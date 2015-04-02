@@ -1,0 +1,9 @@
+- unless modele.constantize.last.nil?
+  - panel.table_for modele.constantize.last do
+    - panel.column :picture do |resource|
+      - render partial: 'admin/shared/show_media', locals: { resource: resource,  size: :medium }
+    - panel.column :title
+    - panel.column :referencement do |resource|
+      - render 'admin/shared/referencement/show', resource: resource
+    - panel.column('Actions') do |resource|
+      - link_to(I18n.t('active_admin.edit'), edit_admin_webdesign_path(resource)) + ' ' + link_to('Voir', admin_webdesign_path(resource))

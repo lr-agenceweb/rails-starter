@@ -1,0 +1,11 @@
+- f.inputs 'Référencement', for: [:referencement, f.object.referencement || Referencement.new] do |item|
+
+  - item.translated_inputs 'Translated fields', switch_locale: false do |t|
+    / - t.input :title,
+    /           hint: I18n.t('form.hint.title')
+    - t.input :description,
+              hint: I18n.t('form.hint.description'),
+              input_html: { class: 'small-height' }
+    - t.input :keywords,
+              hint: I18n.t('form.hint.keywords')
+
