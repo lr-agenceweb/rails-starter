@@ -51,7 +51,7 @@ ActiveAdmin.register Setting do
       row :show_map do
         status_tag("#{resource.show_map}", (resource.show_map? ? :ok : :warn))
       end
-      # render 'show', resource: resource.decorate
+      render 'show', resource: resource.decorate
     end
   end
 
