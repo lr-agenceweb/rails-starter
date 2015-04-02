@@ -191,6 +191,11 @@ GEM
     did_you_mean (0.9.7)
       interception
     dkim (1.0.0)
+    draper (1.4.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     erubis (2.7.0)
     every_day_irb (2.0.0)
       cd (~> 1.0)
@@ -502,6 +507,7 @@ DEPENDENCIES
   compass-rails!
   devise
   dkim
+  draper
   figaro
   font-awesome-rails
   foundation-rails

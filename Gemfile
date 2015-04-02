@@ -23,6 +23,11 @@ gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 
 #
+# == Decorator
+#
+gem 'draper'
+
+#
 # == Html
 #
 gem 'slim-rails' # slim file
