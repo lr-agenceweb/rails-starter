@@ -1,0 +1,21 @@
+- if flash[:notice]
+  div#mainAlert1.alert-box.success.radius data-alert="" tabindex="0" aria-live="assertive" role="dialogalert"
+    == flash[:notice]
+    a href="#" tabindex="0" class="close" aria-label="Close Alert" &times;
+
+- if flash[:alert]
+  div#mainAlert1.alert-box.alert.radius data-alert="" tabindex="0" aria-live="assertive" role="dialogalert"
+    == flash[:alert]
+    a href="#" tabindex="0" class="close" aria-label="Close Alert" &times;
+
+
+- if flash[:error]
+  div#mainAlert1.alert-box.alert.radius data-alert="" tabindex="0" aria-live="assertive" role="dialogalert"
+    == flash[:error]
+    a href="#" tabindex="0" class="close" aria-label="Close Alert" &times;
+
+
+- if flash[:success]
+  div#mainAlert1.alert-box.radius.success data-alert="" tabindex="0" aria-live="assertive" role="dialogalert"
+    == flash[:success]
+    a href="#" tabindex="0" class="close" aria-label="Close Alert" &times;
