@@ -1,5 +1,7 @@
+#= require vendor/modernizr
 #= require jquery
 #= require jquery_ujs
+#= require foundation/foundation
 #= require foundation
 #= require rails.validations
 #= require rails.validations.simple_form
@@ -13,5 +15,5 @@
 #= require tools/nprogress
 
 $(document).on 'ready page:load page:restore', ->
-  $(document).foundation()
+  $(document).foundation
   $('.autosize').autosize()
