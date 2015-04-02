@@ -1,21 +1,4 @@
 fr:
-  views:
-    pagination:
-      first: "&laquo; Premier"
-      last: "Dernier &raquo;"
-      previous: "&lsaquo; Précédent"
-      next: "Suivant &rsaquo;"
-      truncate: "&hellip;"
-
-  helpers:
-    page_entries_info:
-      one_page:
-        display_entries:
-          zero: "Pas de %{entry_name} trouvé"
-          one: "Affichage de <b>1</b> %{entry_name}"
-          other: "Affichage de <b>%{count}</b> %{entry_name}"
-      more_pages:
-        display_entries: "Affichage de %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> sur <b>%{total}</b> au total"
 
   routes:
     home: accueil
@@ -23,32 +6,11 @@ fr:
     contacts: contact
     new: formulaire
 
-  active_admin:
-    globalize:
-      language:
-        en: English
-        fr: Français
-      translations: Traductions
-    edit: Modifier
-
   main_menu:
     home: Accueil
     about: À propos
     dashboard: Dashboard
     contact: Me Contacter
-
-  contact:
-    title: Formulaire de Contact
-    label:
-      message: Message
-    placeholder:
-      email: Écrivez votre email ici
-      message: Écrivez votre message ici
-      name: Écrivez votre prénom et nom ici
-    required: Tous les champs suffixés d'un astérisque (*) sont obligatoires
-    send:
-      button: Envoyer votre message
-      title: Merci de votre message
 
   date:
     abbr_day_names:
@@ -362,32 +324,6 @@ fr:
         postcode: Code Postal
         address: Adresse
         phone: Téléphone
-
-    errors:
-      models:
-        newsletter_user:
-          attributes:
-            email:
-              blank: N'oubliez pas de renseigner votre email ;)
-              invalid: Veuillez renseigner un email valide ;)
-              taken: Cet email n'est pas disponible :(
-
-  mail_form:
-    request:
-      title: "Informations techniques à propos de l'utilisateur"
-      remote_ip: "Adresse IP: "
-      user_agent: "Navigateur: "
-    errors:
-      models:
-        contact_form:
-          attributes:
-            name:
-              blank: N'oubliez pas vos prénom et nom ;)
-            message:
-              blank: N'oubliez pas d'écrire votre message ;)
-            email:
-              blank: N'oubliez pas de renseigner votre email ;)
-              invalid: Veuillez renseigner un email valide ;)
 
   footer:
     copyright: Tous droits réservés

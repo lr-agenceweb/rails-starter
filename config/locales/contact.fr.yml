@@ -1,0 +1,31 @@
+fr:
+
+  contact:
+    title: Formulaire de Contact
+    label:
+      message: Message
+    placeholder:
+      email: Écrivez votre email ici
+      message: Écrivez votre message ici
+      name: Écrivez votre prénom et nom ici
+    required: Tous les champs suffixés d'un astérisque (*) sont obligatoires
+    send:
+      button: Envoyer votre message
+      title: Merci de votre message
+
+  mail_form:
+    request:
+      title: "Informations techniques à propos de l'utilisateur"
+      remote_ip: "Adresse IP: "
+      user_agent: "Navigateur: "
+    errors:
+      models:
+        contact_form:
+          attributes:
+            name:
+              blank: N'oubliez pas vos prénom et nom ;)
+            message:
+              blank: N'oubliez pas d'écrire votre message ;)
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              invalid: Veuillez renseigner un email valide ;)

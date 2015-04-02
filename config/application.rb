@@ -29,6 +29,7 @@ module Startup
     config.autoload_paths += Dir["#{config.root}/app/models/**/"]
     config.autoload_paths += Dir["#{config.root}/app/decorators/**/"]
     config.autoload_paths += Dir["#{config.root}/app/admin/**/"]
+    config.i18n.load_path += Dir["#{config.root}/config/locales/**/*.yml"]
 
     # Remove Helper, CSS, Coffee generating when scaffolding ressources
     config.generators.helper = false
