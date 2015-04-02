@@ -1,11 +1,8 @@
 anthony:
   email: anthony@test.fr
-  role: admin
 
 bob:
   email: bob@test.fr
-  role: visitor
 
 alice:
   email: alice@test.fr
-  role: visitor

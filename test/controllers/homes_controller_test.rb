@@ -21,13 +21,13 @@ class HomesControllerTest < ActionController::TestCase
   end
 
   test 'should get hompepage targetting home controller' do
-    assert_routing '/', controller: 'home', action: 'index', locale: 'fr'
-    assert_routing '/en', controller: 'home', action: 'index', locale: 'en'
+    assert_routing '/', controller: 'homes', action: 'index', locale: 'fr'
+    assert_routing '/en', controller: 'homes', action: 'index', locale: 'en'
   end
 
   private
 
-  def initialize_tests
-    @home = homes(:one)
+  def initialize_test
+    @home = posts(:home)
   end
 end
