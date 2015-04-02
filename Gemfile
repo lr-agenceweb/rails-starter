@@ -94,7 +94,7 @@ gem 'nokogiri'
 # == Assets
 #
 gem 'sass-rails', '~> 5.0'
-gem 'compass-rails', '~> 2.0.1'
+gem 'compass-rails', github: 'Compass/compass-rails', branch: 'master'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-ui-rails'

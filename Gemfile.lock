@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/Compass/compass-rails.git
+  revision: 4e7d761b747a135ec9553e2b8131e2117d8f3be4
+  branch: master
+  specs:
+    compass-rails (2.0.4)
+      compass (~> 1.0.0)
+      sass-rails (<= 5.0.1)
+      sprockets (< 2.13)
+
+GIT
   remote: git://github.com/DavyJonesLocker/client_side_validations-simple_form.git
   revision: ac7d2f3a183a030281e1544d4a628c07e73c67cf
   specs:
@@ -165,8 +175,6 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    compass-rails (2.0.1)
-      compass (~> 1.0.0)
     css_parser (1.3.6)
       addressable
     debug_inspector (0.0.2)
@@ -401,7 +409,7 @@ GEM
     ruby_info (1.0.1)
     ruby_version (1.0.1)
     sass (3.4.13)
-    sass-rails (5.0.3)
+    sass-rails (5.0.0)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -491,7 +499,7 @@ DEPENDENCIES
   client_side_validations!
   client_side_validations-simple_form!
   coffee-rails (~> 4.1.0)
-  compass-rails (~> 2.0.1)
+  compass-rails!
   devise
   dkim
   figaro
