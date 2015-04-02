@@ -24,3 +24,5 @@
 /config/database.yml
 /public/*
 /db/backups/
+
+README.html
