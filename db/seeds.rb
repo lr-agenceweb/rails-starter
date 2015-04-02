@@ -1,7 +1,30 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
-# Examples:
+# == Variables
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+ahora = Time.zone.now
+
+#
+# == Resest content and setup id to 1
+#
+puts 'Reset table ID to 1'
+modeles_str = %w(User)
+modeles_str.each do |modele_str|
+  modele = modele_str.constantize
+  modele.destroy_all
+  ActiveRecord::Base.connection.execute("ALTER TABLE #{modele.table_name} AUTO_INCREMENT = 1")
+end
+
+#
+# == Create a default user
+#
+puts 'Creating users'
+User.create!(
+  email: 'admin@example.com',
+  password: 'password',
+  password_confirmation: 'password'
+)
+User.create!(
+  email: 'admin2@example.com',
+  password: 'password',
+  password_confirmation: 'password'
+)
