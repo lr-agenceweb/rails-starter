@@ -51,7 +51,7 @@ ActiveAdmin.register Setting do
       row :show_map do
         status_tag("#{resource.show_map}", (resource.show_map? ? :ok : :warn))
       end
-      render 'show', resource: resource.decorate
+      # render 'show', resource: resource.decorate
     end
   end
 
@@ -93,10 +93,6 @@ ActiveAdmin.register Setting do
     before_action :set_setting, only: [:show]
 
     private
-
-    def redirect_to_show
-      redirect_to admin_setting_path(1)
-    end
 
     def set_setting
       @setting = Setting.find(params[:id])
