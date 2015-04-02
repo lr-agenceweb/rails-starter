@@ -3,12 +3,12 @@
 #= require jquery_ujs
 #= require foundation/foundation
 #= require foundation
-#= require rails.validations
-#= require rails.validations.simple_form
-#= require rails.validations.simple_form.fix
 #= require turbolinks
 #= require nprogress
 #= require nprogress-turbolinks
+#= require rails.validations
+#= require rails.validations.simple_form
+#= require rails.validations.simple_form.fix
 #= require jquery.autosize
 #= require globals/_functions
 #= require tools/mapbox
