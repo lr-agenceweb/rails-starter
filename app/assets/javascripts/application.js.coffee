@@ -9,6 +9,7 @@
 #= require rails.validations
 #= require rails.validations.simple_form
 #= require rails.validations.simple_form.fix
+#= require mapbox
 #= require jquery.autosize
 #= require globals/_functions
 #= require tools/mapbox
