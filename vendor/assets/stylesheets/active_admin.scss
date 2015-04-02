@@ -1,17 +1,30 @@
-// SASS variable overrides must be declared before loading up Active Admin's styles.
-//
-// To view the variables that Active Admin provides, take a look at
-// `app/assets/stylesheets/active_admin/mixins/_variables.css.scss` in the
-// Active Admin source.
-//
-// For example, to change the sidebar width:
-// $sidebar-width: 242px;
+@import 'compass';
+@import 'active_admin/mixins';
+@import 'active_admin/base';
+@import 'globals/settings';
+@import 'foundation/foundation_and_overrides';
 
-// Active Admin's got SASS!
-@import "active_admin/mixins";
-@import "active_admin/base";
+@import 'jquery-ui/core';
+@import 'jquery-ui/menu';
+@import 'jquery-ui/theme';
+@import 'jquery-ui/autocomplete';
 
-// Overriding any non-variable SASS must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
+@import 'chosen';
+@import 'froala_editor.min';
+@import 'froala_style.min';
+@import 'themes/royal.min';
+@import 'admin/froala';
+@import 'font-awesome';
+@import 'mapbox';
+
+@import 'modules/mapbox';
+@import 'admin/forms';
+
+#site_title_image {
+  width: 150px;
+}
+
+.clearfix {
+  clear: both;
+  height: 0;
+}

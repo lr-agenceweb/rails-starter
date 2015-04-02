@@ -8,6 +8,11 @@ class Post < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 
+  has_one :referencement, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
+
+  delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
+
   scope :online, -> { where(online: true) }
 
   self.inheritance_column = :type
