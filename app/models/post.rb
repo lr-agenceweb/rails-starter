@@ -5,6 +5,9 @@ class Post < ActiveRecord::Base
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history, :globalize, :finders]
+
   scope :online, -> { where(online: true) }
 
   self.inheritance_column = :type
