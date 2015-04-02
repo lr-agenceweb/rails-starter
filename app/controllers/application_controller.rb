@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   before_action :set_setting
   before_action :set_host_name
 
+  decorates_assigned :setting
+
   private
 
   def set_language
