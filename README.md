@@ -33,7 +33,9 @@ To see your mails, visit `http://localhost:1080`
 Gems:
 -----
 ### Globalize
-Two language are included by default: french and english
+Two language are included by default: french and english  
+  
+Look at the Gemfile for more informations !
 
 Tests
 -----
