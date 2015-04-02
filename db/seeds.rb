@@ -39,13 +39,13 @@ setting_site = Setting.create!(
   subtitle: 'démarre rapidement',
   phone: '01 02 03 04 05',
   email: 'demo@startup.fr',
-  address: 'Rue de la biche',
-  city: 'Paris',
-  postcode: 75_000,
-  geocode_address: '',
-  latitude: nil,
-  longitude: nil,
-  show_map: false,
+  address: 'Place du Père Noël',
+  city: 'Rovaniemi',
+  postcode: 96_930,
+  geocode_address: 'Père Noël, 96930 Rovaniemi, Finlande',
+  latitude: 66.5435,
+  longitude: 25.8481,
+  show_map: true,
   created_at: ahora,
   updated_at: nil
 )
@@ -76,9 +76,33 @@ home = Post.create!(
 Post::Translation.create!(
   post_id: home.id,
   locale: 'en',
-  title: 'Homa article title !',
+  title: 'Home article title !',
   slug: 'home-article-title',
   content: '<p>Home article content</p>',
+  created_at: ahora,
+  updated_at: nil
+)
+
+#
+# == About article
+#
+puts 'Creating About article'
+about = Post.create!(
+  type: 'About',
+  title: 'Titre article A propos !',
+  slug: 'titre-article-a-propos',
+  content: '<p>Contenu article a-propos</p>',
+  online: true,
+  created_at: ahora,
+  updated_at: nil
+)
+
+Post::Translation.create!(
+  post_id: about.id,
+  locale: 'en',
+  title: 'About article title !',
+  slug: 'about-article-title',
+  content: '<p>about article content</p>',
   created_at: ahora,
   updated_at: nil
 )

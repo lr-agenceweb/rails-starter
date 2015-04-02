@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   localized do
     root 'homes#index'
+    resources :abouts, only: [:index]
     resources :contacts, only: [:index, :new, :create]
   end
 end
