@@ -16,8 +16,7 @@ class SettingDecorator < ApplicationDecorator
   private
 
   def about
-    "About"
-    # link_to I18n.t('main_menu.about'), abouts_path
+    link_to I18n.t('main_menu.about'), abouts_path
   end
 
   def admin_link
