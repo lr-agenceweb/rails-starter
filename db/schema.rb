@@ -29,11 +29,13 @@ ActiveRecord::Schema.define(version: 20150402174843) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "post_translations", force: :cascade do |t|
-    t.integer  "post_id",    limit: 4,   null: false
-    t.string   "locale",     limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "post_id",    limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.string   "title",      limit: 255
+    t.string   "slug",       limit: 255
+    t.text     "content",    limit: 65535
   end
 
   add_index "post_translations", ["locale"], name: "index_post_translations_on_locale", using: :btree

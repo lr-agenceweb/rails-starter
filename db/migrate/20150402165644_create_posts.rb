@@ -9,7 +9,7 @@ class CreatePosts < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    Post.create_translation_table! title: :string
+    Post.create_translation_table! title: :string, slug: :string, content: :text
 
     add_index :posts, :slug, unique: true
   end
