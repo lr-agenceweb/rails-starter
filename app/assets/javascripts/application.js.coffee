@@ -11,6 +11,7 @@
 #= require rails.validations.simple_form.fix
 #= require mapbox
 #= require jquery.autosize
+#= require jquery.sticky_footer
 #= require globals/_functions
 #= require tools/mapbox
 #= require tools/nprogress
