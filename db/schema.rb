@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402165644) do
+ActiveRecord::Schema.define(version: 20150402174843) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -50,6 +50,35 @@ ActiveRecord::Schema.define(version: 20150402165644) do
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+
+  create_table "setting_translations", force: :cascade do |t|
+    t.integer  "setting_id", limit: 4,   null: false
+    t.string   "locale",     limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "title",      limit: 255
+    t.string   "subtitle",   limit: 255
+  end
+
+  add_index "setting_translations", ["locale"], name: "index_setting_translations_on_locale", using: :btree
+  add_index "setting_translations", ["setting_id"], name: "index_setting_translations_on_setting_id", using: :btree
+
+  create_table "settings", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "title",           limit: 255
+    t.string   "subtitle",        limit: 255
+    t.string   "phone",           limit: 255
+    t.string   "email",           limit: 255
+    t.string   "address",         limit: 255
+    t.string   "city",            limit: 255
+    t.string   "postcode",        limit: 255
+    t.string   "geocode_address", limit: 255
+    t.float    "latitude",        limit: 24
+    t.float    "longitude",       limit: 24
+    t.boolean  "show_map",        limit: 1,   default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
