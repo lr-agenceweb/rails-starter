@@ -1,0 +1,393 @@
+fr:
+  views:
+    pagination:
+      first: "&laquo; Premier"
+      last: "Dernier &raquo;"
+      previous: "&lsaquo; Précédent"
+      next: "Suivant &rsaquo;"
+      truncate: "&hellip;"
+
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Pas de %{entry_name} trouvé"
+          one: "Affichage de <b>1</b> %{entry_name}"
+          other: "Affichage de <b>%{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Affichage de %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> sur <b>%{total}</b> au total"
+
+  routes:
+    home: accueil
+    abouts: a-propos
+    contacts: contact
+    new: formulaire
+
+  active_admin:
+    globalize:
+      language:
+        en: English
+        fr: Français
+      translations: Traductions
+    edit: Modifier
+
+  main_menu:
+    home: Accueil
+    about: À propos
+    dashboard: Dashboard
+    contact: Me Contacter
+
+  contact:
+    title: Formulaire de Contact
+    label:
+      message: Message
+    placeholder:
+      email: Écrivez votre email ici
+      message: Écrivez votre message ici
+      name: Écrivez votre prénom et nom ici
+    required: Tous les champs suffixés d'un astérisque (*) sont obligatoires
+    send:
+      button: Envoyer votre message
+      title: Merci de votre message
+
+  date:
+    abbr_day_names:
+    - dim
+    - lun
+    - mar
+    - mer
+    - jeu
+    - ven
+    - sam
+    abbr_month_names:
+    - null
+    - jan.
+    - fév.
+    - mar.
+    - avr.
+    - mai
+    - juin
+    - juil.
+    - août
+    - sept.
+    - oct.
+    - nov.
+    - déc.
+    day_names:
+    - dimanche
+    - lundi
+    - mardi
+    - mercredi
+    - jeudi
+    - vendredi
+    - samedi
+    formats:
+      default: '%d/%m/%Y'
+      long: '%e %B %Y'
+      month_year: '%b %Y'
+      short: '%e %b'
+    month_names:
+    - null
+    - janvier
+    - février
+    - mars
+    - avril
+    - mai
+    - juin
+    - juillet
+    - août
+    - septembre
+    - octobre
+    - novembre
+    - décembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: environ une heure
+        other: environ %{count} heures
+      about_x_months:
+        one: environ un mois
+        other: environ %{count} mois
+      about_x_years:
+        one: environ un an
+        other: environ %{count} ans
+      almost_x_years:
+        one: presqu'un an
+        other: presque %{count} ans
+      half_a_minute: une demi-minute
+      less_than_x_minutes:
+        one: moins d'une minute
+        other: moins de %{count} minutes
+        zero: moins d'une minute
+      less_than_x_seconds:
+        one: moins d'une seconde
+        other: moins de %{count} secondes
+        zero: moins d'une seconde
+      over_x_years:
+        one: plus d'un an
+        other: plus de %{count} ans
+      x_days:
+        one: 1 jour
+        other: '%{count} jours'
+      x_minutes:
+        one: 1 minute
+        other: '%{count} minutes'
+      x_months:
+        one: 1 mois
+        other: '%{count} mois'
+      x_seconds:
+        one: 1 seconde
+        other: '%{count} secondes'
+    prompts:
+      day: Jour
+      hour: Heure
+      minute: Minute
+      month: Mois
+      second: Seconde
+      year: Année
+  errors:
+    format: '%{attribute} %{message}'
+    messages:
+      accepted: doit être accepté(e)
+      blank: doit être rempli(e)
+      confirmation: ne concorde pas avec la confirmation
+      empty: doit être rempli(e)
+      equal_to: doit être égal à %{count}
+      even: doit être pair
+      exclusion: n'est pas disponible
+      greater_than: doit être supérieur à %{count}
+      greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+      inclusion: n'est pas inclus(e) dans la liste
+      invalid: n'est pas valide
+      less_than: doit être inférieur à %{count}
+      less_than_or_equal_to: doit être inférieur ou égal à %{count}
+      not_a_number: n'est pas un nombre
+      not_an_integer: doit être un nombre entier
+      odd: doit être impair
+      other_than: doit être différent de %{count}
+      present: doit être vide
+      record_invalid: 'La validation a échoué : %{errors}'
+      restrict_dependent_destroy:
+        many: 'Suppression impossible: d''autres enregistrements sont liés'
+        one: 'Suppression impossible: un autre enregistrement est lié'
+      taken: n'est pas disponible
+      too_long:
+        one: est trop long (pas plus d'un caractère)
+        other: est trop long (pas plus de %{count} caractères)
+      too_short:
+        one: est trop court (au moins un caractère)
+        other: est trop court (au moins %{count} caractères)
+      wrong_length:
+        one: ne fait pas la bonne longueur (doit comporter un seul caractère)
+        other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
+    template:
+      body: 'Veuillez vérifier les champs suivants : '
+      header:
+        one: 'Impossible d''enregistrer ce(tte) %{model} : 1 erreur'
+        other: 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
+  formtastic:
+    wysihtml5:
+      block_style: Block style
+      blocks:
+        h1: Heading 1
+        h2: Heading 2
+        h3: Heading 3
+        h4: Heading 4
+        h5: Heading 5
+        h6: Heading 6
+        p: Paragraph
+      command:
+        bold: Bold
+        image: Image
+        indent: Indent
+        italic: Italic
+        link: Link
+        ol: Ordered list
+        outdent: Outdent
+        source: Show HTML
+        ul: Unordered list
+        underline: Underline
+        video: Video
+      dialog:
+        cancel: Cancel
+        image:
+          alignment: 'Alignment:'
+          alt: 'Alternate text:'
+          default: None
+          dialog_title: Insert a new image
+          gallery_title: Gallery
+          left: Left
+          right: Right
+          scale: 'Scale:'
+          title: '<code>title</code> field:'
+          upload_title: Upload
+          url: 'URL:'
+          url_title: External image
+        link:
+          anchor: 'Anchor name:'
+          anchor_title: Anchor
+          blank: The link will open up a new page/tab
+          dialog_title: Insert a new link
+          email: 'Email:'
+          email_title: Email
+          rel: '<code>rel</code> field:'
+          text: 'Text:'
+          title: '<code>title</code> field:'
+          url: 'URL:'
+          url_title: URL
+          your_text_here: Your text here
+        ok: OK
+        video:
+          dialog_title: Insert a new video from youtube or vimeo
+          height: 'Height:'
+          title: 'Title:'
+          url: 'URL:'
+          width: 'Width:'
+          your_text_here: Your text here
+  helpers:
+    select:
+      prompt: Veuillez sélectionner
+    submit:
+      create: Créer un(e) %{model}
+      submit: Enregistrer ce(tte) %{model}
+      update: Modifier ce(tte) %{model}
+  location:
+    city: Ville
+    country: Pays
+  number:
+    currency:
+      format:
+        delimiter: ' '
+        format: '%n %u'
+        precision: 2
+        separator: ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: ' '
+      precision: 3
+      separator: ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: '%n %u'
+        units:
+          billion: milliard
+          million: million
+          quadrillion: million de milliards
+          thousand: millier
+          trillion: billion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: '%n %u'
+        units:
+          byte:
+            one: octet
+            other: octets
+          gb: Go
+          kb: ko
+          mb: Mo
+          tb: To
+    percentage:
+      format:
+        delimiter: ''
+        format: '%n%'
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ' et '
+      two_words_connector: ' et '
+      words_connector: ', '
+  time:
+    am: am
+    from: du
+    to: au
+    formats:
+      db: '%Y-%m-%d %H:%i:%s'
+      default: '%d %B %Y, %Hh%M min %S s'
+      long: '%A %d %B %Y, %Hh%M'
+      short: '%d %b, %Hh%M'
+      without_time: '%A %d %B %Y'
+      for_home_event: '%a %d %b %Y'
+      for_home_event_without_year: '%a %d %b'
+    pm: pm
+
+  activerecord:
+    models:
+      user:
+        one: Utilisateur
+        other: Utilisateurs
+      post:
+        one: Article
+        other: Articles
+      home:
+        one: Accueil
+        other: Accueil
+      about:
+        one: À propos
+        other: À propos
+      setting:
+        one: Paramètre
+        other: Paramètres
+      referencement:
+        one: Référencement
+        other: Référencements
+
+    attributes:
+      post:
+        title: Titre
+        excerpt: Extrait
+        content: Contenu
+        keywords: Mot-clés
+        online: En ligne
+        link: Lien
+      setting:
+        title: Titre
+        subtitle: Sous-titre
+        name: Nom
+        city: Ville
+        postcode: Code Postal
+        address: Adresse
+        phone: Téléphone
+
+    errors:
+      models:
+        newsletter_user:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              invalid: Veuillez renseigner un email valide ;)
+              taken: Cet email n'est pas disponible :(
+
+  mail_form:
+    request:
+      title: "Informations techniques à propos de l'utilisateur"
+      remote_ip: "Adresse IP: "
+      user_agent: "Navigateur: "
+    errors:
+      models:
+        contact_form:
+          attributes:
+            name:
+              blank: N'oubliez pas vos prénom et nom ;)
+            message:
+              blank: N'oubliez pas d'écrire votre message ;)
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              invalid: Veuillez renseigner un email valide ;)
+
+  footer:
+    copyright: Tous droits réservés

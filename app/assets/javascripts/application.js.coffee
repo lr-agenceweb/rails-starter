@@ -1,4 +1,13 @@
 #= require jquery
 #= require jquery_ujs
+#= require rails.validations
+#= require rails.validations.simple_form
+#= require rails.validations.simple_form.fix
+#= require rails.validations.turbolinks
 #= require turbolinks
-#= require_tree .
+#= require nprogress
+#= require nprogress-turbolinks
+#= require jquery.autosize
+#= require globals/_functions
+#= require tools/mapbox
+#= require tools/nprogress

@@ -1,1 +1,9 @@
 #= require active_admin/base
+#= require jquery-ui
+#= require chosen-jquery
+#= require admin/form_translation
+#= require admin/froala_editor
+#= require admin/settings
+#= require admin/chosen
+#= require gmaps.js
+#= require globals/_functions

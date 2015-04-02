@@ -4,12 +4,12 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Startup"
+  config.site_title = 'Startup'
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
-  # config.site_title_link = "/"
+  config.site_title_link = '/'
 
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
@@ -112,14 +112,14 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-  # config.root_to = 'dashboard#index'
+  config.root_to = 'dashboard#index'
 
   # == Admin Comments
   #
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  # config.comments = false
+  config.comments = false
   #
   # You can disable the menu item for the comments index page:
   # config.show_comments_in_menu = false
@@ -149,7 +149,7 @@ ActiveAdmin.setup do |config|
   # Breadcrumbs are enabled by default. You can customize them for individual
   # resources or you can disable them globally from here.
   #
-  # config.breadcrumb = false
+  config.breadcrumb = true
 
   # == Register Stylesheets & Javascripts
   #
@@ -164,7 +164,7 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_print_stylesheet.css', media: :print
   #
   # To load a javascript file:
-  #   config.register_javascript 'my_javascript.js'
+  config.register_javascript '//maps.googleapis.com/maps/api/js?sensor=false'
 
   # == CSV options
   #
