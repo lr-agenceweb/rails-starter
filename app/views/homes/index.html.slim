@@ -1,13 +1,7 @@
-h1 Listing homes
+.row
+  - @homes.each do |home|
+    .small-12.columns
+      header
+        h2 = home.title
 
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @homes.each do |home|
-      tr
-        td = home.title
+      div == home.content
