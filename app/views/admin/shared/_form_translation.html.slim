@@ -1,0 +1,7 @@
+- f.inputs 'Contenu de l\'article' do
+  - f.translated_inputs 'Translated fields', switch_locale: false do |t|
+    - t.input :title, hint: I18n.t('form.hint.title')
+    - t.input :slug, hint: I18n.t('form.hint.slug')
+    - t.input :content,
+              hint: I18n.t('form.hint.content'),
+              input_html: { class: 'froala' }

@@ -1,0 +1,35 @@
+doctype html
+html lang="#{@language}"
+
+  head
+    meta charset='utf-8'
+    == raw analytical.head_prepend_javascript if Rails.env.production?
+    / = display_meta_tags title: title, site: @setting.title, reverse: true
+    / meta name='google-site-verification' content="#{Figaro.env.google_site_verification}"
+    / meta name='msvalidate.01' content="#{Figaro.env.bing_site_verification}"
+    meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+
+    / link type='text/plain' rel='author' href='/humans.txt'
+    / = favicon_link_tag '/favicon.ico'
+    = csrf_meta_tag
+    == raw analytical.head_append_javascript if Rails.env.production?
+
+  body
+    == raw analytical.body_prepend_javascript if Rails.env.production?
+    = include_gon
+
+    #wrapper.wrapper
+      == yield
+    /   = render 'shared/flash'
+    /   = render 'shared/header', setting: setting
+
+    /   .l-container
+    /     .l-container-content
+    /       == yield
+    /   .root-footer
+
+    / = render 'shared/footer', setting: setting
+    == raw analytical.body_append_javascript if Rails.env.production?

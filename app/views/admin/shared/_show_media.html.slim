@@ -1,0 +1,6 @@
+- if resource.picture?
+  = raw retina_image_tag(resource.picture, :image, size)
+  p = link_to 'Modifier l\'image', edit_admin_picture_path(resource.picture), class: 'button'
+- else
+  = p 'Pas d\'image ou image hors-ligne'
+

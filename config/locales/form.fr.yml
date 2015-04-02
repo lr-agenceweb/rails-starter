@@ -1,0 +1,21 @@
+fr:
+
+  form:
+    label:
+      online: Mettre en ligne ?
+      picture: Image liée à l'article
+      background: Image d'arrière-plan liée à la page
+      model_name: Page à définir
+      link: Lien du projet
+      destroy: Supprimer cette image ?
+
+    hint:
+      title: Titre de l'article
+      slug: Titre utilisé dans l'url de la page
+      content: Contenu principal affiché sur le site
+      description: "Résumé du contenu: utile pour le référencement (environ 150 caractères). Attention: ce contenu est affiché en tant que description lorsque les gens partagent sur Facebook, Twitter et Google Plus"
+      keywords: Peut-être utile pour le référencement mais pas obligatoire (20 mots maximum séparés par des virgules)
+      online: Seuls les éléments 'En ligne' apparaîtront sur le site
+      link: Définit le lien qui permet d'accéder au projet
+      year: Année de réalisation du projet
+      destroy: "Après avoir coché la case, ne pas oublier de valider le fomulaire pour que la suppression s'effectue"

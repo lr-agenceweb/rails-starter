@@ -1,0 +1,12 @@
+- f.inputs 'Général' do
+  - f.input :link,
+            as: :url,
+            hint: I18n.t('form.hint.link')
+
+  - f.input :year,
+            as: :date_picker,
+            hint: I18n.t('form.hint.year')
+
+  - f.input :online,
+            label: I18n.t('form.label.online'),
+            hint: I18n.t('form.hint.online')

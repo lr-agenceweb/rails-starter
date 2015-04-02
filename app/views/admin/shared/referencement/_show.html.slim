@@ -1,0 +1,9 @@
+h3 Référencement
+
+- if resource.referencement_description.blank?
+  p Le référencement n'a pas été renseigné
+
+- else
+  ul
+    li = resource.referencement_description
+    li = resource.referencement_keywords

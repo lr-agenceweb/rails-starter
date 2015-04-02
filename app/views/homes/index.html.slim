@@ -1,0 +1,7 @@
+.row
+  - @homes.each do |home|
+    .small-12.columns
+      header
+        h2 = home.title
+
+      div == home.content
