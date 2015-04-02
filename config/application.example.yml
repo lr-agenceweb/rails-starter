@@ -1,0 +1,31 @@
+#
+# == Application
+#
+domain_name: http://yoursite.com
+application_secret_key_base: ''
+devise_secret_key: ''
+
+
+#
+# == Database
+#
+db_host: ''
+db_name: ''
+db_username: ''
+db_password: ''
+
+
+#
+# == Mapbox
+#
+mapbox_username: ''
+mapbox_map_key: ''
+mapbox_access_token: ''
+
+
+#
+# == Google and Bing
+#
+google_analytics_key: ~
+google_site_verification: ~
+bing_site_verification: ~

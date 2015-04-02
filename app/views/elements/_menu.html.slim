@@ -1,0 +1,6 @@
+nav.clearfix.l-nav-container
+  ul.clearfix.sub-nav
+    li class="nav-item #{set_active_class('home')}" = link_to I18n.t('main_menu.home'), root_path, class: 'nav-item-link'
+    li class="nav-item #{set_active_class('contacts')}" = link_to I18n.t('main_menu.contact'), new_contact_path, class: 'nav-item-link'
+
+  = link_to 'Menu', '#', id: 'pull', class: 'l-nav-item-link header__icon'
