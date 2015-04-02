@@ -1,0 +1,34 @@
+body {
+  height: auto;
+}
+
+// Action on text selection
+* {
+  @include selection($link-color, $white);
+  outline: none;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.no-margin {
+  margin: 0 auto;
+}
+
+/* Clearfix */
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+
+a.button {
+  border-radius: 0 !important;
+}

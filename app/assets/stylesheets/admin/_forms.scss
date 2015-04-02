@@ -1,0 +1,15 @@
+/*
+|-----------------------------------------------------
+| Active Admin form style
+|-----------------------------------------------------
+|
+*/
+#active_admin_content {
+  form li.input, fieldset:not(.actions) ol li {
+    clear: both;
+  }
+
+  form fieldset > ol > li fieldset:not(.has_many_fields) ol li:not(.hidden) {
+    padding: 10px !important;
+  }
+}
