@@ -1,0 +1,8 @@
+.row
+  - @abouts.each do |about|
+    .small-12.columns
+      header
+        h2 = about.title
+
+      div
+        == about.content
