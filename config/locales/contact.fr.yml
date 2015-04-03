@@ -20,7 +20,7 @@ fr:
       user_agent: "Navigateur: "
     errors:
       models:
-        contact:
+        contact_form:
           attributes:
             name:
               blank: N'oubliez pas vos prénom et nom ;)

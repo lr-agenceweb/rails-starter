@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     root 'homes#index'
     resources :abouts, only: [:index]
     resources :contacts, only: [:index, :new, :create]
+    resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
   end
 end
