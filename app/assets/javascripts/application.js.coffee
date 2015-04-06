@@ -13,8 +13,9 @@
 #= require jquery.autosize
 #= require jquery.sticky_footer
 #= require globals/_functions
-#= require tools/mapbox
-#= require tools/nprogress
+#= require modules/responsive_menu
+#= require plugins/mapbox
+#= require plugins/nprogress
 
 $(document).on 'ready page:load page:restore', ->
   $(document).foundation

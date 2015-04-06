@@ -5,6 +5,14 @@ class SettingDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
+  def title_subtitle(header = :h1, link = root_path, klass = '')
+    h.content_tag(:a, href: link, class: "l-header-site-title-link #{klass}") do
+      concat(h.content_tag(header, class: 'l-header-site-title') do
+        concat(model.title) + concat(subtitle)
+      end)
+    end
+  end
+
   def credentials
     "#{setting.name} - Tous droits réservés <br> Copyright &copy; #{current_year} <br> #{about} #{admin_link}"
   end
@@ -21,5 +29,9 @@ class SettingDecorator < ApplicationDecorator
 
   def admin_link
     ' - ' + (link_to ' administration', admin_root_path, target: :blank) if current_user_and_administrator?
+  end
+
+  def subtitle
+    h.content_tag(:small, model.subtitle, class: 'l-header-site-subtitle')
   end
 end
