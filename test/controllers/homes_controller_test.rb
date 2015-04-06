@@ -20,6 +20,11 @@ class HomesControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should fetch only online posts' do
+    @homes = Home.online
+    assert_equal @homes.length, 1
+  end
+
   test 'should get hompepage targetting home controller' do
     assert_routing '/', controller: 'homes', action: 'index', locale: 'fr'
     assert_routing '/en', controller: 'homes', action: 'index', locale: 'en'

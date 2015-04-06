@@ -1,0 +1,24 @@
+# French
+fr:
+  routes:
+    home: accueil
+    abouts: a-propos
+    contacts: contact
+    new: formulaire
+
+  main_menu:
+    dashboard: Dashboard
+  #   home: Accueil
+  #   about: À propos
+  #   contact: Me Contacter
+
+
+# English
+en:
+  routes:
+    abouts: about
+    contacts: contact
+    new: form
+
+  main_menu:
+    dashboard: Dashboard

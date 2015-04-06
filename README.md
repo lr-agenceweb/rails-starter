@@ -16,6 +16,7 @@ Rename `database.example.yml` to `database.yml`
 Add your database configuration  
 Go to the application folder: `cd rails-startup`  
 Install gems: `bundle install`  
+Run migrations: `rake db:create db:migrate db:seed`  
 Run `foreman start`  
 Visit `http://localhost:3000`  
 That's it !
@@ -31,11 +32,17 @@ I am using unicorn in local development. The server is launch using `foreman sta
 
 Database:
 ---------
-I am using `mysql2` but you can choose to use `SQlite` or any other SGBD.
+I am using `mysql2` but you can choose to use `SQLite` or any other SGBD.  
+To create a dump of your database, run `rake db:backup`
 
 Template:
 --------
 I am using [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
+
+Assets:
+-------
+Style is writting in `scss` and `sass` (with compass)  
+Scripts are created in `coffeescript`
 
 Mail
 -----
@@ -44,10 +51,17 @@ To see your mails, visit `http://localhost:1080`
 
 Gems:
 -----
-### Globalize
+### [Globalize](https://github.com/globalize/globalize)
 Two language are included by default: french and english  
   
-Look at the Gemfile for more informations !
+### [Whenever](https://github.com/javan/whenever)
+Setup two Cron tasks:
+* Regenrate sitemap everyday
+* Make a dump of database every day
+
+To make this tasks active on your server, just run `whenever --update-crontab <name-of-your-site>`  
+For more information read the gem documentation.
+
 
 Tests
 -----

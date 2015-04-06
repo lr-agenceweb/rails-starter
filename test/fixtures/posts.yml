@@ -1,4 +1,26 @@
+# Home posts
 home:
   type: Home
   title: Home article !
   online: 1
+
+home_offline:
+  type: Home
+  title: Home article !
+  online: 0
+
+# About posts
+about:
+  type: About
+  title: About article 2 !
+  online: 1
+
+about_2:
+  type: About
+  title: About article 2 !
+  online: 1
+
+about_offline:
+  type: About
+  title: About article offline !
+  online: 0

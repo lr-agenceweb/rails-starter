@@ -1,11 +1,14 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+home:
+  name: Home
+  show_in_menu: 1
+  show_in_footer: 0
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+about:
+  name: About
+  show_in_menu: 0
+  show_in_footer: 0
+
+contact:
+  name: Contact
+  show_in_menu: 1
+  show_in_footer: 0
