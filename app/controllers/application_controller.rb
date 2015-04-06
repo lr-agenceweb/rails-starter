@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_menu_elements
-    menu_elements = Category.all
+    menu_elements = ::Category.all
     @menu_elements_header ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_header)
     @menu_elements_footer ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_footer)
     @category = Category.find_by(name: controller_name.classify)
@@ -34,5 +34,14 @@ class ApplicationController < ActionController::Base
 
   def set_host_name
     @hostname = request.host
+  end
+
+  def authenticate_active_admin_user!
+    authenticate_user!
+    redirect_to root_path unless current_user.super_administrator? || current_user.administrator? || current_user.subscriber?
+  end
+
+  def access_denied(exception)
+    redirect_to admin_root_path, alert: exception.message
   end
 end

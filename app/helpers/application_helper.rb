@@ -6,7 +6,7 @@ module ApplicationHelper
   include TruncateHtmlHelper
 
   def current_user_and_administrator?
-    true if current_user # && current_user.is_administrator?
+    current_user && (current_user.administrator? || current_user.super_administrator?)
   end
 
   def current_year
