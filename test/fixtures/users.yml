@@ -1,8 +1,11 @@
 anthony:
   email: anthony@test.fr
+  role: super_administrator
 
 bob:
   email: bob@test.fr
+  role: administrator
 
 alice:
   email: alice@test.fr
+  role: subscriber

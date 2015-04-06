@@ -1,13 +1,8 @@
 #
-# == Variables
-#
-ahora = Time.zone.now
-
-#
 # == Resest content and setup id to 1
 #
 puts 'Reset table ID to 1'
-modeles_str = %w(User Setting Setting::Translation Post Post::Translation Category Category::Translation)
+modeles_str = %w( User Role Setting Setting::Translation Post Post::Translation Category Category::Translation Referencement Referencement::Translation )
 modeles_str.each do |modele_str|
   modele = modele_str.constantize
   modele.destroy_all
@@ -15,18 +10,36 @@ modeles_str.each do |modele_str|
 end
 
 #
+# == Create user roles
+#
+puts 'Creating user roles'
+roles = %w( super_administrator administrator subscriber )
+
+roles.each do |role|
+  Role.create!(name: role)
+end
+
+#
 # == Create a default user
 #
 puts 'Creating users'
 User.create!(
-  email: 'admin@example.com',
+  email: 'superadmin@example.com',
   password: 'password',
-  password_confirmation: 'password'
+  password_confirmation: 'password',
+  role_id: 1
 )
 User.create!(
-  email: 'admin2@example.com',
+  email: 'admin@example.com',
   password: 'password',
-  password_confirmation: 'password'
+  password_confirmation: 'password',
+  role_id: 2
+)
+User.create!(
+  email: 'abonne@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  role_id: 3
 )
 
 #
@@ -45,18 +58,14 @@ setting_site = Setting.create!(
   geocode_address: 'Père Noël, 96930 Rovaniemi, Finlande',
   latitude: 66.5435,
   longitude: 25.8481,
-  show_map: true,
-  created_at: ahora,
-  updated_at: nil
+  show_map: true
 )
 
 Setting::Translation.create!(
   setting_id: setting_site.id,
   locale: 'en',
   title: 'Demo site',
-  subtitle: 'start quickly',
-  created_at: ahora,
-  updated_at: nil
+  subtitle: 'start quickly'
 )
 
 #
@@ -77,16 +86,12 @@ Category.models_name_str.each_with_index do |element, index|
     name: element,
     title: title_fr[index],
     show_in_menu: show_in_menu[index],
-    show_in_footer: show_in_footer[index],
-    created_at: ahora,
-    updated_at: nil
+    show_in_footer: show_in_footer[index]
   )
   Category::Translation.create!(
     category_id: category.id,
     locale: 'en',
-    title: title_en[index],
-    created_at: ahora,
-    updated_at: nil
+    title: title_en[index]
   )
 
   referencement = Referencement.create!(
@@ -94,18 +99,14 @@ Category.models_name_str.each_with_index do |element, index|
     attachable_type: 'Category',
     title: title_fr[index],
     description: description_fr[index],
-    keywords: keywords_fr[index],
-    created_at: ahora,
-    updated_at: nil
+    keywords: keywords_fr[index]
   )
   Referencement::Translation.create!(
     referencement_id: referencement.id,
     locale: 'en',
     title: title_en[index],
     description: description_en[index],
-    keywords: keywords_en[index],
-    created_at: ahora,
-    updated_at: nil
+    keywords: keywords_en[index]
   )
 end
 
@@ -118,9 +119,7 @@ home = Post.create!(
   title: 'Titre article accueil !',
   slug: 'titre-article-accueil',
   content: '<p>Contenu article accueil</p>',
-  online: true,
-  created_at: ahora,
-  updated_at: nil
+  online: true
 )
 
 Post::Translation.create!(
@@ -128,9 +127,7 @@ Post::Translation.create!(
   locale: 'en',
   title: 'Home article title !',
   slug: 'home-article-title',
-  content: '<p>Home article content</p>',
-  created_at: ahora,
-  updated_at: nil
+  content: '<p>Home article content</p>'
 )
 
 #
@@ -142,9 +139,7 @@ about = Post.create!(
   title: 'Titre article A propos !',
   slug: 'titre-article-a-propos',
   content: '<p>Contenu article a-propos</p>',
-  online: true,
-  created_at: ahora,
-  updated_at: nil
+  online: true
 )
 
 Post::Translation.create!(
@@ -152,9 +147,7 @@ Post::Translation.create!(
   locale: 'en',
   title: 'About article title !',
   slug: 'about-article-title',
-  content: '<p>about article content</p>',
-  created_at: ahora,
-  updated_at: nil
+  content: '<p>about article content</p>'
 )
 
 #

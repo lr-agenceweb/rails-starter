@@ -135,6 +135,7 @@ GEM
     byebug (4.0.4)
       columnize (= 0.9.0)
     callsite (0.0.11)
+    cancancan (1.10.1)
     cd (1.0.0)
     chosen-rails (1.4.1)
       coffee-rails (>= 3.2)
@@ -500,6 +501,7 @@ DEPENDENCIES
   autosize-rails
   better_errors
   byebug
+  cancancan (~> 1.10)
   chosen-rails
   client_side_validations!
   client_side_validations-simple_form!

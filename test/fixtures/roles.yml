@@ -1,0 +1,8 @@
+super_administrator:
+  name: super_administrator
+
+administrator:
+  name: administrator
+
+subscriber:
+  name: subscriber
