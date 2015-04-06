@@ -8,4 +8,4 @@
 #= require gmaps.js
 #= require globals/_functions
 #= require mapbox
-#= require tools/mapbox
+#= require plugins/mapbox
