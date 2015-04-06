@@ -312,6 +312,12 @@ fr:
         postcode: Code Postal
         address: Adresse
         phone: Téléphone
+      user:
+        username: Nom d'utilisateur
+        sign_in_count: Nombre de connections
+        current_sign_in_at: Connecté depuis
+        last_sign_in_at: Dernière connexion
+        created_at: Inscrit depuis
 
   footer:
     copyright: Tous droits réservés

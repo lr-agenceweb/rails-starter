@@ -14,9 +14,9 @@ class Ability
       can :manage, User, role_name: %w( administrator subscriber )
       can :manage, User, id: user.id
 
-    else
-      can :read, :all
+    elsif user.subscriber?
       can [:update, :read, :destroy], User, id: user.id
+      can :manage, Post, id: user.id
     end
   end
 end

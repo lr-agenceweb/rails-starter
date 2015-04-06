@@ -15,7 +15,6 @@ ActiveAdmin.register Home do
                 ]
 
   config.clear_sidebar_sections!
-  actions :all, except: [:new, :destroy]
 
   index do
     selectable_column
