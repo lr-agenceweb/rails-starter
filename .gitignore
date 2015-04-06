@@ -22,7 +22,8 @@
 # Ignore application configuration
 /config/application.yml
 /config/database.yml
-/public/*
+/public/system/*
+!public/system/default
 /db/backups/
 
 README.html
