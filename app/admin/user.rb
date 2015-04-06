@@ -19,6 +19,18 @@ ActiveAdmin.register User do
     actions
   end
 
+  show do
+    h3 resource.username
+    attributes_table do
+      row :email
+      row :sign_in_count
+      row :current_sign_in_at
+      row :last_sign_in_at
+      row :role
+      row :created_at
+    end
+  end
+
   form do |f|
     f.inputs 'Admin Details' do
       f.input :username

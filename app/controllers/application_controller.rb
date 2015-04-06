@@ -42,6 +42,10 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied(exception)
-    redirect_to admin_root_path, alert: exception.message
+    if current_user.subscriber?
+      redirect_to admin_user_path(current_user), alert: exception.message
+    else
+      redirect_to admin_root_path, alert: exception.message
+    end
   end
 end
