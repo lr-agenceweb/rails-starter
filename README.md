@@ -39,6 +39,11 @@ Template:
 --------
 I am using [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
 
+Assets:
+-------
+Style is writting in `scss` and `sass` (with compass)  
+Scripts are created in `coffeescript`
+
 Mail
 -----
 I used [maildev](http://djfarrelly.github.io/MailDev/) to tset my emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
