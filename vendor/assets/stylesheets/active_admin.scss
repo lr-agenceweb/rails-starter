@@ -20,6 +20,10 @@
 @import 'plugins/mapbox';
 @import 'admin/forms';
 
+* {
+  outline: none;
+}
+
 #site_title_image {
   width: 150px;
 }
