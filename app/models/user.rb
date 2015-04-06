@@ -3,6 +3,21 @@
 #
 class User < ActiveRecord::Base
   belongs_to :role
+
+  retina!
+  has_attached_file :avatar,
+                    path: ':rails_root/public/system/avatar/:id/:style/:filename',
+                    url:  '/system/avatar/:id/:style/:filename',
+                    styles: {
+                      large: '512x512#',
+                      medium:  '256x256#',
+                      thumb:  '128x128#'
+                    },
+                    retina: { quality: 70 },
+                    default_url: '/assets/images/default_media/:style/missing.png'
+
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
   delegate :name, to: :role, prefix: true, allow_nil: true
 
   # Include default devise modules. Others available are:

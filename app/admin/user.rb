@@ -3,6 +3,7 @@ ActiveAdmin.register User do
                 :username,
                 :email,
                 :password,
+                :avatar,
                 :password_confirmation,
                 role_attributes: [
                   :id, :name
@@ -11,6 +12,9 @@ ActiveAdmin.register User do
   config.clear_sidebar_sections!
 
   index do
+    column :avatar do |resource|
+      retina_image_tag(resource, :avatar, :medium)
+    end
     column :username
     column :email
     column :current_sign_in_at
@@ -22,6 +26,9 @@ ActiveAdmin.register User do
   show do
     h3 resource.username
     attributes_table do
+      row :avatar do
+        retina_image_tag(resource, :avatar, :medium)
+      end
       row :email
       row :sign_in_count
       row :current_sign_in_at
@@ -33,6 +40,9 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs 'Admin Details' do
+      f.input :avatar,
+              as: :file,
+              image_preview: true
       f.input :username
       f.input :email
       f.input :password
