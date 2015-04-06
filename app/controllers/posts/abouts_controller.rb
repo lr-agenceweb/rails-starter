@@ -2,8 +2,9 @@
 # == Abouts Controller
 #
 class AboutsController < InheritedResources::Base
-  # GET /home
-  # GET /home.json
+
+  # GET /abouts
+  # GET /abouts.json
   def index
     @abouts = About.online
   end

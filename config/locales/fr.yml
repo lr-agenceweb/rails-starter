@@ -1,17 +1,5 @@
 fr:
 
-  routes:
-    home: accueil
-    abouts: a-propos
-    contacts: contact
-    new: formulaire
-
-  main_menu:
-    home: Accueil
-    about: À propos
-    dashboard: Dashboard
-    contact: Me Contacter
-
   date:
     abbr_day_names:
     - dim
