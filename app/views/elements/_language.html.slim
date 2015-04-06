@@ -4,14 +4,5 @@
       - I18n.available_locales.each do |locale|
         - locale = locale.to_s
         li class="#{active_language(locale)} l-nav-item"
-          = link_to_unless(params[:locale] == locale, I18n.t("active_admin.globalize.language."+locale), params.merge({locale: locale}), class: "l-nav-item-link") do |item|
+          = link_to_unless(params[:locale] == locale, I18n.t("active_admin.globalize.language.#{locale}"), params.merge({locale: locale}), class: "l-nav-item-link") do |item|
             = current_link_language('check', item)
-      / li Français
-      / li English
-    / - if (params[:controller] == "philosophies" || params[:controller] == "wines" || params[:controller] == "events" || params[:controller] == "domains" || params[:controller] == "presses") && params[:action] == "show"
-    /   - I18n.available_locales.each do |locale|
-    /     - locale = locale.to_s
-    /     li class="#{set_active_language(locale)} nav-item" = link_to_unless(params[:locale] == locale, I18n.t("active_admin.globalize.language."+locale), params.merge({locale: locale, id: object.get_slug_for_locale(locale) }), class: "nav-item-link") do |item|
-    /       = current_link_language("arrow-right", item)
-
-    / - else

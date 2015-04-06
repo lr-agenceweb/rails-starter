@@ -1,3 +1,16 @@
+# French
+fr:
+  simple_form:
+    "yes": 'Oui'
+    "no": 'Non'
+    required:
+      text: 'requis'
+      mark: '*'
+    error_notification:
+      default_message: "Merci de vérifier les erreurs ci-dessous:"
+
+
+# English
 en:
   simple_form:
     "yes": 'Yes'
