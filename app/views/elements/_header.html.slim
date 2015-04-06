@@ -1,0 +1,14 @@
+header.l-header-site.hide-for-print
+
+  .l-header-container
+    .row
+      .small-12.columns
+        = render 'elements/language'
+
+    .row
+      .small-12.medium-4.columns.title-site
+        == setting.title_subtitle.html_safe
+
+      .small-12.medium-8.columns.menu-site
+        = render 'elements/menu'
+        .clearfix

@@ -1,9 +1,0 @@
-fr:
-
-  active_admin:
-    globalize:
-      language:
-        en: English
-        fr: Français
-      translations: Traductions
-    edit: Modifier

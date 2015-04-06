@@ -1,7 +1,7 @@
 #
-# == Contact Model
+# == ContactForm Model
 #
-class Contact < MailForm::Base
+class ContactForm < MailForm::Base
   attribute :name
   attribute :email
   attribute :message

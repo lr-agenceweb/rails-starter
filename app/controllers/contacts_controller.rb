@@ -11,15 +11,14 @@ class ContactsController < InheritedResources::Base
   end
 
   def new
-    @contact = Contact.new
+    @contact_form = ContactForm.new
     # seo_tag_index(category, @background)
   end
 
   def create
-    @contact = Contact.new(params[:contact])
-    @contact.request = request
-    if @contact.deliver
-      # flash[:success] = @content_boxes.find_by(tag: 'message_success').content
+    @contact_form = ContactForm.new(params[:contact_form])
+    @contact_form.request = request
+    if @contact_form.deliver
       flash[:success] = 'Succès !'
       redirect_to :back
     else

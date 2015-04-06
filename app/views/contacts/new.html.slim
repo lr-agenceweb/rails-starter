@@ -3,7 +3,7 @@
     - if Rails.env.development?
       = link_to 'Mail dev', root_url(port: 1080, only_path: false), target: :blank
 
-    = simple_form_for @contact, validate: true do |f|
+    = simple_form_for @contact_form, validate: true do |f|
       = f.input :name, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.name')}"
       = f.input :email, as: :email, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.email')}"
       = f.input :nickname, input_html: { class: 'hide', style: 'display: none' }, label: false
