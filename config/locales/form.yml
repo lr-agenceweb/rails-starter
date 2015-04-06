@@ -19,3 +19,4 @@ fr:
       link: Définit le lien qui permet d'accéder au projet
       year: Année de réalisation du projet
       destroy: "Après avoir coché la case, ne pas oublier de valider le fomulaire pour que la suppression s'effectue"
+      role_name: Modification du rôle de l'utilisateur. Attention à ne pas faire n'importe quoi avec !!!
