@@ -24,7 +24,7 @@ That's it !
 Ruby and Rails versions
 -----------------------
 Ruby 2.2.0  
-Rails 4.2
+Rails 4.2  
 
 Server
 ------
@@ -46,24 +46,24 @@ Scripts are created in `coffeescript`
 
 Mail
 -----
-I used [maildev](http://djfarrelly.github.io/MailDev/) to tset my emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
+I used [maildev](http://djfarrelly.github.io/MailDev/) to test my emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
 To see your mails, visit `http://localhost:1080`
 
 Gems:
 -----
 ### [Globalize](https://github.com/globalize/globalize)
-Two language are included by default: french and english  
+Two languages are included by default: french and english  
   
 ### [Whenever](https://github.com/javan/whenever)
 Setup two Cron tasks:
-* Regenrate sitemap everyday
+* Regenerate sitemap everyday
 * Make a dump of database every day
 
 To make this tasks active on your server, just run `whenever --update-crontab <name-of-your-site>`  
 For more information read the gem documentation.
 
 
-Tests
+Units Tests
 -----
 Basics tests are included, just run `rake test`
 
