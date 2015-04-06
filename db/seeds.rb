@@ -7,7 +7,7 @@ ahora = Time.zone.now
 # == Resest content and setup id to 1
 #
 puts 'Reset table ID to 1'
-modeles_str = %w(User Setting Setting::Translation Post Post::Translation)
+modeles_str = %w(User Setting Setting::Translation Post Post::Translation Category Category::Translation)
 modeles_str.each do |modele_str|
   modele = modele_str.constantize
   modele.destroy_all
@@ -58,6 +58,56 @@ Setting::Translation.create!(
   created_at: ahora,
   updated_at: nil
 )
+
+#
+# == Categories
+#
+puts 'Creating Menu elements'
+title_en = ['Home', 'About', 'Contact']
+title_fr = ['Accueil', 'À Propos', 'Me contacter']
+description_en = ['Homepage description', 'About description', 'Contact description']
+description_fr = ['Description pour la page d\'accueil', 'Description de la page à propos', 'Description de la page contact']
+keywords_en = ['home', 'about', 'contact']
+keywords_fr = ['accueil', 'à propos', 'contact']
+show_in_menu = [true, false, true]
+show_in_footer = [false, false, false]
+
+Category.models_name_str.each_with_index do |element, index|
+  category = Category.create!(
+    name: element,
+    title: title_fr[index],
+    show_in_menu: show_in_menu[index],
+    show_in_footer: show_in_footer[index],
+    created_at: ahora,
+    updated_at: nil
+  )
+  Category::Translation.create!(
+    category_id: category.id,
+    locale: 'en',
+    title: title_en[index],
+    created_at: ahora,
+    updated_at: nil
+  )
+
+  referencement = Referencement.create!(
+    attachable_id: category.id,
+    attachable_type: 'Category',
+    title: title_fr[index],
+    description: description_fr[index],
+    keywords: keywords_fr[index],
+    created_at: ahora,
+    updated_at: nil
+  )
+  Referencement::Translation.create!(
+    referencement_id: referencement.id,
+    locale: 'en',
+    title: title_en[index],
+    description: description_en[index],
+    keywords: keywords_en[index],
+    created_at: ahora,
+    updated_at: nil
+  )
+end
 
 #
 # == Home article
