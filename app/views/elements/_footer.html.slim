@@ -1,4 +1,6 @@
 footer.footer-container#footer
   .row.footer
-    .small-12.large-4.large-centered.columns.credentials
+    .small-12.large-4.large-offset-4.columns.credentials
       == setting.credentials
+    .small-12.large-4.columns.credentials
+      = awesome_share_buttons(@category.title, popup: true)

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   before_action :set_menu_elements
   before_action :set_host_name
 
-  decorates_assigned :setting
+  decorates_assigned :setting, :category
 
   private
 
