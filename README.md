@@ -77,3 +77,7 @@ Basics tests are included, just run `rake test`
 Bonus
 ------
 * This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
+
+Screenshots
+-----------
+![Activeadmin Dashboard example](vendor/assets/images/readme/activeadmin_dashboard_example.png)
