@@ -67,8 +67,13 @@ Setup two Cron tasks:
 To make this tasks active on your server, just run `whenever --update-crontab <name-of-your-site>`  
 For more information read the gem documentation.
 
+### [Annotate](https://github.com/ctran/annotate_models)
+Print table structure in models  
 
 Units Tests
 -----
 Basics tests are included, just run `rake test`
 
+Bonus
+------
+* This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
