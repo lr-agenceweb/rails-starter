@@ -1,0 +1,15 @@
+/* The humans responsible & colophon */
+/* humanstxt.org */
+
+/* TEAM */
+    Web Developper: Anthony ROBIN
+    Website: http://anthony-robin.fr
+    From: FRANCE
+
+/* SITE */
+    Last update: 07/04/2015
+    Language: English / French
+    Doctype: HTML5
+    IDE: Sublime Text 3
+    Technologies: Ruby on Rails, jQuery (JS), Compass (CSS), Google Font, Font Awesome, Mapbox
+    Logiciels: Photoshop
