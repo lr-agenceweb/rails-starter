@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id             :integer          not null, primary key
+#  title          :string(255)
+#  name           :string(255)
+#  show_in_menu   :boolean          default(TRUE)
+#  show_in_footer :boolean          default(FALSE)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 #
 # == Category Model
 #

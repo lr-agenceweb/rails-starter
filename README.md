@@ -30,26 +30,31 @@ Server
 ------
 I am using unicorn in local development. The server is launch using `foreman start`
 
-Database:
+Database
 ---------
 I am using `mysql2` but you can choose to use `SQLite` or any other SGBD.  
 To create a dump of your database, run `rake db:backup`
 
-Template:
+Template
 --------
 I am using [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
 
-Assets:
+Assets
 -------
 Style is writting in `scss` and `sass` (with compass)  
 Scripts are created in `coffeescript`
 
+Tasks
+------
+* Color Routes: colored version of rake routes (run `rake color_routes`)
+* Dump SQL: make a quick save of your Database (run `rake db:backup`)
+
 Mail
 -----
-I used [maildev](http://djfarrelly.github.io/MailDev/) to test my emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
+I use [maildev](http://djfarrelly.github.io/MailDev/) to test my emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
 To see your mails, visit `http://localhost:1080`
 
-Gems:
+Gems
 -----
 ### [Globalize](https://github.com/globalize/globalize)
 Two languages are included by default: french and english  
@@ -62,8 +67,13 @@ Setup two Cron tasks:
 To make this tasks active on your server, just run `whenever --update-crontab <name-of-your-site>`  
 For more information read the gem documentation.
 
+### [Annotate](https://github.com/ctran/annotate_models)
+Print table structure in models  
 
 Units Tests
 -----
 Basics tests are included, just run `rake test`
 
+Bonus
+------
+* This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules

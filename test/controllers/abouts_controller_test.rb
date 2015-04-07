@@ -1,5 +1,8 @@
 require 'test_helper'
 
+#
+# == AboutsController Test
+#
 class AboutsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
@@ -26,13 +29,14 @@ class AboutsControllerTest < ActionController::TestCase
   end
 
   test 'should get abouts page by url' do
-    assert_routing '/a-propos', controller: 'abouts', action: 'index', locale: 'fr'
-    assert_routing '/en/about', controller: 'abouts', action: 'index', locale: 'en'
+    assert_routing '/a-propos', controller: 'abouts', action: 'index', locale: 'fr' if @locales.include?(:fr)
+    assert_routing '/en/about', controller: 'abouts', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
   private
 
   def initialize_test
     @about = posts(:about)
+    @locales = I18n.available_locales
   end
 end
