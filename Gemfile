@@ -63,7 +63,7 @@ gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize', bran
 #
 # == Map
 #
-gem 'mapbox-rails', github: 'seshook/mapbox-rails'
+gem 'mapbox-rails', github: 'anthony-robin/mapbox-rails'
 gem 'gmaps-autocomplete-rails'
 
 #
