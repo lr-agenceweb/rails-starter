@@ -9,9 +9,10 @@ class User < ActiveRecord::Base
                     path: ':rails_root/public/system/avatar/:id/:style/:filename',
                     url:  '/system/avatar/:id/:style/:filename',
                     styles: {
-                      large: '512x512#',
-                      medium:  '256x256#',
-                      small:  '128x128#'
+                      large:  '512x512#',
+                      medium: '256x256#',
+                      small:  '128x128#',
+                      thumb:  '64x64#'
                     },
                     retina: { quality: 70 },
                     default_url: '/system/default/:style/missing.png'
