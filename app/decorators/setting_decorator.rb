@@ -14,7 +14,7 @@ class SettingDecorator < ApplicationDecorator
   end
 
   def credentials
-    "#{setting.name} - Tous droits réservés <br> Copyright &copy; #{current_year} <br> #{about} #{admin_link}"
+    "#{setting.name} - #{copyright} <br> Copyright &copy; #{current_year} <br> #{about} #{admin_link}"
   end
 
   def map(force = false)
@@ -25,6 +25,10 @@ class SettingDecorator < ApplicationDecorator
 
   def about
     link_to I18n.t('main_menu.about'), abouts_path
+  end
+
+  def copyright
+    I18n.t('footer.copyright')
   end
 
   def admin_link
