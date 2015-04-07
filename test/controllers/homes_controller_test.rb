@@ -1,5 +1,8 @@
 require 'test_helper'
 
+#
+# == HomesController Test
+#
 class HomesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
@@ -26,13 +29,14 @@ class HomesControllerTest < ActionController::TestCase
   end
 
   test 'should get hompepage targetting home controller' do
-    assert_routing '/', controller: 'homes', action: 'index', locale: 'fr'
-    assert_routing '/en', controller: 'homes', action: 'index', locale: 'en'
+    assert_routing '/', controller: 'homes', action: 'index', locale: 'fr' if @locales.include?(:fr)
+    assert_routing '/en', controller: 'homes', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
   private
 
   def initialize_test
     @home = posts(:home)
+    @locales = I18n.available_locales
   end
 end

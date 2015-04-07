@@ -1,6 +1,8 @@
 require 'test_helper'
 
-# Admin::UsersControllerTest file
+#
+# == Admin::UsersController Test
+#
 class Admin::UsersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
