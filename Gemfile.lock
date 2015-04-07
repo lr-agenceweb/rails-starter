@@ -60,8 +60,8 @@ GIT
       sass-rails
 
 GIT
-  remote: git://github.com/seshook/mapbox-rails.git
-  revision: ce1d20e8fce98d79a41f2c76fdc8c09d47cad35a
+  remote: git://github.com/anthony-robin/mapbox-rails.git
+  revision: 0c0c99be86662dfde45d14dd74c7cb869fc46942
   specs:
     mapbox-rails (2.1.5)
 

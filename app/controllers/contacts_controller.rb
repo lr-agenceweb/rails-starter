@@ -12,7 +12,7 @@ class ContactsController < InheritedResources::Base
 
   def new
     @contact_form = ContactForm.new
-    # seo_tag_index(category, @background)
+    seo_tag_index category
   end
 
   def create
