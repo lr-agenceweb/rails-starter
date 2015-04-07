@@ -96,13 +96,16 @@ class Admin::UsersControllerTest < ActionController::TestCase
   #####################
   ## Subscriber
   ####################
-  test 'should not be able to edit admin or superadmin if user is subscriber' do
+  test 'should not be able to edit superadmin if user is subscriber' do
     sign_in @subscriber
     get :edit, id: @super_administrator.id
-    assert_redirected_to admin_root_path
+    assert_redirected_to admin_user_path(@subscriber)
+  end
 
+  test 'should not be able to edit admin if user is subscriber' do
+    sign_in @subscriber
     get :edit, id: @administrator.id
-    assert_redirected_to admin_root_path
+    assert_redirected_to admin_user_path(@subscriber)
   end
 
   test 'should be able to update itself' do
