@@ -1,4 +1,6 @@
-# Application decorator
+#
+# == ApplicationDecorator
+#
 class ApplicationDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
@@ -22,6 +24,24 @@ class ApplicationDecorator < Draper::Decorator
       new_contact_url
     else
       return '#'
+    end
+  end
+
+  def show_page_link(absolute = false)
+    case model.class.name
+    when 'About'
+      return about_path(model) unless absolute
+      about_url(model)
+    else
+      return '#'
+    end
+  end
+
+  def social_share(element)
+    if params[:action] == 'index' || params[:action] == 'new'
+      awesome_share_buttons(@category.title, popup: true)
+    else
+      awesome_share_buttons(element.title, popup: true)
     end
   end
 end

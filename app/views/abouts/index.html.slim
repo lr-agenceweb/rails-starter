@@ -2,7 +2,7 @@
   - @abouts.each do |about|
     .small-12.columns
       header
-        h2 = about.title
+        h2 = link_to about.title, about_path(about)
 
       div
         == about.content

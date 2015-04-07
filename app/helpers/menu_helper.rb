@@ -1,6 +1,5 @@
-# == MenuHelper
 #
-# This file contain helpfull methods for menu
+# == MenuHelper
 #
 module MenuHelper
   def controller?(*controller)

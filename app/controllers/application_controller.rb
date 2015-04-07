@@ -3,6 +3,7 @@
 #
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  include SocialHelper
 
   protect_from_forgery with: :exception
   analytical modules: [:google]
