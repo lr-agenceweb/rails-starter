@@ -1,0 +1,21 @@
+en:
+  awesome_share_buttons:
+    share_to: "Share with my %{name} account"
+    twitter: Twitter
+    facebook: Facebook
+    delicious: Delicious
+    google_plus: Google+
+    tumblr: Tumblr
+    pinterest: Pinterest
+    email: Email
+
+fr:
+  awesome_share_buttons:
+    share_to: "Partager avec mon compte %{name}"
+    twitter: Twitter
+    facebook: Facebook
+    delicious: Delicious
+    google_plus: Google+
+    tumblr: Tumblr
+    pinterest: Pinterest
+    email: Email
