@@ -195,6 +195,20 @@ ActiveAdmin.setup do |config|
   #     end
   #   end
 
+  config.namespace :admin do |admin|
+    admin.build_menu :utility_navigation do |menu|
+      # Add user avatar before  username in header
+      menu.add label: proc { raw retina_image_tag(current_user, :avatar, :thumb) },
+               url: proc { url_for([:admin, current_active_admin_user]) },
+               id: 'current_user_avatar'
+      menu.add label: proc { display_name(current_active_admin_user) },
+               url: proc { url_for([:admin, current_active_admin_user]) },
+               id: 'current_user'
+
+      admin.add_logout_button_to_menu menu
+    end
+  end
+
   # == Download Links
   #
   # You can disable download links on resource listing pages,
