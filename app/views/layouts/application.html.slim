@@ -9,10 +9,10 @@ html lang="#{@language}"
     meta name='msvalidate.01' content="#{Figaro.env.bing_site_verification}"
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
 
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
+    = javascript_include_tag 'application', 'data-turbolinks-track': true
 
-    / link type='text/plain' rel='author' href='/humans.txt'
+    link type='text/plain' rel='author' href='/humans.txt'
     / = favicon_link_tag '/favicon.ico'
     = csrf_meta_tag
     == raw analytical.head_append_javascript if Rails.env.production?
@@ -27,11 +27,6 @@ html lang="#{@language}"
 
       .l-container
         == yield
-
-
-    /   = render 'shared/header', setting: setting
-
-    /   .root-footer
 
     = render 'elements/footer'
     == raw analytical.body_append_javascript if Rails.env.production?
