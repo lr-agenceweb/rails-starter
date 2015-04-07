@@ -1,5 +1,7 @@
+#
 # == AssetsHelper
 #
+
 # This file contain helpfull assets methods
 # - images
 #
