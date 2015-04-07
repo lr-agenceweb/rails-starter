@@ -44,27 +44,53 @@ module ApplicationHelper
                   }
   end
 
-  # def seo_tag_show(current_object, url)
-  #   img = image_for_event(current_object)
-  #   title = current_object.decorate.title_for_shareable
-  #   set_meta_tags title: title,
-  #                 description: sanitize_and_truncate(current_object.excerpt),
-  #                 keywords: current_object.keywords,
-  #                 og: {
-  #                   type:  'article',
-  #                   title: title,
-  #                   description: sanitize_and_truncate(current_object.excerpt),
-  #                   url:   url,
-  #                   image: img
-  #                 },
-  #                 twitter: {
-  #                   card: 'summary_large_image',
-  #                   site: Figaro.env.twitter_username,
-  #                   creator: Figaro.env.twitter_username,
-  #                   title: title,
-  #                   description: sanitize_and_truncate(current_object.excerpt),
-  #                   url:   url,
-  #                   image: img
-  #                 }
-  # end
+  def seo_tag_show(current_object)
+    img = image_for_object(current_object)
+    title = current_object.title
+    url = current_object.decorate.show_page_link(true)
+
+    set_meta_tags title: title,
+                  description: sanitize_and_truncate(current_object.referencement_description),
+                  keywords: current_object.referencement_keywords,
+                  og: {
+                    type:  'article',
+                    title: title,
+                    description: sanitize_and_truncate(current_object.referencement_description),
+                    url:   url,
+                    image: img
+                  },
+                  twitter: {
+                    card: 'summary_large_image',
+                    site: Figaro.env.twitter_username,
+                    creator: Figaro.env.twitter_username,
+                    title: title,
+                    description: sanitize_and_truncate(current_object.referencement_description),
+                    url:   url,
+                    image: img
+                  }
+  end
+
+  def awesome_social_share
+    if params[:action] == 'index' || params[:action] == 'new'
+      awesome_share_buttons(@category.title,
+                            desc: @category.referencement_description,
+                            image: image_for_object(@category),
+                            via: Figaro.env.twitter_username,
+                            popup: true)
+    else
+      awesome_share_buttons(@element.title,
+                            desc: @element.referencement_description,
+                            image: image_for_object(@element),
+                            via: Figaro.env.twitter_username,
+                            popup: true)
+    end
+  end
+
+  private
+
+  def image_for_object(obj)
+    image = ''
+    image = attachment_url(obj.picture.image, :large) if defined?(obj.picture) && !obj.picture.nil?
+    image
+  end
 end
