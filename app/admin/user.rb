@@ -58,7 +58,7 @@ ActiveAdmin.register User do
   #
   controller do
     def update
-      update! { admin_users_path }
+      update! { admin_user_path(@user) }
     end
 
     def update_resource(object, attributes)
