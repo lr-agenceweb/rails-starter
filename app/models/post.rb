@@ -37,7 +37,7 @@ class Post < ActiveRecord::Base
   @child_classes = []
 
   def self.type
-    %w(Home About Career Contact)
+    %w(Home About Contact)
   end
 
   def self.inherited(child)
