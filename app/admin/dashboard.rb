@@ -34,5 +34,35 @@ ActiveAdmin.register_page 'Dashboard' do
         end
       end # column
     end # columns
+
+    columns do
+      column do
+        panel 'Mapbox' do
+          render 'admin/settings/show', resource: Setting.first.decorate
+        end
+      end # column
+    end # columns
   end # content
+
+  controller do
+    before_action :set_setting
+
+    private
+
+    def set_setting
+      @setting = Setting.first
+      gon.push(
+        mapbox_username: Figaro.env.mapbox_username,
+        mapbox_key: Figaro.env.mapbox_map_key,
+        mapbox_access_token: Figaro.env.mapbox_access_token,
+        name: @setting.name,
+        subtitle: @setting.subtitle,
+        address: @setting.address,
+        city: @setting.city,
+        postcode: @setting.postcode,
+        latitude: @setting.latitude,
+        longitude: @setting.longitude
+      )
+    end
+  end
 end
