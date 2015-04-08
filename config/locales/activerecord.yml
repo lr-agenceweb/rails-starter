@@ -1,6 +1,12 @@
 fr:
 
+  activemodel: &errors
+    errors:
+      messages:
+        invalid_email_address: n'est pas une adresse email valide
+        email_address_not_routable: n'est pas routable
   activerecord:
+    <<: *errors
     models:
       user:
         one: Utilisateur

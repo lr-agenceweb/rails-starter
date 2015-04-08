@@ -13,7 +13,7 @@ ActiveAdmin.register User do
 
   index do
     column :avatar do |resource|
-      retina_image_tag(resource, :avatar, :small)
+      retina_image_tag(resource, :avatar, :thumb)
     end
     column :username
     column :email
@@ -39,6 +39,8 @@ ActiveAdmin.register User do
   end
 
   form do |f|
+    f.semantic_errors *f.object.errors.keys
+
     f.inputs 'Admin Details' do
       f.input :avatar,
               as: :file,

@@ -57,6 +57,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :username, presence: true
+  validates :email, presence: true, email_format: {}
+
   def super_administrator?
     role_name == 'super_administrator'
   end
