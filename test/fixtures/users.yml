@@ -1,6 +1,7 @@
 anthony:
   email: anthony@test.fr
   role: super_administrator
+  avatar_file_name: bart.jpg
 
 bob:
   email: bob@test.fr

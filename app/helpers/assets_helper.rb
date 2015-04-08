@@ -16,7 +16,7 @@ module AssetsHelper
     end
   end
 
-  def attachment_url(file, style = :original)
-    URI.join(request.url, file.url(style)) unless file.nil?
+  def attachment_url(file, style = :original, req = request)
+    URI.join(req.url, file.url(style)).to_s unless file.nil?
   end
 end
