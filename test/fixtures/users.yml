@@ -1,12 +1,15 @@
 anthony:
+  username: anthony
   email: anthony@test.fr
   role: super_administrator
   avatar_file_name: bart.jpg
 
 bob:
+  username: bob
   email: bob@test.fr
   role: administrator
 
 alice:
+  username: alice
   email: alice@test.fr
   role: subscriber
