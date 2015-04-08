@@ -53,7 +53,7 @@ GIT
 
 GIT
   remote: git://github.com/anthony-robin/awesome-share-buttons.git
-  revision: 301a4462386ae9d70bf69051fa60379647e81f6a
+  revision: 6d9e4d056920e4e8574b795aa098b9d8d455003b
   specs:
     awesome-share-buttons (1.1)
       coffee-rails
