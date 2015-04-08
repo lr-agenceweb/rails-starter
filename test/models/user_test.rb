@@ -1,5 +1,8 @@
 require 'test_helper'
 
+#
+# == User model test
+#
 class UserTest < ActiveSupport::TestCase
   setup :initialize_settings
 

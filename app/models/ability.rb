@@ -1,3 +1,6 @@
+#
+# == Ability Class
+#
 class Ability
   include CanCan::Ability
 

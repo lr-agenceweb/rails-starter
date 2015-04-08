@@ -4,7 +4,15 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
-    - 'lib/**'
-    - 'bin/**'
-LineLength:
+    - 'lib/**/*'
+    - 'bin/**/*'
+Metrics/ClassLength:
+  CountComments: false
+  Max: 99999
+Metrics/MethodLength:
+  CountComments: false
+  Max: 99999
+Metrics/LineLength:
+  Max: 99999
+Metrics/AbcSize:
   Max: 99999

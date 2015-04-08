@@ -51,7 +51,7 @@ gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_validations-simple_form'
 gem 'autosize-rails'
 gem 'mail_form' # contact form
-gem "wysiwyg-rails" # Froala editor
+gem 'wysiwyg-rails' # Froala editor
 
 #
 # == Translation

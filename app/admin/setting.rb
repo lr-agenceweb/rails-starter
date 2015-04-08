@@ -107,7 +107,7 @@ ActiveAdmin.register Setting do
         postcode: @setting.postcode,
         latitude: @setting.latitude,
         longitude: @setting.longitude
-        )
+      )
     end
   end
 end
