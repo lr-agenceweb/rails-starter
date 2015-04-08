@@ -32,5 +32,5 @@ class Setting < ActiveRecord::Base
   validates :address,  presence: true
   validates :city,     presence: true
   validates :postcode, presence: true, numericality: { only_integer: true }
-  validates :email,    presence: true, format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates :email,    presence: true, email_format: {}
 end

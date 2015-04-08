@@ -43,3 +43,11 @@ fr:
         current_sign_in_at: Connecté depuis
         last_sign_in_at: Dernière connexion
         created_at: Inscrit depuis
+
+  activemodel: &errors
+    errors:
+      messages:
+        invalid_email_address: n'est pas une adresse email valide
+        email_address_not_routable: n'est pas routable
+  activerecord:
+    <<: *errors

@@ -39,6 +39,8 @@ ActiveAdmin.register User do
   end
 
   form do |f|
+    f.semantic_errors *f.object.errors.keys
+
     f.inputs 'Admin Details' do
       f.input :avatar,
               as: :file,
