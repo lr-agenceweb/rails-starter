@@ -13,7 +13,7 @@ ActiveAdmin.register User do
 
   index do
     column :avatar do |resource|
-      retina_image_tag(resource, :avatar, :small)
+      retina_image_tag(resource, :avatar, :thumb)
     end
     column :username
     column :email
