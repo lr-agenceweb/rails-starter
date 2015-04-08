@@ -3,3 +3,9 @@ one:
 
 two:
   attachable: about (Post)
+
+category_home:
+  attachable: home (Category)
+  title: Référencement pour catégorie home
+  description: Description pour catégorie home
+  keywords: "Mots-clés, pour, catégorie, home"
