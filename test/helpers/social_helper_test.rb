@@ -1,0 +1,56 @@
+require 'test_helper'
+
+#
+# == SocialHelper Test
+#
+class SocialHelperTest < ActionView::TestCase
+  include SocialHelper
+  include AssetsHelper
+  include ApplicationHelper
+  include MetaTags::ViewHelper
+  include Rails.application.routes.url_helpers
+
+  test 'sould return correct SEO for index page' do
+    @category = categories(:home)
+    seo_tag_index(@category.decorate)
+
+    # Basics
+    assert_equal meta_tags[:title], 'Accueil'
+    assert_equal meta_tags[:description], 'Description pour catégorie home'
+    assert_equal meta_tags[:keywords], 'Mots-clés, pour, catégorie, home'
+
+    # Facebook
+    assert_equal meta_tags[:og][:title], 'Accueil'
+    assert_equal meta_tags[:og][:description], 'Description pour catégorie home'
+    assert_equal meta_tags[:og][:url], root_url
+    assert_nil meta_tags[:og][:image]
+
+    # Twitter
+    assert_equal meta_tags[:twitter][:title], 'Accueil'
+    assert_equal meta_tags[:twitter][:description], 'Description pour catégorie home'
+    assert_equal meta_tags[:twitter][:url], root_url
+    assert_nil meta_tags[:twitter][:image]
+  end
+
+  test 'sould return correct SEO for show page' do
+    @about = posts(:about)
+    seo_tag_show(@about.decorate)
+
+    # Basics
+    assert_equal meta_tags[:title], 'Développement et Hébergement'
+    assert_equal meta_tags[:description], 'Description pour article À Propos'
+    assert_equal meta_tags[:keywords], 'Mots-clés, pour, article, à propos'
+
+    # Facebook
+    assert_equal meta_tags[:og][:title], 'Développement et Hébergement'
+    assert_equal meta_tags[:og][:description], 'Description pour article À Propos'
+    assert_equal meta_tags[:og][:url], about_url(@about)
+    assert_nil meta_tags[:og][:image]
+
+    # Twitter
+    assert_equal meta_tags[:twitter][:title], 'Développement et Hébergement'
+    assert_equal meta_tags[:twitter][:description], 'Description pour article À Propos'
+    assert_equal meta_tags[:twitter][:url], about_url(@about)
+    assert_nil meta_tags[:twitter][:image]
+  end
+end

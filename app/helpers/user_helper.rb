@@ -2,7 +2,7 @@
 # == UserHelper
 #
 module UserHelper
-  def current_user_and_administrator?
-    current_user && (current_user.administrator? || current_user.super_administrator?)
+  def current_user_and_administrator?(user = current_user)
+    user && (user.administrator? || user.super_administrator?)
   end
 end

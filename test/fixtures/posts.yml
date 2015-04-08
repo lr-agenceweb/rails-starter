@@ -12,7 +12,7 @@ home_offline:
 # About posts
 about:
   type: About
-  title: About article 2 !
+  title: Développement et Hébergement
   online: 1
 
 about_2:

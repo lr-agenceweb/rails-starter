@@ -5,7 +5,7 @@ module SocialHelper
   include AssetsHelper
 
   def seo_tag_index(category, background = nil)
-    img = background.nil? ? '' : attachment_url(background.image, :medium)
+    img = background.nil? ? nil : attachment_url(background.image, :medium)
     set_meta_tags title: category.title,
                   description: sanitize_and_truncate(category.referencement_description),
                   keywords: category.referencement_keywords,
@@ -72,7 +72,7 @@ module SocialHelper
   private
 
   def image_for_object(obj)
-    image = ''
+    image = nil
     image = attachment_url(obj.picture.image, :large) if defined?(obj.picture) && !obj.picture.nil?
     image
   end

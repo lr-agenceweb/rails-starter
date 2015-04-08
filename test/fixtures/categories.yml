@@ -1,4 +1,5 @@
 home:
+  title: Accueil
   name: Home
   show_in_menu: 1
   show_in_footer: 0
