@@ -72,7 +72,7 @@ module SocialHelper
   private
 
   def image_for_object(obj)
-    image = ''
+    image = nil
     image = attachment_url(obj.picture.image, :large) if defined?(obj.picture) && !obj.picture.nil?
     image
   end

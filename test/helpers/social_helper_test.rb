@@ -31,4 +31,26 @@ class SocialHelperTest < ActionView::TestCase
     assert_equal meta_tags[:twitter][:url], root_url
     assert_nil meta_tags[:twitter][:image]
   end
+
+  test 'sould return correct SEO for show page' do
+    @about = posts(:about)
+    seo_tag_show(@about.decorate)
+
+    # Basics
+    assert_equal meta_tags[:title], 'Développement et Hébergement'
+    assert_equal meta_tags[:description], 'Description pour article À Propos'
+    assert_equal meta_tags[:keywords], 'Mots-clés, pour, article, à propos'
+
+    # Facebook
+    assert_equal meta_tags[:og][:title], 'Développement et Hébergement'
+    assert_equal meta_tags[:og][:description], 'Description pour article À Propos'
+    assert_equal meta_tags[:og][:url], about_url(@about)
+    assert_nil meta_tags[:og][:image]
+
+    # Twitter
+    assert_equal meta_tags[:twitter][:title], 'Développement et Hébergement'
+    assert_equal meta_tags[:twitter][:description], 'Description pour article À Propos'
+    assert_equal meta_tags[:twitter][:url], about_url(@about)
+    assert_nil meta_tags[:twitter][:image]
+  end
 end
