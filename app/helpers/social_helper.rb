@@ -4,6 +4,12 @@
 module SocialHelper
   include AssetsHelper
 
+  # SEO Meta tags for index pages (include Facebook and Twitter)
+  #
+  # * *Args*    :
+  #   - +category+ -> category corresponding to the page
+  #   - +background+ -> background picture for category
+  #
   def seo_tag_index(category, background = nil)
     img = background.nil? ? nil : attachment_url(background.image, :medium)
     set_meta_tags title: category.title,
@@ -27,6 +33,11 @@ module SocialHelper
                   }
   end
 
+  # SEO Meta tags for show pages (include Facebook and Twitter)
+  #
+  # * *Args*    :
+  #   - +current_object+ -> object for which we want informations
+  #
   def seo_tag_show(current_object)
     img = image_for_object(current_object)
     title = current_object.title
@@ -53,27 +64,31 @@ module SocialHelper
                   }
   end
 
+  # Social share buttons links
+  #
+  # * *Args*    :
+  # * *Returns* :
+  #
   def awesome_social_share
-    if params[:action] == 'index' || params[:action] == 'new'
-      awesome_share_buttons(@category.title,
-                            desc: @category.referencement_description,
-                            image: image_for_object(@category),
-                            via: Figaro.env.twitter_username,
-                            popup: true)
-    else
-      awesome_share_buttons(@element.title,
-                            desc: @element.referencement_description,
-                            image: image_for_object(@element),
-                            via: Figaro.env.twitter_username,
-                            popup: true)
-    end
+    element = params[:action] == 'index' || params[:action] == 'new' ? @category : @element
+
+    awesome_share_buttons(element.title,
+                          desc: element.referencement_description,
+                          image: image_for_object(element),
+                          via: Figaro.env.twitter_username,
+                          popup: true)
   end
 
   private
 
+  # Get image for an object
+  #
+  # * *Args*    :
+  #   - +object+ -> object to get image
+  # * *Returns* :
+  #   - the image for a given object if any
+  #
   def image_for_object(obj)
-    image = nil
-    image = attachment_url(obj.picture.image, :large) if defined?(obj.picture) && !obj.picture.nil?
-    image
+    defined?(obj.picture) && !obj.picture.nil? ? attachment_url(obj.picture.image, :large) : nil
   end
 end

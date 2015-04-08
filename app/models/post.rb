@@ -35,17 +35,14 @@ class Post < ActiveRecord::Base
 
   self.inheritance_column = :type
   @child_classes = []
+  attr_reader :child_classes
 
   def self.type
-    %w(Home About Career Contact)
+    %w(Home About Contact)
   end
 
   def self.inherited(child)
     @child_classes << child
     super # important!
-  end
-
-  def self.child_classes
-    @child_classes
   end
 end

@@ -45,6 +45,6 @@ class ContactsController < InheritedResources::Base
       postcode: setting.postcode,
       latitude: setting.latitude,
       longitude: setting.longitude
-      )
+    )
   end
 end
