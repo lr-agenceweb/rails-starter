@@ -88,4 +88,4 @@ Bonus
 
 Screenshots
 -----------
-![Activeadmin Dashboard example](vendor/assets/images/readme/activeadmin_dashboard_example.png)
+![Activeadmin Dashboard example](vendor/assets/images/readme/activeadmin_dashboard_example.jpg)
