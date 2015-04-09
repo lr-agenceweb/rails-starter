@@ -10,7 +10,7 @@ module Admin
   class UsersControllerTest < ActionController::TestCase
     include Devise::TestHelpers
 
-    setup :initialize_settings
+    setup :initialize_test
 
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @super_administrator
@@ -135,7 +135,7 @@ module Admin
 
     private
 
-    def initialize_settings
+    def initialize_test
       @super_administrator = users(:anthony)
       @administrator = users(:bob)
       @subscriber = users(:alice)
