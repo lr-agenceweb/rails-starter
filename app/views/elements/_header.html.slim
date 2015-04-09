@@ -1,14 +1,30 @@
 header.l-header-site.hide-for-print
 
   .l-header-container
+    nav.top-bar data-topbar="" role="navigation"
+      ul.title-area
+        li.name
+          h1
+            a href="#" = setting.title
+        li.toggle-topbar.menu-icon
+          a href="#"
+            span Menu
+      section.top-bar-section
+        /! Right Nav Section
+        ul.right
+          - @menu_elements_header.each do |element|
+            li class="l-nav-item #{set_active_class(element.name.tableize)}" = link_to element.title, element.menu_link(element.name), class: 'l-nav-item-link'
+
     .row
       .small-12.columns
         = render 'elements/language'
 
-    .row
-      .small-12.medium-4.columns.title-site
-        == setting.title_subtitle.html_safe
 
-      .small-12.medium-8.columns.menu-site
-        = render 'elements/menu'
-        .clearfix
+
+    / .row
+    /   .small-12.medium-4.columns.title-site
+    /     == setting.title_subtitle.html_safe
+
+    /   .small-12.medium-8.columns.menu-site
+    /     = render 'elements/menu'
+    /     .clearfix
