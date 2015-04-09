@@ -66,6 +66,13 @@ GIT
     mapbox-rails (2.1.5)
 
 GIT
+  remote: git://github.com/mvdstam/activeadmin-sortable.git
+  revision: be5806ee5e1dc94da9331c9527f64e0f894a0b87
+  specs:
+    activeadmin-sortable (0.0.3)
+      activeadmin (>= 0.4)
+
+GIT
   remote: git://github.com/thoughtbot/paperclip.git
   revision: cdbc05eb508ad18a1fff746d2c4fa58c177ee837
   specs:
@@ -97,8 +104,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    activeadmin-sortable (0.0.3)
-      activeadmin (>= 0.4)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -510,7 +515,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   activeadmin-globalize!
-  activeadmin-sortable
+  activeadmin-sortable!
   acts_as_list
   analytical
   annotate (~> 2.6.5)

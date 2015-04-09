@@ -24,7 +24,6 @@ ActiveAdmin.register Category do
 
   index do
     sortable_handle_column
-    column :position
     column :title do |resource|
       raw "<strong>#{resource.title}</strong>"
     end
