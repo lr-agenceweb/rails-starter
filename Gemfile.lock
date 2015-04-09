@@ -66,6 +66,13 @@ GIT
     mapbox-rails (2.1.5)
 
 GIT
+  remote: git://github.com/mvdstam/activeadmin-sortable.git
+  revision: be5806ee5e1dc94da9331c9527f64e0f894a0b87
+  specs:
+    activeadmin-sortable (0.0.3)
+      activeadmin (>= 0.4)
+
+GIT
   remote: git://github.com/thoughtbot/paperclip.git
   revision: cdbc05eb508ad18a1fff746d2c4fa58c177ee837
   specs:
@@ -113,6 +120,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_list (0.6.0)
+      activerecord (>= 3.0)
     addressable (2.3.8)
     analytical (3.0.12)
     annotate (2.6.8)
@@ -452,7 +461,7 @@ GEM
       slim (~> 3.0)
     spoon (0.0.4)
       ffi
-    spring (1.3.3)
+    spring (1.3.4)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -506,6 +515,8 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   activeadmin-globalize!
+  activeadmin-sortable!
+  acts_as_list
   analytical
   annotate (~> 2.6.5)
   autosize-rails
@@ -562,7 +573,7 @@ DEPENDENCIES
   simple_form
   sitemap_generator
   slim-rails
-  spring
+  spring (~> 1.3.4)
   sqlite3
   truncate_html
   turbolinks

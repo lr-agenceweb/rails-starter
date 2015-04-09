@@ -16,6 +16,7 @@ class Ability
       can :update, Setting
       can :manage, User, role_name: %w( administrator subscriber )
       can :manage, User, id: user.id
+      can :update, Category
 
     elsif user.subscriber?
       can [:update, :read, :destroy], User, id: user.id

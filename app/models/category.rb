@@ -7,6 +7,7 @@
 #  name           :string(255)
 #  show_in_menu   :boolean          default(TRUE)
 #  show_in_footer :boolean          default(FALSE)
+#  position       :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -18,6 +19,8 @@ class Category < ActiveRecord::Base
   translates :title
   active_admin_translates :title
 
+  acts_as_list
+
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
 
@@ -25,6 +28,7 @@ class Category < ActiveRecord::Base
 
   scope :visible_header, -> { where(show_in_menu: true) }
   scope :visible_footer, -> { where(show_in_footer: true) }
+  scope :by_position, -> { order(position: :asc) }
 
   def self.models_name
     [:Home, :About, :Contact]
