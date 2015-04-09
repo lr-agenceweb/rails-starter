@@ -49,3 +49,7 @@ fr:
         current_sign_in_at: Connecté depuis
         last_sign_in_at: Dernière connexion
         created_at: Inscrit depuis
+      category:
+        title: Titre
+        show_in_menu: Inclus dans le menu ?
+        show_in_footer: Inclus dans le footer ?

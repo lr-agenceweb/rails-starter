@@ -24,12 +24,20 @@ ActiveAdmin.register_page 'Dashboard' do
           table_for Setting.first do
             column :title
             column :subtitle
-            column :show_map do |resource|
-              status_tag("#{resource.show_map}", (resource.show_map? ? :ok : :warn))
-            end
+            column :show_map
+
             column('Actions') do |resource|
               link_to(I18n.t('active_admin.edit'), edit_admin_setting_path(resource)) + ' ' + link_to('Voir', admin_setting_path(resource))
             end
+          end
+        end
+
+        panel 'Categories' do
+          table_for Category.visible_header.by_position do
+            column :position
+            column :title
+            column :show_in_menu
+            column :show_in_footer
           end
         end
       end # column
