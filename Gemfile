@@ -21,6 +21,8 @@ gem 'mysql2'
 #
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
+gem 'acts_as_list'
+gem 'activeadmin-sortable'
 
 #
 # == Decorator

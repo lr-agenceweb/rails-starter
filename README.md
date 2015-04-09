@@ -74,6 +74,14 @@ Units Tests
 -----
 Basics tests are included, just run `rake test`
 
+Contributing
+------------
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
 Bonus
 ------
 * This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules

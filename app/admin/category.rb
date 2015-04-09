@@ -16,9 +16,15 @@ ActiveAdmin.register Category do
                 ]
 
   config.clear_sidebar_sections!
+  config.sort_order = 'position_asc'
+  config.paginate   = false
+
+  sortable # creates the controller action which handles the sorting
   actions :all, except: [:new, :destroy]
 
   index do
+    sortable_handle_column
+    column :position
     column :title do |resource|
       raw "<strong>#{resource.title}</strong>"
     end
