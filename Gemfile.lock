@@ -53,7 +53,7 @@ GIT
 
 GIT
   remote: git://github.com/anthony-robin/awesome-share-buttons.git
-  revision: 6d9e4d056920e4e8574b795aa098b9d8d455003b
+  revision: 6c532202aaed1d5df44a071be0bf7901980d725b
   specs:
     awesome-share-buttons (1.1)
       coffee-rails
@@ -217,7 +217,7 @@ GEM
     erubis (2.7.0)
     every_day_irb (2.0.0)
       cd (~> 1.0)
-    execjs (2.5.0)
+    execjs (2.5.2)
     fancy_irb (1.0.0)
       paint (>= 0.9, < 2.0)
       unicode-display_width (>= 0.2.0)

@@ -4,10 +4,6 @@
   z-index: 1;
   margin-bottom: 50px;
 
-  &:not(.popup):not(.footer) {
-    padding-top: 10px;
-  }
-
   // Specific CSS for mapbox popup
   &.popup, &.footer {
     margin-bottom: 20px;

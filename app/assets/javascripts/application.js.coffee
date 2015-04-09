@@ -10,6 +10,7 @@
 #= require rails.validations.simple_form
 #= require rails.validations.simple_form.fix
 #= require awesome-share-buttons
+#= require plugins/awesome-share-buttons
 #= require mapbox
 #= require jquery.autosize
 #= require jquery.sticky_footer
@@ -19,5 +20,4 @@
 #= require plugins/nprogress
 
 $(document).on 'ready page:load page:restore', ->
-  $(document).foundation
   $('.autosize').autosize()
