@@ -12,11 +12,12 @@ module SocialHelper
   #
   def seo_tag_index(category, background = nil)
     img = background.nil? ? nil : attachment_url(background.image, :medium)
-    set_meta_tags title: category.title,
+    title_seo = "#{category.title} - #{@setting.title_and_subtitle}"
+    set_meta_tags title: title_seo,
                   description: sanitize_and_truncate(category.referencement_description),
                   keywords: category.referencement_keywords,
                   og: {
-                    title: category.title,
+                    title: title_seo,
                     description: sanitize_and_truncate(category.referencement_description),
                     type: 'article',
                     url: category.menu_link(category.name, true),
@@ -26,7 +27,7 @@ module SocialHelper
                     card: 'summary_large_image',
                     site: Figaro.env.twitter_username,
                     creator: Figaro.env.twitter_username,
-                    title: category.title,
+                    title: title_seo,
                     description: sanitize_and_truncate(category.referencement_description),
                     url: category.menu_link(category.name, true),
                     image: img
@@ -40,15 +41,15 @@ module SocialHelper
   #
   def seo_tag_show(current_object)
     img = image_for_object(current_object)
-    title = current_object.title
+    title_seo = "#{current_object.title} - #{@setting.title_and_subtitle}"
     url = current_object.decorate.show_page_link(true)
 
-    set_meta_tags title: title,
+    set_meta_tags title: title_seo,
                   description: sanitize_and_truncate(current_object.referencement_description),
                   keywords: current_object.referencement_keywords,
                   og: {
                     type:  'article',
-                    title: title,
+                    title: title_seo,
                     description: sanitize_and_truncate(current_object.referencement_description),
                     url:   url,
                     image: img
@@ -57,7 +58,7 @@ module SocialHelper
                     card: 'summary_large_image',
                     site: Figaro.env.twitter_username,
                     creator: Figaro.env.twitter_username,
-                    title: title,
+                    title: title_seo,
                     description: sanitize_and_truncate(current_object.referencement_description),
                     url:   url,
                     image: img
@@ -71,8 +72,9 @@ module SocialHelper
   #
   def awesome_social_share
     element = params[:action] == 'index' || params[:action] == 'new' ? @category : @element
+    title_seo = "#{element.title} - #{@setting.title_and_subtitle}"
 
-    awesome_share_buttons(element.title,
+    awesome_share_buttons(title_seo,
                           desc: element.referencement_description,
                           image: image_for_object(element),
                           via: Figaro.env.twitter_username,
