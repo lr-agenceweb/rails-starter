@@ -12,8 +12,8 @@ module SocialHelper
   #
   def seo_tag_index(category, background = nil)
     img = background.nil? ? nil : attachment_url(background.image, :medium)
-    title_seo = "#{category.title} - #{@setting.title_and_subtitle}"
-    set_meta_tags title: title_seo,
+    title_seo = title_seo_structure(category.title)
+    set_meta_tags title: category.title,
                   description: sanitize_and_truncate(category.referencement_description),
                   keywords: category.referencement_keywords,
                   og: {
@@ -37,20 +37,20 @@ module SocialHelper
   # SEO Meta tags for show pages (include Facebook and Twitter)
   #
   # * *Args*    :
-  #   - +current_object+ -> object for which we want informations
+  #   - +element+ -> object for which we want informations
   #
-  def seo_tag_show(current_object)
-    img = image_for_object(current_object)
-    title_seo = "#{current_object.title} - #{@setting.title_and_subtitle}"
-    url = current_object.decorate.show_page_link(true)
+  def seo_tag_show(element)
+    img = image_for_object(element)
+    title_seo = title_seo_structure(element.title)
+    url = element.decorate.show_page_link(true)
 
-    set_meta_tags title: title_seo,
-                  description: sanitize_and_truncate(current_object.referencement_description),
-                  keywords: current_object.referencement_keywords,
+    set_meta_tags title: element.title,
+                  description: sanitize_and_truncate(element.referencement_description),
+                  keywords: element.referencement_keywords,
                   og: {
                     type:  'article',
                     title: title_seo,
-                    description: sanitize_and_truncate(current_object.referencement_description),
+                    description: sanitize_and_truncate(element.referencement_description),
                     url:   url,
                     image: img
                   },
@@ -59,7 +59,7 @@ module SocialHelper
                     site: Figaro.env.twitter_username,
                     creator: Figaro.env.twitter_username,
                     title: title_seo,
-                    description: sanitize_and_truncate(current_object.referencement_description),
+                    description: sanitize_and_truncate(element.referencement_description),
                     url:   url,
                     image: img
                   }
@@ -72,7 +72,7 @@ module SocialHelper
   #
   def awesome_social_share
     element = params[:action] == 'index' || params[:action] == 'new' ? @category : @element
-    title_seo = "#{element.title} - #{@setting.title_and_subtitle}"
+    title_seo = title_seo_structure(element.title)
 
     awesome_share_buttons(title_seo,
                           desc: element.referencement_description,
@@ -92,5 +92,17 @@ module SocialHelper
   #
   def image_for_object(obj)
     defined?(obj.picture) && !obj.picture.nil? ? attachment_url(obj.picture.image, :large) : nil
+  end
+
+  # SEO page title structure
+  #
+  # * *Args*    :
+  #   - +element_title+ -> page title
+  #   - +site_title+ -> site title
+  # * *Returns* :
+  #   - the formatted title for SEO
+  #
+  def title_seo_structure(element_title)
+    "#{element_title} | #{@setting.title_and_subtitle}"
   end
 end

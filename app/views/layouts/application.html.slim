@@ -4,7 +4,7 @@ html lang="#{@language}"
   head
     meta charset='utf-8'
     == raw analytical.head_prepend_javascript if Rails.env.production?
-    = display_meta_tags title: titles
+    = display_meta_tags title: title, site: @setting.title_and_subtitle, reverse: true
     meta name='google-site-verification' content="#{Figaro.env.google_site_verification}"
     meta name='msvalidate.01' content="#{Figaro.env.bing_site_verification}"
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
