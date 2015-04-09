@@ -97,6 +97,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    activeadmin-sortable (0.0.3)
+      activeadmin (>= 0.4)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -113,6 +115,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_list (0.6.0)
+      activerecord (>= 3.0)
     addressable (2.3.8)
     analytical (3.0.12)
     annotate (2.6.8)
@@ -506,6 +510,8 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   activeadmin-globalize!
+  activeadmin-sortable
+  acts_as_list
   analytical
   annotate (~> 2.6.5)
   autosize-rails

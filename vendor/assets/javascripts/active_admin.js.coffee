@@ -1,4 +1,5 @@
 #= require active_admin/base
+#= require activeadmin-sortable
 #= require jquery-ui
 #= require chosen-jquery
 #= require admin/form_translation
