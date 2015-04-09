@@ -33,16 +33,19 @@
 
 anthony:
   username: anthony
+  slug: anthony
   email: anthony@test.fr
   role: super_administrator
   avatar_file_name: bart.jpg
 
 bob:
   username: bob
+  slug: bob
   email: bob@test.fr
   role: administrator
 
 alice:
   username: alice
+  slug: alice
   email: alice@test.fr
   role: subscriber
