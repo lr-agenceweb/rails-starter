@@ -154,6 +154,7 @@ Post::Translation.create!(
 # == FriendlyId
 #
 puts 'Setting Friendly Id'
+User.find_each(&:save)
 Post.find_each(&:save)
 
 puts 'Seeds successfuly loaded :)'

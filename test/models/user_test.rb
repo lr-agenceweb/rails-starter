@@ -4,7 +4,7 @@ require 'test_helper'
 # == User model test
 #
 class UserTest < ActiveSupport::TestCase
-  setup :initialize_settings
+  setup :initialize_test
 
   test 'should be true if user is super_administrator' do
     assert @super_administrator.super_administrator?
@@ -20,7 +20,7 @@ class UserTest < ActiveSupport::TestCase
 
   private
 
-  def initialize_settings
+  def initialize_test
     @super_administrator = users(:anthony)
     @administrator = users(:bob)
     @subscriber = users(:alice)

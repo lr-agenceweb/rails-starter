@@ -22,3 +22,11 @@
 one:
   email: demo@startup.fr
   show_map: 0
+  title: Site title
+  subtitle: Site subtitle
+
+two:
+  email: demo@startup.fr
+  show_map: 0
+  title: Site title
+  subtitle: ''

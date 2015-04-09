@@ -33,4 +33,13 @@ class Setting < ActiveRecord::Base
   validates :city,     presence: true
   validates :postcode, presence: true, numericality: { only_integer: true }
   validates :email,    presence: true, email_format: {}
+
+  def title_and_subtitle
+    return "#{title}, #{subtitle}" if subtitle?
+    title
+  end
+
+  def subtitle?
+    !subtitle.blank?
+  end
 end
