@@ -4,6 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  username               :string(255)
+#  slug                   :string(255)
 #  email                  :string(255)      default(""), not null
 #  avatar_updated_at      :datetime
 #  avatar_file_size       :integer
@@ -27,13 +28,15 @@
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_slug                  (slug) UNIQUE
 #
 
 #
 # == User Model
 #
 class User < ActiveRecord::Base
-  belongs_to :role
+  extend FriendlyId
+  friendly_id :username, use: [:slugged, :finders]
 
   retina!
   has_attached_file :avatar,
@@ -50,6 +53,7 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
+  belongs_to :role
   delegate :name, to: :role, prefix: true, allow_nil: true
 
   # Include default devise modules. Others available are:
@@ -70,5 +74,9 @@ class User < ActiveRecord::Base
 
   def subscriber?
     role_name == 'subscriber'
+  end
+
+  def should_generate_new_friendly_id?
+    username_changed? || super
   end
 end
