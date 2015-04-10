@@ -6,6 +6,7 @@ require 'test_helper'
 class SocialHelperTest < ActionView::TestCase
   include SocialHelper
   include AssetsHelper
+  include HtmlHelper
   include ApplicationHelper
   include MetaTags::ViewHelper
   include Rails.application.routes.url_helpers
