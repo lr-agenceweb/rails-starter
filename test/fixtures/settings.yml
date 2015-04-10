@@ -1,7 +1,5 @@
 one:
   id: 1
-  title: Site title
-  subtitle: Site subtitle
   name: Rails Starter
   email: demo@startup.fr
   show_map: 0
@@ -13,5 +11,5 @@ two:
   id: 2
   email: demo@startup.fr
   show_map: 0
-  title: Site title
+  title: Rails Starter
   subtitle: ''

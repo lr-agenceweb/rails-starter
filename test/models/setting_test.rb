@@ -7,11 +7,11 @@ class SettingTest < ActiveSupport::TestCase
   setup :initialize_test
 
   test 'should return title and subtitle if subtitle is not blank' do
-    assert_equal @setting.title_and_subtitle, 'Site title, Site subtitle'
+    assert_equal @setting.title_and_subtitle, 'Rails Starter, Démarre rapidement'
   end
 
   test 'should return only title if subtitle is blank' do
-    assert_equal @setting_without_subtitle.title_and_subtitle, 'Site title'
+    assert_equal @setting_without_subtitle.title_and_subtitle, 'Rails Starter'
   end
 
   private
