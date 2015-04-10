@@ -24,7 +24,7 @@
 #
 class Setting < ActiveRecord::Base
   translates :title, :subtitle, fallbacks_for_empty_translations: true
-  active_admin_translates :title, :subtitle do
+  active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true
   end
 
