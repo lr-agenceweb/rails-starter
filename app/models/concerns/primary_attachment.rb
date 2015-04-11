@@ -1,3 +1,6 @@
+#
+# == PrimaryAttachment Concerns
+#
 module PrimaryAttachment
   extend ActiveSupport::Concern
   include ApplicationHelper
