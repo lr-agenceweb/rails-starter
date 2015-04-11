@@ -9,8 +9,9 @@ fr:
   main_menu:
     dashboard: Dashboard
     about: À propos
-  #   home: Accueil
-  #   contact: Me Contacter
+
+  breadcrumb:
+    here: 'Vous êtes ici: '
 
 
 # English
@@ -23,3 +24,6 @@ en:
   main_menu:
     dashboard: Dashboard
     about: About
+
+  breadcrumb:
+    here: 'You are here: '

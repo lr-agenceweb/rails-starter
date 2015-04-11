@@ -37,4 +37,8 @@ class Category < ActiveRecord::Base
   def self.models_name_str
     %w( Home About Contact )
   end
+
+  def self.title_by_category(category)
+    Category.find_by(name: category).title
+  end
 end
