@@ -20,6 +20,7 @@
 # == Post Model
 #
 class Post < ActiveRecord::Base
+  include PrimaryAttachment
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content
 
@@ -32,6 +33,8 @@ class Post < ActiveRecord::Base
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
+  scope :home, -> { where(type: 'Home') }
+  scope :about, -> { where(type: 'About') }
 
   self.inheritance_column = :type
   @child_classes = []

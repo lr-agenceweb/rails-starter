@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     resources :abouts, only: [:index, :show]
     resources :contacts, only: [:index, :new, :create]
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
+
+    get 'feed', to: 'posts#feed', as: :posts_rss
   end
 end

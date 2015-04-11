@@ -3,4 +3,5 @@ footer.footer-container#footer
     .small-12.large-4.large-offset-4.columns.credentials
       == setting.credentials
     .small-12.large-4.columns.credentials
+      = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom),  target: :blank
       = awesome_social_share

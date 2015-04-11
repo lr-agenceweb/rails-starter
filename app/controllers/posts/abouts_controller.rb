@@ -1,7 +1,7 @@
 #
 # == Abouts Controller
 #
-class AboutsController < InheritedResources::Base
+class AboutsController < PostsController
   decorates_assigned :about
   before_action :set_about, only: [:show]
 
