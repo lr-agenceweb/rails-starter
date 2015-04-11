@@ -42,6 +42,19 @@ module Admin
       assert_redirected_to admin_setting_path(@setting)
     end
 
+    #
+    # == Form validations
+    #
+    test 'should not update article without name' do
+      patch :update, id: @setting.id
+      assert_not @setting.update(name: nil)
+    end
+
+    test 'should not update article without title' do
+      patch :update, id: @setting.id
+      assert_not @setting.update(title: nil)
+    end
+
     private
 
     def initialize_test
