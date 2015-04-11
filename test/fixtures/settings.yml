@@ -1,32 +1,15 @@
-# == Schema Information
-#
-# Table name: settings
-#
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  title           :string(255)
-#  subtitle        :string(255)
-#  phone           :string(255)
-#  email           :string(255)
-#  address         :string(255)
-#  city            :string(255)
-#  postcode        :string(255)
-#  geocode_address :string(255)
-#  latitude        :float(24)
-#  longitude       :float(24)
-#  show_map        :boolean          default(TRUE)
-#  created_at      :datetime
-#  updated_at      :datetime
-#
-
 one:
+  id: 1
+  name: Rails Starter
   email: demo@startup.fr
   show_map: 0
-  title: Site title
-  subtitle: Site subtitle
+  address: 15 rue de la chouette
+  postcode: 88990
+  city: Paris
 
 two:
+  id: 2
   email: demo@startup.fr
   show_map: 0
-  title: Site title
+  title: Rails Starter
   subtitle: ''

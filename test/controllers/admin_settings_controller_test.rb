@@ -39,7 +39,7 @@ module Admin
 
     test 'should update setting if logged in' do
       patch :update, id: @setting.id, setting: {}
-      assert_response :success
+      assert_redirected_to admin_setting_path(@setting)
     end
 
     private

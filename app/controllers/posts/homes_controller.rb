@@ -1,7 +1,7 @@
 #
 # == Home Controller
 #
-class HomesController < InheritedResources::Base
+class HomesController < PostsController
   decorates_assigned :home
 
   # GET /homes

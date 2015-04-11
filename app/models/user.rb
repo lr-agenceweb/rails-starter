@@ -40,8 +40,8 @@ class User < ActiveRecord::Base
 
   retina!
   has_attached_file :avatar,
-                    path: ':rails_root/public/system/avatar/:id/:style/:filename',
-                    url:  '/system/avatar/:id/:style/:filename',
+                    path: ':rails_root/public/system/avatar/:id/:style-:filename',
+                    url:  '/system/avatar/:id/:style-:filename',
                     styles: {
                       large:  '512x512#',
                       medium: '256x256#',
@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
                       thumb:  '64x64#'
                     },
                     retina: { quality: 70 },
-                    default_url: '/system/default/:style/missing.png'
+                    default_url: '/system/default/:style-missing.png'
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 

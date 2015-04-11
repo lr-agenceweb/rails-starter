@@ -70,6 +70,9 @@ For more information read the gem documentation.
 ### [Annotate](https://github.com/ctran/annotate_models)
 Print table structure in models  
 
+### [Gretel](https://github.com/lassebunk/gretel)
+Breadcrumb generator
+
 Units Tests
 -----
 Basics tests are included, just run `rake test`
