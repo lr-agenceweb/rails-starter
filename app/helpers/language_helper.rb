@@ -28,11 +28,16 @@ module LanguageHelper
   private
 
   def params_language(element, locale)
-    if params[:controller] == 'abouts' && params[:action] == 'show'
+    if change_slug?
       return { locale: locale, id: slug_for_locale(element, locale) }
     end
 
     { locale: locale }
+  end
+
+  def change_slug?
+    (params[:controller] == 'abouts'
+    ) && params[:action] == 'show'
   end
 
   def slug_for_locale(element, locale)
