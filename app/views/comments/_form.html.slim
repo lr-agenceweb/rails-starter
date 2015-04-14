@@ -1,4 +1,4 @@
-= simple_form_for [@commentable, @comment] do |f|
+= simple_form_for [@commentable, @comment], validate: true do |f|
   - if @comment.errors.any?
     .panel.alert
       ul
