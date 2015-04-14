@@ -2,7 +2,7 @@
   div class="panel"
     = simple_format comment.comment
     - if comment.user_id.nil?
-      p = gravatar_image_tag(comment.email)
+      p = gravatar_image_tag(comment.email, alt: comment.username)
       p = comment.username
       p = comment.email
     - else

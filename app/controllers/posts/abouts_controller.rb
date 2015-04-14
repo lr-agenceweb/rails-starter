@@ -9,7 +9,7 @@ class AboutsController < PostsController
   # GET /abouts
   # GET /abouts.json
   def index
-    @abouts = About.online.includes(:referencement)
+    @abouts = About.online.includes(:translations)
     seo_tag_index category
   end
 
@@ -20,7 +20,7 @@ class AboutsController < PostsController
   private
 
   def set_about
-    @about = About.includes(:referencement).friendly.find(params[:id])
+    @about = About.includes(:translations, referencement: [:translations]).friendly.find(params[:id])
     @element = @about
   end
 

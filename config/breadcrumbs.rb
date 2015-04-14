@@ -1,9 +1,9 @@
 crumb :root do
-  link Category.title_by_category('Home'), root_path
+  link Category.includes(:translations).title_by_category('Home'), root_path
 end
 
 crumb :abouts do
-  link Category.title_by_category('About'), abouts_path
+  link Category.includes(:translations).title_by_category('About'), abouts_path
 end
 
 crumb :about do |about|
@@ -12,7 +12,7 @@ crumb :about do |about|
 end
 
 crumb :contact do
-  link Category.title_by_category('Contact'), new_contact_path
+  link Category.includes(:translations).title_by_category('Contact'), new_contact_path
 end
 
 # crumb :project_issues do |project|

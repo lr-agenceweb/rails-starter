@@ -140,6 +140,8 @@ group :development do
 
   # == Debug Rails request in Chrome DevTools
   gem 'meta_request'
+
+  gem "bullet"
 end
 
 group :development, :test do
