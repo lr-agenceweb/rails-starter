@@ -9,7 +9,7 @@ class AboutsController < PostsController
   # GET /abouts
   # GET /abouts.json
   def index
-    @abouts = About.online
+    @abouts = About.online.includes(:referencement)
     seo_tag_index category
   end
 
@@ -20,13 +20,13 @@ class AboutsController < PostsController
   private
 
   def set_about
-    @about = About.friendly.find(params[:id])
+    @about = About.includes(:referencement).friendly.find(params[:id])
     @element = @about
   end
 
   def set_commentable
     @commentable = @element
-    @comments = @commentable.comments.page params[:page]
+    @comments = @commentable.comments.includes(:user).page params[:page]
     @comment = Comment.new
   end
 
