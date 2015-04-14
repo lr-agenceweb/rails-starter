@@ -1,0 +1,30 @@
+= simple_form_for [@commentable, @comment] do |f|
+  - if @comment.errors.any?
+    .panel.alert
+      ul
+        - @comment.errors.full_messages.each do |message|
+          li = message
+
+
+  - if user_signed_in?
+    .row
+      .small-12.medium-2.columns
+        = gravatar_image_tag current_user.email
+        p
+          small = current_user.username
+      .small-12.medium-10.columns
+        = f.input :comment, as: :text, label: false, input_html: { class: 'autosize' }
+
+        = button_tag class: 'submit-btn text-right tiny right' do
+          - fa_icon('paper-plane')
+
+  - else
+    .row
+      .small-12.medium-6.columns
+        = f.input :username
+        = f.input :email, as: :email
+      .small-12.medium-6.columns
+        = f.input :comment, as: :text, input_html: { class: 'autosize' }
+
+        = button_tag class: 'submit-btn text-right tiny right' do
+          - fa_icon('paper-plane')

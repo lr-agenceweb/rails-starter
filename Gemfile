@@ -120,6 +120,7 @@ gem 'foundation-rails'
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
+gem 'gravatar_image_tag'
 
 group :development do
   gem 'better_errors'

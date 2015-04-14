@@ -3,7 +3,8 @@
 #
 class AboutsController < PostsController
   decorates_assigned :about
-  before_action :set_about, only: [:show]
+  before_action :set_about, only: [:show, :create]
+  before_action :set_commentable, only: [:show]
 
   # GET /abouts
   # GET /abouts.json
@@ -21,5 +22,16 @@ class AboutsController < PostsController
   def set_about
     @about = About.friendly.find(params[:id])
     @element = @about
+  end
+
+  def set_commentable
+    @commentable = @element
+    @comments = @commentable.comments.page params[:page]
+    @comment = Comment.new
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:comment, :title, :user_id, :commentable_id, :commentable_type)
   end
 end
