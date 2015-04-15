@@ -2,7 +2,7 @@
 # == Abouts Controller
 #
 class AboutsController < PostsController
-  decorates_assigned :about
+  decorates_assigned :about, :comment
   before_action :set_about, only: [:show, :create]
   before_action :set_commentable, only: [:show]
 
@@ -27,6 +27,7 @@ class AboutsController < PostsController
   def set_commentable
     @commentable = @element
     @comments = @commentable.comments.includes(:user).page params[:page]
+    @comments = CommentDecorator.decorate_collection(@comments)
     @comment = Comment.new
   end
 

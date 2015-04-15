@@ -1,14 +1,5 @@
+/ TODO: refactor this in an helper or decorator
 - @comments.each do |comment|
-  div class="panel"
-    = simple_format comment.comment
-    - if comment.user_id.nil?
-      p = gravatar_image_tag(comment.email, alt: comment.username)
-      p = comment.username
-      p = comment.email
-    - else
-      p = retina_image_tag(comment.user, :avatar, :thumb)
-      p = comment.user_username
-      p = comment.user_email
-    p = l(comment.created_at, format: :without_time)
+  = render 'comments/comment', comment: comment
 
 = paginate @comments

@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
 
   def index
     @comments = @commentable.comments.page params[:page]
-    @element = @comments.first
   end
 
   def new
