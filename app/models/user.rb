@@ -82,6 +82,6 @@ class User < ActiveRecord::Base
 
   # TODO: make a test for this method
   def avatar?
-    !avatar.nil?
+    !avatar_file_name.nil?
   end
 end

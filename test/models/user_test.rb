@@ -18,11 +18,20 @@ class UserTest < ActiveSupport::TestCase
     assert @subscriber.subscriber?
   end
 
+  test 'should be true if user avatar is present' do
+    assert @super_administrator.avatar?
+  end
+
+  test 'should be false if user avatar is nil' do
+    assert_not @guest.avatar?
+  end
+
   private
 
   def initialize_test
     @super_administrator = users(:anthony)
     @administrator = users(:bob)
     @subscriber = users(:alice)
+    @guest = users(:lana)
   end
 end
