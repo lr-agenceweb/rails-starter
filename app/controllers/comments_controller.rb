@@ -2,10 +2,11 @@
 # == CommentsController
 #
 class CommentsController < ApplicationController
+  decorates_assigned :comment
   before_action :load_commentable
 
   def index
-    @comments = @commentable.comments.page params[:page]
+    @comments = CommentDecorator.decorate_collection(@commentable.comments.page params[:page])
   end
 
   def new

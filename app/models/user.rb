@@ -79,4 +79,9 @@ class User < ActiveRecord::Base
   def should_generate_new_friendly_id?
     username_changed? || super
   end
+
+  # TODO: make a test for this method
+  def avatar?
+    !avatar.nil?
+  end
 end
