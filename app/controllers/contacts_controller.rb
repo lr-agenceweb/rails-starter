@@ -2,8 +2,8 @@
 # == ContactsController
 #
 class ContactsController < InheritedResources::Base
-  # before_action :set_content_boxes, only: [:new, :create]
-  before_action :set_mapbox_options, only: [:new, :create], if: proc { Setting.first.show_map }
+  before_action :set_setting
+  before_action :set_mapbox_options, only: [:new, :create], if: proc { @setting.show_map }
   skip_before_action :allow_cors
 
   def index
@@ -33,18 +33,22 @@ class ContactsController < InheritedResources::Base
   end
 
   def set_mapbox_options
-    setting = Setting.first
     gon.push(
       mapbox_username: Figaro.env.mapbox_username,
       mapbox_key: Figaro.env.mapbox_map_key,
       mapbox_access_token: Figaro.env.mapbox_access_token,
-      name: setting.name,
-      subtitle: setting.subtitle,
-      address: setting.address,
-      city: setting.city,
-      postcode: setting.postcode,
-      latitude: setting.latitude,
-      longitude: setting.longitude
+      name: @setting.name,
+      subtitle: @setting.subtitle,
+      address: @setting.address,
+      city: @setting.city,
+      postcode: @setting.postcode,
+      latitude: @setting.latitude,
+      longitude: @setting.longitude
     )
+  end
+
+  def set_setting
+    @setting ||= Setting.first
+    logger.debug @setting.inspect
   end
 end

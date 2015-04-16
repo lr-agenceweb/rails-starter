@@ -66,6 +66,14 @@ GIT
     mapbox-rails (2.1.5)
 
 GIT
+  remote: git://github.com/anthony-robin/outdatedbrowser_rails.git
+  revision: 940ef8b55f5ba05ff2877fd2085f7437e8c31ce8
+  specs:
+    outdatedbrowser_rails (1.0.2.0)
+      i18n (~> 0.6)
+      rails (~> 4.0)
+
+GIT
   remote: git://github.com/mvdstam/activeadmin-sortable.git
   revision: be5806ee5e1dc94da9331c9527f64e0f894a0b87
   specs:
@@ -571,6 +579,7 @@ DEPENDENCIES
   mysql2
   nokogiri
   nprogress-rails
+  outdatedbrowser_rails!
   paperclip!
   premailer-rails
   quiet_assets (~> 1.0.2)

@@ -1,0 +1,33 @@
+body {
+  .buorg {
+    position:fixed;
+    width:100%;
+    top:0px;
+    left:0px;
+    border-bottom:1px solid #A29330;
+    background:#FDF2AB no-repeat 1em 0.55em url(http://browser-update.org/img/dialog-warning.gif);
+    text-align:left;
+    cursor:pointer;
+    font-family: Arial,Helvetica,sans-serif; color:#000;
+    font-size: 12px;
+
+    div {
+      padding:5px 36px 5px 40px;
+    }
+
+    a {
+      color:#E25600;
+    }
+
+    #buorgclose {
+      position: absolute;
+      right: .5em;
+      top:.2em;
+      height: 20px;
+      width: 12px;
+      font-weight: bold;
+      font-size:14px;
+      padding:0;
+    }
+  }
+}

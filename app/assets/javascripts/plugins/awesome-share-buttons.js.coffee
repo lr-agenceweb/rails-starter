@@ -1,5 +1,5 @@
 $(document).on 'ready page:load page:restore', ->
-  $(document).foundation
+  $(document).foundation()
 
   $a = $('.awesome-share-buttons').find('a')
   $a.each (index, element) ->

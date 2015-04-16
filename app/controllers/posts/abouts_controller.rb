@@ -2,7 +2,7 @@
 # == Abouts Controller
 #
 class AboutsController < PostsController
-  decorates_assigned :about, :comment
+  decorates_assigned :about, :comment, :element
   before_action :set_about, only: [:show, :create]
   before_action :set_commentable, only: [:show]
 
@@ -20,7 +20,7 @@ class AboutsController < PostsController
   private
 
   def set_about
-    @about = About.includes(referencement: [:translations]).friendly.find(params[:id])
+    @about = About.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
   end
 
   def set_commentable

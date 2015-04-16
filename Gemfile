@@ -38,6 +38,7 @@ gem 'gretel' # Breadcrumb
 gem 'rails_autolink'
 gem 'truncate_html'
 gem 'chosen-rails'
+gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
 
 #
 # == Media upload

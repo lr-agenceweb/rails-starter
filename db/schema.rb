@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413232549) do
+ActiveRecord::Schema.define(version: 20150416191803) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -78,6 +78,37 @@ ActiveRecord::Schema.define(version: 20150413232549) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "picture_translations", force: :cascade do |t|
+    t.integer  "picture_id",  limit: 4,     null: false
+    t.string   "locale",      limit: 255,   null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
+  end
+
+  add_index "picture_translations", ["locale"], name: "index_picture_translations_on_locale", using: :btree
+  add_index "picture_translations", ["picture_id"], name: "index_picture_translations_on_picture_id", using: :btree
+
+  create_table "pictures", force: :cascade do |t|
+    t.integer  "attachable_id",      limit: 4
+    t.string   "attachable_type",    limit: 255
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+    t.string   "title",              limit: 255
+    t.text     "description",        limit: 65535
+    t.text     "retina_dimensions",  limit: 65535
+    t.boolean  "primary",            limit: 1,     default: false
+    t.boolean  "online",             limit: 1,     default: true
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+  end
+
+  add_index "pictures", ["attachable_id"], name: "index_pictures_on_attachable_id", using: :btree
+  add_index "pictures", ["attachable_type"], name: "index_pictures_on_attachable_type", using: :btree
 
   create_table "post_translations", force: :cascade do |t|
     t.integer  "post_id",    limit: 4,     null: false

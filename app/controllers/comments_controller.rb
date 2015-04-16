@@ -5,14 +5,6 @@ class CommentsController < ApplicationController
   decorates_assigned :comment
   before_action :load_commentable
 
-  def index
-    @comments = CommentDecorator.decorate_collection(paginate_commentable)
-  end
-
-  def new
-    @comment = @commentable.comments.new
-  end
-
   def create
     if comment_params[:nickname].blank?
       @comment = @commentable.comments.new(comment_params)

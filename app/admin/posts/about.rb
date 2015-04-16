@@ -7,6 +7,9 @@ ActiveAdmin.register About do
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
                 ],
+                pictures_attributes: [
+                  :id, :locale, :image, :_destroy
+                ],
                 referencement_attributes: [
                   :id,
                   translations_attributes: [
@@ -46,6 +49,7 @@ ActiveAdmin.register About do
 
     render 'admin/shared/form_general', f: f
     render 'admin/shared/form_translation', f: f
+    render 'admin/shared/pictures/many', f: f
     render 'admin/shared/referencement/form', f: f
     f.actions
   end
@@ -54,25 +58,8 @@ ActiveAdmin.register About do
   # == Controller
   #
   controller do
-    before_action :set_about, only: [:show, :edit, :update, :destroy, :toggle_about_online]
     before_create do |about|
       about.type = 'About'
-    end
-
-    def toggle_about_online
-      new_value = @about.online? ? false : true
-      @about.update_attribute(:online, new_value)
-      make_redirect
-    end
-
-    private
-
-    def set_about
-      @about = About.friendly.find(params[:id])
-    end
-
-    def make_redirect
-      redirect_to :back
     end
   end
 end
