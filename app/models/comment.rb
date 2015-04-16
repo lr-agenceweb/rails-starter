@@ -34,6 +34,7 @@ class Comment < ActiveRecord::Base
   validates :email,    presence: true, email_format: {}, unless: proc { |c| c.user_id }
   validates :comment,  presence: true
 
+  attr_accessor :nickname
   default_scope { order('created_at DESC') }
   paginates_per 15
 end

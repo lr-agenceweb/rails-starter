@@ -1,0 +1,17 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+about_fr:
+  post_id: <%= ActiveRecord::FixtureSet.identify(:about) %>
+  locale: fr
+  title: Développement et Hébergement
+  slug: developpement-hebergement
+  <<: *DEFAULTS
+
+about_en:
+  post_id: <%= ActiveRecord::FixtureSet.identify(:about) %>
+  locale: en
+  title: Site Hosting
+  slug: site-hosting
+  <<: *DEFAULTS

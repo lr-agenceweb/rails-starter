@@ -1,15 +1,17 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
 one_fr:
-  setting_id: 1
+  setting_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
   locale: fr
   title: Rails Starter
   subtitle: Démarre rapidement
-  created_at: 2015-04-10
-  updated_at: 2015-04-10
+  <<: *DEFAULTS
 
 one_en:
-  setting_id: 1
+  setting_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
   locale: en
   subtitle: Quick start
   title: Rails Starter
-  created_at: 2015-04-10
-  updated_at: 2015-04-10
+  <<: *DEFAULTS

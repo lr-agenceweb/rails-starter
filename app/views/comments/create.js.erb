@@ -1,0 +1,4 @@
+$('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>")
+$('#comment_username').val('')
+$('#comment_email').val('')
+$('#comment_comment').val('')

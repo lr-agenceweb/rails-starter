@@ -5,6 +5,7 @@ require 'test_helper'
 #
 class AboutsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
+  include Rails.application.routes.url_helpers
 
   setup :initialize_test
 
@@ -31,6 +32,29 @@ class AboutsControllerTest < ActionController::TestCase
   test 'should get abouts page by url' do
     assert_routing '/a-propos', controller: 'abouts', action: 'index', locale: 'fr' if @locales.include?(:fr)
     assert_routing '/en/about', controller: 'abouts', action: 'index', locale: 'en' if @locales.include?(:en)
+  end
+
+  #
+  # == Translations
+  #
+  test 'should get show page with all locales' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        get :show, locale: locale.to_s, id: @about
+        assert_response :success
+        assert_not_nil @about
+      end
+    end
+  end
+
+  test 'assert integrity of request for each locales' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        get :show, locale: locale.to_s, id: @about
+        assert_equal request.path_parameters[:id], @about.slug
+        assert_equal request.path_parameters[:locale], locale.to_s
+      end
+    end
   end
 
   #

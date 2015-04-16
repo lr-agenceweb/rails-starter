@@ -20,12 +20,11 @@ class AboutsController < PostsController
   private
 
   def set_about
-    @about = About.includes(:translations, referencement: [:translations]).friendly.find(params[:id])
-    @element = @about
+    @about = About.includes(referencement: [:translations]).friendly.find(params[:id])
   end
 
   def set_commentable
-    @commentable = @element
+    @commentable = instance_variable_get("@#{controller_name.singularize}")
     @comments = @commentable.comments.includes(:user).page params[:page]
     @comments = CommentDecorator.decorate_collection(@comments)
     @comment = Comment.new

@@ -20,7 +20,6 @@
 #
 
 one:
-  id: 1
   name: Rails Starter
   email: demo@startup.fr
   show_map: 0
@@ -29,7 +28,6 @@ one:
   city: Paris
 
 two:
-  id: 2
   email: demo@startup.fr
   show_map: 0
   title: Rails Starter
