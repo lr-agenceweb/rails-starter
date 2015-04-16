@@ -21,14 +21,12 @@
 #  index_comments_on_user_id           (user_id)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+one:
+  commentable: about (Post)
+  user: alice
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+two:
+  commentable: about (Post)
+  username: luke
+  email: luke@skywalker.sw
+  user_id: null
