@@ -33,10 +33,22 @@ class AboutsControllerTest < ActionController::TestCase
     assert_routing '/en/about', controller: 'abouts', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
+  #
+  # == Comments
+  #
+  test 'should get two comments for about article' do
+    assert_equal @about.comments.count, 2
+  end
+
+  test 'should get alice as comments author' do
+    assert_equal @comment.user_username, 'alice'
+  end
+
   private
 
   def initialize_test
     @about = posts(:about)
+    @comment = comments(:one)
     @locales = I18n.available_locales
   end
 end

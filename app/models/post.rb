@@ -27,6 +27,9 @@ class Post < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 
+  has_many :comments, as: :commentable, dependent: :destroy
+  accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true
+
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
 

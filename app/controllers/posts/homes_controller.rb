@@ -7,7 +7,7 @@ class HomesController < PostsController
   # GET /homes
   # GET /homes.json
   def index
-    @homes = Home.online
+    @homes = Home.includes(:translations).online
     seo_tag_index category
 
     respond_to do |format|
