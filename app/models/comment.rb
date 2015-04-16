@@ -35,5 +35,5 @@ class Comment < ActiveRecord::Base
   validates :comment,  presence: true
 
   default_scope { order('created_at DESC') }
-  paginates_per 50
+  paginates_per 15
 end
