@@ -20,7 +20,10 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @commentable, notice: 'Comment was successfully created.'
     else
-      render :new
+      # Render view user come from instead of the comments default view
+      instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
+      @comments = CommentDecorator.decorate_collection(@commentable.comments.includes(:user).page params[:page])
+      render "#{@commentable.class.name.underscore.pluralize}/show"
     end
   end
 
