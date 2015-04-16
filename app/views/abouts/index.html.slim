@@ -6,5 +6,4 @@
       header
         h2 = link_to about.title, about_path(about)
 
-      div
-        == about.content
+      div == truncate_read_more(about.content, about_path(about))

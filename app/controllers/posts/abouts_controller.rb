@@ -20,7 +20,7 @@ class AboutsController < PostsController
   private
 
   def set_about
-    @about = About.includes(referencement: [:translations]).friendly.find(params[:id])
+    @about = About.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
   end
 
   def set_commentable

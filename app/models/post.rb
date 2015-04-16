@@ -33,6 +33,9 @@ class Post < ActiveRecord::Base
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
 
+  has_many :pictures, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
+
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
