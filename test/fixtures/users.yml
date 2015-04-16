@@ -49,3 +49,9 @@ alice:
   slug: alice
   email: alice@test.fr
   role: subscriber
+
+lana:
+  username: lana
+  slug: lana
+  email: lana@test.fr
+  role: subscriber

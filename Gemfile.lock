@@ -149,6 +149,9 @@ GEM
       sass (~> 3.4)
       thor
     builder (3.2.2)
+    bullet (4.14.4)
+      activesupport (>= 3.0.0)
+      uniform_notifier (>= 1.6.0)
     byebug (4.0.4)
       columnize (= 0.9.0)
     callsite (0.0.11)
@@ -247,6 +250,7 @@ GEM
       json
       multi_json
       request_store (>= 1.0.5)
+    gravatar_image_tag (1.2.0)
     gretel (3.0.8)
       rails (>= 3.2.0)
     has_scope (0.6.0)
@@ -492,6 +496,7 @@ GEM
     unicorn-rails (2.2.0)
       rack
       unicorn
+    uniform_notifier (1.8.0)
     validates_email_format_of (1.6.2)
       i18n
     warden (1.2.3)
@@ -522,6 +527,7 @@ DEPENDENCIES
   autosize-rails
   awesome-share-buttons!
   better_errors
+  bullet
   byebug
   cancancan (~> 1.10)
   chosen-rails
@@ -539,6 +545,7 @@ DEPENDENCIES
   globalize (~> 5.0.0)
   gmaps-autocomplete-rails
   gon
+  gravatar_image_tag
   gretel
   irbtools-more
   jbuilder (~> 2.0)

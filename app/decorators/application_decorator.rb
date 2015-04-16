@@ -44,4 +44,8 @@ class ApplicationDecorator < Draper::Decorator
       awesome_share_buttons(element.title, popup: true)
     end
   end
+
+  def self.collection_decorator_class
+    PaginatingDecorator
+  end
 end

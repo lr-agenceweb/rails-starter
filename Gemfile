@@ -120,6 +120,7 @@ gem 'foundation-rails'
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
+gem 'gravatar_image_tag'
 
 group :development do
   gem 'better_errors'
@@ -139,6 +140,8 @@ group :development do
 
   # == Debug Rails request in Chrome DevTools
   gem 'meta_request'
+
+  gem "bullet"
 end
 
 group :development, :test do
