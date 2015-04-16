@@ -22,6 +22,7 @@ html lang="#{@language}"
   body
     == raw analytical.body_prepend_javascript if Rails.env.production?
     = include_gon
+    = render 'outdatedbrowser/outdatedbrowser'
 
     #wrapper.wrapper
       = render 'elements/flash'

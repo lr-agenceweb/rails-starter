@@ -18,6 +18,8 @@
 #= require modules/responsive_menu
 #= require plugins/mapbox
 #= require plugins/nprogress
+#= require outdatedbrowser/outdatedBrowser
+#= require outdated_browser
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()
