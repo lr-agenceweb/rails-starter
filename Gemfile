@@ -62,6 +62,7 @@ gem 'validates_email_format_of'
 gem 'route_translator'
 gem 'globalize', '~> 5.0.0'
 gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize', branch: 'master'
+gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master'
 
 #
 # == Map

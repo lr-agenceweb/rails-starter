@@ -1,0 +1,11 @@
+# English
+en:
+  time:
+    formats:
+      without_time: '%B %d, %Y'
+
+# French
+fr:
+  time:
+    formats:
+      without_time: '%A %d %B %Y'
