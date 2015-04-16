@@ -15,6 +15,12 @@ class CommentsControllerTest < ActionController::TestCase
     assert_not assigns(:comment).save
   end
 
+  test 'should not be able to create comment if nickname (captcha) is filled' do
+    assert_difference 'Comment.count', 0 do
+      post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }
+    end
+  end
+
   test 'should create comment with more informations if not connected' do
     assert_difference 'Comment.count' do
       post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }
