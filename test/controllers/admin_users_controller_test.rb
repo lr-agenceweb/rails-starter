@@ -129,8 +129,7 @@ module Admin
     end
 
     test 'should count users' do
-      @users = User.all
-      assert_equal @users.length, 3
+      assert_equal User.count, 4
     end
 
     private
