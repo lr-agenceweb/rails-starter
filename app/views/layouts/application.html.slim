@@ -25,7 +25,7 @@ html lang="#{@language}"
     = render 'outdatedbrowser/outdatedbrowser'
 
     #wrapper.wrapper
-      = render 'elements/flash'
+      = show_flash unless flash.nil?
       = render 'elements/header'
 
       .l-container
