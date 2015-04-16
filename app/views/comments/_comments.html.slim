@@ -1,4 +1,5 @@
-- @comments.each do |comment|
-  = render 'comments/comment', comment: comment
+.comments
+  - @comments.each do |comment|
+    = render 'comments/comment', comment: comment
 
 = paginate @comments

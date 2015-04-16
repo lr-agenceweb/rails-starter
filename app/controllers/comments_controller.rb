@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   before_action :load_commentable
 
   def index
-    @comments = CommentDecorator.decorate_collection(@commentable.comments.page params[:page])
+    @comments = CommentDecorator.decorate_collection(paginate_commentable)
   end
 
   def new
@@ -19,15 +19,22 @@ class CommentsController < ApplicationController
       @comment.user_id = current_user.id if user_signed_in?
 
       if @comment.save
-        redirect_to @commentable, notice: 'Comment was successfully created.'
+        respond_to do |format|
+          format.html { redirect_to @commentable, notice: 'Comment was successfully created.' }
+          format.js {}
+        end
       else
         # Render view user come from instead of the comments default view
         instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
-        @comments = CommentDecorator.decorate_collection(@commentable.comments.includes(:user).page params[:page])
+        @comments = CommentDecorator.decorate_collection(paginate_commentable)
         render "#{@commentable.class.name.underscore.pluralize}/show"
       end
     else # if nickname is filled => robots spam
-      redirect_to @commentable, notice: 'Captcha caught you'
+      respond_to do |format|
+        format.html { redirect_to @commentable, notice: 'Captcha caught you' }
+        format.js { render 'captcha' }
+      end
+
     end
   end
 
@@ -41,5 +48,9 @@ class CommentsController < ApplicationController
   def load_commentable
     klass = [About].detect { |c| params["#{c.name.underscore}_id"] }
     @commentable = klass.find(params["#{klass.name.underscore}_id"])
+  end
+
+  def paginate_commentable
+    @commentable.comments.includes(:user).page params[:page]
   end
 end
