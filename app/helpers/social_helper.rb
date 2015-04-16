@@ -71,7 +71,7 @@ module SocialHelper
   # * *Returns* :
   #
   def awesome_social_share
-    element = params[:action] == 'index' || params[:action] == 'new' ? @category : @element
+    element = params[:action] == 'index' || params[:action] == 'new' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
     title_seo = title_seo_structure(element.title)
 
     awesome_share_buttons(title_seo,

@@ -2,7 +2,7 @@
 # == Abouts Controller
 #
 class AboutsController < PostsController
-  decorates_assigned :about, :comment
+  decorates_assigned :about, :comment, :element
   before_action :set_about, only: [:show, :create]
   before_action :set_commentable, only: [:show]
 
