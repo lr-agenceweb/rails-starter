@@ -34,8 +34,8 @@ class Picture < ActiveRecord::Base
 
   retina!
   has_attached_file :image,
-                    path: ':rails_root/public/system/pictures/:id/:style/:filename',
-                    url:  '/system/pictures/:id/:style/:filename',
+                    path: ':rails_root/public/system/pictures/:id/:style-:filename',
+                    url:  '/system/pictures/:id/:style-:filename',
                     styles: {
                       huge:   '1024x1024>',
                       large:  '512x512>',
@@ -44,7 +44,7 @@ class Picture < ActiveRecord::Base
                       thumb:  '30x30>'
                     },
                     retina: { quality: 70 },
-                    default_url: '/assets/images/default_media/:style/missing.png'
+                    default_url: '/system/default/:style-missing.png'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
