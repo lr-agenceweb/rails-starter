@@ -23,9 +23,21 @@
 
 one:
   commentable: about (Post)
-  user: alice
+  user: anthony
 
 two:
+  commentable: about (Post)
+  user: bob
+
+three:
+  commentable: about (Post)
+  user: alice
+
+four:
+  commentable: about (Post)
+  user: lana
+
+five:
   commentable: about (Post)
   username: luke
   email: luke@skywalker.sw

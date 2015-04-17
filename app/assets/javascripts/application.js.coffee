@@ -18,6 +18,7 @@
 #= require modules/responsive_menu
 #= require plugins/mapbox
 #= require plugins/nprogress
+#= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
 

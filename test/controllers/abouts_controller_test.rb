@@ -61,7 +61,7 @@ class AboutsControllerTest < ActionController::TestCase
   # == Comments
   #
   test 'should get two comments for about article' do
-    assert_equal @about.comments.count, 2
+    assert_equal @about.comments.count, 5
   end
 
   test 'should get alice as comments author' do
@@ -72,7 +72,7 @@ class AboutsControllerTest < ActionController::TestCase
 
   def initialize_test
     @about = posts(:about)
-    @comment = comments(:one)
+    @comment = comments(:three)
     @locales = I18n.available_locales
   end
 end

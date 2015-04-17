@@ -17,10 +17,12 @@ class Ability
       can :manage, User, role_name: %w( administrator subscriber )
       can :manage, User, id: user.id
       can :update, Category
+      can [:create, :read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
 
     elsif user.subscriber?
       can [:update, :read, :destroy], User, id: user.id
       can :manage, Post, id: user.id
+      can :manage, Comment, user_id: user.id
     end
   end
 end

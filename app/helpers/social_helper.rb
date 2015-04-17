@@ -71,18 +71,16 @@ module SocialHelper
   # * *Returns* :
   #
   def awesome_social_share
-    params[:action]
-    # if params[:controller] == 'comments'
-    #   return false
-    # end
-    # element = params[:action] == 'index' || params[:action] == 'new' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
-    # title_seo = title_seo_structure(element.title)
+    return nil if params[:controller] == 'comments'
 
-    # awesome_share_buttons(title_seo,
-    #                       desc: element.referencement_description,
-    #                       image: image_for_object(element),
-    #                       via: Figaro.env.twitter_username,
-    #                       popup: true)
+    element = params[:action] == 'index' || params[:action] == 'new' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
+    title_seo = title_seo_structure(element.title)
+
+    awesome_share_buttons(title_seo,
+                          desc: element.referencement_description,
+                          image: image_for_object(element),
+                          via: Figaro.env.twitter_username,
+                          popup: true)
   end
 
   private
