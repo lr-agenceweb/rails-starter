@@ -18,4 +18,5 @@ script:
 
 addons:
   code_climate:
-    repo_token: adf08323...
+    repo_token:
+      secure: "HaE8VFPfQHp0tFTKIicjWtqBJjikpYt8E5nYrWir7q6y5OwCjMA6s/szigWXjyjG0I1wE3KTdyJAIXmje8K8zZAf2mTfPYQQYasnKjEHk/PUOSagjbLOKU3FlZm9lzPvAz5+CcE/sZWPcDPjcL9A0NAZFg6QLRaK+5mVy9pi0Tk="
