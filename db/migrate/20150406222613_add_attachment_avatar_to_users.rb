@@ -1,8 +1,7 @@
 class AddAttachmentAvatarToUsers < ActiveRecord::Migration
   def self.up
     change_table :users do |t|
-      # t.attachment :avatar, after: :email
-      add_column :users, :retina_dimensions, :text, after: :avatar_file_name
+      add_column :users, :retina_dimensions, :text, after: :email
     end
   end
 
