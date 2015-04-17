@@ -1,5 +1,6 @@
 Rails Startup (Work in Progress)
 ==============
+[![Build Status](https://travis-ci.org/anthony-robin/rails-startup.svg?branch=master)](https://travis-ci.org/anthony-robin/rails-startup)
 
 This project has been built to increase speed when creating a new application: it's annoying to reconfigure always and always the same gems so this startup pack comes with plugins already configured such as activeadmin, devise, globalize, and many others.
 
