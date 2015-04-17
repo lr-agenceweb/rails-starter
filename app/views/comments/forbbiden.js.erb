@@ -1,2 +1,12 @@
-$('#wrapper').prepend("<%= j show_flash %>")
-$(document).foundation('alert', 'reflow');
+$(document).ready(function() {
+  $('#wrapper').prepend("<%= j show_flash %>");
+  $(document).foundation('alert', 'reflow');
+
+  $('html, body').animate({
+    scrollTop: $('#wrapper').offset().top
+  }, 'slow');
+
+  setTimeout((function() {
+    $('.alert-box').fadeOut();
+  }), 5000);
+})
