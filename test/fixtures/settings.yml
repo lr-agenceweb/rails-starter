@@ -22,13 +22,13 @@
 one:
   name: Rails Starter
   email: demo@startup.fr
-  show_map: 0
+  show_map: false
   address: 15 rue de la chouette
   postcode: 88990
   city: Paris
 
 two:
   email: demo@startup.fr
-  show_map: 0
+  show_map: false
   title: Rails Starter
   subtitle: ''

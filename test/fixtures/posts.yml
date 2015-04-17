@@ -20,25 +20,25 @@
 home:
   type: Home
   title: Home article !
-  online: 1
+  online: true
 
 home_offline:
   type: Home
   title: Home article !
-  online: 0
+  online: false
 
 # About posts
 about:
   type: About
   title: Développement et Hébergement
-  online: 1
+  online: true
 
 about_2:
   type: About
   title: About article 2 !
-  online: 1
+  online: true
 
 about_offline:
   type: About
   title: About article offline !
-  online: 0
+  online: false
