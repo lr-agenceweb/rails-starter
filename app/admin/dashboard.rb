@@ -5,7 +5,7 @@ ActiveAdmin.register_page 'Dashboard' do
     columns do
       column do
         panel 'Utilisateurs' do
-          table_for User.last(5) do
+          table_for User.includes(:role).last(5) do
             column :avatar do |user|
               retina_image_tag(user, :avatar, :thumb)
             end
@@ -33,7 +33,7 @@ ActiveAdmin.register_page 'Dashboard' do
         end
 
         panel 'Categories' do
-          table_for Category.visible_header.by_position do
+          table_for Category.includes(:translations).visible_header.by_position do
             column :position
             column :title
             column :show_in_menu
