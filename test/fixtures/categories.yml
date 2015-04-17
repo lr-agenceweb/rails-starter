@@ -15,15 +15,15 @@
 home:
   title: Accueil
   name: Home
-  show_in_menu: 1
-  show_in_footer: 0
+  show_in_menu: true
+  show_in_footer: false
 
 about:
   name: About
-  show_in_menu: 0
-  show_in_footer: 0
+  show_in_menu: false
+  show_in_footer: false
 
 contact:
   name: Contact
-  show_in_menu: 1
-  show_in_footer: 0
+  show_in_menu: true
+  show_in_footer: false
