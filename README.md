@@ -2,6 +2,7 @@ Rails Startup (Work in Progress)
 ==============
 [![Build Status](https://travis-ci.org/anthony-robin/rails-startup.svg?branch=master)](https://travis-ci.org/anthony-robin/rails-startup)
 [![Code Climate](https://codeclimate.com/github/anthony-robin/rails-startup/badges/gpa.svg)](https://codeclimate.com/github/anthony-robin/rails-startup)
+[![security](https://hakiri.io/github/anthony-robin/rails-startup/master.svg)](https://hakiri.io/github/anthony-robin/rails-startup/master)
 
 This project has been built to increase speed when creating a new application: it's annoying to reconfigure always and always the same gems so this startup pack comes with plugins already configured such as activeadmin, devise, globalize, and many others.
 
