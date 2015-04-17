@@ -6,10 +6,12 @@ class CommentDecorator < ApplicationDecorator
   delegate_all
 
   def avatar
+    width = 64
+    height = width
     if model.user_id.nil?
-      gravatar_image_tag(model.email, alt: model.username) + pseudo
+      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: width }) + pseudo
     else
-      retina_image_tag(comment.user, :avatar, :thumb) + pseudo(model.user_username)
+      retina_image_tag(comment.user, :avatar, :thumb, default: [width, height]) + pseudo(model.user_username)
     end
   end
 
