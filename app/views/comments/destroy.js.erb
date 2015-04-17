@@ -1,0 +1,3 @@
+$("#comment-<%= @comment.id %>").slideUp();
+$('#wrapper').prepend("<%= j show_flash %>")
+$(document).foundation('alert', 'reflow');

@@ -4,7 +4,10 @@
 class CommentsController < ApplicationController
   decorates_assigned :comment
   before_action :load_commentable
+  before_action :set_comment, only: [:destroy]
 
+  # POST /comments
+  # POST /comments.json
   def create
     if comment_params[:nickname].blank?
       @comment = @commentable.comments.new(comment_params)
@@ -26,11 +29,44 @@ class CommentsController < ApplicationController
         format.html { redirect_to @commentable, notice: 'Captcha caught you' }
         format.js { render 'captcha' }
       end
+    end
+  end
 
+  # DELETE /comments/1
+  # DELETE /comments/1.json
+  def destroy
+    if can? :destroy, @comment
+      if @comment.destroy
+        flash.now[:error] = nil
+        flash.now[:success] = 'Comment successfully destroy'
+        respond_to do |format|
+          format.html { redirect_to @commentable }
+          format.js {}
+        end
+      else
+        flash.now[:success] = nil
+        flash.now[:error] = 'Error trying to destroy comment'
+        respond_to do |format|
+          format.html { redirect_to @commentable }
+          format.js { render 'forbbiden' }
+        end
+      end
+    else
+      flash.now[:success] = nil
+      flash.now[:error] = 'Your are not allowed to destroy this comment'
+      respond_to do |format|
+        format.html { redirect_to @commentable }
+        format.js { render 'forbbiden' }
+      end
     end
   end
 
   private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
