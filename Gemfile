@@ -15,6 +15,7 @@ gem 'rails', '4.2.0'
 #
 gem 'sqlite3'
 gem 'mysql2'
+gem 'pg'
 
 #
 # == Administration
