@@ -12,7 +12,7 @@ module AssetsHelper
       name_at_2x = image.url((size.to_s + '_2x').to_sym)
       image_tag(image.url(size), options.merge('data-at2x' => asset_path(name_at_2x)))
     else
-      image_tag('/assets/images/default_media/' + size.to_s + '/missing.png', options)
+      image_tag('/assets/images/default_media/' + size.to_s + '-missing.png', options)
     end
   end
 
