@@ -39,25 +39,16 @@ class CommentsController < ApplicationController
       if @comment.destroy
         flash.now[:error] = nil
         flash.now[:success] = 'Comment successfully destroy'
-        respond_to do |format|
-          format.html { redirect_to @commentable }
-          format.js {}
-        end
+        respond_action
       else
         flash.now[:success] = nil
         flash.now[:error] = 'Error trying to destroy comment'
-        respond_to do |format|
-          format.html { redirect_to @commentable }
-          format.js { render 'forbbiden' }
-        end
+        respond_action 'forbbiden'
       end
     else
       flash.now[:success] = nil
       flash.now[:error] = 'Your are not allowed to destroy this comment'
-      respond_to do |format|
-        format.html { redirect_to @commentable }
-        format.js { render 'forbbiden' }
-      end
+      respond_action 'forbbiden'
     end
   end
 
@@ -80,5 +71,12 @@ class CommentsController < ApplicationController
 
   def paginate_commentable
     @commentable.comments.includes(:user).page params[:page]
+  end
+
+  def respond_action(template = 'destroy')
+    respond_to do |format|
+      format.html { redirect_to @commentable }
+      format.js { render template }
+    end
   end
 end
