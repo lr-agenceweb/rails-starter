@@ -28,29 +28,10 @@ class CommentDecorator < ApplicationDecorator
   #   - +f+ -> form object used
   #
   def form(f)
-    # Connected
     if user_signed_in?
-      content_tag(:div, class: 'row') do
-        concat(content_tag(:div, class: 'small-12 medium-2 columns') do
-          if current_user.avatar?
-            concat(retina_image_tag current_user, :avatar, :small)
-          else
-            concat(gravatar_image_tag current_user.email, alt: current_user.username)
-          end
-          concat(pseudo(current_user.username))
-        end)
-        textarea_and_submit(f, 'medium-10')
-      end
-
-    # Not connected
+      form_connected(f)
     else
-      content_tag(:div, class: 'row') do
-        concat(content_tag(:div, class: 'small-12 medium-6 columns') do
-          concat(f.input :username)
-          concat(f.input :email, as: :email)
-        end)
-        textarea_and_submit(f)
-      end
+      form_not_connected(f)
     end
   end
 
@@ -59,6 +40,30 @@ class CommentDecorator < ApplicationDecorator
   def pseudo(name = model.username)
     content_tag(:p) do
       concat(content_tag(:small, name))
+    end
+  end
+
+  def form_connected(f)
+    content_tag(:div, class: 'row') do
+      concat(content_tag(:div, class: 'small-12 medium-2 columns') do
+        if current_user.avatar?
+          concat(retina_image_tag current_user, :avatar, :small)
+        else
+          concat(gravatar_image_tag current_user.email, alt: current_user.username)
+        end
+        concat(pseudo(current_user.username))
+      end)
+      textarea_and_submit(f, 'medium-10')
+    end
+  end
+
+  def form_not_connected(f)
+    content_tag(:div, class: 'row') do
+      concat(content_tag(:div, class: 'small-12 medium-6 columns') do
+        concat(f.input :username)
+        concat(f.input :email, as: :email)
+      end)
+      textarea_and_submit(f)
     end
   end
 
@@ -71,4 +76,5 @@ class CommentDecorator < ApplicationDecorator
       end)
     end)
   end
+
 end
