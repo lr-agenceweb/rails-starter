@@ -11,7 +11,7 @@ class CommentDecorator < ApplicationDecorator
     if model.user_id.nil?
       gravatar_image_tag(model.email, alt: model.username, gravatar: { size: width }) + pseudo
     else
-      retina_image_tag(comment.user, :avatar, :thumb, default: [width, height]) + pseudo(model.user_username)
+      retina_thumb_square(comment.user) + pseudo(model.user_username)
     end
   end
 

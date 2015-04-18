@@ -19,4 +19,8 @@ module AssetsHelper
   def attachment_url(file, style = :original, req = request)
     URI.join(req.url, file.url(style)).to_s unless file.nil?
   end
+
+  def retina_thumb_square(resource)
+    retina_image_tag(resource, :avatar, :thumb, default: [64, 64])
+  end
 end
