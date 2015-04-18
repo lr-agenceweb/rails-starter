@@ -7,7 +7,7 @@ ActiveAdmin.register_page 'Dashboard' do
         panel 'Utilisateurs' do
           table_for User.includes(:role).last(5) do
             column :avatar do |user|
-              retina_image_tag(user, :avatar, :thumb)
+              retina_thumb_square(user)
             end
             column :username
             column :email

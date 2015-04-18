@@ -1,7 +1,2 @@
 $("#comment-<%= @comment.id %>").slideUp();
-$('#wrapper').prepend("<%= j show_flash %>")
-$(document).foundation('alert', 'reflow');
-
-setTimeout((function() {
-  $('.alert-box').fadeOut();
-}), 5000);
+<%= render 'elements/alert' %>

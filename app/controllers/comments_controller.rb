@@ -12,12 +12,9 @@ class CommentsController < ApplicationController
     if comment_params[:nickname].blank?
       @comment = @commentable.comments.new(comment_params)
       @comment.user_id = current_user.id if user_signed_in?
-
       if @comment.save
-        respond_to do |format|
-          format.html { redirect_to @commentable, notice: 'Comment was successfully created.' }
-          format.js {}
-        end
+        flash.now[:success] = 'Comment was successfully created.'
+        respond_create_action
       else
         # Render view user come from instead of the comments default view
         instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
@@ -25,10 +22,8 @@ class CommentsController < ApplicationController
         render "#{@commentable.class.name.underscore.pluralize}/show"
       end
     else # if nickname is filled => robots spam
-      respond_to do |format|
-        format.html { redirect_to @commentable, notice: 'Captcha caught you' }
-        format.js { render 'captcha' }
-      end
+      flash.now[:error] = 'Captcha caught you'
+      respond_create_action 'captcha'
     end
   end
 
@@ -39,16 +34,16 @@ class CommentsController < ApplicationController
       if @comment.destroy
         flash.now[:error] = nil
         flash.now[:success] = 'Comment successfully destroy'
-        respond_action
+        respond_destroy_action
       else
         flash.now[:success] = nil
         flash.now[:error] = 'Error trying to destroy comment'
-        respond_action 'forbbiden'
+        respond_destroy_action 'forbbiden'
       end
     else
       flash.now[:success] = nil
       flash.now[:error] = 'Your are not allowed to destroy this comment'
-      respond_action 'forbbiden'
+      respond_destroy_action 'forbbiden'
     end
   end
 
@@ -73,7 +68,14 @@ class CommentsController < ApplicationController
     @commentable.comments.includes(:user).page params[:page]
   end
 
-  def respond_action(template = 'destroy')
+  def respond_create_action(template = 'create')
+    respond_to do |format|
+      format.html { redirect_to @commentable }
+      format.js { render template }
+    end
+  end
+
+  def respond_destroy_action(template = 'destroy')
     respond_to do |format|
       format.html { redirect_to @commentable }
       format.js { render template }
