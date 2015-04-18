@@ -13,7 +13,7 @@ end
 # == Create user roles
 #
 puts 'Creating user roles'
-roles = %w( super_administrator administrator subscriber )
+roles = %w( super_administrator administrator subscriber visitor )
 
 roles.each do |role|
   Role.create!(name: role)
