@@ -14,16 +14,15 @@ class CommentsController < ApplicationController
       @comment.user_id = current_user.id if user_signed_in?
       if @comment.save
         flash.now[:success] = 'Comment was successfully created.'
-        respond_create_action
-      else
-        # Render view user come from instead of the comments default view
+        respond_action 'create'
+      else # Render view user come from instead of the comments default view
         instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
         @comments = CommentDecorator.decorate_collection(paginate_commentable)
         render "#{@commentable.class.name.underscore.pluralize}/show"
       end
     else # if nickname is filled => robots spam
       flash.now[:error] = 'Captcha caught you'
-      respond_create_action 'captcha'
+      respond_action 'captcha'
     end
   end
 
@@ -34,16 +33,16 @@ class CommentsController < ApplicationController
       if @comment.destroy
         flash.now[:error] = nil
         flash.now[:success] = 'Comment successfully destroy'
-        respond_destroy_action
+        respond_action 'destroy'
       else
         flash.now[:success] = nil
         flash.now[:error] = 'Error trying to destroy comment'
-        respond_destroy_action 'forbbiden'
+        respond_action 'forbidden'
       end
     else
       flash.now[:success] = nil
       flash.now[:error] = 'Your are not allowed to destroy this comment'
-      respond_destroy_action 'forbbiden'
+      respond_action 'forbidden'
     end
   end
 
@@ -68,14 +67,7 @@ class CommentsController < ApplicationController
     @commentable.comments.includes(:user).page params[:page]
   end
 
-  def respond_create_action(template = 'create')
-    respond_to do |format|
-      format.html { redirect_to @commentable }
-      format.js { render template }
-    end
-  end
-
-  def respond_destroy_action(template = 'destroy')
+  def respond_action(template)
     respond_to do |format|
       format.html { redirect_to @commentable }
       format.js { render template }
