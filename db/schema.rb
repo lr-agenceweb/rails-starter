@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608190551) do
+ActiveRecord::Schema.define(version: 20150608203725) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -78,6 +78,37 @@ ActiveRecord::Schema.define(version: 20150608190551) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "newsletter_translations", force: :cascade do |t|
+    t.integer  "newsletter_id", limit: 4,     null: false
+    t.string   "locale",        limit: 255,   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "title",         limit: 255
+    t.text     "content",       limit: 65535
+  end
+
+  add_index "newsletter_translations", ["locale"], name: "index_newsletter_translations_on_locale", using: :btree
+  add_index "newsletter_translations", ["newsletter_id"], name: "index_newsletter_translations_on_newsletter_id", using: :btree
+
+  create_table "newsletter_users", force: :cascade do |t|
+    t.string   "email",      limit: 255
+    t.string   "lang",       limit: 255, default: "fr"
+    t.string   "role",       limit: 255, default: "subscriber"
+    t.string   "token",      limit: 255
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
+  add_index "newsletter_users", ["email"], name: "index_newsletter_users_on_email", unique: true, using: :btree
+
+  create_table "newsletters", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "slug",       limit: 255
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "picture_translations", force: :cascade do |t|
     t.integer  "picture_id",  limit: 4,     null: false
