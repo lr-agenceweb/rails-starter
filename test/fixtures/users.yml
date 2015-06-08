@@ -20,7 +20,7 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  role_id                :integer          default(3), not null
+#  role_id                :integer          default(4), not null
 #  created_at             :datetime
 #  updated_at             :datetime
 #
