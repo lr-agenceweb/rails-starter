@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416191803) do
+ActiveRecord::Schema.define(version: 20150608190551) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -189,6 +189,8 @@ ActiveRecord::Schema.define(version: 20150416191803) do
     t.float    "latitude",        limit: 24
     t.float    "longitude",       limit: 24
     t.boolean  "show_map",        limit: 1,   default: true
+    t.boolean  "show_breadcrumb", limit: 1,   default: false
+    t.boolean  "show_social",     limit: 1,   default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -211,7 +213,7 @@ ActiveRecord::Schema.define(version: 20150416191803) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.integer  "role_id",                limit: 4,     default: 3,  null: false
+    t.integer  "role_id",                limit: 4,     default: 4,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
