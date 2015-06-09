@@ -1,0 +1,9 @@
+$('#feedback span.error').addClass('hide').html('');
+var message = <%= t('newsletter.subscribe_success') %>
+
+$('#newsletter_user_email').val('');
+$('#feedback span.success').removeClass('hide').html("<%= j @newsletter_user.email %> " + message);
+
+setTimeout(function() {
+  $('#feedback span.success').fadeOut();
+}, 5000 );
