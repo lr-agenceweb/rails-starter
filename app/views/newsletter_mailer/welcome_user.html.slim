@@ -1,0 +1,6 @@
+- if @newsletter_user.lang == 'fr'
+  p = "Bonjour #{@newsletter_user.name},"
+  p Vous êtes maintenant abonné à la newsletter, vous la recevrez environ une fois par mois. Votre email ne sera pas utilisé pour vous spammer.
+- else
+  p = "Hello #{@newsletter_user.name},"
+  p You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.
