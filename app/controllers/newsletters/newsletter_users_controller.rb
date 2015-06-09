@@ -43,8 +43,8 @@ class NewsletterUsersController < ApplicationController
       redirect_to :root
   end
 
+  # Sends email to user when user is created.
   def send_welcome_newsletter
-    # Sends email to user when user is created.
-    SendEmailJob.set(wait: 10.seconds).perform_later(@newsletter_user)
+    WelcomeNewsletterJob.set(wait: 10.seconds).perform_later(@newsletter_user)
   end
 end
