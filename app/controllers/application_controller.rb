@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   before_action :set_setting
   before_action :set_menu_elements
   before_action :set_host_name
+  before_action :set_newsletter_user
 
   decorates_assigned :setting, :category
 
@@ -36,6 +37,10 @@ class ApplicationController < ActionController::Base
 
   def set_host_name
     @hostname = request.host
+  end
+
+  def set_newsletter_user
+    @newsletter_user ||= NewsletterUser.new
   end
 
   def authenticate_active_admin_user!
