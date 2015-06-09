@@ -1,0 +1,4 @@
+#!/bin/sh
+if [ "$RACK_ENV" == "development" ]; then
+  rake jobs:work
+fi
