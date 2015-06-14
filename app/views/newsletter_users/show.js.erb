@@ -1,8 +1,8 @@
 $('#feedback span.error').addClass('hide').html('');
-var message = <%= t('newsletter.subscribe_success') %>
+var message = I18n.t('newsletter.subscribe_success', {email: "<%= @newsletter_user.email %>", locale: gon.language})
 
 $('#newsletter_user_email').val('');
-$('#feedback span.success').removeClass('hide').html("<%= j @newsletter_user.email %> " + message);
+$('#feedback span.success').removeClass('hide').html(message);
 
 setTimeout(function() {
   $('#feedback span.success').fadeOut();
