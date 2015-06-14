@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   # Newsletters
   resources :newsletter_users, only: [:create]
   get '/newsletter/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
+  get '/admin/newsletters/:id/send', to: 'admin/newsletters#send_newsletter', as: :send_newsletter_for_subscribers
+  get '/admin/newsletter_test/:id/send', to: 'admin/newsletters#send_newsletter_test', as: :send_newsletter_for_testers
 
   localized do
     root 'homes#index'

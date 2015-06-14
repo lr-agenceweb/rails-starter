@@ -2,7 +2,7 @@
 # == Newsletter Mailer
 #
 class NewsletterMailer < ActionMailer::Base
-  add_template_helper(ApplicationHelper)
+  add_template_helper(HtmlHelper)
   default from: Setting.first.email
 
   def welcome_user(newsletter_user)
@@ -18,14 +18,14 @@ class NewsletterMailer < ActionMailer::Base
     end
   end
 
-  # def send_newsletter(newsletter_user, newsletter)
-  #   @newsletter_user = newsletter_user
-  #   @newsletter = newsletter
-  #   @title = @newsletter.title
-  #   @host = Figaro.env.application_host
-  #   mail(to: @newsletter_user.email, subject: @newsletter.title) do |format|
-  #     format.html { render layout: 'newsletter' }
-  #     format.text
-  #   end
-  # end
+  def send_newsletter(newsletter_user, newsletter)
+    @newsletter_user = newsletter_user
+    @newsletter = newsletter
+    @title = @newsletter.title
+    @host = Figaro.env.application_host
+    mail(to: @newsletter_user.email, subject: @newsletter.title) do |format|
+      format.html { render layout: 'newsletter' }
+      format.text
+    end
+  end
 end
