@@ -4,7 +4,7 @@
       .input-wrapper
         = f.input :email, as: :email, label: false, placeholder: I18n.t('newsletter.placeholder'), required: true
         = f.hidden_field :lang, as: :hidden, value: @language
-        = f.button :button, class: 'submit-with-icon' do
+        = f.button :button, class: 'submit-with-icon tiny' do
           = fa_icon('envelope')
 
       #feedback

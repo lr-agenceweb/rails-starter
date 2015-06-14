@@ -6,4 +6,39 @@
   .credentials {
     text-align: center;
   }
+
+  .input-wrapper {
+    position: relative;
+
+    .newsletter_user_email {
+      input {
+        width: 100%; height: auto;
+        padding: 5px;
+        padding-right: 37px;
+
+        &:focus {
+          outline: none !important;
+        }
+      }
+    }
+
+    .submit-with-icon {
+      background: none;
+      position: absolute;
+      top: 1px; right: 3px;
+
+      margin: 0px; padding: 0px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+
+      color: #000;
+      cursor: pointer;
+
+      i {
+        font-size: 25px;
+        margin-right: 1px;
+      }
+    }
+  }
 }
