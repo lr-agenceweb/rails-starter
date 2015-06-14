@@ -33,6 +33,7 @@ class NewsletterUser < ActiveRecord::Base
   scope :testers, -> { where(role: 'tester') }
   scope :french, -> { where(lang: 'fr') }
   scope :english, -> { where(lang: 'en') }
+  scope :by_locale, -> (locale) { where(lang: locale) }
 
   attr_accessor :name
 

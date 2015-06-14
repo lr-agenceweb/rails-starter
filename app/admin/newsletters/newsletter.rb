@@ -20,12 +20,12 @@ ActiveAdmin.register Newsletter do
       if resource.already_sent?
         span link_to "Renvoyer la newsletter aux #{count} inscrits ?",
                      send_newsletter_for_subscribers_path(resource.id),
-                     data: { confirm: I18n.t('newsletter.send_again', date: l(resource.sent_at, format: :long)) },
+                     data: { confirm: t('newsletter.send_again', date: l(resource.sent_at, format: :long)) },
                      class: 'button'
       else
         span link_to "Envoyer la newsletter aux #{count} inscrits",
                      send_newsletter_for_subscribers_path(resource.id),
-                     data: { confirm: I18n.t('newsletter.send') },
+                     data: { confirm: t('newsletter.send') },
                      class: 'button'
       end
 
@@ -34,7 +34,7 @@ ActiveAdmin.register Newsletter do
         span raw '<br><br>'
         span link_to 'Send newsletter for testers',
                      send_newsletter_for_testers_path(resource.id),
-                     data: { confirm: I18n.t('newsletter.send_testers') }
+                     data: { confirm: t('newsletter.send_testers') }
         span "(#{newsletter_testers})"
       end
     end
@@ -44,12 +44,7 @@ ActiveAdmin.register Newsletter do
     end
 
     column 'Preview' do |resource|
-      newsletter_user_fr = NewsletterUser.french.first
-      newsletter_user_en = NewsletterUser.english.first
-
-      span link_to 'En français', show_newsletter_fr_path(resource.id, newsletter_user_fr.id, newsletter_user_fr.token), target: :_blank
-      span raw '<br>'
-      span link_to 'En anglais', show_newsletter_en_path(resource.id, newsletter_user_en.id, newsletter_user_en.token), target: :_blank
+      raw newsletter_preview(resource.id)
     end
 
     translation_status
@@ -68,12 +63,7 @@ ActiveAdmin.register Newsletter do
       end
 
       row 'Preview' do
-        newsletter_user_fr = NewsletterUser.french.first
-        newsletter_user_en = NewsletterUser.english.first
-
-        span link_to 'En français', show_newsletter_fr_path(resource.id, newsletter_user_fr.id, newsletter_user_fr.token), target: :blank
-        span raw '<br>'
-        span link_to 'En anglais', show_newsletter_en_path(resource.id, newsletter_user_en.id, newsletter_user_en.token), target: :blank
+        raw newsletter_preview(resource.id)
       end
     end
   end
@@ -97,6 +87,8 @@ ActiveAdmin.register Newsletter do
   # == Controller
   #
   controller do
+    include NewsletterHelper
+
     before_action :set_newsletter,
                   only: [
                     :show, :edit, :update, :destroy,
