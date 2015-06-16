@@ -18,7 +18,7 @@ Clone it: `git clone git@github.com:anthony-robin/rails-starter.git`
 Rename `.env.example` to `.env`  
 Rename `database.example.yml` to `database.yml`  
 Add your database configuration  
-Go to the application folder: `cd rails-startup`  
+Go to the application folder: `cd rails-starter`  
 Install gems: `bundle install`  
 Run migrations: `rake db:create db:migrate db:seed`  
 Run `foreman start`  
@@ -57,6 +57,10 @@ Mail
 -----
 I use [maildev](http://djfarrelly.github.io/MailDev/) to test my emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
 To see your mails, visit `http://localhost:1080`
+
+Newsletter
+-----------
+Soon
 
 Gems
 -----
