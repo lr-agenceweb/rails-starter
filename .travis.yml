@@ -1,22 +1,21 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.2.0
-
+- 2.2.0
 env:
-  - DB=mysql
-  - DB=postgresql
-
+- DB=mysql
+- DB=postgresql
 before_script:
-  - cp config/database.travis.yml config/database.yml
-  - mysql -e 'create database rails_starter_test'
-  - psql -c 'create database rails_starter_test' -U postgres
-
+- cp config/database.travis.yml config/database.yml
+- mysql -e 'create database rails_starter_test'
+- psql -c 'create database rails_starter_test' -U postgres
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate
-  - RAILS_ENV=test bundle exec rake test
-
+- RAILS_ENV=test bundle exec rake --trace db:migrate
+- RAILS_ENV=test bundle exec rake test
 addons:
   code_climate:
     repo_token:
-      secure: "HaE8VFPfQHp0tFTKIicjWtqBJjikpYt8E5nYrWir7q6y5OwCjMA6s/szigWXjyjG0I1wE3KTdyJAIXmje8K8zZAf2mTfPYQQYasnKjEHk/PUOSagjbLOKU3FlZm9lzPvAz5+CcE/sZWPcDPjcL9A0NAZFg6QLRaK+5mVy9pi0Tk="
+      secure: g7c/TrOWJ4vnQqY1RBhZjCQNXCHVfWTcFn+A8Za7LNpwLmNps3y9XtT0DIJ+VtKGUDpczzOlRhTEl+A/ddnF6HZSlYUy3PwUX6TwgsVGoLbNsFscx720ST8Yi47QysKcgmWpi+aUBwad3rPHIkeYgu8XmIcDhJUCmBARzNr2qvg=
+notifications:
+  slack:
+    secure: C5mVOWuJfFpZwtZQigkATqvgQxXjmo1YnnGRvbsauSpDI9it362L1GsQ50duaSTN//8GfWMqG12bGY4oW8NOgvR/AzrRUD1aAz6ByLaEpb8TKfBbrO5sYSAZn4FRV39aCaAcW6ZuTKJxBmsHo2bdFFpRP07Vmi0bFRRNQO2n+sY=
