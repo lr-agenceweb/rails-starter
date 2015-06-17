@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include SocialHelper
   include HtmlHelper
+  include UserHelper
 
   protect_from_forgery with: :exception
   analytical modules: [:google]

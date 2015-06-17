@@ -94,6 +94,7 @@ ActiveAdmin.register Newsletter do
                     :show, :edit, :update, :destroy,
                     :send_newsletter, :send_newsletter_test
                   ]
+    before_action :set_variables, only: [:preview]
 
     def send_newsletter
       @newsletter.update_attributes(sent_at: Time.zone.now)
@@ -102,7 +103,7 @@ ActiveAdmin.register Newsletter do
 
       count = @newsletter_users.count
       flash[:notice] = "La newsletter est en train d'être envoyée à #{count} personnes"
-      redirect_to :back
+      make_redirect
     end
 
     def send_newsletter_test
@@ -111,7 +112,16 @@ ActiveAdmin.register Newsletter do
 
       newsletter_testers = @newsletter_testers.map(&:email).join(', ')
       flash[:notice] = "La newsletter est en train d'être envoyée à #{newsletter_testers}"
-      redirect_to :back
+      make_redirect
+    end
+
+    def preview
+      I18n.with_locale(params[:locale]) do
+        @newsletter = Newsletter.find(params[:id])
+        @title = @newsletter.title
+      end
+      @preview_newsletter = true
+      render layout: 'newsletter'
     end
 
     private
@@ -134,6 +144,11 @@ ActiveAdmin.register Newsletter do
 
     def make_redirect
       redirect_to :back
+    end
+
+    def set_variables
+      @host = Figaro.env.application_host
+      @preview_newsletter = true
     end
   end
 end

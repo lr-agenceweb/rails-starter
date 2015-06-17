@@ -9,7 +9,8 @@ html
 
   body
     - @settings = Setting.first
-    - @from_controller ||= false
+    - @see_in_browser ||= false
+    - @preview_newsletter ||= false
     - @is_welcome_user ||= false
 
     table.wrapper cellspacing="0" cellpadding="0" border="0"
@@ -44,7 +45,9 @@ html
 
                 tr width="100%"
                   td.links valign="top"
-                    = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user, host: @host }
 
-                    - unless(@from_controller)
-                      = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, host: @host, is_welcome_user: @is_welcome_user }
+                    - unless(@preview_newsletter)
+                      = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user, host: @host }
+
+                      - unless(@see_in_browser)
+                        = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, host: @host, is_welcome_user: @is_welcome_user }

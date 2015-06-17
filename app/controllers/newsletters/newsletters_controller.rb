@@ -1,17 +1,21 @@
 #
 # == NewslettersController
 #
-class NewslettersController < ApplicationController
-  before_action :set_newsletter_user, only: [:show, :welcome_user]
-  before_action :set_variables, only: [:show, :welcome_user]
+class NewslettersController < InheritedResources::Base
+  before_action :set_newsletter_user, only: [:see_in_browser, :welcome_user]
+  before_action :set_variables, only: [:see_in_browser, :welcome_user]
 
-  def show
+  def see_in_browser
     if @newsletter_user.token == params[:token]
       I18n.with_locale(@newsletter_user.lang) do
         @newsletter = Newsletter.find(params[:id])
-        @title = @newsletter.title
+        if @newsletter.already_sent?
+          @title = @newsletter.title
+          render layout: 'newsletter'
+        else
+          redirect_to :root
+        end
       end
-      render layout: 'newsletter'
     else
       redirect_to :root
     end
