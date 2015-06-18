@@ -15,9 +15,11 @@ ActiveAdmin.register Newsletter do
       raw "<strong>#{resource.title}</strong>"
     end
 
-    column 'Send' do |resource|
-      render 'send', resource: resource
+    column 'Preview' do |resource|
+      raw newsletter_preview(resource.id)
     end
+
+    translation_status
 
     column 'Sent' do |resource|
       status_tag "#{resource.already_sent?}", (resource.already_sent? ? :ok : :warn)
@@ -27,11 +29,10 @@ ActiveAdmin.register Newsletter do
       resource.sent_at_message
     end
 
-    column 'Preview' do |resource|
-      raw newsletter_preview(resource.id)
+    column 'Send' do |resource|
+      render 'send', resource: resource
     end
 
-    translation_status
     actions
   end
 
@@ -42,8 +43,8 @@ ActiveAdmin.register Newsletter do
         raw resource.content
       end
 
-      row 'Send' do
-        render 'send', resource: resource
+      row 'Preview' do
+        raw newsletter_preview(resource.id)
       end
 
       row 'Sent' do
@@ -54,8 +55,8 @@ ActiveAdmin.register Newsletter do
         resource.sent_at_message
       end
 
-      row 'Preview' do
-        raw newsletter_preview(resource.id)
+      row 'Send' do
+        render 'send', resource: resource
       end
     end
   end
