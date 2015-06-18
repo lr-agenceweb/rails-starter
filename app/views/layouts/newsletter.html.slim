@@ -7,7 +7,7 @@ html
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
     link href='/assets/stylesheets/newsletter.css' rel='stylesheet' type='text/css' /
 
-  body
+  body#newsletter
     - @settings = Setting.first
     - @see_in_browser ||= false
     - @preview_newsletter ||= false

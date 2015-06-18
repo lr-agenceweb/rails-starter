@@ -68,20 +68,7 @@ ActiveAdmin.register Newsletter do
     end
   end
 
-  form do |f|
-    f.semantic_errors *f.object.errors.keys
-
-    f.inputs 'Newsletter' do
-      f.translated_inputs 'Translated fields', switch_locale: false do |t|
-        t.input :title, hint: I18n.t('form.hint.title_newsletter')
-        t.input :content,
-                hint: I18n.t('form.hint.content_newsletter'),
-                input_html: { class: 'froala' }
-      end
-    end
-
-    f.actions
-  end
+  form partial: 'form'
 
   #
   # == Controller

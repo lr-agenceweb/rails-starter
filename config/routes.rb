@@ -25,6 +25,6 @@ Rails.application.routes.draw do
     get '/newsletter/welcome_user/:newsletter_user_id/:token', to: 'newsletters#welcome_user', as: :welcome_user
     get '/newsletter/:id/:newsletter_user_id/:token', to: 'newsletters#see_in_browser', as: :see_in_browser_newsletter
     get '/newsletter/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
-    get '/admin/newsletter/:id/', to: 'admin/newsletters#preview', as: :preview_newsletter
+    get '/admin/newsletters/:id/preview', to: 'admin/newsletters#preview', as: :preview_newsletter
   end
 end
