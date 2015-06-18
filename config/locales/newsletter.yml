@@ -11,6 +11,7 @@ fr:
     footer_message: Vous recevez ce message car vous êtes abonné à la newsletter
     subscribe_success: "%{email} est maintenant abonné à la newsletter"
     sent_on: "Envoyée le %{date}"
+    refresh_after_create: La page va se recharger afin de sauvegarder votre newsletter
     unsubscribe:
       link: Se désinscrire
       success: Vous avez été désabonné avec succès
@@ -31,6 +32,7 @@ en:
     footer_message: You receive this message because you subscribed to the newsletter
     subscribe_success: "%{email} is now subscribed to the newsletter"
     sent_on: "Sent on %{date}"
+    refresh_after_create: The page is going to refresh in order to save the newsletter
     unsubscribe:
       link: Unsubscribe
       success: You have been unsubscribe successfully

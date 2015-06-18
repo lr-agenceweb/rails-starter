@@ -5,9 +5,9 @@ $(document).on 'ready page:load page:restore', ->
 
   $('a.newsletter_preview_button.new_record').on 'click', (e) ->
     e.preventDefault()
-    alert('La page va se recharger afin de sauvegarder votre newsletter')
     preview_newsletter($(this), 'post')
 
+# Save form in database, reload the page if creation, refresh the iframe if edition
 preview_newsletter = (element, method) ->
   url = element.data 'url'
   $form = $('form.newsletter')
@@ -27,6 +27,7 @@ preview_newsletter = (element, method) ->
 
       # Creation
       else
+        vex.dialog.alert I18n.t('newsletter.refresh_after_create', locale: 'fr')
         window.location.replace "#{url}/#{data.id}/edit"
       return false
     error: (jqXHR, textStatus, errorThrown) ->

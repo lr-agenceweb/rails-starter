@@ -73,3 +73,9 @@ fr:
         title: Titre
         show_in_menu: Inclus dans le menu ?
         show_in_footer: Inclus dans le footer ?
+      newsletter:
+        title: Titre
+        preview: Prévisualisation
+        sent: Envoyé ?
+        sent_at: Envoyé le
+        send: Envoyer
