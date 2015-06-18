@@ -152,7 +152,7 @@
   line-height: 1.6;
 }
 
-ul li {
+#newsletter ul li {
   margin-left: 5px;
   list-style-position: inside;
 }
