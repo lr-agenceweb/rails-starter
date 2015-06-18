@@ -15,6 +15,8 @@
 #  latitude        :float(24)
 #  longitude       :float(24)
 #  show_map        :boolean          default(TRUE)
+#  show_breadcrumb :boolean          default(FALSE)
+#  show_social     :boolean          default(TRUE)
 #  created_at      :datetime
 #  updated_at      :datetime
 #

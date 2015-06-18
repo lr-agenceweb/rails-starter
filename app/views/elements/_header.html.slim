@@ -14,7 +14,7 @@ header.l-header-site.hide-for-print
           - @menu_elements_header.each do |element|
             li class="l-nav-item #{set_active_class(element.name.tableize)}" = link_to element.title, element.menu_link(element.name), class: 'l-nav-item-link'
 
-    = breadcrumbs pretext: t('breadcrumb.here'), separator: ''
+    = breadcrumbs pretext: t('breadcrumb.here'), separator: '' if setting.show_breadcrumb
 
     .row
       .small-12.columns

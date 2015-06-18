@@ -1,0 +1,15 @@
+- if @newsletter_user.lang == 'fr'
+  = "Bonjour #{@newsletter_user.name},"
+  = "\r\n==============================================\r\n\r\n"
+  | Vous êtes maintenant abonné à la newsletter, vous la recevrez environ une fois par mois. Votre email ne sera pas utilisé pour vous spammer.
+  = "\r\n\r\n\r\n==============================================\r\n"
+  = "Pour vous désinscrire: #{unsubscribe_url(@newsletter_user.id, @newsletter_user.token, host: @host)} \r\n"
+  = "Pour voir ce message dans votre navigateur: #{welcome_user_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token, host: @host)}"
+
+- else
+  = "Welcome #{@newsletter_user.name}"
+  = "\r\n\r\n==============================================\r\n\r\n"
+  | You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.
+  = "\r\n\r\n\r\n==============================================\r\n"
+  = "To unsubscribe: #{unsubscribe_url(@newsletter_user.id, @newsletter_user.token, host: @host)} \r\n"
+  = "To see the message in your browser: #{welcome_user_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token, host: @host)}"

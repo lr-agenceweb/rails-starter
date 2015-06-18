@@ -21,6 +21,13 @@ class SettingDecorator < ApplicationDecorator
     raw content_tag(:div, nil, class: 'map dark', id: 'map') if model.show_map || force
   end
 
+  def newsletter(newsletter_user)
+    content_tag(:div) do
+      concat(content_tag(:span, I18n.t('newsletter.header'), class: 'header'))
+      concat(render 'footer/newsletter_form', newsletter_user: newsletter_user)
+    end
+  end
+
   private
 
   def about

@@ -9,6 +9,8 @@
 #= require rails.validations
 #= require rails.validations.simple_form
 #= require rails.validations.simple_form.fix
+#= require i18n
+#= require i18n/translations
 #= require awesome-share-buttons
 #= require plugins/awesome-share-buttons
 #= require mapbox

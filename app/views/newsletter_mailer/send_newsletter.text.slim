@@ -1,0 +1,7 @@
+= "Hi #{@newsletter_user.email}"
+= "\r\n==============================================\r\n\r\n"
+= sanitize_string(@newsletter.content)
+
+= "\r\n\r\n==============================================\r\n\r\n"
+
+= "Pour vous désinscrire: #{unsubscribe_url(@newsletter_user.id, @newsletter_user.token, host: @host)}"

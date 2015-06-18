@@ -12,6 +12,8 @@ ActiveAdmin.register Setting do
                 :latitude,
                 :longitude,
                 :show_map,
+                :show_breadcrumb,
+                :show_social,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle
                 ]
@@ -51,6 +53,12 @@ ActiveAdmin.register Setting do
       row :show_map do
         status_tag("#{resource.show_map}", (resource.show_map? ? :ok : :warn))
       end
+      row :show_breadcrumb do
+        status_tag("#{resource.show_breadcrumb}", (resource.show_breadcrumb? ? :ok : :warn))
+      end
+      row :show_social do
+        status_tag("#{resource.show_social}", (resource.show_social? ? :ok : :warn))
+      end
       render 'show', resource: resource.decorate
     end
   end
@@ -67,6 +75,8 @@ ActiveAdmin.register Setting do
       f.input :email, hint: 'Email d\'où seront reçus les messages de contact'
       f.input :phone, as: :phone, hint: 'Numéro de téléphone à afficher sur le site pour vous joindre'
       f.input :show_map, hint: 'Afficher ou non la carte sur la page contact'
+      f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site'
+      f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site'
     end
 
     f.inputs 'Paramètre de la carte', class: 'map-settings' do

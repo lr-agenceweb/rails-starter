@@ -17,5 +17,6 @@ addons:
     repo_token:
       secure: g7c/TrOWJ4vnQqY1RBhZjCQNXCHVfWTcFn+A8Za7LNpwLmNps3y9XtT0DIJ+VtKGUDpczzOlRhTEl+A/ddnF6HZSlYUy3PwUX6TwgsVGoLbNsFscx720ST8Yi47QysKcgmWpi+aUBwad3rPHIkeYgu8XmIcDhJUCmBARzNr2qvg=
 notifications:
+  email: false
   slack:
     secure: C5mVOWuJfFpZwtZQigkATqvgQxXjmo1YnnGRvbsauSpDI9it362L1GsQ50duaSTN//8GfWMqG12bGY4oW8NOgvR/AzrRUD1aAz6ByLaEpb8TKfBbrO5sYSAZn4FRV39aCaAcW6ZuTKJxBmsHo2bdFFpRP07Vmi0bFRRNQO2n+sY=
