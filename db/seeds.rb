@@ -24,34 +24,37 @@ end
 #
 puts 'Creating users'
 User.create!(
+  username: 'superadmin',
   email: 'superadmin@example.com',
   password: 'password',
   password_confirmation: 'password',
   role_id: 1
 )
-User.create!(
-  email: 'admin@example.com',
-  password: 'password',
-  password_confirmation: 'password',
-  role_id: 2
-)
-User.create!(
-  email: 'abonne@example.com',
-  password: 'password',
-  password_confirmation: 'password',
-  role_id: 3
-)
+# User.create!(
+#   username: 'admin',
+#   email: 'admin@example.com',
+#   password: 'password',
+#   password_confirmation: 'password',
+#   role_id: 2
+# )
+# User.create!(
+#   username: 'abonne',
+#   email: 'abonne@example.com',
+#   password: 'password',
+#   password_confirmation: 'password',
+#   role_id: 3
+# )
 
 #
 # == Settings for site
 #
 puts 'Creating site Setting'
 setting_site = Setting.create!(
-  name: 'Rails startup',
+  name: 'Rails starter',
   title: 'Demo site',
   subtitle: 'démarre rapidement',
   phone: '01 02 03 04 05',
-  email: 'demo@startup.fr',
+  email: 'demo@starter.fr',
   address: 'Place du Père Noël',
   city: 'Rovaniemi',
   postcode: 96_930,
