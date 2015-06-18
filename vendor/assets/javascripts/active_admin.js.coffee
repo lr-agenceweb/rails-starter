@@ -12,6 +12,8 @@
 #= require mapbox
 #= require plugins/mapbox
 #= require vex.combined.min.js
+#= require i18n
+#= require i18n/translations
 
 $(document).on 'ready page:load page:restore', ->
   vex.defaultOptions.className = 'vex-theme-os'
