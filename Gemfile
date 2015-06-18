@@ -148,6 +148,13 @@ group :development do
   gem 'meta_request'
 
   gem "bullet"
+
+  # == Deploy
+  gem 'capistrano',  '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rvm'
+  gem 'capistrano-rails-collection'
+  gem 'capistrano-passenger'
 end
 
 group :development, :test do
