@@ -1,0 +1,6 @@
+- if is_welcome_user
+  - I18n.with_locale(newsletter_user.lang)
+    p == link_to I18n.t('newsletter.see_in_browser'), welcome_user_url(newsletter_user_id: newsletter_user.id, token: newsletter_user.token, host: host), target: :blank
+- else
+  - I18n.with_locale(newsletter_user.lang)
+    p == link_to I18n.t('newsletter.see_in_browser'), see_in_browser_newsletter_url(newsletter.id, newsletter_user.id, newsletter_user.token, host: host), target: :blank

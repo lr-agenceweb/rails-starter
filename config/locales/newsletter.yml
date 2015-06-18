@@ -1,0 +1,39 @@
+# French
+fr:
+  newsletter:
+    welcome: Bienvenue à la newsletter !
+    see_in_browser: Visualiser dans le navigateur
+    header: Abonnez vous à ma newsletter !
+    placeholder: Entrez votre email ici et valider
+    send: Êtes-vous sûr de vouloir envoyer cette newsletter ?
+    send_again: "Vous avez déjà envoyé cette newsletter le %{date}. Êtes-vous sûr de vouloir la renvoyer ?"
+    send_testers: Êtes-vous sûr de vouloir envoyer cette newsletter aux testeurs uniquement ?
+    footer_message: Vous recevez ce message car vous êtes abonné à la newsletter
+    subscribe_success: "%{email} est maintenant abonné à la newsletter"
+    sent_on: "Envoyée le %{date}"
+    unsubscribe:
+      link: Se désinscrire
+      success: Vous avez été désabonné avec succès
+      fail: Une erreur s'est produite. Veuillez réésayer
+      invalid: Cet utilisateur n'existe pas
+      alert: Êtes-vous sûr de vouloir vous désinscrire ?
+
+# English
+en:
+  newsletter:
+    welcome: Welcome to the newsletter !
+    see_in_browser: See the newsletter in your browser
+    header: Subscribe to the newsletter !
+    placeholder: Enter your email here and subscribe
+    send: Are you sure you want to send this newsletter ?
+    send_again: "You have already sent this newsletter on %{date}. Are you sure you want to send it again ?"
+    send_testers: Are you sure you want to send this newsletter for testers only ?
+    footer_message: You receive this message because you subscribed to the newsletter
+    subscribe_success: "%{email} is now subscribed to the newsletter"
+    sent_on: "Sent on %{date}"
+    unsubscribe:
+      link: Unsubscribe
+      success: You have been unsubscribe successfully
+      fail: An error occured when trying to unsubscribe you
+      invalid: This user doesn't exist
+      alert: Are you sure you want to unsubscribe ?

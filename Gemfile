@@ -65,6 +65,7 @@ gem 'route_translator'
 gem 'globalize', '~> 5.0.0'
 gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize', branch: 'master'
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master'
+gem "i18n-js", ">= 3.0.0.rc10"
 
 #
 # == Map
@@ -106,6 +107,7 @@ gem 'whenever', require: false # Cron tasks
 gem 'dkim' # authenticate emails
 gem 'premailer-rails'
 gem 'nokogiri'
+gem 'delayed_job_active_record'
 
 #
 # == Assets

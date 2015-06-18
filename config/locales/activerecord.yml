@@ -1,5 +1,17 @@
-fr:
+# English
+en:
+  activerecord:
+    errors:
+      models:
+        newsletter_user:
+          attributes:
+            email:
+              blank: Don't forget your email address ;)
+              invalid: Your email is invalid ;)
+              taken: This email is not avalaible :(
 
+# French
+fr:
   activemodel: &errors
     errors:
       messages:
@@ -7,6 +19,14 @@ fr:
         email_address_not_routable: n'est pas routable
   activerecord:
     <<: *errors
+    errors:
+      models:
+        newsletter_user:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              invalid: Veuillez renseigner un email valide ;)
+              taken: Cet email n'est pas disponible :(
     models:
       user:
         one: Utilisateur
