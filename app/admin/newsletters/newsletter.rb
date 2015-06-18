@@ -16,27 +16,11 @@ ActiveAdmin.register Newsletter do
     end
 
     column 'Send' do |resource|
-      count = NewsletterUser.count
-      if resource.already_sent?
-        span link_to "Renvoyer la newsletter aux #{count} inscrits ?",
-                     send_newsletter_for_subscribers_path(resource.id),
-                     data: { confirm: t('newsletter.send_again', date: l(resource.sent_at, format: :long)) },
-                     class: 'button'
-      else
-        span link_to "Envoyer la newsletter aux #{count} inscrits",
-                     send_newsletter_for_subscribers_path(resource.id),
-                     data: { confirm: t('newsletter.send') },
-                     class: 'button'
-      end
+      render 'send', resource: resource
+    end
 
-      if NewsletterUser.testers?
-        newsletter_testers = NewsletterUser.testers.map(&:email).join(', ')
-        span raw '<br><br>'
-        span link_to 'Send newsletter for testers',
-                     send_newsletter_for_testers_path(resource.id),
-                     data: { confirm: t('newsletter.send_testers') }
-        span "(#{newsletter_testers})"
-      end
+    column 'Sent' do |resource|
+      status_tag "#{resource.already_sent?}", (resource.already_sent? ? :ok : :warn)
     end
 
     column :sent_at do |resource|
@@ -56,6 +40,14 @@ ActiveAdmin.register Newsletter do
     attributes_table do
       row :content do
         raw resource.content
+      end
+
+      row 'Send' do
+        render 'send', resource: resource
+      end
+
+      row 'Sent' do
+        status_tag "#{resource.already_sent?}", (resource.already_sent? ? :ok : :warn)
       end
 
       row :sent_at do

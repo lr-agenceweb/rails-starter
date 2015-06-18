@@ -20,7 +20,7 @@ class Newsletter < ActiveRecord::Base
 
   def sent_at_message
     return "Envoyé le #{I18n.l(sent_at, format: :long)}" unless sent_at.nil?
-    'Pas encore envoyée'
+    '/'
   end
 
   def already_sent?
