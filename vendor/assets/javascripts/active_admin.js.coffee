@@ -11,5 +11,7 @@
 #= require globals/_functions
 #= require mapbox
 #= require plugins/mapbox
+#= require vex.combined.min.js
 
 $(document).on 'ready page:load page:restore', ->
+  vex.defaultOptions.className = 'vex-theme-os'

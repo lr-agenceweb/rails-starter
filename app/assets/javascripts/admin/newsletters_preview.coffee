@@ -5,7 +5,7 @@ $(document).on 'ready page:load page:restore', ->
 
   $('a.newsletter_preview_button.new_record').on 'click', (e) ->
     e.preventDefault()
-    alert('La page va se recharger afin de sauvegarder votre newsletter')
+    vex.dialog.alert 'La page va se recharger afin de sauvegarder votre newsletter'
     preview_newsletter($(this), 'post')
 
 preview_newsletter = (element, method) ->
