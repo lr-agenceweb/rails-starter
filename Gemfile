@@ -101,6 +101,7 @@ gem 'awesome-share-buttons', github: 'anthony-robin/awesome-share-buttons'
 # == Background Tasks
 #
 gem 'whenever', require: false # Cron tasks
+gem "daemons"
 
 #
 # == Email
