@@ -39,14 +39,6 @@ ActiveAdmin.register Newsletter do
   show do
     h3 resource.title
     attributes_table do
-      row :content do
-        raw resource.content
-      end
-
-      row 'Preview' do
-        raw newsletter_preview(resource.id)
-      end
-
       row 'Sent' do
         status_tag "#{resource.already_sent?}", (resource.already_sent? ? :ok : :warn)
       end
@@ -57,6 +49,14 @@ ActiveAdmin.register Newsletter do
 
       row 'Send' do
         render 'send', resource: resource
+      end
+
+      row :browser_preview do
+        raw newsletter_preview(resource.id)
+      end
+
+      row :live_preview do
+        render 'iframe_preview', resource: resource
       end
     end
   end

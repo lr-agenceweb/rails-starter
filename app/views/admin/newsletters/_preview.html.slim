@@ -13,7 +13,9 @@
 
     - html << "<a href='#' class='button newsletter_preview_button #{klass}_record' data-url='#{url}' data-locale='#{locale.to_s}'>Prévisualisation de la newsletter en #{t('active_admin.globalize.language.' + locale.to_s)}</a>".html_safe
 - html << '</p>'
-- html << "<iframe id='newsletter_preview_frame' src='#{preview_newsletter_path(f.object)}' onload=\"this.style.height = this.contentWindow.document.body.scrollHeight + 30 + 'px'\"></iframe>".html_safe unless f.object.new_record?
+
+- iframe = f.object.new_record? ? '' : render('iframe_preview', resource: f.object)
+- html << iframe
 
 - html << "</div>"
 
