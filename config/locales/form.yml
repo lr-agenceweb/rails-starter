@@ -1,3 +1,10 @@
+# English
+en:
+  form:
+    hint:
+      media:
+        destroy: Remove media linked to current post
+
 # French
 fr:
   form:
@@ -22,3 +29,6 @@ fr:
       year: Année de réalisation du projet
       destroy: "Après avoir coché la case, ne pas oublier de valider le fomulaire pour que la suppression s'effectue"
       role_name: Modification du rôle de l'utilisateur. Attention à ne pas faire n'importe quoi avec !!!
+
+      media:
+        destroy: Suppression du media associé à l'article
