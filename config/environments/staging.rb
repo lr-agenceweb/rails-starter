@@ -63,6 +63,18 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default_url_options = { host: Figaro.env.domain_name }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default charset: 'utf-8'
+
+  config.action_mailer.smtp_settings = {
+    address: Figaro.env.mandrill_address,
+    port: Figaro.env.mandrill_port,
+    user_name: Figaro.env.mandrill_username,
+    password: Figaro.env.mandrill_password
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
