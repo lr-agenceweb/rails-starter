@@ -27,6 +27,7 @@ class Ability
   def administrator_privilege(user)
     can :read, :all
     can :manage, Post
+    can :manage, Newsletter
     can :update, Setting
     can :manage, User, role_name: %w( administrator subscriber )
     can :manage, User, id: user.id
