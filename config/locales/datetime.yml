@@ -3,9 +3,11 @@ en:
   time:
     formats:
       without_time: '%B %d, %Y'
+      long: "%B %d, %Y at %H:%M"
 
 # French
 fr:
   time:
     formats:
       without_time: '%A %d %B %Y'
+      long: "%A %d %B %Y à %Hh%M"

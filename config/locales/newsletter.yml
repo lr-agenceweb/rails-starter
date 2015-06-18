@@ -10,6 +10,7 @@ fr:
     send_testers: Êtes-vous sûr de vouloir envoyer cette newsletter aux testeurs uniquement ?
     footer_message: Vous recevez ce message car vous êtes abonné à la newsletter
     subscribe_success: "%{email} est maintenant abonné à la newsletter"
+    sent_on: "Envoyée le %{date}"
     unsubscribe:
       link: Se désinscrire
       success: Vous avez été désabonné avec succès
@@ -29,6 +30,7 @@ en:
     send_testers: Are you sure you want to send this newsletter for testers only ?
     footer_message: You receive this message because you subscribed to the newsletter
     subscribe_success: "%{email} is now subscribed to the newsletter"
+    sent_on: "Sent on %{date}"
     unsubscribe:
       link: Unsubscribe
       success: You have been unsubscribe successfully
