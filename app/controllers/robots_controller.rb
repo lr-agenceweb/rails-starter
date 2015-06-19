@@ -8,9 +8,9 @@ class RobotsController < ApplicationController
     expires_in 12.hours, public: true
 
     if Rails.env.production?
-      render 'disallow'
-    else
       render 'allow'
+    else
+      render 'disallow'
     end
   end
 end
