@@ -7,7 +7,7 @@
     From: FRANCE
 
 /* SITE */
-    Last update: 07/04/2015
+    Last update: 19/06/2015
     Language: English / French
     Doctype: HTML5
     IDE: Sublime Text 3
