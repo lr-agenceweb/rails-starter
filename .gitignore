@@ -22,6 +22,8 @@
 # Ignore application configuration
 /config/application.yml
 /config/database.yml
+/public/sitemap*
+/public/shared*
 /public/system/*
 !public/system/default
 /db/backups/
