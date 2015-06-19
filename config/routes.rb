@@ -27,4 +27,6 @@ Rails.application.routes.draw do
     get '/newsletter/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
     get '/admin/newsletters/:id/preview', to: 'admin/newsletters#preview', as: :preview_newsletter
   end
+
+  get 'robots.:format' => 'robots#index'
 end
