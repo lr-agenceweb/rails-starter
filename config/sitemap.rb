@@ -2,6 +2,7 @@
 SitemapGenerator::Sitemap.default_host = Figaro.env.application_host
 SitemapGenerator::Sitemap.verbose = true
 SitemapGenerator::Sitemap.compress = false
+SitemapGenerator::Sitemap.sitemaps_path = 'shared/'
 
 SitemapGenerator::Sitemap.create do
   group(sitemaps_path: 'sitemap/fr/', filename: :french) do
@@ -15,5 +16,6 @@ SitemapGenerator::Sitemap.create do
       add root_path
       add abouts_path, priority: 0.7, changefreq: 'monthly'
       add new_contact_path, priority: 0.7, changefreq: 'monthly'
+    end
   end
 end
