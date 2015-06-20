@@ -1,0 +1,17 @@
+.row
+  .small-12.medium-6.columns
+    = simple_form_for search_index_path, method: :get, remote: true do |f|
+      = text_field_tag :query, params[:query]
+      = button_tag class: 'submit-btn text-right tiny right', name: nil do
+        - fa_icon('paper-plane')
+
+
+.row
+  .small-12.columns
+    ul
+      - @posts.each do |post|
+        = render 'row', post: post
+
+- unless @posts.empty?
+  .row
+    = paginate @posts

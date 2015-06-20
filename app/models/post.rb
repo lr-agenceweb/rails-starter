@@ -21,6 +21,8 @@
 #
 class Post < ActiveRecord::Base
   include PrimaryAttachment
+  include Searchable
+
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content
 
@@ -45,6 +47,8 @@ class Post < ActiveRecord::Base
   self.inheritance_column = :type
   @child_classes = []
   attr_reader :child_classes
+
+  paginates_per 1
 
   def self.type
     %w(Home About Contact)
