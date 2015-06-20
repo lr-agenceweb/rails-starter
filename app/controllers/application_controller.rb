@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     menu_elements = ::Category.includes(:translations).all
     @menu_elements_header ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_header.by_position)
     @menu_elements_footer ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_footer)
-    @category = Category.includes(:translations).find_by(name: controller_name.classify)
+    @category = Category.find_by(name: controller_name.classify)
   end
 
   def set_host_name
