@@ -5,7 +5,7 @@
     - if Rails.env.development?
       h2.text-center = link_to @category.title, new_contact_path
 
-      = link_to 'Mail dev', root_url(port: 1080, only_path: false), target: :blank, class: 'button success tiny'
+      = link_to 'Mail dev', root_url(locale: 'fr', port: 1080, only_path: false), target: :blank, class: 'button success tiny'
 
     .row
       .small-12.medium-6.columns
