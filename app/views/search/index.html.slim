@@ -1,0 +1,6 @@
+.row
+  .small-12.columns
+    h2.text-center = link_to @category.title, search_index_path
+
+    #search
+      = render 'search'

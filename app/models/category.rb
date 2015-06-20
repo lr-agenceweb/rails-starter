@@ -31,11 +31,11 @@ class Category < ActiveRecord::Base
   scope :by_position, -> { order(position: :asc) }
 
   def self.models_name
-    [:Home, :About, :Contact]
+    [:Home, :About, :Contact, :Search]
   end
 
   def self.models_name_str
-    %w( Home About Contact )
+    %w( Home About Contact Search)
   end
 
   def self.title_by_category(category)

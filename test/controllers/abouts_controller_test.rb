@@ -26,7 +26,7 @@ class AboutsControllerTest < ActionController::TestCase
 
   test 'should fetch only online posts' do
     @abouts = About.online
-    assert_equal @abouts.length, 2
+    assert_equal @abouts.length, 3
   end
 
   test 'should get abouts page by url' do

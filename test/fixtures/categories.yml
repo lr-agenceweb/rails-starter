@@ -27,3 +27,9 @@ contact:
   name: Contact
   show_in_menu: true
   show_in_footer: false
+
+search:
+  title: Rechercher
+  name: Search
+  show_in_menu: false
+  show_in_footer: false
