@@ -30,6 +30,10 @@ class NewsletterUser < ActiveRecord::Base
             presence: true,
             inclusion: %w( fr en )
 
+  validates :role,
+            presence: true,
+            inclusion: %w( subscriber tester )
+
   scope :testers, -> { where(role: 'tester') }
   scope :french, -> { where(lang: 'fr') }
   scope :english, -> { where(lang: 'en') }
