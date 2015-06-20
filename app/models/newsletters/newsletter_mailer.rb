@@ -12,6 +12,7 @@ class NewsletterMailer < ActionMailer::Base
     @title = t('newsletter.welcome')
     @host = Figaro.env.application_host
     @is_welcome_user = true
+    @see_in_browser = true
 
     mail(to: @newsletter_user.email, subject: @title) do |format|
       format.html { render layout: 'newsletter' }
