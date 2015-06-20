@@ -3,10 +3,10 @@
 #
 class SearchController < ApplicationController
   def index
-    if params[:query].nil?
+    if params[:query].nil? || params[:query].blank?
       @posts = []
     else
-      @posts = Post.search(params[:query], @language).page params[:page]
+      @posts = Post.search(params[:query], params[:locale]).page params[:page]
     end
   end
 

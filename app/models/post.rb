@@ -48,7 +48,7 @@ class Post < ActiveRecord::Base
   @child_classes = []
   attr_reader :child_classes
 
-  paginates_per 1
+  paginates_per 10
 
   def self.type
     %w(Home About Contact)
