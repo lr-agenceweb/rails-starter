@@ -16,29 +16,52 @@
 #  index_posts_on_slug  (slug) UNIQUE
 #
 
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  content: ''
+
 # Home posts
 home:
+  <<: *DEFAULTS
   type: Home
   title: Home article !
   online: true
 
 home_offline:
+  <<: *DEFAULTS
   type: Home
   title: Home article !
   online: false
 
 # About posts
 about:
+  <<: *DEFAULTS
   type: About
   title: Développement et Hébergement
   online: true
 
 about_2:
+  <<: *DEFAULTS
   type: About
   title: About article 2 !
   online: true
 
 about_offline:
+  <<: *DEFAULTS
   type: About
   title: About article offline !
+  online: false
+
+# For test
+about_test:
+  <<: *DEFAULTS
+  type: About
+  title: Ruby on Rails website
+  online: true
+
+about_test_offline:
+  <<: *DEFAULTS
+  type: About
+  title: Ruby on Rails website
   online: false
