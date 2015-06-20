@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_setting
-    @setting = Setting.includes(:translations).first
+    @setting = Setting.first
   end
 
   def set_menu_elements
