@@ -70,6 +70,51 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     end
   end
 
+  #
+  # == Mailer
+  #
+  test 'should not send a welcome_user email when a newsletter user subscription fails' do
+    clear_deliveries_and_queues
+    assert ActionMailer::Base.deliveries.empty?
+
+    assert_no_enqueued_jobs do
+      post :create, newsletter_user: { email: @email, lang: 'de' }
+    end
+  end
+
+  test 'should send a welcome_user email when a newsletter user subscribed' do
+    clear_deliveries_and_queues
+    assert_no_enqueued_jobs
+    assert ActionMailer::Base.deliveries.empty?
+
+    assert_enqueued_jobs 1 do
+      post :create, newsletter_user: { email: @email, lang: @lang }
+    end
+  end
+
+  test 'should have correct email headers and content' do
+    clear_deliveries_and_queues
+    assert_no_enqueued_jobs
+    assert ActionMailer::Base.deliveries.empty?
+
+    perform_enqueued_jobs do
+      @locales.each do |locale|
+        I18n.with_locale(locale) do
+          post :create, newsletter_user: { email: "#{@email}#{locale}", lang: locale }
+          user = assigns(:newsletter_user)
+          delivered_email = ActionMailer::Base.deliveries.last
+
+          assert_not ActionMailer::Base.deliveries.empty?
+          assert_includes delivered_email.to, user.email
+          assert_includes delivered_email.from, @settings.email
+          assert_includes delivered_email.subject, I18n.t('newsletter.welcome')
+        end
+      end
+    end
+
+    assert_performed_jobs 2
+  end
+
   private
 
   def initialize_test
@@ -77,8 +122,15 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = root_url
     @newsletter_user = newsletter_users(:newsletter_user_fr)
     @newsletter_user_en = newsletter_users(:newsletter_user_en)
+    @settings = settings(:one)
 
     @email = 'aaa@bbb.cc'
     @lang = 'fr'
+  end
+
+  def clear_deliveries_and_queues
+    clear_enqueued_jobs
+    clear_performed_jobs
+    ActionMailer::Base.deliveries.clear
   end
 end
