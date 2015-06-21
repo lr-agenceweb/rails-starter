@@ -1,7 +1,8 @@
 #
 # == Application
 #
-domain_name: http://yoursite.com
+application_host : http://localhost:3000
+domain_name: localhost:3000
 application_secret_key_base: ''
 devise_secret_key: ''
 
@@ -35,3 +36,12 @@ twitter_username: ''
 google_analytics_key: ~
 google_site_verification: ~
 bing_site_verification: ~
+
+
+#
+# == Mandrill (Mail server)
+#
+mandrill_address: ~
+mandrill_port: ~
+mandrill_username: ~
+mandrill_password: ~

@@ -7,6 +7,7 @@ env:
 - DB=postgresql
 before_script:
 - cp config/database.travis.yml config/database.yml
+- cp config/application.example.yml config/application.yml
 - mysql -e 'create database rails_starter_test'
 - psql -c 'create database rails_starter_test' -U postgres
 script:
