@@ -84,6 +84,20 @@ class SearchControllerTest < ActionController::TestCase
     end
   end
 
+  # == Ajax
+  test 'should execute query in ajax' do
+    query = 'Ruby'
+    xhr :get, :index, format: :js, query: query, locale: 'fr'
+    assert_response :success
+  end
+
+  test 'should not be empty in ajax' do
+    query = 'Hébergement'
+    xhr :get, :index, format: :js, query: query, locale: 'fr'
+    assert_not_empty assigns(:posts)
+    assert assigns(:posts).count, 1
+  end
+
   def initialize_test
     @locales = I18n.available_locales
     @category = categories(:search)

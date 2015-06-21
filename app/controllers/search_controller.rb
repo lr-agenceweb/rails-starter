@@ -8,10 +8,10 @@ class SearchController < ApplicationController
     else
       @posts = Post.search(params[:query], params[:locale]).page params[:page]
     end
-  end
 
-  respond_to do |format|
-    format.html
-    format.js
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 end
