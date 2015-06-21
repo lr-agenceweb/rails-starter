@@ -16,10 +16,15 @@ class NewsletterUserTest < ActiveSupport::TestCase
     assert_not NewsletterUser.testers?
   end
 
+  test 'should extract name from email' do
+    assert_equal @newsletter_user.extract_name_from_email, 'foo'
+  end
+
   private
 
   def initialize_test
-    @email = 'aaa@bbb.cc'
+    @email = 'foo@bar.cc'
     @lang = 'fr'
+    @newsletter_user = newsletter_users(:newsletter_user_test)
   end
 end

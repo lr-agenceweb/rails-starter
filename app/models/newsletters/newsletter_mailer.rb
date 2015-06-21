@@ -8,7 +8,7 @@ class NewsletterMailer < ActionMailer::Base
   # Email send after a user subscribed to the newsletter
   def welcome_user(newsletter_user)
     @newsletter_user = newsletter_user
-    @newsletter_user.name = @newsletter_user.email.split('@').first
+    @newsletter_user.name = @newsletter_user.extract_name_from_email
     @title = t('newsletter.welcome')
     @host = Figaro.env.application_host
     @is_welcome_user = true
