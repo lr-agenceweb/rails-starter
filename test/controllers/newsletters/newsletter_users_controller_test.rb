@@ -13,19 +13,19 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   # == Subscribing
   #
   test 'should not create newsletter user if email not properly formatted' do
-    assert_difference ['NewsletterUser.count'], 0 do
+    assert_no_difference ['NewsletterUser.count'] do
       post :create, newsletter_user: { email: 'aaabbb.cc', lang: 'fr' }
     end
   end
 
   test 'should not create newsletter user if lang is empty' do
-    assert_difference ['NewsletterUser.count'], 0 do
+    assert_no_difference ['NewsletterUser.count'] do
       post :create, newsletter_user: { email: @email, lang: '' }
     end
   end
 
   test 'should not create newsletter user if lang is not allowed' do
-    assert_difference ['NewsletterUser.count'], 0 do
+    assert_no_difference ['NewsletterUser.count'] do
       post :create, newsletter_user: { email: @email, lang: 'de' }
     end
   end
@@ -43,6 +43,27 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     assert_equal newsletter_user.email, @email
     assert_equal newsletter_user.lang, @lang
     assert_equal newsletter_user.role, 'subscriber'
+  end
+
+  # == Ajax
+  test 'should create newsletter user by ajax' do
+    xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang }
+    assert_response :success
+  end
+
+  test 'should render show template if newsletter user created by ajax' do
+    xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang }
+    assert_template :show
+  end
+
+  test 'should not create newsletter user by ajax' do
+    xhr :post, :create, format: :js, newsletter_user: { email: 'aaabbb.cc', lang: @lang }
+    assert_response :unprocessable_entity
+  end
+
+  test 'should render error template if newsletter user not being created (when ajax)' do
+    xhr :post, :create, format: :js, newsletter_user: { email: 'aaabbb.cc', lang: @lang }
+    assert_template :errors
   end
 
   #
@@ -65,7 +86,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   end
 
   test 'should not unsubscribe newsletter user if token is wrong' do
-    assert_difference ['NewsletterUser.count'], 0 do
+    assert_no_difference ['NewsletterUser.count'] do
       delete :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: "#{@newsletter_user.token}-abc"
     end
   end
