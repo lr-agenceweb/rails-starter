@@ -60,7 +60,7 @@ To see your mails, visit `http://localhost:1080`
 
 Newsletter
 -----------
-Soon
+Now available
 
 Gems
 -----
