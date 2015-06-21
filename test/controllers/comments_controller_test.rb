@@ -9,15 +9,18 @@ class CommentsControllerTest < ActionController::TestCase
 
   setup :initialize_test
 
+  #
+  # == Create
+  #
   test 'should not be able to create comment if no content' do
-    assert_difference 'Comment.count', 0 do
+    assert_no_difference 'Comment.count' do
       post :create, about_id: @about.id, comment: { comment: nil }, locale: 'fr'
     end
     assert_not assigns(:comment).save
   end
 
   test 'should not be able to create comment if nickname (captcha) is filled' do
-    assert_difference 'Comment.count', 0 do
+    assert_no_difference 'Comment.count' do
       post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: 'fr'
     end
   end
@@ -50,6 +53,22 @@ class CommentsControllerTest < ActionController::TestCase
     assert_nil assigns(:comment).username
     assert_nil assigns(:comment).email
     assert_equal assigns(:comment).user_id, @lana.id
+  end
+
+  # == Ajax
+  test 'should create comment by ajax' do
+    xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: 'fr'
+    assert_response :success
+  end
+
+  test 'should render show template if comment created by ajax' do
+    xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: 'fr'
+    assert_template :create
+  end
+
+  test 'should not create comment by ajax if nickname is filled' do
+    xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot' }, locale: 'fr'
+    assert_template :captcha
   end
 
   #
