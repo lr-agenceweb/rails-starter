@@ -5,6 +5,6 @@ class NewsletterJob < ActiveJob::Base
   queue_as :default
 
   def perform(user, newsletter)
-    NewsletterMailer.send_newsletter(user, newsletter).deliver
+    NewsletterMailer.send_newsletter(user, newsletter).deliver_now
   end
 end
