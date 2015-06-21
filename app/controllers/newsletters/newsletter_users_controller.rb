@@ -2,7 +2,7 @@
 # == NewsletterUsersController
 #
 class NewsletterUsersController < ApplicationController
-  before_action :set_newsletter_user, only: [:unsubscribe]
+  include NewsletterAid
   after_action :send_welcome_newsletter, only: [:create], if: proc { @success }
 
   def create
@@ -36,13 +36,6 @@ class NewsletterUsersController < ApplicationController
 
   def newsletter_user_params
     params.require(:newsletter_user).permit(:email, :lang)
-  end
-
-  def set_newsletter_user
-    @newsletter_user = NewsletterUser.find(params[:newsletter_user_id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:error] = I18n.t('newsletter.unsubscribe.invalid')
-      redirect_to :root
   end
 
   # Sends email to user when user is created.
