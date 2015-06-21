@@ -16,7 +16,7 @@ script:
 addons:
   code_climate:
     repo_token:
-      secure: g7c/TrOWJ4vnQqY1RBhZjCQNXCHVfWTcFn+A8Za7LNpwLmNps3y9XtT0DIJ+VtKGUDpczzOlRhTEl+A/ddnF6HZSlYUy3PwUX6TwgsVGoLbNsFscx720ST8Yi47QysKcgmWpi+aUBwad3rPHIkeYgu8XmIcDhJUCmBARzNr2qvg=
+      secure: Zc9zAQrL0CXmWGMrnw/JaRCzZYRJwr3dMk96SwsCx0YfNV9vYftKJY13GxjUS0V4/gPIhnjIjbxbK8pxEcvPfvilpp7MAg1KKbzXjuGn4tRoen3fB0MH2HiOKIQn2A8S5owtntpwasfVyXiyYTwSZyLukqQqUZN1HGXqZSIVvqs=
 notifications:
   email: false
   slack:
