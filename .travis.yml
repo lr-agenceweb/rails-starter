@@ -15,8 +15,7 @@ script:
 - RAILS_ENV=test bundle exec rake test
 addons:
   code_climate:
-    repo_token:
-      secure: N7YXFxhySVCwl2+L8IRhrehfVi9juPmovkZCKq91oI7h32BL6SRvGWZbE+e6YEE6GNpxMlnUNz//n5ePn+yEaNdh4K1fJC4z66kLqmQFlt6Ipa0/FdsjsAnxFUERBO/tfAf5pN8mpBKXtHBgPD6FVfuUd+KSnYPU7BgRhtfLmyo=
+    repo_token: 78354a901972cb16a67c4bb7076c57ab66f032376558b771963d6f2ef95030a4
 notifications:
   email: false
   slack:
