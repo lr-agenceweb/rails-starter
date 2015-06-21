@@ -3,7 +3,7 @@
 #
 class NewsletterUsersController < ApplicationController
   before_action :set_newsletter_user, only: [:unsubscribe]
-  after_action :send_welcome_newsletter, only: [:create]
+  after_action :send_welcome_newsletter, only: [:create], if: proc { @success }
 
   def create
     @success = false
@@ -48,7 +48,7 @@ class NewsletterUsersController < ApplicationController
   # Sends email to user when user is created.
   def send_welcome_newsletter
     I18n.with_locale(@newsletter_user.lang) do
-      WelcomeNewsletterJob.set(wait: 10.seconds).perform_later(@newsletter_user) if @success
+      WelcomeNewsletterJob.set(wait: 10.seconds).perform_later(@newsletter_user)
     end
   end
 end
