@@ -49,16 +49,14 @@ module Admin
     end
 
     # Invalid params
-    # TODO: Fix this test
     test 'should not update newsletter_user if lang params is not allowed' do
       patch :update, id: @newsletter_user.id, newsletter_user: { lang: 'de' }
-      assert_equal @newsletter_user.lang, assigns(:newsletter_user).lang
+      assert !assigns(:newsletter_user).valid?
     end
 
-    # TODO: Fix this test
     test 'should not update newsletter_user role if role params not allowed' do
       patch :update, id: @newsletter_user.id, newsletter_user: { role: 'administrator' }
-      assert_equal 'tester', assigns(:newsletter_user).role
+      assert !assigns(:newsletter_user).valid?
     end
 
     test 'should not update newsletter_user if email params is changed' do
@@ -76,12 +74,35 @@ module Admin
       assert_template :edit
     end
 
+    #
+    # == Destroy
+    #
+    test 'should not destroy user if logged in as subscriber' do
+      sign_out @bob
+      sign_in @alice # subscriber
+      assert_difference 'NewsletterUser.count', 0 do
+        delete :destroy, id: @newsletter_user.id
+      end
+    end
+
+    test 'should destroy newsletter if logged in as administrator' do
+      assert_difference 'NewsletterUser.count', -1 do
+        delete :destroy, id: @newsletter_user.id
+      end
+    end
+
+    test 'should redirect to newsletter users path after destroy' do
+      delete :destroy, id: @newsletter_user.id
+      assert_redirected_to admin_newsletter_users_path
+    end
+
     private
 
     def initialize_test
-      @newsletter_user = newsletter_users(:newsletter_user_fr)
       @bob = users(:bob)
+      @alice = users(:alice)
       sign_in @bob
+      @newsletter_user = newsletter_users(:newsletter_user_fr)
     end
   end
 end
