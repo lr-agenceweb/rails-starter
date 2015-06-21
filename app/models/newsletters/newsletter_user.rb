@@ -28,10 +28,12 @@ class NewsletterUser < ActiveRecord::Base
 
   validates :lang,
             presence: true,
+            allow_blank: false,
             inclusion: %w( fr en )
 
   validates :role,
             presence: true,
+            allow_blank: false,
             inclusion: %w( subscriber tester )
 
   scope :testers, -> { where(role: 'tester') }
