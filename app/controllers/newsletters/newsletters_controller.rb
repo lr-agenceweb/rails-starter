@@ -5,6 +5,7 @@ class NewslettersController < InheritedResources::Base
   before_action :set_newsletter_user, only: [:see_in_browser, :welcome_user]
   before_action :set_variables, only: [:see_in_browser, :welcome_user]
 
+  # See Newsletter in browser
   def see_in_browser
     if @newsletter_user.token == params[:token]
       I18n.with_locale(@newsletter_user.lang) do
@@ -21,6 +22,7 @@ class NewslettersController < InheritedResources::Base
     end
   end
 
+  # See welcome email in browser
   def welcome_user
     if @newsletter_user.token == params[:token]
       I18n.with_locale(@newsletter_user.lang) do

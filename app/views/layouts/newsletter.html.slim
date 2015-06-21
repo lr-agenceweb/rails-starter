@@ -46,8 +46,8 @@ html
                 tr width="100%"
                   td.links valign="top"
 
-                    - unless(@preview_newsletter)
+                    - unless @preview_newsletter
                       = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user, host: @host }
 
-                      - unless(@see_in_browser)
-                        = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, host: @host, is_welcome_user: @is_welcome_user }
+                    - if @see_in_browser
+                      = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, host: @host, is_welcome_user: @is_welcome_user }

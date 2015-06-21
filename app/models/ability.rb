@@ -28,6 +28,7 @@ class Ability
     can :read, :all
     can :manage, Post
     can :manage, Newsletter
+    can [:update, :destroy], NewsletterUser
     can :update, Setting
     can :manage, User, role_name: %w( administrator subscriber )
     can :manage, User, id: user.id
@@ -45,5 +46,7 @@ class Ability
   def visitor_privilege
     can :read, Post
     cannot :destroy, :all
+    cannot :update, :all
+    cannot :create, :all
   end
 end

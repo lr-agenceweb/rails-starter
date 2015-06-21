@@ -4,7 +4,6 @@ ActiveAdmin.register NewsletterUser do
   permit_params :id, :role, :lang
 
   config.clear_sidebar_sections!
-  actions :all, except: [:new, :show]
 
   index do
     selectable_column
@@ -24,8 +23,11 @@ ActiveAdmin.register NewsletterUser do
       f.input :email, input_html: { disabled: :disabled }
       f.input :lang,
               collection: %w(fr en),
+              include_blank: false,
               hint: 'Attention, changer ce paramètre changera la langue de la newsletter reçue par cet utilisateur !'
-      f.input :role, collection: %w(subscriber tester), include_blank: false
+      f.input :role,
+              collection: %w(subscriber tester),
+              include_blank: false
     end
 
     f.actions
@@ -35,7 +37,7 @@ ActiveAdmin.register NewsletterUser do
   # == Controller
   #
   controller do
-    before_action :set_newsletter_user, only: [:edit ]
+    before_action :set_newsletter_user, only: [:edit]
 
     private
 

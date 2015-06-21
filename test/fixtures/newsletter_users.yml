@@ -15,14 +15,20 @@
 #  index_newsletter_users_on_email  (email) UNIQUE
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+newsletter_user_fr:
+  <<: *DEFAULTS
+  email: newsletteruser@test.fr
+  role: subscriber
+  lang: fr
+  token: WVZpU3pA9yiEyxWA34PO5sw
+
+newsletter_user_en:
+  <<: *DEFAULTS
+  email: newsletteruser@test.en
+  role: subscriber
+  lang: en
+  token: 3pSip0E7jodLBG--k5vSxCw

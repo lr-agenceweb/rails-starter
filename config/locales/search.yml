@@ -1,0 +1,9 @@
+# English
+en:
+  search:
+    no_results: No results to show for this request
+
+# French
+fr:
+  search:
+    no_results: Il n'y a aucun résultat pour cette recherche

@@ -20,7 +20,6 @@ ActiveAdmin.register Category do
   config.paginate   = false
 
   sortable # creates the controller action which handles the sorting
-  actions :all, except: [:new, :destroy]
 
   index do
     sortable_handle_column

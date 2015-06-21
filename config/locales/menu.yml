@@ -5,6 +5,7 @@ fr:
     abouts: a-propos
     contacts: contact
     new: formulaire
+    search: rechercher
 
   main_menu:
     dashboard: Dashboard
@@ -20,6 +21,7 @@ en:
     abouts: about
     contacts: contact
     new: form
+    search: search
 
   main_menu:
     dashboard: Dashboard

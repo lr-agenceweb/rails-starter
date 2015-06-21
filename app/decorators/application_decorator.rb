@@ -29,6 +29,9 @@ class ApplicationDecorator < Draper::Decorator
 
   def show_page_link(absolute = false)
     case model.class.name
+    when 'Home'
+      return root_url unless absolute
+      root_url
     when 'About'
       return about_path(model) unless absolute
       about_url(model)

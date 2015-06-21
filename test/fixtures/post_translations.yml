@@ -1,17 +1,35 @@
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  content: ''
 
 about_fr:
+  <<: *DEFAULTS
   post_id: <%= ActiveRecord::FixtureSet.identify(:about) %>
   locale: fr
   title: Développement et Hébergement
   slug: developpement-hebergement
-  <<: *DEFAULTS
 
 about_en:
+  <<: *DEFAULTS
   post_id: <%= ActiveRecord::FixtureSet.identify(:about) %>
   locale: en
   title: Site Hosting
   slug: site-hosting
+
+# Tests
+about_test_fr:
   <<: *DEFAULTS
+  post_id: <%= ActiveRecord::FixtureSet.identify(:about_test) %>
+  locale: fr
+  title: Ruby on Rails
+  slug: ruby-on-rails
+  content: 'Ruby'
+
+about_test_en:
+  <<: *DEFAULTS
+  post_id: <%= ActiveRecord::FixtureSet.identify(:about_test) %>
+  locale: en
+  title: Ruby on Rails
+  slug: ruby-on-rails
+  content: 'Ruby'

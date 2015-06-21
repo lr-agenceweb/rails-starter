@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
 
+  concern :searchable do
+    get '(/:query)', action: :index, on: :collection, as: ''
+  end
+
   # Newsletters
   resources :newsletter_users, only: [:create]
   get '/admin/newsletters/:id/send', to: 'admin/newsletters#send_newsletter', as: :send_newsletter_for_subscribers
@@ -19,14 +23,17 @@ Rails.application.routes.draw do
     resources :contacts, only: [:index, :new, :create]
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
+    # Search
+    resources :search, only: [:index], concerns: [:searchable, :paginatable]
+
     get 'feed', to: 'posts#feed', as: :posts_rss
 
     # Newsletters
     get '/newsletter/welcome_user/:newsletter_user_id/:token', to: 'newsletters#welcome_user', as: :welcome_user
     get '/newsletter/:id/:newsletter_user_id/:token', to: 'newsletters#see_in_browser', as: :see_in_browser_newsletter
-    get '/newsletter/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
+    get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
     get '/admin/newsletters/:id/preview', to: 'admin/newsletters#preview', as: :preview_newsletter
   end
 
-  get 'robots.:format' => 'robots#index'
+  get 'robots.:format', to: 'robots#index'
 end
