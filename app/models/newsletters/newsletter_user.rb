@@ -46,4 +46,8 @@ class NewsletterUser < ActiveRecord::Base
   def self.testers?
     testers.length > 0
   end
+
+  def extract_name_from_email
+    email.split('@').first
+  end
 end

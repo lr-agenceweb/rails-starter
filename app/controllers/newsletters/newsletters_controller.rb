@@ -2,7 +2,7 @@
 # == NewslettersController
 #
 class NewslettersController < InheritedResources::Base
-  before_action :set_newsletter_user, only: [:see_in_browser, :welcome_user]
+  include NewsletterAid
   before_action :set_variables, only: [:see_in_browser, :welcome_user]
 
   # See Newsletter in browser
@@ -26,6 +26,7 @@ class NewslettersController < InheritedResources::Base
   def welcome_user
     if @newsletter_user.token == params[:token]
       I18n.with_locale(@newsletter_user.lang) do
+        @newsletter_user.name = @newsletter_user.extract_name_from_email
         @title = I18n.t('newsletter.welcome')
       end
       render layout: 'newsletter'
@@ -39,12 +40,5 @@ class NewslettersController < InheritedResources::Base
   def set_variables
     @host = Figaro.env.application_host
     @from_controller = true
-  end
-
-  def set_newsletter_user
-    @newsletter_user = NewsletterUser.find(params[:newsletter_user_id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:error] = I18n.t('newsletter.unsubscribe.invalid')
-      redirect_to :root
   end
 end
