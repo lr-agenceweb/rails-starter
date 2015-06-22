@@ -16,4 +16,17 @@
 #
 class GuestBook < ActiveRecord::Base
   scope :validated, -> { where(validated: true) }
+
+  validates :username,
+            presence: true
+
+  validates :content,
+            presence: true
+
+  validates :lang,
+            presence: true,
+            inclusion: %w( fr en )
+
+  attr_accessor :nickname
+  paginates_per 10
 end

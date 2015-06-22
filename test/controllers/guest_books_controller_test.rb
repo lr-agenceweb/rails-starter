@@ -16,6 +16,14 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should not create message if params are empty' do
+    I18n.available_locales.each do |locale|
+      assert_no_difference ['NewsletterUser.count'] do
+        post :create, locale: locale.to_s, guest_book: {}
+      end
+    end
+  end
+
   # Template
   test 'should use index template' do
     I18n.available_locales.each do |locale|

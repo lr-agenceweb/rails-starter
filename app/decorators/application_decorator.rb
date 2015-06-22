@@ -22,6 +22,9 @@ class ApplicationDecorator < Draper::Decorator
     when 'GuestBook'
       return guest_books_path unless absolute
       guest_books_url
+    when 'Search'
+      return search_index_path unless absolute
+      search_index_url
     when 'Contact'
       return new_contact_path unless absolute
       new_contact_url

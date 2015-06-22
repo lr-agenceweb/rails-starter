@@ -2,5 +2,6 @@ nav.clearfix.l-nav-container
   ul.clearfix.sub-nav
     - @menu_elements_header.each do |element|
       li class="l-nav-item #{set_active_class(element.name.tableize)}" = link_to element.title, element.menu_link(element.name), class: 'l-nav-item-link'
+      li = element.name.tableize
 
   = link_to 'Menu', '#', id: 'pull', class: 'l-nav-item-link header__icon'
