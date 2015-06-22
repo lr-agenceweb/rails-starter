@@ -33,3 +33,9 @@ search:
   name: Search
   show_in_menu: false
   show_in_footer: false
+
+guest_book:
+  title: Guest Book
+  name: GuestBook
+  show_in_menu: true
+  show_in_footer: false

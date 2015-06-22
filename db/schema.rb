@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20150622162915) do
     t.string   "username",   limit: 255
     t.text     "content",    limit: 65535
     t.string   "lang",       limit: 255
-    t.boolean  "online",     limit: 1,     default: true
+    t.boolean  "validated",  limit: 1,     default: true
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
   end

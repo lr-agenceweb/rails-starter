@@ -6,21 +6,31 @@
 #  username   :string(255)
 #  content    :text(65535)
 #  lang       :string(255)
-#  online     :boolean          default(TRUE)
+#  validated  :boolean          default(TRUE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+fr_validate:
+  username: Jean
+  content: Bravo pour le site
+  lang: fr
+  validated: true
 
-one:
-  username: MyString
-  content: MyText
-  lang: MyString
-  online: false
+fr_not_validate:
+  username: Alain
+  content: Merci pour ce moment
+  lang: fr
+  validated: false
 
-two:
-  username: MyString
-  content: MyText
-  lang: MyString
-  online: false
+english_validate:
+  username: Jenny
+  content: Thank you for all your good work !
+  lang: en
+  validated: true
+
+english_not_validate:
+  username: Barack
+  content: It was a good event, thanks again
+  lang: en
+  validated: false

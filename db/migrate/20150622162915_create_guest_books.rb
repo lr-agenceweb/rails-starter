@@ -4,7 +4,7 @@ class CreateGuestBooks < ActiveRecord::Migration
       t.string :username
       t.text :content
       t.string :lang
-      t.boolean :online, default: true
+      t.boolean :validated, default: true
 
       t.timestamps null: false
     end
