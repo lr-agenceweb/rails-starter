@@ -17,6 +17,12 @@ fr_validate:
   lang: fr
   validated: true
 
+fr_validate_2:
+  username: Chloé
+  content: J'aime ce que vous faites
+  lang: fr
+  validated: true
+
 fr_not_validate:
   username: Alain
   content: Merci pour ce moment

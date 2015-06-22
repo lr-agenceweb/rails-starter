@@ -100,10 +100,30 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  # Others
+  # Conditionals
   test 'should fetch only validated messages' do
     @guest_books = GuestBook.validated
-    assert_equal @guest_books.length, 2
+    assert_equal @guest_books.length, 3
+  end
+
+  test 'should fetch only messages from current locale' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        @guest_books = GuestBook.by_locale(locale.to_s)
+        assert_equal @guest_books.length, 3 if locale == 'fr'
+        assert_equal @guest_books.length, 2 if locale == 'en'
+      end
+    end
+  end
+
+  test 'should fetch only messages from current locale and validated' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        @guest_books = GuestBook.validated.by_locale(locale.to_s)
+        assert_equal @guest_books.length, 2 if locale == 'fr'
+        assert_equal @guest_books.length, 1 if locale == 'en'
+      end
+    end
   end
 
   test 'should get guest_books page by url' do
