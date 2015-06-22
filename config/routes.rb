@@ -23,9 +23,13 @@ Rails.application.routes.draw do
     resources :contacts, only: [:index, :new, :create]
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
+    # GuestBook
+    resources :guest_books, only: [:index, :create]
+
     # Search
     resources :search, only: [:index], concerns: [:searchable, :paginatable]
 
+    # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss
 
     # Newsletters
