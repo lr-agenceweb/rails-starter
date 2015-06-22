@@ -9,7 +9,9 @@ class GuestBooksControllerTest < ActionController::TestCase
 
   setup :initialize_test
 
-  # Actions
+  #
+  # == Actions
+  #
   test 'should get index' do
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -25,6 +27,7 @@ class GuestBooksControllerTest < ActionController::TestCase
         assert_difference ['GuestBook.count'], 1 do
           post :create, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: locale.to_s }
         end
+        assert assigns(:guest_book).valid?
       end
     end
   end
@@ -35,6 +38,18 @@ class GuestBooksControllerTest < ActionController::TestCase
         assert_no_difference ['GuestBook.count'] do
           post :create, locale: locale.to_s, guest_book: { username: '' }
         end
+        assert_not assigns(:guest_book).valid?
+      end
+    end
+  end
+
+  test 'should not create message if lang params is not allowed' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_no_difference ['GuestBook.count'] do
+          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: 'ja' }
+        end
+        assert_not assigns(:guest_book).valid?
       end
     end
   end
@@ -45,12 +60,15 @@ class GuestBooksControllerTest < ActionController::TestCase
         assert_no_difference ['GuestBook.count'] do
           post :create, locale: locale.to_s, guest_book: { nickname: 'spammer' }
         end
+        assert_not assigns(:guest_book).valid?
         assert_redirected_to guest_books_path
       end
     end
   end
 
-  # Template
+  #
+  # == Template
+  #
   test 'should use index template' do
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -60,7 +78,9 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  # Ajax
+  #
+  # == Ajax
+  #
   test 'AJAX :: should get index' do
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -85,6 +105,18 @@ class GuestBooksControllerTest < ActionController::TestCase
         assert_difference ['GuestBook.count'], 1 do
           xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: 'fr' }
         end
+        assert assigns(:guest_book).valid?
+      end
+    end
+  end
+
+  test 'AJAX :: should not create message if lang params is not allowed' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_no_difference ['GuestBook.count'] do
+          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: 'ja' }
+        end
+        assert_not assigns(:guest_book).valid?
       end
     end
   end
@@ -95,12 +127,15 @@ class GuestBooksControllerTest < ActionController::TestCase
         assert_no_difference ['GuestBook.count'] do
           xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { nickname: 'spammer' }
         end
+        assert_not assigns(:guest_book).valid?
         assert_template :captcha
       end
     end
   end
 
-  # Conditionals
+  #
+  # == Conditionals
+  #
   test 'should fetch only validated messages' do
     @guest_books = GuestBook.validated
     assert_equal @guest_books.length, 3
