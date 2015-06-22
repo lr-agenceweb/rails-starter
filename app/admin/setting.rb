@@ -14,6 +14,7 @@ ActiveAdmin.register Setting do
                 :show_map,
                 :show_breadcrumb,
                 :show_social,
+                :should_validate,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle
                 ]
@@ -77,6 +78,10 @@ ActiveAdmin.register Setting do
       f.input :show_map, hint: 'Afficher ou non la carte sur la page contact'
       f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site'
       f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site'
+    end
+
+    f.inputs 'Paramètres du fil d\'ariane' do
+      f.input :should_validate, hint: 'Si coché, les messages postés dans le livre d\'or ne seront pas visibles tant que vous ne les aurez pas validé manuellement'
     end
 
     f.inputs 'Paramètre de la carte', class: 'map-settings' do

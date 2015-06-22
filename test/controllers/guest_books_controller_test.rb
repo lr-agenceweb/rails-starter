@@ -66,6 +66,15 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should not appears on site if setting should_validate is true' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        post :create, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: locale.to_s }
+        assert_not assigns(:guest_book).validated
+      end
+    end
+  end
+
   #
   # == Template
   #
@@ -103,7 +112,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_difference ['GuestBook.count'], 1 do
-          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: 'fr' }
+          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: locale.to_s }
         end
         assert assigns(:guest_book).valid?
       end
@@ -129,6 +138,15 @@ class GuestBooksControllerTest < ActionController::TestCase
         end
         assert_not assigns(:guest_book).valid?
         assert_template :captcha
+      end
+    end
+  end
+
+  test 'AJAX :: should not appears on site if setting should_validate is true' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: locale.to_s }
+        assert_not assigns(:guest_book).validated
       end
     end
   end

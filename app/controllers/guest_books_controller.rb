@@ -15,6 +15,7 @@ class GuestBooksController < ApplicationController
   def create
     if guest_book_params[:nickname].blank?
       @guest_book = GuestBook.new(guest_book_params)
+      @guest_book.validated = false if @setting.should_validate
       if @guest_book.save
         flash.now[:success] = 'Message was successfully created.'
         respond_action 'create', false
