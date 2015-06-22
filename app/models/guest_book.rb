@@ -28,5 +28,6 @@ class GuestBook < ActiveRecord::Base
             inclusion: %w( fr en )
 
   attr_accessor :nickname
-  paginates_per 10
+  default_scope { order('created_at DESC') }
+  paginates_per 3
 end

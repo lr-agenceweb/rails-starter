@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
     # GuestBook
-    resources :guest_books, only: [:index, :create]
+    resources :guest_books, only: [:index, :create], concerns: :paginatable
 
     # Search
     resources :searches, only: [:index], concerns: [:searchable, :paginatable]

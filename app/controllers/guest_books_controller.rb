@@ -2,25 +2,24 @@
 # == GuestBooks Controller
 #
 class GuestBooksController < ApplicationController
+  before_action :set_guest_book
   decorates_assigned :guest_book
 
   # GET /guest-book
   # GET /guest-book.json
   def index
-    @guest_books = GuestBook.validated
-    @guest_book = GuestBook.new
   end
 
   # POST /guest-book
   # POST /guest-book.json
   def create
     if guest_book_params[:nickname].blank?
-      @guest_book = @guest_book.new(comment_params)
+      @guest_book = GuestBook.new(guest_book_params)
       if @guest_book.save
         flash.now[:success] = 'Message was successfully created.'
-        respond_action 'create', true
+        respond_action 'create', false
       else
-        render :index
+        respond_action :index, true
       end
     else # if nickname is filled => robots spam
       flash.now[:error] = 'Captcha caught you'
@@ -30,14 +29,20 @@ class GuestBooksController < ApplicationController
 
   private
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def comment_params
-    params.require(:guest_book).permit(:username, :lang, :content)
+  def set_guest_book
+    @guest_book = GuestBook.new
+    @guest_books = GuestBookDecorator.decorate_collection(GuestBook.validated.page params[:page])
   end
 
-  def respond_action(template, _success)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def guest_book_params
+    params.require(:guest_book).permit(:username, :lang, :content, :nickname)
+  end
+
+  def respond_action(template, should_render)
     respond_to do |format|
-      format.html { redirect_to guest_books_path }
+      format.html { redirect_to guest_books_path } unless should_render
+      format.html { render template } if should_render
       format.js { render template }
     end
   end

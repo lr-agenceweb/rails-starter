@@ -1,0 +1,13 @@
+= render 'form'
+
+.row
+  .small-12.columns
+    - if @guest_books.empty?
+      p = t('guest_book.no_results')
+    - else
+      ul#guest_books
+        - @guest_books.each do |guest_book|
+          = render 'row', guest_book: guest_book
+
+      .row
+        = paginate @guest_books

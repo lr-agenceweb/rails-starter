@@ -5,21 +5,47 @@ require 'test_helper'
 #
 class GuestBooksControllerTest < ActionController::TestCase
   include Devise::TestHelpers
+  include Rails.application.routes.url_helpers
 
   setup :initialize_test
 
   # Actions
   test 'should get index' do
     I18n.available_locales.each do |locale|
-      get :index, locale: locale.to_s
-      assert_response :success
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s
+        assert_response :success
+      end
+    end
+  end
+
+  test 'should create message if params are properly filled' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_difference ['GuestBook.count'], 1 do
+          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: locale.to_s }
+        end
+      end
     end
   end
 
   test 'should not create message if params are empty' do
     I18n.available_locales.each do |locale|
-      assert_no_difference ['GuestBook.count'] do
-        post :create, locale: locale.to_s, guest_book: {}
+      I18n.with_locale(locale.to_s) do
+        assert_no_difference ['GuestBook.count'] do
+          post :create, locale: locale.to_s, guest_book: { username: '' }
+        end
+      end
+    end
+  end
+
+  test 'should not create message if nickname is filled' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_no_difference ['GuestBook.count'] do
+          post :create, locale: locale.to_s, guest_book: { nickname: 'spammer' }
+        end
+        assert_redirected_to guest_books_path
       end
     end
   end
@@ -27,26 +53,54 @@ class GuestBooksControllerTest < ActionController::TestCase
   # Template
   test 'should use index template' do
     I18n.available_locales.each do |locale|
-      get :index, locale: locale.to_s
-      assert_template :index
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s
+        assert_template :index
+      end
     end
   end
 
   # Ajax
-  test 'should get index by ajax' do
+  test 'AJAX :: should get index' do
     I18n.available_locales.each do |locale|
-      xhr :get, :index, format: :js, locale: locale.to_s
-      assert_response :success
+      I18n.with_locale(locale.to_s) do
+        xhr :get, :index, format: :js, locale: locale.to_s
+        assert_response :success
+      end
     end
   end
 
-  test 'should use index template by ajax' do
+  test 'AJAX :: should use index template' do
     I18n.available_locales.each do |locale|
-      xhr :get, :index, format: :js, locale: locale.to_s
-      assert_template :index
+      I18n.with_locale(locale.to_s) do
+        xhr :get, :index, format: :js, locale: locale.to_s
+        assert_template :index
+      end
     end
   end
 
+  test 'AJAX :: should create message if params are properly filled' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_difference ['GuestBook.count'], 1 do
+          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: 'fr' }
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should not create message if nickname is filled' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_no_difference ['GuestBook.count'] do
+          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { nickname: 'spammer' }
+        end
+        assert_template :captcha
+      end
+    end
+  end
+
+  # Others
   test 'should fetch only validated messages' do
     @guest_books = GuestBook.validated
     assert_equal @guest_books.length, 2
