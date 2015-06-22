@@ -6,7 +6,7 @@ fr:
     guest_books: livre-d-or
     contacts: contact
     new: formulaire
-    search: rechercher
+    searches: rechercher
 
   main_menu:
     dashboard: Dashboard
@@ -23,7 +23,7 @@ en:
     guest_books: guest-book
     contacts: contact
     new: form
-    search: search
+    searches: search
 
   main_menu:
     dashboard: Dashboard

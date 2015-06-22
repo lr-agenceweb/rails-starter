@@ -1,9 +1,9 @@
 require 'test_helper'
 
 #
-# == SearchController Test
+# == SearchesController Test
 #
-class SearchControllerTest < ActionController::TestCase
+class SearchesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   setup :initialize_test
 
@@ -22,8 +22,8 @@ class SearchControllerTest < ActionController::TestCase
   end
 
   test 'should get search page by url' do
-    assert_routing '/rechercher', controller: 'search', action: 'index', locale: 'fr' if @locales.include?(:fr)
-    assert_routing '/en/search', controller: 'search', action: 'index', locale: 'en' if @locales.include?(:en)
+    assert_routing '/rechercher', controller: 'searches', action: 'index', locale: 'fr' if @locales.include?(:fr)
+    assert_routing '/en/search', controller: 'searches', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
   test 'should return empty object if query is not set' do

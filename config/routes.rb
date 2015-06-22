@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :guest_books, only: [:index, :create]
 
     # Search
-    resources :search, only: [:index], concerns: [:searchable, :paginatable]
+    resources :searches, only: [:index], concerns: [:searchable, :paginatable]
 
     # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss
