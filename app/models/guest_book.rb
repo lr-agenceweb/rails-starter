@@ -15,8 +15,6 @@
 # == GuestBook model
 #
 class GuestBook < ActiveRecord::Base
-  scope :validated, -> { where(validated: true) }
-
   validates :username,
             presence: true
 
@@ -28,6 +26,9 @@ class GuestBook < ActiveRecord::Base
             inclusion: %w( fr en )
 
   attr_accessor :nickname
-  default_scope { order('created_at DESC') }
   paginates_per 3
+
+  default_scope { order('created_at DESC') }
+  scope :validated, -> { where(validated: true) }
+  scope :by_locale, -> (locale) { where(lang: locale) }
 end

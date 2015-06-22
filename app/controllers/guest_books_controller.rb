@@ -31,7 +31,8 @@ class GuestBooksController < ApplicationController
 
   def set_guest_book
     @guest_book = GuestBook.new
-    @guest_books = GuestBookDecorator.decorate_collection(GuestBook.validated.page params[:page])
+    guest_books = GuestBook.validated.by_locale(@language)
+    @guest_books = GuestBookDecorator.decorate_collection(guest_books.page params[:page])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
