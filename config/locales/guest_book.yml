@@ -1,0 +1,9 @@
+# English
+en:
+  guest_book:
+    no_results: No guest book message to show
+
+# French
+fr:
+  guest_book:
+    no_results: Il n'y a aucun message dans le livre d'or

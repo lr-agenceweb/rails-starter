@@ -18,7 +18,7 @@ class GuestBooksControllerTest < ActionController::TestCase
 
   test 'should not create message if params are empty' do
     I18n.available_locales.each do |locale|
-      assert_no_difference ['NewsletterUser.count'] do
+      assert_no_difference ['GuestBook.count'] do
         post :create, locale: locale.to_s, guest_book: {}
       end
     end
@@ -47,7 +47,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should fetch only online validated messages' do
+  test 'should fetch only validated messages' do
     @guest_books = GuestBook.validated
     assert_equal @guest_books.length, 2
   end

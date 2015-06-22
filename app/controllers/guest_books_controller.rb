@@ -8,6 +8,7 @@ class GuestBooksController < ApplicationController
   # GET /guest-book.json
   def index
     @guest_books = GuestBook.validated
+    @guest_book = GuestBook.new
   end
 
   # POST /guest-book
@@ -34,7 +35,7 @@ class GuestBooksController < ApplicationController
     params.require(:guest_book).permit(:username, :lang, :content)
   end
 
-  def respond_action(template, success)
+  def respond_action(template, _success)
     respond_to do |format|
       format.html { redirect_to guest_books_path }
       format.js { render template }
