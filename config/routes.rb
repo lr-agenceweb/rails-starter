@@ -40,4 +40,6 @@ Rails.application.routes.draw do
   end
 
   get 'robots.:format', to: 'robots#index'
+
+  get 'toggle_guest_book_validated/:id', to: 'admin/guest_books#toggle_guest_book_validated', as: :toggle_guest_book_validated
 end

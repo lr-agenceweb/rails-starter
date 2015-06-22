@@ -30,5 +30,6 @@ class GuestBook < ActiveRecord::Base
 
   default_scope { order('created_at DESC') }
   scope :validated, -> { where(validated: true) }
+  scope :to_validate, -> { where(validated: false) }
   scope :by_locale, -> (locale) { where(lang: locale) }
 end
