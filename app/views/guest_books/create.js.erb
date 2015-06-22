@@ -1,0 +1,8 @@
+<% unless @setting.should_validate %>
+  $('#guest_books').prepend("<%= j render partial: 'guest_books/row', locals: { guest_book: guest_book } %>")
+<% end %>
+
+$('#guest_book_username').val('')
+$('#guest_book_content').val('')
+
+<%= render 'elements/alert' %>
