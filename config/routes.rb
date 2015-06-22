@@ -23,9 +23,13 @@ Rails.application.routes.draw do
     resources :contacts, only: [:index, :new, :create]
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
-    # Search
-    resources :search, only: [:index], concerns: [:searchable, :paginatable]
+    # GuestBook
+    resources :guest_books, only: [:index, :create], concerns: :paginatable
 
+    # Search
+    resources :searches, only: [:index], concerns: [:searchable, :paginatable]
+
+    # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss
 
     # Newsletters
@@ -36,4 +40,6 @@ Rails.application.routes.draw do
   end
 
   get 'robots.:format', to: 'robots#index'
+
+  get 'toggle_guest_book_validated/:id', to: 'admin/guest_books#toggle_guest_book_validated', as: :toggle_guest_book_validated
 end

@@ -17,6 +17,7 @@
 #  show_map        :boolean          default(TRUE)
 #  show_breadcrumb :boolean          default(FALSE)
 #  show_social     :boolean          default(TRUE)
+#  should_validate :boolean          default(FALSE)
 #  created_at      :datetime
 #  updated_at      :datetime
 #

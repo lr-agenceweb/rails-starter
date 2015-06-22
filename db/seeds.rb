@@ -2,7 +2,7 @@
 # == Resest content and setup id to 1
 #
 puts 'Reset table ID to 1'
-modeles_str = %w( User Role Setting Setting::Translation Post Post::Translation Category Category::Translation Referencement Referencement::Translation )
+modeles_str = %w( User Role Setting Setting::Translation Post Post::Translation Category Category::Translation Referencement Referencement::Translation Newsletter Newsletter::Translation GuestBook )
 modeles_str.each do |modele_str|
   modele = modele_str.constantize
   modele.destroy_all
@@ -51,7 +51,7 @@ User.create!(
 puts 'Creating site Setting'
 setting_site = Setting.create!(
   name: 'Rails starter',
-  title: 'Demo site',
+  title: 'Rails starter',
   subtitle: 'démarre rapidement',
   phone: '01 02 03 04 05',
   email: 'demo@starter.fr',
@@ -67,7 +67,7 @@ setting_site = Setting.create!(
 Setting::Translation.create!(
   setting_id: setting_site.id,
   locale: 'en',
-  title: 'Demo site',
+  title: 'Rails starter',
   subtitle: 'start quickly'
 )
 
@@ -75,14 +75,14 @@ Setting::Translation.create!(
 # == Categories
 #
 puts 'Creating Menu elements'
-title_en = ['Home', 'About', 'Contact']
-title_fr = ['Accueil', 'À Propos', 'Me contacter']
-description_en = ['Homepage description', 'About description', 'Contact description']
-description_fr = ['Description pour la page d\'accueil', 'Description de la page à propos', 'Description de la page contact']
-keywords_en = ['home', 'about', 'contact']
-keywords_fr = ['accueil', 'à propos', 'contact']
-show_in_menu = [true, false, true]
-show_in_footer = [false, false, false]
+title_en = ['Home', 'About', 'Contact', 'Search', 'GuestBook']
+title_fr = ['Accueil', 'À Propos', 'Me contacter', 'Recherche', 'Livre d\'Or']
+description_en = ['Homepage description', 'About description', 'Contact description', 'Search description', 'GuestBook description']
+description_fr = ['Description pour la page d\'accueil', 'Description de la page à propos', 'Description de la page contact', 'Description de la page recherche', 'Description de la page livre d\'or']
+keywords_en = ['home', 'about', 'contact', 'search', 'guest book']
+keywords_fr = ['accueil', 'à propos', 'contact', 'recherche', 'livre d\'or']
+show_in_menu = [true, false, true, true, true]
+show_in_footer = [false, false, false, false, false]
 
 Category.models_name_str.each_with_index do |element, index|
   category = Category.create!(
@@ -154,10 +154,45 @@ Post::Translation.create!(
 )
 
 #
+# == Newsletter
+#
+puts 'Creating Newsletter'
+newsletter = Newsletter.create!(
+  title: 'Nouveaux contenus sur le site !',
+  content: '<p>Trois nouveaux articles ont été publiés sur le site !</p>',
+  sent_at: nil
+)
+
+Newsletter::Translation.create!(
+  newsletter_id: newsletter.id,
+  locale: 'en',
+  title: 'New content in the website !',
+  content: '<p>Three new contents have been published on the website</p>'
+)
+
+#
+# == Newsletter User
+#
+puts 'Creating Newsletter User'
+NewsletterUser.create!(
+  email: 'abonne@test.fr',
+  lang: 'fr',
+  role: 'subscriber',
+  token: 'df6dbd90f13d7c8'
+)
+NewsletterUser.create!(
+  email: 'subscriber@test.en',
+  lang: 'en',
+  role: 'subscriber',
+  token: '5f9a50a21As109Qw'
+)
+
+#
 # == FriendlyId
 #
 puts 'Setting Friendly Id'
 User.find_each(&:save)
 Post.find_each(&:save)
+Newsletter.find_each(&:save)
 
 puts 'Seeds successfuly loaded :)'

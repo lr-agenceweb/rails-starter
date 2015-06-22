@@ -46,6 +46,9 @@ fr:
       referencement:
         one: Référencement
         other: Référencements
+      guest_book:
+        one: Livre d'Or
+        other: Livre d'Or
 
     attributes:
       post:

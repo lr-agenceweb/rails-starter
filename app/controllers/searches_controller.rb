@@ -1,7 +1,7 @@
 #
-# == SearchController
+# == SearchesController
 #
-class SearchController < ApplicationController
+class SearchesController < ApplicationController
   def index
     if params[:query].nil? || params[:query].blank?
       @posts = []
