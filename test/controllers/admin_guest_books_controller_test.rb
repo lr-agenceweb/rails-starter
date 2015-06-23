@@ -42,13 +42,13 @@ module Admin
     test 'should not access new guest_book page if administrator' do
       sign_in @bob
       get :new
-      assert_redirected_to admin_root_path
+      assert_redirected_to admin_dashboard_path
     end
 
     test 'should not access edit guest_book page if administrator' do
       sign_in @bob
       get :edit, id: @guest_book.id
-      assert_redirected_to admin_root_path
+      assert_redirected_to admin_dashboard_path
     end
 
     #

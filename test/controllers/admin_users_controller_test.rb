@@ -75,14 +75,14 @@ module Admin
       sign_out @super_administrator
       sign_in @administrator
       get :edit, id: @super_administrator.id
-      assert_redirected_to admin_root_path
+      assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to update superadmin if user is administrator' do
       sign_out @super_administrator
       sign_in @administrator
       patch :update, id: @super_administrator.id, user: {}
-      assert_redirected_to admin_root_path
+      assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to update role_id in super_administrator if administrator' do
@@ -126,13 +126,13 @@ module Admin
     test 'should not be able to edit superadmin if user is subscriber' do
       sign_in @subscriber
       get :edit, id: @super_administrator.id
-      assert_redirected_to admin_user_path(@subscriber)
+      assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to edit admin if user is subscriber' do
       sign_in @subscriber
       get :edit, id: @administrator.id
-      assert_redirected_to admin_user_path(@subscriber)
+      assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to update role_id if user is subscriber' do
