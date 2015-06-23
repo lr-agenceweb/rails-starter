@@ -1,0 +1,9 @@
+- panel.panel 'My informations' do
+  - panel.table_for User.find(current_user.id) do |p|
+    - p.column :avatar do |user|
+      - retina_thumb_square(user)
+    - p.column :username
+    - p.column :email
+    - p.column :role
+    - p.column('Actions') do |user|
+      - link_to('Voir', admin_user_path(user))

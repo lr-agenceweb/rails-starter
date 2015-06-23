@@ -4,45 +4,12 @@ ActiveAdmin.register_page 'Dashboard' do
   content title: proc { I18n.t('active_admin.dashboard') } do
     if current_user.subscriber?
       columns do
-        column do
-          panel 'Comments' do
-            table_for Comment.by_user(current_user.id).last(5) do
-              column :image do |comment|
-                source = comment.commentable_type.constantize.find(comment.commentable_id)
-                retina_image_tag source.pictures.first, :image, :small if source.pictures.present?
-              end
-              column :post do |comment|
-                source = comment.commentable_type.constantize.find(comment.commentable_id)
-                link = send("#{source.type.downcase.underscore.singularize}_path", :source)
-                span link_to source.title, link
-              end
-              column :comment
-              column :date do |comment|
-                I18n.l(comment.created_at, format: :short)
-              end
-              column('Actions') do |comment|
-                source = comment.commentable_type.constantize.find(comment.commentable_id)
-                link = send("#{source.type.downcase.underscore.singularize}_comment_path", about_id: source.id, id: comment.id)
-                link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure you want to remove this comment ?' }
-              end
-            end
-          end
+        column do |panel|
+          render 'admin/dashboard/subscribers/comments', panel: panel
         end
 
-        column do
-          panel 'My informations' do
-            table_for User.find(current_user.id) do
-              column :avatar do |user|
-                retina_thumb_square(user)
-              end
-              column :username
-              column :email
-              column :role
-              column('Actions') do |user|
-                link_to('Voir', admin_user_path(user))
-              end
-            end
-          end
+        column do |panel|
+          render 'admin/dashboard/subscribers/user', panel: panel
         end
       end
 
