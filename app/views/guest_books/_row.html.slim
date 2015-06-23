@@ -1,3 +1,5 @@
-li
+li.panel
+  p
+    small = I18n.l(guest_book.created_at, format: :long)
   h3 = guest_book.username
-  div = guest_book.content
+  div = simple_format(guest_book.content)
