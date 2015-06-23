@@ -14,9 +14,9 @@ class HtmlHelperTest < ActionView::TestCase
     assert_equal sanitize_and_truncate(text, 100), 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut auctor mi, quis euismod diam....'
   end
 
-  test 'should truncate with read_more link' do
-    text = 'In quis nisl blandit, commodo massa vitae, congue sapien. Fusce aliquet purus nunc, sit amet ultricies velit euismod non. Duis egestas risus sit amet ante sodales, eget consectetur arcu commodo. Fusce mollis nibh euismod magna ullamcorper, nec euismod metus vestibulum. Donec ornare lorem ante, vel placerat mauris egestas et. Nunc et cursus orci. Sed vitae nisl quis nibh luctus rhoncus. Duis aliquet enim sed ultricies vehicula. Quisque dictum gravida porttitor.'
-    assert_equal truncate_read_more(text, '/a-propos'), 'In quis nisl blandit, commodo massa vitae, congue sapien. Fusce aliquet purus nunc, sit amet ultricies velit euismod non...<p><a href="/a-propos">Lire la suite</a></p>'
+  test 'should truncate with a read more link' do
+    text = '<p>In quis nisl blandit, commodo massa vitae, congue sapien. Fusce aliquet purus nunc, sit amet ultricies velit euismod non. Duis egestas risus sit amet ante sodales, eget consectetur arcu commodo. Fusce mollis nibh euismod magna ullamcorper, nec euismod metus vestibulum. Donec ornare lorem ante, vel placerat mauris egestas et. Nunc et cursus orci. Sed vitae nisl quis nibh luctus rhoncus. Duis aliquet enim sed ultricies vehicula. Quisque dictum gravida porttitor.</p>'
+    assert_equal truncate_read_more(text, '/a-propos', 100), '<p>In quis nisl blandit, commodo massa vitae, congue sapien.... <a href="/a-propos">Lire la suite</a></p>'
   end
 
   test 'should return success flash html code' do

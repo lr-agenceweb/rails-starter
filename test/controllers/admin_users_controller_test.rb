@@ -75,14 +75,28 @@ module Admin
       sign_out @super_administrator
       sign_in @administrator
       get :edit, id: @super_administrator.id
-      assert_redirected_to admin_root_path
+      assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to update superadmin if user is administrator' do
       sign_out @super_administrator
       sign_in @administrator
       patch :update, id: @super_administrator.id, user: {}
-      assert_redirected_to admin_root_path
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should not be able to update role_id in super_administrator if administrator' do
+      sign_in @administrator
+      patch :update, id: @administrator.id, user: { role_id: @super_administrator.role_id }
+      assert_equal assigns(:user).role_id, @administrator.role_id
+      assert_equal assigns(:user).role_name, @administrator.role_name
+    end
+
+    test 'should not be able to update role_id with incorrect id if administrator' do
+      sign_in @administrator
+      patch :update, id: @administrator.id, user: { role_id: '778899' }
+      assert_equal assigns(:user).role_id, @administrator.role_id
+      assert_equal assigns(:user).role_name, @administrator.role_name
     end
 
     test 'should be able to edit subscriber if user is administrator' do
@@ -99,19 +113,33 @@ module Admin
       assert_redirected_to admin_user_path(@subscriber)
     end
 
+    test 'should be able to update role_id if user is administrator' do
+      sign_in @administrator
+      patch :update, id: @administrator.id, user: { role_id: @subscriber.role_id }
+      assert_equal assigns(:user).role_id, @subscriber.role_id
+      assert_equal assigns(:user).role_name, @subscriber.role_name
+    end
+
     #####################
     ## Subscriber
     ####################
     test 'should not be able to edit superadmin if user is subscriber' do
       sign_in @subscriber
       get :edit, id: @super_administrator.id
-      assert_redirected_to admin_user_path(@subscriber)
+      assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to edit admin if user is subscriber' do
       sign_in @subscriber
       get :edit, id: @administrator.id
-      assert_redirected_to admin_user_path(@subscriber)
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should not be able to update role_id if user is subscriber' do
+      sign_in @subscriber
+      patch :update, id: @subscriber.id, user: { role_id: @super_administrator.role_id }
+      assert_equal assigns(:user).role_id, @subscriber.role_id
+      assert_equal assigns(:user).role_name, @subscriber.role_name
     end
 
     test 'should be able to update itself' do

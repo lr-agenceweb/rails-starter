@@ -13,11 +13,7 @@ module HtmlHelper
   end
 
   def truncate_read_more(string, link, length = 160)
-    truncate(string, length: length, separator: '.', escape: false) do
-      content_tag :p do
-        link_to t('link.read_more'), link
-      end
-    end
+    truncate_html(string, length: length, omission: '... ' + (link_to(t('link.read_more'), link)))
   end
 
   def show_flash
