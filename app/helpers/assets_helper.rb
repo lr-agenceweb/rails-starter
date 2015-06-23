@@ -20,7 +20,15 @@ module AssetsHelper
     URI.join(req.url, file.url(style)).to_s unless file.nil?
   end
 
-  def retina_thumb_square(resource)
-    retina_image_tag(resource, :avatar, :thumb, default: [64, 64])
+  def retina_thumb_square(resource, size = 64)
+    if resource.avatar?
+      retina_image_tag(resource, :avatar, :thumb, default: [size, size])
+    else
+      gravatar_image_tag(resource.email, alt: resource.username, gravatar: { size: size })
+    end
+  end
+
+  def retina_large_square(resource, size = 256)
+    retina_thumb_square resource, size
   end
 end

@@ -197,7 +197,7 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu :utility_navigation do |menu|
-      menu.add label: proc { raw "#{retina_image_tag(current_user, :avatar, :thumb)} #{display_name(current_active_admin_user)}" },
+      menu.add label: proc { raw "#{retina_thumb_square(current_user)} #{display_name(current_active_admin_user)}" },
                url: proc { url_for([:admin, current_active_admin_user]) },
                id: 'current_user'
 

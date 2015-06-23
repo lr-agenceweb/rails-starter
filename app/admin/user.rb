@@ -25,7 +25,7 @@ ActiveAdmin.register User do
     h3 resource.username
     attributes_table do
       row :avatar do
-        retina_image_tag(resource, :avatar, :medium)
+        retina_large_square(resource, 256)
       end
       row :email
       row :sign_in_count
