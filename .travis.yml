@@ -13,6 +13,7 @@ before_script:
 script:
 - RAILS_ENV=test bundle exec rake --trace db:migrate
 - RAILS_ENV=test bundle exec rake test
+
 addons:
   code_climate:
     repo_token:
@@ -21,3 +22,7 @@ notifications:
   email: false
   slack:
     secure: C5mVOWuJfFpZwtZQigkATqvgQxXjmo1YnnGRvbsauSpDI9it362L1GsQ50duaSTN//8GfWMqG12bGY4oW8NOgvR/AzrRUD1aAz6ByLaEpb8TKfBbrO5sYSAZn4FRV39aCaAcW6ZuTKJxBmsHo2bdFFpRP07Vmi0bFRRNQO2n+sY=
+
+branches:
+  only:
+    - master
