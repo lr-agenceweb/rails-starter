@@ -1,5 +1,5 @@
-- panel.panel 'My informations' do
-  - panel.table_for User.find(current_user.id) do |p|
+- panel.panel 'Users' do
+  - panel.table_for query do |p|
     - p.column :avatar do |user|
       - retina_thumb_square(user)
     - p.column :username
