@@ -1,8 +1,7 @@
 #
 # == ContactsController
 #
-class ContactsController < InheritedResources::Base
-  before_action :set_setting
+class ContactsController < ApplicationController
   before_action :set_mapbox_options, only: [:new, :create], if: proc { @setting.show_map }
   skip_before_action :allow_cors
 
@@ -16,30 +15,30 @@ class ContactsController < InheritedResources::Base
   end
 
   def create
-    @contact_form = ContactForm.new(params[:contact_form])
-    @contact_form.request = request
-    if @contact_form.deliver
-      flash[:success] = I18n.t('contact.success')
-      respond_to do |format|
-        format.html { redirect_to :back }
-        format.js {}
+    if params[:contact_form][:nickname].blank?
+      @contact_form = ContactForm.new(params[:contact_form])
+      @contact_form.request = request
+      if @contact_form.deliver
+        respond_action 'create'
+      else
+        render :new
       end
     else
-      render :new
+      respond_action 'create'
     end
   end
 
   private
 
-  def set_content_boxes
-    @content_boxes = ContentBox.for_model(controller_name.classify)
+  def respond_action(template)
+    flash.now[:success] = I18n.t('contact.success')
+    respond_to do |format|
+      format.html { redirect_to new_contact_path, notice: I18n.t('contact.success') }
+      format.js { render template }
+    end
   end
 
   def set_mapbox_options
     gon_params
-  end
-
-  def set_setting
-    @setting ||= Setting.first
   end
 end

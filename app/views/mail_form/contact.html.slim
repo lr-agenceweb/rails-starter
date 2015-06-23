@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    meta charset='utf-8'
+    meta content=('text/html; charset=UTF-8') http-equiv='Content-Type'
+    title = message.subject
+    meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
+    link href='/assets/css/newsletter.css' rel='stylesheet' type='text/css'
+
+  body#newsletter
+    - @setting = Setting.first
+    - @host = Figaro.env.application_host
+
+    table.wrapper cellspacing="0" cellpadding="0" border="0"
+      tbody
+        tr width="100%"
+          td.background valign="top" align="left"
+
+            table.main-content
+              tbody
+
+                tr height="57" width="100%"
+                  td.header valign="top" align="left"
+
+                    table
+                      tr
+                        td.logo width="20%"
+                          / = link_to(image_tag("#{@host}/assets/images/logo.png", title: @setting.title, height: 100, width: 100), root_url(host: @host))
+                        td.title width="100%"
+                          h1 = message.subject
+
+                tr width="100%"
+                  td.content valign="top" align="left"
+                    - @resource.mail_form_attributes.each do |attribute, value|
+                      - next if value.blank?
+
+                      - if attribute == 'message'
+                        - case value
+                          - when /\n/
+                            = raw(simple_format(h(value)))
+                          - when Time, DateTime, Date
+                            = I18n.l(value)
+                          - else
+                            = value
+
+                    - @resource.mail_form_attributes.each do |attribute, value|
+                      - next if value.blank?
+                      - if attribute == 'name'
+                        p.author = value
+
+                tr width="100%"
+                  td.footer valign="top"
+                    / = image_tag("#{@host}/assets/images/newsletter/frise.jpg")
+                    p.mentions #{@setting.name} - #{Time.zone.now.year}
