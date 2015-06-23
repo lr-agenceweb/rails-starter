@@ -19,8 +19,11 @@ class ContactsController < InheritedResources::Base
     @contact_form = ContactForm.new(params[:contact_form])
     @contact_form.request = request
     if @contact_form.deliver
-      flash[:success] = 'Succès !'
-      redirect_to :back
+      flash[:success] = I18n.t('contact.success')
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js {}
+      end
     else
       render :new
     end

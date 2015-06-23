@@ -11,8 +11,9 @@
       .small-12.medium-6.columns
         p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, ducimus recusandae et rerum possimus porro, modi, totam unde ex dolorum perspiciatis consequatur cupiditate assumenda ipsam impedit veniam. Optio, quia, consequuntur.
         p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, ducimus recusandae et rerum possimus porro, modi
+
       .small-12.medium-6.columns
-        = simple_form_for @contact_form, validate: true do |f|
+        = simple_form_for @contact_form, validate: true, remote: true do |f|
           = f.input :name, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.name')}"
           = f.input :email, as: :email, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.email')}"
           = f.input :nickname, input_html: { class: 'hide', style: 'display: none' }, label: false
