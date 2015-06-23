@@ -5,9 +5,7 @@ ActiveAdmin.register User do
                 :password,
                 :avatar,
                 :password_confirmation,
-                role_attributes: [
-                  :id, :name
-                ]
+                :role_id
 
   config.clear_sidebar_sections!
 
@@ -60,6 +58,16 @@ ActiveAdmin.register User do
   #
   controller do
     def update
+      params_user = params[:user]
+      params_user_role_id = params_user[:role_id]
+      params_user.delete :role_id if current_user.subscriber?
+
+      if current_user.administrator? && (params_user_role_id.to_i == Role.find_by(name: 'super_administrator').id)
+        params[:user][:role_id] = current_user.role_id
+      end
+
+      params[:user][:role_id] = current_user.role_id unless Role.exists?(params_user_role_id)
+
       update! { admin_user_path(@user) }
     end
 

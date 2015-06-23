@@ -1,7 +1,8 @@
-- f.inputs 'Rôles', for: [:role, f.object.role || Role.new] do |item|
-  - item.input :name,
-               collection: Role.all,
-               include_blank: false,
-               selected: f.object.role.id,
-               hint: I18n.t('form.hint.role_name'),
-               input_html: { class: 'chosen-select' }
+- f.inputs 'Rôles'
+  - f.input :role_id,
+            as: :select,
+            collection: Role.allowed_roles_for_user_role(current_user),
+            include_blank: false,
+            selected: f.object.role.id,
+            hint: I18n.t('form.hint.role_name'),
+            input_html: { class: 'chosen-select' }
