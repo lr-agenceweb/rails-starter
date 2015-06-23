@@ -3,15 +3,28 @@
 #
 class CommentDecorator < ApplicationDecorator
   include Draper::LazyHelpers
+  include AssetsHelper
   delegate_all
 
   def avatar
     width = 64
-    height = width
-    if model.user_id.nil? || !model.user.avatar?
+
+    # Not connected
+    if model.user_id.nil?
       gravatar_image_tag(model.email, alt: model.username, gravatar: { size: width }) + pseudo
+
+    # Connected
     else
-      retina_thumb_square(comment.user) + pseudo(model.user_username)
+      pseudo = pseudo(model.user_username)
+
+      # Website avatar present
+      if model.user.avatar?
+        retina_thumb_square(comment.user) + pseudo
+
+      # Website avatar not present (use Gravatar)
+      else
+        gravatar_image_tag(model.user.email, alt: model.user.username, gravatar: { size: width }) + pseudo
+      end
     end
   end
 
@@ -46,11 +59,7 @@ class CommentDecorator < ApplicationDecorator
   def form_connected(f)
     content_tag(:div, class: 'row') do
       concat(content_tag(:div, class: 'small-12 medium-2 columns') do
-        if current_user.avatar?
-          concat(retina_image_tag current_user, :avatar, :small)
-        else
-          concat(gravatar_image_tag current_user.email, alt: current_user.username)
-        end
+        concat(retina_thumb_square(current_user))
         concat(pseudo(current_user.username))
       end)
       textarea_and_submit(f, 'medium-10')
