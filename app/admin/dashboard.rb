@@ -2,54 +2,100 @@ ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
   content title: proc { I18n.t('active_admin.dashboard') } do
-    columns do
-      column do
-        panel 'Utilisateurs' do
-          table_for User.includes(:role).last(5) do
-            column :avatar do |user|
-              retina_thumb_square(user)
-            end
-            column :username
-            column :email
-            column :role
-            column('Actions') do |user|
-              link_to('Voir', admin_user_path(user))
-            end
-          end
-        end
-      end # column
-
-      column do
-        panel 'Settings' do
-          table_for Setting.first do
-            column :title
-            column :subtitle
-            column :show_map
-
-            column('Actions') do |resource|
-              link_to(I18n.t('active_admin.edit'), edit_admin_setting_path(resource)) + ' ' + link_to('Voir', admin_setting_path(resource))
+    if current_user.subscriber?
+      columns do
+        column do
+          panel 'Comments' do
+            table_for Comment.by_user(current_user.id).last(5) do
+              column :image do |comment|
+                source = comment.commentable_type.constantize.find(comment.commentable_id)
+                retina_image_tag source.pictures.first, :image, :small if source.pictures.present?
+              end
+              column :post do |comment|
+                source = comment.commentable_type.constantize.find(comment.commentable_id)
+                link = send("#{source.type.downcase.underscore.singularize}_path", :source)
+                span link_to source.title, link
+              end
+              column :comment
+              column :date do |comment|
+                I18n.l(comment.created_at, format: :short)
+              end
+              column('Actions') do |comment|
+                source = comment.commentable_type.constantize.find(comment.commentable_id)
+                link = send("#{source.type.downcase.underscore.singularize}_comment_path", about_id: source.id, id: comment.id)
+                link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure you want to remove this comment ?' }
+              end
             end
           end
         end
 
-        panel 'Categories' do
-          table_for Category.includes(:translations).visible_header.by_position do
-            column :position
-            column :title
-            column :show_in_menu
-            column :show_in_footer
+        column do
+          panel 'My informations' do
+            table_for User.find(current_user.id) do
+              column :avatar do |user|
+                retina_thumb_square(user)
+              end
+              column :username
+              column :email
+              column :role
+              column('Actions') do |user|
+                link_to('Voir', admin_user_path(user))
+              end
+            end
           end
         end
-      end # column
-    end # columns
+      end
 
-    columns do
-      column do
-        panel 'Mapbox' do
-          render 'admin/settings/show', resource: Setting.first.decorate
-        end
-      end # column
-    end # columns
+    else
+      columns do
+        column do
+          panel 'Utilisateurs' do
+            table_for User.includes(:role).last(5) do
+              column :avatar do |user|
+                retina_thumb_square(user)
+              end
+              column :username
+              column :email
+              column :role
+              column('Actions') do |user|
+                link_to('Voir', admin_user_path(user))
+              end
+            end
+          end
+        end # column
+
+        column do
+          panel 'Settings' do
+            table_for Setting.first do
+              column :title
+              column :subtitle
+              column :show_map
+
+              column('Actions') do |resource|
+                link_to(I18n.t('active_admin.edit'), edit_admin_setting_path(resource)) + ' ' + link_to('Voir', admin_setting_path(resource))
+              end
+            end
+          end
+
+          panel 'Categories' do
+            table_for Category.includes(:translations).visible_header.by_position do
+              column :position
+              column :title
+              column :show_in_menu
+              column :show_in_footer
+            end
+          end
+        end # column
+      end # columns
+
+      columns do
+        column do
+          panel 'Mapbox' do
+            render 'admin/settings/show', resource: Setting.first.decorate
+          end
+        end # column
+      end # columns
+    end
   end # content
 
   controller do
