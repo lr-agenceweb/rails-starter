@@ -8,6 +8,8 @@ ActiveAdmin.register GuestBook do
   scope :all, default: true
   scope :validated
   scope :to_validate
+  scope :francais
+  scope :english
 
   config.clear_sidebar_sections!
 

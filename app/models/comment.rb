@@ -26,6 +26,8 @@
 # == Comment Model
 #
 class Comment < ActiveRecord::Base
+  include Scopable
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
 
@@ -38,10 +40,9 @@ class Comment < ActiveRecord::Base
             presence: true,
             inclusion: %w( fr en )
 
+  default_scope { order('created_at DESC') }
   scope :by_user, -> (user_id) { where(user_id: user_id) }
-  scope :by_locale, -> (locale) { where(lang: locale) }
 
   attr_accessor :nickname
-  default_scope { order('created_at DESC') }
   paginates_per 15
 end
