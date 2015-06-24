@@ -49,6 +49,15 @@ module Admin
       assert_redirected_to admin_abouts_path
     end
 
+    #
+    # == Comments
+    #
+    test 'should destroy comments with post' do
+      delete :destroy, id: @about.id
+      assert_equal 0, @about.comments.size
+      assert @about.comments.empty?
+    end
+
     private
 
     def initialize_test
