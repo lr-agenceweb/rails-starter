@@ -28,8 +28,30 @@ class CommentsControllerTest < ActionController::TestCase
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         end
+      end
+    end
+  end
+
+  test 'should not be able to create comment if lang is not set' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_no_difference 'Comment.count' do
+          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+        end
+        assert_not assigns(:comment).valid?
+      end
+    end
+  end
+
+  test 'should not be able to create comment if lang is not allowed' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_no_difference 'Comment.count' do
+          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'ch' }, locale: locale.to_s
+        end
+        assert_not assigns(:comment).valid?
       end
     end
   end
@@ -38,7 +60,7 @@ class CommentsControllerTest < ActionController::TestCase
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: '', username: 'leila', email: 'not_valid' }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: '', username: 'leila', email: 'not_valid', lang: locale.to_s }, locale: locale.to_s
         end
         assert_not assigns(:comment).valid?
       end
@@ -49,7 +71,7 @@ class CommentsControllerTest < ActionController::TestCase
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         end
         assert assigns(:comment).valid?
         assert_redirected_to @about
@@ -60,10 +82,11 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should have informations of user given if not connected' do
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
-        post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+        post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_nil assigns(:comment).user_id
         assert_equal assigns(:comment).username, 'leila'
         assert_equal assigns(:comment).email, 'leila@skywalker.sw'
+        assert_equal assigns(:comment).lang, locale.to_s
       end
     end
   end
@@ -73,7 +96,7 @@ class CommentsControllerTest < ActionController::TestCase
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi' }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
         end
         assert assigns(:comment).valid?
         assert_redirected_to @about
@@ -85,7 +108,7 @@ class CommentsControllerTest < ActionController::TestCase
     sign_in @lana
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
-        post :create, about_id: @about.id, comment: { comment: 'youpi' }, locale: locale.to_s
+        post :create, about_id: @about.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
         assert assigns(:comment).valid?
         assert_nil assigns(:comment).username
         assert_nil assigns(:comment).email
@@ -100,7 +123,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should create comment' do
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_response :success
       end
     end
@@ -109,7 +132,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should render show template if comment created' do
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_template :create
       end
     end
@@ -118,7 +141,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should not create comment if nickname is filled' do
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot' }, locale: locale.to_s
+        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot', lang: locale.to_s }, locale: locale.to_s
         assert_template :captcha
       end
     end
