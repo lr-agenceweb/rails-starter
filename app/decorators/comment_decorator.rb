@@ -6,6 +6,10 @@ class CommentDecorator < ApplicationDecorator
   include AssetsHelper
   delegate_all
 
+  # Avatar associated to comment
+  #
+  # * *Args*    :
+  #
   def avatar
     width = 64
 
@@ -19,7 +23,7 @@ class CommentDecorator < ApplicationDecorator
 
       # Website avatar present
       if model.user.avatar?
-        retina_thumb_square(comment.user) + pseudo
+        retina_thumb_square(model.user) + pseudo
 
       # Website avatar not present (use Gravatar)
       else
@@ -28,11 +32,58 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
+  # Email associated to comment
+  #
+  # * *Args*    :
+  #
+  def mail
+    model.user_id.nil? ? model.email : model.user.email
+  end
+
+  def message
+    simple_format(model.comment)
+  end
+
   def content
-    simple_format(comment.comment) +
+    simple_format(model.comment) +
       content_tag(:p, class: 'right') do
         concat(content_tag(:small, l(model.created_at, format: :without_time)))
       end
+  end
+
+  # Article where the Comment comes from
+  #
+  #
+  def source
+    model.commentable_type.constantize.find(model.commentable_id)
+  end
+
+  # Link to article where the Comment comes from
+  #
+  #
+  def link_source
+    from = source
+    link = send("#{from.type.downcase.underscore.singularize}_path", from)
+    link_to from.title, link, target: :_blank
+  end
+
+  # Image from article where Comment comes from
+  #
+  #
+  def image_source
+    from = source
+    retina_image_tag from.pictures.first, :image, :small if from.pictures.present?
+  end
+
+  # Link and Image from article where Comment comes from
+  #
+  #
+  def link_and_image_source
+    content_tag(:p, image_source) + content_tag(:p, link_source)
+  end
+
+  def delete_link_source
+    link_to 'Destroy', admin_comment_path(model.id), method: :delete, data: { confirm: 'Are you sure you want to remove this comment ?' }
   end
 
   # Comment form depending if user is connected or not
