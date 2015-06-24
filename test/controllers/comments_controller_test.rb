@@ -13,62 +13,115 @@ class CommentsControllerTest < ActionController::TestCase
   # == Create
   #
   test 'should not be able to create comment if no content' do
-    assert_no_difference 'Comment.count' do
-      post :create, about_id: @about.id, comment: { comment: nil }, locale: 'fr'
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_no_difference 'Comment.count' do
+          post :create, about_id: @about.id, comment: { comment: nil }, locale: locale.to_s
+        end
+        assert_not assigns(:comment).valid?
+        assert_not assigns(:comment).save
+      end
     end
-    assert_not assigns(:comment).save
   end
 
   test 'should not be able to create comment if nickname (captcha) is filled' do
-    assert_no_difference 'Comment.count' do
-      post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: 'fr'
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_no_difference 'Comment.count' do
+          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'should not be able to create comment if email is not valid' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_no_difference 'Comment.count' do
+          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: '', username: 'leila', email: 'not_valid' }, locale: locale.to_s
+        end
+        assert_not assigns(:comment).valid?
+      end
     end
   end
 
   test 'should create comment with more informations if not connected' do
-    assert_difference 'Comment.count' do
-      post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: 'fr'
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_difference 'Comment.count' do
+          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+        end
+        assert assigns(:comment).valid?
+        assert_redirected_to @about
+      end
     end
-    assert_redirected_to @about
   end
 
   test 'should have informations of user given if not connected' do
-    post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: 'fr'
-    assert_nil assigns(:comment).user_id
-    assert_equal assigns(:comment).username, 'leila'
-    assert_equal assigns(:comment).email, 'leila@skywalker.sw'
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+        assert_nil assigns(:comment).user_id
+        assert_equal assigns(:comment).username, 'leila'
+        assert_equal assigns(:comment).email, 'leila@skywalker.sw'
+      end
+    end
   end
 
   test 'should create comment only with comment field if connected' do
     sign_in @lana
-    assert_difference 'Comment.count' do
-      post :create, about_id: @about.id, comment: { comment: 'youpi' }, locale: 'fr'
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_difference 'Comment.count' do
+          post :create, about_id: @about.id, comment: { comment: 'youpi' }, locale: locale.to_s
+        end
+        assert assigns(:comment).valid?
+        assert_redirected_to @about
+      end
     end
-    assert_redirected_to @about
   end
 
   test 'should have informations of sign_in user if connected' do
     sign_in @lana
-    post :create, about_id: @about.id, comment: { comment: 'youpi' }, locale: 'fr'
-    assert_nil assigns(:comment).username
-    assert_nil assigns(:comment).email
-    assert_equal assigns(:comment).user_id, @lana.id
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        post :create, about_id: @about.id, comment: { comment: 'youpi' }, locale: locale.to_s
+        assert assigns(:comment).valid?
+        assert_nil assigns(:comment).username
+        assert_nil assigns(:comment).email
+        assert_equal assigns(:comment).user_id, @lana.id
+      end
+    end
   end
 
+  #
   # == Ajax
-  test 'should create comment by ajax' do
-    xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: 'fr'
-    assert_response :success
+  #
+  test 'AJAX :: should create comment' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+        assert_response :success
+      end
+    end
   end
 
-  test 'should render show template if comment created by ajax' do
-    xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: 'fr'
-    assert_template :create
+  test 'AJAX :: should render show template if comment created' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+        assert_template :create
+      end
+    end
   end
 
-  test 'should not create comment by ajax if nickname is filled' do
-    xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot' }, locale: 'fr'
-    assert_template :captcha
+  test 'AJAX :: should not create comment if nickname is filled' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale) do
+        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot' }, locale: locale.to_s
+        assert_template :captcha
+      end
+    end
   end
 
   #
@@ -78,7 +131,7 @@ class CommentsControllerTest < ActionController::TestCase
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count', 0 do
-          delete :destroy, id: @comment_alice.id, about_id: @about.id, locale: locale
+          delete :destroy, id: @comment_alice.id, about_id: @about.id, locale: locale.to_s
         end
       end
     end
