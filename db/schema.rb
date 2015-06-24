@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622213057) do
+ActiveRecord::Schema.define(version: 20150624133326) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -189,11 +189,13 @@ ActiveRecord::Schema.define(version: 20150622213057) do
     t.string   "slug",       limit: 255
     t.text     "content",    limit: 65535
     t.boolean  "online",     limit: 1,     default: true
+    t.integer  "user_id",    limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "referencement_translations", force: :cascade do |t|
     t.integer  "referencement_id", limit: 4,     null: false
@@ -283,4 +285,5 @@ ActiveRecord::Schema.define(version: 20150622213057) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
+  add_foreign_key "posts", "users"
 end

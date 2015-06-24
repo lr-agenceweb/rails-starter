@@ -8,12 +8,14 @@
 #  slug       :string(255)
 #  content    :text(65535)
 #  online     :boolean          default(TRUE)
+#  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 # Indexes
 #
-#  index_posts_on_slug  (slug) UNIQUE
+#  index_posts_on_slug     (slug) UNIQUE
+#  index_posts_on_user_id  (user_id)
 #
 
 #
@@ -28,6 +30,8 @@ class Post < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
+
+  belongs_to :user
 
   has_many :comments, as: :commentable, dependent: :destroy
   accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true

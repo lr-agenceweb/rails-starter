@@ -4,6 +4,7 @@ ActiveAdmin.register About do
   permit_params :id,
                 :type,
                 :online,
+                :user_id,
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
                 ],
@@ -58,8 +59,9 @@ ActiveAdmin.register About do
   # == Controller
   #
   controller do
-    before_create do |about|
-      about.type = 'About'
+    before_create do |post|
+      post.type = 'About'
+      post.user_id = current_user.id
     end
   end
 end
