@@ -19,12 +19,12 @@ class ContactsController < ApplicationController
       @contact_form = ContactForm.new(params[:contact_form])
       @contact_form.request = request
       if @contact_form.deliver
-        respond_action 'create'
+        respond_action :create
       else
         render :new
       end
     else
-      respond_action 'create'
+      respond_action :create
     end
   end
 
