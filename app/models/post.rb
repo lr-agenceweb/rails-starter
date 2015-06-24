@@ -47,6 +47,7 @@ class Post < ActiveRecord::Base
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }
   scope :about, -> { where(type: 'About') }
+  scope :by_user, -> (user_id) { where(user_id: user_id) }
 
   self.inheritance_column = :type
   @child_classes = []

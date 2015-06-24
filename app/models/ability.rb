@@ -40,7 +40,7 @@ class Ability
   def subscriber_privilege(user)
     can [:update, :read, :destroy], User, id: user.id
     can :create, About
-    can :manage, About, user_id: user.id
+    can [:update, :read, :destroy], About, user_id: user.id
     can :manage, Comment, user_id: user.id
     cannot :destroy, Comment, user_id: nil
     cannot :manage, Setting
