@@ -1,7 +1,7 @@
 #
-# == PrimaryAttachment Concerns
+# == Imageable Concerns
 #
-module PrimaryAttachment
+module Imageable
   extend ActiveSupport::Concern
   include ApplicationHelper
 

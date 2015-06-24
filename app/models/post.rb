@@ -20,7 +20,7 @@
 # == Post Model
 #
 class Post < ActiveRecord::Base
-  include PrimaryAttachment
+  include Imageable
   include Searchable
 
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
