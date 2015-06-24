@@ -7,6 +7,7 @@
 #  username         :string(255)
 #  email            :string(255)
 #  comment          :text(65535)
+#  lang             :string(255)
 #  commentable_id   :integer
 #  commentable_type :string(255)
 #  user_id          :integer

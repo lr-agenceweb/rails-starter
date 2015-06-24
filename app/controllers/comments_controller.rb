@@ -55,7 +55,7 @@ class CommentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
-    params.require(:comment).permit(:username, :email, :title, :comment, :user_id, :nickname)
+    params.require(:comment).permit(:username, :email, :title, :comment, :lang, :user_id, :nickname)
   end
 
   def load_commentable
@@ -64,7 +64,7 @@ class CommentsController < ApplicationController
   end
 
   def paginate_commentable
-    @commentable.comments.includes(:user).page params[:page]
+    @commentable.comments.by_locale(@language).includes(:user).page params[:page]
   end
 
   def respond_action(template)
