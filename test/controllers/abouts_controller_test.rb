@@ -60,8 +60,16 @@ class AboutsControllerTest < ActionController::TestCase
   #
   # == Comments
   #
-  test 'should get two comments for about article' do
-    assert_equal @about.comments.count, 5
+  test 'should get three comments for about article in french side' do
+    I18n.with_locale(:fr) do
+      assert_equal @about.comments.by_locale(:fr).count, 3
+    end
+  end
+
+  test 'should get two comments for about article in english side' do
+    I18n.with_locale(:en) do
+      assert_equal @about.comments.by_locale(:en).count, 2
+    end
   end
 
   test 'should get alice as comments author' do

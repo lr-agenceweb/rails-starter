@@ -1,19 +1,7 @@
 - panel.panel 'Comments' do
-  - panel.table_for Comment.by_user(current_user.id).last(5) do |p|
-    - p.column :image do |comment|
-      - source = comment.commentable_type.constantize.find(comment.commentable_id)
-      - retina_image_tag source.pictures.first, :image, :small if source.pictures.present?
-
-    - p.column :post do |comment|
-      - source = comment.commentable_type.constantize.find(comment.commentable_id)
-      - link = send("#{source.type.downcase.underscore.singularize}_path", :source)
-      - p.span link_to source.title, link
-
-    - p.column :comment
-    - p.column :date do |comment|
-      - I18n.l(comment.created_at, format: :short)
-
+  - panel.table_for CommentDecorator.decorate_collection(Comment.by_user(current_user.id).last(5)) do |p|
+    - p.column :link_source
+    - p.column :message
+    - p.column :created_at
     - p.column('Actions') do |comment|
-      - source = comment.commentable_type.constantize.find(comment.commentable_id)
-      - link = send("#{source.type.downcase.underscore.singularize}_comment_path", about_id: source.id, id: comment.id)
-      - link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure you want to remove this comment ?' }
+      - comment.delete_link_source

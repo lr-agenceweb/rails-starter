@@ -7,6 +7,7 @@
 #  username         :string(255)
 #  email            :string(255)
 #  comment          :text(65535)
+#  lang             :string(255)
 #  commentable_id   :integer
 #  commentable_type :string(255)
 #  user_id          :integer
@@ -24,21 +25,26 @@
 one:
   commentable: about (Post)
   user: anthony
+  lang: fr
 
 two:
   commentable: about (Post)
   user: bob
+  lang: en
 
 three:
   commentable: about (Post)
   user: alice
+  lang: en
 
 four:
   commentable: about (Post)
   user: lana
+  lang: fr
 
 five:
   commentable: about (Post)
   username: luke
   email: luke@skywalker.sw
   user_id: null
+  lang: fr

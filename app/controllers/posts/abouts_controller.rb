@@ -25,13 +25,8 @@ class AboutsController < PostsController
 
   def set_commentable
     @commentable = instance_variable_get("@#{controller_name.singularize}")
-    @comments = @commentable.comments.includes(:user).page params[:page]
+    @comments = @commentable.comments.by_locale(@language).includes(:user).page params[:page]
     @comments = CommentDecorator.decorate_collection(@comments)
     @comment = Comment.new
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def comment_params
-    params.require(:comment).permit(:comment, :title, :user_id, :commentable_id, :commentable_type)
   end
 end

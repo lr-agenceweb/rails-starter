@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
+  has_many :posts
   belongs_to :role
   delegate :name, to: :role, prefix: true, allow_nil: true
   accepts_nested_attributes_for :role, reject_if: :all_blank

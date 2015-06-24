@@ -4,6 +4,7 @@ ActiveAdmin.register Home do
   permit_params :id,
                 :type,
                 :online,
+                :user_id,
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
                 ],
@@ -55,8 +56,9 @@ ActiveAdmin.register Home do
   #
   controller do
     before_action :set_home, only: [:show, :edit, :update, :destroy, :toggle_home_online]
-    before_create do |home|
-      home.type = 'Home'
+    before_create do |post|
+      post.type = 'Home'
+      post.user_id = current_user.id
     end
 
     def toggle_home_online
