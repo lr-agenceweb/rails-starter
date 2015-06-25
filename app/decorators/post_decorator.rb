@@ -19,6 +19,11 @@ class PostDecorator < ApplicationDecorator
     end
   end
 
+  # TODO: Improve method to handle this
+  def image_and_content
+    content
+  end
+
   private
 
   def first_picture
