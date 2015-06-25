@@ -2,30 +2,22 @@ ActiveAdmin.register Background do
   menu parent: 'Assets'
 
   permit_params :id,
-                :attachable_type,
-                :image,
+                :image
 
+  decorate_with BackgroundDecorator
   config.clear_sidebar_sections!
-  actions :all
 
   index do
     selectable_column
-    column 'Background' do |resource|
-      retina_image_tag(resource, :image, :small)
-    end
-
-    column :attachable_type
-
+    column :image
+    column :category_name
     actions
   end
 
   show do
-    h3 resource.attachable_type
+    h3 resource.category_name
     attributes_table do
-      row :attachable_type
-      row :background do
-        retina_image_tag(resource, :image, :medium)
-      end
+      row :image
     end
   end
 

@@ -4,7 +4,6 @@
 class ApplicationDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
-  delegate :title, :description, :content
 
   def title_for_given_name(name)
     header = content_tag(:h2, name, class: 'l-page-title', id: name)
