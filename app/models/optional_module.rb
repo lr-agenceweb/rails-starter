@@ -13,7 +13,7 @@
 # == OptionalModule Model
 #
 class OptionalModule < ActiveRecord::Base
-  def self.modules_list
+  def self.list
     %w( Newsletter GuestBook Search )
   end
 end
