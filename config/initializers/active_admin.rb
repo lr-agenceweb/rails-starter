@@ -196,6 +196,10 @@ ActiveAdmin.setup do |config|
   #   end
 
   config.namespace :admin do |admin|
+    admin.build_menu do |menu|
+      menu.add id: 'configuration', label: I18n.t('admin_menu.configuration'), priority: 100
+    end
+
     admin.build_menu :utility_navigation do |menu|
       menu.add label: proc { raw "#{retina_thumb_square(current_user)} #{display_name(current_active_admin_user)}" },
                url: proc { url_for([:admin, current_active_admin_user]) },

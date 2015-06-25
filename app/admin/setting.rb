@@ -1,5 +1,5 @@
 ActiveAdmin.register Setting do
-  menu parent: I18n.t('admin_menu.configuration')
+  menu parent: 'configuration'
 
   permit_params :id,
                 :name,
