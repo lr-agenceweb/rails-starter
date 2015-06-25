@@ -60,7 +60,12 @@ class ApplicationDecorator < Draper::Decorator
     PaginatingDecorator
   end
 
+  def arbre_context
+    @arbre_context ||= Arbre::Context.new({}, self)
+    @arbre_context.dup
+  end
+
   def arbre(&block)
-    Arbre::Context.new({}, self, &block).to_s
+    arbre_context.instance_eval(&block).to_s
   end
 end
