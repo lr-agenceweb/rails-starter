@@ -12,6 +12,9 @@ module Admin
 
     setup :initialize_test
 
+    #
+    # == Routing
+    #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @anthony
       get :index
@@ -42,12 +45,52 @@ module Admin
       assert_redirected_to admin_category_path(@category)
     end
 
+    #
+    # == User role
+    #
+    test 'should not create category if administrator' do
+      assert_no_difference ['Category.count'] do
+        post :create, category: {}
+      end
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should not delete category if administrator' do
+      assert_no_difference ['Category.count'] do
+        delete :destroy, id: @category.id
+      end
+      assert_not_nil @category.background
+      assert_redirected_to admin_dashboard_path
+    end
+
+    #
+    # == Backgrounds
+    #
+    test 'should have a background associated' do
+      assert_not_nil @category.background
+    end
+
+    test 'should not have a background associated' do
+      assert_nil @category_about.background
+    end
+
+    test 'should destroy background linked to category if super_administrator' do
+      sign_in @anthony
+      assert_difference ['Category.count'], -1 do
+        delete :destroy, id: @category.id
+      end
+      assert_nil @category.background
+      assert_redirected_to admin_categories_path
+    end
+
     private
 
     def initialize_test
       @category = categories(:home)
+      @category_about = categories(:about)
       @anthony = users(:anthony)
-      sign_in @anthony
+      @bob = users(:bob)
+      sign_in @bob
     end
   end
 end
