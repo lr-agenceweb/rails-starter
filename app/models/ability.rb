@@ -35,6 +35,7 @@ class Ability
     can :update, Category
     can [:create, :read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
     can [:read, :destroy], GuestBook
+    can [:read, :update, :destroy], Background
   end
 
   def subscriber_privilege(user)

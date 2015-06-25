@@ -16,7 +16,7 @@ module Admin
     # == Routing
     #
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @anthony
+      sign_out @bob
       get :index
       assert_redirected_to new_user_session_path
       get :show, id: @category.id

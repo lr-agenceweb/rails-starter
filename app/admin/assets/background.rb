@@ -39,8 +39,8 @@ ActiveAdmin.register Background do
               input_html: { class: 'chosen-select' }
       f.input :image,
               as: :file,
-              label: I18n.t('form.label.background'),
-              image_preview: true
+              label: I18n.t('form.label.background')
+              # image_preview: true
     end
 
     f.actions

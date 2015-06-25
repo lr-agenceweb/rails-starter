@@ -32,7 +32,7 @@ class Background < ActiveRecord::Base
                       small:      '300x300>'
                     },
                     retina: { quality: 70 },
-                    default_url: '/system/default/:style-missing.png'
+                    default_url: '/assets/images/background.jpg'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
