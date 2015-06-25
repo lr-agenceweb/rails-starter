@@ -1,4 +1,6 @@
 ActiveAdmin.register Comment, as: 'PostComment' do
+  menu parent: I18n.t('admin_menu.modules')
+
   permit_params :id,
                 :username,
                 :email,
