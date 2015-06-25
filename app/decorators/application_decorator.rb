@@ -53,7 +53,14 @@ class ApplicationDecorator < Draper::Decorator
     end
   end
 
+  #
+  # == Methods used in all decorators
+  #
   def self.collection_decorator_class
     PaginatingDecorator
+  end
+
+  def arbre(&block)
+    Arbre::Context.new({}, self, &block).to_s
   end
 end

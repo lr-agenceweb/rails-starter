@@ -18,13 +18,13 @@ ActiveAdmin.register About do
                   ]
                 ]
 
+  decorate_with AboutDecorator
   config.clear_sidebar_sections!
 
   index do
     selectable_column
-    column :title do |resource|
-      raw "<strong>#{resource.title}</strong>"
-    end
+    column :image
+    column :title
     column :online
 
     translation_status
@@ -32,14 +32,10 @@ ActiveAdmin.register About do
   end
 
   show do
-    h3 resource.title
     attributes_table do
-      row :content do
-        raw resource.content
-      end
-      row :online do
-        status_tag("#{resource.online}", (resource.online? ? :ok : :warn))
-      end
+      row :content
+      row :online
+      row :image
 
       render 'admin/shared/referencement/show', resource: resource
     end
