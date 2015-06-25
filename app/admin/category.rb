@@ -27,11 +27,8 @@ ActiveAdmin.register Category do
 
   index do
     sortable_handle_column
-    column :background_image
-    column :title do |resource|
-      raw "<strong>#{resource.title}</strong>"
-    end
-
+    column :background
+    column :title
     column :show_in_menu
     column :show_in_footer
 
@@ -46,13 +43,9 @@ ActiveAdmin.register Category do
   show do
     h3 resource.title
     attributes_table do
-      row :background_image
-      row :show_in_menu do
-        status_tag("#{resource.show_in_menu}", (resource.show_in_menu? ? :ok : :warn))
-      end
-      row :show_in_footer do
-        status_tag("#{resource.show_in_footer}", (resource.show_in_footer? ? :ok : :warn))
-      end
+      row :background
+      row :show_in_menu
+      row :show_in_footer
 
       render 'admin/shared/referencement/show', resource: resource
     end
