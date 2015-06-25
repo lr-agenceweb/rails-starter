@@ -17,6 +17,7 @@ fr:
 
   admin_menu:
     modules: Modules
+    configuration: Configuration
 
 # English
 en:
@@ -36,3 +37,4 @@ en:
 
   admin_menu:
     modules: Modules
+    configuration: Configuration
