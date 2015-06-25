@@ -3,6 +3,7 @@
 #
 class PostDecorator < ApplicationDecorator
   include Draper::LazyHelpers
+  include AssetsHelper
   delegate_all
 
   def image
@@ -19,9 +20,11 @@ class PostDecorator < ApplicationDecorator
     end
   end
 
-  # TODO: Improve method to handle this
+  # Method used to display content in RSS Feed
   def image_and_content
-    content
+    html = content
+    html << image_tag(attachment_url(first_picture.image, :medium)) if picture?
+    html
   end
 
   private
