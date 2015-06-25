@@ -32,11 +32,11 @@ class Background < ActiveRecord::Base
                       small:      '300x300>'
                     },
                     retina: { quality: 70 },
-                    default_url: '/assets/images/background.jpg'
+                    default_url: '/system/default/:style-missing.png'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
-  @child_classes = [:Contact, :Actuality]
+  @child_classes = [:Contact]
 
   def self.child_classes
     Post.subclasses.each do |subclass|
