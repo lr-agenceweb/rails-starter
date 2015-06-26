@@ -24,6 +24,7 @@ gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
+gem 'active_skin'
 
 #
 # == Decorator
