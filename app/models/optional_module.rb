@@ -14,6 +14,6 @@
 #
 class OptionalModule < ActiveRecord::Base
   def self.list
-    %w( Newsletter GuestBook Search )
+    %w( Newsletter GuestBook Search RSS )
   end
 end

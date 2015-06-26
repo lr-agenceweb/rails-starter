@@ -27,3 +27,8 @@ newsletter:
   <<: *DEFAULTS
   name: Newsletter
   enabled: false
+
+rss:
+  <<: *DEFAULTS
+  name: RSS
+  enabled: true
