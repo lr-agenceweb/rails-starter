@@ -197,7 +197,7 @@ class CommentsControllerTest < ActionController::TestCase
         delete :destroy, id: @comment_lana.id, about_id: @about.id, locale: locale
       end
 
-      # assert ability.cannot?(:destroy, @comment_anthony)
+      assert ability.cannot?(:destroy, @comment_anthony)
       assert_no_difference 'Comment.count' do
         delete :destroy, id: @comment_anthony.id, about_id: @about.id, locale: locale
       end
