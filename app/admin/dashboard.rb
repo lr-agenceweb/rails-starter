@@ -6,7 +6,7 @@ ActiveAdmin.register_page 'Dashboard' do
     if current_user.subscriber?
       columns do
         column do |panel|
-          render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.by_user(current_user.id).last(5)
+          render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.includes(:translations).by_user(current_user.id).last(5)
         end
 
         column do |panel|
