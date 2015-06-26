@@ -74,4 +74,14 @@ class ApplicationDecorator < Draper::Decorator
   def created_at
     I18n.l(model.created_at, format: :short)
   end
+
+  def lang
+    color = 'green'
+    color = 'blue' if model.lang == 'fr'
+    color = 'red' if model.lang == 'en'
+
+    arbre do
+      status_tag(I18n.t("active_admin.globalize.language.#{model.lang}"), color)
+    end
+  end
 end

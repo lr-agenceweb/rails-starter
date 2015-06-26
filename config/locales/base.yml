@@ -8,6 +8,9 @@ fr:
   enabled:
     'true': Activé
     'false': Désactivé
+  validate:
+    'true': Validé
+    'false': Non validé
 
 # English
 en:
@@ -19,3 +22,6 @@ en:
   enabled:
     'true': Enabled
     'false': Disabled
+  validate:
+    'true': Validated
+    'false': Not validated

@@ -19,9 +19,9 @@ ActiveAdmin.register GuestBook do
   index do
     selectable_column
     column :username
-    column :lang
     column :content
-    column :validated
+    column :lang
+    column :status
     column :created_at
 
     actions
@@ -30,9 +30,9 @@ ActiveAdmin.register GuestBook do
   show do
     attributes_table do
       row :username
-      row :lang
       row :content
-      row :validated
+      row :lang
+      row :status
       row :created_at
     end
   end
