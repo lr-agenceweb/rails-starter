@@ -1,4 +1,6 @@
 ActiveAdmin.register User do
+  includes :role
+
   permit_params :id,
                 :username,
                 :slug,

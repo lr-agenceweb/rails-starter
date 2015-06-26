@@ -1,5 +1,6 @@
 ActiveAdmin.register Category do
   menu parent: 'configuration'
+  includes :background, :translations, :referencement
 
   permit_params :id,
                 :name,

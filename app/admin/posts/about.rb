@@ -1,5 +1,6 @@
 ActiveAdmin.register About do
   menu parent: 'Articles'
+  includes :translations
 
   permit_params :id,
                 :type,

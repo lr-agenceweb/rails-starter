@@ -43,7 +43,7 @@ ActiveAdmin.register_page 'Dashboard' do
       columns do
         column do |panel|
           render 'admin/dashboard/settings', panel: panel, query: Setting.first
-          render 'admin/dashboard/categories', panel: panel, query: CategoryDecorator.decorate_collection(Category.includes(:translations).visible_header.by_position)
+          render 'admin/dashboard/categories', panel: panel, query: CategoryDecorator.decorate_collection(Category.includes(:background, :translations).visible_header.by_position)
           render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all if current_user.super_administrator?
         end # column
 
