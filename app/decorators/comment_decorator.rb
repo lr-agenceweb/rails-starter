@@ -11,11 +11,9 @@ class CommentDecorator < ApplicationDecorator
   # * *Args*    :
   #
   def avatar
-    width = 64
-
     # Not connected
     if model.user_id.nil?
-      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: width }) + pseudo
+      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) }) + pseudo
 
     # Connected
     else
@@ -27,7 +25,7 @@ class CommentDecorator < ApplicationDecorator
 
       # Website avatar not present (use Gravatar)
       else
-        gravatar_image_tag(model.user.email, alt: model.user.username, gravatar: { size: width }) + pseudo
+        gravatar_image_tag(model.user.email, alt: model.user.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) }) + pseudo
       end
     end
   end

@@ -16,7 +16,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
       columns do
         column do |panel|
-          render 'admin/dashboard/subscribers/user', panel: panel, query: User.includes(:role).find(current_user.id)
+          render 'admin/dashboard/subscribers/user', panel: panel, query: User.includes(:role).find(current_user.id).decorate
         end
       end # columns
 
@@ -28,7 +28,7 @@ ActiveAdmin.register_page 'Dashboard' do
         end # column
 
         column do |panel|
-          render 'admin/dashboard/subscribers/user', panel: panel, query: User.includes(:role).last(5)
+          render 'admin/dashboard/subscribers/user', panel: panel, query: UserDecorator.decorate_collection(User.includes(:role).last(5))
         end
       end # columns
 
