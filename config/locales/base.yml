@@ -1,0 +1,15 @@
+# French
+fr:
+  'true': oui
+  'false': non
+  online:
+    'true': En ligne
+    'false': Hors ligne
+
+# English
+en:
+  'true': yes
+  'false': no
+  online:
+    'true': Online
+    'false': Offline

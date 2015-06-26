@@ -18,9 +18,11 @@ class PostDecorator < ApplicationDecorator
     model.content.html_safe
   end
 
-  def online
+  def status
+    color = model.online? ? 'green' : 'orange'
+
     arbre do
-      status_tag("#{model.online}", (model.online? ? :ok : :warn))
+      status_tag(I18n.t("online.#{model.online}"), color)
     end
   end
 
