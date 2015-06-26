@@ -202,7 +202,7 @@ ActiveAdmin.setup do |config|
 
     admin.build_menu :utility_navigation do |menu|
       menu.add label: proc { raw "#{retina_thumb_square(current_user)} #{display_name(current_active_admin_user)} (#{current_active_admin_user.role_name})" },
-               url: proc { content_tag(:p, url_for([:admin, current_active_admin_user])) },
+               url: proc { url_for([:admin, current_active_admin_user]) },
                id: 'current_user'
 
       admin.add_logout_button_to_menu menu
