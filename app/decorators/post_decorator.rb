@@ -7,11 +7,11 @@ class PostDecorator < ApplicationDecorator
   delegate_all
 
   def image
-    retina_image_tag first_picture, :image, :medium if picture?
-  end
-
-  def image_small
-    retina_image_tag first_picture, :image, :small if picture?
+    if picture?
+      retina_image_tag first_picture, :image, :small
+    else
+      'Pas d\'image'
+    end
   end
 
   def content
