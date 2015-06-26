@@ -16,7 +16,7 @@ DEFAULTS: &DEFAULTS
 search:
   <<: *DEFAULTS
   name: Search
-  enabled: false
+  enabled: true
 
 guest_book:
   <<: *DEFAULTS
@@ -26,9 +26,14 @@ guest_book:
 newsletter:
   <<: *DEFAULTS
   name: Newsletter
-  enabled: false
+  enabled: true
 
 rss:
   <<: *DEFAULTS
   name: RSS
+  enabled: true
+
+comment:
+  <<: *DEFAULTS
+  name: Comment
   enabled: true
