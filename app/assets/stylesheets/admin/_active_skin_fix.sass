@@ -1,0 +1,13 @@
+#title_bar
+  .action_items
+    span.action_item > a, span.action_item > .dropdown_menu > a
+      @include rounded(0)
+      background: $skinActiveColor
+      color: #fff
+      @include no-shadow()
+      text-shadow: none
+      border: none
+      padding: 17px
+      font-size: 14px
+      &:hover
+        background: lighten( $skinActiveColor, 10% ) !important
