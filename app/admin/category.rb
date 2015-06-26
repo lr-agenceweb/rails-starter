@@ -1,5 +1,5 @@
 ActiveAdmin.register Category do
-  menu parent: 'Outils'
+  menu parent: 'configuration'
 
   permit_params :id,
                 :name,
