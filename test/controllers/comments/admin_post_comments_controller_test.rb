@@ -5,7 +5,7 @@ require 'test_helper'
 #
 module Admin
   #
-  # == HomesController test
+  # == PostCommentsController test
   #
   class PostCommentsControllerTest < ActionController::TestCase
     include Devise::TestHelpers
