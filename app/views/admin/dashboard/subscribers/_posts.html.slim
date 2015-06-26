@@ -1,9 +1,12 @@
 - panel.panel 'Posts' do
   - panel.table_for PostDecorator.decorate_collection(query) do |p|
-    - p.column :image_small
-    - p.column :title_front_link
-    - p.column :type_title
-    - p.column :created_at
+    - if query.empty?
+      - p.span 'Il n\'y a aucun Article'
+    - else
+      - p.column :image_small
+      - p.column :title_front_link
+      - p.column :type_title
+      - p.column :created_at
 
-    - p.column 'Actions' do |post|
-      - post.admin_link
+      - p.column 'Actions' do |post|
+        - post.admin_link
