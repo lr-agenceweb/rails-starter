@@ -63,8 +63,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :username, presence: true
-  validates :email, presence: true, email_format: {}
+  validates :username,
+            presence: true,
+            uniqueness: { case_sensitive: false }
+  validates :email,
+            presence: true,
+            email_format: {}
 
   scope :except_super_administrator, -> { where.not(role_id: 1) }
 

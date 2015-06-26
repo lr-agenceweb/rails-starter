@@ -8,12 +8,11 @@ ActiveAdmin.register User do
                 :password_confirmation,
                 :role_id
 
+  decorate_with UserDecorator
   config.clear_sidebar_sections!
 
   index do
-    column :avatar do |resource|
-      retina_thumb_square(resource)
-    end
+    column :avatar
     column :username
     column :email
     column :current_sign_in_at
@@ -25,9 +24,7 @@ ActiveAdmin.register User do
   show do
     h3 resource.username
     attributes_table do
-      row :avatar do
-        retina_large_square(resource, 256)
-      end
+      row :avatar
       row :email
       row :sign_in_count
       row :current_sign_in_at
@@ -40,7 +37,7 @@ ActiveAdmin.register User do
   form do |f|
     f.semantic_errors *f.object.errors.keys
 
-    f.inputs 'Admin Details' do
+    f.inputs 'User Details' do
       f.input :avatar,
               as: :file,
               image_preview: true
