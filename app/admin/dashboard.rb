@@ -10,13 +10,13 @@ ActiveAdmin.register_page 'Dashboard' do
         end
 
         column do |panel|
-          render 'admin/dashboard/subscribers/comments', panel: panel
+          render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.by_user(current_user.id).last(5)
         end
       end # columns
 
       columns do
         column do |panel|
-          render 'admin/dashboard/subscribers/user', panel: panel, query: User.includes(:role).find(current_user.id).decorate
+          render 'admin/dashboard/subscribers/user', panel: panel, query: [User.includes(:role).find(current_user.id)]
         end
       end # columns
 
@@ -28,11 +28,17 @@ ActiveAdmin.register_page 'Dashboard' do
         end # column
 
         column do |panel|
-          query = User.includes(:role).last(5)
-          query = User.includes(:role).except_super_administrator.last(5) if current_user.administrator?
-          render 'admin/dashboard/subscribers/user', panel: panel, query: UserDecorator.decorate_collection(query)
+          render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.last(5)
         end
       end # columns
+
+      columns do
+        column do |panel|
+          query = User.includes(:role).last(5)
+          query = User.includes(:role).except_super_administrator.last(5) if current_user.administrator?
+          render 'admin/dashboard/subscribers/user', panel: panel, query: query
+        end
+      end
 
       columns do
         column do |panel|
