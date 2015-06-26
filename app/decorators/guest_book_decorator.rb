@@ -19,8 +19,4 @@ class GuestBookDecorator < ApplicationDecorator
     html << content_tag(:p, link)
     html.html_safe
   end
-
-  def created_at
-    I18n.l(model.created_at, format: :long)
-  end
 end

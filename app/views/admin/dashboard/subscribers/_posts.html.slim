@@ -1,15 +1,9 @@
 - panel.panel 'Posts' do
-  - panel.table_for query do |p|
-    - p.column :image do |post|
-      - retina_image_tag post.pictures.first, :image, :small if post.pictures.present?
+  - panel.table_for PostDecorator.decorate_collection(query) do |p|
+    - p.column :image_small
+    - p.column :title_front_link
+    - p.column :type_title
+    - p.column :created_at
 
-    - p.column :title do |post|
-      - link = send("admin_#{post.type.downcase.underscore.singularize}_path", post)
-      - p.span link_to post.title, link
-
-    - p.column :created_at do |post|
-      - I18n.l(post.created_at, format: :short)
-
-    - p.column('Actions') do |post|
-      - link = send("admin_#{post.type.downcase.underscore.singularize}_path", post)
-      - link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure you want to remove this post ?' }
+    - p.column 'Actions' do |post|
+      - post.admin_link

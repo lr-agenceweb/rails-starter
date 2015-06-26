@@ -68,4 +68,8 @@ class ApplicationDecorator < Draper::Decorator
   def arbre(&block)
     arbre_context.instance_eval(&block).to_s
   end
+
+  def created_at
+    I18n.l(model.created_at, format: :long)
+  end
 end

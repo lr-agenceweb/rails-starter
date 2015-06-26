@@ -16,7 +16,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
       columns do
         column do |panel|
-          render 'admin/dashboard/subscribers/user', panel: panel, query: User.includes.find(current_user.id)
+          render 'admin/dashboard/subscribers/user', panel: panel, query: User.includes(:role).find(current_user.id)
         end
       end # columns
 
@@ -24,7 +24,7 @@ ActiveAdmin.register_page 'Dashboard' do
     else
       columns do
         column do |panel|
-          render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.last(5)
+          render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.includes(:translations).last(5)
         end # column
 
         column do |panel|
@@ -33,15 +33,16 @@ ActiveAdmin.register_page 'Dashboard' do
       end # columns
 
       columns do
+        column do |panel|
+          render 'admin/dashboard/settings', panel: panel, query: Setting.first
+          render 'admin/dashboard/categories', panel: panel, query: Category.includes(:translations).visible_header.by_position
+          render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all if current_user.super_administrator?
+        end # column
+
         column do
           panel 'Mapbox' do
             render 'admin/settings/show', resource: Setting.first.decorate
           end
-        end
-
-        column do |panel|
-          render 'admin/dashboard/settings', panel: panel, query: Setting.first
-          render 'admin/dashboard/categories', panel: panel, query: Category.includes(:translations).visible_header.by_position
         end # column
       end # columns
     end # if / else
