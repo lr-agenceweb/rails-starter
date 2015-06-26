@@ -13,7 +13,9 @@
 # == OptionalModule Model
 #
 class OptionalModule < ActiveRecord::Base
+  scope :by_name, -> (name) { where(name: name) }
+
   def self.list
-    %w( Newsletter GuestBook Search RSS )
+    %w( Newsletter GuestBook Search RSS Comment )
   end
 end
