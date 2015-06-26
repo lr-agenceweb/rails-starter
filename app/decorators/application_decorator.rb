@@ -72,6 +72,6 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   def created_at
-    I18n.l(model.created_at, format: :long)
+    I18n.l(model.created_at, format: :short)
   end
 end
