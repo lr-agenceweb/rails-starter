@@ -29,8 +29,8 @@ ActiveAdmin.register Category do
     sortable_handle_column
     column :background
     column :title
-    column :show_in_menu
-    column :show_in_footer
+    column :in_menu
+    column :in_footer
 
     column :referencement do |resource|
       render 'admin/shared/referencement/show', resource: resource
@@ -44,8 +44,8 @@ ActiveAdmin.register Category do
     h3 resource.title
     attributes_table do
       row :background
-      row :show_in_menu
-      row :show_in_footer
+      row :in_menu
+      row :in_footer
 
       render 'admin/shared/referencement/show', resource: resource
     end
