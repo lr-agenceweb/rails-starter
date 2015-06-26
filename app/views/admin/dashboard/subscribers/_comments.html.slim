@@ -1,7 +1,10 @@
 - panel.panel 'Comments' do
-  - panel.table_for CommentDecorator.decorate_collection(Comment.by_user(current_user.id).last(5)) do |p|
-    - p.column :link_source
-    - p.column :message
-    - p.column :created_at
-    - p.column('Actions') do |comment|
-      - comment.delete_link_source
+  - panel.table_for CommentDecorator.decorate_collection(query) do |p|
+    - if query.empty?
+      - p.span 'Il n\'y a aucun Commentaire'
+    - else
+      - p.column :link_source
+      - p.column :message
+      - p.column :created_at
+      - p.column('Actions') do |comment|
+        - comment.delete_link_source
