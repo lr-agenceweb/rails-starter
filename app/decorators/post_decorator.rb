@@ -39,7 +39,7 @@ class PostDecorator < ApplicationDecorator
 
   def admin_link
     link = send("admin_#{model.type.downcase.underscore.singularize}_path", model)
-    link_to 'Voir', link
+    link_to I18n.t('active_admin.show'), link
   end
 
   # Type of Post

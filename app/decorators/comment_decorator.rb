@@ -83,7 +83,7 @@ class CommentDecorator < ApplicationDecorator
   end
 
   def delete_link_source
-    link_to 'Destroy', admin_comment_path(model.id), method: :delete, data: { confirm: 'Are you sure you want to remove this comment ?' }
+    link_to I18n.t('active_admin.destroy.label'), admin_comment_path(model.id), method: :delete, data: { confirm: I18n.t('active_admin.destroy.confirm', object: 'comment') }
   end
 
   # Comment form depending if user is connected or not
