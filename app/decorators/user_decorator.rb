@@ -6,7 +6,7 @@ class UserDecorator < ApplicationDecorator
   include AssetsHelper
   delegate_all
 
-  def avatar
+  def image_avatar
     # Website avatar present
     if model.avatar?
       retina_thumb_square(model)

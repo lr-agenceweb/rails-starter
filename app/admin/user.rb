@@ -12,7 +12,7 @@ ActiveAdmin.register User do
   config.clear_sidebar_sections!
 
   index do
-    column :avatar
+    column :image_avatar
     column :username
     column :email
     column :current_sign_in_at
@@ -24,7 +24,7 @@ ActiveAdmin.register User do
   show do
     h3 resource.username
     attributes_table do
-      row :avatar
+      row :image_avatar
       row :email
       row :sign_in_count
       row :current_sign_in_at
@@ -40,7 +40,7 @@ ActiveAdmin.register User do
     f.inputs 'User Details' do
       f.input :avatar,
               as: :file,
-              image_preview: true
+              avatar_preview: true
       f.input :username
       f.input :email
       f.input :password
