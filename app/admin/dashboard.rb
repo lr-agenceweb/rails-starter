@@ -28,7 +28,9 @@ ActiveAdmin.register_page 'Dashboard' do
         end # column
 
         column do |panel|
-          render 'admin/dashboard/subscribers/user', panel: panel, query: UserDecorator.decorate_collection(User.includes(:role).last(5))
+          query = User.includes(:role).last(5)
+          query = User.includes(:role).except_super_administrator.last(5) if current_user.administrator?
+          render 'admin/dashboard/subscribers/user', panel: panel, query: UserDecorator.decorate_collection(query)
         end
       end # columns
 

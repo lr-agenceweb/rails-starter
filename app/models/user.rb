@@ -66,6 +66,8 @@ class User < ActiveRecord::Base
   validates :username, presence: true
   validates :email, presence: true, email_format: {}
 
+  scope :except_super_administrator, -> { where.not(role_id: 1) }
+
   def super_administrator?
     role_name == 'super_administrator'
   end
