@@ -49,6 +49,10 @@ class CommentDecorator < ApplicationDecorator
       end
   end
 
+  def lang
+    I18n.t("active_admin.globalize.language.#{model.lang}")
+  end
+
   # Article where the Comment comes from
   #
   #
