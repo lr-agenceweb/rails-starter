@@ -5,6 +5,9 @@ fr:
   online:
     'true': En ligne
     'false': Hors ligne
+  enabled:
+    'true': Activé
+    'false': Désactivé
 
 # English
 en:
@@ -13,3 +16,6 @@ en:
   online:
     'true': Online
     'false': Offline
+  enabled:
+    'true': Enabled
+    'false': Disabled
