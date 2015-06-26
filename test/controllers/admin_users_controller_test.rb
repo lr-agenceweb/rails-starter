@@ -42,6 +42,26 @@ module Admin
     #####################
     ## Superadministator
     ####################
+    test 'should be able to create user' do
+      assert_difference 'User.count' do
+        post :create, user: { username: 'Marco', email: 'marco@test.com', password: 'password', confirm_password: 'password' }
+      end
+    end
+
+    # TODO: Fix this broken test
+    test 'should not be able to create user if username is already taken' do
+      assert_no_difference 'User.count' do
+        post :create, user: { username: 'bob', email: 'bob@test.fr', password: 'password', confirm_password: 'password' }
+      end
+    end
+
+    # TODO: Fix this broken test
+    test 'should not be able to create user if username is already taken (case_sensitive)' do
+      assert_no_difference 'User.count' do
+        post :create, user: { username: 'Bob', email: 'bob@test.fr', password: 'password', confirm_password: 'password' }
+      end
+    end
+
     test 'should be able to edit super_administrator if user is superadministrator' do
       get :edit, id: @super_administrator.id
       assert_response :success
@@ -71,15 +91,21 @@ module Admin
     #####################
     ## Administrator
     ####################
+    test 'should not be able to create user if administrator' do
+      sign_in @administrator
+      assert_no_difference 'User.count' do
+        post :create, user: { username: 'Marco', email: 'marco@test.com', password: 'password', confirm_password: 'password' }
+      end
+      assert_redirected_to admin_dashboard_path
+    end
+
     test 'should not be able to edit superadmin if user is administrator' do
-      sign_out @super_administrator
       sign_in @administrator
       get :edit, id: @super_administrator.id
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to update superadmin if user is administrator' do
-      sign_out @super_administrator
       sign_in @administrator
       patch :update, id: @super_administrator.id, user: {}
       assert_redirected_to admin_dashboard_path
@@ -100,14 +126,12 @@ module Admin
     end
 
     test 'should be able to edit subscriber if user is administrator' do
-      sign_out @super_administrator
       sign_in @administrator
       get :edit, id: @subscriber.id
       assert_response :success
     end
 
     test 'should be able to update subscriber if user is administrator' do
-      sign_out @super_administrator
       sign_in @administrator
       patch :update, id: @subscriber.id, user: {}
       assert_redirected_to admin_user_path(@subscriber)
@@ -123,6 +147,14 @@ module Admin
     #####################
     ## Subscriber
     ####################
+    test 'should not be able to create user if subscriber' do
+      sign_in @subscriber
+      assert_no_difference 'User.count' do
+        post :create, user: { username: 'Marco', email: 'marco@test.com', password: 'password', confirm_password: 'password' }
+      end
+      assert_redirected_to admin_dashboard_path
+    end
+
     test 'should not be able to edit superadmin if user is subscriber' do
       sign_in @subscriber
       get :edit, id: @super_administrator.id
