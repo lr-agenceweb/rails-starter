@@ -11,11 +11,9 @@ class CommentDecorator < ApplicationDecorator
   # * *Args*    :
   #
   def avatar
-    width = 64
-
     # Not connected
     if model.user_id.nil?
-      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: width }) + pseudo
+      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) }) + pseudo
 
     # Connected
     else
@@ -27,7 +25,7 @@ class CommentDecorator < ApplicationDecorator
 
       # Website avatar not present (use Gravatar)
       else
-        gravatar_image_tag(model.user.email, alt: model.user.username, gravatar: { size: width }) + pseudo
+        gravatar_image_tag(model.user.email, alt: model.user.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) }) + pseudo
       end
     end
   end
@@ -49,6 +47,16 @@ class CommentDecorator < ApplicationDecorator
       content_tag(:p, class: 'right') do
         concat(content_tag(:small, l(model.created_at, format: :without_time)))
       end
+  end
+
+  def lang
+    color = 'green'
+    color = 'blue' if model.lang == 'fr'
+    color = 'red' if model.lang == 'en'
+
+    arbre do
+      status_tag(I18n.t("active_admin.globalize.language.#{model.lang}"), color)
+    end
   end
 
   # Article where the Comment comes from
@@ -83,7 +91,7 @@ class CommentDecorator < ApplicationDecorator
   end
 
   def delete_link_source
-    link_to 'Destroy', admin_comment_path(model.id), method: :delete, data: { confirm: 'Are you sure you want to remove this comment ?' }
+    link_to I18n.t('active_admin.destroy.label'), admin_comment_path(model.id), method: :delete, data: { confirm: I18n.t('active_admin.destroy.confirm', object: 'comment') }
   end
 
   # Comment form depending if user is connected or not

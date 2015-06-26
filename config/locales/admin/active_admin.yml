@@ -7,7 +7,10 @@ fr:
         fr: Français
       translations: Traductions
     edit: Modifier
-
+    show: Voir
+    destroy:
+      label: Supprimer
+      confirm: "Ëtes-vous sûr de vouloir supprimer ce %{object} ?"
 
 # English
 en:
@@ -18,3 +21,7 @@ en:
         fr: Français
       translations: Translations
     edit: Edit
+    show: Show
+    destroy:
+      label: Delete
+      confirm: "Are you sure you want to remove this %{object} ?"

@@ -6,21 +6,21 @@ class FileInput < Formtastic::Inputs::FileInput
     input_wrapping do
       label_html <<
         builder.file_field(method, input_html_options) <<
-        image_preview_content
+        avatar_preview_content
     end
   end
 
   private
 
-  def image_preview_content
-    image_preview? ? image_preview_html : ''
+  def avatar_preview_content
+    avatar_preview? ? avatar_preview_html : ''
   end
 
-  def image_preview?
-    options[:image_preview] && @object.send(method).present?
+  def avatar_preview?
+    options[:avatar_preview] && @object.send(method).present?
   end
 
-  def image_preview_html
-    template.retina_image_tag(@object, :avatar, :medium)
+  def avatar_preview_html
+    template.retina_image_tag(@object, :avatar, :small)
   end
 end

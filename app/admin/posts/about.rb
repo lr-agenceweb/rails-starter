@@ -25,7 +25,7 @@ ActiveAdmin.register About do
     selectable_column
     column :image
     column :title
-    column :online
+    column :status
 
     translation_status
     actions
@@ -34,7 +34,7 @@ ActiveAdmin.register About do
   show do
     attributes_table do
       row :content
-      row :online
+      row :status
       row :image
 
       render 'admin/shared/referencement/show', resource: resource

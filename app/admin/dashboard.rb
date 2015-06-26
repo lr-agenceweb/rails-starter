@@ -2,61 +2,58 @@ ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
   content title: proc { I18n.t('active_admin.dashboard') } do
+    # Subscriber
     if current_user.subscriber?
       columns do
         column do |panel|
-          render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.by_user(current_user.id).last(5)
+          render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.includes(:translations).by_user(current_user.id).last(5)
         end
 
         column do |panel|
-          render 'admin/dashboard/subscribers/comments', panel: panel
+          render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.by_user(current_user.id).last(5)
         end
-      end
-
-      columns do
-        column do |panel|
-          render 'admin/dashboard/subscribers/user', panel: panel, query: User.find(current_user.id)
-        end
-      end
-
-    else
-      columns do
-        column do |panel|
-          render 'admin/dashboard/subscribers/user', panel: panel, query: User.includes(:role).last(5)
-        end # column
-
-        column do
-          panel 'Settings' do
-            table_for Setting.first do
-              column :title
-              column :subtitle
-              column :show_map
-
-              column('Actions') do |resource|
-                link_to(I18n.t('active_admin.edit'), edit_admin_setting_path(resource)) + ' ' + link_to('Voir', admin_setting_path(resource))
-              end
-            end
-          end
-
-          panel 'Categories' do
-            table_for Category.includes(:translations).visible_header.by_position do
-              column :position
-              column :title
-              column :show_in_menu
-              column :show_in_footer
-            end
-          end
-        end # column
       end # columns
 
       columns do
+        column do |panel|
+          render 'admin/dashboard/subscribers/user', panel: panel, query: [User.includes(:role).find(current_user.id)]
+        end
+      end # columns
+
+    # Admin / SuperAdmin
+    else
+      columns do
+        column do |panel|
+          render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.includes(:translations).last(5)
+        end # column
+
+        column do |panel|
+          render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.last(5)
+        end
+      end # columns
+
+      columns do
+        column do |panel|
+          query = User.includes(:role).last(5)
+          query = User.includes(:role).except_super_administrator.last(5) if current_user.administrator?
+          render 'admin/dashboard/subscribers/user', panel: panel, query: query
+        end
+      end
+
+      columns do
+        column do |panel|
+          render 'admin/dashboard/settings', panel: panel, query: Setting.first
+          render 'admin/dashboard/categories', panel: panel, query: Category.includes(:translations).visible_header.by_position
+          render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all if current_user.super_administrator?
+        end # column
+
         column do
           panel 'Mapbox' do
             render 'admin/settings/show', resource: Setting.first.decorate
           end
         end # column
       end # columns
-    end
+    end # if / else
   end # content
 
   controller do

@@ -32,6 +32,7 @@ class Ability
     can :update, Setting
     can :manage, User, role_name: %w( administrator subscriber )
     can :manage, User, id: user.id
+    cannot :create, User
     can :update, Category
     can [:create, :read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
     can [:read, :destroy], GuestBook
@@ -41,6 +42,7 @@ class Ability
 
   def subscriber_privilege(user)
     can [:update, :read, :destroy], User, id: user.id
+    cannot :create, User
     can :create, About
     can [:update, :read, :destroy], About, user_id: user.id
     can [:create, :read, :destroy], Comment, user_id: user.id
