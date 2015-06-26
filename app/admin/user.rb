@@ -1,6 +1,7 @@
 ActiveAdmin.register User do
   permit_params :id,
                 :username,
+                :slug,
                 :email,
                 :password,
                 :avatar,
