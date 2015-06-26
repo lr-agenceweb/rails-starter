@@ -1,4 +1,6 @@
 ActiveAdmin.register GuestBook do
+  menu parent: I18n.t('admin_menu.modules')
+
   permit_params :id,
                 :username,
                 :content,
@@ -8,26 +10,19 @@ ActiveAdmin.register GuestBook do
   scope :all, default: true
   scope :validated
   scope :to_validate
+  scope :francais
+  scope :english
 
+  decorate_with GuestBookDecorator
   config.clear_sidebar_sections!
 
   index do
     selectable_column
     column :username
     column :lang
-
-    column :content do |resource|
-      raw resource.content
-    end
-
-    column :validated do |resource|
-      status_tag("#{resource.validated}", (resource.validated? ? :ok : :warn))
-      span link_to 'Toggle', toggle_guest_book_validated_path(resource), data: { confirm: 'Voulez vous changer le statut de ce message ?' }
-    end
-
-    column 'Ajouté le' do |resource|
-      I18n.l(resource.created_at, format: :long)
-    end
+    column :content
+    column :validated
+    column :created_at
 
     actions
   end
@@ -36,18 +31,9 @@ ActiveAdmin.register GuestBook do
     attributes_table do
       row :username
       row :lang
-
-      row :content do
-        raw resource.content
-      end
-
-      row :validated do
-        status_tag("#{resource.validated}", (resource.validated? ? :ok : :warn))
-        span link_to 'Toggle', toggle_guest_book_validated_path(resource), data: { confirm: 'Voulez vous changer le statut de ce message ?' }
-      end
-      row 'Ajouté le' do
-        I18n.l(resource.created_at, format: :long)
-      end
+      row :content
+      row :validated
+      row :created_at
     end
   end
 

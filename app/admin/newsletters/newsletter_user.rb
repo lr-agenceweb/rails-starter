@@ -1,5 +1,5 @@
 ActiveAdmin.register NewsletterUser do
-  menu parent: 'Newsletter'
+  menu parent: I18n.t('admin_menu.modules')
 
   permit_params :id, :role, :lang
 

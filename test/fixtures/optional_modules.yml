@@ -1,0 +1,34 @@
+# == Schema Information
+#
+# Table name: optional_modules
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  enabled    :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+search:
+  <<: *DEFAULTS
+  name: Search
+  enabled: false
+
+guest_book:
+  <<: *DEFAULTS
+  name: GuestBook
+  enabled: true
+
+newsletter:
+  <<: *DEFAULTS
+  name: Newsletter
+  enabled: false
+
+rss:
+  <<: *DEFAULTS
+  name: RSS
+  enabled: true

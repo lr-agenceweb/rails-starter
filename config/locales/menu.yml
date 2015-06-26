@@ -15,6 +15,9 @@ fr:
   breadcrumb:
     here: 'Vous êtes ici: '
 
+  admin_menu:
+    modules: Modules
+    configuration: Configuration
 
 # English
 en:
@@ -31,3 +34,7 @@ en:
 
   breadcrumb:
     here: 'You are here: '
+
+  admin_menu:
+    modules: Modules
+    configuration: Configuration

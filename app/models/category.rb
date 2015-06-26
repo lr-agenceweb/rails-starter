@@ -21,6 +21,9 @@ class Category < ActiveRecord::Base
 
   acts_as_list
 
+  has_one :background, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :background, reject_if: :all_blank, allow_destroy: true
+
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
 

@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: backgrounds
+#
+#  id                 :integer          not null, primary key
+#  attachable_id      :integer
+#  attachable_type    :string(255)
+#  image_file_name    :string(255)
+#  image_content_type :string(255)
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  retina_dimensions  :text(65535)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+
+home:
+  attachable: home (Category)
+
+contact:
+  attachable: contact (Category)

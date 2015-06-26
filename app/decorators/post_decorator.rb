@@ -3,10 +3,37 @@
 #
 class PostDecorator < ApplicationDecorator
   include Draper::LazyHelpers
+  include AssetsHelper
   delegate_all
 
+  def image
+    retina_image_tag first_picture, :image, :medium if picture?
+  end
+
+  def content
+    model.content.html_safe
+  end
+
+  def online
+    arbre do
+      status_tag("#{model.online}", (model.online? ? :ok : :warn))
+    end
+  end
+
+  # Method used to display content in RSS Feed
   def image_and_content
-    # return "#{picture_medium} #{content}" unless model.picture.exist?
-    content
+    html = content
+    html << image_tag(attachment_url(first_picture.image, :medium)) if picture?
+    html
+  end
+
+  private
+
+  def first_picture
+    model.pictures.online.first if picture?
+  end
+
+  def picture?
+    model.pictures.online.present?
   end
 end

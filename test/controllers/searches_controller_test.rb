@@ -5,6 +5,7 @@ require 'test_helper'
 #
 class SearchesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
+
   setup :initialize_test
 
   test 'should get index' do
@@ -97,6 +98,8 @@ class SearchesControllerTest < ActionController::TestCase
     assert_not_empty assigns(:posts)
     assert assigns(:posts).count, 1
   end
+
+  private
 
   def initialize_test
     @locales = I18n.available_locales

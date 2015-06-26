@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   before_action :set_language
   before_action :set_setting
   before_action :set_menu_elements
+  before_action :set_background, unless: proc { @cateogry.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user
 
@@ -34,6 +35,10 @@ class ApplicationController < ActionController::Base
     @menu_elements_header ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_header.by_position)
     @menu_elements_footer ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_footer)
     @category = Category.find_by(name: controller_name.classify)
+  end
+
+  def set_background
+    @background = Background.find_by(attachable_id: @category.id)
   end
 
   def set_host_name

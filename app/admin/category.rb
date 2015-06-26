@@ -13,8 +13,12 @@ ActiveAdmin.register Category do
                   translations_attributes: [
                     :id, :locale, :title, :description, :keywords
                   ]
+                ],
+                background_attributes: [
+                  :id, :image
                 ]
 
+  decorate_with CategoryDecorator
   config.clear_sidebar_sections!
   config.sort_order = 'position_asc'
   config.paginate   = false
@@ -23,10 +27,8 @@ ActiveAdmin.register Category do
 
   index do
     sortable_handle_column
-    column :title do |resource|
-      raw "<strong>#{resource.title}</strong>"
-    end
-
+    column :background
+    column :title
     column :show_in_menu
     column :show_in_footer
 
@@ -41,12 +43,9 @@ ActiveAdmin.register Category do
   show do
     h3 resource.title
     attributes_table do
-      row :show_in_menu do
-        status_tag("#{resource.show_in_menu}", (resource.show_in_menu? ? :ok : :warn))
-      end
-      row :show_in_footer do
-        status_tag("#{resource.show_in_footer}", (resource.show_in_footer? ? :ok : :warn))
-      end
+      row :background
+      row :show_in_menu
+      row :show_in_footer
 
       render 'admin/shared/referencement/show', resource: resource
     end
@@ -70,6 +69,7 @@ ActiveAdmin.register Category do
       end
     end
 
+    render 'admin/shared/backgrounds/form', f: f
     render 'admin/shared/referencement/form', f: f
 
     f.actions

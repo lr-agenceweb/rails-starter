@@ -35,6 +35,8 @@ class Ability
     can :update, Category
     can [:create, :read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
     can [:read, :destroy], GuestBook
+    can [:read, :update, :destroy], Background
+    cannot :manage, OptionalModule
   end
 
   def subscriber_privilege(user)
@@ -44,6 +46,7 @@ class Ability
     can [:create, :read, :destroy], Comment, user_id: user.id
     cannot :destroy, Comment, user_id: nil
     cannot :manage, Setting
+    cannot :manage, OptionalModule
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end
 

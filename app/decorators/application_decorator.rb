@@ -4,7 +4,6 @@
 class ApplicationDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
-  delegate :title, :description, :content
 
   def title_for_given_name(name)
     header = content_tag(:h2, name, class: 'l-page-title', id: name)
@@ -54,7 +53,19 @@ class ApplicationDecorator < Draper::Decorator
     end
   end
 
+  #
+  # == Methods used in all decorators
+  #
   def self.collection_decorator_class
     PaginatingDecorator
+  end
+
+  def arbre_context
+    @arbre_context ||= Arbre::Context.new({}, self)
+    @arbre_context.dup
+  end
+
+  def arbre(&block)
+    arbre_context.instance_eval(&block).to_s
   end
 end

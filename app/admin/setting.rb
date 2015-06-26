@@ -1,5 +1,5 @@
 ActiveAdmin.register Setting do
-  menu priority: 100
+  menu parent: 'configuration'
 
   permit_params :id,
                 :name,
