@@ -15,13 +15,13 @@ class CategoryDecorator < ApplicationDecorator
 
   def in_menu
     arbre do
-      status_tag I18n.t(model.show_in_menu.to_s), (model.show_in_menu? ? :ok : :warn)
+      status_tag I18n.t("enabled.#{model.show_in_menu}"), (model.show_in_menu? ? :ok : :warn)
     end
   end
 
   def in_footer
     arbre do
-      status_tag I18n.t(model.show_in_footer.to_s), (model.show_in_footer? ? :ok : :warn)
+      status_tag I18n.t("enabled.#{model.show_in_footer}"), (model.show_in_footer? ? :ok : :warn)
     end
   end
 
