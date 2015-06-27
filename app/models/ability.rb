@@ -63,10 +63,12 @@ class Ability
   end
 
   def optional_modules_check
+    optional_modules = OptionalModule.all
+
     #
     # == GuestBook
     #
-    if OptionalModule.find_by(name: 'GuestBook').enabled?
+    if optional_modules.by_name('GuestBook').enabled?
       can [:read, :destroy], GuestBook
     else
       cannot :manage, GuestBook
@@ -75,7 +77,7 @@ class Ability
     #
     # == Newsletter
     #
-    if OptionalModule.find_by(name: 'Newsletter').enabled?
+    if optional_modules.by_name('Newsletter').enabled?
       can :manage, Newsletter
       can [:read, :update, :destroy], NewsletterUser
     else
@@ -86,7 +88,7 @@ class Ability
     #
     # == Comment
     #
-    if OptionalModule.find_by(name: 'Comment').enabled?
+    if optional_modules.by_name('Comment').enabled?
       can [:create, :read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
     else
       cannot :manage, Comment

@@ -51,9 +51,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_optional_modules
-    @optional_modules ||= OptionalModule.all
-    @rss_module = @optional_modules.by_name('RSS')
-    @newsletter_module = @optional_modules.by_name('Newsletter')
+    optional_modules = OptionalModule.all
+    @rss_module = optional_modules.by_name('RSS')
+    @newsletter_module = optional_modules.by_name('Newsletter')
   end
 
   def authenticate_active_admin_user!
