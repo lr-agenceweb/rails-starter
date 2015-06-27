@@ -22,6 +22,7 @@ DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
   content: ''
+  user: anthony
 
 # Home posts
 home:

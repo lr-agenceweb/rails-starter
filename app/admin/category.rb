@@ -6,6 +6,8 @@ ActiveAdmin.register Category do
                 :name,
                 :show_in_menu,
                 :show_in_footer,
+                :optional,
+                :optional_module_id,
                 translations_attributes: [
                   :id, :locale, :title
                 ],
@@ -16,7 +18,7 @@ ActiveAdmin.register Category do
                   ]
                 ],
                 background_attributes: [
-                  :id, :image
+                  :id, :image, :_destroy
                 ]
 
   decorate_with CategoryDecorator
@@ -32,11 +34,11 @@ ActiveAdmin.register Category do
     column :title
     column :in_menu
     column :in_footer
-
     column :referencement do |resource|
       render 'admin/shared/referencement/show', resource: resource
     end
 
+    column :module if current_user.super_administrator?
     translation_status
     actions
   end
@@ -47,6 +49,7 @@ ActiveAdmin.register Category do
       row :background
       row :in_menu
       row :in_footer
+      row :module if current_user.super_administrator?
 
       render 'admin/shared/referencement/show', resource: resource
     end
@@ -72,6 +75,7 @@ ActiveAdmin.register Category do
 
     render 'admin/shared/backgrounds/form', f: f
     render 'admin/shared/referencement/form', f: f
+    render 'admin/shared/optional_modules/form', f: f if current_user_and_administrator?
 
     f.actions
   end

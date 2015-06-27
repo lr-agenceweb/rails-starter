@@ -13,9 +13,10 @@ class ApplicationController < ActionController::Base
   before_action :set_language
   before_action :set_setting
   before_action :set_menu_elements
-  before_action :set_background, unless: proc { @cateogry.nil? }
+  before_action :set_optional_modules
+  before_action :set_background, unless: proc { @category.nil? }
   before_action :set_host_name
-  before_action :set_newsletter_user
+  before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
 
   decorates_assigned :setting, :category
 
@@ -32,8 +33,8 @@ class ApplicationController < ActionController::Base
 
   def set_menu_elements
     menu_elements = ::Category.includes(:translations, :referencement).all
-    @menu_elements_header ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_header.by_position)
-    @menu_elements_footer ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_footer)
+    @menu_elements_header ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_header.with_allowed_module.by_position)
+    @menu_elements_footer ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_footer.with_allowed_module.by_position)
     @category = Category.find_by(name: controller_name.classify)
   end
 
@@ -47,6 +48,12 @@ class ApplicationController < ActionController::Base
 
   def set_newsletter_user
     @newsletter_user ||= NewsletterUser.new
+  end
+
+  def set_optional_modules
+    optional_modules = OptionalModule.all
+    @rss_module = optional_modules.by_name('RSS')
+    @newsletter_module = optional_modules.by_name('Newsletter')
   end
 
   def authenticate_active_admin_user!

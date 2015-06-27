@@ -2,40 +2,65 @@
 #
 # Table name: categories
 #
-#  id             :integer          not null, primary key
-#  title          :string(255)
-#  name           :string(255)
-#  show_in_menu   :boolean          default(TRUE)
-#  show_in_footer :boolean          default(FALSE)
-#  position       :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id                 :integer          not null, primary key
+#  title              :string(255)
+#  name               :string(255)
+#  show_in_menu       :boolean          default(TRUE)
+#  show_in_footer     :boolean          default(FALSE)
+#  position           :integer
+#  optional           :boolean          default(FALSE)
+#  optional_module_id :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_categories_on_optional_module_id  (optional_module_id)
 #
 
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
 home:
+  <<: *DEFAULTS
   title: Accueil
   name: Home
   show_in_menu: true
   show_in_footer: false
+  optional: false
+  optional_module: null
 
 about:
+  <<: *DEFAULTS
   name: About
   show_in_menu: false
   show_in_footer: false
+  optional: false
+  optional_module: null
 
 contact:
+  <<: *DEFAULTS
   name: Contact
   show_in_menu: true
   show_in_footer: false
+  optional: false
+  optional_module: null
 
 search:
+  <<: *DEFAULTS
   title: Rechercher
   name: Search
   show_in_menu: false
   show_in_footer: false
+  optional: true
+  optional_module: search
 
 guest_book:
+  <<: *DEFAULTS
   title: Guest Book
   name: GuestBook
   show_in_menu: true
   show_in_footer: false
+  optional: true
+  optional_module: guest_book
