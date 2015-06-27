@@ -23,8 +23,9 @@ ActiveAdmin.register Home do
     column :image
     column :title
     column :online
-
     translation_status
+    column :author_with_avatar
+
     actions
   end
 
@@ -34,6 +35,7 @@ ActiveAdmin.register Home do
       row :content
       row :online
       row :image
+      row :author_with_avatar
 
       render 'admin/shared/referencement/show', resource: resource
     end

@@ -27,8 +27,9 @@ ActiveAdmin.register About do
     column :image
     column :title
     column :status
-
     translation_status
+    column :author_with_avatar
+
     actions
   end
 
@@ -37,6 +38,7 @@ ActiveAdmin.register About do
       row :content
       row :status
       row :image
+      row :author_with_avatar
 
       render 'admin/shared/referencement/show', resource: resource
     end

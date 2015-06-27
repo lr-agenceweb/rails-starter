@@ -4,8 +4,32 @@
 class PostDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   include AssetsHelper
-  delegate_all
 
+  delegate_all
+  decorates_association :user
+
+  #
+  # == Author and avatar linked to Post
+  #
+  def author
+    model.user_username
+  end
+
+  def link_author
+    link_to author, admin_user_path(model.user)
+  end
+
+  def author_avatar
+    user.image_avatar.html_safe
+  end
+
+  def author_with_avatar
+    author_avatar + content_tag(:p, link_author)
+  end
+
+  #
+  # == Post
+  #
   def image
     if picture?
       retina_image_tag first_picture, :image, :small
