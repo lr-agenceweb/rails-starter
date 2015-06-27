@@ -12,8 +12,11 @@ module Admin
 
     setup :initialize_test
 
+    #
+    # == REST actions
+    #
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @anthony
+      sign_out @bob
       get :index
       assert_redirected_to new_user_session_path
       get :show, id: @about.id
@@ -62,8 +65,8 @@ module Admin
 
     def initialize_test
       @about = posts(:about)
-      @anthony = users(:anthony)
-      sign_in @anthony
+      @bob = users(:bob)
+      sign_in @bob
     end
   end
 end
