@@ -24,15 +24,28 @@ ActiveAdmin.register User do
   end
 
   show do
-    h3 resource.username
-    attributes_table do
-      row :image_avatar
-      row :email
-      row :sign_in_count
-      row :current_sign_in_at
-      row :last_sign_in_at
-      row :status
-      row :created_at
+    columns do
+      column do
+        attributes_table do
+          row :image_avatar
+          row :email
+          row :sign_in_count
+          row :current_sign_in_at
+          row :last_sign_in_at
+          row :status
+          row :created_at
+        end
+      end
+
+      column do
+        panel 'Posts' do
+          table_for resource.posts do
+            column :image
+            column :title
+            column :status
+          end
+        end
+      end
     end
   end
 

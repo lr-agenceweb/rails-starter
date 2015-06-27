@@ -4,7 +4,9 @@
 class UserDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   include AssetsHelper
+
   delegate_all
+  decorates_association :posts
 
   def image_avatar
     # Website avatar present
