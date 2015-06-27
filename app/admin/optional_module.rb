@@ -16,6 +16,13 @@ ActiveAdmin.register OptionalModule do
     actions
   end
 
+  show do
+    attributes_table do
+      row :name
+      row :status
+    end
+  end
+
   form do |f|
     f.semantic_errors *f.object.errors.keys
 
