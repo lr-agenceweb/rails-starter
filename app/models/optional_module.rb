@@ -13,9 +13,11 @@
 # == OptionalModule Model
 #
 class OptionalModule < ActiveRecord::Base
-  scope :by_name, -> (name) { where(name: name) }
-
   def self.list
     %w( Newsletter GuestBook Search RSS Comment )
+  end
+
+  def self.by_name(name)
+    find_by(name: name)
   end
 end
