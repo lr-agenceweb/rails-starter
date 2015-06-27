@@ -10,7 +10,7 @@ class OptionalModuleDecorator < ApplicationDecorator
     color = model.enabled? ? 'green' : 'red'
 
     arbre do
-      status_tag(I18n.t("online.#{model.enabled}"), color)
+      status_tag(I18n.t("enabled.#{model.enabled}"), color)
     end
   end
 end
