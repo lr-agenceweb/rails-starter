@@ -33,3 +33,5 @@ fr:
 
       media:
         destroy: Suppression du media associé à l'article
+      background:
+        destroy: Suppression de l'image de Background associée à cette catégorie

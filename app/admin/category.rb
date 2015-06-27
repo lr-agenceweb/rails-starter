@@ -18,7 +18,7 @@ ActiveAdmin.register Category do
                   ]
                 ],
                 background_attributes: [
-                  :id, :image
+                  :id, :image, :_destroy
                 ]
 
   decorate_with CategoryDecorator
