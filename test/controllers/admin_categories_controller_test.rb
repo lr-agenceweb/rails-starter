@@ -9,6 +9,7 @@ module Admin
   #
   class CategoriesControllerTest < ActionController::TestCase
     include Devise::TestHelpers
+    include ActionView::Helpers::AssetTagHelper
 
     setup :initialize_test
 
@@ -76,11 +77,17 @@ module Admin
 
     test 'should destroy background linked to category if super_administrator' do
       sign_in @anthony
-      assert_difference ['Category.count'], -1 do
+      assert_difference ['Category.count', 'Background.count'], -1 do
         delete :destroy, id: @category.id
       end
       assert_nil @category.background
       assert_redirected_to admin_categories_path
+    end
+
+    test 'should destroy background if check_box is checked' do
+      assert_not_nil @category.background
+      patch :update, id: @category.id, category: { background: { _destroy: true } }
+      assert_equal assigns(:category).background, image_tag('/assets/images/background.jpg')
     end
 
     private
