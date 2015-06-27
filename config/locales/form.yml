@@ -29,6 +29,7 @@ fr:
       year: Année de réalisation du projet
       destroy: "Après avoir coché la case, ne pas oublier de valider le fomulaire pour que la suppression s'effectue"
       role_name: Modification du rôle de l'utilisateur. Attention à ne pas faire n'importe quoi avec !!!
+      optional_module: Choisir quel est le module optionel lié à cette catégorie
 
       media:
         destroy: Suppression du media associé à l'article

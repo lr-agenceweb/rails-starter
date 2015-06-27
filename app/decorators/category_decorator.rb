@@ -25,6 +25,27 @@ class CategoryDecorator < ApplicationDecorator
     end
   end
 
+  #
+  # == Optional Modules
+  #
+  def module
+    message = 'Module activé'
+    color = 'blue'
+    if !model.optional && model.optional_module_id.nil?
+      message = 'Module de base'
+      color = ''
+    else
+      if model.optional && !model.optional_module_enabled
+        message = 'Module non activé'
+        color = 'red'
+      end
+    end
+
+    arbre do
+      status_tag message, color
+    end
+  end
+
   private
 
   def background?

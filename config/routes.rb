@@ -24,10 +24,14 @@ Rails.application.routes.draw do
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
     # GuestBook
-    resources :guest_books, only: [:index, :create], concerns: :paginatable
+    if Category.find_by(name: 'GuestBook').optional_module_enabled
+      resources :guest_books, only: [:index, :create], concerns: :paginatable
+    end
 
     # Search
-    resources :searches, only: [:index], concerns: [:searchable, :paginatable]
+    if Category.find_by(name: 'Search').optional_module_enabled
+      resources :searches, only: [:index], concerns: [:searchable, :paginatable]
+    end
 
     # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss
