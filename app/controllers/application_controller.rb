@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   before_action :set_setting
   before_action :set_menu_elements
   before_action :set_optional_modules
-  before_action :set_background, unless: proc { @cateogry.nil? }
+  before_action :set_background, unless: proc { @category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
 
