@@ -1,8 +1,8 @@
 - f.inputs 'Optional Modules'
+  - f.input :optional
   - f.input :optional_module_id,
             as: :select,
             collection: OptionalModule.all,
             include_blank: true,
             hint: I18n.t('form.hint.optional_module'),
             input_html: { class: 'chosen-select' }
-            / selected: f.object.optional_module.id unless f.object.new_record? || f.object.optional_module_id.nil?

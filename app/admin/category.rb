@@ -65,7 +65,6 @@ ActiveAdmin.register Category do
               input_html: { class: 'chosen-select' }
       f.input :show_in_menu
       f.input :show_in_footer
-      f.input :optional
     end
 
     f.inputs 'Catégorie' do
@@ -74,9 +73,9 @@ ActiveAdmin.register Category do
       end
     end
 
-    render 'admin/shared/optional_modules/form', f: f
     render 'admin/shared/backgrounds/form', f: f
     render 'admin/shared/referencement/form', f: f
+    render 'admin/shared/optional_modules/form', f: f if current_user_and_administrator?
 
     f.actions
   end
