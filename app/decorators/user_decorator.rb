@@ -20,4 +20,14 @@ class UserDecorator < ApplicationDecorator
   def admin_link
     link_to I18n.t('active_admin.show'), admin_user_path(model)
   end
+
+  def status
+    color = 'green'
+    color = 'red' if model.administrator?
+    color = 'blue' if model.super_administrator?
+
+    arbre do
+      status_tag(model.role_name, color)
+    end
+  end
 end

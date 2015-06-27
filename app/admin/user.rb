@@ -19,7 +19,7 @@ ActiveAdmin.register User do
     column :email
     column :current_sign_in_at
     column :sign_in_count
-    column :role
+    column :status
     actions
   end
 
@@ -31,7 +31,7 @@ ActiveAdmin.register User do
       row :sign_in_count
       row :current_sign_in_at
       row :last_sign_in_at
-      row :role
+      row :status
       row :created_at
     end
   end
