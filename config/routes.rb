@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   localized do
     root 'homes#index'
     resources :abouts, only: [:index, :show], concerns: :paginatable do
-      resources :comments, only: [:create, :destroy]
+      if optional_modules.by_name('Comment').enabled?
+        resources :comments, only: [:create, :destroy]
+      end
     end
     resources :contacts, only: [:index, :new, :create]
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
