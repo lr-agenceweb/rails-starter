@@ -149,7 +149,8 @@ group :development do
   # == Debug Rails request in Chrome DevTools
   gem 'meta_request'
 
-  gem "bullet"
+  gem 'bullet'
+  gem 'shog'
 
   # == Deploy
   gem 'capistrano',  '~> 3.1'
@@ -168,8 +169,9 @@ end
 
 group :test do
   gem 'minitest'
-  gem 'minitest-reporters'
+  gem 'minitest-reporters', require: false
   gem "codeclimate-test-reporter", require: nil
+  gem 'simplecov', require: false
 end
 
 group :doc do

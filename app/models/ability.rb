@@ -22,6 +22,8 @@ class Ability
 
   def super_administrator_privilege
     can :manage, :all
+    optional_modules_check
+    can [:create, :read, :destroy], Comment
   end
 
   def administrator_privilege(user)
@@ -34,10 +36,11 @@ class Ability
     can :manage, User, id: user.id
     cannot :create, User
     can :update, Category
-    can [:create, :read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
     can [:read, :destroy], GuestBook
     can [:read, :update, :destroy], Background
     cannot :manage, OptionalModule
+
+    optional_modules_check
   end
 
   def subscriber_privilege(user)
@@ -57,5 +60,38 @@ class Ability
     cannot :destroy, :all
     cannot :update, :all
     cannot :create, :all
+  end
+
+  def optional_modules_check
+    optional_modules = OptionalModule.all
+
+    #
+    # == GuestBook
+    #
+    if optional_modules.by_name('GuestBook').enabled?
+      can [:read, :destroy], GuestBook
+    else
+      cannot :manage, GuestBook
+    end
+
+    #
+    # == Newsletter
+    #
+    if optional_modules.by_name('Newsletter').enabled?
+      can :manage, Newsletter
+      can [:read, :update, :destroy], NewsletterUser
+    else
+      cannot :manage, Newsletter
+      cannot :manage, NewsletterUser
+    end
+
+    #
+    # == Comment
+    #
+    if optional_modules.by_name('Comment').enabled?
+      can [:create, :read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
+    else
+      cannot :manage, Comment
+    end
   end
 end

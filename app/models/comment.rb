@@ -10,6 +10,7 @@
 #  lang             :string(255)
 #  commentable_id   :integer
 #  commentable_type :string(255)
+#  validated        :boolean          default(TRUE)
 #  user_id          :integer
 #  role             :string(255)      default("comments")
 #  created_at       :datetime

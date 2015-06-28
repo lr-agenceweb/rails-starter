@@ -13,7 +13,13 @@
 # == OptionalModule Model
 #
 class OptionalModule < ActiveRecord::Base
+  has_one :category, dependent: :destroy
+
   def self.list
-    %w( Newsletter GuestBook Search RSS )
+    %w( Newsletter GuestBook Search RSS Comment )
+  end
+
+  def self.by_name(name)
+    find_by(name: name)
   end
 end

@@ -1,10 +1,13 @@
 ActiveAdmin.register Category do
-  menu parent: 'Outils'
+  menu parent: 'configuration'
+  includes :background, :translations, :referencement
 
   permit_params :id,
                 :name,
                 :show_in_menu,
                 :show_in_footer,
+                :optional,
+                :optional_module_id,
                 translations_attributes: [
                   :id, :locale, :title
                 ],
@@ -15,7 +18,7 @@ ActiveAdmin.register Category do
                   ]
                 ],
                 background_attributes: [
-                  :id, :image
+                  :id, :image, :_destroy
                 ]
 
   decorate_with CategoryDecorator
@@ -29,25 +32,28 @@ ActiveAdmin.register Category do
     sortable_handle_column
     column :background
     column :title
-    column :show_in_menu
-    column :show_in_footer
-
-    column :referencement do |resource|
-      render 'admin/shared/referencement/show', resource: resource
-    end
+    column :in_menu
+    column :in_footer
+    column :module if current_user.super_administrator?
 
     translation_status
     actions
   end
 
   show do
-    h3 resource.title
-    attributes_table do
-      row :background
-      row :show_in_menu
-      row :show_in_footer
+    columns do
+      column do
+        attributes_table do
+          row :background
+          row :in_menu
+          row :in_footer
+          row :module if current_user.super_administrator?
+        end
+      end
 
-      render 'admin/shared/referencement/show', resource: resource
+      column do
+        render 'admin/shared/referencement/show', referencement: resource.referencement
+      end
     end
   end
 
@@ -71,6 +77,7 @@ ActiveAdmin.register Category do
 
     render 'admin/shared/backgrounds/form', f: f
     render 'admin/shared/referencement/form', f: f
+    render 'admin/shared/optional_modules/form', f: f if current_user_and_administrator?
 
     f.actions
   end

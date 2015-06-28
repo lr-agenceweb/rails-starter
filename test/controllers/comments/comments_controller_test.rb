@@ -153,7 +153,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should not be able to delete comments if user is not logged in' do
     I18n.available_locales.each do |locale|
       I18n.with_locale(locale) do
-        assert_difference 'Comment.count', 0 do
+        assert_no_difference 'Comment.count' do
           delete :destroy, id: @comment_alice.id, about_id: @about.id, locale: locale.to_s
         end
       end
@@ -180,7 +180,7 @@ class CommentsControllerTest < ActionController::TestCase
         delete :destroy, id: @comment_lana.id, about_id: @about.id, locale: locale
       end
 
-      assert_difference 'Comment.count', 0 do
+      assert_no_difference 'Comment.count' do
         delete :destroy, id: @comment_alice.id, about_id: @about.id, locale: locale
       end
     end
@@ -188,14 +188,49 @@ class CommentsControllerTest < ActionController::TestCase
 
   test 'administrator should be able to delete comments except superadministrator' do
     sign_in @administrator
+    ability = Ability.new(@administrator)
     locale = 'fr'
+
     I18n.with_locale(locale) do
+      assert ability.can?(:destroy, @comment_lana)
       assert_difference 'Comment.count', -1 do
         delete :destroy, id: @comment_lana.id, about_id: @about.id, locale: locale
       end
 
-      assert_difference 'Comment.count', 0 do
+      assert ability.cannot?(:destroy, @comment_anthony)
+      assert_no_difference 'Comment.count' do
         delete :destroy, id: @comment_anthony.id, about_id: @about.id, locale: locale
+      end
+    end
+  end
+
+  #
+  # == Conditionals
+  #
+  test 'should fetch only validated comments' do
+    @comments = Comment.validated
+    assert_equal @comments.length, 2
+  end
+
+  #
+  # == Locales
+  #
+  test 'should fetch only comments from current locale' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        @comments = Comment.by_locale(locale.to_s)
+        assert_equal @comments.length, 3 if locale == 'fr'
+        assert_equal @comments.length, 2 if locale == 'en'
+      end
+    end
+  end
+
+  test 'should fetch only comments from current locale and validated' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        @comments = Comment.validated.by_locale(locale.to_s)
+        assert_equal @comments.length, 1 if locale == 'fr'
+        assert_equal @comments.length, 1 if locale == 'en'
       end
     end
   end

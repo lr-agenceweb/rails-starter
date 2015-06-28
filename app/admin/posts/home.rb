@@ -23,19 +23,26 @@ ActiveAdmin.register Home do
     column :image
     column :title
     column :online
-
     translation_status
+    column :author_with_avatar
+
     actions
   end
 
   show do
-    h3 resource.title
-    attributes_table do
-      row :content
-      row :online
-      row :image
+    columns do
+      column do
+        attributes_table do
+          row :content
+          row :status
+          row :image
+          row :author_with_avatar
+        end
+      end
 
-      render 'admin/shared/referencement/show', resource: resource
+      column do
+        render 'admin/shared/referencement/show', referencement: resource.referencement
+      end
     end
   end
 

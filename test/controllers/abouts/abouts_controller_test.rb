@@ -72,6 +72,18 @@ class AboutsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should get one comments for about article in french side and validated' do
+    I18n.with_locale(:fr) do
+      assert_equal @about.comments.by_locale(:fr).validated.count, 1
+    end
+  end
+
+  test 'should get one comments for about article in english side and validated' do
+    I18n.with_locale(:en) do
+      assert_equal @about.comments.by_locale(:fr).validated.count, 1
+    end
+  end
+
   test 'should get alice as comments author' do
     assert_equal @comment.user_username, 'alice'
   end

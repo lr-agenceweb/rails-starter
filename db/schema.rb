@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625171631) do
+ActiveRecord::Schema.define(version: 20150628003805) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -41,14 +41,18 @@ ActiveRecord::Schema.define(version: 20150625171631) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "title",          limit: 255
-    t.string   "name",           limit: 255
-    t.boolean  "show_in_menu",   limit: 1,   default: true
-    t.boolean  "show_in_footer", limit: 1,   default: false
-    t.integer  "position",       limit: 4
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.string   "title",              limit: 255
+    t.string   "name",               limit: 255
+    t.boolean  "show_in_menu",       limit: 1,   default: true
+    t.boolean  "show_in_footer",     limit: 1,   default: false
+    t.integer  "position",           limit: 4
+    t.boolean  "optional",           limit: 1,   default: false
+    t.integer  "optional_module_id", limit: 4
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
+
+  add_index "categories", ["optional_module_id"], name: "index_categories_on_optional_module_id", using: :btree
 
   create_table "category_translations", force: :cascade do |t|
     t.integer  "category_id", limit: 4,   null: false
@@ -69,6 +73,7 @@ ActiveRecord::Schema.define(version: 20150625171631) do
     t.string   "lang",             limit: 255
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
+    t.boolean  "validated",        limit: 1,     default: true
     t.integer  "user_id",          limit: 4
     t.string   "role",             limit: 255,   default: "comments"
     t.datetime "created_at"
@@ -305,5 +310,6 @@ ActiveRecord::Schema.define(version: 20150625171631) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
+  add_foreign_key "categories", "optional_modules"
   add_foreign_key "posts", "users"
 end

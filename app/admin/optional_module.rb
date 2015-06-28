@@ -5,6 +5,24 @@ ActiveAdmin.register OptionalModule do
                 :name,
                 :enabled
 
+  decorate_with OptionalModuleDecorator
+  config.clear_sidebar_sections!
+
+  index do
+    selectable_column
+    column :name
+    column :status
+
+    actions
+  end
+
+  show do
+    attributes_table do
+      row :name
+      row :status
+    end
+  end
+
   form do |f|
     f.semantic_errors *f.object.errors.keys
 

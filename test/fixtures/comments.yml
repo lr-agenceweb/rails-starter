@@ -10,6 +10,7 @@
 #  lang             :string(255)
 #  commentable_id   :integer
 #  commentable_type :string(255)
+#  validated        :boolean          default(TRUE)
 #  user_id          :integer
 #  role             :string(255)      default("comments")
 #  created_at       :datetime
@@ -26,21 +27,25 @@ one:
   commentable: about (Post)
   user: anthony
   lang: fr
+  validated: true
 
 two:
   commentable: about (Post)
   user: bob
   lang: en
+  validated: false
 
 three:
   commentable: about (Post)
   user: alice
   lang: en
+  validated: true
 
 four:
   commentable: about (Post)
   user: lana
   lang: fr
+  validated: false
 
 five:
   commentable: about (Post)
@@ -48,3 +53,4 @@ five:
   email: luke@skywalker.sw
   user_id: null
   lang: fr
+  validated: false

@@ -1,4 +1,6 @@
 ActiveAdmin.register User do
+  includes :role
+
   permit_params :id,
                 :username,
                 :slug,
@@ -17,20 +19,33 @@ ActiveAdmin.register User do
     column :email
     column :current_sign_in_at
     column :sign_in_count
-    column :role
+    column :status
     actions
   end
 
   show do
-    h3 resource.username
-    attributes_table do
-      row :image_avatar
-      row :email
-      row :sign_in_count
-      row :current_sign_in_at
-      row :last_sign_in_at
-      row :role
-      row :created_at
+    columns do
+      column do
+        attributes_table do
+          row :image_avatar
+          row :email
+          row :sign_in_count
+          row :current_sign_in_at
+          row :last_sign_in_at
+          row :status
+          row :created_at
+        end
+      end
+
+      column do
+        panel 'Posts' do
+          table_for resource.posts do
+            column :image
+            column :title
+            column :status
+          end
+        end
+      end
     end
   end
 
