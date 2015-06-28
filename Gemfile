@@ -169,8 +169,9 @@ end
 
 group :test do
   gem 'minitest'
-  gem 'minitest-reporters'
+  gem 'minitest-reporters', require: false
   gem "codeclimate-test-reporter", require: nil
+  gem 'simplecov', require: false
 end
 
 group :doc do
