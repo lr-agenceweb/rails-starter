@@ -75,13 +75,10 @@ ActiveAdmin.register Setting do
       f.input :name, hint: 'Nom du propriétaire du site'
       f.input :email, hint: 'Email d\'où seront reçus les messages de contact'
       f.input :phone, as: :phone, hint: 'Numéro de téléphone à afficher sur le site pour vous joindre'
-      f.input :show_map, hint: 'Afficher ou non la carte sur la page contact'
       f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site'
       f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site'
-    end
-
-    f.inputs 'Paramètres du fil d\'ariane' do
-      f.input :should_validate, hint: 'Si coché, les messages postés dans le livre d\'or ne seront pas visibles tant que vous ne les aurez pas validé manuellement'
+      f.input :should_validate, hint: 'Si coché, les messages postés dans le livre d\'or et les commentaires ne seront pas visibles tant que vous ne les aurez pas validé manuellement'
+      f.input :show_map, hint: 'Afficher ou non la carte sur la page contact'
     end
 
     f.inputs 'Paramètre de la carte', class: 'map-settings' do
