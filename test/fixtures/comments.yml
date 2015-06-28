@@ -33,7 +33,7 @@ two:
   commentable: about (Post)
   user: bob
   lang: en
-  validated: true
+  validated: false
 
 three:
   commentable: about (Post)
@@ -45,7 +45,7 @@ four:
   commentable: about (Post)
   user: lana
   lang: fr
-  validated: true
+  validated: false
 
 five:
   commentable: about (Post)
@@ -53,4 +53,4 @@ five:
   email: luke@skywalker.sw
   user_id: null
   lang: fr
-  validated: true
+  validated: false

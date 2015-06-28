@@ -204,6 +204,37 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
+  #
+  # == Conditionals
+  #
+  test 'should fetch only validated comments' do
+    @comments = Comment.validated
+    assert_equal @comments.length, 2
+  end
+
+  #
+  # == Locales
+  #
+  test 'should fetch only comments from current locale' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        @comments = Comment.by_locale(locale.to_s)
+        assert_equal @comments.length, 3 if locale == 'fr'
+        assert_equal @comments.length, 2 if locale == 'en'
+      end
+    end
+  end
+
+  test 'should fetch only comments from current locale and validated' do
+    I18n.available_locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        @comments = Comment.validated.by_locale(locale.to_s)
+        assert_equal @comments.length, 1 if locale == 'fr'
+        assert_equal @comments.length, 1 if locale == 'en'
+      end
+    end
+  end
+
   private
 
   def initialize_test
