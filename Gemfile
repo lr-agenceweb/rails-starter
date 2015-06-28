@@ -149,7 +149,8 @@ group :development do
   # == Debug Rails request in Chrome DevTools
   gem 'meta_request'
 
-  gem "bullet"
+  gem 'bullet'
+  gem 'shog'
 
   # == Deploy
   gem 'capistrano',  '~> 3.1'

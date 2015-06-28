@@ -514,6 +514,9 @@ GEM
       activerecord (~> 4)
       activesupport (~> 4)
     sexp_processor (4.5.0)
+    shog (0.1.5)
+      colored (~> 1.2)
+      rails (~> 4.0)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -664,6 +667,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   seed_dump
+  shog
   simple_form
   sitemap_generator
   slim-rails
