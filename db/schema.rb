@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150627160748) do
+ActiveRecord::Schema.define(version: 20150628003805) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20150627160748) do
     t.string   "lang",             limit: 255
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
+    t.boolean  "validated",        limit: 1,     default: true
     t.integer  "user_id",          limit: 4
     t.string   "role",             limit: 255,   default: "comments"
     t.datetime "created_at"

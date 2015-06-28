@@ -28,8 +28,6 @@ class GuestBook < ActiveRecord::Base
             inclusion: %w( fr en )
 
   default_scope { order('created_at DESC') }
-  scope :validated, -> { where(validated: true) }
-  scope :to_validate, -> { where(validated: false) }
 
   attr_accessor :nickname
   paginates_per 3

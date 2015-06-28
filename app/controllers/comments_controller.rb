@@ -12,8 +12,10 @@ class CommentsController < ApplicationController
     if comment_params[:nickname].blank?
       @comment = @commentable.comments.new(comment_params)
       @comment.user_id = current_user.id if user_signed_in?
+      @comment.validated = false if @setting.should_validate
       if @comment.save
         flash.now[:success] = 'Comment was successfully created.'
+        flash.now[:success] = 'Commentaire ajouté avec succès. Il sera visible dès que l\'administrateur l\'aura validé' if @setting.should_validate
         respond_action 'create'
       else # Render view user come from instead of the comments default view
         instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
@@ -64,7 +66,7 @@ class CommentsController < ApplicationController
   end
 
   def paginate_commentable
-    @commentable.comments.by_locale(@language).includes(:user).page params[:page]
+    @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
   end
 
   def respond_action(template)
