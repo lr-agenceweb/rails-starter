@@ -34,13 +34,19 @@ ActiveAdmin.register About do
   end
 
   show do
-    attributes_table do
-      row :content
-      row :status
-      row :image
-      row :author_with_avatar
+    columns do
+      column do
+        attributes_table do
+          row :content
+          row :status
+          row :image
+          row :author_with_avatar
+        end
+      end
 
-      render 'admin/shared/referencement/show', resource: resource
+      column do
+        render 'admin/shared/referencement/show', referencement: resource.referencement
+      end
     end
   end
 

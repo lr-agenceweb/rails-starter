@@ -34,24 +34,26 @@ ActiveAdmin.register Category do
     column :title
     column :in_menu
     column :in_footer
-    column :referencement do |resource|
-      render 'admin/shared/referencement/show', resource: resource
-    end
-
     column :module if current_user.super_administrator?
+
     translation_status
     actions
   end
 
   show do
-    h3 resource.title
-    attributes_table do
-      row :background
-      row :in_menu
-      row :in_footer
-      row :module if current_user.super_administrator?
+    columns do
+      column do
+        attributes_table do
+          row :background
+          row :in_menu
+          row :in_footer
+          row :module if current_user.super_administrator?
+        end
+      end
 
-      render 'admin/shared/referencement/show', resource: resource
+      column do
+        render 'admin/shared/referencement/show', referencement: resource.referencement
+      end
     end
   end
 
