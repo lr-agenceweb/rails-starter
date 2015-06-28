@@ -7,7 +7,6 @@ rvm:
 env:
   - DB=mysql
   - DB=postgresql
-  - RAILS_ENV=test
 
 before_script:
   - cp config/database.travis.yml config/database.yml
@@ -16,9 +15,10 @@ before_script:
   - psql -c 'create database rails_starter_test' -U postgres
 
 script:
-  - bundle exec rake --trace db:schema:load
-  - bundle exec rake --trace db:test:prepare
-  - bundle exec rake --trace test
+  - RAILS_ENV=test bundle exec rake --trace db:create
+  - RAILS_ENV=test bundle exec rake --trace db:schema:load
+  - RAILS_ENV=test bundle exec rake --trace db:test:prepare
+  - RAILS_ENV=test bundle exec rake --trace test
 
 after_failure:
   - "mysql -e 'show databases;'"
