@@ -26,7 +26,7 @@ class SettingDecorator < ApplicationDecorator
   end
 
   def map(force = false)
-    raw content_tag(:div, nil, class: 'map dark', id: 'map') if model.show_map || force
+    raw content_tag(:div, nil, class: 'map dark', id: 'map') if (model.show_map && latlon?) || (force && latlon?)
   end
 
   def newsletter(newsletter_user)
@@ -60,6 +60,10 @@ class SettingDecorator < ApplicationDecorator
     arbre do
       status_tag(value, color)
     end
+  end
+
+  def latlon?
+    !model.latitude.nil? && !model.longitude.nil?
   end
 
   def about
