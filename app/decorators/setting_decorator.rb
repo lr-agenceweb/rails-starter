@@ -13,6 +13,14 @@ class SettingDecorator < ApplicationDecorator
     end
   end
 
+  def full_address
+    simple_format("#{model.address} <br> #{model.postcode} - #{model.city}")
+  end
+
+  def latlon
+    simple_format("#{model.latitude}, #{model.longitude}")
+  end
+
   def credentials
     "#{setting.name} - #{copyright} <br> Copyright &copy; #{current_year} <br> #{about} #{admin_link}"
   end

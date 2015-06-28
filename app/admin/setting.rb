@@ -25,46 +25,62 @@ ActiveAdmin.register Setting do
 
   index do
     column :name
-    column :title do |resource|
-      raw "<strong>#{resource.title}</strong>"
-    end
+    column :title
     column :subtitle
     column :phone
     column :email
-    column :address do |resource|
-      raw "#{resource.address}<br>#{resource.postcode} - #{resource.city}"
-    end
+    column :full_address
 
     translation_status
     actions
   end
 
   show do
-    h3 resource.name
-    attributes_table do
-      row :title
-      row :subtitle
-      row :phone
-      row :email
-      row :address do
-        raw "#{resource.address}<br>#{resource.postcode} - #{resource.city}"
+    columns do
+      column do
+        panel 'Site parameters' do
+          attributes_table_for setting.decorate do
+            row :title
+            row :subtitle
+          end
+        end
       end
-      row 'latlon' do
-        raw "#{resource.latitude}, #{resource.longitude}"
+
+      column do
+        panel 'Administrator informations' do
+          attributes_table_for setting.decorate do
+            row :name
+            row :phone
+            row :email
+            row :full_address
+            row :latlon
+          end
+        end
       end
-      row :show_map do
-        status_tag("#{resource.show_map}", (resource.show_map? ? :ok : :warn))
-      end
-      row :show_breadcrumb do
-        status_tag("#{resource.show_breadcrumb}", (resource.show_breadcrumb? ? :ok : :warn))
-      end
-      row :show_social do
-        status_tag("#{resource.show_social}", (resource.show_social? ? :ok : :warn))
+
+      column do
+        panel 'Modules informations' do
+          attributes_table_for setting.decorate do
+            row :show_map do
+              status_tag("#{resource.show_map}", (resource.show_map? ? :ok : :warn))
+            end
+            row :show_breadcrumb do
+              status_tag("#{resource.show_breadcrumb}", (resource.show_breadcrumb? ? :ok : :warn))
+            end
+            row :show_social do
+              status_tag("#{resource.show_social}", (resource.show_social? ? :ok : :warn))
+            end
+          end
+        end
       end
     end
 
-    panel 'Map' do
-      render 'show', resource: setting.decorate
+    columns do
+      column do
+        panel 'Map' do
+          render 'show', resource: setting.decorate
+        end
+      end
     end
   end
 
