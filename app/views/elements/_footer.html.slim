@@ -7,7 +7,7 @@ footer.footer-container#footer
     .small-12.large-4.columns.credentials
       == setting.credentials
 
-    - if setting.show_social
-      .small-12.large-4.columns.credentials
+    .small-12.large-4.columns.socials
+      - if setting.show_social
         = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
         = awesome_social_share
