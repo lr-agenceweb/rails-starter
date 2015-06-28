@@ -35,7 +35,7 @@ about:
   <<: *DEFAULTS
   name: About
   show_in_menu: false
-  show_in_footer: false
+  show_in_footer: true
   optional: false
   optional_module: null
 
