@@ -61,15 +61,9 @@ ActiveAdmin.register Setting do
       column do
         panel 'Modules informations' do
           attributes_table_for setting.decorate do
-            row :show_map do
-              status_tag("#{resource.show_map}", (resource.show_map? ? :ok : :warn))
-            end
-            row :show_breadcrumb do
-              status_tag("#{resource.show_breadcrumb}", (resource.show_breadcrumb? ? :ok : :warn))
-            end
-            row :show_social do
-              status_tag("#{resource.show_social}", (resource.show_social? ? :ok : :warn))
-            end
+            row :map_status
+            row :breadcrumb
+            row :social
           end
         end
       end

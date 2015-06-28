@@ -36,7 +36,31 @@ class SettingDecorator < ApplicationDecorator
     end
   end
 
+  #
+  # == Modules
+  #
+  def breadcrumb
+    color = model.show_breadcrumb? ? 'blue' : 'red'
+    status I18n.t("enabled.#{model.show_breadcrumb}"), color
+  end
+
+  def social
+    color = model.show_social? ? 'blue' : 'red'
+    status I18n.t("enabled.#{model.show_social}"), color
+  end
+
+  def map_status
+    color = model.show_map? ? 'blue' : 'red'
+    status I18n.t("enabled.#{model.show_map}"), color
+  end
+
   private
+
+  def status(value, color)
+    arbre do
+      status_tag(value, color)
+    end
+  end
 
   def about
     link_to I18n.t('main_menu.about'), abouts_path
