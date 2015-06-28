@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  optional_modules = OptionalModule.all
+  optional_modules = Object.const_defined?('OptionalModule') ? OptionalModule.all : []
   comment_enabled = optional_modules.empty? ? true : optional_modules.by_name('Comment').enabled?
   guest_book_enabled = optional_modules.empty? ? true : optional_modules.by_name('GuestBook').enabled?
   search_enabled = optional_modules.empty? ? true : optional_modules.by_name('Search').enabled?
