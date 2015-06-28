@@ -1,18 +1,30 @@
 language: ruby
 cache: bundler
+
 rvm:
-- 2.2.0
+  - 2.2.0
+
 env:
-- DB=mysql
-- DB=postgresql
+  - DB=mysql
+  - DB=postgresql
+  - RAILS_ENV=test
+
 before_script:
-- cp config/database.travis.yml config/database.yml
-- cp config/application.example.yml config/application.yml
-- mysql -e 'create database rails_starter_test'
-- psql -c 'create database rails_starter_test' -U postgres
+  - cp config/database.travis.yml config/database.yml
+  - cp config/application.example.yml config/application.yml
+  - mysql -e 'create database rails_starter_test'
+  - psql -c 'create database rails_starter_test' -U postgres
+
 script:
-- RAILS_ENV=test bundle exec rake --trace db:migrate
-- RAILS_ENV=test bundle exec rake test
+  - bundle exec rake --trace db:schema:load
+  - bundle exec rake --trace db:test:prepare
+  - bundle exec rake --trace test
+
+after_failure:
+  - "mysql -e 'show databases;'"
+  - "cat ./config/database.yml"
+  - "echo $RAILS_ENV"
+  - "bundle exec rake --version"
 
 addons:
   code_climate:
