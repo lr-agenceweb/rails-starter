@@ -19,6 +19,7 @@ ActiveAdmin.register Setting do
                   :id, :locale, :title, :subtitle
                 ]
 
+  decorate_with SettingDecorator
   config.clear_sidebar_sections!
   actions :all, except: [:new, :destroy]
 
@@ -60,7 +61,10 @@ ActiveAdmin.register Setting do
       row :show_social do
         status_tag("#{resource.show_social}", (resource.show_social? ? :ok : :warn))
       end
-      render 'show', resource: resource.decorate
+    end
+
+    panel 'Map' do
+      render 'show', resource: setting.decorate
     end
   end
 
@@ -72,13 +76,19 @@ ActiveAdmin.register Setting do
         t.input :title, hint: 'Titre du site'
         t.input :subtitle, hint: 'Sous-titre du site'
       end
-      f.input :name, hint: 'Nom du propriétaire du site'
-      f.input :email, hint: 'Email d\'où seront reçus les messages de contact'
-      f.input :phone, as: :phone, hint: 'Numéro de téléphone à afficher sur le site pour vous joindre'
+    end
+
+    f.inputs 'Paramètres des modules' do
       f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site'
       f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site'
       f.input :should_validate, hint: 'Si coché, les messages postés dans le livre d\'or et les commentaires ne seront pas visibles tant que vous ne les aurez pas validé manuellement'
       f.input :show_map, hint: 'Afficher ou non la carte sur la page contact'
+    end
+
+    f.inputs 'Paramètres de l\'administrateur' do
+      f.input :name, hint: 'Nom du propriétaire du site'
+      f.input :email, hint: 'Email d\'où seront reçus les messages de contact'
+      f.input :phone, as: :phone, hint: 'Numéro de téléphone à afficher sur le site pour vous joindre'
     end
 
     f.inputs 'Paramètre de la carte', class: 'map-settings' do
