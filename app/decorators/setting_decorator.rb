@@ -6,8 +6,8 @@ class SettingDecorator < ApplicationDecorator
   delegate_all
 
   def title_subtitle(header = :h1, link = root_path, klass = '')
-    h.content_tag(:a, href: link, class: "l-header-site-title-link #{klass}") do
-      concat(h.content_tag(header, class: 'l-header-site-title') do
+    content_tag(:a, href: link, class: "l-header-site-title-link #{klass}") do
+      concat(content_tag(header, class: 'l-header-site-title') do
         concat(model.title) + concat(subtitle)
       end)
     end
@@ -75,6 +75,6 @@ class SettingDecorator < ApplicationDecorator
   end
 
   def subtitle
-    h.content_tag(:small, model.subtitle, class: 'l-header-site-subtitle')
+    content_tag(:small, model.subtitle, class: 'l-header-site-subtitle')
   end
 end
