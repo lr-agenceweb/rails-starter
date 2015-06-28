@@ -38,5 +38,6 @@ class UserTest < ActiveSupport::TestCase
     @super_administrator = users(:anthony)
     @administrator = users(:bob)
     @subscriber = users(:alice)
+    @guest = users(:lana)
   end
 end
