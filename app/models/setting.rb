@@ -32,10 +32,8 @@ class Setting < ActiveRecord::Base
   end
 
   validates :name,     presence: true
-  validates :address,  presence: true
-  validates :city,     presence: true
-  validates :postcode, presence: true, numericality: { only_integer: true }
   validates :email,    presence: true, email_format: {}
+  validates :postcode, presence: false, numericality: { only_integer: true }
 
   def title_and_subtitle
     return "#{title}, #{subtitle}" if subtitle?
