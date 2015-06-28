@@ -6,6 +6,9 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   setup :initialize_test
 
+  #
+  # == Roles
+  #
   test 'should be true if user is super_administrator' do
     assert @super_administrator.super_administrator?
   end
@@ -18,6 +21,9 @@ class UserTest < ActiveSupport::TestCase
     assert @subscriber.subscriber?
   end
 
+  #
+  # == Avatar
+  #
   test 'should be true if user avatar is present' do
     assert @super_administrator.avatar?
   end
@@ -32,6 +38,5 @@ class UserTest < ActiveSupport::TestCase
     @super_administrator = users(:anthony)
     @administrator = users(:bob)
     @subscriber = users(:alice)
-    @guest = users(:lana)
   end
 end
