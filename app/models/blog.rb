@@ -21,6 +21,8 @@
 # == Blog Model
 #
 class Blog < ActiveRecord::Base
+  include Scopable
+
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content
 
