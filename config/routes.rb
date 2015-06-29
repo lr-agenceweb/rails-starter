@@ -24,6 +24,9 @@ Rails.application.routes.draw do
     # GuestBook
     resources :guest_books, only: [:index, :create], concerns: :paginatable
 
+    # Blog
+    resources :blog, only: [:index, :show], concerns: :paginatable
+
     # Search
     resources :searches, only: [:index], concerns: [:searchable, :paginatable]
 
