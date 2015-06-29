@@ -30,21 +30,21 @@ class SearchesControllerTest < ActionController::TestCase
   test 'should return empty object if query is not set' do
     @locales.each do |locale|
       get :index, locale: locale.to_s
-      assert_empty assigns(:posts)
+      assert_empty assigns(:searches)
     end
   end
 
   test 'should return empty object if query is empty' do
     @locales.each do |locale|
       get :index, locale: locale.to_s, query: ''
-      assert_empty assigns(:posts)
+      assert_empty assigns(:searches)
     end
   end
 
   test 'should return empty object if query not in post articles' do
     @locales.each do |locale|
       get :index, locale: locale.to_s, query: 'Unitary tests'
-      assert_empty assigns(:posts)
+      assert_empty assigns(:searches)
     end
   end
 
@@ -52,10 +52,10 @@ class SearchesControllerTest < ActionController::TestCase
     query = 'Ruby'
     @locales.each do |locale|
       get :index, locale: locale.to_s, query: query
-      posts = assigns(:posts)
-      assert_not_empty posts
-      assert_match(/#{query}/, posts.first.title)
-      assert_match(/#{query}/, posts.first.content)
+      searches = assigns(:searches)
+      assert_not_empty searches
+      assert_match(/#{query}/, searches.first.title)
+      assert_match(/#{query}/, searches.first.content)
     end
   end
 
@@ -63,8 +63,8 @@ class SearchesControllerTest < ActionController::TestCase
     query = 'Ruby'
     @locales.each do |locale|
       get :index, locale: locale.to_s, query: query
-      posts = assigns(:posts)
-      assert_equal posts.count, 1
+      searches = assigns(:searches)
+      assert_equal searches.count, 1
     end
   end
 
@@ -72,15 +72,15 @@ class SearchesControllerTest < ActionController::TestCase
     query = 'Hébergement'
     I18n.with_locale(:fr) do
       get :index, locale: 'fr', query: query
-      posts = assigns(:posts)
-      assert_not_empty posts
-      assert_match(/#{query}/, posts.first.title)
+      searches = assigns(:searches)
+      assert_not_empty searches
+      assert_match(/#{query}/, searches.first.title)
     end
 
     if @locales.include?(:en)
       I18n.with_locale(:en) do
         get :index, locale: 'en', query: query
-        assert_empty assigns(:posts)
+        assert_empty assigns(:searches)
       end
     end
   end
@@ -95,8 +95,8 @@ class SearchesControllerTest < ActionController::TestCase
   test 'should not be empty in ajax' do
     query = 'Hébergement'
     xhr :get, :index, format: :js, query: query, locale: 'fr'
-    assert_not_empty assigns(:posts)
-    assert assigns(:posts).count, 1
+    assert_not_empty assigns(:searches)
+    assert assigns(:searches).count, 1
   end
 
   private
