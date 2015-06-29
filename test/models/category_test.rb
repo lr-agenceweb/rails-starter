@@ -29,7 +29,15 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test 'should return only visible header element' do
-    assert_equal 3, Category.visible_header.count
+    assert_equal 4, Category.visible_header.count
+  end
+
+  test 'should return only visible header element with allowed modules' do
+    assert_equal 4, Category.with_allowed_module.visible_header.count
+  end
+
+  test 'should return only allowed modules' do
+    assert_equal 6, Category.with_allowed_module.count
   end
 
   test 'should return only visible footer element' do
