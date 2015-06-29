@@ -84,4 +84,10 @@ class ApplicationDecorator < Draper::Decorator
       status_tag(I18n.t("active_admin.globalize.language.#{model.lang}"), color)
     end
   end
+
+  def status_tag_deco(value, color)
+    arbre do
+      status_tag(value, color)
+    end
+  end
 end
