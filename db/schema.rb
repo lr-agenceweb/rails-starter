@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628003805) do
+ActiveRecord::Schema.define(version: 20150629121229) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -39,6 +39,32 @@ ActiveRecord::Schema.define(version: 20150628003805) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
+
+  create_table "blog_translations", force: :cascade do |t|
+    t.integer  "blog_id",    limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "title",      limit: 255
+    t.string   "slug",       limit: 255
+    t.text     "content",    limit: 65535
+  end
+
+  add_index "blog_translations", ["blog_id"], name: "index_blog_translations_on_blog_id", using: :btree
+  add_index "blog_translations", ["locale"], name: "index_blog_translations_on_locale", using: :btree
+
+  create_table "blogs", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "slug",       limit: 255
+    t.text     "content",    limit: 65535
+    t.boolean  "online",     limit: 1,     default: true
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "blogs", ["slug"], name: "index_blogs_on_slug", unique: true, using: :btree
+  add_index "blogs", ["user_id"], name: "fk_rails_08f7f1b196", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",              limit: 255
@@ -310,6 +336,7 @@ ActiveRecord::Schema.define(version: 20150628003805) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
+  add_foreign_key "blogs", "users"
   add_foreign_key "categories", "optional_modules"
   add_foreign_key "posts", "users"
 end
