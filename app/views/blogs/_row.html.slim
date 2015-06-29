@@ -1,5 +1,5 @@
 li.panel
   p
     small = blog.created_at
-  h3 = blog.title
+  h3 = link_to blog.title, blog_path(blog)
   div = simple_format(blog.content)
