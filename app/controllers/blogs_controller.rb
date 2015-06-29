@@ -14,6 +14,7 @@ class BlogsController < ApplicationController
   # GET /blog/1
   # GET /blog/1.json
   def show
+    redirect_to @blog, status: :moved_permanently if request.path != blog_path(@blog)
   end
 
   private
