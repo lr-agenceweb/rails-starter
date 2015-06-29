@@ -37,3 +37,8 @@ comment:
   <<: *DEFAULTS
   name: Comment
   enabled: true
+
+blog:
+  <<: *DEFAULTS
+  name: Blog
+  enabled: true

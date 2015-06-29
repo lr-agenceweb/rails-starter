@@ -11,11 +11,21 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test 'should return list of categories name in string' do
-    assert_equal %w( Home About Contact Search GuestBook ), Category.models_name_str
+    assert_includes Category.models_name_str, 'Home'
+    assert_includes Category.models_name_str, 'About'
+    assert_includes Category.models_name_str, 'Contact'
+    assert_includes Category.models_name_str, 'Search'
+    assert_includes Category.models_name_str, 'GuestBook'
+    assert_includes Category.models_name_str, 'Blog'
   end
 
   test 'should return list of categories name in symbol' do
-    assert_equal [:Home, :About, :Contact, :Search, :GuestBook], Category.models_name
+    assert_includes Category.models_name, :Home
+    assert_includes Category.models_name, :About
+    assert_includes Category.models_name, :Contact
+    assert_includes Category.models_name, :Search
+    assert_includes Category.models_name, :GuestBook
+    assert_includes Category.models_name, :Blog
   end
 
   test 'should return only visible header element' do

@@ -64,3 +64,12 @@ guest_book:
   show_in_footer: false
   optional: true
   optional_module: guest_book
+
+blog:
+  <<: *DEFAULTS
+  title: Blog
+  name: Blog
+  show_in_menu: true
+  show_in_footer: false
+  optional: true
+  optional_module: blog
