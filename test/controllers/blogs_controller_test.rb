@@ -1,9 +1,9 @@
 require 'test_helper'
 
 #
-# == BlogController Test
+# == BlogsController Test
 #
-class BlogControllerTest < ActionController::TestCase
+class BlogsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

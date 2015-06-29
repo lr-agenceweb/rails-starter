@@ -1,14 +1,14 @@
 #
-# == BlogController
+# == BlogsController
 #
-class BlogController < ApplicationController
+class BlogsController < ApplicationController
   before_action :set_blog, only: [:show]
-  decorates_assigned :about, :comment, :element
+  decorates_assigned :blog, :comment
 
   # GET /blog
   # GET /blog.json
   def index
-    BlogDecorator.decorate_collection(Blog.online.by_locale(@language).page params[:page])
+    @blogs = BlogDecorator.decorate_collection(Blog.online.page params[:page])
   end
 
   # GET /blog/1

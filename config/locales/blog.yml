@@ -1,0 +1,9 @@
+# English
+en:
+  blog:
+    no_results: No blog post to show
+
+# French
+fr:
+  blog:
+    no_results: Il n'y a aucun article de blog à montrer

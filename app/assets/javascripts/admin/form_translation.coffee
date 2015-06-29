@@ -21,7 +21,7 @@ switch_locale = (element) ->
 
 
 slugify = ->
-  categories = ['home', 'about', 'content']
+  categories = ['home', 'about', 'content', 'blog']
   $.each categories, (i, val) ->
     j = 0
     while j < 2

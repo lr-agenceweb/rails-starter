@@ -1,4 +1,7 @@
-class BlogDecorator < ApplicationDecorator
+#
+# == BlogDecorator
+#
+class BlogDecorator < PostDecorator
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through
