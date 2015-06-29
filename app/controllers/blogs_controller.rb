@@ -3,8 +3,9 @@
 #
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show]
-  before_action :set_commentable, only: [:show]
   decorates_assigned :blog, :comment
+
+  include Commentable
 
   # GET /blog
   # GET /blog.json
@@ -22,12 +23,5 @@ class BlogsController < ApplicationController
 
   def set_blog
     @blog = Blog.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
-  end
-
-  def set_commentable
-    @commentable = instance_variable_get("@#{controller_name.singularize}")
-    @comments = @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
-    @comments = CommentDecorator.decorate_collection(@comments)
-    @comment = Comment.new
   end
 end
