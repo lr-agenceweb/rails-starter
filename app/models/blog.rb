@@ -23,6 +23,7 @@
 class Blog < ActiveRecord::Base
   include Scopable
   include Imageable
+  include Searchable
 
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content
@@ -43,6 +44,8 @@ class Blog < ActiveRecord::Base
 
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :username, to: :user, prefix: true, allow_nil: true
+
+  paginates_per 10
 
   scope :online, -> { where(online: true) }
 end

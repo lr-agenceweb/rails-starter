@@ -55,6 +55,7 @@ class ApplicationController < ActionController::Base
     @rss_module = optional_modules.by_name('RSS')
     @newsletter_module = optional_modules.by_name('Newsletter')
     @comment_module = optional_modules.by_name('Comment')
+    @blog_module = optional_modules.by_name('Blog')
   end
 
   def authenticate_active_admin_user!
