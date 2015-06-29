@@ -11,6 +11,15 @@ crumb :about do |about|
   parent :abouts
 end
 
+crumb :blogs do
+  link Category.includes(:translations).title_by_category('Blog'), blogs_path
+end
+
+crumb :blog do |blog|
+  link blog.title, blog_path(blog)
+  parent :blogs
+end
+
 crumb :contact do
   link Category.includes(:translations).title_by_category('Contact'), new_contact_path
 end

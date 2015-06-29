@@ -26,6 +26,9 @@ class ApplicationDecorator < Draper::Decorator
     when 'Search'
       return searches_path unless absolute
       searches_url
+    when 'Blog'
+      return blogs_path unless absolute
+      blogs_url
     when 'Contact'
       return new_contact_path unless absolute
       new_contact_url
@@ -42,6 +45,9 @@ class ApplicationDecorator < Draper::Decorator
     when 'About'
       return about_path(model) unless absolute
       about_url(model)
+    when 'Blog'
+      return blog_path(model) unless absolute
+      blog_url(model)
     else
       return '#'
     end

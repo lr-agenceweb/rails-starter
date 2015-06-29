@@ -1,11 +1,11 @@
 .row
   .small-12.columns
-    - if @posts.empty?
+    - if @searches.empty?
       p = t('search.no_results')
     - else
       ul
-        - @posts.each do |post|
-          = render 'row', post: post
+        - @searches.each do |search|
+          = render 'row', search: search
 
       .row
-        = paginate @posts
+        = paginate @searches
