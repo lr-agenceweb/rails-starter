@@ -10,14 +10,16 @@ Rails.application.routes.draw do
     get '(/:query)', action: :index, on: :collection, as: ''
   end
 
+  concern :commentable do
+    resources :comments, only: [:create, :destroy]
+  end
+
   #
   # == Translated routes
   #
   localized do
     root 'homes#index'
-    resources :abouts, only: [:index, :show], concerns: :paginatable do
-      resources :comments, only: [:create, :destroy]
-    end
+    resources :abouts, only: [:index, :show], concerns: [:paginatable, :commentable]
     resources :contacts, only: [:index, :new, :create]
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
@@ -25,9 +27,7 @@ Rails.application.routes.draw do
     resources :guest_books, only: [:index, :create], concerns: :paginatable
 
     # Blog
-    resources :blogs, only: [:index, :show], concerns: :paginatable do
-      resources :comments, only: [:create, :destroy]
-    end
+    resources :blogs, only: [:index, :show], concerns: [:paginatable, :commentable]
 
     # Search
     resources :searches, only: [:index], concerns: [:searchable, :paginatable]
