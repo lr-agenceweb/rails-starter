@@ -44,10 +44,7 @@ class PostDecorator < ApplicationDecorator
 
   def status
     color = model.online? ? 'green' : 'orange'
-
-    arbre do
-      status_tag(I18n.t("online.#{model.online}"), color)
-    end
+    status_tag_deco(I18n.t("online.#{model.online}"), color)
   end
 
   # Method used to display content in RSS Feed

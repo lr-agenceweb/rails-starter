@@ -26,6 +26,9 @@ class ApplicationDecorator < Draper::Decorator
     when 'Search'
       return searches_path unless absolute
       searches_url
+    when 'Blog'
+      return blogs_path unless absolute
+      blogs_url
     when 'Contact'
       return new_contact_path unless absolute
       new_contact_url
@@ -42,6 +45,9 @@ class ApplicationDecorator < Draper::Decorator
     when 'About'
       return about_path(model) unless absolute
       about_url(model)
+    when 'Blog'
+      return blog_path(model) unless absolute
+      blog_url(model)
     else
       return '#'
     end
@@ -82,6 +88,12 @@ class ApplicationDecorator < Draper::Decorator
 
     arbre do
       status_tag(I18n.t("active_admin.globalize.language.#{model.lang}"), color)
+    end
+  end
+
+  def status_tag_deco(value, color)
+    arbre do
+      status_tag(value, color)
     end
   end
 end

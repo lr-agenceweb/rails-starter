@@ -21,7 +21,7 @@ switch_locale = (element) ->
 
 
 slugify = ->
-  categories = ['home', 'about', 'content']
+  categories = ['home', 'about', 'content', 'blog']
   $.each categories, (i, val) ->
     j = 0
     while j < 2
@@ -37,12 +37,12 @@ slugify = ->
 # @param {string} string to slugify
 ###
 string_to_slug = (str) ->
-  str = str.replace(/^\s+|\s+$/g, "") # trim
+  str = str.replace(/^\s+|\s+$/g, '') # trim
   str = str.toLowerCase()
 
   # remove accents, swap ñ for n, etc
-  from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;"
-  to = "aaaaeeeeiiiioooouuuunc------"
+  from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;'"
+  to = "aaaaeeeeiiiioooouuuunc-------"
   i = 0
   l = from.length
 

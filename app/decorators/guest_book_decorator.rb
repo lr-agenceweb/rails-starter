@@ -12,10 +12,7 @@ class GuestBookDecorator < ApplicationDecorator
 
   def status
     color = model.validated? ? 'green' : 'orange'
-
-    arbre do
-      status_tag(I18n.t("validate.#{model.validated}"), color)
-    end
+    status_tag_deco(I18n.t("validate.#{model.validated}"), color)
   end
 
   # def validated

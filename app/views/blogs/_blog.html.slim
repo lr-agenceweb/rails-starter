@@ -1,0 +1,11 @@
+.row
+  .small-12.columns
+    - if @blogs.blank?
+      p = t('blog.no_results')
+    - else
+      div#blogs
+        - @blogs.each do |blog|
+          = render 'row', blog: blog
+
+      .row
+        = paginate @blogs

@@ -1,6 +1,6 @@
 li
   h3
-    = link_to highlight(post.title, params[:query]), post.decorate.show_page_link
-  - text = excerpt(post.content, params[:query], radius: 200)
-  - highlight = text.blank? ? truncate(post.content.html_safe, length: 200, separator: '.') : highlight(text, params[:query])
+    = link_to highlight(search.title, params[:query]), search.decorate.show_page_link
+  - text = excerpt(search.content, params[:query], radius: 200)
+  - highlight = text.blank? ? truncate(search.content.html_safe, length: 200, separator: '.') : highlight(text, params[:query])
   div = highlight

@@ -20,4 +20,8 @@ module Imageable
   def medium
     image.url(:medium)
   end
+
+  def picture?
+    pictures.online.first.present?
+  end
 end

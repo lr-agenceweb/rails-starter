@@ -2,7 +2,7 @@
 
 .row
   .small-12.columns
-    - if @guest_books.empty?
+    - if @guest_books.blank?
       p = t('guest_book.no_results')
     - else
       ul#guest_books
