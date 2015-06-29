@@ -3,7 +3,7 @@
     - if @blogs.blank?
       p = t('blog.no_results')
     - else
-      ul#blogs
+      div#blogs
         - @blogs.each do |blog|
           = render 'row', blog: blog
 
