@@ -33,10 +33,24 @@ class HomesControllerTest < ActionController::TestCase
     assert_routing '/en', controller: 'homes', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
+  #
+  # == Maintenance
+  #
+  test 'should render maintenance layout and template if setting enabled' do
+    @setting.update_attribute(:maintenance, true)
+    I18n.available_locales.each do |locale|
+      get :index, locale: locale.to_s
+      assert_response :success
+      assert_template :maintenance
+      assert_template layout: :maintenance
+    end
+  end
+
   private
 
   def initialize_test
     @home = posts(:home)
     @locales = I18n.available_locales
+    @setting = settings(:one)
   end
 end

@@ -41,26 +41,25 @@ class SettingDecorator < ApplicationDecorator
   #
   def breadcrumb
     color = model.show_breadcrumb? ? 'blue' : 'red'
-    status I18n.t("enabled.#{model.show_breadcrumb}"), color
+    status_tag_deco I18n.t("enabled.#{model.show_breadcrumb}"), color
   end
 
   def social
     color = model.show_social? ? 'blue' : 'red'
-    status I18n.t("enabled.#{model.show_social}"), color
+    status_tag_deco I18n.t("enabled.#{model.show_social}"), color
   end
 
   def map_status
     color = model.show_map? ? 'blue' : 'red'
-    status I18n.t("enabled.#{model.show_map}"), color
+    status_tag_deco I18n.t("enabled.#{model.show_map}"), color
+  end
+
+  def maintenance
+    color = model.maintenance? ? 'red' : 'green'
+    status_tag_deco I18n.t("maintenance.#{model.maintenance}"), color
   end
 
   private
-
-  def status(value, color)
-    arbre do
-      status_tag(value, color)
-    end
-  end
 
   def latlon?
     !model.latitude.nil? && !model.longitude.nil?

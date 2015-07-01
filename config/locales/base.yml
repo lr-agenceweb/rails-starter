@@ -11,6 +11,9 @@ fr:
   validate:
     'true': Validé
     'false': Non validé
+  maintenance:
+    'true': En maintenance
+    'false': En ligne
 
 # English
 en:
@@ -25,3 +28,6 @@ en:
   validate:
     'true': Validated
     'false': Not validated
+  maintenance:
+    'true': In maintenance
+    'false': Online
