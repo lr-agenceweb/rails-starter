@@ -15,6 +15,7 @@ ActiveAdmin.register Setting do
                 :show_breadcrumb,
                 :show_social,
                 :should_validate,
+                :maintenance,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle
                 ]
@@ -30,6 +31,7 @@ ActiveAdmin.register Setting do
     column :phone
     column :email
     column :full_address
+    column :maintenance
 
     translation_status
     actions
@@ -42,6 +44,7 @@ ActiveAdmin.register Setting do
           attributes_table_for setting.decorate do
             row :title
             row :subtitle
+            row :maintenance
           end
         end
       end
@@ -86,6 +89,7 @@ ActiveAdmin.register Setting do
         t.input :title, hint: 'Titre du site'
         t.input :subtitle, hint: 'Sous-titre du site'
       end
+      f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
     end
 
     f.inputs 'Paramètres des modules' do

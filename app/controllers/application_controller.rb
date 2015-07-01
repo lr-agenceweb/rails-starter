@@ -10,8 +10,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   analytical modules: [:google]
 
-  before_action :set_language
   before_action :set_setting
+  before_action :maintenance?
+  before_action :set_language
   before_action :set_menu_elements
   before_action :set_optional_modules
   before_action :set_background, unless: proc { @category.nil? }
@@ -21,6 +22,10 @@ class ApplicationController < ActionController::Base
   decorates_assigned :setting, :category
 
   private
+
+  def maintenance?
+    render template: 'elements/maintenance', layout: 'maintenance' if @setting.maintenance?
+  end
 
   def set_language
     @language = I18n.locale

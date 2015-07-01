@@ -20,6 +20,7 @@
 #  should_validate :boolean          default(FALSE)
 #  created_at      :datetime
 #  updated_at      :datetime
+#  maintenance     :boolean          default(FALSE)
 #
 
 #
