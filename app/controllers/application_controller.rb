@@ -10,8 +10,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   analytical modules: [:google]
 
-  before_action :set_setting
-  before_action :maintenance?
+  before_action :setting_or_maintenance?
   before_action :set_language
   before_action :set_menu_elements
   before_action :set_optional_modules
@@ -23,17 +22,14 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def maintenance?
+  def setting_or_maintenance?
+    @setting = Setting.first
     render template: 'elements/maintenance', layout: 'maintenance' if @setting.maintenance?
   end
 
   def set_language
     @language = I18n.locale
     gon.push(language: @language)
-  end
-
-  def set_setting
-    @setting = Setting.first
   end
 
   def set_menu_elements
