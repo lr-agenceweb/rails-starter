@@ -23,7 +23,7 @@
 #  maintenance     :boolean          default(FALSE)
 #
 
-one:
+DEFAULTS: &DEFAULTS
   name: Rails Starter
   email: demo@startup.fr
   show_map: false
@@ -31,10 +31,21 @@ one:
   postcode: 88990
   city: Paris
   should_validate: true
+  maintenance: false
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+one:
+  id: 1
+  <<: *DEFAULTS
 
 two:
-  email: demo@startup.fr
-  show_map: false
+  id: 2
+  <<: *DEFAULTS
   title: Rails Starter
   subtitle: ''
-  should_validate: true
+
+three:
+  id: 3
+  <<: *DEFAULTS
+  maintenance: true
