@@ -13,3 +13,12 @@
     padding: 10px !important;
   }
 }
+
+form fieldset > ol > li.boolean {
+  height: auto;
+}
+
+.active_admin .activeadmin-translations {
+  margin-left: 30px;
+  margin-right: 30px;
+}
