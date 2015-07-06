@@ -90,11 +90,13 @@ ActiveAdmin.register Setting do
     columns do
       column do
         f.inputs 'Paramètres du site' do
+          f.input :logo,
+                  hint: retina_image_tag(object, :logo, :small)
+
           f.translated_inputs 'Translated fields', switch_locale: false do |t|
             t.input :title, hint: 'Titre du site'
             t.input :subtitle, hint: 'Sous-titre du site'
           end
-          f.input :logo, hint: 'Logo de votre entreprise'
           f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
         end
       end
