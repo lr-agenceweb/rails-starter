@@ -10,7 +10,7 @@ class SettingDecorator < ApplicationDecorator
   def title_subtitle(header = :h1, link = root_path, klass = '')
     content_tag(:a, href: link, class: "l-header-site-title-link #{klass}") do
       concat(content_tag(header, class: 'l-header-site-title') do
-        concat(model.title) + ' ' + concat(subtitle)
+        concat(model.title) + ' ' + concat(small_subtitle)
       end)
     end
   end
@@ -84,7 +84,7 @@ class SettingDecorator < ApplicationDecorator
     ' - ' + (link_to ' administration', admin_root_path, target: :blank) if current_user_and_administrator?
   end
 
-  def subtitle
+  def small_subtitle
     content_tag(:small, model.subtitle, class: 'l-header-site-subtitle')
   end
 end
