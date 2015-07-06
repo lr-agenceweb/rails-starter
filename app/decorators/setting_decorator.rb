@@ -3,6 +3,8 @@
 #
 class SettingDecorator < ApplicationDecorator
   include Draper::LazyHelpers
+  include AssetsHelper
+
   delegate_all
 
   def title_subtitle(header = :h1, link = root_path, klass = '')
@@ -11,6 +13,11 @@ class SettingDecorator < ApplicationDecorator
         concat(model.title) + ' ' + concat(subtitle)
       end)
     end
+  end
+
+  def logo
+    # Website logo present
+    retina_image_tag(model, :logo, :small) if model.logo?
   end
 
   def full_address

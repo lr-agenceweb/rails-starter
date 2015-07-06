@@ -16,6 +16,7 @@ ActiveAdmin.register Setting do
                 :show_social,
                 :should_validate,
                 :maintenance,
+                :logo,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle
                 ]
@@ -25,6 +26,7 @@ ActiveAdmin.register Setting do
   actions :all, except: [:new, :destroy]
 
   index do
+    column :logo
     column :name
     column :title
     column :subtitle
@@ -42,6 +44,7 @@ ActiveAdmin.register Setting do
       column do
         panel 'Site parameters' do
           attributes_table_for setting.decorate do
+            row :logo
             row :title
             row :subtitle
             row :maintenance
@@ -87,11 +90,12 @@ ActiveAdmin.register Setting do
     columns do
       column do
         f.inputs 'Paramètres du site' do
-          f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
           f.translated_inputs 'Translated fields', switch_locale: false do |t|
             t.input :title, hint: 'Titre du site'
             t.input :subtitle, hint: 'Sous-titre du site'
           end
+          f.input :logo, hint: 'Logo de votre entreprise'
+          f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
         end
       end
 
