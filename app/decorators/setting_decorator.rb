@@ -8,7 +8,7 @@ class SettingDecorator < ApplicationDecorator
   def title_subtitle(header = :h1, link = root_path, klass = '')
     content_tag(:a, href: link, class: "l-header-site-title-link #{klass}") do
       concat(content_tag(header, class: 'l-header-site-title') do
-        concat(model.title) + concat(subtitle)
+        concat(model.title) + ' ' + concat(subtitle)
       end)
     end
   end
