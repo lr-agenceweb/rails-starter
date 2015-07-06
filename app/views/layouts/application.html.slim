@@ -20,7 +20,7 @@ html lang="#{@language}"
       = auto_discovery_link_tag(:rss, posts_rss_path(:rss))
     == raw analytical.head_append_javascript if Rails.env.production?
 
-  body
+  body style="#{background_from_color_picker(category)}"
     == raw analytical.body_prepend_javascript if Rails.env.production?
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'

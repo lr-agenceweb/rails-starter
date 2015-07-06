@@ -5,6 +5,7 @@
 #  id                 :integer          not null, primary key
 #  title              :string(255)
 #  name               :string(255)
+#  color              :string(255)
 #  show_in_menu       :boolean          default(TRUE)
 #  show_in_footer     :boolean          default(FALSE)
 #  position           :integer

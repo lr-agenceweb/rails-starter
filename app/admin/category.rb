@@ -4,6 +4,7 @@ ActiveAdmin.register Category do
 
   permit_params :id,
                 :name,
+                :color,
                 :show_in_menu,
                 :show_in_footer,
                 :optional,
@@ -65,6 +66,8 @@ ActiveAdmin.register Category do
               collection: Category.models_name,
               include_blank: false,
               input_html: { class: 'chosen-select' }
+      f.input :color,
+              input_html: { class: 'colorpicker' }
       f.input :show_in_menu
       f.input :show_in_footer
     end

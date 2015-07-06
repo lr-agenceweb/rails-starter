@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701145755) do
+ActiveRecord::Schema.define(version: 20150706142644) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20150701145755) do
   create_table "categories", force: :cascade do |t|
     t.string   "title",              limit: 255
     t.string   "name",               limit: 255
+    t.string   "color",              limit: 255
     t.boolean  "show_in_menu",       limit: 1,   default: true
     t.boolean  "show_in_footer",     limit: 1,   default: false
     t.integer  "position",           limit: 4
