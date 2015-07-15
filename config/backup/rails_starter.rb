@@ -9,7 +9,7 @@
 # For more information about Backup's components, see the documentation at:
 # http://backup.github.io/backup
 #
-app_config = YAML.load_file('/home/anthony/www/production/rails-starter/shared/config/application.yml')
+app_config = YAML.load_file('/home/anthony/www/staging/rails-starter/shared/config/application.yml')
 
 LR_Backup.new(:conseil_culture, "Site #{app_config['application_host']}") do
 
