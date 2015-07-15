@@ -1,4 +1,9 @@
 #!/bin/sh
-if [ "$RACK_ENV" == "development" ]; then
-  rake jobs:work
+if [[ "$RACK_ENV" == "development" ]]; then
+  if [[ "$START_DELAYED_JOB" == "true" ]]; then
+    bundle exec rake jobs:work
+    echo "====== DelayedJob started ======"
+  else
+    echo "====== DelayedJob not started ======"
+  fi
 fi
