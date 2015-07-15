@@ -49,6 +49,18 @@ fr:
       guest_book:
         one: Livre d'Or
         other: Livre d'Or
+      picture:
+        one: Image
+        other: Images
+      background:
+        one: Arrière-plan
+        other: Arrière-plans
+      optional_module:
+        one: Module Optionnel
+        other: Modules Optionnels
+      category:
+        one: Catégorie
+        other: Catégories
 
     attributes:
       post:
