@@ -91,18 +91,24 @@ ActiveAdmin.register Setting do
     columns do
       column do
         f.inputs 'Paramètres du site' do
+          columns do
+            column do
+              f.translated_inputs 'Translated fields', switch_locale: true do |t|
+                t.input :title, hint: 'Titre du site'
+                t.input :subtitle, hint: 'Sous-titre du site'
+              end
+            end
 
-          f.translated_inputs 'Translated fields', switch_locale: false do |t|
-            t.input :title, hint: 'Titre du site'
-            t.input :subtitle, hint: 'Sous-titre du site'
+            column do
+              f.input :logo,
+                      hint: retina_image_tag(object, :logo, :small)
+              f.input :delete_logo,
+                      as: :boolean,
+                      hint: 'Si coché, le logo sera supprimé après mise à jour des paramètres'
+            end
           end
-          f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
 
-          f.input :logo,
-                  hint: retina_image_tag(object, :logo, :small)
-          f.input :delete_logo,
-                  as: :boolean,
-                  hint: 'Supprimer le logo ?'
+          f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
         end
       end
 
