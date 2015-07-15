@@ -36,7 +36,8 @@ module LanguageHelper
   end
 
   def change_slug?
-    (params[:controller] == 'abouts'
+    (params[:controller] == 'abouts' ||
+    params[:controller] == 'blogs'
     ) && params[:action] == 'show'
   end
 
