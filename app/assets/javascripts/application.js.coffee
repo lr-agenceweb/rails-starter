@@ -26,7 +26,3 @@
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()
-
-  # Show loader on Ajax form submit
-  $('form').submit ->
-    NProgress.start()
