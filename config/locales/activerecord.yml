@@ -92,6 +92,8 @@ fr:
         latlon: Latitude / Longitude
       user:
         username: Nom d'utilisateur
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
         sign_in_count: Nombre de connections
         current_sign_in_at: Connecté depuis
         last_sign_in_at: Dernière connexion
