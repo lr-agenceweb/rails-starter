@@ -12,9 +12,14 @@ application_base_secret_key: ~
 # == Database
 #
 db_host: ~
-db_name: ~
-db_username: ~
-db_password: ~
+staging:
+  db_name: ~
+  db_username: ~
+  db_password: ~
+production:
+  db_name: ~
+  db_username: ~
+  db_password: ~
 
 
 #
