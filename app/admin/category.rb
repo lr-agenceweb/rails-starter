@@ -73,7 +73,7 @@ ActiveAdmin.register Category do
     end
 
     f.inputs 'Catégorie' do
-      f.translated_inputs 'Translated fields', switch_locale: false do |t|
+      f.translated_inputs 'Translated fields', switch_locale: true do |t|
         t.input :title, hint: 'Titre du menu'
       end
     end
