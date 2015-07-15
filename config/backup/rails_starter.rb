@@ -1,17 +1,17 @@
 # encoding: utf-8
 
 ##
-# Backup Generated: conseil_culture
+# Backup Generated: rails_starter
 # Once configured, you can run the backup with the following command:
 #
-# $ backup perform -t conseil_culture [-c <path_to_configuration_file>]
+# $ backup perform -t rails_starter [-c <path_to_configuration_file>]
 #
 # For more information about Backup's components, see the documentation at:
 # http://backup.github.io/backup
 #
-app_config = YAML.load_file('/home/anthony/www/production/rails-starter/shared/config/application.yml')
+app_config = YAML.load_file('/home/anthony/www/staging/rails-starter/shared/config/application.yml')
 
-LR_Backup.new(:conseil_culture, "Site #{app_config['application_host']}") do
+LR_Backup.new(:rails_starter, "Site #{app_config['application_host']}") do
 
   ##
   # MySQL [Database]

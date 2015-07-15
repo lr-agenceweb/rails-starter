@@ -40,7 +40,7 @@ set :keep_releases, 5
 
 # Backup
 set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
-set :backup_name, Figaro.env.application_name
+set :backup_name, 'rails_starter'
 
 namespace :deploy do
   after :restart, :clear_cache do
