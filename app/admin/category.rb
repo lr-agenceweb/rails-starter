@@ -61,20 +61,33 @@ ActiveAdmin.register Category do
   form do |f|
     f.semantic_errors *f.object.errors.keys
 
-    f.inputs 'Général' do
-      f.input :name,
-              collection: Category.models_name,
-              include_blank: false,
-              input_html: { class: 'chosen-select' }
-      f.input :color,
-              input_html: { class: 'colorpicker' }
-      f.input :show_in_menu
-      f.input :show_in_footer
-    end
+    columns do
+      column do
+        f.inputs t('activerecord.models.category.one') do
+          f.translated_inputs 'Translated fields', switch_locale: true do |t|
+            t.input :title, hint: 'Titre du menu'
+          end
+        end
+      end
 
-    f.inputs 'Catégorie' do
-      f.translated_inputs 'Translated fields', switch_locale: true do |t|
-        t.input :title, hint: 'Titre du menu'
+      column do
+        f.inputs 'Général' do
+          columns do
+            column do
+              f.input :name,
+                      collection: Category.models_name,
+                      include_blank: false,
+                      input_html: { class: 'chosen-select' }
+            end
+
+            column do
+              f.input :show_in_menu
+              f.input :show_in_footer
+            end
+          end
+          f.input :color,
+                  input_html: { class: 'colorpicker' }
+        end
       end
     end
 

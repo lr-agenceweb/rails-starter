@@ -1,8 +1,6 @@
-- f.inputs 'Référencement', for: [:referencement, f.object.referencement || Referencement.new] do |item|
+- f.inputs t('activerecord.models.referencement.one'), for: [:referencement, f.object.referencement || Referencement.new] do |item|
 
-  - item.translated_inputs 'Translated fields', switch_locale: false do |t|
-    / - t.input :title,
-    /           hint: I18n.t('form.hint.title')
+  - item.translated_inputs 'Translated fields', switch_locale: true do |t|
     - t.input :description,
               hint: I18n.t('form.hint.description'),
               input_html: { class: 'small-height' }
