@@ -25,4 +25,8 @@ module ApplicationHelper
     link = link_to category.title, category.menu_link(category.name), class: 'l-page-title-link'
     content_tag(:h2, link, class: 'l-page-title', id: category.name.downcase)
   end
+
+  def background_from_color_picker(category)
+    "background-color: #{category.color}" unless category.nil? || category.color.blank?
+  end
 end

@@ -1,4 +1,9 @@
 #!/bin/sh
-if [ "$RACK_ENV" == "development" ]; then
-  rails s
+if [[ "$RACK_ENV" == "development" ]]; then
+  if [[ "$START_IP_LOCAL_NETWORK" == "true" ]]; then
+    IP_ADDRESS=`ifconfig en0 | grep inet | grep -v inet6 | awk '{print $2}'`
+    bundle exec rails s -b $IP_ADDRESS
+  else
+    bundle exec rails s
+  fi
 fi

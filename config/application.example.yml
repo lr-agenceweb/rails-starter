@@ -1,33 +1,39 @@
 #
 # == Application
 #
-application_host : http://localhost:3000
-domain_name: localhost:3000
-application_secret_key_base: ''
-devise_secret_key: ''
+application_host : 'http://localhost:3000'
+application_domain_name: 'localhost:3000'
+application_name: ~
+application_devise_secret_key: ~
+application_base_secret_key: ~
 
 
 #
 # == Database
 #
-db_host: ''
-db_name: ''
-db_username: ''
-db_password: ''
+db_host: ~
+staging:
+  db_name: ~
+  db_username: ~
+  db_password: ~
+production:
+  db_name: ~
+  db_username: ~
+  db_password: ~
 
 
 #
 # == Mapbox
 #
-mapbox_username: ''
-mapbox_map_key: ''
-mapbox_access_token: ''
+mapbox_username: ~
+mapbox_map_key: ~
+mapbox_access_token: ~
 
 
 #
 # == Twitter
 #
-twitter_username: ''
+twitter_username: ~
 
 
 #
@@ -39,9 +45,37 @@ bing_site_verification: ~
 
 
 #
-# == Mandrill (Mail server)
+# == Mail server
 #
-mandrill_address: ~
-mandrill_port: ~
-mandrill_username: ~
-mandrill_password: ~
+mailer_address: ~
+mailer_port: ~
+mailer_user_name: ~
+mailer_password: ~
+
+#
+# == Froala [ActiveAdmin wysiwyg editor ]
+#
+froala_key: ~
+
+
+#
+# == Staging Authentication
+#
+staging:
+  admin_username: ~
+  admin_password: ~
+  guest_username: ~
+  guest_password: ~
+
+
+#
+# == Backup gem
+#
+production:
+  dropbox: # Dropbox [Storage]
+    api_key: ~
+    api_secret: ~
+  slack: # Slack [Notifier]
+    webhook_url: ~
+    channel: ~
+  username: ~

@@ -22,6 +22,13 @@ class SearchesControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should have a background color associated' do
+    @locales.each do |locale|
+      get :index, locale: locale.to_s
+      assert_equal assigns(:category).color, '#F00'
+    end
+  end
+
   test 'should get search page by url' do
     assert_routing '/rechercher', controller: 'searches', action: 'index', locale: 'fr' if @locales.include?(:fr)
     assert_routing '/en/search', controller: 'searches', action: 'index', locale: 'en' if @locales.include?(:en)

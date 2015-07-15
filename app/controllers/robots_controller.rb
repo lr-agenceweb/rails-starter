@@ -1,7 +1,7 @@
 #
 # == RobotsController
 #
-class RobotsController < ApplicationController
+class RobotsController < ActionController::Base
   layout false
 
   def index

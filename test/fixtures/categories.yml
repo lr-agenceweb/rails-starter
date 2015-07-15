@@ -5,6 +5,7 @@
 #  id                 :integer          not null, primary key
 #  title              :string(255)
 #  name               :string(255)
+#  color              :string(255)
 #  show_in_menu       :boolean          default(TRUE)
 #  show_in_footer     :boolean          default(FALSE)
 #  position           :integer
@@ -55,6 +56,7 @@ search:
   show_in_footer: false
   optional: true
   optional_module: search
+  color: '#F00'
 
 guest_book:
   <<: *DEFAULTS

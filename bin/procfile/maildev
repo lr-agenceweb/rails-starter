@@ -1,4 +1,9 @@
 #!/bin/sh
-if [ "$RACK_ENV" == 'development' ]; then
-  maildev
+if [[ "$RACK_ENV" == "development" ]]; then
+  if [[ "$START_MAILDEV" == "true" ]]; then
+    maildev
+    echo "====== Maildev server launched ======"
+  else
+    echo "====== Maildev server not launched ======"
+  fi
 fi

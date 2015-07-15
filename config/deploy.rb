@@ -4,6 +4,8 @@ lock '3.4.0'
 set :application, 'rails-starter'
 set :repo_url, 'git@github.com:anthony-robin/rails-starter.git'
 
+set :deploy_user, 'anthony'
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -33,6 +35,10 @@ set :default_env, rvm_bin_path: '~/.rvm/bin'
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
+
+# Backup
+set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
+set :backup_name, Figaro.env.application_name
 
 namespace :deploy do
   after :restart, :clear_cache do

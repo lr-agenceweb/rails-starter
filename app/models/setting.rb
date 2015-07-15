@@ -2,25 +2,30 @@
 #
 # Table name: settings
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  title           :string(255)
-#  subtitle        :string(255)
-#  phone           :string(255)
-#  email           :string(255)
-#  address         :string(255)
-#  city            :string(255)
-#  postcode        :string(255)
-#  geocode_address :string(255)
-#  latitude        :float(24)
-#  longitude       :float(24)
-#  show_map        :boolean          default(TRUE)
-#  show_breadcrumb :boolean          default(FALSE)
-#  show_social     :boolean          default(TRUE)
-#  should_validate :boolean          default(FALSE)
-#  created_at      :datetime
-#  updated_at      :datetime
-#  maintenance     :boolean          default(FALSE)
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  title             :string(255)
+#  subtitle          :string(255)
+#  phone             :string(255)
+#  email             :string(255)
+#  address           :string(255)
+#  city              :string(255)
+#  postcode          :string(255)
+#  geocode_address   :string(255)
+#  latitude          :float(24)
+#  longitude         :float(24)
+#  show_map          :boolean          default(TRUE)
+#  show_breadcrumb   :boolean          default(FALSE)
+#  show_social       :boolean          default(TRUE)
+#  should_validate   :boolean          default(FALSE)
+#  maintenance       :boolean          default(FALSE)
+#  logo_updated_at   :datetime
+#  logo_file_size    :integer
+#  logo_content_type :string(255)
+#  logo_file_name    :string(255)
+#  retina_dimensions :text(65535)
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 #
@@ -31,6 +36,21 @@ class Setting < ActiveRecord::Base
   active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true
   end
+
+  retina!
+  has_attached_file :logo,
+                    path: ':rails_root/public/system/logo/:id/:style-:filename',
+                    url:  '/system/logo/:id/:style-:filename',
+                    styles: {
+                      large:  '512x512>',
+                      medium: '256x256>',
+                      small:  '128x128>',
+                      thumb:  '64x64>'
+                    },
+                    retina: { quality: 70 },
+                    default_url: '/system/default/:style-missing.png'
+
+  validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
 
   validates :name,     presence: true
   validates :email,    presence: true, email_format: {}
