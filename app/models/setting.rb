@@ -56,6 +56,8 @@ class Setting < ActiveRecord::Base
   validates :email,    presence: true, email_format: {}
   validates :postcode, presence: false, numericality: { only_integer: true }
 
+  include DeletableAttachment
+
   def title_and_subtitle
     return "#{title}, #{subtitle}" if subtitle?
     title

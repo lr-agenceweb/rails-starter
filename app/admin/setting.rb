@@ -17,6 +17,7 @@ ActiveAdmin.register Setting do
                 :should_validate,
                 :maintenance,
                 :logo,
+                :delete_logo,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle
                 ]
@@ -90,14 +91,18 @@ ActiveAdmin.register Setting do
     columns do
       column do
         f.inputs 'Paramètres du site' do
-          f.input :logo,
-                  hint: retina_image_tag(object, :logo, :small)
 
           f.translated_inputs 'Translated fields', switch_locale: false do |t|
             t.input :title, hint: 'Titre du site'
             t.input :subtitle, hint: 'Sous-titre du site'
           end
           f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
+
+          f.input :logo,
+                  hint: retina_image_tag(object, :logo, :small)
+          f.input :delete_logo,
+                  as: :boolean,
+                  hint: 'Supprimer le logo ?'
         end
       end
 
