@@ -38,6 +38,16 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: [:slugged, :finders]
 
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :posts
+  belongs_to :role
+  delegate :name, to: :role, prefix: true, allow_nil: true
+  accepts_nested_attributes_for :role, reject_if: :all_blank
+
   retina!
   has_attached_file :avatar,
                     path: ':rails_root/public/system/avatar/:id/:style-:filename',
@@ -53,15 +63,7 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  has_many :posts
-  belongs_to :role
-  delegate :name, to: :role, prefix: true, allow_nil: true
-  accepts_nested_attributes_for :role, reject_if: :all_blank
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable
+  include DeletableAttachment
 
   validates :username,
             presence: true,

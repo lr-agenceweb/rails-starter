@@ -7,6 +7,7 @@ ActiveAdmin.register User do
                 :email,
                 :password,
                 :avatar,
+                :delete_avatar,
                 :password_confirmation,
                 :role_id
 
@@ -56,6 +57,10 @@ ActiveAdmin.register User do
       f.input :avatar,
               as: :file,
               avatar_preview: true
+      f.input :delete_avatar,
+              as: :boolean,
+              hint: 'Si coché, le logo sera supprimé après mise à jour des paramètres'
+
       f.input :username
       f.input :email
       f.input :password
