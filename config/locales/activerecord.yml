@@ -61,11 +61,23 @@ fr:
       setting:
         title: Titre
         subtitle: Sous-titre
+        logo: Logo
+        delete_logo: Supprimer le logo
         name: Nom
         city: Ville
         postcode: Code Postal
         address: Adresse
         phone: Téléphone
+        show_breadcrumb: Afficher le fil d'ariane ?
+        show_social: Afficher le partage sur les réseaux sociaux ?
+        should_validate: Valider les commentaires et les messages du livre d'or ?
+        show_map: Afficher la carte ?
+        geocode_address: Adresse avec géolocalisation
+        full_address: Adresse complète
+        map_status: Carte
+        breadcrumb: Fil d'ariane
+        social: Réseaux sociaux
+        latlon: Latitude / Longitude
       user:
         username: Nom d'utilisateur
         sign_in_count: Nombre de connections
@@ -82,3 +94,13 @@ fr:
         sent: Envoyé ?
         sent_at: Envoyé le
         send: Envoyer
+
+  formtastic:
+    create: 'Créer %{model}'
+    update: 'Mettre à jour %{model}'
+    labels:
+      category:
+        title: Titre
+      setting:
+        title: Titre du site
+        subtitle: Sous-titre du site
