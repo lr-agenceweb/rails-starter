@@ -1,10 +1,10 @@
 #
 # == Application
 #
-application_host : http://localhost:3000
-domain_name: localhost:3000
-application_secret_key_base: ''
-devise_secret_key: ''
+application_host : 'http://localhost:3000'
+application_domain_name: 'localhost:3000'
+application_devise_secret_key: ~
+application_base_secret_key: ~
 
 
 #
@@ -41,11 +41,10 @@ bing_site_verification: ~
 #
 # == Mail server
 #
-mailer:
-  address: ~
-  port: ~
-  user_name: ~
-  password: ~
+mailer_address: ~
+mailer_port: ~
+mailer_user_name: ~
+mailer_password: ~
 
 
 #
