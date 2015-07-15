@@ -159,8 +159,13 @@ ActiveAdmin.register Setting do
   #
   controller do
     before_action :set_setting, only: [:show]
+    before_action :redirect_to_show, only: [:index]
 
     private
+
+    def redirect_to_show
+      redirect_to admin_setting_path(@setting)
+    end
 
     def set_setting
       @setting = Setting.find(params[:id])
