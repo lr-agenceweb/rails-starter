@@ -8,7 +8,7 @@ ruby '2.2.0'
 #
 # == Rails
 #
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.3'
 
 #
 # == Database
