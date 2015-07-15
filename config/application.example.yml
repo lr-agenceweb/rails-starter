@@ -45,3 +45,13 @@ mandrill_address: ~
 mandrill_port: ~
 mandrill_username: ~
 mandrill_password: ~
+
+
+#
+# == Staging Authentication
+#
+staging:
+  admin_username: ~
+  admin_password: ~
+  guest_username: ~
+  guest_password: ~

@@ -88,4 +88,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # RESTRICTING ACCESS TO THE STAGE ENVIRONMENT
+  config.middleware.insert_before(::Rack::Runtime, "::Rack::Auth::Basic", 'Staging environment') do |u, p|
+    (u == Figaro.env.admin_username && p == Figaro.env.admin_password) ||
+    (u == Figaro.env.guest_username && p == Figaro.env.guest_password)
+  end
 end
