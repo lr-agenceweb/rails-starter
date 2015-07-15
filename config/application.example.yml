@@ -3,6 +3,7 @@
 #
 application_host : 'http://localhost:3000'
 application_domain_name: 'localhost:3000'
+application_name: ~
 application_devise_secret_key: ~
 application_base_secret_key: ~
 
@@ -10,24 +11,24 @@ application_base_secret_key: ~
 #
 # == Database
 #
-db_host: ''
-db_name: ''
-db_username: ''
-db_password: ''
+db_host: ~
+db_name: ~
+db_username: ~
+db_password: ~
 
 
 #
 # == Mapbox
 #
-mapbox_username: ''
-mapbox_map_key: ''
-mapbox_access_token: ''
+mapbox_username: ~
+mapbox_map_key: ~
+mapbox_access_token: ~
 
 
 #
 # == Twitter
 #
-twitter_username: ''
+twitter_username: ~
 
 
 #
@@ -46,6 +47,11 @@ mailer_port: ~
 mailer_user_name: ~
 mailer_password: ~
 
+#
+# == Froala [ActiveAdmin wysiwyg editor ]
+#
+froala_key: ~
+
 
 #
 # == Staging Authentication
@@ -55,3 +61,16 @@ staging:
   admin_password: ~
   guest_username: ~
   guest_password: ~
+
+
+#
+# == Backup gem
+#
+production:
+  dropbox: # Dropbox [Storage]
+    api_key: ~
+    api_secret: ~
+  slack: # Slack [Notifier]
+    webhook_url: ~
+    channel: ~
+  username: ~
