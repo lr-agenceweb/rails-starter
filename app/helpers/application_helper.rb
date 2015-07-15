@@ -27,6 +27,6 @@ module ApplicationHelper
   end
 
   def background_from_color_picker(category)
-    "background-color: #{category.color}" unless category.color.blank?
+    "background-color: #{category.color}" unless category.nil? || category.color.blank?
   end
 end
