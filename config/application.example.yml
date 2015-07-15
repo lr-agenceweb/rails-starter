@@ -39,12 +39,13 @@ bing_site_verification: ~
 
 
 #
-# == Mandrill (Mail server)
+# == Mail server
 #
-mandrill_address: ~
-mandrill_port: ~
-mandrill_username: ~
-mandrill_password: ~
+mailer:
+  address: ~
+  port: ~
+  user_name: ~
+  password: ~
 
 
 #

@@ -70,10 +70,10 @@ Rails.application.configure do
   config.action_mailer.default charset: 'utf-8'
 
   config.action_mailer.smtp_settings = {
-    address: Figaro.env.mandrill_address,
-    port: Figaro.env.mandrill_port,
-    user_name: Figaro.env.mandrill_username,
-    password: Figaro.env.mandrill_password
+    address:   Figaro.env.mailer.address,
+    user_name: Figaro.env.mailer.user_name,
+    password:  Figaro.env.mailer.password,
+    port:      Figaro.env.mailer.port
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
