@@ -28,7 +28,7 @@ That's it !
 Ruby and Rails versions
 -----------------------
 Ruby 2.2.0  
-Rails 4.2  
+Rails 4.2.3  
 
 Server
 ------
@@ -36,7 +36,7 @@ I am using unicorn in local development. The server is launch using `foreman sta
 
 Database
 ---------
-I am using `mysql2` but you can choose to use `SQLite` or any other SGBD.  
+I am using `mysql2` but you can choose to use `PostgreSQL` or any other SGBD.  
 To create a dump of your database, run `rake db:backup`
 
 Template
