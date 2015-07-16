@@ -1,5 +1,5 @@
 $(document).on 'ready page:load page:restore', ->
-  $('#query.autocomplete').autocomplete(
+  $('#term.autocomplete').autocomplete(
     source: gon.search_path
     select: (event, ui) ->
       Turbolinks.visit(ui.item.url)

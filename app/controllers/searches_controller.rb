@@ -2,8 +2,6 @@
 # == SearchesController
 #
 class SearchesController < ApplicationController
-  before_action :set_gon_autocomplete
-
   def index
     if params[:term].nil? || params[:term].blank?
       @searches = []
@@ -22,11 +20,5 @@ class SearchesController < ApplicationController
       format.js
       format.json
     end
-  end
-
-  private
-
-  def set_gon_autocomplete
-    gon.push(search_path: searches_path(format: :json))
   end
 end
