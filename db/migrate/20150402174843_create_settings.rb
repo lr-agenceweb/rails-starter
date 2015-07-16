@@ -18,7 +18,7 @@ class CreateSettings < ActiveRecord::Migration
       t.boolean :should_validate, default: true
       t.boolean :maintenance, default: false
 
-      t.timestamps
+      t.timestamps null: false
     end
     Setting.create_translation_table! title: :string, subtitle: :string
   end
