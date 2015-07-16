@@ -4,6 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  username   :string(255)
+#  email      :string(255)      not null
 #  content    :text(65535)
 #  lang       :string(255)
 #  validated  :boolean          default(TRUE)
@@ -11,31 +12,37 @@
 #  updated_at :datetime         not null
 #
 
+DEFAULTS: &DEFAULTS
+  email: user@test.com
+  lang: fr
+  validated: true
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
 fr_validate:
+  <<: *DEFAULTS
   username: Jean
   content: Bravo pour le site
-  lang: fr
-  validated: true
 
 fr_validate_2:
+  <<: *DEFAULTS
   username: Chloé
   content: J'aime ce que vous faites
-  lang: fr
-  validated: true
 
 fr_not_validate:
+  <<: *DEFAULTS
   username: Alain
   content: Merci pour ce moment
-  lang: fr
   validated: false
 
 english_validate:
+  <<: *DEFAULTS
   username: Jenny
   content: Thank you for all your good work !
   lang: en
-  validated: true
 
 english_not_validate:
+  <<: *DEFAULTS
   username: Barack
   content: It was a good event, thanks again
   lang: en
