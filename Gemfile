@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #
 # == Ruby
 #
-ruby '2.2.0'
+ruby '2.2.2'
 
 #
 # == Rails
@@ -13,9 +13,10 @@ gem 'rails', '4.2.3'
 #
 # == Database
 #
-gem 'sqlite3'
 gem 'mysql2'
 gem 'pg'
+gem 'sqlite3'
+gem 'mongoid-rails'
 
 #
 # == Administration
