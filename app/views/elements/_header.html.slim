@@ -4,11 +4,13 @@ header.l-header-site.hide-for-print
     = render 'elements/language'
 
     .row
-      .small-9.medium-5.large-4.columns
+      .small-9.medium-5.large-6.columns
         = render 'elements/logo'
 
       .small-12.medium-6.columns.menu-site
         = render 'elements/menu'
         .clearfix
+
+    = render 'searches/form'
 
     = breadcrumbs pretext: t('breadcrumb.here'), separator: '' if setting.show_breadcrumb?

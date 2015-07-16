@@ -1,4 +1,4 @@
-- f.inputs 'Background', for: [:background, f.object.background || Background.new] do |item|
+- f.inputs t('activerecord.models.background.one'), for: [:background, f.object.background || Background.new] do |item|
   - item.input :image,
                as: :file,
                label: I18n.t('form.label.picture'),

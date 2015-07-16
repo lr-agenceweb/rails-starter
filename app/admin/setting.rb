@@ -17,6 +17,7 @@ ActiveAdmin.register Setting do
                 :should_validate,
                 :maintenance,
                 :logo,
+                :delete_logo,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle
                 ]
@@ -90,13 +91,23 @@ ActiveAdmin.register Setting do
     columns do
       column do
         f.inputs 'Paramètres du site' do
-          f.input :logo,
-                  hint: retina_image_tag(object, :logo, :small)
+          columns do
+            column do
+              f.translated_inputs 'Translated fields', switch_locale: true do |t|
+                t.input :title, hint: 'Titre du site'
+                t.input :subtitle, hint: 'Sous-titre du site'
+              end
+            end
 
-          f.translated_inputs 'Translated fields', switch_locale: false do |t|
-            t.input :title, hint: 'Titre du site'
-            t.input :subtitle, hint: 'Sous-titre du site'
+            column do
+              f.input :logo,
+                      hint: retina_image_tag(object, :logo, :small)
+              f.input :delete_logo,
+                      as: :boolean,
+                      hint: 'Si coché, le logo sera supprimé après mise à jour des paramètres'
+            end
           end
+
           f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
         end
       end
@@ -148,8 +159,13 @@ ActiveAdmin.register Setting do
   #
   controller do
     before_action :set_setting, only: [:show]
+    before_action :redirect_to_show, only: [:index]
 
     private
+
+    def redirect_to_show
+      redirect_to admin_setting_path(@setting)
+    end
 
     def set_setting
       @setting = Setting.find(params[:id])

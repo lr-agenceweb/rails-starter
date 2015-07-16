@@ -3,13 +3,13 @@
 #
 class SearchesController < ApplicationController
   def index
-    if params[:query].nil? || params[:query].blank?
+    if params[:term].nil? || params[:term].blank?
       @searches = []
     else
-      @searches = Post.search(params[:query], params[:locale])
+      @searches = Post.search(params[:term], params[:locale])
 
       if @blog_module.enabled?
-        @searches += Blog.search(params[:query], params[:locale])
+        @searches += Blog.search(params[:term], params[:locale])
       end
 
       @searches = Kaminari.paginate_array(@searches).page params[:page]
@@ -18,6 +18,7 @@ class SearchesController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+      format.json
     end
   end
 end

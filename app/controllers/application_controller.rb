@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   before_action :set_background, unless: proc { @category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
+  before_action :set_gon_autocomplete
 
   decorates_assigned :setting, :category
 
@@ -51,12 +52,17 @@ class ApplicationController < ActionController::Base
     @newsletter_user ||= NewsletterUser.new
   end
 
+  def set_gon_autocomplete
+    gon.push(search_path: searches_path(format: :json))
+  end
+
   def set_optional_modules
     optional_modules = OptionalModule.all
     @rss_module = optional_modules.by_name('RSS')
     @newsletter_module = optional_modules.by_name('Newsletter')
     @comment_module = optional_modules.by_name('Comment')
     @blog_module = optional_modules.by_name('Blog')
+    @search_module = optional_modules.by_name('Search')
   end
 
   def authenticate_active_admin_user!

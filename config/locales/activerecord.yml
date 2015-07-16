@@ -49,6 +49,18 @@ fr:
       guest_book:
         one: Livre d'Or
         other: Livre d'Or
+      picture:
+        one: Image
+        other: Images
+      background:
+        one: Arrière-plan
+        other: Arrière-plans
+      optional_module:
+        one: Module Optionnel
+        other: Modules Optionnels
+      category:
+        one: Page
+        other: Pages
 
     attributes:
       post:
@@ -61,24 +73,54 @@ fr:
       setting:
         title: Titre
         subtitle: Sous-titre
+        logo: Logo
+        delete_logo: Supprimer le logo
         name: Nom
         city: Ville
         postcode: Code Postal
         address: Adresse
         phone: Téléphone
+        show_breadcrumb: Afficher le fil d'ariane ?
+        show_social: Afficher le partage sur les réseaux sociaux ?
+        should_validate: Valider les commentaires et les messages du livre d'or ?
+        show_map: Afficher la carte ?
+        geocode_address: Adresse avec géolocalisation
+        full_address: Adresse complète
+        map_status: Carte
+        breadcrumb: Fil d'ariane
+        social: Réseaux sociaux
+        latlon: Latitude / Longitude
       user:
         username: Nom d'utilisateur
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
         sign_in_count: Nombre de connections
         current_sign_in_at: Connecté depuis
         last_sign_in_at: Dernière connexion
         created_at: Inscrit depuis
+        avatar: Avatar
+        delete_avatar: Supprimer avatar
       category:
         title: Titre
         show_in_menu: Inclus dans le menu ?
         show_in_footer: Inclus dans le footer ?
+        in_menu: Dans le menu principal ?
+        in_footer: Dans le menu du footer ?
+        name: Nom de la catégorie
+        background: Arrière-plan
       newsletter:
         title: Titre
         preview: Prévisualisation
         sent: Envoyé ?
         sent_at: Envoyé le
         send: Envoyer
+
+  formtastic:
+    create: 'Créer %{model}'
+    update: 'Mettre à jour %{model}'
+    labels:
+      category:
+        title: Titre
+      setting:
+        title: Titre du site
+        subtitle: Sous-titre du site

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   concern :searchable do
-    get '(/:query)', action: :index, on: :collection, as: ''
+    get '(/:term)', action: :index, on: :collection, as: ''
   end
 
   concern :commentable do

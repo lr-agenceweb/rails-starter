@@ -7,6 +7,7 @@ ActiveAdmin.register User do
                 :email,
                 :password,
                 :avatar,
+                :delete_avatar,
                 :password_confirmation,
                 :role_id
 
@@ -52,17 +53,35 @@ ActiveAdmin.register User do
   form do |f|
     f.semantic_errors *f.object.errors.keys
 
-    f.inputs 'User Details' do
-      f.input :avatar,
-              as: :file,
-              avatar_preview: true
-      f.input :username
-      f.input :email
-      f.input :password
-      f.input :password_confirmation
+    columns do
+      column do
+        f.inputs 'User Details' do
+          f.input :username
+          f.input :email
+          f.input :password
+          f.input :password_confirmation
+        end
+      end
+
+      column do
+        f.inputs 'Avatar' do
+          f.input :avatar,
+                  as: :file,
+                  avatar_preview: true
+
+          if f.object.avatar?
+            f.input :delete_avatar,
+                    as: :boolean,
+                    hint: 'Si coché, l\'avatar sera supprimé après mise à jour du profil et l\'image de gravatar sera utilisée'
+          end
+        end
+      end
+
+      column do
+        render 'admin/shared/roles/form', f: f if current_user_and_administrator?
+      end
     end
 
-    render 'admin/shared/roles/form', f: f if current_user_and_administrator?
     f.actions
   end
 

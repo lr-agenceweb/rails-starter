@@ -22,6 +22,10 @@ module Imageable
   end
 
   def picture?
+    picture.present?
+  end
+
+  def pictures?
     pictures.online.first.present?
   end
 end
