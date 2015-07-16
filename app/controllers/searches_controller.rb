@@ -12,7 +12,8 @@ class SearchesController < ApplicationController
         @searches += Blog.search(params[:term], params[:locale])
       end
 
-      @searches = Kaminari.paginate_array(@searches).page params[:page]
+      @not_paginated_searches = @searches
+      @searches = Kaminari.paginate_array(@searches).page(params[:page]).per(5)
     end
 
     respond_to do |format|
