@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
 
   before_action :setting_or_maintenance?
   before_action :set_optional_modules
-  before_action :delete_cookie
   before_action :set_adult_validation, if: proc { @adult_module.enabled? && cookies[:adult_validated].nil? }
   before_action :set_language
   before_action :set_menu_elements
@@ -56,10 +55,6 @@ class ApplicationController < ActionController::Base
 
   def set_gon_autocomplete
     gon.push(search_path: searches_path(format: :json))
-  end
-
-  def delete_cookie
-    cookies.delete :adult_validated
   end
 
   def set_adult_validation
