@@ -1,6 +1,7 @@
 $(document).on 'ready page:load page:restore', ->
   $('#term.autocomplete').autocomplete(
     source: gon.search_path
+    minLength: 3
     select: (event, ui) ->
       Turbolinks.visit(ui.item.url)
       return

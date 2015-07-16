@@ -276,6 +276,8 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0)
+    email_validator (1.6.0)
+      activemodel
     erubis (2.7.0)
     every_day_irb (2.0.0)
       cd (~> 1.0)
@@ -627,6 +629,7 @@ DEPENDENCIES
   devise
   dkim
   draper
+  email_validator
   figaro
   font-awesome-rails
   foundation-rails

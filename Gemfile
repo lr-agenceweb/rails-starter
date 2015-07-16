@@ -60,6 +60,7 @@ gem 'autosize-rails'
 gem 'mail_form' # contact form
 gem 'wysiwyg-rails' # Froala editor
 gem 'validates_email_format_of'
+gem 'email_validator'
 
 #
 # == Translation

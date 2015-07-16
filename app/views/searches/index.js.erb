@@ -1,2 +1,7 @@
-$('#search').html("<%= j render 'search' %>");
-NProgress.done()
+if($('#term').data('controller') == 'searches') {
+  $('#search').html("<%= j render 'search' %>");
+  NProgress.done();
+}
+else if(<%= params[:term].present? %>) {
+  Turbolinks.visit("<%= searches_path(term: params[:term]) %>");
+}

@@ -2,4 +2,5 @@ li.panel
   p
     small = guest_book.created_at
   h3 = guest_book.username
+  p = gravatar_image_tag(guest_book.email, alt: guest_book.username)
   div = simple_format(guest_book.content)

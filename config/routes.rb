@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     resources :blogs, only: [:index, :show], concerns: [:paginatable, :commentable]
 
     # Search
-    resources :searches, only: [:index], concerns: [:searchable, :paginatable]
+    resources :searches, only: [:index], concerns: [:paginatable]
 
     # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss

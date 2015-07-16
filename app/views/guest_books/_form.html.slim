@@ -2,6 +2,7 @@
   .small-12.medium-6.columns
     = simple_form_for @guest_book, method: :post, remote: true, validate: true do |f|
       = f.input :username
+      = f.input :email, as: :email
       = f.input :content, as: :text, input_html: { class: 'autosize' }
       = f.hidden_field :lang, value: @language
       = f.input :nickname, input_html: { class: 'hide', style: 'display: none' }, label: false

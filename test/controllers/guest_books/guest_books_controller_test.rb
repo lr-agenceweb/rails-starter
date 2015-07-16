@@ -13,7 +13,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   # == Actions
   #
   test 'should get index' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         get :index, locale: locale.to_s
         assert_response :success
@@ -22,10 +22,10 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'should create message if params are properly filled' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_difference ['GuestBook.count'], 1 do
-          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: locale.to_s }
+          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
         end
         assert assigns(:guest_book).valid?
       end
@@ -33,7 +33,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'should not create message if params are empty' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
           post :create, locale: locale.to_s, guest_book: { username: '' }
@@ -43,11 +43,22 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not create message if lang params is not allowed' do
-    I18n.available_locales.each do |locale|
+  test 'should not create message if email is not properly formatted' do
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
-          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: 'ja' }
+          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas', content: 'Merci !', lang: locale.to_s }
+        end
+        assert_not assigns(:guest_book).valid?
+      end
+    end
+  end
+
+  test 'should not create message if lang params is not allowed' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_no_difference ['GuestBook.count'] do
+          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com',  content: 'Merci !', lang: 'ja' }
         end
         assert_not assigns(:guest_book).valid?
       end
@@ -55,10 +66,10 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'should not create message if nickname is filled' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
-          post :create, locale: locale.to_s, guest_book: { nickname: 'spammer' }
+          post :create, locale: locale.to_s, guest_book:  { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s, nickname: 'spammer' }
         end
         assert_not assigns(:guest_book).valid?
         assert_redirected_to guest_books_path
@@ -67,9 +78,9 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'should not appears on site if setting should_validate is true' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        post :create, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: locale.to_s }
+        post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
         assert_not assigns(:guest_book).validated
       end
     end
@@ -79,7 +90,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   # == Template
   #
   test 'should use index template' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         get :index, locale: locale.to_s
         assert_template :index
@@ -91,7 +102,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   # == Ajax
   #
   test 'AJAX :: should get index' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :get, :index, format: :js, locale: locale.to_s
         assert_response :success
@@ -100,7 +111,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should use index template' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :get, :index, format: :js, locale: locale.to_s
         assert_template :index
@@ -109,10 +120,10 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should create message if params are properly filled' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_difference ['GuestBook.count'], 1 do
-          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: locale.to_s }
+          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
         end
         assert assigns(:guest_book).valid?
       end
@@ -120,10 +131,10 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should not create message if lang params is not allowed' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
-          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: 'ja' }
+          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: 'ja' }
         end
         assert_not assigns(:guest_book).valid?
       end
@@ -131,10 +142,10 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should not create message if nickname is filled' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
-          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { nickname: 'spammer' }
+          xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s, nickname: 'spammer' }
         end
         assert_not assigns(:guest_book).valid?
         assert_template :captcha
@@ -143,9 +154,9 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should not appears on site if setting should_validate is true' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', content: 'Merci !', lang: locale.to_s }
+        xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
         assert_not assigns(:guest_book).validated
       end
     end
@@ -160,7 +171,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'should fetch only messages from current locale' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         @guest_books = GuestBook.by_locale(locale.to_s)
         assert_equal @guest_books.length, 3 if locale == 'fr'
@@ -170,7 +181,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'should fetch only messages from current locale and validated' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         @guest_books = GuestBook.validated.by_locale(locale.to_s)
         assert_equal @guest_books.length, 2 if locale == 'fr'

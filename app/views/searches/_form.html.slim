@@ -1,6 +1,9 @@
 .row
   .small-12.medium-3.columns.right
     = simple_form_for :search, url: searches_path, method: :get, remote: true do |f|
-      = text_field_tag :term, params[:term], class: 'autocomplete'
-      = button_tag class: 'submit-btn text-right tiny right', name: nil do
-        - fa_icon('paper-plane')
+      .row.collapse
+        .small-10.columns
+          = text_field_tag :term, params[:term], placeholder: 'Search', class: 'autocomplete', data: { controller: params[:controller] }
+        .small-2.columns
+          = button_tag class: 'button postfix', name: nil do
+            - fa_icon('paper-plane')
