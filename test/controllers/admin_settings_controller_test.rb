@@ -22,9 +22,9 @@ module Admin
       assert_redirected_to new_user_session_path
     end
 
-    test 'should show index page if logged in' do
+    test 'should redirect index page to show if logged in' do
       get :index
-      assert_response :success
+      assert_redirected_to admin_dashboard_path(@setting)
     end
 
     test 'should show show page if logged in' do
