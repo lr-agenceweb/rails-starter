@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706152107) do
+ActiveRecord::Schema.define(version: 20150716093716) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150706152107) do
     t.string   "title",      limit: 255
     t.string   "slug",       limit: 255
     t.text     "content",    limit: 65535
-    t.boolean  "online",     limit: 1,     default: true
+    t.boolean  "online",                   default: true
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -70,10 +70,10 @@ ActiveRecord::Schema.define(version: 20150706152107) do
     t.string   "title",              limit: 255
     t.string   "name",               limit: 255
     t.string   "color",              limit: 255
-    t.boolean  "show_in_menu",       limit: 1,   default: true
-    t.boolean  "show_in_footer",     limit: 1,   default: false
+    t.boolean  "show_in_menu",                   default: true
+    t.boolean  "show_in_footer",                 default: false
     t.integer  "position",           limit: 4
-    t.boolean  "optional",           limit: 1,   default: false
+    t.boolean  "optional",                       default: false
     t.integer  "optional_module_id", limit: 4
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20150706152107) do
     t.string   "lang",             limit: 255
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
-    t.boolean  "validated",        limit: 1,     default: true
+    t.boolean  "validated",                      default: true
     t.integer  "user_id",          limit: 4
     t.string   "role",             limit: 255,   default: "comments"
     t.datetime "created_at"
@@ -145,9 +145,10 @@ ActiveRecord::Schema.define(version: 20150706152107) do
 
   create_table "guest_books", force: :cascade do |t|
     t.string   "username",   limit: 255
+    t.string   "email",      limit: 255,                  null: false
     t.text     "content",    limit: 65535
     t.string   "lang",       limit: 255
-    t.boolean  "validated",  limit: 1,     default: true
+    t.boolean  "validated",                default: true
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
   end
@@ -186,7 +187,7 @@ ActiveRecord::Schema.define(version: 20150706152107) do
 
   create_table "optional_modules", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.boolean  "enabled",    limit: 1,   default: false
+    t.boolean  "enabled",                default: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end
@@ -213,8 +214,8 @@ ActiveRecord::Schema.define(version: 20150706152107) do
     t.string   "title",              limit: 255
     t.text     "description",        limit: 65535
     t.text     "retina_dimensions",  limit: 65535
-    t.boolean  "primary",            limit: 1,     default: false
-    t.boolean  "online",             limit: 1,     default: true
+    t.boolean  "primary",                          default: false
+    t.boolean  "online",                           default: true
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
   end
@@ -240,7 +241,7 @@ ActiveRecord::Schema.define(version: 20150706152107) do
     t.string   "title",      limit: 255
     t.string   "slug",       limit: 255
     t.text     "content",    limit: 65535
-    t.boolean  "online",     limit: 1,     default: true
+    t.boolean  "online",                   default: true
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -302,11 +303,11 @@ ActiveRecord::Schema.define(version: 20150706152107) do
     t.string   "geocode_address",   limit: 255
     t.float    "latitude",          limit: 24
     t.float    "longitude",         limit: 24
-    t.boolean  "show_map",          limit: 1,     default: true
-    t.boolean  "show_breadcrumb",   limit: 1,     default: false
-    t.boolean  "show_social",       limit: 1,     default: true
-    t.boolean  "should_validate",   limit: 1,     default: false
-    t.boolean  "maintenance",       limit: 1,     default: false
+    t.boolean  "show_map",                        default: true
+    t.boolean  "show_breadcrumb",                 default: false
+    t.boolean  "show_social",                     default: true
+    t.boolean  "should_validate",                 default: false
+    t.boolean  "maintenance",                     default: false
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size",    limit: 4
     t.string   "logo_content_type", limit: 255
