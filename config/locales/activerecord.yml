@@ -15,6 +15,9 @@ en:
               blank: Don't forget your email address ;)
               invalid: Your email is invalid ;)
               taken: This email is not avalaible :(
+    attributes:
+      adult:
+        adult_validated: I attest to be an adult
 
 # French
 fr:
@@ -127,6 +130,8 @@ fr:
         sent: Envoyé ?
         sent_at: Envoyé le
         send: Envoyer
+      adult:
+        adult_validated: J'atteste être majeur
 
   formtastic:
     create: 'Créer %{model}'
