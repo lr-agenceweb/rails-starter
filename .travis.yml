@@ -2,22 +2,27 @@ language: ruby
 cache: bundler
 
 rvm:
-  - 2.2.0
+  - 2.2.2
 
 env:
   - DB=mysql
   - DB=postgresql
   - DB=sqlite
-  - RAILS_VERSION=4.2.0
+  - DB=mongodb
   - RAILS_VERSION=4.2.3
+
+services:
+  - mongodb
 
 bundler_args: --without development
 
 before_script:
+  - sleep 15
   - cp config/database.travis.yml config/database.yml
   - cp config/application.example.yml config/application.yml
   - mysql -e 'create database rails_starter_test'
   - psql -c 'create database rails_starter_test' -U postgres
+  - mongo rails_starter_test --eval 'db.addUser("travis", "test");'
 
 script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate
@@ -27,6 +32,7 @@ script:
 matrix:
   allow_failures:
     - env: DB=sqlite
+    - env: DB=mongodb
 
 after_failure:
   - "mysql -e 'show databases;'"
