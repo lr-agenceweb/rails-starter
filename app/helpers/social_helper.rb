@@ -71,7 +71,7 @@ module SocialHelper
   # * *Returns* :
   #
   def awesome_social_share
-    return nil if params[:controller] == 'comments'
+    return nil if params[:controller] == 'comments' || params[:controller] == 'adults'
 
     element = params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
 

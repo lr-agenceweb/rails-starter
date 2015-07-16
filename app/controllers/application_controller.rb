@@ -11,9 +11,11 @@ class ApplicationController < ActionController::Base
   analytical modules: [:google], disable_if: proc { !Rails.env.production? && Figaro.env.google_analytics_key.nil? }
 
   before_action :setting_or_maintenance?
+  before_action :set_optional_modules
+  before_action :delete_cookie
+  before_action :set_adult_validation, if: proc { @adult_module.enabled? && cookies[:adult_validated].nil? }
   before_action :set_language
   before_action :set_menu_elements
-  before_action :set_optional_modules
   before_action :set_background, unless: proc { @category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
@@ -56,6 +58,14 @@ class ApplicationController < ActionController::Base
     gon.push(search_path: searches_path(format: :json))
   end
 
+  def delete_cookie
+    cookies.delete :adult_validated
+  end
+
+  def set_adult_validation
+    redirect_to adults_path
+  end
+
   def set_optional_modules
     optional_modules = OptionalModule.all
     @rss_module = optional_modules.by_name('RSS')
@@ -63,6 +73,7 @@ class ApplicationController < ActionController::Base
     @comment_module = optional_modules.by_name('Comment')
     @blog_module = optional_modules.by_name('Blog')
     @search_module = optional_modules.by_name('Search')
+    @adult_module = optional_modules.by_name('Adult')
   end
 
   def authenticate_active_admin_user!

@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss
 
+    # Adult
+    resources :adults, only: [:index, :create]
+
     # Newsletters
     get '/newsletter/welcome_user/:newsletter_user_id/:token', to: 'newsletters#welcome_user', as: :welcome_user
     get '/newsletter/:id/:newsletter_user_id/:token', to: 'newsletters#see_in_browser', as: :see_in_browser_newsletter
