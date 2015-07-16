@@ -8,11 +8,7 @@ env:
   - DB=mysql
   - DB=postgresql
   - DB=sqlite
-  - DB=mongodb
   - RAILS_VERSION=4.2.3
-
-services:
-  - mongodb
 
 bundler_args: --without development
 
@@ -22,7 +18,6 @@ before_script:
   - cp config/application.example.yml config/application.yml
   - mysql -e 'create database rails_starter_test'
   - psql -c 'create database rails_starter_test' -U postgres
-  - mongo rails_starter_test --eval 'db.addUser("travis", "test");'
 
 script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate
@@ -32,13 +27,17 @@ script:
 matrix:
   allow_failures:
     - env: DB=sqlite
-    - env: DB=mongodb
 
 after_failure:
   - "mysql -e 'show databases;'"
   - "cat ./config/database.yml"
   - "echo $RAILS_ENV"
   - "bundle exec rake --version"
+
+branches:
+  only:
+    - master
+    - develop
 
 addons:
   code_climate:
@@ -48,8 +47,3 @@ notifications:
   email: false
   slack:
     secure: C5mVOWuJfFpZwtZQigkATqvgQxXjmo1YnnGRvbsauSpDI9it362L1GsQ50duaSTN//8GfWMqG12bGY4oW8NOgvR/AzrRUD1aAz6ByLaEpb8TKfBbrO5sYSAZn4FRV39aCaAcW6ZuTKJxBmsHo2bdFFpRP07Vmi0bFRRNQO2n+sY=
-
-branches:
-  only:
-    - master
-    - develop

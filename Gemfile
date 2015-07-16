@@ -16,7 +16,6 @@ gem 'rails', '4.2.3'
 gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
-gem 'mongoid-rails'
 
 #
 # == Administration
