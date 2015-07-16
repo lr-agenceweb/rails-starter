@@ -3,7 +3,7 @@
     = simple_form_for :search, url: searches_path, method: :get, remote: true do |f|
       .row.collapse
         .small-10.columns
-          = text_field_tag :term, params[:term], placeholder: 'Search', class: 'autocomplete'
+          = text_field_tag :term, params[:term], placeholder: 'Search', class: 'autocomplete', data: { controller: params[:controller] }
         .small-2.columns
           = button_tag class: 'button postfix', name: nil do
             - fa_icon('paper-plane')
