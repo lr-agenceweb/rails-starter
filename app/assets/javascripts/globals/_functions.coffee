@@ -12,3 +12,7 @@
     $(window).scrollTo $(this).attr('href'), 'slow', offset: { top: -10 }
     false
   return
+
+@sleep = (ms) ->
+  start = new Date().getTime()
+  continue while new Date().getTime() - start < ms
