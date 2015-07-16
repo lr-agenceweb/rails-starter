@@ -11,12 +11,14 @@ class BlogsController < ApplicationController
   # GET /blog.json
   def index
     @blogs = BlogDecorator.decorate_collection(Blog.online.page params[:page])
+    seo_tag_index category
   end
 
   # GET /blog/1
   # GET /blog/1.json
   def show
     redirect_to @blog, status: :moved_permanently if request.path != blog_path(@blog)
+    seo_tag_show blog
   end
 
   private
