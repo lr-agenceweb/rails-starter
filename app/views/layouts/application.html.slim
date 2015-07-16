@@ -3,25 +3,24 @@ html lang="#{@language}"
 
   head
     meta charset='utf-8'
-    == raw analytical.head_prepend_javascript if Rails.env.production?
+    = raw analytical.head_prepend_javascript
     = display_meta_tags title: title, site: @setting.title_and_subtitle, reverse: true
-    meta name='google-site-verification' content="#{Figaro.env.google_site_verification}"
-    meta name='msvalidate.01' content="#{Figaro.env.bing_site_verification}"
+    == google_bing_site_verification
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
     = javascript_include_tag 'application', 'data-turbolinks-track': true
 
     link type='text/plain' rel='author' href='/humans.txt'
-    / = favicon_link_tag '/favicon.ico'
+    = favicon_link_tag '/favicon.ico'
     = csrf_meta_tag
     - if @rss_module.enabled?
       = auto_discovery_link_tag(:atom, posts_rss_path(:atom))
       = auto_discovery_link_tag(:rss, posts_rss_path(:rss))
-    == raw analytical.head_append_javascript if Rails.env.production?
+    = raw analytical.head_append_javascript
 
   body style="#{background_from_color_picker(category)}"
-    == raw analytical.body_prepend_javascript if Rails.env.production?
+    = raw analytical.body_prepend_javascript
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'
 
@@ -33,4 +32,4 @@ html lang="#{@language}"
         == yield
 
     = render 'elements/footer', newsletter_user: @newsletter_user
-    == raw analytical.body_append_javascript if Rails.env.production?
+    = raw analytical.body_append_javascript
