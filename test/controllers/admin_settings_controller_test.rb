@@ -24,7 +24,7 @@ module Admin
 
     test 'should redirect index page to show if logged in' do
       get :index
-      assert_redirected_to admin_dashboard_path(@setting)
+      assert_redirected_to admin_setting_path(@setting)
     end
 
     test 'should show show page if logged in' do
