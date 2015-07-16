@@ -5,13 +5,13 @@ class GuestBooksController < ApplicationController
   before_action :set_guest_book
   decorates_assigned :guest_book
 
-  # GET /guest-book
-  # GET /guest-book.json
+  # GET /livre-d-or
+  # GET /livre-d-or.json
   def index
   end
 
-  # POST /guest-book
-  # POST /guest-book.json
+  # POST /livre-d-or
+  # POST /livre-d-or.json
   def create
     if guest_book_params[:nickname].blank?
       @guest_book = GuestBook.new(guest_book_params)
@@ -38,7 +38,7 @@ class GuestBooksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def guest_book_params
-    params.require(:guest_book).permit(:username, :lang, :content, :nickname)
+    params.require(:guest_book).permit(:username, :email, :lang, :content, :nickname)
   end
 
   def respond_action(template, should_render)

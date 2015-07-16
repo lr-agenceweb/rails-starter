@@ -9,6 +9,12 @@ en:
               blank: Don't forget your email address ;)
               invalid: Your email is invalid ;)
               taken: This email is not avalaible :(
+        guest_book:
+          attributes:
+            email:
+              blank: Don't forget your email address ;)
+              invalid: Your email is invalid ;)
+              taken: This email is not avalaible :(
 
 # French
 fr:
@@ -27,6 +33,13 @@ fr:
               blank: N'oubliez pas de renseigner votre email ;)
               invalid: Veuillez renseigner un email valide ;)
               taken: Cet email n'est pas disponible :(
+        guest_book:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              invalid: Veuillez renseigner un email valide ;)
+              taken: Cet email n'est pas disponible :(
+
     models:
       user:
         one: Utilisateur
