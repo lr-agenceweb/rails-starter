@@ -1,6 +1,7 @@
 #= require vendor/modernizr
 #= require jquery
 #= require jquery_ujs
+#= require jquery-ui/autocomplete
 #= require foundation/foundation
 #= require foundation
 #= require turbolinks
@@ -18,6 +19,7 @@
 #= require jquery.sticky_footer
 #= require globals/_functions
 #= require modules/responsive_menu
+#= require modules/autocomplete_search
 #= require plugins/mapbox
 #= require plugins/nprogress
 #= require base/flash
