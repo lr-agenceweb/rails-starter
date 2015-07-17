@@ -12,22 +12,28 @@ class ContactsControllerTest < ActionController::TestCase
 
   test 'index page should redirect to new page' do
     I18n.available_locales.each do |locale|
-      get :index, locale: locale.to_s
-      assert_redirected_to(action: :new)
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s
+        assert_redirected_to(action: :new)
+      end
     end
   end
 
   test 'should get new page' do
     I18n.available_locales.each do |locale|
-      get :new, locale: locale.to_s
-      assert_response :success
+      I18n.with_locale(locale.to_s) do
+        get :new, locale: locale.to_s
+        assert_response :success
+      end
     end
   end
 
   test 'should use new template' do
     I18n.available_locales.each do |locale|
-      get :new, locale: locale.to_s
-      assert_template :new
+      I18n.with_locale(locale.to_s) do
+        get :new, locale: locale.to_s
+        assert_template :new
+      end
     end
   end
 

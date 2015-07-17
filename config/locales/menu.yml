@@ -7,6 +7,7 @@ fr:
     contacts: contact
     new: formulaire
     searches: rechercher
+    adults: verification-age
 
   main_menu:
     dashboard: Dashboard
@@ -27,6 +28,7 @@ en:
     contacts: contact
     new: form
     searches: search
+    adults: age-checking
 
   main_menu:
     dashboard: Dashboard

@@ -36,4 +36,17 @@ ActiveAdmin.register OptionalModule do
 
     f.actions
   end
+
+  #
+  # == Controller
+  #
+  controller do
+    def update
+      if params[:optional_module][:name] == 'Adult'
+        cookies.delete :adult_validated
+      end
+
+      update!
+    end
+  end
 end
