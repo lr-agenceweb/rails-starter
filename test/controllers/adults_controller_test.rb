@@ -68,11 +68,22 @@ class AdultsControllerTest < ActionController::TestCase
   #
   test 'should redirect to root_path if cookie is present' do
     enable_adult_module
-    cookies[:adult_validated] = { value: 'adult', expires: 1.week.from_now }
+    set_cookie
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         get :index, locale: locale.to_s
         assert_redirected_to root_path
+      end
+    end
+  end
+
+  test 'should destroy cookie after adult module is disabled' do
+    enable_adult_module
+    set_cookie
+    disable_adult_module
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_nil cookies[:adult_validated], "Cookie with adult_validated key should be nil. Debug: Cookies=#{cookies.inspect}"
       end
     end
   end
@@ -89,8 +100,22 @@ class AdultsControllerTest < ActionController::TestCase
     old_controller = @controller
     sign_in @anthony
     @controller = Admin::OptionalModulesController.new
-    patch :update, id: @adult_module, optional_module: { enabled: true }
+    patch :update, id: @adult_module, optional_module: { enabled: true, name: @adult_module.name }
     assert assigns(:optional_module).enabled
+    assert 'Adult', assigns(:optional_module).name
+    assert_redirected_to admin_optional_module_path(assigns(:optional_module))
+    sign_out @anthony
+  ensure
+    @controller = old_controller
+  end
+
+  def disable_adult_module
+    old_controller = @controller
+    sign_in @anthony
+    @controller = Admin::OptionalModulesController.new
+    patch :update, id: @adult_module, optional_module: { enabled: false, name: @adult_module.name }
+    assert 'Adult', assigns(:optional_module).name
+    assert_not assigns(:optional_module).enabled
     assert_redirected_to admin_optional_module_path(assigns(:optional_module))
     sign_out @anthony
   ensure
@@ -103,5 +128,9 @@ class AdultsControllerTest < ActionController::TestCase
     get :index, locale: locale.to_s
   ensure
     @controller = old_controller
+  end
+
+  def set_cookie
+    cookies[:adult_validated] = { value: 'adult', expires: 1.week.from_now }
   end
 end
