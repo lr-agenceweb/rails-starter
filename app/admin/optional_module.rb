@@ -3,6 +3,7 @@ ActiveAdmin.register OptionalModule do
 
   permit_params :id,
                 :name,
+                :description,
                 :enabled
 
   decorate_with OptionalModuleDecorator
@@ -11,6 +12,7 @@ ActiveAdmin.register OptionalModule do
   index do
     selectable_column
     column :name
+    column :description
     column :status
 
     actions
@@ -19,6 +21,7 @@ ActiveAdmin.register OptionalModule do
   show do
     attributes_table do
       row :name
+      row :description
       row :status
     end
   end
@@ -31,6 +34,7 @@ ActiveAdmin.register OptionalModule do
               collection: OptionalModule.list,
               include_blank: false,
               input_html: { class: 'chosen-select' }
+      f.input :description
       f.input :enabled
     end
 
@@ -42,7 +46,7 @@ ActiveAdmin.register OptionalModule do
   #
   controller do
     def update
-      if params[:optional_module][:name] == 'Adult'
+      if params[:optional_module][:name] == 'Adult' && params[:optional_module][:enabled] == '0'
         cookies.delete :adult_validated
       end
 
