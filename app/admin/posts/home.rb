@@ -8,6 +8,9 @@ ActiveAdmin.register Home do
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
                 ],
+                pictures_attributes: [
+                  :id, :locale, :image, :_destroy
+                ],
                 referencement_attributes: [
                   :id,
                   translations_attributes: [
@@ -57,6 +60,7 @@ ActiveAdmin.register Home do
 
     render 'admin/shared/form_general', f: f
     render 'admin/shared/form_translation', f: f
+    render 'admin/shared/pictures/many', f: f
     render 'admin/shared/referencement/form', f: f
     f.actions
   end
