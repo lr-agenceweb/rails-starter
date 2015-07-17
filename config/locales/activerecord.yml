@@ -137,6 +137,8 @@ fr:
         title: Titre
         content: Contenu
         key: Clé
+      background:
+        _destroy: Supprimer ?
 
   formtastic:
     create: 'Créer %{model}'
