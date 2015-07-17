@@ -77,6 +77,9 @@ fr:
       category:
         one: Page
         other: Pages
+      string_box:
+        one: Contenu personnalisé
+        other: Contenus personalisés
 
     attributes:
       post:
@@ -130,8 +133,10 @@ fr:
         sent: Envoyé ?
         sent_at: Envoyé le
         send: Envoyer
-      adult:
-        adult_validated: J'atteste être majeur
+      string_box:
+        title: Titre
+        content: Contenu
+        key: Clé
 
   formtastic:
     create: 'Créer %{model}'
