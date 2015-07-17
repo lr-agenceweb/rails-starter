@@ -14,6 +14,9 @@ fr:
   maintenance:
     'true': En maintenance
     'false': En ligne
+  adult:
+    'yes': 'Accepter'
+    'no': 'Refuser'
 
 # English
 en:
@@ -31,3 +34,6 @@ en:
   maintenance:
     'true': In maintenance
     'false': Online
+  adult:
+    'yes': 'Accept'
+    'no': 'Decline'
