@@ -23,8 +23,11 @@ class Background < ActiveRecord::Base
 
   retina!
   has_attached_file :image,
-                    path: ':rails_root/public/system/backgrounds/:id/:style-:filename',
-                    url:  '/system/backgrounds/:id/:style-:filename',
+                    storage: :dropbox,
+                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
+                    dropbox_options: {},
+                    path: '/backgrounds/:id/:style-:filename',
+                    url:  '/backgrounds/:id/:style-:filename',
                     styles: {
                       background: '4000x2000>',
                       large:      '2000x1200>',
