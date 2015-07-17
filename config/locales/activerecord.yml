@@ -139,6 +139,9 @@ fr:
         key: Clé
       background:
         _destroy: Supprimer ?
+      picture:
+        image: Image
+        _destroy: Supprimer ?
 
   formtastic:
     create: 'Créer %{model}'
