@@ -17,7 +17,7 @@ class SettingDecorator < ApplicationDecorator
 
   def logo
     # Website logo present
-    retina_image_tag(model, :logo, :small) if model.logo?
+    h.retina_image_tag(model, :logo, :small) if logo?
   end
 
   def full_address
@@ -70,6 +70,10 @@ class SettingDecorator < ApplicationDecorator
 
   def latlon?
     !model.latitude.nil? && !model.longitude.nil?
+  end
+
+  def logo?
+    model.logo.exists?
   end
 
   def about

@@ -39,8 +39,11 @@ class Setting < ActiveRecord::Base
 
   retina!
   has_attached_file :logo,
-                    path: ':rails_root/public/system/logo/:id/:style-:filename',
-                    url:  '/system/logo/:id/:style-:filename',
+                    storage: :dropbox,
+                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
+                    dropbox_options: {},
+                    path: 'logo/:id/:style-:filename',
+                    url:  '/logo/:id/:style-:filename',
                     styles: {
                       large:  '512x512>',
                       medium: '256x256>',
