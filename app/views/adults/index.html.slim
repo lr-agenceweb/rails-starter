@@ -1,9 +1,0 @@
-.row
-  .small-12.columns
-    p Pour accéder au site vous devez être majeur. Si ce n'est pas le cas, merci de quitter le site
-
-.row
-  .small-12.columns
-    = simple_form_for :adult, url: adults_path, method: :post do |f|
-      = f.input :adult_validated, as: :boolean, label: t('activerecord.attributes.adult.adult_validated')
-      = f.button :submit, 'Valider', class: 'button tiny success'

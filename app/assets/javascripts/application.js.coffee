@@ -13,6 +13,8 @@
 #= require i18n
 #= require i18n/translations
 #= require js.cookie
+#= require vex.combined.min.js
+#= require plugins/vex_config
 #= require awesome-share-buttons
 #= require plugins/awesome-share-buttons
 #= require mapbox
@@ -24,6 +26,7 @@
 #= require plugins/mapbox
 #= require plugins/nprogress
 #= require plugins/cookie_ie
+#= require plugins/cookie_adult_validation
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
