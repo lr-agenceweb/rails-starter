@@ -8,6 +8,7 @@
 #  slug       :string(255)
 #  content    :text(65535)
 #  online     :boolean          default(TRUE)
+#  position   :integer
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
