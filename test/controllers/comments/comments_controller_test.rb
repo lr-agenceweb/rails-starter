@@ -13,7 +13,7 @@ class CommentsControllerTest < ActionController::TestCase
   # == Create
   #
   test 'should not be able to create comment if no content' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
           post :create, about_id: @about.id, comment: { comment: nil }, locale: locale.to_s
@@ -25,7 +25,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'should not be able to create comment if nickname (captcha) is filled' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
           post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
@@ -35,7 +35,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'should not be able to create comment if lang is not set' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
           post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
@@ -46,7 +46,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'should not be able to create comment if lang is not allowed' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
           post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'ch' }, locale: locale.to_s
@@ -57,7 +57,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'should not be able to create comment if email is not valid' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
           post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: '', username: 'leila', email: 'not_valid', lang: locale.to_s }, locale: locale.to_s
@@ -68,7 +68,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'should create comment with more informations if not connected' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
           post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
@@ -80,7 +80,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'should have informations of user given if not connected' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_nil assigns(:comment).user_id
@@ -93,7 +93,7 @@ class CommentsControllerTest < ActionController::TestCase
 
   test 'should create comment only with comment field if connected' do
     sign_in @lana
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
           post :create, about_id: @about.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
@@ -106,7 +106,7 @@ class CommentsControllerTest < ActionController::TestCase
 
   test 'should have informations of sign_in user if connected' do
     sign_in @lana
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         post :create, about_id: @about.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
         assert assigns(:comment).valid?
@@ -121,7 +121,7 @@ class CommentsControllerTest < ActionController::TestCase
   # == Ajax
   #
   test 'AJAX :: should create comment' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_response :success
@@ -130,7 +130,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should render show template if comment created' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_template :create
@@ -139,7 +139,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should not create comment if nickname is filled' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot', lang: locale.to_s }, locale: locale.to_s
         assert_template :captcha
@@ -151,7 +151,7 @@ class CommentsControllerTest < ActionController::TestCase
   # == Destroy
   #
   test 'should not be able to delete comments if user is not logged in' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
           delete :destroy, id: @comment_alice.id, about_id: @about.id, locale: locale.to_s
@@ -216,7 +216,7 @@ class CommentsControllerTest < ActionController::TestCase
   # == Locales
   #
   test 'should fetch only comments from current locale' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         @comments = Comment.by_locale(locale.to_s)
         assert_equal @comments.length, 3 if locale == 'fr'
@@ -226,7 +226,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'should fetch only comments from current locale and validated' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         @comments = Comment.validated.by_locale(locale.to_s)
         assert_equal @comments.length, 1 if locale == 'fr'

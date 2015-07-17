@@ -10,7 +10,7 @@ class AboutsControllerTest < ActionController::TestCase
   setup :initialize_test
 
   test 'should get index' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       get :index, locale: locale.to_s
       assert_response :success
       assert_not_nil @about
@@ -18,7 +18,7 @@ class AboutsControllerTest < ActionController::TestCase
   end
 
   test 'should use index template' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       get :index, locale: locale.to_s
       assert_template :index
     end
@@ -38,7 +38,7 @@ class AboutsControllerTest < ActionController::TestCase
   # == Translations
   #
   test 'should get show page with all locales' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         get :show, locale: locale.to_s, id: @about
         assert_response :success
@@ -48,7 +48,7 @@ class AboutsControllerTest < ActionController::TestCase
   end
 
   test 'assert integrity of request for each locales' do
-    I18n.available_locales.each do |locale|
+    @locales.each do |locale|
       I18n.with_locale(locale) do
         get :show, locale: locale.to_s, id: @about
         assert_equal request.path_parameters[:id], @about.slug
@@ -66,9 +66,11 @@ class AboutsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should get two comments for about article in english side' do
-    I18n.with_locale(:en) do
-      assert_equal @about.comments.by_locale(:en).count, 2
+  if I18n.available_locales.include?(:en)
+    test 'should get two comments for about article in english side' do
+      I18n.with_locale(:en) do
+        assert_equal @about.comments.by_locale(:en).count, 2
+      end
     end
   end
 
@@ -78,9 +80,11 @@ class AboutsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should get one comments for about article in english side and validated' do
-    I18n.with_locale(:en) do
-      assert_equal @about.comments.by_locale(:fr).validated.count, 1
+  if I18n.available_locales.include?(:en)
+    test 'should get one comments for about article in english side and validated' do
+      I18n.with_locale(:en) do
+        assert_equal @about.comments.by_locale(:fr).validated.count, 1
+      end
     end
   end
 

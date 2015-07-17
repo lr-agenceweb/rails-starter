@@ -39,7 +39,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def content
-    model.content.html_safe
+    model.content.html_safe if content?
   end
 
   def status
@@ -80,5 +80,9 @@ class PostDecorator < ApplicationDecorator
 
   def picture?
     model.pictures.online.present?
+  end
+
+  def content?
+    !model.content.blank?
   end
 end
