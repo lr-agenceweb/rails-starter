@@ -42,3 +42,8 @@ blog:
   <<: *DEFAULTS
   name: Blog
   enabled: true
+
+adult:
+  <<: *DEFAULTS
+  name: Adult
+  enabled: false
