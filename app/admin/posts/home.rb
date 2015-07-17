@@ -19,9 +19,9 @@ ActiveAdmin.register Home do
   config.clear_sidebar_sections!
 
   # Sortable
+  sortable
   config.sort_order = 'position_asc'
   config.paginate   = false
-  sortable
 
   index do
     sortable_handle_column

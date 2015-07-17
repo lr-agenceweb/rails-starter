@@ -24,10 +24,12 @@ ActiveAdmin.register Category do
 
   decorate_with CategoryDecorator
   config.clear_sidebar_sections!
+
+  # Sortable
+  sortable
   config.sort_order = 'position_asc'
   config.paginate   = false
 
-  sortable # creates the controller action which handles the sorting
 
   index do
     sortable_handle_column
