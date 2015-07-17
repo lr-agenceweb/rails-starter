@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   before_action :set_background, unless: proc { @category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
-  before_action :set_gon_autocomplete
+  before_action :set_gon_autocomplete, if: proc { @search_module.enabled? }
 
   decorates_assigned :setting, :category
 
