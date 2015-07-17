@@ -51,5 +51,5 @@ class Picture < ActiveRecord::Base
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
-  scope :online,  -> { where(online:  true) }
+  scope :online,  -> { where(online: true) }
 end
