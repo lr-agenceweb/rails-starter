@@ -1,0 +1,16 @@
+f.semantic_errors(*f.object.errors.keys)
+
+render 'admin/shared/form_general', f: f
+
+f.columns do
+  f.column do
+    render 'admin/shared/form_translation', f: f
+  end
+  f.column do
+    render 'admin/shared/referencement/form', f: f
+  end
+end
+
+render 'admin/shared/pictures/many', f: f
+
+f.actions
