@@ -17,8 +17,11 @@ ActiveAdmin.register Home do
 
   decorate_with HomeDecorator
   config.clear_sidebar_sections!
+
+  # Sortable
   config.sort_order = 'position_asc'
   config.paginate   = false
+  sortable
 
   index do
     sortable_handle_column
