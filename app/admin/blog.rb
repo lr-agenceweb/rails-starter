@@ -51,7 +51,7 @@ ActiveAdmin.register Blog do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
 
     render 'admin/shared/form_general', f: f
     render 'admin/shared/form_translation', f: f

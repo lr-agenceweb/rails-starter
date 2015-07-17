@@ -27,7 +27,7 @@ ActiveAdmin.register OptionalModule do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
 
     f.inputs 'Général' do
       f.input :name,
@@ -53,9 +53,7 @@ ActiveAdmin.register OptionalModule do
     private
 
     def delete_adult_cookie
-      if params[:optional_module][:name] == 'Adult' && params[:optional_module][:enabled] == '0'
-        cookies.delete :adult
-      end
+      cookies.delete :adult if params[:optional_module][:name] == 'Adult' && params[:optional_module][:enabled] == '0'
     end
   end
 end

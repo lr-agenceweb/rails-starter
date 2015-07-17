@@ -17,7 +17,7 @@ ActiveAdmin.register NewsletterUser do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
 
     f.inputs 'Newsletter user' do
       f.input :email, input_html: { disabled: :disabled }

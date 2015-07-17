@@ -86,7 +86,7 @@ ActiveAdmin.register Setting do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
 
     columns do
       column do

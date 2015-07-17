@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
       adult_validation: true,
       vex_yes_text: t('adult.yes'),
       vex_no_text: t('adult.no'),
-      adult_not_validated_popup_content: StringBox.find_by(key: 'adult_not_validated_popup_content').content,
+      adult_not_validated_popup_content: StringBox.find_by(key: 'adult_not_validated_popup_content').content
     )
   end
 
@@ -86,6 +86,6 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    raise ActionController::RoutingError.new('Not Found')
+    fail ActionController::RoutingError, 'Not Found'
   end
 end

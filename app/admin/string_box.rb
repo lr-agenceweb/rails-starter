@@ -28,7 +28,7 @@ ActiveAdmin.register StringBox do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
 
     f.inputs 'Custom contenu' do
       if f.object.new_record?
@@ -43,7 +43,6 @@ ActiveAdmin.register StringBox do
                 hint: I18n.t('form.hint.string_box.content'),
                 input_html: { class: 'froala' }
       end
-
     end
 
     f.actions

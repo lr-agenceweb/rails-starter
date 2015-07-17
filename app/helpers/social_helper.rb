@@ -95,12 +95,11 @@ module SocialHelper
   #
   def image_for_object(obj)
     if defined?(obj.picture) && !obj.picture.nil?
-      attachment_url(obj.picture.image, :large)
+      return attachment_url(obj.picture.image, :large)
     elsif defined?(obj.pictures) && !obj.pictures.first.nil?
-      attachment_url(obj.pictures.first.image, :large)
-    else
-      nil
+      return attachment_url(obj.pictures.first.image, :large)
     end
+    nil
   end
 
   # SEO page title structure

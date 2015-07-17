@@ -55,7 +55,7 @@ ActiveAdmin.register Picture do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
 
     f.inputs 'Media properties' do
       f.input :image,

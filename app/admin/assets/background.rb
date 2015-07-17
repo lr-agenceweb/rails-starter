@@ -22,7 +22,7 @@ ActiveAdmin.register Background do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
 
     f.inputs 'Background properties' do
       f.input :attachable_type,
@@ -32,7 +32,6 @@ ActiveAdmin.register Background do
       f.input :image,
               as: :file,
               label: I18n.t('form.label.background')
-              # image_preview: true
     end
 
     f.actions
