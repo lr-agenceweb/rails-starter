@@ -45,10 +45,10 @@ class Setting < ActiveRecord::Base
                     path: 'logo/:id/:style-:filename',
                     url:  '/logo/:id/:style-:filename',
                     styles: {
-                      large:  '512x512>',
-                      medium: '256x256>',
-                      small:  '128x128>',
-                      thumb:  '64x64>'
+                      large: '256x256>',
+                      medium: '128x128>',
+                      small: '64x64>',
+                      thumb: '32x32>'
                     },
                     retina: { quality: 70 },
                     default_url: '/system/default/:style-missing.png'
