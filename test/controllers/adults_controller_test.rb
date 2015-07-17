@@ -100,7 +100,7 @@ class AdultsControllerTest < ActionController::TestCase
     old_controller = @controller
     sign_in @anthony
     @controller = Admin::OptionalModulesController.new
-    patch :update, id: @adult_module, optional_module: { enabled: true, name: @adult_module.name }
+    patch :update, id: @adult_module, optional_module: { enabled: '1', name: @adult_module.name }
     assert assigns(:optional_module).enabled
     assert 'Adult', assigns(:optional_module).name
     assert_redirected_to admin_optional_module_path(assigns(:optional_module))
@@ -113,7 +113,7 @@ class AdultsControllerTest < ActionController::TestCase
     old_controller = @controller
     sign_in @anthony
     @controller = Admin::OptionalModulesController.new
-    patch :update, id: @adult_module, optional_module: { enabled: false, name: @adult_module.name }
+    patch :update, id: @adult_module, optional_module: { enabled: '0', name: @adult_module.name }
     assert 'Adult', assigns(:optional_module).name
     assert_not assigns(:optional_module).enabled
     assert_redirected_to admin_optional_module_path(assigns(:optional_module))
