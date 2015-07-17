@@ -8,6 +8,7 @@ class GuestBooksController < ApplicationController
   # GET /livre-d-or
   # GET /livre-d-or.json
   def index
+    seo_tag_index category
   end
 
   # POST /livre-d-or

@@ -7,8 +7,8 @@ class BlogsController < ApplicationController
 
   include Commentable
 
-  # GET /blog
-  # GET /blog.json
+  # GET /blogs
+  # GET /blogs.json
   def index
     @blogs = BlogDecorator.decorate_collection(Blog.online.order(created_at: :desc).page params[:page])
     seo_tag_index category

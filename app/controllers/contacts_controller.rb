@@ -5,10 +5,14 @@ class ContactsController < ApplicationController
   before_action :set_mapbox_options, only: [:new, :create], if: proc { @setting.show_map }
   skip_before_action :allow_cors
 
+  # GET /contact
+  # GET /contact.json
   def index
     redirect_to new_contact_path
   end
 
+  # GET /contact/formulaire
+  # GET /contact/formulaire.json
   def new
     @contact_form = ContactForm.new
     seo_tag_index category
