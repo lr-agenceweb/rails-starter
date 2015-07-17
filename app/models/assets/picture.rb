@@ -34,8 +34,11 @@ class Picture < ActiveRecord::Base
 
   retina!
   has_attached_file :image,
-                    path: ':rails_root/public/system/pictures/:id/:style-:filename',
-                    url:  '/system/pictures/:id/:style-:filename',
+                    storage: :dropbox,
+                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
+                    dropbox_options: {},
+                    path: '/pictures/:id/:style-:filename',
+                    url:  '/pictures/:id/:style-:filename',
                     styles: {
                       huge:   '1024x1024>',
                       large:  '512x512>',
