@@ -17,7 +17,7 @@ class SettingDecorator < ApplicationDecorator
 
   def logo
     # Website logo present
-    h.retina_image_tag(model, :logo, :small) if logo?
+    h.retina_image_tag(model, :logo, :medium) if logo?
   end
 
   def full_address
