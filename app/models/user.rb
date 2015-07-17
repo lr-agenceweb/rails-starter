@@ -50,8 +50,11 @@ class User < ActiveRecord::Base
 
   retina!
   has_attached_file :avatar,
-                    path: ':rails_root/public/system/avatar/:id/:style-:filename',
-                    url:  '/system/avatar/:id/:style-:filename',
+                    storage: :dropbox,
+                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
+                    dropbox_options: {},
+                    path: '/avatars/:id/:style-:filename',
+                    url:  '/avatars/:id/:style-:filename',
                     styles: {
                       large:  '512x512#',
                       medium: '256x256#',
