@@ -61,7 +61,11 @@ class CommentDecorator < ApplicationDecorator
   #
   def link_source
     from = source
-    link = send("#{from.type.downcase.underscore.singularize}_path", from)
+    if model == 'Post'
+      link = send("#{from.type.downcase.underscore.singularize}_path", from)
+    else
+      link = send('blog_path', from)
+    end
     link_to from.title, link, target: :_blank
   end
 
