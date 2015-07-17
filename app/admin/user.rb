@@ -67,7 +67,7 @@ ActiveAdmin.register User do
         f.inputs 'Avatar' do
           f.input :avatar,
                   as: :file,
-                  avatar_preview: true
+                  hint: f.object.avatar.exists? ? retina_image_tag(f.object, :avatar, :small) : gravatar_image_tag(f.object.email, alt: f.object.username)
 
           if f.object.avatar?
             f.input :delete_avatar,
