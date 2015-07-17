@@ -81,8 +81,4 @@ class PostDecorator < ApplicationDecorator
   def picture?
     model.pictures.online.present?
   end
-
-  def content?
-    !model.content.blank?
-  end
 end
