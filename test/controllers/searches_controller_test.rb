@@ -8,6 +8,9 @@ class SearchesControllerTest < ActionController::TestCase
 
   setup :initialize_test
 
+  #
+  # == Routes / Templates / Responses
+  #
   test 'should get index' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -26,20 +29,14 @@ class SearchesControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should have a background color associated' do
-    @locales.each do |locale|
-      I18n.with_locale(locale.to_s) do
-        get :index, locale: locale.to_s
-        assert_equal assigns(:category).color, '#F00'
-      end
-    end
-  end
-
   test 'should get search page by url' do
     assert_routing '/rechercher', controller: 'searches', action: 'index', locale: 'fr' if @locales.include?(:fr)
     assert_routing '/en/search', controller: 'searches', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
+  #
+  # == Search params
+  #
   test 'should return empty object if term is not set' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -108,7 +105,21 @@ class SearchesControllerTest < ActionController::TestCase
     end
   end
 
+  #
+  # == Diverse
+  #
+  test 'should have a background color associated' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s
+        assert_equal assigns(:category).color, '#F00'
+      end
+    end
+  end
+
+  #
   # == Ajax
+  #
   test 'should execute term in ajax' do
     term = 'Ruby'
     xhr :get, :index, format: :js, term: term, locale: 'fr'
