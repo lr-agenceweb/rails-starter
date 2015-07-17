@@ -61,7 +61,8 @@ class ApplicationController < ActionController::Base
     gon.push(
       adult_validation: true,
       vex_yes_text: t('adult.yes'),
-      vex_no_text: t('adult.no')
+      vex_no_text: t('adult.no'),
+      adult_not_validated_popup_content: StringBox.find_by(key: 'adult_not_validated_popup_content').content,
     )
   end
 
