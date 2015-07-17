@@ -49,6 +49,7 @@ gem 'js_cookie_rails'
 # == Media upload
 #
 gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'paperclip-dropbox', '>= 1.1.7'
 gem 'retina_rails', '~> 2.0.0'
 
 #
