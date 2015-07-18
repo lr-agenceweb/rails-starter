@@ -23,7 +23,7 @@ DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
   content: ''
-  user: anthony
+  user: bob
 
 # Home posts
 home:
@@ -44,6 +44,7 @@ about:
   type: About
   title: Développement et Hébergement
   online: true
+  user: anthony
 
 about_2:
   <<: *DEFAULTS
