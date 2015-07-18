@@ -9,24 +9,26 @@ class AboutsControllerTest < ActionController::TestCase
 
   setup :initialize_test
 
+  #
+  # == Routes / Templates / Responses
+  #
   test 'should get index' do
     @locales.each do |locale|
-      get :index, locale: locale.to_s
-      assert_response :success
-      assert_not_nil @about
+      I18n.with_locale(locale) do
+        get :index, locale: locale.to_s
+        assert_response :success
+        assert_not_nil assigns(:abouts)
+      end
     end
   end
 
   test 'should use index template' do
     @locales.each do |locale|
-      get :index, locale: locale.to_s
-      assert_template :index
+      I18n.with_locale(locale) do
+        get :index, locale: locale.to_s
+        assert_template :index
+      end
     end
-  end
-
-  test 'should fetch only online posts' do
-    @abouts = About.online
-    assert_equal @abouts.length, 3
   end
 
   test 'should get abouts page by url' do
@@ -55,6 +57,14 @@ class AboutsControllerTest < ActionController::TestCase
         assert_equal request.path_parameters[:locale], locale.to_s
       end
     end
+  end
+
+  #
+  # == Object
+  #
+  test 'should fetch only online posts' do
+    @abouts = About.online
+    assert_equal @abouts.length, 3
   end
 
   #
