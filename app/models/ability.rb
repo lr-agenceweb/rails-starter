@@ -94,5 +94,14 @@ class Ability
     else
       cannot :manage, Comment
     end
+
+    #
+    # == Blog
+    #
+    if optional_modules.by_name('Blog').enabled?
+      can :manage, Blog
+    else
+      cannot :manage, Blog
+    end
   end
 end
