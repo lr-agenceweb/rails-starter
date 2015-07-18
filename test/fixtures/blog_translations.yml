@@ -1,0 +1,18 @@
+DEFAULTS: &DEFAULTS
+  content: ''
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+blog_online_fr:
+  <<: *DEFAULTS
+  blog_id: <%= ActiveRecord::FixtureSet.identify(:blog_online) %>
+  locale: fr
+  title: Article de blog en ligne
+  slug: article-de-blog-en-ligne
+
+blog_online_en:
+  <<: *DEFAULTS
+  blog_id: <%= ActiveRecord::FixtureSet.identify(:blog_online) %>
+  locale: en
+  title: Blog article online
+  slug: blog-article-online
