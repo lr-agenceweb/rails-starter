@@ -25,11 +25,12 @@ class UserTest < ActiveSupport::TestCase
   # == Avatar
   #
   test 'should be true if user avatar is present' do
-    assert_not @super_administrator.avatar?
+    assert_equal 'bart.jpg', @guest.avatar_file_name
+    assert_not @guest.avatar?
   end
 
   test 'should be false if user avatar is nil' do
-    assert @guest.avatar?
+    assert_not @super_administrator.avatar?
   end
 
   private

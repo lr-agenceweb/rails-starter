@@ -95,6 +95,6 @@ class User < ActiveRecord::Base
 
   # TODO: make a test for this method
   def avatar?
-    !avatar_file_name.nil?
+    avatar.exists?
   end
 end
