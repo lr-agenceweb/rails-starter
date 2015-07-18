@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   before_action :set_background, unless: proc { @category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
-  before_action :set_gon_autocomplete, if: proc { @search_module.enabled? }
+  before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
 
   decorates_assigned :setting, :category
 
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
     @newsletter_user ||= NewsletterUser.new
   end
 
-  def set_gon_autocomplete
+  def set_search_autocomplete
     gon.push(search_path: searches_path(format: :json))
   end
 
@@ -68,12 +68,13 @@ class ApplicationController < ActionController::Base
 
   def set_optional_modules
     optional_modules = OptionalModule.all
-    @rss_module = optional_modules.by_name('RSS')
+    @rss_module        = optional_modules.by_name('RSS')
     @newsletter_module = optional_modules.by_name('Newsletter')
-    @comment_module = optional_modules.by_name('Comment')
-    @blog_module = optional_modules.by_name('Blog')
-    @search_module = optional_modules.by_name('Search')
-    @adult_module = optional_modules.by_name('Adult')
+    @comment_module    = optional_modules.by_name('Comment')
+    @blog_module       = optional_modules.by_name('Blog')
+    @search_module     = optional_modules.by_name('Search')
+    @adult_module      = optional_modules.by_name('Adult')
+    @guest_book_module = optional_modules.by_name('GuestBook')
   end
 
   def authenticate_active_admin_user!
