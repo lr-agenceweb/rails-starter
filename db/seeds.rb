@@ -2,7 +2,7 @@
 # == Resest content and setup id to 1
 #
 puts 'Reset table ID to 1'
-modeles_str = %w( User Role Setting Setting::Translation Post Post::Translation Category Category::Translation Referencement Referencement::Translation Newsletter Newsletter::Translation GuestBook )
+modeles_str = %w( User Role Setting Setting::Translation Post Post::Translation Category Category::Translation Referencement Referencement::Translation Newsletter Newsletter::Translation NewsletterUser GuestBook Blog Blog::Translation OptionalModule StringBox StringBox::Translation )
 modeles_str.each do |modele_str|
   modele = modele_str.constantize
   modele.destroy_all
@@ -23,20 +23,20 @@ end
 # == Create a default user
 #
 puts 'Creating users'
-User.create!(
-  username: 'superadmin',
-  email: 'superadmin@example.com',
+super_administrator = User.create!(
+  username: 'anthony',
+  email: 'anthony@example.com',
   password: 'password',
   password_confirmation: 'password',
   role_id: 1
 )
-# User.create!(
-#   username: 'admin',
-#   email: 'admin@example.com',
-#   password: 'password',
-#   password_confirmation: 'password',
-#   role_id: 2
-# )
+administrator = User.create!(
+  username: 'bob',
+  email: 'bob@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  role_id: 2
+)
 # User.create!(
 #   username: 'abonne',
 #   email: 'abonne@example.com',
@@ -52,7 +52,7 @@ puts 'Creating site Setting'
 setting_site = Setting.create!(
   name: 'Rails starter',
   title: 'Rails starter',
-  subtitle: 'démarre rapidement',
+  subtitle: 'Démonstration',
   phone: '01 02 03 04 05',
   email: 'demo@starter.fr',
   address: 'Place du Père Noël',
@@ -60,29 +60,28 @@ setting_site = Setting.create!(
   postcode: 96_930,
   geocode_address: 'Père Noël, 96930 Rovaniemi, Finlande',
   latitude: 66.5435,
-  longitude: 25.8481,
-  show_map: true
+  longitude: 25.8481
 )
 
 Setting::Translation.create!(
   setting_id: setting_site.id,
   locale: 'en',
   title: 'Rails starter',
-  subtitle: 'start quickly'
+  subtitle: 'Demo'
 )
 
 #
 # == Categories
 #
 puts 'Creating Menu elements'
-title_en = ['Home', 'About', 'Contact', 'Search', 'GuestBook']
-title_fr = ['Accueil', 'À Propos', 'Me contacter', 'Recherche', 'Livre d\'Or']
-description_en = ['Homepage description', 'About description', 'Contact description', 'Search description', 'GuestBook description']
-description_fr = ['Description pour la page d\'accueil', 'Description de la page à propos', 'Description de la page contact', 'Description de la page recherche', 'Description de la page livre d\'or']
-keywords_en = ['home', 'about', 'contact', 'search', 'guest book']
-keywords_fr = ['accueil', 'à propos', 'contact', 'recherche', 'livre d\'or']
-show_in_menu = [true, false, true, true, true]
-show_in_footer = [false, false, false, false, false]
+title_en = ['Home', 'About', 'Contact', 'Search', 'GuestBook', 'Blog']
+title_fr = ['Accueil', 'À Propos', 'Me contacter', 'Recherche', 'Livre d\'Or', 'Blog']
+description_en = ['Homepage description', 'About description', 'Contact description', 'Search description', 'GuestBook description', 'Blog description']
+description_fr = ['Description pour la page d\'accueil', 'Description de la page à propos', 'Description de la page contact', 'Description de la page recherche', 'Description de la page livre d\'or', 'Description de la page Blog']
+keywords_en = ['home', 'about', 'contact', 'search', 'guest book', 'blog']
+keywords_fr = ['accueil', 'à propos', 'contact', 'recherche', 'livre d\'or', 'blog']
+show_in_menu = [true, false, true, true, true, true]
+show_in_footer = [false, false, false, false, false, false]
 
 Category.models_name_str.each_with_index do |element, index|
   category = Category.create!(
@@ -119,18 +118,33 @@ end
 puts 'Creating Home article'
 home = Post.create!(
   type: 'Home',
-  title: 'Titre article accueil !',
-  slug: 'titre-article-accueil',
-  content: '<p>Contenu article accueil</p>',
-  online: true
+  title: 'Bienvenue sur le site !',
+  slug: 'bienvenue-sur-le-site',
+  content: '<p>Merci de visiter mon site</p>',
+  online: true,
+  user_id: administrator.id
 )
 
 Post::Translation.create!(
   post_id: home.id,
   locale: 'en',
-  title: 'Home article title !',
-  slug: 'home-article-title',
-  content: '<p>Home article content</p>'
+  title: 'Welcome to my site',
+  slug: 'welcome-to-my-site',
+  content: '<p>Thanks to visit my site</p>'
+)
+referencement = Referencement.create!(
+  attachable_id: home.id,
+  attachable_type: 'Post',
+  title: '',
+  description: '',
+  keywords: ''
+)
+Referencement::Translation.create!(
+  referencement_id: referencement.id,
+  locale: 'en',
+  title: '',
+  description: '',
+  keywords: ''
 )
 
 #
@@ -139,18 +153,67 @@ Post::Translation.create!(
 puts 'Creating About article'
 about = Post.create!(
   type: 'About',
-  title: 'Titre article A propos !',
-  slug: 'titre-article-a-propos',
-  content: '<p>Contenu article a-propos</p>',
-  online: true
+  title: 'Hébergement et réalisation',
+  slug: 'hebergement-et-realisation',
+  content: '<p>Le site a été développé par Anthony ROBIN</p>',
+  online: true,
+  user_id: super_administrator.id
 )
 
 Post::Translation.create!(
   post_id: about.id,
   locale: 'en',
-  title: 'About article title !',
-  slug: 'about-article-title',
-  content: '<p>about article content</p>'
+  title: 'Hosting and realisation',
+  slug: 'hosting-and-realisation',
+  content: '<p>This website has been developed by Anthony ROBIN</p>'
+)
+referencement = Referencement.create!(
+  attachable_id: about.id,
+  attachable_type: 'Post',
+  title: '',
+  description: '',
+  keywords: ''
+)
+Referencement::Translation.create!(
+  referencement_id: referencement.id,
+  locale: 'en',
+  title: '',
+  description: '',
+  keywords: ''
+)
+
+#
+# == Blog article
+#
+puts 'Creating Blog article'
+blog = Blog.create!(
+  title: 'Premier article de blog',
+  slug: 'premier-article-de-blog',
+  content: '<p>Voici le premier article de mon blog</p>',
+  online: true,
+  user_id: administrator.id
+)
+
+Blog::Translation.create!(
+  blog_id: blog.id,
+  locale: 'en',
+  title: 'First blog article',
+  slug: 'first-blog-article',
+  content: '<p>This is my first blog article !</p>'
+)
+referencement = Referencement.create!(
+  attachable_id: blog.id,
+  attachable_type: 'Blog',
+  title: '',
+  description: '',
+  keywords: ''
+)
+Referencement::Translation.create!(
+  referencement_id: referencement.id,
+  locale: 'en',
+  title: '',
+  description: '',
+  keywords: ''
 )
 
 #
@@ -188,11 +251,57 @@ NewsletterUser.create!(
 )
 
 #
+# == OptionalModules
+#
+puts 'Creating OptionalModules'
+description = [
+  'Module qui affiche un formulaire pour s\abonner à la newsletter et authorise l\'administrateur à envoyer des mails aux abonnés',
+  'Module livre d\'or dans lequel les internautes pourront laisser leur avis',
+  'Module de recherche sur le site',
+  'Module RSS, donne la possibilité aux internautes de s\'abonner aux articles Post et Blog du site',
+  'Module de commentaire: permet aux internautes de commenter les articles Post ou de Blog',
+  'Module qui affiche une popup demandant aux internet d\'attester qu\'ils sont bien majeurs pour continuer à visiter le site'
+]
+OptionalModule.list.each_with_index do |element, index|
+  OptionalModule.create!(
+    name: element,
+    description: description[index],
+    enabled: true
+  )
+end
+
+#
+# == StringBox
+#
+puts 'Creating StringBox'
+string_box_keys = ['adult_not_validated_popup_content']
+string_box_content_fr = [
+  'Afin de pouvoir accéder au site, vous devez être majeur. En cliquant sur accepter vous attestez avoir plus de 18 ans.'
+]
+string_box_content_en = [
+  'In order to access the website, you must be adult. By clicking accept, you attest you are over 18 years old.'
+]
+string_box_keys.each_with_index do |element, index|
+  string_box = StringBox.create!(
+    key: element,
+    title: '',
+    content: string_box_content_fr[index]
+  )
+  StringBox::Translation.create!(
+    string_box_id: string_box.id,
+    locale: 'en',
+    title: '',
+    content: string_box_content_en[index]
+  )
+end
+
+#
 # == FriendlyId
 #
 puts 'Setting Friendly Id'
 User.find_each(&:save)
 Post.find_each(&:save)
+Blog.find_each(&:save)
 Newsletter.find_each(&:save)
 
 puts 'Seeds successfuly loaded :)'
