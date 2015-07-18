@@ -2,7 +2,7 @@
 # == Resest content and setup id to 1
 #
 puts 'Reset table ID to 1'
-modeles_str = %w( User Role Setting Setting::Translation Post Post::Translation Category Category::Translation Referencement Referencement::Translation Newsletter Newsletter::Translation NewsletterUser GuestBook Blog Blog::Translation OptionalModule StringBox StringBox::Translation )
+modeles_str = %w( User Role Setting Setting::Translation Post Post::Translation Category Category::Translation Referencement Referencement::Translation Newsletter Newsletter::Translation NewsletterUser GuestBook Blog Blog::Translation OptionalModule StringBox StringBox::Translation Picture Picture::Translation )
 modeles_str.each do |modele_str|
   modele = modele_str.constantize
   modele.destroy_all
