@@ -17,6 +17,7 @@ class AboutsController < PostsController
   # GET /a-propos/1
   # GET /a-propos/1.json
   def show
+    redirect_to @about, status: :moved_permanently if request.path_parameters[:id] != @about.slug
     seo_tag_show @about
   end
 

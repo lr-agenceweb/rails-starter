@@ -7,8 +7,8 @@ class BlogsController < ApplicationController
 
   include Commentable
 
-  # GET /blogs
-  # GET /blogs.json
+  # GET /blog
+  # GET /blog.json
   def index
     @blogs = BlogDecorator.decorate_collection(Blog.online.order(created_at: :desc).page params[:page])
     seo_tag_index category
@@ -17,7 +17,7 @@ class BlogsController < ApplicationController
   # GET /blog/1
   # GET /blog/1.json
   def show
-    redirect_to @blog, status: :moved_permanently if request.path != blog_path(@blog)
+    redirect_to @blog, status: :moved_permanently if request.path_parameters[:id] != @blog.slug
     seo_tag_show blog
   end
 
