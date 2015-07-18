@@ -10,7 +10,7 @@ class AboutsController < PostsController
   # GET /a-propos
   # GET /a-propos.json
   def index
-    @abouts = About.online.includes(:translations)
+    @abouts = AboutDecorator.decorate_collection(About.online.includes(:translations))
     seo_tag_index category
   end
 
