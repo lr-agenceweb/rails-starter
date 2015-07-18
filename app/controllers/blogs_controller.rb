@@ -3,6 +3,7 @@
 #
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show]
+  before_action :blog_module_enabled?
   decorates_assigned :blog, :comment
 
   include Commentable
@@ -25,5 +26,9 @@ class BlogsController < ApplicationController
 
   def set_blog
     @blog = Blog.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
+  end
+
+  def blog_module_enabled?
+    not_found unless @blog_module.enabled?
   end
 end
