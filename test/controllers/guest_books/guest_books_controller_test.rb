@@ -195,9 +195,25 @@ class GuestBooksControllerTest < ActionController::TestCase
     assert_routing '/en/guest-book', controller: 'guest_books', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
+  #
+  # == Module disabled
+  #
+  test 'should render 404 if module is disabled' do
+    disable_optional_module @anthony, @guest_book_module, 'GuestBook' # in test_helper.rb
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_raises(ActionController::RoutingError) do
+          get :index, locale: locale.to_s
+        end
+      end
+    end
+  end
+
   private
 
   def initialize_test
     @locales = I18n.available_locales
+    @anthony = users(:anthony)
+    @guest_book_module = optional_modules(:guest_book)
   end
 end
