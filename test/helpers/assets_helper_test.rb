@@ -17,7 +17,7 @@ class AssetsHelperTest < ActionView::TestCase
   test 'should return default image if attachment is not defined' do
     @bob = users(:bob)
     result = attachment_url(@bob.avatar, :small, ActionController::TestRequest.new)
-    expected = 'http://test.host/system/default/small-missing.png'
+    expected = 'http://test.host/default/small-missing.png'
 
     assert_equal result, expected
   end
