@@ -23,8 +23,10 @@ class Background < ActiveRecord::Base
 
   retina!
   has_attached_file :image,
-                    path: ':rails_root/public/system/backgrounds/:id/:style-:filename',
-                    url:  '/system/backgrounds/:id/:style-:filename',
+                    storage: :dropbox,
+                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
+                    path: '/backgrounds/:id/:style-:filename',
+                    url:  '/backgrounds/:id/:style-:filename',
                     styles: {
                       background: '4000x2000>',
                       large:      '2000x1200>',
@@ -32,7 +34,7 @@ class Background < ActiveRecord::Base
                       small:      '300x300>'
                     },
                     retina: { quality: 70 },
-                    default_url: '/system/default/small-missing.png'
+                    default_url: '/default/small-missing.png'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 

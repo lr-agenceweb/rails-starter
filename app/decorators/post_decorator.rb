@@ -39,7 +39,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def content
-    model.content.html_safe
+    model.content.html_safe if content?
   end
 
   def status

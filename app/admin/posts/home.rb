@@ -8,6 +8,9 @@ ActiveAdmin.register Home do
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
                 ],
+                pictures_attributes: [
+                  :id, :locale, :image, :_destroy
+                ],
                 referencement_attributes: [
                   :id,
                   translations_attributes: [
@@ -18,7 +21,13 @@ ActiveAdmin.register Home do
   decorate_with HomeDecorator
   config.clear_sidebar_sections!
 
+  # Sortable
+  sortable
+  config.sort_order = 'position_asc'
+  config.paginate   = false
+
   index do
+    sortable_handle_column
     selectable_column
     column :image
     column :title
@@ -47,12 +56,7 @@ ActiveAdmin.register Home do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
-
-    render 'admin/shared/form_general', f: f
-    render 'admin/shared/form_translation', f: f
-    render 'admin/shared/referencement/form', f: f
-    f.actions
+    render 'admin/posts/form', f: f
   end
 
   #

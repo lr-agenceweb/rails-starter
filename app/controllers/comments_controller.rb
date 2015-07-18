@@ -2,9 +2,11 @@
 # == CommentsController
 #
 class CommentsController < ApplicationController
-  decorates_assigned :comment
+  before_action :comment_module_enabled?
   before_action :load_commentable
   before_action :set_comment, only: [:destroy]
+
+  decorates_assigned :comment
 
   # POST /comments
   # POST /comments.json
@@ -74,5 +76,9 @@ class CommentsController < ApplicationController
       format.html { redirect_to @commentable }
       format.js { render template }
     end
+  end
+
+  def comment_module_enabled?
+    not_found unless @comment_module.enabled?
   end
 end

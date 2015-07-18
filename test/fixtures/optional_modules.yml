@@ -2,16 +2,18 @@
 #
 # Table name: optional_modules
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  enabled    :boolean          default(FALSE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text(65535)
+#  enabled     :boolean          default(FALSE)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  description: ''
 
 search:
   <<: *DEFAULTS
@@ -42,3 +44,8 @@ blog:
   <<: *DEFAULTS
   name: Blog
   enabled: true
+
+adult:
+  <<: *DEFAULTS
+  name: Adult
+  enabled: false

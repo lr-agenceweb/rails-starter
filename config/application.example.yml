@@ -52,10 +52,23 @@ mailer_port: ~
 mailer_user_name: ~
 mailer_password: ~
 
+
 #
 # == Froala [ActiveAdmin wysiwyg editor ]
 #
 froala_key: ~
+
+
+#
+# == Dropbox Storage [Paperclip]
+#
+dropbox:
+  app_key: ~
+  app_secret: ~
+  access_token: ~
+  access_token_secret: ~
+  user_id: ~
+  access_type: ~
 
 
 #

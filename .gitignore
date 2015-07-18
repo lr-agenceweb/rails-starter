@@ -22,6 +22,9 @@
 # Ignore application configuration
 /config/application.yml
 /config/database.yml
+/config/analytical.yml
+/config/dropbox.yml
+
 /public/sitemap*
 /public/shared*
 /public/system/*

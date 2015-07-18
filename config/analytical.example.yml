@@ -1,0 +1,4 @@
+production:
+  google: # Google Analytics
+    key: "<%= Figaro.env.google_analytics_key %>"
+    domain: "<%= Figaro.env.application_domain_name %>"

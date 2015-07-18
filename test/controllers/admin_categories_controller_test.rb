@@ -87,7 +87,7 @@ module Admin
     test 'should destroy background if check_box is checked' do
       assert_not_nil @category.background
       patch :update, id: @category.id, category: { background: { _destroy: true } }
-      assert_equal assigns(:category).background, image_tag('/system/default/small-missing.png')
+      assert_equal assigns(:category).background, image_tag('/default/small-missing.png')
     end
 
     private

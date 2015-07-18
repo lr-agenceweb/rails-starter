@@ -86,7 +86,7 @@ ActiveAdmin.register Setting do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
 
     columns do
       column do
@@ -100,8 +100,7 @@ ActiveAdmin.register Setting do
             end
 
             column do
-              f.input :logo,
-                      hint: retina_image_tag(object, :logo, :small)
+              f.input :logo, hint: retina_image_tag(object, :logo, :small)
               f.input :delete_logo,
                       as: :boolean,
                       hint: 'Si coché, le logo sera supprimé après mise à jour des paramètres'

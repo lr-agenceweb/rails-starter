@@ -2,18 +2,21 @@ language: ruby
 cache: bundler
 
 rvm:
-  - 2.2.0
+  - 2.2.2
 
 env:
   - DB=mysql
   - DB=postgresql
   - DB=sqlite
-  - RAILS_VERSION=4.2.0
   - RAILS_VERSION=4.2.3
 
+bundler_args: --without development
+
 before_script:
+  - sleep 15
   - cp config/database.travis.yml config/database.yml
   - cp config/application.example.yml config/application.yml
+  - cp config/dropbox.example.yml config/dropbox.yml
   - mysql -e 'create database rails_starter_test'
   - psql -c 'create database rails_starter_test' -U postgres
 
@@ -32,6 +35,11 @@ after_failure:
   - "echo $RAILS_ENV"
   - "bundle exec rake --version"
 
+branches:
+  only:
+    - master
+    - develop
+
 addons:
   code_climate:
     repo_token:
@@ -40,7 +48,3 @@ notifications:
   email: false
   slack:
     secure: C5mVOWuJfFpZwtZQigkATqvgQxXjmo1YnnGRvbsauSpDI9it362L1GsQ50duaSTN//8GfWMqG12bGY4oW8NOgvR/AzrRUD1aAz6ByLaEpb8TKfBbrO5sYSAZn4FRV39aCaAcW6ZuTKJxBmsHo2bdFFpRP07Vmi0bFRRNQO2n+sY=
-
-branches:
-  only:
-    - master

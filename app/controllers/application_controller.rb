@@ -8,16 +8,17 @@ class ApplicationController < ActionController::Base
   include UserHelper
 
   protect_from_forgery with: :exception
-  analytical modules: [:google]
+  analytical modules: [:google], disable_if: proc { !Rails.env.production? && Figaro.env.google_analytics_key.nil? }
 
   before_action :setting_or_maintenance?
+  before_action :set_optional_modules
+  before_action :set_adult_validation, if: proc { @adult_module.enabled? }
   before_action :set_language
   before_action :set_menu_elements
-  before_action :set_optional_modules
   before_action :set_background, unless: proc { @category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
-  before_action :set_gon_autocomplete
+  before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
 
   decorates_assigned :setting, :category
 
@@ -52,17 +53,28 @@ class ApplicationController < ActionController::Base
     @newsletter_user ||= NewsletterUser.new
   end
 
-  def set_gon_autocomplete
+  def set_search_autocomplete
     gon.push(search_path: searches_path(format: :json))
+  end
+
+  def set_adult_validation
+    gon.push(
+      adult_validation: true,
+      vex_yes_text: t('adult.yes'),
+      vex_no_text: t('adult.no'),
+      adult_not_validated_popup_content: StringBox.find_by(key: 'adult_not_validated_popup_content').content
+    )
   end
 
   def set_optional_modules
     optional_modules = OptionalModule.all
-    @rss_module = optional_modules.by_name('RSS')
+    @rss_module        = optional_modules.by_name('RSS')
     @newsletter_module = optional_modules.by_name('Newsletter')
-    @comment_module = optional_modules.by_name('Comment')
-    @blog_module = optional_modules.by_name('Blog')
-    @search_module = optional_modules.by_name('Search')
+    @comment_module    = optional_modules.by_name('Comment')
+    @blog_module       = optional_modules.by_name('Blog')
+    @search_module     = optional_modules.by_name('Search')
+    @adult_module      = optional_modules.by_name('Adult')
+    @guest_book_module = optional_modules.by_name('GuestBook')
   end
 
   def authenticate_active_admin_user!
@@ -72,5 +84,9 @@ class ApplicationController < ActionController::Base
 
   def access_denied(exception)
     redirect_to admin_dashboard_path, alert: exception.message
+  end
+
+  def not_found
+    fail ActionController::RoutingError, 'Not Found'
   end
 end

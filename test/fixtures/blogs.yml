@@ -13,18 +13,25 @@
 #
 # Indexes
 #
-#  fk_rails_08f7f1b196  (user_id)
-#  index_blogs_on_slug  (slug) UNIQUE
+#  index_blogs_on_slug     (slug)
+#  index_blogs_on_user_id  (user_id)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  online: true
+  user: bob
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+blog_online:
+  <<: *DEFAULTS
+  title: ~
+  slug: ~
+  content: ~
+
+blog_offline:
+  <<: *DEFAULTS
+  title: Article de blog hors ligne
+  slug: article-de-blog-hors-ligne
+  content: Premier article de blog
+  online: false

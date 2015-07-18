@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #
 # == Ruby
 #
-ruby '2.2.0'
+ruby '2.2.2'
 
 #
 # == Rails
@@ -13,9 +13,9 @@ gem 'rails', '4.2.3'
 #
 # == Database
 #
-gem 'sqlite3'
 gem 'mysql2'
 gem 'pg'
+gem 'sqlite3'
 
 #
 # == Administration
@@ -43,11 +43,13 @@ gem 'chosen-rails'
 gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
 gem 'vex_rails', github: 'anthony-robin/vex_rails'
 gem 'jquery-minicolors-rails'
+gem 'js_cookie_rails'
 
 #
 # == Media upload
 #
 gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'paperclip-dropbox', '>= 1.1.7'
 gem 'retina_rails', '~> 2.0.0'
 
 #
@@ -69,7 +71,7 @@ gem 'route_translator'
 gem 'globalize', '~> 5.0.0'
 gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize', branch: 'master'
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master'
-gem "i18n-js", ">= 3.0.0.rc10"
+gem 'i18n-js', '>= 3.0.0.rc10'
 
 #
 # == Map
@@ -104,7 +106,7 @@ gem 'awesome-share-buttons', github: 'anthony-robin/awesome-share-buttons'
 # == Background Tasks
 #
 gem 'whenever', require: false # Cron tasks
-gem "daemons"
+gem 'daemons'
 
 #
 # == Email
@@ -172,7 +174,7 @@ end
 group :test do
   gem 'minitest'
   gem 'minitest-reporters', require: false
-  gem "codeclimate-test-reporter", require: nil
+  gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
 end
 

@@ -15,6 +15,9 @@ en:
               blank: Don't forget your email address ;)
               invalid: Your email is invalid ;)
               taken: This email is not avalaible :(
+    attributes:
+      adult:
+        adult_validated: I attest to be an adult
 
 # French
 fr:
@@ -74,6 +77,9 @@ fr:
       category:
         one: Page
         other: Pages
+      string_box:
+        one: Contenu personnalisé
+        other: Contenus personalisés
 
     attributes:
       post:
@@ -127,6 +133,15 @@ fr:
         sent: Envoyé ?
         sent_at: Envoyé le
         send: Envoyer
+      string_box:
+        title: Titre
+        content: Contenu
+        key: Clé
+      background:
+        _destroy: Supprimer ?
+      picture:
+        image: Image
+        _destroy: Supprimer ?
 
   formtastic:
     create: 'Créer %{model}'

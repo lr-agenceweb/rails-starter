@@ -89,9 +89,19 @@ class Ability
     # == Comment
     #
     if optional_modules.by_name('Comment').enabled?
-      can [:create, :read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
+      can [:read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
+      can [:read, :destroy], Comment, user_id: nil
     else
       cannot :manage, Comment
+    end
+
+    #
+    # == Blog
+    #
+    if optional_modules.by_name('Blog').enabled?
+      can :manage, Blog
+    else
+      cannot :manage, Blog
     end
   end
 end

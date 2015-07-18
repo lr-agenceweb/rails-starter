@@ -2,11 +2,12 @@
 #
 # Table name: optional_modules
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  enabled    :boolean          default(FALSE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text(65535)
+#  enabled     :boolean          default(FALSE)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 #
@@ -16,7 +17,7 @@ class OptionalModule < ActiveRecord::Base
   has_one :category, dependent: :destroy
 
   def self.list
-    %w( Newsletter GuestBook Search RSS Comment Blog )
+    %w( Newsletter GuestBook Search RSS Comment Blog Adult )
   end
 
   def self.by_name(name)

@@ -6,6 +6,7 @@ class CreatePosts < ActiveRecord::Migration
       t.string :slug
       t.text :content
       t.boolean :online, default: true
+      t.references :user, index: true
 
       t.timestamps null: false
     end

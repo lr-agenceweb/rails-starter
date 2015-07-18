@@ -3,15 +3,11 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
 #  username               :string(255)
 #  slug                   :string(255)
-#  email                  :string(255)      default(""), not null
-#  avatar_updated_at      :datetime
-#  avatar_file_size       :integer
-#  avatar_content_type    :string(255)
-#  avatar_file_name       :string(255)
-#  retina_dimensions      :text(65535)
 #  encrypted_password     :string(255)      default(""), not null
+#  role_id                :integer          default(3), not null
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -20,15 +16,20 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  role_id                :integer          default(4), not null
-#  created_at             :datetime
-#  updated_at             :datetime
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  avatar_file_name       :string(255)
+#  retina_dimensions      :text(65535)
+#  avatar_content_type    :string(255)
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_slug                  (slug) UNIQUE
+#  index_users_on_role_id               (role_id)
+#  index_users_on_slug                  (slug)
 #
 
 #
@@ -43,15 +44,19 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
+  has_many :blogs, dependent: :destroy
   belongs_to :role
-  delegate :name, to: :role, prefix: true, allow_nil: true
   accepts_nested_attributes_for :role, reject_if: :all_blank
+
+  delegate :name, to: :role, prefix: true, allow_nil: true
 
   retina!
   has_attached_file :avatar,
-                    path: ':rails_root/public/system/avatar/:id/:style-:filename',
-                    url:  '/system/avatar/:id/:style-:filename',
+                    storage: :dropbox,
+                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
+                    path: '/avatars/:id/:style-:filename',
+                    url: '/avatars/:id/:style-:filename',
                     styles: {
                       large:  '512x512#',
                       medium: '256x256#',
@@ -59,7 +64,7 @@ class User < ActiveRecord::Base
                       thumb:  '64x64#'
                     },
                     retina: { quality: 70 },
-                    default_url: '/system/default/:style-missing.png'
+                    default_url: '/default/:style-missing.png'
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
@@ -92,6 +97,6 @@ class User < ActiveRecord::Base
 
   # TODO: make a test for this method
   def avatar?
-    !avatar_file_name.nil?
+    avatar.exists?
   end
 end

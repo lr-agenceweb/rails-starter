@@ -3,11 +3,13 @@
 #
 class GuestBooksController < ApplicationController
   before_action :set_guest_book
+  before_action :guest_book_module_enabled?
   decorates_assigned :guest_book
 
   # GET /livre-d-or
   # GET /livre-d-or.json
   def index
+    seo_tag_index category
   end
 
   # POST /livre-d-or
@@ -47,5 +49,9 @@ class GuestBooksController < ApplicationController
       format.html { render template } if should_render
       format.js { render template }
     end
+  end
+
+  def guest_book_module_enabled?
+    not_found unless @guest_book_module.enabled?
   end
 end

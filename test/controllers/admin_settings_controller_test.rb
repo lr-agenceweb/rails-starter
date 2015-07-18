@@ -13,7 +13,7 @@ module Admin
     setup :initialize_test
 
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @anthony
+      sign_out @administrator
       get :index
       assert_redirected_to new_user_session_path
       get :show, id: @setting.id
@@ -55,12 +55,40 @@ module Admin
       assert_not @setting.update(title: nil)
     end
 
+    #
+    # == Avatar
+    #
+    # test 'should be able to upload logo' do
+    #   upload_dropbox_paperclip_attachment
+    #   setting = assigns(:setting)
+    #   assert setting.logo?
+    #   assert_equal 'bart.png', setting.logo_file_name
+    #   assert_equal 'image/png', setting.logo_content_type
+    # end
+
+    # test 'should be able to destroy logo' do
+    #   upload_dropbox_paperclip_attachment
+    #   remove_dropbox_paperclip_attachment
+    # end
+
     private
 
     def initialize_test
       @setting = settings(:one)
-      @anthony = users(:anthony)
-      sign_in @anthony
+      @administrator = users(:bob)
+      sign_in @administrator
+    end
+
+    def upload_dropbox_paperclip_attachment
+      puts '=== Uploading logo to Dropbox'
+      attachment = fixture_file_upload 'images/bart.png', 'image/png'
+      patch :update, id: @setting, setting: { logo: attachment }
+    end
+
+    def remove_dropbox_paperclip_attachment
+      puts '=== Removing logo from Dropbox'
+      patch :update, id: @setting, setting: { logo: nil, delete_logo: '1' }
+      assert_not assigns(:setting).logo?
     end
   end
 end

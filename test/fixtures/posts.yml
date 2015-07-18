@@ -8,6 +8,7 @@
 #  slug       :string(255)
 #  content    :text(65535)
 #  online     :boolean          default(TRUE)
+#  position   :integer
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -22,7 +23,7 @@ DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
   content: ''
-  user: anthony
+  user: bob
 
 # Home posts
 home:
@@ -43,6 +44,7 @@ about:
   type: About
   title: Développement et Hébergement
   online: true
+  user: anthony
 
 about_2:
   <<: *DEFAULTS

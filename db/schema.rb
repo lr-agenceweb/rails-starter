@@ -11,22 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716093716) do
-
-  create_table "active_admin_comments", force: :cascade do |t|
-    t.string   "namespace",     limit: 255
-    t.text     "body",          limit: 65535
-    t.string   "resource_id",   limit: 255,   null: false
-    t.string   "resource_type", limit: 255,   null: false
-    t.integer  "author_id",     limit: 4
-    t.string   "author_type",   limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+ActiveRecord::Schema.define(version: 20150717163951) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -63,8 +48,8 @@ ActiveRecord::Schema.define(version: 20150716093716) do
     t.datetime "updated_at",                              null: false
   end
 
-  add_index "blogs", ["slug"], name: "index_blogs_on_slug", unique: true, using: :btree
-  add_index "blogs", ["user_id"], name: "fk_rails_08f7f1b196", using: :btree
+  add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
+  add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",              limit: 255
@@ -98,13 +83,13 @@ ActiveRecord::Schema.define(version: 20150716093716) do
     t.string   "email",            limit: 255
     t.text     "comment",          limit: 65535
     t.string   "lang",             limit: 255
+    t.boolean  "validated",                      default: false
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
-    t.boolean  "validated",                      default: true
     t.integer  "user_id",          limit: 4
     t.string   "role",             limit: 255,   default: "comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
 
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
@@ -144,13 +129,13 @@ ActiveRecord::Schema.define(version: 20150716093716) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "guest_books", force: :cascade do |t|
-    t.string   "username",   limit: 255
-    t.string   "email",      limit: 255,                  null: false
-    t.text     "content",    limit: 65535
-    t.string   "lang",       limit: 255
-    t.boolean  "validated",                default: true
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "username",   limit: 255,                   null: false
+    t.string   "email",      limit: 255,                   null: false
+    t.text     "content",    limit: 65535,                 null: false
+    t.string   "lang",       limit: 255,                   null: false
+    t.boolean  "validated",                default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "newsletter_translations", force: :cascade do |t|
@@ -186,10 +171,11 @@ ActiveRecord::Schema.define(version: 20150716093716) do
   end
 
   create_table "optional_modules", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.boolean  "enabled",                default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.boolean  "enabled",                   default: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
   create_table "picture_translations", force: :cascade do |t|
@@ -242,6 +228,7 @@ ActiveRecord::Schema.define(version: 20150716093716) do
     t.string   "slug",       limit: 255
     t.text     "content",    limit: 65535
     t.boolean  "online",                   default: true
+    t.integer  "position",   limit: 4
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -303,30 +290,48 @@ ActiveRecord::Schema.define(version: 20150716093716) do
     t.string   "geocode_address",   limit: 255
     t.float    "latitude",          limit: 24
     t.float    "longitude",         limit: 24
-    t.boolean  "show_map",                        default: true
+    t.boolean  "show_map",                        default: false
     t.boolean  "show_breadcrumb",                 default: false
     t.boolean  "show_social",                     default: true
-    t.boolean  "should_validate",                 default: false
+    t.boolean  "should_validate",                 default: true
     t.boolean  "maintenance",                     default: false
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size",    limit: 4
     t.string   "logo_content_type", limit: 255
     t.string   "logo_file_name",    limit: 255
     t.text     "retina_dimensions", limit: 65535
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
+  create_table "string_box_translations", force: :cascade do |t|
+    t.integer  "string_box_id", limit: 4,     null: false
+    t.string   "locale",        limit: 255,   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "title",         limit: 255
+    t.text     "content",       limit: 65535
+  end
+
+  add_index "string_box_translations", ["locale"], name: "index_string_box_translations_on_locale", using: :btree
+  add_index "string_box_translations", ["string_box_id"], name: "index_string_box_translations_on_string_box_id", using: :btree
+
+  create_table "string_boxes", force: :cascade do |t|
+    t.string   "key",        limit: 255
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "string_boxes", ["key"], name: "index_string_boxes_on_key", using: :btree
+
   create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255,   default: "", null: false
     t.string   "username",               limit: 255
     t.string   "slug",                   limit: 255
-    t.string   "email",                  limit: 255,   default: "", null: false
-    t.datetime "avatar_updated_at"
-    t.integer  "avatar_file_size",       limit: 4
-    t.string   "avatar_content_type",    limit: 255
-    t.string   "avatar_file_name",       limit: 255
-    t.text     "retina_dimensions",      limit: 65535
     t.string   "encrypted_password",     limit: 255,   default: "", null: false
+    t.integer  "role_id",                limit: 4,     default: 3,  null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -335,16 +340,18 @@ ActiveRecord::Schema.define(version: 20150716093716) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.integer  "role_id",                limit: 4,     default: 4,  null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "avatar_file_name",       limit: 255
+    t.text     "retina_dimensions",      limit: 65535
+    t.string   "avatar_content_type",    limit: 255
+    t.integer  "avatar_file_size",       limit: 4
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
 
-  add_foreign_key "blogs", "users"
-  add_foreign_key "categories", "optional_modules"
-  add_foreign_key "posts", "users"
 end

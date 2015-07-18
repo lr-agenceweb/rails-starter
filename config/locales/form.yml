@@ -34,4 +34,8 @@ fr:
       media:
         destroy: Suppression du media associé à l'article
       background:
-        destroy: Suppression de l'image de Background associée à cette catégorie
+        destroy: Suppression de l'image d'arrière-plan associée à cette page
+
+      string_box:
+        content: Contenu du message personnalisé à afficher sur le site
+        title: Titre du message personnalisé à afficher sur le site

@@ -14,18 +14,18 @@
 #  geocode_address   :string(255)
 #  latitude          :float(24)
 #  longitude         :float(24)
-#  show_map          :boolean          default(TRUE)
+#  show_map          :boolean          default(FALSE)
 #  show_breadcrumb   :boolean          default(FALSE)
 #  show_social       :boolean          default(TRUE)
-#  should_validate   :boolean          default(FALSE)
+#  should_validate   :boolean          default(TRUE)
 #  maintenance       :boolean          default(FALSE)
 #  logo_updated_at   :datetime
 #  logo_file_size    :integer
 #  logo_content_type :string(255)
 #  logo_file_name    :string(255)
 #  retina_dimensions :text(65535)
-#  created_at        :datetime
-#  updated_at        :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
 #
@@ -39,16 +39,18 @@ class Setting < ActiveRecord::Base
 
   retina!
   has_attached_file :logo,
-                    path: ':rails_root/public/system/logo/:id/:style-:filename',
-                    url:  '/system/logo/:id/:style-:filename',
+                    storage: :dropbox,
+                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
+                    path: 'logo/:id/:style-:filename',
+                    url:  '/logo/:id/:style-:filename',
                     styles: {
-                      large:  '512x512>',
-                      medium: '256x256>',
-                      small:  '128x128>',
-                      thumb:  '64x64>'
+                      large: '256x256>',
+                      medium: '128x128>',
+                      small: '64x64>',
+                      thumb: '32x32>'
                     },
                     retina: { quality: 70 },
-                    default_url: '/system/default/:style-missing.png'
+                    default_url: '/default/:style-missing.png'
 
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
 

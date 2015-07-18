@@ -8,6 +8,7 @@
 #  slug       :string(255)
 #  content    :text(65535)
 #  online     :boolean          default(TRUE)
+#  position   :integer
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -24,9 +25,12 @@
 class Post < ActiveRecord::Base
   include Imageable
   include Searchable
+  include Positionable
 
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content
+
+  acts_as_list
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]

@@ -12,9 +12,13 @@ class CreateSettings < ActiveRecord::Migration
       t.string :geocode_address
       t.float :latitude
       t.float :longitude
-      t.boolean :show_map, default: true
+      t.boolean :show_map, default: false
+      t.boolean :show_breadcrumb, default: false
+      t.boolean :show_social, default: true
+      t.boolean :should_validate, default: true
+      t.boolean :maintenance, default: false
 
-      t.timestamps
+      t.timestamps null: false
     end
     Setting.create_translation_table! title: :string, subtitle: :string
   end

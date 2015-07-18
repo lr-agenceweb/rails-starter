@@ -7,6 +7,7 @@ fr:
     contacts: contact
     new: formulaire
     searches: rechercher
+    blogs: blog
 
   main_menu:
     dashboard: Dashboard
@@ -27,6 +28,7 @@ en:
     contacts: contact
     new: form
     searches: search
+    blogs: blog
 
   main_menu:
     dashboard: Dashboard

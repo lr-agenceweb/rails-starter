@@ -3,11 +3,11 @@ $ ->
     switch_locale($('.available-locales'))
     slugify()
 
-    $('.button.has_many_add').on 'click', (e) ->
-      setTimeout (->
-        switch_locale($('.available-locales:last'))
-        return
-      ), 20
+    # $('.button.has_many_add').on 'click', (e) ->
+    #   setTimeout (->
+    #     switch_locale($('.available-locales:last'))
+    #     return
+    #   ), 20
 
 ###*
 # Function to switch default locale in activeadmin-globalize

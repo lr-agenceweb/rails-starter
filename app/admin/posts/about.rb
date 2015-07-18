@@ -51,13 +51,7 @@ ActiveAdmin.register About do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
-
-    render 'admin/shared/form_general', f: f
-    render 'admin/shared/form_translation', f: f
-    render 'admin/shared/pictures/many', f: f
-    render 'admin/shared/referencement/form', f: f
-    f.actions
+    render 'admin/posts/form', f: f
   end
 
   #

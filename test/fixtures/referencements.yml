@@ -12,17 +12,35 @@
 #  updated_at      :datetime         not null
 #
 
+DEFAULTS: &DEFAULTS
+  title: ~
+  description: ~
+  keywords: ~
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
 one:
+  <<: *DEFAULTS
   attachable: home (Post)
 
 two:
+  <<: *DEFAULTS
   attachable: about (Post)
   title: Développement et Hébergement
   description: Description pour article À Propos
   keywords: "Mots-clés, pour, article, à propos"
 
 category_home:
+  <<: *DEFAULTS
   attachable: home (Category)
   title: Référencement pour catégorie home
   description: Description pour catégorie home
   keywords: "Mots-clés, pour, catégorie, home"
+
+blog_online:
+  <<: *DEFAULTS
+  attachable: blog_online (Blog)
+
+blog_offline:
+  <<: *DEFAULTS
+  attachable: blog_offline (Blog)

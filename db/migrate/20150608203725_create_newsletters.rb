@@ -4,6 +4,7 @@ class CreateNewsletters < ActiveRecord::Migration
       t.string :title
       t.string :slug
       t.text :content
+      t.datetime :sent_at
 
       t.timestamps null: false
     end

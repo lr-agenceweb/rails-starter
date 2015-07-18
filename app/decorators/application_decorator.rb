@@ -96,4 +96,12 @@ class ApplicationDecorator < Draper::Decorator
       status_tag(value, color)
     end
   end
+
+  def content?
+    !model.content.blank?
+  end
+
+  def title?
+    !model.title.blank?
+  end
 end

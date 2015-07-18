@@ -10,16 +10,20 @@ class HomesControllerTest < ActionController::TestCase
 
   test 'should get index' do
     @locales.each do |locale|
-      get :index, locale: locale.to_s
-      assert_response :success
-      assert_not_nil @home
+      I18n.with_locale(locale) do
+        get :index, locale: locale.to_s
+        assert_response :success
+        assert_not_nil assigns(:homes)
+      end
     end
   end
 
   test 'should use index template' do
     @locales.each do |locale|
-      get :index, locale: locale.to_s
-      assert_template :index
+      I18n.with_locale(locale) do
+        get :index, locale: locale.to_s
+        assert_template :index
+      end
     end
   end
 
@@ -39,10 +43,12 @@ class HomesControllerTest < ActionController::TestCase
   test 'should render maintenance layout and template if setting enabled' do
     @setting.update_attribute(:maintenance, true)
     @locales.each do |locale|
-      get :index, locale: locale.to_s
-      assert_response :success
-      assert_template :maintenance
-      assert_template layout: :maintenance
+      I18n.with_locale(locale) do
+        get :index, locale: locale.to_s
+        assert_response :success
+        assert_template :maintenance
+        assert_template layout: :maintenance
+      end
     end
   end
 

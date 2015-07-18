@@ -2,6 +2,10 @@
 # == SearchesController
 #
 class SearchesController < ApplicationController
+  before_action :search_module_enabled?
+
+  # GET /rechercher
+  # GET /rechercher.json
   def index
     if params[:term].nil? || params[:term].blank? || params[:term].length < 3
       @searches = []
@@ -16,10 +20,18 @@ class SearchesController < ApplicationController
       @searches = Kaminari.paginate_array(@searches).page(params[:page]).per(5)
     end
 
+    seo_tag_index category
+
     respond_to do |format|
       format.html
       format.js
       format.json
     end
+  end
+
+  private
+
+  def search_module_enabled?
+    not_found unless @search_module.enabled?
   end
 end
