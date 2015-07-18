@@ -296,6 +296,18 @@ string_box_keys.each_with_index do |element, index|
 end
 
 #
+# == GuestBook
+#
+puts 'Creating GuestBook'
+GuestBook.create!(
+  username: 'leo',
+  email: 'leo@test.com',
+  content: 'Merci pour votre site !',
+  lang: 'fr',
+  validated: true
+)
+
+#
 # == FriendlyId
 #
 puts 'Setting Friendly Id'
