@@ -44,10 +44,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
+  has_many :blogs, dependent: :destroy
   belongs_to :role
-  delegate :name, to: :role, prefix: true, allow_nil: true
   accepts_nested_attributes_for :role, reject_if: :all_blank
+
+  delegate :name, to: :role, prefix: true, allow_nil: true
 
   retina!
   has_attached_file :avatar,
