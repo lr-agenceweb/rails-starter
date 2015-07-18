@@ -13,8 +13,8 @@
 #
 # Indexes
 #
-#  fk_rails_08f7f1b196  (user_id)
-#  index_blogs_on_slug  (slug) UNIQUE
+#  index_blogs_on_slug     (slug)
+#  index_blogs_on_user_id  (user_id)
 #
 
 #

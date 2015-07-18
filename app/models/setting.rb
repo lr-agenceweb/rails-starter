@@ -14,18 +14,18 @@
 #  geocode_address   :string(255)
 #  latitude          :float(24)
 #  longitude         :float(24)
-#  show_map          :boolean          default(TRUE)
+#  show_map          :boolean          default(FALSE)
 #  show_breadcrumb   :boolean          default(FALSE)
 #  show_social       :boolean          default(TRUE)
-#  should_validate   :boolean          default(FALSE)
+#  should_validate   :boolean          default(TRUE)
 #  maintenance       :boolean          default(FALSE)
 #  logo_updated_at   :datetime
 #  logo_file_size    :integer
 #  logo_content_type :string(255)
 #  logo_file_name    :string(255)
 #  retina_dimensions :text(65535)
-#  created_at        :datetime
-#  updated_at        :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
 #
