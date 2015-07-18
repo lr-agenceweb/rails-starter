@@ -63,10 +63,26 @@ class BlogsControllerTest < ActionController::TestCase
     assert_equal @blogs.length, 1
   end
 
+  #
+  # == Module disabled
+  #
+  test 'should render 404 if module is disabled' do
+    disable_optional_module @anthony, @blog_module, 'Blog' # in test_helper.rb
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_raises(ActionController::RoutingError) do
+          get :index, locale: locale.to_s
+        end
+      end
+    end
+  end
+
   private
 
   def initialize_test
     @blog = blogs(:blog_online)
     @locales = I18n.available_locales
+    @blog_module = optional_modules(:blog)
+    @anthony = users(:anthony)
   end
 end

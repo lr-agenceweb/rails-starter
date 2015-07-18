@@ -137,7 +137,7 @@ class SearchesControllerTest < ActionController::TestCase
   # == Module disabled
   #
   test 'should render 404 if module is disabled' do
-    disable_search_module
+    disable_optional_module @anthony, @search_module, 'Search' # in test_helper.rb
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
@@ -154,18 +154,5 @@ class SearchesControllerTest < ActionController::TestCase
     @category = categories(:search)
     @anthony = users(:anthony)
     @search_module = optional_modules(:search)
-  end
-
-  def disable_search_module
-    old_controller = @controller
-    sign_in @anthony
-    @controller = Admin::OptionalModulesController.new
-    patch :update, id: @search_module, optional_module: { enabled: '0' }
-    assert 'Search', assigns(:optional_module).name
-    assert_not assigns(:optional_module).enabled
-    assert_redirected_to admin_optional_module_path(assigns(:optional_module))
-    sign_out @anthony
-  ensure
-    @controller = old_controller
   end
 end
