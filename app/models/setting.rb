@@ -41,7 +41,6 @@ class Setting < ActiveRecord::Base
   has_attached_file :logo,
                     storage: :dropbox,
                     dropbox_credentials: Rails.root.join('config/dropbox.yml'),
-                    dropbox_options: {},
                     path: 'logo/:id/:style-:filename',
                     url:  '/logo/:id/:style-:filename',
                     styles: {
@@ -51,7 +50,7 @@ class Setting < ActiveRecord::Base
                       thumb: '32x32>'
                     },
                     retina: { quality: 70 },
-                    default_url: '/system/default/:style-missing.png'
+                    default_url: '/default/:style-missing.png'
 
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
 

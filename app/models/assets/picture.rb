@@ -36,7 +36,6 @@ class Picture < ActiveRecord::Base
   has_attached_file :image,
                     storage: :dropbox,
                     dropbox_credentials: Rails.root.join('config/dropbox.yml'),
-                    dropbox_options: {},
                     path: '/pictures/:id/:style-:filename',
                     url:  '/pictures/:id/:style-:filename',
                     styles: {
@@ -47,7 +46,7 @@ class Picture < ActiveRecord::Base
                       thumb:  '30x30>'
                     },
                     retina: { quality: 70 },
-                    default_url: '/system/default/:style-missing.png'
+                    default_url: '/default/:style-missing.png'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 

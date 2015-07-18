@@ -52,9 +52,8 @@ class User < ActiveRecord::Base
   has_attached_file :avatar,
                     storage: :dropbox,
                     dropbox_credentials: Rails.root.join('config/dropbox.yml'),
-                    dropbox_options: {},
                     path: '/avatars/:id/:style-:filename',
-                    url:  '/avatars/:id/:style-:filename',
+                    url: '/avatars/:id/:style-:filename',
                     styles: {
                       large:  '512x512#',
                       medium: '256x256#',
@@ -62,7 +61,7 @@ class User < ActiveRecord::Base
                       thumb:  '64x64#'
                     },
                     retina: { quality: 70 },
-                    default_url: '/system/default/:style-missing.png'
+                    default_url: '/default/:style-missing.png'
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 

@@ -25,7 +25,6 @@ class Background < ActiveRecord::Base
   has_attached_file :image,
                     storage: :dropbox,
                     dropbox_credentials: Rails.root.join('config/dropbox.yml'),
-                    dropbox_options: {},
                     path: '/backgrounds/:id/:style-:filename',
                     url:  '/backgrounds/:id/:style-:filename',
                     styles: {
@@ -35,7 +34,7 @@ class Background < ActiveRecord::Base
                       small:      '300x300>'
                     },
                     retina: { quality: 70 },
-                    default_url: '/system/default/small-missing.png'
+                    default_url: '/default/small-missing.png'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
