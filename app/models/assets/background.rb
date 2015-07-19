@@ -32,7 +32,7 @@ class Background < ActiveRecord::Base
                    small:      '300x300>'
                  }
 
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
   @child_classes = [:Contact]
 

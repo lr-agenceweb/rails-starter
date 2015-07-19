@@ -44,7 +44,7 @@ class Picture < ActiveRecord::Base
                    thumb:  '30x30>'
                   }
 
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
   scope :online,  -> { where(online: true) }
 end
