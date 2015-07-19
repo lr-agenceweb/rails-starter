@@ -1,11 +1,6 @@
 source 'https://rubygems.org'
 
 #
-# == Ruby
-#
-ruby '2.2.2'
-
-#
 # == Rails
 #
 gem 'rails', '4.2.3'
