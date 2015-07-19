@@ -29,11 +29,11 @@ class SettingTest < ActiveSupport::TestCase
     attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
     @setting.update_attributes(logo: attachment)
 
-    assert_not_processed 'fake.txt', :original
-    assert_not_processed 'fake.txt', :large
-    assert_not_processed 'fake.txt', :medium
-    assert_not_processed 'fake.txt', :small
-    assert_not_processed 'fake.txt', :thumb
+    assert_not_processed 'fake.txt', :original, @setting.logo
+    assert_not_processed 'fake.txt', :large, @setting.logo
+    assert_not_processed 'fake.txt', :medium, @setting.logo
+    assert_not_processed 'fake.txt', :small, @setting.logo
+    assert_not_processed 'fake.txt', :thumb, @setting.logo
   end
 
   test 'should upload logo if mime type is allowed' do
@@ -46,11 +46,11 @@ class SettingTest < ActiveSupport::TestCase
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     @setting.update_attributes!(logo: attachment)
 
-    assert_processed 'bart.png', :original
-    assert_processed 'bart.png', :large
-    assert_processed 'bart.png', :medium
-    assert_processed 'bart.png', :small
-    assert_processed 'bart.png', :thumb
+    assert_processed 'bart.png', :original, @setting.logo
+    assert_processed 'bart.png', :large, @setting.logo
+    assert_processed 'bart.png', :medium, @setting.logo
+    assert_processed 'bart.png', :small, @setting.logo
+    assert_processed 'bart.png', :thumb, @setting.logo
   end
 
   private
@@ -58,17 +58,5 @@ class SettingTest < ActiveSupport::TestCase
   def initialize_test
     @setting = settings(:one)
     @setting_without_subtitle = settings(:two)
-  end
-
-  def assert_processed(filename, style)
-    path = @setting.logo.path(style)
-    assert_match Regexp.new(Regexp.escape(filename) + '$'), path
-    assert File.exist?(path), "#{style} not processed"
-  end
-
-  def assert_not_processed(filename, style)
-    path = @setting.logo.path(style)
-    assert_match Regexp.new(Regexp.escape(filename) + '$'), path
-    assert_not File.exist?(@setting.logo.path(style)), "#{style} unduly processed"
   end
 end

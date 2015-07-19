@@ -42,5 +42,18 @@ module ActiveSupport
     ensure
       @controller = old_controller
     end
+
+    # Attachment upload
+    def assert_processed(filename, style, model_instance_property)
+      path = model_instance_property.path(style)
+      assert_match Regexp.new(Regexp.escape(filename) + '$'), path
+      assert File.exist?(path), "#{style} not processed"
+    end
+
+    def assert_not_processed(filename, style, model_instance_property)
+      path = model_instance_property.path(style)
+      assert_match Regexp.new(Regexp.escape(filename) + '$'), path
+      assert_not File.exist?(model_instance_property.path(style)), "#{style} unduly processed"
+    end
   end
 end

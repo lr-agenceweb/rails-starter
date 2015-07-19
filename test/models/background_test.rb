@@ -21,11 +21,11 @@ class BackgroundTest < ActiveSupport::TestCase
     attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
     @background.update_attributes(image: attachment)
 
-    assert_not_processed 'fake.txt', :original
-    assert_not_processed 'fake.txt', :background
-    assert_not_processed 'fake.txt', :large
-    assert_not_processed 'fake.txt', :medium
-    assert_not_processed 'fake.txt', :small
+    assert_not_processed 'fake.txt', :original, @background.image
+    assert_not_processed 'fake.txt', :background, @background.image
+    assert_not_processed 'fake.txt', :large, @background.image
+    assert_not_processed 'fake.txt', :medium, @background.image
+    assert_not_processed 'fake.txt', :small, @background.image
   end
 
   test 'should upload background if mime type is allowed' do
@@ -38,28 +38,16 @@ class BackgroundTest < ActiveSupport::TestCase
     attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
     @background.update_attributes!(image: attachment)
 
-    assert_processed 'background-paris.jpg', :original
-    assert_processed 'background-paris.jpg', :background
-    assert_processed 'background-paris.jpg', :large
-    assert_processed 'background-paris.jpg', :medium
-    assert_processed 'background-paris.jpg', :small
+    assert_processed 'background-paris.jpg', :original, @background.image
+    assert_processed 'background-paris.jpg', :background, @background.image
+    assert_processed 'background-paris.jpg', :large, @background.image
+    assert_processed 'background-paris.jpg', :medium, @background.image
+    assert_processed 'background-paris.jpg', :small, @background.image
   end
 
   private
 
   def initialize_test
     @background = backgrounds(:contact)
-  end
-
-  def assert_processed(filename, style)
-    path = @background.image.path(style)
-    assert_match Regexp.new(Regexp.escape(filename) + '$'), path
-    assert File.exist?(path), "#{style} not processed"
-  end
-
-  def assert_not_processed(filename, style)
-    path = @background.image.path(style)
-    assert_match Regexp.new(Regexp.escape(filename) + '$'), path
-    assert_not File.exist?(@background.image.path(style)), "#{style} unduly processed"
   end
 end
