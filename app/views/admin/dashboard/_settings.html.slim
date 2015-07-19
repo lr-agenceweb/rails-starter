@@ -1,8 +1,0 @@
-- panel.panel t('activerecord.models.setting.other') do
-  - panel.table_for query do |p|
-    - p.column :title
-    - p.column :subtitle
-    - p.column :show_map
-
-    - p.column('Actions') do |resource|
-      - link_to(I18n.t('active_admin.edit'), edit_admin_setting_path(resource)) + ' ' + link_to('Voir', admin_setting_path(resource))
