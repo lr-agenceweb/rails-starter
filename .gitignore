@@ -24,6 +24,7 @@
 /config/database.yml
 /config/analytical.yml
 /config/dropbox.yml
+/config/dkim/*.key
 
 /public/sitemap*
 /public/shared*
