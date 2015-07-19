@@ -100,4 +100,4 @@ Bonus
 
 Screenshots
 -----------
-![Activeadmin Dashboard example](vendor/assets/images/readme/activeadmin_dashboard_example.jpg)
+![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
