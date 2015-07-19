@@ -4,6 +4,8 @@ require 'test_helper'
 # == User model test
 #
 class UserTest < ActiveSupport::TestCase
+  include ActionDispatch::TestProcess
+
   setup :initialize_test
 
   #
@@ -31,6 +33,32 @@ class UserTest < ActiveSupport::TestCase
 
   test 'should be false if user avatar is nil' do
     assert_not @super_administrator.avatar?
+  end
+
+  test 'should not upload avatar if mime type is not allowed' do
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @subscriber.avatar.path(size)
+    end
+
+    attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
+    @subscriber.update_attributes(avatar: attachment)
+
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_not_processed 'fake.txt', size, @subscriber.avatar
+    end
+  end
+
+  test 'should upload avatar if mime type is allowed' do
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @subscriber.avatar.path(size)
+    end
+
+    attachment = fixture_file_upload 'images/bart.png', 'image/png'
+    @subscriber.update_attributes!(avatar: attachment)
+
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_processed 'bart.png', size, @subscriber.avatar
+    end
   end
 
   private

@@ -32,27 +32,23 @@
 # == Setting Model
 #
 class Setting < ActiveRecord::Base
+  include Attachable
+
   translates :title, :subtitle, fallbacks_for_empty_translations: true
   active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true
   end
 
   retina!
-  has_attached_file :logo,
-                    storage: :dropbox,
-                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
-                    path: 'logo/:id/:style-:filename',
-                    url:  '/logo/:id/:style-:filename',
-                    styles: {
-                      large: '256x256>',
-                      medium: '128x128>',
-                      small: '64x64>',
-                      thumb: '32x32>'
-                    },
-                    retina: { quality: 70 },
-                    default_url: '/default/:style-missing.png'
+  has_attachment :logo,
+                 styles: {
+                   large: '256x256>',
+                   medium: '128x128>',
+                   small: '64x64>',
+                   thumb: '32x32>'
+                 }
 
-  validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}
 
   validates :name,     presence: true
   validates :email,    presence: true, email_format: {}

@@ -19,24 +19,20 @@
 #
 class Background < ActiveRecord::Base
   include Imageable
+  include Attachable
+
   belongs_to :attachable, polymorphic: true
 
   retina!
-  has_attached_file :image,
-                    storage: :dropbox,
-                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
-                    path: '/backgrounds/:id/:style-:filename',
-                    url:  '/backgrounds/:id/:style-:filename',
-                    styles: {
-                      background: '4000x2000>',
-                      large:      '2000x1200>',
-                      medium:     '1000x600>',
-                      small:      '300x300>'
-                    },
-                    retina: { quality: 70 },
-                    default_url: '/default/small-missing.png'
+  has_attachment :image,
+                 styles: {
+                   background: '4000x2000>',
+                   large:      '2000x1200>',
+                   medium:     '1000x600>',
+                   small:      '300x300>'
+                 }
 
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
   @child_classes = [:Contact]
 

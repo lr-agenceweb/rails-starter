@@ -23,6 +23,8 @@
 # == Category Model
 #
 class Category < ActiveRecord::Base
+  include Imageable
+
   translates :title
   active_admin_translates :title
 

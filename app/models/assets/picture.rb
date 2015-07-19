@@ -27,28 +27,24 @@
 # == Picture Model
 #
 class Picture < ActiveRecord::Base
+  include Attachable
+
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
   belongs_to :attachable, polymorphic: true
 
   retina!
-  has_attached_file :image,
-                    storage: :dropbox,
-                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
-                    path: '/pictures/:id/:style-:filename',
-                    url:  '/pictures/:id/:style-:filename',
-                    styles: {
-                      huge:   '1024x1024>',
-                      large:  '512x512>',
-                      medium: '256x256>',
-                      small:  '90x90>>',
-                      thumb:  '30x30>'
-                    },
-                    retina: { quality: 70 },
-                    default_url: '/default/:style-missing.png'
+  has_attachment :image,
+                 styles: {
+                   huge:   '1024x1024>',
+                   large:  '512x512>',
+                   medium: '256x256>',
+                   small:  '90x90>>',
+                   thumb:  '30x30>'
+                  }
 
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
   scope :online,  -> { where(online: true) }
 end
