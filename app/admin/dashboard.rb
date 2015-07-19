@@ -34,7 +34,11 @@ ActiveAdmin.register_page 'Dashboard' do
 
       columns do
         column do |panel|
-          query = User.includes(:role).order(id: :desc).last(5)
+          render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all if current_user.super_administrator?
+        end
+
+        column do |panel|
+          query = User.includes(:role).order(id: :desc).last(5) unless current_user.administrator?
           query = User.includes(:role).except_super_administrator.order(id: :desc).last(5) if current_user.administrator?
           render 'admin/dashboard/subscribers/user', panel: panel, query: query
         end
@@ -44,7 +48,6 @@ ActiveAdmin.register_page 'Dashboard' do
         column do |panel|
           render 'admin/dashboard/settings', panel: panel, query: Setting.first
           render 'admin/dashboard/categories', panel: panel, query: Category.includes(:background, :translations).by_position
-          render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all if current_user.super_administrator?
         end # column
 
         column do
