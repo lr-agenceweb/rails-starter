@@ -1,4 +1,4 @@
-- panel.panel 'Users' do
+- panel.panel t('activerecord.models.user.other') do
   - panel.table_for UserDecorator.decorate_collection(query) do |p|
     - if query.empty?
       - p.span 'Il n\'y a aucun Utilisateur'

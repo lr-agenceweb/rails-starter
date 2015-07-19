@@ -80,6 +80,9 @@ fr:
       string_box:
         one: Contenu personnalisé
         other: Contenus personalisés
+      comment:
+        one: Commentaire
+        other: Commentaires
 
     attributes:
       post:

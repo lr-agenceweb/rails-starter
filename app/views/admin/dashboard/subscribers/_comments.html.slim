@@ -1,4 +1,4 @@
-- panel.panel 'Comments' do
+- panel.panel t('activerecord.models.comment.other') do
   - panel.table_for CommentDecorator.decorate_collection(query) do |p|
     - if query.empty?
       - p.span 'Il n\'y a aucun Commentaire'
