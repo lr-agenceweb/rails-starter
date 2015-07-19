@@ -50,7 +50,7 @@ class PostDecorator < ApplicationDecorator
   # Method used to display content in RSS Feed
   def image_and_content
     html = content
-    html << image_tag(attachment_url(first_picture.image, :medium)) if picture?
+    html << image_tag(attachment_url(first_picture.image, :medium)) if pictures?
     html
   end
 
@@ -75,10 +75,10 @@ class PostDecorator < ApplicationDecorator
   private
 
   def first_picture
-    model.pictures.online.first if picture?
+    model.pictures.online.first if pictures?
   end
 
-  def picture?
-    model.pictures.online.present?
+  def pictures?
+    model.pictures.online.present? && model.pictures.exists?
   end
 end
