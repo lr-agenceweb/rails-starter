@@ -80,6 +80,12 @@ fr:
       string_box:
         one: Contenu personnalisé
         other: Contenus personalisés
+      comment:
+        one: Commentaire
+        other: Commentaires
+      post_comment:
+        one: Commentaire
+        other: Commentaires
 
     attributes:
       post:
@@ -89,6 +95,7 @@ fr:
         keywords: Mot-clés
         online: En ligne
         link: Lien
+        type_title: Page
       setting:
         title: Titre
         subtitle: Sous-titre
@@ -127,6 +134,7 @@ fr:
         in_footer: Dans le menu du footer ?
         name: Nom de la catégorie
         background: Arrière-plan
+        position: Position
       newsletter:
         title: Titre
         preview: Prévisualisation
@@ -142,6 +150,17 @@ fr:
       picture:
         image: Image
         _destroy: Supprimer ?
+      comment:
+        link_source: Article concerné
+        message: Commentaire
+        lang: Langue
+      optional_module:
+        name: Nom
+
+      shared:
+        created_at: Créé le
+        status: État
+        image: Image
 
   formtastic:
     create: 'Créer %{model}'

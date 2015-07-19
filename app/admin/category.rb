@@ -70,9 +70,7 @@ ActiveAdmin.register Category do
             t.input :title, hint: 'Titre du menu'
           end
         end
-      end
 
-      column do
         f.inputs 'Général' do
           columns do
             column do
@@ -91,12 +89,33 @@ ActiveAdmin.register Category do
                   input_html: { class: 'colorpicker' }
         end
       end
+
+      column do
+        render 'admin/shared/referencement/form', f: f
+      end
     end
 
-    render 'admin/shared/backgrounds/form', f: f
-    render 'admin/shared/referencement/form', f: f
-    render 'admin/shared/optional_modules/form', f: f if current_user_and_administrator?
+    columns do
+      column do
+        render 'admin/shared/backgrounds/form', f: f
+      end
+    end
+
+    render 'admin/shared/optional_modules/form', f: f if current_user.super_administrator?
 
     f.actions
+  end
+
+  #
+  # == Controller
+  #
+  controller do
+    def update
+      unless current_user.super_administrator?
+        params[:category].delete :optional_module_id
+        params[:category].delete :optional
+      end
+      update! { admin_category_path(@category) }
+    end
   end
 end

@@ -1,0 +1,11 @@
+panel.panel t('activerecord.models.setting.other') do
+  panel.table_for query.decorate do |p|
+    p.column t('activerecord.attributes.setting.title'), :title
+    p.column t('activerecord.attributes.setting.subtitle'), :subtitle
+    p.column t('activerecord.attributes.setting.show_map'), :show_map
+
+    p.column('Actions') do |resource|
+      link_to(t('active_admin.edit'), edit_admin_setting_path(resource)) + ' ' + link_to('Voir', admin_setting_path(resource))
+    end
+  end
+end

@@ -1,0 +1,23 @@
+# English
+en:
+  optional_module:
+    name:
+      adult: Adult
+      newsletter: Newsletter
+      blog: Blog
+      rss: RSS feed
+      comment: Comments
+      search: Search
+      guest_book: Guestbook
+
+# French
+fr:
+  optional_module:
+    name:
+      adult: Majeur
+      newsletter: Newsletter
+      blog: Blog
+      rss: Flux RSS
+      comment: Commentaires
+      search: Rechercher
+      guest_book: Livre d'Or

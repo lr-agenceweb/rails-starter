@@ -67,14 +67,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_optional_modules
-    optional_modules = OptionalModule.all
-    @rss_module        = optional_modules.by_name('RSS')
-    @newsletter_module = optional_modules.by_name('Newsletter')
-    @comment_module    = optional_modules.by_name('Comment')
-    @blog_module       = optional_modules.by_name('Blog')
-    @search_module     = optional_modules.by_name('Search')
-    @adult_module      = optional_modules.by_name('Adult')
-    @guest_book_module = optional_modules.by_name('GuestBook')
+    OptionalModule.find_each do |optional_module|
+      instance_variable_set("@#{optional_module.name.underscore.singularize}_module", optional_module)
+    end
   end
 
   def authenticate_active_admin_user!
