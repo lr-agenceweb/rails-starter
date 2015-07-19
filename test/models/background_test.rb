@@ -8,23 +8,42 @@ class BackgroundTest < ActiveSupport::TestCase
 
   setup :initialize_test
 
-  # TODO: Fix this broken test after fixing paperclip-dropbox
-  # test 'any image file is attached and thumbnailed' do
-  #   assert_nil @background.image.path(:original)
-  #   assert_nil @background.image.path(:background)
-  #   assert_nil @background.image.path(:large)
-  #   assert_nil @background.image.path(:medium)
-  #   assert_nil @background.image.path(:small)
+  #
+  # == Background
+  #
+  test 'should not upload background if mime type is not allowed' do
+    assert_nil @background.image.path(:original)
+    assert_nil @background.image.path(:background)
+    assert_nil @background.image.path(:large)
+    assert_nil @background.image.path(:medium)
+    assert_nil @background.image.path(:small)
 
-  #   attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-  #   @background.update_attributes!(image: attachment)
+    attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
+    @background.update_attributes(image: attachment)
 
-  #   assert_processed 'background-paris.jpg', :original
-  #   assert_processed 'background-paris.jpg', :background
-  #   assert_processed 'background-paris.jpg', :large
-  #   assert_processed 'background-paris.jpg', :medium
-  #   assert_processed 'background-paris.jpg', :small
-  # end
+    assert_not_processed 'fake.txt', :original
+    assert_not_processed 'fake.txt', :background
+    assert_not_processed 'fake.txt', :large
+    assert_not_processed 'fake.txt', :medium
+    assert_not_processed 'fake.txt', :small
+  end
+
+  test 'should upload background if mime type is allowed' do
+    assert_nil @background.image.path(:original)
+    assert_nil @background.image.path(:background)
+    assert_nil @background.image.path(:large)
+    assert_nil @background.image.path(:medium)
+    assert_nil @background.image.path(:small)
+
+    attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+    @background.update_attributes!(image: attachment)
+
+    assert_processed 'background-paris.jpg', :original
+    assert_processed 'background-paris.jpg', :background
+    assert_processed 'background-paris.jpg', :large
+    assert_processed 'background-paris.jpg', :medium
+    assert_processed 'background-paris.jpg', :small
+  end
 
   private
 
