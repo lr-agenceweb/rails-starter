@@ -37,8 +37,6 @@ slugify = ->
 # @param {string} string to slugify
 ###
 string_to_slug = (str) ->
-  str = str.replace(/^\s+|\s+$/g, '') # trim
-  str = str.toLowerCase()
 
   # remove accents, swap ñ for n, etc
   from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;'"
@@ -46,10 +44,15 @@ string_to_slug = (str) ->
   i = 0
   l = from.length
 
+  str = str.toString().toLowerCase()
+      .replace(/\s+/g, '-')           # Replace spaces with -
+      .replace(/[^\w\-]+/g, '')       # Remove all non-word chars
+      .replace(/\-\-+/g, '-')         # Replace multiple - with single -
+      .replace(/^-+/, '')             # Trim - from start of text
+      .replace(/-+$/, '');            # Trim - from end of text
+
   while i < l
     str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i))
     i++
-  # remove invalid chars
-  # collapse whitespace and replace by -
-  str = str.replace(/[^a-z0-9 -]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-") # collapse dashes
+
   str
