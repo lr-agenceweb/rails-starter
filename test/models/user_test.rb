@@ -36,37 +36,29 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'should not upload avatar if mime type is not allowed' do
-    assert_nil @subscriber.avatar.path(:original)
-    assert_nil @subscriber.avatar.path(:large)
-    assert_nil @subscriber.avatar.path(:medium)
-    assert_nil @subscriber.avatar.path(:small)
-    assert_nil @subscriber.avatar.path(:thumb)
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @subscriber.avatar.path(size)
+    end
 
     attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
     @subscriber.update_attributes(avatar: attachment)
 
-    assert_not_processed 'fake.txt', :original, @subscriber.avatar
-    assert_not_processed 'fake.txt', :large, @subscriber.avatar
-    assert_not_processed 'fake.txt', :medium, @subscriber.avatar
-    assert_not_processed 'fake.txt', :small, @subscriber.avatar
-    assert_not_processed 'fake.txt', :thumb, @subscriber.avatar
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_not_processed 'fake.txt', size, @subscriber.avatar
+    end
   end
 
   test 'should upload avatar if mime type is allowed' do
-    assert_nil @subscriber.avatar.path(:original)
-    assert_nil @subscriber.avatar.path(:large)
-    assert_nil @subscriber.avatar.path(:medium)
-    assert_nil @subscriber.avatar.path(:small)
-    assert_nil @subscriber.avatar.path(:thumb)
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @subscriber.avatar.path(size)
+    end
 
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     @subscriber.update_attributes!(avatar: attachment)
 
-    assert_processed 'bart.png', :original, @subscriber.avatar
-    assert_processed 'bart.png', :large, @subscriber.avatar
-    assert_processed 'bart.png', :medium, @subscriber.avatar
-    assert_processed 'bart.png', :small, @subscriber.avatar
-    assert_processed 'bart.png', :thumb, @subscriber.avatar
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_processed 'bart.png', size, @subscriber.avatar
+    end
   end
 
   private

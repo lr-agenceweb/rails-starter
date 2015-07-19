@@ -20,37 +20,29 @@ class SettingTest < ActiveSupport::TestCase
   # == Logo
   #
   test 'should not upload logo if mime type is not allowed' do
-    assert_nil @setting.logo.path(:original)
-    assert_nil @setting.logo.path(:large)
-    assert_nil @setting.logo.path(:medium)
-    assert_nil @setting.logo.path(:small)
-    assert_nil @setting.logo.path(:thumb)
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @setting.logo.path(size)
+    end
 
     attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
     @setting.update_attributes(logo: attachment)
 
-    assert_not_processed 'fake.txt', :original, @setting.logo
-    assert_not_processed 'fake.txt', :large, @setting.logo
-    assert_not_processed 'fake.txt', :medium, @setting.logo
-    assert_not_processed 'fake.txt', :small, @setting.logo
-    assert_not_processed 'fake.txt', :thumb, @setting.logo
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_not_processed 'fake.txt', size, @setting.logo
+    end
   end
 
   test 'should upload logo if mime type is allowed' do
-    assert_nil @setting.logo.path(:original)
-    assert_nil @setting.logo.path(:large)
-    assert_nil @setting.logo.path(:medium)
-    assert_nil @setting.logo.path(:small)
-    assert_nil @setting.logo.path(:thumb)
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @setting.logo.path(size)
+    end
 
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     @setting.update_attributes!(logo: attachment)
 
-    assert_processed 'bart.png', :original, @setting.logo
-    assert_processed 'bart.png', :large, @setting.logo
-    assert_processed 'bart.png', :medium, @setting.logo
-    assert_processed 'bart.png', :small, @setting.logo
-    assert_processed 'bart.png', :thumb, @setting.logo
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_processed 'bart.png', size, @setting.logo
+    end
   end
 
   private

@@ -12,37 +12,29 @@ class PictureTest < ActiveSupport::TestCase
   # == Picture attachment
   #
   test 'should not upload image if mime type is not allowed' do
-    assert_nil @picture.image.path(:original)
-    assert_nil @picture.image.path(:large)
-    assert_nil @picture.image.path(:medium)
-    assert_nil @picture.image.path(:small)
-    assert_nil @picture.image.path(:thumb)
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @picture.image.path(size)
+    end
 
     attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
     @picture.update_attributes(image: attachment)
 
-    assert_not_processed 'fake.txt', :original, @picture.image
-    assert_not_processed 'fake.txt', :large, @picture.image
-    assert_not_processed 'fake.txt', :medium, @picture.image
-    assert_not_processed 'fake.txt', :small, @picture.image
-    assert_not_processed 'fake.txt', :thumb, @picture.image
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_not_processed 'fake.txt', size, @picture.image
+    end
   end
 
   test 'should upload image if mime type is allowed' do
-    assert_nil @picture.image.path(:original)
-    assert_nil @picture.image.path(:large)
-    assert_nil @picture.image.path(:medium)
-    assert_nil @picture.image.path(:small)
-    assert_nil @picture.image.path(:thumb)
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @picture.image.path(size)
+    end
 
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     @picture.update_attributes!(image: attachment)
 
-    assert_processed 'bart.png', :original, @picture.image
-    assert_processed 'bart.png', :large, @picture.image
-    assert_processed 'bart.png', :medium, @picture.image
-    assert_processed 'bart.png', :small, @picture.image
-    assert_processed 'bart.png', :thumb, @picture.image
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_processed 'bart.png', size, @picture.image
+    end
   end
 
   private
