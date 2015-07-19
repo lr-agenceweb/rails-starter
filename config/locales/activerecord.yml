@@ -83,6 +83,9 @@ fr:
       comment:
         one: Commentaire
         other: Commentaires
+      post_comment:
+        one: Commentaire
+        other: Commentaires
 
     attributes:
       post:
