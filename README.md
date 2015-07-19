@@ -42,7 +42,7 @@ To create a dump of your database, run `rake db:backup`
 
 Template
 --------
-I am using [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
+It use [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
 
 Assets
 -------
@@ -56,7 +56,7 @@ Tasks
 
 Mail
 -----
-I use [maildev](http://djfarrelly.github.io/MailDev/) to test my emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
+It use [maildev](http://djfarrelly.github.io/MailDev/) to test emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
 To see your mails, visit `http://localhost:1080`
 
 Newsletter
