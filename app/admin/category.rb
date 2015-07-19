@@ -95,8 +95,21 @@ ActiveAdmin.register Category do
 
     render 'admin/shared/backgrounds/form', f: f
     render 'admin/shared/referencement/form', f: f
-    render 'admin/shared/optional_modules/form', f: f if current_user_and_administrator?
+    render 'admin/shared/optional_modules/form', f: f if current_user.super_administrator?
 
     f.actions
+  end
+
+  #
+  # == Controller
+  #
+  controller do
+    def update
+      unless current_user.super_administrator?
+        params[:category].delete :optional_module_id
+        params[:category].delete :optional
+      end
+      update! { admin_category_path(@category) }
+    end
   end
 end
