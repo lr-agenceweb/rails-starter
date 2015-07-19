@@ -16,8 +16,9 @@ Usage
 -----
 Clone it: `git clone git@github.com:anthony-robin/rails-starter.git`  
 Rename `.env.example` to `.env`  
+Rename `application.example.yml` to `application.yml`  
+Setup your environment variable (database, secret key, devise key, ...)
 Rename `database.example.yml` to `database.yml`  
-Add your database configuration  
 Go to the application folder: `cd rails-starter`  
 Install gems: `bundle install`  
 Run migrations: `rake db:create db:migrate db:seed`  
@@ -27,16 +28,16 @@ That's it !
 
 Ruby and Rails versions
 -----------------------
-Ruby 2.2.0  
+Ruby 2.2.2  
 Rails 4.2.3  
 
 Server
 ------
-I am using unicorn in local development. The server is launch using `foreman start`
+This project use unicorn in local development. The server is launch using `foreman start`
 
 Database
 ---------
-I am using `mysql2` but you can choose to use `PostgreSQL` or any other SGBD.  
+It use `mysql2` but you can choose to use `PostgreSQL` or `SQlite` or any other SGBD.  
 To create a dump of your database, run `rake db:backup`
 
 Template
@@ -70,7 +71,7 @@ Two languages are included by default: french and english
 ### [Whenever](https://github.com/javan/whenever)
 Setup two Cron tasks:
 * Regenerate sitemap everyday
-* Make a dump of database every day
+* Make a dump of database every day: it will be saved in ypur dropbox account and you will be notified by Slack about success or failure.
 
 To make this tasks active on your server, just run `whenever --update-crontab <name-of-your-site>`  
 For more information read the gem documentation.
