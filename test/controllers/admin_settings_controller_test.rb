@@ -56,19 +56,21 @@ module Admin
     end
 
     #
-    # == Avatar
+    # == Logo
     #
-    # test 'should be able to upload logo' do
-    #   upload_dropbox_paperclip_attachment
-    #   setting = assigns(:setting)
-    #   assert setting.logo?
-    #   assert_equal 'bart.png', setting.logo_file_name
-    #   assert_equal 'image/png', setting.logo_content_type
-    # end
+    test 'should be able to upload logo' do
+      upload_paperclip_attachment
+      setting = assigns(:setting)
+      assert setting.logo?
+      assert_equal 'bart.png', setting.logo_file_name
+      assert_equal 'image/png', setting.logo_content_type
+    end
 
+    # TODO: Fix this broken test
     # test 'should be able to destroy logo' do
-    #   upload_dropbox_paperclip_attachment
-    #   remove_dropbox_paperclip_attachment
+    #   upload_paperclip_attachment
+    #   remove_paperclip_attachment
+    #   assert_nil assigns(:setting).logo_file_name
     # end
 
     private
@@ -79,16 +81,15 @@ module Admin
       sign_in @administrator
     end
 
-    def upload_dropbox_paperclip_attachment
-      puts '=== Uploading logo to Dropbox'
+    def upload_paperclip_attachment
+      puts '=== Uploading logo'
       attachment = fixture_file_upload 'images/bart.png', 'image/png'
       patch :update, id: @setting, setting: { logo: attachment }
     end
 
-    def remove_dropbox_paperclip_attachment
-      puts '=== Removing logo from Dropbox'
+    def remove_paperclip_attachment
+      puts '=== Removing logo'
       patch :update, id: @setting, setting: { logo: nil, delete_logo: '1' }
-      assert_not assigns(:setting).logo?
     end
   end
 end
