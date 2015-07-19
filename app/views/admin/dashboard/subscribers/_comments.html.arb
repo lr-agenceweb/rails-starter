@@ -3,11 +3,12 @@ panel.panel t('activerecord.models.comment.other') do
     if query.empty?
       p.span t('post.no_results', category: t('activerecord.models.comment.one'))
     else
-      p.column :link_source
-      p.column :message
-      p.column :lang
-      p.column :created_at
-      p.column('Actions') do |comment|
+      p.column t('activerecord.attributes.comment.link_source'), :link_source
+      p.column t('activerecord.attributes.comment.message'), :message
+      p.column t('activerecord.attributes.comment.lang'), :lang
+      p.column t('activerecord.attributes.shared.created_at'), :created_at
+
+      p.column 'Actions' do |comment|
         comment.delete_link_source
       end
     end

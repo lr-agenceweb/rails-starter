@@ -3,12 +3,12 @@ panel.panel t('activerecord.models.user.other') do
     if query.empty?
       p.span t('post.no_results', category: t('activerecord.models.user.one'))
     else
-      p.column :image_avatar
-      p.column :username
-      p.column :email
-      p.column :status
+      p.column t('activerecord.attributes.user.avatar'), :image_avatar
+      p.column t('activerecord.attributes.user.username'), :username
+      p.column t('activerecord.attributes.user.email'), :email
+      p.column t('activerecord.attributes.shared.status'), :status
 
-      p.column('Actions') do |user|
+      p.column 'Actions' do |user|
         user.admin_link
       end
     end

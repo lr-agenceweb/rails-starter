@@ -3,11 +3,11 @@ panel.panel t('activerecord.models.post.other') do
     if query.empty?
       p.span t('post.no_results', category: t('activerecord.models.post.one'))
     else
-      p.column :image
-      p.column :title_front_link
-      p.column :type_title
-      p.column :status
-      p.column :created_at
+      p.column t('activerecord.attributes.shared.image'), :image
+      p.column t('activerecord.attributes.post.title'), :title_front_link
+      p.column t('activerecord.attributes.post.type_title'), :type_title
+      p.column t('activerecord.attributes.shared.status'), :status
+      p.column t('activerecord.attributes.shared.created_at'), :created_at
 
       p.column 'Actions' do |post|
         post.admin_link
