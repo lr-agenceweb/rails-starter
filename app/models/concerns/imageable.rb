@@ -5,27 +5,37 @@ module Imageable
   extend ActiveSupport::Concern
   include ApplicationHelper
 
-  def background?
-    image.present?
-  end
-
-  def background
-    image.url(:background)
-  end
-
-  def large
-    image.url(:large)
-  end
-
-  def medium
-    image.url(:medium)
-  end
-
+  #
+  # == Pictures
+  #
   def picture?
-    picture.present?
+    picture.present? && picture.image.exists?
   end
 
   def pictures?
-    pictures.online.first.present?
+    pictures.online.first.present? && pictures.online.first.image.exists?
+  end
+
+  def first_pictures
+    pictures.online.first if pictures?
+  end
+
+  #
+  # == Background
+  #
+  def background?
+    background.present? && background.image.exists?
+  end
+
+  def bg_background
+    image.url(:background)
+  end
+
+  def bg_large
+    image.url(:large)
+  end
+
+  def bg_medium
+    image.url(:medium)
   end
 end

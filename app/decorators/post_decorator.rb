@@ -31,8 +31,8 @@ class PostDecorator < ApplicationDecorator
   # == Post
   #
   def image
-    if picture?
-      retina_image_tag first_picture, :image, :small
+    if pictures?
+      retina_image_tag first_pictures, :image, :small
     else
       'Pas d\'image'
     end
@@ -50,7 +50,7 @@ class PostDecorator < ApplicationDecorator
   # Method used to display content in RSS Feed
   def image_and_content
     html = content
-    html << image_tag(attachment_url(first_picture.image, :medium)) if pictures?
+    html << image_tag(attachment_url(first_pictures.image, :medium)) if pictures?
     html
   end
 
@@ -70,15 +70,5 @@ class PostDecorator < ApplicationDecorator
   #
   def type_title
     Category.title_by_category(type)
-  end
-
-  private
-
-  def first_picture
-    model.pictures.online.first if pictures?
-  end
-
-  def pictures?
-    model.pictures.online.present? && model.pictures.exists?
   end
 end

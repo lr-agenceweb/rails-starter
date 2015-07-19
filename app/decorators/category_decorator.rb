@@ -45,10 +45,4 @@ class CategoryDecorator < ApplicationDecorator
       status_tag message, color
     end
   end
-
-  private
-
-  def background?
-    model.background.present?
-  end
 end
