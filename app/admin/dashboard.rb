@@ -33,8 +33,10 @@ ActiveAdmin.register_page 'Dashboard' do
       end # columns
 
       columns do
-        column do |panel|
-          render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all if current_user.super_administrator?
+        if current_user.super_administrator?
+          column do |panel|
+            render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all
+          end
         end
 
         column do |panel|
