@@ -19,7 +19,8 @@ class SettingTest < ActiveSupport::TestCase
   #
   # == Logo
   #
-  test 'should not upload attachment if mime type is not allowed' do
+  test 'should not upload logo if mime type is not allowed' do
+    assert_nil @setting.logo.path(:original)
     assert_nil @setting.logo.path(:large)
     assert_nil @setting.logo.path(:medium)
     assert_nil @setting.logo.path(:small)
@@ -28,13 +29,15 @@ class SettingTest < ActiveSupport::TestCase
     attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
     @setting.update_attributes(logo: attachment)
 
+    assert_not_processed 'fake.txt', :original
     assert_not_processed 'fake.txt', :large
     assert_not_processed 'fake.txt', :medium
     assert_not_processed 'fake.txt', :small
     assert_not_processed 'fake.txt', :thumb
   end
 
-  test 'should upload attachment if mime type is allowed' do
+  test 'should upload logo if mime type is allowed' do
+    assert_nil @setting.logo.path(:original)
     assert_nil @setting.logo.path(:large)
     assert_nil @setting.logo.path(:medium)
     assert_nil @setting.logo.path(:small)
@@ -43,6 +46,7 @@ class SettingTest < ActiveSupport::TestCase
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     @setting.update_attributes!(logo: attachment)
 
+    assert_processed 'bart.png', :original
     assert_processed 'bart.png', :large
     assert_processed 'bart.png', :medium
     assert_processed 'bart.png', :small
