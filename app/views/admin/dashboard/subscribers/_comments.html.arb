@@ -1,7 +1,7 @@
 panel.panel t('activerecord.models.comment.other') do
   panel.table_for CommentDecorator.decorate_collection(query) do |p|
     if query.empty?
-      p.span 'Il n\'y a aucun Commentaire'
+      p.span t('post.no_results', category: t('activerecord.models.comment.one'))
     else
       p.column :link_source
       p.column :message
