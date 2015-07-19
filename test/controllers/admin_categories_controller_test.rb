@@ -93,14 +93,13 @@ module Admin
       assert_difference ['Category.count', 'Background.count'], -1 do
         delete :destroy, id: @category
       end
-      assert_nil @category.background
       assert_redirected_to admin_categories_path
     end
 
     test 'should destroy background if check_box is checked' do
       assert_not_nil @category.background
       patch :update, id: @category, category: { background: { _destroy: true } }
-      assert_equal assigns(:category).background, image_tag('/default/small-missing.png')
+      assert_equal 'Pas de Background associé', assigns(:category).background
     end
 
     private
