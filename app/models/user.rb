@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: [:slugged, :finders]
 
+  include Attachable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -52,19 +54,13 @@ class User < ActiveRecord::Base
   delegate :name, to: :role, prefix: true, allow_nil: true
 
   retina!
-  has_attached_file :avatar,
-                    storage: :dropbox,
-                    dropbox_credentials: Rails.root.join('config/dropbox.yml'),
-                    path: '/avatars/:id/:style-:filename',
-                    url: '/avatars/:id/:style-:filename',
-                    styles: {
-                      large:  '512x512#',
-                      medium: '256x256#',
-                      small:  '128x128#',
-                      thumb:  '64x64#'
-                    },
-                    retina: { quality: 70 },
-                    default_url: '/default/:style-missing.png'
+  has_attachment :avatar,
+                 styles: {
+                   large:  '512x512#',
+                   medium: '256x256#',
+                   small:  '128x128#',
+                   thumb:  '64x64#'
+                 }
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
