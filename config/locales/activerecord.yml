@@ -86,6 +86,9 @@ fr:
       post_comment:
         one: Commentaire
         other: Commentaires
+      newsletter_user:
+        one: Newsletter Utilisateur
+        other: Newsletter Utilisateurs
 
     attributes:
       post:
