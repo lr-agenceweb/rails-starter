@@ -172,9 +172,12 @@ fr:
         image: Image
         _destroy: Supprimer ?
       comment:
-        link_source: Article concerné
+        mail: Email
         message: Commentaire
         lang: Langue
+        link_source: Article concerné
+        link_and_image_source: Article concerné
+        created_at: Créé le
       optional_module:
         name: Nom
 
