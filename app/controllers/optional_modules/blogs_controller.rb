@@ -25,7 +25,7 @@ class BlogsController < ApplicationController
   private
 
   def set_blog
-    @blog = Blog.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
+    @blog = Blog.online.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
   end
 
   def blog_module_enabled?
