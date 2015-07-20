@@ -157,6 +157,8 @@ fr:
         sent: Envoyé ?
         sent_at: Envoyé le
         send: Envoyer
+        browser_preview: Prévisualisation dans un autre onglet
+        live_preview: Prévisualisation en direct
       string_box:
         title: Titre
         content: Contenu
