@@ -14,6 +14,10 @@ class NewsletterDecorator < ApplicationDecorator
     raw newsletter_preview(model.id)
   end
 
+  def live_preview
+    render 'iframe_preview', resource: model
+  end
+
   def sent_at
     model.sent_at_message
   end

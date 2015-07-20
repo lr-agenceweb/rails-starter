@@ -23,26 +23,13 @@ ActiveAdmin.register Newsletter do
   end
 
   show do
-    h3 resource.title
-    attributes_table do
-      row :sent do
-        status_tag "#{resource.already_sent?}", (resource.already_sent? ? :ok : :warn)
-      end
-
-      row :sent_at do
-        resource.sent_at_message
-      end
-
-      row :browser_preview do
-        raw newsletter_preview(resource.id)
-      end
-
-      row :live_preview do
-        render 'iframe_preview', resource: resource
-      end
-
-      row :send do
-        render 'send', resource: resource
+    panel t('active_admin.details', model: active_admin_config.resource_label) do
+      attributes_table_for resource.decorate do
+        row :status
+        row :sent_at
+        row :preview
+        row :live_preview
+        row :send_link
       end
     end
   end

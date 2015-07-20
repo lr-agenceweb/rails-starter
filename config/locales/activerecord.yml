@@ -154,10 +154,9 @@ fr:
       newsletter:
         title: Titre
         preview: Prévisualisation
-        sent: Envoyé ?
+        status: Envoyé ?
         sent_at: Envoyé le
-        send: Envoyer
-        browser_preview: Prévisualisation dans un autre onglet
+        send_link: Envoyer
         live_preview: Prévisualisation en direct
       string_box:
         title: Titre
