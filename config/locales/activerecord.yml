@@ -114,6 +114,7 @@ fr:
         online: En ligne
         link: Lien
         type_title: Page
+        author_with_avatar: Auteur
       setting:
         title: Titre
         subtitle: Sous-titre
