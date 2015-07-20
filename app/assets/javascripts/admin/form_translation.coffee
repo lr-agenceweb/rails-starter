@@ -38,15 +38,15 @@ string_to_slug = (str) ->
   i = 0
   l = from.length
 
+  while i < l
+    str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i))
+    i++
+
   str = str.toString().toLowerCase()
       .replace(/\s+/g, '-')           # Replace spaces with -
       .replace(/[^\w\-]+/g, '')       # Remove all non-word chars
       .replace(/\-\-+/g, '-')         # Replace multiple - with single -
       .replace(/^-+/, '')             # Trim - from start of text
       .replace(/-+$/, '');            # Trim - from end of text
-
-  while i < l
-    str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i))
-    i++
 
   str
