@@ -4,6 +4,7 @@ fr:
     super_administrator: Super administrateur
     administrator: Administrateur
     subscriber: Abonné
+    tester: Testeur
 
 # English
 en:
@@ -11,3 +12,4 @@ en:
     super_administrator: Super administrator
     administrator: Administrator
     subscriber: Subscriber
+    tester: Tester

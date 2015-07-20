@@ -5,10 +5,10 @@ ActiveAdmin.register NewsletterUser do
 
   decorate_with NewsletterUserDecorator
   config.clear_sidebar_sections!
+  actions :all, except: [:show]
 
   index do
     selectable_column
-    column :id
     column :email
     column :lang
     column :role
@@ -20,7 +20,7 @@ ActiveAdmin.register NewsletterUser do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs 'Newsletter user' do
+    f.inputs t('activerecord.models.newsletter_user.one') do
       f.input :email, input_html: { disabled: :disabled }
       f.input :lang,
               collection: %w(fr en),

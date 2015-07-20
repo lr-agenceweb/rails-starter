@@ -162,6 +162,11 @@ fr:
         sent_at: Envoyé le
         send_link: Envoyer
         live_preview: Prévisualisation en direct
+      newsletter_user:
+        email: Email
+        lang: Langue
+        role: Rôle
+        created_at: Inscrit le
       string_box:
         title: Titre
         content: Contenu
