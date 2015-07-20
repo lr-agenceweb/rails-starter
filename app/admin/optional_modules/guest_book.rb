@@ -16,6 +16,14 @@ ActiveAdmin.register GuestBook do
   decorate_with GuestBookDecorator
   config.clear_sidebar_sections!
 
+  batch_action :toggle_value do |ids|
+    GuestBook.find(ids).each do |guest_book|
+      toggle_value = guest_book.validated? ? false : true
+      guest_book.update_attribute(:validated, toggle_value)
+    end
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
+
   index do
     selectable_column
     column :username
@@ -34,31 +42,6 @@ ActiveAdmin.register GuestBook do
       row :lang
       row :status
       row :created_at
-    end
-  end
-
-  #
-  # == Controller
-  #
-  controller do
-    before_action :set_guest_book, only: [:toggle_guest_book_validated]
-
-    def toggle_guest_book_validated
-      new_value = @guest_book.validated? ? false : true
-      @guest_book.update_attribute(:validated, new_value)
-      message = new_value == true ? 'Le message vient d\'être validé: il apparaîtra maintenant sur le site' : 'Le message n\'apparaitra plus sur le site'
-      flash[:notice] = message
-      make_redirect
-    end
-
-    private
-
-    def set_guest_book
-      @guest_book = GuestBook.find(params[:id])
-    end
-
-    def make_redirect
-      redirect_to :back
     end
   end
 end
