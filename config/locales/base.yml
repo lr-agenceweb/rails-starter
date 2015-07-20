@@ -14,7 +14,7 @@ fr:
   maintenance:
     'true': En maintenance
     'false': En ligne
-  adult:
+  vex:
     'yes': 'Accepter'
     'no': 'Refuser'
   sent:
