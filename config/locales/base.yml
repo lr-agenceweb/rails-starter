@@ -20,6 +20,7 @@ fr:
   sent:
     'true': 'Envoyé'
     'false': 'Pas encore envoyé'
+  additional: Informations complémentaires
 
 # English
 en:
@@ -43,3 +44,4 @@ en:
   sent:
     'true': 'Sent'
     'false': 'Not sent yet'
+  additional: Additional information

@@ -20,15 +20,24 @@ ActiveAdmin.register NewsletterUser do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs t('activerecord.models.newsletter_user.one') do
-      f.input :email, input_html: { disabled: :disabled }
-      f.input :lang,
-              collection: %w(fr en),
-              include_blank: false,
-              hint: 'Attention, changer ce paramètre changera la langue de la newsletter reçue par cet utilisateur !'
-      f.input :role,
-              collection: %w(subscriber tester),
-              include_blank: false
+    columns do
+      column do
+        f.inputs t('activerecord.models.newsletter_user.one') do
+          f.input :email, input_html: { disabled: :disabled }
+        end
+      end
+
+      column do
+        f.inputs t('additional') do
+          f.input :lang,
+                  collection: %w(fr en),
+                  include_blank: false,
+                  hint: 'Attention, changer ce paramètre changera la langue de la newsletter reçue par cet utilisateur !'
+          f.input :role,
+                  collection: %w(subscriber tester),
+                  include_blank: false
+        end
+      end
     end
 
     f.actions
