@@ -17,6 +17,9 @@ fr:
   adult:
     'yes': 'Accepter'
     'no': 'Refuser'
+  sent:
+    'true': 'Envoyé'
+    'false': 'Pas encore envoyé'
 
 # English
 en:
@@ -37,3 +40,6 @@ en:
   adult:
     'yes': 'Accept'
     'no': 'Decline'
+  sent:
+    'true': 'Sent'
+    'false': 'Not sent yet'
