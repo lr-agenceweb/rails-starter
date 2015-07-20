@@ -54,7 +54,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
         column do
           panel 'Mapbox' do
-            render 'admin/settings/show', resource: Setting.first.decorate
+            render 'admin/settings/map', resource: Setting.first.decorate
           end
         end # column
       end # columns
