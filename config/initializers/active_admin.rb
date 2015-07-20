@@ -201,7 +201,7 @@ ActiveAdmin.setup do |config|
     end
 
     admin.build_menu :utility_navigation do |menu|
-      menu.add label: proc { raw "#{retina_thumb_square(current_user)} #{display_name(current_active_admin_user)} (#{current_active_admin_user.role_name})" },
+      menu.add label: proc { raw "#{retina_thumb_square(current_user)} #{display_name(current_active_admin_user)} (#{I18n.t('role.'+current_active_admin_user.role_name)})" },
                url: proc { url_for([:admin, current_active_admin_user]) },
                id: 'current_user'
 
