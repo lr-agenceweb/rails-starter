@@ -22,6 +22,14 @@ ActiveAdmin.register About do
   decorate_with AboutDecorator
   config.clear_sidebar_sections!
 
+  batch_action :toggle_value do |ids|
+    Post.find(ids).each do |post|
+      toggle_value = post.online? ? false : true
+      post.update_attribute(:online, toggle_value)
+    end
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
+
   index do
     selectable_column
     column :image
