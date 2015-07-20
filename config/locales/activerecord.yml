@@ -15,6 +15,18 @@ en:
               blank: Don't forget your email address ;)
               invalid: Your email is invalid ;)
               taken: This email is not avalaible :(
+
+    models:
+      category:
+        one: Page
+        other: Pages
+      string_box:
+        one: Custom content
+        other: Custom contents
+      post_comment:
+        one: Commen
+        other: Commens
+
     attributes:
       adult:
         adult_validated: I attest to be an adult
@@ -129,6 +141,7 @@ fr:
         created_at: Inscrit depuis
         avatar: Avatar
         delete_avatar: Supprimer avatar
+        status: Rôle
       category:
         title: Titre
         show_in_menu: Inclus dans le menu ?
