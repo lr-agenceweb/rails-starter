@@ -30,7 +30,7 @@ ActiveAdmin.register StringBox do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs 'Custom contenu' do
+    f.inputs t('activerecord.models.string_box.one') do
       if f.object.new_record?
         f.input :key
       else
