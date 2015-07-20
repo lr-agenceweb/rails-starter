@@ -21,6 +21,14 @@ ActiveAdmin.register Home do
   decorate_with HomeDecorator
   config.clear_sidebar_sections!
 
+  batch_action :toggle_value do |ids|
+    Post.find(ids).each do |post|
+      toggle_value = post.online? ? false : true
+      post.update_attribute(:online, toggle_value)
+    end
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
+
   # Sortable
   sortable
   config.sort_order = 'position_asc'
@@ -31,7 +39,7 @@ ActiveAdmin.register Home do
     selectable_column
     column :image
     column :title
-    column :online
+    column :status
     translation_status
     column :author_with_avatar
 
@@ -50,26 +58,9 @@ ActiveAdmin.register Home do
   # == Controller
   #
   controller do
-    before_action :set_home, only: [:show, :edit, :update, :destroy, :toggle_home_online]
     before_create do |post|
       post.type = 'Home'
       post.user_id = current_user.id
-    end
-
-    def toggle_home_online
-      new_value = @home.online? ? false : true
-      @home.update_attribute(:online, new_value)
-      make_redirect
-    end
-
-    private
-
-    def set_home
-      @home = Home.friendly.find(params[:id])
-    end
-
-    def make_redirect
-      redirect_to :back
     end
   end
 end
