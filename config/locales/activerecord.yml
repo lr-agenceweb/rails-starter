@@ -204,6 +204,7 @@ fr:
       optional_module:
         name: Nom
         enabled: Activé
+        status: Statut
 
       shared:
         created_at: Créé le
