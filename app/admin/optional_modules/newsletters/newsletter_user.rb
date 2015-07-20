@@ -3,6 +3,7 @@ ActiveAdmin.register NewsletterUser do
 
   permit_params :id, :role, :lang
 
+  decorate_with NewsletterUserDecorator
   config.clear_sidebar_sections!
 
   index do
