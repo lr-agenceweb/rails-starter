@@ -39,22 +39,7 @@ ActiveAdmin.register Home do
   end
 
   show do
-    columns do
-      column do
-        panel t('active_admin.details', model: active_admin_config.resource_label) do
-          attributes_table_for resource.decorate do
-            row :content
-            row :status
-            row :image
-            row :author_with_avatar
-          end
-        end
-      end
-
-      column do
-        render 'admin/shared/referencement/show', referencement: resource.referencement
-      end
-    end
+    render 'admin/posts/show', resource: resource
   end
 
   form do |f|
