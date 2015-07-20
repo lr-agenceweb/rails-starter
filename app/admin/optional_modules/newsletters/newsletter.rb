@@ -7,56 +7,29 @@ ActiveAdmin.register Newsletter do
                   :id, :locale, :title, :content
                 ]
 
+  decorate_with NewsletterDecorator
   config.clear_sidebar_sections!
 
   index do
     selectable_column
-    column :title do |resource|
-      raw "<strong>#{resource.title}</strong>"
-    end
-
-    column :preview do |resource|
-      raw newsletter_preview(resource.id)
-    end
+    column :title
+    column :preview
+    column :status
+    column :sent_at
+    column :send_link
 
     translation_status
-
-    column :sent do |resource|
-      status_tag "#{resource.already_sent?}", (resource.already_sent? ? :ok : :warn)
-    end
-
-    column :sent_at do |resource|
-      resource.sent_at_message
-    end
-
-    column :send do |resource|
-      render 'send', resource: resource
-    end
-
     actions
   end
 
   show do
-    h3 resource.title
-    attributes_table do
-      row :sent do
-        status_tag "#{resource.already_sent?}", (resource.already_sent? ? :ok : :warn)
-      end
-
-      row :sent_at do
-        resource.sent_at_message
-      end
-
-      row :browser_preview do
-        raw newsletter_preview(resource.id)
-      end
-
-      row :live_preview do
-        render 'iframe_preview', resource: resource
-      end
-
-      row :send do
-        render 'send', resource: resource
+    panel t('active_admin.details', model: active_admin_config.resource_label) do
+      attributes_table_for resource.decorate do
+        row :status
+        row :sent_at
+        row :preview
+        row :live_preview
+        row :send_link
       end
     end
   end

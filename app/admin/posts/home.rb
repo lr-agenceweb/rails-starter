@@ -39,20 +39,7 @@ ActiveAdmin.register Home do
   end
 
   show do
-    columns do
-      column do
-        attributes_table do
-          row :content
-          row :status
-          row :image
-          row :author_with_avatar
-        end
-      end
-
-      column do
-        render 'admin/shared/referencement/show', referencement: resource.referencement
-      end
-    end
+    render 'admin/posts/show', resource: resource
   end
 
   form do |f|

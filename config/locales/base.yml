@@ -14,9 +14,14 @@ fr:
   maintenance:
     'true': En maintenance
     'false': En ligne
-  adult:
+  vex:
     'yes': 'Accepter'
     'no': 'Refuser'
+  sent:
+    'true': 'Envoyé'
+    'false': 'Pas encore envoyé'
+  additional: Informations complémentaires
+  general: Informations générales
 
 # English
 en:
@@ -37,3 +42,8 @@ en:
   adult:
     'yes': 'Accept'
     'no': 'Decline'
+  sent:
+    'true': 'Sent'
+    'false': 'Not sent yet'
+  additional: Additional information
+  general: General information

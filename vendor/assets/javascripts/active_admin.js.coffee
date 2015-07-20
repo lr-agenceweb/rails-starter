@@ -12,11 +12,10 @@
 #= require mapbox
 #= require plugins/mapbox
 #= require vex.combined.min.js
+#= require plugins/vex_config
 #= require i18n
 #= require i18n/translations
 #= require jquery.minicolors
 
 $(document).on 'ready page:load page:restore', ->
-  vex.defaultOptions.className = 'vex-theme-os'
-
   $('input.colorpicker').minicolors()

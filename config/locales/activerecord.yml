@@ -15,6 +15,18 @@ en:
               blank: Don't forget your email address ;)
               invalid: Your email is invalid ;)
               taken: This email is not avalaible :(
+
+    models:
+      category:
+        one: Page
+        other: Pages
+      string_box:
+        one: Custom content
+        other: Custom contents
+      post_comment:
+        one: Commen
+        other: Commens
+
     attributes:
       adult:
         adult_validated: I attest to be an adult
@@ -89,6 +101,12 @@ fr:
       newsletter_user:
         one: Newsletter Utilisateur
         other: Newsletter Utilisateurs
+      newsletter:
+        one: Newsletter
+        other: Newsletters
+      blog:
+        one: Blog
+        other: Blog
 
     attributes:
       post:
@@ -99,6 +117,11 @@ fr:
         online: En ligne
         link: Lien
         type_title: Page
+        author_with_avatar: Auteur
+      blog:
+        title: Titre
+        content: Contenu
+        author_with_avatar: Auteur
       setting:
         title: Titre
         subtitle: Sous-titre
@@ -129,6 +152,7 @@ fr:
         created_at: Inscrit depuis
         avatar: Avatar
         delete_avatar: Supprimer avatar
+        status: Rôle
       category:
         title: Titre
         show_in_menu: Inclus dans le menu ?
@@ -141,24 +165,41 @@ fr:
       newsletter:
         title: Titre
         preview: Prévisualisation
-        sent: Envoyé ?
+        status: Envoyé ?
         sent_at: Envoyé le
-        send: Envoyer
+        send_link: Envoyer
+        live_preview: Prévisualisation en direct
+      newsletter_user:
+        email: Email
+        lang: Langue
+        role: Rôle
+        role_status: Rôle
+        created_at: Inscrit le
       string_box:
         title: Titre
         content: Contenu
         key: Clé
       background:
+        attachable_type: Page associée
+        image: Image
+        category_name: Categorie associée
         _destroy: Supprimer ?
       picture:
+        type: Catégorie
+        online: En ligne
+        picture: Image
         image: Image
         _destroy: Supprimer ?
       comment:
-        link_source: Article concerné
+        mail: Email
         message: Commentaire
         lang: Langue
+        link_source: Article concerné
+        link_and_image_source: Article concerné
+        created_at: Créé le
       optional_module:
         name: Nom
+        enabled: Activé
 
       shared:
         created_at: Créé le

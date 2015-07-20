@@ -29,7 +29,7 @@ class UserDecorator < ApplicationDecorator
     color = 'blue' if model.super_administrator?
 
     arbre do
-      status_tag(model.role_name, color)
+      status_tag I18n.t("role.#{model.role_name}"), color
     end
   end
 end

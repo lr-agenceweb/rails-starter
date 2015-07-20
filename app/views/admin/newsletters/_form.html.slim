@@ -1,12 +1,15 @@
 = active_admin_form_for [:admin, @newsletter] do |f|
-  - f.inputs 'Newsletter' do
-    - f.translated_inputs 'Translated fields', switch_locale: false do |t|
-      - t.input :title, hint: I18n.t('form.hint.title_newsletter')
-      - t.input :content,
-                hint: I18n.t('form.hint.content_newsletter'),
-                input_html: { class: 'froala' }
+  - f.columns do |cols|
+    - f.column do |col|
+      - f.inputs t('activerecord.models.newsletter.one') do
+        - f.translated_inputs 'Translated fields', switch_locale: false do |t|
+          - t.input :title, hint: I18n.t('form.hint.title_newsletter')
+          - t.input :content,
+                    hint: I18n.t('form.hint.content_newsletter'),
+                    input_html: { class: 'froala' }
 
-  - f.inputs 'Preview' do
-    - render 'preview', f: f
+    - f.column do |col|
+      - f.inputs t('activerecord.attributes.newsletter.preview') do
+        - render 'preview', f: f
 
   - actions

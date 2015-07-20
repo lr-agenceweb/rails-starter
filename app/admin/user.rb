@@ -39,7 +39,7 @@ ActiveAdmin.register User do
       end
 
       column do
-        panel 'Posts' do
+        panel t('activerecord.models.post.other') do
           table_for resource.posts do
             column :image
             column :title

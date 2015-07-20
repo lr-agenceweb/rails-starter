@@ -79,7 +79,7 @@ ActiveAdmin.register Setting do
     columns do
       column do
         panel 'Map' do
-          render 'show', resource: setting.decorate
+          render 'map', resource: setting.decorate
         end
       end
     end

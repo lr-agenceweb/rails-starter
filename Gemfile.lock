@@ -103,13 +103,14 @@ GIT
 
 GIT
   remote: git://github.com/thoughtbot/paperclip.git
-  revision: cdbc05eb508ad18a1fff746d2c4fa58c177ee837
+  revision: 947fbf6e7998154235f81754a44b6b187368a657
   specs:
-    paperclip (4.2.1)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
+    paperclip (4.3.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
       cocaine (~> 0.5.5)
       mime-types
+      mimemagic (= 0.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -401,6 +402,7 @@ GEM
     method_source (0.8.2)
     methodfinder (2.0.0)
     mime-types (2.6.1)
+    mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.7.0)
     minitest-reporters (1.0.11)

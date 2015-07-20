@@ -61,7 +61,8 @@ To see your mails, visit `http://localhost:1080`
 
 Newsletter
 -----------
-Now available
+In order to avoid spam email when sending newsletter to subscribers, you will need to sign your email address using SPF and DKIM keys and linked them to your DNS.  
+Be sure to generate a `dkim.private.key` and `dkim.public.key` and move the `dkim.private.key` in `config/dkim` folder.  
 
 Gems
 -----

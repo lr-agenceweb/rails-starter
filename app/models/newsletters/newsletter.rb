@@ -19,7 +19,7 @@ class Newsletter < ActiveRecord::Base
   active_admin_translates :title, :content
 
   def sent_at_message
-    return I18n.t('newsletter.sent_on', date: I18n.l(sent_at, format: :long)) unless sent_at.nil?
+    return I18n.t('newsletter.sent_on', date: I18n.l(sent_at, format: :long)) if already_sent?
     '/'
   end
 

@@ -1,0 +1,15 @@
+# French
+fr:
+  role:
+    super_administrator: Super administrateur
+    administrator: Administrateur
+    subscriber: Abonné
+    tester: Testeur
+
+# English
+en:
+  role:
+    super_administrator: Super administrator
+    administrator: Administrator
+    subscriber: Subscriber
+    tester: Tester
