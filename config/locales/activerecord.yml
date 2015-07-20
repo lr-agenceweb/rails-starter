@@ -173,6 +173,7 @@ fr:
         email: Email
         lang: Langue
         role: Rôle
+        role_status: Rôle
         created_at: Inscrit le
       string_box:
         title: Titre

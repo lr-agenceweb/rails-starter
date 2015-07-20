@@ -11,7 +11,7 @@ ActiveAdmin.register NewsletterUser do
     selectable_column
     column :email
     column :lang
-    column :role
+    column :role_status
     column :created_at
 
     actions

@@ -5,7 +5,7 @@ class NewsletterUserDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
-  def role
+  def role_status
     color = 'orange' if tester?
     color = 'green' if subscriber?
 
