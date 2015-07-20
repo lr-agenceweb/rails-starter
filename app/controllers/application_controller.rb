@@ -31,7 +31,11 @@ class ApplicationController < ActionController::Base
 
   def set_language
     @language = I18n.locale
-    gon.push(language: @language)
+    gon.push(
+      language: @language,
+      vex_yes_text: t('vex.yes'),
+      vex_no_text: t('vex.no')
+    )
   end
 
   def set_menu_elements
@@ -60,8 +64,6 @@ class ApplicationController < ActionController::Base
   def set_adult_validation
     gon.push(
       adult_validation: true,
-      vex_yes_text: t('adult.yes'),
-      vex_no_text: t('adult.no'),
       adult_not_validated_popup_content: StringBox.find_by(key: 'adult_not_validated_popup_content').content
     )
   end
