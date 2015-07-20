@@ -4,6 +4,9 @@
                  as: :file,
                  label: I18n.t('form.label.picture'),
                  hint: retina_image_tag(item.object, :image, :small)
+    - item.input :online,
+                 as: :boolean,
+                 hint: I18n.t('form.hint.media.online')
     - item.input :_destroy,
                  as: :boolean,
                  hint: I18n.t('form.hint.media.destroy')
