@@ -206,6 +206,12 @@ fr:
         name: Nom
         enabled: Activé
         status: Statut
+      guest_book:
+        username: Nom d'utilisateur
+        content: Message
+        lang: Langue
+        status: Statut
+        created_at: Créé le
 
       shared:
         created_at: Créé le
