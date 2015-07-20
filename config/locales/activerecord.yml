@@ -118,10 +118,12 @@ fr:
         link: Lien
         type_title: Page
         author_with_avatar: Auteur
+        status: Statut
       blog:
         title: Titre
         content: Contenu
         author_with_avatar: Auteur
+        status: Statut
       setting:
         title: Titre
         subtitle: Sous-titre
