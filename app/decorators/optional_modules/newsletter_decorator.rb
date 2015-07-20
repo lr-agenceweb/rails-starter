@@ -3,7 +3,6 @@
 #
 class NewsletterDecorator < ApplicationDecorator
   include Draper::LazyHelpers
-  include ApplicationHelper
   delegate_all
 
   def title
