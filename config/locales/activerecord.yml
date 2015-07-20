@@ -189,6 +189,8 @@ fr:
         online: En ligne
         picture: Image
         image: Image
+        image_large: Image
+        source_picture_title_link: Article associé
         _destroy: Supprimer ?
       comment:
         mail: Email
