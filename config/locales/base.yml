@@ -21,6 +21,7 @@ fr:
     'true': 'Envoyé'
     'false': 'Pas encore envoyé'
   additional: Informations complémentaires
+  general: Informations générales
 
 # English
 en:
@@ -45,3 +46,4 @@ en:
     'true': 'Sent'
     'false': 'Not sent yet'
   additional: Additional information
+  general: General information

@@ -30,7 +30,6 @@ ActiveAdmin.register Category do
   config.sort_order = 'position_asc'
   config.paginate   = false
 
-
   index do
     sortable_handle_column
     column :background
@@ -71,7 +70,7 @@ ActiveAdmin.register Category do
           end
         end
 
-        f.inputs 'Général' do
+        f.inputs t('general') do
           columns do
             column do
               f.input :name,

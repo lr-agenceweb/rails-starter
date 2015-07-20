@@ -104,6 +104,9 @@ fr:
       newsletter:
         one: Newsletter
         other: Newsletters
+      blog:
+        one: Blog
+        other: Blog
 
     attributes:
       post:
@@ -114,6 +117,10 @@ fr:
         online: En ligne
         link: Lien
         type_title: Page
+        author_with_avatar: Auteur
+      blog:
+        title: Titre
+        content: Contenu
         author_with_avatar: Auteur
       setting:
         title: Titre
@@ -172,8 +179,14 @@ fr:
         content: Contenu
         key: Clé
       background:
+        attachable_type: Page associée
+        image: Image
+        category_name: Categorie associée
         _destroy: Supprimer ?
       picture:
+        type: Catégorie
+        online: En ligne
+        picture: Image
         image: Image
         _destroy: Supprimer ?
       comment:
@@ -185,6 +198,7 @@ fr:
         created_at: Créé le
       optional_module:
         name: Nom
+        enabled: Activé
 
       shared:
         created_at: Créé le

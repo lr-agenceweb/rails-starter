@@ -1,8 +1,7 @@
 ActiveAdmin.register Background do
   menu parent: 'Assets'
 
-  permit_params :id,
-                :image
+  permit_params :id, :image
 
   decorate_with BackgroundDecorator
   config.clear_sidebar_sections!
@@ -24,14 +23,15 @@ ActiveAdmin.register Background do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs 'Background properties' do
+    f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
       f.input :attachable_type,
               collection: Background.child_classes,
               include_blank: false,
               input_html: { class: 'chosen-select' }
       f.input :image,
               as: :file,
-              label: I18n.t('form.label.background')
+              label: I18n.t('form.label.background'),
+              hint: retina_image_tag(f.object, :image, :medium)
     end
 
     f.actions

@@ -16,12 +16,6 @@ ActiveAdmin.register Picture do
       retina_image_tag(resource, :image, :medium)
     end
 
-    # column :title do |resource|
-    #   raw "<strong>#{resource.title}</strong>"
-    # end
-    # column :description do |resource|
-    #   raw resource.description
-    # end
     column 'Type' do |resource|
       resource.attachable_type
     end
@@ -57,19 +51,27 @@ ActiveAdmin.register Picture do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs 'Media properties' do
-      f.input :image,
-              as: :file,
-              hint: retina_image_tag(f.object, :image, :medium)
-      f.input :online,
-              label: I18n.t('form.label.online'),
-              hint: I18n.t('form.hint.online')
-    end
+    columns do
+      column do
+        f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
+          f.input :image,
+                  as: :file,
+                  hint: retina_image_tag(f.object, :image, :medium)
+          f.input :online,
+                  label: I18n.t('form.label.online'),
+                  hint: I18n.t('form.hint.online')
+        end
+      end
 
-    f.translated_inputs 'Translated fields', switch_locale: false do |t|
-      t.input :title
-      t.input :description,
-              input_html: { class: 'froala' }
+      column do
+        f.inputs t('additional') do
+          f.translated_inputs 'Translated fields', switch_locale: true do |t|
+            t.input :title
+            t.input :description,
+                    input_html: { class: 'froala' }
+          end
+        end
+      end
     end
 
     f.actions
