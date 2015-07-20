@@ -110,7 +110,7 @@ class ApplicationDecorator < Draper::Decorator
     !model.title.blank?
   end
 
-  def description
+  def description?
     !model.description.blank?
   end
 end
