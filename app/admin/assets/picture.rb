@@ -12,7 +12,16 @@ ActiveAdmin.register Picture do
   config.clear_sidebar_sections!
   actions :all, except: [:new]
 
+  batch_action :toggle_value do |ids|
+    Picture.find(ids).each do |picture|
+      toggle_value = picture.online? ? false : true
+      picture.update_attribute(:online, toggle_value)
+    end
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
+
   index do
+    selectable_column
     column :image
     column :source_picture_title_link
     column :status

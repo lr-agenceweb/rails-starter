@@ -193,6 +193,7 @@ fr:
         image: Image
         image_large: Image
         source_picture_title_link: Article associé
+        status: Statut
         _destroy: Supprimer ?
       comment:
         mail: Email
