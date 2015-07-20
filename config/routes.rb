@@ -48,7 +48,4 @@ Rails.application.routes.draw do
   resources :newsletter_users, only: [:create]
   get '/admin/newsletters/:id/send', to: 'admin/newsletters#send_newsletter', as: :send_newsletter_for_subscribers
   get '/admin/newsletter_test/:id/send', to: 'admin/newsletters#send_newsletter_test', as: :send_newsletter_for_testers
-
-  # GuestBook
-  get 'toggle_guest_book_validated/:id', to: 'admin/guest_books#toggle_guest_book_validated', as: :toggle_guest_book_validated
 end
