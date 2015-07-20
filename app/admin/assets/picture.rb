@@ -8,43 +8,25 @@ ActiveAdmin.register Picture do
                   :id, :locale, :title, :description
                 ]
 
+  decorate_with PictureDecorator
   config.clear_sidebar_sections!
   actions :all, except: [:new]
 
   index do
-    column 'Picture' do |resource|
-      retina_image_tag(resource, :image, :medium)
-    end
-
-    column 'Type' do |resource|
-      resource.attachable_type
-    end
-
-    column :online do |resource|
-      span status_tag("#{resource.online}", (resource.online? ? :ok : :warn))
-    end
+    column :image
+    column :source_picture_title_link
+    column :status
 
     translation_status
     actions
   end
 
-  index as: :grid do |resource|
-    raw "#{retina_image_tag(resource, :image, :medium)}<br><strong>#{resource.title}</strong>"
-  end
-
   show do
-    h3 resource.title
     attributes_table do
-      row :description do
-        raw resource.description
-      end
-      row :resource do
-        retina_image_tag(resource, :image, :medium)
-      end
-
-      row :online do
-        status_tag("#{resource.online}", (resource.online? ? :ok : :warn))
-      end
+      row :image_large
+      row :source_picture_title_link
+      row :description
+      row :status
     end
   end
 

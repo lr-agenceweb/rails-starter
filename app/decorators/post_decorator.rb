@@ -42,11 +42,6 @@ class PostDecorator < ApplicationDecorator
     model.content.html_safe if content?
   end
 
-  def status
-    color = model.online? ? 'green' : 'orange'
-    status_tag_deco(I18n.t("online.#{model.online}"), color)
-  end
-
   # Method used to display content in RSS Feed
   def image_and_content
     html = content
