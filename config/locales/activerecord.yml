@@ -101,6 +101,9 @@ fr:
       newsletter_user:
         one: Newsletter Utilisateur
         other: Newsletter Utilisateurs
+      newsletter:
+        one: Newsletter
+        other: Newsletters
 
     attributes:
       post:
