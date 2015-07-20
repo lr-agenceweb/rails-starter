@@ -9,8 +9,10 @@ ActiveAdmin.register_page 'Dashboard' do
           render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.includes(:translations).by_user(current_user.id).order(id: :desc).last(5)
         end
 
-        column do |panel|
-          render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.by_user(current_user.id).last(5)
+        if OptionalModule.find_by(name: 'Comment').enabled?
+          column do |panel|
+            render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.by_user(current_user.id).last(5)
+          end
         end
       end # columns
 
@@ -27,8 +29,10 @@ ActiveAdmin.register_page 'Dashboard' do
           render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.includes(:translations).order(id: :desc).last(5)
         end # column
 
-        column do |panel|
-          render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.order(id: :desc).last(5)
+        if OptionalModule.find_by(name: 'Comment').enabled?
+          column do |panel|
+            render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.order(id: :desc).last(5)
+          end
         end
       end # columns
 

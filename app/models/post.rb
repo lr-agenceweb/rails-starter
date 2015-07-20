@@ -48,6 +48,7 @@ class Post < ActiveRecord::Base
 
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :username, to: :user, prefix: true, allow_nil: true
+  delegate :online, to: :pictures, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }

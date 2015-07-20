@@ -10,7 +10,7 @@ ActiveAdmin.register Blog do
                   :id, :locale, :title, :slug, :content
                 ],
                 pictures_attributes: [
-                  :id, :locale, :image, :_destroy
+                  :id, :locale, :image, :online, :_destroy
                 ],
                 referencement_attributes: [
                   :id,
@@ -21,6 +21,14 @@ ActiveAdmin.register Blog do
 
   decorate_with BlogDecorator
   config.clear_sidebar_sections!
+
+  batch_action :toggle_value do |ids|
+    Blog.find(ids).each do |blog|
+      toggle_value = blog.online? ? false : true
+      blog.update_attribute(:online, toggle_value)
+    end
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
 
   index do
     selectable_column

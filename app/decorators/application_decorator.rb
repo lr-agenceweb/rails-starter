@@ -91,6 +91,11 @@ class ApplicationDecorator < Draper::Decorator
     end
   end
 
+  def status
+    color = model.online? ? 'green' : 'orange'
+    status_tag_deco(I18n.t("online.#{model.online}"), color)
+  end
+
   def status_tag_deco(value, color)
     arbre do
       status_tag(value, color)
@@ -103,5 +108,9 @@ class ApplicationDecorator < Draper::Decorator
 
   def title?
     !model.title.blank?
+  end
+
+  def description?
+    !model.description.blank?
   end
 end

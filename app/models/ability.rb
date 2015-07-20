@@ -23,7 +23,6 @@ class Ability
   def super_administrator_privilege
     can :manage, :all
     optional_modules_check
-    can [:create, :read, :destroy], Comment
   end
 
   def administrator_privilege(user)

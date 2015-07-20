@@ -11,6 +11,10 @@ fr:
     destroy:
       label: Supprimer
       confirm: "Ëtes-vous sûr de vouloir supprimer ce %{object} ?"
+    batch_actions:
+      labels:
+        toggle_value: Changer le statut
+      flash: Le (les) élement(s) sélectionnés ont bien changé de statut
 
 # English
 en:

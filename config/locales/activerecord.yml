@@ -118,10 +118,12 @@ fr:
         link: Lien
         type_title: Page
         author_with_avatar: Auteur
+        status: Statut
       blog:
         title: Titre
         content: Contenu
         author_with_avatar: Auteur
+        status: Statut
       setting:
         title: Titre
         subtitle: Sous-titre
@@ -189,6 +191,9 @@ fr:
         online: En ligne
         picture: Image
         image: Image
+        image_large: Image
+        source_picture_title_link: Article associé
+        status: Statut
         _destroy: Supprimer ?
       comment:
         mail: Email
@@ -196,10 +201,18 @@ fr:
         lang: Langue
         link_source: Article concerné
         link_and_image_source: Article concerné
+        status: Statut
         created_at: Créé le
       optional_module:
         name: Nom
         enabled: Activé
+        status: Statut
+      guest_book:
+        username: Nom d'utilisateur
+        content: Message
+        lang: Langue
+        status: Statut
+        created_at: Créé le
 
       shared:
         created_at: Créé le

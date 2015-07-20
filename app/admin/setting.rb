@@ -43,7 +43,7 @@ ActiveAdmin.register Setting do
   show do
     columns do
       column do
-        panel 'Site parameters' do
+        panel t('active_admin.details', model: active_admin_config.resource_label) do
           attributes_table_for setting.decorate do
             row :logo
             row :title
@@ -54,7 +54,7 @@ ActiveAdmin.register Setting do
       end
 
       column do
-        panel 'Administrator informations' do
+        panel t('active_admin.details', model: t('role.administrator')) do
           attributes_table_for setting.decorate do
             row :name
             row :phone
@@ -66,7 +66,7 @@ ActiveAdmin.register Setting do
       end
 
       column do
-        panel 'Modules informations' do
+        panel t('active_admin.details', model: 'Modules') do
           attributes_table_for setting.decorate do
             row :map_status
             row :breadcrumb

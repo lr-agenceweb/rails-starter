@@ -51,33 +51,6 @@ module Admin
       assert_redirected_to admin_dashboard_path
     end
 
-    #
-    # == Toggling validated column
-    #
-    test 'should toggle value for validated field if false' do
-      assert_not @guest_book_not_validate.validated
-      get :toggle_guest_book_validated, id: @guest_book_not_validate.id
-      assert assigns(:guest_book).validated
-    end
-
-    test 'should toggle value for validated field if true' do
-      assert @guest_book.validated
-      get :toggle_guest_book_validated, id: @guest_book.id
-      assert_not assigns(:guest_book).validated
-    end
-
-    test 'should count one more validated message' do
-      count_before = GuestBook.validated.count
-      get :toggle_guest_book_validated, id: @guest_book_not_validate.id
-      assert_equal GuestBook.validated.count, count_before + 1
-    end
-
-    test 'should count one less validated message' do
-      count_before = GuestBook.validated.count
-      get :toggle_guest_book_validated, id: @guest_book.id
-      assert_equal GuestBook.validated.count, count_before - 1
-    end
-
     private
 
     def initialize_test

@@ -18,12 +18,12 @@ class AboutsController < PostsController
   # GET /a-propos/1.json
   def show
     redirect_to @about, status: :moved_permanently if request.path_parameters[:id] != @about.slug
-    seo_tag_show @about
+    seo_tag_show about
   end
 
   private
 
   def set_about
-    @about = About.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
+    @about = About.online.includes(:pictures, referencement: [:translations]).friendly.find(params[:id]) or not_found
   end
 end

@@ -10,7 +10,7 @@ ActiveAdmin.register About do
                   :id, :locale, :title, :slug, :content
                 ],
                 pictures_attributes: [
-                  :id, :locale, :image, :_destroy
+                  :id, :locale, :image, :online, :_destroy
                 ],
                 referencement_attributes: [
                   :id,
@@ -21,6 +21,14 @@ ActiveAdmin.register About do
 
   decorate_with AboutDecorator
   config.clear_sidebar_sections!
+
+  batch_action :toggle_value do |ids|
+    Post.find(ids).each do |post|
+      toggle_value = post.online? ? false : true
+      post.update_attribute(:online, toggle_value)
+    end
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
 
   index do
     selectable_column
@@ -46,7 +54,7 @@ ActiveAdmin.register About do
   #
   controller do
     before_create do |post|
-      post.type = 'About'
+      post.type = post.object.class.name
       post.user_id = current_user.id
     end
   end

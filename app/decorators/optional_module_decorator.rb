@@ -12,6 +12,6 @@ class OptionalModuleDecorator < ApplicationDecorator
   end
 
   def name
-    t("optional_module.name.#{model.name.underscore.downcase}")
+    content_tag :strong, t("optional_module.name.#{model.name.underscore.downcase}")
   end
 end

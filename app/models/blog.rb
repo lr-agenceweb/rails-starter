@@ -44,6 +44,7 @@ class Blog < ActiveRecord::Base
 
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :username, to: :user, prefix: true, allow_nil: true
+  delegate :online, to: :pictures, prefix: true, allow_nil: true
 
   paginates_per 10
 
