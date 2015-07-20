@@ -54,7 +54,7 @@ ActiveAdmin.register About do
   #
   controller do
     before_create do |post|
-      post.type = 'About'
+      post.type = post.object.class.name
       post.user_id = current_user.id
     end
   end

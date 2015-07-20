@@ -59,7 +59,7 @@ ActiveAdmin.register Home do
   #
   controller do
     before_create do |post|
-      post.type = 'Home'
+      post.type = post.object.class.name
       post.user_id = current_user.id
     end
   end
