@@ -1,7 +1,7 @@
-- if @slider_module.enabled? && !@slider.nil?
+- if (@slider_module.enabled? && !slider.nil?) || force?
   .row
     .small-12.columns
       .slick-carousel
         - slider.pictures_online.find_each do |slide|
           .slide
-            = image_tag slide.image.url(:original)
+            = image_tag slide.image.url(:large)

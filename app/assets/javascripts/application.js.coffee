@@ -27,6 +27,7 @@
 #= require plugins/nprogress
 #= require plugins/cookie_ie
 #= require plugins/cookie_adult_validation
+#= require plugins/slick_carousel
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
@@ -34,19 +35,3 @@
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()
-
-  if $('.slick-carousel').length
-    console.log gon
-
-    $('.slick-carousel').slick
-      slidesToShow: 1
-      dots: gon.bullet
-      autoplay: gon.autoplay
-      infinite: gon.loop
-      fade: if gon.animate == 'fade' then true else false
-      pauseOnHover: gon.hover_pause
-      pauseOnDotsHover: gon.hover_pause
-      speed: gon.timeout
-      autoplaySpeed: gon.timeout
-      arrows : gon.navigation
-      # lazyLoad: true
