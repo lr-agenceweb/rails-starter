@@ -14,6 +14,7 @@
 #= require i18n/translations
 #= require js.cookie
 #= require vex.combined.min.js
+#= require owl.carousel
 #= require plugins/vex_config
 #= require awesome-share-buttons
 #= require plugins/awesome-share-buttons

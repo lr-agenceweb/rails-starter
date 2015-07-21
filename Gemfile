@@ -128,6 +128,7 @@ gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
 gem 'gravatar_image_tag'
+gem 'owlcarousel-rails', github: 'acrogenesis/owlcarousel-rails', branch: 'OwlCarousel2'
 
 group :development do
   gem 'better_errors'
