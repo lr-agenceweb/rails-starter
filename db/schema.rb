@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(version: 20150721091821) do
     t.boolean  "loop",                    default: true
     t.boolean  "navigation",              default: false
     t.boolean  "bullet",                  default: false
+    t.boolean  "online",                  default: true
     t.integer  "category_id", limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false

@@ -10,6 +10,7 @@
 #  loop        :boolean          default(TRUE)
 #  navigation  :boolean          default(FALSE)
 #  bullet      :boolean          default(FALSE)
+#  online      :boolean          default(TRUE)
 #  category_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

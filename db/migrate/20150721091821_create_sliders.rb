@@ -8,6 +8,7 @@ class CreateSliders < ActiveRecord::Migration
       t.boolean :loop, default: true
       t.boolean :navigation, default: false
       t.boolean :bullet, default: false
+      t.boolean :online, default: true
       t.references :category, index: true, unique: true
 
       t.timestamps null: false
