@@ -31,7 +31,7 @@ class Category < ActiveRecord::Base
   acts_as_list
 
   belongs_to :optional_module
-  has_one :slider, as: :attachable, dependent: :destroy
+  has_one :slider, dependent: :destroy
 
   has_one :background, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :background, reject_if: :all_blank, allow_destroy: true
