@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_slider
-    @slider = Slider.by_page(controller_name.classify).first
+    @slider = Slider.online.by_page(controller_name.classify).first
     unless @slider.nil?
       gon.push(
         animate: @slider.animate,

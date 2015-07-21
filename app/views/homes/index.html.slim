@@ -1,11 +1,12 @@
 - breadcrumb :root
 
-.row
-  - unless @slider.nil?
-    .owl-carousel
-      - @slider.pictures_online.find_each do |slide|
-        .item
-          = retina_image_tag slide, :image, :large
+- unless @slider.nil?
+  .row
+    .small-12.columns
+      .slick-carousel
+        - @slider.pictures_online.find_each do |slide|
+          .slide
+            = image_tag slide.image.url(:original)
 
 .row
   - @homes.each do |home|

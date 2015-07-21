@@ -34,5 +34,6 @@ class Slider < ActiveRecord::Base
   delegate :online, to: :pictures, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true
 
+  scope :online, -> { where(online: true) }
   scope :by_page, -> (page) { joins(:category).where('categories.name = ?', page) }
 end

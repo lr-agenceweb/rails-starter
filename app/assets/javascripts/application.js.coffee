@@ -14,13 +14,12 @@
 #= require i18n/translations
 #= require js.cookie
 #= require vex.combined.min.js
-#= require owl.carousel
 #= require plugins/vex_config
+#= require jquery.slick
 #= require awesome-share-buttons
 #= require plugins/awesome-share-buttons
 #= require mapbox
 #= require jquery.autosize
-#= require jquery.sticky_footer
 #= require globals/_functions
 #= require modules/responsive_menu
 #= require modules/autocomplete_search
@@ -31,16 +30,23 @@
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
+#= require jquery.sticky_footer
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()
 
-  $('.owl-carousel').owlCarousel
-    items: 1
-    animateOut: gon.animate
-    autoplay: gon.autoplay
-    timeout: gon.timeout
-    hover_pause: gon.hover_pause
-    loop: gon.loop
-    nav: gon.navigation
-    dot: gon.bullet
+  if $('.slick-carousel').length
+    console.log gon
+
+    $('.slick-carousel').slick
+      slidesToShow: 1
+      dots: gon.bullet
+      autoplay: gon.autoplay
+      infinite: gon.loop
+      fade: if gon.animate == 'fade' then true else false
+      pauseOnHover: gon.hover_pause
+      pauseOnDotsHover: gon.hover_pause
+      speed: gon.timeout
+      autoplaySpeed: gon.timeout
+      arrows : gon.navigation
+      # lazyLoad: true

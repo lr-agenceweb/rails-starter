@@ -31,14 +31,6 @@ GIT
       rails (>= 4.0.0, < 4.3.0)
 
 GIT
-  remote: git://github.com/acrogenesis/owlcarousel-rails.git
-  revision: 2dd679c61b795fa08003994c74d140c214781141
-  branch: OwlCarousel2
-  specs:
-    owlcarousel-rails (1.1.3.3)
-      jquery-rails
-
-GIT
   remote: git://github.com/activeadmin/activeadmin.git
   revision: 28e8a8f36640c64fc4163c86cc31d716862c5b37
   specs:
@@ -383,6 +375,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-scrollto-rails (1.4.3)
       railties (> 3.1, < 5.0)
+    jquery-slick-rails (1.5.6)
+      railties (>= 3.1)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
     js_cookie_rails (1.0.0)
@@ -662,6 +656,7 @@ DEPENDENCIES
   jquery-datetimepicker-rails
   jquery-minicolors-rails
   jquery-scrollto-rails
+  jquery-slick-rails
   jquery-ui-rails
   js_cookie_rails
   kaminari (~> 0.16.1)
@@ -675,7 +670,6 @@ DEPENDENCIES
   nokogiri
   nprogress-rails
   outdatedbrowser_rails!
-  owlcarousel-rails!
   paperclip!
   paperclip-dropbox (>= 1.1.7)
   pg

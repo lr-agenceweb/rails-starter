@@ -39,7 +39,7 @@ ActiveAdmin.register Slider do
           f.input :bullet
           f.input :timeout
           f.input :animate,
-                  collection: %w( fadeOut slideOut ),
+                  collection: %w( fade backSlide goDown scaleUp ),
                   include_blank: false
         end
       end
