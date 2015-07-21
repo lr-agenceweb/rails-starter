@@ -26,6 +26,42 @@ ActiveAdmin.register Slider do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  index do
+    selectable_column
+    column :page
+    column :autoplay
+    column :hover_pause
+    column :loop
+    column :navigation
+    column :bullet
+    column :timeout
+    column :animate
+    column :status
+
+    actions
+  end
+
+  show do
+    columns do
+      column do
+        attributes_table do
+          row :page
+          row :status
+          row :autoplay
+          row :hover_pause
+          row :loop
+          row :navigation
+          row :bullet
+          row :timeout
+          row :animate
+        end
+      end
+
+      column do
+      end
+    end
+  end
+
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
@@ -39,7 +75,7 @@ ActiveAdmin.register Slider do
           f.input :bullet
           f.input :timeout
           f.input :animate,
-                  collection: %w( fade backSlide goDown scaleUp ),
+                  collection: %w( fade slide ),
                   include_blank: false
         end
       end

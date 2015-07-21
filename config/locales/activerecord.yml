@@ -225,6 +225,7 @@ fr:
         timeout: Temps entre chaque image
         animate: Effet d'animation
         online: En ligne ?
+        status: État
         category_id: Page
 
       shared:
