@@ -219,6 +219,7 @@ fr:
       slider:
         autoplay: Démarrage automatique
         hover_pause: Pause au survol
+        loop: En boucle ?
         navigation: Lien Précédent / Suivant
         bullet: Ronds de navigation
         timeout: Temps entre chaque image

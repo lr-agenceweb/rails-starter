@@ -6,6 +6,7 @@ ActiveAdmin.register Slider do
                 :autoplay,
                 :timeout,
                 :hover_pause,
+                :loop,
                 :navigation,
                 :bullet,
                 :online,
@@ -33,11 +34,12 @@ ActiveAdmin.register Slider do
         f.inputs t('activerecord.models.slider.one') do
           f.input :autoplay
           f.input :hover_pause
+          f.input :loop
           f.input :navigation
           f.input :bullet
           f.input :timeout
           f.input :animate,
-                  collection: %w( fade slide ),
+                  collection: %w( fadeOut slideOut ),
                   include_blank: false
         end
       end
@@ -53,6 +55,8 @@ ActiveAdmin.register Slider do
         end
       end
     end
+
+    render 'admin/shared/pictures/many', f: f
 
     f.actions
   end

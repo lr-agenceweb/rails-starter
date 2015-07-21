@@ -30,4 +30,9 @@ class Slider < ActiveRecord::Base
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :category, dependent: :destroy
+
+  delegate :online, to: :pictures, prefix: true, allow_nil: true
+  delegate :name, to: :category, prefix: true, allow_nil: true
+
+  scope :by_page, -> (page) { joins(:category).where('categories.name = ?', page) }
 end

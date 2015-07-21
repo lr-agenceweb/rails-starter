@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
   before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
+  before_action :set_slider, if: proc { @slider_module.enabled? }
 
   decorates_assigned :setting, :category
 
@@ -66,6 +67,21 @@ class ApplicationController < ActionController::Base
       adult_validation: true,
       adult_not_validated_popup_content: StringBox.find_by(key: 'adult_not_validated_popup_content').content
     )
+  end
+
+  def set_slider
+    @slider = Slider.by_page(controller_name.classify).first
+    unless @slider.nil?
+      gon.push(
+        animate: @slider.animate,
+        autoplay: @slider.autoplay,
+        timeout: @slider.timeout,
+        hover_pause: @slider.hover_pause,
+        loop: @slider.loop,
+        navigation: @slider.navigation,
+        bullet: @slider.bullet
+      )
+    end
   end
 
   def set_optional_modules

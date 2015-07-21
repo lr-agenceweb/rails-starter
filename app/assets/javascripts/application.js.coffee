@@ -34,4 +34,13 @@
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()
-  $('.owl-carousel').owlCarousel()
+
+  $('.owl-carousel').owlCarousel
+    items: 1
+    animateOut: gon.animate
+    autoplay: gon.autoplay
+    timeout: gon.timeout
+    hover_pause: gon.hover_pause
+    loop: gon.loop
+    nav: gon.navigation
+    dot: gon.bullet
