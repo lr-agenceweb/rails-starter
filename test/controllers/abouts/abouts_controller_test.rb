@@ -67,6 +67,16 @@ class AboutsControllerTest < ActionController::TestCase
     assert_equal @abouts.length, 3
   end
 
+  test 'should render 404 if about article is offline' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_raises(ActiveRecord::RecordNotFound) do
+          get :show, locale: locale.to_s, id: @about_offline
+        end
+      end
+    end
+  end
+
   #
   # == Comments
   #
@@ -106,6 +116,7 @@ class AboutsControllerTest < ActionController::TestCase
 
   def initialize_test
     @about = posts(:about)
+    @about_offline = posts(:about_offline)
     @comment = comments(:three)
     @locales = I18n.available_locales
   end

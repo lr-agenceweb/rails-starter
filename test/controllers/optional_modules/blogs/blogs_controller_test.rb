@@ -63,6 +63,16 @@ class BlogsControllerTest < ActionController::TestCase
     assert_equal @blogs.length, 1
   end
 
+  test 'should render 404 if blog article is offline' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_raises(ActiveRecord::RecordNotFound) do
+          get :show, locale: locale.to_s, id: @blog_offline
+        end
+      end
+    end
+  end
+
   #
   # == Module disabled
   #
@@ -81,6 +91,7 @@ class BlogsControllerTest < ActionController::TestCase
 
   def initialize_test
     @blog = blogs(:blog_online)
+    @blog_offline = blogs(:blog_offline)
     @locales = I18n.available_locales
     @blog_module = optional_modules(:blog)
     @anthony = users(:anthony)
