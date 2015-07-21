@@ -10,6 +10,7 @@
 #  loop        :boolean          default(TRUE)
 #  navigation  :boolean          default(FALSE)
 #  bullet      :boolean          default(FALSE)
+#  online      :boolean          default(TRUE)
 #  category_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -19,5 +20,14 @@
 #  index_sliders_on_category_id  (category_id)
 #
 
+#
+# == Slider Model
+#
 class Slider < ActiveRecord::Base
+  include Imageable
+
+  has_many :pictures, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
+
+  belongs_to :category, dependent: :destroy
 end

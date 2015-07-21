@@ -107,6 +107,9 @@ fr:
       blog:
         one: Blog
         other: Blog
+      slider:
+        one: Slider
+        other: Sliders
 
     attributes:
       post:
