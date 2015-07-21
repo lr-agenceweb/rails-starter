@@ -60,6 +60,10 @@ ActiveAdmin.register Slider do
       column do
       end
     end
+
+    panel 'Slider preview' do
+      render 'optional_modules/sliders/show', slider: resource, force: true
+    end
   end
 
   form do |f|
@@ -95,5 +99,18 @@ ActiveAdmin.register Slider do
     render 'admin/shared/pictures/many', f: f
 
     f.actions
+  end
+
+  #
+  # == Controller
+  #
+  controller do
+    before_action :set_slider_option, only: [:show]
+
+    private
+
+    def set_slider_option
+      resource.custom_default_slider_options gon
+    end
   end
 end

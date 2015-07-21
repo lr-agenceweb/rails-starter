@@ -19,9 +19,9 @@ class ApplicationController < ActionController::Base
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
   before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
-  before_action :set_slider, if: proc { @slider_module.enabled? }
+  before_action :set_slider#, if: proc { @slider_module.enabled? }
 
-  decorates_assigned :setting, :category
+  decorates_assigned :setting, :category, :slider
 
   private
 
@@ -72,15 +72,7 @@ class ApplicationController < ActionController::Base
   def set_slider
     @slider = Slider.online.by_page(controller_name.classify).first
     unless @slider.nil?
-      gon.push(
-        animate: @slider.animate,
-        autoplay: @slider.autoplay,
-        timeout: @slider.timeout,
-        hover_pause: @slider.hover_pause,
-        loop: @slider.loop,
-        navigation: @slider.navigation,
-        bullet: @slider.bullet
-      )
+      slider.custom_default_slider_options gon
     end
   end
 

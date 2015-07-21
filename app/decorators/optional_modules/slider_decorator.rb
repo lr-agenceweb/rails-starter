@@ -29,6 +29,18 @@ class SliderDecorator < ApplicationDecorator
     status_slider 'bullet'
   end
 
+  def custom_default_slider_options(gon)
+    gon.push(
+      animate: model.animate,
+      autoplay: model.autoplay,
+      timeout: model.timeout,
+      hover_pause: model.hover_pause,
+      loop: model.loop,
+      navigation: model.navigation,
+      bullet: model.bullet
+    )
+  end
+
   private
 
   def status_slider(property)
