@@ -8,6 +8,6 @@ $(document).on 'ready page:load page:restore', ->
   )
   .autocomplete('instance')._renderItemData = (ul, item) ->
     ul.data 'ui-autocomplete-item', item
-    image = if item.hasOwnProperty('picture') then '<img src="' + item.picture + '" />' else ''
+    image = if item.hasOwnProperty('picture') then '<div class="dtcell"><img src="' + item.picture + '" /></div>' else ''
     $('<li>').data('ui-autocomplete-item', item)
-      .append('<p>' + image + item.title + '</p>').addClass('ui-menu-item').appendTo ul
+      .append('<div class="dtable">' + image + '<div class="dtcell autocomplete-content">' + item.title + '</div></div>').addClass('ui-menu-item').appendTo ul
