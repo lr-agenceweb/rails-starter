@@ -7,6 +7,8 @@
 #= require admin/settings
 #= require admin/chosen
 #= require admin/newsletters_preview
+#= require jquery.slick
+#= require plugins/slick_carousel
 #= require gmaps.js
 #= require globals/_functions
 #= require mapbox

@@ -19,8 +19,9 @@ class ApplicationController < ActionController::Base
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
   before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
+  before_action :set_slider, if: proc { @slider_module.enabled? }
 
-  decorates_assigned :setting, :category
+  decorates_assigned :setting, :category, :slider
 
   private
 
@@ -68,8 +69,16 @@ class ApplicationController < ActionController::Base
     )
   end
 
+  def set_slider
+    @slider = Slider.online.by_page(controller_name.classify).first
+    unless @slider.nil?
+      slider.custom_default_slider_options gon
+    end
+  end
+
   def set_optional_modules
-    OptionalModule.find_each do |optional_module|
+    @optional_modules = OptionalModule.all
+    @optional_modules.find_each do |optional_module|
       instance_variable_set("@#{optional_module.name.underscore.singularize}_module", optional_module)
     end
   end

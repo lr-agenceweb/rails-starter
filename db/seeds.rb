@@ -261,7 +261,8 @@ description = [
   'Module RSS, donne la possibilité aux internautes de s\'abonner aux articles Post et Blog du site',
   'Module de commentaire: permet aux internautes de commenter les articles Post ou de Blog',
   'Module Blog où l\'administrateur peut créer des articles',
-  'Module qui affiche une popup demandant aux internet d\'attester qu\'ils sont bien majeurs pour continuer à visiter le site'
+  'Module qui affiche une popup demandant aux internet d\'attester qu\'ils sont bien majeurs pour continuer à visiter le site',
+  'Module qui affiche slider avec des images défilantes'
 ]
 OptionalModule.list.each_with_index do |element, index|
   OptionalModule.create!(

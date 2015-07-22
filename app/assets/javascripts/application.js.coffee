@@ -15,11 +15,11 @@
 #= require js.cookie
 #= require vex.combined.min.js
 #= require plugins/vex_config
+#= require jquery.slick
 #= require awesome-share-buttons
 #= require plugins/awesome-share-buttons
 #= require mapbox
 #= require jquery.autosize
-#= require jquery.sticky_footer
 #= require globals/_functions
 #= require modules/responsive_menu
 #= require modules/autocomplete_search
@@ -27,9 +27,11 @@
 #= require plugins/nprogress
 #= require plugins/cookie_ie
 #= require plugins/cookie_adult_validation
+#= require plugins/slick_carousel
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
+#= require jquery.sticky_footer
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()

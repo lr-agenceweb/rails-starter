@@ -49,3 +49,8 @@ adult:
   <<: *DEFAULTS
   name: Adult
   enabled: false
+
+slider:
+  <<: *DEFAULTS
+  name: Slider
+  enabled: true

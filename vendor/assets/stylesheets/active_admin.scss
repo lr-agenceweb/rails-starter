@@ -20,6 +20,8 @@
 @import 'mapbox';
 @import 'vex';
 @import 'vex-theme-os';
+@import 'slick';
+@import 'slick-theme';
 
 @import 'plugins/mapbox';
 @import 'admin/base';
@@ -28,6 +30,7 @@
 @import 'admin/newsletter';
 @import 'admin/active_skin_fix';
 @import 'admin/vex_fix';
+@import 'admin/slick_carousel_fix';
 @import 'jquery.minicolors';
 
 * {
