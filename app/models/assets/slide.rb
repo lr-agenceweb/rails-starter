@@ -42,5 +42,5 @@ class Slide < ActiveRecord::Base
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
-  scope :online,  -> { where(online: true) }
+  scope :online, -> { where(online: true) }
 end
