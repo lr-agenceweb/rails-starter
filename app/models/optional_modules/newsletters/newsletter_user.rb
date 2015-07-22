@@ -20,6 +20,7 @@
 #
 class NewsletterUser < ActiveRecord::Base
   include Tokenable
+  include Scopable
 
   validates :email,
             presence: true,
@@ -37,9 +38,6 @@ class NewsletterUser < ActiveRecord::Base
             inclusion: %w( subscriber tester )
 
   scope :testers, -> { where(role: 'tester') }
-  scope :french, -> { where(lang: 'fr') }
-  scope :english, -> { where(lang: 'en') }
-  scope :by_locale, -> (locale) { where(lang: locale) }
 
   attr_accessor :name
 
