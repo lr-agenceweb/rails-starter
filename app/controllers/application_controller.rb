@@ -71,9 +71,6 @@ class ApplicationController < ActionController::Base
 
   def set_slider
     @slider = Slider.online.by_page(controller_name.classify).first
-    unless @slider.nil?
-      slider.custom_default_slider_options gon
-    end
   end
 
   def set_optional_modules
