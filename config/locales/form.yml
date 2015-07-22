@@ -11,6 +11,7 @@ fr:
     label:
       online: Mettre en ligne ?
       picture: Image liée à l'article
+      slide: Image liée au slider
       background: Image d'arrière-plan liée à la page
       model_name: Page à définir
       link: Lien du projet
@@ -32,10 +33,13 @@ fr:
       optional_module: Choisir quel est le module optionel lié à cette catégorie
 
       media:
-        destroy: Suppression du media associé à l'article
         online: Mettre cette image visible sur le site ?
+        destroy: Suppression du media associé à l'article
       background:
         destroy: Suppression de l'image d'arrière-plan associée à cette page
+      slide:
+        online: Montrer cette image dans le slider ?
+        destroy: Supprimer cette image du slider ?
 
       string_box:
         content: Contenu du message personnalisé à afficher sur le site
