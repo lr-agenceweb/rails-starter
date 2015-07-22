@@ -16,7 +16,7 @@ module Admin
     # == Routes / Templates / Responses
     #
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @bob
+      sign_out @administrator
       get :index
       assert_redirected_to new_user_session_path
       get :edit, id: @newsletter_user
@@ -74,9 +74,9 @@ module Admin
     # == Destroy
     #
     test 'should not destroy user if logged in as subscriber' do
-      sign_out @bob
-      sign_in @alice # subscriber
-      assert_difference 'NewsletterUser.count', 0 do
+      sign_out @administrator
+      sign_in @subscriber
+      assert_no_difference 'NewsletterUser.count' do
         delete :destroy, id: @newsletter_user
       end
     end
@@ -92,13 +92,26 @@ module Admin
       assert_redirected_to admin_newsletter_users_path
     end
 
+    #
+    # == Module disabled
+    #
+    test 'should not access page if newsletter module is disabled' do
+      disable_optional_module @super_administrator, @newsletter_module, 'Newslett' # in test_helper.rb
+      sign_in @administrator
+      get :index
+      assert_redirected_to admin_dashboard_path
+    end
+
     private
 
     def initialize_test
-      @bob = users(:bob)
-      @alice = users(:alice)
-      sign_in @bob
+      @administrator = users(:bob)
+      @subscriber = users(:alice)
+      @super_administrator = users(:anthony)
       @newsletter_user = newsletter_users(:newsletter_user_fr)
+      @newsletter_module = optional_modules(:newsletter)
+
+      sign_in @administrator
     end
   end
 end
