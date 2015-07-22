@@ -28,6 +28,7 @@
 #
 class Picture < ActiveRecord::Base
   include Attachable
+  include Imageable
 
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description

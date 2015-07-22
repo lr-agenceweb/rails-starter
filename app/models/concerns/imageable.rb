@@ -20,6 +20,10 @@ module Imageable
     pictures.online.first if pictures?
   end
 
+  def self_image?
+    image.exists?
+  end
+
   #
   # == Background
   #

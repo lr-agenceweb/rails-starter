@@ -27,6 +27,7 @@
 #
 class Slide < ActiveRecord::Base
   include Attachable
+  include Imageable
 
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
@@ -43,8 +44,4 @@ class Slide < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
   scope :online, -> { where(online: true) }
-
-  def slide?
-    image.exists?
-  end
 end

@@ -8,7 +8,7 @@
                  as: :boolean,
                  hint: I18n.t('form.hint.slide.online')
 
-    - if item.object.slide?
+    - if item.object.self_image?
       - item.input :_destroy,
                    as: :boolean,
                    hint: I18n.t('form.hint.slide.destroy')
