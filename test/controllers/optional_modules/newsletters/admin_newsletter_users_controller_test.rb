@@ -12,6 +12,9 @@ module Admin
 
     setup :initialize_test
 
+    #
+    # == Routes / Templates / Responses
+    #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @bob
       get :index
