@@ -58,8 +58,8 @@ module Admin
       assert_redirected_to admin_sliders_path
     end
 
-    test 'should destroy pictures with slider' do
-      assert_difference ['Picture.count'], -3 do
+    test 'should destroy slides with slider' do
+      assert_difference ['Slide.count'], -3 do
         delete :destroy, id: @slider
       end
       assert_redirected_to admin_sliders_path

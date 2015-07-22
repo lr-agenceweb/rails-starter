@@ -25,15 +25,3 @@
 
 one:
   attachable: home (Category)
-
-slider_one:
-  attachable: online (Slider)
-  online: true
-
-slider_two:
-  attachable: online (Slider)
-  online: true
-
-slider_three:
-  attachable: online (Slider)
-  online: false

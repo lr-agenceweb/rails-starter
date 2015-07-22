@@ -14,7 +14,7 @@ class SliderTest < ActiveSupport::TestCase
   end
 
   test 'should have only 2 pictures online' do
-    assert_equal 2, @slider.pictures.online.length
+    assert_equal 2, @slider.slides_online.length
   end
 
   private

@@ -22,14 +22,14 @@
 #  index_slides_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+slide_one:
+  attachable: online (Slider)
+  online: true
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+slide_two:
+  attachable: online (Slider)
+  online: true
+
+slide_three:
+  attachable: online (Slider)
+  online: false
