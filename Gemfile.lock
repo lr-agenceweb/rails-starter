@@ -375,8 +375,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-scrollto-rails (1.4.3)
       railties (> 3.1, < 5.0)
-    jquery-slick-rails (1.5.6)
-      railties (>= 3.1)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
     js_cookie_rails (1.0.0)
@@ -656,7 +654,6 @@ DEPENDENCIES
   jquery-datetimepicker-rails
   jquery-minicolors-rails
   jquery-scrollto-rails
-  jquery-slick-rails
   jquery-ui-rails
   js_cookie_rails
   kaminari (~> 0.16.1)

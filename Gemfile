@@ -128,7 +128,6 @@ gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
 gem 'gravatar_image_tag'
-gem 'jquery-slick-rails' # carousel
 
 group :development do
   gem 'better_errors'
