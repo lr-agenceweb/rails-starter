@@ -96,7 +96,7 @@ module Admin
     # == Module disabled
     #
     test 'should not access page if newsletter module is disabled' do
-      disable_optional_module @super_administrator, @newsletter_module, 'Newslett' # in test_helper.rb
+      disable_optional_module @super_administrator, @newsletter_module, 'Newsletter' # in test_helper.rb
       sign_in @administrator
       get :index
       assert_redirected_to admin_dashboard_path
