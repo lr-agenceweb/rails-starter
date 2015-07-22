@@ -77,8 +77,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_optional_modules
-    @optional_modules = OptionalModule.all
-    @optional_modules.find_each do |optional_module|
+    @optional_mod = OptionalModule.all
+    @optional_mod.find_each do |optional_module|
       instance_variable_set("@#{optional_module.name.underscore.singularize}_module", optional_module)
     end
   end
