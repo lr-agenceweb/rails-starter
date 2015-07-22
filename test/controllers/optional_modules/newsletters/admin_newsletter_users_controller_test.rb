@@ -5,7 +5,7 @@ require 'test_helper'
 #
 module Admin
   #
-  # == CategoriesController test
+  # == NewsletterUsersController test
   #
   class NewsletterUsersControllerTest < ActionController::TestCase
     include Devise::TestHelpers
