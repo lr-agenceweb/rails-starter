@@ -11,8 +11,11 @@ ActiveAdmin.register Slider do
                 :bullet,
                 :online,
                 :category_id,
-                pictures_attributes: [
-                  :id, :locale, :image, :online, :_destroy
+                slides_attributes: [
+                  :id, :image, :online, :_destroy,
+                  translations_attributes: [
+                    :id, :locale, :title, :description
+                  ]
                 ]
 
   decorate_with SliderDecorator
@@ -96,7 +99,7 @@ ActiveAdmin.register Slider do
       end
     end
 
-    render 'admin/shared/pictures/many', f: f
+    render 'admin/slides/many', f: f
 
     f.actions
   end

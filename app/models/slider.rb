@@ -26,12 +26,12 @@
 class Slider < ActiveRecord::Base
   include Imageable
 
-  has_many :pictures, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
+  has_many :slides, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :slides, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :category, dependent: :destroy
 
-  delegate :online, to: :pictures, prefix: true, allow_nil: true
+  delegate :online, to: :slides, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }

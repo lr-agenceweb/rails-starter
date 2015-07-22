@@ -22,3 +22,7 @@ form fieldset > ol > li.boolean {
   margin-left: 30px;
   margin-right: 30px;
 }
+
+form.slider fieldset > ol > li p.inline-hints {
+  margin-left: 0;
+}

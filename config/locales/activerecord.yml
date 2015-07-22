@@ -110,6 +110,9 @@ fr:
       slider:
         one: Slider
         other: Sliders
+      slide:
+        one: Slide
+        other: Slides
 
     attributes:
       post:
@@ -197,6 +200,13 @@ fr:
         image: Image
         image_large: Image
         source_picture_title_link: Article associé
+        status: Statut
+        _destroy: Supprimer ?
+      slide:
+        online: En ligne
+        slide: Image
+        image: Image
+        image_large: Image
         status: Statut
         _destroy: Supprimer ?
       comment:
