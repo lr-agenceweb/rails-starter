@@ -1,0 +1,3 @@
+ul
+  - newsletter_users.find_each do |newsletter_user|
+    li = mail_to newsletter_user.email, newsletter_user.email
