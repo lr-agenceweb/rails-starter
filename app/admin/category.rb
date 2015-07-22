@@ -34,6 +34,7 @@ ActiveAdmin.register Category do
     sortable_handle_column
     column :background
     column :title
+    column :slider if slider_module.enabled?
     column :in_menu
     column :in_footer
     column :module if current_user.super_administrator?
@@ -47,6 +48,7 @@ ActiveAdmin.register Category do
       column do
         attributes_table do
           row :background
+          row :slider if slider_module.enabled?
           row :in_menu
           row :in_footer
           row :module if current_user.super_administrator?

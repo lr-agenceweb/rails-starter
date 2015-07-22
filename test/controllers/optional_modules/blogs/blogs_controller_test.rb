@@ -63,11 +63,21 @@ class BlogsControllerTest < ActionController::TestCase
     assert_equal @blogs.length, 1
   end
 
+  test 'should render 404 if blog article is offline' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_raises(ActiveRecord::RecordNotFound) do
+          get :show, locale: locale.to_s, id: @blog_offline
+        end
+      end
+    end
+  end
+
   #
   # == Module disabled
   #
   test 'should render 404 if module is disabled' do
-    disable_optional_module @anthony, @blog_module, 'Blog' # in test_helper.rb
+    disable_optional_module @super_administrator, @blog_module, 'Blog' # in test_helper.rb
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
@@ -81,8 +91,9 @@ class BlogsControllerTest < ActionController::TestCase
 
   def initialize_test
     @blog = blogs(:blog_online)
-    @locales = I18n.available_locales
+    @blog_offline = blogs(:blog_offline)
     @blog_module = optional_modules(:blog)
-    @anthony = users(:anthony)
+    @locales = I18n.available_locales
+    @super_administrator = users(:anthony)
   end
 end

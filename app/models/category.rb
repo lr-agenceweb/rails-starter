@@ -31,12 +31,14 @@ class Category < ActiveRecord::Base
   acts_as_list
 
   belongs_to :optional_module
+  has_one :slider, dependent: :destroy
 
   has_one :background, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :background, reject_if: :all_blank, allow_destroy: true
 
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
+
 
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :enabled, to: :optional_module, prefix: true, allow_nil: true
@@ -56,5 +58,9 @@ class Category < ActiveRecord::Base
 
   def self.title_by_category(category)
     Category.find_by(name: category).title
+  end
+
+  def slider?
+    !slider.nil?
   end
 end

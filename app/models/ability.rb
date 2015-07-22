@@ -102,5 +102,14 @@ class Ability
     else
       cannot :manage, Blog
     end
+
+    #
+    # == Slider
+    #
+    if optional_modules.by_name('Slider').enabled?
+      can :manage, Slider
+    else
+      cannot :manage, Slider
+    end
   end
 end

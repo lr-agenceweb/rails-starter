@@ -44,9 +44,18 @@ class CategoryTest < ActiveSupport::TestCase
     assert_equal 1, Category.visible_footer.count
   end
 
+  test 'should have a slider linked for home category' do
+    assert @category.slider?
+  end
+
+  test 'should not have any slider linked for search category' do
+    assert_not @search_category.slider?
+  end
+
   private
 
   def initialize_test
     @category = categories(:home)
+    @search_category = categories(:search)
   end
 end

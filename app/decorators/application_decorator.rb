@@ -87,13 +87,13 @@ class ApplicationDecorator < Draper::Decorator
     color = 'red' if model.lang == 'en'
 
     arbre do
-      status_tag(I18n.t("active_admin.globalize.language.#{model.lang}"), color)
+      status_tag_deco I18n.t("active_admin.globalize.language.#{model.lang}"), color
     end
   end
 
   def status
     color = model.online? ? 'green' : 'orange'
-    status_tag_deco(I18n.t("online.#{model.online}"), color)
+    status_tag_deco I18n.t("online.#{model.online}"), color
   end
 
   def status_tag_deco(value, color)

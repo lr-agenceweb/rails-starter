@@ -13,7 +13,6 @@
 #
 # Indexes
 #
-#  index_blogs_on_slug     (slug)
 #  index_blogs_on_user_id  (user_id)
 #
 
