@@ -59,4 +59,8 @@ class Category < ActiveRecord::Base
   def self.title_by_category(category)
     Category.find_by(name: category).title
   end
+
+  def slider?
+    !slider.nil?
+  end
 end
