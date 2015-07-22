@@ -29,7 +29,7 @@ DEFAULTS: &DEFAULTS
   navigation: true
   bullet: true
   online: true
-  category: home (Category)
+  category: home
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
 
@@ -39,3 +39,4 @@ online:
 offline:
   <<: *DEFAULTS
   online: false
+  category: blog
