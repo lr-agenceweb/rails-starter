@@ -35,7 +35,7 @@ module Admin
       assert_response :success
     end
 
-    test 'should destroy guest_book' do
+    test 'should destroy blog' do
       assert_difference ['Blog.count'], -1 do
         delete :destroy, id: @blog
       end

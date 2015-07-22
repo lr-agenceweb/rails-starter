@@ -20,14 +20,22 @@
 #  index_sliders_on_category_id  (category_id)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+DEFAULTS: &DEFAULTS
+  animate: true
+  autoplay: true
+  timeout: true
+  hover_pause: true
+  loop: true
+  navigation: true
+  bullet: true
+  online: true
+  category: home (Category)
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+online:
+  <<: *DEFAULTS
+
+offline:
+  <<: *DEFAULTS
+  online: false
