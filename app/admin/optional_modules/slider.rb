@@ -1,5 +1,6 @@
 ActiveAdmin.register Slider do
   menu parent: I18n.t('admin_menu.modules')
+  includes :category
 
   permit_params :id,
                 :animate,
