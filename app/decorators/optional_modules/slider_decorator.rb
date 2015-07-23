@@ -3,6 +3,7 @@
 #
 class SliderDecorator < ApplicationDecorator
   include Draper::LazyHelpers
+  include Imageable
   delegate_all
 
   def page

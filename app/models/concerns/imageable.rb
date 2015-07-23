@@ -42,4 +42,12 @@ module Imageable
   def bg_medium
     image.url(:medium)
   end
+
+  #
+  # == Slides
+  #
+
+  def slides?
+    slides.online.first.present? && slides.online.first.image.exists?
+  end
 end

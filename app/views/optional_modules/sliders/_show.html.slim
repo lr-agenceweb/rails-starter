@@ -1,4 +1,4 @@
-- if (@slider_module.enabled? && !slider.nil?) || force
+- if (@slider_module.enabled? && !slider.nil? && slider.slides?) || force
   ul data-orbit='' data-options="#{slider.slider_options}"
     - slider.slides_online.find_each.with_index do |slide, index|
       li
