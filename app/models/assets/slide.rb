@@ -38,7 +38,8 @@ class Slide < ActiveRecord::Base
   has_attachment :image,
                  styles: {
                   slide: '2000x',
-                  preview: '1500x'
+                  medium: '1000x',
+                  small: '800x'
                 }
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
