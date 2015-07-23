@@ -26,6 +26,7 @@
 #= require plugins/nprogress
 #= require plugins/cookie_ie
 #= require plugins/cookie_adult_validation
+#= require plugins/orbit
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
