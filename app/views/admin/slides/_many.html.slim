@@ -1,14 +1,20 @@
 - f.inputs t('activerecord.models.slide.other')
   - f.has_many :slides, heading: false do |item|
-    - item.input :image,
-                 as: :file,
-                 label: I18n.t('form.label.slide'),
-                 hint: retina_image_tag(item.object, :image, :preview)
-    - item.input :online,
-                 as: :boolean,
-                 hint: I18n.t('form.hint.slide.online')
-
-    - if item.object.self_image?
-      - item.input :_destroy,
+    = item.inputs 'Main' do
+      - item.input :image,
+                   as: :file,
+                   label: I18n.t('form.label.slide'),
+                   hint: retina_image_tag(item.object, :image, :thumb)
+      - item.input :online,
                    as: :boolean,
-                   hint: I18n.t('form.hint.slide.destroy')
+                   hint: I18n.t('form.hint.slide.online')
+
+      - if item.object.self_image?
+        - item.input :_destroy,
+                     as: :boolean,
+                     hint: I18n.t('form.hint.slide.destroy')
+
+    = item.inputs 'Titre et description de la Slide' do
+      - item.translated_inputs 'Translated fields', switch_locale: true do |t|
+        - t.input :title, hint: I18n.t('form.hint.title')
+        - t.input :description
