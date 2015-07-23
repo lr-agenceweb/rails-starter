@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722153659) do
+ActiveRecord::Schema.define(version: 20150723114913) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 20150722153659) do
     t.datetime "updated_at",                              null: false
   end
 
-  add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
@@ -317,17 +316,17 @@ ActiveRecord::Schema.define(version: 20150722153659) do
   add_index "slide_translations", ["slide_id"], name: "index_slide_translations_on_slide_id", using: :btree
 
   create_table "sliders", force: :cascade do |t|
-    t.string   "animate",     limit: 255
-    t.boolean  "autoplay",                default: true
-    t.integer  "timeout",     limit: 4,   default: 5000
-    t.boolean  "hover_pause",             default: true
-    t.boolean  "loop",                    default: true
-    t.boolean  "navigation",              default: false
-    t.boolean  "bullet",                  default: false
-    t.boolean  "online",                  default: true
-    t.integer  "category_id", limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "animate",      limit: 255
+    t.boolean  "autoplay",                 default: true
+    t.integer  "time_to_show", limit: 4,   default: 5000
+    t.boolean  "hover_pause",              default: true
+    t.boolean  "loop",                     default: true
+    t.boolean  "navigation",               default: false
+    t.boolean  "bullet",                   default: false
+    t.boolean  "online",                   default: true
+    t.integer  "category_id",  limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "sliders", ["category_id"], name: "index_sliders_on_category_id", using: :btree

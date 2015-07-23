@@ -2,18 +2,18 @@
 #
 # Table name: sliders
 #
-#  id          :integer          not null, primary key
-#  animate     :string(255)
-#  autoplay    :boolean          default(TRUE)
-#  timeout     :integer          default(5000)
-#  hover_pause :boolean          default(TRUE)
-#  loop        :boolean          default(TRUE)
-#  navigation  :boolean          default(FALSE)
-#  bullet      :boolean          default(FALSE)
-#  online      :boolean          default(TRUE)
-#  category_id :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :integer          not null, primary key
+#  animate      :string(255)
+#  autoplay     :boolean          default(TRUE)
+#  time_to_show :integer          default(5000)
+#  hover_pause  :boolean          default(TRUE)
+#  loop         :boolean          default(TRUE)
+#  navigation   :boolean          default(FALSE)
+#  bullet       :boolean          default(FALSE)
+#  online       :boolean          default(TRUE)
+#  category_id  :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 # Indexes
 #
@@ -36,4 +36,10 @@ class Slider < ActiveRecord::Base
 
   scope :online, -> { where(online: true) }
   scope :by_page, -> (page) { joins(:category).where('categories.name = ?', page) }
+
+  validates :time_to_show, presence: true
+  validates :category, presence: true
+  validates :animate,
+            presence: true,
+            inclusion: %w( fade slide )
 end

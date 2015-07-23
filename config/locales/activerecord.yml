@@ -233,7 +233,7 @@ fr:
         loop: En boucle ?
         navigation: Lien Précédent / Suivant
         bullet: Ronds de navigation
-        timeout: Temps entre chaque image
+        time_to_show: Temps entre chaque image
         animate: Effet d'animation
         online: En ligne ?
         status: État

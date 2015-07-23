@@ -4,7 +4,7 @@ ActiveAdmin.register Slider do
   permit_params :id,
                 :animate,
                 :autoplay,
-                :timeout,
+                :time_to_show,
                 :hover_pause,
                 :loop,
                 :navigation,
@@ -37,7 +37,7 @@ ActiveAdmin.register Slider do
     column :loop
     column :navigation
     column :bullet
-    column :timeout
+    column :time_to_show
     column :animate
     column :status
 
@@ -55,7 +55,7 @@ ActiveAdmin.register Slider do
           row :loop
           row :navigation
           row :bullet
-          row :timeout
+          row :time_to_show
           row :animate
         end
       end
@@ -80,7 +80,7 @@ ActiveAdmin.register Slider do
           f.input :loop
           f.input :navigation
           f.input :bullet
-          f.input :timeout
+          f.input :time_to_show
           f.input :animate,
                   collection: %w( fade slide ),
                   include_blank: false
@@ -89,12 +89,12 @@ ActiveAdmin.register Slider do
 
       column do
         f.inputs t('additional') do
-          f.input :online
           f.input :category_id,
                   as: :select,
                   collection: Category.visible_header,
                   include_blank: false,
                   input_html: { class: 'chosen-select' }
+          f.input :online
         end
       end
     end
