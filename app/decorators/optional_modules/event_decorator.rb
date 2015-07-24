@@ -3,6 +3,7 @@
 #
 class EventDecorator < PostDecorator
   include Draper::LazyHelpers
+  include ActionView::Helpers::DateHelper
   delegate_all
 
   def url

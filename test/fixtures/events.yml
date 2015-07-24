@@ -28,14 +28,18 @@ DEFAULTS: &DEFAULTS
 event_online:
   <<: *DEFAULTS
   url: ''
-  start_date: 2015-07-22 09:00:00
-  start_date: 2015-07-22 18:00:00
+  start_date: '2015-07-22 09:00:00'
+  end_date: '2015-07-28 18:00:00'
   online: true
 
 event_offline:
   <<: *DEFAULTS
+  start_date: '2015-07-24 09:00:00'
+  end_date: '2015-07-25 18:00:00'
   online: false
 
 event_third:
   <<: *DEFAULTS
+  start_date: '2015-07-15 09:00:00'
+  end_date: '2015-08-31 18:00:00'
   online: true

@@ -106,4 +106,11 @@ ActiveAdmin.register Event do
 
     f.actions
   end
+
+  controller do
+    def update
+      logger.debug "====== #{params[:event].inspect}"
+      update!
+    end
+  end
 end

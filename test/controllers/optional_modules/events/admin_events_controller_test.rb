@@ -42,7 +42,7 @@ module Admin
       assert_response :success
     end
 
-    test 'should update slider if logged in' do
+    test 'should update event if logged in' do
       patch :update, id: @event, event: { title: 'event edit', content: 'content edit' }
       assert_redirected_to admin_event_path(assigns(:event))
     end
@@ -50,11 +50,49 @@ module Admin
     #
     # == Destroy
     #
-    test 'should destroy slider' do
+    test 'should destroy event' do
       assert_difference ['Event.count'], -1 do
         delete :destroy, id: @event
       end
       assert_redirected_to admin_events_path
+    end
+
+    #
+    # == Validation rules
+    #
+    test 'should save event if link is correct' do
+      assert_difference ['Event.count'] do
+        post :create, event: { url: 'http://google.com' }
+      end
+      assert assigns(:event).valid?
+    end
+
+    test 'should not save event if link is not correct' do
+      assert_no_difference ['Event.count'] do
+        post :create, event: { url: 'fake.url' }
+      end
+      assert_not assigns(:event).valid?
+    end
+
+    test 'should save event if dates are corrects' do
+      assert_difference ['Event.count'] do
+        post :create, event: { start_date: '2015-07-19 09:00:00', end_date: '2015-07-22 09:00:00' }
+      end
+      assert assigns(:event).valid?
+    end
+
+    test 'should save event if dates are equals but hours corrects' do
+      assert_difference ['Event.count'] do
+        post :create, event: { start_date: '2015-07-19 09:00:00', end_date: '2015-07-19 10:00:00' }
+      end
+      assert assigns(:event).valid?
+    end
+
+    test 'should not save event if dates are not corrects' do
+      assert_no_difference ['Event.count'] do
+        post :create, event: { start_date: '2015-07-22 09:00:00', end_date: '2015-07-19 09:00:00' }
+      end
+      assert_not assigns(:event).valid?
     end
 
     #

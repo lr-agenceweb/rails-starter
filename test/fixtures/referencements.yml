@@ -44,3 +44,7 @@ blog_online:
 blog_offline:
   <<: *DEFAULTS
   attachable: blog_offline (Blog)
+
+event_online:
+  <<: *DEFAULTS
+  attachable: event_online (Event)

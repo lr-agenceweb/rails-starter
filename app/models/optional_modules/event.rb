@@ -25,10 +25,7 @@ class Event < ActiveRecord::Base
   include Imageable
 
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
-  active_admin_translates :title, :slug, :content, fallbacks_for_empty_translations: true do
-    validates :title, presence: true
-    validates :content, presence: true
-  end
+  active_admin_translates :title, :slug, :content, fallbacks_for_empty_translations: true
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
@@ -39,8 +36,8 @@ class Event < ActiveRecord::Base
   has_many :pictures, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
 
-  validate :calendar_date_correct?
-  validates :url, url: true
+  validate :calendar_date_correct?, unless: proc { end_date.blank? && start_date.blank? }
+  validates :url, allow_blank: true, url: true
 
   delegate :online, to: :pictures, prefix: true, allow_nil: true
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
@@ -48,7 +45,7 @@ class Event < ActiveRecord::Base
   scope :online, -> { where(online: true) }
 
   def calendar_date_correct?
-    unless end_date && start_date && (end_date >= start_date)
+    if end_date <= start_date
       errors.add :start_date, I18n.t('form.errors.start_date')
       errors.add :end_date, I18n.t('form.errors.end_date')
     end
