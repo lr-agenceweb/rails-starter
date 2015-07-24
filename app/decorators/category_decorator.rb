@@ -13,7 +13,7 @@ class CategoryDecorator < ApplicationDecorator
     end
   end
 
-  def color
+  def div_color
     unless model.color.blank?
       content_tag(:div, '', style: "background-color: #{model.color}; width: 35px; height: 20px;")
     end

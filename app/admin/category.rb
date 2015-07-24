@@ -34,7 +34,7 @@ ActiveAdmin.register Category do
     sortable_handle_column
     column :background
     column :title
-    column :color
+    column :div_color
     column :slider if slider_module.enabled?
     column :in_menu
     column :in_footer
@@ -49,7 +49,7 @@ ActiveAdmin.register Category do
       column do
         attributes_table do
           row :background
-          row :color
+          row :div_color
           row :slider if slider_module.enabled?
           row :in_menu
           row :in_footer
