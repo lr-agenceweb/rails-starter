@@ -113,5 +113,14 @@ class Ability
     else
       cannot :manage, Slider
     end
+
+    #
+    # == Event
+    #
+    if optional_modules.by_name('Event').enabled?
+      can :manage, Event
+    else
+      cannot :manage, Event
+    end
   end
 end
