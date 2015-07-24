@@ -18,6 +18,4 @@
 #= require i18n
 #= require i18n/translations
 #= require jquery.minicolors
-
-$(document).on 'ready page:load page:restore', ->
-  $('input.colorpicker').minicolors()
+#= require admin/minicolors

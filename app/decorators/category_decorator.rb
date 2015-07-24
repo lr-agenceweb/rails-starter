@@ -13,6 +13,12 @@ class CategoryDecorator < ApplicationDecorator
     end
   end
 
+  def color
+    unless model.color.blank?
+      content_tag(:div, '', style: "background-color: #{model.color}; width: 35px; height: 20px;")
+    end
+  end
+
   def in_menu
     arbre do
       status_tag I18n.t("enabled.#{model.show_in_menu}"), (model.show_in_menu? ? :ok : :warn)
