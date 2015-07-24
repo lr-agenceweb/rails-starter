@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721091821) do
+ActiveRecord::Schema.define(version: 20150724125336) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -113,6 +113,33 @@ ActiveRecord::Schema.define(version: 20150721091821) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   add_index "delayed_jobs", ["queue"], name: "delayed_jobs_queue", using: :btree
+
+  create_table "event_translations", force: :cascade do |t|
+    t.integer  "event_id",   limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "title",      limit: 255
+    t.string   "slug",       limit: 255
+    t.text     "content",    limit: 65535
+  end
+
+  add_index "event_translations", ["event_id"], name: "index_event_translations_on_event_id", using: :btree
+  add_index "event_translations", ["locale"], name: "index_event_translations_on_locale", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "slug",       limit: 255
+    t.text     "content",    limit: 65535
+    t.string   "url",        limit: 255
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "online",                   default: true
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "events", ["slug"], name: "index_events_on_slug", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -303,21 +330,51 @@ ActiveRecord::Schema.define(version: 20150721091821) do
     t.datetime "updated_at",                                      null: false
   end
 
+  create_table "slide_translations", force: :cascade do |t|
+    t.integer  "slide_id",    limit: 4,     null: false
+    t.string   "locale",      limit: 255,   null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
+  end
+
+  add_index "slide_translations", ["locale"], name: "index_slide_translations_on_locale", using: :btree
+  add_index "slide_translations", ["slide_id"], name: "index_slide_translations_on_slide_id", using: :btree
+
   create_table "sliders", force: :cascade do |t|
-    t.string   "animate",     limit: 255
-    t.boolean  "autoplay",                default: true
-    t.integer  "timeout",     limit: 4,   default: 5000
-    t.boolean  "hover_pause",             default: true
-    t.boolean  "loop",                    default: true
-    t.boolean  "navigation",              default: false
-    t.boolean  "bullet",                  default: false
-    t.boolean  "online",                  default: true
-    t.integer  "category_id", limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "animate",      limit: 255
+    t.boolean  "autoplay",                 default: true
+    t.integer  "time_to_show", limit: 4,   default: 5000
+    t.boolean  "hover_pause",              default: true
+    t.boolean  "loop",                     default: true
+    t.boolean  "navigation",               default: false
+    t.boolean  "bullet",                   default: false
+    t.boolean  "online",                   default: true
+    t.integer  "category_id",  limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "sliders", ["category_id"], name: "index_sliders_on_category_id", using: :btree
+
+  create_table "slides", force: :cascade do |t|
+    t.integer  "attachable_id",      limit: 4
+    t.string   "attachable_type",    limit: 255
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+    t.string   "title",              limit: 255
+    t.text     "description",        limit: 65535
+    t.text     "retina_dimensions",  limit: 65535
+    t.boolean  "primary",                          default: false
+    t.boolean  "online",                           default: true
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+  end
+
+  add_index "slides", ["attachable_type", "attachable_id"], name: "index_slides_on_attachable_type_and_attachable_id", using: :btree
 
   create_table "string_box_translations", force: :cascade do |t|
     t.integer  "string_box_id", limit: 4,     null: false

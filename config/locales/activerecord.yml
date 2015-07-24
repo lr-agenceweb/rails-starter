@@ -110,6 +110,12 @@ fr:
       slider:
         one: Slider
         other: Sliders
+      slide:
+        one: Slide
+        other: Slides
+      event:
+        one: Événement
+        other: Événements
 
     attributes:
       post:
@@ -174,6 +180,7 @@ fr:
         sent_at: Envoyé le
         send_link: Envoyer
         live_preview: Prévisualisation en direct
+        list_subscribers: Abonnés
       newsletter_user:
         email: Email
         lang: Langue
@@ -196,6 +203,13 @@ fr:
         image: Image
         image_large: Image
         source_picture_title_link: Article associé
+        status: Statut
+        _destroy: Supprimer ?
+      slide:
+        online: En ligne
+        slide: Image
+        image: Image
+        image_large: Image
         status: Statut
         _destroy: Supprimer ?
       comment:
@@ -222,11 +236,19 @@ fr:
         loop: En boucle ?
         navigation: Lien Précédent / Suivant
         bullet: Ronds de navigation
-        timeout: Temps entre chaque image
+        time_to_show: Temps entre chaque image
         animate: Effet d'animation
         online: En ligne ?
         status: État
         category_id: Page
+      event:
+        title: Titre
+        content: Contenu
+        url: Lien
+        start_date: Date de début
+        end_date: Date de fin
+        online: En ligne ?
+        status: État
 
       shared:
         created_at: Créé le

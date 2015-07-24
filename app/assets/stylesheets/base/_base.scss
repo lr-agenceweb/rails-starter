@@ -16,6 +16,17 @@ body {
   margin: 0 auto;
 }
 
+.dtable {
+  display: table;
+  .dtrow {
+    display: table-row;
+  }
+  .dtcell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
 /* Clearfix */
 .clearfix:before,
 .clearfix:after {

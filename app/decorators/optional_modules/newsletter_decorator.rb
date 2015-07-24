@@ -29,4 +29,8 @@ class NewsletterDecorator < ApplicationDecorator
     color = model.already_sent? ? 'red' : 'green'
     status_tag_deco(I18n.t("sent.#{model.already_sent?}"), color)
   end
+
+  def list_subscribers
+    render 'list_subscribers', newsletter_users: NewsletterUser.all
+  end
 end

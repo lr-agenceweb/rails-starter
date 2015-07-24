@@ -16,7 +16,7 @@ module Admin
     # == User role
     #
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @bob
+      sign_out @administrator
       get :index
       assert_redirected_to new_user_session_path
       get :show, id: @optional_module
@@ -37,7 +37,7 @@ module Admin
     end
 
     test 'should redirect to dashboard if user is subscriber' do
-      sign_in @alice
+      sign_in @subscriber
       get :index
       assert_redirected_to admin_dashboard_path
       get :show, id: @optional_module
@@ -49,7 +49,7 @@ module Admin
     end
 
     test 'should be all good if user is super_administrator' do
-      sign_in @anthony
+      sign_in @super_administrator
       get :index
       assert :success
       get :show, id: @optional_module
@@ -63,11 +63,12 @@ module Admin
     private
 
     def initialize_test
-      @anthony = users(:anthony)
-      @bob = users(:bob)
-      @alice = users(:alice)
+      @super_administrator = users(:anthony)
+      @administrator = users(:bob)
+      @subscriber = users(:alice)
       @optional_module = optional_modules(:guest_book)
-      sign_in @bob
+
+      sign_in @administrator
     end
   end
 end

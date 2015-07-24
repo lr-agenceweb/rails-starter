@@ -54,3 +54,8 @@ slider:
   <<: *DEFAULTS
   name: Slider
   enabled: true
+
+event:
+  <<: *DEFAULTS
+  name: Event
+  enabled: true

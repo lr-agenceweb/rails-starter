@@ -4,6 +4,8 @@ en:
     hint:
       media:
         destroy: Remove media linked to current post
+      start_date: starting date of the event
+      end_date: ending date of the event
 
 # French
 fr:
@@ -11,6 +13,7 @@ fr:
     label:
       online: Mettre en ligne ?
       picture: Image liée à l'article
+      slide: Image liée au slider
       background: Image d'arrière-plan liée à la page
       model_name: Page à définir
       link: Lien du projet
@@ -30,13 +33,22 @@ fr:
       destroy: "Après avoir coché la case, ne pas oublier de valider le fomulaire pour que la suppression s'effectue"
       role_name: Modification du rôle de l'utilisateur. Attention à ne pas faire n'importe quoi avec !!!
       optional_module: Choisir quel est le module optionel lié à cette catégorie
+      start_date: Date de début de l'événement
+      end_date: Date de fin de l'événement
 
       media:
-        destroy: Suppression du media associé à l'article
         online: Mettre cette image visible sur le site ?
+        destroy: Suppression du media associé à l'article
       background:
         destroy: Suppression de l'image d'arrière-plan associée à cette page
+      slide:
+        online: Montrer cette image dans le slider ?
+        destroy: Supprimer cette image du slider ?
 
       string_box:
         content: Contenu du message personnalisé à afficher sur le site
         title: Titre du message personnalisé à afficher sur le site
+
+    errors:
+      start_date: L'événement ne peut pas commencer après la fin présumée de celui-ci
+      end_date: L'événement ne peut pas terminer après la début présumé de celui-ci

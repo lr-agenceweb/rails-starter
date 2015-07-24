@@ -49,11 +49,11 @@ class Category < ActiveRecord::Base
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 
   def self.models_name
-    [:Home, :About, :Contact, :Search, :GuestBook, :Blog]
+    [:Home, :About, :Contact, :Search, :GuestBook, :Blog, :Event]
   end
 
   def self.models_name_str
-    %w( Home About Contact Search GuestBook Blog)
+    %w( Home About Contact Search GuestBook Blog Event )
   end
 
   def self.title_by_category(category)

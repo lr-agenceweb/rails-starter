@@ -1,18 +1,22 @@
 ActiveAdmin.register Slider do
   menu parent: I18n.t('admin_menu.modules')
+  includes :category
 
   permit_params :id,
                 :animate,
                 :autoplay,
-                :timeout,
+                :time_to_show,
                 :hover_pause,
                 :loop,
                 :navigation,
                 :bullet,
                 :online,
                 :category_id,
-                pictures_attributes: [
-                  :id, :locale, :image, :online, :_destroy
+                slides_attributes: [
+                  :id, :image, :online, :_destroy,
+                  translations_attributes: [
+                    :id, :locale, :title, :description
+                  ]
                 ]
 
   decorate_with SliderDecorator
@@ -34,7 +38,7 @@ ActiveAdmin.register Slider do
     column :loop
     column :navigation
     column :bullet
-    column :timeout
+    column :time_to_show
     column :animate
     column :status
 
@@ -52,7 +56,7 @@ ActiveAdmin.register Slider do
           row :loop
           row :navigation
           row :bullet
-          row :timeout
+          row :time_to_show
           row :animate
         end
       end
@@ -61,9 +65,9 @@ ActiveAdmin.register Slider do
       end
     end
 
-    panel 'Slider preview' do
-      render 'optional_modules/sliders/show', slider: resource, force: true
-    end
+    # panel 'Slider preview' do
+    #   render 'optional_modules/sliders/show', slider: resource, force: true
+    # end
   end
 
   form do |f|
@@ -77,7 +81,7 @@ ActiveAdmin.register Slider do
           f.input :loop
           f.input :navigation
           f.input :bullet
-          f.input :timeout
+          f.input :time_to_show
           f.input :animate,
                   collection: %w( fade slide ),
                   include_blank: false
@@ -86,31 +90,18 @@ ActiveAdmin.register Slider do
 
       column do
         f.inputs t('additional') do
-          f.input :online
           f.input :category_id,
                   as: :select,
                   collection: Category.visible_header,
                   include_blank: false,
                   input_html: { class: 'chosen-select' }
+          f.input :online
         end
       end
     end
 
-    render 'admin/shared/pictures/many', f: f
+    render 'admin/slides/many', f: f
 
     f.actions
-  end
-
-  #
-  # == Controller
-  #
-  controller do
-    before_action :set_slider_option, only: [:show]
-
-    private
-
-    def set_slider_option
-      resource.custom_default_slider_options gon
-    end
   end
 end

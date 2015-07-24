@@ -3,6 +3,7 @@
 #
 class SliderDecorator < ApplicationDecorator
   include Draper::LazyHelpers
+  include Imageable
   delegate_all
 
   def page
@@ -29,16 +30,8 @@ class SliderDecorator < ApplicationDecorator
     status_slider 'bullet'
   end
 
-  def custom_default_slider_options(gon)
-    gon.push(
-      animate: model.animate,
-      autoplay: model.autoplay,
-      timeout: model.timeout,
-      hover_pause: model.hover_pause,
-      loop: model.loop,
-      navigation: model.navigation,
-      bullet: model.bullet
-    )
+  def slider_options
+    "animation: #{model.animate}; timer_speed: #{model.time_to_show}; pause_on_hover: #{model.hover_pause}; resume_on_mouseout: true; navigation_arrows: #{model.navigation}; slide_number: false; bullet: #{model.bullet}; circular: #{model.loop}; timer: #{model.autoplay}; swipe: true"
   end
 
   private

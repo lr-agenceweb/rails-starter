@@ -7,6 +7,10 @@ ActiveAdmin.register NewsletterUser do
   config.clear_sidebar_sections!
   actions :all, except: [:show]
 
+  scope :all, default: true
+  scope :francais
+  scope :english
+
   index do
     selectable_column
     column :email

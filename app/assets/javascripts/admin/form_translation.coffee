@@ -3,6 +3,14 @@ $ ->
     switch_locale($('.available-locales'))
     slugify()
 
+
+    $('form.slider .button.has_many_add').on 'click', (e) ->
+      console.log 'here'
+      setTimeout (->
+        switch_locale($('.has_many_container.slides').find('.inputs.has_many_fields:last').find('.available-locales:last'))
+        return
+      ), 20
+
 ###*
 # Function to switch default locale in activeadmin-globalize
 ###
@@ -15,7 +23,7 @@ switch_locale = (element) ->
 
 
 slugify = ->
-  categories = ['home', 'about', 'content', 'blog']
+  categories = ['home', 'about', 'content', 'blog', 'event']
   $.each categories, (i, val) ->
     j = 0
     while j < 2

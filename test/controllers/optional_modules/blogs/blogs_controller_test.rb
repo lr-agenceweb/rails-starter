@@ -58,11 +58,6 @@ class BlogsControllerTest < ActionController::TestCase
   #
   # == Object
   #
-  test 'should fetch only online posts' do
-    @blogs = Blog.online
-    assert_equal @blogs.length, 1
-  end
-
   test 'should render 404 if blog article is offline' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do

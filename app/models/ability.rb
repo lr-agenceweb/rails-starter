@@ -23,6 +23,7 @@ class Ability
   def super_administrator_privilege
     can :manage, :all
     optional_modules_check
+    can :destroy, Comment
   end
 
   def administrator_privilege(user)
@@ -90,6 +91,7 @@ class Ability
     if optional_modules.by_name('Comment').enabled?
       can [:read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
       can [:read, :destroy], Comment, user_id: nil
+      cannot :update, Comment
     else
       cannot :manage, Comment
     end
@@ -110,6 +112,15 @@ class Ability
       can :manage, Slider
     else
       cannot :manage, Slider
+    end
+
+    #
+    # == Event
+    #
+    if optional_modules.by_name('Event').enabled?
+      can :manage, Event
+    else
+      cannot :manage, Event
     end
   end
 end

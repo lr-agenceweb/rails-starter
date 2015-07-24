@@ -32,6 +32,9 @@ Rails.application.routes.draw do
     # Search
     resources :searches, only: [:index], concerns: [:paginatable]
 
+    # Event
+    resources :events, only: [:index, :show], concerns: [:paginatable]
+
     # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss
 

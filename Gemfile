@@ -58,6 +58,7 @@ gem 'mail_form' # contact form
 gem 'wysiwyg-rails' # Froala editor
 gem 'validates_email_format_of'
 gem 'email_validator'
+gem 'valid_url'
 
 #
 # == Translation
@@ -128,7 +129,6 @@ gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
 gem 'gravatar_image_tag'
-gem 'jquery-slick-rails' # carousel
 
 group :development do
   gem 'better_errors'

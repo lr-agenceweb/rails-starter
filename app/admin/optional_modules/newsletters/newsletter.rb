@@ -29,6 +29,7 @@ ActiveAdmin.register Newsletter do
         row :sent_at
         row :preview
         row :live_preview
+        row :list_subscribers
         row :send_link
       end
     end
