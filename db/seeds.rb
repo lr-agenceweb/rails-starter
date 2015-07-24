@@ -74,14 +74,14 @@ Setting::Translation.create!(
 # == Categories
 #
 puts 'Creating Menu elements'
-title_en = ['Home', 'About', 'Contact', 'Search', 'GuestBook', 'Blog']
-title_fr = ['Accueil', 'À Propos', 'Me contacter', 'Recherche', 'Livre d\'Or', 'Blog']
-description_en = ['Homepage description', 'About description', 'Contact description', 'Search description', 'GuestBook description', 'Blog description']
-description_fr = ['Description pour la page d\'accueil', 'Description de la page à propos', 'Description de la page contact', 'Description de la page recherche', 'Description de la page livre d\'or', 'Description de la page Blog']
-keywords_en = ['home', 'about', 'contact', 'search', 'guest book', 'blog']
-keywords_fr = ['accueil', 'à propos', 'contact', 'recherche', 'livre d\'or', 'blog']
-show_in_menu = [true, false, true, true, true, true]
-show_in_footer = [false, false, false, false, false, false]
+title_en = ['Home', 'About', 'Contact', 'Search', 'GuestBook', 'Blog', 'Events']
+title_fr = ['Accueil', 'À Propos', 'Me contacter', 'Recherche', 'Livre d\'Or', 'Blog', 'Événements']
+description_en = ['Homepage description', 'About description', 'Contact description', 'Search description', 'GuestBook description', 'Blog description', 'Event description']
+description_fr = ['Description pour la page d\'accueil', 'Description de la page à propos', 'Description de la page contact', 'Description de la page recherche', 'Description de la page livre d\'or', 'Description de la page Blog', 'Description de la page événement']
+keywords_en = ['home', 'about', 'contact', 'search', 'guest book', 'blog', 'event']
+keywords_fr = ['accueil', 'à propos', 'contact', 'recherche', 'livre d\'or', 'blog', 'événement']
+show_in_menu = [true, false, true, true, true, true, true]
+show_in_footer = [false, false, false, false, false, false, false]
 
 Category.models_name_str.each_with_index do |element, index|
   category = Category.create!(
@@ -262,7 +262,8 @@ description = [
   'Module de commentaire: permet aux internautes de commenter les articles Post ou de Blog',
   'Module Blog où l\'administrateur peut créer des articles',
   'Module qui affiche une popup demandant aux internet d\'attester qu\'ils sont bien majeurs pour continuer à visiter le site',
-  'Module qui affiche slider avec des images défilantes'
+  'Module qui affiche slider avec des images défilantes',
+  'Module qui gère des événements à venir'
 ]
 OptionalModule.list.each_with_index do |element, index|
   OptionalModule.create!(
