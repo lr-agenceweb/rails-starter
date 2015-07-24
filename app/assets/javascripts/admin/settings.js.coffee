@@ -2,8 +2,7 @@ $ ->
   if $('#setting_show_map').length
     $this = $('#setting_show_map')
 
-    if $this.is(':checked')
-    else
+    unless $this.is(':checked')
       $('.map-settings').hide()
 
     $this.on 'click', (e) ->
