@@ -173,6 +173,8 @@ fr:
         name: Nom de la catégorie
         background: Arrière-plan
         position: Position
+        custom_background_color: Couleur de fond de page personnalisée
+        color: Couleur
       newsletter:
         title: Titre
         preview: Prévisualisation
