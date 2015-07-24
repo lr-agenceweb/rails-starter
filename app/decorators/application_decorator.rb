@@ -98,7 +98,7 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   def status
-    color = model.online? ? 'green' : 'orange'
+    color = model.online? ? 'green' : 'red'
     status_tag_deco I18n.t("online.#{model.online}"), color
   end
 

@@ -36,7 +36,17 @@ class Event < ActiveRecord::Base
   has_many :pictures, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
 
+  validate :calendar_date_correct?
+
   delegate :online, to: :pictures, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
+
+  def calendar_date_correct?
+    if end_date && start_date && (end_date >= start_date)
+    else
+      errors.add :start_date, I18n.t('form.errors.start_date')
+      errors.add :end_date, I18n.t('form.errors.end_date')
+    end
+  end
 end

@@ -4,6 +4,8 @@ en:
     hint:
       media:
         destroy: Remove media linked to current post
+      start_date: starting date of the event
+      end_date: ending date of the event
 
 # French
 fr:
@@ -31,6 +33,8 @@ fr:
       destroy: "Après avoir coché la case, ne pas oublier de valider le fomulaire pour que la suppression s'effectue"
       role_name: Modification du rôle de l'utilisateur. Attention à ne pas faire n'importe quoi avec !!!
       optional_module: Choisir quel est le module optionel lié à cette catégorie
+      start_date: Date de début de l'événement
+      end_date: Date de fin de l'événement
 
       media:
         online: Mettre cette image visible sur le site ?
@@ -44,3 +48,7 @@ fr:
       string_box:
         content: Contenu du message personnalisé à afficher sur le site
         title: Titre du message personnalisé à afficher sur le site
+
+    errors:
+      start_date: L'événement ne peut pas commencer après la fin présumée de celui-ci
+      end_date: L'événement ne peut pas terminer après la début présumé de celui-ci
