@@ -1,0 +1,45 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  slug       :string(255)
+#  content    :text(65535)
+#  url        :string(255)
+#  start_date :datetime
+#  end_date   :datetime
+#  online     :boolean          default(TRUE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_events_on_slug  (slug)
+#
+
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  title: ~
+  slug: ~
+  content: ~
+
+event_online:
+  <<: *DEFAULTS
+  url: ''
+  start_date: '2015-07-22 09:00:00'
+  end_date: '2015-07-28 18:00:00'
+  online: true
+
+event_offline:
+  <<: *DEFAULTS
+  start_date: '2015-07-24 09:00:00'
+  end_date: '2015-07-25 18:00:00'
+  online: false
+
+event_third:
+  <<: *DEFAULTS
+  start_date: '2015-07-15 09:00:00'
+  end_date: '2015-08-31 18:00:00'
+  online: true

@@ -1,9 +1,9 @@
 require 'test_helper'
 
 #
-# == BlogsController Test
+# == EventsController Test
 #
-class BlogsControllerTest < ActionController::TestCase
+class EventsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   include Rails.application.routes.url_helpers
 
@@ -17,7 +17,7 @@ class BlogsControllerTest < ActionController::TestCase
       I18n.with_locale(locale) do
         get :index, locale: locale.to_s
         assert_response :success
-        assert_not_nil assigns(:blogs)
+        assert_not_nil assigns(:events)
       end
     end
   end
@@ -34,7 +34,7 @@ class BlogsControllerTest < ActionController::TestCase
   test 'should get show page with all locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @blog
+        get :show, locale: locale.to_s, id: @event
         assert_response :success
       end
     end
@@ -43,26 +43,26 @@ class BlogsControllerTest < ActionController::TestCase
   test 'assert integrity of request for each locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @blog
-        assert_equal request.path_parameters[:id], @blog.slug
+        get :show, locale: locale.to_s, id: @event
+        assert_equal request.path_parameters[:id], @event.slug
         assert_equal request.path_parameters[:locale], locale.to_s
       end
     end
   end
 
-  test 'should get index page targetting blogs controller' do
-    assert_routing '/blog', controller: 'blogs', action: 'index', locale: 'fr' if @locales.include?(:fr)
-    assert_routing '/en/blog', controller: 'blogs', action: 'index', locale: 'en' if @locales.include?(:en)
+  test 'should get index page targetting events controller' do
+    assert_routing '/evenements', controller: 'events', action: 'index', locale: 'fr' if @locales.include?(:fr)
+    assert_routing '/en/events', controller: 'events', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
   #
   # == Object
   #
-  test 'should render 404 if blog article is offline' do
+  test 'should render 404 if event article is offline' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActiveRecord::RecordNotFound) do
-          get :show, locale: locale.to_s, id: @blog_offline
+          get :show, locale: locale.to_s, id: @event_offline
         end
       end
     end
@@ -72,7 +72,7 @@ class BlogsControllerTest < ActionController::TestCase
   # == Module disabled
   #
   test 'should render 404 if module is disabled' do
-    disable_optional_module @super_administrator, @blog_module, 'Blog' # in test_helper.rb
+    disable_optional_module @super_administrator, @event_module, 'Event' # in test_helper.rb
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
@@ -85,10 +85,11 @@ class BlogsControllerTest < ActionController::TestCase
   private
 
   def initialize_test
-    @blog = blogs(:blog_online)
-    @blog_offline = blogs(:blog_offline)
-    @blog_module = optional_modules(:blog)
     @locales = I18n.available_locales
+    @event = events(:event_online)
+    @event_offline = events(:event_offline)
+    @event_module = optional_modules(:event)
+
     @super_administrator = users(:anthony)
   end
 end

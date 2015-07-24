@@ -8,6 +8,7 @@ fr:
     new: formulaire
     searches: rechercher
     blogs: blog
+    events: evenements
 
   main_menu:
     dashboard: Dashboard
@@ -29,6 +30,7 @@ en:
     new: form
     searches: search
     blogs: blog
+    events: events
 
   main_menu:
     dashboard: Dashboard

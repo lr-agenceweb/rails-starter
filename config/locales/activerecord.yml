@@ -113,6 +113,9 @@ fr:
       slide:
         one: Slide
         other: Slides
+      event:
+        one: Événement
+        other: Événements
 
     attributes:
       post:
@@ -238,6 +241,14 @@ fr:
         online: En ligne ?
         status: État
         category_id: Page
+      event:
+        title: Titre
+        content: Contenu
+        url: Lien
+        start_date: Date de début
+        end_date: Date de fin
+        online: En ligne ?
+        status: État
 
       shared:
         created_at: Créé le

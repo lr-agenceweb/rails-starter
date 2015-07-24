@@ -1,6 +1,6 @@
 ActiveAdmin.register Category do
   menu parent: 'configuration'
-  includes :background, :translations, :referencement
+  includes :background, :translations, :slider, :optional_module
 
   permit_params :id,
                 :name,

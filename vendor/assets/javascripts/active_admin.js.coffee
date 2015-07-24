@@ -1,6 +1,8 @@
 #= require active_admin/base
 #= require activeadmin-sortable
 #= require jquery-ui
+#= require jquery.datetimepicker
+#= require plugins/datetimepicker
 #= require chosen-jquery
 #= require admin/form_translation
 #= require admin/froala_editor

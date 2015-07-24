@@ -1,0 +1,16 @@
+.row
+  .small-12.columns
+    = title_for_category(category)
+
+    #events
+      .row
+        .small-12.columns
+          - if @events.blank?
+            p = t('blog.no_results')
+          - else
+            div#events-container
+              - @events.each do |event|
+                = render 'row', event: event.decorate
+
+            .row
+              = paginate @events
