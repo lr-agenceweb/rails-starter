@@ -31,6 +31,7 @@ home:
   name: Home
   optional: false
   optional_module: null
+  color: '#F0F'
 
 about:
   <<: *DEFAULTS
