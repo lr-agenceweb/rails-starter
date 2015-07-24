@@ -16,6 +16,7 @@ class PostsController < InheritedResources::Base
   def set_posts
     @posts = Post.online.where.not(type: 'Home')
     @posts += Blog.online if @blog_module.enabled?
+    @posts += Event.online if @event_module.enabled?
     @posts = @posts.sort_by(&:updated_at).reverse
     @updated = @posts.first.updated_at unless @posts.empty?
   end

@@ -16,14 +16,16 @@ class SearchesController < ApplicationController
         @searches += Blog.search(params[:term], params[:locale])
       end
 
+      if @event_module.enabled?
+        @searches += Event.search(params[:term], params[:locale])
+      end
+
       @not_paginated_searches = @searches
       @searches = Kaminari.paginate_array(@searches).page(params[:page]).per(5)
     end
 
-    seo_tag_index category
-
     respond_to do |format|
-      format.html
+      format.html { seo_tag_index category }
       format.js
       format.json
     end

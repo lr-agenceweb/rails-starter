@@ -11,6 +11,7 @@ module SocialHelper
   #   - +background+ -> background picture for category
   #
   def seo_tag_index(category, background = nil)
+    return false if category.nil?
     img = background.nil? ? nil : attachment_url(background.image, :medium)
     title_seo = title_seo_structure(category.title)
     set_meta_tags title: category.title,
