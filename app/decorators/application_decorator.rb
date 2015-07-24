@@ -29,6 +29,9 @@ class ApplicationDecorator < Draper::Decorator
     when 'Blog'
       return blogs_path unless absolute
       blogs_url
+    when 'Event'
+      return events_path unless absolute
+      events_url
     when 'Contact'
       return new_contact_path unless absolute
       new_contact_url
@@ -48,6 +51,9 @@ class ApplicationDecorator < Draper::Decorator
     when 'Blog'
       return blog_path(model) unless absolute
       blog_url(model)
+    when 'Event'
+      return event_path(model) unless absolute
+      event_url(model)
     else
       return '#'
     end
