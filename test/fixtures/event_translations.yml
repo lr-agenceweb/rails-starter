@@ -1,0 +1,19 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+event_online_fr:
+  <<: *DEFAULTS
+  event_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
+  locale: fr
+  title: Foire aux saucisses
+  slug: foire-aux-saucisses
+  content: Venez goutez les saucisses de la région
+
+event_online_en:
+  <<: *DEFAULTS
+  event_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
+  locale: en
+  title: Fear of sausage
+  slug: fear-of-sausage
+  content: Come and discover sausages flavours

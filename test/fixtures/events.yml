@@ -18,14 +18,24 @@
 #  index_events_on_slug  (slug)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  title: ~
+  slug: ~
+  content: ~
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+event_online:
+  <<: *DEFAULTS
+  url: ''
+  start_date: 2015-07-22 09:00:00
+  start_date: 2015-07-22 18:00:00
+  online: true
+
+event_offline:
+  <<: *DEFAULTS
+  online: false
+
+event_third:
+  <<: *DEFAULTS
+  online: true
