@@ -84,10 +84,6 @@ class CommentDecorator < ApplicationDecorator
     content_tag(:p, image_source) + content_tag(:p, link_source)
   end
 
-  def delete_link_source
-    link_to I18n.t('active_admin.destroy.label'), admin_comment_path(model.id), method: :delete, data: { confirm: I18n.t('active_admin.destroy.confirm', object: 'comment') }
-  end
-
   def status
     color = model.validated? ? 'green' : 'orange'
     status_tag_deco(I18n.t("validate.#{model.validated}"), color)
