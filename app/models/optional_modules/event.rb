@@ -43,6 +43,7 @@ class Event < ActiveRecord::Base
   validates :url, url: true
 
   delegate :online, to: :pictures, prefix: true, allow_nil: true
+  delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
 

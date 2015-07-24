@@ -1,0 +1,5 @@
+.panel
+  p
+    small = event.created_at
+  h3 = link_to event.title, event_path(event)
+  div = simple_format(event.content)

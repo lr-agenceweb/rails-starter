@@ -1,2 +1,13 @@
-h1 Events#show
-p Find me in app/views/events/show.html.slim
+.row
+  .small-12.columns
+
+    article
+      header
+        h2 = event.title
+
+      = event.content
+
+      .pictures
+        ul.small-block-grid-1.medium-block-grid-3.large-block-grid-6
+          - event.pictures_online.each do |picture|
+            li = retina_image_tag picture, :image, :medium, class: 'th'
