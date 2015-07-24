@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723114913) do
+ActiveRecord::Schema.define(version: 20150724125336) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -113,6 +113,33 @@ ActiveRecord::Schema.define(version: 20150723114913) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   add_index "delayed_jobs", ["queue"], name: "delayed_jobs_queue", using: :btree
+
+  create_table "event_translations", force: :cascade do |t|
+    t.integer  "event_id",   limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "title",      limit: 255
+    t.string   "slug",       limit: 255
+    t.text     "content",    limit: 65535
+  end
+
+  add_index "event_translations", ["event_id"], name: "index_event_translations_on_event_id", using: :btree
+  add_index "event_translations", ["locale"], name: "index_event_translations_on_locale", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "slug",       limit: 255
+    t.text     "content",    limit: 65535
+    t.string   "url",        limit: 255
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "online",                   default: true
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "events", ["slug"], name: "index_events_on_slug", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
