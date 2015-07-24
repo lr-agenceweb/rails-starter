@@ -69,7 +69,7 @@ blog:
   optional: true
   optional_module: blog
 
-blog:
+event:
   <<: *DEFAULTS
   title: Event
   name: Event
