@@ -9,8 +9,8 @@ class MapDecorator < ApplicationDecorator
     simple_format("#{model.latitude}, #{model.longitude}")
   end
 
-  def map(map_module_enabled, force = false)
-    raw content_tag(:div, nil, class: 'map dark', id: 'map') if map_module_enabled && ((model.show_map && latlon?) || (force && latlon?))
+  def map(map_module_enabled, force = false, from_form = false)
+    raw content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : '' }", id: 'map') if map_module_enabled && ((model.show_map && latlon?) || (force && latlon?))
   end
 
   def full_address

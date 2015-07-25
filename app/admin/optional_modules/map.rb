@@ -42,14 +42,14 @@ ActiveAdmin.register Map do
             row :status
             row :full_address
             row :latlon
+            row :geocode_address
           end
         end
       end
 
       column do
         panel 'Map' do
-          # Mapbox
-          resource.decorate.map(true, true)
+          resource.decorate.map(true, true) # Mapbox
         end
       end
     end
@@ -62,7 +62,7 @@ ActiveAdmin.register Map do
       f.input :show_map, hint: 'Afficher ou non la carte sur la page contact'
     end
 
-    f.columns do
+    f.columns id: 'map-columns' do
       f.column do
         f.inputs 'Paramètre de la carte', class: 'map-settings' do
           f.input :geocode_address,
@@ -81,6 +81,12 @@ ActiveAdmin.register Map do
                   input_html: { id: 'gmaps-output-longitude', class: 'hide' }
         end
       end
+
+      f.column do
+        panel 'Map' do
+          f.object.decorate.map(true, true, true) # Mapbox
+        end
+      end
     end
 
     f.actions
@@ -90,7 +96,7 @@ ActiveAdmin.register Map do
   # == Controller
   #
   controller do
-    before_action :set_gon_params, only: [:show]
+    before_action :set_gon_params, only: [:show, :edit]
 
     private
 
