@@ -119,6 +119,9 @@ fr:
       plan:
         one: Carte
         other: Cartes
+      role:
+        one: Rôle
+        other: Rôles
 
     attributes:
       post:

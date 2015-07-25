@@ -1,4 +1,4 @@
-- f.inputs 'Rôles'
+- f.inputs t('activerecord.models.role.one')
   - f.input :role_id,
             as: :select,
             collection: Role.allowed_roles_for_user_role(current_user),
