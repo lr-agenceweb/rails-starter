@@ -13,6 +13,7 @@ class OptionalModuleTest < ActiveSupport::TestCase
     assert_includes OptionalModule.list, 'Adult'
     assert_includes OptionalModule.list, 'Slider'
     assert_includes OptionalModule.list, 'Event'
+    assert_includes OptionalModule.list, 'Map'
   end
 
   test 'should return correct optional module by name' do

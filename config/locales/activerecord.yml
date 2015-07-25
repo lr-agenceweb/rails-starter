@@ -116,6 +116,9 @@ fr:
       event:
         one: Événement
         other: Événements
+      plan:
+        one: Carte
+        other: Cartes
 
     attributes:
       post:
@@ -139,20 +142,12 @@ fr:
         logo: Logo
         delete_logo: Supprimer le logo
         name: Nom
-        city: Ville
-        postcode: Code Postal
-        address: Adresse
         phone: Téléphone
         show_breadcrumb: Afficher le fil d'ariane ?
         show_social: Afficher le partage sur les réseaux sociaux ?
         should_validate: Valider les commentaires et les messages du livre d'or ?
-        show_map: Afficher la carte ?
-        geocode_address: Adresse avec géolocalisation
-        full_address: Adresse complète
-        map_status: Carte
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
-        latlon: Latitude / Longitude
       user:
         username: Nom d'utilisateur
         password: Mot de passe
@@ -250,6 +245,16 @@ fr:
         start_date: Date de début
         end_date: Date de fin
         online: En ligne ?
+        status: État
+      map:
+        show_map: Afficher la carte ?
+        geocode_address: Adresse avec géolocalisation
+        full_address: Adresse complète
+        map_status: Carte
+        latlon: Latitude / Longitude
+        city: Ville
+        postcode: Code Postal
+        address: Adresse
         status: État
 
       shared:

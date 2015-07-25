@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724125336) do
+ActiveRecord::Schema.define(version: 20150725002051) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -164,6 +164,18 @@ ActiveRecord::Schema.define(version: 20150724125336) do
     t.datetime "updated_at",                               null: false
   end
 
+  create_table "maps", force: :cascade do |t|
+    t.string   "address",         limit: 255
+    t.string   "city",            limit: 255
+    t.integer  "postcode",        limit: 4
+    t.string   "geocode_address", limit: 255
+    t.float    "latitude",        limit: 24
+    t.float    "longitude",       limit: 24
+    t.boolean  "show_map"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
   create_table "newsletter_translations", force: :cascade do |t|
     t.integer  "newsletter_id", limit: 4,     null: false
     t.string   "locale",        limit: 255,   null: false
@@ -310,13 +322,6 @@ ActiveRecord::Schema.define(version: 20150724125336) do
     t.string   "subtitle",          limit: 255
     t.string   "phone",             limit: 255
     t.string   "email",             limit: 255
-    t.string   "address",           limit: 255
-    t.string   "city",              limit: 255
-    t.string   "postcode",          limit: 255
-    t.string   "geocode_address",   limit: 255
-    t.float    "latitude",          limit: 24
-    t.float    "longitude",         limit: 24
-    t.boolean  "show_map",                        default: false
     t.boolean  "show_breadcrumb",                 default: false
     t.boolean  "show_social",                     default: true
     t.boolean  "should_validate",                 default: true

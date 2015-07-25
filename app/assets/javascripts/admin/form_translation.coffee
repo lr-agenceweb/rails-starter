@@ -5,7 +5,6 @@ $ ->
 
 
     $('form.slider .button.has_many_add').on 'click', (e) ->
-      console.log 'here'
       setTimeout (->
         switch_locale($('.has_many_container.slides').find('.inputs.has_many_fields:last').find('.available-locales:last'))
         return

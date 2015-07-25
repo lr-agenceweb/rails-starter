@@ -8,13 +8,6 @@
 #  subtitle          :string(255)
 #  phone             :string(255)
 #  email             :string(255)
-#  address           :string(255)
-#  city              :string(255)
-#  postcode          :string(255)
-#  geocode_address   :string(255)
-#  latitude          :float(24)
-#  longitude         :float(24)
-#  show_map          :boolean          default(FALSE)
 #  show_breadcrumb   :boolean          default(FALSE)
 #  show_social       :boolean          default(TRUE)
 #  should_validate   :boolean          default(TRUE)
@@ -31,10 +24,6 @@
 DEFAULTS: &DEFAULTS
   name: Rails Starter
   email: demo@startup.fr
-  show_map: false
-  address: 15 rue de la chouette
-  postcode: 88990
-  city: Paris
   should_validate: true
   maintenance: false
   created_at: <%= 1.weeks.ago.to_s(:db) %>

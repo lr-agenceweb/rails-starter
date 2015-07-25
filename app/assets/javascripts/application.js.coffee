@@ -18,11 +18,11 @@
 #= require awesome-share-buttons
 #= require plugins/awesome-share-buttons
 #= require mapbox
+#= require plugins/mapbox
 #= require jquery.autosize
 #= require globals/_functions
 #= require modules/responsive_menu
 #= require modules/autocomplete_search
-#= require plugins/mapbox
 #= require plugins/nprogress
 #= require plugins/cookie_ie
 #= require plugins/cookie_adult_validation

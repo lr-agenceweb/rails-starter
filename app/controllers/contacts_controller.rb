@@ -2,8 +2,10 @@
 # == ContactsController
 #
 class ContactsController < ApplicationController
-  before_action :set_mapbox_options, only: [:new, :create], if: proc { @setting.show_map }
+  before_action :set_map, only: [:new, :create], if: proc { @map_module.enabled? }
   skip_before_action :allow_cors
+
+  decorates_assigned :map
 
   # GET /contact
   # GET /contact.json
@@ -34,15 +36,16 @@ class ContactsController < ApplicationController
 
   private
 
+  def set_map
+    @map = Map.first
+    mapbox_gon_params if !map.nil? && map.show_map?
+  end
+
   def respond_action(template)
     flash.now[:success] = I18n.t('contact.success')
     respond_to do |format|
       format.html { redirect_to new_contact_path, notice: I18n.t('contact.success') }
       format.js { render template }
     end
-  end
-
-  def set_mapbox_options
-    gon_params
   end
 end

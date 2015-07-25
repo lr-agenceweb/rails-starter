@@ -36,7 +36,7 @@ module ActiveSupport
       @controller = Admin::OptionalModulesController.new
       patch :update, id: optional_module, optional_module: { enabled: '0' }
       assert name, assigns(:optional_module).name
-      assert_not assigns(:optional_module).enabled
+      assert_not assigns(:optional_module).enabled, 'Module should be disabled'
       assert_redirected_to admin_optional_module_path(assigns(:optional_module))
       sign_out user
     ensure

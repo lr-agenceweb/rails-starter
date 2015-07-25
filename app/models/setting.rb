@@ -8,13 +8,6 @@
 #  subtitle          :string(255)
 #  phone             :string(255)
 #  email             :string(255)
-#  address           :string(255)
-#  city              :string(255)
-#  postcode          :string(255)
-#  geocode_address   :string(255)
-#  latitude          :float(24)
-#  longitude         :float(24)
-#  show_map          :boolean          default(FALSE)
 #  show_breadcrumb   :boolean          default(FALSE)
 #  show_social       :boolean          default(TRUE)
 #  should_validate   :boolean          default(TRUE)
@@ -52,7 +45,6 @@ class Setting < ActiveRecord::Base
 
   validates :name,     presence: true
   validates :email,    presence: true, email_format: {}
-  validates :postcode, presence: false, numericality: { only_integer: true }
 
   include DeletableAttachment
 

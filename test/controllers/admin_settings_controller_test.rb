@@ -16,9 +16,9 @@ module Admin
       sign_out @administrator
       get :index
       assert_redirected_to new_user_session_path
-      get :show, id: @setting.id
+      get :show, id: @setting
       assert_redirected_to new_user_session_path
-      get :edit, id: @setting.id
+      get :edit, id: @setting
       assert_redirected_to new_user_session_path
     end
 
@@ -28,17 +28,17 @@ module Admin
     end
 
     test 'should show show page if logged in' do
-      get :show, id: @setting.id
+      get :show, id: @setting
       assert_response :success
     end
 
     test 'should show edit page if logged in' do
-      get :edit, id: @setting.id
+      get :edit, id: @setting
       assert_response :success
     end
 
     test 'should update setting if logged in' do
-      patch :update, id: @setting.id, setting: {}
+      patch :update, id: @setting, setting: {}
       assert_redirected_to admin_setting_path(@setting)
     end
 
@@ -46,12 +46,12 @@ module Admin
     # == Form validations
     #
     test 'should not update article without name' do
-      patch :update, id: @setting.id
+      patch :update, id: @setting
       assert_not @setting.update(name: nil)
     end
 
     test 'should not update article without title' do
-      patch :update, id: @setting.id
+      patch :update, id: @setting
       assert_not @setting.update(title: nil)
     end
 

@@ -54,13 +54,7 @@ setting_site = Setting.create!(
   title: 'Rails starter',
   subtitle: 'Démonstration',
   phone: '01 02 03 04 05',
-  email: 'demo@starter.fr',
-  address: 'Place du Père Noël',
-  city: 'Rovaniemi',
-  postcode: 96_930,
-  geocode_address: 'Père Noël, 96930 Rovaniemi, Finlande',
-  latitude: 66.5435,
-  longitude: 25.8481
+  email: 'demo@starter.fr'
 )
 
 Setting::Translation.create!(
@@ -68,6 +62,20 @@ Setting::Translation.create!(
   locale: 'en',
   title: 'Rails starter',
   subtitle: 'Demo'
+)
+
+#
+# == Map
+#
+puts 'Creating Map'
+Map.create!(
+  show_map: true,
+  address: 'Place du Père Noël',
+  city: 'Rovaniemi',
+  postcode: 96_930,
+  geocode_address: 'Père Noël, 96930 Rovaniemi, Finlande',
+  latitude: 66.5435,
+  longitude: 25.8481
 )
 
 #
@@ -263,7 +271,8 @@ description = [
   'Module Blog où l\'administrateur peut créer des articles',
   'Module qui affiche une popup demandant aux internet d\'attester qu\'ils sont bien majeurs pour continuer à visiter le site',
   'Module qui affiche slider avec des images défilantes',
-  'Module qui gère des événements à venir'
+  'Module qui gère des événements à venir',
+  'Module qui affiche une carte Mapbox sur le site',
 ]
 OptionalModule.list.each_with_index do |element, index|
   OptionalModule.create!(

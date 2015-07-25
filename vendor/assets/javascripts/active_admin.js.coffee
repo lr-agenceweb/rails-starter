@@ -6,13 +6,13 @@
 #= require chosen-jquery
 #= require admin/form_translation
 #= require admin/froala_editor
-#= require admin/settings
 #= require admin/chosen
 #= require admin/newsletters_preview
 #= require gmaps.js
 #= require globals/_functions
 #= require mapbox
 #= require plugins/mapbox
+#= require admin/map
 #= require vex.combined.min.js
 #= require plugins/vex_config
 #= require i18n
