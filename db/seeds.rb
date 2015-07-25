@@ -307,7 +307,7 @@ Comment.create!(
 puts 'Creating Event article'
 event = Event.create!(
   title: 'Foire aux saucisses',
-  slug: 'foire aux saucisses',
+  slug: 'foire-aux-saucisses',
   content: '<p>Venez gouter les saucisses de la région !</p>',
   url: nil,
   start_date: 2.weeks.ago.to_s(:db),
