@@ -13,7 +13,7 @@ module Admin
     setup :initialize_test
 
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @super_administrator
+      sign_out @administrator
       get :index
       assert_redirected_to new_user_session_path
       get :show, id: @administrator
@@ -28,7 +28,7 @@ module Admin
     end
 
     test 'should show show page if logged in' do
-      get :show, id: @super_administrator
+      get :show, id: @administrator
       assert_response :success
     end
 
@@ -43,47 +43,53 @@ module Admin
     ## Superadministator
     ####################
     test 'should be able to create user' do
+      sign_in @super_administrator
       assert_difference 'User.count' do
         post :create, user: { username: 'Marco', email: 'marco@test.com', password: 'password', confirm_password: 'password' }
       end
     end
 
-    # TODO: Fix this broken test
     test 'should not be able to create user if username is already taken' do
+      sign_in @super_administrator
       assert_no_difference 'User.count' do
         post :create, user: { username: 'bob', email: 'bob@test.fr', password: 'password', confirm_password: 'password' }
       end
+      assert_not assigns(:user).valid?
     end
 
-    # TODO: Fix this broken test
     test 'should not be able to create user if username is already taken (case_sensitive)' do
+      sign_in @super_administrator
       assert_no_difference 'User.count' do
         post :create, user: { username: 'Bob', email: 'bob@test.fr', password: 'password', confirm_password: 'password' }
       end
+      assert_not assigns(:user).valid?
     end
 
     test 'should be able to edit super_administrator if user is superadministrator' do
+      sign_in @super_administrator
+
       get :edit, id: @super_administrator
       assert_response :success
-
       get :edit, id: @administrator
       assert_response :success
-
       get :edit, id: @subscriber
       assert_response :success
     end
 
     test 'should be able to update super_administrator if user is super_administrator' do
+      sign_in @super_administrator
       patch :update, id: @super_administrator, user: {}
       assert_redirected_to admin_user_path(@super_administrator)
     end
 
     test 'should be able to update administrator if user is superadministrator' do
+      sign_in @super_administrator
       patch :update, id: @administrator, user: {}
       assert_redirected_to admin_user_path(@administrator)
     end
 
     test 'should be able to update subscriber if user is superadministrator' do
+      sign_in @super_administrator
       patch :update, id: @subscriber, user: {}
       assert_redirected_to admin_user_path(@subscriber)
     end
@@ -92,7 +98,6 @@ module Admin
     ## Administrator
     ####################
     test 'should not be able to create user if administrator' do
-      sign_in @administrator
       assert_no_difference 'User.count' do
         post :create, user: { username: 'Marco', email: 'marco@test.com', password: 'password', confirm_password: 'password' }
       end
@@ -100,45 +105,38 @@ module Admin
     end
 
     test 'should not be able to edit superadmin if user is administrator' do
-      sign_in @administrator
       get :edit, id: @super_administrator
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to update superadmin if user is administrator' do
-      sign_in @administrator
       patch :update, id: @super_administrator, user: {}
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to update role_id in super_administrator if administrator' do
-      sign_in @administrator
       patch :update, id: @administrator, user: { role_id: @super_administrator.role_id }
       assert_equal assigns(:user).role_id, @administrator.role_id
       assert_equal assigns(:user).role_name, @administrator.role_name
     end
 
     test 'should not be able to update role_id with incorrect id if administrator' do
-      sign_in @administrator
       patch :update, id: @administrator, user: { role_id: '778899' }
       assert_equal assigns(:user).role_id, @administrator.role_id
       assert_equal assigns(:user).role_name, @administrator.role_name
     end
 
     test 'should be able to edit subscriber if user is administrator' do
-      sign_in @administrator
       get :edit, id: @subscriber
       assert_response :success
     end
 
     test 'should be able to update subscriber if user is administrator' do
-      sign_in @administrator
       patch :update, id: @subscriber, user: {}
       assert_redirected_to admin_user_path(@subscriber)
     end
 
     test 'should be able to update role_id if user is administrator' do
-      sign_in @administrator
       patch :update, id: @administrator, user: { role_id: @subscriber.role_id }
       assert_equal assigns(:user).role_id, @subscriber.role_id
       assert_equal assigns(:user).role_name, @subscriber.role_name
@@ -222,7 +220,7 @@ module Admin
       @super_administrator = users(:anthony)
       @administrator = users(:bob)
       @subscriber = users(:alice)
-      sign_in @super_administrator
+      sign_in @administrator
     end
 
     def upload_dropbox_paperclip_attachment

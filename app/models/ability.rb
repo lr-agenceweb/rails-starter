@@ -29,14 +29,11 @@ class Ability
   def administrator_privilege(user)
     can :read, :all
     can :manage, Post
-    can :manage, Newsletter
-    can [:update, :destroy], NewsletterUser
     can :update, Setting
     can :manage, User, role_name: %w( administrator subscriber )
     can :manage, User, id: user.id
     cannot :create, User
     can :update, Category
-    can [:read, :destroy], GuestBook
     can [:read, :update, :destroy], Background
     cannot :manage, OptionalModule
 

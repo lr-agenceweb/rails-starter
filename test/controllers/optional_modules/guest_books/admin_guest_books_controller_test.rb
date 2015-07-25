@@ -16,7 +16,7 @@ module Admin
     # == Routes / Templates / Responses
     #
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @super_administrator
+      sign_out @administrator
       get :index, id: @guest_book
       assert_redirected_to new_user_session_path
       get :show, id: @guest_book
@@ -42,14 +42,12 @@ module Admin
       assert_redirected_to admin_guest_books_path
     end
 
-    test 'should not access new guest_book page if administrator' do
-      sign_in @administrator
+    test 'should not access new guest_book page' do
       get :new
       assert_redirected_to admin_dashboard_path
     end
 
-    test 'should not access edit guest_book page if administrator' do
-      sign_in @administrator
+    test 'should not access edit guest_book page' do
       get :edit, id: @guest_book
       assert_redirected_to admin_dashboard_path
     end
@@ -71,10 +69,10 @@ module Admin
       @guest_book = guest_books(:fr_validate)
       @guest_book_not_validate = guest_books(:fr_not_validate)
       @guest_book_module = optional_modules(:guest_book)
+
       @super_administrator = users(:anthony)
       @administrator = users(:bob)
-
-      sign_in @super_administrator
+      sign_in @administrator
     end
   end
 end

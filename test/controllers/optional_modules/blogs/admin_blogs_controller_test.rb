@@ -58,10 +58,10 @@ module Admin
       @request.env['HTTP_REFERER'] = admin_blogs_path
       @blog = blogs(:blog_online)
       @blog_not_validate = blogs(:blog_offline)
-      @super_administrator = users(:anthony)
-      @administrator = users(:bob)
       @blog_module = optional_modules(:blog)
 
+      @super_administrator = users(:anthony)
+      @administrator = users(:bob)
       sign_in @administrator
     end
   end
