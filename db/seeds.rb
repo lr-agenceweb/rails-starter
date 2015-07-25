@@ -2,7 +2,7 @@
 # == Resest content and setup id to 1
 #
 puts 'Reset table ID to 1'
-modeles_str = %w( User Role Setting Setting::Translation Post Post::Translation Category Category::Translation Referencement Referencement::Translation Newsletter Newsletter::Translation NewsletterUser GuestBook Blog Blog::Translation OptionalModule StringBox StringBox::Translation Picture Picture::Translation )
+modeles_str = %w( User Role Setting Setting::Translation Post Post::Translation Category Category::Translation Referencement Referencement::Translation Newsletter Newsletter::Translation NewsletterUser GuestBook Blog Blog::Translation OptionalModule StringBox StringBox::Translation Picture Picture::Translation Event Event::Translation Slider Slider Slide Slide::Translation Map )
 modeles_str.each do |modele_str|
   modele = modele_str.constantize
   modele.destroy_all
@@ -79,6 +79,35 @@ Map.create!(
 )
 
 #
+# == OptionalModules
+#
+puts 'Creating OptionalModules'
+description = [
+  'Module qui affiche un formulaire pour s\abonner à la newsletter et authorise l\'administrateur à envoyer des mails aux abonnés',
+  'Module livre d\'or dans lequel les internautes pourront laisser leur avis',
+  'Module de recherche sur le site',
+  'Module RSS, donne la possibilité aux internautes de s\'abonner aux articles Post et Blog du site',
+  'Module de commentaire: permet aux internautes de commenter les articles Post ou de Blog',
+  'Module Blog où l\'administrateur peut créer des articles',
+  'Module qui affiche une popup demandant aux internet d\'attester qu\'ils sont bien majeurs pour continuer à visiter le site',
+  'Module qui affiche slider avec des images défilantes',
+  'Module qui gère des événements à venir',
+  'Module qui affiche une carte Mapbox sur le site',
+]
+OptionalModule.list.each_with_index do |element, index|
+  optional_module = OptionalModule.create!(
+    name: element,
+    description: description[index],
+    enabled: true
+  )
+
+  @optional_module_search = optional_module if element == 'Search'
+  @optional_module_guest_book = optional_module if element == 'GuestBook'
+  @optional_module_blog = optional_module if element == 'Blog'
+  @optional_module_event = optional_module if element == 'Event'
+end
+
+#
 # == Categories
 #
 puts 'Creating Menu elements'
@@ -92,11 +121,18 @@ show_in_menu = [true, false, true, true, true, true, true]
 show_in_footer = [false, false, false, false, false, false, false]
 
 Category.models_name_str.each_with_index do |element, index|
+  optional_module_id = nil
+  optional_module_id = @optional_module_search.id if element == 'Search'
+  optional_module_id = @optional_module_guest_book.id if element == 'GuestBook'
+  optional_module_id = @optional_module_blog.id if element == 'Blog'
+  optional_module_id = @optional_module_event.id if element == 'Event'
+
   category = Category.create!(
     name: element,
     title: title_fr[index],
     show_in_menu: show_in_menu[index],
-    show_in_footer: show_in_footer[index]
+    show_in_footer: show_in_footer[index],
+    optional_module_id: optional_module_id
   )
   Category::Translation.create!(
     category_id: category.id,
@@ -257,30 +293,6 @@ NewsletterUser.create!(
   role: 'subscriber',
   token: '5f9a50a21As109Qw'
 )
-
-#
-# == OptionalModules
-#
-puts 'Creating OptionalModules'
-description = [
-  'Module qui affiche un formulaire pour s\abonner à la newsletter et authorise l\'administrateur à envoyer des mails aux abonnés',
-  'Module livre d\'or dans lequel les internautes pourront laisser leur avis',
-  'Module de recherche sur le site',
-  'Module RSS, donne la possibilité aux internautes de s\'abonner aux articles Post et Blog du site',
-  'Module de commentaire: permet aux internautes de commenter les articles Post ou de Blog',
-  'Module Blog où l\'administrateur peut créer des articles',
-  'Module qui affiche une popup demandant aux internet d\'attester qu\'ils sont bien majeurs pour continuer à visiter le site',
-  'Module qui affiche slider avec des images défilantes',
-  'Module qui gère des événements à venir',
-  'Module qui affiche une carte Mapbox sur le site',
-]
-OptionalModule.list.each_with_index do |element, index|
-  OptionalModule.create!(
-    name: element,
-    description: description[index],
-    enabled: true
-  )
-end
 
 #
 # == StringBox
