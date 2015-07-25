@@ -86,6 +86,8 @@ Allow users (connected or not) to leave a message in the guest book.
 * **Events**  
 Create events (with start date and end date)
 
+* **Map**  
+Display a mapbox map of your organization or business  
 
 Units Tests
 -----------
