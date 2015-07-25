@@ -1,4 +1,4 @@
-ActiveAdmin.register Map do
+ActiveAdmin.register Map, as: 'Plan' do
   menu parent: I18n.t('admin_menu.modules')
 
   permit_params :id,
@@ -37,7 +37,7 @@ ActiveAdmin.register Map do
   show do
     columns do
       column do
-        panel t('active_admin.details', model: t('activerecord.models.map.one')) do
+        panel t('active_admin.details', model: t('activerecord.models.plan.one')) do
           attributes_table_for resource.decorate do
             row :status
             row :full_address
@@ -96,11 +96,18 @@ ActiveAdmin.register Map do
   # == Controller
   #
   controller do
-    before_action :set_gon_params, only: [:show, :edit]
+    include ApplicationHelper
+    before_action :set_map
+    before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? }
 
     private
 
-    def set_gon_params
+    def redirect_to_show
+      redirect_to admin_plan_path(@map)
+    end
+
+    def set_map
+      @map = Map.first
       mapbox_gon_params
     end
   end

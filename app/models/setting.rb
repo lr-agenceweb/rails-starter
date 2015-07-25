@@ -45,7 +45,6 @@ class Setting < ActiveRecord::Base
 
   validates :name,     presence: true
   validates :email,    presence: true, email_format: {}
-  validates :postcode, presence: false, numericality: { only_integer: true }
 
   include DeletableAttachment
 

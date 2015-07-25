@@ -15,4 +15,5 @@
 #
 
 class Map < ActiveRecord::Base
+  validates :postcode, presence: false, numericality: { only_integer: true }
 end

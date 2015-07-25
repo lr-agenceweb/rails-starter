@@ -116,7 +116,7 @@ fr:
       event:
         one: Événement
         other: Événements
-      map:
+      plan:
         one: Carte
         other: Cartes
 
@@ -255,6 +255,7 @@ fr:
         city: Ville
         postcode: Code Postal
         address: Adresse
+        status: État
 
       shared:
         created_at: Créé le

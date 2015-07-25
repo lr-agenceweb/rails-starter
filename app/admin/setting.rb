@@ -85,7 +85,6 @@ ActiveAdmin.register Setting do
 
     def set_setting
       @setting = Setting.find(params[:id])
-      gon_params
     end
   end
 end
