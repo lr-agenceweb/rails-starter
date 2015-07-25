@@ -81,5 +81,8 @@ class @MapBoxSingleton
         if @map.tap
           @map.tap.disable()
 
-  @get: (accessToken, username, key) ->
-    instance ?= new MapBoxClass(accessToken, username, key)
+  @get: (accessToken, username, key, force = false) ->
+    if force
+      new MapBoxClass(accessToken, username, key)
+    else
+      instance ?= new MapBoxClass(accessToken, username, key)

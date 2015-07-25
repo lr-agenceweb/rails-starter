@@ -18,7 +18,6 @@
 #= require awesome-share-buttons
 #= require plugins/awesome-share-buttons
 #= require mapbox
-#= require classes/mapbox_class
 #= require plugins/mapbox
 #= require jquery.autosize
 #= require globals/_functions

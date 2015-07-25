@@ -11,7 +11,6 @@
 #= require gmaps.js
 #= require globals/_functions
 #= require mapbox
-#= require classes/mapbox_class
 #= require plugins/mapbox
 #= require admin/map
 #= require vex.combined.min.js
