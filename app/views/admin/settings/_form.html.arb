@@ -40,26 +40,6 @@ f.columns do
       f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site'
       f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site'
       f.input :should_validate, hint: 'Si coché, les messages postés dans le livre d\'or et les commentaires ne seront pas visibles tant que vous ne les aurez pas validé manuellement'
-      f.input :show_map, hint: 'Afficher ou non la carte sur la page contact'
-    end
-  end
-
-  f.column do
-    f.inputs 'Paramètre de la carte', class: 'map-settings' do
-      f.input :geocode_address,
-              hint: 'Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n\'est pas affichée)',
-              input_html: { id: 'gmaps-input-address' }
-
-      f.input :address,
-              hint: 'Adresse affichée sur le site'
-      f.input :city
-      f.input :postcode
-      f.input :latitude,
-              label: false,
-              input_html: { id: 'gmaps-output-latitude', class: 'hide' }
-      f.input :longitude,
-              label: false,
-              input_html: { id: 'gmaps-output-longitude', class: 'hide' }
     end
   end
 end

@@ -20,8 +20,9 @@ class ApplicationController < ActionController::Base
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
   before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
   before_action :set_slider, if: proc { @slider_module.enabled? }
+  before_action :set_map, if: proc { @map_module.enabled? }
 
-  decorates_assigned :setting, :category, :slider
+  decorates_assigned :setting, :category, :slider, :map
 
   private
 
@@ -71,6 +72,10 @@ class ApplicationController < ActionController::Base
 
   def set_slider
     @slider = Slider.includes(slides: [:translations]).online.by_page(controller_name.classify).first
+  end
+
+  def set_map
+    @map = Map.first
   end
 
   def set_optional_modules

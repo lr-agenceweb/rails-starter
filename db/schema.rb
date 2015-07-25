@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724125336) do
+ActiveRecord::Schema.define(version: 20150724231418) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -162,6 +162,18 @@ ActiveRecord::Schema.define(version: 20150724125336) do
     t.boolean  "validated",                default: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+  end
+
+  create_table "maps", force: :cascade do |t|
+    t.string   "address",         limit: 255
+    t.string   "city",            limit: 255
+    t.integer  "postcode",        limit: 4
+    t.string   "geocode_address", limit: 255
+    t.float    "latitude",        limit: 24
+    t.float    "longitude",       limit: 24
+    t.boolean  "show_map"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "newsletter_translations", force: :cascade do |t|

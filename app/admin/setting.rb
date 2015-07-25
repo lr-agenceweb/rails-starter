@@ -5,13 +5,6 @@ ActiveAdmin.register Setting do
                 :name,
                 :phone,
                 :email,
-                :address,
-                :city,
-                :postcode,
-                :geocode_address,
-                :latitude,
-                :longitude,
-                :show_map,
                 :show_breadcrumb,
                 :show_social,
                 :should_validate,
@@ -33,7 +26,6 @@ ActiveAdmin.register Setting do
     column :subtitle
     column :phone
     column :email
-    column :full_address
     column :maintenance
 
     translation_status
@@ -59,8 +51,6 @@ ActiveAdmin.register Setting do
             row :name
             row :phone
             row :email
-            row :full_address
-            row :latlon
           end
         end
       end
@@ -68,18 +58,9 @@ ActiveAdmin.register Setting do
       column do
         panel t('active_admin.details', model: 'Modules') do
           attributes_table_for setting.decorate do
-            row :map_status
             row :breadcrumb
             row :social
           end
-        end
-      end
-    end
-
-    columns do
-      column do
-        panel 'Map' do
-          render 'map', resource: setting.decorate
         end
       end
     end

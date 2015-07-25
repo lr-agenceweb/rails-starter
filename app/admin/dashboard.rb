@@ -56,11 +56,13 @@ ActiveAdmin.register_page 'Dashboard' do
           render 'admin/dashboard/categories', panel: panel, query: Category.includes(:background, :translations).by_position
         end # column
 
-        column do
-          panel 'Mapbox' do
-            render 'admin/settings/map', resource: Setting.first.decorate
-          end
-        end # column
+        if OptionalModule.find_by(name: 'Map').enabled?
+          column do
+            panel 'Mapbox' do
+              Map.first.decorate.map(true, true)
+            end
+          end # column
+        end # if / else
       end # columns
     end # if / else
   end # content
@@ -72,7 +74,8 @@ ActiveAdmin.register_page 'Dashboard' do
 
     def set_setting
       @setting = Setting.first
-      gon_params
+      @map = Map.first
+      mapbox_gon_params
     end
   end
 end

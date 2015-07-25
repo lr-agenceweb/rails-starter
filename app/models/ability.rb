@@ -122,5 +122,15 @@ class Ability
     else
       cannot :manage, Event
     end
+
+    #
+    # == Map
+    #
+    if optional_modules.by_name('Map').enabled?
+      can [:update, :read], Map
+      cannot [:create, :destroy], Map
+    else
+      cannot :manage, Map
+    end
   end
 end

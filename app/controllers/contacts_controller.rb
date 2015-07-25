@@ -2,7 +2,7 @@
 # == ContactsController
 #
 class ContactsController < ApplicationController
-  before_action :set_mapbox_options, only: [:new, :create], if: proc { @setting.show_map }
+  before_action :set_mapbox_options, only: [:new, :create], if: proc { !map.nil? && map.show_map? }
   skip_before_action :allow_cors
 
   # GET /contact
@@ -43,6 +43,6 @@ class ContactsController < ApplicationController
   end
 
   def set_mapbox_options
-    gon_params
+    mapbox_gon_params
   end
 end
