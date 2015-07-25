@@ -129,6 +129,7 @@ gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
 gem 'gravatar_image_tag'
+gem 'magnific-popup-rails'
 
 group :development do
   gem 'better_errors'

@@ -19,6 +19,7 @@
 #= require plugins/awesome-share-buttons
 #= require mapbox
 #= require plugins/mapbox
+#= require magnific-popup
 #= require jquery.autosize
 #= require globals/_functions
 #= require modules/responsive_menu
@@ -34,3 +35,9 @@
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()
+
+  $('.magnific-popup').magnificPopup
+    type: 'image'
+    # image:
+    #   titleSrc: (item) ->
+    #     return item.el.attr('title')

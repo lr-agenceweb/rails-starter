@@ -12,4 +12,5 @@
       .pictures
         ul.small-block-grid-1.medium-block-grid-3.large-block-grid-6
           - event.pictures_online.each do |picture|
-            li = retina_image_tag picture, :image, :medium, class: 'th'
+            li
+              = link_to retina_image_tag(picture, :image, :medium, class: 'th'), picture.image.url(:large), title: picture.title, class: 'magnific-popup'

@@ -387,6 +387,7 @@ GEM
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     looksee (3.1.0)
+    magnific-popup-rails (0.9.9.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mail_form (1.5.0)
@@ -660,6 +661,7 @@ DEPENDENCIES
   jquery-ui-rails
   js_cookie_rails
   kaminari (~> 0.16.1)
+  magnific-popup-rails
   mail_form
   mapbox-rails!
   meta-tags
