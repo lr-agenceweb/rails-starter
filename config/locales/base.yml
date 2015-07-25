@@ -20,6 +20,9 @@ fr:
   sent:
     'true': 'Envoyé'
     'false': 'Pas encore envoyé'
+  map:
+    'true': Affichée
+    'false': Non affichée
   additional: Informations complémentaires
   general: Informations générales
 
@@ -45,5 +48,8 @@ en:
   sent:
     'true': 'Sent'
     'false': 'Not sent yet'
+  map:
+    'true': Shown
+    'false': Not shown
   additional: Additional information
   general: General information

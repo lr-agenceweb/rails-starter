@@ -34,6 +34,7 @@ ActiveAdmin.register Category do
     sortable_handle_column
     column :background
     column :title
+    column :div_color
     column :slider if slider_module.enabled?
     column :in_menu
     column :in_footer
@@ -48,6 +49,7 @@ ActiveAdmin.register Category do
       column do
         attributes_table do
           row :background
+          row :div_color
           row :slider if slider_module.enabled?
           row :in_menu
           row :in_footer
@@ -86,8 +88,18 @@ ActiveAdmin.register Category do
               f.input :show_in_footer
             end
           end
+
+          f.input :custom_background_color,
+                  as: :boolean,
+                  input_html: {
+                    checked: f.object.color.blank? ? false : true
+                  }
+
           f.input :color,
-                  input_html: { class: 'colorpicker' }
+                  input_html: {
+                    class: 'colorpicker',
+                    value: f.object.color.blank? ? '' : f.object.color
+                  }
         end
       end
 
@@ -115,6 +127,9 @@ ActiveAdmin.register Category do
       unless current_user.super_administrator?
         params[:category].delete :optional_module_id
         params[:category].delete :optional
+      end
+      if params[:category][:custom_background_color] == '0'
+        params[:category][:color] = nil
       end
       update! { admin_category_path(@category) }
     end

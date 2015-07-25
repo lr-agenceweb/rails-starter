@@ -9,7 +9,7 @@ panel.panel t('activerecord.models.comment.other') do
       p.column t('activerecord.attributes.shared.created_at'), :created_at
 
       p.column 'Actions' do |comment|
-        comment.delete_link_source
+        link_to t('active_admin.show'), admin_post_comment_path(comment)
       end
     end
   end

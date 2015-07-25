@@ -44,6 +44,19 @@ crumb :searches do
 end
 
 #
+# == Event [OptionalModule]
+#
+crumb :events do
+  link Category.includes(:translations).title_by_category('Event'), events_path
+end
+
+crumb :event do |event|
+  link event.title, event_path(event)
+  parent :events
+end
+
+
+#
 # == Contact
 #
 crumb :contact do

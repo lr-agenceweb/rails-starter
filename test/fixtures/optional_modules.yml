@@ -59,3 +59,8 @@ event:
   <<: *DEFAULTS
   name: Event
   enabled: true
+
+map:
+  <<: *DEFAULTS
+  name: Map
+  enabled: true

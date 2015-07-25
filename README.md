@@ -9,6 +9,9 @@ This project has been built to increase speed when creating a new application: i
 
 Requirements:
 ------------
+~~a computer~~  
+RVM with Ruby 2.2.2  
+Rails 4.2.3  
 Install [Foreman](https://github.com/ddollar/foreman)  
 Install [Maildev](https://github.com/djfarrelly/MailDev)  
 
@@ -24,7 +27,7 @@ Install gems: `bundle install`
 Run migrations: `rake db:create db:migrate db:seed`  
 Run `foreman start`  
 Visit `http://localhost:3000`  
-That's it !
+That's it !  
 
 Ruby and Rails versions
 -----------------------
@@ -47,7 +50,9 @@ It use [Slim](https://github.com/slim-template/slim-rails) template to write HTM
 Assets
 -------
 Style is writting in `scss` and `sass` (with compass)  
-Scripts are created in `coffeescript`
+Scripts are created in `coffeescript`  
+
+In development and test environments, assets are stored in `local` but in staging and production, they are stored with `dropbox` using dropbox-paperclip gem. The advantage of storing in an external server is that you relieve your server storage.  
 
 Tasks
 ------
@@ -59,32 +64,31 @@ Mail
 It use [maildev](http://djfarrelly.github.io/MailDev/) to test emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
 To see your mails, visit `http://localhost:1080`
 
-Newsletter
------------
+
+Modules
+---------
+* **Newsletter**  
 In order to avoid spam email when sending newsletter to subscribers, you will need to sign your email address using SPF and DKIM keys and linked them to your DNS.  
 Be sure to generate a `dkim.private.key` and `dkim.public.key` and move the `dkim.private.key` in `config/dkim` folder.  
 
-Gems
------
-### [Globalize](https://github.com/globalize/globalize)
-Two languages are included by default: french and english  
-  
-### [Whenever](https://github.com/javan/whenever)
-Setup two Cron tasks:
-* Regenerate sitemap everyday
-* Make a dump of database every day: it will be saved in ypur dropbox account and you will be notified by Slack about success or failure.
+* **Blog**  
+Write blog articles.
 
-To make this tasks active on your server, just run `whenever --update-crontab <name-of-your-site>`  
-For more information read the gem documentation.
+* **Slider**  
+Add a slider on the page you want and customize its options.
 
-### [Annotate](https://github.com/ctran/annotate_models)
-Print table structure in models  
+* **Comments**  
+Add comments for posts or blogs articles.
 
-### [Gretel](https://github.com/lassebunk/gretel)
-Breadcrumb generator
+* **Guest Book**  
+Allow users (connected or not) to leave a message in the guest book.
+
+* **Events**  
+Create events (with start date and end date)
+
 
 Units Tests
------
+-----------
 Basics tests are included, just run `rake test`
 
 Contributing

@@ -1,9 +1,9 @@
 # fill in the UI elements with new position data
 update_ui = (address, latLng) ->
-  $("#gmaps-input-address").autocomplete "close"
-  $("#gmaps-input-address").val address
-  $("#gmaps-output-latitude").attr("value", latLng.lat())
-  $("#gmaps-output-longitude").attr("value", latLng.lng())
+  $('#gmaps-input-address').autocomplete 'close'
+  $('#gmaps-input-address').val address
+  $('#gmaps-output-latitude').attr('value', latLng.lat()).change()
+  $('#gmaps-output-longitude').attr('value', latLng.lng()).change()
   return
 
 # Query the Google geocode object
@@ -17,11 +17,11 @@ update_ui = (address, latLng) ->
 geocode_lookup = (type, value, update) ->
 
   # default value: update = false
-  update = (if typeof update isnt "undefined" then update else false)
+  update = (if typeof update isnt 'undefined' then update else false)
   request = {}
   request[type] = value
   geocoder.geocode request, (results, status) ->
-    $("#gmaps-error").html ""
+    $('#gmaps-error').html ''
     if status is google.maps.GeocoderStatus.OK
 
       # Google geocoding has succeeded!
@@ -35,22 +35,22 @@ geocode_lookup = (type, value, update) ->
       else
 
         # Geocoder status ok but no results!?
-        $("#gmaps-error").html "Sorry, something went wrong. Try again!"
+        $('#gmaps-error').html 'Sorry, something went wrong. Try again!'
     else
 
       # Google Geocoding has failed. Two common reasons:
       #   * Address not recognised (e.g. search for 'zxxzcxczxcx')
       #   * Location doesn't map to address (e.g. click in middle of Atlantic)
-      if type is "address"
+      if type is 'address'
 
         # User has typed in an address which we can't geocode to a location
-        $("#gmaps-error").html "Sorry! We couldn't find " + value + ". Try a different search term, or click the map."
+        $('#gmaps-error').html 'Sorry! We couldn\'t find ' + value + '. Try a different search term, or click the map.'
       else
 
         # User has clicked or dragged marker to somewhere that Google can't do a
         # reverse lookup for. In this case we display a warning.
-        $("#gmaps-error").html "Woah... that's pretty remote! You're going to have to manually enter a place name."
-        update_ui "", value
+        $('#gmaps-error').html 'Woah... that\'s pretty remote! You\'re going to have to manually enter a place name.'
+        update_ui '', value
     return
 
   return
@@ -58,7 +58,7 @@ geocode_lookup = (type, value, update) ->
 # initialise the jqueryUI autocomplete element
 autocomplete_init = ->
   geocoder = new google.maps.Geocoder()
-  $("#gmaps-input-address").autocomplete
+  $('#gmaps-input-address').autocomplete
 
     # source is the list of input options shown in the autocomplete dropdown.
     # see documentation: http://jqueryui.com/demos/autocomplete/
@@ -88,16 +88,16 @@ autocomplete_init = ->
 
 
   # triggered when user presses a key in the address box
-  $("#gmaps-input-address").bind "keydown", (event) ->
+  $('#gmaps-input-address').bind 'keydown', (event) ->
     if event.keyCode is 13
-      geocode_lookup "address", $("#gmaps-input-address").val(), true
+      geocode_lookup 'address', $('#gmaps-input-address').val(), true
 
       # ensures dropdown disappears when enter is pressed
-      $("#gmaps-input-address").autocomplete "disable"
+      $('#gmaps-input-address').autocomplete 'disable'
     else
 
       # re-enable if previously disabled above
-      $("#gmaps-input-address").autocomplete "enable"
+      $('#gmaps-input-address').autocomplete 'enable'
     return
 
   return
