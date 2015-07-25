@@ -16,7 +16,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: nil }, locale: locale.to_s
+          post :create, about_id: @about, comment: { comment: nil }, locale: locale.to_s
         end
         assert_not assigns(:comment).valid?
         assert_not assigns(:comment).save
@@ -28,7 +28,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+          post :create, about_id: @about, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         end
       end
     end
@@ -38,7 +38,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+          post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
         end
         assert_not assigns(:comment).valid?
       end
@@ -49,7 +49,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'ch' }, locale: locale.to_s
+          post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'ch' }, locale: locale.to_s
         end
         assert_not assigns(:comment).valid?
       end
@@ -60,7 +60,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: '', username: 'leila', email: 'not_valid', lang: locale.to_s }, locale: locale.to_s
+          post :create, about_id: @about, comment: { comment: 'youpi', nickname: '', username: 'leila', email: 'not_valid', lang: locale.to_s }, locale: locale.to_s
         end
         assert_not assigns(:comment).valid?
       end
@@ -71,7 +71,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+          post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         end
         assert assigns(:comment).valid?
         assert_redirected_to @about
@@ -82,7 +82,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should have informations of user given if not connected' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_nil assigns(:comment).user_id
         assert_equal assigns(:comment).username, 'leila'
         assert_equal assigns(:comment).email, 'leila@skywalker.sw'
@@ -92,11 +92,11 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'should create comment only with comment field if connected' do
-    sign_in @lana
+    sign_in @subscriber
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
-          post :create, about_id: @about.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
+          post :create, about_id: @about, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
         end
         assert assigns(:comment).valid?
         assert_redirected_to @about
@@ -105,14 +105,14 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test 'should have informations of sign_in user if connected' do
-    sign_in @lana
+    sign_in @subscriber
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        post :create, about_id: @about.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
+        post :create, about_id: @about, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
         assert assigns(:comment).valid?
         assert_nil assigns(:comment).username
         assert_nil assigns(:comment).email
-        assert_equal assigns(:comment).user_id, @lana.id
+        assert_equal assigns(:comment).user_id, @subscriber.id
       end
     end
   end
@@ -123,7 +123,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should create comment' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        xhr :post, :create, format: :js, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_response :success
       end
     end
@@ -132,7 +132,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should render show template if comment created' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        xhr :post, :create, format: :js, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_template :create
       end
     end
@@ -141,7 +141,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should not create comment if nickname is filled' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot', lang: locale.to_s }, locale: locale.to_s
+        xhr :post, :create, format: :js, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot', lang: locale.to_s }, locale: locale.to_s
         assert_template :captcha
       end
     end
@@ -154,7 +154,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          delete :destroy, id: @comment_alice.id, about_id: @about.id, locale: locale.to_s
+          delete :destroy, id: @comment_alice, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -166,22 +166,22 @@ class CommentsControllerTest < ActionController::TestCase
       locale = 'fr'
       I18n.with_locale(locale) do
         assert_difference 'Comment.count', -1 do
-          delete :destroy, id: @comment_alice.id, about_id: @about.id, locale: locale
+          delete :destroy, id: @comment_alice, about_id: @about, locale: locale
         end
       end
     end
   end
 
   test 'subscriber should not be able to delete comments except his own' do
-    sign_in @lana
+    sign_in @subscriber
     locale = 'fr'
     I18n.with_locale(locale) do
       assert_difference 'Comment.count', -1 do
-        delete :destroy, id: @comment_lana.id, about_id: @about.id, locale: locale
+        delete :destroy, id: @comment_lana, about_id: @about, locale: locale
       end
 
       assert_no_difference 'Comment.count' do
-        delete :destroy, id: @comment_alice.id, about_id: @about.id, locale: locale
+        delete :destroy, id: @comment_alice, about_id: @about, locale: locale
       end
     end
   end
@@ -194,12 +194,12 @@ class CommentsControllerTest < ActionController::TestCase
     I18n.with_locale(locale) do
       assert ability.can?(:destroy, @comment_lana)
       assert_difference 'Comment.count', -1 do
-        delete :destroy, id: @comment_lana.id, about_id: @about.id, locale: locale
+        delete :destroy, id: @comment_lana, about_id: @about, locale: locale
       end
 
       assert ability.cannot?(:destroy, @comment_anthony)
       assert_no_difference 'Comment.count' do
-        delete :destroy, id: @comment_anthony.id, about_id: @about.id, locale: locale
+        delete :destroy, id: @comment_anthony, about_id: @about, locale: locale
       end
     end
   end
@@ -243,7 +243,7 @@ class CommentsControllerTest < ActionController::TestCase
 
     @super_administrator = users(:anthony)
     @administrator = users(:bob)
-    @lana = users(:lana)
+    @subscriber = users(:lana)
 
     @comment_anthony = comments(:one)
     @comment_bob = comments(:two)

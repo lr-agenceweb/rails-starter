@@ -16,12 +16,12 @@ module Admin
     # == REST actions
     #
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @bob
+      sign_out @administrator
       get :index
       assert_redirected_to new_user_session_path
-      get :show, id: @about.id
+      get :show, id: @about
       assert_redirected_to new_user_session_path
-      get :edit, id: @about.id
+      get :edit, id: @about
       assert_redirected_to new_user_session_path
     end
 
@@ -31,23 +31,23 @@ module Admin
     end
 
     test 'should show show page if logged in' do
-      get :show, id: @about.id
+      get :show, id: @about
       assert_response :success
     end
 
     test 'should show edit page if logged in' do
-      get :edit, id: @about.id
+      get :edit, id: @about
       assert_response :success
     end
 
     test 'should update about if logged in' do
-      patch :update, id: @about.id, about: {}
+      patch :update, id: @about, about: {}
       assert_redirected_to admin_about_path(@about)
     end
 
     test 'should destroy about' do
       assert_difference ['About.count', 'Referencement.count'], -1 do
-        delete :destroy, id: @about.id
+        delete :destroy, id: @about
       end
       assert_redirected_to admin_abouts_path
     end
@@ -56,7 +56,7 @@ module Admin
     # == Comments
     #
     test 'should destroy comments with post' do
-      delete :destroy, id: @about.id
+      delete :destroy, id: @about
       assert_equal 0, @about.comments.size
       assert @about.comments.empty?
     end
@@ -65,8 +65,8 @@ module Admin
 
     def initialize_test
       @about = posts(:about)
-      @bob = users(:bob)
-      sign_in @bob
+      @administrator = users(:bob)
+      sign_in @administrator
     end
   end
 end

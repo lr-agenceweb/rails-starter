@@ -18,28 +18,28 @@ module Admin
     end
 
     test 'should show dashboard page if logged in' do
-      sign_in @anthony
+      sign_in @super_administrator
       get :index
       assert_response :success
     end
 
     test 'should redirect to users/sign_in after logged out' do
-      sign_in @anthony
-      sign_out @anthony
+      sign_in @super_administrator
+      sign_out @super_administrator
       get :index
       assert_redirected_to new_user_session_path
     end
 
-    test 'should user email be the anthony@test.fr for anthony' do
-      sign_in @anthony
+    test 'should user email be the anthony@test.fr for super_administrator' do
+      sign_in @super_administrator
       get :index
-      assert_equal(@anthony.email, 'anthony@test.fr')
+      assert_equal(@super_administrator.email, 'anthony@test.fr')
     end
 
     private
 
     def initialize_test
-      @anthony = users(:anthony)
+      @super_administrator = users(:anthony)
     end
   end
 end
