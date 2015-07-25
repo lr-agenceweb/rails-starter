@@ -12,13 +12,8 @@ class SearchesController < ApplicationController
     else
       @searches = Post.search(params[:term], params[:locale])
 
-      if @blog_module.enabled?
-        @searches += Blog.search(params[:term], params[:locale])
-      end
-
-      if @event_module.enabled?
-        @searches += Event.search(params[:term], params[:locale])
-      end
+      @searches += Blog.search(params[:term], params[:locale]) if @blog_module.enabled?
+      @searches += Event.search(params[:term], params[:locale]) if @event_module.enabled?
 
       @not_paginated_searches = @searches
       @searches = Kaminari.paginate_array(@searches).page(params[:page]).per(5)
