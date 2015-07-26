@@ -39,13 +39,13 @@ administrator = User.create!(
   password_confirmation: 'password',
   role_id: 2
 )
-# User.create!(
-#   username: 'abonne',
-#   email: 'abonne@example.com',
-#   password: 'password',
-#   password_confirmation: 'password',
-#   role_id: 3
-# )
+User.create!(
+  username: 'abonne',
+  email: 'abonne@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  role_id: 3
+)
 
 #
 # == Settings for site
@@ -136,6 +136,7 @@ Category.models_name_str.each_with_index do |element, index|
     title: title_fr[index],
     show_in_menu: show_in_menu[index],
     show_in_footer: show_in_footer[index],
+    optional: optional_module_id.nil? ? false : true
     optional_module_id: optional_module_id
   )
 
