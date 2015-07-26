@@ -17,12 +17,7 @@ module Admin
     #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      get :index, id: @blog
-      assert_redirected_to new_user_session_path
-      get :show, id: @blog
-      assert_redirected_to new_user_session_path
-      delete :destroy, id: @blog
-      assert_redirected_to new_user_session_path
+      assert_crud_actions(@blog, new_user_session_path)
     end
 
     test 'should show index page if logged in' do
@@ -43,13 +38,53 @@ module Admin
     end
 
     #
+    # == Abilities
+    #
+    test 'should test abilities for subscriber' do
+      sign_in @subscriber
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, Blog.new), 'should not be able to create'
+      assert ability.cannot?(:read, Blog.new), 'should not be able to read'
+      assert ability.cannot?(:update, Blog.new), 'should not be able to update'
+      assert ability.cannot?(:destroy, Blog.new), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for administrator' do
+      ability = Ability.new(@administrator)
+      assert ability.can?(:create, Blog.new), 'should be able to create'
+      assert ability.can?(:read, Blog.new), 'should be able to read'
+      assert ability.can?(:update, Blog.new), 'should be able to update'
+      assert ability.can?(:destroy, Blog.new), 'should be able to destroy'
+    end
+
+    test 'should test abilities for super_administrator' do
+      sign_in @super_administrator
+      ability = Ability.new(@super_administrator)
+      assert ability.can?(:create, Blog.new), 'should be able to create'
+      assert ability.can?(:read, Blog.new), 'should be able to read'
+      assert ability.can?(:update, Blog.new), 'should be able to update'
+      assert ability.can?(:destroy, Blog.new), 'should be able to destroy'
+    end
+
+    #
+    # == Subscriber
+    #
+    test 'should redirect to dashboard page if trying to access blog as subscriber' do
+      sign_in @subscriber
+      assert_crud_actions(@blog, admin_dashboard_path)
+    end
+
+    #
     # == Module disabled
     #
     test 'should not access page if blog module is disabled' do
       disable_optional_module @super_administrator, @blog_module, 'Blog' # in test_helper.rb
+      sign_in @super_administrator
+      assert_crud_actions(@blog, admin_dashboard_path)
       sign_in @administrator
-      get :index
-      assert_redirected_to admin_dashboard_path
+      assert_crud_actions(@blog, admin_dashboard_path)
+      sign_in @subscriber
+      assert_crud_actions(@blog, admin_dashboard_path)
     end
 
     private
@@ -60,8 +95,9 @@ module Admin
       @blog_not_validate = blogs(:blog_offline)
       @blog_module = optional_modules(:blog)
 
-      @super_administrator = users(:anthony)
+      @subscriber = users(:alice)
       @administrator = users(:bob)
+      @super_administrator = users(:anthony)
       sign_in @administrator
     end
   end

@@ -17,14 +17,7 @@ module Admin
     #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      get :index, id: @event
-      assert_redirected_to new_user_session_path
-      get :show, id: @event
-      assert_redirected_to new_user_session_path
-      patch :update, id: @event
-      assert_redirected_to new_user_session_path
-      delete :destroy, id: @event
-      assert_redirected_to new_user_session_path
+      assert_crud_actions(@event, new_user_session_path)
     end
 
     test 'should show index page if logged in' do
@@ -55,6 +48,54 @@ module Admin
         delete :destroy, id: @event
       end
       assert_redirected_to admin_events_path
+    end
+
+    #
+    # == Abilities
+    #
+    test 'should test abilities for subscriber' do
+      sign_in @subscriber
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, Event.new), 'should not be able to create'
+      assert ability.cannot?(:read, Event.new), 'should not be able to read'
+      assert ability.cannot?(:update, Event.new), 'should not be able to update'
+      assert ability.cannot?(:destroy, Event.new), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for administrator' do
+      ability = Ability.new(@administrator)
+      assert ability.can?(:create, Event.new), 'should be able to create'
+      assert ability.can?(:read, Event.new), 'should be able to read'
+      assert ability.can?(:update, Event.new), 'should be able to update'
+      assert ability.can?(:destroy, Event.new), 'should be able to destroy'
+    end
+
+    test 'should test abilities for super_administrator' do
+      sign_in @super_administrator
+      ability = Ability.new(@super_administrator)
+      assert ability.can?(:create, Event.new), 'should be able to create'
+      assert ability.can?(:read, Event.new), 'should be able to read'
+      assert ability.can?(:update, Event.new), 'should be able to update'
+      assert ability.can?(:destroy, Event.new), 'should be able to destroy'
+    end
+
+    #
+    # == Subscriber
+    #
+    test 'should redirect to dashboard page if trying to access event as subscriber' do
+      sign_in @subscriber
+      get :index
+      assert_redirected_to admin_dashboard_path
+      get :show, id: @event
+      assert_redirected_to admin_dashboard_path
+      get :edit, id: @event
+      assert_redirected_to admin_dashboard_path
+      post :create, event: {}
+      assert_redirected_to admin_dashboard_path
+      patch :update, id: @event, event: {}
+      assert_redirected_to admin_dashboard_path
+      delete :destroy, id: @event
+      assert_redirected_to admin_dashboard_path
     end
 
     #
@@ -100,9 +141,12 @@ module Admin
     #
     test 'should not access page if event module is disabled' do
       disable_optional_module @super_administrator, @event_module, 'Event' # in test_helper.rb
+      sign_in @super_administrator
+      assert_crud_actions(@event, admin_dashboard_path)
       sign_in @administrator
-      get :index
-      assert_redirected_to admin_dashboard_path
+      assert_crud_actions(@event, admin_dashboard_path)
+      sign_in @subscriber
+      assert_crud_actions(@event, admin_dashboard_path)
     end
 
     private
@@ -113,8 +157,9 @@ module Admin
       @event_not_validate = events(:event_offline)
       @event_module = optional_modules(:event)
 
-      @super_administrator = users(:anthony)
+      @subscriber = users(:alice)
       @administrator = users(:bob)
+      @super_administrator = users(:anthony)
       sign_in @administrator
     end
   end

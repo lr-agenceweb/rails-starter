@@ -5,7 +5,7 @@ ActiveAdmin.register NewsletterUser do
 
   decorate_with NewsletterUserDecorator
   config.clear_sidebar_sections!
-  actions :all, except: [:show]
+  # actions :all, except: [:show]
 
   scope :all, default: true
   scope :francais
@@ -51,7 +51,11 @@ ActiveAdmin.register NewsletterUser do
   # == Controller
   #
   controller do
-    before_action :set_newsletter_user, only: [:edit]
+    before_action :set_newsletter_user, only: [:show, :edit, :destroy]
+
+    def update
+      update! { admin_newsletter_users_path }
+    end
 
     private
 

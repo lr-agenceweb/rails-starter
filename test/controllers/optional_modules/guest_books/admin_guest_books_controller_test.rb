@@ -17,12 +17,7 @@ module Admin
     #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      get :index, id: @guest_book
-      assert_redirected_to new_user_session_path
-      get :show, id: @guest_book
-      assert_redirected_to new_user_session_path
-      delete :destroy, id: @guest_book
-      assert_redirected_to new_user_session_path
+      assert_crud_actions(@guest_book, new_user_session_path)
     end
 
     test 'should show index page if logged in' do
@@ -53,13 +48,64 @@ module Admin
     end
 
     #
+    # == Abilities
+    #
+    test 'should test abilities for subscriber' do
+      sign_in @subscriber
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, GuestBook.new), 'should not be able to create'
+      assert ability.cannot?(:read, GuestBook.new), 'should not be able to read'
+      assert ability.cannot?(:update, GuestBook.new), 'should not be able to update'
+      assert ability.cannot?(:destroy, GuestBook.new), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for administrator' do
+      ability = Ability.new(@administrator)
+      assert ability.cannot?(:create, GuestBook.new), 'should not be able to create'
+      assert ability.can?(:read, GuestBook.new), 'should be able to read'
+      assert ability.cannot?(:update, GuestBook.new), 'should not be able to update'
+      assert ability.can?(:destroy, GuestBook.new), 'should be able to destroy'
+    end
+
+    test 'should test abilities for super_administrator' do
+      sign_in @super_administrator
+      ability = Ability.new(@super_administrator)
+      assert ability.cannot?(:create, GuestBook.new), 'should not be able to create'
+      assert ability.can?(:read, GuestBook.new), 'should be able to read'
+      assert ability.cannot?(:update, GuestBook.new), 'should not be able to update'
+      assert ability.can?(:destroy, GuestBook.new), 'should be able to destroy'
+    end
+
+    #
+    # == Subscriber
+    #
+    test 'should redirect to dashboard page if trying to access guest book as subscriber' do
+      sign_in @subscriber
+      get :index
+      assert_redirected_to admin_dashboard_path
+      get :show, id: @guest_book
+      assert_redirected_to admin_dashboard_path
+      get :edit, id: @guest_book
+      assert_redirected_to admin_dashboard_path
+      post :create, guest_book: {}
+      assert_redirected_to admin_dashboard_path
+      patch :update, id: @guest_book, guest_book: {}
+      assert_redirected_to admin_dashboard_path
+      delete :destroy, id: @guest_book
+      assert_redirected_to admin_dashboard_path
+    end
+
+    #
     # == Module disabled
     #
     test 'should not access page if guest_book module is disabled' do
       disable_optional_module @super_administrator, @guest_book_module, 'GuestBook' # in test_helper.rb
+      sign_in @super_administrator
+      assert_crud_actions(@guest_book, admin_dashboard_path)
       sign_in @administrator
-      get :index
-      assert_redirected_to admin_dashboard_path
+      assert_crud_actions(@guest_book, admin_dashboard_path)
+      sign_in @subscriber
+      assert_crud_actions(@guest_book, admin_dashboard_path)
     end
 
     private
@@ -70,8 +116,9 @@ module Admin
       @guest_book_not_validate = guest_books(:fr_not_validate)
       @guest_book_module = optional_modules(:guest_book)
 
-      @super_administrator = users(:anthony)
+      @subscriber = users(:alice)
       @administrator = users(:bob)
+      @super_administrator = users(:anthony)
       sign_in @administrator
     end
   end
