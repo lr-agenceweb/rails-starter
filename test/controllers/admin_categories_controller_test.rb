@@ -129,26 +129,26 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Category.new), 'should not be able to create'
-      assert ability.cannot?(:read, Category.new), 'should not be able to read'
-      assert ability.cannot?(:update, Category.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Category.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @category), 'should not be able to read'
+      assert ability.cannot?(:update, @category), 'should not be able to update'
+      assert ability.cannot?(:destroy, @category), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.cannot?(:create, Category.new), 'should not be able to create'
-      assert ability.can?(:read, Category.new), 'should be able to read'
-      assert ability.can?(:update, Category.new), 'should be able to update'
-      assert ability.cannot?(:destroy, Category.new), 'should not be able to destroy'
+      assert ability.can?(:read, @category), 'should be able to read'
+      assert ability.can?(:update, @category), 'should be able to update'
+      assert ability.cannot?(:destroy, @category), 'should not be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.can?(:create, Category.new), 'should be able to create'
-      assert ability.can?(:read, Category.new), 'should be able to read'
-      assert ability.can?(:update, Category.new), 'should be able to update'
-      assert ability.can?(:destroy, Category.new), 'should be able to destroy'
+      assert ability.can?(:read, @category), 'should be able to read'
+      assert ability.can?(:update, @category), 'should be able to update'
+      assert ability.can?(:destroy, @category), 'should be able to destroy'
     end
 
     #
