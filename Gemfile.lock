@@ -186,7 +186,7 @@ GEM
     byebug (4.0.4)
       columnize (= 0.9.0)
     callsite (0.0.11)
-    cancancan (1.10.1)
+    cancancan (1.12.0)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
