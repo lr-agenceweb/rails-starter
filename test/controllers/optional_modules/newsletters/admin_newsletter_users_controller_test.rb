@@ -5,9 +5,9 @@ require 'test_helper'
 #
 module Admin
   #
-  # == NewsletterUsersController test
+  # == LetterUsersController test
   #
-  class NewsletterUsersControllerTest < ActionController::TestCase
+  class LetterUsersControllerTest < ActionController::TestCase
     include Devise::TestHelpers
 
     setup :initialize_test
@@ -33,28 +33,29 @@ module Admin
     # Valid params
     test 'should update newsletter_user if logged in' do
       patch :update, id: @newsletter_user, newsletter_user: {}
-      assert_redirected_to admin_newsletter_users_path
+      assert_redirected_to admin_letter_users_path
     end
 
     test 'should update newsletter_user role' do
       patch :update, id: @newsletter_user, newsletter_user: { role: 'tester' }
-      assert_equal 'tester', assigns(:newsletter_user).role
+      assert assigns(:letter_user).valid?, 'record should be valid'
+      assert_equal 'tester', assigns(:letter_user).role
     end
 
     # Invalid params
     test 'should not update newsletter_user if lang params is not allowed' do
       patch :update, id: @newsletter_user, newsletter_user: { lang: 'de' }
-      assert_not assigns(:newsletter_user).valid?
+      assert_not assigns(:letter_user).valid?
     end
 
     test 'should not update newsletter_user role if role params not allowed' do
       patch :update, id: @newsletter_user, newsletter_user: { role: 'administrator' }
-      assert_not assigns(:newsletter_user).valid?
+      assert_not assigns(:letter_user).valid?
     end
 
     test 'should not update newsletter_user if email params is changed' do
       patch :update, id: @newsletter_user, newsletter_user: { email: 'test@test.com' }
-      assert_equal @newsletter_user.email, assigns(:newsletter_user).email
+      assert_equal @newsletter_user.email, assigns(:letter_user).email
     end
 
     test 'should render edit template if lang is not allowed' do
@@ -85,7 +86,7 @@ module Admin
 
     test 'should redirect to newsletter users path after destroy' do
       delete :destroy, id: @newsletter_user
-      assert_redirected_to admin_newsletter_users_path
+      assert_redirected_to admin_letter_users_path
     end
 
     #

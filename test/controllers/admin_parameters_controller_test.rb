@@ -5,7 +5,7 @@ require 'test_helper'
 #
 module Admin
   #
-  # == SettingsController test
+  # == ParametersController test
   #
   class ParametersControllerTest < ActionController::TestCase
     include Devise::TestHelpers

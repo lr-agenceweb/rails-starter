@@ -1,11 +1,10 @@
-ActiveAdmin.register NewsletterUser do
+ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
   menu parent: I18n.t('admin_menu.modules')
 
   permit_params :id, :role, :lang
 
   decorate_with NewsletterUserDecorator
   config.clear_sidebar_sections!
-  # actions :all, except: [:show]
 
   scope :all, default: true
   scope :francais
@@ -34,11 +33,11 @@ ActiveAdmin.register NewsletterUser do
       column do
         f.inputs t('additional') do
           f.input :lang,
-                  collection: %w(fr en),
+                  collection: %w( fr en ),
                   include_blank: false,
                   hint: 'Attention, changer ce paramètre changera la langue de la newsletter reçue par cet utilisateur !'
           f.input :role,
-                  collection: %w(subscriber tester),
+                  collection: %w( subscriber tester ),
                   include_blank: false
         end
       end
@@ -51,16 +50,8 @@ ActiveAdmin.register NewsletterUser do
   # == Controller
   #
   controller do
-    before_action :set_newsletter_user, only: [:show, :edit, :destroy]
-
     def update
-      update! { admin_newsletter_users_path }
-    end
-
-    private
-
-    def set_newsletter_user
-      @newsletter_user = NewsletterUser.find(params[:id])
+      super { admin_letter_users_path }
     end
   end
 end

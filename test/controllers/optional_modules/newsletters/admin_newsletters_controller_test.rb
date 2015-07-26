@@ -7,7 +7,7 @@ module Admin
   #
   # == NewslettersController test
   #
-  class NewslettersControllerTest < ActionController::TestCase
+  class LettersControllerTest < ActionController::TestCase
     include Devise::TestHelpers
 
     setup :initialize_test
@@ -22,6 +22,11 @@ module Admin
 
     test 'should show index page if logged in' do
       get :index
+      assert_response :success
+    end
+
+    test 'should access new page if logged in' do
+      get :new
       assert_response :success
     end
 
@@ -49,7 +54,7 @@ module Admin
 
     test 'should redirect to newsletter path after destroy' do
       delete :destroy, id: @newsletter
-      assert_redirected_to admin_newsletters_path
+      assert_redirected_to admin_letters_path
     end
 
     #
@@ -97,10 +102,8 @@ module Admin
       sign_in @super_administrator
       assert_crud_actions(@newsletter, admin_dashboard_path)
       sign_in @administrator
-      get :index
       assert_crud_actions(@newsletter, admin_dashboard_path)
       sign_in @subscriber
-      get :index
       assert_crud_actions(@newsletter, admin_dashboard_path)
     end
 

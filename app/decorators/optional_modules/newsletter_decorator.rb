@@ -14,7 +14,7 @@ class NewsletterDecorator < ApplicationDecorator
   end
 
   def live_preview
-    render 'iframe_preview', resource: model
+    render '/admin/newsletters/iframe_preview', resource: model
   end
 
   def sent_at
@@ -22,7 +22,7 @@ class NewsletterDecorator < ApplicationDecorator
   end
 
   def send_link
-    render 'send', resource: model
+    render '/admin/newsletters/send', resource: model
   end
 
   def status
@@ -31,6 +31,6 @@ class NewsletterDecorator < ApplicationDecorator
   end
 
   def list_subscribers
-    render 'list_subscribers', newsletter_users: NewsletterUser.all
+    render '/admin/newsletters/list_subscribers', newsletter_users: NewsletterUser.all
   end
 end

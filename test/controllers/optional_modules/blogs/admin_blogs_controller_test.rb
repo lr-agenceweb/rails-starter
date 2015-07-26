@@ -25,6 +25,11 @@ module Admin
       assert_response :success
     end
 
+    test 'should access new page if logged in' do
+      get :new
+      assert_response :success
+    end
+
     test 'should access show page if logged in' do
       get :show, id: @blog
       assert_response :success

@@ -6,7 +6,7 @@
 
     - if f.object.new_record?
       - klass = 'new'
-      - url = admin_newsletters_path
+      - url = admin_letters_path
     - else
       - klass = 'existing'
       - url = preview_newsletter_path(f.object)
@@ -14,7 +14,7 @@
     - html << "<a href='#' class='button newsletter_preview_button #{klass}_record' data-url='#{url}' data-locale='#{locale.to_s}'>Prévisualisation de la newsletter en #{t('active_admin.globalize.language.' + locale.to_s)}</a>".html_safe
 - html << '</p>'
 
-- iframe = f.object.new_record? ? '' : render('iframe_preview', resource: f.object)
+- iframe = f.object.new_record? ? '' : render('/admin/newsletters/iframe_preview', resource: f.object)
 - html << iframe
 
 - html << "</div>"
