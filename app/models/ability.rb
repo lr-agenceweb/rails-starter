@@ -24,6 +24,8 @@ class Ability
 
   def super_administrator_privilege(user)
     can :manage, :all
+    cannot [:update, :destroy], User, role: { name: 'super_administrator' }
+    can :manage, User, id: user.id
     optional_modules_check(user)
   end
 
@@ -31,9 +33,11 @@ class Ability
     can :read, :all
     can :crud, Post
     can :update, Setting
-    can :crud, User, role_name: %w( administrator subscriber )
-    can :crud, User, id: user.id
+    can [:read, :destroy, :update], User, role_name: %w( subscriber )
     cannot :create, User
+    cannot [:update, :destroy], User, role: { name: %w( administrator ) }
+    cannot :manage, User, role: { name: %w( super_administrator ) }
+    can :manage, User, id: user.id
     can :update, Category
     can [:read, :update, :destroy], Background
     cannot :manage, OptionalModule

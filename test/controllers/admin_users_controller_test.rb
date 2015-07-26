@@ -14,12 +14,7 @@ module Admin
 
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      get :index
-      assert_redirected_to new_user_session_path
-      get :show, id: @administrator
-      assert_redirected_to new_user_session_path
-      get :edit, id: @administrator
-      assert_redirected_to new_user_session_path
+      assert_crud_actions(@administrator, new_user_session_path)
     end
 
     test 'should show index page if logged in' do
@@ -186,47 +181,112 @@ module Admin
       assert_response :success
     end
 
-    test 'should count users' do
-      assert_equal User.count, 4
-    end
-
     #
     # == Avatar
     #
-    # test 'should be able to upload avatar' do
-    #   sign_in @administrator
-    #   upload_dropbox_paperclip_attachment
+    test 'should be able to upload avatar' do
+      sign_in @administrator
+      upload_dropbox_paperclip_attachment
 
-    #   user = assigns(:user)
-    #   assert user.avatar?
-    #   assert_equal 'bart.png', user.avatar_file_name
-    #   assert_equal 'image/png', user.avatar_content_type
-
-    #   remove_dropbox_paperclip_attachment(user)
-    # end
+      user = assigns(:user)
+      assert user.avatar?
+      assert_equal 'bart.png', user.avatar_file_name
+      assert_equal 'image/png', user.avatar_content_type
+    end
 
     # test 'should delete avatar with user' do
     #   sign_in @super_administrator
-    #   attachment = fixture_file_upload 'images/homer.png', 'image/png'
-    #   puts '=== Uploading attachment to Dropbox'
-    #   patch :update, id: @subscriber, user: { avatar: attachment }
+    #   upload_dropbox_paperclip_attachment
     #   user = assigns(:user)
     #   delete :destroy, id: @subscriber
     # end
 
+    #
+    # == Abilities
+    #
+    test 'should test abilities for subscriber' do
+      sign_in @subscriber
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, User.new), 'should not be able to create'
+
+      assert ability.can?(:read, @subscriber), 'should be able to read itself'
+      assert ability.cannot?(:read, User.new), 'should not be able to read'
+      assert ability.cannot?(:read, @administrator), 'should not be able to read administrator'
+      assert ability.cannot?(:read, @super_administrator), 'should not be able to read super_administrator'
+
+      assert ability.can?(:update, @subscriber), 'should be able to update itself'
+      assert ability.cannot?(:update, User.new), 'should not be able to update'
+      assert ability.cannot?(:update, @administrator), 'should not be able to update administrator'
+      assert ability.cannot?(:update, @super_administrator), 'should not be able to update super_administrator'
+
+      assert ability.can?(:destroy, @subscriber), 'should be able to destroy itself'
+      assert ability.cannot?(:destroy, User.new), 'should not be able to destroy'
+      assert ability.cannot?(:destroy, @administrator), 'should not be able to destroy administrator'
+      assert ability.cannot?(:destroy, @super_administrator), 'should not be able to destroy super_administrator'
+    end
+
+    test 'should test abilities for administrator' do
+      ability = Ability.new(@administrator)
+      assert ability.cannot?(:create, User.new), 'should not be able to create'
+
+      assert ability.can?(:read, @subscriber), 'should be able to read subscriber'
+      assert ability.can?(:read, User.new), 'should be able to read'
+      assert ability.can?(:read, @administrator), 'should be able to read itself'
+      assert ability.can?(:read, @administrator_2), 'should be able to read other administrator'
+      assert ability.cannot?(:read, @super_administrator), 'should not be able to read super_administrator'
+
+      assert ability.can?(:update, @subscriber), 'should be able to update subscriber'
+      assert ability.cannot?(:update, User.new), 'should not be able to update'
+      assert ability.can?(:update, @administrator), 'should be able to update itself'
+      assert ability.cannot?(:update, @administrator_2), 'should not be able to update other administrator'
+      assert ability.cannot?(:update, @super_administrator), 'should not be able to update super_administrator'
+
+      assert ability.can?(:destroy, @subscriber), 'should be able to destroy subscriber'
+      assert ability.cannot?(:destroy, User.new), 'should not be able to destroy'
+      assert ability.can?(:destroy, @administrator), 'should be able to destroy itself'
+      assert ability.cannot?(:destroy, @administrator_2), 'should not be able to destroy other administrator'
+      assert ability.cannot?(:destroy, @super_administrator), 'should not be able to destroy super_administrator'
+    end
+
+    test 'should test abilities for super_administrator' do
+      sign_in @super_administrator
+      ability = Ability.new(@super_administrator)
+      assert ability.can?(:create, User.new), 'should be able to create'
+
+      assert ability.can?(:read, @subscriber), 'should be able to read subscriber'
+      assert ability.can?(:read, User.new), 'should be able to read'
+      assert ability.can?(:read, @administrator), 'should be able to read itself'
+      assert ability.can?(:read, @super_administrator), 'should be able to read itself'
+      assert ability.can?(:read, @super_administrator_2), 'should be able to read other super_administrator'
+
+      assert ability.can?(:update, @subscriber), 'should be able to update subscriber'
+      assert ability.can?(:update, User.new), 'should not be able to update'
+      assert ability.can?(:update, @administrator), 'should be able to update administrator'
+      assert ability.can?(:update, @super_administrator), 'should be able to update itself'
+      assert ability.cannot?(:update, @super_administrator_2), 'should not be able to update other super_administrator'
+
+      assert ability.can?(:destroy, @subscriber), 'should be able to destroy subscriber'
+      assert ability.can?(:destroy, User.new), 'should not be able to destroy'
+      assert ability.can?(:destroy, @administrator), 'should be able to destroy administrator'
+      assert ability.can?(:destroy, @super_administrator), 'should be able to destroy itself'
+      assert ability.cannot?(:destroy, @super_administrator_2), 'should not be able to destroy other super_administrator'
+    end
+
     private
 
     def initialize_test
-      @super_administrator = users(:anthony)
-      @administrator = users(:bob)
       @subscriber = users(:alice)
+      @administrator = users(:bob)
+      @administrator_2 = users(:lorie)
+      @super_administrator = users(:anthony)
+      @super_administrator_2 = users(:maria)
       sign_in @administrator
     end
 
     def upload_dropbox_paperclip_attachment
       puts '=== Uploading avatar to Dropbox'
       attachment = fixture_file_upload 'images/bart.png', 'image/png'
-      patch :update, id: @user, user: { avatar: attachment }
+      patch :update, id: @administrator, user: { avatar: attachment }
     end
 
     def remove_dropbox_paperclip_attachment(user)

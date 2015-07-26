@@ -61,6 +61,10 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test 'should count users' do
+    assert_equal User.count, 6
+  end
+
   private
 
   def initialize_test

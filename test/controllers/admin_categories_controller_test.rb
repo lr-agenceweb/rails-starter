@@ -18,12 +18,7 @@ module Admin
     #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      get :index
-      assert_redirected_to new_user_session_path
-      get :show, id: @category
-      assert_redirected_to new_user_session_path
-      get :edit, id: @category
-      assert_redirected_to new_user_session_path
+      assert_crud_actions(@category, new_user_session_path)
     end
 
     test 'should show index page if logged in' do
@@ -127,6 +122,43 @@ module Admin
       assert_redirected_to admin_categories_path
     end
 
+    #
+    # == Abilities
+    #
+    test 'should test abilities for subscriber' do
+      sign_in @subscriber
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, Category.new), 'should not be able to create'
+      assert ability.cannot?(:read, Category.new), 'should not be able to read'
+      assert ability.cannot?(:update, Category.new), 'should not be able to update'
+      assert ability.cannot?(:destroy, Category.new), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for administrator' do
+      ability = Ability.new(@administrator)
+      assert ability.cannot?(:create, Category.new), 'should not be able to create'
+      assert ability.can?(:read, Category.new), 'should be able to read'
+      assert ability.can?(:update, Category.new), 'should be able to update'
+      assert ability.cannot?(:destroy, Category.new), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for super_administrator' do
+      sign_in @super_administrator
+      ability = Ability.new(@super_administrator)
+      assert ability.can?(:create, Category.new), 'should be able to create'
+      assert ability.can?(:read, Category.new), 'should be able to read'
+      assert ability.can?(:update, Category.new), 'should be able to update'
+      assert ability.can?(:destroy, Category.new), 'should be able to destroy'
+    end
+
+    #
+    # == Subscriber
+    #
+    test 'should redirect to dashboard page if trying to access slider as subscriber' do
+      sign_in @subscriber
+      assert_crud_actions(@category, admin_dashboard_path)
+    end
+
     private
 
     def initialize_test
@@ -135,9 +167,25 @@ module Admin
       @category_search = categories(:search)
       @category_blog = categories(:blog)
 
-      @super_administrator = users(:anthony)
+      @subscriber = users(:alice)
       @administrator = users(:bob)
+      @super_administrator = users(:anthony)
       sign_in @administrator
+    end
+
+    def assert_crud_actions(obj, url)
+      get :index
+      assert_redirected_to url
+      get :show, id: obj
+      assert_redirected_to url
+      get :edit, id: obj
+      assert_redirected_to url
+      post :create, category: {}
+      assert_redirected_to url
+      patch :update, id: obj, category: {}
+      assert_redirected_to url
+      delete :destroy, id: obj
+      assert_redirected_to url
     end
   end
 end

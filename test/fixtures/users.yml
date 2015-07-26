@@ -38,10 +38,22 @@ anthony:
   email: anthony@test.fr
   role: super_administrator
 
+maria:
+  username: maria
+  slug: maria
+  email: maria@test.fr
+  role: super_administrator
+
 bob:
   username: bob
   slug: bob
   email: bob@test.fr
+  role: administrator
+
+lorie:
+  username: lorie
+  slug: lorie
+  email: lorie@test.fr
   role: administrator
 
 alice:
