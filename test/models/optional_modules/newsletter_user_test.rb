@@ -16,8 +16,16 @@ class NewsletterUserTest < ActiveSupport::TestCase
     assert_not NewsletterUser.testers?
   end
 
+  test 'should count testers' do
+    assert_equal 0, NewsletterUser.testers.count
+  end
+
+  test 'should count subscriber' do
+    assert_equal 3, NewsletterUser.subscribers.count
+  end
+
   test 'should extract name from email' do
-    assert_equal @newsletter_user.extract_name_from_email, 'foo'
+    assert_equal 'foo', @newsletter_user.extract_name_from_email
   end
 
   private
