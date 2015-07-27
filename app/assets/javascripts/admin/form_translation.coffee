@@ -1,11 +1,12 @@
 $ ->
-  if $('.available-locales').length
+  if $('.available-locales, form.slider').length
     switch_locale($('.available-locales'))
     slugify()
 
 
     $('form.slider .button.has_many_add').on 'click', (e) ->
       setTimeout (->
+        console.log 'test'
         switch_locale($('.has_many_container.slides').find('.inputs.has_many_fields:last').find('.available-locales:last'))
         return
       ), 20
