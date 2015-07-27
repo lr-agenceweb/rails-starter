@@ -5,4 +5,4 @@
             include_blank: false,
             hint: I18n.t('form.hint.role_name'),
             input_html: { class: 'chosen-select' },
-            selected: f.object.role.id unless f.object.new_record?
+            selected: f.object.new_record? ? '3' : f.object.role.id
