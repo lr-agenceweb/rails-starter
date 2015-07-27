@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     if comment_params[:nickname].blank?
       @comment = @commentable.comments.new(comment_params)
       @comment.user_id = current_user.id if user_signed_in?
-      @comment.validated = false if @setting.should_validate
+      @comment.validated = @setting.should_validate? ? false : true
       if @comment.save
         flash.now[:success] = 'Comment was successfully created.'
         flash.now[:success] = 'Commentaire ajouté avec succès. Il sera visible dès que l\'administrateur l\'aura validé' if @setting.should_validate
@@ -54,7 +54,7 @@ class CommentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = @commentable.comments.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

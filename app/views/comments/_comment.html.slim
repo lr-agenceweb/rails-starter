@@ -8,4 +8,4 @@
 
       footer
         - if can? :destroy, comment
-          = link_to 'Destroy', about_comment_path(@commentable, comment), method: :delete, remote: true, data: { confirm: 'Are you sure you want to remove this comment ?' }
+          = link_to 'Destroy', send("#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment), method: :delete, remote: true, data: { confirm: 'Are you sure you want to remove this comment ?' }
