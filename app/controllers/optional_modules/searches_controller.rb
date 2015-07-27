@@ -7,14 +7,10 @@ class SearchesController < ApplicationController
   # GET /rechercher
   # GET /rechercher.json
   def index
-    if params[:term].nil? || params[:term].blank? || params[:term].length < 3
+    if render_empty_array?
       @searches = []
     else
-      @searches = Post.search(params[:term], params[:locale])
-
-      @searches += Blog.search(params[:term], params[:locale]) if @blog_module.enabled?
-      @searches += Event.search(params[:term], params[:locale]) if @event_module.enabled?
-
+      set_search_array
       @not_paginated_searches = @searches
       @searches = Kaminari.paginate_array(@searches).page(params[:page]).per(5)
     end
@@ -30,5 +26,15 @@ class SearchesController < ApplicationController
 
   def search_module_enabled?
     not_found unless @search_module.enabled?
+  end
+
+  def set_search_array
+    @searches = Post.search(params[:term], params[:locale])
+    @searches += Blog.search(params[:term], params[:locale]) if @blog_module.enabled?
+    @searches += Event.search(params[:term], params[:locale]) if @event_module.enabled?
+  end
+
+  def render_empty_array?
+    params[:term].blank? || params[:term].length < 3
   end
 end
