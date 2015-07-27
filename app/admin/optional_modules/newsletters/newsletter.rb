@@ -1,4 +1,4 @@
-ActiveAdmin.register Newsletter do
+ActiveAdmin.register Newsletter, as: 'Letter' do
   menu parent: I18n.t('admin_menu.modules')
 
   permit_params :id,
@@ -35,7 +35,9 @@ ActiveAdmin.register Newsletter do
     end
   end
 
-  form partial: 'form'
+  form do |f|
+    render 'admin/newsletters/form', f: f
+  end
 
   #
   # == Controller
@@ -43,11 +45,7 @@ ActiveAdmin.register Newsletter do
   controller do
     include NewsletterHelper
 
-    before_action :set_newsletter,
-                  only: [
-                    :show, :edit, :update, :destroy,
-                    :send_newsletter, :send_newsletter_test
-                  ]
+    before_action :set_newsletter, only: [:send_newsletter, :send_newsletter_test]
     before_action :set_variables, only: [:preview]
 
     def send_newsletter
@@ -75,7 +73,7 @@ ActiveAdmin.register Newsletter do
         @title = @newsletter.title
       end
       @preview_newsletter = true
-      render layout: 'newsletter'
+      render '/admin/newsletters/preview', layout: 'newsletter'
     end
 
     private

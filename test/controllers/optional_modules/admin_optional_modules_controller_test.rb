@@ -17,35 +17,16 @@ module Admin
     #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      get :index
-      assert_redirected_to new_user_session_path
-      get :show, id: @optional_module
-      assert_redirected_to new_user_session_path
-      get :edit, id: @optional_module
-      assert_redirected_to new_user_session_path
-    end
-
-    test 'should redirect to dashboard if user is administrator' do
-      get :index
-      assert_redirected_to admin_dashboard_path
-      get :show, id: @optional_module
-      assert_redirected_to admin_dashboard_path
-      get :edit, id: @optional_module
-      assert_redirected_to admin_dashboard_path
-      delete :destroy, id: @optional_module
-      assert_redirected_to admin_dashboard_path
+      assert_crud_actions(@optional_module, new_user_session_path)
     end
 
     test 'should redirect to dashboard if user is subscriber' do
       sign_in @subscriber
-      get :index
-      assert_redirected_to admin_dashboard_path
-      get :show, id: @optional_module
-      assert_redirected_to admin_dashboard_path
-      get :edit, id: @optional_module
-      assert_redirected_to admin_dashboard_path
-      get :destroy, id: @optional_module
-      assert_redirected_to admin_dashboard_path
+      assert_crud_actions(@optional_module, admin_dashboard_path)
+    end
+
+    test 'should redirect to dashboard if user is administrator' do
+      assert_crud_actions(@optional_module, admin_dashboard_path)
     end
 
     test 'should be all good if user is super_administrator' do
@@ -56,19 +37,67 @@ module Admin
       assert :success
       get :edit, id: @optional_module
       assert :success
+      post :create, optional_module: {}
+      assert :success
+      patch :update, id: @optional_module, optional_module: {}
+      assert :success
       delete :destroy, id: @optional_module
       assert :success
+    end
+
+    #
+    # == Abilities
+    #
+    test 'should test abilities for subscriber' do
+      sign_in @subscriber
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, OptionalModule.new), 'should not be able to create'
+      assert ability.cannot?(:read, OptionalModule.new), 'should not be able to read'
+      assert ability.cannot?(:update, OptionalModule.new), 'should not be able to update'
+      assert ability.cannot?(:destroy, OptionalModule.new), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for administrator' do
+      ability = Ability.new(@administrator)
+      assert ability.cannot?(:create, OptionalModule.new), 'should not be able to create'
+      assert ability.cannot?(:read, OptionalModule.new), 'should not be able to read'
+      assert ability.cannot?(:update, OptionalModule.new), 'should not be able to update'
+      assert ability.cannot?(:destroy, OptionalModule.new), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for super_administrator' do
+      sign_in @super_administrator
+      ability = Ability.new(@super_administrator)
+      assert ability.can?(:create, OptionalModule.new), 'should be able to create'
+      assert ability.can?(:read, OptionalModule.new), 'should be able to read'
+      assert ability.can?(:update, OptionalModule.new), 'should be able to update'
+      assert ability.can?(:destroy, OptionalModule.new), 'should be able to destroy'
     end
 
     private
 
     def initialize_test
-      @super_administrator = users(:anthony)
-      @administrator = users(:bob)
-      @subscriber = users(:alice)
       @optional_module = optional_modules(:guest_book)
 
+      @subscriber = users(:alice)
+      @administrator = users(:bob)
+      @super_administrator = users(:anthony)
       sign_in @administrator
+    end
+
+    def assert_crud_actions(obj, url)
+      get :index
+      assert_redirected_to url
+      get :show, id: obj
+      assert_redirected_to url
+      get :edit, id: obj
+      assert_redirected_to url
+      post :create, optional_module: {}
+      assert_redirected_to url
+      patch :update, id: obj, optional_module: {}
+      assert_redirected_to url
+      delete :destroy, id: obj
+      assert_redirected_to url
     end
   end
 end

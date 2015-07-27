@@ -4,7 +4,7 @@ panel.panel t('activerecord.models.setting.other') do
     p.column t('activerecord.attributes.setting.subtitle'), :subtitle
 
     p.column('Actions') do |resource|
-      link_to(t('active_admin.edit'), edit_admin_setting_path(resource)) + ' ' + link_to('Voir', admin_setting_path(resource))
+      link_to(t('active_admin.edit'), edit_admin_parameter_path(resource)) + ' ' + link_to('Voir', admin_parameter_path(resource))
     end
   end
 end

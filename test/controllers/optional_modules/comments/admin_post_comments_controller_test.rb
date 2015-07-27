@@ -12,14 +12,12 @@ module Admin
 
     setup :initialize_test
 
+    #
+    # == Routes / Templates / Responses
+    #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      get :index
-      assert_redirected_to new_user_session_path
-      get :show, id: @comment
-      assert_redirected_to new_user_session_path
-      delete :destroy, id: @comment
-      assert_redirected_to new_user_session_path
+      assert_crud_actions(@comment, new_user_session_path)
     end
 
     test 'should show index page if logged in' do
@@ -66,6 +64,54 @@ module Admin
       assert_redirected_to admin_post_comments_path
     end
 
+    #
+    # == Abilities
+    #
+    test 'should test abilities for subscriber' do
+      sign_in @subscriber
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, Comment.new), 'should not be able to create'
+      assert ability.cannot?(:read, Comment.new), 'should not be able to read'
+      assert ability.cannot?(:update, Comment.new), 'should not be able to update'
+      assert ability.cannot?(:destroy, Comment.new), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for administrator' do
+      ability = Ability.new(@administrator)
+      assert ability.cannot?(:create, Comment.new), 'should not be able to create'
+      assert ability.can?(:read, Comment.new), 'should be able to read'
+      assert ability.cannot?(:update, Comment.new), 'should not be able to update'
+      assert ability.can?(:destroy, Comment.new), 'should be able to destroy'
+    end
+
+    test 'should test abilities for super_administrator' do
+      sign_in @super_administrator
+      ability = Ability.new(@super_administrator)
+      assert ability.cannot?(:create, Comment.new), 'should not be able to create'
+      assert ability.can?(:read, Comment.new), 'should be able to read'
+      assert ability.cannot?(:update, Comment.new), 'should not be able to update'
+      assert ability.can?(:destroy, Comment.new), 'should be able to destroy'
+    end
+
+    #
+    # == Subscriber
+    #
+    test 'should redirect to dashboard page if trying to access comment as subscriber' do
+      sign_in @subscriber
+      get :index
+      assert_response :success
+      get :show, id: @comment
+      assert_redirected_to admin_dashboard_path
+      get :edit, id: @comment
+      assert_redirected_to admin_dashboard_path
+      post :create, comment: {}
+      assert_redirected_to admin_dashboard_path
+      patch :update, id: @comment, comment: {}
+      assert_redirected_to admin_dashboard_path
+      delete :destroy, id: @comment
+      assert_redirected_to admin_dashboard_path
+    end
+
     # TODO: Fix broken test
     # test 'should destroy all comments if super_administrator' do
     #   sign_in @super_administrator
@@ -77,16 +123,30 @@ module Admin
     #   assert_redirected_to admin_post_comments_path
     # end
 
+    #
+    # == Module disabled
+    #
+    test 'should not access page if blog module is disabled' do
+      disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
+      sign_in @super_administrator
+      assert_crud_actions(@comment, admin_dashboard_path)
+      sign_in @administrator
+      assert_crud_actions(@comment, admin_dashboard_path)
+      sign_in @subscriber
+      assert_crud_actions(@comment, admin_dashboard_path)
+    end
+
     private
 
     def initialize_test
       @comment = comments(:one)
       @comment_administrator = comments(:two)
       @comment_subscriber = comments(:three)
+      @comment_module = optional_modules(:comment)
 
-      @super_administrator = users(:anthony)
-      @administrator = users(:bob)
       @subscriber = users(:alice)
+      @administrator = users(:bob)
+      @super_administrator = users(:anthony)
       sign_in @administrator
     end
   end

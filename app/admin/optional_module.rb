@@ -55,7 +55,7 @@ ActiveAdmin.register OptionalModule do
   controller do
     def update
       delete_adult_cookie
-      update!
+      super
     end
 
     private

@@ -7,8 +7,10 @@ class Ability
   def initialize(user)
     user ||= User.new # visitor user (not logged in)
 
+    alias_action :create, :read, :update, :destroy, to: :crud
+
     if user.super_administrator?
-      super_administrator_privilege
+      super_administrator_privilege(user)
     elsif user.administrator?
       administrator_privilege(user)
     elsif user.subscriber?
@@ -20,30 +22,31 @@ class Ability
 
   private
 
-  def super_administrator_privilege
+  def super_administrator_privilege(user)
     can :manage, :all
-    optional_modules_check
-    can :destroy, Comment
+    cannot [:update, :destroy], User, role: { name: 'super_administrator' }
+    can :manage, User, id: user.id
+    optional_modules_check(user)
   end
 
   def administrator_privilege(user)
     can :read, :all
-    can :manage, Post
-    can :manage, Newsletter
-    can [:update, :destroy], NewsletterUser
+    can :crud, Post
     can :update, Setting
-    can :manage, User, role_name: %w( administrator subscriber )
-    can :manage, User, id: user.id
+    can [:read, :destroy, :update], User, role_name: %w( subscriber )
     cannot :create, User
+    cannot [:update, :destroy], User, role: { name: %w( administrator ) }
+    cannot :manage, User, role: { name: %w( super_administrator ) }
+    can :manage, User, id: user.id
     can :update, Category
-    can [:read, :destroy], GuestBook
     can [:read, :update, :destroy], Background
     cannot :manage, OptionalModule
 
-    optional_modules_check
+    optional_modules_check(user)
   end
 
   def subscriber_privilege(user)
+    cannot_manage_optional_modules
     can [:update, :read, :destroy], User, id: user.id
     cannot :create, User
     can :create, About
@@ -51,7 +54,7 @@ class Ability
     can [:create, :read, :destroy], Comment, user_id: user.id
     cannot :destroy, Comment, user_id: nil
     cannot :manage, Setting
-    cannot :manage, OptionalModule
+    cannot :manage, Background
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end
 
@@ -60,9 +63,22 @@ class Ability
     cannot :destroy, :all
     cannot :update, :all
     cannot :create, :all
+    cannot_manage_optional_modules
   end
 
-  def optional_modules_check
+  def cannot_manage_optional_modules
+    cannot :manage, OptionalModule
+    cannot :manage, GuestBook
+    cannot :manage, NewsletterUser
+    cannot :manage, Comment
+    cannot :manage, Blog
+    cannot :manage, Slider
+    cannot :manage, Event
+    cannot :manage, Map
+    cannot :manage, Newsletter
+  end
+
+  def optional_modules_check(user)
     optional_modules = OptionalModule.all
 
     #
@@ -70,6 +86,7 @@ class Ability
     #
     if optional_modules.by_name('GuestBook').enabled?
       can [:read, :destroy], GuestBook
+      cannot [:create, :update], GuestBook
     else
       cannot :manage, GuestBook
     end
@@ -79,7 +96,7 @@ class Ability
     #
     if optional_modules.by_name('Newsletter').enabled?
       can :manage, Newsletter
-      can [:read, :update, :destroy], NewsletterUser
+      can [:create, :read, :update, :destroy], NewsletterUser
     else
       cannot :manage, Newsletter
       cannot :manage, NewsletterUser
@@ -92,6 +109,8 @@ class Ability
       can [:read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
       can [:read, :destroy], Comment, user_id: nil
       cannot :update, Comment
+      cannot :create, Comment
+      can :destroy, Comment if user.super_administrator?
     else
       cannot :manage, Comment
     end
@@ -100,7 +119,7 @@ class Ability
     # == Blog
     #
     if optional_modules.by_name('Blog').enabled?
-      can :manage, Blog
+      can :crud, Blog
     else
       cannot :manage, Blog
     end
@@ -109,7 +128,7 @@ class Ability
     # == Slider
     #
     if optional_modules.by_name('Slider').enabled?
-      can :manage, Slider
+      can :crud, Slider
     else
       cannot :manage, Slider
     end
@@ -118,7 +137,7 @@ class Ability
     # == Event
     #
     if optional_modules.by_name('Event').enabled?
-      can :manage, Event
+      can :crud, Event
     else
       cannot :manage, Event
     end

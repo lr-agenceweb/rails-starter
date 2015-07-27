@@ -68,7 +68,7 @@ fr:
       about:
         one: À propos
         other: À propos
-      setting:
+      parameter:
         one: Paramètre
         other: Paramètres
       referencement:
@@ -98,10 +98,10 @@ fr:
       post_comment:
         one: Commentaire
         other: Commentaires
-      newsletter_user:
+      letter_user:
         one: Newsletter Utilisateur
         other: Newsletter Utilisateurs
-      newsletter:
+      letter:
         one: Newsletter
         other: Newsletters
       blog:
@@ -119,6 +119,9 @@ fr:
       plan:
         one: Carte
         other: Cartes
+      role:
+        one: Rôle
+        other: Rôles
 
     attributes:
       post:

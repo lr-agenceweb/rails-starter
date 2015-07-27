@@ -3,6 +3,22 @@ DEFAULTS: &DEFAULTS
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
   content: ''
 
+# Home
+home_fr:
+  <<: *DEFAULTS
+  post_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
+  locale: fr
+  title: Article d'accueil
+  slug: article-d-accueil
+
+home_en:
+  <<: *DEFAULTS
+  post_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
+  locale: en
+  title: Home article
+  slug: home-article
+
+# About
 about_fr:
   <<: *DEFAULTS
   post_id: <%= ActiveRecord::FixtureSet.identify(:about) %>

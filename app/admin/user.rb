@@ -77,8 +77,10 @@ ActiveAdmin.register User do
         end
       end
 
-      column do
-        render 'admin/shared/roles/form', f: f if current_user_and_administrator?
+      if current_user_and_administrator?
+        column do
+          render 'admin/shared/roles/form', f: f
+        end
       end
     end
 
@@ -100,7 +102,7 @@ ActiveAdmin.register User do
 
       params[:user][:role_id] = current_user.role_id unless Role.exists?(params_user_role_id)
 
-      update! { admin_user_path(@user) }
+      super { admin_user_path(@user) }
     end
 
     def update_resource(object, attributes)

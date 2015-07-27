@@ -13,12 +13,12 @@ module Admin
     setup :initialize_test
 
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @anthony
+      sign_out @administrator
       get :index
       assert_redirected_to new_user_session_path
-      get :show, id: @home.id
+      get :show, id: @home
       assert_redirected_to new_user_session_path
-      get :edit, id: @home.id
+      get :edit, id: @home
       assert_redirected_to new_user_session_path
     end
 
@@ -28,34 +28,34 @@ module Admin
     end
 
     test 'should show show page if logged in' do
-      get :show, id: @home.id
+      get :show, id: @home
       assert_response :success
     end
 
     test 'should show edit page if logged in' do
-      get :edit, id: @home.id
+      get :edit, id: @home
       assert_response :success
     end
 
     test 'should update home if logged in' do
-      patch :update, id: @home.id, home: {}
+      patch :update, id: @home, home: {}
       assert_redirected_to admin_home_path(@home)
     end
 
-    ### It's not possible to create or delete Home posts currently
-    # test 'should destroy home' do
-    #   assert_difference ['Home.count', 'Referencement.count'], -1 do
-    #     delete :destroy, id: @home.id
-    #   end
-    #   assert_redirected_to admin_abouts_path
-    # end
+    test 'should destroy home' do
+      assert_difference ['Home.count', 'Referencement.count'], -1 do
+        delete :destroy, id: @home
+      end
+      assert_redirected_to admin_homes_path
+    end
 
     private
 
     def initialize_test
       @home = posts(:home)
-      @anthony = users(:anthony)
-      sign_in @anthony
+
+      @administrator = users(:bob)
+      sign_in @administrator
     end
   end
 end

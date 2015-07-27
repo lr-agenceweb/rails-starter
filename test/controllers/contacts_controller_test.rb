@@ -150,7 +150,5 @@ class ContactsControllerTest < ActionController::TestCase
 
   def initialize_test
     @locales = I18n.available_locales
-    @map_module = optional_modules(:map)
-    @super_administrator = users(:anthony)
   end
 end

@@ -98,7 +98,7 @@ ActiveAdmin.register Map, as: 'Plan' do
   controller do
     include ApplicationHelper
     before_action :set_map
-    before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? }
+    before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? && current_user_and_administrator? }
 
     private
 

@@ -55,5 +55,20 @@ module ActiveSupport
       assert_match Regexp.new(Regexp.escape(filename) + '$'), path
       assert_not File.exist?(model_instance_property.path(style)), "#{style} unduly processed"
     end
+
+    def assert_crud_actions(obj, url)
+      get :index
+      assert_redirected_to url
+      get :show, id: obj
+      assert_redirected_to url
+      get :edit, id: obj
+      assert_redirected_to url
+      post :create
+      assert_redirected_to url
+      patch :update, id: obj
+      assert_redirected_to url
+      delete :destroy, id: obj
+      assert_redirected_to url
+    end
   end
 end

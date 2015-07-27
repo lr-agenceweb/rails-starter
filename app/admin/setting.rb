@@ -1,4 +1,4 @@
-ActiveAdmin.register Setting do
+ActiveAdmin.register Setting, as: 'Parameter' do
   menu parent: 'configuration'
 
   permit_params :id,
@@ -36,7 +36,7 @@ ActiveAdmin.register Setting do
     columns do
       column do
         panel t('active_admin.details', model: active_admin_config.resource_label) do
-          attributes_table_for setting.decorate do
+          attributes_table_for parameter.decorate do
             row :logo
             row :title
             row :subtitle
@@ -47,7 +47,7 @@ ActiveAdmin.register Setting do
 
       column do
         panel t('active_admin.details', model: t('role.administrator')) do
-          attributes_table_for setting.decorate do
+          attributes_table_for parameter.decorate do
             row :name
             row :phone
             row :email
@@ -57,7 +57,7 @@ ActiveAdmin.register Setting do
 
       column do
         panel t('active_admin.details', model: 'Modules') do
-          attributes_table_for setting.decorate do
+          attributes_table_for parameter.decorate do
             row :breadcrumb
             row :social
           end
@@ -67,24 +67,19 @@ ActiveAdmin.register Setting do
   end
 
   form do |f|
-    render 'form', f: f
+    render '/admin/settings/form', f: f
   end
 
   #
   # == Controller
   #
   controller do
-    before_action :set_setting, only: [:show]
-    before_action :redirect_to_show, only: [:index]
+    before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? }
 
     private
 
     def redirect_to_show
-      redirect_to admin_setting_path(@setting)
-    end
-
-    def set_setting
-      @setting = Setting.find(params[:id])
+      redirect_to admin_parameter_path(Setting.first)
     end
   end
 end

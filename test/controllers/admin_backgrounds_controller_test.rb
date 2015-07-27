@@ -13,16 +13,11 @@ module Admin
     setup :initialize_test
 
     #
-    # == Routing
+    # == Routes / Templates / Responses
     #
     test 'should redirect to users/sign_in if not logged in' do
-      sign_out @bob
-      get :index
-      assert_redirected_to new_user_session_path
-      get :show, id: @background
-      assert_redirected_to new_user_session_path
-      get :edit, id: @background
-      assert_redirected_to new_user_session_path
+      sign_out @administrator
+      assert_crud_actions(@background, new_user_session_path)
     end
 
     test 'should show index page if logged in' do
@@ -55,9 +50,38 @@ module Admin
     #
     # == User role
     #
-    test 'should not access new page if administrator' do
-      get :new
-      assert_redirected_to admin_dashboard_path
+    test 'should redirect to dashboard page if trying to access background as subscriber' do
+      sign_in @subscriber
+      assert_crud_actions(@background, admin_dashboard_path)
+    end
+
+    #
+    # == Abilities
+    #
+    test 'should test abilities for subscriber' do
+      sign_in @subscriber
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, Background.new), 'should not be able to create'
+      assert ability.cannot?(:read, Background.new), 'should not be able to read'
+      assert ability.cannot?(:update, Background.new), 'should not be able to update'
+      assert ability.cannot?(:destroy, Background.new), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for administrator' do
+      ability = Ability.new(@administrator)
+      assert ability.cannot?(:create, Background.new), 'should not be able to create'
+      assert ability.can?(:read, Background.new), 'should be able to read'
+      assert ability.can?(:update, Background.new), 'should be able to update'
+      assert ability.can?(:destroy, Background.new), 'should be able to destroy'
+    end
+
+    test 'should test abilities for super_administrator' do
+      sign_in @super_administrator
+      ability = Ability.new(@super_administrator)
+      assert ability.can?(:create, Background.new), 'should be able to create'
+      assert ability.can?(:read, Background.new), 'should be able to read'
+      assert ability.can?(:update, Background.new), 'should be able to update'
+      assert ability.can?(:destroy, Background.new), 'should be able to destroy'
     end
 
     #
@@ -90,9 +114,11 @@ module Admin
       @category = categories(:home)
       @category_about = categories(:about)
       @background = backgrounds(:contact)
-      @anthony = users(:anthony)
-      @bob = users(:bob)
-      sign_in @bob
+
+      @subscriber = users(:alice)
+      @administrator = users(:bob)
+      @super_administrator = users(:anthony)
+      sign_in @administrator
     end
   end
 end
