@@ -18,5 +18,5 @@
 # == Map Model
 #
 class Map < ActiveRecord::Base
-  validates :postcode, presence: false, numericality: { only_integer: true }
+  validates :postcode, allow_blank: true, numericality: { only_integer: true }
 end
