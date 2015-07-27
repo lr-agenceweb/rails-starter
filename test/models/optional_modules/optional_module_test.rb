@@ -1,5 +1,8 @@
 require 'test_helper'
 
+#
+# == OptionalModule Model test
+#
 class OptionalModuleTest < ActiveSupport::TestCase
   setup :initialize_test
 

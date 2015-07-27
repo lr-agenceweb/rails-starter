@@ -14,6 +14,9 @@
 #  updated_at      :datetime         not null
 #
 
+#
+# == Map Model
+#
 class Map < ActiveRecord::Base
   validates :postcode, presence: false, numericality: { only_integer: true }
 end

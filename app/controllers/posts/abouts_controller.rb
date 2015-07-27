@@ -24,6 +24,6 @@ class AboutsController < PostsController
   private
 
   def set_about
-    @about = About.online.includes(:pictures, referencement: [:translations]).friendly.find(params[:id]) or not_found
+    @about = About.online.includes(:pictures, referencement: [:translations]).friendly.find(params[:id]) || not_found
   end
 end

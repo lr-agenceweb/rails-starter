@@ -43,7 +43,7 @@ class Picture < ActiveRecord::Base
                    medium: '256x256>',
                    small:  '90x90>>',
                    thumb:  '30x30>'
-                  }
+                 }
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
