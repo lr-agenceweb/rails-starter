@@ -97,6 +97,7 @@ ActiveAdmin.register Map, as: 'Plan' do
   #
   controller do
     include ApplicationHelper
+    skip_before_action :set_menu_elements, :set_background, :set_host_name, :set_newsletter_user, :set_search_autocomplete, :set_slider, :set_adult_validation
     before_action :set_map
     before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? && current_user_and_administrator? }
 
