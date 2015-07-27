@@ -12,14 +12,12 @@ module Admin
 
     setup :initialize_test
 
+    #
+    # == Routes / Templates / Responses
+    #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      get :index
-      assert_redirected_to new_user_session_path
-      get :show, id: @home
-      assert_redirected_to new_user_session_path
-      get :edit, id: @home
-      assert_redirected_to new_user_session_path
+      assert_crud_actions(@home, new_user_session_path)
     end
 
     test 'should show index page if logged in' do
@@ -49,12 +47,51 @@ module Admin
       assert_redirected_to admin_homes_path
     end
 
+    #
+    # == Abilities
+    #
+    test 'should test abilities for subscriber' do
+      sign_in @subscriber
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, Home.new), 'should not be able to create'
+      assert ability.cannot?(:read, @home), 'should not be able to read'
+      assert ability.cannot?(:update, @home), 'should not be able to update'
+      assert ability.cannot?(:destroy, @home), 'should not be able to destroy'
+    end
+
+    test 'should test abilities for administrator' do
+      ability = Ability.new(@administrator)
+      assert ability.can?(:create, Blog.new), 'should be able to create'
+      assert ability.can?(:read, @home), 'should be able to read'
+      assert ability.can?(:update, @home), 'should be able to update'
+      assert ability.can?(:destroy, @home), 'should be able to destroy'
+    end
+
+    test 'should test abilities for super_administrator' do
+      sign_in @super_administrator
+      ability = Ability.new(@super_administrator)
+      assert ability.can?(:create, Blog.new), 'should be able to create'
+      assert ability.can?(:read, @home), 'should be able to read'
+      assert ability.can?(:update, @home), 'should be able to update'
+      assert ability.can?(:destroy, @home), 'should be able to destroy'
+    end
+
+    #
+    # == Subscriber
+    #
+    test 'should redirect to dashboard page if trying to access blog as subscriber' do
+      sign_in @subscriber
+      assert_crud_actions(@home, admin_dashboard_path)
+    end
+
     private
 
     def initialize_test
       @home = posts(:home)
 
+      @subscriber = users(:alice)
       @administrator = users(:bob)
+      @super_administrator = users(:anthony)
       sign_in @administrator
     end
   end

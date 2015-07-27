@@ -41,7 +41,8 @@ class Ability
     can :update, Category
     can [:read, :update, :destroy], Background
     cannot :manage, OptionalModule
-
+    cannot [:read, :update, :destroy], About
+    can :manage, About, user_id: user.id
     optional_modules_check(user)
   end
 
@@ -49,8 +50,7 @@ class Ability
     cannot_manage_optional_modules
     can [:update, :read, :destroy], User, id: user.id
     cannot :create, User
-    can :create, About
-    can [:update, :read, :destroy], About, user_id: user.id
+    cannot :manage, About
     can [:create, :read, :destroy], Comment, user_id: user.id
     cannot :destroy, Comment, user_id: nil
     cannot :manage, Setting

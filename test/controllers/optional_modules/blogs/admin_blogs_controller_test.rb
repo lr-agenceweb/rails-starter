@@ -49,26 +49,26 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Blog.new), 'should not be able to create'
-      assert ability.cannot?(:read, Blog.new), 'should not be able to read'
-      assert ability.cannot?(:update, Blog.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Blog.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @blog), 'should not be able to read'
+      assert ability.cannot?(:update, @blog), 'should not be able to update'
+      assert ability.cannot?(:destroy, @blog), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.can?(:create, Blog.new), 'should be able to create'
-      assert ability.can?(:read, Blog.new), 'should be able to read'
-      assert ability.can?(:update, Blog.new), 'should be able to update'
-      assert ability.can?(:destroy, Blog.new), 'should be able to destroy'
+      assert ability.can?(:read, @blog), 'should be able to read'
+      assert ability.can?(:update, @blog), 'should be able to update'
+      assert ability.can?(:destroy, @blog), 'should be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.can?(:create, Blog.new), 'should be able to create'
-      assert ability.can?(:read, Blog.new), 'should be able to read'
-      assert ability.can?(:update, Blog.new), 'should be able to update'
-      assert ability.can?(:destroy, Blog.new), 'should be able to destroy'
+      assert ability.can?(:read, @blog), 'should be able to read'
+      assert ability.can?(:update, @blog), 'should be able to update'
+      assert ability.can?(:destroy, @blog), 'should be able to destroy'
     end
 
     #
