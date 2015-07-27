@@ -38,6 +38,7 @@ class NewsletterUser < ActiveRecord::Base
             inclusion: %w( subscriber tester )
 
   scope :testers, -> { where(role: 'tester') }
+  scope :subscribers, -> { where(role: 'subscriber') }
 
   attr_accessor :name
 

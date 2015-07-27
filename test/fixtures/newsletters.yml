@@ -14,4 +14,9 @@
 one:
   title: Première newsletter
   content: Ici le contenu de ma première newsletter
+  sent_at: <%= 1.day.ago.to_s(:db) %>
+
+not_sent:
+  title: Première newsletter
+  content: Ici le contenu de ma première newsletter
   sent_at: ~

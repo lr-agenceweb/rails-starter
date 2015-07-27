@@ -58,6 +58,20 @@ module Admin
     end
 
     #
+    # == Preview
+    #
+    test 'should render preview template and newsletter layout' do
+      I18n.available_locales.each do |locale|
+        I18n.with_locale(locale) do
+          get :preview, locale: locale.to_s, id: @newsletter
+          assert_response :success
+          assert_template :preview
+          assert_template layout: :newsletter
+        end
+      end
+    end
+
+    #
     # == Abilities
     #
     test 'should test abilities for subscriber' do
@@ -111,6 +125,7 @@ module Admin
 
     def initialize_test
       @newsletter = newsletters(:one)
+      @newsletter_user = newsletter_users(:newsletter_user_fr)
       @newsletter_module = optional_modules(:newsletter)
 
       @subscriber = users(:alice)
