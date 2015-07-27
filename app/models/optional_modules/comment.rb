@@ -35,7 +35,7 @@ class Comment < ActiveRecord::Base
   delegate :username, :email, to: :user, prefix: true, allow_nil: true
 
   validates :username, presence: true, unless: proc { |c| c.user_id }
-  validates :email,    presence: true, email_format: {}, unless: proc { |c| c.user_id }
+  validates :email,    presence: true, email_format: true, unless: proc { |c| c.user_id }
   validates :comment,  presence: true
   validates :lang,
             presence: true,

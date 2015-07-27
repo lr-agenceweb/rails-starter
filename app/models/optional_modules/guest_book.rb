@@ -21,7 +21,7 @@ class GuestBook < ActiveRecord::Base
   validates :username, presence: true
   validates :email,
             presence: true,
-            format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+            email_format: true
 
   validates :content,  presence: true
   validates :lang,

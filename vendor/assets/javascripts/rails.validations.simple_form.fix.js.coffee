@@ -14,3 +14,8 @@ ClientSideValidations.formBuilders['SimpleForm::FormBuilder'].wrappers.vertical_
     wrapper_class_element.removeClass(settings.wrapper_error_class)
     errorElement = wrapper_tag_element.find("#{settings.error_tag}.#{settings.error_class}")
     errorElement.remove()
+
+ClientSideValidations.validators.local['email_format'] = (element, options) ->
+  if !/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i.test(element.val())
+    return options.message
+  return

@@ -43,8 +43,8 @@ class Setting < ActiveRecord::Base
 
   validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}
 
-  validates :name,     presence: true
-  validates :email,    presence: true, email_format: {}
+  validates :name,  presence: true
+  validates :email, presence: true, email_format: true
 
   include DeletableAttachment
 

@@ -7,14 +7,15 @@ en:
           attributes:
             email:
               blank: Don't forget your email address ;)
-              invalid: Your email is invalid ;)
               taken: This email is not avalaible :(
         guest_book:
           attributes:
             email:
               blank: Don't forget your email address ;)
-              invalid: Your email is invalid ;)
               taken: This email is not avalaible :(
+  errors:
+    messages:
+      email_format: Your email is invalid ;)
 
     models:
       category:
@@ -33,6 +34,10 @@ en:
 
 # French
 fr:
+  errors:
+    messages:
+      email_format: Veuillez renseigner un email valide ;)
+
   activemodel: &errors
     errors:
       messages:
@@ -46,14 +51,17 @@ fr:
           attributes:
             email:
               blank: N'oubliez pas de renseigner votre email ;)
-              invalid: Veuillez renseigner un email valide ;)
               taken: Cet email n'est pas disponible :(
         guest_book:
           attributes:
             email:
               blank: N'oubliez pas de renseigner votre email ;)
-              invalid: Veuillez renseigner un email valide ;)
               taken: Cet email n'est pas disponible :(
+        user:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              email: ''
 
     models:
       user:
