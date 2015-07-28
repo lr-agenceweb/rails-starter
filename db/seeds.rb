@@ -2,7 +2,7 @@
 # == Resest content and setup id to 1
 #
 puts 'Reset table ID to 1'
-modeles_str = %w( Background Blog Blog::Translation Category Category::Translation Comment Event Event::Translation GuestBook Map Newsletter Newsletter::Translation NewsletterUser OptionalModule Picture Picture::Translation Post Post::Translation Referencement Referencement::Translation Role Setting Setting::Translation Slider Slide Slide::Translation StringBox StringBox::Translation User )
+modeles_str = %w( Background Blog Blog::Translation Category Category::Translation Comment Event Event::Translation GuestBook Map Newsletter Newsletter::Translation NewsletterUser OptionalModule Picture Picture::Translation Post Post::Translation Referencement Referencement::Translation Role Setting Setting::Translation Slider Slide Slide::Translation Social StringBox StringBox::Translation User )
 modeles_str.each do |modele_str|
   modele = modele_str.constantize
   modele.destroy_all
@@ -98,6 +98,7 @@ description = [
   'Module qui gère des événements à venir',
   'Module qui affiche une carte Mapbox sur le site',
   'Module qui gère les différents réseaux sociaux',
+  'Module qui affiche un fil d\'ariane sur le site'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(
