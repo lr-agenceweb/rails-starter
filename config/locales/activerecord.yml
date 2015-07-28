@@ -1,5 +1,9 @@
 # English
 en:
+  errors:
+    messages:
+      email_format: Your email is invalid ;)
+
   activerecord:
     errors:
       models:
@@ -13,10 +17,6 @@ en:
             email:
               blank: Don't forget your email address ;)
               taken: This email is not avalaible :(
-  errors:
-    messages:
-      email_format: Your email is invalid ;)
-
     models:
       category:
         one: Page
@@ -25,8 +25,11 @@ en:
         one: Custom content
         other: Custom contents
       post_comment:
-        one: Commen
-        other: Commens
+        one: Comment
+        other: Comments
+      comment:
+        one: Comment
+        other: Comments
 
     attributes:
       adult:

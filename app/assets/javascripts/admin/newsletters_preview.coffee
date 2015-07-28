@@ -43,5 +43,9 @@ alert_before_send_newsletter = ->
     $link = $(this)
     vex.dialog.confirm
       message: $link.data('vex-alert')
+      buttons: [
+        $.extend({}, vex.dialog.buttons.YES, text: I18n.t('newsletter.yes', locale: 'fr'))
+        $.extend({}, vex.dialog.buttons.NO, text: I18n.t('newsletter.no', locale: 'fr'))
+      ]
       callback: (value) ->
         window.location.href = $link.attr 'href' if value is true

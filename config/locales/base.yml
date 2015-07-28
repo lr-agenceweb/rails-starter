@@ -14,9 +14,15 @@ fr:
   maintenance:
     'true': En maintenance
     'false': En ligne
-  vex:
+  adult:
     'yes': 'Accepter'
     'no': 'Refuser'
+  delete:
+    'yes': 'Supprimer'
+    'no': 'Annuler'
+  newsletter:
+    'yes': 'Envoyer'
+    'no': 'Annuler'
   sent:
     'true': 'Envoyé'
     'false': 'Pas encore envoyé'
@@ -45,6 +51,12 @@ en:
   adult:
     'yes': 'Accept'
     'no': 'Decline'
+  delete:
+    'yes': 'Delete'
+    'no': 'Cancel'
+  newsletter:
+    'yes': 'Send'
+    'no': 'Cancel'
   sent:
     'true': 'Sent'
     'false': 'Not sent yet'

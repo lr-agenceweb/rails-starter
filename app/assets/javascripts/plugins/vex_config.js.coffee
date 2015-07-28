@@ -1,4 +1,4 @@
 $(document).on 'ready page:load page:restore', ->
   vex.defaultOptions.className = 'vex-theme-os'
-  vex.dialog.buttons.YES.text  = gon.vex_yes_text
-  vex.dialog.buttons.NO.text   = gon.vex_no_text
+  vex.dialog.buttons.YES.text  = I18n.t('delete.yes')
+  vex.dialog.buttons.NO.text   = I18n.t('delete.no')

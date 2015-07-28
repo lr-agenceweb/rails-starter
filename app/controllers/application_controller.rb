@@ -32,11 +32,7 @@ class ApplicationController < ActionController::Base
 
   def set_language
     @language = I18n.locale
-    gon.push(
-      language: @language,
-      vex_yes_text: t('vex.yes'),
-      vex_no_text: t('vex.no')
-    )
+    gon.push(language: @language)
   end
 
   def set_menu_elements

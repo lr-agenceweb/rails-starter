@@ -1,10 +1,10 @@
 <% unless @setting.should_validate %>
-  $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>")
+  $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
 <% end %>
 
-$('#comment_username').val('')
-$('#comment_email').val('')
-$('#comment_comment').val('')
+$('#comment_username').val('');
+$('#comment_email').val('');
+$('#comment_comment').val('');
 
 NProgress.done();
 
