@@ -40,6 +40,8 @@ class Social < ActiveRecord::Base
                  }
   validates_attachment_content_type :ikon, content_type: %r{\Aimage\/.*\Z}
 
+  include DeletableAttachment
+
   validates :title,
             presence: true,
             allow_blank: false,
@@ -50,5 +52,6 @@ class Social < ActiveRecord::Base
             inclusion: { in: allowed_kind_social_network }
   validates :link, allow_blank: true, url: true
 
-  include DeletableAttachment
+  scope :follow, -> { where(kind: 'follow') }
+  scope :share, -> { where(kind: 'share') }
 end

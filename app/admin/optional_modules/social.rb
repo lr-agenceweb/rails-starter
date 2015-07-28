@@ -63,7 +63,9 @@ ActiveAdmin.register Social do
                     disabled: current_user.super_administrator? ? false : :disbaled
                   }
 
-          f.input :link, hint: 'Lien du réseau social'
+          if f.object.kind != 'share'
+            f.input :link, hint: 'Lien du réseau social'
+          end
           f.input :enabled, hint: 'Activer ce réseau social ?'
         end
       end
@@ -74,7 +76,7 @@ ActiveAdmin.register Social do
           if f.object.decorate.ikon?
             f.input :delete_ikon,
                     as: :boolean,
-                    hint: 'Si coché, l\'icon du réseau social sera supprimée après mise à jour de l\'élément'
+                    hint: 'Si coché, l\'icône du réseau social sera supprimée après mise à jour de l\'élément'
           end
         end
       end

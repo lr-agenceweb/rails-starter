@@ -44,17 +44,44 @@ module Admin
     #
     # == Destroy
     #
-    test 'should destroy social' do
+    test 'should not destroy social' do
       assert_no_difference ['Social.count'] do
         delete :destroy, id: @social
       end
       assert_redirected_to admin_dashboard_path
     end
 
+    #
+    # == Validation rules
+    #
     test 'should remove forbidden key from object if administrator' do
       patch :update, id: @social, social: { title: 'Google+', kind: 'share' }
       assert_equal 'Facebook', assigns(:social).title
       assert_equal 'follow', assigns(:social).kind
+    end
+
+    test 'should not save if title is not allowed' do
+      sign_in @super_administrator
+      assert_no_difference ['Social.count'] do
+        post :create, social: { title: 'forbidden', kind: 'share' }
+      end
+      assert_not assigns(:social).valid?
+    end
+
+    test 'should not save if kind is not allowed' do
+      sign_in @super_administrator
+      assert_no_difference ['Social.count'] do
+        post :create, social: { title: 'Facebook', kind: 'forbidden' }
+      end
+      assert_not assigns(:social).valid?
+    end
+
+    test 'should not save if link is not correct' do
+      sign_in @super_administrator
+      assert_no_difference ['Social.count'] do
+        post :create, social: { title: 'Facebook', kind: 'share', link: 'http://forbidden' }
+      end
+      assert_not assigns(:social).valid?
     end
 
     #
