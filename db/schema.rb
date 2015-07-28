@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725002051) do
+ActiveRecord::Schema.define(version: 20150728135612) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -381,6 +381,20 @@ ActiveRecord::Schema.define(version: 20150725002051) do
   end
 
   add_index "slides", ["attachable_type", "attachable_id"], name: "index_slides_on_attachable_type_and_attachable_id", using: :btree
+
+  create_table "socials", force: :cascade do |t|
+    t.string   "title",             limit: 255
+    t.string   "link",              limit: 255
+    t.string   "kind",              limit: 255
+    t.boolean  "enabled",                         default: true
+    t.datetime "ikon_updated_at"
+    t.integer  "ikon_file_size",    limit: 4
+    t.string   "ikon_content_type", limit: 255
+    t.string   "ikon_file_name",    limit: 255
+    t.text     "retina_dimensions", limit: 65535
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
 
   create_table "string_box_translations", force: :cascade do |t|
     t.integer  "string_box_id", limit: 4,     null: false
