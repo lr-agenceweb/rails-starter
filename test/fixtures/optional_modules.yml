@@ -64,3 +64,13 @@ map:
   <<: *DEFAULTS
   name: Map
   enabled: true
+
+social:
+  <<: *DEFAULTS
+  name: Social
+  enabled: true
+
+breadcrumb:
+  <<: *DEFAULTS
+  name: Breadcrumb
+  enabled: true

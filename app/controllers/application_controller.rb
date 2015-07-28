@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
   before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
   before_action :set_slider, if: proc { @slider_module.enabled? }
+  before_action :set_socials_network, if: proc { @social_module.enabled? }
 
   decorates_assigned :setting, :category, :slider
 
@@ -67,6 +68,12 @@ class ApplicationController < ActionController::Base
 
   def set_slider
     @slider = Slider.includes(slides: [:translations]).online.by_page(controller_name.classify).first
+  end
+
+  def set_socials_network
+    socials_all = Social.enabled
+    @socials_follow = socials_all.follow
+    @socials_share = socials_all.share
   end
 
   def set_optional_modules

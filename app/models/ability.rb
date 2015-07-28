@@ -76,6 +76,7 @@ class Ability
     cannot :manage, Event
     cannot :manage, Map
     cannot :manage, Newsletter
+    cannot :manage, Social
   end
 
   def optional_modules_check(user)
@@ -111,8 +112,7 @@ class Ability
     if @comment_module.enabled?
       can [:read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
       can [:read, :destroy], Comment, user_id: nil
-      cannot :update, Comment
-      cannot :create, Comment
+      cannot [:create, :update], Comment
       can :destroy, Comment if user.super_administrator?
     else
       cannot :manage, Comment
@@ -153,6 +153,16 @@ class Ability
       cannot [:create, :destroy], Map
     else
       cannot :manage, Map
+    end
+
+    #
+    # == Map
+    #
+    if @social_module.enabled?
+      can [:update, :read], Social
+      cannot [:create, :destroy], Social if user.administrator?
+    else
+      cannot :manage, Social
     end
   end
 end
