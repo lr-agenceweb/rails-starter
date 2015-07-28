@@ -80,11 +80,14 @@ class Ability
 
   def optional_modules_check(user)
     optional_modules = OptionalModule.all
+    optional_modules.find_each do |optional_module|
+      instance_variable_set("@#{optional_module.name.underscore.singularize}_module", optional_module)
+    end
 
     #
     # == GuestBook
     #
-    if optional_modules.by_name('GuestBook').enabled?
+    if @guest_book_module.enabled?
       can [:read, :destroy], GuestBook
       cannot [:create, :update], GuestBook
     else
@@ -94,7 +97,7 @@ class Ability
     #
     # == Newsletter
     #
-    if optional_modules.by_name('Newsletter').enabled?
+    if @newsletter_module.enabled?
       can :manage, Newsletter
       can [:create, :read, :update, :destroy], NewsletterUser
     else
@@ -105,7 +108,7 @@ class Ability
     #
     # == Comment
     #
-    if optional_modules.by_name('Comment').enabled?
+    if @comment_module.enabled?
       can [:read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
       can [:read, :destroy], Comment, user_id: nil
       cannot :update, Comment
@@ -118,7 +121,7 @@ class Ability
     #
     # == Blog
     #
-    if optional_modules.by_name('Blog').enabled?
+    if @blog_module.enabled?
       can :crud, Blog
     else
       cannot :manage, Blog
@@ -127,7 +130,7 @@ class Ability
     #
     # == Slider
     #
-    if optional_modules.by_name('Slider').enabled?
+    if @slider_module.enabled?
       can :crud, Slider
     else
       cannot :manage, Slider
@@ -136,7 +139,7 @@ class Ability
     #
     # == Event
     #
-    if optional_modules.by_name('Event').enabled?
+    if @event_module.enabled?
       can :crud, Event
     else
       cannot :manage, Event
@@ -145,7 +148,7 @@ class Ability
     #
     # == Map
     #
-    if optional_modules.by_name('Map').enabled?
+    if @map_module.enabled?
       can [:update, :read], Map
       cannot [:create, :destroy], Map
     else
