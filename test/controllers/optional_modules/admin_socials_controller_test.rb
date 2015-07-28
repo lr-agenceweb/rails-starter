@@ -79,7 +79,15 @@ module Admin
     test 'should not save if link is not correct' do
       sign_in @super_administrator
       assert_no_difference ['Social.count'] do
-        post :create, social: { title: 'Facebook', kind: 'share', link: 'http://forbidden' }
+        post :create, social: { title: 'Facebook', kind: 'follow', link: 'http://forbidden' }
+      end
+      assert_not assigns(:social).valid?
+    end
+
+    test 'should not save if link is not present with follow kind' do
+      sign_in @super_administrator
+      assert_no_difference ['Social.count'] do
+        post :create, social: { title: 'Facebook', kind: 'follow' }
       end
       assert_not assigns(:social).valid?
     end

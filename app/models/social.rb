@@ -50,7 +50,9 @@ class Social < ActiveRecord::Base
             presence: true,
             allow_blank: true,
             inclusion: { in: allowed_kind_social_network }
-  validates :link, allow_blank: true, url: true
+  validates :link,
+            presence: true, if: proc { |social| social.kind == 'follow' },
+            url: true
 
   scope :follow, -> { where(kind: 'follow') }
   scope :share, -> { where(kind: 'share') }
