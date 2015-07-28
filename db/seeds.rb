@@ -382,17 +382,25 @@ NewsletterUser.create!(
 # == StringBox
 #
 puts 'Creating StringBox'
-string_box_keys = ['adult_not_validated_popup_content']
+string_box_keys = ['adult_not_validated_popup_content', 'error_404', 'error_422', 'error_500']
+string_box_title_fr = ['', 'Erreur 404', 'Erreur 422', 'Erreur 500']
+string_box_title_en = ['', 'Error 404', 'Error 404', 'Error 500']
 string_box_content_fr = [
-  'Afin de pouvoir accéder au site, vous devez être majeur. En cliquant sur accepter vous attestez avoir plus de 18 ans.'
+  'Afin de pouvoir accéder au site, vous devez être majeur. En cliquant sur accepter vous attestez avoir plus de 18 ans.',
+  'La page que vous tentez de voir n\'existe pas :(',
+  'La page que vous tentez de voir n\'est pas disponible pour l\'instant :(',
+  'Ooops, une erreur s\'est produite :( Veuillez réésayer ultérieurement'
 ]
 string_box_content_en = [
-  'In order to access the website, you must be adult. By clicking accept, you attest you are over 18 years old.'
+  'In order to access the website, you must be adult. By clicking accept, you attest you are over 18 years old.',
+  'The page you want to access doesn\'t exist :(',
+  'The page you want to access is not available now :(',
+  'Oops, something bad happend :( Please try again later'
 ]
 string_box_keys.each_with_index do |element, index|
   string_box = StringBox.create!(
     key: element,
-    title: '',
+    title: string_box_title_fr[index],
     content: string_box_content_fr[index]
   )
 
@@ -400,7 +408,7 @@ string_box_keys.each_with_index do |element, index|
     StringBox::Translation.create!(
       string_box_id: string_box.id,
       locale: 'en',
-      title: '',
+      title: string_box_title_en[index],
       content: string_box_content_en[index]
     )
   end

@@ -72,7 +72,7 @@ module SocialHelper
   # * *Returns* :
   #
   def social_share_buttons
-    return nil if params[:controller] == 'comments'
+    return nil if return_nil_for_social_share?
 
     element = params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
 
@@ -133,5 +133,9 @@ module SocialHelper
   #
   def title_seo_structure(element_title)
     "#{element_title} | #{@setting.title_and_subtitle}"
+  end
+
+  def return_nil_for_social_share?
+    params[:controller] == 'comments' || params[:controller] == 'errors'
   end
 end

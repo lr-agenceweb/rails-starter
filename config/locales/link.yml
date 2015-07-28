@@ -3,7 +3,7 @@ fr:
   link:
     read_more: Lire la suite
     know_more: En savoir plus
-    back_to: Retour à la page
+    back_to: "Retour à la page %{page}"
     see_page: Voir la page
     go_to: Aller sur le site
 
@@ -12,6 +12,6 @@ en:
   link:
     read_more: Read more
     know_more: Know more
-    back_to: Back to the page
+    back_to: "Back to the %{page} page"
     see_page: See the page
     go_to: Go on the website

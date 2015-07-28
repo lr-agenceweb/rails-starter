@@ -18,6 +18,9 @@ en:
               blank: Don't forget your email address ;)
               taken: This email is not avalaible :(
     models:
+      home:
+        one: Home
+        other: Homes
       category:
         one: Page
         other: Pages
