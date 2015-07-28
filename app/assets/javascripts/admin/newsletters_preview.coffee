@@ -3,10 +3,12 @@ $(document).on 'ready page:load page:restore', ->
 
   $('a.newsletter_preview_button.existing_record').on 'click', (e) ->
     e.preventDefault()
+    e.stopPropagation()
     preview_newsletter($(this), 'put')
 
   $('a.newsletter_preview_button.new_record').on 'click', (e) ->
     e.preventDefault()
+    e.stopPropagation()
     preview_newsletter($(this), 'post')
 
 # Save form in database, reload the page if creation, refresh the iframe if edition
@@ -29,8 +31,13 @@ preview_newsletter = (element, method) ->
 
       # Creation
       else
-        vex.dialog.alert I18n.t('newsletter.refresh_after_create', locale: 'fr')
-        window.location.replace "#{url}/#{data.id}/edit"
+        vex.dialog.alert
+          message: I18n.t('newsletter.refresh_after_create', locale: 'fr')
+          buttons: [
+            $.extend({}, vex.dialog.buttons.YES, text: I18n.t('alert.ok', locale: 'fr'))
+          ]
+          callback: (value) ->
+            window.location.replace "#{url}/#{data.id}/edit"
       return false
     error: (jqXHR, textStatus, errorThrown) ->
       console.log 'Error'

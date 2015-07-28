@@ -14,6 +14,8 @@ fr:
   maintenance:
     'true': En maintenance
     'false': En ligne
+  alert:
+    'ok': D'accord
   adult:
     'yes': 'Accepter'
     'no': 'Refuser'
@@ -48,6 +50,8 @@ en:
   maintenance:
     'true': In maintenance
     'false': Online
+  alert:
+    'ok': Alright
   adult:
     'yes': 'Accept'
     'no': 'Decline'
