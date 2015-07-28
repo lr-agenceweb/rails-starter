@@ -97,6 +97,7 @@ description = [
   'Module qui affiche slider avec des images défilantes',
   'Module qui gère des événements à venir',
   'Module qui affiche une carte Mapbox sur le site',
+  'Module qui gère les différents réseaux sociaux',
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(
