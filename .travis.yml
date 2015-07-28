@@ -24,6 +24,7 @@ script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate
   - RAILS_ENV=test bundle exec rake --trace db:test:prepare
   - RAILS_ENV=test bundle exec rake test
+  - RAILS_ENV=test bundle exec rake db:seed
 
 matrix:
   allow_failures:
