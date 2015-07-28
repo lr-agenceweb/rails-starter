@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728135612) do
+ActiveRecord::Schema.define(version: 20150728215511) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -327,6 +327,7 @@ ActiveRecord::Schema.define(version: 20150728135612) do
     t.boolean  "show_social",                     default: true
     t.boolean  "should_validate",                 default: true
     t.boolean  "maintenance",                     default: false
+    t.string   "twitter_username",  limit: 255
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size",    limit: 4
     t.string   "logo_content_type", limit: 255

@@ -81,7 +81,7 @@ module SocialHelper
     awesome_share_buttons(title_seo,
                           desc: element.referencement_description,
                           image: image_for_object(element),
-                          via: Figaro.env.twitter_username,
+                          via: @setting.twitter_username,
                           popup: true)
   end
 

@@ -168,6 +168,7 @@ fr:
         should_validate: Valider les commentaires et les messages du livre d'or ?
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
+        twitter_username: Nom d'utilisateur sur Twitter
       user:
         username: Nom d'utilisateur
         password: Mot de passe

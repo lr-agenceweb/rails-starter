@@ -12,6 +12,7 @@
 #  show_social       :boolean          default(TRUE)
 #  should_validate   :boolean          default(TRUE)
 #  maintenance       :boolean          default(FALSE)
+#  twitter_username  :string(255)
 #  logo_updated_at   :datetime
 #  logo_file_size    :integer
 #  logo_content_type :string(255)

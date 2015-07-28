@@ -11,6 +11,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
                 :maintenance,
                 :logo,
                 :delete_logo,
+                :twitter_username,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle
                 ]
@@ -61,6 +62,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
             attributes_table_for parameter.decorate do
               row :breadcrumb if breadcrumb_module.enabled?
               row :social if social_module.enabled?
+              row :twitter_username if social_module.enabled?
             end
           end
         end
@@ -81,6 +83,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
     def update
       params[:setting].delete :show_social unless @social_module.enabled?
       params[:setting].delete :show_breadcrumb unless @breadcrumb_module.enabled?
+      params[:setting].delete :twitter_username unless @social_module.enabled?
       params[:setting].delete :should_validate unless @guest_book_module.enabled? || @comment_module.enabled?
       super
     end
