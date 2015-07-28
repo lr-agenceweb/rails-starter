@@ -136,6 +136,9 @@ fr:
       role:
         one: Rôle
         other: Rôles
+      social:
+        one: Réseau Social
+        other: Réseaux Sociaux
 
     attributes:
       post:
@@ -273,6 +276,12 @@ fr:
         postcode: Code Postal
         address: Adresse
         status: État
+      social:
+        title: Titre
+        link: Lien
+        enabled: Activer
+        kind: Type
+        ikon: Icône
 
       shared:
         created_at: Créé le

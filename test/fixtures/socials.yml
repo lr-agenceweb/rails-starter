@@ -16,16 +16,20 @@
 #  updated_at        :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+facebook_follow:
+  title: Facebook
+  link: http://facebook.com
+  kind: follow
+  enabled: true
 
-one:
-  title: MyString
-  link: MyString
-  kind: MyString
-  enabled: false
+facebook_share:
+  title: Facebook
+  link: http://facebook.com
+  kind: share
+  enabled: true
 
-two:
-  title: MyString
-  link: MyString
-  kind: MyString
-  enabled: false
+twitter:
+  title: Twitter
+  link: http://twitter.com
+  kind: follow
+  enabled: true
