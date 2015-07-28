@@ -16,12 +16,17 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  key: MyString
-  title: MyString
-  content: MyText
+404:
+  key: error_404
+  title: Erreur 404
+  content: erreur 404
 
-two:
-  key: MyString
-  title: MyString
-  content: MyText
+422:
+  key: error_422
+  title: Erreur 422
+  content: erreur 422
+
+500:
+  key: error_500
+  title: Erreur 500
+  content: erreur 500
