@@ -11,7 +11,7 @@ class OptionalModuleDecorator < ApplicationDecorator
     status_tag_deco(I18n.t("enabled.#{model.enabled}"), color)
   end
 
-  def name
+  def name_deco
     content_tag :strong, t("optional_module.name.#{model.name.underscore.downcase}")
   end
 end

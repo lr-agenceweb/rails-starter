@@ -19,7 +19,7 @@ ActiveAdmin.register StringBox do
     actions
   end
 
-  show do
+  show title: proc { |sb| sb.title } do
     attributes_table do
       row :key
       row :title

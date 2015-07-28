@@ -19,7 +19,7 @@ ActiveAdmin.register OptionalModule do
 
   index do
     selectable_column
-    column :name
+    column :name_deco
     column :status
     column :description
 
@@ -28,7 +28,7 @@ ActiveAdmin.register OptionalModule do
 
   show do
     attributes_table do
-      row :name
+      row :name_deco
       row :status
       row :description
     end

@@ -243,6 +243,7 @@ fr:
         created_at: Créé le
       optional_module:
         name: Nom
+        name_deco: Nom
         enabled: Activé
         status: Statut
       guest_book:
