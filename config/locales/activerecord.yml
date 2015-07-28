@@ -282,6 +282,9 @@ fr:
         enabled: Activer
         kind: Type
         ikon: Icône
+        ikon_deco: Icône
+        status: État
+        delete_ikon: Supprimer l'icône
 
       shared:
         created_at: Créé le

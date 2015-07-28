@@ -20,4 +20,35 @@
 # == Social Model
 #
 class Social < ActiveRecord::Base
+  include Attachable
+
+  def self.allowed_title_social_network
+    %w( Facebook Twitter Google+ Email )
+  end
+
+  def self.allowed_kind_social_network
+    %w( follow share )
+  end
+
+  retina!
+  has_attachment :ikon,
+                 styles: {
+                   large: '128x128>',
+                   medium: '64x64>',
+                   small: '32x32>',
+                   thumb: '16x16>'
+                 }
+  validates_attachment_content_type :ikon, content_type: %r{\Aimage\/.*\Z}
+
+  validates :title,
+            presence: true,
+            allow_blank: false,
+            inclusion: { in: allowed_title_social_network }
+  validates :kind,
+            presence: true,
+            allow_blank: true,
+            inclusion: { in: allowed_kind_social_network }
+  validates :link, allow_blank: true, url: true
+
+  include DeletableAttachment
 end

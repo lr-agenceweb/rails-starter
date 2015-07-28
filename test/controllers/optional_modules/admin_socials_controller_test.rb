@@ -51,6 +51,12 @@ module Admin
       assert_redirected_to admin_dashboard_path
     end
 
+    test 'should remove forbidden key from object if administrator' do
+      patch :update, id: @social, social: { title: 'Google+', kind: 'share' }
+      assert_equal 'Facebook', assigns(:social).title
+      assert_equal 'follow', assigns(:social).kind
+    end
+
     #
     # == Abilities
     #
