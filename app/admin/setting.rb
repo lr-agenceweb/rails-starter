@@ -55,11 +55,13 @@ ActiveAdmin.register Setting, as: 'Parameter' do
         end
       end
 
-      column do
-        panel t('active_admin.details', model: 'Modules') do
-          attributes_table_for parameter.decorate do
-            row :breadcrumb if breadcrumb_module.enabled?
-            row :social if social_module.enabled?
+      if breadcrumb_module.enabled? || social_module.enabled?
+        column do
+          panel t('active_admin.details', model: 'Modules') do
+            attributes_table_for parameter.decorate do
+              row :breadcrumb if breadcrumb_module.enabled?
+              row :social if social_module.enabled?
+            end
           end
         end
       end
