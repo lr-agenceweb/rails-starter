@@ -59,7 +59,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
         panel t('active_admin.details', model: 'Modules') do
           attributes_table_for parameter.decorate do
             row :breadcrumb
-            row :social
+            row :social if social_module.enabled?
           end
         end
       end
@@ -75,6 +75,12 @@ ActiveAdmin.register Setting, as: 'Parameter' do
   #
   controller do
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? }
+
+    def update
+      params[:setting].delete :show_social unless @social_module.enabled?
+      params[:setting].delete :should_validate unless @guest_book_module.enabled? || @comment_module.enabled?
+      super
+    end
 
     private
 
