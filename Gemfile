@@ -94,7 +94,7 @@ gem 'analytical'
 #
 # == Social
 #
-gem 'awesome-share-buttons', github: 'anthony-robin/awesome-share-buttons'
+# gem 'awesome-share-buttons', github: 'anthony-robin/awesome-share-buttons'
 
 #
 # == Background Tasks

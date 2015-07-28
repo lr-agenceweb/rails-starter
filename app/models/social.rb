@@ -56,4 +56,5 @@ class Social < ActiveRecord::Base
 
   scope :follow, -> { where(kind: 'follow') }
   scope :share, -> { where(kind: 'share') }
+  scope :enabled, -> { where(enabled: true) }
 end

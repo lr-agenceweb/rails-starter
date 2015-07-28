@@ -58,14 +58,6 @@ GIT
       globalize (~> 5.0.0)
 
 GIT
-  remote: git://github.com/anthony-robin/awesome-share-buttons.git
-  revision: 6c532202aaed1d5df44a071be0bf7901980d725b
-  specs:
-    awesome-share-buttons (1.1)
-      coffee-rails
-      sass-rails
-
-GIT
   remote: git://github.com/anthony-robin/mapbox-rails.git
   revision: 0c0c99be86662dfde45d14dd74c7cb869fc46942
   specs:
@@ -616,7 +608,6 @@ DEPENDENCIES
   analytical
   annotate (~> 2.6.5)
   autosize-rails
-  awesome-share-buttons!
   better_errors
   bullet
   byebug

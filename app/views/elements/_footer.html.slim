@@ -8,6 +8,17 @@ footer.footer-container#footer
       == setting.credentials
 
     .small-12.large-4.columns.socials
+      / = awesome_social_share
       - if setting.show_social?
-        = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
-        = awesome_social_share
+        h3 Follow me
+        ul.inline-list
+          li = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
+
+          - unless @socials_share.nil?
+            - @socials_follow.each do |social_follow|
+              li
+                = link_to retina_image_tag(social_follow, :ikon, :small), social_follow.link, target: :_blank
+
+        - unless @socials_share.nil?
+          h4 Share me
+          = social_share_buttons
