@@ -8,6 +8,8 @@ ActiveAdmin.register Map, as: 'Plan' do
                 :geocode_address,
                 :latitude,
                 :longitude,
+                :marker_icon,
+                :marker_color,
                 :show_map
 
   decorate_with MapDecorator
@@ -43,6 +45,8 @@ ActiveAdmin.register Map, as: 'Plan' do
             row :full_address
             row :latlon
             row :geocode_address
+            row :marker_icon
+            row :marker_color_deco
           end
         end
       end
@@ -65,6 +69,18 @@ ActiveAdmin.register Map, as: 'Plan' do
     f.columns id: 'map-columns' do
       f.column do
         f.inputs 'Paramètre de la carte', class: 'map-settings' do
+          f.input :marker_icon,
+                  as: :select,
+                  collection: Map.allowed_markers,
+                  hint: I18n.t('form.hint.role_name'),
+                  input_html: { class: 'chosen-select' }
+
+          f.input :marker_color,
+                  input_html: {
+                    class: 'colorpicker',
+                    value: f.object.marker_color.blank? ? '' : f.object.marker_color
+                  }
+
           f.input :geocode_address,
                   hint: 'Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n\'est pas affichée)',
                   input_html: { id: 'gmaps-input-address' }

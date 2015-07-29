@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728215511) do
+ActiveRecord::Schema.define(version: 20150729175758) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20150728215511) do
     t.datetime "updated_at",                              null: false
   end
 
+  add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
@@ -171,6 +172,8 @@ ActiveRecord::Schema.define(version: 20150728215511) do
     t.string   "geocode_address", limit: 255
     t.float    "latitude",        limit: 24
     t.float    "longitude",       limit: 24
+    t.string   "marker_icon",     limit: 255
+    t.string   "marker_color",    limit: 255
     t.boolean  "show_map"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false

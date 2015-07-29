@@ -282,6 +282,9 @@ fr:
         postcode: Code Postal
         address: Adresse
         status: État
+        marker_icon: Icône du marqueur
+        marker_color: Couleur du marqueur
+        marker_color_deco: Couleur du marqueur
       social:
         title: Titre
         link: Lien
