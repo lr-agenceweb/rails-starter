@@ -42,6 +42,19 @@ module Admin
     end
 
     #
+    # == Validation
+    #
+    test 'should not update if marker_icon is not allowed' do
+      patch :update, id: @map, map: { marker_icon: 'bad_value' }
+      assert_not assigns(:plan).valid?
+    end
+
+    test 'should not update if postcode is not an integer' do
+      patch :update, id: @map, map: { postcode: 'bad_value' }
+      assert_not assigns(:plan).valid?
+    end
+
+    #
     # == Abilities
     #
     test 'should test abilities for subscriber' do

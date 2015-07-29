@@ -20,9 +20,13 @@
 # == Map Model
 #
 class Map < ActiveRecord::Base
-  validates :postcode, allow_blank: true, numericality: { only_integer: true }
-
   def self.allowed_markers
     %w( camera building park car bus college gift )
   end
+
+  validates :postcode, allow_blank: true, numericality: { only_integer: true }
+  validates :marker_icon,
+            presence: false,
+            allow_blank: true,
+            inclusion: { in: allowed_markers }
 end
