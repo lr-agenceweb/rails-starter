@@ -1,15 +1,12 @@
+@locales = I18n.available_locales
+
 #
 # == Resest content and setup id to 1
 #
 puts 'Reset table ID to 1'
-modeles_str = %w( Background Blog Blog::Translation Category Category::Translation Comment Event Event::Translation GuestBook Map Newsletter Newsletter::Translation NewsletterUser OptionalModule Picture Picture::Translation Post Post::Translation Referencement Referencement::Translation Role Setting Setting::Translation Slider Slide Slide::Translation Social StringBox StringBox::Translation User )
-modeles_str.each do |modele_str|
-  modele = modele_str.constantize
-  modele.destroy_all
-  ActiveRecord::Base.connection.execute("ALTER TABLE #{modele.table_name} AUTO_INCREMENT = 1")
-end
-
-@locales = I18n.available_locales
+require 'database_cleaner'
+DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.clean
 
 #
 # == Create user roles
