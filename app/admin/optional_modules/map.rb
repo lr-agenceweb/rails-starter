@@ -72,10 +72,11 @@ ActiveAdmin.register Map, as: 'Plan' do
           f.input :marker_icon,
                   as: :select,
                   collection: Map.allowed_markers,
-                  hint: I18n.t('form.hint.role_name'),
+                  hint: I18n.t('form.hint.map.marker_icon'),
                   input_html: { class: 'chosen-select' }
 
           f.input :marker_color,
+                  hint: I18n.t('form.hint.map.marker_color'),
                   input_html: {
                     class: 'colorpicker',
                     value: f.object.marker_color.blank? ? '' : f.object.marker_color

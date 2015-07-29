@@ -36,6 +36,10 @@ fr:
       start_date: Date de début de l'événement
       end_date: Date de fin de l'événement
 
+      map:
+        marker_icon: Choisissez une icône à afficher pour le marqueur de la carte
+        marker_color: Choisissez une couleur de fonds pour le marqueur de la carte
+
       media:
         online: Mettre cette image visible sur le site ?
         destroy: Suppression du media associé à l'article
