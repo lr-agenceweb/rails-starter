@@ -58,14 +58,6 @@ GIT
       globalize (~> 5.0.0)
 
 GIT
-  remote: git://github.com/anthony-robin/awesome-share-buttons.git
-  revision: 6c532202aaed1d5df44a071be0bf7901980d725b
-  specs:
-    awesome-share-buttons (1.1)
-      coffee-rails
-      sass-rails
-
-GIT
   remote: git://github.com/anthony-robin/mapbox-rails.git
   revision: 0c0c99be86662dfde45d14dd74c7cb869fc46942
   specs:
@@ -252,6 +244,7 @@ GEM
     css_parser (1.3.6)
       addressable
     daemons (1.1.9)
+    database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     debugging (1.1.0)
       binding.repl (~> 3.0)
@@ -279,8 +272,6 @@ GEM
       request_store (~> 1.0)
     dropbox-sdk (1.6.4)
       json
-    email_validator (1.6.0)
-      activemodel
     erubis (2.7.0)
     every_day_irb (2.0.0)
       cd (~> 1.0)
@@ -591,8 +582,6 @@ GEM
     valid_url (0.0.4)
       addressable
       rails
-    validates_email_format_of (1.6.2)
-      i18n
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.1.2)
@@ -620,7 +609,6 @@ DEPENDENCIES
   analytical
   annotate (~> 2.6.5)
   autosize-rails
-  awesome-share-buttons!
   better_errors
   bullet
   byebug
@@ -638,11 +626,11 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   compass-rails!
   daemons
+  database_cleaner
   delayed_job_active_record
   devise
   dkim
   draper
-  email_validator
   figaro
   font-awesome-rails
   foundation-rails
@@ -702,7 +690,6 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn-rails
   valid_url
-  validates_email_format_of
   vex_rails!
   web-console (~> 2.0)
   whenever

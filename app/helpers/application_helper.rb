@@ -17,7 +17,9 @@ module ApplicationHelper
       city: @map.city,
       postcode: @map.postcode,
       latitude: @map.latitude,
-      longitude: @map.longitude
+      longitude: @map.longitude,
+      marker_icon: @map.marker_icon.nil? ? '' : @map.marker_icon,
+      marker_color: @map.marker_color
     )
   end
 

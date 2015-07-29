@@ -70,8 +70,8 @@ class User < ActiveRecord::Base
             presence: true,
             uniqueness: { case_sensitive: false }
   validates :email,
-            presence: true,
-            email_format: {}
+            presence: { message: 'Ne doit pas être vide' },
+            email_format: true
 
   scope :except_super_administrator, -> { where.not(role_id: 1) }
 

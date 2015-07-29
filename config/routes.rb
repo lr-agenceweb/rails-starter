@@ -43,6 +43,11 @@ Rails.application.routes.draw do
     get '/newsletter/:id/:newsletter_user_id/:token', to: 'newsletters#see_in_browser', as: :see_in_browser_newsletter
     get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
     get '/admin/newsletters/:id/preview', to: 'admin/letters#preview', as: :preview_newsletter
+
+    # Errors
+    %w( 404 422 500 ).each do |code|
+      resources :errors, only: [:show], code: code, path: '', as: "error_#{code}".to_sym
+    end
   end
 
   get 'robots.:format', to: 'robots#index'

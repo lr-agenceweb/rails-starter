@@ -10,6 +10,6 @@ class StringBoxDecorator < ApplicationDecorator
   end
 
   def title
-    title? ? '/' : model.title
+    title? ? model.title : '/'
   end
 end

@@ -1,7 +1,7 @@
 class CreatePictures < ActiveRecord::Migration
   def up
     create_table :pictures do |t|
-      t.references :attachable, polymorphic: true
+      t.references :attachable, polymorphic: true, index: true
       t.attachment :image
       t.string :title
       t.text :description
@@ -11,9 +11,6 @@ class CreatePictures < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-
-    add_index :pictures, :attachable_type
-    add_index :pictures, :attachable_id
 
     Picture.create_translation_table! title: :string, description: :text
   end

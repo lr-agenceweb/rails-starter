@@ -4,6 +4,7 @@ ActiveAdmin.register Blog do
 
   permit_params :id,
                 :type,
+                :allow_comments,
                 :online,
                 :user_id,
                 translations_attributes: [
@@ -34,6 +35,7 @@ ActiveAdmin.register Blog do
     selectable_column
     column :image
     column :title
+    column :allow_comments_status
     column :status
     translation_status
     column :author_with_avatar
@@ -55,6 +57,22 @@ ActiveAdmin.register Blog do
   controller do
     before_create do |blog|
       blog.user_id = current_user.id
+    end
+
+    def create
+      delete_key_before_save
+      super
+    end
+
+    def update
+      delete_key_before_save
+      super
+    end
+
+    private
+
+    def delete_key_before_save
+      params[:blog].delete :allow_comments unless @comment_module.enabled?
     end
   end
 end

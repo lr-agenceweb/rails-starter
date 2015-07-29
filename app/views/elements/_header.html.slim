@@ -13,4 +13,4 @@ header.l-header-site.hide-for-print
 
     = render 'searches/form' if @search_module.enabled?
 
-    = breadcrumbs pretext: t('breadcrumb.here'), separator: '' if setting.show_breadcrumb?
+    = breadcrumbs pretext: t('breadcrumb.here'), separator: '' if @breadcrumb_module.enabled? && setting.show_breadcrumb?

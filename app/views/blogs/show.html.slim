@@ -19,6 +19,10 @@
 - if @comment_module.enabled?
   .row
     .small-12.columns
-      h3 Commentaires
-      = render 'comments/form'
-      = render 'comments/comments'
+      - if @blog.allow_comments?
+        h3 Commentaires
+        = render 'comments/form'
+        = render 'comments/comments'
+
+      - else
+        p = I18n.t('comment.disabled')

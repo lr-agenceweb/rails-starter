@@ -12,6 +12,7 @@
 #  show_social       :boolean          default(TRUE)
 #  should_validate   :boolean          default(TRUE)
 #  maintenance       :boolean          default(FALSE)
+#  twitter_username  :string(255)
 #  logo_updated_at   :datetime
 #  logo_file_size    :integer
 #  logo_content_type :string(255)
@@ -25,6 +26,8 @@ DEFAULTS: &DEFAULTS
   name: Rails Starter
   email: demo@startup.fr
   should_validate: true
+  show_social: false
+  show_breadcrumb: false
   maintenance: false
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>

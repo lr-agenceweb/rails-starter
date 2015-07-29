@@ -56,8 +56,6 @@ gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_
 gem 'autosize-rails'
 gem 'mail_form' # contact form
 gem 'wysiwyg-rails' # Froala editor
-gem 'validates_email_format_of'
-gem 'email_validator'
 gem 'valid_url'
 
 #
@@ -96,7 +94,7 @@ gem 'analytical'
 #
 # == Social
 #
-gem 'awesome-share-buttons', github: 'anthony-robin/awesome-share-buttons'
+# gem 'awesome-share-buttons', github: 'anthony-robin/awesome-share-buttons'
 
 #
 # == Background Tasks
@@ -166,6 +164,7 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.3.4'
+  gem 'database_cleaner'
 end
 
 group :test do

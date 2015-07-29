@@ -2,7 +2,7 @@ f.semantic_errors(*f.object.errors.keys)
 
 f.columns do
   f.column do
-    f.inputs t('activerecord.models.newsletter.one') do
+    f.inputs t('activerecord.models.letter.one') do
       f.translated_inputs 'Translated fields', switch_locale: false do |t|
         t.input :title, hint: I18n.t('form.hint.title_newsletter')
         t.input :content,
@@ -13,9 +13,7 @@ f.columns do
   end
 
   f.column do
-    f.inputs t('activerecord.attributes.newsletter.preview') do
-      render '/admin/newsletters/preview', f: f
-    end
+    render '/admin/newsletters/preview', f: f
   end
 end
 

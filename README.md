@@ -89,6 +89,12 @@ Create events (with start date and end date)
 * **Map**  
 Display a mapbox map of your organization or business  
 
+* **Social Network**  
+Display social networks icons to share your site or let users to follow you on this networks
+
+* **Breadcrumb**  
+Sow a breadcrumb on the page of your site
+
 Units Tests
 -----------
 Basics tests are included, just run `rake test`

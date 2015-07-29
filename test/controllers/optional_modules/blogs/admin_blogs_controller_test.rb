@@ -43,32 +43,47 @@ module Admin
     end
 
     #
+    # == Validations
+    #
+    test 'should not save allow_comments params if module is disabled' do
+      disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @blog, blog: { allow_comments: false }
+      assert assigns(:blog).allow_comments?
+    end
+
+    test 'should save allow_comments params if module is enabled' do
+      patch :update, id: @blog, blog: { allow_comments: false }
+      assert_not assigns(:blog).allow_comments?
+    end
+
+    #
     # == Abilities
     #
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Blog.new), 'should not be able to create'
-      assert ability.cannot?(:read, Blog.new), 'should not be able to read'
-      assert ability.cannot?(:update, Blog.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Blog.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @blog), 'should not be able to read'
+      assert ability.cannot?(:update, @blog), 'should not be able to update'
+      assert ability.cannot?(:destroy, @blog), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.can?(:create, Blog.new), 'should be able to create'
-      assert ability.can?(:read, Blog.new), 'should be able to read'
-      assert ability.can?(:update, Blog.new), 'should be able to update'
-      assert ability.can?(:destroy, Blog.new), 'should be able to destroy'
+      assert ability.can?(:read, @blog), 'should be able to read'
+      assert ability.can?(:update, @blog), 'should be able to update'
+      assert ability.can?(:destroy, @blog), 'should be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.can?(:create, Blog.new), 'should be able to create'
-      assert ability.can?(:read, Blog.new), 'should be able to read'
-      assert ability.can?(:update, Blog.new), 'should be able to update'
-      assert ability.can?(:destroy, Blog.new), 'should be able to destroy'
+      assert ability.can?(:read, @blog), 'should be able to read'
+      assert ability.can?(:update, @blog), 'should be able to update'
+      assert ability.can?(:destroy, @blog), 'should be able to destroy'
     end
 
     #
@@ -99,6 +114,7 @@ module Admin
       @blog = blogs(:blog_online)
       @blog_not_validate = blogs(:blog_offline)
       @blog_module = optional_modules(:blog)
+      @comment_module = optional_modules(:comment)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

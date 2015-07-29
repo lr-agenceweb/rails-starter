@@ -1,5 +1,9 @@
 # English
 en:
+  errors:
+    messages:
+      email_format: Your email is invalid ;)
+
   activerecord:
     errors:
       models:
@@ -7,16 +11,16 @@ en:
           attributes:
             email:
               blank: Don't forget your email address ;)
-              invalid: Your email is invalid ;)
               taken: This email is not avalaible :(
         guest_book:
           attributes:
             email:
               blank: Don't forget your email address ;)
-              invalid: Your email is invalid ;)
               taken: This email is not avalaible :(
-
     models:
+      home:
+        one: Home
+        other: Homes
       category:
         one: Page
         other: Pages
@@ -24,8 +28,11 @@ en:
         one: Custom content
         other: Custom contents
       post_comment:
-        one: Commen
-        other: Commens
+        one: Comment
+        other: Comments
+      comment:
+        one: Comment
+        other: Comments
 
     attributes:
       adult:
@@ -33,6 +40,10 @@ en:
 
 # French
 fr:
+  errors:
+    messages:
+      email_format: Veuillez renseigner un email valide ;)
+
   activemodel: &errors
     errors:
       messages:
@@ -46,14 +57,17 @@ fr:
           attributes:
             email:
               blank: N'oubliez pas de renseigner votre email ;)
-              invalid: Veuillez renseigner un email valide ;)
               taken: Cet email n'est pas disponible :(
         guest_book:
           attributes:
             email:
               blank: N'oubliez pas de renseigner votre email ;)
-              invalid: Veuillez renseigner un email valide ;)
               taken: Cet email n'est pas disponible :(
+        user:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              email: ''
 
     models:
       user:
@@ -119,9 +133,15 @@ fr:
       plan:
         one: Carte
         other: Cartes
+      map:
+        one: Carte
+        other: Cartes
       role:
         one: Rôle
         other: Rôles
+      social:
+        one: Réseau Social
+        other: Réseaux Sociaux
 
     attributes:
       post:
@@ -134,11 +154,15 @@ fr:
         type_title: Page
         author_with_avatar: Auteur
         status: Statut
+        allow_comments: Autoriser les commentaires
+        allow_comments_status: Autoriser les commentaires
       blog:
         title: Titre
         content: Contenu
         author_with_avatar: Auteur
         status: Statut
+        allow_comments: Autoriser les commentaires
+        allow_comments_status: Autoriser les commentaires
       setting:
         title: Titre
         subtitle: Sous-titre
@@ -151,6 +175,7 @@ fr:
         should_validate: Valider les commentaires et les messages du livre d'or ?
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
+        twitter_username: Nom d'utilisateur sur Twitter
       user:
         username: Nom d'utilisateur
         password: Mot de passe
@@ -194,7 +219,8 @@ fr:
       background:
         attachable_type: Page associée
         image: Image
-        category_name: Categorie associée
+        image_deco: Image
+        category_name: Page associée
         _destroy: Supprimer ?
       picture:
         type: Catégorie
@@ -222,6 +248,7 @@ fr:
         created_at: Créé le
       optional_module:
         name: Nom
+        name_deco: Nom
         enabled: Activé
         status: Statut
       guest_book:
@@ -259,6 +286,18 @@ fr:
         postcode: Code Postal
         address: Adresse
         status: État
+        marker_icon: Icône du marqueur
+        marker_color: Couleur du marqueur
+        marker_color_deco: Couleur du marqueur
+      social:
+        title: Titre
+        link: Lien
+        enabled: Activer
+        kind: Type
+        ikon: Icône
+        ikon_deco: Icône
+        status: État
+        delete_ikon: Supprimer l'icône
 
       shared:
         created_at: Créé le

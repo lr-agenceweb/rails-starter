@@ -9,11 +9,24 @@
 #  geocode_address :string(255)
 #  latitude        :float(24)
 #  longitude       :float(24)
+#  marker_icon     :string(255)
+#  marker_color    :string(255)
 #  show_map        :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
 
+#
+# == Map Model
+#
 class Map < ActiveRecord::Base
-  validates :postcode, presence: false, numericality: { only_integer: true }
+  def self.allowed_markers
+    %w( camera building park car bus college gift )
+  end
+
+  validates :postcode, allow_blank: true, numericality: { only_integer: true }
+  validates :marker_icon,
+            presence: false,
+            allow_blank: true,
+            inclusion: { in: allowed_markers }
 end

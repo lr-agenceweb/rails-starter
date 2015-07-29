@@ -12,6 +12,7 @@
 #  show_social       :boolean          default(TRUE)
 #  should_validate   :boolean          default(TRUE)
 #  maintenance       :boolean          default(FALSE)
+#  twitter_username  :string(255)
 #  logo_updated_at   :datetime
 #  logo_file_size    :integer
 #  logo_content_type :string(255)
@@ -43,8 +44,8 @@ class Setting < ActiveRecord::Base
 
   validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}
 
-  validates :name,     presence: true
-  validates :email,    presence: true, email_format: {}
+  validates :name,  presence: true
+  validates :email, presence: true, email_format: true
 
   include DeletableAttachment
 

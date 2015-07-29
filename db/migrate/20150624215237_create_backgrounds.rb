@@ -1,8 +1,7 @@
 class CreateBackgrounds < ActiveRecord::Migration
   def change
     create_table :backgrounds do |t|
-      t.integer :attachable_id
-      t.string :attachable_type
+      t.references :attachable, polymorphic: true, index: true
       t.attachment :image
       t.text :retina_dimensions
 

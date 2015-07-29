@@ -62,51 +62,57 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Background.new), 'should not be able to create'
-      assert ability.cannot?(:read, Background.new), 'should not be able to read'
-      assert ability.cannot?(:update, Background.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Background.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @background), 'should not be able to read'
+      assert ability.cannot?(:update, @background), 'should not be able to update'
+      assert ability.cannot?(:destroy, @background), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.cannot?(:create, Background.new), 'should not be able to create'
-      assert ability.can?(:read, Background.new), 'should be able to read'
-      assert ability.can?(:update, Background.new), 'should be able to update'
-      assert ability.can?(:destroy, Background.new), 'should be able to destroy'
+      assert ability.can?(:read, @background), 'should be able to read'
+      assert ability.can?(:update, @background), 'should be able to update'
+      assert ability.can?(:destroy, @background), 'should be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.can?(:create, Background.new), 'should be able to create'
-      assert ability.can?(:read, Background.new), 'should be able to read'
-      assert ability.can?(:update, Background.new), 'should be able to update'
-      assert ability.can?(:destroy, Background.new), 'should be able to destroy'
+      assert ability.can?(:read, @background), 'should be able to read'
+      assert ability.can?(:update, @background), 'should be able to update'
+      assert ability.can?(:destroy, @background), 'should be able to destroy'
     end
 
     #
     # == Background
     #
-    # # TODO: Fix this broken test
-    # test 'should update background if new picture is sent' do
-    #   attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-    #   patch :update, id: @background, background: { image: attachment }
-    #   assert_equal assigns(:background).image_file_name, 'background-paris.jpg'
-    #   assert_equal assigns(:background).image_content_type, 'image/jpeg'
-    # end
+    test 'should update background if new picture is sent' do
+      attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+      patch :update, id: @background, background: { image: attachment }
+      background = assigns(:background)
+      assert_equal background.image_file_name, 'background-paris.jpg'
+      assert_equal background.image_content_type, 'image/jpeg'
+      delete :destroy, id: background.id
+    end
 
-    # # TODO: Fix this broken test
-    # test 'should destroy all attachments when destroying background' do
-    #   attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-    #   patch :update, id: @background, background: { image: attachment }
+    test 'should destroy all attachments when destroying background' do
+      attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+      patch :update, id: @background, background: { image: attachment }
 
-    #   background = assigns(:background)
-    #   existing_styles = background.image.styles.keys.collect do |style|
-    #     background.image.path(style)
-    #   end
-    #   delete :destroy, id: background.id
-    #   existing_styles.each { |f| assert_not File.exist?(f) }
-    # end
+      background = assigns(:background)
+      existing_styles = []
+      background.image.styles.keys.collect do |style|
+        f = background.image.path(style)
+        assert File.exist?(f), "File #{f} should exist"
+        existing_styles << f
+      end
+
+      delete :destroy, id: background.id
+      existing_styles.each do |f|
+        assert_not File.exist?(f), "File #{f} should not exist"
+      end
+    end
 
     private
 

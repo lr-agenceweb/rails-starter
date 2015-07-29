@@ -50,24 +50,27 @@ module Admin
       assert_not @setting.update(title: nil)
     end
 
-    #
-    # == Logo
-    #
-    test 'should be able to upload logo' do
-      upload_paperclip_attachment
-      setting = assigns(:parameter)
-      assert setting.logo?, 'a logo should have been uploaded'
-      assert_equal 'bart.png', setting.logo_file_name
-      assert_equal 'image/png', setting.logo_content_type
+    test 'should not update social param if optional module is disabled' do
+      disable_optional_module @super_administrator, @social_module, 'Social' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @setting, setting: { show_social: '1' }
+      assert_not assigns(:setting).show_social?
     end
 
-    # # TODO: Fix this broken test
-    # test 'should be able to destroy logo' do
-    #   upload_paperclip_attachment
-    #   remove_paperclip_attachment
-    #   assert_nil assigns(:setting).logo_file_name
-    #   assert_not assigns(:setting).logo?
-    # end
+    test 'should not update breadcrumb param if optional module is disabled' do
+      disable_optional_module @super_administrator, @breadcrumb_module, 'Breadcrumb' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @setting, setting: { show_breadcrumb: '1' }
+      assert_not assigns(:setting).show_breadcrumb?
+    end
+
+    test 'should not update should_validate param if guest_book and comment modules are disabled' do
+      disable_optional_module @super_administrator, @guest_book_module, 'GuestBook' # in test_helper.rb
+      disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @setting, setting: { should_validate: '0' }
+      assert assigns(:setting).should_validate?
+    end
 
     #
     # == Abilities
@@ -106,10 +109,49 @@ module Admin
       assert_crud_actions(@setting, admin_dashboard_path)
     end
 
+    #
+    # == Logo
+    #
+    test 'should be able to upload logo' do
+      upload_paperclip_attachment
+      setting = assigns(:parameter)
+      assert setting.logo?, 'a logo should have been uploaded'
+      assert_equal 'bart.png', setting.logo_file_name
+      assert_equal 'image/png', setting.logo_content_type
+    end
+
+    # TODO: Fix this broken test
+    test 'should be able to destroy logo' do
+      existing_styles = []
+
+      upload_paperclip_attachment
+      setting = assigns(:parameter)
+
+      setting.logo.styles.keys.collect do |style|
+        f = setting.logo.path(style)
+        assert File.exist?(f), "File #{f} should exist"
+        existing_styles << f
+      end
+
+      # remove_paperclip_attachment(setting)
+      # setting = assigns(:parameter)
+
+      # assert_nil setting.logo_file_name
+      # assert_not setting.logo?
+
+      # existing_styles.each do |f|
+      #   assert_not File.exist?(f), "File #{f} should not exist"
+      # end
+    end
+
     private
 
     def initialize_test
       @setting = settings(:one)
+      @social_module = optional_modules(:social)
+      @guest_book_module = optional_modules(:guest_book)
+      @comment_module = optional_modules(:comment)
+      @breadcrumb_module = optional_modules(:breadcrumb)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)
@@ -123,9 +165,9 @@ module Admin
       patch :update, id: @setting, setting: { logo: attachment }
     end
 
-    def remove_paperclip_attachment
+    def remove_paperclip_attachment(setting)
       puts '=== Removing logo'
-      patch :update, id: assigns(:setting), setting: { logo: nil, delete_logo: '1' }
+      patch :update, id: setting, setting: { delete_logo: '1' }
     end
 
     def assert_crud_actions(obj, url)

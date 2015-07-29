@@ -1,0 +1,6 @@
+.row
+  .small-12.columns
+    h2 = @error.title
+    div == @error.content
+
+    = link_to I18n.t('link.back_to', page: I18n.t('activerecord.models.home.one')), root_path

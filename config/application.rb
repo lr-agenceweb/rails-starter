@@ -41,5 +41,8 @@ module Startup
 
     # Mailer
     config.active_job.queue_adapter = :delayed_job
+
+    # Override default errors
+    config.exceptions_app = self.routes
   end
 end

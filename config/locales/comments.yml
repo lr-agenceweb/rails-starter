@@ -1,0 +1,23 @@
+# English
+en:
+  comment:
+    disabled: Comments are disabled for this article
+    create_success: Your comment was successfully created.
+    create_success_with_validate: Your comment was successfully created. It will appear on website after moderation.
+    captcha: Captcha caught you !
+    destroy:
+      success: The comment has been destroyed.
+      error: An error occured when trying to destroy the comment
+      not_allowed: You are not allowed to destroy this comment
+
+# French
+fr:
+  comment:
+    disabled: Les commentaires sont désactivés pour cet article
+    create_success: Votre commentaire a bien été ajouté.
+    create_success_with_validate: Votre commentaire sera visible dès que l'administrateur l'aura validé
+    captcha: Attrapé par le captcha !
+    destroy:
+      success: Le commentaire a été supprimé.
+      error: Une erreur s'est produite au moment de supprimé le commentaire
+      not_allowed: Vous n'êtes pas autorisé à supprimer ce commentaire

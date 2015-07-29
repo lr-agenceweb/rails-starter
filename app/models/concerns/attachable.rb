@@ -4,6 +4,9 @@
 module Attachable
   extend ActiveSupport::Concern
 
+  #
+  # == ClassMethod
+  #
   module ClassMethods
     def has_attachment(name, options = {})
       model_name = table_name

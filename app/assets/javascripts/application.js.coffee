@@ -4,6 +4,7 @@
 #= require jquery-ui/autocomplete
 #= require foundation/foundation
 #= require foundation
+#= require plugins/foundation_init
 #= require turbolinks
 #= require nprogress
 #= require nprogress-turbolinks
@@ -15,8 +16,8 @@
 #= require js.cookie
 #= require vex.combined.min.js
 #= require plugins/vex_config
-#= require awesome-share-buttons
-#= require plugins/awesome-share-buttons
+#= require plugins/override_rails_confirm
+#= require classes/social_share_class
 #= require mapbox
 #= require plugins/mapbox
 #= require magnific-popup
@@ -41,3 +42,4 @@ $(document).on 'ready page:load page:restore', ->
     # image:
     #   titleSrc: (item) ->
     #     return item.el.attr('title')
+

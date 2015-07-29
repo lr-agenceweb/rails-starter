@@ -33,6 +33,20 @@ about_en:
   title: Site Hosting
   slug: site-hosting
 
+about_2_fr:
+  <<: *DEFAULTS
+  post_id: <%= ActiveRecord::FixtureSet.identify(:about_2) %>
+  locale: fr
+  title: Article 2 A Propos
+  slug: article-2-a-propos
+
+about_2_en:
+  <<: *DEFAULTS
+  post_id: <%= ActiveRecord::FixtureSet.identify(:about_2) %>
+  locale: en
+  title: About article 2 !
+  slug: about-article-2
+
 # Tests
 about_test_fr:
   <<: *DEFAULTS

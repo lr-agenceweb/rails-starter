@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725002051) do
+ActiveRecord::Schema.define(version: 20150729205322) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -39,13 +39,14 @@ ActiveRecord::Schema.define(version: 20150725002051) do
   add_index "blog_translations", ["locale"], name: "index_blog_translations_on_locale", using: :btree
 
   create_table "blogs", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "slug",       limit: 255
-    t.text     "content",    limit: 65535
-    t.boolean  "online",                   default: true
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "title",          limit: 255
+    t.string   "slug",           limit: 255
+    t.text     "content",        limit: 65535
+    t.boolean  "allow_comments",               default: true
+    t.boolean  "online",                       default: true
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
@@ -172,6 +173,8 @@ ActiveRecord::Schema.define(version: 20150725002051) do
     t.string   "geocode_address", limit: 255
     t.float    "latitude",        limit: 24
     t.float    "longitude",       limit: 24
+    t.string   "marker_icon",     limit: 255
+    t.string   "marker_color",    limit: 255
     t.boolean  "show_map"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
@@ -262,15 +265,16 @@ ActiveRecord::Schema.define(version: 20150725002051) do
   add_index "post_translations", ["post_id"], name: "index_post_translations_on_post_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "type",       limit: 255
-    t.string   "title",      limit: 255
-    t.string   "slug",       limit: 255
-    t.text     "content",    limit: 65535
-    t.boolean  "online",                   default: true
-    t.integer  "position",   limit: 4
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "type",           limit: 255
+    t.string   "title",          limit: 255
+    t.string   "slug",           limit: 255
+    t.text     "content",        limit: 65535
+    t.boolean  "allow_comments",               default: true
+    t.boolean  "online",                       default: true
+    t.integer  "position",       limit: 4
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
@@ -327,6 +331,7 @@ ActiveRecord::Schema.define(version: 20150725002051) do
     t.boolean  "show_social",                     default: true
     t.boolean  "should_validate",                 default: true
     t.boolean  "maintenance",                     default: false
+    t.string   "twitter_username",  limit: 255
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size",    limit: 4
     t.string   "logo_content_type", limit: 255
@@ -381,6 +386,20 @@ ActiveRecord::Schema.define(version: 20150725002051) do
   end
 
   add_index "slides", ["attachable_type", "attachable_id"], name: "index_slides_on_attachable_type_and_attachable_id", using: :btree
+
+  create_table "socials", force: :cascade do |t|
+    t.string   "title",             limit: 255
+    t.string   "link",              limit: 255
+    t.string   "kind",              limit: 255
+    t.boolean  "enabled",                         default: true
+    t.datetime "ikon_updated_at"
+    t.integer  "ikon_file_size",    limit: 4
+    t.string   "ikon_content_type", limit: 255
+    t.string   "ikon_file_name",    limit: 255
+    t.text     "retina_dimensions", limit: 65535
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
 
   create_table "string_box_translations", force: :cascade do |t|
     t.integer  "string_box_id", limit: 4,     null: false

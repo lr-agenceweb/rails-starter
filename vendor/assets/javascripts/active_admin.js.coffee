@@ -15,6 +15,7 @@
 #= require admin/map
 #= require vex.combined.min.js
 #= require plugins/vex_config
+#= require plugins/override_rails_confirm
 #= require i18n
 #= require i18n/translations
 #= require jquery.minicolors

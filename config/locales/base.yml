@@ -14,15 +14,26 @@ fr:
   maintenance:
     'true': En maintenance
     'false': En ligne
-  vex:
+  alert:
+    'ok': D'accord
+  adult:
     'yes': 'Accepter'
     'no': 'Refuser'
+  delete:
+    'yes': 'Supprimer'
+    'no': 'Annuler'
+  newsletter:
+    'yes': 'Envoyer'
+    'no': 'Annuler'
   sent:
     'true': 'Envoyé'
     'false': 'Pas encore envoyé'
   map:
     'true': Affichée
     'false': Non affichée
+  allow_comments:
+    'true': Commentaires autorisés
+    'false': Article non commentable
   additional: Informations complémentaires
   general: Informations générales
 
@@ -42,14 +53,25 @@ en:
   maintenance:
     'true': In maintenance
     'false': Online
+  alert:
+    'ok': Alright
   adult:
     'yes': 'Accept'
     'no': 'Decline'
+  delete:
+    'yes': 'Delete'
+    'no': 'Cancel'
+  newsletter:
+    'yes': 'Send'
+    'no': 'Cancel'
   sent:
     'true': 'Sent'
     'false': 'Not sent yet'
   map:
     'true': Shown
     'false': Not shown
+  allow_comments:
+    'true': Comments allowed
+    'false': Comments not allowed
   additional: Additional information
   general: General information

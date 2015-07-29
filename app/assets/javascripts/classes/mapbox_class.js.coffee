@@ -23,9 +23,9 @@ class @MapBoxSingleton
             address: gon.address
             city: gon.city
             postcode: gon.postcode
-            'marker-color': '#F2471A'
+            'marker-color': gon.marker_color
             'marker-size': 'medium'
-            'marker-symbol': 'camera'
+            'marker-symbol': gon.marker_icon
           geometry:
             type: 'Point'
             coordinates: [

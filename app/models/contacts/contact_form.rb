@@ -9,7 +9,7 @@ class ContactForm < MailForm::Base
 
   validates :name, presence: true
   validates :message, presence: true
-  validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+  validates :email, presence: true, email_format: true
 
   append :remote_ip, :user_agent
 

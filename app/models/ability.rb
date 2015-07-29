@@ -40,8 +40,11 @@ class Ability
     can :manage, User, id: user.id
     can :update, Category
     can [:read, :update, :destroy], Background
+    can [:read, :update, :destroy], Picture
     cannot :manage, OptionalModule
-
+    cannot [:read, :update, :destroy], About
+    can :manage, About, user_id: user.id
+    can [:read, :update], StringBox
     optional_modules_check(user)
   end
 
@@ -49,12 +52,13 @@ class Ability
     cannot_manage_optional_modules
     can [:update, :read, :destroy], User, id: user.id
     cannot :create, User
-    can :create, About
-    can [:update, :read, :destroy], About, user_id: user.id
+    cannot :manage, About
     can [:create, :read, :destroy], Comment, user_id: user.id
     cannot :destroy, Comment, user_id: nil
     cannot :manage, Setting
     cannot :manage, Background
+    cannot :manage, Picture
+    cannot :manage, StringBox
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end
 
@@ -76,15 +80,19 @@ class Ability
     cannot :manage, Event
     cannot :manage, Map
     cannot :manage, Newsletter
+    cannot :manage, Social
   end
 
   def optional_modules_check(user)
     optional_modules = OptionalModule.all
+    optional_modules.find_each do |optional_module|
+      instance_variable_set("@#{optional_module.name.underscore.singularize}_module", optional_module)
+    end
 
     #
     # == GuestBook
     #
-    if optional_modules.by_name('GuestBook').enabled?
+    if @guest_book_module.enabled?
       can [:read, :destroy], GuestBook
       cannot [:create, :update], GuestBook
     else
@@ -94,7 +102,7 @@ class Ability
     #
     # == Newsletter
     #
-    if optional_modules.by_name('Newsletter').enabled?
+    if @newsletter_module.enabled?
       can :manage, Newsletter
       can [:create, :read, :update, :destroy], NewsletterUser
     else
@@ -105,11 +113,10 @@ class Ability
     #
     # == Comment
     #
-    if optional_modules.by_name('Comment').enabled?
+    if @comment_module.enabled?
       can [:read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
       can [:read, :destroy], Comment, user_id: nil
-      cannot :update, Comment
-      cannot :create, Comment
+      cannot [:create, :update], Comment
       can :destroy, Comment if user.super_administrator?
     else
       cannot :manage, Comment
@@ -118,7 +125,7 @@ class Ability
     #
     # == Blog
     #
-    if optional_modules.by_name('Blog').enabled?
+    if @blog_module.enabled?
       can :crud, Blog
     else
       cannot :manage, Blog
@@ -127,7 +134,7 @@ class Ability
     #
     # == Slider
     #
-    if optional_modules.by_name('Slider').enabled?
+    if @slider_module.enabled?
       can :crud, Slider
     else
       cannot :manage, Slider
@@ -136,7 +143,7 @@ class Ability
     #
     # == Event
     #
-    if optional_modules.by_name('Event').enabled?
+    if @event_module.enabled?
       can :crud, Event
     else
       cannot :manage, Event
@@ -145,11 +152,21 @@ class Ability
     #
     # == Map
     #
-    if optional_modules.by_name('Map').enabled?
+    if @map_module.enabled?
       can [:update, :read], Map
       cannot [:create, :destroy], Map
     else
       cannot :manage, Map
+    end
+
+    #
+    # == Map
+    #
+    if @social_module.enabled?
+      can [:update, :read], Social
+      cannot [:create, :destroy], Social if user.administrator?
+    else
+      cannot :manage, Social
     end
   end
 end

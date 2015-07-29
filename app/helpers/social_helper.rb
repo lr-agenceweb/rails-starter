@@ -71,8 +71,8 @@ module SocialHelper
   # * *Args*    :
   # * *Returns* :
   #
-  def awesome_social_share
-    return nil if params[:controller] == 'comments'
+  def social_share_buttons
+    return nil if return_nil_for_social_share?
 
     element = params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
 
@@ -81,11 +81,31 @@ module SocialHelper
     awesome_share_buttons(title_seo,
                           desc: element.referencement_description,
                           image: image_for_object(element),
-                          via: Figaro.env.twitter_username,
+                          via: @setting.twitter_username,
                           popup: true)
   end
 
   private
+
+  def awesome_share_buttons(title = "", opts = {})
+    rel = opts[:rel]
+    html = []
+    html << "<div class='awesome-share-buttons' data-title='#{h title}' data-img='#{opts[:image]}' "
+    html << "data-url='#{opts[:url]}' data-desc='#{opts[:desc]}' data-popup='#{opts[:popup]}' data-via='#{opts[:via]}'>"
+
+    @socials_share.each do |social|
+      link_title = t 'awesome_share_buttons.share_to', name: t("awesome_share_buttons.#{social.title.downcase}")
+      ikon = social.decorate.ikon? ? retina_image_tag(social, :ikon, :small) : social.title
+      html << link_to(ikon, '#', {
+        rel: ['nofollow', rel],
+        'data-site': social.title.downcase,
+        onclick: 'return SocialShareClass.share(this);',
+        title: h(link_title)
+      })
+    end
+    html << '</div>'
+    raw html.join("\n")
+  end
 
   # Get image for an object
   #
@@ -113,5 +133,9 @@ module SocialHelper
   #
   def title_seo_structure(element_title)
     "#{element_title} | #{@setting.title_and_subtitle}"
+  end
+
+  def return_nil_for_social_share?
+    params[:controller] == 'comments' || params[:controller] == 'errors'
   end
 end

@@ -10,7 +10,7 @@ fr:
     show: Voir
     destroy:
       label: Supprimer
-      confirm: "Ëtes-vous sûr de vouloir supprimer ce %{object} ?"
+      confirm: "Êtes-vous sûr de vouloir supprimer ce %{object_kind} ?"
     batch_actions:
       labels:
         toggle_value: Changer le statut
@@ -28,4 +28,4 @@ en:
     show: Show
     destroy:
       label: Delete
-      confirm: "Are you sure you want to remove this %{object} ?"
+      confirm: "Are you sure you want to remove this %{object_kind} ?"

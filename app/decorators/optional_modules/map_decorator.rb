@@ -22,6 +22,10 @@ class MapDecorator < ApplicationDecorator
     status_tag_deco I18n.t("map.#{model.show_map}"), color
   end
 
+  def marker_color_deco
+    content_tag(:div, '', style: "background-color: #{model.marker_color}; width: 35px; height: 20px;") unless model.marker_color.blank?
+  end
+
   private
 
   def latlon?

@@ -14,14 +14,17 @@
 #  index_string_boxes_on_key  (key)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+error_404:
+  key: error_404
+  title: Erreur 404
+  content: erreur 404
 
-one:
-  key: MyString
-  title: MyString
-  content: MyText
+error_422:
+  key: error_422
+  title: Erreur 422
+  content: erreur 422
 
-two:
-  key: MyString
-  title: MyString
-  content: MyText
+error_500:
+  key: error_500
+  title: Erreur 500
+  content: erreur 500

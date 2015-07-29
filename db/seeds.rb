@@ -1,15 +1,12 @@
+@locales = I18n.available_locales
+
 #
 # == Resest content and setup id to 1
 #
 puts 'Reset table ID to 1'
-modeles_str = %w( Background Blog Blog::Translation Category Category::Translation Comment Event Event::Translation GuestBook Map Newsletter Newsletter::Translation NewsletterUser OptionalModule Picture Picture::Translation Post Post::Translation Referencement Referencement::Translation Role Setting Setting::Translation Slider Slide Slide::Translation StringBox StringBox::Translation User )
-modeles_str.each do |modele_str|
-  modele = modele_str.constantize
-  modele.destroy_all
-  ActiveRecord::Base.connection.execute("ALTER TABLE #{modele.table_name} AUTO_INCREMENT = 1")
-end
-
-@locales = I18n.available_locales
+require 'database_cleaner'
+DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.clean
 
 #
 # == Create user roles
@@ -97,6 +94,8 @@ description = [
   'Module qui affiche slider avec des images défilantes',
   'Module qui gère des événements à venir',
   'Module qui affiche une carte Mapbox sur le site',
+  'Module qui gère les différents réseaux sociaux',
+  'Module qui affiche un fil d\'ariane sur le site'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(
@@ -136,7 +135,7 @@ Category.models_name_str.each_with_index do |element, index|
     title: title_fr[index],
     show_in_menu: show_in_menu[index],
     show_in_footer: show_in_footer[index],
-    optional: optional_module_id.nil? ? false : true
+    optional: optional_module_id.nil? ? false : true,
     optional_module_id: optional_module_id
   )
 
@@ -380,17 +379,25 @@ NewsletterUser.create!(
 # == StringBox
 #
 puts 'Creating StringBox'
-string_box_keys = ['adult_not_validated_popup_content']
+string_box_keys = ['adult_not_validated_popup_content', 'error_404', 'error_422', 'error_500']
+string_box_title_fr = ['', 'Erreur 404', 'Erreur 422', 'Erreur 500']
+string_box_title_en = ['', 'Error 404', 'Error 404', 'Error 500']
 string_box_content_fr = [
-  'Afin de pouvoir accéder au site, vous devez être majeur. En cliquant sur accepter vous attestez avoir plus de 18 ans.'
+  'Afin de pouvoir accéder au site, vous devez être majeur. En cliquant sur accepter vous attestez avoir plus de 18 ans.',
+  'La page que vous tentez de voir n\'existe pas :(',
+  'La page que vous tentez de voir n\'est pas disponible pour l\'instant :(',
+  'Ooops, une erreur s\'est produite :( Veuillez réésayer ultérieurement'
 ]
 string_box_content_en = [
-  'In order to access the website, you must be adult. By clicking accept, you attest you are over 18 years old.'
+  'In order to access the website, you must be adult. By clicking accept, you attest you are over 18 years old.',
+  'The page you want to access doesn\'t exist :(',
+  'The page you want to access is not available now :(',
+  'Oops, something bad happend :( Please try again later'
 ]
 string_box_keys.each_with_index do |element, index|
   string_box = StringBox.create!(
     key: element,
-    title: '',
+    title: string_box_title_fr[index],
     content: string_box_content_fr[index]
   )
 
@@ -398,7 +405,7 @@ string_box_keys.each_with_index do |element, index|
     StringBox::Translation.create!(
       string_box_id: string_box.id,
       locale: 'en',
-      title: '',
+      title: string_box_title_en[index],
       content: string_box_content_en[index]
     )
   end

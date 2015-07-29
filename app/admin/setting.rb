@@ -11,6 +11,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
                 :maintenance,
                 :logo,
                 :delete_logo,
+                :twitter_username,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle
                 ]
@@ -20,7 +21,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
   actions :all, except: [:new, :destroy]
 
   index do
-    column :logo
+    column :logo_deco
     column :name
     column :title
     column :subtitle
@@ -37,7 +38,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
       column do
         panel t('active_admin.details', model: active_admin_config.resource_label) do
           attributes_table_for parameter.decorate do
-            row :logo
+            row :logo_deco
             row :title
             row :subtitle
             row :maintenance
@@ -55,11 +56,14 @@ ActiveAdmin.register Setting, as: 'Parameter' do
         end
       end
 
-      column do
-        panel t('active_admin.details', model: 'Modules') do
-          attributes_table_for parameter.decorate do
-            row :breadcrumb
-            row :social
+      if breadcrumb_module.enabled? || social_module.enabled?
+        column do
+          panel t('active_admin.details', model: 'Modules') do
+            attributes_table_for parameter.decorate do
+              row :breadcrumb if breadcrumb_module.enabled?
+              row :social if social_module.enabled?
+              row :twitter_username if social_module.enabled?
+            end
           end
         end
       end
@@ -75,6 +79,14 @@ ActiveAdmin.register Setting, as: 'Parameter' do
   #
   controller do
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? }
+
+    def update
+      params[:setting].delete :show_social unless @social_module.enabled?
+      params[:setting].delete :show_breadcrumb unless @breadcrumb_module.enabled?
+      params[:setting].delete :twitter_username unless @social_module.enabled?
+      params[:setting].delete :should_validate unless @guest_book_module.enabled? || @comment_module.enabled?
+      super
+    end
 
     private
 
