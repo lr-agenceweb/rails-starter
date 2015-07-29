@@ -43,6 +43,7 @@ class Ability
     cannot :manage, OptionalModule
     cannot [:read, :update, :destroy], About
     can :manage, About, user_id: user.id
+    can [:read, :update], StringBox
     optional_modules_check(user)
   end
 
@@ -55,6 +56,7 @@ class Ability
     cannot :destroy, Comment, user_id: nil
     cannot :manage, Setting
     cannot :manage, Background
+    cannot :manage, StringBox
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end
 
