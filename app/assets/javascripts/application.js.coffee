@@ -16,6 +16,7 @@
 #= require js.cookie
 #= require vex.combined.min.js
 #= require plugins/vex_config
+#= require plugins/override_rails_confirm
 #= require classes/social_share_class
 #= require mapbox
 #= require plugins/mapbox
@@ -34,23 +35,6 @@
 #= require jquery.sticky_footer
 
 $(document).on 'ready page:load page:restore', ->
-  $.rails.allowAction = (link) ->
-    return true unless link.attr('data-confirm')
-    $.rails.showConfirmDialog(link) # look bellow for implementations
-    false # always stops the action since code runs asynchronously
-
-  $.rails.confirmed = (link) ->
-    link.removeAttr('data-confirm')
-    link.trigger('click.rails')
-
-
-  $.rails.showConfirmDialog = (link) ->
-    vex.dialog.confirm
-      message: link.data('confirm')
-      callback: (value) ->
-        $.rails.confirmed(link) if value is true
-
-
   $('.autosize').autosize()
 
   $('.magnific-popup').magnificPopup
