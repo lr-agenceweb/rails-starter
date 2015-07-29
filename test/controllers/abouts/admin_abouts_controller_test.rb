@@ -51,9 +51,25 @@ module Admin
     # == Comments
     #
     test 'should destroy comments with post' do
+      assert_equal 5, @about.comments.size
       delete :destroy, id: @about
       assert_equal 0, @about.comments.size
       assert @about.comments.empty?
+    end
+
+    #
+    # == Validations
+    #
+    test 'should not save allow_comments params if module is disabled' do
+      disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @about, about: { allow_comments: false }
+      assert assigns(:about).allow_comments?
+    end
+
+    test 'should save allow_comments params if module is enabled' do
+      patch :update, id: @about, about: { allow_comments: false }
+      assert_not assigns(:about).allow_comments?
     end
 
     #
@@ -110,6 +126,7 @@ module Admin
     def initialize_test
       @about = posts(:about_2)
       @about_super_administrator = posts(:about)
+      @comment_module = optional_modules(:comment)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

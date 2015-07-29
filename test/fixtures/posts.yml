@@ -25,6 +25,7 @@ DEFAULTS: &DEFAULTS
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
   content: ''
   user: bob
+  allow_comments: true
 
 # Home posts
 home:

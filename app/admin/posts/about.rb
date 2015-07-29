@@ -5,6 +5,7 @@ ActiveAdmin.register About do
   permit_params :id,
                 :type,
                 :online,
+                :allow_comments,
                 :user_id,
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
@@ -56,6 +57,22 @@ ActiveAdmin.register About do
     before_create do |post|
       post.type = post.object.class.name
       post.user_id = current_user.id
+    end
+
+    def create
+      delete_key_before_save
+      super
+    end
+
+    def update
+      delete_key_before_save
+      super
+    end
+
+    private
+
+    def delete_key_before_save
+      params[:about].delete :allow_comments unless @comment_module.enabled?
     end
   end
 end

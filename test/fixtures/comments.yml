@@ -24,31 +24,31 @@
 #
 
 one:
-  commentable: about (Post)
+  commentable: about_2 (Post)
   user: anthony
   lang: fr
   validated: true
 
 two:
-  commentable: about (Post)
+  commentable: about_2 (Post)
   user: bob
   lang: en
   validated: false
 
 three:
-  commentable: about (Post)
+  commentable: about_2 (Post)
   user: alice
   lang: en
   validated: true
 
 four:
-  commentable: about (Post)
+  commentable: about_2 (Post)
   user: lana
   lang: fr
   validated: false
 
 five:
-  commentable: about (Post)
+  commentable: about_2 (Post)
   username: luke
   email: luke@skywalker.sw
   user_id: null
