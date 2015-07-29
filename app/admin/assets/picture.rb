@@ -22,7 +22,7 @@ ActiveAdmin.register Picture do
 
   index do
     selectable_column
-    column :image
+    column :image_deco
     column :source_picture_title_link
     column :status
 
@@ -72,22 +72,18 @@ ActiveAdmin.register Picture do
   # == Controller
   #
   controller do
-    before_action :set_picture, only: [:toggle_online]
+    before_action :set_picture, only: [:destroy]
 
-    def toggle_online
-      new_value = @picture.online? ? false : true
-      @picture.update_attribute(:online, new_value)
-      make_redirect
+    def destroy
+      @pic.image.clear
+      @pic.save
+      super
     end
 
     private
 
     def set_picture
-      @picture = Picture.find(params[:id])
-    end
-
-    def make_redirect
-      redirect_to :back
+      @pic = Picture.find(params[:id])
     end
   end
 end

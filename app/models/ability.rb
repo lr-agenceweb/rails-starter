@@ -40,6 +40,7 @@ class Ability
     can :manage, User, id: user.id
     can :update, Category
     can [:read, :update, :destroy], Background
+    can [:read, :update, :destroy], Picture
     cannot :manage, OptionalModule
     cannot [:read, :update, :destroy], About
     can :manage, About, user_id: user.id
@@ -56,6 +57,7 @@ class Ability
     cannot :destroy, Comment, user_id: nil
     cannot :manage, Setting
     cannot :manage, Background
+    cannot :manage, Picture
     cannot :manage, StringBox
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end

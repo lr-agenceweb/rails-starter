@@ -8,7 +8,7 @@ ActiveAdmin.register Background do
 
   index do
     selectable_column
-    column :image
+    column :image_deco
     column :category_name
     actions
   end
@@ -16,7 +16,7 @@ ActiveAdmin.register Background do
   show do
     h3 resource.category_name
     attributes_table do
-      row :image
+      row :image_deco
     end
   end
 
@@ -35,5 +35,24 @@ ActiveAdmin.register Background do
     end
 
     f.actions
+  end
+
+  #
+  # == Controller
+  #
+  controller do
+    before_action :set_background, only: [:destroy]
+
+    def destroy
+      @bg.image.clear
+      @bg.save
+      super
+    end
+
+    private
+
+    def set_background
+      @bg = Background.find(params[:id])
+    end
   end
 end

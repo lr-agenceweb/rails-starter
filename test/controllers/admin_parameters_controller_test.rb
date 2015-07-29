@@ -73,25 +73,6 @@ module Admin
     end
 
     #
-    # == Logo
-    #
-    test 'should be able to upload logo' do
-      upload_paperclip_attachment
-      setting = assigns(:parameter)
-      assert setting.logo?, 'a logo should have been uploaded'
-      assert_equal 'bart.png', setting.logo_file_name
-      assert_equal 'image/png', setting.logo_content_type
-    end
-
-    # # TODO: Fix this broken test
-    # test 'should be able to destroy logo' do
-    #   upload_paperclip_attachment
-    #   remove_paperclip_attachment
-    #   assert_nil assigns(:setting).logo_file_name
-    #   assert_not assigns(:setting).logo?
-    # end
-
-    #
     # == Abilities
     #
     test 'should test abilities for subscriber' do
@@ -128,6 +109,41 @@ module Admin
       assert_crud_actions(@setting, admin_dashboard_path)
     end
 
+    #
+    # == Logo
+    #
+    test 'should be able to upload logo' do
+      upload_paperclip_attachment
+      setting = assigns(:parameter)
+      assert setting.logo?, 'a logo should have been uploaded'
+      assert_equal 'bart.png', setting.logo_file_name
+      assert_equal 'image/png', setting.logo_content_type
+    end
+
+    # TODO: Fix this broken test
+    test 'should be able to destroy logo' do
+      existing_styles = []
+
+      upload_paperclip_attachment
+      setting = assigns(:parameter)
+
+      setting.logo.styles.keys.collect do |style|
+        f = setting.logo.path(style)
+        assert File.exist?(f), "File #{f} should exist"
+        existing_styles << f
+      end
+
+      # remove_paperclip_attachment(setting)
+      # setting = assigns(:parameter)
+
+      # assert_nil setting.logo_file_name
+      # assert_not setting.logo?
+
+      # existing_styles.each do |f|
+      #   assert_not File.exist?(f), "File #{f} should not exist"
+      # end
+    end
+
     private
 
     def initialize_test
@@ -149,9 +165,9 @@ module Admin
       patch :update, id: @setting, setting: { logo: attachment }
     end
 
-    def remove_paperclip_attachment
+    def remove_paperclip_attachment(setting)
       puts '=== Removing logo'
-      patch :update, id: assigns(:setting), setting: { logo: nil, delete_logo: '1' }
+      patch :update, id: setting, setting: { delete_logo: '1' }
     end
 
     def assert_crud_actions(obj, url)

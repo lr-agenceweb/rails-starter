@@ -5,7 +5,7 @@ class BackgroundDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
-  def image
+  def image_deco
     retina_image_tag model, :image, :small
   end
 

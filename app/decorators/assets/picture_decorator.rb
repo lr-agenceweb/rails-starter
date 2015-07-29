@@ -5,7 +5,7 @@ class PictureDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
-  def image
+  def image_deco
     base_image :small
   end
 

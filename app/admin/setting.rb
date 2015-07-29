@@ -21,7 +21,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
   actions :all, except: [:new, :destroy]
 
   index do
-    column :logo
+    column :logo_deco
     column :name
     column :title
     column :subtitle
@@ -38,7 +38,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
       column do
         panel t('active_admin.details', model: active_admin_config.resource_label) do
           attributes_table_for parameter.decorate do
-            row :logo
+            row :logo_deco
             row :title
             row :subtitle
             row :maintenance

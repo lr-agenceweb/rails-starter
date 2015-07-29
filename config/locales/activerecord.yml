@@ -215,7 +215,8 @@ fr:
       background:
         attachable_type: Page associée
         image: Image
-        category_name: Categorie associée
+        image_deco: Image
+        category_name: Page associée
         _destroy: Supprimer ?
       picture:
         type: Catégorie
