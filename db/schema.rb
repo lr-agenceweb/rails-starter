@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729175758) do
+ActiveRecord::Schema.define(version: 20150729205322) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -39,13 +39,14 @@ ActiveRecord::Schema.define(version: 20150729175758) do
   add_index "blog_translations", ["locale"], name: "index_blog_translations_on_locale", using: :btree
 
   create_table "blogs", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "slug",       limit: 255
-    t.text     "content",    limit: 65535
-    t.boolean  "online",                   default: true
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "title",          limit: 255
+    t.string   "slug",           limit: 255
+    t.text     "content",        limit: 65535
+    t.boolean  "allow_comments",               default: true
+    t.boolean  "online",                       default: true
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
@@ -264,15 +265,16 @@ ActiveRecord::Schema.define(version: 20150729175758) do
   add_index "post_translations", ["post_id"], name: "index_post_translations_on_post_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "type",       limit: 255
-    t.string   "title",      limit: 255
-    t.string   "slug",       limit: 255
-    t.text     "content",    limit: 65535
-    t.boolean  "online",                   default: true
-    t.integer  "position",   limit: 4
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "type",           limit: 255
+    t.string   "title",          limit: 255
+    t.string   "slug",           limit: 255
+    t.text     "content",        limit: 65535
+    t.boolean  "allow_comments",               default: true
+    t.boolean  "online",                       default: true
+    t.integer  "position",       limit: 4
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree

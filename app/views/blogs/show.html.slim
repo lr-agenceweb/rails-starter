@@ -16,7 +16,7 @@
               li = retina_image_tag picture, :image, :medium, class: 'th'
 
 
-- if @comment_module.enabled?
+- if @comment_module.enabled? && @blog.allow_comments?
   .row
     .small-12.columns
       h3 Commentaires

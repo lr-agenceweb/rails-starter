@@ -154,11 +154,13 @@ fr:
         type_title: Page
         author_with_avatar: Auteur
         status: Statut
+        allow_comments: Autoriser les commentaires
       blog:
         title: Titre
         content: Contenu
         author_with_avatar: Auteur
         status: Statut
+        allow_comments: Autoriser les commentaires
       setting:
         title: Titre
         subtitle: Sous-titre

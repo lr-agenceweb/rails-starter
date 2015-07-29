@@ -43,6 +43,21 @@ module Admin
     end
 
     #
+    # == Validations
+    #
+    test 'should not save allow_comments params if module is disabled' do
+      disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @blog, blog: { allow_comments: false }
+      assert assigns(:blog).allow_comments?
+    end
+
+    test 'should save allow_comments params if module is enabled' do
+      patch :update, id: @blog, blog: { allow_comments: false }
+      assert_not assigns(:blog).allow_comments?
+    end
+
+    #
     # == Abilities
     #
     test 'should test abilities for subscriber' do
@@ -99,6 +114,7 @@ module Admin
       @blog = blogs(:blog_online)
       @blog_not_validate = blogs(:blog_offline)
       @blog_module = optional_modules(:blog)
+      @comment_module = optional_modules(:comment)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

@@ -36,6 +36,8 @@ fr:
       start_date: Date de début de l'événement
       end_date: Date de fin de l'événement
 
+      allow_comments: Voulez-vous autoriser les commentaires sur cet article ?
+
       map:
         marker_icon: Choisissez une icône à afficher pour le marqueur de la carte
         marker_color: Choisissez une couleur de fonds pour le marqueur de la carte
