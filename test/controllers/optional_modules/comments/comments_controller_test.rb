@@ -239,7 +239,7 @@ class CommentsControllerTest < ActionController::TestCase
 
   def initialize_test
     @locales = I18n.available_locales
-    @about = posts(:about)
+    @about = posts(:about_2)
 
     @super_administrator = users(:anthony)
     @administrator = users(:bob)

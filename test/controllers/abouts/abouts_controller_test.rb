@@ -115,7 +115,7 @@ class AboutsControllerTest < ActionController::TestCase
   private
 
   def initialize_test
-    @about = posts(:about)
+    @about = posts(:about_2)
     @about_offline = posts(:about_offline)
     @comment = comments(:three)
     @locales = I18n.available_locales
