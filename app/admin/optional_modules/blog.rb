@@ -35,10 +35,10 @@ ActiveAdmin.register Blog do
     selectable_column
     column :image
     column :title
+    column :allow_comments_status
     column :status
     translation_status
     column :author_with_avatar
-    column :allow_comments_status
 
     actions
   end

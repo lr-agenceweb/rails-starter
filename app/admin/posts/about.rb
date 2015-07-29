@@ -35,6 +35,7 @@ ActiveAdmin.register About do
     selectable_column
     column :image
     column :title
+    column :allow_comments_status
     column :status
     translation_status
     column :author_with_avatar

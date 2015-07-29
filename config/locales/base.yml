@@ -31,6 +31,9 @@ fr:
   map:
     'true': Affichée
     'false': Non affichée
+  allow_comments:
+    'true': Commentaires autorisés
+    'false': Article non commentable
   additional: Informations complémentaires
   general: Informations générales
 
@@ -67,5 +70,8 @@ en:
   map:
     'true': Shown
     'false': Not shown
+  allow_comments:
+    'true': Comments allowed
+    'false': Comments not allowed
   additional: Additional information
   general: General information

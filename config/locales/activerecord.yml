@@ -155,12 +155,14 @@ fr:
         author_with_avatar: Auteur
         status: Statut
         allow_comments: Autoriser les commentaires
+        allow_comments_status: Autoriser les commentaires
       blog:
         title: Titre
         content: Contenu
         author_with_avatar: Auteur
         status: Statut
         allow_comments: Autoriser les commentaires
+        allow_comments_status: Autoriser les commentaires
       setting:
         title: Titre
         subtitle: Sous-titre
