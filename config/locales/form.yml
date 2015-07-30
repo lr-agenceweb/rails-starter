@@ -19,6 +19,8 @@ fr:
       link: Lien du projet
       destroy: Supprimer cette image ?
 
+    counter: "Caractères restants: %{count}"
+
     hint:
       title: Titre de l'article (avoir un bon titre est important pour le référencement)
       title_newsletter: Titre de la newsletter
