@@ -95,7 +95,10 @@ module SocialHelper
 
     @socials_share.each do |social|
       link_title = t 'awesome_share_buttons.share_to', name: t("awesome_share_buttons.#{social.title.downcase}")
-      ikon = social.decorate.ikon? ? retina_image_tag(social, :ikon, :small) : social.title
+      ikon = social.title
+      ikon = fa_icon "#{social.font_ikon} 2x" if social.decorate.font_ikon?
+      ikon = retina_image_tag(social, :ikon, :small) if social.decorate.ikon?
+
       html << link_to(ikon, '#', {
         rel: ['nofollow', rel],
         'data-site': social.title.downcase,

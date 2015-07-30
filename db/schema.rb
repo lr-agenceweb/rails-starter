@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729205322) do
+ActiveRecord::Schema.define(version: 20150730173640) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -392,6 +392,7 @@ ActiveRecord::Schema.define(version: 20150729205322) do
     t.string   "link",              limit: 255
     t.string   "kind",              limit: 255
     t.boolean  "enabled",                         default: true
+    t.string   "font_ikon",         limit: 255
     t.datetime "ikon_updated_at"
     t.integer  "ikon_file_size",    limit: 4
     t.string   "ikon_content_type", limit: 255
