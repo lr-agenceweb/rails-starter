@@ -75,19 +75,13 @@ ActiveAdmin.register Category do
         end
 
         f.inputs t('general') do
-          columns do
-            column do
-              f.input :name,
-                      collection: Category.models_name,
-                      include_blank: false,
-                      input_html: { class: 'chosen-select' }
-            end
+          f.input :name,
+                  collection: Category.models_name,
+                  include_blank: false,
+                  input_html: { class: 'chosen-select' }
 
-            column do
-              f.input :show_in_menu
-              f.input :show_in_footer
-            end
-          end
+          f.input :show_in_menu
+          f.input :show_in_footer
 
           f.input :custom_background_color,
                   as: :boolean,
