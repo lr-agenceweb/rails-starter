@@ -32,6 +32,9 @@ class Category < ActiveRecord::Base
 
   attr_accessor :custom_background_color
 
+  has_one :heading, as: :headingable, dependent: :destroy
+  accepts_nested_attributes_for :heading, reject_if: :all_blank, allow_destroy: true
+
   belongs_to :optional_module
   has_one :slider, dependent: :destroy
 

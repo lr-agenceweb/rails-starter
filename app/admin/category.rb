@@ -20,6 +20,12 @@ ActiveAdmin.register Category do
                 ],
                 background_attributes: [
                   :id, :image, :_destroy
+                ],
+                heading_attributes: [
+                  :id,
+                  translations_attributes: [
+                    :id, :locale, :content
+                  ]
                 ]
 
   decorate_with CategoryDecorator
@@ -98,13 +104,17 @@ ActiveAdmin.register Category do
       end
 
       column do
-        render 'admin/shared/referencement/form', f: f
+        render 'admin/shared/heading/form', f: f
       end
     end
 
     columns do
       column do
         render 'admin/shared/backgrounds/form', f: f
+      end
+
+      column do
+        render 'admin/shared/referencement/form', f: f
       end
     end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730173640) do
+ActiveRecord::Schema.define(version: 20150730211412) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -165,6 +165,27 @@ ActiveRecord::Schema.define(version: 20150730173640) do
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end
+
+  create_table "heading_translations", force: :cascade do |t|
+    t.integer  "heading_id", limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "content",    limit: 65535
+  end
+
+  add_index "heading_translations", ["heading_id"], name: "index_heading_translations_on_heading_id", using: :btree
+  add_index "heading_translations", ["locale"], name: "index_heading_translations_on_locale", using: :btree
+
+  create_table "headings", force: :cascade do |t|
+    t.text     "content",          limit: 65535
+    t.integer  "headingable_id",   limit: 4
+    t.string   "headingable_type", limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "headings", ["headingable_type", "headingable_id"], name: "index_headings_on_headingable_type_and_headingable_id", using: :btree
 
   create_table "maps", force: :cascade do |t|
     t.string   "address",         limit: 255
