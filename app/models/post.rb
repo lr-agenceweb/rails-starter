@@ -31,8 +31,6 @@ class Post < ActiveRecord::Base
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content
 
-  acts_as_list
-
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 

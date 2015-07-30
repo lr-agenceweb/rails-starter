@@ -24,19 +24,18 @@
 #
 class Category < ActiveRecord::Base
   include Imageable
+  include Positionable
 
   translates :title
   active_admin_translates :title
 
-  acts_as_list
-
   attr_accessor :custom_background_color
-
-  has_one :heading, as: :headingable, dependent: :destroy
-  accepts_nested_attributes_for :heading, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :optional_module
   has_one :slider, dependent: :destroy
+
+  has_one :heading, as: :headingable, dependent: :destroy
+  accepts_nested_attributes_for :heading, reject_if: :all_blank, allow_destroy: true
 
   has_one :background, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :background, reject_if: :all_blank, allow_destroy: true
@@ -49,7 +48,6 @@ class Category < ActiveRecord::Base
 
   scope :visible_header, -> { where(show_in_menu: true) }
   scope :visible_footer, -> { where(show_in_footer: true) }
-  scope :by_position, -> { order(position: :asc) }
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 
   def self.models_name
