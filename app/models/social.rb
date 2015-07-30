@@ -58,6 +58,10 @@ class Social < ActiveRecord::Base
   validates :link,
             presence: true, if: proc { |social| social.kind == 'follow' },
             url: true
+  validates :font_ikon,
+            presence: false,
+            allow_blank: true,
+            inclusion: { in: allowed_font_awesome_ikons }
 
   scope :follow, -> { where(kind: 'follow') }
   scope :share, -> { where(kind: 'share') }

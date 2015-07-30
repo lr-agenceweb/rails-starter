@@ -28,11 +28,15 @@ class SocialDecorator < ApplicationDecorator
     if ikon?
       "Ce champs est désactivé car vous avez choisi d'utiliser une image en guise d'icône"
     else
-      raw "Si vous ne choisissez aucune image ou icône (#{fa_icon 'twitter'}, #{fa_icon 'facebook'}, #{fa_icon 'google'}, #{fa_icon 'envelope'}), le titre du réseau social sera utilisé."
+      raw "Si vous ne choisissez aucune image ou icône (#{font_ikon_list}), le titre du réseau social sera utilisé."
     end
   end
 
   private
+
+  def font_ikon_list
+    Social.allowed_font_awesome_ikons.map{ |ikon| fa_icon(ikon, title: ikon) }.join(', ')
+  end
 
   def ikon?
     model.ikon.exists?
