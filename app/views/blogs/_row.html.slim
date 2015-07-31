@@ -3,5 +3,5 @@ article.panel itemscope='' itemtype='http://schema.org/BlogPosting'
     small
       = time_tag blog.created_at.to_datetime, blog.created_at, itemprop: 'datePublished'
 
-  h3 itemprop='headline' = link_to blog.title, blog_path(blog), itemprop: 'url'
+  h3 itemprop='name headline' = link_to blog.title, blog_path(blog), itemprop: 'url'
   div itemprop='articleBody' = simple_format(blog.content)
