@@ -1,10 +1,12 @@
-.comment.row id="comment-#{comment.id}"
+article.comment.row id="comment-#{comment.id}" itemscope='' itemtype='http://schema.org/Comment'
   .small-12.columns.panel
     .row
       .small-12.medium-2.columns
+        p = comment.comment_created_at
+
         = comment.avatar
       .small-12.medium-10.columns
-        = comment.content
+        div itemprop='text' = comment.content
 
       footer
         - if can? :destroy, comment

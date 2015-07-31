@@ -43,10 +43,11 @@ class CommentDecorator < ApplicationDecorator
   end
 
   def content
-    simple_format(model.comment) +
-      content_tag(:p, class: 'right') do
-        concat(content_tag(:small, l(model.created_at, format: :without_time)))
-      end
+    simple_format(model.comment)
+  end
+
+  def comment_created_at
+    content_tag(:small, time_tag(model.created_at.to_datetime, l(model.created_at, format: :without_time), itemprop: 'dateCreated'))
   end
 
   # Article where the Comment comes from
@@ -105,8 +106,8 @@ class CommentDecorator < ApplicationDecorator
   private
 
   def pseudo(name = model.username)
-    content_tag(:p) do
-      concat(content_tag(:small, name))
+    content_tag(:p, '', itemprop: 'author', itemscope: '', itemtype: 'http://schema.org/Person') do
+      concat(content_tag(:small, name, itemprop: 'name'))
     end
   end
 

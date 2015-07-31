@@ -3,7 +3,7 @@
     - if @blogs.blank?
       p = t('blog.no_results')
     - else
-      div#blogs
+      section#blogs itemscope='' itemtype='http://schema.org/Blog'
         - @blogs.each do |blog|
           = render 'row', blog: blog
 
