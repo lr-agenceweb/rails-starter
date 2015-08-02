@@ -8,7 +8,7 @@
       meta itemprop='url' content="#{root_url}"
       meta itemprop='creator' content="#{home.user_username}"
       meta itemprop='datePublished' content="#{home.created_at.to_datetime}"
-      meta itemprop='image' content="#{attachment_url(home.first_pictures.image, :medium)}"
+      meta itemprop='image' content="#{attachment_url(home.first_pictures_image, :medium)}"
 
       header
         h2 itemprop='headline name' = home.title

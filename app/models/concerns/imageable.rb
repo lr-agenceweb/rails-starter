@@ -20,6 +20,10 @@ module Imageable
     pictures.online.first if pictures?
   end
 
+  def first_pictures_image
+    pictures.online.first.image if pictures?
+  end
+
   def self_image?
     image.exists?
   end
