@@ -2,8 +2,13 @@
 
 .row
   - @abouts.each do |about|
-    .small-12.columns
-      header
-        h2 = link_to about.title, about_path(about)
+    article.small-12.columns itemscope='' itemtype='http://schema.org/Article'
+      meta itemprop='url' content="#{about_url(about)}"
+      meta itemprop='creator' content="#{about.user_username}"
+      meta itemprop='datePublished' content="#{about.created_at.to_datetime}"
+      meta itemprop='image' content="#{attachment_url(about.first_pictures.image, :medium)}"
 
-      div == truncate_read_more(about.content, about_path(about))
+      header
+        h2 itemprop='headline name' = link_to about.title, about_path(about)
+
+      div itemprop='text' == truncate_read_more(about.content, about_path(about))

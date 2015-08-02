@@ -1,4 +1,6 @@
 article.panel itemscope='' itemtype='http://schema.org/BlogPosting'
+  meta itemprop='image' content="#{attachment_url(blog.first_pictures.image, :medium)}"
+
   p
     small
       = time_tag blog.created_at.to_datetime, blog.created_at, itemprop: 'datePublished'

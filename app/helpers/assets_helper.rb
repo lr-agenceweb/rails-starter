@@ -17,7 +17,11 @@ module AssetsHelper
   end
 
   def attachment_url(file, style = :original, req = request)
-    URI.join(req.url, file.url(style)).to_s unless file.nil?
+    if file.nil?
+      URI.join(req.url, "/default/#{style}-missing.png").to_s
+    else
+      URI.join(req.url, file.url(style)).to_s
+    end
   end
 
   def retina_thumb_square(resource, size = 64)

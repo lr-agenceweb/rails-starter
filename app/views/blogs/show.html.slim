@@ -4,6 +4,8 @@
   .small-12.columns
 
     article itemscope='' itemtype='http://schema.org/BlogPosting'
+      meta itemprop='image' content="#{attachment_url(blog.first_pictures.image, :medium)}"
+
       header
         h2 itemprop='headline' = blog.title
         p
