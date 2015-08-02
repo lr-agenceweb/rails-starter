@@ -92,6 +92,18 @@ module Admin
       assert_not assigns(:social).valid?
     end
 
+    test 'should not update if font awesome ikon is not allowed' do
+      sign_in @administrator
+      patch :update, id: @social_facebook_share, social: { font_ikon: 'forbidden_value' }
+      assert_not assigns(:social).valid?
+    end
+
+    test 'should update if font awesome ikon is allowed' do
+      sign_in @administrator
+      patch :update, id: @social_facebook_share, social: { font_ikon: 'twitter' }
+      assert assigns(:social).valid?
+    end
+
     #
     # == Abilities
     #
@@ -146,6 +158,7 @@ module Admin
 
     def initialize_test
       @social = socials(:facebook_follow)
+      @social_facebook_share = socials(:facebook_share)
       @social_module = optional_modules(:social)
 
       @subscriber = users(:alice)

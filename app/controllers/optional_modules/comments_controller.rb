@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   before_action :load_commentable
   before_action :set_comment, only: [:destroy]
 
-  decorates_assigned :comment
+  decorates_assigned :comment, :about, :blog
 
   # POST /comments
   # POST /comments.json

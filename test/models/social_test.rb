@@ -17,15 +17,25 @@ class SocialTest < ActiveSupport::TestCase
   end
 
   test 'should return list of allowed title for social newtwork' do
-    assert_includes Social.allowed_title_social_network, 'Facebook'
-    assert_includes Social.allowed_title_social_network, 'Twitter'
-    assert_includes Social.allowed_title_social_network, 'Google+'
-    assert_includes Social.allowed_title_social_network, 'Email'
+    atsn = Social.allowed_title_social_network
+    assert_includes atsn, 'Facebook'
+    assert_includes atsn, 'Twitter'
+    assert_includes atsn, 'Google+'
+    assert_includes atsn, 'Email'
   end
 
   test 'should return list of allowed kind for social newtwork' do
-    assert_includes Social.allowed_kind_social_network, 'follow'
-    assert_includes Social.allowed_kind_social_network, 'share'
+    aksn = Social.allowed_kind_social_network
+    assert_includes aksn, 'follow'
+    assert_includes aksn, 'share'
+  end
+
+  test 'should return list of allowed font awesome for social newtwork' do
+    afai = Social.allowed_font_awesome_ikons
+    assert_includes afai, 'facebook'
+    assert_includes afai, 'twitter'
+    assert_includes afai, 'google'
+    assert_includes afai, 'envelope'
   end
 
   #

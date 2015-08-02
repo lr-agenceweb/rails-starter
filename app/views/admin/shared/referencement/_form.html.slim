@@ -1,9 +1,13 @@
-- f.inputs t('activerecord.models.referencement.one'), for: [:referencement, f.object.referencement || Referencement.new] do |item|
+- f.inputs t('activerecord.models.referencement.one'), id: 'referencement', for: [:referencement, f.object.referencement || Referencement.new] do |item|
 
   - item.translated_inputs 'Translated fields', switch_locale: true do |t|
+    li
+      p.counter.right
+        = I18n.t('form.counter', count: item.object.decorate.letters_length)
+
     - t.input :description,
               hint: I18n.t('form.hint.description'),
               input_html: { class: 'small-height' }
+
     - t.input :keywords,
               hint: I18n.t('form.hint.keywords')
-

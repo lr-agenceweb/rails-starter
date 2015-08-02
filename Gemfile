@@ -31,7 +31,7 @@ gem 'draper'
 #
 gem 'slim-rails' # slim file
 gem 'kaminari', '~> 0.16.1' # Pagination
-gem 'gretel' # Breadcrumb
+gem 'gretel', github: 'LoveMondays/gretel', branch: 'fix-semantic-breadcrumb-current-item' # Breadcrumb
 gem 'rails_autolink'
 gem 'truncate_html', github: 'AlexGunslinger/truncate_html'
 gem 'chosen-rails'

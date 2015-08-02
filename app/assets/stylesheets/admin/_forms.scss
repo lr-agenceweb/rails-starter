@@ -49,3 +49,8 @@ form fieldset > ol > li fieldset:not(.has_many_fields) ol {
 #active_admin_content form li.input, #active_admin_content fieldset:not(.actions) ol li {
   clear: none;
 }
+
+
+form fieldset#referencement legend span {
+  font-size: 2em;
+}

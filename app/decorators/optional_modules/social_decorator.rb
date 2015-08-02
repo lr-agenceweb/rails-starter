@@ -13,8 +13,10 @@ class SocialDecorator < ApplicationDecorator
   def ikon_deco
     if ikon?
       retina_image_tag model, :ikon, :small
+    elsif font_ikon?
+      fa_icon "#{model.font_ikon} 3x"
     else
-      'Pas d\'icône'
+      model.title
     end
   end
 
@@ -22,9 +24,25 @@ class SocialDecorator < ApplicationDecorator
     link_to model.link, model.link, target: :_blank
   end
 
+  def hint_by_ikon
+    if ikon?
+      "Ce champs est désactivé car vous avez choisi d'utiliser une image en guise d'icône"
+    else
+      raw "Si vous ne choisissez aucune image ou icône (#{font_ikon_list}), le titre du réseau social sera utilisé."
+    end
+  end
+
   private
+
+  def font_ikon_list
+    Social.allowed_font_awesome_ikons.map{ |ikon| fa_icon(ikon, title: ikon) }.join(', ')
+  end
 
   def ikon?
     model.ikon.exists?
+  end
+
+  def font_ikon?
+    !model.font_ikon.blank?
   end
 end

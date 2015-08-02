@@ -7,6 +7,7 @@
 #  link              :string(255)
 #  kind              :string(255)
 #  enabled           :boolean          default(TRUE)
+#  font_ikon         :string(255)
 #  ikon_updated_at   :datetime
 #  ikon_file_size    :integer
 #  ikon_content_type :string(255)
@@ -28,6 +29,10 @@ class Social < ActiveRecord::Base
 
   def self.allowed_kind_social_network
     %w( follow share )
+  end
+
+  def self.allowed_font_awesome_ikons
+    %w( facebook twitter google envelope )
   end
 
   retina!
@@ -53,6 +58,10 @@ class Social < ActiveRecord::Base
   validates :link,
             presence: true, if: proc { |social| social.kind == 'follow' },
             url: true
+  validates :font_ikon,
+            presence: false,
+            allow_blank: true,
+            inclusion: { in: allowed_font_awesome_ikons }
 
   scope :follow, -> { where(kind: 'follow') }
   scope :share, -> { where(kind: 'share') }

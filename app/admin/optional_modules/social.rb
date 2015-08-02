@@ -7,7 +7,8 @@ ActiveAdmin.register Social do
                 :kind,
                 :enabled,
                 :ikon,
-                :delete_ikon
+                :delete_ikon,
+                :font_ikon
 
   decorate_with SocialDecorator
   config.clear_sidebar_sections!
@@ -72,12 +73,21 @@ ActiveAdmin.register Social do
 
       f.column do
         f.inputs 'Icône du Réseau Social' do
-          f.input :ikon, hint: f.object.decorate.ikon_deco
+          f.input :ikon, hint: f.object.decorate.ikon? ? f.object.decorate.ikon_deco : ''
           if f.object.decorate.ikon?
             f.input :delete_ikon,
                     as: :boolean,
                     hint: 'Si coché, l\'icône du réseau social sera supprimée après mise à jour de l\'élément'
           end
+
+          f.input :font_ikon,
+                  collection: Social.allowed_font_awesome_ikons,
+                  hint: f.object.decorate.hint_by_ikon,
+                  input_html: {
+                    class: 'chosen-select',
+                    disabled: f.object.decorate.ikon? ? :disabled : false,
+                    data: { placeholder: 'Sélectionnez une valeur' }
+                  }
         end
       end
     end

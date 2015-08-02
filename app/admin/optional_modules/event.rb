@@ -80,7 +80,7 @@ ActiveAdmin.register Event do
                     class: 'datetimepicker',
                     value: f.object.start_date.blank? ? '' : f.object.start_date.localtime.to_s(:db)
                   },
-                  hint: I18n.t('form.hint.start_date')
+                  hint: I18n.t('form.hint.event.start_date')
 
           f.input :end_date,
                   as: :string,
@@ -88,10 +88,10 @@ ActiveAdmin.register Event do
                     class: 'datetimepicker',
                     value: f.object.end_date.blank? ? '' : f.object.end_date.localtime.to_s(:db)
                   },
-                  hint: I18n.t('form.hint.end_date')
+                  hint: I18n.t('form.hint.event.end_date')
 
-          f.input :url
-          f.input :online
+          f.input :url, hint: I18n.t('form.hint.event.link')
+          f.input :online, hint: I18n.t('form.hint.event.online')
         end
       end
     end

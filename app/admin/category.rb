@@ -20,6 +20,12 @@ ActiveAdmin.register Category do
                 ],
                 background_attributes: [
                   :id, :image, :_destroy
+                ],
+                heading_attributes: [
+                  :id,
+                  translations_attributes: [
+                    :id, :locale, :content
+                  ]
                 ]
 
   decorate_with CategoryDecorator
@@ -75,19 +81,13 @@ ActiveAdmin.register Category do
         end
 
         f.inputs t('general') do
-          columns do
-            column do
-              f.input :name,
-                      collection: Category.models_name,
-                      include_blank: false,
-                      input_html: { class: 'chosen-select' }
-            end
+          f.input :name,
+                  collection: Category.models_name,
+                  include_blank: false,
+                  input_html: { class: 'chosen-select' }
 
-            column do
-              f.input :show_in_menu
-              f.input :show_in_footer
-            end
-          end
+          f.input :show_in_menu
+          f.input :show_in_footer
 
           f.input :custom_background_color,
                   as: :boolean,
@@ -104,13 +104,17 @@ ActiveAdmin.register Category do
       end
 
       column do
-        render 'admin/shared/referencement/form', f: f
+        render 'admin/shared/heading/form', f: f
       end
     end
 
     columns do
       column do
         render 'admin/shared/backgrounds/form', f: f
+      end
+
+      column do
+        render 'admin/shared/referencement/form', f: f
       end
     end
 

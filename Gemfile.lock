@@ -31,6 +31,14 @@ GIT
       rails (>= 4.0.0, < 4.3.0)
 
 GIT
+  remote: git://github.com/LoveMondays/gretel.git
+  revision: 3351b3d47bb34b1d70f9dd370e074e822c9171f4
+  branch: fix-semantic-breadcrumb-current-item
+  specs:
+    gretel (3.0.8)
+      rails (>= 3.2.0)
+
+GIT
   remote: git://github.com/activeadmin/activeadmin.git
   revision: 28e8a8f36640c64fc4163c86cc31d716862c5b37
   specs:
@@ -306,8 +314,6 @@ GEM
       multi_json
       request_store (>= 1.0.5)
     gravatar_image_tag (1.2.0)
-    gretel (3.0.8)
-      rails (>= 3.2.0)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -639,7 +645,7 @@ DEPENDENCIES
   gmaps-autocomplete-rails
   gon
   gravatar_image_tag
-  gretel
+  gretel!
   i18n-js (>= 3.0.0.rc10)
   irbtools-more
   jbuilder (~> 2.0)

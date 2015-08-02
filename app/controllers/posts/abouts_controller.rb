@@ -3,7 +3,7 @@
 #
 class AboutsController < PostsController
   before_action :set_about, only: [:show]
-  decorates_assigned :about, :comment, :element
+  decorates_assigned :about, :comment
 
   include Commentable
 

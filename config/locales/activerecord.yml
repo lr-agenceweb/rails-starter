@@ -294,8 +294,9 @@ fr:
         link: Lien
         enabled: Activer
         kind: Type
-        ikon: Icône
+        ikon: Image
         ikon_deco: Icône
+        font_ikon: Icône
         status: État
         delete_ikon: Supprimer l'icône
 

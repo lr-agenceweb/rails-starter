@@ -7,17 +7,21 @@ class SettingDecorator < ApplicationDecorator
 
   delegate_all
 
+  def title
+    content_tag(:span, model.title, itemprop: 'name legalName')
+  end
+
   def title_subtitle(header = :h1, link = root_path, klass = '')
-    content_tag(:a, href: link, class: "l-header-site-title-link #{klass}") do
+    content_tag(:a, href: link, class: "l-header-site-title-link #{klass}", itemprop: 'url') do
       concat(content_tag(header, class: 'l-header-site-title') do
-        concat(model.title) + ' ' + concat(small_subtitle)
+        concat(title) + ' ' + concat(small_subtitle)
       end)
     end
   end
 
   def logo_deco
     # Website logo present
-    h.retina_image_tag(model, :logo, :medium) if logo?
+    retina_image_tag(model, :logo, :medium, itemprop: 'logo') if logo?
   end
 
   def credentials

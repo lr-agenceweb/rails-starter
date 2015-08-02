@@ -7,6 +7,7 @@
 #  link              :string(255)
 #  kind              :string(255)
 #  enabled           :boolean          default(TRUE)
+#  font_ikon         :string(255)
 #  ikon_updated_at   :datetime
 #  ikon_file_size    :integer
 #  ikon_content_type :string(255)
@@ -21,12 +22,14 @@ facebook_follow:
   link: http://facebook.com
   kind: follow
   enabled: true
+  font_ikon: facebook
 
 facebook_share:
   title: Facebook
-  link: http://facebook.com
+  link: ~
   kind: share
   enabled: true
+  font_ikon: facebook
 
 twitter:
   title: Twitter

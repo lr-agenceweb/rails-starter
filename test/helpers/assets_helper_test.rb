@@ -22,7 +22,9 @@ class AssetsHelperTest < ActionView::TestCase
     assert_equal expected, result
   end
 
-  test 'should return nil if attachment is nil' do
-    assert_nil attachment_url(nil, :small, ActionController::TestRequest.new)
+  test 'should return default picture if attachment is nil' do
+    result = attachment_url(nil, :small, ActionController::TestRequest.new)
+    expected = 'http://test.host/default/small-missing.png'
+    assert_equal expected, result
   end
 end

@@ -1,5 +1,12 @@
-.panel
-  p
-    small = event.created_at
-  h3 = link_to event.title, event_path(event)
-  div = simple_format(event.content)
+article.panel itemscope='' itemtype='http://schema.org/Event'
+  header
+    h2 itemprop='name' = event.title
+
+    = time_tag event.start_date.to_datetime, l(event.start_date, format: :short), itemprop: 'startDate'
+    br
+    = time_tag event.end_date.to_datetime, l(event.end_date, format: :short), itemprop: 'endDate'
+    br
+    span itemprop='duration' = event.duration
+
+  h3 itemprop='name' = link_to event.title, event_path(event), itemprop: 'url'
+  div itemprop='description' = simple_format(event.content)
