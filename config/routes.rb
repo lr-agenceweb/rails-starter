@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
+  get 'robots.:format', to: 'robots#index'
+
   #
   # == Translated routes
   #
@@ -49,8 +51,6 @@ Rails.application.routes.draw do
       resources :errors, only: [:show], code: code, path: '', as: "error_#{code}".to_sym
     end
   end
-
-  get 'robots.:format', to: 'robots#index'
 
   # Newsletters
   resources :newsletter_users, only: [:create]
