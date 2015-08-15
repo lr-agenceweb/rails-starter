@@ -65,7 +65,7 @@ class CommentsController < ApplicationController
   def load_commentable
     klass = [About, Blog].detect { |c| params["#{c.name.underscore}_id"] }
     @commentable = klass.find(params["#{klass.name.underscore}_id"])
-    @category = Category.find_by(name: klass)
+    @category = Category.find_by(name: klass.model_name.to_s)
     @controller_name = klass.name.underscore.pluralize
     redirect_to root_path unless @commentable.allow_comments?
   end
