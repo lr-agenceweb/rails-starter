@@ -2,18 +2,12 @@
 #
 # Table name: maps
 #
-#  id              :integer          not null, primary key
-#  address         :string(255)
-#  city            :string(255)
-#  postcode        :integer
-#  geocode_address :string(255)
-#  latitude        :float(24)
-#  longitude       :float(24)
-#  marker_icon     :string(255)
-#  marker_color    :string(255)
-#  show_map        :boolean
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id           :integer          not null, primary key
+#  marker_icon  :string(255)
+#  marker_color :string(255)
+#  show_map     :boolean
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 #
@@ -24,7 +18,9 @@ class Map < ActiveRecord::Base
     %w( camera building park car bus college gift )
   end
 
-  validates :postcode, allow_blank: true, numericality: { only_integer: true }
+  has_one :location, as: :locationable, dependent: :destroy
+  accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
+
   validates :marker_icon,
             presence: false,
             allow_blank: true,

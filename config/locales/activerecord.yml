@@ -283,19 +283,25 @@ fr:
         end_date: Date de fin
         online: En ligne ?
         status: État
+        full_address_inline: Adresse de l'événement
+        duration: Durée
       map:
         show_map: Afficher la carte ?
-        geocode_address: Adresse avec géolocalisation
-        full_address: Adresse complète
+        full_address_inline: Adresse de votre organisation
         map_status: Carte
-        latlon: Latitude / Longitude
-        city: Ville
-        postcode: Code Postal
-        address: Adresse
         status: État
         marker_icon: Icône du marqueur
         marker_color: Couleur du marqueur
         marker_color_deco: Couleur du marqueur
+      location:
+        address: Adresse complète
+        full_address: Adresse complète
+        postcode: Code Postal
+        address: Adresse
+        city: Ville
+        geocode_address: Adresse avec géolocalisation
+        latlon: Latitude / Longitude
+
       social:
         title: Titre
         link: Lien

@@ -67,6 +67,9 @@ fr:
         online: Montrer cette image dans le slider ?
         destroy: Supprimer cette image du slider ?
 
+      location:
+        geocode_address: Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n'est pas affichée)
+
       string_box:
         content: Contenu du message personnalisé à afficher sur le site
         title: Titre du message personnalisé à afficher sur le site

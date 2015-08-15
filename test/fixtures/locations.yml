@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: locations
+#
+#  id                :integer          not null, primary key
+#  locationable_id   :integer
+#  locationable_type :string(255)
+#  address           :string(255)
+#  city              :string(255)
+#  postcode          :integer
+#  latitude          :float(24)
+#  longitude         :float(24)
+#  geocode_address   :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+# Indexes
+#
+#  index_locations_on_locationable_type_and_locationable_id  (locationable_type,locationable_id)
+#
+
+one:
+  geocode_address: 'Main Street'
+  address: '1 Main Street'
+  postcode: 06_000
+  city: Auckland
+  latitude: 1.5
+  longitude: 1.5
+  locationable: one (Map)
+
+two:
+  address: MyString
+  city: MyString
+  postcode: 1
+  locationable: event_online (Event)
