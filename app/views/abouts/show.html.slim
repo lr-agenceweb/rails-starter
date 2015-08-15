@@ -3,22 +3,19 @@
 .row
   .small-12.columns
 
-    article itemscope='' itemtype='http://schema.org/Article'
-      meta itemprop='url' content="#{about_url(about)}"
-      meta itemprop='creator' content="#{about.user_username}"
-      meta itemprop='datePublished' content="#{about.created_at.to_datetime}"
-      meta itemprop='image' content="#{attachment_url(about.first_pictures_image, :medium)}"
+    article
+      == about.microdata_meta
 
       header
-        h2 itemprop='headline' = about.title
+        h2 = about.title
 
-      div itemprop='text' == about.content
+      div == about.content
 
       .pictures
         ul.small-block-grid-1.medium-block-grid-3.large-block-grid-6
           - about.pictures_online.each do |picture|
             li
-              = link_to retina_image_tag(picture, :image, :medium, class: 'th', itemprop: 'image'), picture.image.url(:large), title: picture.title, class: 'magnific-popup', itemprop: 'url'
+              = link_to retina_image_tag(picture, :image, :medium, class: 'th'), picture.image.url(:large), title: picture.title, class: 'magnific-popup'
 
 
 - if @comment_module.enabled?

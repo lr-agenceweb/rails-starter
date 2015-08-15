@@ -7,6 +7,7 @@ class PostDecorator < ApplicationDecorator
 
   delegate_all
   decorates_association :user
+  decorates_association :pictures
 
   #
   # == Author and avatar linked to Post
@@ -65,10 +66,24 @@ class PostDecorator < ApplicationDecorator
     link_to I18n.t('active_admin.show'), link
   end
 
-  # Type of Post
   #
+  # Type of Post
   #
   def type_title
     Category.title_by_category(type)
+  end
+
+  #
+  # Microdatas
+  #
+  def microdata_meta
+    content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/Article') do
+      concat(tag(:meta, itemprop: 'name headline', content: model.title))
+      concat(tag(:meta, itemprop: 'text', content: model.content)) if content?
+      concat(tag(:meta, itemprop: 'url', content: show_page_link(true)))
+      concat(tag(:meta, itemprop: 'creator', content: model.user_username))
+      concat(tag(:meta, itemprop: 'datePublished', content: model.created_at.to_datetime))
+      concat(tag(:meta, itemprop: 'image', content: attachment_url(model.first_pictures_image, :medium))) if model.pictures?
+    end
   end
 end
