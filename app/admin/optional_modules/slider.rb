@@ -112,4 +112,13 @@ ActiveAdmin.register Slider do
 
     f.actions
   end
+
+  #
+  # == Controller
+  #
+  controller do
+    def edit
+      @page_title = "#{t('active_admin.edit')} #{I18n.t('activerecord.models.slider.one')} page #{resource.decorate.page}"
+    end
+  end
 end
