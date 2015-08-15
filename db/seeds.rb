@@ -71,6 +71,13 @@ end
 puts 'Creating Map'
 Map.create!(
   show_map: true,
+)
+
+#
+# == Location
+#
+puts 'Creating Map Location'
+Location.create!(
   address: 'Place du Père Noël',
   city: 'Rovaniemi',
   postcode: 96_930,
@@ -320,6 +327,16 @@ referencement = Referencement.create!(
   title: '',
   description: '',
   keywords: ''
+)
+
+puts 'Creating Event Location'
+Location.create!(
+  address: 'Rue des Limaces',
+  city: 'Lyon',
+  postcode: 69_000,
+  geocode_address: 'Rue des Limaces, 69000 - Lyon',
+  latitude: 45.764,
+  longitude: 4.83566
 )
 
 if @locales.include?(:en)
