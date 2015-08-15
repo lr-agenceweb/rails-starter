@@ -37,10 +37,9 @@ class Slide < ActiveRecord::Base
   retina!
   has_attachment :image,
                  styles: {
-                   slide: '2000x',
-                   medium: '1000x',
-                   small: '800x',
-                   thumb: '400x'
+                   slide: '1920x650#',
+                   medium: '960x250#',
+                   small: '480x250#'
                  }
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
