@@ -26,7 +26,6 @@ table.index_table td a.button
     &:hover
       background-color: lighten(#007637, 10%) !important
 
-
 // Site title
 #header h1.site_title
   background: #FFF
@@ -35,3 +34,15 @@ table.index_table td a.button
 
   a
     color: #313131
+
+// Breadcrumb
+#titlebar_left
+  .breadcrumb
+    a
+      @include link-colors(#FFF, #FFF, #FFF, #FFF, #FFF)
+    .breadcrumb_sep
+      color: #FFF
+    &:before
+      content: "Vous êtes ici: "
+      color: #FFF
+      margin-right: 6px
