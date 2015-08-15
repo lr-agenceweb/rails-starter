@@ -3,9 +3,14 @@ fr:
   location:
     event:
       title: Adresse de l'événement
+    map:
+      title: Adresse de votre organisation
 
 
 # English
 en:
   location:
-    title: Full address
+    event:
+      title: Full address
+    map:
+      title: Location of your business

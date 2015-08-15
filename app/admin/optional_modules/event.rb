@@ -99,7 +99,7 @@ ActiveAdmin.register Event do
           f.input :online, hint: I18n.t('form.hint.event.online')
         end
 
-        render 'admin/shared/locations/one', f: f, title: t('location.event.title')
+        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
       end
     end # columns
 

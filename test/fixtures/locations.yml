@@ -19,20 +19,17 @@
 #  index_locations_on_locationable_type_and_locationable_id  (locationable_type,locationable_id)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  address: MyString
-  city: MyString
-  postcode: 1
+  geocode_address: 'Main Street'
+  address: '1 Main Street'
+  postcode: 06_000
+  city: Auckland
   latitude: 1.5
   longitude: 1.5
-  geocode_address: MyString
+  locationable: one (Map)
 
 two:
   address: MyString
   city: MyString
   postcode: 1
-  latitude: 1.5
-  longitude: 1.5
-  geocode_address: MyString
+  locationable: event_online (Event)

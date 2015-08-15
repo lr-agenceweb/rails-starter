@@ -4,26 +4,18 @@
 class MapDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
-
-  def latlon
-    simple_format("#{model.latitude}, #{model.longitude}")
-  end
+  decorates_association :location
 
   def map(map_module_enabled, force = false, from_form = false)
-    raw content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : '' }", id: 'map') if map_module_enabled && ((model.show_map && latlon?) || (force && latlon?))
+    raw content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : '' }", id: 'map') if map_module_enabled && !model.location.nil? && ((model.show_map && model.location.decorate.latlon?) || (force && model.location.decorate.latlon?))
   end
 
-  # def full_address
-  #   simple_format("#{model.address} <br> #{model.postcode} - #{model.city}")
-  # end
-
-  # def full_address_inline
-  #   content_tag(:span) do
-  #     concat(model.address + ', ')
-  #     concat(model.postcode.to_s + ' - ')
-  #     concat(model.city)
-  #   end
-  # end
+  #
+  # == Location
+  #
+  def full_address_inline
+    model.location.decorate.full_address_inline
+  end
 
   def status
     color = model.show_map? ? 'green' : 'red'
@@ -34,6 +26,9 @@ class MapDecorator < ApplicationDecorator
     content_tag(:div, '', style: "background-color: #{model.marker_color}; width: 35px; height: 20px;") unless model.marker_color.blank?
   end
 
+  #
+  # == ActiveAdmin
+  #
   def title_aa_show
     I18n.t('activerecord.models.map.one')
   end
@@ -43,15 +38,9 @@ class MapDecorator < ApplicationDecorator
   #
   def microdata_meta
     content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/PostalAddress') do
-      concat(tag(:meta, itemprop: 'streetAddress', content: model.address))
-      concat(tag(:meta, itemprop: 'postalCode', content: model.postcode))
-      concat(tag(:meta, itemprop: 'addressLocality', content: model.city))
+      concat(tag(:meta, itemprop: 'streetAddress', content: model.location.try(:address)))
+      concat(tag(:meta, itemprop: 'postalCode', content: model.location.try(:postcode)))
+      concat(tag(:meta, itemprop: 'addressLocality', content: model.location.try(:city)))
     end
   end
-
-  private
-
-  # def latlon?
-  #   !model.latitude.nil? && !model.longitude.nil?
-  # end
 end
