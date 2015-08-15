@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
     # Errors
     %w( 404 422 500 ).each do |code|
-      resources :errors, only: [:show], code: code, path: '', as: "error_#{code}".to_sym
+      get "/#{code}", to: 'errors#show', code: code, as: "error_#{code}".to_sym
     end
   end
 

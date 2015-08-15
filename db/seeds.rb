@@ -379,20 +379,20 @@ NewsletterUser.create!(
 # == StringBox
 #
 puts 'Creating StringBox'
-string_box_keys = ['adult_not_validated_popup_content', 'error_404', 'error_422', 'error_500']
-string_box_title_fr = ['', 'Erreur 404', 'Erreur 422', 'Erreur 500']
-string_box_title_en = ['', 'Error 404', 'Error 404', 'Error 500']
+string_box_keys = ['error_404', 'error_422', 'error_500', 'success_contact_form']
+string_box_title_fr = ['404', '422', '500', 'Message de contact envoyé avec succès', '']
+string_box_title_en = ['404', '422', '500', 'Contact message sent successfuly', '']
 string_box_content_fr = [
-  'Afin de pouvoir accéder au site, vous devez être majeur. En cliquant sur accepter vous attestez avoir plus de 18 ans.',
-  'La page que vous tentez de voir n\'existe pas :(',
-  'La page que vous tentez de voir n\'est pas disponible pour l\'instant :(',
-  'Ooops, une erreur s\'est produite :( Veuillez réésayer ultérieurement'
+  "<p>Cette page n'existe pas ou n'existe plus.<br /> Nous vous prions de nous excuser pour la gêne occasionnée.</p>",
+  '<p>La page que vous tentez de voir n\'est pas disponible pour l\'instant :(</p>',
+  '<p>Ooops, une erreur s\'est produite :( Veuillez réésayer ultérieurement</p>',
+  '<p>Votre message a bien été envoyé. Merci :)</p>'
 ]
 string_box_content_en = [
-  'In order to access the website, you must be adult. By clicking accept, you attest you are over 18 years old.',
-  'The page you want to access doesn\'t exist :(',
-  'The page you want to access is not available now :(',
-  'Oops, something bad happend :( Please try again later'
+  '<p>The page you want to access doesn\'t exist :(</p>',
+  '<p>The page you want to access is not available now :(</p>',
+  '<p>Oops, something bad happend :( Please try again later</p>',
+  '<p>Your message has been sent successfuly. Thank you :)'
 ]
 string_box_keys.each_with_index do |element, index|
   string_box = StringBox.create!(
