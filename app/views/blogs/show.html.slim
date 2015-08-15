@@ -16,14 +16,4 @@
 
       == blog.loop_hover_has_many_pictures true
 
-
-- if @comment_module.enabled?
-  .row
-    .small-12.columns
-      - if @blog.allow_comments?
-        h3 Commentaires
-        = render 'comments/form'
-        = render 'comments/comments'
-
-      - else
-        p = I18n.t('comment.disabled')
+= render 'comments/section', o: @blog

@@ -1,5 +1,5 @@
 <% unless @setting.should_validate %>
-  $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
+  $('.comments').prepend("<%= j render partial: 'comments/row', locals: { comment: comment } %>");
 <% end %>
 
 $('#comment_username').val('');
@@ -9,3 +9,4 @@ $('#comment_comment').val('');
 NProgress.done();
 
 <%= render 'elements/alert' %>
+<%= render 'elements/scroll_to' %>
