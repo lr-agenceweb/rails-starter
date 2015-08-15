@@ -1,4 +1,6 @@
-article.comment.row id="comment-#{comment.id}" itemscope='' itemtype='http://schema.org/Comment'
+article.comment.row id="comment-#{comment.id}"
+  == comment.microdata_meta
+
   .small-12.columns.panel
     .row
       .small-12.medium-2.columns
@@ -6,7 +8,7 @@ article.comment.row id="comment-#{comment.id}" itemscope='' itemtype='http://sch
 
         = comment.avatar
       .small-12.medium-10.columns
-        div itemprop='text' = comment.content
+        div = comment.content
 
       footer
         - if can? :destroy, comment
