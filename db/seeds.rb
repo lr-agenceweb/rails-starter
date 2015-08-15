@@ -69,8 +69,10 @@ end
 # == Map
 #
 puts 'Creating Map'
-Map.create!(
+map = Map.create!(
   show_map: true,
+  marker_icon: 'park',
+  marker_color: '#EE903E'
 )
 
 #
@@ -78,6 +80,8 @@ Map.create!(
 #
 puts 'Creating Map Location'
 Location.create!(
+  locationable_id: map.id,
+  locationable_type: 'Map',
   address: 'Place du Père Noël',
   city: 'Rovaniemi',
   postcode: 96_930,
@@ -331,6 +335,8 @@ referencement = Referencement.create!(
 
 puts 'Creating Event Location'
 Location.create!(
+  locationable_id: event.id,
+  locationable_type: 'Event',
   address: 'Rue des Limaces',
   city: 'Lyon',
   postcode: 69_000,
