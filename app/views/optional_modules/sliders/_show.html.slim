@@ -1,6 +1,2 @@
 - if (@slider_module.enabled? && !slider.nil? && slider.slides?) || force
-  ul data-orbit='' data-options="#{slider.slider_options}"
-    - slider.slides_online.find_each do |slide|
-      li
-        = content_tag(:img, '', data: { interchange: "[#{slide.image.url(:slide)}, (default)], [#{slide.image.url(:small)}, (small)], [#{slide.image.url(:medium)}, (medium)], [#{slide.image.url(:medium)}, (large)]" })
-        = slide.decorate.caption
+  == slider.loop_hover_has_many_pictures

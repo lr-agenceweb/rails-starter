@@ -42,6 +42,19 @@ class SliderDecorator < ApplicationDecorator
     "#{I18n.t('activerecord.models.slider.one')} page #{resource.page}"
   end
 
+  def loop_hover_has_many_pictures(size = :slide)
+    if model.slides?
+      h.content_tag(:ul, '', class: 'slides', data: { orbit: '', options: slider_options }) do
+        model.slides_online.each do |slide|
+          concat(h.content_tag(:li) do
+            concat(slide.decorate.self_image_has_one_by_size(size))
+            concat(slide.decorate.caption)
+          end)
+        end
+      end
+    end
+  end
+
   private
 
   def status_slider(property)
