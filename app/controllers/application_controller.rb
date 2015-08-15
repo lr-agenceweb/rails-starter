@@ -41,7 +41,8 @@ class ApplicationController < ActionController::Base
     menu_elements = ::Category.includes(:translations, :referencement).all
     @menu_elements_header ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_header.with_allowed_module.by_position)
     @menu_elements_footer ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_footer.with_allowed_module.by_position)
-    @category = Category.find_by(name: controller_name.classify)
+    @controller_name = controller_name.classify
+    @category = Category.find_by(name: @controller_name)
   end
 
   def set_background
