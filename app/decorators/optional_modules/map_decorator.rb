@@ -26,6 +26,10 @@ class MapDecorator < ApplicationDecorator
     content_tag(:div, '', style: "background-color: #{model.marker_color}; width: 35px; height: 20px;") unless model.marker_color.blank?
   end
 
+  def title_aa_show
+    I18n.t('activerecord.models.map.one')
+  end
+
   #
   # Microdatas
   #

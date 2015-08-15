@@ -37,7 +37,7 @@ ActiveAdmin.register Map, as: 'Plan' do
     actions
   end
 
-  show do
+  show title: :title_aa_show do
     columns do
       column do
         panel t('active_admin.details', model: t('activerecord.models.plan.one')) do
