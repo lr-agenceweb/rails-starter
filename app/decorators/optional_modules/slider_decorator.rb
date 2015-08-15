@@ -7,31 +7,39 @@ class SliderDecorator < ApplicationDecorator
   delegate_all
 
   def page
-    model.category_name
+    I18n.t("activerecord.models.#{model.category_name.downcase}.one")
   end
 
-  def autoplay
+  def autoplay_deco
     status_slider 'autoplay'
   end
 
-  def hover_pause
+  def hover_pause_deco
     status_slider 'hover_pause'
   end
 
-  def loop
+  def loop_deco
     status_slider 'loop'
   end
 
-  def navigation
+  def navigation_deco
     status_slider 'navigation'
   end
 
-  def bullet
+  def bullet_deco
     status_slider 'bullet'
+  end
+
+  def time_to_show_deco
+    "#{model.time_to_show / 1000} #{I18n.t('time.label.seconds')}"
   end
 
   def slider_options
     "animation: #{model.animate}; timer_speed: #{model.time_to_show}; pause_on_hover: #{model.hover_pause}; resume_on_mouseout: true; navigation_arrows: #{model.navigation}; slide_number: false; bullet: #{model.bullet}; circular: #{model.loop}; timer: #{model.autoplay}; swipe: true"
+  end
+
+  def title_aa_show
+    "#{I18n.t('activerecord.models.slider.one')} page #{resource.page}"
   end
 
   private

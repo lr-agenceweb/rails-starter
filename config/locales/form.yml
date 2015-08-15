@@ -54,6 +54,15 @@ fr:
         destroy: Suppression du media associé à l'article
       background:
         destroy: Suppression de l'image d'arrière-plan associée à cette page
+
+      slider:
+        autoplay: Si coché, le slider démarrera automatiquement au chargement de la page
+        hover_pause: Si coché, le slider sera mis en pause tant que la souris de l'internaute survolera l'image (le slidera redémarrera automatiquement après)
+        loop: Si coché, le slider affichera de nouveau la première image après être arrivé à la dernière
+        navigation: Si coché, les flèches précedentes et suivantes seront affichées sur le slider
+        bullet: Si coché, des ronds de navigations seront affichés sous le slider
+        time_to_show: Intervalle de temps dans lequel sera affichée une image du slider avant de passer à la suivante (en milli secondes)
+        animate: Effet de transition entre chaque slide
       slide:
         online: Montrer cette image dans le slider ?
         destroy: Supprimer cette image du slider ?

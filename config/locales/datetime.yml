@@ -1,6 +1,8 @@
 # English
 en:
   time:
+    label:
+      seconds: seconds
     formats:
       without_time: '%B %d, %Y'
       long: "%B %d, %Y at %H:%M"
@@ -8,6 +10,8 @@ en:
 # French
 fr:
   time:
+    label:
+      seconds: secondes
     formats:
       without_time: '%A %d %B %Y'
       long: "%A %d %B %Y à %Hh%M"
