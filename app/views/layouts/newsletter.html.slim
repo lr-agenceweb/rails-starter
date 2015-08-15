@@ -5,7 +5,7 @@ html
     meta content=('text/html; charset=UTF-8') http-equiv='Content-Type' /
     title = @title
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
-    link href='/assets/css/newsletter.css' rel='stylesheet' type='text/css' /
+    = stylesheet_link_tag 'newsletter', media: 'all', 'data-turbolinks-track': true
 
   body#newsletter
     - @settings = Setting.first
