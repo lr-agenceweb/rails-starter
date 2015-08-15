@@ -26,6 +26,17 @@ class MapDecorator < ApplicationDecorator
     content_tag(:div, '', style: "background-color: #{model.marker_color}; width: 35px; height: 20px;") unless model.marker_color.blank?
   end
 
+  #
+  # Microdatas
+  #
+  def microdata_meta
+    content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/PostalAddress') do
+      concat(tag(:meta, itemprop: 'streetAddress', content: model.address))
+      concat(tag(:meta, itemprop: 'postalCode', content: model.postcode))
+      concat(tag(:meta, itemprop: 'addressLocality', content: model.city))
+    end
+  end
+
   private
 
   def latlon?
