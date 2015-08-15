@@ -2,8 +2,10 @@
 en:
   post:
     no_results: "No %{category} to show"
+    title_aa_show: "Article link to the %{page} page"
 
 # French
 fr:
   post:
     no_results: "Il n'y a aucun %{category} à montrer"
+    title_aa_show: "Article lié à la page %{page}"
