@@ -6,23 +6,6 @@ module ApplicationHelper
     Time.zone.now.year
   end
 
-  def mapbox_gon_params
-    gon.push(
-      mapbox_username: Figaro.env.mapbox_username,
-      mapbox_key: Figaro.env.mapbox_map_key,
-      mapbox_access_token: Figaro.env.mapbox_access_token,
-      name: @setting.name,
-      subtitle: @setting.subtitle,
-      address: @map.address,
-      city: @map.city,
-      postcode: @map.postcode,
-      latitude: @map.latitude,
-      longitude: @map.longitude,
-      marker_icon: @map.marker_icon.nil? ? '' : @map.marker_icon,
-      marker_color: @map.marker_color
-    )
-  end
-
   def title_for_category(category)
     link = link_to category.title, category.menu_link(category.name), class: 'l-page-title-link'
     content_tag(:h2, link, class: 'l-page-title', id: category.name.downcase)

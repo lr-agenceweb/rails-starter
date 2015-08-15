@@ -1,5 +1,6 @@
 ActiveAdmin.register Map, as: 'Plan' do
-  menu parent: I18n.t('admin_menu.modules')
+  menu parent: I18n.t('admin_menu.modules'),
+       label: I18n.t('activerecord.models.map.one')
 
   permit_params :id,
                 :address,
@@ -113,19 +114,14 @@ ActiveAdmin.register Map, as: 'Plan' do
   # == Controller
   #
   controller do
-    include ApplicationHelper
-    before_action :set_map
+    include Mappable
+    include MapHelper
     before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? && current_user_and_administrator? }
 
     private
 
     def redirect_to_show
       redirect_to admin_plan_path(@map)
-    end
-
-    def set_map
-      @map = Map.first
-      mapbox_gon_params
     end
   end
 end
