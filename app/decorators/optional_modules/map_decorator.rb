@@ -17,6 +17,14 @@ class MapDecorator < ApplicationDecorator
     simple_format("#{model.address} <br> #{model.postcode} - #{model.city}")
   end
 
+  def full_address_inline
+    content_tag(:span) do
+      concat(model.address + ', ')
+      concat(model.postcode.to_s + ' - ')
+      concat(model.city)
+    end
+  end
+
   def status
     color = model.show_map? ? 'green' : 'red'
     status_tag_deco I18n.t("map.#{model.show_map}"), color
