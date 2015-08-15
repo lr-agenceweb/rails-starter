@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730211412) do
+ActiveRecord::Schema.define(version: 20150815184501) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -186,6 +186,21 @@ ActiveRecord::Schema.define(version: 20150730211412) do
   end
 
   add_index "headings", ["headingable_type", "headingable_id"], name: "index_headings_on_headingable_type_and_headingable_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.integer  "locationable_id",   limit: 4
+    t.string   "locationable_type", limit: 255
+    t.string   "address",           limit: 255
+    t.string   "city",              limit: 255
+    t.integer  "postcode",          limit: 4
+    t.float    "latitude",          limit: 24
+    t.float    "longitude",         limit: 24
+    t.string   "geocode_address",   limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "locations", ["locationable_type", "locationable_id"], name: "index_locations_on_locationable_type_and_locationable_id", using: :btree
 
   create_table "maps", force: :cascade do |t|
     t.string   "address",         limit: 255

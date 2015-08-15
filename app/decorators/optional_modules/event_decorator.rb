@@ -42,8 +42,12 @@ class EventDecorator < PostDecorator
       concat(tag(:meta, itemprop: 'duration', content: duration))
       concat(tag(:meta, itemprop: 'description', content: model.content))
       concat(h.content_tag(:div, '', itemprop: 'location', itemscope: '', itemtype: 'http://schema.org/Place') do
-        # concat(tag(:meta, itemprop: 'address', content: model.location))
-        # concat(tag(:meta, itemprop: 'name', content: model.location))
+        concat(tag(:meta, itemprop: 'name', content: model.title))
+        concat(h.content_tag(:div, '', itemprop: 'address', itemscope: '', itemtype: 'http://schema.org/PostalAddress') do
+          concat(tag(:meta, itemprop: 'streetAddress', content: model.location_address))
+          concat(tag(:meta, itemprop: 'addressLocality', content: model.location_city))
+          concat(tag(:meta, itemprop: 'postalCode', content: model.location_postcode))
+        end)
       end)
     end
   end

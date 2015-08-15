@@ -296,6 +296,13 @@ fr:
         marker_icon: Icône du marqueur
         marker_color: Couleur du marqueur
         marker_color_deco: Couleur du marqueur
+      location:
+        address: Adresse complète
+        full_address: Adresse complète
+        postcode: Code Postal
+        address: Adresse
+        city: Ville
+
       social:
         title: Titre
         link: Lien

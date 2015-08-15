@@ -1,0 +1,11 @@
+# French
+fr:
+  location:
+    event:
+      title: Adresse de l'événement
+
+
+# English
+en:
+  location:
+    title: Full address

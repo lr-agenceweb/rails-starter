@@ -1,0 +1,6 @@
+f.inputs title, for: [:location, f.object.location || Location.new] do |item|
+
+  item.input :address
+  item.input :city
+  item.input :postcode
+end

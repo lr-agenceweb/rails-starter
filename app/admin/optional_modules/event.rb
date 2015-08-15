@@ -12,6 +12,9 @@ ActiveAdmin.register Event do
                 pictures_attributes: [
                   :id, :image, :online, :_destroy
                 ],
+                location_attributes: [
+                  :id, :address, :city, :postcode
+                ],
                 referencement_attributes: [
                   :id,
                   translations_attributes: [
@@ -93,8 +96,10 @@ ActiveAdmin.register Event do
           f.input :url, hint: I18n.t('form.hint.event.link')
           f.input :online, hint: I18n.t('form.hint.event.online')
         end
+
+        render 'admin/shared/locations/one', f: f, title: t('location.event.title')
       end
-    end
+    end # columns
 
     columns do
       column do

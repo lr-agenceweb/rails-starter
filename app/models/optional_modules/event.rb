@@ -45,6 +45,7 @@ class Event < ActiveRecord::Base
 
   delegate :online, to: :pictures, prefix: true, allow_nil: true
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
+  delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
 
