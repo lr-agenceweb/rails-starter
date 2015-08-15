@@ -4,7 +4,7 @@
 
   .error-container.row
     .small-12.columns
-      h1.error-title = @error..try(:title)
+      h1.error-title = @error.try(:title)
       .error-content == @error.try(:content)
 
       p.error-link == I18n.t('link.error_404', page: link_to(I18n.t('link.homepage'), root_path))
