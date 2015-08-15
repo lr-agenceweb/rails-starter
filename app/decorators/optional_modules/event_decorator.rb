@@ -36,7 +36,7 @@ class EventDecorator < PostDecorator
   # == Location
   #
   def full_address_inline
-    model.location.decorate.full_address_inline
+    model.location.decorate.full_address_inline if location?
   end
 
   #

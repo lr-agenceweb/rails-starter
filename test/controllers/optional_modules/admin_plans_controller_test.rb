@@ -50,7 +50,7 @@ module Admin
     end
 
     test 'should not update if postcode is not an integer' do
-      patch :update, id: @map, map: { postcode: 'bad_value' }
+      patch :update, id: @map, map: { location_attributes: { postcode: 'bad_value' } }
       assert_not assigns(:plan).valid?
     end
 
@@ -61,33 +61,33 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Map.new), 'should not be able to create'
-      assert ability.cannot?(:read, Map.new), 'should not be able to read'
-      assert ability.cannot?(:update, Map.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Map.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @map), 'should not be able to read'
+      assert ability.cannot?(:update, @map), 'should not be able to update'
+      assert ability.cannot?(:destroy, @map), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.cannot?(:create, Map.new), 'should not be able to create'
-      assert ability.can?(:read, Map.new), 'should be able to read'
-      assert ability.can?(:update, Map.new), 'should be able to update'
-      assert ability.cannot?(:destroy, Map.new), 'should not be able to destroy'
+      assert ability.can?(:read, @map), 'should be able to read'
+      assert ability.can?(:update, @map), 'should be able to update'
+      assert ability.cannot?(:destroy, @map), 'should not be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.cannot?(:create, Map.new), 'should not be able to create'
-      assert ability.can?(:read, Map.new), 'should be able to read'
-      assert ability.can?(:update, Map.new), 'should be able to update'
-      assert ability.cannot?(:destroy, Map.new), 'should not be able to destroy'
+      assert ability.can?(:read, @map), 'should be able to read'
+      assert ability.can?(:update, @map), 'should be able to update'
+      assert ability.cannot?(:destroy, @map), 'should not be able to destroy'
     end
 
     #
     # == Destroy
     #
     test 'should not destroy map' do
-      assert_no_difference ['Map.count'] do
+      assert_no_difference ['Map.count', 'Location.count'] do
         delete :destroy, id: @map
       end
       assert_redirected_to admin_dashboard_path
