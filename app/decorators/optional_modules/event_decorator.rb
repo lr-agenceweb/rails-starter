@@ -4,7 +4,9 @@
 class EventDecorator < PostDecorator
   include Draper::LazyHelpers
   include ActionView::Helpers::DateHelper
+
   delegate_all
+  decorates_association :location
 
   def url
     if url?
@@ -28,6 +30,13 @@ class EventDecorator < PostDecorator
 
   def from_to_date
     I18n.t('event.from_to_date', start_date: start_date_deco, end_date: end_date_deco) if start_date? && end_date?
+  end
+
+  #
+  # == Location
+  #
+  def full_address_inline
+    model.location.decorate.full_address_inline
   end
 
   #

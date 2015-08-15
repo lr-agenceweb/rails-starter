@@ -13,17 +13,17 @@ class MapDecorator < ApplicationDecorator
     raw content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : '' }", id: 'map') if map_module_enabled && ((model.show_map && latlon?) || (force && latlon?))
   end
 
-  def full_address
-    simple_format("#{model.address} <br> #{model.postcode} - #{model.city}")
-  end
+  # def full_address
+  #   simple_format("#{model.address} <br> #{model.postcode} - #{model.city}")
+  # end
 
-  def full_address_inline
-    content_tag(:span) do
-      concat(model.address + ', ')
-      concat(model.postcode.to_s + ' - ')
-      concat(model.city)
-    end
-  end
+  # def full_address_inline
+  #   content_tag(:span) do
+  #     concat(model.address + ', ')
+  #     concat(model.postcode.to_s + ' - ')
+  #     concat(model.city)
+  #   end
+  # end
 
   def status
     color = model.show_map? ? 'green' : 'red'
@@ -51,7 +51,7 @@ class MapDecorator < ApplicationDecorator
 
   private
 
-  def latlon?
-    !model.latitude.nil? && !model.longitude.nil?
-  end
+  # def latlon?
+  #   !model.latitude.nil? && !model.longitude.nil?
+  # end
 end

@@ -283,6 +283,8 @@ fr:
         end_date: Date de fin
         online: En ligne ?
         status: État
+        full_address_inline: Adresse de l'événement
+        duration: Durée
       map:
         show_map: Afficher la carte ?
         geocode_address: Adresse avec géolocalisation

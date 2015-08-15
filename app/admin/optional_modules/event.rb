@@ -42,6 +42,7 @@ ActiveAdmin.register Event do
     column :duration
     column :url
     column :status
+    column :full_address_inline
 
     translation_status
     actions
@@ -58,6 +59,7 @@ ActiveAdmin.register Event do
           row :duration
           row :url
           row :status
+          row :full_address_inline
         end
       end
 
