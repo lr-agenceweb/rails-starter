@@ -135,9 +135,9 @@ class Ability
     # == Slider
     #
     if @slider_module.enabled?
-      can :crud, Slider
+      can :crud, [Slider, Slide]
     else
-      cannot :manage, Slider
+      cannot :manage, [Slider, Slide]
     end
 
     #

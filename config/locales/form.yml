@@ -18,6 +18,7 @@ fr:
       model_name: Page à définir
       link: Lien du projet
       destroy: Supprimer cette image ?
+      slide: Image du slider
 
     counter: "Caractères restants: %{count}"
 
@@ -63,7 +64,10 @@ fr:
         bullet: Si coché, des ronds de navigations seront affichés sous le slider
         time_to_show: Intervalle de temps dans lequel sera affichée une image du slider avant de passer à la suivante (en milli secondes)
         animate: Effet de transition entre chaque slide
+
       slide:
+        title: Titre de la slide
+        description: Description de la slide (une phrase maximum)
         online: Montrer cette image dans le slider ?
         destroy: Supprimer cette image du slider ?
 
