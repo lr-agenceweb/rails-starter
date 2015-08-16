@@ -10,7 +10,6 @@
 
   .popup a.link-color
     @include link-colors($link-active-color, darken($link-active-color, 9%), $link-active-color)
-    @include transition(color .2s ease-in)
 
 @if variable-exists(small-only)
   @media #{$small-only}
