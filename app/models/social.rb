@@ -36,13 +36,13 @@ class Social < ActiveRecord::Base
   end
 
   retina!
-  has_attachment :ikon,
-                 styles: {
-                   large: '128x128>',
-                   medium: '64x64>',
-                   small: '32x32>',
-                   thumb: '16x16>'
-                 }
+  handle_attachment :ikon,
+                    styles: {
+                      large: '128x128>',
+                      medium: '64x64>',
+                      small: '32x32>',
+                      thumb: '16x16>'
+                    }
   validates_attachment_content_type :ikon, content_type: %r{\Aimage\/.*\Z}
 
   include DeletableAttachment

@@ -87,7 +87,7 @@ module SocialHelper
 
   private
 
-  def awesome_share_buttons(title = "", opts = {})
+  def awesome_share_buttons(title = '', opts = {})
     rel = opts[:rel]
     html = []
     html << "<div class='awesome-share-buttons' data-title='#{h title}' data-img='#{opts[:image]}' "
@@ -99,12 +99,14 @@ module SocialHelper
       ikon = fa_icon "#{social.font_ikon} 2x" if social.decorate.font_ikon?
       ikon = retina_image_tag(social, :ikon, :small) if social.decorate.ikon?
 
-      html << link_to(ikon, '#', {
-        rel: ['nofollow', rel],
-        'data-site': social.title.downcase,
-        onclick: 'return SocialShareClass.share(this);',
-        title: h(link_title)
-      })
+      html << link_to(ikon, '#',
+                      rel: [
+                        'nofollow',
+                        rel
+                      ],
+                      'data-site': social.title.downcase,
+                      onclick: 'return SocialShareClass.share(this);',
+                      title: h(link_title))
     end
     html << '</div>'
     raw html.join("\n")

@@ -6,14 +6,11 @@ class SlideDecorator < ApplicationDecorator
   delegate_all
 
   def caption
-    if caption?
-      h.content_tag(:div, '', class: 'caption') do
-        concat(h.content_tag(:h3, model.title, class: 'caption-title')) if slide.title?
-        concat(h.content_tag(:div, model.description, class: 'caption-content')) if slide.description?
-      end
-    end
+    h.content_tag(:div, '', class: 'caption') do
+      concat(h.content_tag(:h3, model.title, class: 'caption-title')) if slide.title?
+      concat(h.content_tag(:div, model.description, class: 'caption-content')) if slide.description?
+    end if caption?
   end
-
 
   def self_image_has_one_by_size(size = :slide)
     retina_image_tag self, :image, size, data: interchange_self

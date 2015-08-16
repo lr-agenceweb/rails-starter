@@ -36,14 +36,14 @@ class Picture < ActiveRecord::Base
   belongs_to :attachable, polymorphic: true
 
   retina!
-  has_attachment :image,
-                 styles: {
-                   huge:   '1024x1024>',
-                   large:  '512x512>',
-                   medium: '256x256>',
-                   small:  '90x90>>',
-                   thumb:  '30x30>'
-                 }
+  handle_attachment :image,
+                    styles: {
+                      huge:   '1024x1024>',
+                      large:  '512x512>',
+                      medium: '256x256>',
+                      small:  '90x90>>',
+                      thumb:  '30x30>'
+                    }
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 

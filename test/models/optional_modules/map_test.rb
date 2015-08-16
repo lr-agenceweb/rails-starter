@@ -1,5 +1,8 @@
 require 'test_helper'
 
+#
+# == Map model test
+#
 class MapTest < ActiveSupport::TestCase
   test 'should return list of allowed map markers' do
     allowed_map_markers = Map.allowed_markers

@@ -24,13 +24,13 @@ class Background < ActiveRecord::Base
   belongs_to :attachable, polymorphic: true
 
   retina!
-  has_attachment :image,
-                 styles: {
-                   background: '4000x2000>',
-                   large:      '2000x1200>',
-                   medium:     '1000x600>',
-                   small:      '300x300>'
-                 }
+  handle_attachment :image,
+                    styles: {
+                      background: '4000x2000>',
+                      large:      '2000x1200>',
+                      medium:     '1000x600>',
+                      small:      '300x300>'
+                    }
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 

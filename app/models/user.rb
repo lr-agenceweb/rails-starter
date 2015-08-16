@@ -54,13 +54,13 @@ class User < ActiveRecord::Base
   delegate :name, to: :role, prefix: true, allow_nil: true
 
   retina!
-  has_attachment :avatar,
-                 styles: {
-                   large:  '512x512#',
-                   medium: '256x256#',
-                   small:  '128x128#',
-                   thumb:  '64x64#'
-                 }
+  handle_attachment :avatar,
+                    styles: {
+                      large:  '512x512#',
+                      medium: '256x256#',
+                      small:  '128x128#',
+                      thumb:  '64x64#'
+                    }
 
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
 
