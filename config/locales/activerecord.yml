@@ -237,7 +237,11 @@ fr:
         slide: Image
         image: Image
         image_large: Image
-        status: Statut
+        image_deco: Image
+        slider_page_name: Slide liée à la page
+        status: État
+        title_deco: Titre
+        description_deco: Description
         _destroy: Supprimer ?
       comment:
         mail: Email

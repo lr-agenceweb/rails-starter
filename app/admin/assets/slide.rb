@@ -1,21 +1,21 @@
-ActiveAdmin.register Picture do
+ActiveAdmin.register Slide do
   menu parent: 'Assets'
+  includes :translations, :attachable
 
   permit_params :id,
-                :online,
                 :image,
+                :online,
                 translations_attributes: [
                   :id, :locale, :title, :description
                 ]
 
-  decorate_with PictureDecorator
+  decorate_with SlideDecorator
   config.clear_sidebar_sections!
-  actions :all, except: [:new]
 
   batch_action :toggle_value do |ids|
-    Picture.find(ids).each do |picture|
-      toggle_value = picture.online? ? false : true
-      picture.update_attribute(:online, toggle_value)
+    Slide.find(ids).each do |slide|
+      toggle_value = slide.online? ? false : true
+      slide.update_attribute(:online, toggle_value)
     end
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
@@ -23,18 +23,18 @@ ActiveAdmin.register Picture do
   index do
     selectable_column
     column :image_deco
-    column :source_picture_title_link
+    column :title_deco
+    column :description_deco
+    column :slider_page_name
     column :status
-
-    translation_status
     actions
   end
 
-  show do
+  show title: :title_aa_show, decorate: true do
     attributes_table do
-      row :image_large
-      row :source_picture_title_link
-      row :description
+      row :image_deco
+      row :title_deco
+      row :description_deco
       row :status
     end
   end
@@ -44,23 +44,25 @@ ActiveAdmin.register Picture do
 
     columns do
       column do
-        f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
-          f.input :image,
-                  as: :file,
-                  hint: retina_image_tag(f.object, :image, :medium)
-          f.input :online,
-                  label: I18n.t('form.label.online'),
-                  hint: I18n.t('form.hint.online')
+        f.inputs 'Contenu de la slide' do
+          f.translated_inputs 'Translated fields', switch_locale: true do |t|
+            t.input :title, hint: I18n.t('form.hint.slide.title')
+            t.input :description,
+                    hint: I18n.t('form.hint.slide.description'),
+                    input_html: { class: '' }
+          end
         end
       end
 
       column do
-        f.inputs t('additional') do
-          f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :title
-            t.input :description,
-                    input_html: { class: 'froala' }
-          end
+        f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
+          f.input :image,
+                  as: :file,
+                  label: I18n.t('form.label.slide'),
+                  hint: retina_image_tag(f.object, :image, :small)
+          f.input :online,
+                  label: I18n.t('form.label.online'),
+                  hint: I18n.t('form.hint.online')
         end
       end
     end
@@ -72,6 +74,10 @@ ActiveAdmin.register Picture do
   # == Controller
   #
   controller do
+    def edit
+      @page_title = resource.decorate.title_aa_edit
+    end
+
     def destroy
       resource.image.clear
       resource.save

@@ -31,16 +31,14 @@ class Ability
 
   def administrator_privilege(user)
     can :read, :all
-    can :crud, Post
-    can :update, Setting
+    can :manage, Post
+    can :update, [Setting, Category]
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
     cannot :create, User
     cannot [:update, :destroy], User, role: { name: %w( administrator ) }
     cannot :manage, User, role: { name: %w( super_administrator ) }
     can :manage, User, id: user.id
-    can :update, Category
-    can [:read, :update, :destroy], Background
-    can [:read, :update, :destroy], Picture
+    can [:read, :update, :destroy], [Background, Picture]
     cannot :manage, OptionalModule
     cannot [:read, :update, :destroy], About
     can :manage, About, user_id: user.id
@@ -52,35 +50,20 @@ class Ability
     cannot_manage_optional_modules
     can [:update, :read, :destroy], User, id: user.id
     cannot :create, User
-    cannot :manage, About
     can [:create, :read, :destroy], Comment, user_id: user.id
     cannot :destroy, Comment, user_id: nil
-    cannot :manage, Setting
-    cannot :manage, Background
-    cannot :manage, Picture
-    cannot :manage, StringBox
+    cannot :manage, [Home, About, Setting, Background, Picture, StringBox]
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end
 
   def visitor_privilege
     can :read, Post
-    cannot :destroy, :all
-    cannot :update, :all
-    cannot :create, :all
+    cannot [:create, :update, :destroy], :all
     cannot_manage_optional_modules
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, OptionalModule
-    cannot :manage, GuestBook
-    cannot :manage, NewsletterUser
-    cannot :manage, Comment
-    cannot :manage, Blog
-    cannot :manage, Slider
-    cannot :manage, Event
-    cannot :manage, Map
-    cannot :manage, Newsletter
-    cannot :manage, Social
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, Comment, Blog, Slider, Event, Map, Newsletter, Social]
   end
 
   def optional_modules_check(user)
@@ -135,9 +118,10 @@ class Ability
     # == Slider
     #
     if @slider_module.enabled?
-      can :crud, Slider
+      can :crud, [Slider, Slide]
+      cannot :create, Slide
     else
-      cannot :manage, Slider
+      cannot :manage, [Slider, Slide]
     end
 
     #
