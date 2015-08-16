@@ -22,10 +22,14 @@ class PictureDecorator < ApplicationDecorator
     link_to source_picture_title, send("admin_#{klass}_path", source_picture)
   end
 
+  def self_image_has_one_by_size(size = :large)
+    retina_image_tag self, :image, size, data: interchange_self
+  end
+
   private
 
-  # Article where the Picture comes from
   #
+  # Article where the Picture comes from
   #
   def source_picture
     model.attachable_type.constantize.find(model.attachable_id)
@@ -37,5 +41,9 @@ class PictureDecorator < ApplicationDecorator
 
   def base_image(size)
     retina_image_tag model, :image, size
+  end
+
+  def interchange_self
+    { interchange: "[#{model.self_image_url_by_size(:large)}, (default)], [#{model.self_image_url_by_size(:small)}, (small)], [#{model.self_image_url_by_size(:medium)}, (medium)], [#{model.self_image_url_by_size(:large)}, (large)]" }
   end
 end

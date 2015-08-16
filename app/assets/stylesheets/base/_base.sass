@@ -1,0 +1,39 @@
+body
+  height: auto
+
+// Action on text selection
+*
+  @include selection($link-color, $white)
+  outline: none
+
+a
+  @include transition(color .2s ease-in)
+
+.no-margin-bottom
+  margin-bottom: 0
+
+.no-margin
+  margin: 0 auto
+
+.dtable
+  display: table
+  .dtrow
+    display: table-row
+
+  .dtcell
+    display: table-cell
+    vertical-align: middle
+
+/* Clearfix */
+.clearfix
+  *zoom: 1
+
+  &:before, &:after
+    content: " "
+    display: table
+
+  &:after
+    clear: both
+
+a.button
+  border-radius: 0 !important

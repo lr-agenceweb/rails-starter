@@ -68,14 +68,14 @@ ActiveAdmin.register_page 'Dashboard' do
   end # content
 
   controller do
+    include Mappable
+    include MapHelper
     before_action :set_setting
 
     private
 
     def set_setting
       @setting = Setting.first
-      @map = Map.first
-      mapbox_gon_params
     end
   end
 end

@@ -7,7 +7,7 @@ class HomesController < PostsController
   # GET /homes
   # GET /homes.json
   def index
-    @homes = Home.includes(:translations).online.by_position
+    @homes = HomeDecorator.decorate_collection(Home.includes(:translations).online.by_position)
     seo_tag_index category
 
     respond_to do |format|

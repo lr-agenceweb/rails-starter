@@ -47,7 +47,7 @@ class CommentDecorator < ApplicationDecorator
   end
 
   def comment_created_at
-    content_tag(:small, time_tag(model.created_at.to_datetime, l(model.created_at, format: :without_time), itemprop: 'dateCreated'))
+    content_tag(:small, time_tag(model.created_at.to_datetime, l(model.created_at, format: :without_time)))
   end
 
   # Article where the Comment comes from
@@ -103,7 +103,26 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
+  #
+  # == Microdata
+  #
+  def microdata_meta
+    h.content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/Comment') do
+      concat(tag(:meta, itemprop: 'text', content: model.comment))
+      concat(tag(:meta, itemprop: 'dateCreated', content: model.created_at.to_datetime))
+      concat(tag(:meta, itemprop: 'name', content: pseudo_registered_or_guest))
+    end
+  end
+
   private
+
+  def pseudo_registered_or_guest
+    if model.user_id.nil?
+      model.username
+    else
+      model.user_username
+    end
+  end
 
   def pseudo(name = model.username)
     content_tag(:p, '', itemprop: 'author', itemscope: '', itemtype: 'http://schema.org/Person') do

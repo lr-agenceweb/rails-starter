@@ -21,7 +21,6 @@ map_init = ->
   map.set_view(gon.latitude, gon.longitude)
   map.remove_existing_layers()
   map.set_marker(gon.latitude, gon.longitude)
-  map.open_marker()
   map.disable_touch_zoom()
   map.disable_dragging()
   refresh_map_with_new_position(map)
@@ -36,4 +35,3 @@ refresh_map_with_new_position = (map) ->
     map.set_view(new_lat, new_lon)
     map.remove_existing_layers()
     map.set_marker(new_lat, new_lon)
-    map.open_marker()

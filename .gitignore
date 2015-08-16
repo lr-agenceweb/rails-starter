@@ -30,6 +30,7 @@
 /public/shared*
 /public/system/*
 !public/system/default
+!public/system/seeds
 /db/backups/
 
 README.html

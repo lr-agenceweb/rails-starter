@@ -1,9 +1,5 @@
-article.panel itemscope='' itemtype='http://schema.org/BlogPosting'
-  meta itemprop='image' content="#{attachment_url(blog.first_pictures_image, :medium)}"
+article.panel
+  == blog.microdata_meta
 
-  p
-    small
-      = time_tag blog.created_at.to_datetime, blog.created_at, itemprop: 'datePublished'
-
-  h3 itemprop='name headline' = link_to blog.title, blog_path(blog), itemprop: 'url'
-  div itemprop='articleBody' = simple_format(blog.content)
+  h3 = link_to blog.title, blog_path(blog)
+  div = simple_format(blog.content)

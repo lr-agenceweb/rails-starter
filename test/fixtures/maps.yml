@@ -2,25 +2,13 @@
 #
 # Table name: maps
 #
-#  id              :integer          not null, primary key
-#  address         :string(255)
-#  city            :string(255)
-#  postcode        :integer
-#  geocode_address :string(255)
-#  latitude        :float(24)
-#  longitude       :float(24)
-#  marker_icon     :string(255)
-#  marker_color    :string(255)
-#  show_map        :boolean
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id           :integer          not null, primary key
+#  marker_icon  :string(255)
+#  marker_color :string(255)
+#  show_map     :boolean
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 one:
-  geocode_address: 'Main Street'
-  address: '1 Main Street'
-  postcode: 06_000
-  city: Auckland
-  latitude: 1.5
-  longitude: 1.5
   show_map: true

@@ -1,12 +1,14 @@
-article.panel itemscope='' itemtype='http://schema.org/Event'
+article.panel
+  == event.microdata_meta
+
   header
-    h2 itemprop='name' = event.title
+    h2 = event.title
 
-    = time_tag event.start_date.to_datetime, l(event.start_date, format: :short), itemprop: 'startDate'
+    = time_tag event.start_date.to_datetime, l(event.start_date, format: :short)
     br
-    = time_tag event.end_date.to_datetime, l(event.end_date, format: :short), itemprop: 'endDate'
+    = time_tag event.end_date.to_datetime, l(event.end_date, format: :short)
     br
-    span itemprop='duration' = event.duration
+    span = event.duration
 
-  h3 itemprop='name' = link_to event.title, event_path(event), itemprop: 'url'
-  div itemprop='description' = simple_format(event.content)
+  h3 = link_to event.title, event_path(event)
+  div = simple_format(event.content)

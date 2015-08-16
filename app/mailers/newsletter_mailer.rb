@@ -3,7 +3,7 @@
 #
 class NewsletterMailer < ActionMailer::Base
   add_template_helper(HtmlHelper)
-  default from: Setting.first.email
+  default from: Setting.first.try(:email)
 
   # Email send after a user subscribed to the newsletter
   def welcome_user(newsletter_user)

@@ -12,53 +12,25 @@ class ApplicationDecorator < Draper::Decorator
     header
   end
 
+  #
+  # == Dynamic menu link
+  #
   def menu_link(model_name, absolute = false)
-    case model_name
-    when 'Home'
-      return root_path unless absolute
-      root_url
-    when 'About'
-      return abouts_path unless absolute
-      abouts_url
-    when 'GuestBook'
-      return guest_books_path unless absolute
-      guest_books_url
-    when 'Search'
-      return searches_path unless absolute
-      searches_url
-    when 'Blog'
-      return blogs_path unless absolute
-      blogs_url
-    when 'Event'
-      return events_path unless absolute
-      events_url
-    when 'Contact'
-      return new_contact_path unless absolute
-      new_contact_url
-    else
-      return '#'
-    end
+    suffix = absolute ? 'url' : 'path'
+    return send("root_#{suffix}") if model_name == 'Home'
+    send("#{model_name.underscore.downcase.pluralize}_#{suffix}")
   end
 
   def show_page_link(absolute = false)
-    case model.class.name
-    when 'Home'
-      return root_url unless absolute
-      root_url
-    when 'About'
-      return about_path(model) unless absolute
-      about_url(model)
-    when 'Blog'
-      return blog_path(model) unless absolute
-      blog_url(model)
-    when 'Event'
-      return event_path(model) unless absolute
-      event_url(model)
-    else
-      return '#'
-    end
+    suffix = absolute ? 'url' : 'path'
+    model_name = model.class.to_s
+    return send("root_#{suffix}") if model_name == 'Home'
+    send("#{model_name.underscore.downcase.singularize}_#{suffix}", model)
   end
 
+  #
+  # == Social
+  #
   def social_share(element)
     if params[:action] == 'index' || params[:action] == 'new'
       awesome_share_buttons(@category.title, popup: true)

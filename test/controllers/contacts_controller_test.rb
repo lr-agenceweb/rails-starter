@@ -86,6 +86,15 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should redirect to index action if try to access mapbox popup action' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :mapbox_popup, locale: locale.to_s
+        assert_redirected_to contacts_path
+      end
+    end
+  end
+
   #
   # == Ajax
   #
@@ -142,6 +151,16 @@ class ContactsControllerTest < ActionController::TestCase
       I18n.with_locale(locale.to_s) do
         xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { email: 'john@test.fr', username: 'john', message: 'Thanks for this site', nickname: 'I am a robot' }
         assert_template :create
+      end
+    end
+  end
+
+  test 'AJAX :: should use correct action and no layout for mapbox popup action' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        xhr :get, :mapbox_popup, locale: locale.to_s
+        assert_template :mapbox_popup
+        assert_template layout: false
       end
     end
   end

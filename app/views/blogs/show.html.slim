@@ -3,32 +3,17 @@
 .row
   .small-12.columns
 
-    article itemscope='' itemtype='http://schema.org/BlogPosting'
-      meta itemprop='image' content="#{attachment_url(blog.first_pictures_image, :medium)}"
+    article
+      == blog.microdata_meta
 
       header
-        h2 itemprop='headline' = blog.title
+        h2 = blog.title
         p
           small
-            = time_tag blog.created_at.to_datetime, blog.created_at, itemprop: 'datePublished'
+            = time_tag blog.created_at.to_datetime, blog.created_at
 
-      div itemprop='articleBody'
-        == blog.content
+      div == blog.content
 
-      - if blog.pictures?
-        .pictures
-          ul.small-block-grid-1.medium-block-grid-3.large-block-grid-6
-            - blog.pictures_online.each do |picture|
-              li = retina_image_tag picture, :image, :medium, class: 'th', itemprop: 'image'
+      == blog.loop_hover_has_many_pictures true
 
-
-- if @comment_module.enabled?
-  .row
-    .small-12.columns
-      - if @blog.allow_comments?
-        h3 Commentaires
-        = render 'comments/form'
-        = render 'comments/comments'
-
-      - else
-        p = I18n.t('comment.disabled')
+= render 'comments/section', o: @blog

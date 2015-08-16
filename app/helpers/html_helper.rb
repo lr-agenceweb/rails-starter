@@ -22,7 +22,7 @@ module HtmlHelper
       next if flash[type].nil?
       klass = klass_by_type(type)
       f << content_tag(:div, class: "alert-box #{klass}", data: { alert: '' }, 'tabindex': 0, 'aria-live': 'assertive', role: 'dialogalert') do
-        concat(message) +
+        concat(message.html_safe) +
           concat(content_tag(:a, '&times'.html_safe, href: '#', class: 'close', 'tabindex': 0, 'aria-label': 'Close Alert'))
       end
     end

@@ -21,8 +21,9 @@ class ApplicationController < ActionController::Base
   before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
   before_action :set_slider, if: proc { @slider_module.enabled? }
   before_action :set_socials_network, if: proc { @social_module.enabled? }
+  before_action :set_map, if: proc { @map_module.enabled? }
 
-  decorates_assigned :setting, :category, :slider
+  decorates_assigned :setting, :category, :slider, :map
 
   private
 
@@ -40,7 +41,8 @@ class ApplicationController < ActionController::Base
     menu_elements = ::Category.includes(:translations, :referencement).all
     @menu_elements_header ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_header.with_allowed_module.by_position)
     @menu_elements_footer ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_footer.with_allowed_module.by_position)
-    @category = Category.find_by(name: controller_name.classify)
+    @controller_name = controller_name.classify
+    @category = Category.find_by(name: @controller_name)
   end
 
   def set_background
@@ -74,6 +76,10 @@ class ApplicationController < ActionController::Base
     socials_all = Social.enabled
     @socials_follow = socials_all.follow
     @socials_share = socials_all.share
+  end
+
+  def set_map
+    @map = Map.first
   end
 
   def set_optional_modules

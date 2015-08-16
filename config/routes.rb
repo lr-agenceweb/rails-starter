@@ -46,9 +46,12 @@ Rails.application.routes.draw do
     get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
     get '/admin/newsletters/:id/preview', to: 'admin/letters#preview', as: :preview_newsletter
 
+    # Mapbox popup content
+    get 'contact/mapbox-popup', to: 'contacts#mapbox_popup', as: :mapbox_popup
+
     # Errors
     %w( 404 422 500 ).each do |code|
-      resources :errors, only: [:show], code: code, path: '', as: "error_#{code}".to_sym
+      get "/#{code}", to: 'errors#show', code: code, as: "error_#{code}".to_sym
     end
   end
 

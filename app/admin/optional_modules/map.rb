@@ -1,16 +1,20 @@
 ActiveAdmin.register Map, as: 'Plan' do
-  menu parent: I18n.t('admin_menu.modules')
+  menu parent: I18n.t('admin_menu.modules'),
+       label: I18n.t('activerecord.models.map.one')
 
   permit_params :id,
-                :address,
-                :city,
-                :postcode,
-                :geocode_address,
-                :latitude,
-                :longitude,
                 :marker_icon,
                 :marker_color,
-                :show_map
+                :show_map,
+                location_attributes: [
+                  :id,
+                  :address,
+                  :city,
+                  :postcode,
+                  :geocode_address,
+                  :latitude,
+                  :longitude
+                ]
 
   decorate_with MapDecorator
   config.clear_sidebar_sections!
@@ -25,26 +29,19 @@ ActiveAdmin.register Map, as: 'Plan' do
 
   index do
     selectable_column
-    column :address
-    column :city
-    column :postcode
-    column :geocode_address
-    column :latitude
-    column :longitude
+    row :full_address_inline
     column :status
 
     actions
   end
 
-  show do
+  show title: :title_aa_show do
     columns do
       column do
         panel t('active_admin.details', model: t('activerecord.models.plan.one')) do
           attributes_table_for resource.decorate do
             row :status
-            row :full_address
-            row :latlon
-            row :geocode_address
+            row :full_address_inline
             row :marker_icon
             row :marker_color_deco
           end
@@ -52,7 +49,7 @@ ActiveAdmin.register Map, as: 'Plan' do
       end
 
       column do
-        panel 'Map' do
+        panel t('activerecord.models.map.one') do
           resource.decorate.map(true, true) # Mapbox
         end
       end
@@ -68,6 +65,8 @@ ActiveAdmin.register Map, as: 'Plan' do
 
     f.columns id: 'map-columns' do
       f.column do
+        render 'admin/shared/locations/one', f: f, title: t('location.map.title'), full: true
+
         f.inputs 'Paramètre de la carte', class: 'map-settings' do
           f.input :marker_icon,
                   as: :select,
@@ -81,26 +80,11 @@ ActiveAdmin.register Map, as: 'Plan' do
                     class: 'colorpicker',
                     value: f.object.marker_color.blank? ? '' : f.object.marker_color
                   }
-
-          f.input :geocode_address,
-                  hint: 'Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n\'est pas affichée)',
-                  input_html: { id: 'gmaps-input-address' }
-
-          f.input :address,
-                  hint: 'Adresse affichée sur le site'
-          f.input :city
-          f.input :postcode
-          f.input :latitude,
-                  label: false,
-                  input_html: { id: 'gmaps-output-latitude', class: 'hide' }
-          f.input :longitude,
-                  label: false,
-                  input_html: { id: 'gmaps-output-longitude', class: 'hide' }
         end
       end
 
       f.column do
-        panel 'Map' do
+        panel t('activerecord.models.map.one') do
           f.object.decorate.map(true, true, true) # Mapbox
         end
       end
@@ -113,19 +97,14 @@ ActiveAdmin.register Map, as: 'Plan' do
   # == Controller
   #
   controller do
-    include ApplicationHelper
-    before_action :set_map
+    include Mappable
+    include MapHelper
     before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? && current_user_and_administrator? }
 
     private
 
     def redirect_to_show
       redirect_to admin_plan_path(@map)
-    end
-
-    def set_map
-      @map = Map.first
-      mapbox_gon_params
     end
   end
 end

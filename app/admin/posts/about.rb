@@ -43,7 +43,7 @@ ActiveAdmin.register About do
     actions
   end
 
-  show do
+  show title: :title_aa_show do
     render 'admin/posts/show', resource: resource
   end
 

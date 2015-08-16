@@ -167,6 +167,7 @@ fr:
         title: Titre
         subtitle: Sous-titre
         logo: Logo
+        logo_deco: Logo
         delete_logo: Supprimer le logo
         name: Nom
         phone: Téléphone
@@ -261,9 +262,16 @@ fr:
         autoplay: Démarrage automatique
         hover_pause: Pause au survol
         loop: En boucle ?
+        looper: En boucle ?
         navigation: Lien Précédent / Suivant
         bullet: Ronds de navigation
+        autoplay_deco: Démarrage automatique
+        hover_pause_deco: Pause au survol
+        loop_deco: En boucle ?
+        navigation_deco: Lien Précédent / Suivant
+        bullet_deco: Ronds de navigation
         time_to_show: Temps entre chaque image
+        time_to_show_deco: Temps entre chaque image
         animate: Effet d'animation
         online: En ligne ?
         status: État
@@ -276,19 +284,25 @@ fr:
         end_date: Date de fin
         online: En ligne ?
         status: État
+        full_address_inline: Adresse de l'événement
+        duration: Durée
       map:
         show_map: Afficher la carte ?
-        geocode_address: Adresse avec géolocalisation
-        full_address: Adresse complète
+        full_address_inline: Adresse de votre organisation
         map_status: Carte
-        latlon: Latitude / Longitude
-        city: Ville
-        postcode: Code Postal
-        address: Adresse
         status: État
         marker_icon: Icône du marqueur
         marker_color: Couleur du marqueur
         marker_color_deco: Couleur du marqueur
+      location:
+        address: Adresse complète
+        full_address: Adresse complète
+        postcode: Code Postal
+        address: Adresse
+        city: Ville
+        geocode_address: Adresse avec géolocalisation
+        latlon: Latitude / Longitude
+
       social:
         title: Titre
         link: Lien
