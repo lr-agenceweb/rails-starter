@@ -53,7 +53,8 @@ setting_site = Setting.create!(
   title: 'Rails starter',
   subtitle: 'Démonstration',
   phone: '01 02 03 04 05',
-  email: 'demo@starter.fr'
+  email: 'demo@starter.fr',
+  logo: File.new("#{Rails.root}/public/system/seeds/logo/logo.png")
 )
 
 if @locales.include?(:en)
