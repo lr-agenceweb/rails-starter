@@ -18,11 +18,6 @@ class @MapBoxSingleton
         features: [ {
           type: 'Feature'
           properties:
-            title: gon.name
-            subtitle: gon.subtitle
-            address: gon.address
-            city: gon.city
-            postcode: gon.postcode
             'marker-color': gon.marker_color
             'marker-size': 'medium'
             'marker-symbol': gon.marker_icon
@@ -35,26 +30,14 @@ class @MapBoxSingleton
         } ]).addTo(@map)
 
       @featureLayer.eachLayer (layer) ->
-        lfp = layer.feature.properties
-        content = "
-                  <header class='l-header-site popup'>
-                    <div class='.l-header-container'>
-                      <a href='' class='l-header-site-title-link'>
-                        <h3 class='l-header-site-title marker-title text-center'>
-                          #{lfp.title}
-                          <small class='l-header-site-subtitle'> #{lfp.subtitle} </small>
-                        </h3>
-                      </a>
-                    </div>
-                  </header>
-                  <div class='row popup'>
-                    <div class='small-12 columns'>
-                      <p class='text-center'> #{lfp.address} <br /> #{lfp.postcode} - #{lfp.city} </p>
-                    </div>
-                  </div>"
-        layer.bindPopup content, {}
-
-      return
+        $.ajax
+          url: $('#map').data 'url-popup'
+          success: (data) ->
+            layer.bindPopup data, {}
+            layer.openPopup()
+          error: (jqXHR, textStatus, errorThrown) ->
+            console.log "Error :: #{errorThrown}"
+        return
 
     remove_existing_layers: ->
       m = @map

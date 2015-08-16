@@ -34,6 +34,11 @@ class ContactsController < ApplicationController
     end
   end
 
+  def mapbox_popup
+    redirect_to contacts_path unless request.xhr?
+    render layout: false
+  end
+
   private
 
   def respond_action(template)

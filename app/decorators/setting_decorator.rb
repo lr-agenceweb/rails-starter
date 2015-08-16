@@ -31,7 +31,7 @@ class SettingDecorator < ApplicationDecorator
   #
   def logo_deco
     # Website logo present
-    retina_image_tag(model, :logo, :medium) if logo?
+    retina_image_tag(model, :logo, :medium, class: 'text-center') if logo?
   end
 
   #

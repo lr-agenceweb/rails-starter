@@ -167,6 +167,7 @@ fr:
         title: Titre
         subtitle: Sous-titre
         logo: Logo
+        logo_deco: Logo
         delete_logo: Supprimer le logo
         name: Nom
         phone: Téléphone
