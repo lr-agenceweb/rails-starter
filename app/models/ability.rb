@@ -136,6 +136,7 @@ class Ability
     #
     if @slider_module.enabled?
       can :crud, [Slider, Slide]
+      cannot :create, Slide
     else
       cannot :manage, [Slider, Slide]
     end
