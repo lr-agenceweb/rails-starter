@@ -72,18 +72,10 @@ ActiveAdmin.register Picture do
   # == Controller
   #
   controller do
-    before_action :set_picture, only: [:destroy]
-
     def destroy
-      @pic.image.clear
-      @pic.save
+      resource.image.clear
+      resource.save
       super
-    end
-
-    private
-
-    def set_picture
-      @pic = Picture.find(params[:id])
     end
   end
 end

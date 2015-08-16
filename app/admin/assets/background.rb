@@ -41,18 +41,10 @@ ActiveAdmin.register Background do
   # == Controller
   #
   controller do
-    before_action :set_background, only: [:destroy]
-
     def destroy
-      @bg.image.clear
-      @bg.save
+      resource.image.clear
+      resource.save
       super
-    end
-
-    private
-
-    def set_background
-      @bg = Background.find(params[:id])
     end
   end
 end
