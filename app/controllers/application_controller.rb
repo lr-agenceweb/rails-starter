@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   before_action :setting_or_maintenance?
   before_action :set_optional_modules
-  before_action :set_adult_validation, if: proc { @adult_module.enabled? && ! cookies[:adult] }
+  before_action :set_adult_validation, if: proc { @adult_module.enabled? && !cookies[:adult] }
   before_action :set_language
   before_action :set_menu_elements
   before_action :set_background, unless: proc { @category.nil? }

@@ -43,16 +43,14 @@ class SliderDecorator < ApplicationDecorator
   end
 
   def loop_hover_has_many_pictures(size = :slide)
-    if model.slides?
-      h.content_tag(:ul, '', class: 'slides', data: { orbit: '', options: slider_options }) do
-        model.slides_online.each do |slide|
-          concat(h.content_tag(:li) do
-            concat(slide.decorate.self_image_has_one_by_size(size))
-            concat(slide.decorate.caption)
-          end)
-        end
+    h.content_tag(:ul, '', class: 'slides', data: { orbit: '', options: slider_options }) do
+      model.slides_online.each do |slide|
+        concat(h.content_tag(:li) do
+          concat(slide.decorate.self_image_has_one_by_size(size))
+          concat(slide.decorate.caption)
+        end)
       end
-    end
+    end if model.slides?
   end
 
   private

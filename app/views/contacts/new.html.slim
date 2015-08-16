@@ -17,5 +17,4 @@ section.l-contact.one-page
       = render 'form'
 
 / Mapbox
-- unless map.nil?
-  == map.map(@map_module)
+== map.map(@map_module.enabled?) unless map.nil?

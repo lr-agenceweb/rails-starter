@@ -34,13 +34,13 @@ class Setting < ActiveRecord::Base
   end
 
   retina!
-  has_attachment :logo,
-                 styles: {
-                   large: '256x256>',
-                   medium: '128x128>',
-                   small: '64x64>',
-                   thumb: '32x32>'
-                 }
+  handle_attachment :logo,
+                    styles: {
+                      large: '256x256>',
+                      medium: '128x128>',
+                      small: '64x64>',
+                      thumb: '32x32>'
+                    }
 
   validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}
 

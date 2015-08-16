@@ -7,7 +7,7 @@ class MapDecorator < ApplicationDecorator
   decorates_association :location
 
   def map(map_module_enabled, force = false, from_form = false)
-    raw content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : '' }", id: 'map', data: { url_popup: mapbox_popup_path } ) if map_module_enabled && !model.location.nil? && ((model.show_map && model.location.decorate.latlon?) || (force && model.location.decorate.latlon?))
+    content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : '' }", id: 'map', data: { url_popup: mapbox_popup_path }) if map?(map_module_enabled, force)
   end
 
   #
@@ -63,5 +63,11 @@ class MapDecorator < ApplicationDecorator
       concat(tag(:meta, itemprop: 'postalCode', content: model.location.try(:postcode)))
       concat(tag(:meta, itemprop: 'addressLocality', content: model.location.try(:city)))
     end
+  end
+
+  private
+
+  def map?(map_module_enabled, force)
+    map_module_enabled && !model.location.nil? && ((model.show_map && model.location.decorate.latlon?) || (force && model.location.decorate.latlon?))
   end
 end

@@ -84,15 +84,13 @@ class PostDecorator < ApplicationDecorator
   end
 
   # Generate img tag and backgroud version of image for has_many relation
-  def handle_has_many_picture_and_background(link = false, size = :large)
-    if model.pictures?
-      content_tag(:div, class: 'hide show-for-print') do
-        concat(image_has_many_by_size(size))
-      end
-      content_tag(:div, class: 'background-wrapper') do
-        concat(background_picture_cover_has_many)
-      end
-    end
+  def handle_has_many_picture_and_background(_link = false, size = :large)
+    content_tag(:div, class: 'hide show-for-print') do
+      concat(image_has_many_by_size(size))
+    end if model.pictures?
+    content_tag(:div, class: 'background-wrapper') do
+      concat(background_picture_cover_has_many)
+    end if model.pictures?
   end
 
   # Method used to display content in RSS Feed
@@ -103,17 +101,15 @@ class PostDecorator < ApplicationDecorator
   end
 
   def loop_hover_has_many_pictures(link = false, size = :large)
-    if model.pictures?
-      content_tag(:div, '', class: 'pictures') do
-        model.pictures_online.each do |picture|
-          concat(content_tag(:div) do
-            img_version = picture.decorate.self_image_has_one_by_size(size)
-            concat(link_to img_version, picture.decorate.self_image_url_by_size(:large), title: picture.title, class: 'magnific-popup') if link
-            concat(img_version) unless link
-          end)
-        end
+    content_tag(:div, '', class: 'pictures') do
+      model.pictures_online.each do |picture|
+        concat(content_tag(:div) do
+          img_version = picture.decorate.self_image_has_one_by_size(size)
+          concat(link_to img_version, picture.decorate.self_image_url_by_size(:large), title: picture.title, class: 'magnific-popup') if link
+          concat(img_version) unless link
+        end)
       end
-    end
+    end if model.pictures?
   end
 
   #
@@ -142,7 +138,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def title_aa_show
-    I18n.t('post.title_aa_show', page: resource.type_title )
+    I18n.t('post.title_aa_show', page: resource.type_title)
   end
 
   #

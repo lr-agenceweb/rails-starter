@@ -8,7 +8,7 @@ module Attachable
   # == ClassMethod
   #
   module ClassMethods
-    def has_attachment(name, options = {})
+    def handle_attachment(name, options = {})
       model_name = table_name
       attachment_path  = "#{model_name}/:id/:style-:filename"
 
