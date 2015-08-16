@@ -453,10 +453,45 @@ GuestBook.create!(
 # == Slider
 #
 puts 'Creating Slider'
-Slider.create!(
+slider = Slider.create!(
   animate: 'fade',
   category_id: @category_home.id
 )
+
+puts 'Uploading slides image for slider'
+slides_image = [ 'slide-1.png', 'slide-2.png', 'slide-3.jpg' ]
+
+slide_title_fr = ['Paysage', 'Ordinateur', '']
+slide_title_en = ['Landscape', 'Computer', '']
+slide_description_fr = [
+  'Course à pied au coucher du soleil',
+  '',
+  ''
+]
+slide_description_en = [
+  '',
+  '',
+  ''
+]
+
+slides_image.each_with_index do |element, index|
+  slide = Slide.create!(
+    attachable_id: slider.id,
+    attachable_type: 'Slider',
+    image: File.new("#{Rails.root}/public/system/seeds/slides/#{element}"),
+    title: slide_title_fr[index],
+    description: slide_description_fr[index]
+  )
+
+  if @locales.include?(:en)
+    Slide::Translation.create!(
+      slide_id: slide.id,
+      locale: 'en',
+      title: slide_title_en[index],
+      description: slide_description_en[index]
+    )
+  end
+end
 
 #
 # == FriendlyId
