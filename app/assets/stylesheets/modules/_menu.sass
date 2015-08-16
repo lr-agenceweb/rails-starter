@@ -17,7 +17,6 @@
     height: 40px
     float: right
 
-
   .l-nav-item
     display: inline
     float: left
@@ -29,20 +28,15 @@
         padding-right: 0
         border-right: none
 
-
-
     .l-nav-item-link
       font-size: 12pt
       display: inline-block
       text-decoration: none
       padding: 0 5px
 
-
     &:not(:last-child):after
       content: '~'
       color: $menu-font-color
-
-
 
   a#pull
     display: none
@@ -83,88 +77,71 @@
     height: auto
     margin-left: 0
     max-width: initial
+    border: 1px solid $border-color
+    border-bottom: none
 
     ul
       width: 100%
       display: block
       height: auto
+      padding: 0
+
+      // Even menu items number
+      &.even
+        .l-nav-item
+          &:nth-child(odd)
+            border-right: 1px solid $border-color
+          &:first-child
+            width: 50%
+
+      // Odd menu items number
+      &.odd
+        .l-nav-item
+          &:first-child
+            float: none
+            width: 100%
+          &:not(:first-child):nth-child(even)
+            border-right: 1px solid $border-color
 
     .l-nav-item
       width: 50%
       float: left
       position: relative
       background-color: $white
-
-      &:first-child
-        float: none
-        width: 100%
-
-        .l-nav-item-link
-          border-right: 1px solid $link-active-color
-          // border-bottom: 1px solid $link-active-color
+      border-bottom: 1px solid $border-color
+      display: block
 
       .l-nav-item-link
         text-align: center
-        border-top: 1px solid $link-active-color
-        border-right: 1px solid $link-active-color
         padding: 8px 0
+        width: 100%
 
       &:after
         content: none !important
 
-    .l-nav-item-link
-      width: 100%
-
-
-// Menu déroulant sur deux colonnes
-// @media only screen and (max-width : $menu-breakpoint-two)
-//   .l-nav-container
-//     border-bottom: 0
-
-//     ul
-//       display: none
-//       height: auto
-//       float: none
-//
-
-//     a#pull
-//       position: relative
-//       display: block
-//       background-color: $white
-//       width: 100%
-//       border-top: 1px solid $link-active-color
-//       padding: 10px
-
-//       // /* L'icône hamburger, en utilisant le box-shadow */
-//       &:after
-//         content: ''
-//         position: absolute
-//         top: 5px right: 15px
-//         display: inline-block
-//         width: 1rem height: 0
-//         @include box-shadow(0 10px 0 1px $menu-font-color, 0 16px 0 1px $menu-font-color, 0 22px 0 1px $menu-font-color)
-//         color: $link-active-color
-//
-
-//       &:hover
-//         &:after
-//         @include box-shadow(0 10px 0 1px $link-active-color, 0 16px 0 1px $link-active-color, 0 22px 0 1px $link-active-color)
-//
-//
 
 // Menu déroulant sur une colonne
 @media only screen and (max-width : $menu-breakpoint-three)
   .l-nav-container
+    margin-bottom: 15px
+
     ul
       display: none
       height: auto
       float: none
 
+    .l-nav-item
+      display: block
+      float: none
+      width: 100% !important
+      border-bottom: 1px solid $border-color
+      border-right: none !important
+
     a#pull
       position: relative
       display: block
       width: 100%
-      border-top: 1px solid $link-active-color
+      border-bottom: 1px solid $link-active-color
       padding: 10px
       background-color: $white
 
@@ -182,20 +159,3 @@
       &:hover
         &:after
           @include box-shadow(0 10px 0 1px $link-active-color, 0 16px 0 1px $link-active-color, 0 22px 0 1px $link-active-color)
-
-    .l-nav-item
-      display: block
-      float: none
-      width: 100%
-
-      &:nth-child(odd)
-        border-left: none
-
-      &:last-child
-        .l-nav-item-link
-          border-right: none
-
-      .l-nav-item-link
-        border-left: none
-        border-right: none
-        border-bottom: none

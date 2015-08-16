@@ -10,6 +10,10 @@ module MenuHelper
     end
   end
 
+  def even_or_odd_menu_item(items)
+    items.length.odd? ? 'odd' : 'even'
+  end
+
   private
 
   def controller?(*controller)
