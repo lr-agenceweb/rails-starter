@@ -28,3 +28,13 @@ error_500:
   key: error_500
   title: Erreur 500
   content: erreur 500
+
+success_contact_form:
+  key: success_contact_form
+  title: Message envoyé avec succès
+  content: Votre message a bien été envoyé. Merci :)
+
+adult_not_validated_popup_content:
+  key: adult_not_validated_popup_content
+  title: ~
+  content: Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.
