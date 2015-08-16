@@ -35,8 +35,11 @@ class ContactsController < ApplicationController
   end
 
   def mapbox_popup
-    redirect_to contacts_path unless request.xhr?
-    render layout: false
+    if request.xhr?
+      render layout: false
+    else
+      redirect_to contacts_path
+    end
   end
 
   private
