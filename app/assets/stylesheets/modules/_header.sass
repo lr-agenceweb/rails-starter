@@ -1,0 +1,60 @@
+.l-header-site
+  background-color: $topbar-bg-color
+  position: relative
+  z-index: 1
+  padding-bottom: 10px
+  margin-bottom: 50px
+
+  // Specific CSS for mapbox popup
+  &.popup, &.footer
+    margin-bottom: 20px
+
+    .l-header-site-title-link
+      .l-header-site-title
+        font-weight: 400
+        font-size: $h4-font-size
+
+        .l-header-site-subtitle
+          margin-top: 8px
+
+  &.footer
+    text-align: right
+    .l-header-site-title-link
+      .l-header-site-title
+        font-size: $h6-font-size
+
+        .l-header-site-subtitle
+          font-size: 11px
+          margin-top: 0px !important
+
+  .l-header-site-title-link
+    display: block
+    @include link-colors($link-color, $link-hover-color, $link-active-color)
+
+    .l-header-site-title
+      margin-bottom: 0
+      color: $link-color
+      font-size: $h2-font-size
+
+      &:hover
+        color: $link-hover-color
+
+
+      .l-header-site-subtitle
+        display: block
+        color: $body-font-color
+        font-weight: 400
+        font-size: 14px
+        line-height: 1
+        text-transform: uppercase
+
+
+@media screen and (max-width: $menu-breakpoint-two)
+  .l-header-site
+
+    .title-site, .menu-site
+      width: 100%
+
+
+    .v-bottom
+      margin-top: 20px

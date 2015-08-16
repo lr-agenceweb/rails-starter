@@ -1,0 +1,18 @@
+.map
+  width: 100%
+  height: 500px
+
+  .leaflet-popup-content img
+    max-width: 100%
+
+  .marker-title span
+    display: block
+
+  .popup a.link-color
+    @include link-colors($link-active-color, darken($link-active-color, 9%), $link-active-color)
+    @include transition(color .2s ease-in)
+
+@if variable-exists(small-only)
+  @media #{$small-only}
+    .map
+      height: 350px
