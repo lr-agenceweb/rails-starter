@@ -10,7 +10,7 @@ class BackgroundDecorator < ApplicationDecorator
   end
 
   def category_name
-    source_background.title
+    model.attachable.title
   end
 
   #
@@ -22,14 +22,5 @@ class BackgroundDecorator < ApplicationDecorator
 
   def title_aa_edit
     "#{t('active_admin.edit')} #{I18n.t('activerecord.models.background.one')} page #{category_name}"
-  end
-
-  private
-
-  # Category where the Background comes from
-  #
-  #
-  def source_background
-    model.attachable_type.constantize.find(model.attachable_id)
   end
 end
