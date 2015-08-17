@@ -205,6 +205,8 @@ fr:
       referencement:
         description: Description
         keywords: Mots-clés
+      heading:
+        content: Contenu
       newsletter:
         title: Titre
         preview: Prévisualisation
