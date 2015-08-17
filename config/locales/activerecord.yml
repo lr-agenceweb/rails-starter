@@ -230,6 +230,7 @@ fr:
         image: Image
         image_deco: Image
         category_name: Page associée
+        attachable_id: Page
         _destroy: Supprimer ?
       picture:
         type: Catégorie
