@@ -34,6 +34,11 @@ class Background < ActiveRecord::Base
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
+  validates :attachable_type,
+            presence: true,
+            allow_blank: false,
+            inclusion: %w( Category )
+
   @child_classes = [:Contact]
 
   def self.child_classes

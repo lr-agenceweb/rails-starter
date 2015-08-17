@@ -50,13 +50,12 @@ module Admin
     #
     # == Form validations
     #
-    test 'should not save attachable param if administrator' do
-      patch :update, id: @background, background: { attachable_id: 4 }
-      assert_equal @category.id, assigns(:background).attachable_id
+    test 'should not save background if attachable_type param if wrong' do
+      patch :update, id: @background, background: { attachable_type: 'fake' }
+      assert_not assigns(:background).valid?
     end
 
-    test 'should save attachable param if super_administrator' do
-      sign_in @super_administrator
+    test 'should save background after switching page' do
       patch :update, id: @background, background: { attachable_id: 4 }
       assert_equal 4, assigns(:background).attachable_id
     end

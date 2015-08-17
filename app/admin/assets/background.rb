@@ -24,18 +24,15 @@ ActiveAdmin.register Background do
     f.semantic_errors(*f.object.errors.keys)
 
     f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
-      if current_user.super_administrator?
-        f.input :attachable_id,
-                as: :select,
-                collection: Category.all.collect { |c| [c.title, c.id] },
-                include_blank: false,
-                input_html: { class: 'chosen-select' }
+      f.input :attachable_id,
+              as: :select,
+              collection: Category.all.collect { |c| [c.title, c.id] },
+              include_blank: false,
+              input_html: { class: 'chosen-select' }
 
-        f.input :attachable_type,
-                as: :hidden,
-                input_html: { value: 'Category' }
-
-      end
+      f.input :attachable_type,
+              as: :hidden,
+              input_html: { value: 'Category' }
 
       f.input :image,
               as: :file,
@@ -52,11 +49,6 @@ ActiveAdmin.register Background do
   controller do
     def edit
       @page_title = resource.decorate.title_aa_edit
-    end
-
-    def update
-      params[:background].delete :attachable_id unless current_user.super_administrator?
-      super
     end
 
     def destroy
