@@ -201,6 +201,10 @@ fr:
         position: Position
         custom_background_color: Couleur de fond de page personnalisée
         color: Couleur
+        color: Couleur
+      referencement:
+        description: Description
+        keywords: Mots-clés
       newsletter:
         title: Titre
         preview: Prévisualisation
