@@ -54,6 +54,11 @@ class SettingDecorator < ApplicationDecorator
     status_tag_deco I18n.t("enabled.#{model.show_social}"), color
   end
 
+  def qrcode
+    color = model.show_qrcode? ? 'blue' : 'red'
+    status_tag_deco I18n.t("enabled.#{model.show_qrcode}"), color
+  end
+
   def maintenance
     color = model.maintenance? ? 'red' : 'green'
     status_tag_deco I18n.t("maintenance.#{model.maintenance}"), color

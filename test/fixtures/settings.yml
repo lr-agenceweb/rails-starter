@@ -10,6 +10,7 @@
 #  email             :string(255)
 #  show_breadcrumb   :boolean          default(FALSE)
 #  show_social       :boolean          default(TRUE)
+#  show_qrcode       :boolean          default(FALSE)
 #  should_validate   :boolean          default(TRUE)
 #  maintenance       :boolean          default(FALSE)
 #  twitter_username  :string(255)

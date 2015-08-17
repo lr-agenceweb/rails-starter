@@ -107,7 +107,8 @@ description = [
   'Module qui gère des événements à venir',
   'Module qui affiche une carte Mapbox sur le site',
   'Module qui gère les différents réseaux sociaux',
-  'Module qui affiche un fil d\'ariane sur le site'
+  'Module qui affiche un fil d\'ariane sur le site',
+  'Module qui affiche un Qrcode pour créer automatiquement un contact sur son smartphone'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(

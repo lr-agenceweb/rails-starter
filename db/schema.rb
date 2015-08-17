@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815193543) do
+ActiveRecord::Schema.define(version: 20150817162454) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -359,6 +359,7 @@ ActiveRecord::Schema.define(version: 20150815193543) do
     t.string   "email",             limit: 255
     t.boolean  "show_breadcrumb",                 default: false
     t.boolean  "show_social",                     default: true
+    t.boolean  "show_qrcode",                     default: false
     t.boolean  "should_validate",                 default: true
     t.boolean  "maintenance",                     default: false
     t.string   "twitter_username",  limit: 255
