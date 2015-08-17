@@ -12,6 +12,7 @@ SitemapGenerator::Sitemap.create do
     blog_module if OptionalModule.by_name('Blog').enabled?
     event_module if OptionalModule.by_name('Event').enabled?
     guest_book_module if OptionalModule.by_name('GuestBook').enabled?
+    rss_module if OptionalModule.by_name('RSS').enabled?
   end
 
   if I18n.available_locales.include?(:en)
@@ -21,6 +22,7 @@ SitemapGenerator::Sitemap.create do
         blog_module if OptionalModule.by_name('Blog').enabled?
         event_module if OptionalModule.by_name('Event').enabled?
         guest_book_module if OptionalModule.by_name('GuestBook').enabled?
+        rss_module if OptionalModule.by_name('RSS').enabled?
       end
     end
   end
