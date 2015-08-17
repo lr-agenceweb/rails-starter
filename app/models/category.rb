@@ -63,11 +63,10 @@ class Category < ActiveRecord::Base
   end
 
   def self.handle_pages_for_background(new_record)
-    if new_record
-      Category.except_already_background.collect { |c| [c.title, c.id] }
-    else
-      with_allowed_module.collect { |c| [c.title, c.id] }
-    end
+    categories = Category.includes(:background).except_already_background if new_record
+    categories = with_allowed_module unless new_record
+
+    categories.collect { |c| [c.title, c.id] }
   end
 
   def slider?
