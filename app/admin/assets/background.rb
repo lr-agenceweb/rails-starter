@@ -49,7 +49,7 @@ ActiveAdmin.register Background do
     end
 
     def update
-      params[:background].delete :attachable_type unless current_user.super_administrator?
+      params[:background].delete :attachable_id unless current_user.super_administrator?
       super
     end
 

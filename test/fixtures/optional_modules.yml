@@ -79,3 +79,9 @@ qrcode:
   <<: *DEFAULTS
   name: Qrcode
   enabled: true
+
+background:
+  <<: *DEFAULTS
+  name: Background
+  enabled: true
+

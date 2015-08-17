@@ -158,6 +158,7 @@ class Ability
     #
     if @background_module.enabled?
       can [:read, :update, :destroy], Background
+      cannot :create, Background
     else
       cannot :manage, Background
     end
