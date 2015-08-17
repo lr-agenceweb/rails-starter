@@ -38,7 +38,7 @@ ActiveAdmin.register Category do
 
   index do
     sortable_handle_column
-    column :background
+    column :background if background_module.enabled?
     column :title
     column :div_color
     column :slider if slider_module.enabled?
@@ -54,7 +54,7 @@ ActiveAdmin.register Category do
     columns do
       column do
         attributes_table do
-          row :background
+          row :background if background_module.enabled?
           row :div_color
           row :slider if slider_module.enabled?
           row :in_menu
@@ -101,20 +101,13 @@ ActiveAdmin.register Category do
                     value: f.object.color.blank? ? '' : f.object.color
                   }
         end
+
+        render 'admin/shared/referencement/form', f: f
       end
 
       column do
         render 'admin/shared/heading/form', f: f
-      end
-    end
-
-    columns do
-      column do
-        render 'admin/shared/backgrounds/form', f: f
-      end
-
-      column do
-        render 'admin/shared/referencement/form', f: f
+        render 'admin/shared/backgrounds/form', f: f if background_module.enabled?
       end
     end
 
@@ -132,10 +125,14 @@ ActiveAdmin.register Category do
         params[:category].delete :optional_module_id
         params[:category].delete :optional
       end
+
       if params[:category][:custom_background_color] == '0'
         params[:category][:color] = nil
       end
-      update! { admin_category_path(@category) }
+
+      params[:category].delete :background unless @background_module.enabled?
+
+      super
     end
   end
 end

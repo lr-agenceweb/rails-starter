@@ -2,7 +2,7 @@ f.inputs t('activerecord.models.background.one'), for: [:background, f.object.ba
   item.input :image,
              as: :file,
              label: I18n.t('form.label.background'),
-             hint: retina_image_tag(item.object, :image, :medium)
+             hint: retina_image_tag(item.object, :image, :small)
 
   if f.object.background?
     item.input :_destroy,
