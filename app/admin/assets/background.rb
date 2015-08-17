@@ -1,7 +1,7 @@
 ActiveAdmin.register Background do
   menu parent: 'Assets'
 
-  permit_params :id, :image, :attachable_id
+  permit_params :id, :image, :attachable_id, :attachable_type
 
   decorate_with BackgroundDecorator
   config.clear_sidebar_sections!
@@ -30,6 +30,11 @@ ActiveAdmin.register Background do
                 collection: Category.all.collect { |c| [c.title, c.id] },
                 include_blank: false,
                 input_html: { class: 'chosen-select' }
+
+        f.input :attachable_type,
+                as: :hidden,
+                input_html: { value: 'Category' }
+
       end
 
       f.input :image,

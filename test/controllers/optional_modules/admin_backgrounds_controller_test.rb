@@ -96,7 +96,7 @@ module Admin
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
-      assert ability.cannot?(:create, Background.new), 'should not be able to create'
+      assert ability.can?(:create, Background.new), 'should be able to create'
       assert ability.can?(:read, @background), 'should be able to read'
       assert ability.can?(:update, @background), 'should be able to update'
       assert ability.can?(:destroy, @background), 'should be able to destroy'
@@ -105,7 +105,7 @@ module Admin
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
-      assert ability.cannot?(:create, Background.new), 'should not be able to create'
+      assert ability.can?(:create, Background.new), 'should be able to create'
       assert ability.can?(:read, @background), 'should be able to read'
       assert ability.can?(:update, @background), 'should be able to update'
       assert ability.can?(:destroy, @background), 'should be able to destroy'

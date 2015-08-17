@@ -157,8 +157,7 @@ class Ability
     # == Background
     #
     if @background_module.enabled?
-      can [:read, :update, :destroy], Background
-      cannot :create, Background
+      can :crud, Background
     else
       cannot :manage, Background
     end
