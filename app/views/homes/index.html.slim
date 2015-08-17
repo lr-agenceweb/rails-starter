@@ -2,6 +2,9 @@
 
 = render 'optional_modules/sliders/show', slider: slider, force: false
 
+- if @background_module.enabled?
+  .background.background-homepage style="background-image: url(#{@background.bg_medium});" data-interchange="[#{@background.bg_medium}, (default)], [#{@background.bg_medium}, (medium)], [#{@background.bg_background}, (large)]"
+
 .row
   - @homes.each do |home|
     article.small-12.columns

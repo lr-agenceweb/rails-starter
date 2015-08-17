@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   before_action :set_adult_validation, if: proc { @adult_module.enabled? && !cookies[:adult] }
   before_action :set_language
   before_action :set_menu_elements
-  before_action :set_background, unless: proc { @category.nil? }
+  before_action :set_background, if: proc { @background_module.enabled && !@category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
   before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_background
-    @background = Background.find_by(attachable_id: @category.id)
+    @background = @category.background
   end
 
   def set_host_name

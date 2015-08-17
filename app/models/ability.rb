@@ -38,7 +38,7 @@ class Ability
     cannot [:update, :destroy], User, role: { name: %w( administrator ) }
     cannot :manage, User, role: { name: %w( super_administrator ) }
     can :manage, User, id: user.id
-    can [:read, :update, :destroy], [Background, Picture]
+    can [:read, :update, :destroy], Picture
     cannot :manage, OptionalModule
     cannot [:read, :update, :destroy], About
     can :manage, About, user_id: user.id
@@ -52,7 +52,7 @@ class Ability
     cannot :create, User
     can [:create, :read, :destroy], Comment, user_id: user.id
     cannot :destroy, Comment, user_id: nil
-    cannot :manage, [Home, About, Setting, Background, Picture, StringBox]
+    cannot :manage, [Home, About, Setting, Picture, StringBox]
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end
 
@@ -63,7 +63,7 @@ class Ability
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, Comment, Blog, Slider, Event, Map, Newsletter, Social]
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, Comment, Blog, Slider, Event, Map, Newsletter, Social, Background]
   end
 
   def optional_modules_check(user)
@@ -151,6 +151,15 @@ class Ability
       cannot [:create, :destroy], Social if user.administrator?
     else
       cannot :manage, Social
+    end
+
+    #
+    # == Background
+    #
+    if @background_module.enabled?
+      can [:read, :update, :destroy], Background
+    else
+      cannot :manage, Background
     end
   end
 end

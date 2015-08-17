@@ -14,7 +14,7 @@ fr:
       online: Mettre en ligne ?
       picture: Image liée à l'article
       slide: Image liée au slider
-      background: Image d'arrière-plan liée à la page
+      background: Image d'arrière-plan
       model_name: Page à définir
       link: Lien du projet
       destroy: Supprimer cette image ?

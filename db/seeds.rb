@@ -108,7 +108,8 @@ description = [
   'Module qui affiche une carte Mapbox sur le site',
   'Module qui gère les différents réseaux sociaux',
   'Module qui affiche un fil d\'ariane sur le site',
-  'Module qui affiche un Qrcode pour créer automatiquement un contact sur son smartphone'
+  'Module qui affiche un Qrcode pour créer automatiquement un contact sur son smartphone',
+  'Module qui propose à l\'administrateur de choisir une image d\'arrière plan pour les pages du site'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(
@@ -175,7 +176,16 @@ Category.models_name_str.each_with_index do |element, index|
     )
   end
 
-  @category_home = category if element == 'Home'
+  if element == 'Home'
+    @category_home = category
+
+    puts 'Uploading background image for homepage'
+    Background.create!(
+      attachable_id: category.id,
+      attachable_type: 'Category',
+      image: File.new("#{Rails.root}/public/system/seeds/backgrounds/background_homepage.jpg")
+    )
+  end
 end
 
 #

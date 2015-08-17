@@ -13,6 +13,13 @@ class BackgroundDecorator < ApplicationDecorator
     source_background.title
   end
 
+  #
+  # ActiveAdmin
+  #
+  def title_aa_show
+    "#{I18n.t('activerecord.models.background.one')} lié à la page #{category_name}"
+  end
+
   private
 
   # Category where the Background comes from
