@@ -5,7 +5,7 @@ class CategoryDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
-  def background
+  def background_deco
     if background?
       retina_image_tag model.background, :image, :small
     else

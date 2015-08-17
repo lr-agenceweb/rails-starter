@@ -38,7 +38,7 @@ ActiveAdmin.register Category do
 
   index do
     sortable_handle_column
-    column :background if background_module.enabled?
+    column :background_deco if background_module.enabled?
     column :title
     column :div_color
     column :slider if slider_module.enabled?
@@ -54,7 +54,7 @@ ActiveAdmin.register Category do
     columns do
       column do
         attributes_table do
-          row :background if background_module.enabled?
+          row :background_deco if background_module.enabled?
           row :div_color
           row :slider if slider_module.enabled?
           row :in_menu
@@ -130,7 +130,7 @@ ActiveAdmin.register Category do
         params[:category][:color] = nil
       end
 
-      params[:category].delete :background unless @background_module.enabled?
+      params[:category].delete :background_attributes unless @background_module.enabled?
 
       super
     end
