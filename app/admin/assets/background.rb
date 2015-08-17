@@ -45,7 +45,7 @@ ActiveAdmin.register Background do
   #
   controller do
     def edit
-      @page_title = "#{t('active_admin.edit')} #{I18n.t('activerecord.models.background.one')} page #{resource.decorate.category_name}"
+      @page_title = resource.decorate.title_aa_edit
     end
 
     def update
