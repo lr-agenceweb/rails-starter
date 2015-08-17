@@ -62,10 +62,8 @@ class Category < ActiveRecord::Base
     Category.find_by(name: category).title
   end
 
-  def self.handle_pages_for_background(new_record)
-    categories = Category.includes(:background).except_already_background if new_record
-    categories = with_allowed_module unless new_record
-
+  def self.handle_pages_for_background(current_background)
+    categories = Category.except_already_background(current_background.attachable)
     categories.collect { |c| [c.title, c.id] }
   end
 
@@ -75,10 +73,10 @@ class Category < ActiveRecord::Base
 
   private
 
-  def self.except_already_background
+  def self.except_already_background(myself = nil)
     categories = []
-    Category.with_allowed_module.each do |category|
-      categories << category if category.background.nil?
+    Category.includes(:translations, :background).with_allowed_module.each do |category|
+      categories << category if category.background.nil? || category == myself
     end
     categories
   end
