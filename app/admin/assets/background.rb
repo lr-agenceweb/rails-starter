@@ -26,7 +26,7 @@ ActiveAdmin.register Background do
     f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
       f.input :attachable_id,
               as: :select,
-              collection: Category.all.collect { |c| [c.title, c.id] },
+              collection: Category.handle_pages_for_background(f.object.new_record?),
               include_blank: false,
               input_html: { class: 'chosen-select' }
 

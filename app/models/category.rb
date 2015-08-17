@@ -62,7 +62,25 @@ class Category < ActiveRecord::Base
     Category.find_by(name: category).title
   end
 
+  def self.handle_pages_for_background(new_record)
+    if new_record
+      Category.except_already_background.collect { |c| [c.title, c.id] }
+    else
+      with_allowed_module.collect { |c| [c.title, c.id] }
+    end
+  end
+
   def slider?
     !slider.nil?
+  end
+
+  private
+
+  def self.except_already_background
+    categories = []
+    Category.with_allowed_module.each do |category|
+      categories << category if category.background.nil?
+    end
+    categories
   end
 end
