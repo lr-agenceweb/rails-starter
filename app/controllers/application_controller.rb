@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   before_action :set_socials_network, if: proc { @social_module.enabled? }
   before_action :set_map, if: proc { @map_module.enabled? }
 
-  decorates_assigned :setting, :category, :slider, :map
+  decorates_assigned :setting, :category, :slider, :map, :background
 
   private
 
