@@ -9,6 +9,11 @@ en:
       comment: Comments
       search: Search
       guest_book: Guestbook
+      background: Background
+      breadcrumb: Breadcrumb
+      social: Social Network
+      map: Map
+      event: Events
 
 # French
 fr:
@@ -21,3 +26,8 @@ fr:
       comment: Commentaires
       search: Rechercher
       guest_book: Livre d'Or
+      background: Arrière-plan
+      breadcrumb: Fil d'ariane
+      social: Réseaux sociaux
+      map: Carte
+      event: Événements
