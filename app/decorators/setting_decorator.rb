@@ -41,6 +41,10 @@ class SettingDecorator < ApplicationDecorator
     "#{setting.name} - #{copyright} <br> Copyright &copy; #{current_year} <br> #{about} #{admin_link}"
   end
 
+  def phone_w3c
+    model.phone.delete(' ').remove('(0)')
+  end
+
   #
   # == Modules
   #
