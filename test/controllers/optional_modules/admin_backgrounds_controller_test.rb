@@ -50,11 +50,6 @@ module Admin
     #
     # == Form validations
     #
-    test 'should not save background if attachable_type param if wrong' do
-      patch :update, id: @background, background: { attachable_type: 'fake' }
-      assert_not assigns(:background).valid?
-    end
-
     test 'should save background after switching page' do
       patch :update, id: @background, background: { attachable_id: 4 }
       assert_equal 4, assigns(:background).attachable_id
