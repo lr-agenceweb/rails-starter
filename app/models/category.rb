@@ -75,6 +75,10 @@ class Category < ActiveRecord::Base
     visible_header.collect { |c| [c.title, c.id] }
   end
 
+  def self.models_name_str_collection
+    Category.includes(:translations).collect { |c| [c.title, c.name] }
+  end
+
   private
 
   def self.except_already_background(myself = nil)

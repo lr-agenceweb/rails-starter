@@ -82,7 +82,7 @@ ActiveAdmin.register Category do
 
         f.inputs t('general') do
           f.input :name,
-                  collection: Category.models_name,
+                  collection: Category.models_name_str_collection,
                   include_blank: false,
                   input_html: { class: 'chosen-select' }
 
