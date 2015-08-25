@@ -18,6 +18,7 @@ fr:
     action_item:
       edit_heading_page: Modifier l'entête de la page %{page}
       see_article_in_frontend: Voir l'article sur le site
+      new_article: Créer un nouvel article
 
 # English
 en:

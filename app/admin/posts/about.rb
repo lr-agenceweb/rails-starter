@@ -27,8 +27,12 @@ ActiveAdmin.register About do
     edit_heading_page_aa
   end
 
+  action_item :new_article, only:[:show] do
+    link_to I18n.t('active_admin.action_item.new_article'), new_admin_about_path if can? :create, About
+  end
+
   action_item :show_article, only: [:show] do
-    link_to I18n.t('action_item.see_article_in_frontend'), about_path(resource), target: :blank
+    link_to I18n.t('active_admin.action_item.see_article_in_frontend'), about_path(resource), target: :blank
   end
 
   batch_action :toggle_value do |ids|
