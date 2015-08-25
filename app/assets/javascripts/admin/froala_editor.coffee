@@ -22,7 +22,7 @@ $ ->
 froala_init = ->
   $('.froala').editable
     inlineMode: false
-    placeholder: 'Contenu de l\'article ici :)'
+    placeholder: I18n.t('form.placeholder.froala', locale: gon.language)
     theme: 'gray',
     plainPaste: true
     toolbarFixed: false

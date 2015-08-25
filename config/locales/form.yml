@@ -80,6 +80,9 @@ fr:
         content: Contenu du message personnalisé à afficher sur le site
         title: Titre du message personnalisé à afficher sur le site
 
+    placeholder:
+      froala: Contenu de l'article ici :)
+
     errors:
       start_date: L'événement ne peut pas commencer après la fin présumée de celui-ci
       end_date: L'événement ne peut pas terminer après la début présumé de celui-ci
