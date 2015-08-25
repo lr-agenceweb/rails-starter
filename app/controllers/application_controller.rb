@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   before_action :set_slider, if: proc { @slider_module.enabled? }
   before_action :set_socials_network, if: proc { @social_module.enabled? }
   before_action :set_map, if: proc { @map_module.enabled? }
+  before_action :set_froala_key
 
   decorates_assigned :setting, :category, :slider, :map, :background
 
@@ -87,6 +88,10 @@ class ApplicationController < ActionController::Base
     @optional_mod.find_each do |optional_module|
       instance_variable_set("@#{optional_module.name.underscore.singularize}_module", optional_module)
     end
+  end
+
+  def set_froala_key
+    gon.push(froala_key: Figaro.env.froala_key)
   end
 
   def authenticate_active_admin_user!

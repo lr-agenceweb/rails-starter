@@ -16,6 +16,7 @@
 
 $ ->
   if $('.froala').length
+    $.Editable.DEFAULTS.key = gon.froala_key
     froala_init()
 
 froala_init = ->
