@@ -249,7 +249,9 @@ fr:
         image_deco: Image
         slider_page_name: Slide liée à la page
         status: État
+        title: Titre
         title_deco: Titre
+        description: Description
         description_deco: Description
         _destroy: Supprimer ?
       comment:

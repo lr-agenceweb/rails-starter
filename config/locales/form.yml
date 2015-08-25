@@ -70,6 +70,8 @@ fr:
         description: Description de la slide (une phrase maximum)
         online: Montrer cette image dans le slider ?
         destroy: Supprimer cette image du slider ?
+        size: Afin d'avoir un affichage optimale des slides sur le site, veuillez envoyer des images avec une largeur minimale de 2000px.
+
 
       location:
         geocode_address: Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n'est pas affichée)

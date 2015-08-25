@@ -1,10 +1,11 @@
 - f.inputs t('activerecord.models.slide.other')
   - f.has_many :slides, heading: false do |item|
-    = item.inputs 'Main' do
+    = item.inputs 'Image du slider' do
       - item.input :image,
                    as: :file,
                    label: I18n.t('form.label.slide'),
-                   hint: retina_image_tag(item.object, :image, :thumb)
+                   hint: "#{retina_image_tag(item.object, :image, :small)} <br/> #{I18n.t('form.hint.slide.size')}".html_safe
+
       - item.input :online,
                    as: :boolean,
                    hint: I18n.t('form.hint.slide.online')
@@ -16,5 +17,10 @@
 
     = item.inputs 'Titre et description de la Slide' do
       - item.translated_inputs 'Translated fields', switch_locale: true do |t|
-        - t.input :title, hint: I18n.t('form.hint.title')
-        - t.input :description
+        - t.input :title,
+                  label: I18n.t('activerecord.attributes.slide.title'),
+                  hint: I18n.t('form.hint.slide.title')
+
+        - t.input :description,
+                  label: I18n.t('activerecord.attributes.slide.description'),
+                  hint: I18n.t('form.hint.slide.description')

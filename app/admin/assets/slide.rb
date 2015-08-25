@@ -46,8 +46,11 @@ ActiveAdmin.register Slide do
       column do
         f.inputs 'Contenu de la slide' do
           f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :title, hint: I18n.t('form.hint.slide.title')
+            t.input :title,
+                    label: I18n.t('activerecord.attributes.slide.title'),
+                    hint: I18n.t('form.hint.slide.title')
             t.input :description,
+                    label: I18n.t('activerecord.attributes.slide.description'),
                     hint: I18n.t('form.hint.slide.description'),
                     input_html: { class: '' }
           end
@@ -59,7 +62,7 @@ ActiveAdmin.register Slide do
           f.input :image,
                   as: :file,
                   label: I18n.t('form.label.slide'),
-                  hint: retina_image_tag(f.object, :image, :small)
+                  hint: "#{retina_image_tag(f.object, :image, :small)} <br/> #{I18n.t('form.hint.slide.size')}".html_safe
           f.input :online,
                   label: I18n.t('form.label.online'),
                   hint: I18n.t('form.hint.online')
