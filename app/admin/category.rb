@@ -50,7 +50,7 @@ ActiveAdmin.register Category do
     actions
   end
 
-  show do
+  show title: :title_aa_show do
     columns do
       column do
         attributes_table do
@@ -120,6 +120,10 @@ ActiveAdmin.register Category do
   # == Controller
   #
   controller do
+    def edit
+      @page_title = resource.decorate.title_aa_edit
+    end
+
     def update
       unless current_user.super_administrator?
         params[:category].delete :optional_module_id

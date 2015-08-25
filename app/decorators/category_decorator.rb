@@ -34,6 +34,17 @@ class CategoryDecorator < ApplicationDecorator
   end
 
   #
+  # ActiveAdmin
+  #
+  def title_aa_show
+    aa_page_name.titleize
+  end
+
+  def title_aa_edit
+    "#{t('active_admin.edit')} #{aa_page_name}"
+  end
+
+  #
   # == Optional Modules
   #
   def module
@@ -52,5 +63,11 @@ class CategoryDecorator < ApplicationDecorator
     arbre do
       status_tag message, color
     end
+  end
+
+  private
+
+  def aa_page_name
+    "#{I18n.t('activerecord.models.category.one').downcase} \"#{resource.decorate.title}\""
   end
 end
