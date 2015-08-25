@@ -465,7 +465,7 @@ GuestBook.create!(
 #
 puts 'Creating Slider'
 slider = Slider.create!(
-  animate: 'fade',
+  animate: 'crossfade',
   category_id: @category_home.id
 )
 

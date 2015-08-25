@@ -90,7 +90,7 @@ ActiveAdmin.register Slider do
           f.input :time_to_show,
                   hint: I18n.t('form.hint.slider.time_to_show')
           f.input :animate,
-                  collection: %w( fade horizontal vertical ),
+                  collection: %w( crossfade slide dissolve ),
                   include_blank: false,
                   hint: I18n.t('form.hint.slider.animate')
         end

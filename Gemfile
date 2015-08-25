@@ -39,6 +39,7 @@ gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
 gem 'vex_rails', github: 'anthony-robin/vex_rails'
 gem 'jquery-minicolors-rails'
 gem 'js_cookie_rails'
+gem 'fotoramajs'
 
 #
 # == Media upload
