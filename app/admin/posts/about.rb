@@ -23,6 +23,14 @@ ActiveAdmin.register About do
   decorate_with AboutDecorator
   config.clear_sidebar_sections!
 
+  action_item :edit_heading_page do
+    edit_heading_page_aa
+  end
+
+  action_item :show_article, only: [:show] do
+    link_to I18n.t('action_item.see_article_in_frontend'), about_path(resource), target: :blank
+  end
+
   batch_action :toggle_value do |ids|
     Post.find(ids).each do |post|
       toggle_value = post.online? ? false : true

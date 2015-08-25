@@ -15,6 +15,9 @@ fr:
       labels:
         toggle_value: Changer le statut
       flash: Le (les) élement(s) sélectionnés ont bien changé de statut
+    action_item:
+      edit_heading_page: Modifier l'entête de la page %{page}
+      see_article_in_frontend: Voir l'article sur le site
 
 # English
 en:
