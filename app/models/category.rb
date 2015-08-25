@@ -71,6 +71,10 @@ class Category < ActiveRecord::Base
     !slider.nil?
   end
 
+  def self.visible_header_fr
+    visible_header.collect { |c| [c.title, c.id] }
+  end
+
   private
 
   def self.except_already_background(myself = nil)
