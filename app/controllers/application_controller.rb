@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include UserHelper
 
   protect_from_forgery with: :exception
-  analytical modules: [:google], disable_if: proc { !Rails.env.production? && Figaro.env.google_analytics_key.nil? }
+  analytical modules: [:google], disable_if: proc { !Rails.env.production? || Figaro.env.google_analytics_key.nil? }
 
   before_action :setting_or_maintenance?
   before_action :set_optional_modules
