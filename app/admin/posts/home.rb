@@ -1,5 +1,5 @@
 ActiveAdmin.register Home do
-  menu parent: 'Articles'
+  menu parent: I18n.t('admin_menu.posts')
 
   permit_params :id,
                 :type,

@@ -1,5 +1,5 @@
 ActiveAdmin.register Slide do
-  menu parent: 'Assets'
+  menu parent: I18n.t('admin_menu.assets')
   includes :translations, :attachable
 
   permit_params :id,

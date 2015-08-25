@@ -20,6 +20,9 @@ fr:
   admin_menu:
     modules: Modules
     configuration: Configuration
+    assets: Assets
+    posts: Articles
+    config: Configuration
 
 # English
 en:

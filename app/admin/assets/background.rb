@@ -1,5 +1,5 @@
 ActiveAdmin.register Background do
-  menu parent: 'Assets'
+  menu parent: I18n.t('admin_menu.assets')
 
   permit_params :id, :image, :attachable_id, :attachable_type
 
