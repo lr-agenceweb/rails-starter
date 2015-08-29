@@ -1,5 +1,5 @@
 set :stage, :staging
-set :deploy_to, "/home/#{fetch(:deploy_user)}/www/staging/#{fetch(:application)}"
+set :deploy_to, Figaro.env.capistrano_deploy_to
 
 # server-based syntax
 # ======================
@@ -9,7 +9,7 @@ set :deploy_to, "/home/#{fetch(:deploy_user)}/www/staging/#{fetch(:application)}
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-server '195.154.90.115', user: "#{fetch(:deploy_user)}", roles: %w( web app db )
+server Figaro.env.capistrano_server_ip, user: "#{fetch(:deploy_user)}", roles: %w( web app db )
 
 # role-based syntax
 # ==================

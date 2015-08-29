@@ -54,6 +54,19 @@ froala_key: ~
 
 
 #
+# == Capistrano [Deployer]
+#
+capistrano_repo_url: ~
+capistrano_deploy_user: ~
+capistrano_server_ip: ~
+
+staging:
+  capistrano_deploy_to: ~
+production:
+  capistrano_deploy_to: ~
+
+
+#
 # == Dropbox Storage [Paperclip]
 #
 dropbox:
