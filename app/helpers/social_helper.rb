@@ -44,14 +44,15 @@ module SocialHelper
     img = image_for_object(element)
     title_seo = title_seo_structure(element.title)
     url = element.decorate.show_page_link(true)
+    desc = html_escape_once(sanitize_and_truncate(element.referencement_description))
 
     set_meta_tags title: element.title,
-                  description: sanitize_and_truncate(element.referencement_description),
+                  description: desc,
                   keywords: element.referencement_keywords,
                   og: {
                     type:  'article',
                     title: title_seo,
-                    description: sanitize_and_truncate(element.referencement_description),
+                    description: desc,
                     url:   url,
                     image: img
                   },
@@ -60,7 +61,7 @@ module SocialHelper
                     site: Figaro.env.twitter_username,
                     creator: Figaro.env.twitter_username,
                     title: title_seo,
-                    description: sanitize_and_truncate(element.referencement_description),
+                    description: desc,
                     url:   url,
                     image: img
                   }
@@ -79,7 +80,7 @@ module SocialHelper
     title_seo = title_seo_structure(element.title)
 
     awesome_share_buttons(title_seo,
-                          desc: element.referencement_description,
+                          desc: html_escape_once(element.referencement_description),
                           image: image_for_object(element),
                           via: @setting.twitter_username,
                           popup: true)
