@@ -3,6 +3,7 @@
 #
 module SocialHelper
   include AssetsHelper
+  include ERB::Util
 
   # SEO Meta tags for index pages (include Facebook and Twitter)
   #
