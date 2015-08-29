@@ -29,6 +29,8 @@
 class Setting < ActiveRecord::Base
   include Attachable
 
+  after_validation :clean_paperclip_errors
+
   translates :title, :subtitle, fallbacks_for_empty_translations: true
   active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true
@@ -43,7 +45,9 @@ class Setting < ActiveRecord::Base
                       thumb: '32x32>'
                     }
 
-  validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}
+  validates_attachment :logo,
+                       content_type: { content_type: %r{\Aimage\/.*\Z} },
+                       size: { less_than: 2.megabyte }
 
   validates :name,  presence: true
   validates :email, presence: true, email_format: true
@@ -57,5 +61,9 @@ class Setting < ActiveRecord::Base
 
   def subtitle?
     !subtitle.blank?
+  end
+
+  def clean_paperclip_errors
+    errors.delete(:logo)
   end
 end

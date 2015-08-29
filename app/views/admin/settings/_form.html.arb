@@ -12,7 +12,7 @@ f.columns do
         end
 
         f.column do
-          f.input :logo, hint: retina_image_tag(f.object, :logo, :small)
+          f.input :logo, hint: raw("<p class='paperclip-preview'>#{retina_image_tag(f.object, :logo, :small)}</p>")
           if f.object.logo?
             f.input :delete_logo,
                     as: :boolean,
