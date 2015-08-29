@@ -64,7 +64,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
               row :breadcrumb if breadcrumb_module.enabled?
               row :qrcode if qrcode_module.enabled?
               row :social if social_module.enabled?
-              row :twitter_username if social_module.enabled?
+              row :twitter_username
             end
           end
         end
@@ -86,7 +86,6 @@ ActiveAdmin.register Setting, as: 'Parameter' do
       params[:setting].delete :show_social unless @social_module.enabled?
       params[:setting].delete :show_qrcode unless @qrcode_module.enabled?
       params[:setting].delete :show_breadcrumb unless @breadcrumb_module.enabled?
-      params[:setting].delete :twitter_username unless @social_module.enabled?
       params[:setting].delete :should_validate unless @guest_book_module.enabled? || @comment_module.enabled?
       super
     end
