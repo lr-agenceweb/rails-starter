@@ -58,8 +58,8 @@ module SocialHelper
                   },
                   twitter: {
                     card: 'summary_large_image',
-                    site: Figaro.env.twitter_username,
-                    creator: Figaro.env.twitter_username,
+                    site: @setting.try(:twitter_username),
+                    creator: @setting.try(:twitter_username),
                     title: title_seo,
                     description: desc,
                     url:   url,
@@ -82,7 +82,7 @@ module SocialHelper
     awesome_share_buttons(title_seo,
                           desc: html_escape_once(element.referencement_description),
                           image: image_for_object(element),
-                          via: @setting.twitter_username,
+                          via: @setting.try(:twitter_username),
                           popup: true)
   end
 

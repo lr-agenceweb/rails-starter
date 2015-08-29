@@ -31,12 +31,6 @@ mapbox_access_token: ~
 
 
 #
-# == Twitter
-#
-twitter_username: ~
-
-
-#
 # == Google and Bing
 #
 google_analytics_key: ~
