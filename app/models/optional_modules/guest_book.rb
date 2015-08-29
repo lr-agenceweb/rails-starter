@@ -23,7 +23,7 @@ class GuestBook < ActiveRecord::Base
             presence: true,
             email_format: true
 
-  validates :content,  presence: true
+  validates :content, presence: true
   validates :lang,
             presence: true,
             inclusion: %w( fr en )

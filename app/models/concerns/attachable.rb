@@ -10,7 +10,7 @@ module Attachable
   module ClassMethods
     def handle_attachment(name, options = {})
       model_name = table_name
-      attachment_path  = "#{model_name}/:id/:style-:filename"
+      attachment_path = "#{model_name}/:id/:style-:filename"
 
       # conditionals options
       if Rails.env.staging? || Rails.env.production?

@@ -79,8 +79,6 @@ class Category < ActiveRecord::Base
     Category.includes(:translations).collect { |c| [c.title, c.name] }
   end
 
-  private
-
   def self.except_already_background(myself = nil)
     categories = []
     Category.includes(:translations, :background).with_allowed_module.each do |category|

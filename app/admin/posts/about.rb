@@ -27,7 +27,7 @@ ActiveAdmin.register About do
     edit_heading_page_aa
   end
 
-  action_item :new_article, only:[:show] do
+  action_item :new_article, only: [:show] do
     link_to I18n.t('active_admin.action_item.new_article'), new_admin_about_path if can? :create, About
   end
 
