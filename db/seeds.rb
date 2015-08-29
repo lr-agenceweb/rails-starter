@@ -52,7 +52,7 @@ setting_site = Setting.create!(
   name: 'Rails starter',
   title: 'Rails starter',
   subtitle: 'Démonstration',
-  phone: '01 02 03 04 05',
+  phone: '+33 (0)1 02 03 04 05',
   email: 'demo@starter.fr',
   logo: File.new("#{Rails.root}/public/system/seeds/logo/logo.png")
 )
