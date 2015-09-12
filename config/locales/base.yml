@@ -37,6 +37,10 @@ fr:
   additional: Informations complémentaires
   general: Informations générales
 
+  # has_many button label
+  add:
+    feminin: Ajouter une nouvelle %{klass}
+
 # English
 en:
   'true': yes
