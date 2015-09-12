@@ -128,14 +128,78 @@ end
 # == Categories
 #
 puts 'Creating Menu elements'
-title_en = ['Home', 'About', 'Contact', 'Search', 'GuestBook', 'Blog', 'Events']
-title_fr = ['Accueil', 'À Propos', 'Me contacter', 'Recherche', 'Livre d\'Or', 'Blog', 'Événements']
-description_en = ['Homepage description', 'About description', 'Contact description', 'Search description', 'GuestBook description', 'Blog description', 'Event description']
-description_fr = ['Description pour la page d\'accueil', 'Description de la page à propos', 'Description de la page contact', 'Description de la page recherche', 'Description de la page livre d\'or', 'Description de la page Blog', 'Description de la page événement']
-keywords_en = ['home', 'about', 'contact', 'search', 'guest book', 'blog', 'event']
-keywords_fr = ['accueil', 'à propos', 'contact', 'recherche', 'livre d\'or', 'blog', 'événement']
-show_in_menu = [true, false, true, true, true, true, true]
-show_in_footer = [false, false, false, false, false, false, false]
+title_en = [
+  'Home',
+  'Search',
+  'GuestBook',
+  'Blog',
+  'Events',
+  'About',
+  'Contact'
+]
+title_fr = [
+  'Accueil',
+  'Recherche',
+  'Livre d\'Or',
+  'Blog',
+  'Événements',
+  'À Propos',
+  'Me contacter'
+]
+description_en = [
+  'Homepage description',
+  'Search description',
+  'GuestBook description',
+  'Blog description',
+  'Event description',
+  'About description',
+  'Contact description'
+]
+description_fr = [
+  'Description pour la page d\'accueil',
+  'Description de la page recherche',
+  'Description de la page livre d\'or',
+  'Description de la page Blog',
+  'Description de la page événement',
+  'Description de la page à propos',
+  'Description de la page contact'
+]
+keywords_en = [
+  'home',
+  'search',
+  'guest book',
+  'blog',
+  'event',
+  'about',
+  'contact'
+]
+keywords_fr = [
+  'accueil',
+  'recherche',
+  'livre d\'or',
+  'blog',
+  'événement',
+  'à propos',
+  'contact'
+]
+show_in_menu = [
+  true,
+  true,
+  true,
+  true,
+  true,
+  false,
+  true
+]
+show_in_footer = [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+]
 
 Category.models_name_str.each_with_index do |element, index|
   optional_module_id = nil
