@@ -34,7 +34,8 @@ fr:
       link: Définit le lien qui permet d'accéder au projet
       year: Année de réalisation du projet
       destroy: "Après avoir coché la case, ne pas oublier de valider le fomulaire pour que la suppression s'effectue"
-      role_name: Modification du rôle de l'utilisateur. Attention à ne pas faire n'importe quoi avec !!!
+      role_name: Modification du rôle de l'utilisateur. <br /> Le rôle "administrateur" permet à l'utilisateur d'accéder à une grande partie des contenus et de la configuration du site. <br /> Le rôle "abonné" restreint grandement les droits octroyés et l'utilisateur ne pourra modifier que les contenus qui lui sont propres et non la configuration du site. <br /> Ne modifiez ce champs que si vous savez ce que vous faîtes !
+
       optional_module: Choisir quel est le module optionel lié à cette catégorie
       heading: En-tête du contenu
 
