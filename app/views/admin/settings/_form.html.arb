@@ -30,6 +30,7 @@ f.columns do
       f.input :name, hint: 'Nom du propriétaire du site'
       f.input :email, hint: 'Email d\'où seront reçus les messages de contact'
       f.input :phone, as: :phone, hint: 'Numéro de téléphone à afficher sur le site pour vous joindre'
+      f.input :phone_secondary, as: :phone, hint: 'Numéro de téléphone secondaire. Laissez vide si ce champs ne vous sert pas'
     end
   end
 end

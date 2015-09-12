@@ -4,6 +4,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
   permit_params :id,
                 :name,
                 :phone,
+                :phone_secondary,
                 :email,
                 :show_breadcrumb,
                 :show_social,
@@ -52,6 +53,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
           attributes_table_for parameter.decorate do
             row :name
             row :phone
+            row :phone_secondary unless resource.phone_secondary.blank?
             row :email
           end
         end
