@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912224247) do
+ActiveRecord::Schema.define(version: 20150913115504) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -211,6 +211,49 @@ ActiveRecord::Schema.define(version: 20150912224247) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  create_table "menu_child_translations", force: :cascade do |t|
+    t.integer  "menu_child_id", limit: 4,   null: false
+    t.string   "locale",        limit: 255, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "title",         limit: 255
+  end
+
+  add_index "menu_child_translations", ["locale"], name: "index_menu_child_translations_on_locale", using: :btree
+  add_index "menu_child_translations", ["menu_child_id"], name: "index_menu_child_translations_on_menu_child_id", using: :btree
+
+  create_table "menu_children", force: :cascade do |t|
+    t.string   "title",          limit: 255
+    t.boolean  "online",                     default: true
+    t.integer  "menu_parent_id", limit: 4
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+  end
+
+  add_index "menu_children", ["menu_parent_id"], name: "index_menu_children_on_menu_parent_id", using: :btree
+
+  create_table "menu_parent_translations", force: :cascade do |t|
+    t.integer  "menu_parent_id", limit: 4,   null: false
+    t.string   "locale",         limit: 255, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "title",          limit: 255
+  end
+
+  add_index "menu_parent_translations", ["locale"], name: "index_menu_parent_translations_on_locale", using: :btree
+  add_index "menu_parent_translations", ["menu_parent_id"], name: "index_menu_parent_translations_on_menu_parent_id", using: :btree
+
+  create_table "menu_parents", force: :cascade do |t|
+    t.string   "title",          limit: 255
+    t.boolean  "online",                     default: true
+    t.boolean  "show_in_footer",             default: false
+    t.integer  "category_id",    limit: 4
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "menu_parents", ["category_id"], name: "index_menu_parents_on_category_id", using: :btree
 
   create_table "newsletter_translations", force: :cascade do |t|
     t.integer  "newsletter_id", limit: 4,     null: false
@@ -487,4 +530,6 @@ ActiveRecord::Schema.define(version: 20150912224247) do
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
 
+  add_foreign_key "menu_children", "menu_parents"
+  add_foreign_key "menu_parents", "categories"
 end
