@@ -213,6 +213,11 @@ fr:
         color: Couleur
       menu:
         parent_id: Menu parent
+        children_list: Sous-menu(s)
+        status: État
+        show_in_footer: Dans le footer
+        show_in_footer_d: Dans le footer
+        title: Titre
       referencement:
         description: Description
         keywords: Mots-clés

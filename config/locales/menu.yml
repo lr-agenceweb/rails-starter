@@ -24,6 +24,10 @@ fr:
     posts: Articles
     config: Configuration
 
+  menu:
+    title_aa_show: "Élément de menu \"%{menu_item}\""
+    no_children: Cet élément n'a pas de sous-menu
+
 # English
 en:
   routes:

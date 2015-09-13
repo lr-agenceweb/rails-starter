@@ -7,7 +7,7 @@
 /   = link_to 'Menu', '#', id: 'pull', class: 'l-nav-item-link header__icon'
 
 
-- Menu.online.not_submenus.each do |menu|
+- Menu.online.only_parents.each do |menu|
   ul
     li
       = menu.title

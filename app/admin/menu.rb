@@ -35,13 +35,14 @@ ActiveAdmin.register Menu do
   #   actions
   # end
 
-  # show title: :title_aa_show do
-  #   attributes_table do
-  #     row :name_deco
-  #     row :status
-  #     row :description
-  #   end
-  # end
+  show title: :title_aa_show do
+    attributes_table do
+      row :title
+      row :status
+      row :show_in_footer_d
+      row :children_list
+    end
+  end
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
