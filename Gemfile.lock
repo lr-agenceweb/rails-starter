@@ -134,6 +134,10 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_admin-sortable_tree (0.2.1)
+      activeadmin (>= 0.6)
+      jquery-ui-rails (~> 5.0)
+      rails (>= 3.2)
     active_skin (0.0.9)
     activejob (4.2.4)
       activesupport (= 4.2.4)
@@ -669,6 +673,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_admin-sortable_tree
   active_skin
   activeadmin!
   activeadmin-globalize!

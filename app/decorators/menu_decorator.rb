@@ -24,4 +24,8 @@ class MenuDecorator < ApplicationDecorator
     color = show_in_footer? ? 'green' : 'red'
     status_tag_deco I18n.t("enabled.#{show_in_footer}"), color
   end
+
+  def title_sortable_tree
+    "#{model.title} #{status}"
+  end
 end

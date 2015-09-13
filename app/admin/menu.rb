@@ -14,6 +14,12 @@ ActiveAdmin.register Menu do
   decorate_with MenuDecorator
   config.clear_sidebar_sections!
 
+  # ActiveAdmin Sortable Tree options
+  sortable tree: true,
+           top_of_list: 0,
+           max_levels: 2,
+           collapsible: true
+
   action_item :new_menu_item, only: [:edit, :show] do
     link_to I18n.t('active_admin.action_item.new_menu_item'), new_admin_menu_path if can? :create, Menu
   end
@@ -26,13 +32,10 @@ ActiveAdmin.register Menu do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
-  index do
-    selectable_column
-    column :title
-    column :status
-    column :show_in_footer_d
-    column :children_list
-
+  index as: :sortable do
+    label do |menu|
+      raw(menu.decorate.title_sortable_tree)
+    end
     actions
   end
 

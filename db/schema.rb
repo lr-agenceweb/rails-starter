@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913132656) do
+ActiveRecord::Schema.define(version: 20150913153457) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150913132656) do
     t.boolean  "online",         default: true
     t.boolean  "show_in_footer", default: false
     t.string   "ancestry",       limit: 255
+    t.integer  "position",       limit: 4
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
