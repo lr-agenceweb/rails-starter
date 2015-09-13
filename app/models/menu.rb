@@ -22,9 +22,10 @@ class Menu < ActiveRecord::Base
   translates :title, fallbacks_for_empty_translations: true
   active_admin_translates :title
 
+  has_ancestry
   has_one :category
 
-  has_ancestry
+  delegate :name, to: :category, prefix: true, allow_nil: true
 
   scope :only_parents, -> { where(ancestry: nil) }
   scope :with_page, -> { joins(:category).where.not('categories.menu_id': nil) }

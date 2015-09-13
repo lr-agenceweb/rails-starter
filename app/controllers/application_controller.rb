@@ -39,11 +39,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_menu_elements
-    menu_elements = Menu.includes(:translations).all
+    menu_elements = Menu.includes(:translations, :category).online.only_parents.with_page
     @menu_elements_header ||= MenuDecorator.decorate_collection(menu_elements.visible_header.by_position)
     @menu_elements_footer ||= MenuDecorator.decorate_collection(menu_elements.visible_footer.by_position)
     @controller_name = controller_name.classify
-    @category = Category.find_by(name: @controller_name)
+    @category = Category.includes(menu: [:translations]).find_by(name: @controller_name)
   end
 
   def set_background
