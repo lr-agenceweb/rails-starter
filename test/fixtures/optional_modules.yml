@@ -74,3 +74,14 @@ breadcrumb:
   <<: *DEFAULTS
   name: Breadcrumb
   enabled: true
+
+qrcode:
+  <<: *DEFAULTS
+  name: Qrcode
+  enabled: true
+
+background:
+  <<: *DEFAULTS
+  name: Background
+  enabled: true
+

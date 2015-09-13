@@ -1,10 +1,10 @@
 / I had to use this ugly code because the locale params is lost between the controller and the view.
-- I18n.with_locale(@locale.to_sym) do
-  - @error = StringBox.find_by(key: "error_#{@status_code}")
+- I18n.with_locale(locale.to_sym) do
+  - error = StringBox.find_by(key: "error_#{status_code}")
 
   .error-container.row
     .small-12.columns
-      h1.error-title = @error.try(:title)
-      .error-content == @error.try(:content)
+      h1.error-title = error.try(:title)
+      .error-content == error.try(:content)
 
       p.error-link == I18n.t('link.error_404', page: link_to(I18n.t('link.homepage'), root_path))

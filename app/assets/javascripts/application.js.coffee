@@ -21,6 +21,7 @@
 #= require mapbox
 #= require plugins/mapbox
 #= require magnific-popup
+#= require fotorama
 #= require jquery.autosize
 #= require globals/_functions
 #= require modules/responsive_menu
@@ -28,7 +29,7 @@
 #= require plugins/nprogress
 #= require plugins/cookie_ie
 #= require plugins/cookie_adult_validation
-#= require plugins/orbit
+#= require plugins/fotorama
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser

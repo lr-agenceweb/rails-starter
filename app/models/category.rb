@@ -51,18 +51,39 @@ class Category < ActiveRecord::Base
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 
   def self.models_name
-    [:Home, :About, :Contact, :Search, :GuestBook, :Blog, :Event]
+    [:Home, :Search, :GuestBook, :Blog, :Event, :About, :Contact]
   end
 
   def self.models_name_str
-    %w( Home About Contact Search GuestBook Blog Event )
+    %w( Home Search GuestBook Blog Event About Contact )
   end
 
   def self.title_by_category(category)
     Category.find_by(name: category).title
   end
 
+  def self.handle_pages_for_background(current_background)
+    categories = Category.except_already_background(current_background.attachable)
+    categories.collect { |c| [c.title, c.id] }
+  end
+
   def slider?
     !slider.nil?
+  end
+
+  def self.visible_header_fr
+    visible_header.collect { |c| [c.title, c.id] }
+  end
+
+  def self.models_name_str_collection
+    Category.includes(:translations).collect { |c| [c.title, c.name] }
+  end
+
+  def self.except_already_background(myself = nil)
+    categories = []
+    Category.includes(:translations, :background).with_allowed_module.each do |category|
+      categories << category if category.background.nil? || category == myself
+    end
+    categories
   end
 end

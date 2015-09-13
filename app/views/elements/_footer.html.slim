@@ -21,3 +21,7 @@ footer.footer-container#footer
         - unless @socials_share.nil?
           h4 Share me
           = social_share_buttons
+
+  .row.lower-footer
+    .small-12.colunms
+      p.no-margin-bottom.text-center == t('footer.made_by', amour: fa_icon('heart'), company: link_to(image_tag('logo.png', width: '40px'), 'http://www.lr-agenceweb.fr', target: :blank, title: 'L&R Agence web'))

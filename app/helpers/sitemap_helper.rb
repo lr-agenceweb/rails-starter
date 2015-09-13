@@ -25,4 +25,8 @@ module SitemapHelper
   def guest_book_module
     add guest_books_path, priority: 0.7, changefreq: 'monthly'
   end
+
+  def rss_module
+    add posts_rss_path(format: :atom), priority: 0.7, changefreq: 'monthly'
+  end
 end

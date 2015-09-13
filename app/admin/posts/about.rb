@@ -1,5 +1,5 @@
 ActiveAdmin.register About do
-  menu parent: 'Articles'
+  menu parent: I18n.t('admin_menu.posts')
   includes :translations
 
   permit_params :id,
@@ -22,6 +22,18 @@ ActiveAdmin.register About do
 
   decorate_with AboutDecorator
   config.clear_sidebar_sections!
+
+  action_item :edit_heading_page do
+    edit_heading_page_aa
+  end
+
+  action_item :new_article, only: [:show] do
+    link_to I18n.t('active_admin.action_item.new_article'), new_admin_about_path if can? :create, About
+  end
+
+  action_item :show_article, only: [:show] do
+    link_to I18n.t('active_admin.action_item.see_article_in_frontend'), about_path(resource), target: :blank
+  end
 
   batch_action :toggle_value do |ids|
     Post.find(ids).each do |post|

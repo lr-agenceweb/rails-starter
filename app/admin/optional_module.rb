@@ -1,5 +1,5 @@
 ActiveAdmin.register OptionalModule do
-  menu parent: 'configuration'
+  menu parent: I18n.t('admin_menu.config')
 
   permit_params :id,
                 :name,
@@ -26,7 +26,7 @@ ActiveAdmin.register OptionalModule do
     actions
   end
 
-  show do
+  show title: :title_aa_show do
     attributes_table do
       row :name_deco
       row :status

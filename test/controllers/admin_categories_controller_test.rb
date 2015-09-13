@@ -93,8 +93,23 @@ module Admin
 
     test 'should destroy background if check_box is checked' do
       assert_not_nil @category.background
-      patch :update, id: @category, category: { background: { _destroy: true } }
-      assert_equal 'Pas de Background associé', assigns(:category).background
+      patch :update, id: @category, category: { background_attributes: { _destroy: true } }
+      assert_equal 'Pas de Background associé', assigns(:category).background_deco
+    end
+
+    test 'should remove background parameter if module is disabled' do
+      disable_optional_module @super_administrator, @background_module, 'Background' # in test_helper.rb
+      sign_in @administrator
+      attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+      patch :update, id: @category, category: { background_attributes: { image: attachment } }
+      assert_equal 'background-homepage.jpg', assigns(:category).background.image_file_name
+    end
+
+    test 'should not destroy background if module is disabled' do
+      disable_optional_module @super_administrator, @background_module, 'Background' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @category, category: { background_attributes: { _destroy: true } }
+      assert_equal 'background-homepage.jpg', assigns(:category).background.image_file_name
     end
 
     #
@@ -166,6 +181,7 @@ module Admin
       @category_about = categories(:about)
       @category_search = categories(:search)
       @category_blog = categories(:blog)
+      @background_module = optional_modules(:background)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

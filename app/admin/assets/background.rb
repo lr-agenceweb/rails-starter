@@ -1,7 +1,7 @@
 ActiveAdmin.register Background do
-  menu parent: 'Assets'
+  menu parent: I18n.t('admin_menu.assets')
 
-  permit_params :id, :image
+  permit_params :id, :image, :attachable_id, :attachable_type
 
   decorate_with BackgroundDecorator
   config.clear_sidebar_sections!
@@ -13,9 +13,9 @@ ActiveAdmin.register Background do
     actions
   end
 
-  show do
-    h3 resource.category_name
+  show title: :title_aa_show do
     attributes_table do
+      row :category_name
       row :image_deco
     end
   end
@@ -24,10 +24,16 @@ ActiveAdmin.register Background do
     f.semantic_errors(*f.object.errors.keys)
 
     f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
-      f.input :attachable_type,
-              collection: Background.child_classes,
+      f.input :attachable_id,
+              as: :select,
+              collection: Category.handle_pages_for_background(f.object),
               include_blank: false,
               input_html: { class: 'chosen-select' }
+
+      f.input :attachable_type,
+              as: :hidden,
+              input_html: { value: 'Category' }
+
       f.input :image,
               as: :file,
               label: I18n.t('form.label.background'),
@@ -41,6 +47,10 @@ ActiveAdmin.register Background do
   # == Controller
   #
   controller do
+    def edit
+      @page_title = resource.decorate.title_aa_edit
+    end
+
     def destroy
       resource.image.clear
       resource.save

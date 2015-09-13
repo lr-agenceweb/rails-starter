@@ -6,10 +6,10 @@ class SlideDecorator < PictureDecorator
   delegate_all
 
   def caption
-    h.content_tag(:div, '', class: 'caption') do
+    raw(h.content_tag(:div, '', class: 'caption') do
       concat(h.content_tag(:h3, model.title, class: 'caption-title')) if slide.title?
       concat(h.content_tag(:div, model.description, class: 'caption-content')) if slide.description?
-    end if caption?
+    end.html_safe) if caption?
   end
 
   def self_image_has_one_by_size(size = :slide)

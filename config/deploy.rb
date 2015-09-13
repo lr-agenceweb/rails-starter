@@ -3,16 +3,16 @@ require 'figaro'
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'rails-starter'
-set :repo_url, 'git@github.com:anthony-robin/rails-starter.git'
+set :application, Figaro.env.application_name
+set :repo_url, Figaro.env.capistrano_repo_url
 
-set :deploy_user, 'anthony'
+set :deploy_user, Figaro.env.capistrano_deploy_user
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/home/anthony/www/#{fetch(:application)}"
+set :deploy_to, '/var/www/my_app_name'
 
 # Default value for :scm is :git
 set :scm, :git
@@ -40,7 +40,7 @@ set :keep_releases, 5
 
 # Backup
 set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
-set :backup_name, 'rails_starter'
+set :backup_name, Figaro.env.application_name.parameterize.underscore
 
 namespace :deploy do
   after :restart, :clear_cache do

@@ -64,6 +64,13 @@ module Admin
       assert_not assigns(:setting).show_breadcrumb?
     end
 
+    test 'should not update qrcode param if optional module is disabled' do
+      disable_optional_module @super_administrator, @qrcode_module, 'Qrcode' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @setting, setting: { show_qrcode: '1' }
+      assert_not assigns(:setting).show_qrcode?
+    end
+
     test 'should not update should_validate param if guest_book and comment modules are disabled' do
       disable_optional_module @super_administrator, @guest_book_module, 'GuestBook' # in test_helper.rb
       disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
@@ -152,6 +159,7 @@ module Admin
       @guest_book_module = optional_modules(:guest_book)
       @comment_module = optional_modules(:comment)
       @breadcrumb_module = optional_modules(:breadcrumb)
+      @qrcode_module = optional_modules(:qrcode)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

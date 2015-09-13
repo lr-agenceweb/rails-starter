@@ -48,9 +48,30 @@ module Admin
     end
 
     #
+    # == Form validations
+    #
+    test 'should save background after switching page' do
+      patch :update, id: @background, background: { attachable_id: 4 }
+      assert_equal 4, assigns(:background).attachable_id
+    end
+
+    #
     # == User role
     #
     test 'should redirect to dashboard page if trying to access background as subscriber' do
+      sign_in @subscriber
+      assert_crud_actions(@background, admin_dashboard_path)
+    end
+
+    #
+    # == Module disabled
+    #
+    test 'should not access page if slider module is disabled' do
+      disable_optional_module @super_administrator, @background_module, 'Background' # in test_helper.rb
+      sign_in @super_administrator
+      assert_crud_actions(@background, admin_dashboard_path)
+      sign_in @administrator
+      assert_crud_actions(@background, admin_dashboard_path)
       sign_in @subscriber
       assert_crud_actions(@background, admin_dashboard_path)
     end
@@ -69,7 +90,7 @@ module Admin
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
-      assert ability.cannot?(:create, Background.new), 'should not be able to create'
+      assert ability.can?(:create, Background.new), 'should be able to create'
       assert ability.can?(:read, @background), 'should be able to read'
       assert ability.can?(:update, @background), 'should be able to update'
       assert ability.can?(:destroy, @background), 'should be able to destroy'
@@ -119,12 +140,28 @@ module Admin
     def initialize_test
       @category = categories(:home)
       @category_about = categories(:about)
-      @background = backgrounds(:contact)
+      @background = backgrounds(:home)
+      @background_module = optional_modules(:background)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
+    end
+
+    def assert_crud_actions(obj, url)
+      get :index
+      assert_redirected_to url
+      get :show, id: obj
+      assert_redirected_to url
+      get :edit, id: obj
+      assert_redirected_to url
+      post :create, background: {}
+      assert_redirected_to url
+      patch :update, id: obj, background: {}
+      assert_redirected_to url
+      delete :destroy, id: obj
+      assert_redirected_to url
     end
   end
 end

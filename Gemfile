@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #
 # == Rails
 #
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.4'
 
 #
 # == Database
@@ -39,6 +39,7 @@ gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
 gem 'vex_rails', github: 'anthony-robin/vex_rails'
 gem 'jquery-minicolors-rails'
 gem 'js_cookie_rails'
+gem 'fotoramajs'
 
 #
 # == Media upload
@@ -152,7 +153,7 @@ group :development do
   gem 'shog'
 
   # == Deploy
-  gem 'capistrano',  '~> 3.1'
+  gem 'capistrano', '~> 3.1'
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rvm'
   gem 'capistrano-rails-collection'

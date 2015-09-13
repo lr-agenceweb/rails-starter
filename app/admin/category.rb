@@ -1,5 +1,5 @@
 ActiveAdmin.register Category do
-  menu parent: 'configuration'
+  menu parent: I18n.t('admin_menu.config')
   includes :background, :translations, :slider, :optional_module
 
   permit_params :id,
@@ -38,7 +38,7 @@ ActiveAdmin.register Category do
 
   index do
     sortable_handle_column
-    column :background
+    column :background_deco if background_module.enabled?
     column :title
     column :div_color
     column :slider if slider_module.enabled?
@@ -50,11 +50,11 @@ ActiveAdmin.register Category do
     actions
   end
 
-  show do
+  show title: :title_aa_show do
     columns do
       column do
         attributes_table do
-          row :background
+          row :background_deco if background_module.enabled?
           row :div_color
           row :slider if slider_module.enabled?
           row :in_menu
@@ -82,7 +82,7 @@ ActiveAdmin.register Category do
 
         f.inputs t('general') do
           f.input :name,
-                  collection: Category.models_name,
+                  collection: Category.models_name_str_collection,
                   include_blank: false,
                   input_html: { class: 'chosen-select' }
 
@@ -101,20 +101,13 @@ ActiveAdmin.register Category do
                     value: f.object.color.blank? ? '' : f.object.color
                   }
         end
+
+        render 'admin/shared/referencement/form', f: f
       end
 
       column do
         render 'admin/shared/heading/form', f: f
-      end
-    end
-
-    columns do
-      column do
-        render 'admin/shared/backgrounds/form', f: f
-      end
-
-      column do
-        render 'admin/shared/referencement/form', f: f
+        render 'admin/shared/backgrounds/form', f: f if background_module.enabled?
       end
     end
 
@@ -127,15 +120,23 @@ ActiveAdmin.register Category do
   # == Controller
   #
   controller do
+    def edit
+      @page_title = resource.decorate.title_aa_edit
+    end
+
     def update
       unless current_user.super_administrator?
         params[:category].delete :optional_module_id
         params[:category].delete :optional
       end
+
       if params[:category][:custom_background_color] == '0'
         params[:category][:color] = nil
       end
-      update! { admin_category_path(@category) }
+
+      params[:category].delete :background_attributes unless @background_module.enabled?
+
+      super
     end
   end
 end

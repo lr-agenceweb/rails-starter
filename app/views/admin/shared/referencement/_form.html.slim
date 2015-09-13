@@ -7,7 +7,9 @@
 
     - t.input :description,
               hint: I18n.t('form.hint.description'),
-              input_html: { class: 'small-height' }
+              input_html: { class: 'small-height' },
+              label: I18n.t('activerecord.attributes.referencement.description')
 
     - t.input :keywords,
-              hint: I18n.t('form.hint.keywords')
+              hint: I18n.t('form.hint.keywords'),
+              label: I18n.t('activerecord.attributes.referencement.keywords')

@@ -43,12 +43,14 @@ fr:
   errors:
     messages:
       email_format: Veuillez renseigner un email valide ;)
+      in_between: doit être entre %{min} et %{max}
 
   activemodel: &errors
     errors:
       messages:
         invalid_email_address: n'est pas une adresse email valide
         email_address_not_routable: n'est pas routable
+
   activerecord:
     <<: *errors
     errors:
@@ -82,6 +84,9 @@ fr:
       about:
         one: À propos
         other: À propos
+      setting:
+        one: Paramètre
+        other: Paramètres
       parameter:
         one: Paramètre
         other: Paramètres
@@ -168,11 +173,14 @@ fr:
         subtitle: Sous-titre
         logo: Logo
         logo_deco: Logo
+        logo_file_size: Le poids du logo
         delete_logo: Supprimer le logo
         name: Nom
         phone: Téléphone
+        phone_secondary: Téléphone secondaire
         show_breadcrumb: Afficher le fil d'ariane ?
         show_social: Afficher le partage sur les réseaux sociaux ?
+        show_qrcode: Afficher le QrCode sur la page contact ?
         should_validate: Valider les commentaires et les messages du livre d'or ?
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
@@ -196,9 +204,16 @@ fr:
         in_footer: Dans le menu du footer ?
         name: Nom de la catégorie
         background: Arrière-plan
+        background_deco: Arrière-plan
         position: Position
         custom_background_color: Couleur de fond de page personnalisée
         color: Couleur
+        color: Couleur
+      referencement:
+        description: Description
+        keywords: Mots-clés
+      heading:
+        content: Contenu
       newsletter:
         title: Titre
         preview: Prévisualisation
@@ -222,6 +237,7 @@ fr:
         image: Image
         image_deco: Image
         category_name: Page associée
+        attachable_id: Page
         _destroy: Supprimer ?
       picture:
         type: Catégorie
@@ -240,7 +256,9 @@ fr:
         image_deco: Image
         slider_page_name: Slide liée à la page
         status: État
+        title: Titre
         title_deco: Titre
+        description: Description
         description_deco: Description
         _destroy: Supprimer ?
       comment:

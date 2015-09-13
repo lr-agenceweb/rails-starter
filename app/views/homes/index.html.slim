@@ -2,6 +2,8 @@
 
 = render 'optional_modules/sliders/show', slider: slider, force: false
 
+= background.handle_background_tag 'background-homepage' if @background_module.enabled? && !@background.nil?
+
 .row
   - @homes.each do |home|
     article.small-12.columns

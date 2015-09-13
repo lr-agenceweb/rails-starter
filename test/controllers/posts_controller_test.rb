@@ -4,6 +4,8 @@ require 'test_helper'
 # == PostsController Test
 #
 class PostsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup :initialize_test
 
   test 'should get atom page' do
@@ -37,9 +39,23 @@ class PostsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should redirect to homepage if trying to access rss with disabled module' do
+    disable_optional_module @super_administrator, @rss_module, 'RSS' # in test_helper.rb
+    sign_in @administrator
+    @locales.each do |locale|
+      get :feed, format: :atom, locale: locale.to_s
+      assert_redirected_to controller: :homes, action: :index, locale: locale.to_s
+    end
+  end
+
   private
 
   def initialize_test
     @locales = I18n.available_locales
+    @rss_module = optional_modules(:rss)
+
+    @administrator = users(:bob)
+    @super_administrator = users(:anthony)
+    sign_in @administrator
   end
 end

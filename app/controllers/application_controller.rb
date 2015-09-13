@@ -8,22 +8,23 @@ class ApplicationController < ActionController::Base
   include UserHelper
 
   protect_from_forgery with: :exception
-  analytical modules: [:google], disable_if: proc { !Rails.env.production? && Figaro.env.google_analytics_key.nil? }
+  analytical modules: [:google], disable_if: proc { !Rails.env.production? || Figaro.env.google_analytics_key.nil? }
 
   before_action :setting_or_maintenance?
   before_action :set_optional_modules
   before_action :set_adult_validation, if: proc { @adult_module.enabled? && !cookies[:adult] }
   before_action :set_language
   before_action :set_menu_elements
-  before_action :set_background, unless: proc { @category.nil? }
+  before_action :set_background, if: proc { @background_module.enabled && !@category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
   before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
   before_action :set_slider, if: proc { @slider_module.enabled? }
   before_action :set_socials_network, if: proc { @social_module.enabled? }
   before_action :set_map, if: proc { @map_module.enabled? }
+  before_action :set_froala_key
 
-  decorates_assigned :setting, :category, :slider, :map
+  decorates_assigned :setting, :category, :slider, :map, :background
 
   private
 
@@ -46,7 +47,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_background
-    @background = Background.find_by(attachable_id: @category.id)
+    @background = @category.background
   end
 
   def set_host_name
@@ -87,6 +88,10 @@ class ApplicationController < ActionController::Base
     @optional_mod.find_each do |optional_module|
       instance_variable_set("@#{optional_module.name.underscore.singularize}_module", optional_module)
     end
+  end
+
+  def set_froala_key
+    gon.push(froala_key: Figaro.env.froala_key)
   end
 
   def authenticate_active_admin_user!

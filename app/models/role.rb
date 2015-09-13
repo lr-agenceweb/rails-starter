@@ -19,9 +19,9 @@ class Role < ActiveRecord::Base
 
   def self.allowed_roles_for_user_role(user)
     if user.super_administrator?
-      all
+      all.collect { |c| [I18n.t("role.#{c.name}"), c.id] }
     elsif user.administrator?
-      all.except_super_adminstrator
+      all.except_super_adminstrator.collect { |c| [I18n.t("role.#{c.name}"), c.id] }
     end
   end
 end

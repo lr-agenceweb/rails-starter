@@ -4,6 +4,7 @@
 class ContactsController < ApplicationController
   include Mappable
   include MapHelper
+  include QrcodeHelper
 
   skip_before_action :allow_cors
 

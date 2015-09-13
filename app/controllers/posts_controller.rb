@@ -1,7 +1,8 @@
 #
 # == Posts Controller
 #
-class PostsController < InheritedResources::Base
+class PostsController < ApplicationController
+  before_action :make_redirect, only: [:feed], unless: proc { @rss_module.enabled? }
   before_action :set_posts, only: [:feed]
 
   def feed
@@ -12,6 +13,10 @@ class PostsController < InheritedResources::Base
   end
 
   private
+
+  def make_redirect
+    redirect_to root_path
+  end
 
   def set_posts
     @posts = Post.includes(:translations).allowed_for_rss.online

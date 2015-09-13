@@ -90,7 +90,7 @@ ActiveAdmin.register Slider do
           f.input :time_to_show,
                   hint: I18n.t('form.hint.slider.time_to_show')
           f.input :animate,
-                  collection: %w( fade horizontal vertical ),
+                  collection: %w( crossfade slide dissolve ),
                   include_blank: false,
                   hint: I18n.t('form.hint.slider.animate')
         end
@@ -100,7 +100,7 @@ ActiveAdmin.register Slider do
         f.inputs t('additional') do
           f.input :category_id,
                   as: :select,
-                  collection: Category.visible_header,
+                  collection: Category.visible_header_fr,
                   include_blank: false,
                   input_html: { class: 'chosen-select' }
           f.input :online

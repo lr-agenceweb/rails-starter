@@ -13,7 +13,7 @@ section.l-contact.one-page
     = render 'form'
 
   - else
-    .background_contact style="background-image: url(#{@background.bg_medium})" data-interchange="[#{@background.bg_medium}, (default)], [#{@background.bg_medium}, (medium)], [#{@background.bg_background}, (large)]"
+    = background.handle_background_tag 'background-contact' if @background_module.enabled? && !@background.nil?
       = render 'form'
 
 / Mapbox

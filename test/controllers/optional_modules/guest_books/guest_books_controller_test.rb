@@ -58,7 +58,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
-          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com',  content: 'Merci !', lang: 'ja' }
+          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: 'ja' }
         end
         assert_not assigns(:guest_book).valid?
       end
@@ -69,7 +69,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
-          post :create, locale: locale.to_s, guest_book:  { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s, nickname: 'spammer' }
+          post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s, nickname: 'spammer' }
         end
         assert_not assigns(:guest_book).valid?
         assert_redirected_to guest_books_path

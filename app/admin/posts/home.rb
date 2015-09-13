@@ -1,5 +1,5 @@
 ActiveAdmin.register Home do
-  menu parent: 'Articles'
+  menu parent: I18n.t('admin_menu.posts')
 
   permit_params :id,
                 :type,
@@ -20,6 +20,10 @@ ActiveAdmin.register Home do
 
   decorate_with HomeDecorator
   config.clear_sidebar_sections!
+
+  action_item :edit_heading_page do
+    edit_heading_page_aa
+  end
 
   batch_action :toggle_value do |ids|
     Post.find(ids).each do |post|

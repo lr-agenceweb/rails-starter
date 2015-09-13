@@ -3,6 +3,6 @@
             as: :select,
             collection: Role.allowed_roles_for_user_role(current_user),
             include_blank: false,
-            hint: I18n.t('form.hint.role_name'),
+            hint: raw(I18n.t('form.hint.role_name')),
             input_html: { class: 'chosen-select' },
             selected: f.object.new_record? ? '3' : f.object.role.id

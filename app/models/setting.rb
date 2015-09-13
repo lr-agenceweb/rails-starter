@@ -7,9 +7,11 @@
 #  title             :string(255)
 #  subtitle          :string(255)
 #  phone             :string(255)
+#  phone_secondary   :string(255)
 #  email             :string(255)
 #  show_breadcrumb   :boolean          default(FALSE)
 #  show_social       :boolean          default(TRUE)
+#  show_qrcode       :boolean          default(FALSE)
 #  should_validate   :boolean          default(TRUE)
 #  maintenance       :boolean          default(FALSE)
 #  twitter_username  :string(255)
@@ -28,6 +30,8 @@
 class Setting < ActiveRecord::Base
   include Attachable
 
+  after_validation :clean_paperclip_errors
+
   translates :title, :subtitle, fallbacks_for_empty_translations: true
   active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true
@@ -42,7 +46,9 @@ class Setting < ActiveRecord::Base
                       thumb: '32x32>'
                     }
 
-  validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}
+  validates_attachment :logo,
+                       content_type: { content_type: %r{\Aimage\/.*\Z} },
+                       size: { less_than: 2.megabyte }
 
   validates :name,  presence: true
   validates :email, presence: true, email_format: true
@@ -56,5 +62,9 @@ class Setting < ActiveRecord::Base
 
   def subtitle?
     !subtitle.blank?
+  end
+
+  def clean_paperclip_errors
+    errors.delete(:logo)
   end
 end

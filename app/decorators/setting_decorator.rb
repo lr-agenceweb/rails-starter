@@ -41,6 +41,10 @@ class SettingDecorator < ApplicationDecorator
     "#{setting.name} - #{copyright} <br> Copyright &copy; #{current_year} <br> #{about} #{admin_link}"
   end
 
+  def phone_w3c
+    model.phone.delete(' ').remove('(0)')
+  end
+
   #
   # == Modules
   #
@@ -52,6 +56,11 @@ class SettingDecorator < ApplicationDecorator
   def social
     color = model.show_social? ? 'blue' : 'red'
     status_tag_deco I18n.t("enabled.#{model.show_social}"), color
+  end
+
+  def qrcode
+    color = model.show_qrcode? ? 'blue' : 'red'
+    status_tag_deco I18n.t("enabled.#{model.show_qrcode}"), color
   end
 
   def maintenance

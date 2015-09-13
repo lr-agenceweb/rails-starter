@@ -31,12 +31,6 @@ mapbox_access_token: ~
 
 
 #
-# == Twitter
-#
-twitter_username: ~
-
-
-#
 # == Google and Bing
 #
 google_analytics_key: ~
@@ -57,6 +51,19 @@ mailer_password: ~
 # == Froala [ActiveAdmin wysiwyg editor ]
 #
 froala_key: ~
+
+
+#
+# == Capistrano [Deployer]
+#
+capistrano_repo_url: ~
+capistrano_deploy_user: ~
+capistrano_server_ip: ~
+
+staging:
+  capistrano_deploy_to: ~
+production:
+  capistrano_deploy_to: ~
 
 
 #

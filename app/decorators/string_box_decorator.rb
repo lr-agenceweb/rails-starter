@@ -9,7 +9,10 @@ class StringBoxDecorator < ApplicationDecorator
     model.content.html_safe if content?
   end
 
-  def title
-    title? ? model.title : '/'
+  #
+  # ActiveAdmin
+  #
+  def title_aa_show
+    title? ? model.title : model.key.titleize
   end
 end

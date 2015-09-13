@@ -57,18 +57,6 @@ module Imageable
     background.present? && background.image.exists?
   end
 
-  def bg_background
-    image.url(:background)
-  end
-
-  def bg_large
-    image.url(:large)
-  end
-
-  def bg_medium
-    image.url(:medium)
-  end
-
   #
   # == Slides
   #

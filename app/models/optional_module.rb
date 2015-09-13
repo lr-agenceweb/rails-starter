@@ -17,7 +17,7 @@ class OptionalModule < ActiveRecord::Base
   has_one :category, dependent: :destroy
 
   def self.list
-    %w( Newsletter GuestBook Search RSS Comment Blog Adult Slider Event Map Social Breadcrumb )
+    %w( Newsletter GuestBook Search RSS Comment Blog Adult Slider Event Map Social Breadcrumb Qrcode Background )
   end
 
   def self.by_name(name)

@@ -14,7 +14,7 @@ fr:
       online: Mettre en ligne ?
       picture: Image liée à l'article
       slide: Image liée au slider
-      background: Image d'arrière-plan liée à la page
+      background: Image d'arrière-plan
       model_name: Page à définir
       link: Lien du projet
       destroy: Supprimer cette image ?
@@ -34,7 +34,8 @@ fr:
       link: Définit le lien qui permet d'accéder au projet
       year: Année de réalisation du projet
       destroy: "Après avoir coché la case, ne pas oublier de valider le fomulaire pour que la suppression s'effectue"
-      role_name: Modification du rôle de l'utilisateur. Attention à ne pas faire n'importe quoi avec !!!
+      role_name: Modification du rôle de l'utilisateur. <br /> Le rôle "administrateur" permet à l'utilisateur d'accéder à une grande partie des contenus et de la configuration du site. <br /> Le rôle "abonné" restreint grandement les droits octroyés et l'utilisateur ne pourra modifier que les contenus qui lui sont propres et non la configuration du site. <br /> Ne modifiez ce champs que si vous savez ce que vous faîtes !
+
       optional_module: Choisir quel est le module optionel lié à cette catégorie
       heading: En-tête du contenu
 
@@ -70,6 +71,8 @@ fr:
         description: Description de la slide (une phrase maximum)
         online: Montrer cette image dans le slider ?
         destroy: Supprimer cette image du slider ?
+        size: Afin d'avoir un affichage optimale des slides sur le site, veuillez envoyer des images avec une largeur minimale de 2000px.
+
 
       location:
         geocode_address: Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n'est pas affichée)
@@ -77,6 +80,9 @@ fr:
       string_box:
         content: Contenu du message personnalisé à afficher sur le site
         title: Titre du message personnalisé à afficher sur le site
+
+    placeholder:
+      froala: Contenu de l'article ici :)
 
     errors:
       start_date: L'événement ne peut pas commencer après la fin présumée de celui-ci

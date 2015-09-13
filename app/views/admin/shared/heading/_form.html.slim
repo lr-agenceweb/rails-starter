@@ -2,4 +2,5 @@
   - item.translated_inputs 'Translated fields', switch_locale: true do |t|
     - t.input :content,
               hint: I18n.t('form.hint.heading'),
-              input_html: { class: 'froala small-height' }
+              input_html: { class: 'froala small-height' },
+              label: I18n.t('activerecord.attributes.heading.content')

@@ -37,7 +37,7 @@ module Admin
     end
 
     test 'should update slider if logged in' do
-      patch :update, id: @slider, slider: { time_to_show: 2000, cateogry: 5, animate: 'fade' }
+      patch :update, id: @slider, slider: { time_to_show: 2000, cateogry: 5, animate: 'crossfade' }
       assert_redirected_to admin_slider_path(assigns(:slider))
     end
 

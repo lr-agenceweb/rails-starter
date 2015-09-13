@@ -43,5 +43,5 @@ class Slider < ActiveRecord::Base
   validates :category, presence: true
   validates :animate,
             presence: true,
-            inclusion: %w( fade slide )
+            inclusion: %w( crossfade slide dissolve )
 end

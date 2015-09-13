@@ -1,5 +1,5 @@
 ActiveAdmin.register Picture do
-  menu parent: 'Assets'
+  menu parent: I18n.t('admin_menu.assets')
 
   permit_params :id,
                 :online,
