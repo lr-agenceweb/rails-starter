@@ -58,7 +58,7 @@ ActiveAdmin.register Menu do
 
         column do
           f.input :parent_id,
-                  collection: Menu.except_current_and_submenus(self),
+                  collection: Menu.except_current_and_submenus(f.object),
                   include_blank: true,
                   as: :select,
                   input_html: { class: 'chosen-select' },
