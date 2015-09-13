@@ -3,12 +3,8 @@
 # Table name: categories
 #
 #  id                 :integer          not null, primary key
-#  title              :string(255)
 #  name               :string(255)
 #  color              :string(255)
-#  show_in_menu       :boolean          default(TRUE)
-#  show_in_footer     :boolean          default(FALSE)
-#  position           :integer
 #  optional           :boolean          default(FALSE)
 #  optional_module_id :integer
 #  menu_id            :integer
@@ -26,10 +22,6 @@
 #
 class Category < ActiveRecord::Base
   include Imageable
-  include Positionable
-
-  translates :title
-  active_admin_translates :title
 
   attr_accessor :custom_background_color
 
@@ -48,9 +40,8 @@ class Category < ActiveRecord::Base
 
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :enabled, to: :optional_module, prefix: true, allow_nil: true
+  delegate :title, to: :menu, prefix: true, allow_nil: true
 
-  scope :visible_header, -> { where(show_in_menu: true) }
-  scope :visible_footer, -> { where(show_in_footer: true) }
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 
   def self.models_name
@@ -74,9 +65,9 @@ class Category < ActiveRecord::Base
     !slider.nil?
   end
 
-  def self.visible_header_fr
-    visible_header.collect { |c| [c.title, c.id] }
-  end
+  # def self.visible_header_fr
+  #   visible_header.collect { |c| [c.title, c.id] }
+  # end
 
   def self.models_name_str_collection
     Category.includes(:translations).collect { |c| [c.title, c.name] }

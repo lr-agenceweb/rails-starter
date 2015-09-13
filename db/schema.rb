@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913153457) do
+ActiveRecord::Schema.define(version: 20150913180007) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20150913153457) do
   create_table "menus", force: :cascade do |t|
     t.string   "title",          limit: 255
     t.boolean  "online",         default: true
+    t.boolean  "show_in_header", default: true
     t.boolean  "show_in_footer", default: false
     t.string   "ancestry",       limit: 255
     t.integer  "position",       limit: 4
@@ -57,25 +58,13 @@ ActiveRecord::Schema.define(version: 20150913153457) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "title",              limit: 255
     t.string   "name",               limit: 255
     t.string   "color",              limit: 255
-    t.boolean  "show_in_menu",       default: true
-    t.boolean  "show_in_footer",     default: false
-    t.integer  "position",           limit: 4
     t.boolean  "optional",           default: false
     t.integer  "optional_module_id", limit: 4, index: {name: "index_categories_on_optional_module_id", using: :btree}
     t.integer  "menu_id",            limit: 4, index: {name: "index_categories_on_menu_id", using: :btree}, foreign_key: {references: "menus", name: "fk_categories_menu_id", on_update: :restrict, on_delete: :restrict}
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-  end
-
-  create_table "category_translations", force: :cascade do |t|
-    t.integer  "category_id", limit: 4,   null: false, index: {name: "index_category_translations_on_category_id", using: :btree}
-    t.string   "locale",      limit: 255, null: false, index: {name: "index_category_translations_on_locale", using: :btree}
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "title",       limit: 255
   end
 
   create_table "comments", force: :cascade do |t|

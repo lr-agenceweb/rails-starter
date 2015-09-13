@@ -5,14 +5,9 @@ ActiveAdmin.register Category do
   permit_params :id,
                 :name,
                 :color,
-                :show_in_menu,
-                :show_in_footer,
                 :optional,
                 :optional_module_id,
                 :menu_id,
-                translations_attributes: [
-                  :id, :locale, :title
-                ],
                 referencement_attributes: [
                   :id,
                   translations_attributes: [
