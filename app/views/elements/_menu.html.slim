@@ -1,7 +1,17 @@
-nav.clearfix.l-nav-container aria-label='navigation' itemscope='' itemtype='http://schema.org/SiteNavigationElement'
-  ul class="clearfix sub-nav #{even_or_odd_menu_item(@menu_elements_header)}"
-    - @menu_elements_header.each do |element|
-      li class="l-nav-item #{set_active_class(element.name.tableize)}"
-        = link_to element.title, element.menu_link(element.name), class: 'l-nav-item-link', itemprop: 'url'
+/ nav.clearfix.l-nav-container aria-label='navigation' itemscope='' itemtype='http://schema.org/SiteNavigationElement'
+/   ul class="clearfix sub-nav #{even_or_odd_menu_item(@menu_elements_header)}"
+/     - @menu_elements_header.each do |element|
+/       li class="l-nav-item #{set_active_class(element.name.tableize)}"
+/         = link_to element.title, element.menu_link(element.name), class: 'l-nav-item-link', itemprop: 'url'
 
-  = link_to 'Menu', '#', id: 'pull', class: 'l-nav-item-link header__icon'
+/   = link_to 'Menu', '#', id: 'pull', class: 'l-nav-item-link header__icon'
+
+
+- Menu.online.not_submenus.each do |menu|
+  ul
+    li
+      = menu.title
+      - if menu.has_children?
+        ul
+          - menu.children.online.each do |child|
+            li = child.title

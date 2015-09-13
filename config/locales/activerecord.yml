@@ -108,6 +108,9 @@ fr:
       category:
         one: Page
         other: Pages
+      menu:
+        one: Menu
+        other: Menus
       string_box:
         one: Contenu personnalisé
         other: Contenus personalisés
@@ -208,7 +211,8 @@ fr:
         position: Position
         custom_background_color: Couleur de fond de page personnalisée
         color: Couleur
-        color: Couleur
+      menu:
+        ancestry: Menu parent
       referencement:
         description: Description
         keywords: Mots-clés

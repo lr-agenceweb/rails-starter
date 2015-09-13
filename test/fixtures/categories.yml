@@ -11,11 +11,13 @@
 #  position           :integer
 #  optional           :boolean          default(FALSE)
 #  optional_module_id :integer
+#  menu_id            :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
 # Indexes
 #
+#  index_categories_on_menu_id             (menu_id)
 #  index_categories_on_optional_module_id  (optional_module_id)
 #
 

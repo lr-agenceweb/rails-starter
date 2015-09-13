@@ -11,6 +11,8 @@ gem 'rails', '4.2.4'
 gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
+gem 'schema_plus'
+gem 'ancestry'
 
 #
 # == Administration
