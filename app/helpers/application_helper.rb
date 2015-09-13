@@ -7,7 +7,7 @@ module ApplicationHelper
   end
 
   def title_for_category(category)
-    link = link_to category.title, category.menu_link(category.name), class: 'l-page-title-link'
+    link = link_to category.menu_title, category.menu_link(category.name), class: 'l-page-title-link'
     content_tag(:h2, link, class: 'l-page-title', id: category.name.downcase)
   end
 

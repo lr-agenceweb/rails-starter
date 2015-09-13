@@ -18,6 +18,12 @@
     padding-bottom: 180px
     margin-top: 12px
 
+// Mapbox popup
+.logo-link
+  img
+    display: block
+    margin: 0 auto
+
 .header-title-link
   display: block
   color: #414042
@@ -43,9 +49,9 @@
     width: $logo_width
     letter-spacing: normal
 
-// @media screen and (max-width: $menu-breakpoint-two)
-@media #{$small-only}
-  .logo-container
-    position: static
-    margin: 0 auto
-    @include scale(.7)
+@if variable-exists(small-only)
+  @media #{$small-only}
+    .logo-container
+      position: static
+      margin: 0 auto
+      @include scale(.7)

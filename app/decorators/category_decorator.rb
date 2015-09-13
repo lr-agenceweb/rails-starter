@@ -68,6 +68,6 @@ class CategoryDecorator < ApplicationDecorator
   private
 
   def aa_page_name
-    "#{I18n.t('activerecord.models.category.one').downcase} \"#{resource.decorate.title}\""
+    "#{I18n.t('activerecord.models.category.one').downcase} \"#{resource.decorate.menu_title}\""
   end
 end
