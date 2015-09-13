@@ -75,21 +75,7 @@ ActiveAdmin.register Category do
 
     columns do
       column do
-        # f.inputs t('activerecord.models.category.one') do
-        #   f.translated_inputs 'Translated fields', switch_locale: true do |t|
-        #     t.input :title, hint: 'Titre du menu'
-        #   end
-        # end
-
         f.inputs t('general') do
-        #   f.input :name,
-        #           collection: Category.models_name_str_collection,
-        #           include_blank: false,
-        #           input_html: { class: 'chosen-select' }
-
-        #   f.input :show_in_menu
-        #   f.input :show_in_footer
-
           f.input :menu_id,
                   as: :select,
                   collection: Menu.online,

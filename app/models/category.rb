@@ -34,6 +34,7 @@ class Category < ActiveRecord::Base
   attr_accessor :custom_background_color
 
   belongs_to :optional_module
+  belongs_to :menu
   has_one :slider, dependent: :destroy
 
   has_one :heading, as: :headingable, dependent: :destroy

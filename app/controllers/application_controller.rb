@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   before_action :set_map, if: proc { @map_module.enabled? }
   before_action :set_froala_key
 
-  decorates_assigned :setting, :category, :slider, :map, :background
+  decorates_assigned :setting, :category, :slider, :map, :background, :menu
 
   private
 
