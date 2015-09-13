@@ -52,7 +52,7 @@ ActiveAdmin.register Menu do
           f.translated_inputs 'Translated fields', switch_locale: true do |t|
             t.input :title,
                     label: I18n.t('activerecord.attributes.post.title'),
-                    hint: I18n.t('form.hint.title')
+                    hint: I18n.t('form.hint.menu.title')
           end
         end
 
@@ -63,7 +63,7 @@ ActiveAdmin.register Menu do
                     include_blank: true,
                     as: :select,
                     input_html: { class: 'chosen-select' },
-                    hint: 'Menu Parent'
+                    hint: I18n.t('form.hint.menu.parent_id')
 
             f.input :show_in_footer
             f.input :online
