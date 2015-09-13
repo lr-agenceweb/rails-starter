@@ -152,7 +152,7 @@ show_in_header = [
   true,
   true,
   true,
-  false,
+  true,
   true
 ]
 show_in_footer = [
@@ -184,7 +184,7 @@ title_en.each_with_index do |element, index|
   @menu_search = menu.id if element == 'Search'
   @menu_guest_book = menu.id if element == 'GuestBook'
   @menu_blog = menu.id if element == 'Blog'
-  @menu_event = menu.id if element == 'Event'
+  @menu_event = menu.id if element == 'Events'
   @menu_about = menu.id if element == 'About'
   @menu_contact = menu.id if element == 'Contact'
 end
