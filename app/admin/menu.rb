@@ -26,14 +26,15 @@ ActiveAdmin.register Menu do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
-  # index do
-  #   selectable_column
-  #   column :name_deco
-  #   column :status
-  #   column :description
+  index do
+    selectable_column
+    column :title
+    column :status
+    column :show_in_footer_d
+    column :children_list
 
-  #   actions
-  # end
+    actions
+  end
 
   show title: :title_aa_show do
     attributes_table do

@@ -9,12 +9,12 @@ class MenuDecorator < ApplicationDecorator
   # ActiveAdmin
   #
   def title_aa_show
-    I18n.t('menu.title_aa_show', menu_item: resource.title)
+    I18n.t('menu.title_aa_show', menu_item: model.title)
   end
 
   def children_list
-    if resource.has_children?
-      resource.children.map(&:title).join(', ')
+    if model.has_children?
+      model.children.map(&:title).join(', ')
     else
       I18n.t('menu.no_children')
     end

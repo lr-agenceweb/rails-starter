@@ -214,6 +214,7 @@ fr:
       menu:
         parent_id: Menu parent
         children_list: Sous-menu(s)
+        online: En ligne
         status: État
         show_in_footer: Dans le footer
         show_in_footer_d: Dans le footer
