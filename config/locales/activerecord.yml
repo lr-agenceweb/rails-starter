@@ -212,7 +212,7 @@ fr:
         custom_background_color: Couleur de fond de page personnalisée
         color: Couleur
       menu:
-        ancestry: Menu parent
+        parent_id: Menu parent
       referencement:
         description: Description
         keywords: Mots-clés

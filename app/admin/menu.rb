@@ -14,6 +14,10 @@ ActiveAdmin.register Menu do
   decorate_with MenuDecorator
   config.clear_sidebar_sections!
 
+  action_item :new_menu_item, only: [:edit, :show] do
+    link_to I18n.t('active_admin.action_item.new_menu_item'), new_admin_menu_path if can? :create, Menu
+  end
+
   batch_action :toggle_value do |ids|
     Menu.find(ids).each do |menu|
       toggle_value = menu.online? ? false : true
