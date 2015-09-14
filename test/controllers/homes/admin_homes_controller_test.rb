@@ -15,22 +15,17 @@ module Admin
     #
     # == Routes / Templates / Responses
     #
-    test 'should redirect to users/sign_in if not logged in' do
-      sign_out @administrator
-      assert_crud_actions(@home, new_user_session_path)
-    end
-
-    test 'should show index page if logged in' do
+    test 'should get index page if logged in' do
       get :index
       assert_response :success
     end
 
-    test 'should show show page if logged in' do
+    test 'should get show page if logged in' do
       get :show, id: @home
       assert_response :success
     end
 
-    test 'should show edit page if logged in' do
+    test 'should get edit page if logged in' do
       get :edit, id: @home
       assert_response :success
     end
@@ -77,11 +72,16 @@ module Admin
     end
 
     #
-    # == Subscriber
+    # == Crud actions
     #
-    test 'should redirect to dashboard page if trying to access blog as subscriber' do
+    test 'should redirect to users/sign_in if not logged in' do
+      sign_out @administrator
+      assert_crud_actions(@home, new_user_session_path, model_name)
+    end
+
+    test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
-      assert_crud_actions(@home, admin_dashboard_path)
+      assert_crud_actions(@home, admin_dashboard_path, model_name)
     end
 
     private

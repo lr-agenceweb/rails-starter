@@ -15,22 +15,17 @@ module Admin
     #
     # == Routes / Templates / Responses
     #
-    test 'should redirect to users/sign_in if not logged in' do
-      sign_out @administrator
-      assert_crud_actions(@slide, new_user_session_path)
-    end
-
-    test 'should show index page if logged in' do
+    test 'should get index page if logged in' do
       get :index
       assert_response :success
     end
 
-    test 'should visit show page if logged in' do
+    test 'should get show page if logged in' do
       get :show, id: @slide
       assert_response :success
     end
 
-    test 'should show edit page if logged in' do
+    test 'should get edit page if logged in' do
       get :edit, id: @slide
       assert_response :success
     end
@@ -107,11 +102,16 @@ module Admin
     end
 
     #
-    # == Subscriber
+    # == Crud actions
     #
-    test 'should redirect to dashboard page if trying to access slider as subscriber' do
+    test 'should redirect to users/sign_in if not logged in' do
+      sign_out @administrator
+      assert_crud_actions(@slide, new_user_session_path, model_name)
+    end
+
+    test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
-      assert_crud_actions(@slide, admin_dashboard_path)
+      assert_crud_actions(@slide, admin_dashboard_path, model_name)
     end
 
     #
@@ -120,11 +120,11 @@ module Admin
     test 'should not access page if slider module is disabled' do
       disable_optional_module @super_administrator, @slider_module, 'Slider' # in test_helper.rb
       sign_in @super_administrator
-      assert_crud_actions(@slide, admin_dashboard_path)
+      assert_crud_actions(@slide, admin_dashboard_path, model_name)
       sign_in @administrator
-      assert_crud_actions(@slide, admin_dashboard_path)
+      assert_crud_actions(@slide, admin_dashboard_path, model_name)
       sign_in @subscriber
-      assert_crud_actions(@slide, admin_dashboard_path)
+      assert_crud_actions(@slide, admin_dashboard_path, model_name)
     end
 
     private
