@@ -4,6 +4,7 @@ ActiveAdmin.register Menu do
 
   permit_params :id,
                 :online,
+                :show_in_header,
                 :show_in_footer,
                 :ancestry,
                 :parent_id,
@@ -43,6 +44,7 @@ ActiveAdmin.register Menu do
     attributes_table do
       row :title
       row :status
+      row :show_in_header_d
       row :show_in_footer_d
       row :children_list
     end
@@ -70,6 +72,7 @@ ActiveAdmin.register Menu do
                     input_html: { class: 'chosen-select' },
                     hint: I18n.t('form.hint.menu.parent_id')
 
+            f.input :show_in_header
             f.input :show_in_footer
             f.input :online
           end
@@ -81,9 +84,9 @@ ActiveAdmin.register Menu do
     f.actions
   end
 
-  #
-  # == Controller
-  #
-  controller do
-  end
+  # #
+  # # == Controller
+  # #
+  # controller do
+  # end
 end

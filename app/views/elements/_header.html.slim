@@ -13,7 +13,7 @@ header.l-header-site.hide-for-print
             = render 'searches/form' if @search_module.enabled?
 
           .small-12.columns
-            = render 'elements/menu/no_dropdown'
+            = render 'elements/menu/dropdown'
 
 
     = breadcrumbs pretext: t('breadcrumb.here'), separator: '', style: :ol, semantic: true if @breadcrumb_module.enabled? && setting.show_breadcrumb?

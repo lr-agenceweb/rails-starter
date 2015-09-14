@@ -1,6 +1,6 @@
 ActiveAdmin.register Category do
   menu parent: I18n.t('admin_menu.config')
-  includes :background, :translations, :slider, :optional_module
+  includes :background, :slider, :optional_module
 
   permit_params :id,
                 :name,

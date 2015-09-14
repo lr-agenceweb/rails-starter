@@ -13,12 +13,38 @@
 #  updated_at     :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  show_in_header: true
+  show_in_footer: false
+  online: true
 
-one:
-  title: MyString
-  online: false
+home:
+  <<: *DEFAULTS
+  title: Accueil
 
-two:
-  title: MyString
-  online: false
+about:
+  <<: *DEFAULTS
+  title: A propos
+
+contact:
+  <<: *DEFAULTS
+  title: Contact
+
+search:
+  <<: *DEFAULTS
+  title: Rechercher
+  show_in_header: false
+
+guest_book:
+  <<: *DEFAULTS
+  title: Guest Book
+
+blog:
+  <<: *DEFAULTS
+  title: Blog
+
+event:
+  <<: *DEFAULTS
+  title: Event

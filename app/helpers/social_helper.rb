@@ -79,7 +79,7 @@ module SocialHelper
     element = params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
 
     t = element.try(:menu_title)
-    t = element.title if t = nil
+    t = element.title if t == nil
     title_seo = title_seo_structure(t)
 
     awesome_share_buttons(title_seo,

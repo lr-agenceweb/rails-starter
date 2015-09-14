@@ -1,7 +1,7 @@
 require 'test_helper'
 
+#
+# == Menu model test
+#
 class MenuTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 end

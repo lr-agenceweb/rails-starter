@@ -20,12 +20,9 @@
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
-  show_in_menu: true
-  show_in_footer: false
 
 home:
   <<: *DEFAULTS
-  title: Accueil
   name: Home
   optional: false
   optional_module: null
@@ -34,8 +31,6 @@ home:
 about:
   <<: *DEFAULTS
   name: About
-  show_in_menu: false
-  show_in_footer: true
   optional: false
   optional_module: null
 
@@ -47,30 +42,25 @@ contact:
 
 search:
   <<: *DEFAULTS
-  title: Rechercher
   name: Search
-  show_in_menu: false
   optional: true
   optional_module: search
   color: '#F00'
 
 guest_book:
   <<: *DEFAULTS
-  title: Guest Book
   name: GuestBook
   optional: true
   optional_module: guest_book
 
 blog:
   <<: *DEFAULTS
-  title: Blog
   name: Blog
   optional: true
   optional_module: blog
 
 event:
   <<: *DEFAULTS
-  title: Event
   name: Event
   optional: true
   optional_module: event
