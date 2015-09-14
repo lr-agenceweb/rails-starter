@@ -128,6 +128,7 @@ end
 # == Menu
 #
 puts 'Creating Menu elements'
+models_name = [:Home, :Search, :GuestBook, :Blog, :Event, :About, :Contact]
 title_en = [
   'Home',
   'Search',
@@ -230,7 +231,8 @@ keywords_fr = [
   'contact'
 ]
 
-Category.models_name_str.each_with_index do |element, index|
+models_name.each_with_index do |element, index|
+  element = element.to_s
   optional_module_id = nil
   optional_module_id = @optional_module_search.id if element == 'Search'
   optional_module_id = @optional_module_guest_book.id if element == 'GuestBook'

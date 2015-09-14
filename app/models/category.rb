@@ -7,7 +7,7 @@
 #  color              :string(255)
 #  optional           :boolean          default(FALSE)
 #  optional_module_id :integer
-#  menu_id            :integer
+#  menu_id           :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
@@ -44,14 +44,6 @@ class Category < ActiveRecord::Base
 
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 
-  def self.models_name
-    [:Home, :Search, :GuestBook, :Blog, :Event, :About, :Contact]
-  end
-
-  def self.models_name_str
-    %w( Home Search GuestBook Blog Event About Contact )
-  end
-
   def self.title_by_category(category)
     Category.find_by(name: category).menu_title
   end
@@ -63,10 +55,6 @@ class Category < ActiveRecord::Base
 
   def slider?
     !slider.nil?
-  end
-
-  def self.models_name_str_collection
-    Category.includes(:translations).collect { |c| [c.title, c.name] }
   end
 
   def self.except_already_background(myself = nil)
