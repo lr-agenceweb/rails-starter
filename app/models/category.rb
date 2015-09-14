@@ -53,21 +53,17 @@ class Category < ActiveRecord::Base
   end
 
   def self.title_by_category(category)
-    Category.find_by(name: category).title
+    Category.find_by(name: category).menu_title
   end
 
   def self.handle_pages_for_background(current_background)
     categories = Category.except_already_background(current_background.attachable)
-    categories.collect { |c| [c.title, c.id] }
+    categories.collect { |c| [c.menu_title, c.id] }
   end
 
   def slider?
     !slider.nil?
   end
-
-  # def self.visible_header_fr
-  #   visible_header.collect { |c| [c.title, c.id] }
-  # end
 
   def self.models_name_str_collection
     Category.includes(:translations).collect { |c| [c.title, c.name] }
@@ -75,7 +71,7 @@ class Category < ActiveRecord::Base
 
   def self.except_already_background(myself = nil)
     categories = []
-    Category.includes(:translations, :background).with_allowed_module.each do |category|
+    Category.includes(:background).with_allowed_module.each do |category|
       categories << category if category.background.nil? || category == myself
     end
     categories

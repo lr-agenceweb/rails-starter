@@ -53,7 +53,7 @@ ActiveAdmin.register_page 'Dashboard' do
       columns do
         column do |panel|
           render 'admin/dashboard/settings', panel: panel, query: Setting.first
-          render 'admin/dashboard/categories', panel: panel, query: Category.includes(:background, :translations).by_position
+          render 'admin/dashboard/categories', panel: panel, query: Category.includes(:background, :menu)
         end # column
 
         if OptionalModule.find_by(name: 'Map').enabled?

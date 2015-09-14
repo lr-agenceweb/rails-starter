@@ -41,6 +41,10 @@ class Menu < ActiveRecord::Base
     menus
   end
 
+  def self.visible_header_title
+    visible_header.collect { |c| [c.title, c.id] }
+  end
+
   # validates :ancestry,
   #           presence: false,
   #           allow_blank: true,

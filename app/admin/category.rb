@@ -27,11 +27,6 @@ ActiveAdmin.register Category do
   decorate_with CategoryDecorator
   config.clear_sidebar_sections!
 
-  # Sortable
-  sortable
-  config.sort_order = 'position_asc'
-  config.paginate   = false
-
   index do
     sortable_handle_column
     column :background_deco if background_module.enabled?
@@ -42,7 +37,6 @@ ActiveAdmin.register Category do
     column :in_footer
     column :module if current_user.super_administrator?
 
-    translation_status
     actions
   end
 
