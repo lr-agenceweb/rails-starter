@@ -1,5 +1,5 @@
 .l-nav-item .l-nav-item-link
-  @include link-colors($menu-font-color)
+  @include link-colors($menu-font-color, $link-hover-color)
   text-decoration: none
 
 .l-nav-item-active .l-nav-item-link
@@ -115,6 +115,7 @@
         text-align: center
         padding: 8px 0
         width: 100%
+        @include link-colors($menu-font-color, $menu-font-color)
 
       &:after
         content: none !important
