@@ -72,9 +72,12 @@ ActiveAdmin.register Menu do
                     input_html: { class: 'chosen-select' },
                     hint: I18n.t('form.hint.menu.parent_id')
 
-            f.input :show_in_header
-            f.input :show_in_footer
-            f.input :online
+            f.input :show_in_header,
+                    hint: I18n.t('form.hint.menu.show_in_header')
+            f.input :show_in_footer,
+                    hint: I18n.t('form.hint.menu.show_in_header')
+            f.input :online,
+                    hint: I18n.t('form.hint.menu.online')
           end
         end
       end
@@ -83,10 +86,4 @@ ActiveAdmin.register Menu do
 
     f.actions
   end
-
-  # #
-  # # == Controller
-  # #
-  # controller do
-  # end
 end
