@@ -23,7 +23,7 @@ class Menu < ActiveRecord::Base
   active_admin_translates :title
 
   has_ancestry
-  has_one :category
+  has_one :category, dependent: :destroy
   has_one :optional_module, through: :category
 
   delegate :name, to: :category, prefix: true, allow_nil: true
