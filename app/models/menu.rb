@@ -24,8 +24,10 @@ class Menu < ActiveRecord::Base
 
   has_ancestry
   has_one :category
+  has_one :optional_module, through: :category
 
   delegate :name, to: :category, prefix: true, allow_nil: true
+  delegate :optional, to: :category, prefix: true, allow_nil: true
 
   scope :only_parents, -> { where(ancestry: nil) }
   scope :with_page, -> { joins(:category).where.not('categories.menu_id': nil) }
