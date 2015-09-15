@@ -71,3 +71,8 @@ event:
   optional: true
   optional_module: event
   menu: event
+
+test_online:
+  <<: *DEFAULTS
+  name: Test
+  # not linked to a menu item

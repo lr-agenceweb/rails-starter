@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_menu_elements
-    menu_elements = Menu.includes(:translations, :category).online.only_parents.with_page
+    menu_elements = Menu.includes(:translations, :category).online.only_parents.with_page.with_allowed_modules
     @menu_elements_header ||= MenuDecorator.decorate_collection(menu_elements.visible_header.by_position)
     @menu_elements_footer ||= MenuDecorator.decorate_collection(menu_elements.visible_footer.by_position)
     @controller_name = controller_name.classify

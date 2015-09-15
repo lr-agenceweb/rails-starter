@@ -34,6 +34,7 @@ class Menu < ActiveRecord::Base
   scope :visible_header, -> { where(show_in_header: true) }
   scope :visible_footer, -> { where(show_in_footer: true) }
   scope :online, -> { where(online: true) }
+  scope :with_allowed_modules, -> { eager_load(:category, :optional_module).where('categories.optional=? OR (categories.optional=? AND optional_modules.enabled=?)', false, true, true) }
 
   def self.except_current_and_submenus(myself = nil)
     menus = []
