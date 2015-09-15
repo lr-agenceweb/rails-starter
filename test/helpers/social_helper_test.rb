@@ -17,20 +17,20 @@ class SocialHelperTest < ActionView::TestCase
     seo_tag_index(@category.decorate)
 
     # Basics
-    assert_equal meta_tags[:title], 'Accueil'
-    assert_equal meta_tags[:description], 'Description pour catégorie home'
-    assert_equal meta_tags[:keywords], 'Mots-clés, pour, catégorie, home'
+    assert_equal 'Home', meta_tags[:title]
+    assert_equal 'Description pour catégorie home', meta_tags[:description]
+    assert_equal 'Mots-clés, pour, catégorie, home', meta_tags[:keywords]
 
     # Facebook
-    assert_equal meta_tags[:og][:title], 'Accueil | Rails Starter, Démarre rapidement'
-    assert_equal meta_tags[:og][:description], 'Description pour catégorie home'
-    assert_equal meta_tags[:og][:url], root_url
+    assert_equal 'Home | Rails Starter, Démarre rapidement', meta_tags[:og][:title]
+    assert_equal 'Description pour catégorie home', meta_tags[:og][:description]
+    assert_equal root_url, meta_tags[:og][:url]
     assert_nil meta_tags[:og][:image]
 
     # Twitter
-    assert_equal meta_tags[:twitter][:title], 'Accueil | Rails Starter, Démarre rapidement'
-    assert_equal meta_tags[:twitter][:description], 'Description pour catégorie home'
-    assert_equal meta_tags[:twitter][:url], root_url
+    assert_equal 'Home | Rails Starter, Démarre rapidement', meta_tags[:twitter][:title]
+    assert_equal 'Description pour catégorie home', meta_tags[:twitter][:description]
+    assert_equal root_url, meta_tags[:twitter][:url]
     assert_nil meta_tags[:twitter][:image]
   end
 
@@ -38,20 +38,20 @@ class SocialHelperTest < ActionView::TestCase
     seo_tag_show(@about.decorate)
 
     # Basics
-    assert_equal meta_tags[:title], 'Développement et Hébergement'
-    assert_equal meta_tags[:description], 'Description pour article À Propos'
-    assert_equal meta_tags[:keywords], 'Mots-clés, pour, article, à propos'
+    assert_equal 'Développement et Hébergement', meta_tags[:title]
+    assert_equal 'Description pour article À Propos', meta_tags[:description]
+    assert_equal 'Mots-clés, pour, article, à propos', meta_tags[:keywords]
 
     # Facebook
-    assert_equal meta_tags[:og][:title], 'Développement et Hébergement | Rails Starter, Démarre rapidement'
-    assert_equal meta_tags[:og][:description], 'Description pour article À Propos'
-    assert_equal meta_tags[:og][:url], about_url(@about)
+    assert_equal 'Développement et Hébergement | Rails Starter, Démarre rapidement', meta_tags[:og][:title]
+    assert_equal 'Description pour article À Propos', meta_tags[:og][:description]
+    assert_equal about_url(@about), meta_tags[:og][:url]
     assert_nil meta_tags[:og][:image]
 
     # Twitter
-    assert_equal meta_tags[:twitter][:title], 'Développement et Hébergement | Rails Starter, Démarre rapidement'
-    assert_equal meta_tags[:twitter][:description], 'Description pour article À Propos'
-    assert_equal meta_tags[:twitter][:url], about_url(@about)
+    assert_equal 'Développement et Hébergement | Rails Starter, Démarre rapidement', meta_tags[:twitter][:title]
+    assert_equal 'Description pour article À Propos', meta_tags[:twitter][:description]
+    assert_equal about_url(@about), meta_tags[:twitter][:url]
     assert_nil meta_tags[:twitter][:image]
   end
 
