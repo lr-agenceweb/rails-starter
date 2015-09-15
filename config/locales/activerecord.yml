@@ -201,12 +201,14 @@ fr:
         status: Rôle
       category:
         title: Titre
+        title_d: Titre
         name: Nom de la catégorie
         background: Arrière-plan
         background_deco: Arrière-plan
         position: Position
         custom_background_color: Couleur de fond de page personnalisée
         color: Couleur
+        div_color: Couleur de fond de site
       menu:
         parent_id: Menu parent
         children_list: Sous-menu(s)

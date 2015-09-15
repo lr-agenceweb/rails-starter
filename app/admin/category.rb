@@ -1,6 +1,6 @@
 ActiveAdmin.register Category do
   menu parent: I18n.t('admin_menu.config')
-  includes :background, :slider, :optional_module
+  includes :background, :slider, :optional_module, :menu, menu: [:translations]
 
   permit_params :id,
                 :name,
@@ -26,15 +26,14 @@ ActiveAdmin.register Category do
 
   decorate_with CategoryDecorator
   config.clear_sidebar_sections!
+  config.sort_order = 'menus.position asc'
 
   index do
-    sortable_handle_column
+    selectable_column
     column :background_deco if background_module.enabled?
-    column :title
+    column :title_d
     column :div_color
     column :slider if slider_module.enabled?
-    column :in_menu
-    column :in_footer
     column :module if current_user.super_administrator?
 
     actions
@@ -47,8 +46,6 @@ ActiveAdmin.register Category do
           row :background_deco if background_module.enabled?
           row :div_color
           row :slider if slider_module.enabled?
-          row :in_menu
-          row :in_footer
           row :module if current_user.super_administrator?
         end
       end
