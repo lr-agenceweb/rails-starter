@@ -44,4 +44,11 @@ ActiveAdmin.register GuestBook do
       row :created_at
     end
   end
+
+  #
+  # == Controller
+  #
+  controller do
+    include Skippable
+  end
 end

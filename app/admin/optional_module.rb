@@ -53,6 +53,8 @@ ActiveAdmin.register OptionalModule do
   # == Controller
   #
   controller do
+    include Skippable
+
     def update
       delete_adult_cookie
       super

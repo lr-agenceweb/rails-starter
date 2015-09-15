@@ -77,6 +77,8 @@ ActiveAdmin.register Slide do
   # == Controller
   #
   controller do
+    include Skippable
+
     def edit
       @page_title = resource.decorate.title_aa_edit
     end

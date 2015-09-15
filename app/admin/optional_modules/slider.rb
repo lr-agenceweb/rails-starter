@@ -117,6 +117,8 @@ ActiveAdmin.register Slider do
   # == Controller
   #
   controller do
+    include Skippable
+
     def edit
       @page_title = "#{t('active_admin.edit')} #{I18n.t('activerecord.models.slider.one')} page #{resource.decorate.page}"
     end

@@ -43,6 +43,7 @@ ActiveAdmin.register Newsletter, as: 'Letter' do
   # == Controller
   #
   controller do
+    include Skippable
     include NewsletterHelper
 
     before_action :set_newsletter, only: [:send_newsletter, :send_newsletter_test]
