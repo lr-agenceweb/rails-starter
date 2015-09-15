@@ -32,7 +32,7 @@ module Admin
     end
 
     test 'should update category if logged in' do
-      patch :update, id: @category, category: {}
+      patch :update, id: @category, category: { menu_id: @category.menu_id }
       assert_redirected_to admin_category_path(@category)
     end
 
@@ -70,7 +70,7 @@ module Admin
     #
     # == Menu
     #
-    test 'should not delete menu param if administrator' do
+    test 'should not update menu param if administrator' do
       patch :update, id: @category, category: { menu_id: 8 }
       assert_equal @category.menu_id, assigns(:category).menu_id
     end
