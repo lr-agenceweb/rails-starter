@@ -81,6 +81,9 @@ fr:
         show_in_footer: Montrer cet élément dans le menu du pied de page ?
         online: Activer cet élément ? Si désactivé, il ne sera alors visible ni dans le menu principal ni dans le pied de page.
 
+      category:
+        menu_id: Élément de menu lié à cette page
+
       location:
         geocode_address: Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n'est pas affichée)
 

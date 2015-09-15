@@ -54,17 +54,25 @@ module Admin
       assert_redirected_to admin_dashboard_path
     end
 
-    test 'should delete optional_modules params if administrator' do
+    test 'should not delete optional_modules params if administrator' do
       patch :update, id: @category_search, category: { optional: false, optional_module_id: @category_blog.id }
       assert assigns(:category).optional
       assert_equal @category_search.id, assigns(:category).optional_module_id
     end
 
-    test 'should update optional_modules params if administrator' do
+    test 'should not update optional_modules params if administrator' do
       sign_in @super_administrator
       patch :update, id: @category_search, category: { optional: false, optional_module_id: @category_blog.id }
       assert_not assigns(:category).optional
       assert_equal @category_blog.id, assigns(:category).optional_module_id
+    end
+
+    #
+    # == Menu
+    #
+    test 'should not delete menu param if administrator' do
+      patch :update, id: @category, category: { menu_id: 8 }
+      assert_equal @category.menu_id, assigns(:category).menu_id
     end
 
     #

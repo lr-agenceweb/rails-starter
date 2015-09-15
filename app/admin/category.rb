@@ -66,9 +66,13 @@ ActiveAdmin.register Category do
         f.inputs t('general') do
           f.input :menu_id,
                   as: :select,
-                  collection: nested_dropdown(Menu.includes(:translations).online.arrange),
+                  collection: nested_dropdown(Menu.self_or_available(f.object)),
                   include_blank: false,
-                  input_html: { class: 'chosen-select' }
+                  input_html: {
+                    class: 'chosen-select',
+                    disabled: current_user.super_administrator? ? false : :disbaled
+                  },
+                  hint: I18n.t('form.hint.category.menu_id')
 
           f.input :custom_background_color,
                   as: :boolean,
@@ -109,6 +113,7 @@ ActiveAdmin.register Category do
       unless current_user.super_administrator?
         params[:category].delete :optional_module_id
         params[:category].delete :optional
+        params[:category].delete :menu_id
       end
 
       if params[:category][:custom_background_color] == '0'

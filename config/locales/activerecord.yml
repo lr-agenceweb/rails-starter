@@ -150,6 +150,13 @@ fr:
       social:
         one: Réseau Social
         other: Réseaux Sociaux
+      search:
+        one: Recherche
+        other: Recherches
+      contact:
+        one: Contact
+        other: Contacts
+
 
     attributes:
       post:

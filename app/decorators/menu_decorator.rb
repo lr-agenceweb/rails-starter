@@ -20,12 +20,19 @@ class MenuDecorator < ApplicationDecorator
     end
   end
 
+  def show_in_header_d
+    color = show_in_header? ? 'green' : 'red'
+    status_tag_deco I18n.t("enabled.#{show_in_header}"), color
+  end
+
   def show_in_footer_d
     color = show_in_footer? ? 'green' : 'red'
     status_tag_deco I18n.t("enabled.#{show_in_footer}"), color
   end
 
   def title_sortable_tree
-    "#{model.title} #{status}"
+    page = ", lié à aucune page"
+    page = ", lié à la page #{I18n.t('activerecord.models.'+category_name.singularize.underscore.downcase+'.one')}" unless category_name.nil?
+    "#{model.title} #{status} #{page}"
   end
 end

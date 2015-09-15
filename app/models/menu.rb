@@ -23,7 +23,7 @@ class Menu < ActiveRecord::Base
   active_admin_translates :title
 
   has_ancestry
-  has_one :category, dependent: :destroy
+  has_one :category, dependent: :nullify
   has_one :optional_module, through: :category
 
   delegate :name, to: :category, prefix: true, allow_nil: true
@@ -45,6 +45,14 @@ class Menu < ActiveRecord::Base
 
   def self.visible_header_title
     visible_header.collect { |c| [c.title, c.id] }
+  end
+
+  def self.self_or_available(myself = nil)
+    menu = []
+    Menu.includes(:translations).each do |item|
+      menu << item if item.category.nil? || item.try(:category) == myself
+    end
+    menu
   end
 
   # validates :ancestry,
