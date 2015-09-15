@@ -14,7 +14,7 @@
 #
 
 #
-# == Menu Model (parent)
+# == Menu Model
 #
 class Menu < ActiveRecord::Base
   include Positionable
