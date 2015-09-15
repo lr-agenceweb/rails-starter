@@ -1,3 +1,5 @@
+include MenuHelper
+
 ActiveAdmin.register Category do
   menu parent: I18n.t('admin_menu.config')
   includes :background, :slider, :optional_module, :menu, menu: [:translations]
@@ -64,7 +66,7 @@ ActiveAdmin.register Category do
         f.inputs t('general') do
           f.input :menu_id,
                   as: :select,
-                  collection: Menu.online,
+                  collection: nested_dropdown(Menu.includes(:translations).online.arrange),
                   include_blank: false,
                   input_html: { class: 'chosen-select' }
 

@@ -45,7 +45,7 @@ class Category < ActiveRecord::Base
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 
   def self.title_by_category(category)
-    Category.find_by(name: category).menu_title
+    Category.includes(menu: [:translations]).find_by(name: category).menu_title
   end
 
   def self.handle_pages_for_background(current_background)
