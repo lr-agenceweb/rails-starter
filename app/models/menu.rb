@@ -49,7 +49,7 @@ class Menu < ActiveRecord::Base
 
   def self.self_or_available(myself = nil)
     menu = []
-    Menu.includes(:translations).each do |item|
+    Menu.includes(:translations, :category).each do |item|
       menu << item if item.category.nil? || item.try(:category) == myself
     end
     menu

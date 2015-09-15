@@ -105,6 +105,10 @@ ActiveAdmin.register Category do
   # == Controller
   #
   controller do
+    def scoped_collection
+      super.includes menu: [:translations]
+    end
+
     def edit
       @page_title = resource.decorate.title_aa_edit
     end
