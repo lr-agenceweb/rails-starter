@@ -11,7 +11,7 @@ ActiveAdmin.register Event do
                   :id, :locale, :title, :slug, :content
                 ],
                 pictures_attributes: [
-                  :id, :image, :online, :_destroy
+                  :id, :image, :online, :position, :_destroy
                 ],
                 location_attributes: [
                   :id, :address, :city, :postcode

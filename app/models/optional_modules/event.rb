@@ -38,7 +38,7 @@ class Event < ActiveRecord::Base
   has_one :location, as: :locationable, dependent: :destroy
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
-  has_many :pictures, as: :attachable, dependent: :destroy
+  has_many :pictures, -> { order(:position) }, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
 
   validate :calendar_date_correct?, unless: proc { end_date.blank? && start_date.blank? }

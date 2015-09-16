@@ -9,7 +9,7 @@ ActiveAdmin.register Home do
                   :id, :locale, :title, :slug, :content
                 ],
                 pictures_attributes: [
-                  :id, :locale, :image, :online, :_destroy
+                  :id, :locale, :image, :online, :position, :_destroy
                 ],
                 referencement_attributes: [
                   :id,

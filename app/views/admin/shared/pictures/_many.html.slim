@@ -1,5 +1,5 @@
 - f.inputs t('activerecord.models.picture.other')
-  - f.has_many :pictures, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.picture.one')) do |item|
+  - f.has_many :pictures, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.picture.one')), sortable: :position do |item|
     - item.input :image,
                  as: :file,
                  label: I18n.t('form.label.picture'),
