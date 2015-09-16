@@ -64,4 +64,9 @@ class Category < ActiveRecord::Base
     end
     categories
   end
+
+  # validates :menu_id,
+  #           presence: true,
+  #           allow_blank: false,
+  #           inclusion: { in: Menu.self_or_available(id).map { |menu| [menu.title, menu.id] } }
 end

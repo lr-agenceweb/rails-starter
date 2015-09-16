@@ -129,13 +129,13 @@ class MenuTest < ActiveSupport::TestCase
 
   def expected_in_menu(expected, menu_items)
     expected.each do |item|
-      assert menu_items.map{ |a| a.title }.include?(item), "\"#{item}\" should be included in menu"
+      assert menu_items.map { |a| a.title }.include?(item), "\"#{item}\" should be included in menu"
     end
   end
 
   def not_expected_in_menu(not_expected, menu_items)
     not_expected.each do |item|
-      assert_not menu_items.map{ |a| a.title }.include?(item), "\"#{item}\" should not be included in menu"
+      assert_not menu_items.map { |a| a.title }.include?(item), "\"#{item}\" should not be included in menu"
     end
   end
 end

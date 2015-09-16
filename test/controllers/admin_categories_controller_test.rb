@@ -75,6 +75,11 @@ module Admin
       assert_equal @category.menu_id, assigns(:category).menu_id
     end
 
+    # test 'should not update menu param if menu_id is not present' do
+    #   patch :update, id: @category, category: { menu_id: nil }
+    #   assert_not assigns(:category).valid?
+    # end
+
     #
     # == Backgrounds
     #
