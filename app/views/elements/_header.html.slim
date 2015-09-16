@@ -4,13 +4,16 @@ header.l-header-site.hide-for-print
     = render 'elements/language'
 
     .row
-      .small-9.medium-5.large-6.columns
+      .small-12.medium-4.columns
         = render 'elements/logo', show_metadata: true
 
-      .small-12.medium-6.columns.menu-site
-        = render 'elements/menu'
-        .clearfix
+      .small-12.large-8.columns
+        .row.small-collapse
+          .small-12.medium-6.medium-offset-6.columns
+            = render 'searches/form' if @search_module.enabled?
 
-    = render 'searches/form' if @search_module.enabled?
+          .small-12.columns
+            = render 'elements/menu/dropdown'
+
 
     = breadcrumbs pretext: t('breadcrumb.here'), separator: '', style: :ol, semantic: true if @breadcrumb_module.enabled? && setting.show_breadcrumb?

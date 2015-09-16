@@ -1,17 +1,15 @@
+include MenuHelper
+
 ActiveAdmin.register Category do
   menu parent: I18n.t('admin_menu.config')
-  includes :background, :translations, :slider, :optional_module
+  includes :background, :slider, :optional_module, :menu, menu: [:translations]
 
   permit_params :id,
                 :name,
                 :color,
-                :show_in_menu,
-                :show_in_footer,
                 :optional,
                 :optional_module_id,
-                translations_attributes: [
-                  :id, :locale, :title
-                ],
+                :menu_id,
                 referencement_attributes: [
                   :id,
                   translations_attributes: [
@@ -30,23 +28,16 @@ ActiveAdmin.register Category do
 
   decorate_with CategoryDecorator
   config.clear_sidebar_sections!
-
-  # Sortable
-  sortable
-  config.sort_order = 'position_asc'
-  config.paginate   = false
+  config.sort_order = 'menus.position asc'
 
   index do
-    sortable_handle_column
+    selectable_column
     column :background_deco if background_module.enabled?
-    column :title
+    column :title_d
     column :div_color
     column :slider if slider_module.enabled?
-    column :in_menu
-    column :in_footer
     column :module if current_user.super_administrator?
 
-    translation_status
     actions
   end
 
@@ -57,8 +48,6 @@ ActiveAdmin.register Category do
           row :background_deco if background_module.enabled?
           row :div_color
           row :slider if slider_module.enabled?
-          row :in_menu
-          row :in_footer
           row :module if current_user.super_administrator?
         end
       end
@@ -74,20 +63,16 @@ ActiveAdmin.register Category do
 
     columns do
       column do
-        f.inputs t('activerecord.models.category.one') do
-          f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :title, hint: 'Titre du menu'
-          end
-        end
-
         f.inputs t('general') do
-          f.input :name,
-                  collection: Category.models_name_str_collection,
+          f.input :menu_id,
+                  as: :select,
+                  collection: nested_dropdown(Menu.self_or_available(f.object)),
                   include_blank: false,
-                  input_html: { class: 'chosen-select' }
-
-          f.input :show_in_menu
-          f.input :show_in_footer
+                  input_html: {
+                    class: 'chosen-select',
+                    disabled: current_user.super_administrator? ? false : :disbaled
+                  },
+                  hint: I18n.t('form.hint.category.menu_id')
 
           f.input :custom_background_color,
                   as: :boolean,
@@ -120,6 +105,10 @@ ActiveAdmin.register Category do
   # == Controller
   #
   controller do
+    def scoped_collection
+      super.includes menu: [:translations]
+    end
+
     def edit
       @page_title = resource.decorate.title_aa_edit
     end
@@ -128,6 +117,7 @@ ActiveAdmin.register Category do
       unless current_user.super_administrator?
         params[:category].delete :optional_module_id
         params[:category].delete :optional
+        params[:category].delete :menu_id
       end
 
       if params[:category][:custom_background_color] == '0'

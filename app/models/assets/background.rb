@@ -13,6 +13,10 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
+# Indexes
+#
+#  index_backgrounds_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
+#
 
 #
 # == Background Model

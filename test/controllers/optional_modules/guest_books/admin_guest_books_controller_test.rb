@@ -15,17 +15,12 @@ module Admin
     #
     # == Routes / Templates / Responses
     #
-    test 'should redirect to users/sign_in if not logged in' do
-      sign_out @administrator
-      assert_crud_actions(@guest_book, new_user_session_path)
-    end
-
-    test 'should show index page if logged in' do
+    test 'should get index page if logged in' do
       get :index
       assert_response :success
     end
 
-    test 'should access show page if logged in' do
+    test 'should get show page if logged in' do
       get :show, id: @guest_book
       assert_response :success
     end
@@ -79,20 +74,14 @@ module Admin
     #
     # == Subscriber
     #
-    test 'should redirect to dashboard page if trying to access guest book as subscriber' do
+    test 'should redirect to users/sign_in if not logged in' do
+      sign_out @administrator
+      assert_crud_actions(@guest_book, new_user_session_path, model_name)
+    end
+
+    test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
-      get :index
-      assert_redirected_to admin_dashboard_path
-      get :show, id: @guest_book
-      assert_redirected_to admin_dashboard_path
-      get :edit, id: @guest_book
-      assert_redirected_to admin_dashboard_path
-      post :create, guest_book: {}
-      assert_redirected_to admin_dashboard_path
-      patch :update, id: @guest_book, guest_book: {}
-      assert_redirected_to admin_dashboard_path
-      delete :destroy, id: @guest_book
-      assert_redirected_to admin_dashboard_path
+      assert_crud_actions(@guest_book, admin_dashboard_path, model_name)
     end
 
     #
@@ -101,11 +90,11 @@ module Admin
     test 'should not access page if guest_book module is disabled' do
       disable_optional_module @super_administrator, @guest_book_module, 'GuestBook' # in test_helper.rb
       sign_in @super_administrator
-      assert_crud_actions(@guest_book, admin_dashboard_path)
+      assert_crud_actions(@guest_book, admin_dashboard_path, model_name)
       sign_in @administrator
-      assert_crud_actions(@guest_book, admin_dashboard_path)
+      assert_crud_actions(@guest_book, admin_dashboard_path, model_name)
       sign_in @subscriber
-      assert_crud_actions(@guest_book, admin_dashboard_path)
+      assert_crud_actions(@guest_book, admin_dashboard_path, model_name)
     end
 
     private

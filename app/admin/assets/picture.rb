@@ -72,6 +72,8 @@ ActiveAdmin.register Picture do
   # == Controller
   #
   controller do
+    include Skippable
+
     def destroy
       resource.image.clear
       resource.save

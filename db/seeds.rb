@@ -125,9 +125,10 @@ OptionalModule.list.each_with_index do |element, index|
 end
 
 #
-# == Categories
+# == Menu
 #
 puts 'Creating Menu elements'
+models_name = [:Home, :Search, :GuestBook, :Blog, :Event, :About, :Contact]
 title_en = [
   'Home',
   'Search',
@@ -146,6 +147,53 @@ title_fr = [
   'À Propos',
   'Me contacter'
 ]
+show_in_header = [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+]
+show_in_footer = [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+]
+
+title_en.each_with_index do |element, index|
+  menu = Menu.create!(
+    title: title_fr[index],
+    show_in_header: show_in_header[index],
+    show_in_footer: show_in_footer[index],
+    online: true
+  )
+  if @locales.include?(:en)
+    Menu::Translation.create!(
+      menu_id: menu.id,
+      locale: 'en',
+      title: title_en[index]
+    )
+  end
+
+  @menu_home = menu.id if element == 'Home'
+  @menu_search = menu.id if element == 'Search'
+  @menu_guest_book = menu.id if element == 'GuestBook'
+  @menu_blog = menu.id if element == 'Blog'
+  @menu_event = menu.id if element == 'Events'
+  @menu_about = menu.id if element == 'About'
+  @menu_contact = menu.id if element == 'Contact'
+end
+
+#
+# == Categories
+#
+puts 'Creating pages'
 description_en = [
   'Homepage description',
   'Search description',
@@ -182,39 +230,28 @@ keywords_fr = [
   'à propos',
   'contact'
 ]
-show_in_menu = [
-  true,
-  true,
-  true,
-  true,
-  true,
-  false,
-  true
-]
-show_in_footer = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false
-]
 
-Category.models_name_str.each_with_index do |element, index|
+models_name.each_with_index do |element, index|
+  element = element.to_s
   optional_module_id = nil
   optional_module_id = @optional_module_search.id if element == 'Search'
   optional_module_id = @optional_module_guest_book.id if element == 'GuestBook'
   optional_module_id = @optional_module_blog.id if element == 'Blog'
   optional_module_id = @optional_module_event.id if element == 'Event'
 
+  menu_id = @menu_home if element == 'Home'
+  menu_id = @menu_search if element == 'Search'
+  menu_id = @menu_guest_book if element == 'GuestBook'
+  menu_id = @menu_blog if element == 'Blog'
+  menu_id = @menu_event if element == 'Event'
+  menu_id = @menu_about if element == 'About'
+  menu_id = @menu_contact if element == 'Contact'
+
   category = Category.create!(
     name: element,
-    title: title_fr[index],
-    show_in_menu: show_in_menu[index],
-    show_in_footer: show_in_footer[index],
     optional: optional_module_id.nil? ? false : true,
-    optional_module_id: optional_module_id
+    optional_module_id: optional_module_id,
+    menu_id: menu_id
   )
 
   referencement = Referencement.create!(
@@ -226,11 +263,6 @@ Category.models_name_str.each_with_index do |element, index|
   )
 
   if @locales.include?(:en)
-    Category::Translation.create!(
-      category_id: category.id,
-      locale: 'en',
-      title: title_en[index]
-    )
     Referencement::Translation.create!(
       referencement_id: referencement.id,
       locale: 'en',

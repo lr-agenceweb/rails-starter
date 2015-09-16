@@ -74,6 +74,16 @@ fr:
         size: Afin d'avoir un affichage optimale des slides sur le site, veuillez envoyer des images avec une largeur minimale de 2000px.
 
 
+      menu:
+        title: Titre de l'élément de menu
+        parent_id: Choisissez le parent de cet élément si désiré. Il deviendra alors un sous élément du ce parent.
+        show_in_header: Montrer cet élément dans le menu principal ?
+        show_in_footer: Montrer cet élément dans le menu du pied de page ?
+        online: Activer cet élément ? Si désactivé, il ne sera alors visible ni dans le menu principal ni dans le pied de page.
+
+      category:
+        menu_id: Élément de menu lié à cette page
+
       location:
         geocode_address: Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n'est pas affichée)
 

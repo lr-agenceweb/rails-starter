@@ -19,8 +19,7 @@
 #
 # Indexes
 #
-#  index_pictures_on_attachable_id    (attachable_id)
-#  index_pictures_on_attachable_type  (attachable_type)
+#  index_pictures_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
 #
 
 #

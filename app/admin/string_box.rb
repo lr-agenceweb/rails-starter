@@ -47,4 +47,11 @@ ActiveAdmin.register StringBox do
 
     f.actions
   end
+
+  #
+  # == Controller
+  #
+  controller do
+    include Skippable
+  end
 end

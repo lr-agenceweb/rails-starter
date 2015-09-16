@@ -1,6 +1,57 @@
-.logo-link
-  text-align: center
-  display: block
+// Logo
+.logo-container
+  background: #FFF
+  position: absolute
+  top: -30px
+  left: 0
+  z-index: 10
+  padding: 5px 0
+  width: $logo_width
+  height: $logo_width
+  @include box-shadow(1.2px 4.9px 5px rgba(0, 0, 0, 0.3))
 
   .logo
+    width: $logo_width
+    height: 100px
+    background-repeat: no-repeat
+    background-position: center center
+    padding-bottom: 180px
+    margin-top: 12px
+
+// Mapbox popup
+.logo-link
+  img
     display: block
+    margin: 0 auto
+
+.header-title-link
+  display: block
+  color: #414042
+
+  .header-title
+    position: absolute
+    top: 0
+    font-size: 20px
+    text-transform: uppercase
+    text-align: center
+    font-weight: 700
+    color: rgba(0, 0, 0, .60)
+    letter-spacing: 3px
+
+  .header-subtitle
+    position: absolute
+    bottom: 13px
+    text-transform: none
+    font-weight: 300
+    font-size: 14px
+    text-align: center
+    display: block
+    width: $logo_width
+    letter-spacing: normal
+
+@if variable-exists(small-only)
+  @media #{$small-only}
+    .logo-container
+      position: static
+      margin: 0 auto
+      @include scale(.7)

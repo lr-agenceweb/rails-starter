@@ -100,7 +100,7 @@ ActiveAdmin.register Slider do
         f.inputs t('additional') do
           f.input :category_id,
                   as: :select,
-                  collection: Category.visible_header_fr,
+                  collection: Menu.online.visible_header_title,
                   include_blank: false,
                   input_html: { class: 'chosen-select' }
           f.input :online
@@ -117,6 +117,8 @@ ActiveAdmin.register Slider do
   # == Controller
   #
   controller do
+    include Skippable
+
     def edit
       @page_title = "#{t('active_admin.edit')} #{I18n.t('activerecord.models.slider.one')} page #{resource.decorate.page}"
     end

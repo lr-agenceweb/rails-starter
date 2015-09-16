@@ -11,6 +11,8 @@ gem 'rails', '4.2.4'
 gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
+gem 'schema_plus'
+gem 'ancestry'
 
 #
 # == Administration
@@ -20,6 +22,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
 gem 'active_skin'
+gem 'active_admin-sortable_tree'
 
 #
 # == Decorator

@@ -15,22 +15,17 @@ module Admin
     #
     # == Routes / Templates / Responses
     #
-    test 'should redirect to users/sign_in if not logged in' do
-      sign_out @administrator
-      assert_crud_actions(@event, new_user_session_path)
-    end
-
-    test 'should show index page if logged in' do
+    test 'should get index page if logged in' do
       get :index
       assert_response :success
     end
 
-    test 'should access show page if logged in' do
+    test 'should get show page if logged in' do
       get :show, id: @event
       assert_response :success
     end
 
-    test 'should access edit page if logged in' do
+    test 'should get edit page if logged in' do
       get :edit, id: @event
       assert_response :success
     end
@@ -80,22 +75,16 @@ module Admin
     end
 
     #
-    # == Subscriber
+    # == Crud actions
     #
-    test 'should redirect to dashboard page if trying to access event as subscriber' do
+    test 'should redirect to users/sign_in if not logged in' do
+      sign_out @administrator
+      assert_crud_actions(@event, new_user_session_path, model_name)
+    end
+
+    test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
-      get :index
-      assert_redirected_to admin_dashboard_path
-      get :show, id: @event
-      assert_redirected_to admin_dashboard_path
-      get :edit, id: @event
-      assert_redirected_to admin_dashboard_path
-      post :create, event: {}
-      assert_redirected_to admin_dashboard_path
-      patch :update, id: @event, event: {}
-      assert_redirected_to admin_dashboard_path
-      delete :destroy, id: @event
-      assert_redirected_to admin_dashboard_path
+      assert_crud_actions(@event, admin_dashboard_path, model_name)
     end
 
     #
@@ -142,11 +131,11 @@ module Admin
     test 'should not access page if event module is disabled' do
       disable_optional_module @super_administrator, @event_module, 'Event' # in test_helper.rb
       sign_in @super_administrator
-      assert_crud_actions(@event, admin_dashboard_path)
+      assert_crud_actions(@event, admin_dashboard_path, model_name)
       sign_in @administrator
-      assert_crud_actions(@event, admin_dashboard_path)
+      assert_crud_actions(@event, admin_dashboard_path, model_name)
       sign_in @subscriber
-      assert_crud_actions(@event, admin_dashboard_path)
+      assert_crud_actions(@event, admin_dashboard_path, model_name)
     end
 
     private

@@ -50,4 +50,11 @@ ActiveAdmin.register Comment, as: 'PostComment' do
       row :created_at
     end
   end
+
+  #
+  # == Controller
+  #
+  controller do
+    include Skippable
+  end
 end

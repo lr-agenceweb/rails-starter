@@ -115,4 +115,11 @@ ActiveAdmin.register Event do
 
     f.actions
   end
+
+  #
+  # == Controller
+  #
+  controller do
+    include Skippable
+  end
 end

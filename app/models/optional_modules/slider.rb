@@ -29,7 +29,7 @@ class Slider < ActiveRecord::Base
   has_many :slides, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :slides, reject_if: :all_blank, allow_destroy: true
 
-  belongs_to :category, dependent: :destroy
+  belongs_to :category
 
   delegate :online, to: :slides, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true

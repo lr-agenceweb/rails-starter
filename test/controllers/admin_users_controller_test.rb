@@ -14,7 +14,7 @@ module Admin
 
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      assert_crud_actions(@administrator, new_user_session_path)
+      assert_crud_actions(@administrator, new_user_session_path, model_name)
     end
 
     test 'should show index page if logged in' do

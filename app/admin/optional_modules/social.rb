@@ -99,6 +99,8 @@ ActiveAdmin.register Social do
   # == Controller
   #
   controller do
+    include Skippable
+
     def update
       if !current_user.super_administrator? && params[:social]
         params[:social].delete :title

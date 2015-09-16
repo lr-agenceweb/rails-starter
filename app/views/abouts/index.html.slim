@@ -1,6 +1,10 @@
 - breadcrumb :abouts
 
 .row
+  .small-12.columns
+    = title_for_category(category)
+
+.row
   - @abouts.each do |about|
     article.small-12.columns
       == about.microdata_meta
