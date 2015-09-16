@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   private
 
   def set_event
-    @event = Event.online.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
+    @event = Event.online.includes(pictures: [:translations], referencement: [:translations]).friendly.find(params[:id])
   end
 
   def event_module_enabled?

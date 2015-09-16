@@ -358,6 +358,14 @@ if @locales.include?(:en)
   )
 end
 
+puts 'Creating About picture'
+Picture.create!(
+  attachable_id: about.id,
+  attachable_type: 'Post',
+  image: File.new("#{Rails.root}/public/system/seeds/abouts/hosting.jpg"),
+  online: true
+)
+
 #
 # == Blog article
 #
@@ -424,6 +432,11 @@ Comment.create!(
 # == Event article
 #
 puts 'Creating Event article'
+event_images = [
+  'event-1-1.jpg',
+  'event-1-2.jpg',
+  'event-1-3.jpg'
+]
 event = Event.create!(
   title: 'Foire aux saucisses',
   slug: 'foire-aux-saucisses',
@@ -470,13 +483,15 @@ Location.create!(
   longitude: 4.83566
 )
 
-puts 'Creating Event picture'
-Picture.create!(
-  attachable_id: event.id,
-  attachable_type: 'Event',
-  image: File.new("#{Rails.root}/public/system/seeds/events/saucisses.jpg"),
-  online: true
-)
+puts 'Creating Event pictures'
+event_images.each do |image|
+  Picture.create!(
+    attachable_id: event.id,
+    attachable_type: 'Event',
+    image: File.new("#{Rails.root}/public/system/seeds/events/#{image}"),
+    online: true
+  )
+end
 
 #
 # == Newsletter

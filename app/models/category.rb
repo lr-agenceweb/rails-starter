@@ -7,7 +7,7 @@
 #  color              :string(255)
 #  optional           :boolean          default(FALSE)
 #  optional_module_id :integer
-#  menu_id           :integer
+#  menu_id            :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

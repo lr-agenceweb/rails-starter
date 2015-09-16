@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913180007) do
+ActiveRecord::Schema.define(version: 20150916205308) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -109,15 +109,16 @@ ActiveRecord::Schema.define(version: 20150913180007) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "slug",       limit: 255, index: {name: "index_events_on_slug", using: :btree}
-    t.text     "content",    limit: 65535
-    t.string   "url",        limit: 255
+    t.string   "title",           limit: 255
+    t.string   "slug",            limit: 255, index: {name: "index_events_on_slug", using: :btree}
+    t.text     "content",         limit: 65535
+    t.string   "url",             limit: 255
     t.datetime "start_date"
     t.datetime "end_date"
-    t.boolean  "online",     default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "show_as_gallery", default: false
+    t.boolean  "online",          default: true
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -255,16 +256,17 @@ ActiveRecord::Schema.define(version: 20150913180007) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string   "type",           limit: 255
-    t.string   "title",          limit: 255
-    t.string   "slug",           limit: 255, index: {name: "index_posts_on_slug", unique: true, using: :btree}
-    t.text     "content",        limit: 65535
-    t.boolean  "allow_comments", default: true
-    t.boolean  "online",         default: true
-    t.integer  "position",       limit: 4
-    t.integer  "user_id",        limit: 4, index: {name: "index_posts_on_user_id", using: :btree}
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "type",            limit: 255
+    t.string   "title",           limit: 255
+    t.string   "slug",            limit: 255, index: {name: "index_posts_on_slug", unique: true, using: :btree}
+    t.text     "content",         limit: 65535
+    t.boolean  "show_as_gallery", default: false
+    t.boolean  "allow_comments",  default: true
+    t.boolean  "online",          default: true
+    t.integer  "position",        limit: 4
+    t.integer  "user_id",         limit: 4, index: {name: "index_posts_on_user_id", using: :btree}
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "referencement_translations", force: :cascade do |t|
