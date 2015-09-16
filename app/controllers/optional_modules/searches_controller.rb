@@ -3,11 +3,27 @@
 #
 class SearchesController < ApplicationController
   before_action :search_module_enabled?
-  skip_before_action :set_menu_elements, :set_adult_validation, :set_background, :set_newsletter_user, :set_search_autocomplete, :set_slider, :set_social_network, :set_froala_key, :set_map
+  skip_before_action :set_menu_elements, :set_adult_validation, :set_background, :set_newsletter_user, :set_slider, :set_social_network, :set_froala_key, :set_map, only: :autocomplete
 
   # GET /rechercher
   # GET /rechercher.json
   def index
+    search_action
+  end
+
+  # GET /rechercher/autocomplete
+  # GET /rechercher/autocomplete.json
+  def autocomplete
+    search_action
+  end
+
+  private
+
+  def search_module_enabled?
+    not_found unless @search_module.enabled?
+  end
+
+  def search_action
     if render_empty_array?
       @searches = []
     else
@@ -17,16 +33,13 @@ class SearchesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { seo_tag_index category }
-      format.js
-      format.json
+      format.html do
+        seo_tag_index category
+        render :index
+      end
+      format.js { render :index }
+      format.json { render :index }
     end
-  end
-
-  private
-
-  def search_module_enabled?
-    not_found unless @search_module.enabled?
   end
 
   def set_search_array

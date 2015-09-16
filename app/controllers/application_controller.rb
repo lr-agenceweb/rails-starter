@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
   before_action :set_background, if: proc { @background_module.enabled && !@category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
-  before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
   before_action :set_slider, if: proc { @slider_module.enabled? }
   before_action :set_socials_network, if: proc { @social_module.enabled? }
   before_action :set_map, if: proc { @map_module.enabled? }
@@ -56,10 +55,6 @@ class ApplicationController < ActionController::Base
 
   def set_newsletter_user
     @newsletter_user ||= NewsletterUser.new
-  end
-
-  def set_search_autocomplete
-    gon.push(search_path: searches_path(format: :json))
   end
 
   def set_adult_validation

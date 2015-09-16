@@ -11,7 +11,6 @@ module Skippable
                        :set_background,
                        :set_host_name,
                        :set_newsletter_user,
-                       :set_search_autocomplete,
                        :set_slider,
                        :set_socials_network,
                        :set_map
