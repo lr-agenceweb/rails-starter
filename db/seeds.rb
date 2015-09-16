@@ -441,18 +441,6 @@ referencement = Referencement.create!(
   keywords: ''
 )
 
-puts 'Creating Event Location'
-Location.create!(
-  locationable_id: event.id,
-  locationable_type: 'Event',
-  address: 'Rue des Limaces',
-  city: 'Lyon',
-  postcode: 69_000,
-  geocode_address: 'Rue des Limaces, 69000 - Lyon',
-  latitude: 45.764,
-  longitude: 4.83566
-)
-
 if @locales.include?(:en)
   Event::Translation.create!(
     event_id: event.id,
@@ -469,6 +457,26 @@ if @locales.include?(:en)
     keywords: ''
   )
 end
+
+puts 'Creating Event Location'
+Location.create!(
+  locationable_id: event.id,
+  locationable_type: 'Event',
+  address: 'Rue des Limaces',
+  city: 'Lyon',
+  postcode: 69_000,
+  geocode_address: 'Rue des Limaces, 69000 - Lyon',
+  latitude: 45.764,
+  longitude: 4.83566
+)
+
+puts 'Creating Event picture'
+Picture.create!(
+  attachable_id: event.id,
+  attachable_type: 'Event',
+  image: File.new("#{Rails.root}/public/system/seeds/events/saucisses.jpg"),
+  online: true
+)
 
 #
 # == Newsletter
