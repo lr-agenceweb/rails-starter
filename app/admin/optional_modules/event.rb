@@ -43,6 +43,7 @@ ActiveAdmin.register Event do
     column :end_date
     column :duration
     column :url
+    column :show_calendar_d
     column :status
     column :full_address_inline
 

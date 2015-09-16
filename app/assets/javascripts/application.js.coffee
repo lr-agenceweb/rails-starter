@@ -32,6 +32,7 @@
 #= require plugins/cookie_ie
 #= require plugins/cookie_adult_validation
 #= require plugins/fotorama
+#= require plugins/fullcalendar
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser

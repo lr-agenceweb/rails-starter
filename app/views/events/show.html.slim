@@ -11,6 +11,9 @@
 
       div = event.content
 
+      - if event.show_calendar?
+        div#calendar
+
       .pictures.pictures-container
         - if event.show_as_gallery?
           .small-12.medium-6.medium-centered.columns
