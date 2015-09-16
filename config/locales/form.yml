@@ -91,6 +91,10 @@ fr:
         content: Contenu du message personnalisé à afficher sur le site
         title: Titre du message personnalisé à afficher sur le site
 
+
+      picture:
+        show_as_gallery: Afficher les images sous forme de galerie ?
+
     placeholder:
       froala: Contenu de l'article ici :)
 

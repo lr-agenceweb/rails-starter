@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916205308) do
+ActiveRecord::Schema.define(version: 20150916215119) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -36,14 +36,15 @@ ActiveRecord::Schema.define(version: 20150916205308) do
   end
 
   create_table "blogs", force: :cascade do |t|
-    t.string   "title",          limit: 255
-    t.string   "slug",           limit: 255, index: {name: "index_blogs_on_slug", using: :btree}
-    t.text     "content",        limit: 65535
-    t.boolean  "allow_comments", default: true
-    t.boolean  "online",         default: true
-    t.integer  "user_id",        limit: 4, index: {name: "index_blogs_on_user_id", using: :btree}
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "title",           limit: 255
+    t.string   "slug",            limit: 255, index: {name: "index_blogs_on_slug", using: :btree}
+    t.text     "content",         limit: 65535
+    t.boolean  "allow_comments",  default: true
+    t.boolean  "show_as_gallery", default: false
+    t.boolean  "online",          default: true
+    t.integer  "user_id",         limit: 4, index: {name: "index_blogs_on_user_id", using: :btree}
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "menus", force: :cascade do |t|

@@ -171,6 +171,8 @@ fr:
         status: Statut
         allow_comments: Autoriser les commentaires
         allow_comments_status: Autoriser les commentaires
+        show_as_gallery: Galerie d'images
+        show_as_gallery_d: Galerie d'images
       blog:
         title: Titre
         content: Contenu
@@ -178,6 +180,8 @@ fr:
         status: Statut
         allow_comments: Autoriser les commentaires
         allow_comments_status: Autoriser les commentaires
+        show_as_gallery: Galerie d'images
+        show_as_gallery_d: Galerie d'images
       setting:
         title: Titre
         subtitle: Sous-titre
@@ -323,6 +327,8 @@ fr:
         end_date: Date de fin
         online: En ligne ?
         status: État
+        show_as_gallery: Galerie d'images
+        show_as_gallery_d: Galerie d'images
         full_address_inline: Adresse de l'événement
         duration: Durée
       map:

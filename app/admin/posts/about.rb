@@ -4,6 +4,7 @@ ActiveAdmin.register About do
 
   permit_params :id,
                 :type,
+                :show_as_gallery,
                 :online,
                 :allow_comments,
                 :user_id,
@@ -48,6 +49,7 @@ ActiveAdmin.register About do
     column :image
     column :title
     column :allow_comments_status
+    column :show_as_gallery_d
     column :status
     translation_status
     column :author_with_avatar

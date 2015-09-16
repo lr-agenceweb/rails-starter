@@ -5,6 +5,7 @@ ActiveAdmin.register Blog do
   permit_params :id,
                 :type,
                 :allow_comments,
+                :show_as_gallery,
                 :online,
                 :user_id,
                 translations_attributes: [
@@ -36,6 +37,7 @@ ActiveAdmin.register Blog do
     column :image
     column :title
     column :allow_comments_status
+    column :show_as_gallery_d
     column :status
     translation_status
     column :author_with_avatar

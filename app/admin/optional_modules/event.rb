@@ -5,6 +5,7 @@ ActiveAdmin.register Event do
                 :url,
                 :start_date,
                 :end_date,
+                :show_as_gallery,
                 :online,
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
@@ -58,6 +59,7 @@ ActiveAdmin.register Event do
           row :end_date
           row :duration
           row :url
+          row :show_as_gallery_d
           row :status
           row :full_address_inline
         end
@@ -96,6 +98,8 @@ ActiveAdmin.register Event do
                   hint: I18n.t('form.hint.event.end_date')
 
           f.input :url, hint: I18n.t('form.hint.event.link')
+          f.input :show_as_gallery,
+                  hint: I18n.t('form.hint.picture.show_as_gallery')
           f.input :online, hint: I18n.t('form.hint.event.online')
         end
 
