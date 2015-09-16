@@ -9,9 +9,7 @@ position_footer = ->
   return
 
 $(document).on 'ready page:load page:restore', ->
+  position_footer
   $(window).scroll position_footer
   $(window).resize position_footer
-
-  sleep 30
-  $(window).resize()
   return
