@@ -45,6 +45,12 @@ gem 'js_cookie_rails'
 gem 'fotoramajs'
 
 #
+# == Calendar
+#
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
+#
 # == Media upload
 #
 gem 'paperclip', github: 'thoughtbot/paperclip'

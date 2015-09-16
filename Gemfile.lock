@@ -308,6 +308,9 @@ GEM
       sass (>= 3.3.0, < 3.5)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
+    fullcalendar-rails (2.3.1.0)
+      jquery-rails (>= 3.1.1, < 5.0.0)
+      momentjs-rails (~> 2.8, >= 2.8.4)
     g (1.7.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -416,6 +419,8 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
+    momentjs-rails (2.10.3)
+      railties (>= 3.1)
     multi_json (1.11.2)
     mysql2 (0.3.18)
     net-scp (1.2.1)
@@ -652,6 +657,7 @@ DEPENDENCIES
   fotoramajs
   foundation-rails
   friendly_id (~> 5.1)
+  fullcalendar-rails
   globalize (~> 5.0.0)
   gmaps-autocomplete-rails
   gon
@@ -673,6 +679,7 @@ DEPENDENCIES
   meta_request
   minitest
   minitest-reporters
+  momentjs-rails
   mysql2
   nokogiri
   nprogress-rails
