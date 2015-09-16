@@ -80,9 +80,49 @@ class MenuTest < ActiveSupport::TestCase
     not_expected_in_menu(not_expected, menu_items)
   end
 
+  #
+  # == ActiveAdmin (select collection)
+  #
+  test 'should return all menu except current (when nil) and submenu' do
+    menu_items = Menu.except_current_and_submenus
+    expected = ['Home', 'Blog', 'Events', 'Contact', 'Search', 'Test offline', 'GuestBook', 'Test online']
+    not_expected = ['About']
+
+    expected_in_menu(expected, menu_items)
+    not_expected_in_menu(not_expected, menu_items)
+  end
+
+  test 'should return all menu except current (not nil) and submenu' do
+    menu_items = Menu.except_current_and_submenus(@menu_home)
+    expected = ['Blog', 'Events', 'Contact', 'Search', 'Test offline', 'GuestBook', 'Test online']
+    not_expected = ['Home', 'About']
+
+    expected_in_menu(expected, menu_items)
+    not_expected_in_menu(not_expected, menu_items)
+  end
+
+  test 'should return correct menu items to link page to category (current nil)' do
+    menu_items = Menu.self_or_available
+    expected = ['Test online', 'Test offline']
+    not_expected = ['Blog', 'Events', 'Contact', 'Search', 'GuestBook', 'About']
+
+    expected_in_menu(expected, menu_items)
+    not_expected_in_menu(not_expected, menu_items)
+  end
+
+  test 'should return correct menu items to link page to category (current not nil)' do
+    menu_items = Menu.self_or_available(@menu_home.category)
+    expected = ['Home', 'Test online', 'Test offline']
+    not_expected = ['Blog', 'Events', 'Contact', 'Search', 'GuestBook', 'About']
+
+    expected_in_menu(expected, menu_items)
+    not_expected_in_menu(not_expected, menu_items)
+  end
+
   private
 
   def initialize_test
+    @menu_home = menus(:home)
     @guest_book_module = optional_modules(:guest_book)
     @event_module = optional_modules(:event)
   end
