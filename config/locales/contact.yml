@@ -30,7 +30,8 @@ fr:
             email:
               blank: N'oubliez pas de renseigner votre email ;)
               invalid: Veuillez renseigner un email valide ;)
-
+  map:
+    no_js: Pour visualiser la carte, votre navigateur doit avoir javascript d'activé
 
 # English
 en:
@@ -64,3 +65,6 @@ en:
             email:
               blank: Don't forget your email address ;)
               invalid: Your email is invalid ;)
+
+  map:
+    no_js: To see the map, your browser must enabled javascript

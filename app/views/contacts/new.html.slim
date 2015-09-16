@@ -18,3 +18,6 @@ section.l-contact.one-page
 
 / Mapbox
 == map.map(@map_module.enabled?) unless map.nil?
+
+noscript
+  p.text-center = I18n.t('map.no_js')
