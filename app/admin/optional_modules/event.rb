@@ -6,6 +6,7 @@ ActiveAdmin.register Event do
                 :start_date,
                 :end_date,
                 :show_as_gallery,
+                :show_calendar,
                 :online,
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
@@ -60,6 +61,7 @@ ActiveAdmin.register Event do
           row :duration
           row :url
           row :show_as_gallery_d
+          row :show_calendar_d
           row :status
           row :full_address_inline
         end
@@ -73,6 +75,19 @@ ActiveAdmin.register Event do
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
+
+    columns do
+      column do
+        f.inputs t('general') do
+          f.input :show_as_gallery,
+                  hint: I18n.t('form.hint.picture.show_as_gallery')
+          f.input :show_calendar,
+                  hint: I18n.t('form.hint.event.show_calendar')
+          f.input :online, hint: I18n.t('form.hint.event.online')
+          f.input :url, hint: I18n.t('form.hint.event.link')
+        end
+      end
+    end
 
     columns do
       column do
@@ -96,11 +111,6 @@ ActiveAdmin.register Event do
                     value: f.object.end_date.blank? ? '' : f.object.end_date.localtime.to_s(:db)
                   },
                   hint: I18n.t('form.hint.event.end_date')
-
-          f.input :url, hint: I18n.t('form.hint.event.link')
-          f.input :show_as_gallery,
-                  hint: I18n.t('form.hint.picture.show_as_gallery')
-          f.input :online, hint: I18n.t('form.hint.event.online')
         end
 
         render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false

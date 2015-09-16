@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916221534) do
+ActiveRecord::Schema.define(version: 20150916233116) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20150916221534) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.boolean  "show_as_gallery",               default: false
+    t.boolean  "show_calendar",                 default: false
     t.boolean  "online",                        default: true
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false

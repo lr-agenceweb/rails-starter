@@ -329,6 +329,8 @@ fr:
         status: État
         show_as_gallery: Galerie d'images
         show_as_gallery_d: Galerie d'images
+        show_calendar_d: Calendrier
+        show_calendar: Calendrier
         full_address_inline: Adresse de l'événement
         duration: Durée
       map:
