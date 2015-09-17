@@ -143,5 +143,21 @@ ActiveAdmin.register Event do
   controller do
     include Skippable
     before_action :set_optional_modules
+
+    def create
+      remove_calendar_param
+      super
+    end
+
+    def update
+      remove_calendar_param
+      super
+    end
+
+    private
+
+    def remove_calendar_param
+      params[:event].delete :show_calendar unless @calendar_module.enabled?
+    end
   end
 end

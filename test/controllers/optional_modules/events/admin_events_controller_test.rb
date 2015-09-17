@@ -138,6 +138,33 @@ module Admin
       assert_crud_actions(@event, admin_dashboard_path, model_name)
     end
 
+    #
+    # == Calendar module disabled
+    #
+    test 'should not create calendar param if calendar module is disabled' do
+      disable_optional_module @super_administrator, @calendar_module, 'Calendar' # in test_helper.rb
+      sign_in @administrator
+      post :create, event: { show_calendar: true }
+      assert_not assigns(:event).show_calendar
+    end
+
+    test 'should create calendar param if calendar module is enabled' do
+      post :create, event: { show_calendar: true }
+      assert assigns(:event).show_calendar
+    end
+
+    test 'should not update calendar param if calendar module is disabled' do
+      disable_optional_module @super_administrator, @calendar_module, 'Calendar' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @event, event: { show_calendar: true }
+      assert_not assigns(:event).show_calendar
+    end
+
+    test 'should update calendar param if calendar module is enabled' do
+      patch :update, id: @event, event: { show_calendar: true }
+      assert assigns(:event).show_calendar
+    end
+
     private
 
     def initialize_test
@@ -145,6 +172,7 @@ module Admin
       @event = events(:event_online)
       @event_not_validate = events(:event_offline)
       @event_module = optional_modules(:event)
+      @calendar_module = optional_modules(:calendar)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)
