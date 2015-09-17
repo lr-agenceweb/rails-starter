@@ -1,5 +1,5 @@
 - f.inputs t('activerecord.models.slide.other')
-  - f.has_many :slides, heading: false do |item|
+  - f.has_many :slides, heading: false, sortable: :position do |item|
     = item.inputs 'Image du slider' do
       - item.input :image,
                    as: :file,

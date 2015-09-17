@@ -26,7 +26,7 @@
 class Slider < ActiveRecord::Base
   include Imageable
 
-  has_many :slides, as: :attachable, dependent: :destroy
+  has_many :slides, -> { order(:position) }, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :slides, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :category

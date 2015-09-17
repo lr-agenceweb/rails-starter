@@ -13,7 +13,7 @@ ActiveAdmin.register Slider do
                 :online,
                 :category_id,
                 slides_attributes: [
-                  :id, :image, :online, :_destroy,
+                  :id, :image, :online, :position, :_destroy,
                   translations_attributes: [
                     :id, :locale, :title, :description
                   ]
