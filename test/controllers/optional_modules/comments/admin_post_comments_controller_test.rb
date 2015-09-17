@@ -100,7 +100,7 @@ module Admin
       sign_in @subscriber
       get :index
       assert_response :success
-      assert_crud_actions(@comment, admin_dashboard_path, model_name, { no_index: true })
+      assert_crud_actions(@comment, admin_dashboard_path, model_name, no_index: true)
     end
 
     test 'should destroy all comments if super_administrator' do

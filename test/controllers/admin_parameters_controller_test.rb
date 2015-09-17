@@ -111,12 +111,12 @@ module Admin
     #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      assert_crud_actions(@setting, new_user_session_path, model_name, { no_delete: true })
+      assert_crud_actions(@setting, new_user_session_path, model_name, no_delete: true)
     end
 
     test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
-      assert_crud_actions(@setting, admin_dashboard_path, model_name, { no_delete: true })
+      assert_crud_actions(@setting, admin_dashboard_path, model_name, no_delete: true)
     end
 
     #

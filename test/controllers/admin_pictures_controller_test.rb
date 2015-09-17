@@ -1,6 +1,5 @@
 require 'test_helper'
 
-
 #
 # == Admin namespace
 #

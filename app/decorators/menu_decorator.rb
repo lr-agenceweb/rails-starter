@@ -31,8 +31,8 @@ class MenuDecorator < ApplicationDecorator
   end
 
   def title_sortable_tree
-    page = ", lié à aucune page"
-    page = ", lié à la page #{I18n.t('activerecord.models.'+category_name.singularize.underscore.downcase+'.one')}" unless category_name.nil?
+    page = ', lié à aucune page'
+    page = ", lié à la page #{I18n.t('activerecord.models.' + category_name.singularize.underscore.downcase + '.one')}" unless category_name.nil?
     "#{model.title} #{status} #{page}"
   end
 end

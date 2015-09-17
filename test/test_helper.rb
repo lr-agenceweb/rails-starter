@@ -62,7 +62,7 @@ module ActiveSupport
     end
 
     def assert_crud_actions(obj, url, attributes, check = {})
-      unless check.has_key?(:no_index) && check[:no_index]
+      unless check.key?(:no_index) && check[:no_index]
         get :index
         assert_redirected_to url
       end
@@ -76,7 +76,7 @@ module ActiveSupport
       patch :update, id: obj, "#{attributes.to_sym}": {}
       assert_redirected_to url
 
-      unless check.has_key?(:no_delete) && check[:no_delete]
+      unless check.key?(:no_delete) && check[:no_delete]
         delete :destroy, id: obj
         assert_redirected_to url
       end
