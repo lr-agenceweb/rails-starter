@@ -49,6 +49,10 @@ ActiveAdmin.register Background do
   controller do
     include Skippable
 
+    def scoped_collection
+      super.includes attachable: [menu: [:translations]]
+    end
+
     def edit
       @page_title = resource.decorate.title_aa_edit
     end
