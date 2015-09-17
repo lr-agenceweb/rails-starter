@@ -72,7 +72,7 @@ ActiveAdmin.register Slider do
 
     columns do
       column do
-        f.inputs t('activerecord.models.slider.one') do
+        f.inputs "Paramètres du #{t('activerecord.models.slider.one')}" do
           f.input :autoplay,
                   hint: I18n.t('form.hint.slider.autoplay')
           f.input :hover_pause,
