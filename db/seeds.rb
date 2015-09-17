@@ -109,7 +109,8 @@ description = [
   'Module qui gère les différents réseaux sociaux',
   'Module qui affiche un fil d\'ariane sur le site',
   'Module qui affiche un Qrcode pour créer automatiquement un contact sur son smartphone',
-  'Module qui propose à l\'administrateur de choisir une image d\'arrière plan pour les pages du site'
+  'Module qui propose à l\'administrateur de choisir une image d\'arrière plan pour les pages du site',
+  'Module qui affiche un calendrier'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(

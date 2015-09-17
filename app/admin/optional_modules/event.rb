@@ -43,7 +43,7 @@ ActiveAdmin.register Event do
     column :end_date
     column :duration
     column :url
-    column :show_calendar_d
+    column :show_calendar_d if calendar_module.enabled?
     column :status
     column :full_address_inline
 
@@ -62,7 +62,7 @@ ActiveAdmin.register Event do
           row :duration
           row :url
           row :show_as_gallery_d
-          row :show_calendar_d
+          row :show_calendar_d if calendar_module.enabled?
           row :status
           row :full_address_inline
         end
@@ -82,11 +82,19 @@ ActiveAdmin.register Event do
         f.inputs t('general') do
           f.input :show_as_gallery,
                   hint: I18n.t('form.hint.picture.show_as_gallery')
-          f.input :show_calendar,
-                  hint: I18n.t('form.hint.event.show_calendar')
+
+          if calendar_module.enabled?
+            f.input :show_calendar,
+                    hint: I18n.t('form.hint.event.show_calendar')
+          end
+
           f.input :online, hint: I18n.t('form.hint.event.online')
           f.input :url, hint: I18n.t('form.hint.event.link')
         end
+      end
+
+      column do
+        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
       end
     end
 
@@ -113,18 +121,16 @@ ActiveAdmin.register Event do
                   },
                   hint: I18n.t('form.hint.event.end_date')
         end
-
-        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
       end
     end # columns
 
     columns do
       column do
-        render 'admin/shared/referencement/form', f: f
+        render 'admin/shared/pictures/many', f: f
       end
 
       column do
-        render 'admin/shared/pictures/many', f: f
+        render 'admin/shared/referencement/form', f: f
       end
     end
 
@@ -136,5 +142,6 @@ ActiveAdmin.register Event do
   #
   controller do
     include Skippable
+    before_action :set_optional_modules
   end
 end
