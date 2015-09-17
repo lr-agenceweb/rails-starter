@@ -22,8 +22,8 @@
 #= require plugins/mapbox
 #= require magnific-popup
 #= require fotorama
-#= require fullcalendar
 #= require moment
+#= require fullcalendar
 #= require jquery.autosize
 #= require globals/_functions
 #= require modules/responsive_menu

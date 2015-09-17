@@ -17,6 +17,7 @@ class EventsController < ApplicationController
   # GET /event/1.json
   def show
     redirect_to @event, status: :moved_permanently if request.path_parameters[:id] != @event.slug
+    gon.push(event_path: event_path(format: :json))
     seo_tag_show event
   end
 
