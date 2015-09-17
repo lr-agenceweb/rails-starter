@@ -71,6 +71,10 @@ ActiveAdmin.register Picture do
   controller do
     include Skippable
 
+    def scoped_collection
+      super.includes attachable: [pictures: [:translations]]
+    end
+
     def destroy
       resource.image.clear
       resource.save
