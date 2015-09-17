@@ -24,11 +24,8 @@ ActiveAdmin.register Blog do
   decorate_with BlogDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    Blog.find(ids).each do |blog|
-      toggle_value = blog.online? ? false : true
-      blog.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    Blog.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 

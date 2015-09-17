@@ -12,11 +12,8 @@ ActiveAdmin.register Picture do
   config.clear_sidebar_sections!
   actions :all, except: [:new]
 
-  batch_action :toggle_value do |ids|
-    Picture.find(ids).each do |picture|
-      toggle_value = picture.online? ? false : true
-      picture.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    Picture.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 

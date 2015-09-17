@@ -19,11 +19,8 @@ ActiveAdmin.register Map, as: 'Plan' do
   decorate_with MapDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    Map.find(ids).each do |map|
-      toggle_value = map.online? ? false : true
-      map.update_attribute(:show_map, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    Map.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 

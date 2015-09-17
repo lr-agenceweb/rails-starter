@@ -36,11 +36,8 @@ ActiveAdmin.register About do
     link_to I18n.t('active_admin.action_item.see_article_in_frontend'), about_path(resource), target: :blank
   end
 
-  batch_action :toggle_value do |ids|
-    Post.find(ids).each do |post|
-      toggle_value = post.online? ? false : true
-      post.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    About.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 

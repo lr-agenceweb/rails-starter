@@ -22,11 +22,8 @@ ActiveAdmin.register Slider do
   decorate_with SliderDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    Slider.find(ids).each do |slider|
-      toggle_value = slider.online? ? false : true
-      slider.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    Slider.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 

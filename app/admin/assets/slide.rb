@@ -12,11 +12,8 @@ ActiveAdmin.register Slide do
   decorate_with SlideDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    Slide.find(ids).each do |slide|
-      toggle_value = slide.online? ? false : true
-      slide.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    Slide.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 

@@ -9,11 +9,8 @@ ActiveAdmin.register OptionalModule do
   decorate_with OptionalModuleDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    OptionalModule.find(ids).each do |optional_module|
-      toggle_value = optional_module.enabled? ? false : true
-      optional_module.update_attribute(:enabled, toggle_value)
-    end
+  batch_action :toggle_enabled do |ids|
+    OptionalModule.find(ids).each { |item| item.toggle! :enabled }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 

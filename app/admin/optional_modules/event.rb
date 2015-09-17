@@ -27,18 +27,13 @@ ActiveAdmin.register Event do
   decorate_with EventDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    Event.find(ids).each do |event|
-      toggle_value = event.online? ? false : true
-      event.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    Event.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
   batch_action :toggle_show_calendar, if: proc { @calendar_module.enabled? } do |ids|
-    Event.find(ids).each do |event|
-      event.toggle! :show_calendar
-    end
+    Event.find(ids).each { |event| event.toggle! :show_calendar }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 

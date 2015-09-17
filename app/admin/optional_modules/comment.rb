@@ -18,11 +18,8 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   config.clear_sidebar_sections!
   actions :all, except: [:new]
 
-  batch_action :toggle_value do |ids|
-    Comment.find(ids).each do |comment|
-      toggle_value = comment.validated? ? false : true
-      comment.update_attribute(:validated, toggle_value)
-    end
+  batch_action :toggle_validated do |ids|
+    Comment.find(ids).each { |item| item.toggle! :validated }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 

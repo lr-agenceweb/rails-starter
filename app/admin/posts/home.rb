@@ -25,11 +25,8 @@ ActiveAdmin.register Home do
     edit_heading_page_aa
   end
 
-  batch_action :toggle_value do |ids|
-    Post.find(ids).each do |post|
-      toggle_value = post.online? ? false : true
-      post.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    Post.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
