@@ -22,6 +22,10 @@ ActiveAdmin.register Slider do
   decorate_with SliderDecorator
   config.clear_sidebar_sections!
 
+  action_item :new_slider, only: [:show] do
+    link_to I18n.t('active_admin.action_item.new_slider'), new_admin_slider_path if can? :create, Slider
+  end
+
   batch_action :toggle_online do |ids|
     Slider.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
