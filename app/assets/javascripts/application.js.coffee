@@ -24,6 +24,7 @@
 #= require fotorama
 #= require moment
 #= require fullcalendar
+#= require fullcalendar/lang/fr
 #= require jquery.autosize
 #= require globals/_functions
 #= require modules/responsive_menu
