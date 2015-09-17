@@ -86,6 +86,14 @@ GIT
     vex_rails (0.2.0)
 
 GIT
+  remote: git://github.com/bernat/best_in_place.git
+  revision: 9fa298dd8fe7599cee3ae5f863668367f89ad298
+  specs:
+    best_in_place (3.0.3)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
+
+GIT
   remote: git://github.com/mvdstam/activeadmin-sortable.git
   revision: be5806ee5e1dc94da9331c9527f64e0f894a0b87
   specs:
@@ -630,6 +638,7 @@ DEPENDENCIES
   ancestry
   annotate (~> 2.6.5)
   autosize-rails
+  best_in_place!
   better_errors
   bullet
   byebug

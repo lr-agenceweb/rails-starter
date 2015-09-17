@@ -67,6 +67,7 @@ gem 'autosize-rails'
 gem 'mail_form' # contact form
 gem 'wysiwyg-rails' # Froala editor
 gem 'valid_url'
+gem 'best_in_place', github: 'bernat/best_in_place'
 
 #
 # == Translation
