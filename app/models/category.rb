@@ -65,6 +65,14 @@ class Category < ActiveRecord::Base
     categories
   end
 
+  def self.except_already_slider(myself = nil)
+    categories = []
+    Category.includes(:slider).with_allowed_module.each do |category|
+      categories << category if category.slider.nil? || category == myself
+    end
+    categories
+  end
+
   # validates :menu_id,
   #           presence: true,
   #           allow_blank: false,

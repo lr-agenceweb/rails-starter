@@ -97,7 +97,7 @@ ActiveAdmin.register Slider do
         f.inputs t('additional') do
           f.input :category_id,
                   as: :select,
-                  collection: Menu.online.visible_header_title,
+                  collection: Category.except_already_slider,
                   include_blank: false,
                   input_html: { class: 'chosen-select' }
           f.input :online
