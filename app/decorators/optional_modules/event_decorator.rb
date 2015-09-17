@@ -32,6 +32,13 @@ class EventDecorator < PostDecorator
     I18n.t('event.from_to_date', start_date: start_date_deco, end_date: end_date_deco) if start_date? && end_date?
   end
 
+  #
+  # == Calendar
+  #
+  def all_conditions_to_show_calendar?(calendar_module)
+    model.show_calendar? && calendar_module.enabled? && start_date? && end_date?
+  end
+
   def show_calendar_d
     color = model.show_calendar? ? 'green' : 'red'
     status_tag_deco I18n.t("enabled.#{model.show_calendar}"), color

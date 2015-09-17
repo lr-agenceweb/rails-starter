@@ -27,6 +27,6 @@
                     = link_to picture.decorate.self_image_has_one_by_size(:medium), picture.decorate.self_image_url_by_size(:large), title: picture.title, class: 'magnific-popup'
 
         .small-12.medium-6.columns
-          - if event.show_calendar? && @calendar_module.enabled?
+          - if event.all_conditions_to_show_calendar?(@calendar_module)
             div#calendar
 
