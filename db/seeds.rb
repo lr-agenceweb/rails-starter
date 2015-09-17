@@ -51,7 +51,7 @@ puts 'Creating site Setting'
 setting_site = Setting.create!(
   name: 'Rails starter',
   title: 'Rails starter',
-  subtitle: 'Démonstration',
+  subtitle: 'Site de Démonstration',
   phone: '+33 (0)1 02 03 04 05',
   email: 'demo@starter.fr',
   logo: File.new("#{Rails.root}/public/system/seeds/logo/logo.png")
@@ -62,7 +62,7 @@ if @locales.include?(:en)
     setting_id: setting_site.id,
     locale: 'en',
     title: 'Rails starter',
-    subtitle: 'Demo'
+    subtitle: 'Demo website'
   )
 end
 
