@@ -103,16 +103,16 @@ module Admin
       assert_crud_actions(@comment, admin_dashboard_path, model_name, { no_index: true })
     end
 
-    # TODO: Fix broken test
-    # test 'should destroy all comments if super_administrator' do
-    #   sign_in @super_administrator
-    #   assert_difference ['Comment.count'], -3 do
-    #     delete :destroy, id: @comment
-    #     delete :destroy, id: @comment_subscriber
-    #     delete :destroy, id: @comment_administrator
-    #   end
-    #   assert_redirected_to admin_post_comments_path
-    # end
+    test 'should destroy all comments if super_administrator' do
+      skip 'Fix this broken test'
+      sign_in @super_administrator
+      assert_difference ['Comment.count'], -3 do
+        delete :destroy, id: @comment
+        delete :destroy, id: @comment_subscriber
+        delete :destroy, id: @comment_administrator
+      end
+      assert_redirected_to admin_post_comments_path
+    end
 
     #
     # == Module disabled
