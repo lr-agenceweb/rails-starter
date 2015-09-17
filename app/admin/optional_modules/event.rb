@@ -35,6 +35,13 @@ ActiveAdmin.register Event do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  batch_action :toggle_show_calendar, if: proc { @calendar_module.enabled? } do |ids|
+    Event.find(ids).each do |event|
+      event.toggle! :show_calendar
+    end
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
+
   index do
     selectable_column
     column :image

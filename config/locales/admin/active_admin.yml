@@ -13,7 +13,8 @@ fr:
       confirm: "Êtes-vous sûr de vouloir supprimer ce %{object_kind} ?"
     batch_actions:
       labels:
-        toggle_value: Changer le statut
+        toggle_value: Mettre en ligne / hors ligne
+        toggle_show_calendar: Activer / Désactiver calendrier pour
       flash: Le (les) élement(s) sélectionnés ont bien changé de statut
     action_item:
       edit_heading_page: Modifier l'entête de la page %{page}
