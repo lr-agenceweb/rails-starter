@@ -62,9 +62,9 @@ ActiveAdmin.register Slider do
       end
     end
 
-    # panel 'Slider preview' do
-    #   render 'optional_modules/sliders/show', slider: resource, force: true
-    # end
+    panel 'Slider prévisualisation' do
+      render 'optional_modules/sliders/show', slider: resource, force: true
+    end
   end
 
   form do |f|
@@ -115,6 +115,11 @@ ActiveAdmin.register Slider do
   #
   controller do
     include Skippable
+    before_action :set_optional_modules
+
+    def scoped_collection
+      super.includes slides: [:translations]
+    end
 
     def edit
       @page_title = "#{t('active_admin.edit')} #{I18n.t('activerecord.models.slider.one')} page #{resource.decorate.page}"
