@@ -76,6 +76,10 @@ ActiveAdmin.register Slide do
   controller do
     include Skippable
 
+    def scoped_collection
+      super.includes attachable: [category: [menu: [:translations]]]
+    end
+
     def edit
       @page_title = resource.decorate.title_aa_edit
     end
