@@ -1,4 +1,4 @@
-= simple_form_for @contact_form, validate: true, remote: true do |f|
+= simple_form_for @contact_form, validate: true, remote: true, authenticity_token: true do |f|
   .row
     .small-12.medium-6.columns
         = f.input :name, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.name')}"

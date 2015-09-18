@@ -1,6 +1,6 @@
 .row
   .small-12.medium-6.columns
-    = simple_form_for @guest_book, method: :post, remote: true, validate: true do |f|
+    = simple_form_for @guest_book, method: :post, remote: true, validate: true, authenticity_token: true do |f|
       = f.input :username
       = f.input :email, as: :email
       = f.input :content, as: :text, input_html: { class: 'autosize' }

@@ -76,7 +76,7 @@ module SocialHelper
   def social_share_buttons
     return nil if return_nil_for_social_share?
 
-    element = params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
+    element = params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
 
     t = element.try(:menu_title)
     t = element.title if t.nil?

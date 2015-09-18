@@ -11,10 +11,10 @@ class NewsletterUsersController < ApplicationController
     respond_to do |format|
       if @newsletter_user.save
         @success = true
-        format.html { redirect_to :back }
+        format.html { redirect_to :back, flash: { success: I18n.t('newsletter.subscribe_success', { email: @newsletter_user.email }) }}
         format.js { render :show, status: :created }
       else
-        format.html { redirect_to :back }
+        format.html { redirect_to :back, flash: { alert: I18n.t('newsletter.subscribe_error') }}
         format.js { render 'errors', status: :unprocessable_entity }
       end
     end

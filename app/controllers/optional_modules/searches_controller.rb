@@ -3,7 +3,6 @@
 #
 class SearchesController < ApplicationController
   before_action :search_module_enabled?
-  skip_before_action :set_menu_elements, :set_adult_validation, :set_background, :set_newsletter_user, :set_slider, :set_social_network, :set_froala_key, :set_map, only: :autocomplete
 
   # GET /rechercher
   # GET /rechercher.json
