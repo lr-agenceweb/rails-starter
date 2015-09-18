@@ -23,5 +23,8 @@
 #  index_pictures_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
 #
 
-one:
+DEFAULTS: &DEFAULTS
+  online: true
+
+home:
   attachable: home (Post)

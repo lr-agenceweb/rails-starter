@@ -37,9 +37,34 @@ class PictureTest < ActiveSupport::TestCase
     end
   end
 
+  test 'should have picture linked' do
+    attachment = fixture_file_upload 'images/bart.png', 'image/png'
+    Picture.create(image: attachment, attachable_type: 'Post', attachable_id: @home_post.id)
+    assert @home_post.pictures?, 'should have picture linked to home article'
+  end
+
+  test 'should not have picture linked' do
+    assert_not @about_post.pictures?, 'should not have picture linked to about article'
+  end
+
+  test 'should return first picture object' do
+    attachment = fixture_file_upload 'images/bart.png', 'image/png'
+    picture = Picture.create(image: attachment, attachable_type: 'Post', attachable_id: @home_post.id)
+    assert_equal picture, @home_post.first_pictures
+  end
+
+  test 'should return first paperclip picture object' do
+    attachment = fixture_file_upload 'images/bart.png', 'image/png'
+    picture = Picture.create(image: attachment, attachable_type: 'Post', attachable_id: @about_2_post.id)
+    assert_equal picture.image.instance, @about_2_post.first_pictures_image.instance
+  end
+
   private
 
   def initialize_test
-    @picture = pictures(:one)
+    @picture = pictures(:home)
+    @home_post = posts(:home)
+    @about_post = posts(:about)
+    @about_2_post = posts(:about_2)
   end
 end
