@@ -117,7 +117,7 @@ module Admin
     private
 
     def initialize_test
-      @picture = pictures(:one)
+      @picture = pictures(:home)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)
