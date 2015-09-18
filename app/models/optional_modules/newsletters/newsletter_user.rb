@@ -22,6 +22,8 @@ class NewsletterUser < ActiveRecord::Base
   include Tokenable
   include Scopable
 
+  attr_accessor :nickname
+
   validates :email,
             presence: true,
             uniqueness: true,
