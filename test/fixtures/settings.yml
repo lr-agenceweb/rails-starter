@@ -26,7 +26,7 @@
 
 DEFAULTS: &DEFAULTS
   name: Rails Starter
-  email: demo@startup.fr
+  email: demo@rails-starter.com
   should_validate: true
   show_social: false
   show_qrcode: false

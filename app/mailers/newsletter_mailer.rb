@@ -1,7 +1,7 @@
 #
 # == Newsletter Mailer
 #
-class NewsletterMailer < ActionMailer::Base
+class NewsletterMailer < ApplicationMailer
   add_template_helper(HtmlHelper)
   default from: Setting.first.try(:email)
 

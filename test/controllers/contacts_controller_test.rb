@@ -58,6 +58,32 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should deliver successfully a message' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        ActionMailer::Base.deliveries.clear
+        assert_difference 'ActionMailer::Base.deliveries.size', 1 do
+          post :create, locale: locale.to_s, contact_form: {
+            name: 'cristiano',
+            email: 'cristiano@ronaldo.pt',
+            message: 'Hi',
+            send_copy: false
+          }
+        end
+
+        assert_redirected_to new_contact_path
+        last_email = ActionMailer::Base.deliveries.last
+
+        assert_equal 'Message envoyé par le site Rails Starter', I18n.t('contact.email.subject', site: @settings.title, locale: I18n.default_locale)
+        assert_equal 'demo@rails-starter.com', last_email.to[0]
+        assert_equal 'cristiano@ronaldo.pt', last_email.from[0]
+        assert_match(/Hi/, last_email.body.to_s)
+
+        ActionMailer::Base.deliveries.clear
+      end
+    end
+  end
+
   test 'should not send a contact message if fields are empty' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -169,5 +195,6 @@ class ContactsControllerTest < ActionController::TestCase
 
   def initialize_test
     @locales = I18n.available_locales
+    @settings = settings(:two)
   end
 end

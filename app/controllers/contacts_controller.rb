@@ -26,6 +26,7 @@ class ContactsController < ApplicationController
     if params[:contact_form][:nickname].blank?
       @contact_form = ContactForm.new(contact_form_params)
       if @contact_form.valid?
+        ContactFormMailer.message_me(@contact_form).deliver_now
         respond_action :create
       else
         render :new
