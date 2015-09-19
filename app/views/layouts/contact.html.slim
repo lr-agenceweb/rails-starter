@@ -14,7 +14,7 @@ html
         tbody
           tr
             td.copy width="1%"
-              p = I18n.t('contact.email.message_cc', name: @settings.name)
+              p = I18n.t('contact.email.message_cc', name: @setting.name)
 
     table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="social" width="100%"
       tbody
@@ -33,11 +33,11 @@ html
                         tr
                           td
                             p
-                              = @settings.title
+                              = @setting.title
                               | &nbsp;
                               = @map.decorate.full_address_inline
                               | &nbsp;
-                              = @settings.phone
+                              = @setting.phone
 
                         /! Spacing
                         tr
@@ -63,8 +63,8 @@ html
                                   td align="center" height="50" width="140"
                                     .imgpop.logo
                                       a href="#{root_url}"
-                                        = image_tag(image_url @settings.logo.url(:small))
-                                        small = @settings.subtitle
+                                        = image_tag(image_url @setting.logo.url(:small))
+                                        small = @setting.subtitle
                             /! end of logo
 
                             /! start of menu
@@ -72,7 +72,7 @@ html
                               tbody
                                 tr
                                   td.subject-mail align="center" height="50" st-content="menu" valign="middle"
-                                    p = I18n.t('contact.email.subject', site: @settings.title, locale: I18n.default_locale)
+                                    p = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
 
                             /! end of menu
     table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="full-text" width="100%"
@@ -125,7 +125,7 @@ html
                         /! Spacing
                         tr
                           td
-                            p #{@settings.name} - #{Time.zone.now.year}
+                            p #{@setting.name} - #{Time.zone.now.year}
 
                         /! Spacing
                         tr

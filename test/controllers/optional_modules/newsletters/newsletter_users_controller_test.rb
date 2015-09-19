@@ -157,7 +157,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
           assert_not ActionMailer::Base.deliveries.empty?
           assert_includes delivered_email.to, user.email
-          assert_includes delivered_email.from, @settings.email
+          assert_includes delivered_email.from, @setting.email
           assert_includes delivered_email.subject, I18n.t('newsletter.welcome')
         end
       end
@@ -173,7 +173,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = root_url
     @newsletter_user = newsletter_users(:newsletter_user_fr)
     @newsletter_user_en = newsletter_users(:newsletter_user_en)
-    @settings = settings(:one)
+    @setting = settings(:one)
 
     @email = 'aaa@bbb.cc'
     @lang = 'fr'

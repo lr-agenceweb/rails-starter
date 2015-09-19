@@ -5,6 +5,6 @@ class ApplicationMailer < ActionMailer::Base
   before_action :set_setting
 
   def set_setting
-    @settings = Setting.first
+    @setting = Setting.first
   end
 end

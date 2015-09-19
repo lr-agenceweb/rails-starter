@@ -6,7 +6,7 @@ class NewsletterMailer < ApplicationMailer
   default from: Setting.first.try(:email)
   layout 'newsletter'
 
-  before_action :set_settings
+  before_action :set_newsletter_settings
 
   # Email send after a user subscribed to the newsletter
   def welcome_user(newsletter_user)
@@ -36,7 +36,7 @@ class NewsletterMailer < ApplicationMailer
 
   private
 
-  def set_settings
+  def set_newsletter_settings
     @see_in_browser = false
     @preview_newsletter = false
     @is_welcome_user = false

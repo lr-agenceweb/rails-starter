@@ -1,7 +1,7 @@
 #
 # == NewslettersController
 #
-class NewslettersController < InheritedResources::Base
+class NewslettersController < ApplicationController
   include NewsletterAid
   before_action :set_newsletter_user, only: [:see_in_browser, :welcome_user]
   before_action :set_variables, only: [:see_in_browser, :welcome_user]

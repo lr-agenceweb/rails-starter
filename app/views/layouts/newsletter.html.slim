@@ -22,7 +22,7 @@ html
                     table
                       tr
                         td.logo width="20%"
-                          / = link_to(image_tag("/assets/images/logo.png", title: @settings.title, height: 100, width: 100), root_url)
+                          / = link_to(image_tag("/assets/images/logo.png", title: @setting.title, height: 100, width: 100), root_url)
                         td.title width="100%"
                           h1 = link_to @title, root_url
 
@@ -31,12 +31,12 @@ html
 
                     == yield
 
-                    p.author = @settings.name
+                    p.author = @setting.name
 
                 tr width="100%"
                   td.footer valign="top"
                     / = image_tag("/assets/images/newsletter/frise.jpg")
-                    p.mentions #{@settings.name} - #{Time.zone.now.year}
+                    p.mentions #{@setting.name} - #{Time.zone.now.year}
 
                 tr width="100%"
                   td.links valign="top"
