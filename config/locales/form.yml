@@ -44,6 +44,7 @@ fr:
         end_date: Date de fin de l'événement
         link: Vous pouvez mettre un lien vers le site organisateur de l'événement
         online: En cochant la case en ligne, vous choisissez d'afficher l'événement sur le site
+        show_calendar: Afficher un calendrier de l'événement sur le site ? (Attention, le calendrier ne sera visible que si les options "date de début" et "date de fin" de l'événement sont spécifiées)
 
       allow_comments: Voulez-vous autoriser les commentaires sur cet article ?
 
@@ -74,12 +75,26 @@ fr:
         size: Afin d'avoir un affichage optimale des slides sur le site, veuillez envoyer des images avec une largeur minimale de 2000px.
 
 
+      menu:
+        title: Titre de l'élément de menu
+        parent_id: Choisissez le parent de cet élément si désiré. Il deviendra alors un sous élément du ce parent.
+        show_in_header: Montrer cet élément dans le menu principal ?
+        show_in_footer: Montrer cet élément dans le menu du pied de page ?
+        online: Activer cet élément ? Si désactivé, il ne sera alors visible ni dans le menu principal ni dans le pied de page.
+
+      category:
+        menu_id: Élément de menu lié à cette page
+
       location:
         geocode_address: Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n'est pas affichée)
 
       string_box:
         content: Contenu du message personnalisé à afficher sur le site
         title: Titre du message personnalisé à afficher sur le site
+
+
+      picture:
+        show_as_gallery: Afficher les images sous forme de galerie ?
 
     placeholder:
       froala: Contenu de l'article ici :)

@@ -30,6 +30,24 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should not create newsletter user if captcha is filled' do
+    assert_no_difference ['NewsletterUser.count'] do
+      post :create, newsletter_user: { email: @email, lang: @lang, nickname: 'robot' }
+    end
+  end
+
+  test 'should create newsletter user if captcha is blank' do
+    assert_difference ['NewsletterUser.count'] do
+      post :create, newsletter_user: { email: @email, lang: @lang, nickname: '' }
+    end
+  end
+
+  test 'should not render template if captcha is filled' do
+    post :create, newsletter_user: { email: @email, lang: @lang, nickname: 'robot' }
+    assert_response :success
+    assert_empty @response.body
+  end
+
   test 'should create newsletter user' do
     assert_difference ['NewsletterUser.count'], 1 do
       post :create, newsletter_user: { email: @email, lang: @lang }
@@ -46,22 +64,34 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   end
 
   # == Ajax
-  test 'should create newsletter user by ajax' do
+  test 'AJAX :: should create newsletter user' do
     xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang }
     assert_response :success
   end
 
-  test 'should render show template if newsletter user created by ajax' do
+  test 'AJAX :: should render show template if newsletter user created' do
     xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang }
     assert_template :show
   end
 
-  test 'should not create newsletter user by ajax' do
+  test 'AJAX :: should not create newsletter user' do
     xhr :post, :create, format: :js, newsletter_user: { email: 'aaabbb.cc', lang: @lang }
     assert_response :unprocessable_entity
   end
 
-  test 'should render error template if newsletter user not being created (when ajax)' do
+  test 'AJAX :: should not create newsletter user if captcha is filled' do
+    assert_no_difference ['NewsletterUser.count'] do
+      xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang, nickname: 'robot' }
+    end
+  end
+
+  test 'AJAX :: should create newsletter user if captcha is blank' do
+    assert_difference ['NewsletterUser.count'] do
+      xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang, nickname: '' }
+    end
+  end
+
+  test 'AJAX :: should render error template if newsletter user not being created' do
     xhr :post, :create, format: :js, newsletter_user: { email: 'aaabbb.cc', lang: @lang }
     assert_template :errors
   end
@@ -127,7 +157,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
           assert_not ActionMailer::Base.deliveries.empty?
           assert_includes delivered_email.to, user.email
-          assert_includes delivered_email.from, @settings.email
+          assert_includes delivered_email.from, @setting.email
           assert_includes delivered_email.subject, I18n.t('newsletter.welcome')
         end
       end
@@ -143,7 +173,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = root_url
     @newsletter_user = newsletter_users(:newsletter_user_fr)
     @newsletter_user_en = newsletter_users(:newsletter_user_en)
-    @settings = settings(:one)
+    @setting = settings(:one)
 
     @email = 'aaa@bbb.cc'
     @lang = 'fr'

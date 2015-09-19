@@ -16,28 +16,23 @@ module Admin
     #
     # == Routing
     #
-    test 'should redirect to users/sign_in if not logged in' do
-      sign_out @administrator
-      assert_crud_actions(@category, new_user_session_path)
-    end
-
-    test 'should show index page if logged in' do
+    test 'should get index page if logged in' do
       get :index
       assert_response :success
     end
 
-    test 'should show show page if logged in' do
+    test 'should get show page if logged in' do
       get :show, id: @category
       assert_response :success
     end
 
-    test 'should show edit page if logged in' do
+    test 'should get edit page if logged in' do
       get :edit, id: @category
       assert_response :success
     end
 
     test 'should update category if logged in' do
-      patch :update, id: @category, category: {}
+      patch :update, id: @category, category: { menu_id: @category.menu_id }
       assert_redirected_to admin_category_path(@category)
     end
 
@@ -59,18 +54,31 @@ module Admin
       assert_redirected_to admin_dashboard_path
     end
 
-    test 'should delete optional_modules params if administrator' do
+    test 'should not delete optional_modules params if administrator' do
       patch :update, id: @category_search, category: { optional: false, optional_module_id: @category_blog.id }
       assert assigns(:category).optional
       assert_equal @category_search.id, assigns(:category).optional_module_id
     end
 
-    test 'should update optional_modules params if administrator' do
+    test 'should not update optional_modules params if administrator' do
       sign_in @super_administrator
       patch :update, id: @category_search, category: { optional: false, optional_module_id: @category_blog.id }
       assert_not assigns(:category).optional
       assert_equal @category_blog.id, assigns(:category).optional_module_id
     end
+
+    #
+    # == Menu
+    #
+    test 'should not update menu param if administrator' do
+      patch :update, id: @category, category: { menu_id: 8 }
+      assert_equal @category.menu_id, assigns(:category).menu_id
+    end
+
+    # test 'should not update menu param if menu_id is not present' do
+    #   patch :update, id: @category, category: { menu_id: nil }
+    #   assert_not assigns(:category).valid?
+    # end
 
     #
     # == Backgrounds
@@ -167,11 +175,16 @@ module Admin
     end
 
     #
-    # == Subscriber
+    # == Crud actions
     #
-    test 'should redirect to dashboard page if trying to access slider as subscriber' do
+    test 'should redirect to users/sign_in if not logged in' do
+      sign_out @administrator
+      assert_crud_actions(@category, new_user_session_path, model_name)
+    end
+
+    test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
-      assert_crud_actions(@category, admin_dashboard_path)
+      assert_crud_actions(@category, admin_dashboard_path, model_name)
     end
 
     private
@@ -187,21 +200,6 @@ module Admin
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
-    end
-
-    def assert_crud_actions(obj, url)
-      get :index
-      assert_redirected_to url
-      get :show, id: obj
-      assert_redirected_to url
-      get :edit, id: obj
-      assert_redirected_to url
-      post :create, category: {}
-      assert_redirected_to url
-      patch :update, id: obj, category: {}
-      assert_redirected_to url
-      delete :destroy, id: obj
-      assert_redirected_to url
     end
   end
 end

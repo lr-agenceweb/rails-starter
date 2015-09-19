@@ -10,7 +10,7 @@ class BackgroundDecorator < ApplicationDecorator
   end
 
   def category_name
-    model.attachable.try(:title)
+    model.attachable.menu_title
   end
 
   def handle_background_tag(klass = '')

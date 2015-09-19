@@ -18,13 +18,12 @@ class ApplicationController < ActionController::Base
   before_action :set_background, if: proc { @background_module.enabled && !@category.nil? }
   before_action :set_host_name
   before_action :set_newsletter_user, if: proc { @newsletter_module.enabled? }
-  before_action :set_search_autocomplete, if: proc { @search_module.enabled? }
   before_action :set_slider, if: proc { @slider_module.enabled? }
   before_action :set_socials_network, if: proc { @social_module.enabled? }
   before_action :set_map, if: proc { @map_module.enabled? }
   before_action :set_froala_key
 
-  decorates_assigned :setting, :category, :slider, :map, :background
+  decorates_assigned :setting, :category, :slider, :map, :background, :menu
 
   private
 
@@ -39,11 +38,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_menu_elements
-    menu_elements = ::Category.includes(:translations, :referencement).all
-    @menu_elements_header ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_header.with_allowed_module.by_position)
-    @menu_elements_footer ||= ::CategoryDecorator.decorate_collection(menu_elements.visible_footer.with_allowed_module.by_position)
+    menu_elements = Menu.includes(:translations, :category).online.only_parents.with_page.with_allowed_modules
+    @menu_elements_header ||= MenuDecorator.decorate_collection(menu_elements.visible_header.by_position)
+    @menu_elements_footer ||= MenuDecorator.decorate_collection(menu_elements.visible_footer.by_position)
     @controller_name = controller_name.classify
-    @category = Category.find_by(name: @controller_name)
+    @category = Category.includes(menu: [:translations]).find_by(name: @controller_name)
   end
 
   def set_background
@@ -56,10 +55,6 @@ class ApplicationController < ActionController::Base
 
   def set_newsletter_user
     @newsletter_user ||= NewsletterUser.new
-  end
-
-  def set_search_autocomplete
-    gon.push(search_path: searches_path(format: :json))
   end
 
   def set_adult_validation

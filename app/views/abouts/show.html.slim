@@ -3,7 +3,7 @@
 .row
   .small-12.columns
 
-    article
+    article.article-container
       == about.microdata_meta
 
       header
@@ -11,10 +11,16 @@
 
       div == about.content
 
-      .pictures
-        ul.small-block-grid-1.medium-block-grid-3.large-block-grid-6
-          - about.pictures_online.each do |picture|
-            li
-              = link_to retina_image_tag(picture, :image, :medium, class: 'th'), picture.image.url(:large), title: picture.title, class: 'magnific-popup'
+      .pictures.pictures-container
+        - if about.show_as_gallery?
+          .small-12.medium-6.medium-centered.columns
+            .fotorama data-nav="false" data-loop="true" data-autoplay="4000" data-keyboard="true" data-shuffle="true" data-transition="crossfade" data-transitionduration="1200" data-stopautoplayontouch="true" data-arrows="true"
+              - about.pictures_online.each_with_index do |image, index|
+                = link_to retina_image_tag(image, :image, :large), image.self_image_url_by_size(:medium), data: { caption: html_escape_once(image.decorate.title) }
+        - else
+          ul.small-block-grid-1.medium-block-grid-3.large-block-grid-6
+            - about.pictures_online.each do |picture|
+              li
+                = link_to retina_image_tag(picture, :image, :medium, class: 'th'), picture.image.url(:large), title: picture.title, class: 'magnific-popup'
 
 = render 'comments/section', o: @about

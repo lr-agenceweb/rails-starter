@@ -15,11 +15,6 @@ module Admin
     #
     # == Routes / Templates / Responses
     #
-    test 'should redirect to users/sign_in if not logged in' do
-      sign_out @administrator
-      assert_crud_actions(@picture, new_user_session_path)
-    end
-
     test 'should show index page if logged in' do
       get :index
       assert_response :success
@@ -48,11 +43,16 @@ module Admin
     end
 
     #
-    # == User role
+    # == Crud actions
     #
-    test 'should redirect to dashboard page if trying to access picture as subscriber' do
+    test 'should redirect to users/sign_in if not logged in' do
+      sign_out @administrator
+      assert_crud_actions(@picture, new_user_session_path, model_name)
+    end
+
+    test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
-      assert_crud_actions(@picture, admin_dashboard_path)
+      assert_crud_actions(@picture, admin_dashboard_path, model_name)
     end
 
     #
@@ -117,7 +117,7 @@ module Admin
     private
 
     def initialize_test
-      @picture = pictures(:one)
+      @picture = pictures(:home)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

@@ -2,16 +2,18 @@
 #
 # Table name: events
 #
-#  id         :integer          not null, primary key
-#  title      :string(255)
-#  slug       :string(255)
-#  content    :text(65535)
-#  url        :string(255)
-#  start_date :datetime
-#  end_date   :datetime
-#  online     :boolean          default(TRUE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  title           :string(255)
+#  slug            :string(255)
+#  content         :text(65535)
+#  url             :string(255)
+#  start_date      :datetime
+#  end_date        :datetime
+#  show_as_gallery :boolean          default(FALSE)
+#  show_calendar   :boolean          default(FALSE)
+#  online          :boolean          default(TRUE)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
@@ -37,7 +39,7 @@ class Event < ActiveRecord::Base
   has_one :location, as: :locationable, dependent: :destroy
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
-  has_many :pictures, as: :attachable, dependent: :destroy
+  has_many :pictures, -> { order(:position) }, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
 
   validate :calendar_date_correct?, unless: proc { end_date.blank? && start_date.blank? }

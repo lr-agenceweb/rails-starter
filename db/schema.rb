@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912224247) do
+ActiveRecord::Schema.define(version: 20150917160436) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20150912224247) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
+
+  add_index "backgrounds", ["attachable_type", "attachable_id"], name: "index_backgrounds_on_attachable_type_and_attachable_id", using: :btree
 
   create_table "blog_translations", force: :cascade do |t|
     t.integer  "blog_id",    limit: 4,     null: false
@@ -39,44 +41,32 @@ ActiveRecord::Schema.define(version: 20150912224247) do
   add_index "blog_translations", ["locale"], name: "index_blog_translations_on_locale", using: :btree
 
   create_table "blogs", force: :cascade do |t|
-    t.string   "title",          limit: 255
-    t.string   "slug",           limit: 255
-    t.text     "content",        limit: 65535
-    t.boolean  "allow_comments",               default: true
-    t.boolean  "online",                       default: true
-    t.integer  "user_id",        limit: 4
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.string   "title",           limit: 255
+    t.string   "slug",            limit: 255
+    t.text     "content",         limit: 65535
+    t.boolean  "allow_comments",                default: true
+    t.boolean  "show_as_gallery",               default: false
+    t.boolean  "online",                        default: true
+    t.integer  "user_id",         limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.string   "title",              limit: 255
     t.string   "name",               limit: 255
     t.string   "color",              limit: 255
-    t.boolean  "show_in_menu",                   default: true
-    t.boolean  "show_in_footer",                 default: false
-    t.integer  "position",           limit: 4
     t.boolean  "optional",                       default: false
     t.integer  "optional_module_id", limit: 4
+    t.integer  "menu_id",            limit: 4
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
   end
 
+  add_index "categories", ["menu_id"], name: "index_categories_on_menu_id", using: :btree
   add_index "categories", ["optional_module_id"], name: "index_categories_on_optional_module_id", using: :btree
-
-  create_table "category_translations", force: :cascade do |t|
-    t.integer  "category_id", limit: 4,   null: false
-    t.string   "locale",      limit: 255, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "title",       limit: 255
-  end
-
-  add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
-  add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "title",            limit: 50,    default: ""
@@ -130,15 +120,17 @@ ActiveRecord::Schema.define(version: 20150912224247) do
   add_index "event_translations", ["locale"], name: "index_event_translations_on_locale", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "slug",       limit: 255
-    t.text     "content",    limit: 65535
-    t.string   "url",        limit: 255
+    t.string   "title",           limit: 255
+    t.string   "slug",            limit: 255
+    t.text     "content",         limit: 65535
+    t.string   "url",             limit: 255
     t.datetime "start_date"
     t.datetime "end_date"
-    t.boolean  "online",                   default: true
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.boolean  "show_as_gallery",               default: false
+    t.boolean  "show_calendar",                 default: false
+    t.boolean  "online",                        default: true
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", using: :btree
@@ -202,16 +194,6 @@ ActiveRecord::Schema.define(version: 20150912224247) do
 
   add_index "locations", ["locationable_type", "locationable_id"], name: "index_locations_on_locationable_type_and_locationable_id", using: :btree
 
-  create_table "map_articles", force: :cascade do |t|
-    t.boolean  "online"
-    t.integer  "mappable_id",   limit: 4
-    t.string   "mappable_type", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  add_index "map_articles", ["mappable_type", "mappable_id"], name: "index_map_articles_on_mappable_type_and_mappable_id", using: :btree
-
   create_table "maps", force: :cascade do |t|
     t.string   "marker_icon",  limit: 255
     t.string   "marker_color", limit: 255
@@ -220,16 +202,27 @@ ActiveRecord::Schema.define(version: 20150912224247) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "markers", force: :cascade do |t|
-    t.string   "color",         limit: 255
-    t.string   "icon",          limit: 255
-    t.integer  "markable_id",   limit: 4
-    t.string   "markable_type", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+  create_table "menu_translations", force: :cascade do |t|
+    t.integer  "menu_id",    limit: 4,   null: false
+    t.string   "locale",     limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "title",      limit: 255
   end
 
-  add_index "markers", ["markable_type", "markable_id"], name: "index_markers_on_markable_type_and_markable_id", using: :btree
+  add_index "menu_translations", ["locale"], name: "index_menu_translations_on_locale", using: :btree
+  add_index "menu_translations", ["menu_id"], name: "index_menu_translations_on_menu_id", using: :btree
+
+  create_table "menus", force: :cascade do |t|
+    t.string   "title",          limit: 255
+    t.boolean  "online",                     default: true
+    t.boolean  "show_in_header",             default: true
+    t.boolean  "show_in_footer",             default: false
+    t.string   "ancestry",       limit: 255
+    t.integer  "position",       limit: 4
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
 
   create_table "newsletter_translations", force: :cascade do |t|
     t.integer  "newsletter_id", limit: 4,     null: false
@@ -294,13 +287,13 @@ ActiveRecord::Schema.define(version: 20150912224247) do
     t.text     "description",        limit: 65535
     t.text     "retina_dimensions",  limit: 65535
     t.boolean  "primary",                          default: false
+    t.integer  "position",           limit: 4
     t.boolean  "online",                           default: true
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
   end
 
-  add_index "pictures", ["attachable_id"], name: "index_pictures_on_attachable_id", using: :btree
-  add_index "pictures", ["attachable_type"], name: "index_pictures_on_attachable_type", using: :btree
+  add_index "pictures", ["attachable_type", "attachable_id"], name: "index_pictures_on_attachable_type_and_attachable_id", using: :btree
 
   create_table "post_translations", force: :cascade do |t|
     t.integer  "post_id",    limit: 4,     null: false
@@ -316,16 +309,17 @@ ActiveRecord::Schema.define(version: 20150912224247) do
   add_index "post_translations", ["post_id"], name: "index_post_translations_on_post_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "type",           limit: 255
-    t.string   "title",          limit: 255
-    t.string   "slug",           limit: 255
-    t.text     "content",        limit: 65535
-    t.boolean  "allow_comments",               default: true
-    t.boolean  "online",                       default: true
-    t.integer  "position",       limit: 4
-    t.integer  "user_id",        limit: 4
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.string   "type",            limit: 255
+    t.string   "title",           limit: 255
+    t.string   "slug",            limit: 255
+    t.text     "content",         limit: 65535
+    t.boolean  "show_as_gallery",               default: false
+    t.boolean  "allow_comments",                default: true
+    t.boolean  "online",                        default: true
+    t.integer  "position",        limit: 4
+    t.integer  "user_id",         limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
@@ -353,6 +347,8 @@ ActiveRecord::Schema.define(version: 20150912224247) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
+
+  add_index "referencements", ["attachable_type", "attachable_id"], name: "index_referencements_on_attachable_type_and_attachable_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -433,6 +429,7 @@ ActiveRecord::Schema.define(version: 20150912224247) do
     t.text     "description",        limit: 65535
     t.text     "retina_dimensions",  limit: 65535
     t.boolean  "primary",                          default: false
+    t.integer  "position",           limit: 4
     t.boolean  "online",                           default: true
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
@@ -498,15 +495,13 @@ ActiveRecord::Schema.define(version: 20150912224247) do
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 4
     t.datetime "avatar_updated_at"
-    t.string   "provider",               limit: 255
-    t.string   "uid",                    limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
-  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
+  add_foreign_key "categories", "menus", name: "fk_categories_menu_id"
+  add_foreign_key "menu_translations", "menus", name: "fk_menu_translations_menu_id"
 end

@@ -2,17 +2,18 @@
 #
 # Table name: posts
 #
-#  id             :integer          not null, primary key
-#  type           :string(255)
-#  title          :string(255)
-#  slug           :string(255)
-#  content        :text(65535)
-#  allow_comments :boolean          default(TRUE)
-#  online         :boolean          default(TRUE)
-#  position       :integer
-#  user_id        :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id              :integer          not null, primary key
+#  type            :string(255)
+#  title           :string(255)
+#  slug            :string(255)
+#  content         :text(65535)
+#  show_as_gallery :boolean          default(FALSE)
+#  allow_comments  :boolean          default(TRUE)
+#  online          :boolean          default(TRUE)
+#  position        :integer
+#  user_id         :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
@@ -42,7 +43,7 @@ class Post < ActiveRecord::Base
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
 
-  has_many :pictures, as: :attachable, dependent: :destroy
+  has_many :pictures, -> { order(:position) }, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
 
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true

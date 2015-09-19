@@ -1,8 +1,8 @@
 == setting.microdata_meta(map) if show_metadata
 
-.logo
-  .row
-    .small-6.medium-3.columns
-      = setting.logo_deco
-    .small-6.medium-9.columns
-      = setting.title_subtitle
+.row
+  .small-12.columns
+    a.header-title-link.logo-container href='/'
+      h1.header-title.logo style="background-image: url(#{setting.logo.url(:medium)})"
+        = setting.title
+        small.header-subtitle = setting.subtitle

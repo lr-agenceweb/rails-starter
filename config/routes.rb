@@ -32,7 +32,9 @@ Rails.application.routes.draw do
     resources :blogs, only: [:index, :show], concerns: [:paginatable, :commentable]
 
     # Search
-    resources :searches, only: [:index], concerns: [:paginatable]
+    resources :searches, only: [:index], concerns: [:paginatable] do
+      get 'autocomplete', on: :collection
+    end
 
     # Event
     resources :events, only: [:index, :show], concerns: [:paginatable]

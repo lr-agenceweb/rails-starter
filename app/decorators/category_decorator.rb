@@ -5,6 +5,10 @@ class CategoryDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
+  def title_d
+    model.menu_title
+  end
+
   def background_deco
     if background?
       retina_image_tag model.background, :image, :small
@@ -18,18 +22,6 @@ class CategoryDecorator < ApplicationDecorator
       content_tag(:span, 'Pas de couleur')
     else
       content_tag(:div, '', style: "background-color: #{model.color}; width: 35px; height: 20px;")
-    end
-  end
-
-  def in_menu
-    arbre do
-      status_tag I18n.t("enabled.#{model.show_in_menu}"), (model.show_in_menu? ? :ok : :warn)
-    end
-  end
-
-  def in_footer
-    arbre do
-      status_tag I18n.t("enabled.#{model.show_in_footer}"), (model.show_in_footer? ? :ok : :warn)
     end
   end
 
@@ -68,6 +60,6 @@ class CategoryDecorator < ApplicationDecorator
   private
 
   def aa_page_name
-    "#{I18n.t('activerecord.models.category.one').downcase} \"#{resource.decorate.title}\""
+    "#{I18n.t('activerecord.models.category.one').downcase} \"#{resource.decorate.menu_title}\""
   end
 end

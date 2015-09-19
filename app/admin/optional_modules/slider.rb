@@ -13,7 +13,7 @@ ActiveAdmin.register Slider do
                 :online,
                 :category_id,
                 slides_attributes: [
-                  :id, :image, :online, :_destroy,
+                  :id, :image, :online, :position, :_destroy,
                   translations_attributes: [
                     :id, :locale, :title, :description
                   ]
@@ -22,11 +22,12 @@ ActiveAdmin.register Slider do
   decorate_with SliderDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    Slider.find(ids).each do |slider|
-      toggle_value = slider.online? ? false : true
-      slider.update_attribute(:online, toggle_value)
-    end
+  action_item :new_slider, only: [:show] do
+    link_to I18n.t('active_admin.action_item.new_slider'), new_admin_slider_path if can? :create, Slider
+  end
+
+  batch_action :toggle_online do |ids|
+    Slider.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
@@ -65,9 +66,9 @@ ActiveAdmin.register Slider do
       end
     end
 
-    # panel 'Slider preview' do
-    #   render 'optional_modules/sliders/show', slider: resource, force: true
-    # end
+    panel 'Slider prévisualisation' do
+      render 'optional_modules/sliders/show', slider: resource, force: true
+    end
   end
 
   form do |f|
@@ -75,7 +76,7 @@ ActiveAdmin.register Slider do
 
     columns do
       column do
-        f.inputs t('activerecord.models.slider.one') do
+        f.inputs "Paramètres du #{t('activerecord.models.slider.one')}" do
           f.input :autoplay,
                   hint: I18n.t('form.hint.slider.autoplay')
           f.input :hover_pause,
@@ -100,7 +101,7 @@ ActiveAdmin.register Slider do
         f.inputs t('additional') do
           f.input :category_id,
                   as: :select,
-                  collection: Category.visible_header_fr,
+                  collection: Category.except_already_slider,
                   include_blank: false,
                   input_html: { class: 'chosen-select' }
           f.input :online
@@ -117,6 +118,13 @@ ActiveAdmin.register Slider do
   # == Controller
   #
   controller do
+    include Skippable
+    before_action :set_optional_modules
+
+    def scoped_collection
+      super.includes slides: [:translations]
+    end
+
     def edit
       @page_title = "#{t('active_admin.edit')} #{I18n.t('activerecord.models.slider.one')} page #{resource.decorate.page}"
     end

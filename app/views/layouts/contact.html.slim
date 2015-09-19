@@ -3,15 +3,19 @@ html
   head
     meta charset='utf-8'
     meta content=('text/html; charset=UTF-8') http-equiv='Content-Type'
-    title = message.subject
+    title = @message.subject
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
     = stylesheet_link_tag 'email', media: 'all', 'data-turbolinks-track': false
 
-  - @setting = Setting.first
-  - @map = Map.first
-  - @host = Figaro.env.application_host
-
   body#email
+
+    - if @copy_to_sender
+      table
+        tbody
+          tr
+            td.copy width="1%"
+              p = I18n.t('contact.email.message_cc', name: @setting.name)
+
     table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="social" width="100%"
       tbody
         tr
@@ -58,10 +62,8 @@ html
                                 tr
                                   td align="center" height="50" width="140"
                                     .imgpop.logo
-                                      a href="#"
-                                        - logo_absolute = URI.join(@host, @setting.logo.url(:medium)).to_s
-                                        = image_tag logo_absolute, st_image: 'logo', width: 100, border: 0
-                                        / = retina_image_tag(@setting, :logo, :medium, st_image: 'logo', width: 100, border: 0)
+                                      a href="#{root_url}"
+                                        = image_tag(image_url @setting.logo.url(:small))
                                         small = @setting.subtitle
                             /! end of logo
 
@@ -70,7 +72,7 @@ html
                               tbody
                                 tr
                                   td.subject-mail align="center" height="50" st-content="menu" valign="middle"
-                                    p = message.subject
+                                    p = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
 
                             /! end of menu
     table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="full-text" width="100%"
@@ -97,26 +99,7 @@ html
                                 /! content
                                 tr
                                   td st-content="text-content" style="font-size: 14px; color: #889098; line-height: 24px"
-                                    .main-content
-                                      - @resource.mail_form_attributes.each do |attribute, value|
-                                        - next if value.blank?
-
-                                        - if attribute == 'message'
-                                          - case value
-                                            - when /\n/
-                                              = raw(simple_format(h(value)))
-                                            - when Time, DateTime, Date
-                                              = I18n.l(value)
-                                            - else
-                                              = raw(simple_format(h(value)))
-
-                                      - @resource.mail_form_attributes.each do |attribute, value|
-                                        - next if value.blank?
-                                        - if attribute == 'name'
-                                          - @name_from_loop = value
-                                        - if attribute == 'email'
-                                          - @email_from_loop = value
-                                      p.sent-from == "#{@name_from_loop} (#{mail_to @email_from_loop})"
+                                    = yield
                                 /! End of content
                                 /! Spacing
                                 tr

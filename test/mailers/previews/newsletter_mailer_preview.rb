@@ -1,4 +1,7 @@
+#
+# == Newsletter Mailer preview
 # Preview all emails at http://localhost:3000/rails/mailers/send_newsletter_preview
+#
 class NewsletterMailerPreview < ActionMailer::Preview
   def welcome_user_preview
     @is_welcome_user = true

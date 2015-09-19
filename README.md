@@ -1,4 +1,4 @@
-Rails Starter (Work in Progress)
+Rails Starter
 ==============
 [![Build Status](https://travis-ci.org/anthony-robin/rails-starter.svg?branch=master)](https://travis-ci.org/anthony-robin/rails-starter)
 [![Code Climate](https://codeclimate.com/github/anthony-robin/rails-starter/badges/gpa.svg)](https://codeclimate.com/github/anthony-robin/rails-starter)
@@ -9,30 +9,32 @@ This project has been built to increase speed when creating a new application: i
 
 Requirements:
 ------------
-~~a computer~~  
-RVM with Ruby 2.2.2  
-Rails 4.2.4  
-Install [Foreman](https://github.com/ddollar/foreman)  
-Install [Maildev](https://github.com/djfarrelly/MailDev)  
+~~a computer~~
+RVM with Ruby 2.2.2
+Rails 4.2.4
+Install [Foreman](https://github.com/ddollar/foreman)
+Install [Maildev](https://github.com/djfarrelly/MailDev)
 
 Usage
 -----
-Clone it: `git clone git@github.com:anthony-robin/rails-starter.git`  
-Duplicate `.env.example` and rename it in `.env`  
-Duplicate `application.example.yml` and rename it in `application.yml`  
-Duplicate `database.example.yml` and rename it in `database.yml`  
-Setup your environment variable (database, secret key, devise key, ...)  
-Go to the application folder: `cd rails-starter`  
-Install gems: `bundle install`  
-Run migrations: `rake db:create db:migrate db:seed`  
-Run `foreman start`  
-Visit `http://localhost:3000`  
-That's it !  
+Clone it: `git clone git@github.com:anthony-robin/rails-starter.git`
+Duplicate `.env.example` and rename it in `.env`
+Duplicate `application.example.yml` and rename it in `application.yml`
+Duplicate `database.example.yml` and rename it in `database.yml`
+Setup your environment variable (database, secret key, devise key, ...)
+Go to the application folder: `cd rails-starter`
+Install gems: `bundle install`
+Create database: `rake db:create`
+Load schema: `rake db:schema:load`
+Seed datas: `rake db:seed`
+Run `foreman start`
+Visit `http://localhost:3000`
+That's it !
 
 Ruby and Rails versions
 -----------------------
-Ruby 2.2.2  
-Rails 4.2.4  
+Ruby 2.2.2
+Rails 4.2.4
 
 Server
 ------
@@ -40,7 +42,7 @@ This project use unicorn in local development. The server is launched using `for
 
 Database
 ---------
-It use `mysql2` but you can choose to use `PostgreSQL` or `SQlite` or any other SGBD.  
+It use `mysql2` but you can choose to use `PostgreSQL` or `SQlite` or any other SGBD.
 To create a dump of your database, run `rake db:backup`
 
 Template
@@ -49,10 +51,10 @@ It use [Slim](https://github.com/slim-template/slim-rails) template to write HTM
 
 Assets
 -------
-Style is writting in `scss` and `sass` (with compass)  
-Scripts are created in `coffeescript`  
+Style is writting in `scss` and `sass` (with compass)
+Scripts are created in `coffeescript`
 
-In development and test environments, assets are stored in `local` but in staging and production, they are stored with `dropbox` using dropbox-paperclip gem. The advantage of storing in an external server is that you relieve your server storage.  
+In development and test environments, assets are stored in `local` but in staging and production, they are stored with `dropbox` using dropbox-paperclip gem. The advantage of storing in an external server is that you relieve your server storage.
 
 Tasks
 ------
@@ -61,38 +63,38 @@ Tasks
 
 Mail
 -----
-It use [maildev](http://djfarrelly.github.io/MailDev/) to test emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
+It use [maildev](http://djfarrelly.github.io/MailDev/) to test emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.
 To see your mails, visit `http://localhost:1080`
 
 
 Modules
 ---------
-* **Newsletter**  
-In order to avoid spam email when sending newsletter to subscribers, you will need to sign your email address using SPF and DKIM keys and linked them to your DNS.  
-Be sure to generate a `dkim.private.key` and `dkim.public.key` and move the `dkim.private.key` in `config/dkim` folder.  
+* **Newsletter**
+In order to avoid spam email when sending newsletter to subscribers, you will need to sign your email address using SPF and DKIM keys and linked them to your DNS.
+Be sure to generate a `dkim.private.key` and `dkim.public.key` and move the `dkim.private.key` in `config/dkim` folder.
 
-* **Blog**  
+* **Blog**
 Write blog articles.
 
-* **Slider**  
+* **Slider**
 Add a slider on the page you want and customize its options.
 
-* **Comments**  
+* **Comments**
 Add comments for posts or blogs articles.
 
-* **Guest Book**  
+* **Guest Book**
 Allow users (connected or not) to leave a message in the guest book.
 
-* **Events**  
+* **Events**
 Create events (with start date and end date)
 
-* **Map**  
-Display a mapbox map of your organization or business  
+* **Map**
+Display a mapbox map of your organization or business
 
-* **Social Network**  
+* **Social Network**
 Display social networks icons to share your site or let users to follow you on this networks
 
-* **Breadcrumb**  
+* **Breadcrumb**
 Sow a breadcrumb on the page of your site
 
 Units Tests

@@ -51,7 +51,7 @@ puts 'Creating site Setting'
 setting_site = Setting.create!(
   name: 'Rails starter',
   title: 'Rails starter',
-  subtitle: 'Démonstration',
+  subtitle: 'Site de Démonstration',
   phone: '+33 (0)1 02 03 04 05',
   email: 'demo@starter.fr',
   logo: File.new("#{Rails.root}/public/system/seeds/logo/logo.png")
@@ -62,7 +62,7 @@ if @locales.include?(:en)
     setting_id: setting_site.id,
     locale: 'en',
     title: 'Rails starter',
-    subtitle: 'Demo'
+    subtitle: 'Demo website'
   )
 end
 
@@ -109,7 +109,8 @@ description = [
   'Module qui gère les différents réseaux sociaux',
   'Module qui affiche un fil d\'ariane sur le site',
   'Module qui affiche un Qrcode pour créer automatiquement un contact sur son smartphone',
-  'Module qui propose à l\'administrateur de choisir une image d\'arrière plan pour les pages du site'
+  'Module qui propose à l\'administrateur de choisir une image d\'arrière plan pour les pages du site',
+  'Module qui affiche un calendrier'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(
@@ -125,9 +126,10 @@ OptionalModule.list.each_with_index do |element, index|
 end
 
 #
-# == Categories
+# == Menu
 #
 puts 'Creating Menu elements'
+models_name = [:Home, :Search, :GuestBook, :Blog, :Event, :About, :Contact]
 title_en = [
   'Home',
   'Search',
@@ -146,6 +148,53 @@ title_fr = [
   'À Propos',
   'Me contacter'
 ]
+show_in_header = [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+]
+show_in_footer = [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+]
+
+title_en.each_with_index do |element, index|
+  menu = Menu.create!(
+    title: title_fr[index],
+    show_in_header: show_in_header[index],
+    show_in_footer: show_in_footer[index],
+    online: true
+  )
+  if @locales.include?(:en)
+    Menu::Translation.create!(
+      menu_id: menu.id,
+      locale: 'en',
+      title: title_en[index]
+    )
+  end
+
+  @menu_home = menu.id if element == 'Home'
+  @menu_search = menu.id if element == 'Search'
+  @menu_guest_book = menu.id if element == 'GuestBook'
+  @menu_blog = menu.id if element == 'Blog'
+  @menu_event = menu.id if element == 'Events'
+  @menu_about = menu.id if element == 'About'
+  @menu_contact = menu.id if element == 'Contact'
+end
+
+#
+# == Categories
+#
+puts 'Creating pages'
 description_en = [
   'Homepage description',
   'Search description',
@@ -182,39 +231,28 @@ keywords_fr = [
   'à propos',
   'contact'
 ]
-show_in_menu = [
-  true,
-  true,
-  true,
-  true,
-  true,
-  false,
-  true
-]
-show_in_footer = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false
-]
 
-Category.models_name_str.each_with_index do |element, index|
+models_name.each_with_index do |element, index|
+  element = element.to_s
   optional_module_id = nil
   optional_module_id = @optional_module_search.id if element == 'Search'
   optional_module_id = @optional_module_guest_book.id if element == 'GuestBook'
   optional_module_id = @optional_module_blog.id if element == 'Blog'
   optional_module_id = @optional_module_event.id if element == 'Event'
 
+  menu_id = @menu_home if element == 'Home'
+  menu_id = @menu_search if element == 'Search'
+  menu_id = @menu_guest_book if element == 'GuestBook'
+  menu_id = @menu_blog if element == 'Blog'
+  menu_id = @menu_event if element == 'Event'
+  menu_id = @menu_about if element == 'About'
+  menu_id = @menu_contact if element == 'Contact'
+
   category = Category.create!(
     name: element,
-    title: title_fr[index],
-    show_in_menu: show_in_menu[index],
-    show_in_footer: show_in_footer[index],
     optional: optional_module_id.nil? ? false : true,
-    optional_module_id: optional_module_id
+    optional_module_id: optional_module_id,
+    menu_id: menu_id
   )
 
   referencement = Referencement.create!(
@@ -226,11 +264,6 @@ Category.models_name_str.each_with_index do |element, index|
   )
 
   if @locales.include?(:en)
-    Category::Translation.create!(
-      category_id: category.id,
-      locale: 'en',
-      title: title_en[index]
-    )
     Referencement::Translation.create!(
       referencement_id: referencement.id,
       locale: 'en',
@@ -326,6 +359,14 @@ if @locales.include?(:en)
   )
 end
 
+puts 'Creating About picture'
+Picture.create!(
+  attachable_id: about.id,
+  attachable_type: 'Post',
+  image: File.new("#{Rails.root}/public/system/seeds/abouts/hosting.jpg"),
+  online: true
+)
+
 #
 # == Blog article
 #
@@ -392,6 +433,11 @@ Comment.create!(
 # == Event article
 #
 puts 'Creating Event article'
+event_images = [
+  'event-1-1.jpg',
+  'event-1-2.jpg',
+  'event-1-3.jpg'
+]
 event = Event.create!(
   title: 'Foire aux saucisses',
   slug: 'foire-aux-saucisses',
@@ -409,18 +455,6 @@ referencement = Referencement.create!(
   keywords: ''
 )
 
-puts 'Creating Event Location'
-Location.create!(
-  locationable_id: event.id,
-  locationable_type: 'Event',
-  address: 'Rue des Limaces',
-  city: 'Lyon',
-  postcode: 69_000,
-  geocode_address: 'Rue des Limaces, 69000 - Lyon',
-  latitude: 45.764,
-  longitude: 4.83566
-)
-
 if @locales.include?(:en)
   Event::Translation.create!(
     event_id: event.id,
@@ -435,6 +469,28 @@ if @locales.include?(:en)
     title: '',
     description: '',
     keywords: ''
+  )
+end
+
+puts 'Creating Event Location'
+Location.create!(
+  locationable_id: event.id,
+  locationable_type: 'Event',
+  address: 'Rue des Limaces',
+  city: 'Lyon',
+  postcode: 69_000,
+  geocode_address: 'Rue des Limaces, 69000 - Lyon',
+  latitude: 45.764,
+  longitude: 4.83566
+)
+
+puts 'Creating Event pictures'
+event_images.each do |image|
+  Picture.create!(
+    attachable_id: event.id,
+    attachable_type: 'Event',
+    image: File.new("#{Rails.root}/public/system/seeds/events/#{image}"),
+    online: true
   )
 end
 

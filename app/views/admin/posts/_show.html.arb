@@ -5,6 +5,7 @@ columns do
       attributes_table_for resource do
         row :content
         row :status
+        row :show_as_gallery_d
         row :image
         row :author_with_avatar
       end

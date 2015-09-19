@@ -22,6 +22,9 @@
 #= require plugins/mapbox
 #= require magnific-popup
 #= require fotorama
+#= require moment
+#= require fullcalendar
+#= require fullcalendar/lang/fr
 #= require jquery.autosize
 #= require globals/_functions
 #= require modules/responsive_menu
@@ -30,6 +33,7 @@
 #= require plugins/cookie_ie
 #= require plugins/cookie_adult_validation
 #= require plugins/fotorama
+#= require plugins/fullcalendar
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser

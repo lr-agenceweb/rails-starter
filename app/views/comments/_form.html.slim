@@ -1,2 +1,2 @@
-= simple_form_for [@commentable, @comment], validate: true, remote: true do |f|
+= simple_form_for [@commentable, @comment], validate: true, remote: true, authenticity_token: true do |f|
   = comment.form(f)

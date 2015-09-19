@@ -21,7 +21,7 @@ class LanguageHelperTest < ActionView::TestCase
 
   test 'should return correct class if tested locale is true' do
     params[:locale] = :fr
-    assert_equal 'l-nav-item-active', active_language(:fr)
+    assert_equal 'active', active_language(:fr)
     assert_nil active_language(:en)
   end
 

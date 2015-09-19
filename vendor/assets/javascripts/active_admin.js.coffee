@@ -21,3 +21,4 @@
 #= require i18n/translations
 #= require jquery.minicolors
 #= require admin/minicolors
+#= require fotorama

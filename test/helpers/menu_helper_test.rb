@@ -9,7 +9,7 @@ class MenuHelperTest < ActionView::TestCase
   setup :initialize_test
 
   test 'should return active class for home page' do
-    assert_equal set_active_class('homes', 'index'), 'l-nav-item-active'
+    assert_equal set_active_class('homes', 'index'), 'active'
   end
 
   test 'should not return active class if action params is show for home page' do
@@ -17,7 +17,7 @@ class MenuHelperTest < ActionView::TestCase
   end
 
   test 'should return active class if action params is false for home page' do
-    assert_equal set_active_class('homes'), 'l-nav-item-active'
+    assert_equal set_active_class('homes'), 'active'
   end
 
   test 'should not return active class for contact page' do

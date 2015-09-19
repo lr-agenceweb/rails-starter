@@ -2,9 +2,9 @@
 
 .row
   .small-12.columns
-    h2.text-center = link_to @category.title, searches_path
+    = title_for_category(category)
 
     = render 'form' unless params[:controller] == 'searches'
 
-    #search
+    #search_container
       = render 'search'

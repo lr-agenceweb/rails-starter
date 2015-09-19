@@ -13,6 +13,7 @@
 #  description        :text(65535)
 #  retina_dimensions  :text(65535)
 #  primary            :boolean          default(FALSE)
+#  position           :integer
 #  online             :boolean          default(TRUE)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

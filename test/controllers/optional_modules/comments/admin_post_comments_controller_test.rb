@@ -15,17 +15,12 @@ module Admin
     #
     # == Routes / Templates / Responses
     #
-    test 'should redirect to users/sign_in if not logged in' do
-      sign_out @administrator
-      assert_crud_actions(@comment, new_user_session_path)
-    end
-
-    test 'should show index page if logged in' do
+    test 'should get index page if logged in' do
       get :index
       assert_response :success
     end
 
-    test 'should show show page if logged in' do
+    test 'should get show page if logged in' do
       get :show, id: @comment
       assert_response :success
     end
@@ -96,32 +91,28 @@ module Admin
     #
     # == Subscriber
     #
-    test 'should redirect to dashboard page if trying to access comment as subscriber' do
+    test 'should redirect to users/sign_in if not logged in' do
+      sign_out @administrator
+      assert_crud_actions(@comment, new_user_session_path, model_name)
+    end
+
+    test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
       get :index
       assert_response :success
-      get :show, id: @comment
-      assert_redirected_to admin_dashboard_path
-      get :edit, id: @comment
-      assert_redirected_to admin_dashboard_path
-      post :create, comment: {}
-      assert_redirected_to admin_dashboard_path
-      patch :update, id: @comment, comment: {}
-      assert_redirected_to admin_dashboard_path
-      delete :destroy, id: @comment
-      assert_redirected_to admin_dashboard_path
+      assert_crud_actions(@comment, admin_dashboard_path, model_name, no_index: true)
     end
 
-    # TODO: Fix broken test
-    # test 'should destroy all comments if super_administrator' do
-    #   sign_in @super_administrator
-    #   assert_difference ['Comment.count'], -3 do
-    #     delete :destroy, id: @comment
-    #     delete :destroy, id: @comment_subscriber
-    #     delete :destroy, id: @comment_administrator
-    #   end
-    #   assert_redirected_to admin_post_comments_path
-    # end
+    test 'should destroy all comments if super_administrator' do
+      skip 'Fix this broken test'
+      sign_in @super_administrator
+      assert_difference ['Comment.count'], -3 do
+        delete :destroy, id: @comment
+        delete :destroy, id: @comment_subscriber
+        delete :destroy, id: @comment_administrator
+      end
+      assert_redirected_to admin_post_comments_path
+    end
 
     #
     # == Module disabled
@@ -129,11 +120,11 @@ module Admin
     test 'should not access page if blog module is disabled' do
       disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
       sign_in @super_administrator
-      assert_crud_actions(@comment, admin_dashboard_path)
+      assert_crud_actions(@comment, admin_dashboard_path, model_name)
       sign_in @administrator
-      assert_crud_actions(@comment, admin_dashboard_path)
+      assert_crud_actions(@comment, admin_dashboard_path, model_name)
       sign_in @subscriber
-      assert_crud_actions(@comment, admin_dashboard_path)
+      assert_crud_actions(@comment, admin_dashboard_path, model_name)
     end
 
     private

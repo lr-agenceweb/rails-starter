@@ -59,6 +59,6 @@ module LanguageHelper
   end
 
   def active_language(locale)
-    'l-nav-item-active' if current_locale?(locale)
+    'active' if current_locale?(locale)
   end
 end

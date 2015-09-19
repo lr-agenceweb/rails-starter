@@ -17,16 +17,16 @@ module Admin
     #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      assert_crud_actions(@optional_module, new_user_session_path)
+      assert_crud_actions(@optional_module, new_user_session_path, model_name)
     end
 
     test 'should redirect to dashboard if user is subscriber' do
       sign_in @subscriber
-      assert_crud_actions(@optional_module, admin_dashboard_path)
+      assert_crud_actions(@optional_module, admin_dashboard_path, model_name)
     end
 
     test 'should redirect to dashboard if user is administrator' do
-      assert_crud_actions(@optional_module, admin_dashboard_path)
+      assert_crud_actions(@optional_module, admin_dashboard_path, model_name)
     end
 
     test 'should be all good if user is super_administrator' do
@@ -83,21 +83,6 @@ module Admin
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
-    end
-
-    def assert_crud_actions(obj, url)
-      get :index
-      assert_redirected_to url
-      get :show, id: obj
-      assert_redirected_to url
-      get :edit, id: obj
-      assert_redirected_to url
-      post :create, optional_module: {}
-      assert_redirected_to url
-      patch :update, id: obj, optional_module: {}
-      assert_redirected_to url
-      delete :destroy, id: obj
-      assert_redirected_to url
     end
   end
 end

@@ -1,26 +1,12 @@
 #
 # == ContactForm Model
 #
-class ContactForm < MailForm::Base
-  attribute :name
-  attribute :email
-  attribute :message
-  attribute :nickname, captcha: true # used to cheat spam robots
+class ContactForm
+  include ActiveModel::Model
+  include Mailable
 
-  validates :name, presence: true
-  validates :message, presence: true
-  validates :email, presence: true, email_format: true
+  attr_accessor :name, :email, :message, :send_copy, :subject, :nickname
 
-  append :remote_ip, :user_agent
-
-  # Declaration of the e-mail headers.
-  def headers
-    settings = Setting.first
-    {
-      subject: "Contact depuis #{settings.title}",
-      from: %("#{name}" <#{email}>),
-      to: settings.email,
-      bcc: email
-    }
-  end
+  validates :name, :message, :email, presence: true
+  validates :email, email_format: true
 end

@@ -85,3 +85,7 @@ background:
   name: Background
   enabled: true
 
+calendar:
+  <<: *DEFAULTS
+  name: Calendar
+  enabled: true

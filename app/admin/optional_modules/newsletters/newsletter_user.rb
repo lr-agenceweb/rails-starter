@@ -50,6 +50,8 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
   # == Controller
   #
   controller do
+    include Skippable
+
     def update
       super { admin_letter_users_path }
     end

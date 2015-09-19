@@ -1,5 +1,5 @@
 if($('#term').data('controller') == 'searches') {
-  $('#search').html("<%= j render 'search' %>");
+  $('#search_container').html("<%= j render 'search' %>");
   NProgress.done();
 }
 else if(<%= params[:term].present? %>) {

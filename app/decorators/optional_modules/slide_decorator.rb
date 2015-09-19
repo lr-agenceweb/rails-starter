@@ -29,7 +29,7 @@ class SlideDecorator < PictureDecorator
   end
 
   def slider_page_name
-    model.attachable.category.title
+    model.attachable.category.menu_title
   end
 
   #

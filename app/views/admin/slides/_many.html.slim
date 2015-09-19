@@ -1,5 +1,5 @@
 - f.inputs t('activerecord.models.slide.other')
-  - f.has_many :slides, heading: false do |item|
+  - f.has_many :slides, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.slide.one')), sortable: :position do |item|
     = item.inputs 'Image du slider' do
       - item.input :image,
                    as: :file,
@@ -23,4 +23,5 @@
 
         - t.input :description,
                   label: I18n.t('activerecord.attributes.slide.description'),
-                  hint: I18n.t('form.hint.slide.description')
+                  hint: I18n.t('form.hint.slide.description'),
+                  input_html: { class: 'small-height' }

@@ -16,11 +16,8 @@ ActiveAdmin.register GuestBook do
   decorate_with GuestBookDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    GuestBook.find(ids).each do |guest_book|
-      toggle_value = guest_book.validated? ? false : true
-      guest_book.update_attribute(:validated, toggle_value)
-    end
+  batch_action :toggle_validated do |ids|
+    GuestBook.find(ids).each { |item| item.toggle! :validated }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
@@ -43,5 +40,12 @@ ActiveAdmin.register GuestBook do
       row :status
       row :created_at
     end
+  end
+
+  #
+  # == Controller
+  #
+  controller do
+    include Skippable
   end
 end

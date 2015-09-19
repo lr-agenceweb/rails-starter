@@ -5,13 +5,14 @@ ActiveAdmin.register Blog do
   permit_params :id,
                 :type,
                 :allow_comments,
+                :show_as_gallery,
                 :online,
                 :user_id,
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
                 ],
                 pictures_attributes: [
-                  :id, :locale, :image, :online, :_destroy
+                  :id, :locale, :image, :online, :position, :_destroy
                 ],
                 referencement_attributes: [
                   :id,
@@ -23,11 +24,8 @@ ActiveAdmin.register Blog do
   decorate_with BlogDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    Blog.find(ids).each do |blog|
-      toggle_value = blog.online? ? false : true
-      blog.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    Blog.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
@@ -36,6 +34,7 @@ ActiveAdmin.register Blog do
     column :image
     column :title
     column :allow_comments_status
+    column :show_as_gallery_d
     column :status
     translation_status
     column :author_with_avatar

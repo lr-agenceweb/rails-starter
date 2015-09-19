@@ -2,4 +2,4 @@
   p
     = I18n.t('newsletter.footer_message')
     | &nbsp; - &nbsp;
-    == link_to I18n.t('newsletter.unsubscribe.link'), unsubscribe_url(newsletter_user.id, newsletter_user.token, host: host), target: :blank, onclick: "return confirm(\"#{I18n.t('newsletter.unsubscribe.alert')} \")"
+    == link_to I18n.t('newsletter.unsubscribe.link'), unsubscribe_url(newsletter_user.id, newsletter_user.token), target: :blank, onclick: "return confirm(\"#{I18n.t('newsletter.unsubscribe.alert')} \")"

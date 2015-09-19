@@ -4,6 +4,7 @@ ActiveAdmin.register About do
 
   permit_params :id,
                 :type,
+                :show_as_gallery,
                 :online,
                 :allow_comments,
                 :user_id,
@@ -11,7 +12,7 @@ ActiveAdmin.register About do
                   :id, :locale, :title, :slug, :content
                 ],
                 pictures_attributes: [
-                  :id, :locale, :image, :online, :_destroy
+                  :id, :locale, :image, :online, :position, :_destroy
                 ],
                 referencement_attributes: [
                   :id,
@@ -35,11 +36,8 @@ ActiveAdmin.register About do
     link_to I18n.t('active_admin.action_item.see_article_in_frontend'), about_path(resource), target: :blank
   end
 
-  batch_action :toggle_value do |ids|
-    Post.find(ids).each do |post|
-      toggle_value = post.online? ? false : true
-      post.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    About.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
@@ -48,6 +46,7 @@ ActiveAdmin.register About do
     column :image
     column :title
     column :allow_comments_status
+    column :show_as_gallery_d
     column :status
     translation_status
     column :author_with_avatar

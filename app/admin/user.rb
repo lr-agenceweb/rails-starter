@@ -91,6 +91,8 @@ ActiveAdmin.register User do
   # == Controller
   #
   controller do
+    include Skippable
+
     def update
       params_user = params[:user]
       params_user_role_id = params_user[:role_id]

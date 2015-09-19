@@ -13,14 +13,14 @@
 #  description        :text(65535)
 #  retina_dimensions  :text(65535)
 #  primary            :boolean          default(FALSE)
+#  position           :integer
 #  online             :boolean          default(TRUE)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
 # Indexes
 #
-#  index_pictures_on_attachable_id    (attachable_id)
-#  index_pictures_on_attachable_type  (attachable_type)
+#  index_pictures_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
 #
 
 #

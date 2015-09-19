@@ -5,12 +5,14 @@ ActiveAdmin.register Event do
                 :url,
                 :start_date,
                 :end_date,
+                :show_as_gallery,
+                :show_calendar,
                 :online,
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
                 ],
                 pictures_attributes: [
-                  :id, :image, :online, :_destroy
+                  :id, :image, :online, :position, :_destroy
                 ],
                 location_attributes: [
                   :id, :address, :city, :postcode
@@ -25,11 +27,13 @@ ActiveAdmin.register Event do
   decorate_with EventDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_value do |ids|
-    Event.find(ids).each do |event|
-      toggle_value = event.online? ? false : true
-      event.update_attribute(:online, toggle_value)
-    end
+  batch_action :toggle_online do |ids|
+    Event.find(ids).each { |item| item.toggle! :online }
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
+
+  batch_action :toggle_show_calendar, if: proc { @calendar_module.enabled? } do |ids|
+    Event.find(ids).each { |event| event.toggle! :show_calendar }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
@@ -41,6 +45,7 @@ ActiveAdmin.register Event do
     column :end_date
     column :duration
     column :url
+    column :show_calendar_d if calendar_module.enabled?
     column :status
     column :full_address_inline
 
@@ -58,6 +63,8 @@ ActiveAdmin.register Event do
           row :end_date
           row :duration
           row :url
+          row :show_as_gallery_d
+          row :show_calendar_d if calendar_module.enabled?
           row :status
           row :full_address_inline
         end
@@ -71,6 +78,27 @@ ActiveAdmin.register Event do
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
+
+    columns do
+      column do
+        f.inputs t('general') do
+          f.input :show_as_gallery,
+                  hint: I18n.t('form.hint.picture.show_as_gallery')
+
+          if calendar_module.enabled?
+            f.input :show_calendar,
+                    hint: I18n.t('form.hint.event.show_calendar')
+          end
+
+          f.input :online, hint: I18n.t('form.hint.event.online')
+          f.input :url, hint: I18n.t('form.hint.event.link')
+        end
+      end
+
+      column do
+        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
+      end
+    end
 
     columns do
       column do
@@ -94,25 +122,44 @@ ActiveAdmin.register Event do
                     value: f.object.end_date.blank? ? '' : f.object.end_date.localtime.to_s(:db)
                   },
                   hint: I18n.t('form.hint.event.end_date')
-
-          f.input :url, hint: I18n.t('form.hint.event.link')
-          f.input :online, hint: I18n.t('form.hint.event.online')
         end
-
-        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
       end
     end # columns
 
     columns do
       column do
-        render 'admin/shared/referencement/form', f: f
+        render 'admin/shared/pictures/many', f: f
       end
 
       column do
-        render 'admin/shared/pictures/many', f: f
+        render 'admin/shared/referencement/form', f: f
       end
     end
 
     f.actions
+  end
+
+  #
+  # == Controller
+  #
+  controller do
+    include Skippable
+    before_action :set_optional_modules
+
+    def create
+      remove_calendar_param
+      super
+    end
+
+    def update
+      remove_calendar_param
+      super
+    end
+
+    private
+
+    def remove_calendar_param
+      params[:event].delete :show_calendar unless @calendar_module.enabled?
+    end
   end
 end

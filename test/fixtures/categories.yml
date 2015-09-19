@@ -3,76 +3,76 @@
 # Table name: categories
 #
 #  id                 :integer          not null, primary key
-#  title              :string(255)
 #  name               :string(255)
 #  color              :string(255)
-#  show_in_menu       :boolean          default(TRUE)
-#  show_in_footer     :boolean          default(FALSE)
-#  position           :integer
 #  optional           :boolean          default(FALSE)
 #  optional_module_id :integer
+#  menu_id            :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
 # Indexes
 #
+#  index_categories_on_menu_id             (menu_id)
 #  index_categories_on_optional_module_id  (optional_module_id)
 #
 
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
-  show_in_menu: true
-  show_in_footer: false
 
 home:
   <<: *DEFAULTS
-  title: Accueil
   name: Home
   optional: false
   optional_module: null
   color: '#F0F'
+  menu: home
 
 about:
   <<: *DEFAULTS
   name: About
-  show_in_menu: false
-  show_in_footer: true
   optional: false
   optional_module: null
+  menu: about
 
 contact:
   <<: *DEFAULTS
   name: Contact
   optional: false
   optional_module: null
+  menu: contact
 
 search:
   <<: *DEFAULTS
-  title: Rechercher
   name: Search
-  show_in_menu: false
   optional: true
   optional_module: search
   color: '#F00'
+  menu: search
 
 guest_book:
   <<: *DEFAULTS
-  title: Guest Book
   name: GuestBook
   optional: true
   optional_module: guest_book
+  menu: guest_book
 
 blog:
   <<: *DEFAULTS
-  title: Blog
   name: Blog
   optional: true
   optional_module: blog
+  menu: blog
 
 event:
   <<: *DEFAULTS
-  title: Event
   name: Event
   optional: true
   optional_module: event
+  menu: event
+
+test_online:
+  <<: *DEFAULTS
+  name: Test
+  # not linked to a menu item

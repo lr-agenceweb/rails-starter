@@ -6,17 +6,21 @@ class NewsletterUsersController < ApplicationController
   after_action :send_welcome_newsletter, only: [:create], if: proc { @success }
 
   def create
-    @success = false
-    @newsletter_user = NewsletterUser.new(newsletter_user_params)
-    respond_to do |format|
-      if @newsletter_user.save
-        @success = true
-        format.html { redirect_to :back }
-        format.js { render :show, status: :created }
-      else
-        format.html { redirect_to :back }
-        format.js { render 'errors', status: :unprocessable_entity }
+    if params[:newsletter_user][:nickname].blank?
+      @success = false
+      @newsletter_user = NewsletterUser.new(newsletter_user_params)
+      respond_to do |format|
+        if @newsletter_user.save
+          @success = true
+          format.html { redirect_to :back, flash: { success: I18n.t('newsletter.subscribe_success', { email: @newsletter_user.email }) }}
+          format.js { render :show, status: :created }
+        else
+          format.html { redirect_to :back, flash: { alert: I18n.t('newsletter.subscribe_error') }}
+          format.js { render 'errors', status: :unprocessable_entity }
+        end
       end
+    else
+      render nothing: true
     end
   end
 

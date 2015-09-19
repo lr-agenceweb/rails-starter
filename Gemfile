@@ -11,6 +11,7 @@ gem 'rails', '4.2.4'
 gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
+gem 'ancestry'
 
 #
 # == Administration
@@ -20,6 +21,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
 gem 'active_skin'
+gem 'active_admin-sortable_tree'
 
 #
 # == Decorator
@@ -42,6 +44,12 @@ gem 'js_cookie_rails'
 gem 'fotoramajs'
 
 #
+# == Calendar
+#
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
+#
 # == Media upload
 #
 gem 'paperclip', github: 'thoughtbot/paperclip'
@@ -55,9 +63,10 @@ gem 'simple_form'
 gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_validations-simple_form'
 gem 'autosize-rails'
-gem 'mail_form' # contact form
 gem 'wysiwyg-rails' # Froala editor
 gem 'valid_url'
+gem 'best_in_place', github: 'bernat/best_in_place'
+gem 'actionmailer-with-request'
 
 #
 # == Translation

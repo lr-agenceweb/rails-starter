@@ -86,6 +86,14 @@ GIT
     vex_rails (0.2.0)
 
 GIT
+  remote: git://github.com/bernat/best_in_place.git
+  revision: 9fa298dd8fe7599cee3ae5f863668367f89ad298
+  specs:
+    best_in_place (3.0.3)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
+
+GIT
   remote: git://github.com/mvdstam/activeadmin-sortable.git
   revision: be5806ee5e1dc94da9331c9527f64e0f894a0b87
   specs:
@@ -121,6 +129,8 @@ GEM
       activejob (= 4.2.4)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 1.0, >= 1.0.5)
+    actionmailer-with-request (0.4.0)
+      rails (>= 3)
     actionpack (4.2.4)
       actionview (= 4.2.4)
       activesupport (= 4.2.4)
@@ -134,6 +144,10 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_admin-sortable_tree (0.2.1)
+      activeadmin (>= 0.6)
+      jquery-ui-rails (~> 5.0)
+      rails (>= 3.2)
     active_skin (0.0.9)
     activejob (4.2.4)
       activesupport (= 4.2.4)
@@ -155,6 +169,8 @@ GEM
       activerecord (>= 3.0)
     addressable (2.3.8)
     analytical (3.0.12)
+    ancestry (2.1.0)
+      activerecord (>= 3.0.0)
     annotate (2.6.8)
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
@@ -302,6 +318,9 @@ GEM
       sass (>= 3.3.0, < 3.5)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
+    fullcalendar-rails (2.3.1.0)
+      jquery-rails (>= 3.1.1, < 5.0.0)
+      momentjs-rails (~> 2.8, >= 2.8.4)
     g (1.7.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -389,9 +408,6 @@ GEM
     magnific-popup-rails (0.9.9.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mail_form (1.5.0)
-      actionmailer (>= 3.2, < 5)
-      activemodel (>= 3.2, < 5)
     meta-tags (2.0.0)
       actionpack (>= 3.0.0)
     meta_request (0.3.4)
@@ -410,6 +426,8 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
+    momentjs-rails (2.10.3)
+      railties (>= 3.1)
     multi_json (1.11.2)
     mysql2 (0.3.18)
     net-scp (1.2.1)
@@ -609,14 +627,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionmailer-with-request
+  active_admin-sortable_tree
   active_skin
   activeadmin!
   activeadmin-globalize!
   activeadmin-sortable!
   acts_as_list
   analytical
+  ancestry
   annotate (~> 2.6.5)
   autosize-rails
+  best_in_place!
   better_errors
   bullet
   byebug
@@ -644,6 +666,7 @@ DEPENDENCIES
   fotoramajs
   foundation-rails
   friendly_id (~> 5.1)
+  fullcalendar-rails
   globalize (~> 5.0.0)
   gmaps-autocomplete-rails
   gon
@@ -659,12 +682,12 @@ DEPENDENCIES
   js_cookie_rails
   kaminari (~> 0.16.1)
   magnific-popup-rails
-  mail_form
   mapbox-rails!
   meta-tags
   meta_request
   minitest
   minitest-reporters
+  momentjs-rails
   mysql2
   nokogiri
   nprogress-rails

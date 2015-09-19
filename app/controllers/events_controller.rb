@@ -17,13 +17,14 @@ class EventsController < ApplicationController
   # GET /event/1.json
   def show
     redirect_to @event, status: :moved_permanently if request.path_parameters[:id] != @event.slug
+    gon.push(event_path: event_path(format: :json))
     seo_tag_show event
   end
 
   private
 
   def set_event
-    @event = Event.online.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
+    @event = Event.online.includes(pictures: [:translations], referencement: [:translations]).friendly.find(params[:id])
   end
 
   def event_module_enabled?

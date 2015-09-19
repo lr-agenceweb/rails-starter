@@ -1,0 +1,63 @@
+# == Schema Information
+#
+# Table name: menus
+#
+#  id             :integer          not null, primary key
+#  title          :string(255)
+#  online         :boolean          default(TRUE)
+#  show_in_header :boolean          default(TRUE)
+#  show_in_footer :boolean          default(FALSE)
+#  ancestry       :string(255)
+#  position       :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  show_in_header: true
+  show_in_footer: false
+  online: true
+
+home:
+  <<: *DEFAULTS
+  title: Home
+
+about:
+  <<: *DEFAULTS
+  title: About
+  ancestry: <%= ActiveRecord::FixtureSet.identify(:home) %>
+  show_in_footer: true
+
+contact:
+  <<: *DEFAULTS
+  title: Contact
+
+search:
+  <<: *DEFAULTS
+  title: Search
+  show_in_header: false
+
+guest_book:
+  <<: *DEFAULTS
+  title: GuestBook
+
+blog:
+  <<: *DEFAULTS
+  title: Blog
+
+event:
+  <<: *DEFAULTS
+  title: Events
+
+test_offline:
+  <<: *DEFAULTS
+  title: Test offline
+  online: false
+
+test_online:
+  <<: *DEFAULTS
+  title: Test online
+  show_in_header: false
+  show_in_footer: true

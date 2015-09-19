@@ -19,7 +19,7 @@ class GuestBooksController < ApplicationController
       @guest_book = GuestBook.new(guest_book_params)
       @guest_book.validated = @setting.should_validate? ? false : true
       if @guest_book.save
-        flash.now[:success] = 'Message was successfully created.'
+        flash.now[:success] = I18n.t('guest_book.success')
         respond_action 'create', false
       else
         respond_action :index, true
@@ -45,7 +45,7 @@ class GuestBooksController < ApplicationController
 
   def respond_action(template, should_render)
     respond_to do |format|
-      format.html { redirect_to guest_books_path } unless should_render
+      format.html { redirect_to guest_books_path, flash: { success: I18n.t('guest_book.success') } } unless should_render
       format.html { render template } if should_render
       format.js { render template }
     end

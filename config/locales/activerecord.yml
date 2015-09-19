@@ -108,6 +108,9 @@ fr:
       category:
         one: Page
         other: Pages
+      menu:
+        one: Menu
+        other: Menus
       string_box:
         one: Contenu personnalisé
         other: Contenus personalisés
@@ -147,6 +150,13 @@ fr:
       social:
         one: Réseau Social
         other: Réseaux Sociaux
+      search:
+        one: Recherche
+        other: Recherches
+      contact:
+        one: Contact
+        other: Contacts
+
 
     attributes:
       post:
@@ -161,6 +171,8 @@ fr:
         status: Statut
         allow_comments: Autoriser les commentaires
         allow_comments_status: Autoriser les commentaires
+        show_as_gallery: Galerie d'images
+        show_as_gallery_d: Galerie d'images
       blog:
         title: Titre
         content: Contenu
@@ -168,6 +180,8 @@ fr:
         status: Statut
         allow_comments: Autoriser les commentaires
         allow_comments_status: Autoriser les commentaires
+        show_as_gallery: Galerie d'images
+        show_as_gallery_d: Galerie d'images
       setting:
         title: Titre
         subtitle: Sous-titre
@@ -198,17 +212,24 @@ fr:
         status: Rôle
       category:
         title: Titre
-        show_in_menu: Inclus dans le menu ?
-        show_in_footer: Inclus dans le footer ?
-        in_menu: Dans le menu principal ?
-        in_footer: Dans le menu du footer ?
+        title_d: Titre
         name: Nom de la catégorie
         background: Arrière-plan
         background_deco: Arrière-plan
         position: Position
         custom_background_color: Couleur de fond de page personnalisée
         color: Couleur
-        color: Couleur
+        div_color: Couleur de fond de site
+      menu:
+        parent_id: Menu parent
+        children_list: Sous-menu(s)
+        online: En ligne
+        status: État
+        show_in_footer: Dans le footer
+        show_in_footer_d: Dans le footer
+        show_in_header: Dans le menu principal
+        show_in_header_d: Dans le menu principal
+        title: Titre
       referencement:
         description: Description
         keywords: Mots-clés
@@ -306,6 +327,10 @@ fr:
         end_date: Date de fin
         online: En ligne ?
         status: État
+        show_as_gallery: Galerie d'images
+        show_as_gallery_d: Galerie d'images
+        show_calendar_d: Calendrier
+        show_calendar: Calendrier
         full_address_inline: Adresse de l'événement
         duration: Durée
       map:

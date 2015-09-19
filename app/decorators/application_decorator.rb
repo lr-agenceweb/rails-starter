@@ -74,6 +74,11 @@ class ApplicationDecorator < Draper::Decorator
     status_tag_deco I18n.t("online.#{model.online}"), color
   end
 
+  def show_as_gallery_d
+    color = model.show_as_gallery? ? 'green' : 'red'
+    status_tag_deco I18n.t("enabled.#{model.show_as_gallery}"), color
+  end
+
   def status_tag_deco(value, color)
     arbre do
       status_tag(value, color)

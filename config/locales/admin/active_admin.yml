@@ -13,12 +13,17 @@ fr:
       confirm: "Êtes-vous sûr de vouloir supprimer ce %{object_kind} ?"
     batch_actions:
       labels:
-        toggle_value: Changer le statut
+        toggle_online: Mettre en ligne / hors ligne
+        toggle_enabled: Activer / Désactiver
+        toggle_validated: Valider / Invalider
+        toggle_show_calendar: Activer / Désactiver calendrier pour
       flash: Le (les) élement(s) sélectionnés ont bien changé de statut
     action_item:
       edit_heading_page: Modifier l'entête de la page %{page}
       see_article_in_frontend: Voir l'article sur le site
       new_article: Créer un nouvel article
+      new_menu_item: Créer un nouvel élément de menu
+      new_slider: Créer Slider
 
 # English
 en:

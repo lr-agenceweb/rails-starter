@@ -33,6 +33,7 @@ class Ability
     can :read, :all
     can :manage, Post
     can :update, [Setting, Category]
+    can [:read, :update], Menu
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
     cannot :create, User
     cannot [:update, :destroy], User, role: { name: %w( administrator ) }
@@ -52,7 +53,7 @@ class Ability
     cannot :create, User
     can [:create, :read, :destroy], Comment, user_id: user.id
     cannot :destroy, Comment, user_id: nil
-    cannot :manage, [Home, About, Setting, Picture, StringBox]
+    cannot :manage, [Home, About, Setting, Picture, StringBox, Menu]
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end
 
