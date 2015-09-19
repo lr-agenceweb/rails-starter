@@ -35,7 +35,6 @@ class ContactFormMailer < ApplicationMailer
 
   def set_settings
     @map = Map.first
-    @host = Figaro.env.application_host
     @copy_to_sender = false
   end
 end

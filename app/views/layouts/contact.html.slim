@@ -62,9 +62,8 @@ html
                                 tr
                                   td align="center" height="50" width="140"
                                     .imgpop.logo
-                                      a href="#{@host}"
-                                        - logo_absolute = URI.join(@host, @settings.logo.url(:medium)).to_s
-                                        = image_tag logo_absolute, st_image: 'logo', width: 100, border: 0
+                                      a href="#{root_url}"
+                                        = image_tag(image_url @settings.logo.url(:small))
                                         small = @settings.subtitle
                             /! end of logo
 
