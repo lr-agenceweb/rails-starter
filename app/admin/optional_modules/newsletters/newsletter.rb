@@ -100,7 +100,6 @@ ActiveAdmin.register Newsletter, as: 'Letter' do
     end
 
     def set_variables
-      @host = Figaro.env.application_host
       @preview_newsletter = true
     end
   end

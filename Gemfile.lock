@@ -129,6 +129,8 @@ GEM
       activejob (= 4.2.4)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 1.0, >= 1.0.5)
+    actionmailer-with-request (0.4.0)
+      rails (>= 3)
     actionpack (4.2.4)
       actionview (= 4.2.4)
       activesupport (= 4.2.4)
@@ -406,9 +408,6 @@ GEM
     magnific-popup-rails (0.9.9.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mail_form (1.5.0)
-      actionmailer (>= 3.2, < 5)
-      activemodel (>= 3.2, < 5)
     meta-tags (2.0.0)
       actionpack (>= 3.0.0)
     meta_request (0.3.4)
@@ -628,6 +627,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionmailer-with-request
   active_admin-sortable_tree
   active_skin
   activeadmin!
@@ -682,7 +682,6 @@ DEPENDENCIES
   js_cookie_rails
   kaminari (~> 0.16.1)
   magnific-popup-rails
-  mail_form
   mapbox-rails!
   meta-tags
   meta_request

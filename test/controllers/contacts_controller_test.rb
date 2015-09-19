@@ -10,6 +10,9 @@ class ContactsControllerTest < ActionController::TestCase
 
   setup :initialize_test
 
+  #
+  # == Routes / Templates / Responses
+  #
   test 'index page should redirect to new page' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -46,13 +49,75 @@ class ContactsControllerTest < ActionController::TestCase
   # == Form
   #
   test 'should send a contact message if all fields are valid' do
-    skip 'Fix this broken test'
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        post :create, locale: locale.to_s, contact_form: { email: 'john@test.com', username: 'john', message: 'Thanks for this site', nickname: '' }
+        post :create, locale: locale.to_s, contact_form: { email: 'john@test.com', name: 'john', message: 'Thanks for this site', nickname: '' }
         assert assigns(:contact_form).valid?
-        assert assigns(:contact_form).deliver
         assert_redirected_to new_contact_path
+      end
+    end
+  end
+
+  test 'should deliver successfully a message' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_difference 'ActionMailer::Base.deliveries.size', 1 do
+          post :create, locale: locale.to_s, contact_form: {
+            name: 'cristiano',
+            email: 'cristiano@ronaldo.pt',
+            message: 'Hi',
+            send_copy: '0'
+          }
+        end
+
+        assert_redirected_to new_contact_path
+        last_email = ActionMailer::Base.deliveries.last
+
+        assert_equal 'Message envoyé par le site Rails Starter', I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
+        assert_equal 'demo@rails-starter.com', last_email.to[0]
+        assert_equal 'cristiano@ronaldo.pt', last_email.from[0]
+        assert_match(/Hi/, last_email.text_part.body.to_s)
+        assert_match(/Hi/, last_email.html_part.body.to_s)
+
+        ActionMailer::Base.deliveries.clear
+      end
+    end
+  end
+
+  test 'should deliver successfully a message and send copy to sender' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        ActionMailer::Base.deliveries.clear
+        assert_difference 'ActionMailer::Base.deliveries.size', 2 do
+          post :create, locale: locale.to_s, contact_form: {
+            name: 'cristiano',
+            email: 'cristiano@ronaldo.pt',
+            message: 'Hi',
+            send_copy: '1'
+          }
+        end
+
+        assert_redirected_to new_contact_path
+        contact_email = ActionMailer::Base.deliveries.first
+        cc_email = ActionMailer::Base.deliveries.last
+
+        # Contact to admin
+        assert_equal 'Message envoyé par le site Rails Starter', I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
+        assert_equal 'demo@rails-starter.com', contact_email.to[0]
+        assert_equal 'cristiano@ronaldo.pt', contact_email.from[0]
+        assert_match(/Hi/, contact_email.text_part.body.to_s)
+        assert_match(/Hi/, contact_email.html_part.body.to_s)
+
+        # Carbon Copy
+        subject_cc = 'Copie de votre message de contact envoyé à Rails Starter' if locale.to_s == 'fr'
+        subject_cc = 'Copy of your contact message sent to Rails Starter website' if locale.to_s == 'en'
+        assert_equal subject_cc, I18n.t('contact.email.subject_cc', site: @setting.title)
+        assert_equal 'demo@rails-starter.com', cc_email.from[0]
+        assert_equal 'cristiano@ronaldo.pt', cc_email.to[0]
+        assert_match(/Hi/, cc_email.text_part.body.to_s)
+        assert_match(/Hi/, cc_email.html_part.body.to_s)
+
+        ActionMailer::Base.deliveries.clear
       end
     end
   end
@@ -60,7 +125,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'should not send a contact message if fields are empty' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        post :create, locale: locale.to_s, contact_form: {}
+        post :create, locale: locale.to_s, contact_form: { name: '', email: '', message: '', send_copy: '' }
         assert_not assigns(:contact_form).valid?
         assert_template :new
       end
@@ -80,7 +145,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'should not send a contact message if captcha is filled' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        post :create, locale: locale.to_s, contact_form: { email: 'john@test.fr', username: 'john', message: 'Thanks for this site', nickname: 'I am a robot' }
+        post :create, locale: locale.to_s, contact_form: { email: 'john@test.fr', name: 'john', message: 'Thanks for this site', nickname: 'I am a robot' }
         assert_redirected_to new_contact_path
       end
     end
@@ -126,20 +191,19 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should send a contact message if all fields are valid' do
-    skip 'Fix this broken test'
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { email: 'john@test.fr', username: 'john', message: 'Thanks for this site', nickname: '' }
+        xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { email: 'john@test.fr', name: 'john', message: 'Thanks for this site', nickname: '' }
         assert assigns(:contact_form).valid?
-        # assert_template :create
+        assert_template :create
       end
     end
   end
 
-  test 'AJAX :: should not send a contact message if fields are not valid' do
+  test 'AJAX :: should not send a contact message if fields are empty' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :post, :create, format: :js, locale: locale.to_s, contact_form: {}
+        xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { name: '', email: '', message: '', send_copy: '' }
         assert_not assigns(:contact_form).valid?
         assert_template :new
       end
@@ -149,7 +213,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'AJAX :: should not send a contact message if captcha is filled' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { email: 'john@test.fr', username: 'john', message: 'Thanks for this site', nickname: 'I am a robot' }
+        xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { email: 'john@test.fr', name: 'john', message: 'Thanks for this site', nickname: 'I am a robot' }
         assert_template :create
       end
     end
@@ -169,5 +233,6 @@ class ContactsControllerTest < ActionController::TestCase
 
   def initialize_test
     @locales = I18n.available_locales
+    @setting = settings(:two)
   end
 end

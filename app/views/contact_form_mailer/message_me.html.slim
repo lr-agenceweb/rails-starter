@@ -1,0 +1,3 @@
+.main-content
+  = @message.message
+  p.sent-from == "#{@message.extract_name_from_email} (#{mail_to @message.email})"
