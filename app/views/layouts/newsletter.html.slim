@@ -27,9 +27,9 @@ html
                     table
                       tr
                         td.logo width="20%"
-                          / = link_to(image_tag("#{@host}/assets/images/logo.png", title: @settings.title, height: 100, width: 100), root_url(host: @host))
+                          / = link_to(image_tag("/assets/images/logo.png", title: @settings.title, height: 100, width: 100), root_url)
                         td.title width="100%"
-                          h1 = link_to @title, root_url(host: @host)
+                          h1 = link_to @title, root_url
 
                 tr width="100%"
                   td.content valign="top" align="left"
@@ -40,14 +40,14 @@ html
 
                 tr width="100%"
                   td.footer valign="top"
-                    / = image_tag("#{@host}/assets/images/newsletter/frise.jpg")
+                    / = image_tag("/assets/images/newsletter/frise.jpg")
                     p.mentions #{@settings.name} - #{Time.zone.now.year}
 
                 tr width="100%"
                   td.links valign="top"
 
                     - unless @preview_newsletter
-                      = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user, host: @host }
+                      = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user }
 
                     - if @see_in_browser
-                      = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, host: @host, is_welcome_user: @is_welcome_user }
+                      = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user }

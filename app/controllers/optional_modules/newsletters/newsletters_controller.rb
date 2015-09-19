@@ -39,7 +39,6 @@ class NewslettersController < InheritedResources::Base
   private
 
   def set_variables
-    @host = Figaro.env.application_host
     @from_controller = true
   end
 

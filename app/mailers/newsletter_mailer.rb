@@ -11,7 +11,6 @@ class NewsletterMailer < ApplicationMailer
     @newsletter_user = newsletter_user
     @newsletter_user.name = @newsletter_user.extract_name_from_email
     @title = t('newsletter.welcome')
-    @host = Figaro.env.application_host
     @is_welcome_user = true
     @see_in_browser = true
 
@@ -26,7 +25,6 @@ class NewsletterMailer < ApplicationMailer
     @newsletter_user = newsletter_user
     @newsletter = newsletter
     @title = @newsletter.title
-    @host = Figaro.env.application_host
 
     mail(to: @newsletter_user.email, subject: @newsletter.title) do |format|
       format.html
