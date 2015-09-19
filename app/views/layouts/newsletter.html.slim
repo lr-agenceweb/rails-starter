@@ -8,11 +8,6 @@ html
     = stylesheet_link_tag 'newsletter', media: 'all', 'data-turbolinks-track': false
 
   body#newsletter
-    - @settings = Setting.first
-    - @see_in_browser ||= false
-    - @preview_newsletter ||= false
-    - @is_welcome_user ||= false
-
     table.wrapper cellspacing="0" cellpadding="0" border="0"
       tbody
         tr width="100%"
