@@ -10,7 +10,9 @@ class ContactFormMailer < ApplicationMailer
   def message_me(message)
     @message = message
     @message.subject = I18n.t('contact.email.subject', site: @settings.title, locale: I18n.default_locale)
-    mail(from: @message.email, subject: @message.subject) do |format|
+    mail from: @message.email,
+         subject: @message.subject,
+         body: @message.message do |format|
       format.html
       format.text
     end

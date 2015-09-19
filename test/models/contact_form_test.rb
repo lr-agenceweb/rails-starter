@@ -15,8 +15,7 @@ class ContactFormTest < ActiveSupport::TestCase
     valid_attrs = {
       name: 'maria',
       email: 'maria@example.com',
-      message: 'Lorem ipsum dolor sit amet',
-      send_copy: true
+      message: 'Lorem ipsum dolor sit amet'
     }
     msg = ContactForm.new valid_attrs
     assert msg.valid?, 'should be all good !'
@@ -31,8 +30,7 @@ class ContactFormTest < ActiveSupport::TestCase
     attrs = {
       name: '',
       email: '',
-      message: '',
-      send_copy: ''
+      message: ''
     }
     msg = ContactForm.new attrs
     refute msg.valid?, 'should not be valid if all fields are empty'
@@ -42,8 +40,7 @@ class ContactFormTest < ActiveSupport::TestCase
     attrs = {
       name: 'maria',
       email: 'maria@example',
-      message: 'Lorem ipsum dolor sit amet',
-      send_copy: true
+      message: 'Lorem ipsum dolor sit amet'
     }
     msg = ContactForm.new attrs
     refute msg.valid?, 'should not be valid if email is not properly formatted'
