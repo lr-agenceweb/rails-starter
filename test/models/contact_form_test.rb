@@ -34,7 +34,7 @@ class ContactFormTest < ActiveSupport::TestCase
       message: '',
       send_copy: ''
     }
-    msg = ContactForm.new
+    msg = ContactForm.new attrs
     refute msg.valid?, 'should not be valid if all fields are empty'
   end
 

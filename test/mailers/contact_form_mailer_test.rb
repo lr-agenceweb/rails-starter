@@ -1,5 +1,8 @@
 require 'test_helper'
 
+#
+# == ContactForm Mailer test class
+#
 class ContactFormMailerTest < ActionMailer::TestCase
   test 'should message me' do
     msg = ContactForm.new(
