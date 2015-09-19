@@ -66,7 +66,7 @@ class ContactsControllerTest < ActionController::TestCase
             name: 'cristiano',
             email: 'cristiano@ronaldo.pt',
             message: 'Hi',
-            send_copy: false
+            send_copy: '0'
           }
         end
 
@@ -92,7 +92,7 @@ class ContactsControllerTest < ActionController::TestCase
             name: 'cristiano',
             email: 'cristiano@ronaldo.pt',
             message: 'Hi',
-            send_copy: true
+            send_copy: '1'
           }
         end
 
