@@ -10,4 +10,12 @@ class ContactFormMailer < ApplicationMailer
          subject: I18n.t('contact.email.subject', site: @settings.title, locale: I18n.default_locale),
          body: @message.message
   end
+
+  def send_copy(message)
+    @message = message
+    mail from: @settings.email,
+         to: @message.email,
+         subject: I18n.t('contact.email.subject_cc', site: @settings.title),
+         body: @message.message
+  end
 end

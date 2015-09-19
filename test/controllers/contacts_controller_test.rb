@@ -61,7 +61,6 @@ class ContactsControllerTest < ActionController::TestCase
   test 'should deliver successfully a message' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        ActionMailer::Base.deliveries.clear
         assert_difference 'ActionMailer::Base.deliveries.size', 1 do
           post :create, locale: locale.to_s, contact_form: {
             name: 'cristiano',
@@ -78,6 +77,42 @@ class ContactsControllerTest < ActionController::TestCase
         assert_equal 'demo@rails-starter.com', last_email.to[0]
         assert_equal 'cristiano@ronaldo.pt', last_email.from[0]
         assert_match(/Hi/, last_email.body.to_s)
+
+        ActionMailer::Base.deliveries.clear
+      end
+    end
+  end
+
+  test 'should deliver successfully a message and send copy to sender' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        ActionMailer::Base.deliveries.clear
+        assert_difference 'ActionMailer::Base.deliveries.size', 2 do
+          post :create, locale: locale.to_s, contact_form: {
+            name: 'cristiano',
+            email: 'cristiano@ronaldo.pt',
+            message: 'Hi',
+            send_copy: true
+          }
+        end
+
+        assert_redirected_to new_contact_path
+        contact_email = ActionMailer::Base.deliveries.first
+        cc_email = ActionMailer::Base.deliveries.last
+
+        # Contact to admin
+        assert_equal 'Message envoyé par le site Rails Starter', I18n.t('contact.email.subject', site: @settings.title, locale: I18n.default_locale)
+        assert_equal 'demo@rails-starter.com', contact_email.to[0]
+        assert_equal 'cristiano@ronaldo.pt', contact_email.from[0]
+        assert_match(/Hi/, contact_email.body.to_s)
+
+        # Carbon Copy
+        subject_cc = 'Copie de votre message de contact envoyé à Rails Starter' if locale.to_s == 'fr'
+        subject_cc = 'Copy of your contact message sent to Rails Starter website' if locale.to_s == 'en'
+        assert_equal subject_cc, I18n.t('contact.email.subject_cc', site: @settings.title)
+        assert_equal 'demo@rails-starter.com', cc_email.from[0]
+        assert_equal 'cristiano@ronaldo.pt', cc_email.to[0]
+        assert_match(/Hi/, cc_email.body.to_s)
 
         ActionMailer::Base.deliveries.clear
       end

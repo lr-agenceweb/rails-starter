@@ -27,6 +27,7 @@ class ContactsController < ApplicationController
       @contact_form = ContactForm.new(contact_form_params)
       if @contact_form.valid?
         ContactFormMailer.message_me(@contact_form).deliver_now
+        ContactFormMailer.send_copy(@contact_form).deliver_now if @contact_form.send_copy
         respond_action :create
       else
         render :new
