@@ -21,6 +21,7 @@
 class NewsletterUser < ActiveRecord::Base
   include Tokenable
   include Scopable
+  include Mailable
 
   attr_accessor :nickname # captcha
   attr_accessor :name # name extracted from email
@@ -45,9 +46,5 @@ class NewsletterUser < ActiveRecord::Base
 
   def self.testers?
     testers.length > 0
-  end
-
-  def extract_name_from_email
-    email.split('@').first
   end
 end
