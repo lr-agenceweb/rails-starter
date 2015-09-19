@@ -16,6 +16,7 @@ fr:
     email:
       subject: Message envoyé par le site %{site}
       subject_cc: Copie de votre message de contact envoyé à %{site}
+      message_cc: Voici une copie de l'email reçu par %{name}
   map:
     no_js: Pour visualiser la carte, votre navigateur doit avoir javascript d'activé
 
@@ -37,5 +38,6 @@ en:
     email:
       subject: Message sent by %{site} website
       subject_cc: Copy of your contact message sent to %{site} website
+      message_cc: Here is a copy of the email received by %{name}
   map:
     no_js: To see the map, your browser must enabled javascript

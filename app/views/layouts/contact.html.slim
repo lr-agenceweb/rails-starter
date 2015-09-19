@@ -8,6 +8,14 @@ html
     = stylesheet_link_tag 'email', media: 'all', 'data-turbolinks-track': false
 
   body#email
+
+    - if @copy_to_sender
+      table
+        tbody
+          tr
+            td.copy width="1%"
+              p = I18n.t('contact.email.message_cc', name: @settings.name)
+
     table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="social" width="100%"
       tbody
         tr
