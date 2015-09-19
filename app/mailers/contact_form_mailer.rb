@@ -3,6 +3,7 @@
 #
 class ContactFormMailer < ApplicationMailer
   default to: Setting.first.try(:email)
+  layout :contact
 
   def message_me(message)
     @message = message

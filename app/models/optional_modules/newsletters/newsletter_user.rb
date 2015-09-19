@@ -22,7 +22,8 @@ class NewsletterUser < ActiveRecord::Base
   include Tokenable
   include Scopable
 
-  attr_accessor :nickname
+  attr_accessor :nickname # captcha
+  attr_accessor :name # name extracted from email
 
   validates :email,
             presence: true,
@@ -41,8 +42,6 @@ class NewsletterUser < ActiveRecord::Base
 
   scope :testers, -> { where(role: 'tester') }
   scope :subscribers, -> { where(role: 'subscriber') }
-
-  attr_accessor :name
 
   def self.testers?
     testers.length > 0

@@ -4,6 +4,7 @@
 class NewsletterMailer < ApplicationMailer
   add_template_helper(HtmlHelper)
   default from: Setting.first.try(:email)
+  layout 'newsletter'
 
   # Email send after a user subscribed to the newsletter
   def welcome_user(newsletter_user)
@@ -15,7 +16,7 @@ class NewsletterMailer < ApplicationMailer
     @see_in_browser = true
 
     mail(to: @newsletter_user.email, subject: @title) do |format|
-      format.html { render layout: 'newsletter' }
+      format.html
       format.text
     end
   end
@@ -28,7 +29,7 @@ class NewsletterMailer < ApplicationMailer
     @host = Figaro.env.application_host
 
     mail(to: @newsletter_user.email, subject: @newsletter.title) do |format|
-      format.html { render layout: 'newsletter' }
+      format.html
       format.text
     end
   end
