@@ -62,25 +62,24 @@ class PostDecorator < ApplicationDecorator
 
   # Generate img tag and backgroud version of image for has_one relation
   def handle_has_one_picture_and_background(link = false, size = :large)
-    if model.picture?
-      img_version = content_tag(:div, class: 'hide show-for-print') do
-        concat(image_has_one_by_size(size))
-      end
-
-      bg_version = content_tag(:div, class: 'background-wrapper') do
-        concat(background_picture_cover_has_one)
-      end
-
-      if link
-        link_version = content_tag(:a, href: model.image_url_by_size(size), class: 'magnific-popup background-wrapper-link') do
-          concat(bg_version)
-        end
-
-        return img_version + link_version
-      end
-
-      img_version + bg_version
+    return unless model.picture?
+    img_version = content_tag(:div, class: 'hide show-for-print') do
+      concat(image_has_one_by_size(size))
     end
+
+    bg_version = content_tag(:div, class: 'background-wrapper') do
+      concat(background_picture_cover_has_one)
+    end
+
+    if link
+      link_version = content_tag(:a, href: model.image_url_by_size(size), class: 'magnific-popup background-wrapper-link') do
+        concat(bg_version)
+      end
+
+      return img_version + link_version
+    end
+
+    img_version + bg_version
   end
 
   # Generate img tag and backgroud version of image for has_many relation

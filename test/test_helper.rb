@@ -76,10 +76,9 @@ module ActiveSupport
       patch :update, id: obj, "#{attributes.to_sym}": {}
       assert_redirected_to url
 
-      unless check.key?(:no_delete) && check[:no_delete]
-        delete :destroy, id: obj
-        assert_redirected_to url
-      end
+      return if check.key?(:no_delete) && check[:no_delete]
+      delete :destroy, id: obj
+      assert_redirected_to url
     end
   end
 end

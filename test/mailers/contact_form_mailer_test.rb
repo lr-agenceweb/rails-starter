@@ -24,7 +24,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
     msg = ContactForm.new(
       name: 'cristiano',
       email: 'cristiano@ronaldo.pt',
-      message: 'Hello from the internet',
+      message: 'Hello from the internet'
     )
     email = ContactFormMailer.send_copy(msg).deliver_now
 
