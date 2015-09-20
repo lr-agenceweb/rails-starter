@@ -52,7 +52,8 @@ class Event < ActiveRecord::Base
   scope :online, -> { where(online: true) }
 
   def calendar_date_correct?
-    errors.add :start_date, I18n.t('form.errors.start_date') if end_date <= start_date
-    errors.add :end_date, I18n.t('form.errors.end_date') if end_date <= start_date
+    return true unless end_date <= start_date
+    errors.add :start_date, I18n.t('form.errors.start_date')
+    errors.add :end_date, I18n.t('form.errors.end_date')
   end
 end

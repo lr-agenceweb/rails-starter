@@ -7,7 +7,7 @@ class ContactFormMailerPreview < ActionMailer::Preview
     attrs = {
       name: 'cristiano',
       email: 'cristiano@ronaldo.pt',
-      message: 'Hi, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos minus atque accusantium quos perspiciatis dolor itaque dicta nulla architecto ut quaerat sequi nostrum, earum magni doloribus maxime tempore quam sapiente.',
+      message: 'Hi, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos minus atque accusantium quos perspiciatis dolor itaque dicta nulla architecto ut quaerat sequi nostrum, earum magni doloribus maxime tempore quam sapiente.'
     }
 
     @message = ContactForm.new attrs
@@ -21,7 +21,7 @@ class ContactFormMailerPreview < ActionMailer::Preview
     attrs = {
       name: 'Karim',
       email: 'karim@benzema.fr',
-      message: 'Hi, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos minus atque accusantium quos perspiciatis dolor itaque dicta nulla architecto ut quaerat sequi nostrum, earum magni doloribus maxime tempore quam sapiente.',
+      message: 'Hi, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos minus atque accusantium quos perspiciatis dolor itaque dicta nulla architecto ut quaerat sequi nostrum, earum magni doloribus maxime tempore quam sapiente.'
     }
 
     @message = ContactForm.new attrs
