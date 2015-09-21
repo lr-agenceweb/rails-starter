@@ -8,6 +8,7 @@ env:
   - DB=mysql
   - DB=postgresql
   - DB=sqlite
+  - DB=mariadb
   # - RAILS_VERSION=4.2.4
 
 bundler_args: --without development
@@ -28,7 +29,8 @@ script:
 
 matrix:
   allow_failures:
-    - env: DB=sqlite
+    # - env: DB=sqlite
+    - env: DB=mariadb
 
 after_failure:
   - "mysql -e 'show databases;'"
