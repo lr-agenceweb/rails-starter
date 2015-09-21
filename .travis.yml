@@ -8,7 +8,6 @@ env:
   - DB=mysql
   - DB=postgresql
   - DB=sqlite
--  # - RAILS_VERSION=4.2.4
 
 bundler_args: --without development
 
