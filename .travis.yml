@@ -14,7 +14,7 @@ env:
 bundler_args: --without development
 
 before_script:
-  - sleep 15
+  - sleep 10
   - cp config/database.travis.yml config/database.yml
   - cp config/application.example.yml config/application.yml
   - cp config/dropbox.example.yml config/dropbox.yml
@@ -44,7 +44,7 @@ branches:
     - develop
 
 addons:
-  mariadb: '10.0.21'
+  mariadb: '10.0'
   code_climate:
     repo_token:
       secure: b6mrCBirtmuHlSsxhKBHEZsbw8StVaaqS7ocB7wYotw+OP8hElkpZb7/Yb7+aGCsClI822n+mhavlGh6QpFlXvT6ptgefyj5Z/Z8HmlOjH8fYmkxYQLTfQ8dzUq6XEngELhHPq9kMskfZgbSH9Q85r/4zapmdE2FJ4dJXNL9XvA=
