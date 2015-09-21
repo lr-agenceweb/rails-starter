@@ -42,7 +42,7 @@ This project use unicorn in local development. The server is launched using `for
 
 Database
 ---------
-It use `mysql2` but you can choose to use `PostgreSQL`, `SQlite`, `MariaDB` or any other SGBD.  
+It use `MySQL2` but you can choose to use `PostgreSQL`, `SQlite` or any other SGBD.  
 To create a dump of your database, run `rake db:backup`
 
 Template
