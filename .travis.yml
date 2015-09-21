@@ -14,7 +14,7 @@ env:
 bundler_args: --without development
 
 before_script:
-  - sleep 10
+  - sleep 5
   - cp config/database.travis.yml config/database.yml
   - cp config/application.example.yml config/application.yml
   - cp config/dropbox.example.yml config/dropbox.yml
@@ -30,7 +30,7 @@ script:
 matrix:
   allow_failures:
     # - env: DB=sqlite
-    - env: DB=mariadb
+    # - env: DB=mariadb
 
 after_failure:
   - "mysql -e 'show databases;'"
