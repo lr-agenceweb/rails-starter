@@ -1,9 +1,9 @@
 Rails Starter
 ==============
-[![Build Status](https://travis-ci.org/anthony-robin/rails-starter.svg?branch=master)](https://travis-ci.org/anthony-robin/rails-starter)
-[![Code Climate](https://codeclimate.com/github/anthony-robin/rails-starter/badges/gpa.svg)](https://codeclimate.com/github/anthony-robin/rails-starter)
-[![Test Coverage](https://codeclimate.com/github/anthony-robin/rails-starter/badges/coverage.svg)](https://codeclimate.com/github/anthony-robin/rails-starter)
-[![security](https://hakiri.io/github/anthony-robin/rails-starter/master.svg)](https://hakiri.io/github/anthony-robin/rails-starter/master)
+[![Build Status](https://travis-ci.org/lr-agenceweb/rails-starter.svg?branch=master)](https://travis-ci.org/lr-agenceweb/rails-starter)
+[![Code Climate](https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/gpa.svg)](https://codeclimate.com/github/lr-agenceweb/rails-starter)
+[![Test Coverage](https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/coverage.svg)](https://codeclimate.com/github/lr-agenceweb/rails-starter/coverage)
+[![security](https://hakiri.io/github/lr-agenceweb/rails-starter/master.svg)](https://hakiri.io/github/lr-agenceweb/rails-starter/master)
 
 This project has been built to increase speed when creating a new application: it's annoying to reconfigure always and always the same gems so this starter pack comes with plugins already configured such as activeadmin, devise, globalize, and many others.
 
@@ -42,7 +42,7 @@ This project use unicorn in local development. The server is launched using `for
 
 Database
 ---------
-It use `mysql2` but you can choose to use `PostgreSQL` or `SQlite` or any other SGBD.  
+It use `MySQL2` but you can choose to use `PostgreSQL`, `SQlite` or any other SGBD.  
 To create a dump of your database, run `rake db:backup`
 
 Template

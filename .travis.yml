@@ -8,12 +8,11 @@ env:
   - DB=mysql
   - DB=postgresql
   - DB=sqlite
-  # - RAILS_VERSION=4.2.4
 
 bundler_args: --without development
 
 before_script:
-  - sleep 15
+  - sleep 5
   - cp config/database.travis.yml config/database.yml
   - cp config/application.example.yml config/application.yml
   - cp config/dropbox.example.yml config/dropbox.yml
@@ -28,7 +27,7 @@ script:
 
 matrix:
   allow_failures:
-    - env: DB=sqlite
+    # - env: DB=sqlite
 
 after_failure:
   - "mysql -e 'show databases;'"
