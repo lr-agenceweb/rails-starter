@@ -47,4 +47,4 @@ addons:
 notifications:
   email: false
   slack:
-    secure: C5mVOWuJfFpZwtZQigkATqvgQxXjmo1YnnGRvbsauSpDI9it362L1GsQ50duaSTN//8GfWMqG12bGY4oW8NOgvR/AzrRUD1aAz6ByLaEpb8TKfBbrO5sYSAZn4FRV39aCaAcW6ZuTKJxBmsHo2bdFFpRP07Vmi0bFRRNQO2n+sY=
+    secure: HmJCoJ5yy5fv52OZC+1ledyw5PROK2Mdz54mDXg3dAFHe1DjILJhwHUS9eE1say6BUZWr3/ChrO9tJe8l9NK5PLqhPl2sHo2ZHWD78bNAsr1sbD/7wBlPF6ASCDmiZa9pi61YuED36y4bvKMO84tXcmK9Aw65FNTjKpey3/sb4M=
