@@ -7,127 +7,226 @@ html
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
     = stylesheet_link_tag 'email', media: 'all', 'data-turbolinks-track': false
 
-  body#email
 
-    - if @copy_to_sender
-      table
-        tbody
-          tr
-            td.copy width="1%"
-              p = I18n.t('contact.email.message_cc', name: @setting.name)
 
-    table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="social" width="100%"
-      tbody
-        tr
-          td
-            table.devicewidth align="center" bgcolor="#f09e05" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
-              tbody
+  body
+    table.body
+      tr
+        td.center align="center" valign="top"
+          center
+
+            - if @copy_to_sender
+              / Send copy
+              table.container
                 tr
-                  td width="100%"
-                    table.devicewidth.upper-header align="center" border="0" cellpadding="0" cellspacing="0" width="600"
-                      tbody
-                        /! Spacing
-                        tr
-                          td.mask height="10"
-                        /! Spacing
-                        tr
-                          td
-                            p
-                              = @setting.title
-                              | &nbsp;
-                              = @map.decorate.full_address_inline
-                              | &nbsp;
-                              = @setting.phone
+                  td
+                    table.row
+                      tr.upper-upper-header
+                        td.wrapper.last
+                          table.twelve.columns
+                            tr
+                              td.center.panel
+                                center
+                                  span = I18n.t('contact.email.message_cc', name: @setting.name)
+                            tr
+                              td
 
-                        /! Spacing
-                        tr
-                          td.mask height="10"
-                        /! Spacing
 
-    table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="header" width="100%"
-      tbody
-        tr
-          td
-            table.devicewidth align="center" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
-              tbody
-                tr
-                  td width="100%"
-                    table.devicewidth.lower-header align="center" bgcolor="#eacb3c" border="0" cellpadding="0" cellspacing="0" width="600"
-                      tbody
-                        tr
-                          td
-                            /! logo
-                            table.devicewidth align="left" border="0" cellpadding="0" cellspacing="0" width="140" style="position: relative"
-                              tbody
-                                tr
-                                  td align="center" height="50" width="140"
-                                    .imgpop.logo
-                                      a href="#{root_url}"
-                                        = image_tag(image_url @setting.logo.url(:small))
-                                        small = @setting.subtitle
-                            /! end of logo
+            / Upper header
+            table.container
+              tr
+                td
+                  table.row
+                    tr.upper-header
+                      td.wrapper.offset-by-one.logo-container
 
-                            /! start of menu
-                            table.devicewidth align="right" border="0" cellpadding="0" cellspacing="0" height="50" valign="middle" width="430"
-                              tbody
-                                tr
-                                  td.subject-mail align="center" height="50" st-content="menu" valign="middle"
-                                    p = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
+                        table.three.columns
+                          tr
+                            td.logo
+                              a href="#{root_url}"
+                                = image_tag(image_url @setting.logo.url(:small))
 
-                            /! end of menu
-    table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="full-text" width="100%"
-      tbody
-        tr
-          td
-            table.devicewidth align="center" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
-              tbody
-                tr
-                  td width="100%"
-                    table.devicewidth align="center" border="0" cellpadding="0" cellspacing="0" width="600"
-                      tbody
-                        /! Spacing
-                        tr
-                          td.mask height="20"
-                        /! Spacing
-                        tr
-                          td
-                            table.devicewidthinner align="center" border="0" cellpadding="0" cellspacing="0" width="560"
-                              tbody
-                                tr
-                                  td.mask height="15" width="100%"
-                                /! End of spacing
-                                /! content
-                                tr
-                                  td st-content="text-content" style="font-size: 14px; color: #889098; line-height: 24px"
-                                    = yield
-                                /! End of content
-                                /! Spacing
-                                tr
-                                  td.mask height="15" width="100%"
-                                /! Spacing
-                        /! Spacing
-                        tr
-                          td.mask height="20"
-                        /! Spacing
-    table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="social" width="100%"
-      tbody
-        tr
-          td
-            table.devicewidth align="center" bgcolor="#3c3c3c" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
-              tbody
-                tr
-                  td width="100%"
-                    table.devicewidth.footer align="center" bgcolor="#3c3c3c" border="0" cellpadding="0" cellspacing="0" width="600"
-                      tbody
-                        /! Spacing
-                        tr
-                          td.mask height="10"
-                        /! Spacing
-                        tr
-                          td
-                            p #{@setting.name} - #{Time.zone.now.year}
+                            td.expander
 
-                        /! Spacing
-                        tr
-                          td.mask height="10"
-                        /! Spacing
+                      td.wrapper.last
+                        table.eight.columns
+                          tr
+                            td.right-text-pad
+                              h3.site-title = @setting.title
+                              = @map.decorate.address if @map.decorate.address?
+                              == "&nbsp; - &nbsp;" if @map.decorate.city?
+                              = @map.decorate.postcode if @map.decorate.postcode?
+                              == "&nbsp;" if @map.decorate.city?
+                              = @map.decorate.city if @map.decorate.city?
+                              .site-phone
+                                = link_to @setting.phone, "tel:#{@setting.decorate.phone_w3c}"
+
+            / Lower header
+            table.container
+              tr
+                td
+                  table.row
+                    tr.lower-header
+                      td.wrapper.last.vam
+                        table.twelve.columns
+                          tr
+                            td.center.panel
+                              center
+                                h6.subject = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
+
+                            td.expander
+
+            / Content
+            table.container
+              tr
+                td
+                  table.row
+                    tr.main-content
+                      td.wrapper.last.offset-by-three
+                        table.nine.columns
+                          tr
+                            td.panel
+                              = yield
+
+
+            / Footer
+            table.container
+              tr
+                td
+                  table.row
+                    tr.upper-footer
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td.panel.center
+                              center
+                                span #{@setting.name}
+                                == " - "
+                                span = link_to @setting.title, root_url
+                                == " - "
+                                span = Time.zone.now.year
+
+  / body#email
+
+  /   - if @copy_to_sender
+  /     table
+  /       tbody
+  /         tr
+  /           td.copy width="1%"
+  /             p = I18n.t('contact.email.message_cc', name: @setting.name)
+
+  /   table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="social" width="100%"
+  /     tbody
+  /       tr
+  /         td
+  /           table.devicewidth align="center" bgcolor="#f09e05" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
+  /             tbody
+  /               tr
+  /                 td width="100%"
+  /                   table.devicewidth.upper-header align="center" border="0" cellpadding="0" cellspacing="0" width="600"
+  /                     tbody
+  /                       /! Spacing
+  /                       tr
+  /                         td.mask height="10"
+  /                       /! Spacing
+  /                       tr
+  /                         td
+  /                           p
+  /                             = @setting.title
+  /                             | &nbsp;
+  /                             = @map.decorate.full_address_inline
+  /                             | &nbsp;
+  /                             = @setting.phone
+
+  /                       /! Spacing
+  /                       tr
+  /                         td.mask height="10"
+  /                       /! Spacing
+
+  /   table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="header" width="100%"
+  /     tbody
+  /       tr
+  /         td
+  /           table.devicewidth align="center" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
+  /             tbody
+  /               tr
+  /                 td width="100%"
+  /                   table.devicewidth.lower-header align="center" bgcolor="#eacb3c" border="0" cellpadding="0" cellspacing="0" width="600"
+  /                     tbody
+  /                       tr
+  /                         td
+  /                           /! logo
+  /                           table.devicewidth align="left" border="0" cellpadding="0" cellspacing="0" width="140" style="position: relative"
+  /                             tbody
+  /                               tr
+  /                                 td align="center" height="50" width="140"
+  /                                   .imgpop.logo
+  /                                     a href="#{root_url}"
+  /                                       = image_tag(image_url @setting.logo.url(:small))
+  /                                       small = @setting.subtitle
+  /                           /! end of logo
+
+  /                           /! start of menu
+  /                           table.devicewidth align="right" border="0" cellpadding="0" cellspacing="0" height="50" valign="middle" width="430"
+  /                             tbody
+  /                               tr
+  /                                 td.subject-mail align="center" height="50" st-content="menu" valign="middle"
+  /                                   p = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
+
+  /                           /! end of menu
+  /   table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="full-text" width="100%"
+  /     tbody
+  /       tr
+  /         td
+  /           table.devicewidth align="center" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
+  /             tbody
+  /               tr
+  /                 td width="100%"
+  /                   table.devicewidth align="center" border="0" cellpadding="0" cellspacing="0" width="600"
+  /                     tbody
+  /                       /! Spacing
+  /                       tr
+  /                         td.mask height="20"
+  /                       /! Spacing
+  /                       tr
+  /                         td
+  /                           table.devicewidthinner align="center" border="0" cellpadding="0" cellspacing="0" width="560"
+  /                             tbody
+  /                               tr
+  /                                 td.mask height="15" width="100%"
+  /                               /! End of spacing
+  /                               /! content
+  /                               tr
+  /                                 td st-content="text-content" style="font-size: 14px; color: #889098; line-height: 24px"
+  /                                   = yield
+  /                               /! End of content
+  /                               /! Spacing
+  /                               tr
+  /                                 td.mask height="15" width="100%"
+  /                               /! Spacing
+  /                       /! Spacing
+  /                       tr
+  /                         td.mask height="20"
+  /                       /! Spacing
+  /   table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="social" width="100%"
+  /     tbody
+  /       tr
+  /         td
+  /           table.devicewidth align="center" bgcolor="#3c3c3c" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
+  /             tbody
+  /               tr
+  /                 td width="100%"
+  /                   table.devicewidth.footer align="center" bgcolor="#3c3c3c" border="0" cellpadding="0" cellspacing="0" width="600"
+  /                     tbody
+  /                       /! Spacing
+  /                       tr
+  /                         td.mask height="10"
+  /                       /! Spacing
+  /                       tr
+  /                         td
+  /                           p #{@setting.name} - #{Time.zone.now.year}
+
+  /                       /! Spacing
+  /                       tr
+  /                         td.mask height="10"
+  /                       /! Spacing
