@@ -5,7 +5,7 @@
         = f.input :email, as: :email, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.email')}"
         = f.input :nickname, input_html: { class: 'hide', style: 'display: none' }, label: false
         = f.input :message, as: :text, required: true, input_html: { class: 'autosize contact-form' }, placeholder: "* #{I18n.t('contact.placeholder.message')}", label: false
-        = f.input :send_copy, as: :boolean, required: false
+        = f.input :send_copy, as: :boolean, required: false, input_html: { checked: true }
 
         = button_tag class: 'submit-btn text-right tiny right' do
           - fa_icon('paper-plane')
