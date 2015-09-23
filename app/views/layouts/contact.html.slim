@@ -1,4 +1,4 @@
-doctype html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 html
   head
     meta charset='utf-8'
@@ -45,6 +45,7 @@ html
                             td.logo
                               a href="#{root_url}"
                                 = image_tag(image_url @setting.logo.url(:small))
+                                span = @setting.subtitle
 
                             td.expander
 
@@ -105,128 +106,3 @@ html
                                 span = link_to @setting.title, root_url
                                 == " - "
                                 span = Time.zone.now.year
-
-  / body#email
-
-  /   - if @copy_to_sender
-  /     table
-  /       tbody
-  /         tr
-  /           td.copy width="1%"
-  /             p = I18n.t('contact.email.message_cc', name: @setting.name)
-
-  /   table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="social" width="100%"
-  /     tbody
-  /       tr
-  /         td
-  /           table.devicewidth align="center" bgcolor="#f09e05" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
-  /             tbody
-  /               tr
-  /                 td width="100%"
-  /                   table.devicewidth.upper-header align="center" border="0" cellpadding="0" cellspacing="0" width="600"
-  /                     tbody
-  /                       /! Spacing
-  /                       tr
-  /                         td.mask height="10"
-  /                       /! Spacing
-  /                       tr
-  /                         td
-  /                           p
-  /                             = @setting.title
-  /                             | &nbsp;
-  /                             = @map.decorate.full_address_inline
-  /                             | &nbsp;
-  /                             = @setting.phone
-
-  /                       /! Spacing
-  /                       tr
-  /                         td.mask height="10"
-  /                       /! Spacing
-
-  /   table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="header" width="100%"
-  /     tbody
-  /       tr
-  /         td
-  /           table.devicewidth align="center" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
-  /             tbody
-  /               tr
-  /                 td width="100%"
-  /                   table.devicewidth.lower-header align="center" bgcolor="#eacb3c" border="0" cellpadding="0" cellspacing="0" width="600"
-  /                     tbody
-  /                       tr
-  /                         td
-  /                           /! logo
-  /                           table.devicewidth align="left" border="0" cellpadding="0" cellspacing="0" width="140" style="position: relative"
-  /                             tbody
-  /                               tr
-  /                                 td align="center" height="50" width="140"
-  /                                   .imgpop.logo
-  /                                     a href="#{root_url}"
-  /                                       = image_tag(image_url @setting.logo.url(:small))
-  /                                       small = @setting.subtitle
-  /                           /! end of logo
-
-  /                           /! start of menu
-  /                           table.devicewidth align="right" border="0" cellpadding="0" cellspacing="0" height="50" valign="middle" width="430"
-  /                             tbody
-  /                               tr
-  /                                 td.subject-mail align="center" height="50" st-content="menu" valign="middle"
-  /                                   p = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
-
-  /                           /! end of menu
-  /   table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="full-text" width="100%"
-  /     tbody
-  /       tr
-  /         td
-  /           table.devicewidth align="center" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
-  /             tbody
-  /               tr
-  /                 td width="100%"
-  /                   table.devicewidth align="center" border="0" cellpadding="0" cellspacing="0" width="600"
-  /                     tbody
-  /                       /! Spacing
-  /                       tr
-  /                         td.mask height="20"
-  /                       /! Spacing
-  /                       tr
-  /                         td
-  /                           table.devicewidthinner align="center" border="0" cellpadding="0" cellspacing="0" width="560"
-  /                             tbody
-  /                               tr
-  /                                 td.mask height="15" width="100%"
-  /                               /! End of spacing
-  /                               /! content
-  /                               tr
-  /                                 td st-content="text-content" style="font-size: 14px; color: #889098; line-height: 24px"
-  /                                   = yield
-  /                               /! End of content
-  /                               /! Spacing
-  /                               tr
-  /                                 td.mask height="15" width="100%"
-  /                               /! Spacing
-  /                       /! Spacing
-  /                       tr
-  /                         td.mask height="20"
-  /                       /! Spacing
-  /   table bgcolor="#fcfcfc" border="0" cellpadding="0" cellspacing="0" st-sortable="social" width="100%"
-  /     tbody
-  /       tr
-  /         td
-  /           table.devicewidth align="center" bgcolor="#3c3c3c" border="0" cellpadding="0" cellspacing="0" hasbackground="true" width="600"
-  /             tbody
-  /               tr
-  /                 td width="100%"
-  /                   table.devicewidth.footer align="center" bgcolor="#3c3c3c" border="0" cellpadding="0" cellspacing="0" width="600"
-  /                     tbody
-  /                       /! Spacing
-  /                       tr
-  /                         td.mask height="10"
-  /                       /! Spacing
-  /                       tr
-  /                         td
-  /                           p #{@setting.name} - #{Time.zone.now.year}
-
-  /                       /! Spacing
-  /                       tr
-  /                         td.mask height="10"
-  /                       /! Spacing
