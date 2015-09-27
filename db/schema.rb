@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917160436) do
+ActiveRecord::Schema.define(version: 20150927144908) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -369,25 +369,29 @@ ActiveRecord::Schema.define(version: 20150917160436) do
   add_index "setting_translations", ["setting_id"], name: "index_setting_translations_on_setting_id", using: :btree
 
   create_table "settings", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "title",             limit: 255
-    t.string   "subtitle",          limit: 255
-    t.string   "phone",             limit: 255
-    t.string   "phone_secondary",   limit: 255
-    t.string   "email",             limit: 255
-    t.boolean  "show_breadcrumb",                 default: false
-    t.boolean  "show_social",                     default: true
-    t.boolean  "show_qrcode",                     default: false
-    t.boolean  "should_validate",                 default: true
-    t.boolean  "maintenance",                     default: false
-    t.string   "twitter_username",  limit: 255
+    t.string   "name",                     limit: 255
+    t.string   "title",                    limit: 255
+    t.string   "subtitle",                 limit: 255
+    t.string   "phone",                    limit: 255
+    t.string   "phone_secondary",          limit: 255
+    t.string   "email",                    limit: 255
+    t.boolean  "show_breadcrumb",                        default: false
+    t.boolean  "show_social",                            default: true
+    t.boolean  "show_qrcode",                            default: false
+    t.boolean  "should_validate",                        default: true
+    t.boolean  "maintenance",                            default: false
+    t.string   "twitter_username",         limit: 255
     t.datetime "logo_updated_at"
-    t.integer  "logo_file_size",    limit: 4
-    t.string   "logo_content_type", limit: 255
-    t.string   "logo_file_name",    limit: 255
-    t.text     "retina_dimensions", limit: 65535
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.integer  "logo_file_size",           limit: 4
+    t.string   "logo_content_type",        limit: 255
+    t.string   "logo_file_name",           limit: 255
+    t.datetime "logo_footer_updated_at"
+    t.integer  "logo_footer_file_size",    limit: 4
+    t.string   "logo_footer_content_type", limit: 255
+    t.string   "logo_footer_file_name",    limit: 255
+    t.text     "retina_dimensions",        limit: 65535
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   create_table "slide_translations", force: :cascade do |t|

@@ -186,9 +186,11 @@ fr:
         title: Titre
         subtitle: Sous-titre
         logo: Logo
+        logo_footer: Logo du pied de page
         logo_deco: Logo
         logo_file_size: Le poids du logo
         delete_logo: Supprimer le logo
+        delete_logo_footer: Supprimer le logo du pied de page
         name: Nom
         phone: Téléphone
         phone_secondary: Téléphone secondaire
@@ -373,5 +375,5 @@ fr:
       category:
         title: Titre
       setting:
-        title: Titre du site
-        subtitle: Sous-titre du site
+        title: Titre
+        subtitle: Sous-titre
