@@ -1,15 +1,17 @@
-= simple_form_for @contact_form, validate: true, remote: true, authenticity_token: true do |f|
-  .row
-    .small-12.medium-6.columns
-        = f.input :name, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.name')}"
-        = f.input :email, as: :email, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.email')}"
-        = f.input :nickname, input_html: { class: 'hide', style: 'display: none' }, label: false
-        = f.input :message, as: :text, required: true, input_html: { class: 'autosize contact-form' }, placeholder: "* #{I18n.t('contact.placeholder.message')}", label: false
-        = f.input :send_copy, as: :boolean, required: false, input_html: { checked: true }
+.row
+  .small-12.medium-6.medium-offset-4.last.columns
+    = simple_form_for @contact_form, validate: true, remote: true, authenticity_token: true do |f|
+      .row
+        .small-12.columns
+            = f.input :name, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.name')}"
+            = f.input :email, as: :email, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.email')}"
+            = f.input :nickname, input_html: { class: 'hide', style: 'display: none' }, label: false
+            = f.input :message, as: :text, required: true, input_html: { class: 'autosize contact-form' }, placeholder: "* #{I18n.t('contact.placeholder.message')}", label: false
+            = f.input :send_copy, as: :boolean, required: false, input_html: { checked: true }
 
-        = button_tag class: 'submit-btn text-right tiny right' do
-          - fa_icon('paper-plane')
+            = button_tag class: 'submit-btn text-right tiny right' do
+              - fa_icon('paper-plane')
 
-    - if @qrcode_module.enabled? && setting.show_qrcode?
-      .small-12.medium-6.columns.hide-for-small
-        = image_tag "http://chart.apis.google.com/chart?chs=350x350&cht=qr&chl=#{u vcard}", alt: 'QrCode'
+        - if @qrcode_module.enabled? && setting.show_qrcode?
+          .small-12.medium-6.columns.hide-for-small
+            = image_tag "http://chart.apis.google.com/chart?chs=350x350&cht=qr&chl=#{u vcard}", alt: 'QrCode'
