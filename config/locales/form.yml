@@ -1,6 +1,9 @@
 # English
 en:
   form:
+    label:
+      send_copy: Receive a copy of this message on my mailbox
+
     hint:
       media:
         destroy: Remove media linked to current post
@@ -19,6 +22,7 @@ fr:
       link: Lien du projet
       destroy: Supprimer cette image ?
       slide: Image du slider
+      send_copy: Recevoir une copie de ce message sur ma boîte email
 
     counter: "Caractères restants: %{count}"
 
