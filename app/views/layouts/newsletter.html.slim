@@ -3,7 +3,7 @@ html
   head
     meta charset='utf-8'
     meta content=('text/html; charset=UTF-8') http-equiv='Content-Type'
-    title = @title
+    title = @newsletter.title
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
     = stylesheet_link_tag 'newsletter', media: 'all', 'data-turbolinks-track': false
 
@@ -27,7 +27,7 @@ html
                           tr
                             td.logo
                               a href="#{root_url}"
-                                = image_tag(image_url @setting.logo.url(:small))
+                                = image_tag(@setting.logo.url(:small))
                                 span = @setting.subtitle
 
                             td.expander
@@ -56,7 +56,7 @@ html
                           tr
                             td.center.panel
                               center
-                                h6.subject = @title
+                                h6.subject = @newsletter.title
 
                             td.expander
 
@@ -89,15 +89,17 @@ html
                                 span = link_to @setting.title, root_url
                                 == " - "
                                 span = Time.zone.now.year
-              tr
-                td
-                  table.row
-                    tr.lower-footer
-                      td.wrapper.last
-                        table.twelve.columns
-                          tr
-                            td.panel.center
-                              center
-                                = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user } unless @preview_newsletter
 
-                                = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user } if @see_in_browser
+              - if @see_in_browser || !@preview_newsletter
+                tr
+                  td
+                    table.row
+                      tr.lower-footer
+                        td.wrapper.last
+                          table.twelve.columns
+                            tr
+                              td.panel.center
+                                center
+                                  = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user } unless @preview_newsletter
+
+                                  = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user } if @see_in_browser

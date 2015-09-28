@@ -26,7 +26,8 @@ class NewsletterMailer < ApplicationMailer
   def send_newsletter(newsletter_user, newsletter)
     @newsletter_user = newsletter_user
     @newsletter = newsletter
-    @title = @newsletter.title
+
+    puts "====== #{@newsletter.inspect}"
 
     mail(to: @newsletter_user.email, subject: @newsletter.title) do |format|
       format.html

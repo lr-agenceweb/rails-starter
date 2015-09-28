@@ -40,6 +40,7 @@ class NewslettersController < ApplicationController
 
   def set_variables
     @from_controller = true
+    @map = Map.joins(:location).select('locations.id, locations.address, locations.city, locations.postcode').first
   end
 
   def set_newsletter_user

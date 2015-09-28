@@ -11,7 +11,9 @@ f.columns do
       end
     end
   end
+end
 
+f.columns do
   f.column do
     render '/admin/newsletters/preview', f: f
   end

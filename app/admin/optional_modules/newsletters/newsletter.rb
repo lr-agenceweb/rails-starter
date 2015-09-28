@@ -101,6 +101,7 @@ ActiveAdmin.register Newsletter, as: 'Letter' do
 
     def set_variables
       @preview_newsletter = true
+      @map = Map.joins(:location).select('locations.id, locations.address, locations.city, locations.postcode').first
     end
   end
 end
