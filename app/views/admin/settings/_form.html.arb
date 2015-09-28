@@ -6,8 +6,10 @@ f.columns do
       f.columns do
         f.column do
           f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :title, hint: 'Titre du site'
-            t.input :subtitle, hint: 'Sous-titre du site'
+            t.input :title,
+                    hint: 'Titre du site'
+            t.input :subtitle,
+                    hint: 'Sous-titre du site'
           end
         end
 
@@ -17,6 +19,13 @@ f.columns do
             f.input :delete_logo,
                     as: :boolean,
                     hint: 'Si coché, le logo sera supprimé après mise à jour des paramètres'
+          end
+
+          f.input :logo_footer, hint: f.object.logo_footer? ? raw("<p class='paperclip-preview logo-footer'>#{retina_image_tag(f.object, :logo_footer, :small)}</p>") : ''
+          if f.object.logo_footer?
+            f.input :delete_logo_footer,
+                    as: :boolean,
+                    hint: 'Si coché, le logo du pied de page sera supprimé après mise à jour des paramètres'
           end
         end
       end

@@ -12,7 +12,9 @@ ActiveAdmin.register Setting, as: 'Parameter' do
                 :should_validate,
                 :maintenance,
                 :logo,
+                :logo_footer,
                 :delete_logo,
+                :delete_logo_footer,
                 :twitter_username,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle

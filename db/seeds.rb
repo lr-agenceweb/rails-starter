@@ -54,7 +54,8 @@ setting_site = Setting.create!(
   subtitle: 'Site de Démonstration',
   phone: '+33 (0)1 02 03 04 05',
   email: 'demo@starter.fr',
-  logo: File.new("#{Rails.root}/public/system/seeds/logo/logo.png")
+  logo: File.new("#{Rails.root}/public/system/seeds/logo/logo.png"),
+  logo_footer: File.new("#{Rails.root}/public/system/seeds/logo/logo-lr-agenceweb.png")
 )
 
 if @locales.include?(:en)
