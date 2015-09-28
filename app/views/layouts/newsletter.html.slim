@@ -1,48 +1,103 @@
-doctype html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 html
   head
     meta charset='utf-8'
-    meta content=('text/html; charset=UTF-8') http-equiv='Content-Type' /
+    meta content=('text/html; charset=UTF-8') http-equiv='Content-Type'
     title = @title
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
     = stylesheet_link_tag 'newsletter', media: 'all', 'data-turbolinks-track': false
 
-  body#newsletter
-    table.wrapper cellspacing="0" cellpadding="0" border="0"
-      tbody
-        tr width="100%"
-          td.background valign="top" align="left"
 
-            table.main-content
-              tbody
 
-                tr height="57" width="100%"
-                  td.header valign="top" align="left"
+  body
+    table.body
+      tr
+        td.center align="center" valign="top"
+          center
 
-                    table
-                      tr
-                        td.logo width="20%"
-                          / = link_to(image_tag("/assets/images/logo.png", title: @setting.title, height: 100, width: 100), root_url)
-                        td.title width="100%"
-                          h1 = link_to @title, root_url
+            / Upper header
+            table.container
+              tr
+                td
+                  table.row
+                    tr.upper-header
+                      td.wrapper.offset-by-one.logo-container
 
-                tr width="100%"
-                  td.content valign="top" align="left"
+                        table.three.columns
+                          tr
+                            td.logo
+                              a href="#{root_url}"
+                                = image_tag(image_url @setting.logo.url(:small))
+                                span = @setting.subtitle
 
-                    == yield
+                            td.expander
 
-                    p.author = @setting.name
+                      td.wrapper.last
+                        table.eight.columns
+                          tr
+                            td.right-text-pad
+                              h3.site-title = @setting.title
+                              = @map.decorate.address if @map.decorate.address?
+                              == "&nbsp; - &nbsp;" if @map.decorate.city?
+                              = @map.decorate.postcode if @map.decorate.postcode?
+                              == "&nbsp;" if @map.decorate.city?
+                              = @map.decorate.city if @map.decorate.city?
+                              .site-phone
+                                = link_to @setting.phone, "tel:#{@setting.decorate.phone_w3c}"
 
-                tr width="100%"
-                  td.footer valign="top"
-                    / = image_tag("/assets/images/newsletter/frise.jpg")
-                    p.mentions #{@setting.name} - #{Time.zone.now.year}
+            / Lower header
+            table.container
+              tr
+                td
+                  table.row
+                    tr.lower-header
+                      td.wrapper.last.vam
+                        table.twelve.columns
+                          tr
+                            td.center.panel
+                              center
+                                h6.subject = @title
 
-                tr width="100%"
-                  td.links valign="top"
+                            td.expander
 
-                    - unless @preview_newsletter
-                      = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user }
+            / Content
+            table.container
+              tr
+                td
+                  table.row
+                    tr.main-content
+                      td.wrapper.last.offset-by-three
+                        table.nine.columns
+                          tr
+                            td.panel
+                              = yield
 
-                    - if @see_in_browser
-                      = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user }
+
+            / Footer
+            table.container
+              tr
+                td
+                  table.row
+                    tr.upper-footer
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td.panel.center
+                              center
+                                span #{@setting.name}
+                                == " - "
+                                span = link_to @setting.title, root_url
+                                == " - "
+                                span = Time.zone.now.year
+              tr
+                td
+                  table.row
+                    tr.lower-footer
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td.panel.center
+                              center
+                                = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user } unless @preview_newsletter
+
+                                = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user } if @see_in_browser

@@ -4,3 +4,7 @@
 - else
   p = "Hello #{@newsletter_user.name},"
   p You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.
+
+
+p.sent-from
+  == @setting.name

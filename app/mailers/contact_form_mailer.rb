@@ -30,11 +30,4 @@ class ContactFormMailer < ApplicationMailer
       format.text { render :message_me }
     end
   end
-
-  private
-
-  def set_contact_settings
-    @map = Map.joins(:location).select('locations.id, locations.address, locations.city, locations.postcode').first
-    @copy_to_sender = false
-  end
 end

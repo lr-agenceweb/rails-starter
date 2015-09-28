@@ -1,6 +1,6 @@
 #
 # == Newsletter Mailer preview
-# Preview all emails at http://localhost:3000/rails/mailers/send_newsletter_preview
+# Preview all emails at http://localhost:3000/rails/mailers/newsletter_preview
 #
 class NewsletterMailerPreview < ActionMailer::Preview
   def welcome_user_preview
@@ -11,10 +11,10 @@ class NewsletterMailerPreview < ActionMailer::Preview
     end
   end
 
-  # def newsletter_preview
-  #   @newsletter_user = NewsletterUser.english.first
-  #   I18n.with_locale(@newsletter_user.lang) do
-  #     NewsletterMailer.send_newsletter(@newsletter_user, Newsletter.find(2))
-  #   end
-  # end
+  def newsletter_preview
+    @newsletter_user = NewsletterUser.english.first
+    I18n.with_locale(@newsletter_user.lang) do
+      NewsletterMailer.send_newsletter(@newsletter_user, Newsletter.find(1))
+    end
+  end
 end

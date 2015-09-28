@@ -13,3 +13,6 @@
   = "\r\n\r\n\r\n==============================================\r\n"
   = "To unsubscribe: #{unsubscribe_url(@newsletter_user.id, @newsletter_user.token)} \r\n"
   = "To see the message in your browser: #{welcome_user_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)}"
+
+= "\r\n\r\n============= "
+== @setting.name
