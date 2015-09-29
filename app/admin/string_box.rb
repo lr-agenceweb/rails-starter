@@ -51,7 +51,7 @@ ActiveAdmin.register StringBox do
       if current_user.super_administrator?
         f.input :optional_module_id,
                 as: :select,
-                collection: OptionalModule.all,
+                collection: OptionalModule.all.map { |m| [m.decorate.name_deco, m.id] },
                 include_blank: true,
                 input_html: {
                   class: 'chosen-select'
