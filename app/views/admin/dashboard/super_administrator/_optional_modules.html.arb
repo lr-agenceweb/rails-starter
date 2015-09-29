@@ -1,6 +1,6 @@
 panel.panel t('activerecord.models.optional_module.other') do
   panel.table_for OptionalModuleDecorator.decorate_collection(query) do |p|
-    p.column t('activerecord.attributes.optional_module.name'), :name
+    p.column t('activerecord.attributes.optional_module.name'), :name_deco
     p.column t('enabled.true'), :enabled
   end
 end
