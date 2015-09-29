@@ -158,7 +158,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
           assert_not ActionMailer::Base.deliveries.empty?
           assert_includes delivered_email.to, user.email
           assert_includes delivered_email.from, @setting.email
-          assert_includes delivered_email.subject, I18n.t('newsletter.welcome')
+          assert_includes delivered_email.subject, string_boxes(:welcome_newsletter).title
         end
       end
     end

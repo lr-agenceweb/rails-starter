@@ -38,3 +38,8 @@ adult_not_validated_popup_content:
   key: adult_not_validated_popup_content
   title: ~
   content: Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.
+
+welcome_newsletter:
+  key: welcome_newsletter
+  title: Bienvenue !
+  content: Vous êtes maintenant inscrit à la newsletter !
