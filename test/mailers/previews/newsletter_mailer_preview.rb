@@ -5,7 +5,7 @@
 class NewsletterMailerPreview < ActionMailer::Preview
   def welcome_user_preview
     @is_welcome_user = true
-    @newsletter_user = NewsletterUser.find(1)
+    @newsletter_user = NewsletterUser.find(2)
     I18n.with_locale(@newsletter_user.lang) do
       NewsletterMailer.welcome_user(@newsletter_user)
     end

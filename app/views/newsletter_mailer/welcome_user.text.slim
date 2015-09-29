@@ -1,18 +1,14 @@
-- if @newsletter_user.lang == 'fr'
-  = "Bonjour #{@newsletter_user.name},"
-  = "\r\n==============================================\r\n\r\n"
-  | Vous êtes maintenant abonné à la newsletter, vous la recevrez environ une fois par mois. Votre email ne sera pas utilisé pour vous spammer.
-  = "\r\n\r\n\r\n==============================================\r\n"
-  = "Pour vous désinscrire: #{unsubscribe_url(@newsletter_user.id, @newsletter_user.token)} \r\n"
-  = "Pour voir ce message dans votre navigateur: #{welcome_user_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)}"
+= I18n.t('newsletter.hello', subscriber: @newsletter_user.name, locale: @newsletter_user.lang)
+= "\r\n==============================================\r\n\r\n"
 
-- else
-  = "Welcome #{@newsletter_user.name}"
-  = "\r\n\r\n==============================================\r\n\r\n"
-  | You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.
-  = "\r\n\r\n\r\n==============================================\r\n"
-  = "To unsubscribe: #{unsubscribe_url(@newsletter_user.id, @newsletter_user.token)} \r\n"
-  = "To see the message in your browser: #{welcome_user_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)}"
+== strip_tags(@content)
+== "\r\n\==== #{@setting.name}"
 
-= "\r\n\r\n============= "
-== @setting.name
+= "\r\n\r\n\r\n==============================================\r\n"
+= I18n.t('newsletter.footer_message', locale: @newsletter_user.lang)
+= ' - '
+= unsubscribe_url(@newsletter_user.id, @newsletter_user.token)
+= "\r\n===\r\n"
+= I18n.t('newsletter.see_in_browser', locale: @newsletter_user.lang)
+= ' - '
+= welcome_user_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)

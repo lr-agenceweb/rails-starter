@@ -1,7 +1,7 @@
 # French
 fr:
   newsletter:
-    welcome: Bienvenue à la newsletter !
+    hello: Bonjour %{subscriber}
     see_in_browser: Visualiser dans le navigateur
     header: Abonnez vous à ma newsletter !
     placeholder: Entrez votre email ici et valider
@@ -20,10 +20,11 @@ fr:
       invalid: Cet utilisateur n'existe pas
       alert: Êtes-vous sûr de vouloir vous désinscrire ?
 
+
 # English
 en:
   newsletter:
-    welcome: Welcome to the newsletter !
+    hello: Hello %{subscriber}
     see_in_browser: See the newsletter in your browser
     header: Subscribe to the newsletter !
     placeholder: Enter your email here and subscribe

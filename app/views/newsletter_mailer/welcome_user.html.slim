@@ -1,9 +1,5 @@
-- if @newsletter_user.lang == 'fr'
-  p = "Bonjour #{@newsletter_user.name},"
-- else
-  p = "Hello #{@newsletter_user.name},"
-
-== @content.content
+p = I18n.t('newsletter.hello', subscriber: @newsletter_user.name, locale: @newsletter_user.lang)
+== @content
 
 p.sent-from
   == @setting.name

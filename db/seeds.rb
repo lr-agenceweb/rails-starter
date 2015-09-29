@@ -49,7 +49,7 @@ User.create!(
 #
 puts 'Creating site Setting'
 setting_site = Setting.create!(
-  name: 'Rails starter',
+  name: 'L&R Agence web',
   title: 'Rails starter',
   subtitle: 'Site de Démonstration',
   phone: '+33 (0)1 02 03 04 05',
