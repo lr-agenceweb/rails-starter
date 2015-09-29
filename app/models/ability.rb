@@ -36,6 +36,7 @@ class Ability
     cannot [:update, :destroy], User, role: { name: 'super_administrator' }
     can :manage, User, id: @user.id
     optional_modules_check
+    can :manage, StringBox, optional_module_id: nil
   end
 
   def administrator_privilege
@@ -52,8 +53,8 @@ class Ability
     cannot :manage, OptionalModule
     cannot [:read, :update, :destroy], About
     can :manage, About, user_id: @user.id
-    can [:read, :update], StringBox
     optional_modules_check
+    can [:read, :update], StringBox, optional_module_id: nil
   end
 
   def subscriber_privilege
@@ -86,6 +87,7 @@ class Ability
     map_module
     social_module
     background_module
+    adult_module
   end
 
   #
@@ -110,6 +112,7 @@ class Ability
     else
       cannot :manage, Newsletter
       cannot :manage, NewsletterUser
+      cannot :manage, StringBox, optional_module_id: @newsletter_module.id unless @newsletter_module.enabled?
     end
   end
 
@@ -194,5 +197,9 @@ class Ability
     else
       cannot :manage, Background
     end
+  end
+
+  def adult_module
+    cannot :manage, StringBox, optional_module: { id: @adult_module.id } unless @adult_module.enabled?
   end
 end
