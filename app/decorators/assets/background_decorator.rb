@@ -13,7 +13,7 @@ class BackgroundDecorator < ApplicationDecorator
     model.attachable.menu_title
   end
 
-  def handle_background_tag(content = '', klass = '')
+  def handle_background_tag(content = nil, klass = '')
     content_tag(:div, content, class: "background #{klass}", style: "background-image: url(#{model.self_image_url_by_size(:background)});", data: interchange_background)
   end
 
