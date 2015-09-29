@@ -67,5 +67,21 @@ ActiveAdmin.register StringBox do
   #
   controller do
     include Skippable
+
+    def create
+      delete_key_before_save
+      super
+    end
+
+    def update
+      delete_key_before_save
+      super
+    end
+
+    private
+
+    def delete_key_before_save
+      params[:string_box].delete :optional_module_id unless current_user.super_administrator?
+    end
   end
 end
