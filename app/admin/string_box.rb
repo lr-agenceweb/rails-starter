@@ -1,6 +1,6 @@
 ActiveAdmin.register StringBox do
   menu parent: I18n.t('admin_menu.config')
-  includes :translations
+  includes :translations, :optional_module
 
   permit_params :id,
                 :key,
@@ -16,6 +16,7 @@ ActiveAdmin.register StringBox do
     column :key
     column :title
     column :content
+    column :optional_module if current_user.super_administrator?
 
     translation_status
     actions
