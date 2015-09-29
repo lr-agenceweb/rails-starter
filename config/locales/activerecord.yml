@@ -255,6 +255,7 @@ fr:
         title: Titre
         content: Contenu
         key: Clé
+        optional_module: Module Optionnel
       background:
         attachable_type: Page associée
         image: Image

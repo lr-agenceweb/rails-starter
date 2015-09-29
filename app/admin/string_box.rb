@@ -3,6 +3,7 @@ ActiveAdmin.register StringBox do
 
   permit_params :id,
                 :key,
+                :optional_module_id,
                 translations_attributes: [
                   :id, :locale, :title, :content
                 ]
@@ -24,6 +25,7 @@ ActiveAdmin.register StringBox do
       row :key
       row :title
       row :content
+      row :optional_module if current_user.super_administrator?
     end
   end
 
@@ -42,6 +44,16 @@ ActiveAdmin.register StringBox do
         t.input :content,
                 hint: I18n.t('form.hint.string_box.content'),
                 input_html: { class: 'froala' }
+      end
+
+      if current_user.super_administrator?
+        f.input :optional_module_id,
+                as: :select,
+                collection: OptionalModule.all,
+                include_blank: true,
+                input_html: {
+                  class: 'chosen-select'
+                }
       end
     end
 

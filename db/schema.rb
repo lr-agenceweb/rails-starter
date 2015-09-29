@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927144908) do
+ActiveRecord::Schema.define(version: 20150929161013) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -469,14 +469,16 @@ ActiveRecord::Schema.define(version: 20150927144908) do
   add_index "string_box_translations", ["string_box_id"], name: "index_string_box_translations_on_string_box_id", using: :btree
 
   create_table "string_boxes", force: :cascade do |t|
-    t.string   "key",        limit: 255
-    t.string   "title",      limit: 255
-    t.text     "content",    limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "key",                limit: 255
+    t.string   "title",              limit: 255
+    t.text     "content",            limit: 65535
+    t.integer  "optional_module_id", limit: 4
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "string_boxes", ["key"], name: "index_string_boxes_on_key", using: :btree
+  add_index "string_boxes", ["optional_module_id"], name: "index_string_boxes_on_optional_module_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
@@ -508,4 +510,5 @@ ActiveRecord::Schema.define(version: 20150927144908) do
 
   add_foreign_key "categories", "menus", name: "fk_categories_menu_id"
   add_foreign_key "menu_translations", "menus", name: "fk_menu_translations_menu_id"
+  add_foreign_key "string_boxes", "optional_modules"
 end

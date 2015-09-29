@@ -15,6 +15,7 @@
 #
 class OptionalModule < ActiveRecord::Base
   has_one :category, dependent: :destroy
+  has_many :string_boxes, dependent: :destroy
 
   def self.list
     %w( Newsletter GuestBook Search RSS Comment Blog Adult Slider Event Map Social Breadcrumb Qrcode Background Calendar )

@@ -120,6 +120,8 @@ OptionalModule.list.each_with_index do |element, index|
     enabled: true
   )
 
+  @optional_module_newsletter = optional_module if element == 'Newsletter'
+  @optional_module_adult = optional_module if element == 'Adult'
   @optional_module_search = optional_module if element == 'Search'
   @optional_module_guest_book = optional_module if element == 'GuestBook'
   @optional_module_blog = optional_module if element == 'Blog'
@@ -575,11 +577,21 @@ string_box_content_en = [
   '<p>In order to access the website, you must be over 18 years old.</p>',
   '<p>You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.</p>'
 ]
+optional_module_id = [
+  nil,
+  nil,
+  nil,
+  nil,
+  @optional_module_adult.id,
+  @optional_module_newsletter.id
+]
+
 string_box_keys.each_with_index do |element, index|
   string_box = StringBox.create!(
     key: element,
     title: string_box_title_fr[index],
-    content: string_box_content_fr[index]
+    content: string_box_content_fr[index],
+    optional_module_id: optional_module_id[index]
   )
 
   if @locales.include?(:en)
