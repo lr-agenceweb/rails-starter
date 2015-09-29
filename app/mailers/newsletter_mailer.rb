@@ -12,7 +12,8 @@ class NewsletterMailer < ApplicationMailer
   def welcome_user(newsletter_user)
     @newsletter_user = newsletter_user
     @newsletter_user.name = @newsletter_user.extract_name_from_email
-    @title = t('newsletter.welcome')
+    @content = StringBox.find_by(key: 'welcome_newsletter')
+    @title = @content.title
     @is_welcome_user = true
     @see_in_browser = true
 

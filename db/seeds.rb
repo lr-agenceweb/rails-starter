@@ -535,22 +535,45 @@ NewsletterUser.create!(
 # == StringBox
 #
 puts 'Creating StringBox'
-string_box_keys = ['error_404', 'error_422', 'error_500', 'success_contact_form', 'adult_not_validated_popup_content']
-string_box_title_fr = ['404', '422', '500', 'Message de contact envoyé avec succès', '', 'Majorité requise !']
-string_box_title_en = ['404', '422', '500', 'Contact message sent successfuly', '', '']
+string_box_keys = [
+  'error_404',
+  'error_422',
+  'error_500',
+  'success_contact_form',
+  'adult_not_validated_popup_content',
+  'welcome_newsletter'
+]
+string_box_title_fr = [
+  '404',
+  '422',
+  '500',
+  'Message de contact envoyé avec succès',
+  'Majorité requise !',
+  'Bienvenue à la newsletter'
+]
+string_box_title_en = [
+  '404',
+  '422',
+  '500',
+  'Contact message sent successfuly',
+  '',
+  'Welcome to the newsletter'
+]
 string_box_content_fr = [
   "<p>Cette page n'existe pas ou n'existe plus.<br /> Nous vous prions de nous excuser pour la gêne occasionnée.</p>",
   '<p>La page que vous tentez de voir n\'est pas disponible pour l\'instant :(</p>',
   '<p>Ooops, une erreur s\'est produite :( Veuillez réésayer ultérieurement</p>',
   '<p>Votre message a bien été envoyé. Merci :)</p>',
-  '<p>Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.</p>'
+  '<p>Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.</p>',
+  '<p>Vous êtes maintenant abonné à la newsletter, vous la recevrez environ une fois par mois. Votre email ne sera pas utilisé pour vous spammer.</p>'
 ]
 string_box_content_en = [
   '<p>The page you want to access doesn\'t exist :(</p>',
   '<p>The page you want to access is not available now :(</p>',
   '<p>Oops, something bad happend :( Please try again later</p>',
   '<p>Your message has been sent successfuly. Thank you :)',
-  '<p>In order to access the website, you must be over 18 years old.</p>'
+  '<p>In order to access the website, you must be over 18 years old.</p>',
+  '<p>You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.</p>'
 ]
 string_box_keys.each_with_index do |element, index|
   string_box = StringBox.create!(
