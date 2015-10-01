@@ -10,6 +10,10 @@ ActiveAdmin.register Newsletter, as: 'Letter' do
   decorate_with NewsletterDecorator
   config.clear_sidebar_sections!
 
+  action_item :update_newsletter_setting, only: [:index, :show] do
+    link_to I18n.t('active_admin.action_item.update_newsletter_setting'), edit_admin_newsletter_setting_path(NewsletterSetting.first)
+  end
+
   index do
     selectable_column
     column :title

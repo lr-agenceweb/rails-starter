@@ -6,6 +6,10 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
   decorate_with NewsletterUserDecorator
   config.clear_sidebar_sections!
 
+  action_item :update_newsletter_setting, only: [:index, :show] do
+    link_to I18n.t('active_admin.action_item.update_newsletter_setting'), edit_admin_newsletter_setting_path(NewsletterSetting.first)
+  end
+
   scope :all, default: true
   scope :francais
   scope :english
