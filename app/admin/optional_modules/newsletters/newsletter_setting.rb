@@ -9,13 +9,12 @@ ActiveAdmin.register NewsletterSetting do
   decorate_with NewsletterSettingDecorator
   config.clear_sidebar_sections!
 
-  index do
-    selectable_column
-    column :send_welcome_email
-    column :title_subscriber
-    column :content_subscriber
-
-    actions
+  show do
+    attributes_table do
+      row :send_welcome_email_d
+      row :title_subscriber_d
+      row :content_subscriber_d
+    end
   end
 
   form do |f|
@@ -23,7 +22,7 @@ ActiveAdmin.register NewsletterSetting do
 
     columns do
       column do
-        f.inputs t('genereal') do
+        f.inputs t('general') do
           f.input :send_welcome_email,
                   input_html: { disabled: :disabled }
         end

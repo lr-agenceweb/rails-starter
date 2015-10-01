@@ -254,6 +254,10 @@ fr:
         role: Rôle
         role_status: Rôle
         created_at: Inscrit le
+      newsletter_setting:
+        send_welcome_email_d: Mail de bienvenue ?
+        title_subscriber_d: Titre du mail
+        content_subscriber_d: Contenu du mail
       string_box:
         title: Titre
         content: Contenu
