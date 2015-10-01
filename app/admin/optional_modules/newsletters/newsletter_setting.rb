@@ -29,9 +29,9 @@ ActiveAdmin.register NewsletterSetting do
       end
     end
 
-    columns do
+    columns id: 'newsletter_config_form' do
       column do
-        f.inputs t('activerecord.models.newsletter_setting.one') do
+        f.inputs t('newsletter.active_admin.welcome_panel_title') do
           f.translated_inputs 'Translated fields', switch_locale: true do |t|
             t.input :title_subscriber,
                     label: I18n.t('activerecord.attributes.newsletter_setting.title_subscriber'),
