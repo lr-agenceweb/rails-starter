@@ -10,11 +10,11 @@ class NewsletterSettingDecorator < ApplicationDecorator
     status_tag_deco I18n.t("#{send_welcome_email}"), color
   end
 
-  def title_subscriber_d
+  def title_subscriber
     raw(model.title_subscriber)
   end
 
-  def content_subscriber_d
+  def content_subscriber
     raw(model.content_subscriber)
   end
 end
