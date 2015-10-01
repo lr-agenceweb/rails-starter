@@ -10,8 +10,7 @@
 #  updated_at         :datetime         not null
 #
 
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+one:
+  send_welcome_email: true
+  title_subscriber: 'I am the title'
+  content_subscriber: 'I am the content'

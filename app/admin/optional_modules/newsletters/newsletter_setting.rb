@@ -52,9 +52,7 @@ ActiveAdmin.register NewsletterSetting do
   # == Controller
   #
   controller do
-    include Skippable
-
-    before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? }
+    before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? && @newsletter_module.enabled? }
 
     private
 
