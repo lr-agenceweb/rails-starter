@@ -22,3 +22,14 @@
 #= require jquery.minicolors
 #= require admin/minicolors
 #= require fotorama
+
+$ ->
+  if $('#newsletter_setting_send_welcome_email').length
+    $this = $('#newsletter_setting_send_welcome_email')
+    $('#newsletter_config_form').hide() unless $this.is(':checked')
+
+    $this.on 'click', (e) ->
+      if $this.is(':checked')
+        $('#newsletter_config_form').slideDown()
+      else
+        $('#newsletter_config_form').slideUp()

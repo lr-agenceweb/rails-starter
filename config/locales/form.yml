@@ -43,6 +43,11 @@ fr:
       optional_module: Choisir quel est le module optionel lié à cette catégorie
       heading: En-tête du contenu
 
+      newsletter:
+        send_welcome_email: Si coché, le nouvel abonné à la newsletter recevra un email de bienvenue
+        title_subscriber: Titre / Sujet du mail reçu par le nouvel abonné
+        content_subscriber: Contenu du mail reçu par le nouvel abonné
+
       event:
         start_date: Date de début de l'événement
         end_date: Date de fin de l'événement

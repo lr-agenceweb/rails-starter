@@ -534,6 +534,24 @@ NewsletterUser.create!(
 )
 
 #
+# == Newsletter Setting
+#
+puts 'Creating Newsletter Setting'
+newsletter_setting = NewsletterSetting.create!(
+  send_welcome_email: true,
+  title_subscriber: 'Bienvenue à la newsletter',
+  content_subscriber: '<p>Vous êtes maintenant abonné à la newsletter, vous la recevrez environ une fois par mois. Votre email ne sera pas utilisé pour vous spammer.</p>'
+)
+if @locales.include?(:en)
+  NewsletterSetting::Translation.create!(
+    newsletter_setting_id: newsletter_setting.id,
+    locale: 'en',
+    title_subscriber: 'Welcome to the newsletter',
+    content_subscriber: '<p>You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.</p>'
+  )
+end
+
+#
 # == StringBox
 #
 puts 'Creating StringBox'
@@ -542,48 +560,42 @@ string_box_keys = [
   'error_422',
   'error_500',
   'success_contact_form',
-  'adult_not_validated_popup_content',
-  'welcome_newsletter'
+  'adult_not_validated_popup_content'
 ]
 string_box_title_fr = [
   '404',
   '422',
   '500',
   'Message de contact envoyé avec succès',
-  'Majorité requise !',
-  'Bienvenue à la newsletter'
+  'Majorité requise !'
 ]
 string_box_title_en = [
   '404',
   '422',
   '500',
   'Contact message sent successfuly',
-  '',
-  'Welcome to the newsletter'
+  ''
 ]
 string_box_content_fr = [
   "<p>Cette page n'existe pas ou n'existe plus.<br /> Nous vous prions de nous excuser pour la gêne occasionnée.</p>",
   '<p>La page que vous tentez de voir n\'est pas disponible pour l\'instant :(</p>',
   '<p>Ooops, une erreur s\'est produite :( Veuillez réésayer ultérieurement</p>',
   '<p>Votre message a bien été envoyé. Merci :)</p>',
-  '<p>Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.</p>',
-  '<p>Vous êtes maintenant abonné à la newsletter, vous la recevrez environ une fois par mois. Votre email ne sera pas utilisé pour vous spammer.</p>'
+  '<p>Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.</p>'
 ]
 string_box_content_en = [
   '<p>The page you want to access doesn\'t exist :(</p>',
   '<p>The page you want to access is not available now :(</p>',
   '<p>Oops, something bad happend :( Please try again later</p>',
   '<p>Your message has been sent successfuly. Thank you :)',
-  '<p>In order to access the website, you must be over 18 years old.</p>',
-  '<p>You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.</p>'
+  '<p>In order to access the website, you must be over 18 years old.</p>'
 ]
 optional_module_id = [
   nil,
   nil,
   nil,
   nil,
-  @optional_module_adult.id,
-  @optional_module_newsletter.id
+  @optional_module_adult.id
 ]
 
 string_box_keys.each_with_index do |element, index|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929161013) do
+ActiveRecord::Schema.define(version: 20151001123439) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -222,6 +222,26 @@ ActiveRecord::Schema.define(version: 20150929161013) do
     t.integer  "position",       limit: 4
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+  end
+
+  create_table "newsletter_setting_translations", force: :cascade do |t|
+    t.integer  "newsletter_setting_id", limit: 4,     null: false
+    t.string   "locale",                limit: 255,   null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "title_subscriber",      limit: 255
+    t.text     "content_subscriber",    limit: 65535
+  end
+
+  add_index "newsletter_setting_translations", ["locale"], name: "index_newsletter_setting_translations_on_locale", using: :btree
+  add_index "newsletter_setting_translations", ["newsletter_setting_id"], name: "index_newsletter_setting_translations_on_newsletter_setting_id", using: :btree
+
+  create_table "newsletter_settings", force: :cascade do |t|
+    t.boolean  "send_welcome_email",               default: true
+    t.string   "title_subscriber",   limit: 255
+    t.text     "content_subscriber", limit: 65535
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   create_table "newsletter_translations", force: :cascade do |t|

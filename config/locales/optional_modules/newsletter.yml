@@ -20,6 +20,8 @@ fr:
       invalid: Cet utilisateur n'existe pas
       alert: Êtes-vous sûr de vouloir vous désinscrire ?
 
+    active_admin:
+      welcome_panel_title: Configuration de l'email de Bienvenue
 
 # English
 en:
