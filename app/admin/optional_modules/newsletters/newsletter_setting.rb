@@ -49,5 +49,13 @@ ActiveAdmin.register NewsletterSetting do
   #
   controller do
     include Skippable
+
+    before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? }
+
+    private
+
+    def redirect_to_show
+      redirect_to admin_newsletter_setting_path(NewsletterSetting.first)
+    end
   end
 end
