@@ -126,6 +126,9 @@ fr:
       letter:
         one: Newsletter
         other: Newsletters
+      newsletter_setting:
+        one: Newsletter configuration
+        other: Newsletter configuration
       blog:
         one: Blog
         other: Blog
