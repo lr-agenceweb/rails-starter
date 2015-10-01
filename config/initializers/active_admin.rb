@@ -165,6 +165,8 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   config.register_javascript '//maps.googleapis.com/maps/api/js?sensor=false'
+  config.register_javascript '//www.google.com/jsapi'
+  config.register_javascript 'chartkick'
 
   # == CSV options
   #

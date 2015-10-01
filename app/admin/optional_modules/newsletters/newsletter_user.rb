@@ -22,6 +22,18 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
     column :created_at
 
     actions
+
+    panel 'Chart' do
+      columns do
+        column do
+          pie_chart NewsletterUser.group(:lang).count
+        end
+
+        column do
+          pie_chart NewsletterUser.group(:role).count
+        end
+      end
+    end
   end
 
   form do |f|

@@ -223,6 +223,7 @@ GEM
     capistrano3-delayed-job (1.4.0)
       capistrano (>= 3.0.0)
     cd (1.0.0)
+    chartkick (1.4.1)
     chosen-rails (1.4.1)
       coffee-rails (>= 3.2)
       compass-rails (>= 1.1.2)
@@ -649,6 +650,7 @@ DEPENDENCIES
   capistrano-rails-collection
   capistrano-rvm
   capistrano3-delayed-job (~> 1.0)
+  chartkick
   chosen-rails
   client_side_validations!
   client_side_validations-simple_form!
