@@ -12,8 +12,8 @@ ActiveAdmin.register NewsletterSetting do
   show do
     attributes_table do
       row :send_welcome_email_d
-      row :title_subscriber_d
-      row :content_subscriber_d
+      row :title_subscriber
+      row :content_subscriber
     end
   end
 
@@ -24,16 +24,21 @@ ActiveAdmin.register NewsletterSetting do
       column do
         f.inputs t('general') do
           f.input :send_welcome_email,
-                  input_html: { disabled: :disabled }
+                  hint: I18n.t('form.hint.newsletter.send_welcome_email')
         end
       end
+    end
 
+    columns do
       column do
         f.inputs t('activerecord.models.newsletter_setting.one') do
-          f.translated_inputs 'Translated fields', switch_locale: false do |t|
-            t.input :title_subscriber, hint: I18n.t('form.hint.title_newsletter')
+          f.translated_inputs 'Translated fields', switch_locale: true do |t|
+            t.input :title_subscriber,
+                    label: I18n.t('activerecord.attributes.newsletter_setting.title_subscriber'),
+                    hint: I18n.t('form.hint.newsletter.title_subscriber')
             t.input :content_subscriber,
-                    hint: I18n.t('form.hint.content_newsletter'),
+                    label: I18n.t('activerecord.attributes.newsletter_setting.content_subscriber'),
+                    hint: I18n.t('form.hint.newsletter.content_subscriber'),
                     input_html: { class: 'froala' }
           end
         end
