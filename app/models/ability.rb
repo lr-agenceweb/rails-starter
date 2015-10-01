@@ -74,7 +74,7 @@ class Ability
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, Comment, Blog, Slider, Event, Map, Newsletter, Social, Background]
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, Map, Newsletter, Social, Background]
   end
 
   def optional_modules_check
@@ -109,9 +109,9 @@ class Ability
     if @newsletter_module.enabled?
       can :manage, Newsletter
       can [:create, :read, :update, :destroy], NewsletterUser
+      can [:read, :update], NewsletterSetting
     else
-      cannot :manage, Newsletter
-      cannot :manage, NewsletterUser
+      cannot :manage, [Newsletter, NewsletterUser, NewsletterSetting]
       cannot :manage, StringBox, optional_module_id: @newsletter_module.id unless @newsletter_module.enabled?
     end
   end
