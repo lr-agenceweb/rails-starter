@@ -13,9 +13,9 @@ class NewsletterMailer < ApplicationMailer
     @newsletter_user = newsletter_user
     @newsletter_user.name = @newsletter_user.extract_name_from_email
     I18n.with_locale(@newsletter_user.lang) do
-      welcome_newsletter = StringBox.find_by(key: 'welcome_newsletter')
-      @title = welcome_newsletter.title
-      @content = welcome_newsletter.content
+      welcome_newsletter = NewsletterSetting.first
+      @title = welcome_newsletter.title_subscriber
+      @content = welcome_newsletter.content_subscriber
     end
     @is_welcome_user = true
     @see_in_browser = true
