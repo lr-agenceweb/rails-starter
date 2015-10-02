@@ -16,11 +16,22 @@ ActiveAdmin.register NewsletterSetting do
   config.clear_sidebar_sections!
 
   show do
-    attributes_table do
-      row :send_welcome_email_d
-      row :title_subscriber
-      row :content_subscriber
-      row :newsletter_user_roles
+    columns do
+      column do
+        attributes_table do
+          row :send_welcome_email_d
+          row :newsletter_user_roles
+        end
+      end
+
+      column do
+        panel I18n.t('newsletter.active_admin.welcome_panel_title') do
+          attributes_table_for resource.decorate do
+            row :title_subscriber
+            row :content_subscriber
+          end
+        end
+      end if resource.send_welcome_email?
     end
   end
 

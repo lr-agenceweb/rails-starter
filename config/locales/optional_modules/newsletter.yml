@@ -21,7 +21,7 @@ fr:
       alert: Êtes-vous sûr de vouloir vous désinscrire ?
 
     active_admin:
-      welcome_panel_title: Configuration de l'email de Bienvenue
+      welcome_panel_title: Email de Bienvenue
 
 # English
 en:
