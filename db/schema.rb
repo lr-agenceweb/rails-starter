@@ -268,10 +268,14 @@ ActiveRecord::Schema.define(version: 20151002170656) do
   add_index "newsletter_user_role_translations", ["newsletter_user_role_id"], name: "index_eda908bed34c8eafcfa35f3b63d6111221f532d2", using: :btree
 
   create_table "newsletter_user_roles", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "rollable_id",   limit: 4
+    t.string   "rollable_type", limit: 255
+    t.string   "title",         limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
+
+  add_index "newsletter_user_roles", ["rollable_type", "rollable_id"], name: "index_newsletter_user_roles_on_rollable_type_and_rollable_id", using: :btree
 
   create_table "newsletter_users", force: :cascade do |t|
     t.string   "email",      limit: 255

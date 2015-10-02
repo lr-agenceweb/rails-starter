@@ -129,6 +129,9 @@ fr:
       newsletter_setting:
         one: Newsletter configuration
         other: Newsletter configuration
+      newsletter_user_role:
+        one: Newsletter rôle utilisateur
+        other: Newsletter rôles utilisateur
       blog:
         one: Blog
         other: Blog
@@ -259,6 +262,8 @@ fr:
         send_welcome_email: Mail de bienvenue ?
         title_subscriber: Titre du mail
         content_subscriber: Contenu du mail
+      newsletter_user_role:
+        title: Rôle
       string_box:
         title: Titre
         content: Contenu

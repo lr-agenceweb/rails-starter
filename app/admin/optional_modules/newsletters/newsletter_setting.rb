@@ -4,7 +4,13 @@ ActiveAdmin.register NewsletterSetting do
   permit_params :id,
                 :send_welcome_email,
                 :title_subscriber,
-                :content_subscriber
+                :content_subscriber,
+                newsletter_user_roles_attributes: [
+                  :id,
+                  translations_attributes: [
+                    :id, :locale, :title
+                  ]
+                ]
 
   decorate_with NewsletterSettingDecorator
   config.clear_sidebar_sections!
@@ -42,6 +48,12 @@ ActiveAdmin.register NewsletterSetting do
                     input_html: { class: 'froala' }
           end
         end
+      end
+    end
+
+    columns do
+      column do
+        render 'admin/newsletter_user_roles/form', f: f
       end
     end
 

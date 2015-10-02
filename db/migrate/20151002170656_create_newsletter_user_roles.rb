@@ -1,6 +1,7 @@
 class CreateNewsletterUserRoles < ActiveRecord::Migration
   def up
     create_table :newsletter_user_roles do |t|
+      t.references :rollable, polymorphic: true, index: true
       t.string :title
 
       t.timestamps null: false

@@ -1,0 +1,6 @@
+- f.inputs t('activerecord.models.newsletter_user_role.other') do
+  - f.has_many :newsletter_user_roles, heading: false do |item|
+    = item.translated_inputs 'Translated fields', switch_locale: true do |t|
+      - t.input :title,
+                label: I18n.t('activerecord.attributes.newsletter_user_role.title'),
+                hint: I18n.t('form.hint.newsletter_user_role.title')
