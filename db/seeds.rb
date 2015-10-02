@@ -534,6 +534,33 @@ NewsletterUser.create!(
 )
 
 #
+# == Newsletter User Roles
+#
+puts 'Creating Newsletter User Roles'
+newsletter_user_role_title_fr = [
+  'abonné',
+  'testeur'
+]
+newsletter_user_role_title_en = [
+  'subscriber',
+  'tester'
+]
+
+newsletter_user_role_title_fr.each_with_index do |element, index|
+  newsletter_user_role = NewsletterUserRole.create!(
+    title: newsletter_user_role_title_fr[index]
+  )
+
+  if @locales.include?(:en)
+    NewsletterUserRole::Translation.create!(
+      newsletter_user_role_id: newsletter_user_role.id,
+      locale: 'en',
+      title: newsletter_user_role_title_en[index]
+    )
+  end
+end
+
+#
 # == Newsletter Setting
 #
 puts 'Creating Newsletter Setting'
