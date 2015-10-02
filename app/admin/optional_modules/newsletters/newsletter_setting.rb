@@ -67,6 +67,10 @@ ActiveAdmin.register NewsletterSetting do
   controller do
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? && @newsletter_module.enabled? }
 
+    def scoped_collection
+      super.includes newsletter_user_roles: [:translations]
+    end
+
     private
 
     def redirect_to_show
