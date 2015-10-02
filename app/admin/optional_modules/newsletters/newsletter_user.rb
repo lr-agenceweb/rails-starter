@@ -14,6 +14,10 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
   scope :francais
   scope :english
 
+  sidebar I18n.t('newsletter.active_admin.subscriber_by_lang'), only: :index do
+    pie_chart NewsletterUser.subscribers.group(:lang).count, height: '150px'
+  end
+
   index do
     selectable_column
     column :email
@@ -22,18 +26,6 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
     column :created_at
 
     actions
-
-    panel 'Chart' do
-      columns do
-        column do
-          pie_chart NewsletterUser.group(:lang).count
-        end
-
-        column do
-          pie_chart NewsletterUser.group(:role).count
-        end
-      end
-    end
   end
 
   form do |f|
