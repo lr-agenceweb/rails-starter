@@ -1,0 +1,16 @@
+class CreateNewsletterUserRoles < ActiveRecord::Migration
+  def up
+    create_table :newsletter_user_roles do |t|
+      t.string :title
+
+      t.timestamps null: false
+    end
+
+    NewsletterUserRole.create_translation_table! title: :string
+  end
+
+  def down
+    drop_table :newsletter_user_roles
+    NewsletterUserRole.drop_translation_table!
+  end
+end
