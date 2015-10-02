@@ -20,6 +20,7 @@ ActiveAdmin.register NewsletterSetting do
       row :send_welcome_email_d
       row :title_subscriber
       row :content_subscriber
+      row :newsletter_user_roles
     end
   end
 
