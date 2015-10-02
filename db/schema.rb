@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002170656) do
+ActiveRecord::Schema.define(version: 20151002201558) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -278,15 +278,16 @@ ActiveRecord::Schema.define(version: 20151002170656) do
   add_index "newsletter_user_roles", ["rollable_type", "rollable_id"], name: "index_newsletter_user_roles_on_rollable_type_and_rollable_id", using: :btree
 
   create_table "newsletter_users", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.string   "lang",       limit: 255, default: "fr"
-    t.string   "role",       limit: 255, default: "subscriber"
-    t.string   "token",      limit: 255
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.string   "email",                   limit: 255
+    t.string   "lang",                    limit: 255, default: "fr"
+    t.string   "token",                   limit: 255
+    t.integer  "newsletter_user_role_id", limit: 4,   default: 1
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "newsletter_users", ["email"], name: "index_newsletter_users_on_email", unique: true, using: :btree
+  add_index "newsletter_users", ["newsletter_user_role_id"], name: "index_newsletter_users_on_newsletter_user_role_id", using: :btree
 
   create_table "newsletters", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -555,5 +556,6 @@ ActiveRecord::Schema.define(version: 20151002170656) do
 
   add_foreign_key "categories", "menus", name: "fk_categories_menu_id"
   add_foreign_key "menu_translations", "menus", name: "fk_menu_translations_menu_id"
+  add_foreign_key "newsletter_users", "newsletter_user_roles"
   add_foreign_key "string_boxes", "optional_modules"
 end

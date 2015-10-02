@@ -5,6 +5,7 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
 
   decorate_with NewsletterUserDecorator
   config.clear_sidebar_sections!
+  actions :all, except: [:show]
 
   action_item :update_newsletter_setting, only: [:index, :show] do
     link_to I18n.t('active_admin.action_item.update_newsletter_setting'), edit_admin_newsletter_setting_path(NewsletterSetting.first)
@@ -59,6 +60,10 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
   #
   controller do
     include Skippable
+
+    def scoped_collection
+      super.includes newsletter_user_role: [:translations]
+    end
 
     def update
       super { admin_letter_users_path }
