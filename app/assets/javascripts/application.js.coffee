@@ -5,6 +5,7 @@
 #= require foundation/foundation
 #= require foundation
 #= require plugins/foundation_init
+#= require konami
 #= require turbolinks
 #= require nprogress
 #= require nprogress-turbolinks
@@ -34,6 +35,7 @@
 #= require plugins/cookie_adult_validation
 #= require plugins/fotorama
 #= require plugins/fullcalendar
+#= require plugins/easter-egg
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
