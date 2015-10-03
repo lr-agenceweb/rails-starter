@@ -61,8 +61,8 @@ class Setting < ActiveRecord::Base
                        content_type: { content_type: %r{\Aimage\/.*\Z} },
                        size: { less_than: 2.megabyte }
   validates_attachment :logo_footer,
-                        content_type: { content_type: %r{\Aimage\/.*\Z} },
-                        size: { less_than: 2.megabyte }
+                       content_type: { content_type: %r{\Aimage\/.*\Z} },
+                       size: { less_than: 2.megabyte }
 
   validates :name,  presence: true
   validates :email, presence: true, email_format: true

@@ -21,7 +21,7 @@
 class NewsletterUserRole < ActiveRecord::Base
   translates :title, fallbacks_for_empty_translations: true
   active_admin_translates :title do
-    validates_presence_of :title
+    validates :title, presence: true
   end
 
   belongs_to :rollable, polymorphic: true
