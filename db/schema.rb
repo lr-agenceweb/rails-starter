@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001123439) do
+ActiveRecord::Schema.define(version: 20151003174654) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -256,16 +256,39 @@ ActiveRecord::Schema.define(version: 20151001123439) do
   add_index "newsletter_translations", ["locale"], name: "index_newsletter_translations_on_locale", using: :btree
   add_index "newsletter_translations", ["newsletter_id"], name: "index_newsletter_translations_on_newsletter_id", using: :btree
 
+  create_table "newsletter_user_role_translations", force: :cascade do |t|
+    t.integer  "newsletter_user_role_id", limit: 4,   null: false
+    t.string   "locale",                  limit: 255, null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "title",                   limit: 255
+  end
+
+  add_index "newsletter_user_role_translations", ["locale"], name: "index_newsletter_user_role_translations_on_locale", using: :btree
+  add_index "newsletter_user_role_translations", ["newsletter_user_role_id"], name: "index_eda908bed34c8eafcfa35f3b63d6111221f532d2", using: :btree
+
+  create_table "newsletter_user_roles", force: :cascade do |t|
+    t.integer  "rollable_id",   limit: 4
+    t.string   "rollable_type", limit: 255
+    t.string   "title",         limit: 255
+    t.string   "kind",          limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "newsletter_user_roles", ["rollable_type", "rollable_id"], name: "index_newsletter_user_roles_on_rollable_type_and_rollable_id", using: :btree
+
   create_table "newsletter_users", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.string   "lang",       limit: 255, default: "fr"
-    t.string   "role",       limit: 255, default: "subscriber"
-    t.string   "token",      limit: 255
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.string   "email",                   limit: 255
+    t.string   "lang",                    limit: 255, default: "fr"
+    t.string   "token",                   limit: 255
+    t.integer  "newsletter_user_role_id", limit: 4,   default: 1
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "newsletter_users", ["email"], name: "index_newsletter_users_on_email", unique: true, using: :btree
+  add_index "newsletter_users", ["newsletter_user_role_id"], name: "index_newsletter_users_on_newsletter_user_role_id", using: :btree
 
   create_table "newsletters", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -521,14 +544,19 @@ ActiveRecord::Schema.define(version: 20151001123439) do
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 4
     t.datetime "avatar_updated_at"
+    t.string   "provider",               limit: 255
+    t.string   "uid",                    limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
   add_foreign_key "categories", "menus", name: "fk_categories_menu_id"
   add_foreign_key "menu_translations", "menus", name: "fk_menu_translations_menu_id"
+  add_foreign_key "newsletter_users", "newsletter_user_roles"
   add_foreign_key "string_boxes", "optional_modules"
 end

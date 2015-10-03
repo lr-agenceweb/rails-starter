@@ -17,4 +17,8 @@ class NewsletterSettingDecorator < ApplicationDecorator
   def content_subscriber
     raw(model.content_subscriber)
   end
+
+  def newsletter_user_roles_d
+    model.newsletter_user_roles.map(&:title).join(', ')
+  end
 end

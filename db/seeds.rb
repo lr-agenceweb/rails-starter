@@ -498,6 +498,24 @@ event_images.each do |image|
 end
 
 #
+# == Newsletter Setting
+#
+puts 'Creating Newsletter Setting'
+@newsletter_setting = NewsletterSetting.create!(
+  send_welcome_email: true,
+  title_subscriber: 'Bienvenue à la newsletter',
+  content_subscriber: '<p>Vous êtes maintenant abonné à la newsletter, vous la recevrez environ une fois par mois. Votre email ne sera pas utilisé pour vous spammer.</p>'
+)
+if @locales.include?(:en)
+  NewsletterSetting::Translation.create!(
+    newsletter_setting_id: @newsletter_setting.id,
+    locale: 'en',
+    title_subscriber: 'Welcome to the newsletter',
+    content_subscriber: '<p>You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.</p>'
+  )
+end
+
+#
 # == Newsletter
 #
 puts 'Creating Newsletter'
@@ -517,39 +535,55 @@ if @locales.include?(:en)
 end
 
 #
+# == Newsletter User Roles
+#
+puts 'Creating Newsletter User Roles'
+newsletter_user_role_title_fr = [
+  'abonné',
+  'testeur'
+]
+newsletter_user_role_title_en = [
+  'subscriber',
+  'tester'
+]
+
+newsletter_user_role_title_en.each_with_index do |element, index|
+  newsletter_user_role = NewsletterUserRole.create!(
+    rollable_id: @newsletter_setting.id,
+    rollable_type: 'NewsletterSetting',
+    title: newsletter_user_role_title_fr[index],
+    kind: newsletter_user_role_title_en[index]
+  )
+
+  if @locales.include?(:en)
+    NewsletterUserRole::Translation.create!(
+      newsletter_user_role_id: newsletter_user_role.id,
+      locale: 'en',
+      title: newsletter_user_role_title_en[index]
+    )
+  end
+
+  @newsletter_user_role_subscriber = newsletter_user_role if element == 'subscriber'
+  @newsletter_user_role_tester = newsletter_user_role if element == 'tester'
+end
+
+#
 # == Newsletter User
 #
 puts 'Creating Newsletter User'
 NewsletterUser.create!(
   email: 'abonne@test.fr',
   lang: 'fr',
-  role: 'subscriber',
-  token: 'df6dbd90f13d7c8'
+  token: 'df6dbd90f13d7c8',
+  newsletter_user_role_id: @newsletter_user_role_subscriber.id
 )
 NewsletterUser.create!(
   email: 'subscriber@test.en',
   lang: 'en',
-  role: 'subscriber',
-  token: '5f9a50a21As109Qw'
+  token: '5f9a50a21As109Qw',
+  newsletter_user_role_id: @newsletter_user_role_subscriber.id
 )
 
-#
-# == Newsletter Setting
-#
-puts 'Creating Newsletter Setting'
-newsletter_setting = NewsletterSetting.create!(
-  send_welcome_email: true,
-  title_subscriber: 'Bienvenue à la newsletter',
-  content_subscriber: '<p>Vous êtes maintenant abonné à la newsletter, vous la recevrez environ une fois par mois. Votre email ne sera pas utilisé pour vous spammer.</p>'
-)
-if @locales.include?(:en)
-  NewsletterSetting::Translation.create!(
-    newsletter_setting_id: newsletter_setting.id,
-    locale: 'en',
-    title_subscriber: 'Welcome to the newsletter',
-    content_subscriber: '<p>You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.</p>'
-  )
-end
 
 #
 # == StringBox

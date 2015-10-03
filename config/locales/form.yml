@@ -47,6 +47,8 @@ fr:
         send_welcome_email: Si coché, le nouvel abonné à la newsletter recevra un email de bienvenue
         title_subscriber: Titre / Sujet du mail reçu par le nouvel abonné
         content_subscriber: Contenu du mail reçu par le nouvel abonné
+      newsletter_user_role:
+        title: Rôle de l'inscrit à la newsletter
 
       event:
         start_date: Date de début de l'événement

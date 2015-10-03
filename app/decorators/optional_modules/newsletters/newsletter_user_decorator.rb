@@ -10,15 +10,17 @@ class NewsletterUserDecorator < ApplicationDecorator
     color = 'green' if subscriber?
 
     arbre do
-      status_tag I18n.t("role.#{model.role}"), color
+      Globalize.with_locale(:en) do
+        status_tag I18n.t("role.#{model.newsletter_user_role_title}"), color
+      end
     end
   end
 
   def tester?
-    model.role == 'tester'
+    model.newsletter_user_role_title == 'testeur'
   end
 
   def subscriber?
-    model.role == 'subscriber'
+    model.newsletter_user_role_title == 'abonné'
   end
 end

@@ -4,16 +4,34 @@ ActiveAdmin.register NewsletterSetting do
   permit_params :id,
                 :send_welcome_email,
                 :title_subscriber,
-                :content_subscriber
+                :content_subscriber,
+                newsletter_user_roles_attributes: [
+                  :id,
+                  translations_attributes: [
+                    :id, :locale, :title
+                  ]
+                ]
 
   decorate_with NewsletterSettingDecorator
   config.clear_sidebar_sections!
 
   show do
-    attributes_table do
-      row :send_welcome_email_d
-      row :title_subscriber
-      row :content_subscriber
+    columns do
+      column do
+        attributes_table do
+          row :send_welcome_email_d
+          row :newsletter_user_roles_d
+        end
+      end
+
+      column do
+        panel I18n.t('newsletter.active_admin.welcome_panel_title') do
+          attributes_table_for resource.decorate do
+            row :title_subscriber
+            row :content_subscriber
+          end
+        end
+      end if resource.send_welcome_email?
     end
   end
 
@@ -45,6 +63,12 @@ ActiveAdmin.register NewsletterSetting do
       end
     end
 
+    columns do
+      column do
+        render 'admin/newsletter_user_roles/form', f: f
+      end
+    end
+
     f.actions
   end
 
@@ -53,6 +77,10 @@ ActiveAdmin.register NewsletterSetting do
   #
   controller do
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? && @newsletter_module.enabled? }
+
+    def scoped_collection
+      super.includes newsletter_user_roles: [:translations]
+    end
 
     private
 

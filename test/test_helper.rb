@@ -67,8 +67,10 @@ module ActiveSupport
         assert_redirected_to url
       end
 
-      get :show, id: obj
-      assert_redirected_to url
+      unless check.key?(:no_show) && check[:no_show]
+        get :show, id: obj
+        assert_redirected_to url
+      end
       get :edit, id: obj
       assert_redirected_to url
       post :create, "#{attributes.to_sym}": {}
