@@ -264,6 +264,7 @@ fr:
         title_subscriber: Titre du mail
         content_subscriber: Contenu du mail
         newsletter_user_roles: Rôles utilisateur
+        newsletter_user_roles_d: Rôles utilisateur
       newsletter_user_role:
         title: Rôle
       string_box:

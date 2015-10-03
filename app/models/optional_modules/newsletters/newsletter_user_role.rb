@@ -20,7 +20,9 @@
 #
 class NewsletterUserRole < ActiveRecord::Base
   translates :title, fallbacks_for_empty_translations: true
-  active_admin_translates :title
+  active_admin_translates :title do
+    validates_presence_of :title
+  end
 
   belongs_to :rollable, polymorphic: true
   has_many :newsletter_users

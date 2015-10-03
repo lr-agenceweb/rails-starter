@@ -19,4 +19,5 @@ class NewsletterSetting < ActiveRecord::Base
 
   has_many :newsletter_user_roles, as: :rollable, dependent: :destroy
   accepts_nested_attributes_for :newsletter_user_roles, reject_if: :all_blank, allow_destroy: true
+  validates_associated :newsletter_user_roles
 end
