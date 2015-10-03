@@ -23,20 +23,20 @@ DEFAULTS: &DEFAULTS
 newsletter_user_fr:
   <<: *DEFAULTS
   email: newsletteruser@test.fr
-  role: subscriber
   lang: fr
   token: WVZpU3pA9yiEyxWA34PO5sw
+  newsletter_user_role: subscriber
 
 newsletter_user_en:
   <<: *DEFAULTS
   email: newsletteruser@test.en
-  role: subscriber
   lang: en
   token: 3pSip0E7jodLBG--k5vSxCw
+  newsletter_user_role: subscriber
 
 newsletter_user_test:
   <<: *DEFAULTS
   email: foo@bar.com
-  role: subscriber
   lang: fr
   token: _JCD1DXUjs3i2jDUSrwlVA
+  newsletter_user_role: tester

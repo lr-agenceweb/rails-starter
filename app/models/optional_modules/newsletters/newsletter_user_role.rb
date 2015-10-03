@@ -6,6 +6,7 @@
 #  rollable_id   :integer
 #  rollable_type :string(255)
 #  title         :string(255)
+#  kind          :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -22,4 +23,14 @@ class NewsletterUserRole < ActiveRecord::Base
   active_admin_translates :title
 
   belongs_to :rollable, polymorphic: true
+  has_many :newsletter_users
+
+  validates :title,
+            presence: true,
+            allow_blank: false,
+            inclusion: %w( subscriber tester )
+
+  def self.newsletter_user_role_dropdown
+    includes(:translations).all.map { |nur| [nur.title, nur.id] }
+  end
 end

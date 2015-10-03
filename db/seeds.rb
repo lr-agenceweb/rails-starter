@@ -548,7 +548,8 @@ newsletter_user_role_title_en = [
 
 newsletter_user_role_title_fr.each_with_index do |element, index|
   newsletter_user_role = NewsletterUserRole.create!(
-    title: newsletter_user_role_title_fr[index]
+    title: newsletter_user_role_title_fr[index],
+    kind: newsletter_user_role_title_en[index]
   )
 
   if @locales.include?(:en)

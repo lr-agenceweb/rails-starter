@@ -60,7 +60,8 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
     assert_equal newsletter_user.email, @email
     assert_equal newsletter_user.lang, @lang
-    assert_equal newsletter_user.role, 'subscriber'
+    assert_equal newsletter_user.newsletter_user_role_id, 1
+    assert_equal newsletter_user.newsletter_user_role_title, 'abonné'
   end
 
   # == Ajax

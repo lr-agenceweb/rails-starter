@@ -39,13 +39,8 @@ class NewsletterUser < ActiveRecord::Base
             allow_blank: false,
             inclusion: %w( fr en )
 
-  validates :role,
-            presence: true,
-            allow_blank: false,
-            inclusion: %w( subscriber tester )
-
-  scope :testers, -> { where(newsletter_user_role_id: Z) }
-  scope :subscribers, -> { where(newsletter_user_role_id: 1) }
+  scope :testers, -> { where(newsletter_user_role_id: 2) }
+  scope :subscribers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'subscriber') }
 
   delegate :title, to: :newsletter_user_role, prefix: true, allow_nil: true
 

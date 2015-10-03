@@ -6,6 +6,7 @@
 #  rollable_id   :integer
 #  rollable_type :string(255)
 #  title         :string(255)
+#  kind          :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -16,6 +17,10 @@
 
 subscriber:
   title: abonné
+  kind: subscriber
+  rollable: one (NewsletterSetting)
 
 tester:
   title: testeur
+  kind: tester
+  rollable: one (NewsletterSetting)

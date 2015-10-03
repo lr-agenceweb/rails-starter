@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002201558) do
+ActiveRecord::Schema.define(version: 20151003174654) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -271,6 +271,7 @@ ActiveRecord::Schema.define(version: 20151002201558) do
     t.integer  "rollable_id",   limit: 4
     t.string   "rollable_type", limit: 255
     t.string   "title",         limit: 255
+    t.string   "kind",          limit: 255
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

@@ -257,6 +257,7 @@ fr:
         role: Rôle
         role_status: Rôle
         created_at: Inscrit le
+        newsletter_user_role_id: Rôle
       newsletter_setting:
         send_welcome_email_d: Mail de bienvenue ?
         send_welcome_email: Mail de bienvenue ?

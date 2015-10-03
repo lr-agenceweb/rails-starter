@@ -1,7 +1,9 @@
 ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
   menu parent: I18n.t('admin_menu.modules')
 
-  permit_params :id, :role, :lang
+  permit_params :id,
+                :lang,
+                :newsletter_user_role_id
 
   decorate_with NewsletterUserDecorator
   config.clear_sidebar_sections!
@@ -34,7 +36,7 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
 
     columns do
       column do
-        f.inputs t('activerecord.models.newsletter_user.one') do
+        f.inputs t('activerecord.models.letter_user.one') do
           f.input :email, input_html: { disabled: :disabled }
         end
       end
@@ -44,10 +46,14 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
           f.input :lang,
                   collection: %w( fr en ),
                   include_blank: false,
-                  hint: 'Attention, changer ce paramètre changera la langue de la newsletter reçue par cet utilisateur !'
-          f.input :role,
-                  collection: %w( subscriber tester ),
-                  include_blank: false
+                  hint: 'Attention, changer ce paramètre changera la langue de la newsletter reçue par cet utilisateur !',
+                  input_html: { class: 'chosen-select' }
+
+          f.input :newsletter_user_role_id,
+                  as: :select,
+                  collection: NewsletterUserRole.newsletter_user_role_dropdown,
+                  include_blank: false,
+                  input_html: { class: 'chosen-select' }
         end
       end
     end
