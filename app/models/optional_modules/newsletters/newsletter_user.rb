@@ -39,7 +39,7 @@ class NewsletterUser < ActiveRecord::Base
             allow_blank: false,
             inclusion: %w( fr en )
 
-  scope :testers, -> { where(newsletter_user_role_id: 2) }
+  scope :testers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'tester') }
   scope :subscribers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'subscriber') }
 
   delegate :title, to: :newsletter_user_role, prefix: true, allow_nil: true

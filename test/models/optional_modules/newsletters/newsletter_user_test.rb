@@ -7,21 +7,13 @@ class NewsletterUserTest < ActiveSupport::TestCase
   setup :initialize_test
 
   test 'should have testers' do
-    NewsletterUser.create(email: @email, lang: @lang, role: 'tester')
-    assert NewsletterUser.testers?
+    assert NewsletterUser.testers.map(&:email).include?('foo@bar.com'), "\"foo@bar.com\" should be tester"
+    assert_not NewsletterUser.testers.map(&:email).include?('newsletteruser@test.fr'), "\"newsletteruser@test.fr\" should not be tester"
   end
 
-  test 'should not have testers' do
-    NewsletterUser.create(email: @email, lang: @lang, role: 'subscriber')
-    assert_not NewsletterUser.testers?
-  end
-
-  test 'should count testers' do
-    assert_equal 0, NewsletterUser.testers.count
-  end
-
-  test 'should count subscriber' do
-    assert_equal 3, NewsletterUser.subscribers.count
+  test 'should have subscriber' do
+    assert NewsletterUser.subscribers.map(&:email).include?('newsletteruser@test.fr'), "\"newsletteruser@test.fr\" should be subscriber"
+    assert_not NewsletterUser.subscribers.map(&:email).include?('foo@bar.com'), "\"foo@bar.com\" should not be subscriber"
   end
 
   test 'should extract name from email' do
@@ -34,5 +26,7 @@ class NewsletterUserTest < ActiveSupport::TestCase
     @email = 'foo@bar.cc'
     @lang = 'fr'
     @newsletter_user = newsletter_users(:newsletter_user_test)
+    @newsletter_user_role_tester = newsletter_user_roles(:tester)
+    @newsletter_user_role_subscriber = newsletter_user_roles(:subscriber)
   end
 end
