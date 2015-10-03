@@ -10,6 +10,7 @@ class NewsletterUsersController < ApplicationController
     if params[:newsletter_user][:nickname].blank?
       @success = false
       @newsletter_user = NewsletterUser.new(newsletter_user_params)
+      @newsletter_user.newsletter_user_role_id = NewsletterUserRole.find_by(kind: 'subscriber').id
       respond_to do |format|
         if @newsletter_user.save
           @success = true
