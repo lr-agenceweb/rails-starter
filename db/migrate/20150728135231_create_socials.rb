@@ -5,6 +5,7 @@ class CreateSocials < ActiveRecord::Migration
       t.string :link
       t.string :kind
       t.boolean :enabled, default: true
+      t.string :font_ikon
 
       t.timestamps null: false
     end

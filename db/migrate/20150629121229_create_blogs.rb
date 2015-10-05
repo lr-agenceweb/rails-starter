@@ -4,6 +4,8 @@ class CreateBlogs < ActiveRecord::Migration
       t.string :title
       t.string :slug, index: true, unique: true
       t.text :content
+      t.boolean :show_as_gallery, default: false
+      t.boolean :allow_comments, default: true
       t.boolean :online, default: true
       t.references :user, index: true
 
