@@ -3,8 +3,10 @@ class CreateMenus < ActiveRecord::Migration
     create_table :menus do |t|
       t.string :title
       t.boolean :online, default: true
+      t.boolean :show_in_header, default: true
       t.boolean :show_in_footer, default: false
       t.string :ancestry
+      t.integer :position
 
       t.timestamps null: false
     end

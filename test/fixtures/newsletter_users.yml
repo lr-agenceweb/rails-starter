@@ -6,7 +6,7 @@
 #  email                   :string(255)
 #  lang                    :string(255)      default("fr")
 #  token                   :string(255)
-#  newsletter_user_role_id :integer          default(1)
+#  newsletter_user_role_id :integer
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #

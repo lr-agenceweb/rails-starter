@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003174654) do
+ActiveRecord::Schema.define(version: 20151002170656) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20151003174654) do
     t.string   "title",           limit: 255
     t.string   "slug",            limit: 255
     t.text     "content",         limit: 65535
-    t.boolean  "allow_comments",                default: true
     t.boolean  "show_as_gallery",               default: false
+    t.boolean  "allow_comments",                default: true
     t.boolean  "online",                        default: true
     t.integer  "user_id",         limit: 4
     t.datetime "created_at",                                    null: false
@@ -282,7 +282,7 @@ ActiveRecord::Schema.define(version: 20151003174654) do
     t.string   "email",                   limit: 255
     t.string   "lang",                    limit: 255, default: "fr"
     t.string   "token",                   limit: 255
-    t.integer  "newsletter_user_role_id", limit: 4,   default: 1
+    t.integer  "newsletter_user_role_id", limit: 4
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
   end
@@ -423,7 +423,6 @@ ActiveRecord::Schema.define(version: 20151003174654) do
     t.boolean  "show_qrcode",                            default: false
     t.boolean  "should_validate",                        default: true
     t.boolean  "maintenance",                            default: false
-    t.string   "twitter_username",         limit: 255
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size",           limit: 4
     t.string   "logo_content_type",        limit: 255
@@ -433,6 +432,7 @@ ActiveRecord::Schema.define(version: 20151003174654) do
     t.string   "logo_footer_content_type", limit: 255
     t.string   "logo_footer_file_name",    limit: 255
     t.text     "retina_dimensions",        limit: 65535
+    t.string   "twitter_username",         limit: 255
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
   end
@@ -489,12 +489,12 @@ ActiveRecord::Schema.define(version: 20151003174654) do
     t.string   "link",              limit: 255
     t.string   "kind",              limit: 255
     t.boolean  "enabled",                         default: true
-    t.string   "font_ikon",         limit: 255
     t.datetime "ikon_updated_at"
     t.integer  "ikon_file_size",    limit: 4
     t.string   "ikon_content_type", limit: 255
     t.string   "ikon_file_name",    limit: 255
     t.text     "retina_dimensions", limit: 65535
+    t.string   "font_ikon",         limit: 255
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
   end
@@ -544,19 +544,11 @@ ActiveRecord::Schema.define(version: 20151003174654) do
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 4
     t.datetime "avatar_updated_at"
-    t.string   "provider",               limit: 255
-    t.string   "uid",                    limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
-  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
-  add_foreign_key "categories", "menus", name: "fk_categories_menu_id"
-  add_foreign_key "menu_translations", "menus", name: "fk_menu_translations_menu_id"
-  add_foreign_key "newsletter_users", "newsletter_user_roles"
-  add_foreign_key "string_boxes", "optional_modules"
 end

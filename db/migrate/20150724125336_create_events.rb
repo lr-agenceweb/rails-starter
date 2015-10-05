@@ -7,6 +7,8 @@ class CreateEvents < ActiveRecord::Migration
       t.string :url
       t.datetime :start_date
       t.datetime :end_date
+      t.boolean :show_as_gallery, default: false
+      t.boolean :show_calendar, default: false
       t.boolean :online, default: true
 
       t.timestamps null: false

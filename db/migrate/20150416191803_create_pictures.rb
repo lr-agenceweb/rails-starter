@@ -7,6 +7,7 @@ class CreatePictures < ActiveRecord::Migration
       t.text :description
       t.text :retina_dimensions
       t.boolean :primary, default: false
+      t.integer :position
       t.boolean :online, default: true
 
       t.timestamps null: false

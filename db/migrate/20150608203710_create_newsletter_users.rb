@@ -3,8 +3,8 @@ class CreateNewsletterUsers < ActiveRecord::Migration
     create_table :newsletter_users do |t|
       t.string :email
       t.string :lang, default: 'fr'
-      t.string :role, default: 'subscriber'
       t.string :token
+      t.references :newsletter_user_role, index: true
 
       t.timestamps null: false
     end
