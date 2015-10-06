@@ -183,6 +183,7 @@ group :test do
   gem 'minitest-reporters', require: false
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
+  gem 'simplecov-json', require: false
 end
 
 group :doc do
