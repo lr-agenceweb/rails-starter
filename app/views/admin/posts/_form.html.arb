@@ -11,7 +11,14 @@ f.columns do
   end
 end
 
-render 'admin/shared/pictures/many', f: f
-render 'admin/shared/videos/many', f: f
+f.columns do
+  f.column do
+    render 'admin/shared/pictures/many', f: f
+  end
+
+  f.column do
+    render 'admin/shared/videos/many', f: f
+  end if video_module.enabled?
+end
 
 f.actions
