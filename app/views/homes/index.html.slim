@@ -17,4 +17,4 @@
       - home.videos.each do |video|
         - video_info = VideoInfo.new(video.url)
         - if video_info.available? && video.online?
-          .flex-video.widescreen == video_info.embed_code 
+          .flex-video.widescreen == video_info.embed_code

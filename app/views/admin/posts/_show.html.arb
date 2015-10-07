@@ -16,3 +16,9 @@ columns do
     render 'admin/shared/referencement/show', referencement: resource.referencement
   end
 end
+
+columns do
+  column do
+    render 'admin/shared/videos/show', videos: resource.videos
+  end
+end unless resource.videos.nil?

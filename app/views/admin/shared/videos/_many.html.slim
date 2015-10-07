@@ -1,5 +1,5 @@
 - f.inputs t('activerecord.models.video.other')
-  - f.has_many :videos, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.video.one')), sortable: :position do |item|
+  - f.has_many :videos, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.video.one')), allow_destroy: true, sortable: :position do |item|
     / - item.input :image,
     /              as: :file,
     /              label: I18n.t('form.label.picture'),

@@ -293,7 +293,7 @@ fr:
         _destroy: Supprimer ?
       video:
         url: Lien de la vidéo
-        online: Statut
+        online: En ligne ?
         status: Statut
         _destroy: Supprimer ?
       slide:

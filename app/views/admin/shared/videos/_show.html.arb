@@ -1,0 +1,10 @@
+div.panel t('activerecord.models.video.other') do
+  if videos.nil?
+    span 'Le référencement n\'a pas été renseigné'
+  else
+    videos.find_each do |video|
+      video_info = VideoInfo.new(video.url)
+      span raw(video_info.embed_code)
+    end
+  end
+end
