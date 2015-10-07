@@ -12,5 +12,6 @@ f.columns do
 end
 
 render 'admin/shared/pictures/many', f: f
+render 'admin/shared/videos/many', f: f
 
 f.actions

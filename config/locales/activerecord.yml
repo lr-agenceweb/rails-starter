@@ -99,6 +99,9 @@ fr:
       picture:
         one: Image
         other: Images
+      video:
+        one: Vidéo
+        other: Vidéos
       background:
         one: Arrière-plan
         other: Arrière-plans
@@ -286,6 +289,11 @@ fr:
         image: Image
         image_large: Image
         source_picture_title_link: Article associé
+        status: Statut
+        _destroy: Supprimer ?
+      video:
+        url: Lien de la vidéo
+        online: Statut
         status: Statut
         _destroy: Supprimer ?
       slide:
