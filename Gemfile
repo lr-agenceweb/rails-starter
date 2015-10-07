@@ -139,6 +139,7 @@ gem 'gon'
 gem 'gravatar_image_tag'
 gem 'magnific-popup-rails'
 gem 'chartkick'
+gem 'video_info'
 
 group :development do
   gem 'better_errors'
