@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  videoable_id: 
+  videoable_type: Videoable
+  url: MyString
+  online: false
+
+two:
+  videoable_id: 
+  videoable_type: Videoable
+  url: MyString
+  online: false
