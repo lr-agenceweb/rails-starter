@@ -21,4 +21,6 @@
 #
 class Video < ActiveRecord::Base
   belongs_to :videoable, polymorphic: true
+
+  scope :online, -> { where(online: true) }
 end

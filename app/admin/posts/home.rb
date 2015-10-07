@@ -62,6 +62,9 @@ ActiveAdmin.register Home do
   # == Controller
   #
   controller do
+    include Skippable
+    before_action :set_optional_modules
+
     before_create do |post|
       post.type = post.object.class.name
       post.user_id = current_user.id
