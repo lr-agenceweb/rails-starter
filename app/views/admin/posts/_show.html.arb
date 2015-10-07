@@ -19,6 +19,10 @@ end
 
 columns do
   column do
-    render 'admin/shared/videos/show', videos: resource.videos
+    render 'admin/shared/pictures/show', resource: resource
   end
-end unless resource.videos.nil?
+
+  column do
+    render 'admin/shared/videos/show', videos: resource.videos
+  end unless resource.videos.nil?
+end

@@ -1,6 +1,6 @@
 div.panel t('activerecord.models.video.other') do
   if videos.nil?
-    span 'Le référencement n\'a pas été renseigné'
+    span 'Aucune vidéo n\'est liée à cet article'
   else
     videos.find_each do |video|
       video_info = VideoInfo.new(video.url)

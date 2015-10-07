@@ -1,0 +1,9 @@
+div.panel t('activerecord.models.picture.other') do
+  if resource.pictures?
+    resource.pictures.each do |picture|
+      span raw(retina_image_tag(picture, :image, :medium))
+    end
+  else
+    div 'Aucune image n\'est liée à cet article'
+  end
+end
