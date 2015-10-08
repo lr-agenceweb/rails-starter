@@ -56,6 +56,7 @@ class Post < ActiveRecord::Base
   delegate :username, to: :user, prefix: true, allow_nil: true
   delegate :online, to: :pictures, prefix: true, allow_nil: true
   delegate :online, to: :videos, prefix: true, allow_nil: true
+  delegate :online, to: :video_uploads, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }
