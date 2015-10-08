@@ -55,6 +55,7 @@ gem 'momentjs-rails'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'paperclip-dropbox', '>= 1.1.7'
 gem 'retina_rails', '~> 2.0.0'
+gem 'paperclip-av-transcoder'
 
 #
 # == Forms and WYSIWYG

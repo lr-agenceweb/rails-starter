@@ -49,6 +49,9 @@ class Post < ActiveRecord::Base
   has_many :videos, -> { order(:position) }, as: :videoable, dependent: :destroy
   accepts_nested_attributes_for :videos, reject_if: :all_blank, allow_destroy: true
 
+  has_many :video_uploads, -> { order(:position) }, as: :videoable, dependent: :destroy
+  accepts_nested_attributes_for :video_uploads, reject_if: :all_blank, allow_destroy: true
+
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :username, to: :user, prefix: true, allow_nil: true
   delegate :online, to: :pictures, prefix: true, allow_nil: true

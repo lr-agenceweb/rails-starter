@@ -1,0 +1,33 @@
+# == Schema Information
+#
+# Table name: video_uploads
+#
+#  id                 :integer          not null, primary key
+#  videoable_id       :integer
+#  videoable_type     :string(255)
+#  online             :boolean          default(TRUE)
+#  position           :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  video_file_name    :string(255)
+#  video_content_type :string(255)
+#  video_file_size    :integer
+#  video_updated_at   :datetime
+#  retina_dimensions  :text(65535)
+#
+# Indexes
+#
+#  index_video_uploads_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+#  column: value

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007164216) do
+ActiveRecord::Schema.define(version: 20151008144054) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -550,6 +550,22 @@ ActiveRecord::Schema.define(version: 20151007164216) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
+
+  create_table "video_uploads", force: :cascade do |t|
+    t.integer  "videoable_id",       limit: 4
+    t.string   "videoable_type",     limit: 255
+    t.boolean  "online",                           default: true
+    t.integer  "position",           limit: 4
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "video_file_name",    limit: 255
+    t.string   "video_content_type", limit: 255
+    t.integer  "video_file_size",    limit: 4
+    t.datetime "video_updated_at"
+    t.text     "retina_dimensions",  limit: 65535
+  end
+
+  add_index "video_uploads", ["videoable_type", "videoable_id"], name: "index_video_uploads_on_videoable_type_and_videoable_id", using: :btree
 
   create_table "videos", force: :cascade do |t|
     t.integer  "videoable_id",   limit: 4

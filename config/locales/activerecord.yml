@@ -296,6 +296,10 @@ fr:
         online: En ligne ?
         status: Statut
         _destroy: Supprimer ?
+      video_upload:
+        online: En ligne ?
+        status: Statut
+        _destroy: Supprimer ?
       slide:
         online: En ligne
         slide: Image

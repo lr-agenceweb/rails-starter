@@ -15,10 +15,16 @@ f.columns do
   f.column do
     render 'admin/shared/pictures/many', f: f
   end
+end
 
+f.columns do
   f.column do
     render 'admin/shared/videos/many', f: f
-  end if video_module.enabled?
-end
+  end
+
+  f.column do
+    render 'admin/shared/video_uploads/many', f: f
+  end
+end if video_module.enabled?
 
 f.actions
