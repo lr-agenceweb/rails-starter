@@ -13,6 +13,7 @@
 #  video_content_type :string(255)
 #  video_file_size    :integer
 #  video_updated_at   :datetime
+#  video_processing   :boolean
 #  retina_dimensions  :text(65535)
 #
 # Indexes
@@ -51,6 +52,7 @@ class VideoUpload < ActiveRecord::Base
                     max_size: 300.megabytes
 
   validates_attachment_content_type :video, content_type: %r{\Avideo\/.*\Z}
+  process_in_background :video, processing_image_url: '/default/medium-missing.png'
 
   scope :online, -> { where(online: true) }
 end

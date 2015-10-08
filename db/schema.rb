@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008144054) do
+ActiveRecord::Schema.define(version: 20151008155313) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -562,6 +562,7 @@ ActiveRecord::Schema.define(version: 20151008144054) do
     t.string   "video_content_type", limit: 255
     t.integer  "video_file_size",    limit: 4
     t.datetime "video_updated_at"
+    t.boolean  "video_processing"
     t.text     "retina_dimensions",  limit: 65535
   end
 

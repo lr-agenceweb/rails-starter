@@ -13,6 +13,7 @@
 #  video_content_type :string(255)
 #  video_file_size    :integer
 #  video_updated_at   :datetime
+#  video_processing   :boolean
 #  retina_dimensions  :text(65535)
 #
 # Indexes
