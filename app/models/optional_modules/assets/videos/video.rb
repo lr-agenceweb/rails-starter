@@ -22,5 +22,7 @@
 class Video < ActiveRecord::Base
   belongs_to :videoable, polymorphic: true
 
+  validates :url, allow_blank: false, presence: true, url: true
+
   scope :online, -> { where(online: true) }
 end
