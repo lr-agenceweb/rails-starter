@@ -115,6 +115,8 @@ fr:
         <br /> <br />
         Attention ! Assurez-vous d'avoir les droits d'exploitation de la vidéo avant de la publier."
         online: Si coché, la vidéo sera visible sur le site
+        video_platform: Si coché, l'administrateur aura le droit d'insérer des vidéos provenant de Youtube, Dailymotion ou Viméo sur le site
+        video_upload: Si coché, l'administrateur aura le droit de mettre en ligne ses propres vidéos par l'intermédiaire du site
 
     placeholder:
       froala: Contenu de l'article ici :)
