@@ -26,9 +26,13 @@
 #
 class VideoUpload < ActiveRecord::Base
   include Attachable
+
   belongs_to :videoable, polymorphic: true
 
-  handle_attachment :video,
+  has_one :video_subtitle, as: :subtitleable, dependent: :destroy
+  accepts_nested_attributes_for :video_subtitle, reject_if: :all_blank, allow_destroy: true
+
+  handle_attachment :video_file,
                     styles: {
                       mp4video: {
                         geometry: '520x390',
@@ -51,8 +55,8 @@ class VideoUpload < ActiveRecord::Base
                     processors: [:transcoder],
                     max_size: 300.megabytes
 
-  validates_attachment_content_type :video, content_type: %r{\Avideo\/.*\Z}
-  process_in_background :video, processing_image_url: '/default/medium-missing.png'
+  validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
+  process_in_background :video_file, processing_image_url: '/default/medium-missing.png'
 
   scope :online, -> { where(online: true) }
 end

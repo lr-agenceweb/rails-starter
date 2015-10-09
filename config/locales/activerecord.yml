@@ -111,6 +111,9 @@ fr:
       video_platform:
         one: Vidéo externe
         other: Vidéos externes
+      video_subtitle:
+        one: Sous-titres
+        other: Sous-titres
       background:
         one: Arrière-plan
         other: Arrière-plans

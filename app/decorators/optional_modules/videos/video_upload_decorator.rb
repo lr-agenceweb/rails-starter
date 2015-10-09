@@ -6,6 +6,6 @@ class VideoUploadDecorator < VideoDecorator
   delegate_all
 
   def preview
-    h.retina_image_tag model, :video, :preview
+    h.retina_image_tag model, :video_file, :preview
   end
 end

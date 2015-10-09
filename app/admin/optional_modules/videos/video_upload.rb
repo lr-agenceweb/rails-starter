@@ -2,8 +2,11 @@ ActiveAdmin.register VideoUpload do
   menu parent: I18n.t('admin_menu.assets')
 
   permit_params :id,
-                :video,
-                :online
+                :video_file,
+                :online,
+                video_subtitle_attributes: [
+                  :id, :online, :subtitle_fr, :subtitle_en, :_destroy
+                ]
 
   decorate_with VideoUploadDecorator
   config.clear_sidebar_sections!
@@ -40,13 +43,17 @@ ActiveAdmin.register VideoUpload do
     columns do
       column do
         f.inputs t('general') do
-          f.input :video,
+          f.input :video_file,
                   as: :file,
                   label: I18n.t('form.label.video'),
-                  hint: raw("#{retina_image_tag(f.object, :video, :preview) unless f.object.new_record?}")
+                  hint: raw(f.object.decorate.preview) unless f.object.new_record?
           f.input :online,
                   hint: I18n.t('form.hint.video.online')
         end
+      end
+
+      column do
+        render 'admin/subtitles/form', f: f
       end
     end
 

@@ -17,7 +17,7 @@ ActiveAdmin.register Home do
                   :id, :url, :online, :position, :_destroy
                 ],
                 video_uploads_attributes: [
-                  :id, :video, :online, :position, :_destroy
+                  :id, :video_file, :online, :position, :_destroy
                 ],
                 referencement_attributes: [
                   :id,

@@ -1,0 +1,15 @@
+- f.inputs t('activerecord.models.video_subtitle.other')
+  - f.inputs '', for: [:video_subtitle, f.object.video_subtitle || VideoSubtitle.new] do |item|
+    - item.input :subtitle_fr,
+                 as: :file,
+                 label: I18n.t('form.label.subtitle'),
+                 hint: 'Sous titres pour langue française'
+
+    - item.input :subtitle_en,
+                 as: :file,
+                 label: I18n.t('form.label.subtitle'),
+                 hint: 'Sous titres par langue anglaise'
+
+    - item.input :online,
+                 as: :boolean,
+                 hint: I18n.t('form.hint.subtitle.online')
