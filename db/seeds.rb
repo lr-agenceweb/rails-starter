@@ -708,6 +708,15 @@ slides_image.each_with_index do |element, index|
 end
 
 #
+# == VideoSetting
+#
+puts 'Create video settings'
+VideoSetting.create!(
+  video_platform: true,
+  video_upload: true
+)
+
+#
 # == FriendlyId
 #
 puts 'Setting Friendly Id'
