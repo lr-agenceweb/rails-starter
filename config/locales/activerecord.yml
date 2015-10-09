@@ -105,6 +105,12 @@ fr:
       video_setting:
         one: Vidéo configuration
         other: Vidéos configuration
+      video_upload:
+        one: Vidéo du site
+        other: Vidéos du site
+      video_platform:
+        one: Vidéo externe
+        other: Vidéos externes
       background:
         one: Arrière-plan
         other: Arrière-plans
@@ -300,6 +306,8 @@ fr:
         status: Statut
         _destroy: Supprimer ?
       video_upload:
+        preview: Prévisualisation
+        from_article: Lié à
         online: En ligne ?
         status: Statut
         _destroy: Supprimer ?
