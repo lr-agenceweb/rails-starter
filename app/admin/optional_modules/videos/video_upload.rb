@@ -8,6 +8,11 @@ ActiveAdmin.register VideoUpload do
   decorate_with VideoUploadDecorator
   config.clear_sidebar_sections!
 
+  batch_action :toggle_online do |ids|
+    VideoUpload.find(ids).each { |item| item.toggle! :online }
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
+
   index do
     selectable_column
     column :preview
