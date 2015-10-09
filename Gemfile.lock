@@ -634,6 +634,7 @@ GEM
       multi_json (~> 1.11)
       oga
       open_uri_redirections
+    videojs_rails (4.12.14)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -754,6 +755,7 @@ DEPENDENCIES
   valid_url
   vex_rails!
   video_info
+  videojs_rails
   web-console (~> 2.0)
   whenever
   wysiwyg-rails

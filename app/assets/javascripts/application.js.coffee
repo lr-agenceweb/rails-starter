@@ -40,6 +40,8 @@
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
 #= require jquery.sticky_footer
+#= require video
+#= require plugins/video_js
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()
@@ -49,4 +51,3 @@ $(document).on 'ready page:load page:restore', ->
     # image:
     #   titleSrc: (item) ->
     #     return item.el.attr('title')
-

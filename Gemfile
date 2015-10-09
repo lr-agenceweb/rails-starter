@@ -141,6 +141,11 @@ gem 'gon'
 gem 'gravatar_image_tag'
 gem 'magnific-popup-rails'
 gem 'chartkick'
+
+#
+# == Video
+#
+gem 'videojs_rails' # HTML5 video player
 gem 'video_info'
 
 group :development do
