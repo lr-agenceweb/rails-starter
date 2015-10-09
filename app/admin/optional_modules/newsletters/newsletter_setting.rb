@@ -1,5 +1,5 @@
 ActiveAdmin.register NewsletterSetting do
-  menu parent: I18n.t('admin_menu.config')
+  menu parent: I18n.t('admin_menu.modules_config')
 
   permit_params :id,
                 :send_welcome_email,

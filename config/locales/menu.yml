@@ -22,7 +22,8 @@ fr:
     configuration: Configuration
     assets: Assets
     posts: Articles
-    config: Configuration
+    config: Site Configuration
+    modules_config: Modules configuration
 
   menu:
     title_aa_show: "Élément de menu \"%{menu_item}\""
