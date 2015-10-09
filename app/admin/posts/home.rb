@@ -3,6 +3,8 @@ ActiveAdmin.register Home do
 
   permit_params :id,
                 :type,
+                :show_as_gallery,
+                :allow_comments,
                 :online,
                 :user_id,
                 translations_attributes: [
