@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: video_settings
+#
+#  id             :integer          not null, primary key
+#  video_platform :boolean          default(TRUE)
+#  video_upload   :boolean          default(TRUE)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  video_platform: false
+  video_upload: false
+
+two:
+  video_platform: false
+  video_upload: false
