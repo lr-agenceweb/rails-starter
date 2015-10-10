@@ -22,7 +22,3 @@
       - subtitle.input :online,
                        as: :boolean,
                        hint: I18n.t('form.hint.subtitle.online')
-
-    / - unless item.object.new_record?
-    /   li
-    /     span = link_to 'Add subtitles here', edit_admin_video_upload_path(item.object), target: :blank, class: 'button'

@@ -1,13 +1,13 @@
-- f.inputs t('activerecord.models.video_subtitle.other')
-  - f.inputs '', for: [:video_subtitle, f.object.video_subtitle || VideoSubtitle.new] do |item|
-    - item.input :subtitle_fr,
-                 as: :file,
-                 hint: "Sous titres au format VTT pour langue française - #{item.object.try(:created_at)}"
+- f.inputs t('activerecord.models.video_subtitle.other'), for: [:video_subtitle, f.object.video_subtitle || VideoSubtitle.new] do |subtitle|
+  br
+  - subtitle.input :subtitle_fr,
+                   as: :file,
+                   hint: raw("Sous titres au format VTT pour langue française <br /> #{subtitle.object.subtitle_fr_file_name + ' le ' if subtitle.object.subtitle_fr.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_fr.exists?}")
 
-    - item.input :subtitle_en,
-                 as: :file,
-                 hint: "Sous titres au format VTT pour langue anglaise - #{item.object.try(:created_at)}"
+  - subtitle.input :subtitle_en,
+                   as: :file,
+                   hint: raw("Sous titres au format VTT pour langue anglaise <br /> #{subtitle.object.subtitle_en_file_name + ' le ' if subtitle.object.subtitle_en.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_en.exists?}")
 
-    - item.input :online,
-                 as: :boolean,
-                 hint: I18n.t('form.hint.subtitle.online')
+  - subtitle.input :online,
+                   as: :boolean,
+                   hint: I18n.t('form.hint.subtitle.online')
