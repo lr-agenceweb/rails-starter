@@ -24,6 +24,6 @@
 
         .row
           - home.video_uploads_online.each do |video|
-            .small-12.medium-6.columns
+            .small-12.columns
               .flex-video.widescreen
-                = videojs_rails sources: { mp4: video.video.url(:mp4video), webm:  video.video.url(:webmvideo), ogg: video.video.url(:oggvideo) }, setup: '{}', controls: true, width: '450'
+                = videojs_rails sources: { mp4: video.video_file.url(:mp4video), webm:  video.video_file.url(:webmvideo), ogg: video.video_file.url(:oggvideo) }, setup: '{}', controls: true, width: '100%', height: '500', captions: video.video_subtitle.try(:decorate).try(:make_captions)

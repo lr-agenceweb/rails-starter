@@ -8,7 +8,7 @@ div.panel t('activerecord.models.video.other') do
     end if video_settings.video_platform?
 
     video_uploads.find_each do |video|
-      div video_tag(video.video.url(:mp4video), size: '420x300', controls: true)
+      div video_tag(video.video_file.url(:mp4video), size: '420x300', controls: true)
     end if video_settings.video_upload?
   end
 end

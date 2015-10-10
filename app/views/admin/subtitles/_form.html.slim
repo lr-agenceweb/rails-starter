@@ -3,12 +3,12 @@
     - item.input :subtitle_fr,
                  as: :file,
                  label: I18n.t('form.label.subtitle'),
-                 hint: 'Sous titres pour langue française'
+                 hint: "Sous titres au format VTT pour langue française - #{item.object.try(:created_at)}"
 
     - item.input :subtitle_en,
                  as: :file,
                  label: I18n.t('form.label.subtitle'),
-                 hint: 'Sous titres par langue anglaise'
+                 hint: "Sous titres au format VTT pour langue anglaise - #{item.object.try(:created_at)}"
 
     - item.input :online,
                  as: :boolean,
