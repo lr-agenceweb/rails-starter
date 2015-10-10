@@ -120,6 +120,10 @@ fr:
         video_upload: Si coché, l'administrateur aura le droit de mettre en ligne ses propres vidéos par l'intermédiaire du site
       subtitle:
         online: Si coché, les sous titres seront disponible lors de la lecture de la vidéo sur le site
+        en:
+          destroy: Si coché, les sous-titres anglais seront supprimés
+        fr:
+          destroy: Si coché, les sous-titres français seront supprimés
 
     placeholder:
       froala: Contenu de l'article ici :)

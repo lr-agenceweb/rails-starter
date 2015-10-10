@@ -36,5 +36,7 @@ class VideoSubtitle < ActiveRecord::Base
   do_not_validate_attachment_file_type :subtitle_fr
   do_not_validate_attachment_file_type :subtitle_en
 
+  include DeletableAttachment
+
   scope :online, -> { where(online: true) }
 end

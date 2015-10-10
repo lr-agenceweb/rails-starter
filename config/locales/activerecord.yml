@@ -322,6 +322,8 @@ fr:
       video_subtitle:
         subtitle_fr: Sous-titres français
         subtitle_en: Sous-titres anglais
+        delete_subtitle_fr: Supprimer sous-titres français ?
+        delete_subtitle_en: Supprimer sous-titres anglais ?
         online: En ligne ?
       slide:
         online: En ligne
