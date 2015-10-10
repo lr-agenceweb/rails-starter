@@ -10,6 +10,7 @@
                  hint: I18n.t('form.hint.video.online')
 
     = item.inputs t('activerecord.models.video_subtitle.other'), for: [:video_subtitle, item.object.video_subtitle || VideoSubtitle.new] do |subtitle|
+      br
       - subtitle.input :subtitle_fr,
                        as: :file,
                        hint: raw("Sous titres au format VTT pour langue française <br /> #{subtitle.object.subtitle_fr_file_name + ' le ' if subtitle.object.subtitle_fr.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_fr.exists?}")

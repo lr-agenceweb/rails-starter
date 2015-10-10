@@ -33,3 +33,7 @@ $ ->
         $('#newsletter_config_form').slideDown()
       else
         $('#newsletter_config_form').slideUp()
+
+
+  $('.has_many_delete.boolean input').on 'click', ->
+    $(this).parents('.has_many_delete.boolean').siblings().slideToggle()

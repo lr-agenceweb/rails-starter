@@ -55,5 +55,28 @@ form fieldset ol > li.newsletter_user_roles
     float: left
     margin-left: 1%
 
+form
+  fieldset.inputs
+    padding-top: 0
+
+    legend
+      border-bottom: 0
+
+// Translations
+.activeadmin-translations
+  margin-top: 10px
+
+// Legend
 form fieldset.inputs legend
-  border-bottom: 0
+  position: relative
+
+// VideoUpload
+li.has_many_container.video_uploads
+  fieldset
+    background: repeating-linear-gradient(45deg, #abb4ed, #abb4ed 10px, #bfbfbf 10px, #bfbfbf 20px )
+
+    fieldset.inputs
+      background: rgba(255, 255, 255, .65)
+
+  li.boolean.has_many_delete label
+    color: rgb(255, 92, 92)
