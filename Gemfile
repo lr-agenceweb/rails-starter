@@ -145,7 +145,7 @@ gem 'chartkick'
 #
 # == Video
 #
-gem 'videojs_rails' # HTML5 video player
+gem 'mediaelement_rails' # HTML5 video player
 gem 'video_info'
 
 group :development do

@@ -40,8 +40,8 @@
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
 #= require jquery.sticky_footer
-#= require video
-#= require plugins/video_js
+#= require mediaelement_rails
+#= require plugins/mediaelement
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()

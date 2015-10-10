@@ -25,5 +25,12 @@
         .row
           - home.video_uploads_online.each do |video|
             .small-12.columns
-              .flex-video.widescreen
-                = videojs_rails sources: { mp4: video.video_file.url(:mp4video), webm:  video.video_file.url(:webmvideo), ogg: video.video_file.url(:oggvideo) }, setup: '{}', controls: true, width: '100%', height: '500', captions: video.video_subtitle.try(:decorate).try(:make_captions)
+              .flex-video
+                video controls='true' width='100%' poster="#{video.video_file.url(:preview)}"
+                  source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
+                  source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
+                  source src="#{video.video_file.url(:oggvideo)}" type='video/ogg'
+                  - if video.video_subtitle.subtitle_fr.exists?
+                    track kind='subtitles' src="#{video.video_subtitle.subtitle_fr.url}" type="#{video.video_subtitle.subtitle_fr_content_type}" srclang='fr' label='Français'
+                  - if video.video_subtitle.subtitle_en.exists?
+                    track kind='subtitles' src="#{video.video_subtitle.subtitle_en.url}" type="#{video.video_subtitle.subtitle_en_content_type}" srclang='en' label='English' default='default'

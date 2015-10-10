@@ -412,6 +412,9 @@ GEM
     magnific-popup-rails (0.9.9.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mediaelement_rails (0.8.2)
+      jquery-rails (>= 1.0)
+      railties (>= 3.1)
     meta-tags (2.0.0)
       actionpack (>= 3.0.0)
     meta_request (0.3.4)
@@ -629,7 +632,6 @@ GEM
       multi_json (~> 1.11)
       oga
       open_uri_redirections
-    videojs_rails (4.12.14)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -707,6 +709,7 @@ DEPENDENCIES
   kaminari (~> 0.16.1)
   magnific-popup-rails
   mapbox-rails!
+  mediaelement_rails
   meta-tags
   meta_request
   minitest
@@ -749,7 +752,6 @@ DEPENDENCIES
   valid_url
   vex_rails!
   video_info
-  videojs_rails
   web-console (~> 2.0)
   whenever
   wysiwyg-rails
