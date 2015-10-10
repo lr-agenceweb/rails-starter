@@ -8,3 +8,20 @@
     - item.input :online,
                  as: :boolean,
                  hint: I18n.t('form.hint.video.online')
+
+    = item.inputs t('activerecord.models.video_subtitle.other'), for: [:video_subtitle, item.object.video_subtitle || VideoSubtitle.new] do |subtitle|
+      - subtitle.input :subtitle_fr,
+                       as: :file,
+                       hint: raw("Sous titres au format VTT pour langue française <br /> #{subtitle.object.subtitle_fr_file_name + ' le ' if subtitle.object.subtitle_fr.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_fr.exists?}")
+
+      - subtitle.input :subtitle_en,
+                       as: :file,
+                       hint: raw("Sous titres au format VTT pour langue anglaise <br /> #{subtitle.object.subtitle_en_file_name + ' le ' if subtitle.object.subtitle_en.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_en.exists?}")
+
+      - subtitle.input :online,
+                       as: :boolean,
+                       hint: I18n.t('form.hint.subtitle.online')
+
+    / - unless item.object.new_record?
+    /   li
+    /     span = link_to 'Add subtitles here', edit_admin_video_upload_path(item.object), target: :blank, class: 'button'

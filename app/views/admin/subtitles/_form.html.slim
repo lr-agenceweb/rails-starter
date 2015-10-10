@@ -2,12 +2,10 @@
   - f.inputs '', for: [:video_subtitle, f.object.video_subtitle || VideoSubtitle.new] do |item|
     - item.input :subtitle_fr,
                  as: :file,
-                 label: I18n.t('form.label.subtitle'),
                  hint: "Sous titres au format VTT pour langue française - #{item.object.try(:created_at)}"
 
     - item.input :subtitle_en,
                  as: :file,
-                 label: I18n.t('form.label.subtitle'),
                  hint: "Sous titres au format VTT pour langue anglaise - #{item.object.try(:created_at)}"
 
     - item.input :online,
