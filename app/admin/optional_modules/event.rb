@@ -145,6 +145,16 @@ ActiveAdmin.register Event do
       end
     end
 
+    columns do
+      column do
+        render 'admin/shared/video_platforms/many', f: f
+      end if video_settings.video_platform?
+
+      column do
+        render 'admin/shared/video_uploads/many', f: f
+      end if video_settings.video_upload?
+    end if video_module.enabled?
+
     f.actions
   end
 
@@ -154,6 +164,7 @@ ActiveAdmin.register Event do
   controller do
     include Skippable
     before_action :set_optional_modules
+    include Videoable
 
     def create
       remove_calendar_param
