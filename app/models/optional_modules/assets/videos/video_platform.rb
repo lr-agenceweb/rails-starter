@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: videos
+# Table name: video_platforms
 #
 #  id             :integer          not null, primary key
 #  videoable_id   :integer
@@ -13,19 +13,16 @@
 #
 # Indexes
 #
-#  index_videos_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
+#  index_video_platforms_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+#
+# == VideoPlatform Model
+#
+class VideoPlatform < ActiveRecord::Base
+  belongs_to :videoable, polymorphic: true
 
-one:
-  videoable_id: 
-  videoable_type: Videoable
-  url: MyString
-  online: false
+  validates :url, allow_blank: false, presence: true, url: true
 
-two:
-  videoable_id: 
-  videoable_type: Videoable
-  url: MyString
-  online: false
+  scope :online, -> { where(online: true) }
+end

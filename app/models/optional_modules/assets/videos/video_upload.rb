@@ -2,19 +2,19 @@
 #
 # Table name: video_uploads
 #
-#  id                 :integer          not null, primary key
-#  videoable_id       :integer
-#  videoable_type     :string(255)
-#  online             :boolean          default(TRUE)
-#  position           :integer
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  video_file_name    :string(255)
-#  video_content_type :string(255)
-#  video_file_size    :integer
-#  video_updated_at   :datetime
-#  video_processing   :boolean
-#  retina_dimensions  :text(65535)
+#  id                      :integer          not null, primary key
+#  videoable_id            :integer
+#  videoable_type          :string(255)
+#  online                  :boolean          default(TRUE)
+#  position                :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  video_file_file_name    :string(255)
+#  video_file_content_type :string(255)
+#  video_file_file_size    :integer
+#  video_file_updated_at   :datetime
+#  video_file_processing   :boolean
+#  retina_dimensions       :text(65535)
 #
 # Indexes
 #

@@ -106,8 +106,8 @@ fr:
         one: Vidéo configuration
         other: Vidéos configuration
       video_upload:
-        one: Vidéo du site
-        other: Vidéos du site
+        one: Vidéo interne
+        other: Vidéos interne
       video_platform:
         one: Vidéo externe
         other: Vidéos externes
@@ -304,7 +304,7 @@ fr:
         source_picture_title_link: Article associé
         status: Statut
         _destroy: Supprimer ?
-      video:
+      video_platform:
         url: Lien de la vidéo
         online: En ligne ?
         status: Statut

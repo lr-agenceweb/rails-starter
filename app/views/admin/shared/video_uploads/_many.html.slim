@@ -1,4 +1,4 @@
-- f.inputs t('activerecord.models.video.other')
+- f.inputs t('activerecord.models.video_upload.other')
   - f.has_many :video_uploads, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.video.one')), allow_destroy: true, sortable: :position do |item|
     - item.input :video_file,
                  as: :file,

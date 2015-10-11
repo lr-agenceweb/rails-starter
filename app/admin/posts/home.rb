@@ -13,7 +13,7 @@ ActiveAdmin.register Home do
                 pictures_attributes: [
                   :id, :locale, :image, :online, :position, :_destroy
                 ],
-                videos_attributes: [
+                video_platforms_attributes: [
                   :id, :url, :online, :position, :_destroy
                 ],
                 video_uploads_attributes: [

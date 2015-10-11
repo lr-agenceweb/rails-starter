@@ -1,8 +1,8 @@
 div.panel t('activerecord.models.video.other') do
-  if videos.nil?
+  if video_platforms.nil? || video_uploads.nil?
     span 'Aucune vidéo n\'est liée à cet article'
   else
-    videos.find_each do |video|
+    video_platforms.find_each do |video|
       video_info = VideoInfo.new(video.url)
       span raw(video_info.embed_code)
     end if video_settings.video_platform?

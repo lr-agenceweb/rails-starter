@@ -23,6 +23,6 @@ columns do
   end
 
   column do
-    render 'admin/shared/videos/show', videos: resource.videos, video_uploads: resource.video_uploads
+    render 'admin/shared/videos/show', video_platforms: resource.video_platforms, video_uploads: resource.video_uploads
   end if video_module.enabled?
 end

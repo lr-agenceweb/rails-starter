@@ -19,7 +19,7 @@ end
 
 f.columns do
   f.column do
-    render 'admin/shared/videos/many', f: f
+    render 'admin/shared/video_platforms/many', f: f
   end if video_settings.video_platform?
 
   f.column do
