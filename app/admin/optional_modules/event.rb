@@ -163,7 +163,6 @@ ActiveAdmin.register Event do
   #
   controller do
     include Skippable
-    before_action :set_optional_modules
     include Videoable
 
     def create

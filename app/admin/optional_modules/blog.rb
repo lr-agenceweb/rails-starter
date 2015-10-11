@@ -63,6 +63,7 @@ ActiveAdmin.register Blog do
   # == Controller
   #
   controller do
+    include Skippable
     include Videoable
 
     before_create do |blog|
