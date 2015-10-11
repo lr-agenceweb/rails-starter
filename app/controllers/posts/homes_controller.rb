@@ -2,6 +2,8 @@
 # == Home Controller
 #
 class HomesController < PostsController
+  include Videoable
+
   decorates_assigned :home
 
   # GET /homes

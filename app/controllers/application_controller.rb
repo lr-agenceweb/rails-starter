@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
 
   def setting_or_maintenance?
     @setting = Setting.first
+    gon.push(
+      site_title: @setting.title,
+      root_url: root_url
+    )
     render template: 'elements/maintenance', layout: 'maintenance' if @setting.maintenance?
   end
 

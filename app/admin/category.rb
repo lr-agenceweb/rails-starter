@@ -112,6 +112,7 @@ ActiveAdmin.register Category do
   #
   controller do
     include Skippable
+    before_action :set_optional_modules
     include Videoable
 
     def scoped_collection

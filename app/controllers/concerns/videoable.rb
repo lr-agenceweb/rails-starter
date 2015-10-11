@@ -5,7 +5,6 @@ module Videoable
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_optional_modules
     before_action :set_video_settings, if: proc { @video_module.enabled? }
 
     private

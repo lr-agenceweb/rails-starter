@@ -71,6 +71,7 @@ ActiveAdmin.register Home do
   #
   controller do
     include Skippable
+    before_action :set_optional_modules
     include Videoable
 
     before_create do |post|
