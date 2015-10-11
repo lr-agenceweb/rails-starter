@@ -57,6 +57,28 @@ class CategoryDecorator < ApplicationDecorator
     end
   end
 
+  #
+  # == Optional Modules
+  #
+  def video_preview
+    retina_image_tag model.video_upload, :video_file, :preview
+  end
+
+  def video_background
+    return unless video?
+    content_tag(:section, class: 'l-section heading-site') do
+      concat(content_tag(:video, class: 'heading-video', preload: 'auto', autoplay: true, loop: true, muted: true) do
+        concat(tag(:source, type: 'video/mp4', src: model.video_upload.video_file.url(:mp4video)))
+        concat(tag(:source, type: 'video/webm', src: model.video_upload.video_file.url(:webmvideo)))
+        concat(tag(:source, type: 'video/ogg', src: model.video_upload.video_file.url(:oggvideo)))
+      end)
+    end.html_safe
+  end
+
+  def video?
+    model.try(:video_upload_online) && model.try(:video_upload).try(:video_file).exists?
+  end
+
   private
 
   def aa_page_name

@@ -39,6 +39,7 @@ ActiveAdmin.register Category do
     column :title_d
     column :div_color
     column :slider if slider_module.enabled?
+    column :video_upload if video_module.enabled? && video_settings.video_upload?
     column :module if current_user.super_administrator?
 
     actions
@@ -52,6 +53,7 @@ ActiveAdmin.register Category do
           row :div_color
           row :slider if slider_module.enabled?
           row :module if current_user.super_administrator?
+          row :video_preview if video_module.enabled? && resource.try(:video_upload).try(:video_file).exists?
         end
       end
 
