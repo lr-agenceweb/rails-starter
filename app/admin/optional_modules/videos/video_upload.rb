@@ -1,5 +1,6 @@
 ActiveAdmin.register VideoUpload do
   menu parent: I18n.t('admin_menu.assets')
+  includes :videoable, :video_subtitle
 
   permit_params :id,
                 :video_file,
