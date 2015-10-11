@@ -53,7 +53,7 @@ class VideoUpload < ActiveRecord::Base
                       }
                     },
                     processors: [:transcoder],
-                    max_size: 300.megabytes
+                    max_size: 10.megabytes
 
   validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
   process_in_background :video_file, processing_image_url: '/default/medium-missing.png'
