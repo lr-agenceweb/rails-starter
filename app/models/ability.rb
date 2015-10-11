@@ -213,8 +213,17 @@ class Ability
   #
   def video_module
     @video_settings = VideoSetting.first
-    cannot :manage, [VideoPlatform, VideoUpload, VideoSubtitle, VideoSetting] unless @video_module.enabled?
-    cannot :manage, [VideoPlatform] unless @video_module.enabled? && @video_settings.video_platform?
-    cannot :manage, [VideoUpload, VideoSubtitle] unless @video_module.enabled? && @video_settings.video_upload?
+    if @video_module.enabled?
+      can [:read, :update], [VideoSetting]
+      cannot [:create, :destroy], [VideoSetting]
+
+      can [:read, :update, :destroy], VideoPlatform if @video_settings.video_platform?
+      can [:read, :update, :destroy], VideoUpload if @video_settings.video_upload?
+    else
+      cannot :manage, [VideoPlatform, VideoUpload, VideoSubtitle, VideoSetting]
+      cannot :manage, [VideoPlatform] unless @video_settings.video_platform?
+      cannot :manage, [VideoUpload, VideoSubtitle] unless @video_settings.video_upload?
+    end
+
   end
 end

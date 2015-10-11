@@ -45,7 +45,7 @@ ActiveAdmin.register VideoSetting do
     private
 
     def redirect_to_show
-      redirect_to admin_video_setting_path(VideoSetting.first)
+      redirect_to admin_video_setting_path(VideoSetting.first), status: 301
     end
   end
 end
