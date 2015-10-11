@@ -15,23 +15,25 @@
       div == home.content
 
       - if @video_module.enabled?
-        .row
-          - home.video_platforms_online.each do |video|
-            - video_info = VideoInfo.new(video.url)
-            - if video_info.available?
-              .small-12.medium-4.large-3.columns
-                .flex-video.widescreen == video_info.embed_code
+        - if @video_settings.video_platform?
+          .row
+            - home.video_platforms_online.each do |video|
+              - video_info = VideoInfo.new(video.url)
+              - if video_info.available?
+                .small-12.medium-4.large-3.columns
+                  .flex-video.widescreen == video_info.embed_code
 
-        .row
-          - home.video_uploads_online.includes(:video_subtitle).each do |video|
-            .small-12.columns
-              .flex-video
-                video.mediaelement controls='true' width='100%' poster="#{video.video_file.url(:preview)}"
-                  source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
-                  source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
-                  source src="#{video.video_file.url(:oggvideo)}" type='video/ogv'
-                  - if video.video_subtitle.subtitle_fr.exists?
-                    track kind='subtitles' src="#{video.video_subtitle.subtitle_fr.url}" type="#{video.video_subtitle.subtitle_fr_content_type}" srclang='fr' label='Français'
-                  - if video.video_subtitle.subtitle_en.exists?
-                    track kind='subtitles' src="#{video.video_subtitle.subtitle_en.url}" type="#{video.video_subtitle.subtitle_en_content_type}" srclang='en' label='English' default='default'
-                  = t('video.no_html5')
+        - if @video_settings.video_upload?
+          .row
+            - home.video_uploads_online.includes(:video_subtitle).each do |video|
+              .small-12.columns
+                .flex-video
+                  video.mediaelement controls='true' width='100%' poster="#{video.video_file.url(:preview)}"
+                    source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
+                    source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
+                    source src="#{video.video_file.url(:oggvideo)}" type='video/ogv'
+                    - if video.video_subtitle.subtitle_fr.exists?
+                      track kind='subtitles' src="#{video.video_subtitle.subtitle_fr.url}" type="#{video.video_subtitle.subtitle_fr_content_type}" srclang='fr' label='Français'
+                    - if video.video_subtitle.subtitle_en.exists?
+                      track kind='subtitles' src="#{video.video_subtitle.subtitle_en.url}" type="#{video.video_subtitle.subtitle_en_content_type}" srclang='en' label='English' default='default'
+                    = t('video.no_html5')

@@ -88,6 +88,7 @@ class Ability
     social_module
     background_module
     adult_module
+    video_module
   end
 
   #
@@ -205,5 +206,15 @@ class Ability
   #
   def adult_module
     cannot :manage, StringBox, optional_module: { id: @adult_module.id } unless @adult_module.enabled?
+  end
+
+  #
+  # == Video
+  #
+  def video_module
+    @video_settings = VideoSetting.first
+    cannot :manage, [VideoPlatform, VideoUpload, VideoSubtitle, VideoSetting] unless @video_module.enabled?
+    cannot :manage, [VideoPlatform] unless @video_module.enabled? && @video_settings.video_platform?
+    cannot :manage, [VideoUpload, VideoSubtitle] unless @video_module.enabled? && @video_settings.video_upload?
   end
 end
