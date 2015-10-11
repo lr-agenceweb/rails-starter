@@ -66,6 +66,8 @@ ActiveAdmin.register About do
   # == Controller
   #
   controller do
+    include Videoable
+
     before_create do |post|
       post.type = post.object.class.name
       post.user_id = current_user.id

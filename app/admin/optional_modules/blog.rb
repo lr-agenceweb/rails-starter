@@ -54,6 +54,8 @@ ActiveAdmin.register Blog do
   # == Controller
   #
   controller do
+    include Videoable
+
     before_create do |blog|
       blog.user_id = current_user.id
     end

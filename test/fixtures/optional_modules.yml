@@ -89,3 +89,8 @@ calendar:
   <<: *DEFAULTS
   name: Calendar
   enabled: true
+
+video:
+  <<: *DEFAULTS
+  name: Video
+  enabled: true

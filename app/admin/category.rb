@@ -53,7 +53,7 @@ ActiveAdmin.register Category do
           row :div_color
           row :slider if slider_module.enabled?
           row :module if current_user.super_administrator?
-          row :video_preview if video_module.enabled? && resource.try(:video_upload).try(:video_file).exists?
+          row :video_preview if video_module.enabled? && resource.try(:video_upload).try(:video_file).try(:exists?)
         end
       end
 

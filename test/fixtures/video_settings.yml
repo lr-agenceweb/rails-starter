@@ -9,12 +9,6 @@
 #  updated_at     :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  video_platform: false
-  video_upload: false
-
-two:
-  video_platform: false
-  video_upload: false
+  video_platform: true
+  video_upload: true
