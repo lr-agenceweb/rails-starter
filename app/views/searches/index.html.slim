@@ -1,5 +1,13 @@
 - breadcrumb :searches
 
+- if @category.video_upload_online && @category.video_upload.video_file.exists?
+  section.l-section.heading-site
+    article.heading
+      video.heading-video preload='auto' autoplay='autoplay' loop='loop' muted='muted'
+        source src="#{@category.video_upload.video_file.url(:mp4video)}" type='video/mp4'
+        source src="#{@category.video_upload.video_file.url(:webmvideo)}" type='video/webm'
+        source src="#{@category.video_upload.video_file.url(:oggvideo)}" type='video/ogg'
+
 .row
   .small-12.columns
     = title_for_category(category)

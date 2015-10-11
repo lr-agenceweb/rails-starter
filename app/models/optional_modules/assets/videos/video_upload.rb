@@ -35,15 +35,15 @@ class VideoUpload < ActiveRecord::Base
   handle_attachment :video_file,
                     styles: {
                       mp4video: {
-                        geometry: '520x390',
+                        geometry: '1280x720',
                         format: 'mp4',
                       },
                       oggvideo: {
-                        geometry: '520x390',
+                        geometry: '1280x720',
                         format: 'ogg'
                       },
                       webmvideo: {
-                        geometry: '520x390',
+                        geometry: '1280x720',
                         format: 'webm',
                       },
                       preview: {

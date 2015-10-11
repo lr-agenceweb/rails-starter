@@ -1,0 +1,10 @@
+- f.inputs t('activerecord.models.video_upload.one'), for: [:video_upload, f.object.video_upload || VideoUpload.new], allow_destroy: true do |item|
+
+  - item.input :video_file,
+               as: :file,
+               label: I18n.t('form.label.video'),
+               hint: raw("#{retina_image_tag(item.object, :video_file, :preview) unless item.object.new_record?}")
+
+  - item.input :online,
+               as: :boolean,
+               hint: I18n.t('form.hint.video.online')

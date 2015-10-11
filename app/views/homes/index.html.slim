@@ -26,7 +26,7 @@
           - home.video_uploads_online.each do |video|
             .small-12.columns
               .flex-video
-                video controls='true' width='100%' poster="#{video.video_file.url(:preview)}"
+                video.mediaelement controls='true' width='100%' poster="#{video.video_file.url(:preview)}"
                   source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
                   source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
                   source src="#{video.video_file.url(:oggvideo)}" type='video/ogg'

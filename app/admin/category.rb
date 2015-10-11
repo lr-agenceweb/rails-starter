@@ -24,6 +24,9 @@ ActiveAdmin.register Category do
                   translations_attributes: [
                     :id, :locale, :content
                   ]
+                ],
+                video_upload_attributes: [
+                  :id, :video_file, :online, :position, :_destroy,
                 ]
 
   decorate_with CategoryDecorator
@@ -88,6 +91,7 @@ ActiveAdmin.register Category do
         end
 
         render 'admin/shared/referencement/form', f: f
+        render 'admin/shared/video_uploads/one', f: f if video_module.enabled? && video_settings.video_upload?
       end
 
       column do
@@ -105,6 +109,9 @@ ActiveAdmin.register Category do
   # == Controller
   #
   controller do
+    include Skippable
+    include Videoable
+
     def scoped_collection
       super.includes menu: [:translations]
     end
