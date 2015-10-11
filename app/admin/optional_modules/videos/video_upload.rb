@@ -20,6 +20,7 @@ ActiveAdmin.register VideoUpload do
     selectable_column
     column :preview
     column :from_article
+    column :subtitles
     column :status
 
     actions
@@ -31,6 +32,7 @@ ActiveAdmin.register VideoUpload do
         attributes_table do
           row :preview
           row :from_article
+          row :subtitles
           row :status
         end
       end

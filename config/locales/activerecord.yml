@@ -314,6 +314,7 @@ fr:
         from_article: Lié à
         online: En ligne ?
         status: Statut
+        subtitles: Sous-titres
         _destroy: Supprimer ?
       video_setting:
         video_platform: Vidéos depuis platformes en ligne

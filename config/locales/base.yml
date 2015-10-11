@@ -34,6 +34,9 @@ fr:
   allow_comments:
     'true': Commentaires autorisés
     'false': Article non commentable
+  subtitles:
+    'true': Sous-titres présents
+    'false': Sous-titres absents
   additional: Informations complémentaires
   general: Informations générales
 
