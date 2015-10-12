@@ -15,6 +15,7 @@ ActiveAdmin.register VideoSetting do
         attributes_table do
           row :video_platform_d
           row :video_upload_d
+          row :video_background_d if resource.video_background?
         end
       end
     end
@@ -30,8 +31,11 @@ ActiveAdmin.register VideoSetting do
                   hint: I18n.t('form.hint.video.video_platform')
           f.input :video_upload,
                   hint: I18n.t('form.hint.video.video_upload')
-          f.input :video_background,
-                  hint: I18n.t('form.hint.video.video_background')
+
+          if current_user.super_administrator?
+            f.input :video_background,
+                    hint: I18n.t('form.hint.video.video_background')
+          end
         end
       end
     end
