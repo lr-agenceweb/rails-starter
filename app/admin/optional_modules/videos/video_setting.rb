@@ -3,7 +3,8 @@ ActiveAdmin.register VideoSetting do
 
   permit_params :id,
                 :video_platform,
-                :video_upload
+                :video_upload,
+                :video_background
 
   decorate_with VideoSettingDecorator
   config.clear_sidebar_sections!
@@ -29,6 +30,8 @@ ActiveAdmin.register VideoSetting do
                   hint: I18n.t('form.hint.video.video_platform')
           f.input :video_upload,
                   hint: I18n.t('form.hint.video.video_upload')
+          f.input :video_background,
+                  hint: I18n.t('form.hint.video.video_background')
         end
       end
     end

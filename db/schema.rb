@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151011155019) do
+ActiveRecord::Schema.define(version: 20151012203143) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -564,10 +564,11 @@ ActiveRecord::Schema.define(version: 20151011155019) do
   add_index "video_platforms", ["videoable_type", "videoable_id"], name: "index_video_platforms_on_videoable_type_and_videoable_id", using: :btree
 
   create_table "video_settings", force: :cascade do |t|
-    t.boolean  "video_platform", default: true
-    t.boolean  "video_upload",   default: true
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "video_platform",   default: true
+    t.boolean  "video_upload",     default: true
+    t.boolean  "video_background", default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   create_table "video_subtitles", force: :cascade do |t|
