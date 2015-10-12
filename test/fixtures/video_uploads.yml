@@ -21,4 +21,7 @@
 #  index_video_uploads_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
 #
 
-one: {}
+one:
+  videoable: home (Post)
+  online: true
+  video_file_file_name: 'landscape.mp4'
