@@ -1,4 +1,5 @@
 include MenuHelper
+include AssetsHelper
 
 ActiveAdmin.register Category do
   menu parent: I18n.t('admin_menu.config')
@@ -39,7 +40,7 @@ ActiveAdmin.register Category do
     column :title_d
     column :div_color
     column :slider if slider_module.enabled?
-    column :video_upload if video_module.enabled? && video_settings.video_upload?
+    column :video_upload if video_background?(video_settings, video_module)
     column :module if current_user.super_administrator?
 
     actions
@@ -53,7 +54,7 @@ ActiveAdmin.register Category do
           row :div_color
           row :slider if slider_module.enabled?
           row :module if current_user.super_administrator?
-          row :video_preview if video_module.enabled? && resource.try(:video_upload).try(:video_file).try(:exists?)
+          row :video_preview if video_background? && resouce.video?
         end
       end
 
@@ -93,7 +94,7 @@ ActiveAdmin.register Category do
         end
 
         render 'admin/shared/referencement/form', f: f
-        render 'admin/shared/video_uploads/one', f: f if video_module.enabled? && video_settings.video_upload?
+        render 'admin/shared/video_uploads/one', f: f if video_module.enabled? && video_settings.video_upload? && video_settings.video_background?
       end
 
       column do
@@ -112,7 +113,6 @@ ActiveAdmin.register Category do
   #
   controller do
     include Skippable
-    before_action :set_optional_modules
     include Videoable
 
     def scoped_collection
