@@ -49,10 +49,19 @@ ActiveAdmin.register VideoSetting do
   controller do
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? && @video_module.enabled? }
 
+    def update
+      remove_video_background_param
+      super
+    end
+
     private
 
     def redirect_to_show
       redirect_to admin_video_setting_path(VideoSetting.first), status: 301
+    end
+
+    def remove_video_background_param
+      params[:video_setting].delete :video_background unless current_user.super_administrator?
     end
   end
 end
