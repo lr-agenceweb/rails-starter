@@ -244,6 +244,7 @@ fr:
         color: Couleur
         div_color: Couleur de fond de site
         video_preview: Vidéo
+        video_upload: Vidéo d'arrière plan
       menu:
         parent_id: Menu parent
         children_list: Sous-menu(s)

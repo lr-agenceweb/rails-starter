@@ -54,7 +54,7 @@ ActiveAdmin.register Category do
           row :div_color
           row :slider if slider_module.enabled?
           row :module if current_user.super_administrator?
-          row :video_preview if video_background? && resouce.video?
+          row :video_preview if video_background?(video_settings, video_module) && resource.video?
         end
       end
 
@@ -135,6 +135,7 @@ ActiveAdmin.register Category do
       end
 
       params[:category].delete :background_attributes unless @background_module.enabled?
+      params[:category].delete :video_upload_attributes unless video_background?(@video_settings, @video_module)
 
       super
     end

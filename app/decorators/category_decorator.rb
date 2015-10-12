@@ -61,7 +61,7 @@ class CategoryDecorator < ApplicationDecorator
   # == Optional Modules
   #
   def video_preview
-    retina_image_tag model.video_upload, :video_file, :preview
+    h.retina_image_tag model.video_upload, :video_file, :preview
   end
 
   def video_background(video_settings, video_module)
