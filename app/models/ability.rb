@@ -217,8 +217,19 @@ class Ability
       can [:read, :update], [VideoSetting]
       cannot [:create, :destroy], [VideoSetting]
 
-      can [:read, :update, :destroy], VideoPlatform if @video_settings.video_platform?
-      can [:read, :update, :destroy], VideoUpload if @video_settings.video_upload?
+      if @video_settings.video_platform?
+        can [:read, :update, :destroy], VideoPlatform
+        cannot :create, VideoPlatform
+      else
+        cannot :manage, VideoPlatform
+      end
+
+      if @video_settings.video_upload?
+        can [:read, :update, :destroy], VideoUpload
+        cannot :create, VideoUpload
+      else
+        cannot :manage, VideoUpload
+      end
     else
       cannot :manage, [VideoPlatform, VideoUpload, VideoSubtitle, VideoSetting]
       cannot :manage, [VideoPlatform] unless @video_settings.video_platform?

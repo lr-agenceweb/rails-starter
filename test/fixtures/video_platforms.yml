@@ -17,13 +17,6 @@
 #
 
 one:
-  videoable_id:
-  videoable_type: Videoable
-  url: MyString
-  online: false
-
-two:
-  videoable_id:
-  videoable_type: Videoable
-  url: MyString
-  online: false
+  videoable: home (Post)
+  url: http://www.dailymotion.com/video/x2z92v3
+  online: true
