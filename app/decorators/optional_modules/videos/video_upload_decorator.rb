@@ -15,6 +15,14 @@ class VideoUploadDecorator < VideoDecorator
     status_tag_deco I18n.t("subtitles.#{bool}"), color
   end
 
+  def description_d
+    raw(model.description)
+  end
+
+  def category?
+    videoable_type == 'Category'
+  end
+
   private
 
   def subtitles?

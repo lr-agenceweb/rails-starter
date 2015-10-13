@@ -5,6 +5,9 @@ ActiveAdmin.register VideoUpload do
   permit_params :id,
                 :video_file,
                 :online,
+                translations_attributes: [
+                  :id, :locale, :title, :description
+                ],
                 video_subtitle_attributes: [
                   :id, :online, :subtitle_fr, :subtitle_en, :_destroy
                 ]
@@ -37,6 +40,13 @@ ActiveAdmin.register VideoUpload do
           row :status
         end
       end
+
+      column do
+        attributes_table do
+          row :title
+          row :description_d
+        end
+      end unless resource.category?
     end
   end
 
@@ -57,6 +67,18 @@ ActiveAdmin.register VideoUpload do
 
       column do
         render 'admin/subtitles/form', f: f
+      end unless f.object.decorate.category?
+    end
+
+    unless f.object.decorate.category?
+      f.inputs 'Contenu de la vidéo' do
+        f.translated_inputs 'Translated fields', switch_locale: true do |t|
+          t.input :title,
+                  label: I18n.t('activerecord.attributes.video_upload.title')
+          t.input :description,
+                  label: I18n.t('activerecord.attributes.video_upload.description'),
+                  input_html: { class: 'froala' }
+        end
       end
     end
 

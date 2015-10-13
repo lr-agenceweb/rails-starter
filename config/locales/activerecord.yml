@@ -324,6 +324,9 @@ fr:
         video_loop: Répéter la vidéo
         video_controls: Contrôles de la vidéo
         video_mute: Désactiver le son
+        title: Titre
+        description: Description
+        description_d: Description
         _destroy: Supprimer ?
       video_setting:
         video_platform: Vidéos depuis platformes en ligne
