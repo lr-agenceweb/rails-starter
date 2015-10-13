@@ -60,6 +60,7 @@ class VideoUpload < ActiveRecord::Base
                       }
                     },
                     processors: [:transcoder],
+                    size: { in: 0..10.megabytes },
                     max_size: 10.megabytes
 
   validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
