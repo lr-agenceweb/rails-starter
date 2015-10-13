@@ -21,7 +21,9 @@ f.columns do
   f.column do
     render 'admin/shared/video_platforms/many', f: f
   end if video_settings.video_platform?
+end if video_module.enabled?
 
+f.columns do
   f.column do
     render 'admin/shared/video_uploads/many', f: f
   end if video_settings.video_upload?

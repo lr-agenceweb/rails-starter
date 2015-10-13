@@ -319,6 +319,10 @@ fr:
         online: En ligne ?
         status: Statut
         subtitles: Sous-titres
+        video_autoplay: Démarrage automatique
+        video_loop: Répéter la vidéo
+        video_controls: Contrôles de la vidéo
+        video_mute: Désactiver le son
         _destroy: Supprimer ?
       video_setting:
         video_platform: Vidéos depuis platformes en ligne

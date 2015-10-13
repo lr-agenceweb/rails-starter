@@ -15,6 +15,10 @@
 #  video_file_updated_at   :datetime
 #  video_file_processing   :boolean
 #  retina_dimensions       :text(65535)
+#  video_autoplay          :boolean          default(FALSE)
+#  video_loop              :boolean          default(FALSE)
+#  video_controls          :boolean          default(TRUE)
+#  video_mute              :boolean          default(FALSE)
 #
 # Indexes
 #

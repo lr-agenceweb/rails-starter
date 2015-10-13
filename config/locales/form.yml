@@ -119,6 +119,10 @@ fr:
         video_platform: Si coché, l'administrateur aura le droit d'insérer des vidéos provenant de Youtube, Dailymotion ou Viméo sur le site
         video_upload: Si coché, l'administrateur aura le droit de mettre en ligne ses propres vidéos par l'intermédiaire du site
         video_background: Si coché, l'administrateur pourra utiliser les vidéos envoyées en tant que arrière plan des différentes pages.
+        autoplay: Si coché la vidéo démarrera automatiquement au chargement de la page
+        loop: Si coché la vidéo redémarrera automatiquement au début à la fin de la lecture
+        controls: Si coché la barre de lecture sera visible sur la vidéo (play/pause, volume, plein écran, ...)
+        mute: Si coché, le son de la vidéo sera désactivé par défaut (l'utilisateur pourra l'activer à condition que les contrôles soient activés)
       subtitle:
         online: Si coché, les sous titres seront disponible lors de la lecture de la vidéo sur le site
         en:
