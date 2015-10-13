@@ -27,7 +27,7 @@ ActiveAdmin.register Category do
                   ]
                 ],
                 video_upload_attributes: [
-                  :id, :video_file, :online, :position, :_destroy,
+                  :id, :video_file, :online, :position, :delete_video_file,
                 ]
 
   decorate_with CategoryDecorator

@@ -8,3 +8,9 @@
   - item.input :online,
                as: :boolean,
                hint: I18n.t('form.hint.video.online')
+
+  - if item.object.video_file?
+    - item.input :delete_video_file,
+                 as: :boolean,
+                 label: I18n.t('activerecord.attributes.category.delete_video_file'),
+                 hint: 'Si coché, la vidéo d\'arrière plan sera supprimée après mise à jour'

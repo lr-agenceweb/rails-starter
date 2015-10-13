@@ -62,6 +62,8 @@ class VideoUpload < ActiveRecord::Base
   validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
   process_in_background :video_file, processing_image_url: '/default/medium-missing.png'
 
+  include DeletableAttachment
+
   delegate :online, to: :video_subtitle, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
