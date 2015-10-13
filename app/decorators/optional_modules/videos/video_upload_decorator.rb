@@ -15,6 +15,10 @@ class VideoUploadDecorator < VideoDecorator
     status_tag_deco I18n.t("subtitles.#{bool}"), color
   end
 
+  def video_configuration
+    "controls='controls'"
+  end
+
   private
 
   def subtitles?

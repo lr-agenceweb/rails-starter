@@ -25,10 +25,10 @@
 
         - if @video_settings.video_upload?
           .row
-            - home.video_uploads_online.includes(:video_subtitle).each do |video|
+            - home.video_uploads_online.includes(:video_subtitle).each_with_index do |video, index|
               .small-12.columns
                 .flex-video
-                  video.mediaelement controls='true' width='100%' poster="#{video.video_file.url(:preview)}"
+                  video.mediaelement id="video_#{index}" width='100%' data-autoplay="#{video.video_autoplay?}" data-mute="#{video.video_mute?}" data-controls="#{video.video_controls?}" data-loop="#{video.video_loop?}" poster="#{video.video_file.url(:preview)}"
                     source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
                     source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
                     source src="#{video.video_file.url(:oggvideo)}" type='video/ogv'
