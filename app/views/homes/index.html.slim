@@ -25,15 +25,17 @@
 
         - if @video_settings.video_upload?
           .row
-            - home.video_uploads_online.includes(:video_subtitle).each_with_index do |video, index|
+            - VideoUploadDecorator.decorate_collection(home.video_uploads_online.includes(:video_subtitle)).each_with_index do |video, index|
               .small-12.columns
-                .flex-video
-                  video.mediaelement id="video_#{index}" width='100%' data-autoplay="#{video.video_autoplay?}" data-mute="#{video.video_mute?}" data-controls="#{video.video_controls?}" data-loop="#{video.video_loop?}" poster="#{video.video_file.url(:preview)}"
+                h3 = video.title if video.title?
+                figure.flex-video
+                  video.mediaelement id="video_#{index}" data-autoplay="#{video.video_autoplay?}" data-mute="#{video.video_mute?}" data-controls="#{video.video_controls?}" data-loop="#{video.video_loop?}" poster="#{video.video_file.url(:preview)}"
                     source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
                     source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
                     source src="#{video.video_file.url(:oggvideo)}" type='video/ogv'
                     - if video.video_subtitle.subtitle_fr.exists?
-                      track kind='subtitles' src="#{video.video_subtitle.subtitle_fr.url}" type="#{video.video_subtitle.subtitle_fr_content_type}" srclang='fr' label='Français'
+                      track kind='subtitles' src="#{video.video_subtitle.subtitle_fr.url}" srclang='fr' label='Français'
                     - if video.video_subtitle.subtitle_en.exists?
-                      track kind='subtitles' src="#{video.video_subtitle.subtitle_en.url}" type="#{video.video_subtitle.subtitle_en_content_type}" srclang='en' label='English' default='default'
+                      track kind='subtitles' src="#{video.video_subtitle.subtitle_en.url}" srclang='en' label='English' default='default'
                     = t('video.no_html5')
+                  figcaption: div == video.description if video.description?
