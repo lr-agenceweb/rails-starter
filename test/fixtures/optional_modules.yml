@@ -94,3 +94,8 @@ video:
   <<: *DEFAULTS
   name: Video
   enabled: true
+
+video_disabled:
+  <<: *DEFAULTS
+  name: Video disabled
+  enabled: false

@@ -6,6 +6,8 @@ require 'test_helper'
 class AssetsHelperTest < ActionView::TestCase
   include AssetsHelper
 
+  setup :initialize_test
+
   test 'should return full path for attachment' do
     @subscriber = users(:lana)
     result = attachment_url(@subscriber.avatar, :small, ActionController::TestRequest.new)
@@ -26,5 +28,35 @@ class AssetsHelperTest < ActionView::TestCase
     result = attachment_url(nil, :small, ActionController::TestRequest.new)
     expected = 'http://test.host/default/small-missing.png'
     assert_equal expected, result
+  end
+
+  #
+  # == Video
+  #
+  test 'should return false if video_module disabled' do
+    assert_not video_background?(@video_settings, @video_module_disabled), 'should be false'
+  end
+
+  test 'should return true if video_upload and video_background are enabled' do
+    assert video_background?(@video_settings, @video_module), 'should be true'
+  end
+
+  test 'should return false if video_upload is enabled but not video_background' do
+    assert_not video_background?(@video_settings_two, @video_module), 'should be false'
+  end
+
+  test 'should return false if video_background is enabled but not video_upload' do
+    assert_not video_background?(@video_settings_three, @video_module), 'should be false'
+  end
+
+  private
+
+  def initialize_test
+    @video_settings = video_settings(:one)
+    @video_settings_two = video_settings(:two)
+    @video_settings_three = video_settings(:three)
+
+    @video_module = optional_modules(:video)
+    @video_module_disabled = optional_modules(:video_disabled)
   end
 end
