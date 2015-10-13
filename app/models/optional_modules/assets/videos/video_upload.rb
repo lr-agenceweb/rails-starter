@@ -31,6 +31,9 @@
 class VideoUpload < ActiveRecord::Base
   include Attachable
 
+  translates :title, :description, fallbacks_for_empty_translations: true
+  active_admin_translates :title, :description
+
   belongs_to :videoable, polymorphic: true
 
   has_one :video_subtitle, as: :subtitleable, dependent: :destroy

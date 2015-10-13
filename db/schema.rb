@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013134137) do
+ActiveRecord::Schema.define(version: 20151013191016) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -588,6 +588,18 @@ ActiveRecord::Schema.define(version: 20151013134137) do
   end
 
   add_index "video_subtitles", ["subtitleable_type", "subtitleable_id"], name: "index_video_subtitles_on_subtitleable_type_and_subtitleable_id", using: :btree
+
+  create_table "video_upload_translations", force: :cascade do |t|
+    t.integer  "video_upload_id", limit: 4,     null: false
+    t.string   "locale",          limit: 255,   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "title",           limit: 255
+    t.text     "description",     limit: 65535
+  end
+
+  add_index "video_upload_translations", ["locale"], name: "index_video_upload_translations_on_locale", using: :btree
+  add_index "video_upload_translations", ["video_upload_id"], name: "index_video_upload_translations_on_video_upload_id", using: :btree
 
   create_table "video_uploads", force: :cascade do |t|
     t.integer  "videoable_id",            limit: 4
