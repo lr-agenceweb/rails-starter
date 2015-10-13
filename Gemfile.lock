@@ -148,7 +148,7 @@ GEM
       activeadmin (>= 0.6)
       jquery-ui-rails (~> 5.0)
       rails (>= 3.2)
-    active_skin (0.0.9)
+    active_skin (0.0.12)
     activejob (4.2.4)
       activesupport (= 4.2.4)
       globalid (>= 0.3.0)
