@@ -18,7 +18,13 @@ ActiveAdmin.register Blog do
                   :id, :url, :online, :position, :_destroy
                 ],
                 video_uploads_attributes: [
-                  :id, :video_file, :online, :position, :_destroy,
+                  :id, :online, :position,
+                  :video_file,
+                  :video_autoplay,
+                  :video_loop,
+                  :video_controls,
+                  :video_mute,
+                  :_destroy,
                   video_subtitle_attributes: [
                     :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
                   ]
