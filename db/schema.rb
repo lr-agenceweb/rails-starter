@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013191016) do
+ActiveRecord::Schema.define(version: 20151014213741) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -551,14 +551,27 @@ ActiveRecord::Schema.define(version: 20151013191016) do
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
 
+  create_table "video_platform_translations", force: :cascade do |t|
+    t.integer  "video_platform_id", limit: 4,     null: false
+    t.string   "locale",            limit: 255,   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "title",             limit: 255
+    t.text     "description",       limit: 65535
+  end
+
+  add_index "video_platform_translations", ["locale"], name: "index_video_platform_translations_on_locale", using: :btree
+  add_index "video_platform_translations", ["video_platform_id"], name: "index_video_platform_translations_on_video_platform_id", using: :btree
+
   create_table "video_platforms", force: :cascade do |t|
-    t.integer  "videoable_id",   limit: 4
-    t.string   "videoable_type", limit: 255
-    t.string   "url",            limit: 255
-    t.boolean  "online",                     default: true
-    t.integer  "position",       limit: 4
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.integer  "videoable_id",        limit: 4
+    t.string   "videoable_type",      limit: 255
+    t.string   "url",                 limit: 255
+    t.boolean  "native_informations",             default: false
+    t.boolean  "online",                          default: true
+    t.integer  "position",            limit: 4
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "video_platforms", ["videoable_type", "videoable_id"], name: "index_video_platforms_on_videoable_type_and_videoable_id", using: :btree

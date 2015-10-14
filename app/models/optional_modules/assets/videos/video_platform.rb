@@ -2,14 +2,15 @@
 #
 # Table name: video_platforms
 #
-#  id             :integer          not null, primary key
-#  videoable_id   :integer
-#  videoable_type :string(255)
-#  url            :string(255)
-#  online         :boolean          default(TRUE)
-#  position       :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id                  :integer          not null, primary key
+#  videoable_id        :integer
+#  videoable_type      :string(255)
+#  url                 :string(255)
+#  native_informations :boolean          default(FALSE)
+#  online              :boolean          default(TRUE)
+#  position            :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #
 # Indexes
 #
@@ -20,6 +21,9 @@
 # == VideoPlatform Model
 #
 class VideoPlatform < ActiveRecord::Base
+  translates :title, :description, fallbacks_for_empty_translations: true
+  active_admin_translates :title, :description
+
   belongs_to :videoable, polymorphic: true
 
   validates :url, allow_blank: false, presence: true, url: true

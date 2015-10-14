@@ -4,7 +4,11 @@ ActiveAdmin.register VideoPlatform do
 
   permit_params :id,
                 :url,
-                :online
+                :native_informations,
+                :online,
+                translations_attributes: [
+                  :id, :locale, :title, :description
+                ]
 
   decorate_with VideoPlatformDecorator
   config.clear_sidebar_sections!
