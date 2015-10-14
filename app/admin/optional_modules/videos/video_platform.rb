@@ -38,6 +38,14 @@ ActiveAdmin.register VideoPlatform do
           row :status
         end
       end
+
+      column do
+        attributes_table do
+          row :native_informations_d
+          row :title_d
+          row :description_d
+        end
+      end
     end
   end
 

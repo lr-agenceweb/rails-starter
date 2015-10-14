@@ -8,4 +8,8 @@ class VideoDecorator < ApplicationDecorator
   def from_article
     model.videoable
   end
+
+  def description_d
+    raw(model.description)
+  end
 end
