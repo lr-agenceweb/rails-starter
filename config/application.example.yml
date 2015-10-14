@@ -89,6 +89,13 @@ staging:
 
 
 #
+# == VideoInfo
+#
+youtube_api_key: ~
+vimeo_api_key: ~
+
+
+#
 # == Backup gem
 #
 production:
