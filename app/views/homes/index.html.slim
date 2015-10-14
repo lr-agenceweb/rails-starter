@@ -17,11 +17,16 @@
       - if @video_module.enabled?
         - if @video_settings.video_platform?
           .row
-            - home.video_platforms_online.each do |video|
+            - VideoPlatformDecorator.decorate_collection(home.video_platforms_online).each do |video|
               - video_info = VideoInfo.new(video.url)
               - if video_info.available?
                 .small-12.medium-6.columns
-                  .flex-video.widescreen == video_info.embed_code
+                  figure.flex-video.widescreen
+                    h3 = video.title if video.title? && !video.native_informations?
+                    h3 = video_info.title if video.native_informations?
+                    == video_info.embed_code
+                  figcaption: div == video.description if video.description? && !video.native_informations?
+                  figcaption: div == auto_link(video_info.description, html: { target: :blank }) if video.native_informations?
 
         - if @video_settings.video_upload?
           .row
