@@ -123,6 +123,7 @@ fr:
         loop: Si coché la vidéo redémarrera automatiquement au début à la fin de la lecture.
         controls: Si coché la barre de lecture sera toujours visible sur la vidéo (play/pause, volume, plein écran, ...). Autrement, elle n'apparaît qu'au survol de la vidéo.
         mute: Si coché, le son de la vidéo sera désactivé par défaut (l'utilisateur pourra l'activer à condition que les contrôles soient activés). Il est recommendé d'activer cette option surtout si vous avez coché le démarrage automatique de la vidéo.
+        native_informations: Si coché, le titre et la description de la vidéo venant de la platforme seront utilisés.
       subtitle:
         online: Si coché, les sous titres seront disponible lors de la lecture de la vidéo sur le site
         en:

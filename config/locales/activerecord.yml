@@ -309,6 +309,7 @@ fr:
       video_platform:
         preview: Prévisualisation
         video_link: Lien de la vidéo
+        native_informations: Informations natives ?
         from_article: Lié à
         url: Lien de la vidéo
         online: En ligne ?

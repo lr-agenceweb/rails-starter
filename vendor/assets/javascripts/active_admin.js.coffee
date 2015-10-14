@@ -37,3 +37,11 @@ $ ->
 
   $('.has_many_delete.boolean input').on 'click', ->
     $(this).parents('.has_many_delete.boolean').siblings().slideToggle()
+
+  # VideoPlatform title and description
+  $('#video_platform_native_informations_input input').on 'click', ->
+    $this = $(this)
+    if $this.is(':checked')
+      $this.parents('li.input.boolean').next('div').slideUp()
+    else
+      $this.parents('li.input.boolean').next('div').slideDown()

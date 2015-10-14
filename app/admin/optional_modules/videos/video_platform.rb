@@ -55,6 +55,22 @@ ActiveAdmin.register VideoPlatform do
                   hint: t('form.hint.video.online')
         end
       end
+
+      column do
+        f.inputs 'Contenu de la vidéo' do
+          f.input :native_informations,
+                  as: :boolean,
+                  hint: t('form.hint.video.native_informations')
+
+          f.translated_inputs 'Translated fields', switch_locale: true, class: 'aazazaz' do |t|
+            t.input :title,
+                    label: I18n.t('activerecord.attributes.video_upload.title')
+            t.input :description,
+                    label: I18n.t('activerecord.attributes.video_upload.description'),
+                    input_html: { class: 'froala' }
+          end
+        end
+      end
     end
 
     f.actions
