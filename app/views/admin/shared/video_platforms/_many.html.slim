@@ -7,3 +7,10 @@
     - item.input :online,
                  as: :boolean,
                  hint: I18n.t('form.hint.video.online')
+
+    - if item.object.new_record?
+      li
+        p Après avoir envoyé votre vidéo, vous avez la possibilité d'ajouter un titre et une description. Pour cela, rendez-vous dans 'assets > Vidéos externes' et modifier les paramètres de votre vidéo.
+    - else
+      li
+        p = link_to 'Ajouter un titre et une description', edit_admin_video_platform_path(item.object), class: 'button success', target: :blank
