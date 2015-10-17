@@ -40,7 +40,7 @@ ActiveAdmin.register Category do
     column :title_d
     column :div_color
     column :slider if slider_module.enabled?
-    column :video_upload if video_background?(video_settings, video_module)
+    column :video_upload if show_video_background?(video_settings, video_module)
     column :module if current_user.super_administrator?
 
     actions
@@ -54,7 +54,7 @@ ActiveAdmin.register Category do
           row :div_color
           row :slider if slider_module.enabled?
           row :module if current_user.super_administrator?
-          row :video_preview if video_background?(video_settings, video_module) && resource.video?
+          row :video_preview if show_video_background?(video_settings, video_module) && resource.video?
         end
       end
 
@@ -135,7 +135,7 @@ ActiveAdmin.register Category do
       end
 
       params[:category].delete :background_attributes unless @background_module.enabled?
-      params[:category].delete :video_upload_attributes unless video_background?(@video_settings, @video_module)
+      params[:category].delete :video_upload_attributes unless show_video_background?(@video_settings, @video_module)
 
       super
     end

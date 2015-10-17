@@ -39,7 +39,7 @@ module AssetsHelper
   #
   # == Videos
   #
-  def video_background?(video_settings, video_module)
+  def show_video_background?(video_settings, video_module)
     video_settings.video_upload? && video_settings.video_background? && video_module.enabled?
   end
 end

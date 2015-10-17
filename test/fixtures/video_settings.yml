@@ -14,15 +14,3 @@ one:
   video_platform: true
   video_upload: true
   video_background: true
-
-# Test when video_upload is enabled but not video_backgrond
-two:
-  video_platform: true
-  video_upload: true
-  video_background: false
-
-# Test when video_upload is disabled but not video_background
-three:
-  video_platform: true
-  video_upload: false
-  video_background: true

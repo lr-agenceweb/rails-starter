@@ -38,9 +38,9 @@
                     source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
                     source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
                     source src="#{video.video_file.url(:oggvideo)}" type='video/ogv'
-                    - if video.video_subtitle.subtitle_fr.exists?
+                    - if video.try(:video_subtitle).try(:subtitle_fr).try(:exists?)
                       track kind='subtitles' src="#{video.video_subtitle.subtitle_fr.url}" srclang='fr' label='Français'
-                    - if video.video_subtitle.subtitle_en.exists?
+                    - if video.try(:video_subtitle).try(:subtitle_en).try(:exists?)
                       track kind='subtitles' src="#{video.video_subtitle.subtitle_en.url}" srclang='en' label='English' default='default'
                     = t('video.no_html5')
                   figcaption: div == video.description if video.description?

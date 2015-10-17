@@ -47,7 +47,12 @@ ActiveAdmin.register VideoSetting do
   # == Controller
   #
   controller do
+    before_action :redirect_to_dashboard, if: proc { current_user.subscriber? || !@video_module.enabled? }
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? && @video_module.enabled? }
+
+    def index
+      @collection ||= VideoSetting.all.page(1).per(1)
+    end
 
     def update
       remove_video_background_param
@@ -55,6 +60,10 @@ ActiveAdmin.register VideoSetting do
     end
 
     private
+
+    def redirect_to_dashboard
+      redirect_to admin_dashboard_path
+    end
 
     def redirect_to_show
       redirect_to admin_video_setting_path(VideoSetting.first), status: 301

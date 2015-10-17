@@ -74,7 +74,7 @@ class Ability
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, Map, Newsletter, Social, Background]
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting]
   end
 
   def optional_modules_check
@@ -232,9 +232,6 @@ class Ability
       end
     else
       cannot :manage, [VideoPlatform, VideoUpload, VideoSubtitle, VideoSetting]
-      cannot :manage, [VideoPlatform] unless @video_settings.video_platform?
-      cannot :manage, [VideoUpload, VideoSubtitle] unless @video_settings.video_upload?
     end
-
   end
 end

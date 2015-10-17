@@ -69,6 +69,20 @@ module Admin
     end
 
     #
+    # == VideoBackground
+    #
+    test 'should remove video_background boolean if administrator' do
+      patch :update, id: @video_settings, video_setting: { video_background: '0' }
+      assert assigns(:video_setting).video_background?
+    end
+
+    test 'should keep video_background boolean if super_administrator' do
+      sign_in @super_administrator
+      patch :update, id: @video_settings, video_setting: { video_background: '0' }
+      assert_not assigns(:video_setting).video_background?
+    end
+
+    #
     # == Abilities
     #
     test 'should test abilities for subscriber' do

@@ -22,12 +22,6 @@
 #  index_video_subtitles_on_subtitleable_type_and_subtitleable_id  (subtitleable_type,subtitleable_id)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  subtitleable_id: 
-  online: false
-
-two:
-  subtitleable_id: 
-  online: false
+  subtitleable: one (VideoUpload)
+  online: true
