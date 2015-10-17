@@ -31,7 +31,7 @@ module Admin
     end
 
     test 'should update category if logged in' do
-      patch :update, id: @video_upload, video_platform: {}
+      patch :update, id: @video_upload, video_upload: {}
       assert_redirected_to admin_video_upload_path(@video_upload)
     end
 
@@ -97,7 +97,7 @@ module Admin
       assert ability.can?(:destroy, @video_upload), 'should be able to destroy'
     end
 
-    test 'should test abilities for administrator with video_platform disabled' do
+    test 'should test abilities for administrator with video_upload disabled' do
       disable_video_upload_settings
       ability = Ability.new(@administrator)
       assert ability.cannot?(:create, VideoUpload.new), 'should not be able to create'
@@ -106,7 +106,7 @@ module Admin
       assert ability.cannot?(:destroy, @video_upload), 'should not be able to destroy'
     end
 
-    test 'should test abilities for super_administrator with video_platform disabled' do
+    test 'should test abilities for super_administrator with video_upload disabled' do
       disable_video_upload_settings
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
