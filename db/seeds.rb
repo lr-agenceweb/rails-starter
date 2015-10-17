@@ -286,8 +286,16 @@ models_name.each_with_index do |element, index|
       attachable_type: 'Category',
       image: File.new("#{Rails.root}/public/system/seeds/backgrounds/background_homepage.jpg")
     )
+
+    puts 'Uploading video background for homepage'
+    video_background = VideoUpload.create!(
+      videoable_id: @category_home.id,
+      videoable_type: 'Category',
+      video_file: File.new("#{Rails.root}/public/system/seeds/videos/background_homepage.mp4")
+    )
   end
 end
+
 
 #
 # == Home article
@@ -713,7 +721,8 @@ end
 puts 'Create video settings'
 VideoSetting.create!(
   video_platform: true,
-  video_upload: true
+  video_upload: true,
+  video_background: true
 )
 
 #
