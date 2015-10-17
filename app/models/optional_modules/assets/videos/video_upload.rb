@@ -59,14 +59,14 @@ class VideoUpload < ActiveRecord::Base
                         time: 2
                       }
                     },
-                    processors: [:transcoder],
-                    size: { in: 0..10.megabytes },
-                    max_size: 10.megabytes
+                    processors: [:transcoder]
 
   validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
+  validates_attachment_size :video_file, in: 0.megabytes..100.megabytes
   process_in_background :video_file, processing_image_url: '/default/medium-missing.png'
 
   delegate :online, to: :video_subtitle, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
+  scope :not_precessing, -> { where.not(video_file_processing: true) }
 end

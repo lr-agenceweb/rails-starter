@@ -30,7 +30,7 @@
 
         - if @video_settings.video_upload?
           .row
-            - VideoUploadDecorator.decorate_collection(home.video_uploads_online.includes(:video_subtitle)).each_with_index do |video, index|
+            - VideoUploadDecorator.decorate_collection(home.video_uploads_online.not_precessing.includes(:video_subtitle)).each_with_index do |video, index|
               .small-12.columns
                 h3 = video.title if video.title?
                 figure.flex-video
