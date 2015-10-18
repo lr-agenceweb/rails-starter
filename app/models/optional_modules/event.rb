@@ -12,6 +12,7 @@
 #  show_as_gallery :boolean          default(FALSE)
 #  show_calendar   :boolean          default(FALSE)
 #  online          :boolean          default(TRUE)
+#  prev_next       :boolean          default(TRUE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

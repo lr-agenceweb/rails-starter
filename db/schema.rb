@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014213741) do
+ActiveRecord::Schema.define(version: 20151018194242) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20151014213741) do
     t.boolean  "show_as_gallery",               default: false
     t.boolean  "allow_comments",                default: true
     t.boolean  "online",                        default: true
+    t.boolean  "prev_next",                     default: true
     t.integer  "user_id",         limit: 4
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
@@ -129,6 +130,7 @@ ActiveRecord::Schema.define(version: 20151014213741) do
     t.boolean  "show_as_gallery",               default: false
     t.boolean  "show_calendar",                 default: false
     t.boolean  "online",                        default: true
+    t.boolean  "prev_next",                     default: true
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
   end
@@ -359,6 +361,7 @@ ActiveRecord::Schema.define(version: 20151014213741) do
     t.boolean  "show_as_gallery",               default: false
     t.boolean  "allow_comments",                default: true
     t.boolean  "online",                        default: true
+    t.boolean  "prev_next",                     default: true
     t.integer  "position",        limit: 4
     t.integer  "user_id",         limit: 4
     t.datetime "created_at",                                    null: false
