@@ -559,7 +559,7 @@ end
 
 puts 'Creating Event Location'
 Location.create!(
-  locationable_id: event_1.id,
+  locationable_id: event_2.id,
   locationable_type: 'Event',
   address: 'Zénith de Paris, 205 Bd Sérurier',
   city: 'Paris',
