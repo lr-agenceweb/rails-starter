@@ -6,6 +6,7 @@ ActiveAdmin.register Blog do
                 :type,
                 :allow_comments,
                 :show_as_gallery,
+                :prev_next,
                 :online,
                 :user_id,
                 translations_attributes: [

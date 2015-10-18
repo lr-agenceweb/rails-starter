@@ -6,6 +6,7 @@ columns do
         row :content
         row :status
         row :show_as_gallery_d
+        row :prev_next_d
         row :image
         row :author_with_avatar
       end

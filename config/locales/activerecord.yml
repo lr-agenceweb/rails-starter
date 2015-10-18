@@ -189,6 +189,8 @@ fr:
         content: Contenu
         keywords: Mot-clés
         online: En ligne
+        prev_next: Liens précédent/suivant
+        prev_next_d: Liens précédent/suivant
         link: Lien
         type_title: Page
         author_with_avatar: Auteur
@@ -202,6 +204,8 @@ fr:
         content: Contenu
         author_with_avatar: Auteur
         status: Statut
+        prev_next: Liens précédent/suivant
+        prev_next_d: Liens précédent/suivant
         allow_comments: Autoriser les commentaires
         allow_comments_status: Autoriser les commentaires
         show_as_gallery: Galerie d'images
@@ -408,6 +412,8 @@ fr:
         end_date: Date de fin
         online: En ligne ?
         status: État
+        prev_next: Liens précédent/suivant
+        prev_next_d: Liens précédent/suivant
         show_as_gallery: Galerie d'images
         show_as_gallery_d: Galerie d'images
         show_calendar_d: Calendrier

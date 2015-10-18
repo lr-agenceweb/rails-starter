@@ -45,6 +45,9 @@ fr:
       optional_module: Choisir quel est le module optionel lié à cette catégorie
       heading: En-tête du contenu
 
+      post:
+        prev_next: Si coché, un lien permettant d'accéder à l'article précédent et suivant sera ajouté sur le site
+
       newsletter:
         send_welcome_email: Si coché, le nouvel abonné à la newsletter recevra un email de bienvenue
         title_subscriber: Titre / Sujet du mail reçu par le nouvel abonné

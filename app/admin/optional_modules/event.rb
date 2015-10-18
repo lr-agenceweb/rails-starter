@@ -7,6 +7,7 @@ ActiveAdmin.register Event do
                 :end_date,
                 :show_as_gallery,
                 :show_calendar,
+                :prev_next,
                 :online,
                 translations_attributes: [
                   :id, :locale, :title, :slug, :content
@@ -79,6 +80,7 @@ ActiveAdmin.register Event do
           row :duration
           row :url
           row :show_as_gallery_d
+          row :prev_next_d
           row :show_calendar_d if calendar_module.enabled?
           row :status
           row :full_address_inline
@@ -99,6 +101,9 @@ ActiveAdmin.register Event do
         f.inputs t('general') do
           f.input :show_as_gallery,
                   hint: I18n.t('form.hint.picture.show_as_gallery')
+
+          f.input :prev_next,
+                  hint: I18n.t('form.hint.post.prev_next')
 
           if calendar_module.enabled?
             f.input :show_calendar,
@@ -170,6 +175,10 @@ ActiveAdmin.register Event do
   controller do
     include Skippable
     include Videoable
+
+    def scoped_collection
+      super.includes :translations, :location
+    end
 
     def create
       remove_calendar_param
