@@ -116,7 +116,7 @@ ActiveAdmin.register Category do
     include Videoable
 
     def scoped_collection
-      super.includes menu: [:translations]
+      super.includes :video_upload, menu: [:translations]
     end
 
     def edit

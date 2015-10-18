@@ -88,6 +88,10 @@ ActiveAdmin.register VideoPlatform do
   # == Controller
   #
   controller do
+    def scoped_collection
+      super.includes videoable: [:translations]
+    end
+
     def edit
       @page_title = "#{t('active_admin.edit')} #{I18n.t('activerecord.models.video_platform.one')} article \"#{resource.decorate.from_article.title}\""
     end

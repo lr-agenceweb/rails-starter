@@ -89,5 +89,8 @@ ActiveAdmin.register VideoUpload do
   # == Controller
   #
   controller do
+    def scoped_collection
+      super.includes :videoable
+    end
   end
 end
