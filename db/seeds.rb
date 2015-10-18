@@ -277,25 +277,24 @@ models_name.each_with_index do |element, index|
     )
   end
 
-  if element == 'Home'
-    @category_home = category
-
-    puts 'Uploading background image for homepage'
-    Background.create!(
-      attachable_id: category.id,
-      attachable_type: 'Category',
-      image: File.new("#{Rails.root}/public/system/seeds/backgrounds/background_homepage.jpg")
-    )
-
-    puts 'Uploading video background for homepage'
-    video_background = VideoUpload.create!(
-      videoable_id: @category_home.id,
-      videoable_type: 'Category',
-      video_file: File.new("#{Rails.root}/public/system/seeds/videos/background_homepage.mp4")
-    )
-  end
+  @category_home = category if element == 'Home'
+  @category_blog = category if element == 'Blog'
+  @category_event = category if element == 'Event'
 end
 
+puts 'Uploading video background for homepage'
+video_background = VideoUpload.create!(
+  videoable_id: @category_home.id,
+  videoable_type: 'Category',
+  video_file: File.new("#{Rails.root}/public/system/seeds/videos/background_homepage.mp4")
+)
+
+puts 'Uploading background image for event page'
+Background.create!(
+  attachable_id: @category_event.id,
+  attachable_type: 'Category',
+  image: File.new("#{Rails.root}/public/system/seeds/backgrounds/background_event.jpg")
+)
 
 #
 # == Home article
@@ -384,9 +383,9 @@ Picture.create!(
 #
 puts 'Creating Blog article'
 blog = Blog.create!(
-  title: 'Premier article de blog',
-  slug: 'premier-article-de-blog',
-  content: '<p>Voici le premier article de mon blog</p>',
+  title: 'Fonds marins',
+  slug: 'fonds-marins',
+  content: '<p>Voici ce qu\'il se passe sous l\'eau</p>',
   online: true,
   user_id: administrator.id
 )
@@ -398,13 +397,28 @@ referencement = Referencement.create!(
   keywords: ''
 )
 
+puts 'Uploading video background for blog'
+video_blog = VideoUpload.create!(
+  videoable_id: blog.id,
+  videoable_type: 'Blog',
+  video_file: File.new("#{Rails.root}/public/system/seeds/videos/bubbles.mp4")
+)
+
+puts 'Uploading video subtitles for blog'
+video_background = VideoSubtitle.create!(
+  subtitleable_id: video_blog.id,
+  subtitleable_type: 'VideoUpload',
+  subtitle_fr: File.new("#{Rails.root}/public/system/seeds/subtitles/bubbles_fr.srt"),
+  subtitle_en: File.new("#{Rails.root}/public/system/seeds/subtitles/bubbles_en.srt")
+)
+
 if @locales.include?(:en)
   Blog::Translation.create!(
     blog_id: blog.id,
     locale: 'en',
-    title: 'First blog article',
-    slug: 'first-blog-article',
-    content: '<p>This is my first blog article !</p>'
+    title: 'Underwater',
+    slug: 'underwater',
+    content: '<p>This is what happend underwater</p>'
   )
 
   Referencement::Translation.create!(
@@ -677,20 +691,23 @@ GuestBook.create!(
 puts 'Creating Slider'
 slider = Slider.create!(
   animate: 'crossfade',
-  category_id: @category_home.id
+  navigation: true,
+  category_id: @category_blog.id
 )
 
 puts 'Uploading slides image for slider'
-slides_image = [ 'slide-1.png', 'slide-2.png', 'slide-3.jpg' ]
+slides_image = ['slide-1.jpg', 'slide-2.png', 'slide-3.jpg', 'slide-4.jpg']
 
-slide_title_fr = ['Paysage', 'Ordinateur', '']
-slide_title_en = ['Landscape', 'Computer', '']
+slide_title_fr = ['Paysage', 'Ordinateur', 'Evénement Sportif']
+slide_title_en = ['Landscape', 'Computer', 'Sport Event']
 slide_description_fr = [
-  'Course à pied au coucher du soleil',
+  'Paysage de montagne',
+  '',
   '',
   ''
 ]
 slide_description_en = [
+  '',
   '',
   '',
   ''

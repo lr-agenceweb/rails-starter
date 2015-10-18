@@ -1,5 +1,7 @@
 - breadcrumb :blogs
 
+= render 'optional_modules/sliders/show', slider: @category.slider, force: false unless @category.slider.nil?
+
 .row
   .small-12.columns
     = title_for_category(category)
