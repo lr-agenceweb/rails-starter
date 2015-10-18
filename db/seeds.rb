@@ -464,7 +464,9 @@ event_images = [
   'event-1-2.jpg',
   'event-1-3.jpg'
 ]
-event = Event.create!(
+
+# Sausage market
+event_1 = Event.create!(
   title: 'Foire aux saucisses',
   slug: 'foire-aux-saucisses',
   content: '<p>Venez gouter les saucisses de la région !</p>',
@@ -474,7 +476,7 @@ event = Event.create!(
   online: true
 )
 referencement = Referencement.create!(
-  attachable_id: event.id,
+  attachable_id: event_1.id,
   attachable_type: 'Event',
   title: '',
   description: '',
@@ -483,7 +485,7 @@ referencement = Referencement.create!(
 
 if @locales.include?(:en)
   Event::Translation.create!(
-    event_id: event.id,
+    event_id: event_1.id,
     locale: 'en',
     title: 'Sausage market',
     slug: 'sausage-market',
@@ -500,7 +502,7 @@ end
 
 puts 'Creating Event Location'
 Location.create!(
-  locationable_id: event.id,
+  locationable_id: event_1.id,
   locationable_type: 'Event',
   address: 'Rue des Limaces',
   city: 'Lyon',
@@ -513,12 +515,68 @@ Location.create!(
 puts 'Creating Event pictures'
 event_images.each do |image|
   Picture.create!(
-    attachable_id: event.id,
+    attachable_id: event_1.id,
     attachable_type: 'Event',
     image: File.new("#{Rails.root}/public/system/seeds/events/#{image}"),
     online: true
   )
 end
+
+# Silky Cam and Tizy Bertrand
+event_2 = Event.create!(
+  title: 'Silky Cam et Tizy Bertrand au Zénith de Paris',
+  slug: 'silky-cam-tizy-bertrand-zenith-paris',
+  content: '<p>Venez assister au concert exceptionnel de Silky Cam et Tizy Bertrand au Zénith de Paris !</p>',
+  url: nil,
+  start_date: 1.weeks.ago.to_s(:db),
+  end_date: Time.zone.now + 3.week.to_i,
+  online: true
+)
+referencement_2 = Referencement.create!(
+  attachable_id: event_2.id,
+  attachable_type: 'Event',
+  title: '',
+  description: '',
+  keywords: ''
+)
+
+if @locales.include?(:en)
+  Event::Translation.create!(
+    event_id: event_2.id,
+    locale: 'en',
+    title: 'Silky Cam and Tizy Bertrand in concert',
+    slug: 'silky-cam-tizy-bertrand-concert',
+    content: '<p>Come to assist to the concert of Silky Cam and Tizy Bertrand !</p>'
+  )
+  Referencement::Translation.create!(
+    referencement_id: referencement_2.id,
+    locale: 'en',
+    title: '',
+    description: '',
+    keywords: ''
+  )
+end
+
+puts 'Creating Event Location'
+Location.create!(
+  locationable_id: event_1.id,
+  locationable_type: 'Event',
+  address: 'Zénith de Paris, 205 Bd Sérurier',
+  city: 'Paris',
+  postcode: 75_019,
+  geocode_address: 'Zénith de Paris, 205 Bd Sérurier, 75019 - Paris',
+  latitude: 43.5947418,
+  longitude: 1.409389
+)
+
+puts 'Creating Event 2 VideoPlatform'
+VideoPlatform.create!(
+  videoable_id: event_2.id,
+  videoable_type: 'Event',
+  url: 'http://www.dailymotion.com/video/x38cajc',
+  native_informations: true,
+  online: true
+)
 
 #
 # == Newsletter Setting

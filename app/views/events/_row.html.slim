@@ -2,13 +2,41 @@ article.panel
   == event.microdata_meta
 
   header
-    h2 = event.title
+    h3 = link_to event.title, event_path(event)
 
     = time_tag event.start_date.to_datetime, l(event.start_date, format: :short)
-    br
+    span ,
     = time_tag event.end_date.to_datetime, l(event.end_date, format: :short)
-    br
-    span = event.duration
 
-  h3 = link_to event.title, event_path(event)
-  div = simple_format(event.content)
+    div = simple_format(event.content)
+
+  - if @video_module.enabled?
+    - if @video_settings.video_platform?
+      .row
+        - VideoPlatformDecorator.decorate_collection(event.video_platforms_online).each do |video|
+          - video_info = VideoInfo.new(video.url)
+          - if video_info.available?
+            .small-12.columns
+              figure.flex-video.widescreen
+                h3 = video.title if video.title? && !video.native_informations?
+                h3 = video_info.title if video.native_informations?
+                == video_info.embed_code
+              figcaption: div == video.description if video.description? && !video.native_informations?
+              figcaption: div == auto_link(video_info.description, html: { target: :blank }) if video.native_informations?
+
+    - if @video_settings.video_upload?
+      .row
+        - VideoUploadDecorator.decorate_collection(event.video_uploads_online.not_precessing.includes(:video_subtitle)).each_with_index do |video, index|
+          .small-12.columns
+            h3 = video.title if video.title?
+            figure.flex-video
+              video.mediaelement id="video_#{index}" data-autoplay="#{video.video_autoplay?}" data-mute="#{video.video_mute?}" data-controls="#{video.video_controls?}" data-loop="#{video.video_loop?}" poster="#{video.video_file.url(:preview)}"
+                source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
+                source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
+                source src="#{video.video_file.url(:oggvideo)}" type='video/ogv'
+                - if video.try(:video_subtitle).try(:subtitle_fr).try(:exists?)
+                  track kind='subtitles' src="#{video.video_subtitle.subtitle_fr.url}" srclang='fr' label='Français'
+                - if video.try(:video_subtitle).try(:subtitle_en).try(:exists?)
+                  track kind='subtitles' src="#{video.video_subtitle.subtitle_en.url}" srclang='en' label='English' default='default'
+                = t('video.no_html5')
+              figcaption: div == video.description if video.description?
