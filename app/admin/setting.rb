@@ -24,19 +24,6 @@ ActiveAdmin.register Setting, as: 'Parameter' do
   config.clear_sidebar_sections!
   actions :all, except: [:new, :destroy]
 
-  index do
-    column :logo_deco
-    column :name
-    column :title
-    column :subtitle
-    column :phone
-    column :email
-    column :maintenance
-
-    translation_status
-    actions
-  end
-
   show do
     columns do
       column do
