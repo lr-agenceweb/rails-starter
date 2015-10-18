@@ -32,7 +32,7 @@ html lang="#{@language}"
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'
 
-    #wrapper.wrapper
+    main#wrapper.wrapper
       = show_flash unless flash.nil?
       = render 'elements/header'
 
