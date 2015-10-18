@@ -43,7 +43,7 @@ class VideoUpload < ActiveRecord::Base
                     styles: {
                       mp4video: {
                         geometry: '1280x720',
-                        format: 'mp4',
+                        format: 'mp4'
                       },
                       oggvideo: {
                         geometry: '1280x720',
@@ -51,7 +51,7 @@ class VideoUpload < ActiveRecord::Base
                       },
                       webmvideo: {
                         geometry: '1280x720',
-                        format: 'webm',
+                        format: 'webm'
                       },
                       preview: {
                         geometry: '380x240#',

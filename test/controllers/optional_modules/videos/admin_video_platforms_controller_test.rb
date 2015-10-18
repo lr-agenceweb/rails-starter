@@ -116,7 +116,6 @@ module Admin
       assert ability.cannot?(:destroy, @video_platform), 'should not be able to destroy'
     end
 
-
     private
 
     def initialize_test

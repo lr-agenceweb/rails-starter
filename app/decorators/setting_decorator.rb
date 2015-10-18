@@ -44,7 +44,7 @@ class SettingDecorator < ApplicationDecorator
   # == Other
   #
   def credentials
-    "#{CGI::escapeHTML(setting.name)} - #{copyright} - Copyright &copy; #{current_year}"
+    "#{CGI.escapeHTML(setting.name)} - #{copyright} - Copyright &copy; #{current_year}"
   end
 
   def phone_w3c
