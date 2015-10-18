@@ -84,7 +84,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
     private
 
     def redirect_to_show
-      redirect_to admin_parameter_path(Setting.first)
+      redirect_to admin_parameter_path(Setting.first), status: 301
     end
   end
 end

@@ -17,6 +17,7 @@ module Admin
     #
     test 'should redirect index to show if logged in' do
       get :index
+      assert_response 301
       assert_redirected_to admin_parameter_path(@setting)
     end
 

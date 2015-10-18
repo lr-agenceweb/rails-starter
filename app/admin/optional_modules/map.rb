@@ -101,7 +101,7 @@ ActiveAdmin.register Map, as: 'Plan' do
     private
 
     def redirect_to_show
-      redirect_to admin_plan_path(@map)
+      redirect_to admin_plan_path(@map), status: 301
     end
   end
 end

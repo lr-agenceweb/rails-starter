@@ -18,6 +18,7 @@ module Admin
     #
     test 'should redirect to show page if logged in' do
       get :index
+      assert_response 301
       assert_redirected_to admin_plan_path(@map)
     end
 
