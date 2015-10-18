@@ -28,6 +28,7 @@ class Event < ActiveRecord::Base
   include Imageable
   include Videosable
   include Searchable
+  include PrevNextable
 
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content, fallbacks_for_empty_translations: true

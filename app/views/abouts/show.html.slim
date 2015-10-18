@@ -23,4 +23,5 @@
               li
                 = link_to retina_image_tag(picture, :image, :medium, class: 'th'), picture.image.url(:large), title: picture.title, class: 'magnific-popup'
 
+= render 'elements/prev_next', element: about
 = render 'comments/section', o: @about
