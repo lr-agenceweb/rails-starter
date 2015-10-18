@@ -1,0 +1,9 @@
+# French
+fr:
+  video:
+    no_html5: Votre navigateur ne supporte pas la lecture de cette vidéo. Veuillez le mettre à jour pour lire la vidéo.
+
+# English
+en:
+  video:
+    no_html5: Your browser doesn't support this video format. Please update your browser in order to read it.

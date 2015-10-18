@@ -14,6 +14,21 @@ ActiveAdmin.register Event do
                 pictures_attributes: [
                   :id, :image, :online, :position, :_destroy
                 ],
+                video_platforms_attributes: [
+                  :id, :url, :online, :position, :_destroy
+                ],
+                video_uploads_attributes: [
+                  :id, :online, :position,
+                  :video_file,
+                  :video_autoplay,
+                  :video_loop,
+                  :video_controls,
+                  :video_mute,
+                  :_destroy,
+                  video_subtitle_attributes: [
+                    :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
+                  ]
+                ],
                 location_attributes: [
                   :id, :address, :city, :postcode
                 ],
@@ -136,6 +151,16 @@ ActiveAdmin.register Event do
       end
     end
 
+    columns do
+      column do
+        render 'admin/shared/video_platforms/many', f: f
+      end if video_settings.video_platform?
+
+      column do
+        render 'admin/shared/video_uploads/many', f: f
+      end if video_settings.video_upload?
+    end if video_module.enabled?
+
     f.actions
   end
 
@@ -144,7 +169,7 @@ ActiveAdmin.register Event do
   #
   controller do
     include Skippable
-    before_action :set_optional_modules
+    include Videoable
 
     def create
       remove_calendar_param

@@ -4,7 +4,7 @@ $(document).on 'ready page:load page:restore', ->
   map_init()
 
 map_init = ->
-  if $('#map:not(.from-form').length
+  if $('#map:not(.from-form)').length
     $('#map').addClass('js-height')
     map = MapBoxSingleton.get(gon.mapbox_access_token, gon.mapbox_username, gon.mapbox_key, true)
     map.set_view(gon.latitude, gon.longitude)

@@ -3,3 +3,5 @@ article.panel
 
   h3 = link_to blog.title, blog_path(blog)
   div = simple_format(blog.content)
+
+  = render '/videos/index', resource: blog

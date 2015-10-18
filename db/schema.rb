@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002170656) do
+ActiveRecord::Schema.define(version: 20151014213741) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -550,5 +550,89 @@ ActiveRecord::Schema.define(version: 20151002170656) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
+
+  create_table "video_platform_translations", force: :cascade do |t|
+    t.integer  "video_platform_id", limit: 4,     null: false
+    t.string   "locale",            limit: 255,   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "title",             limit: 255
+    t.text     "description",       limit: 65535
+  end
+
+  add_index "video_platform_translations", ["locale"], name: "index_video_platform_translations_on_locale", using: :btree
+  add_index "video_platform_translations", ["video_platform_id"], name: "index_video_platform_translations_on_video_platform_id", using: :btree
+
+  create_table "video_platforms", force: :cascade do |t|
+    t.integer  "videoable_id",        limit: 4
+    t.string   "videoable_type",      limit: 255
+    t.string   "url",                 limit: 255
+    t.boolean  "native_informations",             default: false
+    t.boolean  "online",                          default: true
+    t.integer  "position",            limit: 4
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "video_platforms", ["videoable_type", "videoable_id"], name: "index_video_platforms_on_videoable_type_and_videoable_id", using: :btree
+
+  create_table "video_settings", force: :cascade do |t|
+    t.boolean  "video_platform",   default: true
+    t.boolean  "video_upload",     default: true
+    t.boolean  "video_background", default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  create_table "video_subtitles", force: :cascade do |t|
+    t.integer  "subtitleable_id",          limit: 4
+    t.string   "subtitleable_type",        limit: 255
+    t.boolean  "online",                               default: true
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.string   "subtitle_fr_file_name",    limit: 255
+    t.string   "subtitle_fr_content_type", limit: 255
+    t.integer  "subtitle_fr_file_size",    limit: 4
+    t.datetime "subtitle_fr_updated_at"
+    t.string   "subtitle_en_file_name",    limit: 255
+    t.string   "subtitle_en_content_type", limit: 255
+    t.integer  "subtitle_en_file_size",    limit: 4
+    t.datetime "subtitle_en_updated_at"
+  end
+
+  add_index "video_subtitles", ["subtitleable_type", "subtitleable_id"], name: "index_video_subtitles_on_subtitleable_type_and_subtitleable_id", using: :btree
+
+  create_table "video_upload_translations", force: :cascade do |t|
+    t.integer  "video_upload_id", limit: 4,     null: false
+    t.string   "locale",          limit: 255,   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "title",           limit: 255
+    t.text     "description",     limit: 65535
+  end
+
+  add_index "video_upload_translations", ["locale"], name: "index_video_upload_translations_on_locale", using: :btree
+  add_index "video_upload_translations", ["video_upload_id"], name: "index_video_upload_translations_on_video_upload_id", using: :btree
+
+  create_table "video_uploads", force: :cascade do |t|
+    t.integer  "videoable_id",            limit: 4
+    t.string   "videoable_type",          limit: 255
+    t.boolean  "online",                                default: true
+    t.integer  "position",                limit: 4
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.string   "video_file_file_name",    limit: 255
+    t.string   "video_file_content_type", limit: 255
+    t.integer  "video_file_file_size",    limit: 4
+    t.datetime "video_file_updated_at"
+    t.boolean  "video_file_processing"
+    t.text     "retina_dimensions",       limit: 65535
+    t.boolean  "video_autoplay",                        default: false
+    t.boolean  "video_loop",                            default: false
+    t.boolean  "video_controls",                        default: true
+    t.boolean  "video_mute",                            default: false
+  end
+
+  add_index "video_uploads", ["videoable_type", "videoable_id"], name: "index_video_uploads_on_videoable_type_and_videoable_id", using: :btree
 
 end

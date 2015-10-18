@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   before_action :set_socials_network, if: proc { @social_module.enabled? }
   before_action :set_map, if: proc { @map_module.enabled? }
   before_action :set_froala_key
+  include Videoable
 
   decorates_assigned :setting, :category, :slider, :map, :background, :menu
 
@@ -29,6 +30,10 @@ class ApplicationController < ActionController::Base
 
   def setting_or_maintenance?
     @setting = Setting.first
+    gon.push(
+      site_title: @setting.title,
+      root_url: root_url
+    )
     render template: 'elements/maintenance', layout: 'maintenance' if @setting.maintenance?
   end
 

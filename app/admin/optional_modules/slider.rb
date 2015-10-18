@@ -119,7 +119,7 @@ ActiveAdmin.register Slider do
   #
   controller do
     include Skippable
-    before_action :set_optional_modules
+    # before_action :set_optional_modules
 
     def scoped_collection
       super.includes slides: [:translations]

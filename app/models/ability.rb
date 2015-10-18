@@ -74,7 +74,7 @@ class Ability
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, Map, Newsletter, Social, Background]
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting]
   end
 
   def optional_modules_check
@@ -88,6 +88,7 @@ class Ability
     social_module
     background_module
     adult_module
+    video_module
   end
 
   #
@@ -205,5 +206,32 @@ class Ability
   #
   def adult_module
     cannot :manage, StringBox, optional_module: { id: @adult_module.id } unless @adult_module.enabled?
+  end
+
+  #
+  # == Video
+  #
+  def video_module
+    @video_settings = VideoSetting.first
+    if @video_module.enabled?
+      can [:read, :update], [VideoSetting]
+      cannot [:create, :destroy], [VideoSetting]
+
+      if @video_settings.video_platform?
+        can [:read, :update, :destroy], VideoPlatform
+        cannot :create, VideoPlatform
+      else
+        cannot :manage, VideoPlatform
+      end
+
+      if @video_settings.video_upload?
+        can [:read, :update, :destroy], VideoUpload
+        cannot :create, VideoUpload
+      else
+        cannot :manage, VideoUpload
+      end
+    else
+      cannot :manage, [VideoPlatform, VideoUpload, VideoSubtitle, VideoSetting]
+    end
   end
 end

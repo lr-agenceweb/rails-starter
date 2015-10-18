@@ -25,6 +25,7 @@
 class Blog < ActiveRecord::Base
   include Scopable
   include Imageable
+  include Videosable
   include Searchable
 
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
@@ -41,12 +42,8 @@ class Blog < ActiveRecord::Base
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
 
-  has_many :pictures, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
-
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :username, to: :user, prefix: true, allow_nil: true
-  delegate :online, to: :pictures, prefix: true, allow_nil: true
 
   paginates_per 10
 

@@ -1,8 +1,10 @@
 - breadcrumb :root
 
-= render 'optional_modules/sliders/show', slider: slider, force: false
-
-= background.handle_background_tag if @background_module.enabled? && !@background.nil?
+- if category.video?
+  = category.video_background(@video_settings, @video_module)
+- else
+  = render 'optional_modules/sliders/show', slider: slider, force: false
+  = background.handle_background_tag if @background_module.enabled? && !@background.nil?
 
 .row
   - @homes.each do |home|

@@ -1,0 +1,14 @@
+div.panel t('activerecord.models.video.other') do
+  if video_platforms.nil? || video_uploads.nil?
+    span 'Aucune vidéo n\'est liée à cet article'
+  else
+    video_platforms.find_each do |video|
+      video_info = VideoInfo.new(video.url)
+      span raw(video_info.embed_code)
+    end if video_settings.video_platform?
+
+    video_uploads.find_each do |video|
+      div image_tag(video.video_file.url(:preview))
+    end if video_settings.video_upload?
+  end
+end

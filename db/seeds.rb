@@ -111,7 +111,8 @@ description = [
   'Module qui affiche un fil d\'ariane sur le site',
   'Module qui affiche un Qrcode pour créer automatiquement un contact sur son smartphone',
   'Module qui propose à l\'administrateur de choisir une image d\'arrière plan pour les pages du site',
-  'Module qui affiche un calendrier'
+  'Module qui affiche un calendrier',
+  'Module qui gère la visualisation de vidéos sur le site'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(
@@ -276,17 +277,24 @@ models_name.each_with_index do |element, index|
     )
   end
 
-  if element == 'Home'
-    @category_home = category
-
-    puts 'Uploading background image for homepage'
-    Background.create!(
-      attachable_id: category.id,
-      attachable_type: 'Category',
-      image: File.new("#{Rails.root}/public/system/seeds/backgrounds/background_homepage.jpg")
-    )
-  end
+  @category_home = category if element == 'Home'
+  @category_blog = category if element == 'Blog'
+  @category_event = category if element == 'Event'
 end
+
+puts 'Uploading video background for homepage'
+video_background = VideoUpload.create!(
+  videoable_id: @category_home.id,
+  videoable_type: 'Category',
+  video_file: File.new("#{Rails.root}/public/system/seeds/videos/background_homepage.mp4")
+)
+
+puts 'Uploading background image for event page'
+Background.create!(
+  attachable_id: @category_event.id,
+  attachable_type: 'Category',
+  image: File.new("#{Rails.root}/public/system/seeds/backgrounds/background_event.jpg")
+)
 
 #
 # == Home article
@@ -375,9 +383,9 @@ Picture.create!(
 #
 puts 'Creating Blog article'
 blog = Blog.create!(
-  title: 'Premier article de blog',
-  slug: 'premier-article-de-blog',
-  content: '<p>Voici le premier article de mon blog</p>',
+  title: 'Fonds marins',
+  slug: 'fonds-marins',
+  content: '<p>Voici ce qu\'il se passe sous l\'eau</p>',
   online: true,
   user_id: administrator.id
 )
@@ -389,13 +397,28 @@ referencement = Referencement.create!(
   keywords: ''
 )
 
+puts 'Uploading video background for blog'
+video_blog = VideoUpload.create!(
+  videoable_id: blog.id,
+  videoable_type: 'Blog',
+  video_file: File.new("#{Rails.root}/public/system/seeds/videos/bubbles.mp4")
+)
+
+puts 'Uploading video subtitles for blog'
+video_background = VideoSubtitle.create!(
+  subtitleable_id: video_blog.id,
+  subtitleable_type: 'VideoUpload',
+  subtitle_fr: File.new("#{Rails.root}/public/system/seeds/subtitles/bubbles_fr.srt"),
+  subtitle_en: File.new("#{Rails.root}/public/system/seeds/subtitles/bubbles_en.srt")
+)
+
 if @locales.include?(:en)
   Blog::Translation.create!(
     blog_id: blog.id,
     locale: 'en',
-    title: 'First blog article',
-    slug: 'first-blog-article',
-    content: '<p>This is my first blog article !</p>'
+    title: 'Underwater',
+    slug: 'underwater',
+    content: '<p>This is what happend underwater</p>'
   )
 
   Referencement::Translation.create!(
@@ -441,7 +464,9 @@ event_images = [
   'event-1-2.jpg',
   'event-1-3.jpg'
 ]
-event = Event.create!(
+
+# Sausage market
+event_1 = Event.create!(
   title: 'Foire aux saucisses',
   slug: 'foire-aux-saucisses',
   content: '<p>Venez gouter les saucisses de la région !</p>',
@@ -451,7 +476,7 @@ event = Event.create!(
   online: true
 )
 referencement = Referencement.create!(
-  attachable_id: event.id,
+  attachable_id: event_1.id,
   attachable_type: 'Event',
   title: '',
   description: '',
@@ -460,7 +485,7 @@ referencement = Referencement.create!(
 
 if @locales.include?(:en)
   Event::Translation.create!(
-    event_id: event.id,
+    event_id: event_1.id,
     locale: 'en',
     title: 'Sausage market',
     slug: 'sausage-market',
@@ -477,7 +502,7 @@ end
 
 puts 'Creating Event Location'
 Location.create!(
-  locationable_id: event.id,
+  locationable_id: event_1.id,
   locationable_type: 'Event',
   address: 'Rue des Limaces',
   city: 'Lyon',
@@ -490,12 +515,68 @@ Location.create!(
 puts 'Creating Event pictures'
 event_images.each do |image|
   Picture.create!(
-    attachable_id: event.id,
+    attachable_id: event_1.id,
     attachable_type: 'Event',
     image: File.new("#{Rails.root}/public/system/seeds/events/#{image}"),
     online: true
   )
 end
+
+# Silky Cam and Tizy Bertrand
+event_2 = Event.create!(
+  title: 'Silky Cam et Tizy Bertrand au Zénith de Paris',
+  slug: 'silky-cam-tizy-bertrand-zenith-paris',
+  content: '<p>Venez assister au concert exceptionnel de Silky Cam et Tizy Bertrand au Zénith de Paris !</p>',
+  url: nil,
+  start_date: 1.weeks.ago.to_s(:db),
+  end_date: Time.zone.now + 3.week.to_i,
+  online: true
+)
+referencement_2 = Referencement.create!(
+  attachable_id: event_2.id,
+  attachable_type: 'Event',
+  title: '',
+  description: '',
+  keywords: ''
+)
+
+if @locales.include?(:en)
+  Event::Translation.create!(
+    event_id: event_2.id,
+    locale: 'en',
+    title: 'Silky Cam and Tizy Bertrand in concert',
+    slug: 'silky-cam-tizy-bertrand-concert',
+    content: '<p>Come to assist to the concert of Silky Cam and Tizy Bertrand !</p>'
+  )
+  Referencement::Translation.create!(
+    referencement_id: referencement_2.id,
+    locale: 'en',
+    title: '',
+    description: '',
+    keywords: ''
+  )
+end
+
+puts 'Creating Event Location'
+Location.create!(
+  locationable_id: event_1.id,
+  locationable_type: 'Event',
+  address: 'Zénith de Paris, 205 Bd Sérurier',
+  city: 'Paris',
+  postcode: 75_019,
+  geocode_address: 'Zénith de Paris, 205 Bd Sérurier, 75019 - Paris',
+  latitude: 43.5947418,
+  longitude: 1.409389
+)
+
+puts 'Creating Event 2 VideoPlatform'
+VideoPlatform.create!(
+  videoable_id: event_2.id,
+  videoable_type: 'Event',
+  url: 'http://www.dailymotion.com/video/x38cajc',
+  native_informations: true,
+  online: true
+)
 
 #
 # == Newsletter Setting
@@ -668,20 +749,23 @@ GuestBook.create!(
 puts 'Creating Slider'
 slider = Slider.create!(
   animate: 'crossfade',
-  category_id: @category_home.id
+  navigation: true,
+  category_id: @category_blog.id
 )
 
 puts 'Uploading slides image for slider'
-slides_image = [ 'slide-1.png', 'slide-2.png', 'slide-3.jpg' ]
+slides_image = ['slide-1.jpg', 'slide-2.png', 'slide-3.jpg', 'slide-4.jpg']
 
-slide_title_fr = ['Paysage', 'Ordinateur', '']
-slide_title_en = ['Landscape', 'Computer', '']
+slide_title_fr = ['Paysage', 'Ordinateur', 'Evénement Sportif']
+slide_title_en = ['Landscape', 'Computer', 'Sport Event']
 slide_description_fr = [
-  'Course à pied au coucher du soleil',
+  'Paysage de montagne',
+  '',
   '',
   ''
 ]
 slide_description_en = [
+  '',
   '',
   '',
   ''
@@ -705,6 +789,16 @@ slides_image.each_with_index do |element, index|
     )
   end
 end
+
+#
+# == VideoSetting
+#
+puts 'Create video settings'
+VideoSetting.create!(
+  video_platform: true,
+  video_upload: true,
+  video_background: true
+)
 
 #
 # == FriendlyId

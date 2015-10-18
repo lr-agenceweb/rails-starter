@@ -11,6 +11,14 @@ html lang="#{@language}"
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
     = javascript_include_tag 'application', 'data-turbolinks-track': true
 
+    - if setting.logo_footer? && @video_module.enabled? && @video_settings.video_upload?
+      css:
+        .mejs-container .mejs-controls .mejs-logo-button span {
+          background: transparent url("#{setting.logo_footer.url(:thumb)}") no-repeat;
+          background-size: 20px auto;
+          margin: 8px 0;
+        }
+
     link type='text/plain' rel='author' href='/humans.txt'
     = favicon_link_tag '/favicon.ico'
     = csrf_meta_tag

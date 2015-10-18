@@ -38,9 +38,13 @@ class Category < ActiveRecord::Base
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
 
+  has_one :video_upload, as: :videoable, dependent: :destroy
+  accepts_nested_attributes_for :video_upload, reject_if: :all_blank, allow_destroy: true
+
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :enabled, to: :optional_module, prefix: true, allow_nil: true
   delegate :title, :position, to: :menu, prefix: true, allow_nil: true
+  delegate :online, to: :video_upload, prefix: true, allow_nil: true
 
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 

@@ -25,6 +25,7 @@
 #
 class Event < ActiveRecord::Base
   include Imageable
+  include Videosable
   include Searchable
 
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
@@ -39,13 +40,9 @@ class Event < ActiveRecord::Base
   has_one :location, as: :locationable, dependent: :destroy
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
-  has_many :pictures, -> { order(:position) }, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
-
   validate :calendar_date_correct?, unless: proc { end_date.blank? && start_date.blank? }
   validates :url, allow_blank: true, url: true
 
-  delegate :online, to: :pictures, prefix: true, allow_nil: true
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 

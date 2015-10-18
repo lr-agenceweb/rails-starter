@@ -16,6 +16,8 @@ fr:
     label:
       online: Mettre en ligne ?
       picture: Image liée à l'article
+      video: Vidéo
+      subtitle: Sous-titres de la vidéo
       slide: Image liée au slider
       background: Image d'arrière-plan
       model_name: Page à définir
@@ -106,6 +108,28 @@ fr:
 
       picture:
         show_as_gallery: Afficher les images sous forme de galerie ?
+
+      video:
+        url: "Lien de la vidéo que vous souhaitez afficher sur votre site (Youtube, Dailymotion, Viméo, ...).
+        <br />
+        Exemple: http://www.dailymotion.com/video/xxxxxxx
+        <br /> <br />
+        Attention ! Assurez-vous d'avoir les droits d'exploitation de la vidéo avant de la publier."
+        online: Si coché, la vidéo sera visible sur le site
+        video_platform: Si coché, l'administrateur aura le droit d'insérer des vidéos provenant de Youtube, Dailymotion ou Viméo sur le site
+        video_upload: Si coché, l'administrateur aura le droit de mettre en ligne ses propres vidéos par l'intermédiaire du site
+        video_background: Si coché, l'administrateur pourra utiliser les vidéos envoyées en tant que arrière plan des différentes pages.
+        autoplay: Si coché la vidéo démarrera automatiquement au chargement de la page. Attention !!! La majorité des internautes n'apprécient pas ce comportement par défaut. Si vous décidez quand même de l'activer, assurez vous de désactiver le son de cette vidéo (option ci-dessous).
+        loop: Si coché la vidéo redémarrera automatiquement au début à la fin de la lecture.
+        controls: Si coché la barre de lecture sera toujours visible sur la vidéo (play/pause, volume, plein écran, ...). Autrement, elle n'apparaît qu'au survol de la vidéo.
+        mute: Si coché, le son de la vidéo sera désactivé par défaut (l'utilisateur pourra l'activer à condition que les contrôles soient activés). Il est recommendé d'activer cette option surtout si vous avez coché le démarrage automatique de la vidéo.
+        native_informations: Si coché, le titre et la description de la vidéo venant de la platforme seront utilisés.
+      subtitle:
+        online: Si coché, les sous titres seront disponible lors de la lecture de la vidéo sur le site
+        en:
+          destroy: Si coché, les sous-titres anglais seront supprimés
+        fr:
+          destroy: Si coché, les sous-titres français seront supprimés
 
     placeholder:
       froala: Contenu de l'article ici :)

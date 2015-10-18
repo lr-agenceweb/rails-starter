@@ -11,6 +11,13 @@ f.columns do
   end
 end
 
-render 'admin/shared/pictures/many', f: f
+f.columns do
+  f.column do
+    render 'admin/shared/pictures/many', f: f
+  end
+end
+
+render 'admin/shared/video_platforms/many', f: f if video_settings.video_platform? && video_module.enabled?
+render 'admin/shared/video_uploads/many', f: f if video_settings.video_upload? && video_module.enabled?
 
 f.actions

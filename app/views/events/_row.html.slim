@@ -2,13 +2,12 @@ article.panel
   == event.microdata_meta
 
   header
-    h2 = event.title
+    h3 = link_to event.title, event_path(event)
 
     = time_tag event.start_date.to_datetime, l(event.start_date, format: :short)
-    br
+    span ,
     = time_tag event.end_date.to_datetime, l(event.end_date, format: :short)
-    br
-    span = event.duration
 
-  h3 = link_to event.title, event_path(event)
-  div = simple_format(event.content)
+    div = simple_format(event.content)
+
+  = render '/videos/index', resource: event

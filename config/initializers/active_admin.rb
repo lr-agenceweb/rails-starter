@@ -199,7 +199,7 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
-      menu.add id: 'configuration', label: I18n.t('admin_menu.configuration'), priority: 100
+      menu.add id: 'site_configuration', label: I18n.t('admin_menu.config'), priority: 100
     end
 
     admin.build_menu :utility_navigation do |menu|

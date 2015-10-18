@@ -14,6 +14,21 @@ ActiveAdmin.register Blog do
                 pictures_attributes: [
                   :id, :locale, :image, :online, :position, :_destroy
                 ],
+                video_platforms_attributes: [
+                  :id, :url, :online, :position, :_destroy
+                ],
+                video_uploads_attributes: [
+                  :id, :online, :position,
+                  :video_file,
+                  :video_autoplay,
+                  :video_loop,
+                  :video_controls,
+                  :video_mute,
+                  :_destroy,
+                  video_subtitle_attributes: [
+                    :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
+                  ]
+                ],
                 referencement_attributes: [
                   :id,
                   translations_attributes: [
@@ -54,6 +69,9 @@ ActiveAdmin.register Blog do
   # == Controller
   #
   controller do
+    include Skippable
+    include Videoable
+
     before_create do |blog|
       blog.user_id = current_user.id
     end
