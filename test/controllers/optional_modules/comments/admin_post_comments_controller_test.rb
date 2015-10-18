@@ -36,6 +36,12 @@ module Admin
       assert_redirected_to admin_dashboard_path
     end
 
+    test 'should render 404 if access new page' do
+      assert_raises(ActionController::UrlGenerationError) do
+        get :new
+      end
+    end
+
     test 'should not be able to destroy administrator comments if subscriber' do
       sign_in @subscriber
       assert_no_difference ['Comment.count'] do

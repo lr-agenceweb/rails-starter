@@ -36,6 +36,18 @@ module Admin
       assert_redirected_to admin_parameter_path(@setting)
     end
 
+    test 'should render 404 if access new page' do
+      assert_raises(ActionController::UrlGenerationError) do
+        get :new
+      end
+    end
+
+    test 'should render 404 if access destroy page' do
+      assert_raises(ActionController::UrlGenerationError) do
+        delete :destroy
+      end
+    end
+
     #
     # == Form validations
     #

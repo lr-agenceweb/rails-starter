@@ -42,6 +42,12 @@ module Admin
       assert_redirected_to admin_pictures_path
     end
 
+    test 'should render 404 if access new page' do
+      assert_raises(ActionController::UrlGenerationError) do
+        get :new
+      end
+    end
+
     #
     # == Crud actions
     #
