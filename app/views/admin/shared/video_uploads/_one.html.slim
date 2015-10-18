@@ -1,4 +1,4 @@
-- f.inputs t('activerecord.models.video_upload.one'), for: [:video_upload, f.object.video_upload || VideoUpload.new], allow_destroy: true do |item|
+- f.inputs t('activerecord.models.video_background.one'), for: [:video_upload, f.object.video_upload || VideoUpload.new], allow_destroy: true do |item|
 
   - item.input :video_file,
                as: :file,

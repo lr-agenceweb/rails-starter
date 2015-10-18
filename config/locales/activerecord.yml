@@ -114,6 +114,9 @@ fr:
       video_subtitle:
         one: Sous-titres
         other: Sous-titres
+      video_background:
+        one: Vidéo d'arrière-plan
+        other: Vidéos d'arrière-plan
       background:
         one: Arrière-plan
         other: Arrière-plans
