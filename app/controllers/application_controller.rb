@@ -63,9 +63,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_adult_validation
+    adult_string_box = StringBox.find_by(key: 'adult_not_validated_popup_content')
     gon.push(
       adult_validation: true,
-      adult_not_validated_popup_content: StringBox.find_by(key: 'adult_not_validated_popup_content').content
+      adult_not_validated_popup_title: adult_string_box.title,
+      adult_not_validated_popup_content: adult_string_box.content
     )
   end
 
