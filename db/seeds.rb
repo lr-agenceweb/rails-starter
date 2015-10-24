@@ -682,7 +682,7 @@ string_box_title_fr = [
   '422',
   '500',
   'Message de contact envoyé avec succès',
-  'Majorité requise !'
+  'Bienvenue sur le site de démonstration des modules !'
 ]
 string_box_title_en = [
   '404',
@@ -696,7 +696,7 @@ string_box_content_fr = [
   '<p>La page que vous tentez de voir n\'est pas disponible pour l\'instant :(</p>',
   '<p>Ooops, une erreur s\'est produite :( Veuillez réésayer ultérieurement</p>',
   '<p>Votre message a bien été envoyé. Merci :)</p>',
-  '<p>Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.</p>'
+  "<p>Vous allez pouvoir les tester et également les gérer depuis le panneau d'administration.</p> <p>Ce popup est un aperçu du module \"<strong>Adulte</strong>\" (majorité requise pour certains sites comme les vignerons)</p> <p><strong>Cliquez oui si vous avez plus de 18 ans pour continuer ;)</strong></p>"
 ]
 string_box_content_en = [
   '<p>The page you want to access doesn\'t exist :(</p>',
