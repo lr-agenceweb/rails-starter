@@ -7,5 +7,5 @@ $(document).on 'ready page:load page:restore', ->
         $.extend({}, vex.dialog.buttons.NO, text: I18n.t('false', locale: gon.language))
       ]
       callback: (value) ->
-        window.location.href = 'http://google.fr' if value is false
+        window.location.href = 'http://lr-agenceweb.fr' if value is false
         Cookies.set('adult', 'validated') if value is true
