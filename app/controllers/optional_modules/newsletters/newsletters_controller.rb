@@ -27,9 +27,9 @@ class NewslettersController < ApplicationController
   def welcome_user
     if @newsletter_user.token == params[:token]
       I18n.with_locale(@newsletter_user.lang) do
-        welcome_newsletter = StringBox.find_by(key: 'welcome_newsletter')
-        @title = welcome_newsletter.title
-        @content = welcome_newsletter.content
+        welcome_newsletter = NewsletterSetting.first
+        @title = welcome_newsletter.try(:title_subscriber)
+        @content = welcome_newsletter.try(:content_subscriber)
         @newsletter_user.name = @newsletter_user.extract_name_from_email
       end
       render layout: 'newsletter'

@@ -29,10 +29,13 @@ class NewsletterMailer < ApplicationMailer
   # Email Newsletter
   def send_newsletter(newsletter_user, newsletter)
     @newsletter_user = newsletter_user
-    @newsletter = newsletter
-    @title = @newsletter.title
+    I18n.with_locale(@newsletter_user.lang) do
+      @newsletter = Newsletter.find(newsletter.id)
+      @title = @newsletter.title
+      @content = @newsletter.content
+    end
 
-    mail(to: @newsletter_user.email, subject: @newsletter.title) do |format|
+    mail(to: @newsletter_user.email, subject: @title) do |format|
       format.html
       format.text
     end
