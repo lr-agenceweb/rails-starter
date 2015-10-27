@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+doctype strict
 html
   head
     meta charset='utf-8'
@@ -8,8 +8,8 @@ html
     = stylesheet_link_tag 'email', media: 'all', 'data-turbolinks-track': false
 
 
-
   body
+
     table.body
       tr
         td.center align="center" valign="top"
@@ -17,92 +17,110 @@ html
 
             - if @copy_to_sender
               / Send copy
-              table.container
+              table.row
                 tr
-                  td
-                    table.row
-                      tr.upper-upper-header
+                  td.center align="center"
+                    center
+                      table.container
+                        tr.upper-upper-header
+                          td.wrapper.last
+                            table.twelve.columns
+                              tr
+                                td.center.panel
+                                  center
+                                    span = I18n.t('contact.email.message_cc', name: @setting.name)
+                                td.expander
+
+                              tr
+                                td
+
+
+            table.row.header
+              tr.upper-header
+                td.center align="center"
+                  center
+                    table.container
+                      tr
                         td.wrapper.last
                           table.twelve.columns
                             tr
-                              td.center.panel
-                                center
-                                  span = I18n.t('contact.email.message_cc', name: @setting.name)
+                              td.six.sub-columns
+                                a href="#{root_url}"
+                                  = image_tag(image_url @setting.logo.url(:small))
+
+                              td.six.sub-columns.last style=("text-align:right; vertical-align:middle;")
+                                strong.template-label = @setting.title
+                                br
+                                span.subject = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
+                              td.expander
+
+
+            table.container
+              tr
+                td
+                  table.row
+                    tr
+                      td.wrapper
+
+                        - if @copy_to_sender
+                          table.seven.columns
                             tr
                               td
+                                h4 = I18n.t('newsletter.hello', subscriber: @setting.name)
+                                br
+                                = yield
+
+                              td.expander
+
+                        - else
+                          table.twelve.columns.last
+                            tr
+                              td
+                                h4 = I18n.t('newsletter.hello', subscriber: @setting.name)
+                                br
+                                = yield
+
+                              td.expander
 
 
-            / Upper header
-            table.container
-              tr
-                td
-                  table.row
-                    tr.upper-header
-                      td.wrapper.offset-by-one.logo-container
+                      - if @copy_to_sender
+                        td.wrapper.last
+                          table.five.columns
+                            tr
+                              td.last.right-text-pad
+                                br
+                                h6 Informations de contact:
+                                p
+                                  strong Nom: &nbsp;
+                                  = @setting.name
+                                p
+                                  strong Email: &nbsp;
+                                  a href="mailto:#{@setting.email}" = @setting.email
+                                  br
+                                  strong Téléphone: &nbsp;
+                                  = link_to @setting.phone, "tel:#{@setting.decorate.phone_w3c}"
+                                p
+                                  strong Adresse: &nbsp;
+                                  br
+                                  = @map.decorate.address if @map.decorate.address?
+                                  == "<br />" if @map.decorate.city?
+                                  = @map.decorate.postcode if @map.decorate.postcode?
+                                  == " - " if @map.decorate.city?
+                                  = @map.decorate.city if @map.decorate.city?
+                              td.expander
 
-                        table.three.columns
-                          tr
-                            td.logo
-                              a href="#{root_url}"
-                                = image_tag(image_url @setting.logo.url(:small))
-                                span = @setting.subtitle
-
-                            td.expander
-
-                      td.wrapper.last
-                        table.eight.columns
-                          tr
-                            td.right-text-pad
-                              h3.site-title = @setting.title
-                              = @map.decorate.address if @map.decorate.address?
-                              == "&nbsp; - &nbsp;" if @map.decorate.city?
-                              = @map.decorate.postcode if @map.decorate.postcode?
-                              == "&nbsp;" if @map.decorate.city?
-                              = @map.decorate.city if @map.decorate.city?
-                              .site-phone
-                                = link_to @setting.phone, "tel:#{@setting.decorate.phone_w3c}"
-
-            / Lower header
-            table.container
-              tr
-                td
-                  table.row
-                    tr.lower-header
-                      td.wrapper.last.vam
-                        table.twelve.columns
-                          tr
-                            td.center.panel
-                              center
-                                h6.subject = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
-
-                            td.expander
-
-            / Content
-            table.container
-              tr
-                td
-                  table.row
-                    tr.main-content
-                      td.wrapper.last.offset-by-three
-                        table.nine.columns
-                          tr
-                            td.panel
-                              = yield
-
-
-            / Footer
-            table.container
-              tr
-                td
-                  table.row
-                    tr.upper-footer
+                  table.row.callout
+                    tr
                       td.wrapper.last
                         table.twelve.columns
                           tr
-                            td.panel.center
+                            td.panel align="center"
                               center
-                                span #{@setting.name}
-                                == " - "
-                                span = link_to @setting.title, root_url
-                                == " - "
-                                span = Time.zone.now.year
+                                span style="text-align:center;"
+                                  span #{@setting.name}
+                                  == " - "
+                                  span = link_to @setting.title, root_url
+                                  == " - "
+                                  span = Time.zone.now.year
+                            td.expander
+                  /! container end below

@@ -1,3 +1,5 @@
 = @message.subject
 = "\r\n==============================================\r\n\r\n"
 = @message.message
+
+= "\r\n\r\n===== #{@message.extract_name_from_email} (#{@message.email})"
