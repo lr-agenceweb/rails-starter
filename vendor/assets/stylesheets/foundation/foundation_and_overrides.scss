@@ -361,7 +361,7 @@ $h6-font-size: 1rem;
 // $include-html-nav-classes: $include-html-classes;
 
 // We use this to set the background color for the breadcrumb container.
-// $crumb-bg: scale-color($secondary-color, $lightness: 55%);
+$crumb-bg: scale-color($tercery-color, $lightness: 55%);
 
 // We use these to set the padding around the breadcrumbs.
 // $crumb-padding: rem-calc(9 14 9);
@@ -383,7 +383,7 @@ $h6-font-size: 1rem;
 // $crumb-link-decor: underline;
 
 // We use these to control the slash between breadcrumbs
-// $crumb-slash-color: $base;
+$crumb-slash-color: $black;
 // $crumb-slash: "/";
 
 // 05. Buttons
