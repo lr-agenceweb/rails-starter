@@ -13,6 +13,7 @@ html
         td.center align="center" valign="top"
           center
 
+            / Header
             table.row.header
               tr.upper-header
                 td.center align="center"
@@ -21,19 +22,11 @@ html
                       tr
                         td.wrapper.last
                           table.twelve.columns
-                            tr
-                              td.six.sub-columns
-                                a href="#{root_url}"
-                                  = image_tag(image_url @setting.logo.url(:small))
-
-                              td.six.sub-columns.last style=("text-align:right; vertical-align:middle;")
-                                strong.template-label = @setting.title
-                                br
-                                span.subject = "Newsletter :: #{@title}"
-                              td.expander
+                            = render 'mailer/header', setting: @setting, title: "Newsletter :: #{@title}"
 
 
 
+            / Newsletter content
             table.container
               tr
                 td
@@ -50,30 +43,7 @@ html
 
                       td.wrapper.last
                         table.five.columns
-                          tr
-                            td.last.right-text-pad
-                              br
-                              h6 Informations de contact:
-                              p
-                                strong Nom: &nbsp;
-                                = @setting.name
-                              p
-                                strong Email: &nbsp;
-                                a href="mailto:#{@setting.email}" = @setting.email
-                                br
-                                strong Téléphone: &nbsp;
-                                = link_to @setting.phone, "tel:#{@setting.decorate.phone_w3c}"
-                              p
-                                strong Adresse: &nbsp;
-                                br
-                                = @map.decorate.address if @map.decorate.address?
-                                == "<br />" if @map.decorate.city?
-                                = @map.decorate.postcode if @map.decorate.postcode?
-                                == " - " if @map.decorate.city?
-                                = @map.decorate.city if @map.decorate.city?
-                            td.expander
-
-
+                          = render 'mailer/contact_informations', setting: @setting, map: @map
 
 
 
@@ -85,16 +55,7 @@ html
                     tr
                       td.wrapper.last
                         table.twelve.columns
-                          tr
-                            td.panel align="center"
-                              center
-                                span style="text-align:center;"
-                                  span #{@setting.name}
-                                  == " - "
-                                  span = link_to @setting.title, root_url
-                                  == " - "
-                                  span = Time.zone.now.year
-                            td.expander
+                          = render 'mailer/footer', setting: @setting
 
                           - if @see_in_browser || !@preview_newsletter
                             tr.lower-footer
@@ -104,4 +65,3 @@ html
                                   = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user } unless @preview_newsletter
 
                                   = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user } if @see_in_browser
-

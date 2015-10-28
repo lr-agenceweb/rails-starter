@@ -1,0 +1,22 @@
+tr
+  td.last.right-text-pad
+    br
+    h6 Informations de contact:
+    p
+      strong> Nom:
+      = setting.name
+    p
+      strong> Email:
+      a href="mailto:#{setting.email}" = setting.email
+      br
+      strong> Téléphone:
+      = link_to setting.phone, "tel:#{setting.decorate.phone_w3c}"
+    p
+      strong> Adresse:
+      br
+      = map.decorate.address if map.decorate.address?
+      == '<br />' if map.decorate.city?
+      = map.decorate.postcode if map.decorate.postcode?
+      == ' - ' if map.decorate.city?
+      = map.decorate.city if map.decorate.city?
+  td.expander
