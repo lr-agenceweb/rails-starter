@@ -1,18 +1,18 @@
 tr
   td.last.right-text-pad
     br
-    h6 Informations de contact:
+    h6 = I18n.t('contact.informations.label', locale: locale)
     p
-      strong> Nom:
+      strong> = I18n.t('contact.informations.name', locale: locale) + ':'
       = setting.name
     p
-      strong> Email:
+      strong> = I18n.t('contact.informations.email', locale: locale) + ':'
       a href="mailto:#{setting.email}" = setting.email
       br
-      strong> Téléphone:
+      strong> = I18n.t('contact.informations.phone', locale: locale) + ':'
       = link_to setting.phone, "tel:#{setting.decorate.phone_w3c}"
     p
-      strong> Adresse:
+      strong> = I18n.t('contact.informations.address', locale: locale) + ':'
       br
       = map.decorate.address if map.decorate.address?
       == '<br />' if map.decorate.city?
