@@ -459,124 +459,119 @@ Comment.create!(
 # == Event article
 #
 puts 'Creating Event article'
-event_images = [
-  'event-1-1.jpg',
-  'event-1-2.jpg',
-  'event-1-3.jpg'
+event_title_fr = [
+  'Foire aux saucisses',
+  'Silky Cam et Tizy Bertrand au Zénith de Paris'
+]
+event_title_en = [
+  'Sausage market',
+  'Silky Cam and Tizy Bertrand in concert'
+]
+event_slug_fr = [
+  'foire-aux-saucisses',
+  'silky-cam-tizy-bertrand-zenith-paris'
+]
+event_slug_en = [
+  'sausage-market',
+  'silky-cam-tizy-bertrand-concert'
+]
+event_content_fr = [
+  '<p>Venez gouter les saucisses de la région !</p>',
+  '<p>Venez assister au concert exceptionnel de Silky Cam et Tizy Bertrand au Zénith de Paris !</p>'
+]
+event_content_en = [
+  '<p>Come and taste amazing sausage at the market !</p>',
+  '<p>Come to assist to the concert of Silky Cam and Tizy Bertrand !</p>'
 ]
 
-# Sausage market
-event_1 = Event.create!(
-  title: 'Foire aux saucisses',
-  slug: 'foire-aux-saucisses',
-  content: '<p>Venez gouter les saucisses de la région !</p>',
-  url: nil,
-  start_date: 2.weeks.ago.to_s(:db),
-  end_date: Time.zone.now + 1.week.to_i,
-  online: true
-)
-referencement = Referencement.create!(
-  attachable_id: event_1.id,
-  attachable_type: 'Event',
-  title: '',
-  description: '',
-  keywords: ''
-)
+event_start_date = [2.weeks.ago.to_s(:db), 2.weeks.ago.to_s(:db)]
+event_end_date = [Time.zone.now + 1.week.to_i, Time.zone.now + 3.week.to_i]
+event_url = [nil, nil]
 
-if @locales.include?(:en)
-  Event::Translation.create!(
-    event_id: event_1.id,
-    locale: 'en',
-    title: 'Sausage market',
-    slug: 'sausage-market',
-    content: '<p>Come and taste amazing sausage at the market !</p>'
-  )
-  Referencement::Translation.create!(
-    referencement_id: referencement.id,
-    locale: 'en',
-    title: '',
-    description: '',
-    keywords: ''
-  )
-end
+event_address = ['Rue des Limaces', 'Zénith de Paris, 205 Bd Sérurier']
+event_city = ['Lyon', 'Paris']
+event_postcode = [69_000, 75_019]
+event_geocode = ['Rue des Limaces, 69000 - Lyon', 'Zénith de Paris, 205 Bd Sérurier, 75019 - Paris']
+event_latitude = [45.764, 43.5947418]
+event_longitude = [4.83566, 1.409389]
 
-puts 'Creating Event Location'
-Location.create!(
-  locationable_id: event_1.id,
-  locationable_type: 'Event',
-  address: 'Rue des Limaces',
-  city: 'Lyon',
-  postcode: 69_000,
-  geocode_address: 'Rue des Limaces, 69000 - Lyon',
-  latitude: 45.764,
-  longitude: 4.83566
-)
+event_images = [
+  ['event-1-1.jpg', 'event-1-2.jpg', 'event-1-3.jpg'],
+  [nil]
+]
+event_videos = [nil, 'http://www.dailymotion.com/video/x38cajc']
 
-puts 'Creating Event pictures'
-event_images.each do |image|
-  Picture.create!(
-    attachable_id: event_1.id,
-    attachable_type: 'Event',
-    image: File.new("#{Rails.root}/public/system/seeds/events/#{image}"),
+event_title_fr.each_with_index do |element, index|
+  event = Event.create!(
+    title: event_title_fr[index],
+    slug: event_slug_fr[index],
+    content: event_content_fr[index],
+    url: event_url[index],
+    start_date: event_start_date[index],
+    end_date: event_end_date[index],
     online: true
   )
-end
-
-# Silky Cam and Tizy Bertrand
-event_2 = Event.create!(
-  title: 'Silky Cam et Tizy Bertrand au Zénith de Paris',
-  slug: 'silky-cam-tizy-bertrand-zenith-paris',
-  content: '<p>Venez assister au concert exceptionnel de Silky Cam et Tizy Bertrand au Zénith de Paris !</p>',
-  url: nil,
-  start_date: 1.weeks.ago.to_s(:db),
-  end_date: Time.zone.now + 3.week.to_i,
-  online: true
-)
-referencement_2 = Referencement.create!(
-  attachable_id: event_2.id,
-  attachable_type: 'Event',
-  title: '',
-  description: '',
-  keywords: ''
-)
-
-if @locales.include?(:en)
-  Event::Translation.create!(
-    event_id: event_2.id,
-    locale: 'en',
-    title: 'Silky Cam and Tizy Bertrand in concert',
-    slug: 'silky-cam-tizy-bertrand-concert',
-    content: '<p>Come to assist to the concert of Silky Cam and Tizy Bertrand !</p>'
-  )
-  Referencement::Translation.create!(
-    referencement_id: referencement_2.id,
-    locale: 'en',
+  referencement = Referencement.create!(
+    attachable_id: event.id,
+    attachable_type: 'Event',
     title: '',
     description: '',
     keywords: ''
   )
+
+  if @locales.include?(:en)
+    Event::Translation.create!(
+      event_id: event.id,
+      locale: 'en',
+      title: event_title_en[index],
+      slug: event_slug_en[index],
+      content: event_content_en[index]
+    )
+    Referencement::Translation.create!(
+      referencement_id: referencement.id,
+      locale: 'en',
+      title: '',
+      description: '',
+      keywords: ''
+    )
+  end
+
+  puts 'Creating Event Location'
+  Location.create!(
+    locationable_id: event.id,
+    locationable_type: 'Event',
+    address: event_address[index],
+    city: event_city[index],
+    postcode: event_postcode[index],
+    geocode_address: event_geocode[index],
+    latitude: event_latitude[index],
+    longitude: event_longitude[index]
+  )
+
+
+  event_images[index].each_with_index do |image, index|
+    unless image.nil?
+      puts 'Creating Event pictures'
+      Picture.create!(
+        attachable_id: event.id,
+        attachable_type: 'Event',
+        image: File.new("#{Rails.root}/public/system/seeds/events/#{image}"),
+        online: true
+      )
+    end
+  end
+
+  unless event_videos[index].nil?
+    puts 'Creating Event VideoPlatform'
+    VideoPlatform.create!(
+      videoable_id: event.id,
+      videoable_type: 'Event',
+      url: event_videos[index],
+      native_informations: true,
+      online: true
+    )
+  end
 end
-
-puts 'Creating Event Location'
-Location.create!(
-  locationable_id: event_2.id,
-  locationable_type: 'Event',
-  address: 'Zénith de Paris, 205 Bd Sérurier',
-  city: 'Paris',
-  postcode: 75_019,
-  geocode_address: 'Zénith de Paris, 205 Bd Sérurier, 75019 - Paris',
-  latitude: 43.5947418,
-  longitude: 1.409389
-)
-
-puts 'Creating Event 2 VideoPlatform'
-VideoPlatform.create!(
-  videoable_id: event_2.id,
-  videoable_type: 'Event',
-  url: 'http://www.dailymotion.com/video/x38cajc',
-  native_informations: true,
-  online: true
-)
 
 #
 # == Newsletter Setting
