@@ -32,14 +32,14 @@ class SocialDecorator < ApplicationDecorator
     end
   end
 
+  def ikon?
+    model.ikon.present? && model.ikon.exists?
+  end
+
   private
 
   def font_ikon_list
     Social.allowed_font_awesome_ikons.map { |ikon| fa_icon(ikon, title: ikon) }.join(', ')
-  end
-
-  def ikon?
-    model.ikon.exists?
   end
 
   def font_ikon?

@@ -14,10 +14,13 @@ footer.footer-container#footer
           ul.inline-list
             li = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
 
-            - unless @socials_share.nil?
+            - unless @socials_follow.nil?
               - @socials_follow.each do |social_follow|
                 li
-                  = link_to retina_image_tag(social_follow, :ikon, :small), social_follow.link, target: :_blank
+                  - ikon = social_follow.title
+                  - ikon = fa_icon "#{social_follow.font_ikon} 2x" if social_follow.decorate.font_ikon?
+                  - ikon = retina_image_tag(social_follow, :ikon, :small) if social_follow.decorate.ikon?
+                  = link_to ikon, social_follow.link, target: :_blank
 
           - unless @socials_share.nil?
             h4 Share me
