@@ -36,9 +36,31 @@ class EventTest < ActiveSupport::TestCase
     assert_equal [I18n.t('form.errors.end_date')], event.calendar_date_correct?
   end
 
+  #
+  # == Prev / Next
+  #
+  test 'should have a next record' do
+    assert @event.next?, 'should have a next record'
+    assert_equal @event.fetch_next.title, 'Evénement 3'
+  end
+
+  test 'should have a prev record' do
+    assert @event_third.prev?, 'should have a prev record'
+    assert_equal @event_third.fetch_prev.title, 'Evénement 1'
+  end
+
+  test 'should not have a prev record' do
+    assert_not @event.prev?, 'should not have a prev record'
+  end
+
+  test 'should not have a next record' do
+    assert_not @event_third.next?, 'should not have a next record'
+  end
+
   private
 
   def initialize_test
     @event = events(:event_online)
+    @event_third = events(:event_third)
   end
 end

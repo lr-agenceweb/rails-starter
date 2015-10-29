@@ -43,6 +43,6 @@ event_offline:
 
 event_third:
   <<: *DEFAULTS
-  start_date: '2015-07-15 09:00:00'
+  start_date: '2015-08-15 09:00:00'
   end_date: '2015-08-31 18:00:00'
   online: true
