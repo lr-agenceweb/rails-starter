@@ -32,4 +32,4 @@
           - if event.all_conditions_to_show_calendar?(@calendar_module)
             div#calendar
 
-      = render 'elements/prev_next', element: event
+      = render 'elements/prev_next', element: event if @event_settings.prev_next?
