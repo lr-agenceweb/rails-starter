@@ -153,6 +153,9 @@ fr:
       blog:
         one: Blog
         other: Blog
+      blog_setting:
+        one: Blog configuration
+        other: Blog configuration
       slider:
         one: Slider
         other: Sliders
@@ -213,6 +216,8 @@ fr:
         allow_comments_status: Autoriser les commentaires
         show_as_gallery: Galerie d'images
         show_as_gallery_d: Galerie d'images
+      blog_setting:
+        prev_next: Liens précédent / suivant
       setting:
         title: Titre
         subtitle: Sous-titre
