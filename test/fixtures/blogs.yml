@@ -38,3 +38,9 @@ blog_offline:
   slug: article-de-blog-hors-ligne
   content: Premier article de blog
   online: false
+
+blog_third:
+  <<: *DEFAULTS
+  title: ~
+  slug: ~
+  content: ~
