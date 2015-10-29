@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018194242) do
+ActiveRecord::Schema.define(version: 20151029185406) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -106,6 +106,12 @@ ActiveRecord::Schema.define(version: 20151018194242) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   add_index "delayed_jobs", ["queue"], name: "delayed_jobs_queue", using: :btree
+
+  create_table "event_settings", force: :cascade do |t|
+    t.boolean  "prev_next",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",   limit: 4,     null: false
