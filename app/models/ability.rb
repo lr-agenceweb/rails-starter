@@ -74,7 +74,7 @@ class Ability
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting]
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, EventSetting, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting]
   end
 
   def optional_modules_check
@@ -161,8 +161,10 @@ class Ability
   def event_module
     if @event_module.enabled?
       can :crud, Event
+      can [:read, :update], EventSetting
+      cannot [:create, :destroy], EventSetting
     else
-      cannot :manage, Event
+      cannot :manage, [Event, EventSetting]
     end
   end
 
