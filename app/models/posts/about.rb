@@ -10,7 +10,6 @@
 #  show_as_gallery :boolean          default(FALSE)
 #  allow_comments  :boolean          default(TRUE)
 #  online          :boolean          default(TRUE)
-#  prev_next       :boolean          default(TRUE)
 #  position        :integer
 #  user_id         :integer
 #  created_at      :datetime         not null

@@ -157,14 +157,6 @@ class PostDecorator < ApplicationDecorator
     end
   end
 
-  #
-  # Booleans
-  #
-  def prev_next_d
-    color = model.prev_next? ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.prev_next}"), color
-  end
-
   private
 
   def interchange_has_one
