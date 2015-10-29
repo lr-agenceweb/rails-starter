@@ -40,6 +40,14 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
+  # == BlogSetting and EventSetting
+  #
+  def prev_next
+    color = model.prev_next? ? 'green' : 'red'
+    status_tag_deco I18n.t("enabled.#{model.prev_next}"), color
+  end
+
+  #
   # == Methods used in all decorators
   #
   def self.collection_decorator_class

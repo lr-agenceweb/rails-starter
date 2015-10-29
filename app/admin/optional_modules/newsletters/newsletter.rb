@@ -76,6 +76,8 @@ ActiveAdmin.register Newsletter, as: 'Letter' do
       I18n.with_locale(params[:locale]) do
         @newsletter = Newsletter.find(params[:id])
         @title = @newsletter.title
+        @content = @newsletter.content
+        @newsletter_user = NewsletterUser.find_by(lang: params[:locale])
       end
       @preview_newsletter = true
       render '/admin/newsletters/preview', layout: 'newsletter'

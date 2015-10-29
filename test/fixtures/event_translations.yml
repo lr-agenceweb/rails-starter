@@ -6,14 +6,30 @@ event_online_fr:
   <<: *DEFAULTS
   event_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
   locale: fr
-  title: Foire aux saucisses
-  slug: foire-aux-saucisses
+  title: Evénement 1
+  slug: evenement-1
   content: Venez goutez les saucisses de la région
 
 event_online_en:
   <<: *DEFAULTS
   event_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
   locale: en
-  title: Fear of sausage
-  slug: fear-of-sausage
+  title: Event 1
+  slug: event-1
   content: Come and discover sausages flavours
+
+event_third_fr:
+  <<: *DEFAULTS
+  event_id: <%= ActiveRecord::FixtureSet.identify(:event_third) %>
+  locale: fr
+  title: Evénement 3
+  slug: evenement-3
+  content: ~
+
+event_third_en:
+  <<: *DEFAULTS
+  event_id: <%= ActiveRecord::FixtureSet.identify(:event_third) %>
+  locale: en
+  title: Event 3
+  slug: event-3
+  content: ~

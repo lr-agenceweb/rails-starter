@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018194242) do
+ActiveRecord::Schema.define(version: 20151029210259) do
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 20151018194242) do
   end
 
   add_index "backgrounds", ["attachable_type", "attachable_id"], name: "index_backgrounds_on_attachable_type_and_attachable_id", using: :btree
+
+  create_table "blog_settings", force: :cascade do |t|
+    t.boolean  "prev_next",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "blog_translations", force: :cascade do |t|
     t.integer  "blog_id",    limit: 4,     null: false
@@ -47,7 +53,6 @@ ActiveRecord::Schema.define(version: 20151018194242) do
     t.boolean  "show_as_gallery",               default: false
     t.boolean  "allow_comments",                default: true
     t.boolean  "online",                        default: true
-    t.boolean  "prev_next",                     default: true
     t.integer  "user_id",         limit: 4
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
@@ -107,6 +112,12 @@ ActiveRecord::Schema.define(version: 20151018194242) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   add_index "delayed_jobs", ["queue"], name: "delayed_jobs_queue", using: :btree
 
+  create_table "event_settings", force: :cascade do |t|
+    t.boolean  "prev_next",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",   limit: 4,     null: false
     t.string   "locale",     limit: 255,   null: false
@@ -130,7 +141,6 @@ ActiveRecord::Schema.define(version: 20151018194242) do
     t.boolean  "show_as_gallery",               default: false
     t.boolean  "show_calendar",                 default: false
     t.boolean  "online",                        default: true
-    t.boolean  "prev_next",                     default: true
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
   end
@@ -361,7 +371,6 @@ ActiveRecord::Schema.define(version: 20151018194242) do
     t.boolean  "show_as_gallery",               default: false
     t.boolean  "allow_comments",                default: true
     t.boolean  "online",                        default: true
-    t.boolean  "prev_next",                     default: true
     t.integer  "position",        limit: 4
     t.integer  "user_id",         limit: 4
     t.datetime "created_at",                                    null: false

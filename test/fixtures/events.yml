@@ -12,7 +12,6 @@
 #  show_as_gallery :boolean          default(FALSE)
 #  show_calendar   :boolean          default(FALSE)
 #  online          :boolean          default(TRUE)
-#  prev_next       :boolean          default(TRUE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -44,6 +43,6 @@ event_offline:
 
 event_third:
   <<: *DEFAULTS
-  start_date: '2015-07-15 09:00:00'
+  start_date: '2015-08-15 09:00:00'
   end_date: '2015-08-31 18:00:00'
   online: true

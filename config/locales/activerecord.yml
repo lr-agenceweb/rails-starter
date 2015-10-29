@@ -153,6 +153,9 @@ fr:
       blog:
         one: Blog
         other: Blog
+      blog_setting:
+        one: Blog configuration
+        other: Blog configuration
       slider:
         one: Slider
         other: Sliders
@@ -162,6 +165,9 @@ fr:
       event:
         one: Événement
         other: Événements
+      event_setting:
+        one: Événement configuration
+        other: Événements configuration
       plan:
         one: Carte
         other: Cartes
@@ -210,6 +216,8 @@ fr:
         allow_comments_status: Autoriser les commentaires
         show_as_gallery: Galerie d'images
         show_as_gallery_d: Galerie d'images
+      blog_setting:
+        prev_next: Liens précédent / suivant
       setting:
         title: Titre
         subtitle: Sous-titre
@@ -420,6 +428,8 @@ fr:
         show_calendar: Calendrier
         full_address_inline: Adresse de l'événement
         duration: Durée
+      event_setting:
+        prev_next: Liens précédent / suivant
       map:
         show_map: Afficher la carte ?
         full_address_inline: Adresse de votre organisation

@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = EventDecorator.decorate_collection(Event.includes(:translations, :location).online.order(created_at: :desc).page params[:page])
+    @events = EventDecorator.decorate_collection(Event.includes(:translations, :location).online.order(start_date: :asc).page params[:page])
     seo_tag_index category
   end
 
@@ -18,6 +18,7 @@ class EventsController < ApplicationController
   def show
     redirect_to @event, status: :moved_permanently if request.path_parameters[:id] != @event.slug
     gon.push(event_path: event_path(format: :json))
+    @event_settings = EventSetting.first
     seo_tag_show event
   end
 

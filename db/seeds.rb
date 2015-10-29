@@ -431,6 +431,12 @@ if @locales.include?(:en)
 end
 
 #
+# == Blog Setting
+#
+puts 'Creating Blog Setting'
+BlogSetting.create!(prev_next: true)
+
+#
 # == Comment
 #
 puts 'Creating Comments'
@@ -572,6 +578,12 @@ event_title_fr.each_with_index do |element, index|
     )
   end
 end
+
+#
+# == Event Setting
+#
+puts 'Creating Event Setting'
+EventSetting.create!(prev_next: true)
 
 #
 # == Newsletter Setting
