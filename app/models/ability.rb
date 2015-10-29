@@ -138,8 +138,10 @@ class Ability
   def blog_module
     if @blog_module.enabled?
       can :crud, Blog
+      can [:read, :update], BlogSetting
+      cannot [:create, :destroy], BlogSetting
     else
-      cannot :manage, Blog
+      cannot :manage, [Blog, BlogSetting]
     end
   end
 
