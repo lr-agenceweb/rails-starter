@@ -162,6 +162,9 @@ fr:
       event:
         one: Événement
         other: Événements
+      event_setting:
+        one: Événement configuration
+        other: Événements configuration
       plan:
         one: Carte
         other: Cartes
@@ -420,6 +423,8 @@ fr:
         show_calendar: Calendrier
         full_address_inline: Adresse de l'événement
         duration: Durée
+      event_setting:
+        prev_next: Liens précédent / suivant
       map:
         show_map: Afficher la carte ?
         full_address_inline: Adresse de votre organisation
