@@ -33,3 +33,5 @@
             div#calendar
 
       = render 'elements/prev_next', element: event if @event_settings.prev_next?
+
+      = link_to t('link.back_to', page: @category.menu_title), events_path
