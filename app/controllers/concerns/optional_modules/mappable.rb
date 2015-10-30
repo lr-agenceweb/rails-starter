@@ -5,6 +5,7 @@ module Mappable
   extend ActiveSupport::Concern
 
   included do
+    include MapHelper
     before_action :set_map, if: proc { @map_module.enabled? }
     decorates_assigned :map
 
