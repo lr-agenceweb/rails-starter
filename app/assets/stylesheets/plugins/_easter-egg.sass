@@ -1,7 +1,7 @@
 @import url('http://fonts.googleapis.com/css?family=Droid+Sans:400,700')
 
 #easter-egg
-  position: absolute
+  position: fixed
   top: 0
   left: 0
   width: 100%
@@ -9,7 +9,7 @@
   font-family: 'Droid Sans', arial, verdana, sans-serif
   font-weight: 700
   color: #ff6
-  background-color: #000
+  background: #000 url('/assets/images/easter-egg/background.jpg') no-repeat center center
   overflow: hidden
   z-index: 99999
 
@@ -48,11 +48,11 @@
     right: 0
     top: 0
     bottom: 60%
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
-    background-image: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
-    background-image: -ms-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
-    background-image: -o-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
-    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
+    // background-image: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
+    // background-image: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
+    // background-image: -ms-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
+    // background-image: -o-linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
+    // background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%)
     pointer-events: none
 
   p
@@ -72,10 +72,10 @@
 #titlecontent
   position: absolute
   top: 100%
-  -webkit-animation: scroll 100s linear 4s infinite
-  -moz-animation: scroll 100s linear 4s infinite
-  -ms-animation: scroll 100s linear 4s infinite
-  -o-animation: scroll 100s linear 4s infinite
+  -webkit-animation: scroll 100s linear .5s infinite
+  -moz-animation: scroll 100s linear .5s infinite
+  -ms-animation: scroll 100s linear .5s infinite
+  -o-animation: scroll 100s linear .5s infinite
   animation: scroll 100s linear .5s infinite
 
 
