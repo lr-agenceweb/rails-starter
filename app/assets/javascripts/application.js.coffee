@@ -5,7 +5,6 @@
 #= require foundation/foundation
 #= require foundation
 #= require plugins/foundation_init
-#= require konami
 #= require turbolinks
 #= require nprogress
 #= require nprogress-turbolinks
