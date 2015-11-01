@@ -11,7 +11,8 @@ class @EasterEgg
 
   # Create magic :)
   enjoy_easter_egg: ->
-    $.get '/homes/easter-egg', {}, (data) =>
+    url = if gon.language == 'fr' then '/accueil/easter-egg' else '/en/home/easter-egg'
+    $.get url, {}, (data) =>
       $('#easter-egg').html(data).fadeIn(500)
       @audio = $('audio#easter-egg-audio')
       this.epic_music()
@@ -44,7 +45,7 @@ class @EasterEgg
 
   # Close easter egg after timeout
   close_easter_egg_after_timeout: ->
-    @timer = setTimeout (->
+    @timer = setTimeout (=>
       this.close_easter_egg(@audio)
       return
     ), 74000

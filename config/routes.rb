@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   #
   localized do
     root 'homes#index'
+
+    resources :homes, only: [:easter_egg] do
+      get 'easter-egg', to: 'homes#easter_egg', on: :collection, as: :easter_egg # Easter egg
+    end
+
     resources :abouts, only: [:index, :show], concerns: [:paginatable, :commentable]
     resources :contacts, only: [:index, :new, :create]
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
@@ -55,9 +60,6 @@ Rails.application.routes.draw do
     %w( 404 422 500 ).each do |code|
       get "/#{code}", to: 'errors#show', code: code, as: "error_#{code}".to_sym
     end
-
-    # Easter egg
-    get 'homes/easter-egg', to: 'homes#easter_egg', as: :easter_egg
   end
 
   # Newsletters

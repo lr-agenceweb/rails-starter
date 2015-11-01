@@ -17,8 +17,11 @@ class HomesController < PostsController
   end
 
   def easter_egg
-    redirect_to root_path unless request.xhr?
-    @asocial = true
-    render layout: false
+    if request.xhr?
+      @asocial = true
+      render layout: false
+    else
+      redirect_to root_path
+    end
   end
 end
