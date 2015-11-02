@@ -74,7 +74,7 @@ class Ability
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, EventSetting, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting]
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, EventSetting, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting, AdultSetting]
   end
 
   def optional_modules_check
@@ -209,7 +209,13 @@ class Ability
   # == Adult
   #
   def adult_module
-    cannot :manage, StringBox, optional_module: { id: @adult_module.id } unless @adult_module.enabled?
+    if @adult_module.enabled?
+      can [:read, :update], AdultSetting
+      cannot [:create, :destroy], AdultSetting
+    else
+      cannot :manage, AdultSetting
+      cannot :manage, StringBox, optional_module: { id: @adult_module.id }
+    end
   end
 
   #
