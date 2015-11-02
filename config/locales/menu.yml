@@ -2,6 +2,7 @@
 fr:
   routes:
     home: accueil
+    homes: accueil
     abouts: a-propos
     guest_books: livre-d-or
     contacts: contact
@@ -32,6 +33,8 @@ fr:
 # English
 en:
   routes:
+    home: home
+    homes: home
     abouts: about
     guest_books: guest-book
     contacts: contact

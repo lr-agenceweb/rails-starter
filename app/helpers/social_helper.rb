@@ -74,7 +74,7 @@ module SocialHelper
   # * *Returns* :
   #
   def social_share_buttons
-    return nil if return_nil_for_social_share?
+    return nil if return_nil_for_social_share? || @asocial
 
     element = params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
 
