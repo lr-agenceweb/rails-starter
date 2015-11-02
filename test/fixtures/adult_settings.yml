@@ -1,0 +1,14 @@
+# == Schema Information
+#
+# Table name: adult_settings
+#
+#  id            :integer          not null, primary key
+#  redirect_link :string(255)
+#  enabled       :boolean          default(FALSE)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+one:
+  redirect_link: http://google.com
+  enabled: true
