@@ -150,6 +150,9 @@ fr:
       newsletter_user_role:
         one: Newsletter rôle utilisateur
         other: Newsletter rôles utilisateur
+      adult_setting:
+        one: Adulte configuration
+        other: Adulte configuration
       blog:
         one: Blog
         other: Blog
@@ -300,6 +303,14 @@ fr:
         newsletter_user_roles_d: Rôles utilisateur
       newsletter_user_role:
         title: Rôle
+      adult_setting:
+        enabled: Statut
+        status: Statut
+        redirect_link: Lien de redirection
+        title: Titre
+        title_d: Titre
+        content: Contenu
+        content_d: Contenu
       string_box:
         title: Titre
         content: Contenu
