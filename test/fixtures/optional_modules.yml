@@ -48,7 +48,7 @@ blog:
 adult:
   <<: *DEFAULTS
   name: Adult
-  enabled: false
+  enabled: true
 
 slider:
   <<: *DEFAULTS
