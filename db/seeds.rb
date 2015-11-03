@@ -672,6 +672,25 @@ NewsletterUser.create!(
   newsletter_user_role_id: @newsletter_user_role_subscriber.id
 )
 
+#
+# == AdultSetting
+#
+puts 'Creating AdultSetting'
+adult_setting = AdultSetting.create!(
+  enabled: true,
+  title: 'Bienvenue sur le site de démonstration des modules !',
+  content: "<p>Vous allez pouvoir les tester et également les gérer depuis le panneau d'administration.</p> <p>Ce popup est un aperçu du module \"<strong>Adulte</strong>\" (majorité requise pour certains sites comme les vignerons)</p> <p><strong>Cliquez oui si vous avez plus de 18 ans pour continuer ;)</strong></p>",
+  redirect_link: 'http://www.lr-agenceweb.fr'
+)
+
+if @locales.include?(:en)
+  AdultSetting::Translation.create!(
+    adult_setting_id: adult_setting.id,
+    locale: 'en',
+    title: 'Welcome to the demonstration website for modules',
+    content: "<p>In order to access the website, you must be over 18 years old.</p><p>More content soon</p>"
+  )
+end
 
 #
 # == StringBox
@@ -681,43 +700,37 @@ string_box_keys = [
   'error_404',
   'error_422',
   'error_500',
-  'success_contact_form',
-  'adult_not_validated_popup_content'
+  'success_contact_form'
 ]
 string_box_title_fr = [
   '404',
   '422',
   '500',
-  'Message de contact envoyé avec succès',
-  'Bienvenue sur le site de démonstration des modules !'
+  'Message de contact envoyé avec succès'
 ]
 string_box_title_en = [
   '404',
   '422',
   '500',
-  'Contact message sent successfuly',
-  ''
+  'Contact message sent successfuly'
 ]
 string_box_content_fr = [
   "<p>Cette page n'existe pas ou n'existe plus.<br /> Nous vous prions de nous excuser pour la gêne occasionnée.</p>",
   '<p>La page que vous tentez de voir n\'est pas disponible pour l\'instant :(</p>',
   '<p>Ooops, une erreur s\'est produite :( Veuillez réésayer ultérieurement</p>',
-  '<p>Votre message a bien été envoyé. Merci :)</p>',
-  "<p>Vous allez pouvoir les tester et également les gérer depuis le panneau d'administration.</p> <p>Ce popup est un aperçu du module \"<strong>Adulte</strong>\" (majorité requise pour certains sites comme les vignerons)</p> <p><strong>Cliquez oui si vous avez plus de 18 ans pour continuer ;)</strong></p>"
+  '<p>Votre message a bien été envoyé. Merci :)</p>'
 ]
 string_box_content_en = [
   '<p>The page you want to access doesn\'t exist :(</p>',
   '<p>The page you want to access is not available now :(</p>',
   '<p>Oops, something bad happend :( Please try again later</p>',
-  '<p>Your message has been sent successfuly. Thank you :)',
-  '<p>In order to access the website, you must be over 18 years old.</p>'
+  '<p>Your message has been sent successfuly. Thank you :)'
 ]
 optional_module_id = [
   nil,
   nil,
   nil,
-  nil,
-  @optional_module_adult.id
+  nil
 ]
 
 string_box_keys.each_with_index do |element, index|
