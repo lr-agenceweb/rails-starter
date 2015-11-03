@@ -3,6 +3,7 @@ require 'simplecov-json'
 require 'codeclimate-test-reporter'
 
 # Start reporters
+SimpleCov.start 'rails'
 SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 CodeClimate::TestReporter.start
 
