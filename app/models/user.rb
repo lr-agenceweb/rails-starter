@@ -93,6 +93,6 @@ class User < ActiveRecord::Base
 
   # TODO: make a test for this method
   def avatar?
-    avatar.exists?
+    avatar.present? && avatar.exists?
   end
 end
