@@ -86,7 +86,7 @@ Location.create!(
   locationable_type: 'Map',
   address: 'Place du Père Noël',
   city: 'Rovaniemi',
-  postcode: 96_930,
+  postcode: '96930',
   geocode_address: 'Père Noël, 96930 Rovaniemi, Finlande',
   latitude: 66.5435,
   longitude: 25.8481

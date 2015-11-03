@@ -7,7 +7,7 @@
 #  locationable_type :string(255)
 #  address           :string(255)
 #  city              :string(255)
-#  postcode          :integer
+#  postcode          :string(255)
 #  latitude          :float(24)
 #  longitude         :float(24)
 #  geocode_address   :string(255)
@@ -22,7 +22,7 @@
 one:
   geocode_address: 'Main Street'
   address: '1 Main Street'
-  postcode: 06_000
+  postcode: '06001'
   city: Auckland
   latitude: 1.5
   longitude: 1.5

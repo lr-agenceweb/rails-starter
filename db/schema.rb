@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102173649) do
+ActiveRecord::Schema.define(version: 20151103232909) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -215,7 +215,7 @@ ActiveRecord::Schema.define(version: 20151102173649) do
     t.string   "locationable_type", limit: 255
     t.string   "address",           limit: 255
     t.string   "city",              limit: 255
-    t.integer  "postcode",          limit: 4
+    t.string   "postcode",          limit: 255
     t.float    "latitude",          limit: 24
     t.float    "longitude",         limit: 24
     t.string   "geocode_address",   limit: 255

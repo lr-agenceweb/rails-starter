@@ -8,7 +8,7 @@ class LocationDecorator < ApplicationDecorator
   def full_address_inline
     content_tag(:span) do
       concat(model.address + ', ') if address?
-      concat(model.postcode.to_s + ' - ') if postcode?
+      concat(model.postcode + ' - ') if postcode?
       concat(model.city) if city?
     end
   end
