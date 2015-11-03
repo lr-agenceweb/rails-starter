@@ -55,6 +55,12 @@ fr:
       newsletter_user_role:
         title: Rôle de l'inscrit à la newsletter
 
+      adult:
+        enabled: Activer / Désactiver le popup de validation de l'âge
+        title: Titre du message d'accueil dans la popup
+        content: Contenu du message d'accueil dans la popup
+        redirect_link: "Lien de redirection dans le cas où l'utilisateur refuse de valider le message (ex: http://google.com).<br /> Si aucun lien n'est renseigné, l'utilisateur sera redirigé sur le site de L&R Agence web"
+
       event:
         start_date: Date de début de l'événement
         end_date: Date de fin de l'événement

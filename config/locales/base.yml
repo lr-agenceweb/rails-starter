@@ -51,8 +51,8 @@ fr:
 
 # English
 en:
-  'true': yes
-  'false': no
+  'true': 'yes'
+  'false': 'no'
   online:
     'true': Online
     'false': Offline
