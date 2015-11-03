@@ -680,7 +680,7 @@ adult_setting = AdultSetting.create!(
   enabled: true,
   title: 'Bienvenue sur le site de démonstration des modules !',
   content: "<p>Vous allez pouvoir les tester et également les gérer depuis le panneau d'administration.</p> <p>Ce popup est un aperçu du module \"<strong>Adulte</strong>\" (majorité requise pour certains sites comme les vignerons)</p> <p><strong>Cliquez oui si vous avez plus de 18 ans pour continuer ;)</strong></p>",
-  redirect_link: 'http://www.lr-agenceweb.fr'
+  redirect_link: Figaro.env.adult_not_validated_popup_redirect_link
 )
 
 if @locales.include?(:en)
