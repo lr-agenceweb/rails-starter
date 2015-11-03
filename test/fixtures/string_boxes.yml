@@ -18,8 +18,6 @@
 
 error_404:
   key: error_404
-  title: Erreur 404
-  content: erreur 404
 
 error_422:
   key: error_422
