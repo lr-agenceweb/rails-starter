@@ -41,6 +41,19 @@ module Admin
     end
 
     #
+    # == Validation
+    #
+    test 'should not update if redirect_link is not a correct url' do
+      patch :update, id: @adult_setting, adult_setting: { redirect_link: 'fake' }
+      assert_not assigns(:adult_setting).valid?
+    end
+
+    test 'should update if redirect_link is not present' do
+      patch :update, id: @adult_setting, adult_setting: { redirect_link: '' }
+      assert assigns(:adult_setting).valid?
+    end
+
+    #
     # == Subscriber
     #
     test 'should redirect to users/sign_in if not logged in' do
