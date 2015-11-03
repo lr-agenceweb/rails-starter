@@ -1,0 +1,17 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+one_fr:
+  <<: *DEFAULTS
+  adult_setting_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: fr
+  title: Bienvenue sur le site de démonstration des modules !
+  content: '<p>Venez tester les différents modules</p>'
+
+one_en:
+  <<: *DEFAULTS
+  adult_setting_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: en
+  title: Welcome to the demonstration website for modules
+  content: '<p>Come and test all the modules</p>'
