@@ -140,7 +140,7 @@ class PostDecorator < ApplicationDecorator
   # ActiveAdmin
   #
   def title_aa_show
-    I18n.t('post.title_aa_show', page: resource.type_title)
+    I18n.t('post.title_aa_show', page: type_title)
   end
 
   #

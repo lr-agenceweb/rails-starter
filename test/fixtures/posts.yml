@@ -32,7 +32,6 @@ DEFAULTS: &DEFAULTS
 home:
   <<: *DEFAULTS
   type: Home
-  title: Home article !
   online: true
 
 home_offline:
