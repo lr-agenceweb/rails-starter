@@ -48,7 +48,7 @@ class BackgroundTest < ActiveSupport::TestCase
 
   test 'should return menu_title and if for pages which doesn\'t already contain background' do
     category_dropdown_items = Category.handle_pages_for_background(@background_home)
-    assert_includes category_dropdown_items, ['Home', categories(:home).id]
+    assert_includes category_dropdown_items, ['Accueil', categories(:home).id]
     assert_includes category_dropdown_items, ['About', categories(:about).id]
     assert_includes category_dropdown_items, ['Search', categories(:search).id]
     assert_includes category_dropdown_items, ['GuestBook', categories(:guest_book).id]

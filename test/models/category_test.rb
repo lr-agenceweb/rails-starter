@@ -7,7 +7,7 @@ class CategoryTest < ActiveSupport::TestCase
   setup :initialize_test
 
   test 'should return title for category' do
-    assert_equal 'Home', Category.title_by_category(@category.name)
+    assert_equal 'Accueil', Category.title_by_category(@category.name)
   end
 
   test 'should return only allowed modules' do
