@@ -5,8 +5,6 @@ class ApplicationDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
-  @avatar_width = 64
-
   def title_for_given_name(name)
     header = content_tag(:h2, name, class: 'l-page-title', id: name)
     header
