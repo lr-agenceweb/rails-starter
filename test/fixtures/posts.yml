@@ -44,7 +44,6 @@ home_offline:
 about:
   <<: *DEFAULTS
   type: About
-  title: Développement et Hébergement
   online: true
   user: anthony
 

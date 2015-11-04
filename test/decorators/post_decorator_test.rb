@@ -27,6 +27,15 @@ class PostDecoratorTest < Draper::TestCase
     assert_equal 'Accueil', @post_decorated.type_title
   end
 
+  test 'should return correct title link for home (show action)' do
+    assert_equal "<a target=\"_blank\" href=\"/\">Article d'accueil</a>", @post_decorated.title_front_link
+  end
+
+  test 'should return correct title link for about (show action)' do
+    @post_about_decorated = PostDecorator.new(@post_about)
+    assert_equal "<a target=\"_blank\" href=\"/a-propos/developpement-hebergement\">Développement et Hébergement</a>", @post_about_decorated.title_front_link
+  end
+
   #
   # ActiveAdmin
   #
@@ -38,6 +47,7 @@ class PostDecoratorTest < Draper::TestCase
 
   def initialize_test
     @post = posts(:home)
+    @post_about = posts(:about)
     @post_decorated = PostDecorator.new(@post)
   end
 end
