@@ -6,7 +6,7 @@ class BackgroundDecorator < ApplicationDecorator
   delegate_all
 
   def image_deco
-    retina_image_tag model, :image, :small
+    h.retina_image_tag model, :image, :small
   end
 
   def category_name

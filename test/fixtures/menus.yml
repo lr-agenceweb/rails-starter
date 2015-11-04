@@ -22,7 +22,6 @@ DEFAULTS: &DEFAULTS
 
 home:
   <<: *DEFAULTS
-  title: Home
 
 about:
   <<: *DEFAULTS
