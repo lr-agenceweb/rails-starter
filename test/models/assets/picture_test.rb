@@ -64,7 +64,7 @@ class PictureTest < ActiveSupport::TestCase
   private
 
   def initialize_test
-    @picture = pictures(:home)
+    @picture = pictures(:home_three)
     @home_post = posts(:home)
     @about_post = posts(:about)
     @about_2_post = posts(:about_2)

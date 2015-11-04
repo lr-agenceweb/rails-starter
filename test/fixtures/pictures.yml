@@ -33,3 +33,6 @@ home:
 home_two:
   attachable: home (Post)
   image_file_name: my-picture-2.jpg
+
+home_three:
+  attachable: home (Post)
