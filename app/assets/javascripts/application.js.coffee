@@ -43,6 +43,7 @@
 #= require mediaelement_rails
 #= require mediaelement/mejs-feature-logo.min
 #= require plugins/mediaelement
+#= require plugins/cookie_cnil
 
 $(document).on 'ready page:load page:restore', ->
   $('.autosize').autosize()
