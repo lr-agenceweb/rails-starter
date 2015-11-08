@@ -54,6 +54,31 @@ module Admin
     end
 
     #
+    # == Maintenance
+    #
+    test 'should not render maintenance even if enabled and SA' do
+      sign_in @super_administrator
+      assert_no_maintenance_backend(:show, @newsletter_setting)
+    end
+
+    test 'should not render maintenance even if enabled and Admin' do
+      sign_in @administrator
+      assert_no_maintenance_backend(:show, @newsletter_setting)
+    end
+
+    test 'should render maintenance if enabled and subscriber' do
+      sign_in @subscriber
+      assert_maintenance_backend
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should redirect to login if maintenance and not connected' do
+      sign_out @administrator
+      assert_maintenance_backend
+      assert_redirected_to new_user_session_path
+    end
+
+    #
     # == Abilities
     #
     test 'should test abilities for subscriber' do
@@ -98,6 +123,7 @@ module Admin
     private
 
     def initialize_test
+      @setting = settings(:one)
       @newsletter_setting = newsletter_settings(:one)
       @newsletter_module = optional_modules(:newsletter)
 
