@@ -95,7 +95,6 @@ ActiveAdmin.register Map, as: 'Plan' do
   #
   controller do
     include Mappable
-    include MapHelper
     before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? && current_user_and_administrator? }
 
     private

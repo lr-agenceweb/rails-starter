@@ -69,7 +69,6 @@ ActiveAdmin.register_page 'Dashboard' do
 
   controller do
     include Mappable
-    include MapHelper
     before_action :set_setting
 
     private
