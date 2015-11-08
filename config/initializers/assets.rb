@@ -12,6 +12,3 @@ Rails.application.config.assets.precompile += %w( icons-*.png )
 
 # Email / Newsletter / Maintenance assets
 Rails.application.config.assets.precompile += %w( email.css newsletter.css maintenance.css )
-
-# Videojs assets
-Rails.application.config.assets.precompile += %w( video-js.swf vjs.eot vjs.svg vjs.ttf vjs.woff )
