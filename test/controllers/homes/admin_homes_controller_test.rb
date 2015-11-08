@@ -43,6 +43,15 @@ module Admin
     end
 
     #
+    # == Maintenance
+    #
+    test 'should still access admin page if maintenance is true' do
+      @setting.update_attribute(:maintenance, true)
+      get :index
+      assert_response :success
+    end
+
+    #
     # == Abilities
     #
     test 'should test abilities for subscriber' do
@@ -88,6 +97,7 @@ module Admin
 
     def initialize_test
       @home = posts(:home)
+      @setting = settings(:one)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

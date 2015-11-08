@@ -49,6 +49,16 @@ module Admin
     end
 
     #
+    # == Maintenance
+    #
+    test 'should still access admin page if maintenance is true' do
+      @setting.update_attribute(:maintenance, true)
+      get :index
+      assert_response 301
+      assert_redirected_to admin_parameter_path(@setting)
+    end
+
+    #
     # == Form validations
     #
     test 'should not update article without name' do
