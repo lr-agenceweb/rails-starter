@@ -31,6 +31,7 @@ html lang="#{@language}"
     = raw analytical.body_prepend_javascript
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'
+    = render 'elements/banner_maintenance' if maintenance?
 
     main#wrapper.wrapper
       = show_flash unless flash.nil?
