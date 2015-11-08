@@ -86,21 +86,29 @@ module ActiveSupport
     # == Maintenance
     #
     # Frontend
-    def assert_maintenance_frontend
+    def assert_maintenance_frontend(page = :index, id = nil, code = nil)
       @setting.update_attributes(maintenance: true)
       @locales.each do |locale|
         I18n.with_locale(locale) do
-          get :index, locale: locale.to_s
+          if id.nil?
+            get page, locale: locale.to_s
+          else
+            get page, id: id, locale: locale.to_s
+          end
           assert_maintenance
         end
       end
     end
 
-    def assert_no_maintenance_frontend
+    def assert_no_maintenance_frontend(page = :index, id = nil, code = nil)
       @setting.update_attributes(maintenance: true)
       @locales.each do |locale|
         I18n.with_locale(locale) do
-          get :index, locale: locale.to_s
+          if id.nil?
+            get page, locale: locale.to_s
+          else
+            get page, id: id, locale: locale.to_s
+          end
           assert_response :success
           assert_template layout: :application
         end
