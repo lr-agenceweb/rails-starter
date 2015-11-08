@@ -10,8 +10,8 @@ Rails.application.config.assets.precompile += %w( active_admin/active_admin_glob
 # Mapbox assets
 Rails.application.config.assets.precompile += %w( icons-*.png )
 
-# Email and Newsletter assets
-Rails.application.config.assets.precompile += %w( email.css newsletter.css )
+# Email / Newsletter / Maintenance assets
+Rails.application.config.assets.precompile += %w( email.css newsletter.css maintenance.css )
 
 # Videojs assets
 Rails.application.config.assets.precompile += %w( video-js.swf vjs.eot vjs.svg vjs.ttf vjs.woff )

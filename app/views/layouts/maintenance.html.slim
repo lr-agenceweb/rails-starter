@@ -6,7 +6,7 @@ html lang="#{@language}"
     = display_meta_tags title: title, site: @setting.title_and_subtitle, reverse: true
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
 
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
+    = stylesheet_link_tag 'maintenance', media: 'all', 'data-turbolinks-track': true
 
     link type='text/plain' rel='author' href='/humans.txt'
     / = favicon_link_tag '/favicon.ico'
@@ -15,6 +15,6 @@ html lang="#{@language}"
   body
     = include_gon
 
-    #wrapper.wrapper
+    #wrapper.wrapper.maintenance
       .l-container
         == yield
