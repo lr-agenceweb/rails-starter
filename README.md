@@ -101,6 +101,18 @@ Units Tests
 -----------
 Basics tests are included, just run `rake test`
 
+Code structure:
+---------------
+This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
+
+Bonus
+------
+Do you know the Konami code ?
+
+Screenshots
+-----------
+![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
+
 Contributing
 ------------
 1. Fork it
@@ -108,11 +120,3 @@ Contributing
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
-Bonus
-------
-* This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
-
-Screenshots
------------
-![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
