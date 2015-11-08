@@ -71,16 +71,23 @@ class HomesControllerTest < ActionController::TestCase
   #
   # == Maintenance
   #
-  test 'should render maintenance layout and template if setting enabled' do
-    @setting.update_attribute(:maintenance, true)
-    @locales.each do |locale|
-      I18n.with_locale(locale) do
-        get :index, locale: locale.to_s
-        assert_response :success
-        assert_template :maintenance
-        assert_template layout: :maintenance
-      end
-    end
+  test 'should render maintenance if enabled and not connected' do
+    assert_maintenance
+  end
+
+  test 'should not render maintenance even if enabled and SA' do
+    sign_in @super_administrator
+    assert_no_maintenance
+  end
+
+  test 'should not render maintenance even if enabled and Admin' do
+    sign_in @administrator
+    assert_no_maintenance
+  end
+
+  test 'should render maintenance if enabled and subscriber' do
+    sign_in @subscriber
+    assert_maintenance
   end
 
   private
@@ -89,5 +96,9 @@ class HomesControllerTest < ActionController::TestCase
     @home = posts(:home)
     @locales = I18n.available_locales
     @setting = settings(:one)
+
+    @subscriber = users(:alice)
+    @administrator = users(:bob)
+    @super_administrator = users(:anthony)
   end
 end

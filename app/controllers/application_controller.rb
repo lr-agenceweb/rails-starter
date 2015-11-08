@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? }
 
-  before_action :set_setting
+  before_action :set_setting_or_maintenance
 
   # Core
   include Languageable
@@ -44,18 +44,14 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_setting
+  def set_setting_or_maintenance
     @setting = Setting.first
     gon.push(
       site_title: @setting.title,
       root_url: root_url
     )
 
-    set_maintenance if @setting.maintenance? && !request.path.include?('/admin')
-  end
-
-  def set_maintenance
-    render template: 'elements/maintenance', layout: 'maintenance'
+    render template: 'elements/maintenance', layout: 'maintenance' if maintenance? && !current_user_and_administrator?
   end
 
   def set_host_name

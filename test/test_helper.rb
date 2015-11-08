@@ -81,5 +81,46 @@ module ActiveSupport
       delete :destroy, id: obj
       assert_redirected_to url
     end
-  end
+
+    #
+    # == Maintenance
+    #
+    def assert_maintenance_frontend
+      @setting.update_attributes(maintenance: true)
+      @locales.each do |locale|
+        I18n.with_locale(locale) do
+          get :index, locale: locale.to_s
+          assert_maintenance
+        end
+      end
+    end
+
+    def assert_no_maintenance_frontend
+      @setting.update_attributes(maintenance: true)
+      @locales.each do |locale|
+        I18n.with_locale(locale) do
+          get :index, locale: locale.to_s
+          assert_response :success
+          assert_template layout: :application
+        end
+      end
+    end
+
+    def assert_no_maintenance_backend(page = :index)
+      @setting.update_attributes(maintenance: true)
+      get page
+      assert_response :success
+    end
+
+    def assert_maintenance_backend(page = :index)
+      @setting.update_attributes(maintenance: true)
+      get page
+    end
+
+    def assert_maintenance
+      assert_response :success
+      assert_template :maintenance
+      assert_template layout: :maintenance
+    end
+  end # TestCase
 end
