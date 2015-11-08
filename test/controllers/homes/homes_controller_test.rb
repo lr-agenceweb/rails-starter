@@ -72,22 +72,22 @@ class HomesControllerTest < ActionController::TestCase
   # == Maintenance
   #
   test 'should render maintenance if enabled and not connected' do
-    assert_maintenance
+    assert_maintenance_frontend
   end
 
   test 'should not render maintenance even if enabled and SA' do
     sign_in @super_administrator
-    assert_no_maintenance
+    assert_no_maintenance_frontend
   end
 
   test 'should not render maintenance even if enabled and Admin' do
     sign_in @administrator
-    assert_no_maintenance
+    assert_no_maintenance_frontend
   end
 
   test 'should render maintenance if enabled and subscriber' do
     sign_in @subscriber
-    assert_maintenance
+    assert_maintenance_frontend
   end
 
   private
