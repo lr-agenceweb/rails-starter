@@ -33,7 +33,7 @@ module ApplicationHelper
   #
   # == Maintenance
   #
-  def maintenance?(request)
-    @setting.maintenance? && (!request.path.include?('/admin') || !self.class.name.to_s.split('::').first == 'ActiveAdmin')
+  def maintenance?(req = request)
+    @setting.maintenance? && (!req.path.include?('/admin') || !self.class.name.to_s.split('::').first == 'ActiveAdmin')
   end
 end
