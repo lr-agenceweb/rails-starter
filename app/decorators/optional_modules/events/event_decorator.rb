@@ -16,6 +16,9 @@ class EventDecorator < PostDecorator
     end
   end
 
+  #
+  # == Dates
+  #
   def duration
     distance_of_time_in_words(model.end_date, model.start_date) if start_date? && end_date?
   end

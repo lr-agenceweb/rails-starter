@@ -29,7 +29,7 @@ one:
   locationable: one (Map)
 
 two:
-  address: MyString
-  city: MyString
-  postcode: 1
+  address: '4 avenue de la chouette'
+  postcode: '77700'
+  city: Gotham
   locationable: event_online (Event)
