@@ -1,17 +1,17 @@
 == TEAM ==
 ==========
-Web Developper: Anthony ROBIN
+Web Developer: Anthony ROBIN
 Website: http://anthony-robin.fr
 From: FRANCE
 
 == SITE ==
 ==========
-Last update: 30/09/2015
+Last update: 27/11/2015
 Language: English / French
 Doctype: HTML5
 IDE: Sublime Text 3
 Technologies: Ruby on Rails, jQuery (JS), Compass (CSS), Google Font, Font Awesome, Mapbox
-Logiciels: Photoshop
+Software: Photoshop
 
 
                                                ____
