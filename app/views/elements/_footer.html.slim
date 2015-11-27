@@ -35,4 +35,11 @@ footer.footer-container#footer
       .small-12.medium-5.medium-offset-3.columns.credentials
         p == setting.credentials
       .small-12.medium-4.columns
-        p.made-by == t('footer.made_by', amour: fa_icon('heart'), company: link_to(image_tag('logo-lr-agenceweb.png', width: '40'), 'http://www.lr-agenceweb.fr', target: :blank, title: 'L&R Agence web'))
+        p.made-by
+          == "Développé avec #{fa_icon('heart')} par "
+          a< href="http://www.lr-agenceweb.fr" target="_blank" title="L&amp;R Agence web"
+            span.initials>
+              span.letter-l L
+              span.letter-esperluette &amp;
+              span.letter-r R
+            span Agence web
