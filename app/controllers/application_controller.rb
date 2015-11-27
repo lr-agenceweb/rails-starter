@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include UserHelper
 
   protect_from_forgery with: :exception
-  analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? }
+  analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? || request.headers['HTTP_DNT'] == '1' }
 
   before_action :set_setting_or_maintenance
 
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   decorates_assigned :setting, :category, :menu
 
   def analytical_modules?
-    value = !Rails.env.production? || Figaro.env.google_analytics_key.nil? || cookies[:cookie_cnil_cancel] === '1'
+    value = !Rails.env.production? || Figaro.env.google_analytics_key.nil? || cookies[:cookie_cnil_cancel] === '1' || request.headers['HTTP_DNT'] == '1'
     gon.push(disable_cookie_message: value)
     value
   end
