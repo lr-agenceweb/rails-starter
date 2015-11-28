@@ -1,0 +1,21 @@
+.error-container
+  width: 100%
+  position: fixed
+  top: 50%
+  left: 50%
+  background-color: $secondary-color
+  padding: 25px
+  text-align: center
+  color: $white
+  @include translate(-50%, -50%)
+
+  .error-title
+    color: $white
+  .error-content
+    font-size: 1.25rem
+  .error-link
+    font-size: 0.8rem
+
+  a
+    @include link-colors($white, $link-color)
+    text-decoration: underline
