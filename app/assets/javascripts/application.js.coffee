@@ -39,7 +39,6 @@
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
-#= require jquery.sticky_footer
 #= require mediaelement_rails
 #= require mediaelement/mejs-feature-logo.min
 #= require plugins/mediaelement

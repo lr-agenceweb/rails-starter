@@ -42,6 +42,7 @@ html lang="#{@language}"
 
       .l-container
         == yield
+      .push
 
     = render 'elements/footer', newsletter_user: @newsletter_user
     = render 'elements/easter_egg'

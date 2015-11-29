@@ -1,11 +1,11 @@
 .footer-container
-  background-color: $topbar-bg-color
   color: $white
   position: relative
   width: 100%
 
   .upper-footer
     padding: 1rem 10px 15px 10px
+    background-color: $topbar-bg-color
 
     .input-wrapper
       position: relative
@@ -70,3 +70,7 @@
       &:hover
         .love
           color: #E34
+
+// Sticky footer
+.footer-container, .push
+  height: $footer-height
