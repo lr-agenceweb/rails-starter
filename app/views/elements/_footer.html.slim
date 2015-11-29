@@ -36,7 +36,7 @@ footer.footer-container#footer
         p == setting.credentials
       .small-12.medium-4.columns
         p.made-by
-          == "Développé avec #{fa_icon('heart')} par "
+          == I18n.t('footer.made_by', amour: "<span class='love'> #{fa_icon('heart')} </span>")
           a< href="http://www.lr-agenceweb.fr" target="_blank" title="L&amp;R Agence web"
             span.initials>
               span.letter-l L

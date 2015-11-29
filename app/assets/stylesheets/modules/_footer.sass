@@ -53,15 +53,20 @@
       margin-bottom: 0
 
     .made-by
-      text-align: right
       a
         color: $white
+      .love
+        @include transition(color .3s ease-in)
       .initials
         background-color: $white
-        padding: 5px 3px
+        padding: 0 3px
         .letter-l
           color: #0c708d
         .letter-esperluette
           color: #ee732a
         .letter-r
           color: #614394
+
+      &:hover
+        .love
+          color: #E34
