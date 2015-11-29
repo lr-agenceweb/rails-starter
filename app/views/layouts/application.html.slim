@@ -34,6 +34,7 @@ html lang="#{@language}"
     = render 'elements/banner_maintenance' if maintenance?
 
     main#wrapper.wrapper
+      = render 'elements/no_js', setting: @setting
       = show_flash unless flash.nil?
       = render 'elements/header'
 

@@ -44,10 +44,12 @@ fr:
   general: Informations générales
   prev: Précédent
   next: Suivant
+  no_js: "%{site} fonctionne mieux avec JavaScript activé ;)"
 
   # has_many button label
   add:
     feminin: Ajouter une nouvelle %{klass}
+
 
 # English
 en:
@@ -89,3 +91,4 @@ en:
   general: General information
   prev: Previous
   next: Next
+  no_js: "%{site} works better with JavaScript enabled ;)"
