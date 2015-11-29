@@ -9,6 +9,8 @@ html lang="#{@language}"
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
+    noscript = stylesheet_link_tag 'noscript', media: 'all'
+
     = javascript_include_tag 'application', 'data-turbolinks-track': true
 
     - if setting.logo_footer? && @video_module.enabled? && @video_settings.video_upload?
