@@ -10,6 +10,7 @@ fr:
     searches: rechercher
     blogs: blog
     events: evenements
+    legal_notices: mentions-legales
 
   main_menu:
     dashboard: Dashboard
@@ -42,6 +43,7 @@ en:
     searches: search
     blogs: blog
     events: events
+    legal_notices: legal-notices
 
   main_menu:
     dashboard: Dashboard

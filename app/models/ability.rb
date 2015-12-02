@@ -51,8 +51,8 @@ class Ability
     can :manage, User, id: @user.id
     can [:read, :update, :destroy], Picture
     cannot :manage, OptionalModule
-    cannot [:read, :update, :destroy], About
-    can :manage, About, user_id: @user.id
+    cannot [:read, :update, :destroy], [About, LegalNotice]
+    can :manage, [About, LegalNotice], user_id: @user.id
     optional_modules_check
     can [:read, :update], StringBox, optional_module_id: nil
   end
@@ -63,7 +63,7 @@ class Ability
     cannot :create, User
     can [:create, :read, :destroy], Comment, user_id: @user.id
     cannot :destroy, Comment, user_id: nil
-    cannot :manage, [Home, About, Setting, Picture, StringBox, Menu]
+    cannot :manage, [Home, About, Setting, Picture, StringBox, Menu, LegalNotice]
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end
 
