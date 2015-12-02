@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
 
     resources :abouts, only: [:index, :show], concerns: [:paginatable, :commentable]
+    resources :legal_notices, only: [:index]
     resources :contacts, only: [:index, :new, :create]
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
