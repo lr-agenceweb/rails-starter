@@ -18,6 +18,13 @@ crumb :about do |about|
 end
 
 #
+# == LegalNotice
+#
+crumb :legal_notices do
+  link Category.includes(menu: [:translations]).title_by_category('LegalNotice'), legal_notices_path
+end
+
+#
 # == Blog [OptionalModule]
 #
 crumb :blogs do
