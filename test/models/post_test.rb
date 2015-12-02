@@ -18,8 +18,6 @@ class PostTest < ActiveSupport::TestCase
   private
 
   def initialize_test
-    @menu_home = menus(:home)
-    @event_module = optional_modules(:event)
   end
 
   def expected_in_rss(expected, rss_items)
