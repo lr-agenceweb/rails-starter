@@ -27,7 +27,7 @@ set :scm, :git
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/application.yml', 'public/sitemap.xml', 'config/dkim/dkim.private.key', 'config/dropbox.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/application.yml', 'public/sitemap.xml', 'config/dkim/dkim.private.key', 'public/shared/sitemap.xml')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/sitemap')
@@ -38,11 +38,30 @@ set :default_env, rvm_bin_path: '~/.rvm/bin'
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
-# Backup
+# Backup database config files
 set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
 set :backup_name, Figaro.env.application_name.parameterize.underscore
 
 namespace :deploy do
+  desc 'Symlink shared directories and files'
+  task :upload_yml do
+    on roles(:app) do
+      execute "mkdir -p #{shared_path}/config"
+      upload! StringIO.new(File.read("config/application.yml")), "#{shared_path}/config/application.yml"
+      upload! StringIO.new(File.read("config/database.yml")), "#{shared_path}/config/database.yml"
+      upload! StringIO.new(File.read("config/secrets.yml")), "#{shared_path}/config/secrets.yml"
+      upload! StringIO.new(File.read("public/shared/sitemap.xml")), "#{shared_path}/public/shared/sitemap.xml"
+    end
+  end
+
+  desc 'Upload DKIM private key'
+  task :upload_dkim do
+    on roles(:app) do
+      execute "mkdir -p #{shared_path}/config/dkim"
+      upload! StringIO.new(File.read("config/dkim/dkim.private.key")), "#{shared_path}/config/dkim/dkim.private.key"
+    end
+  end
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:

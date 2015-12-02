@@ -1,4 +1,4 @@
-set :stage, :staging
+set :stage, :backup
 set :deploy_to, "#{Figaro.env.capistrano_deploy_to_backup}/#{fetch(:stage).to_s}/#{fetch(:application)}"
 
 # server-based syntax
@@ -9,7 +9,7 @@ set :deploy_to, "#{Figaro.env.capistrano_deploy_to_backup}/#{fetch(:stage).to_s}
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-server Figaro.env.capistrano_server_ip, user: "#{fetch(:deploy_user)}", roles: %w( web app db )
+server Figaro.env.capistrano_server_ip_backup, user: "#{fetch(:deploy_user_backup)}", roles: %w( web app db )
 
 # role-based syntax
 # ==================
@@ -39,11 +39,11 @@ server Figaro.env.capistrano_server_ip, user: "#{fetch(:deploy_user)}", roles: %
 #
 # Global options
 # --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
+# set :ssh_options, {
+#  keys: %w(/home/rlisowski/.ssh/id_rsa),
+#  auth_methods: %w(password),
+#  forward_agent: true
+# }
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
