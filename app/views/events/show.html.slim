@@ -7,10 +7,11 @@
       == event.microdata_meta
 
       header
-        h2 = event.title
+        h2 = link_to event.title, event_path(event)
 
       div = event.content
 
+      = render '/videos/index', resource: event
 
       .row
         .small-12.medium-7.columns
@@ -31,3 +32,6 @@
           - if event.all_conditions_to_show_calendar?(@calendar_module)
             div#calendar
 
+      = render 'elements/prev_next', element: event if @event_settings.prev_next?
+
+      = link_to t('link.back_to', page: @category.menu_title), events_path

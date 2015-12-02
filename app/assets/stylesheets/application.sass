@@ -1,4 +1,4 @@
-// Plugins
+// Library
 @import compass
 @import compass/layout/sticky-footer
 @import compass/css3/selection
@@ -14,12 +14,14 @@
 @import mapbox
 @import outdatedbrowser/outdatedBrowser
 @import vex
-@import vex-theme-os
+@import vex-theme-plain
 @import magnific-popup
 @import fotorama
 @import fullcalendar
+@import mediaelement_rails.css
 
 // Globals
+@import globals/mixins
 @import globals/settings
 @import nprogress
 
@@ -28,15 +30,18 @@
 @import base/forms
 
 // Layout
+@import layout/prev_next
 
 // Modules
 @import modules/header
 @import modules/logo
 @import modules/language
 @import modules/menu
+@import modules/breadcrumb
 @import modules/background
 @import modules/page
 @import modules/footer
+@import modules/404
 
 // Plugins
 @import plugins/mapbox
@@ -44,3 +49,7 @@
 @import plugins/alert
 @import plugins/autocomplete
 @import plugins/orbit
+@import plugins/mediaelement
+@import plugins/easter-egg
+@import plugins/cookie_cnil
+@import plugins/maintenance

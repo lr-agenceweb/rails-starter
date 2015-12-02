@@ -22,7 +22,6 @@ DEFAULTS: &DEFAULTS
 
 home:
   <<: *DEFAULTS
-  title: Home
 
 about:
   <<: *DEFAULTS
@@ -50,6 +49,10 @@ blog:
 event:
   <<: *DEFAULTS
   title: Events
+
+legal_notice:
+  <<: *DEFAULTS
+  title: Legal Notices
 
 test_offline:
   <<: *DEFAULTS

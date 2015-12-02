@@ -16,3 +16,13 @@ columns do
     render 'admin/shared/referencement/show', referencement: resource.referencement
   end
 end
+
+columns do
+  column do
+    render 'admin/shared/pictures/show', resource: resource
+  end
+
+  column do
+    render 'admin/shared/videos/show', video_platforms: resource.video_platforms, video_uploads: resource.video_uploads
+  end if video_module.enabled?
+end

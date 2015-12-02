@@ -1,0 +1,17 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+error_404_fr:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:error_404) %>
+  locale: fr
+  title: Erreur 404
+  content: <p>Cette page n'existe pas ou n'existe plus.<br /> Nous vous prions de nous excuser pour la gêne occasionnée.</p>
+
+error_404_en:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:error_404) %>
+  locale: en
+  title: Error 404
+  content: <p>The page you want to access doesn't exist :(</p>

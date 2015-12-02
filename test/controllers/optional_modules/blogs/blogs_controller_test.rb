@@ -82,13 +82,40 @@ class BlogsControllerTest < ActionController::TestCase
     end
   end
 
+  #
+  # == Maintenance
+  #
+  test 'should render maintenance if enabled and not connected' do
+    assert_maintenance_frontend
+  end
+
+  test 'should not render maintenance even if enabled and SA' do
+    sign_in @super_administrator
+    assert_no_maintenance_frontend
+  end
+
+  test 'should not render maintenance even if enabled and Admin' do
+    sign_in @administrator
+    assert_no_maintenance_frontend
+  end
+
+  test 'should render maintenance if enabled and subscriber' do
+    sign_in @subscriber
+    assert_maintenance_frontend
+  end
+
   private
 
   def initialize_test
     @blog = blogs(:blog_online)
     @blog_offline = blogs(:blog_offline)
     @blog_module = optional_modules(:blog)
+
     @locales = I18n.available_locales
+    @setting = settings(:one)
+
+    @subscriber = users(:alice)
+    @administrator = users(:bob)
     @super_administrator = users(:anthony)
   end
 end

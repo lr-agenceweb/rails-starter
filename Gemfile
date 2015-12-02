@@ -12,6 +12,7 @@ gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
 gem 'ancestry'
+gem 'database_cleaner'
 
 #
 # == Administration
@@ -53,8 +54,10 @@ gem 'momentjs-rails'
 # == Media upload
 #
 gem 'paperclip', github: 'thoughtbot/paperclip'
-gem 'paperclip-dropbox', '>= 1.1.7'
+# gem 'paperclip-dropbox', '>= 1.1.7'
 gem 'retina_rails', '~> 2.0.0'
+gem 'paperclip-av-transcoder'
+gem 'delayed_paperclip'
 
 #
 # == Forms and WYSIWYG
@@ -111,6 +114,7 @@ gem 'analytical'
 #
 gem 'whenever', require: false # Cron tasks
 gem 'daemons'
+gem 'delayed_job_active_record'
 
 #
 # == Email
@@ -118,7 +122,6 @@ gem 'daemons'
 gem 'dkim' # authenticate emails
 gem 'premailer-rails'
 gem 'nokogiri'
-gem 'delayed_job_active_record'
 
 #
 # == Assets
@@ -138,6 +141,13 @@ gem 'jbuilder', '~> 2.0'
 gem 'gon'
 gem 'gravatar_image_tag'
 gem 'magnific-popup-rails'
+gem 'chartkick'
+
+#
+# == Video
+#
+gem 'mediaelement_rails' # HTML5 video player
+gem 'video_info'
 
 group :development do
   gem 'better_errors'
@@ -174,7 +184,6 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.3.4'
-  gem 'database_cleaner'
 end
 
 group :test do
@@ -182,6 +191,7 @@ group :test do
   gem 'minitest-reporters', require: false
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
+  gem 'simplecov-json', require: false
 end
 
 group :doc do

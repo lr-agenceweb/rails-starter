@@ -2,11 +2,11 @@
 fr:
   footer:
     copyright: Tous droits réservés
-    made_by: Développé avec %{amour} par %{company}
+    made_by: Développé avec %{amour} par
 
 
 # English
 en:
   footer:
     copyright: All right reserved
-    made_by: Made with %{amour} by %{company}
+    made_by: Made with %{amour} by

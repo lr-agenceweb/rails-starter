@@ -3,12 +3,14 @@
 #
 class NewsletterUsersController < ApplicationController
   include NewsletterAid
-  after_action :send_welcome_newsletter, only: [:create], if: proc { @success }
+  before_action :set_newsletter_setting, only: [:create]
+  after_action :send_welcome_newsletter, only: [:create], if: proc { @newsletter_setting.send_welcome_email && @success }
 
   def create
     if params[:newsletter_user][:nickname].blank?
       @success = false
       @newsletter_user = NewsletterUser.new(newsletter_user_params)
+      @newsletter_user.newsletter_user_role_id = NewsletterUserRole.find_by(kind: 'subscriber').id
       respond_to do |format|
         if @newsletter_user.save
           @success = true
@@ -40,6 +42,10 @@ class NewsletterUsersController < ApplicationController
 
   def newsletter_user_params
     params.require(:newsletter_user).permit(:email, :lang)
+  end
+
+  def set_newsletter_setting
+    @newsletter_setting = NewsletterSetting.first
   end
 
   # Sends email to user when user is created.

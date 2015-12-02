@@ -1,0 +1,22 @@
+tr
+  td.last.right-text-pad
+    br
+    h6 = I18n.t('contact.informations.label', locale: locale)
+    p
+      strong> = I18n.t('contact.informations.name', locale: locale) + ':'
+      = setting.name
+    p
+      strong> = I18n.t('contact.informations.email', locale: locale) + ':'
+      a href="mailto:#{setting.email}" = setting.email
+      br
+      strong> = I18n.t('contact.informations.phone', locale: locale) + ':'
+      = link_to setting.phone, "tel:#{setting.decorate.phone_w3c}"
+    p
+      strong> = I18n.t('contact.informations.address', locale: locale) + ':'
+      br
+      = map.decorate.address if map.decorate.address?
+      == '<br />' if map.decorate.city?
+      = map.decorate.postcode if map.decorate.postcode?
+      == ' - ' if map.decorate.city?
+      = map.decorate.city if map.decorate.city?
+  td.expander

@@ -51,9 +51,12 @@ class PostsControllerTest < ActionController::TestCase
   private
 
   def initialize_test
-    @locales = I18n.available_locales
     @rss_module = optional_modules(:rss)
 
+    @locales = I18n.available_locales
+    @setting = settings(:one)
+
+    @subscriber = users(:alice)
     @administrator = users(:bob)
     @super_administrator = users(:anthony)
     sign_in @administrator

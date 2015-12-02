@@ -5,18 +5,14 @@ class CreateSettings < ActiveRecord::Migration
       t.string :title
       t.string :subtitle
       t.string :phone
+      t.string :phone_secondary, default: nil
       t.string :email
-      t.string :address
-      t.string :city
-      t.string :postcode
-      t.string :geocode_address
-      t.float :latitude
-      t.float :longitude
-      t.boolean :show_map, default: false
       t.boolean :show_breadcrumb, default: false
       t.boolean :show_social, default: true
+      t.boolean :show_qrcode, default: false
       t.boolean :should_validate, default: true
       t.boolean :maintenance, default: false
+      t.string :twitter_username, default: nil
 
       t.timestamps null: false
     end

@@ -6,7 +6,11 @@ module Imageable
   include ApplicationHelper
 
   included do
+    has_many :pictures, -> { order(:position) }, as: :attachable, dependent: :destroy
+    accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
+
     delegate :title, :description, to: :picture, prefix: true, allow_nil: true
+    delegate :online, to: :pictures, prefix: true, allow_nil: true
   end
 
   #

@@ -165,6 +165,8 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   config.register_javascript '//maps.googleapis.com/maps/api/js?sensor=false'
+  config.register_javascript '//www.google.com/jsapi'
+  config.register_javascript 'chartkick'
 
   # == CSV options
   #
@@ -197,7 +199,7 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
-      menu.add id: 'configuration', label: I18n.t('admin_menu.configuration'), priority: 100
+      menu.add id: 'site_configuration', label: I18n.t('admin_menu.config'), priority: 100
     end
 
     admin.build_menu :utility_navigation do |menu|

@@ -3,7 +3,7 @@ class CreateSliders < ActiveRecord::Migration
     create_table :sliders do |t|
       t.string :animate
       t.boolean :autoplay, default: true
-      t.integer :timeout, default: 5000
+      t.integer :time_to_show, default: 5000
       t.boolean :hover_pause, default: true
       t.boolean :loop, default: true
       t.boolean :navigation, default: false

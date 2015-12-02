@@ -60,7 +60,8 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
     assert_equal newsletter_user.email, @email
     assert_equal newsletter_user.lang, @lang
-    assert_equal newsletter_user.role, 'subscriber'
+    assert_equal newsletter_user.newsletter_user_role_id, @newsletter_user_role_subscriber.id
+    assert_equal newsletter_user.newsletter_user_role_title, 'abonné'
   end
 
   # == Ajax
@@ -143,6 +144,18 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should not send a welcome_user email if setting is disabled' do
+    clear_deliveries_and_queues
+    assert_no_enqueued_jobs
+    assert ActionMailer::Base.deliveries.empty?
+
+    @newsletter_setting.update_attributes(send_welcome_email: false)
+
+    assert_enqueued_jobs 0 do
+      post :create, newsletter_user: { email: @email, lang: @lang }
+    end
+  end
+
   test 'should have correct email headers and content' do
     clear_deliveries_and_queues
     assert_no_enqueued_jobs
@@ -158,7 +171,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
           assert_not ActionMailer::Base.deliveries.empty?
           assert_includes delivered_email.to, user.email
           assert_includes delivered_email.from, @setting.email
-          assert_includes delivered_email.subject, I18n.t('newsletter.welcome')
+          assert_includes delivered_email.subject, @newsletter_setting.title_subscriber
         end
       end
     end
@@ -171,8 +184,10 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   def initialize_test
     @locales = I18n.available_locales
     @request.env['HTTP_REFERER'] = root_url
+    @newsletter_setting = newsletter_settings(:one)
     @newsletter_user = newsletter_users(:newsletter_user_fr)
     @newsletter_user_en = newsletter_users(:newsletter_user_en)
+    @newsletter_user_role_subscriber = newsletter_user_roles(:subscriber)
     @setting = settings(:one)
 
     @email = 'aaa@bbb.cc'

@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: video_uploads
+#
+#  id                      :integer          not null, primary key
+#  videoable_id            :integer
+#  videoable_type          :string(255)
+#  online                  :boolean          default(TRUE)
+#  position                :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  video_file_file_name    :string(255)
+#  video_file_content_type :string(255)
+#  video_file_file_size    :integer
+#  video_file_updated_at   :datetime
+#  video_file_processing   :boolean
+#  retina_dimensions       :text(65535)
+#  video_autoplay          :boolean          default(FALSE)
+#  video_loop              :boolean          default(FALSE)
+#  video_controls          :boolean          default(TRUE)
+#  video_mute              :boolean          default(FALSE)
+#
+# Indexes
+#
+#  index_video_uploads_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
+#
+
+one:
+  videoable: home (Post)
+  online: true
+  video_file_file_name: 'landscape.mp4'

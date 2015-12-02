@@ -72,6 +72,12 @@ event:
   optional_module: event
   menu: event
 
+legal_notice:
+  <<: *DEFAULTS
+  name: LegalNotice
+  optional: false
+  menu: legal_notice
+
 test_online:
   <<: *DEFAULTS
   name: Test

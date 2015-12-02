@@ -39,7 +39,7 @@ ActiveAdmin.register_page 'Dashboard' do
       columns do
         if current_user.super_administrator?
           column do |panel|
-            render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all
+            render 'admin/dashboard/categories', panel: panel, query: Category.includes(:background, menu: [:translations])
           end
         end
 
@@ -53,7 +53,7 @@ ActiveAdmin.register_page 'Dashboard' do
       columns do
         column do |panel|
           render 'admin/dashboard/settings', panel: panel, query: Setting.first
-          render 'admin/dashboard/categories', panel: panel, query: Category.includes(:background, :menu)
+          render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all
         end # column
 
         if OptionalModule.find_by(name: 'Map').enabled?
@@ -69,7 +69,6 @@ ActiveAdmin.register_page 'Dashboard' do
 
   controller do
     include Mappable
-    include MapHelper
     before_action :set_setting
 
     private

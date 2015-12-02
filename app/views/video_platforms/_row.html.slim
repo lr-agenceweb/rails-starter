@@ -1,0 +1,14 @@
+- video_info = VideoInfo.new(video.url)
+- if video_info.available?
+  .small-12.columns
+    figure
+      - if video.title? && !video.native_informations?
+        h3 = video.title
+      - elsif video.native_informations?
+        h3 = video_info.title
+
+      .flex-video.widescreen
+        == video_info.embed_code
+
+      figcaption: div == video.description if video.description? && !video.native_informations?
+      figcaption: div == auto_link(video_info.description, html: { target: :blank }) if video.native_informations?

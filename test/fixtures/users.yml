@@ -61,6 +61,7 @@ alice:
   slug: alice
   email: alice@test.fr
   role: subscriber
+  avatar_file_name: bart.png
 
 lana:
   username: lana

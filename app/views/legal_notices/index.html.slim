@@ -1,0 +1,10 @@
+- breadcrumb :legal_notices
+
+.row
+  .small-12.columns
+    = title_for_category(category)
+
+    - @legal_notices.each do |legal_notice|
+      article.panel
+        h3 = legal_notice.title
+        div = simple_format(legal_notice.content)

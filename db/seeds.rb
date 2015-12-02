@@ -49,12 +49,13 @@ User.create!(
 #
 puts 'Creating site Setting'
 setting_site = Setting.create!(
-  name: 'Rails starter',
+  name: 'L&R Agence web',
   title: 'Rails starter',
   subtitle: 'Site de Démonstration',
   phone: '+33 (0)1 02 03 04 05',
   email: 'demo@starter.fr',
-  logo: File.new("#{Rails.root}/public/system/seeds/logo/logo.png")
+  logo: File.new("#{Rails.root}/public/system/seeds/logo/logo.png"),
+  logo_footer: File.new("#{Rails.root}/public/system/seeds/logo/logo-lr-agenceweb.png")
 )
 
 if @locales.include?(:en)
@@ -85,7 +86,7 @@ Location.create!(
   locationable_type: 'Map',
   address: 'Place du Père Noël',
   city: 'Rovaniemi',
-  postcode: 96_930,
+  postcode: '96930',
   geocode_address: 'Père Noël, 96930 Rovaniemi, Finlande',
   latitude: 66.5435,
   longitude: 25.8481
@@ -110,7 +111,8 @@ description = [
   'Module qui affiche un fil d\'ariane sur le site',
   'Module qui affiche un Qrcode pour créer automatiquement un contact sur son smartphone',
   'Module qui propose à l\'administrateur de choisir une image d\'arrière plan pour les pages du site',
-  'Module qui affiche un calendrier'
+  'Module qui affiche un calendrier',
+  'Module qui gère la visualisation de vidéos sur le site'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(
@@ -119,6 +121,8 @@ OptionalModule.list.each_with_index do |element, index|
     enabled: true
   )
 
+  @optional_module_newsletter = optional_module if element == 'Newsletter'
+  @optional_module_adult = optional_module if element == 'Adult'
   @optional_module_search = optional_module if element == 'Search'
   @optional_module_guest_book = optional_module if element == 'GuestBook'
   @optional_module_blog = optional_module if element == 'Blog'
@@ -129,7 +133,7 @@ end
 # == Menu
 #
 puts 'Creating Menu elements'
-models_name = [:Home, :Search, :GuestBook, :Blog, :Event, :About, :Contact]
+models_name = [:Home, :Search, :GuestBook, :Blog, :Event, :About, :Contact, :LegalNotice]
 title_en = [
   'Home',
   'Search',
@@ -137,7 +141,8 @@ title_en = [
   'Blog',
   'Events',
   'About',
-  'Contact'
+  'Contact',
+  'Legal notices'
 ]
 title_fr = [
   'Accueil',
@@ -146,7 +151,8 @@ title_fr = [
   'Blog',
   'Événements',
   'À Propos',
-  'Me contacter'
+  'Me contacter',
+  'Mentions légales'
 ]
 show_in_header = [
   true,
@@ -167,7 +173,8 @@ show_in_footer = [
   false
 ]
 
-title_en.each_with_index do |element, index|
+models_name.each_with_index do |element, index|
+  element = element.to_s
   menu = Menu.create!(
     title: title_fr[index],
     show_in_header: show_in_header[index],
@@ -186,9 +193,10 @@ title_en.each_with_index do |element, index|
   @menu_search = menu.id if element == 'Search'
   @menu_guest_book = menu.id if element == 'GuestBook'
   @menu_blog = menu.id if element == 'Blog'
-  @menu_event = menu.id if element == 'Events'
+  @menu_event = menu.id if element == 'Event'
   @menu_about = menu.id if element == 'About'
   @menu_contact = menu.id if element == 'Contact'
+  @menu_legal_notice = menu.id if element == 'LegalNotice'
 end
 
 #
@@ -202,7 +210,8 @@ description_en = [
   'Blog description',
   'Event description',
   'About description',
-  'Contact description'
+  'Contact description',
+  'Legal notices description'
 ]
 description_fr = [
   'Description pour la page d\'accueil',
@@ -211,7 +220,8 @@ description_fr = [
   'Description de la page Blog',
   'Description de la page événement',
   'Description de la page à propos',
-  'Description de la page contact'
+  'Description de la page contact',
+  'Description de la page mentions légales'
 ]
 keywords_en = [
   'home',
@@ -220,7 +230,8 @@ keywords_en = [
   'blog',
   'event',
   'about',
-  'contact'
+  'contact',
+  'legal notices'
 ]
 keywords_fr = [
   'accueil',
@@ -229,7 +240,8 @@ keywords_fr = [
   'blog',
   'événement',
   'à propos',
-  'contact'
+  'contact',
+  'mentions légales'
 ]
 
 models_name.each_with_index do |element, index|
@@ -247,6 +259,7 @@ models_name.each_with_index do |element, index|
   menu_id = @menu_event if element == 'Event'
   menu_id = @menu_about if element == 'About'
   menu_id = @menu_contact if element == 'Contact'
+  menu_id = @menu_legal_notice if element == 'LegalNotice'
 
   category = Category.create!(
     name: element,
@@ -273,14 +286,74 @@ models_name.each_with_index do |element, index|
     )
   end
 
-  if element == 'Home'
-    @category_home = category
+  @category_home = category if element == 'Home'
+  @category_blog = category if element == 'Blog'
+  @category_event = category if element == 'Event'
+end
 
-    puts 'Uploading background image for homepage'
-    Background.create!(
-      attachable_id: category.id,
-      attachable_type: 'Category',
-      image: File.new("#{Rails.root}/public/system/seeds/backgrounds/background_homepage.jpg")
+puts 'Uploading video background for homepage'
+video_background = VideoUpload.create!(
+  videoable_id: @category_home.id,
+  videoable_type: 'Category',
+  video_file: File.new("#{Rails.root}/public/system/seeds/videos/background_homepage.mp4")
+)
+
+puts 'Uploading background image for event page'
+Background.create!(
+  attachable_id: @category_event.id,
+  attachable_type: 'Category',
+  image: File.new("#{Rails.root}/public/system/seeds/backgrounds/background_event.jpg")
+)
+
+#
+# == LegalNotice articles
+#
+puts 'Creating LegalNotice article'
+legal_notice_title_fr = [
+  'Hébergement du site',
+  'Nom de domaine'
+]
+legal_notice_title_en = [
+  'Site hosting',
+  'Domain name'
+]
+legal_notice_slug_fr = [
+  'hebergement-du-site',
+  'nom-de-domaine'
+]
+legal_notice_slug_en = [
+  'site-hosting',
+  'domain-name'
+]
+legal_notice_content_fr = [
+  '<p><strong>Ce site est hébergé par</strong>: <br>  Hébergeur : ONLINE SAS<br>  Adresse web : <a href="https://www.online.net/fr">https://www.online.net</a><br>Téléphone : +33.(0)1.84.13.00.00<br>TVA : FR 35 433115904</p><p><strong>Adresse Postale</strong>: <br>  ONLINE SAS<br>  BP 438 75366<br>  PARIS CEDEX 08</p>',
+  '<p><strong>Le nom de domaine provient de</strong> :<br>  Hébergeur : OVH SAS<br>  Adresse web : <a href="https://www.ovh.com">https://www.ovh.com</a><br>  Téléphone: 1007<br>  SAS au capital de 10 059 500 €<br>  RCS Lille Métropole 424 761 419 00045<br>  Code APE 6202A<br>  N° TVA : FR 22 424 761 419</p><p><strong>Siège social</strong> :<br>  2 rue Kellermann<br>  59100 Roubaix<br>  France</p>'
+]
+legal_notice_content_en = [
+  '<p><strong>This website is hosted by</strong>: <br>  Host : ONLINE SAS<br> Website : <a href="https://www.online.net/fr">https://www.online.net</a><br>Phone : +33.(0)1.84.13.00.00<br>TVA : FR 35 433115904<br></p><p><strong>Postal address</strong>: <br>  ONLINE SAS<br>  BP 438 75366<br>  PARIS CEDEX 08</p>',
+  '<p><strong>The domain name come from</strong> :<br>  Host : OVH SAS<br>Website : <a href="https://www.ovh.com">https://www.ovh.com</a><br>  Phone: 1007<br>  SAS au capital de 10 059 500 €<br>  RCS Lille Métropole 424 761 419 00045<br>  Code APE 6202A<br>  N° TVA : FR 22 424 761 419</p><p><strong>Head office</strong> :<br>  2 rue Kellermann<br>  59100 Roubaix<br>  France</p>'
+]
+legal_notice_user_id = [
+  super_administrator.id,
+  super_administrator.id
+]
+
+legal_notice_title_fr.each_with_index do |element, index|
+  legal_notice = LegalNotice.create!(
+    title: legal_notice_title_fr[index],
+    slug: legal_notice_slug_fr[index],
+    content: legal_notice_content_fr[index],
+    online: true,
+    user_id: legal_notice_user_id[index]
+  )
+
+  if @locales.include?(:en)
+    LegalNotice::Translation.create!(
+      post_id: legal_notice.id,
+      locale: 'en',
+      title: legal_notice_title_en[index],
+      slug: legal_notice_slug_en[index],
+      content: legal_notice_content_en[index]
     )
   end
 end
@@ -372,9 +445,9 @@ Picture.create!(
 #
 puts 'Creating Blog article'
 blog = Blog.create!(
-  title: 'Premier article de blog',
-  slug: 'premier-article-de-blog',
-  content: '<p>Voici le premier article de mon blog</p>',
+  title: 'Fonds marins',
+  slug: 'fonds-marins',
+  content: '<p>Voici ce qu\'il se passe sous l\'eau</p>',
   online: true,
   user_id: administrator.id
 )
@@ -386,13 +459,28 @@ referencement = Referencement.create!(
   keywords: ''
 )
 
+puts 'Uploading video background for blog'
+video_blog = VideoUpload.create!(
+  videoable_id: blog.id,
+  videoable_type: 'Blog',
+  video_file: File.new("#{Rails.root}/public/system/seeds/videos/bubbles.mp4")
+)
+
+puts 'Uploading video subtitles for blog'
+video_background = VideoSubtitle.create!(
+  subtitleable_id: video_blog.id,
+  subtitleable_type: 'VideoUpload',
+  subtitle_fr: File.new("#{Rails.root}/public/system/seeds/subtitles/bubbles_fr.srt"),
+  subtitle_en: File.new("#{Rails.root}/public/system/seeds/subtitles/bubbles_en.srt")
+)
+
 if @locales.include?(:en)
   Blog::Translation.create!(
     blog_id: blog.id,
     locale: 'en',
-    title: 'First blog article',
-    slug: 'first-blog-article',
-    content: '<p>This is my first blog article !</p>'
+    title: 'Underwater',
+    slug: 'underwater',
+    content: '<p>This is what happend underwater</p>'
   )
 
   Referencement::Translation.create!(
@@ -403,6 +491,12 @@ if @locales.include?(:en)
     keywords: ''
   )
 end
+
+#
+# == Blog Setting
+#
+puts 'Creating Blog Setting'
+BlogSetting.create!(prev_next: true)
 
 #
 # == Comment
@@ -433,64 +527,141 @@ Comment.create!(
 # == Event article
 #
 puts 'Creating Event article'
-event_images = [
-  'event-1-1.jpg',
-  'event-1-2.jpg',
-  'event-1-3.jpg'
+event_title_fr = [
+  'Foire aux saucisses',
+  'Silky Cam et Tizy Bertrand au Zénith de Paris'
 ]
-event = Event.create!(
-  title: 'Foire aux saucisses',
-  slug: 'foire-aux-saucisses',
-  content: '<p>Venez gouter les saucisses de la région !</p>',
-  url: nil,
-  start_date: 2.weeks.ago.to_s(:db),
-  end_date: Time.zone.now + 1.week.to_i,
-  online: true
-)
-referencement = Referencement.create!(
-  attachable_id: event.id,
-  attachable_type: 'Event',
-  title: '',
-  description: '',
-  keywords: ''
-)
+event_title_en = [
+  'Sausage market',
+  'Silky Cam and Tizy Bertrand in concert'
+]
+event_slug_fr = [
+  'foire-aux-saucisses',
+  'silky-cam-tizy-bertrand-zenith-paris'
+]
+event_slug_en = [
+  'sausage-market',
+  'silky-cam-tizy-bertrand-concert'
+]
+event_content_fr = [
+  '<p>Venez gouter les saucisses de la région !</p>',
+  '<p>Venez assister au concert exceptionnel de Silky Cam et Tizy Bertrand au Zénith de Paris !</p>'
+]
+event_content_en = [
+  '<p>Come and taste amazing sausage at the market !</p>',
+  '<p>Come to assist to the concert of Silky Cam and Tizy Bertrand !</p>'
+]
 
-if @locales.include?(:en)
-  Event::Translation.create!(
-    event_id: event.id,
-    locale: 'en',
-    title: 'Sausage market',
-    slug: 'sausage-market',
-    content: '<p>Come and taste amazing sausage at the market !</p>'
+event_start_date = [2.weeks.ago.to_s(:db), 2.weeks.ago.to_s(:db)]
+event_end_date = [Time.zone.now + 1.week.to_i, Time.zone.now + 3.week.to_i]
+event_url = [nil, nil]
+
+event_address = ['Rue des Limaces', 'Zénith de Paris, 205 Bd Sérurier']
+event_city = ['Lyon', 'Paris']
+event_postcode = [69_000, 75_019]
+event_geocode = ['Rue des Limaces, 69000 - Lyon', 'Zénith de Paris, 205 Bd Sérurier, 75019 - Paris']
+event_latitude = [45.764, 43.5947418]
+event_longitude = [4.83566, 1.409389]
+
+event_images = [
+  ['event-1-1.jpg', 'event-1-2.jpg', 'event-1-3.jpg'],
+  [nil]
+]
+event_videos = [nil, 'http://www.dailymotion.com/video/x38cajc']
+
+event_title_fr.each_with_index do |element, index|
+  event = Event.create!(
+    title: event_title_fr[index],
+    slug: event_slug_fr[index],
+    content: event_content_fr[index],
+    url: event_url[index],
+    start_date: event_start_date[index],
+    end_date: event_end_date[index],
+    online: true
   )
-  Referencement::Translation.create!(
-    referencement_id: referencement.id,
-    locale: 'en',
+  referencement = Referencement.create!(
+    attachable_id: event.id,
+    attachable_type: 'Event',
     title: '',
     description: '',
     keywords: ''
   )
+
+  if @locales.include?(:en)
+    Event::Translation.create!(
+      event_id: event.id,
+      locale: 'en',
+      title: event_title_en[index],
+      slug: event_slug_en[index],
+      content: event_content_en[index]
+    )
+    Referencement::Translation.create!(
+      referencement_id: referencement.id,
+      locale: 'en',
+      title: '',
+      description: '',
+      keywords: ''
+    )
+  end
+
+  puts 'Creating Event Location'
+  Location.create!(
+    locationable_id: event.id,
+    locationable_type: 'Event',
+    address: event_address[index],
+    city: event_city[index],
+    postcode: event_postcode[index],
+    geocode_address: event_geocode[index],
+    latitude: event_latitude[index],
+    longitude: event_longitude[index]
+  )
+
+
+  event_images[index].each_with_index do |image, index|
+    unless image.nil?
+      puts 'Creating Event pictures'
+      Picture.create!(
+        attachable_id: event.id,
+        attachable_type: 'Event',
+        image: File.new("#{Rails.root}/public/system/seeds/events/#{image}"),
+        online: true
+      )
+    end
+  end
+
+  unless event_videos[index].nil?
+    puts 'Creating Event VideoPlatform'
+    VideoPlatform.create!(
+      videoable_id: event.id,
+      videoable_type: 'Event',
+      url: event_videos[index],
+      native_informations: true,
+      online: true
+    )
+  end
 end
 
-puts 'Creating Event Location'
-Location.create!(
-  locationable_id: event.id,
-  locationable_type: 'Event',
-  address: 'Rue des Limaces',
-  city: 'Lyon',
-  postcode: 69_000,
-  geocode_address: 'Rue des Limaces, 69000 - Lyon',
-  latitude: 45.764,
-  longitude: 4.83566
-)
+#
+# == Event Setting
+#
+puts 'Creating Event Setting'
+EventSetting.create!(prev_next: true)
 
-puts 'Creating Event pictures'
-event_images.each do |image|
-  Picture.create!(
-    attachable_id: event.id,
-    attachable_type: 'Event',
-    image: File.new("#{Rails.root}/public/system/seeds/events/#{image}"),
-    online: true
+#
+# == Newsletter Setting
+#
+puts 'Creating Newsletter Setting'
+@newsletter_setting = NewsletterSetting.create!(
+  send_welcome_email: true,
+  title_subscriber: 'Bienvenue à la newsletter',
+  content_subscriber: '<p>Vous êtes maintenant abonné à la newsletter, vous la recevrez environ une fois par mois. Votre email ne sera pas utilisé pour vous spammer.</p>'
+)
+if @locales.include?(:en)
+  NewsletterSetting::Translation.create!(
+    newsletter_setting_id: @newsletter_setting.id,
+    locale: 'en',
+    title_subscriber: 'Welcome to the newsletter',
+    content_subscriber: '<p>You are now subscribed to the newsletter, you will receive it once a month. Your email will not be use for spam.</p>'
   )
 end
 
@@ -514,48 +685,122 @@ if @locales.include?(:en)
 end
 
 #
+# == Newsletter User Roles
+#
+puts 'Creating Newsletter User Roles'
+newsletter_user_role_title_fr = [
+  'abonné',
+  'testeur'
+]
+newsletter_user_role_title_en = [
+  'subscriber',
+  'tester'
+]
+
+newsletter_user_role_title_en.each_with_index do |element, index|
+  newsletter_user_role = NewsletterUserRole.create!(
+    rollable_id: @newsletter_setting.id,
+    rollable_type: 'NewsletterSetting',
+    title: newsletter_user_role_title_fr[index],
+    kind: newsletter_user_role_title_en[index]
+  )
+
+  if @locales.include?(:en)
+    NewsletterUserRole::Translation.create!(
+      newsletter_user_role_id: newsletter_user_role.id,
+      locale: 'en',
+      title: newsletter_user_role_title_en[index]
+    )
+  end
+
+  @newsletter_user_role_subscriber = newsletter_user_role if element == 'subscriber'
+  @newsletter_user_role_tester = newsletter_user_role if element == 'tester'
+end
+
+#
 # == Newsletter User
 #
 puts 'Creating Newsletter User'
 NewsletterUser.create!(
   email: 'abonne@test.fr',
   lang: 'fr',
-  role: 'subscriber',
-  token: 'df6dbd90f13d7c8'
+  token: 'df6dbd90f13d7c8',
+  newsletter_user_role_id: @newsletter_user_role_subscriber.id
 )
 NewsletterUser.create!(
   email: 'subscriber@test.en',
   lang: 'en',
-  role: 'subscriber',
-  token: '5f9a50a21As109Qw'
+  token: '5f9a50a21As109Qw',
+  newsletter_user_role_id: @newsletter_user_role_subscriber.id
 )
+
+#
+# == AdultSetting
+#
+puts 'Creating AdultSetting'
+adult_setting = AdultSetting.create!(
+  enabled: true,
+  title: 'Bienvenue sur le site de démonstration des modules !',
+  content: "<p>Vous allez pouvoir les tester et également les gérer depuis le panneau d'administration.</p> <p>Ce popup est un aperçu du module \"<strong>Adulte</strong>\" (majorité requise pour certains sites comme les vignerons)</p> <p><strong>Cliquez oui si vous avez plus de 18 ans pour continuer ;)</strong></p>",
+  redirect_link: Figaro.env.adult_not_validated_popup_redirect_link
+)
+
+if @locales.include?(:en)
+  AdultSetting::Translation.create!(
+    adult_setting_id: adult_setting.id,
+    locale: 'en',
+    title: 'Welcome to the demonstration website for modules',
+    content: "<p>In order to access the website, you must be over 18 years old.</p><p>More content soon</p>"
+  )
+end
 
 #
 # == StringBox
 #
 puts 'Creating StringBox'
-string_box_keys = ['error_404', 'error_422', 'error_500', 'success_contact_form', 'adult_not_validated_popup_content']
-string_box_title_fr = ['404', '422', '500', 'Message de contact envoyé avec succès', '', 'Majorité requise !']
-string_box_title_en = ['404', '422', '500', 'Contact message sent successfuly', '', '']
+string_box_keys = [
+  'error_404',
+  'error_422',
+  'error_500',
+  'success_contact_form'
+]
+string_box_title_fr = [
+  '404',
+  '422',
+  '500',
+  'Message de contact envoyé avec succès'
+]
+string_box_title_en = [
+  '404',
+  '422',
+  '500',
+  'Contact message sent successfuly'
+]
 string_box_content_fr = [
   "<p>Cette page n'existe pas ou n'existe plus.<br /> Nous vous prions de nous excuser pour la gêne occasionnée.</p>",
   '<p>La page que vous tentez de voir n\'est pas disponible pour l\'instant :(</p>',
   '<p>Ooops, une erreur s\'est produite :( Veuillez réésayer ultérieurement</p>',
-  '<p>Votre message a bien été envoyé. Merci :)</p>',
-  '<p>Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.</p>'
+  '<p>Votre message a bien été envoyé. Merci :)</p>'
 ]
 string_box_content_en = [
   '<p>The page you want to access doesn\'t exist :(</p>',
   '<p>The page you want to access is not available now :(</p>',
   '<p>Oops, something bad happend :( Please try again later</p>',
-  '<p>Your message has been sent successfuly. Thank you :)',
-  '<p>In order to access the website, you must be over 18 years old.</p>'
+  '<p>Your message has been sent successfuly. Thank you :)'
 ]
+optional_module_id = [
+  nil,
+  nil,
+  nil,
+  nil
+]
+
 string_box_keys.each_with_index do |element, index|
   string_box = StringBox.create!(
     key: element,
     title: string_box_title_fr[index],
-    content: string_box_content_fr[index]
+    content: string_box_content_fr[index],
+    optional_module_id: optional_module_id[index]
   )
 
   if @locales.include?(:en)
@@ -586,20 +831,23 @@ GuestBook.create!(
 puts 'Creating Slider'
 slider = Slider.create!(
   animate: 'crossfade',
-  category_id: @category_home.id
+  navigation: true,
+  category_id: @category_blog.id
 )
 
 puts 'Uploading slides image for slider'
-slides_image = [ 'slide-1.png', 'slide-2.png', 'slide-3.jpg' ]
+slides_image = ['slide-1.jpg', 'slide-2.png', 'slide-3.jpg', 'slide-4.jpg']
 
-slide_title_fr = ['Paysage', 'Ordinateur', '']
-slide_title_en = ['Landscape', 'Computer', '']
+slide_title_fr = ['Paysage', 'Ordinateur', 'Evénement Sportif']
+slide_title_en = ['Landscape', 'Computer', 'Sport Event']
 slide_description_fr = [
-  'Course à pied au coucher du soleil',
+  'Paysage de montagne',
+  '',
   '',
   ''
 ]
 slide_description_en = [
+  '',
   '',
   '',
   ''
@@ -623,6 +871,31 @@ slides_image.each_with_index do |element, index|
     )
   end
 end
+
+#
+# == Social
+#
+social_share_title = ['Facebook', 'Twitter', 'Google+', 'Email']
+social_share_ikon = ['facebook', 'twitter', 'google', 'envelope']
+
+social_share_title.each_with_index do |element, index|
+  puts "Create Socials share #{element}"
+  Social.create!(
+    kind: 'share',
+    title: social_share_title[index],
+    font_ikon: social_share_ikon[index]
+  )
+end
+
+#
+# == VideoSetting
+#
+puts 'Create video settings'
+VideoSetting.create!(
+  video_platform: true,
+  video_upload: true,
+  video_background: true
+)
 
 #
 # == FriendlyId

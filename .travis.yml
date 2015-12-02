@@ -11,6 +11,9 @@ env:
 
 bundler_args: --without development
 
+before_install:
+  - export TZ=Europe/Paris
+
 before_script:
   - sleep 5
   - cp config/database.travis.yml config/database.yml
@@ -30,6 +33,7 @@ matrix:
     # - env: DB=sqlite
 
 after_failure:
+  - date
   - "mysql -e 'show databases;'"
   - "cat ./config/database.yml"
   - "echo $RAILS_ENV"

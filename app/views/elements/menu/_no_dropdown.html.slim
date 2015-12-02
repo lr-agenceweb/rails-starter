@@ -1,6 +1,6 @@
 nav.clearfix.l-nav-container aria-label='navigation' itemscope='' itemtype='http://schema.org/SiteNavigationElement'
   ul class="clearfix sub-nav #{even_or_odd_menu_item(@menu_elements_header)}"
-    - Menu.online.only_parents.with_page.each do |element|
+    - @menu_elements_header.each do |element|
       li class="l-nav-item #{set_active_class(element.category_name.tableize)}"
         = link_to element.title, element.decorate.menu_link(element.category.name), class: 'l-nav-item-link', itemprop: 'url'
 

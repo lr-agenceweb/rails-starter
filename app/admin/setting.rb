@@ -12,7 +12,9 @@ ActiveAdmin.register Setting, as: 'Parameter' do
                 :should_validate,
                 :maintenance,
                 :logo,
+                :logo_footer,
                 :delete_logo,
+                :delete_logo_footer,
                 :twitter_username,
                 translations_attributes: [
                   :id, :locale, :title, :subtitle
@@ -21,19 +23,6 @@ ActiveAdmin.register Setting, as: 'Parameter' do
   decorate_with SettingDecorator
   config.clear_sidebar_sections!
   actions :all, except: [:new, :destroy]
-
-  index do
-    column :logo_deco
-    column :name
-    column :title
-    column :subtitle
-    column :phone
-    column :email
-    column :maintenance
-
-    translation_status
-    actions
-  end
 
   show do
     columns do
@@ -95,7 +84,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
     private
 
     def redirect_to_show
-      redirect_to admin_parameter_path(Setting.first)
+      redirect_to admin_parameter_path(Setting.first), status: 301
     end
   end
 end

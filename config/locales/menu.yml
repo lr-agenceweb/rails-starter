@@ -2,6 +2,7 @@
 fr:
   routes:
     home: accueil
+    homes: accueil
     abouts: a-propos
     guest_books: livre-d-or
     contacts: contact
@@ -9,6 +10,7 @@ fr:
     searches: rechercher
     blogs: blog
     events: evenements
+    legal_notices: mentions-legales
 
   main_menu:
     dashboard: Dashboard
@@ -22,7 +24,8 @@ fr:
     configuration: Configuration
     assets: Assets
     posts: Articles
-    config: Configuration
+    config: Site Configuration
+    modules_config: Modules configuration
 
   menu:
     title_aa_show: "Élément de menu \"%{menu_item}\""
@@ -31,6 +34,8 @@ fr:
 # English
 en:
   routes:
+    home: home
+    homes: home
     abouts: about
     guest_books: guest-book
     contacts: contact
@@ -38,6 +43,7 @@ en:
     searches: search
     blogs: blog
     events: events
+    legal_notices: legal-notices
 
   main_menu:
     dashboard: Dashboard

@@ -34,11 +34,17 @@ class SettingDecorator < ApplicationDecorator
     retina_image_tag(model, :logo, :medium, class: 'text-center') if logo?
   end
 
+  def logo_footer_site
+    return retina_image_tag(model, :logo_footer, :medium) if logo_footer?
+    return model.title unless logo?
+    logo_deco
+  end
+
   #
   # == Other
   #
   def credentials
-    "#{setting.name} - #{copyright} <br> Copyright &copy; #{current_year} <br> #{about} #{admin_link}"
+    "#{CGI.escapeHTML(setting.name)} - #{copyright} - Copyright &copy; #{current_year}"
   end
 
   def phone_w3c
@@ -89,26 +95,30 @@ class SettingDecorator < ApplicationDecorator
     end
   end
 
+  def about
+    link_to I18n.t('main_menu.about'), abouts_path
+  end
+
+  def admin_link
+    ' - ' + (link_to ' administration', admin_root_path, target: :blank) if current_user_and_administrator?
+  end
+
   private
 
   def logo?
     model.logo.exists?
   end
 
+  def logo_footer?
+    model.logo_footer.exists?
+  end
+
   def subtitle?
     !model.subtitle.blank?
   end
 
-  def about
-    link_to I18n.t('main_menu.about'), abouts_path
-  end
-
   def copyright
     I18n.t('footer.copyright')
-  end
-
-  def admin_link
-    ' - ' + (link_to ' administration', admin_root_path, target: :blank) if current_user_and_administrator?
   end
 
   def small_subtitle

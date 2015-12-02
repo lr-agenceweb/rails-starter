@@ -15,6 +15,7 @@ en:
       map: Map
       event: Events
       calendar: Calendar
+      video: Vidéo
 
 # French
 fr:
@@ -33,3 +34,4 @@ fr:
       map: Carte
       event: Événements
       calendar: Calendrier
+      video: Video

@@ -1,12 +1,11 @@
 require 'simplecov'
+require 'simplecov-json'
 require 'codeclimate-test-reporter'
-SimpleCov.start 'rails' do
-  formatter SimpleCov::Formatter::MultiFormatter[
-    SimpleCov::Formatter::HTMLFormatter,
-    CodeClimate::TestReporter::Formatter
-  ]
-end
-# CodeClimate::TestReporter.start
+
+# Start reporters
+SimpleCov.start 'rails'
+SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
+CodeClimate::TestReporter.start
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -67,8 +66,10 @@ module ActiveSupport
         assert_redirected_to url
       end
 
-      get :show, id: obj
-      assert_redirected_to url
+      unless check.key?(:no_show) && check[:no_show]
+        get :show, id: obj
+        assert_redirected_to url
+      end
       get :edit, id: obj
       assert_redirected_to url
       post :create, "#{attributes.to_sym}": {}
@@ -80,5 +81,64 @@ module ActiveSupport
       delete :destroy, id: obj
       assert_redirected_to url
     end
-  end
+
+    #
+    # == Maintenance
+    #
+    # Frontend
+    def assert_maintenance_frontend(page = :index, id = nil, code = nil)
+      @setting.update_attributes(maintenance: true)
+      @locales.each do |locale|
+        I18n.with_locale(locale) do
+          if id.nil?
+            get page, locale: locale.to_s
+          else
+            get page, id: id, locale: locale.to_s
+          end
+          assert_maintenance
+        end
+      end
+    end
+
+    def assert_no_maintenance_frontend(page = :index, id = nil, code = nil)
+      @setting.update_attributes(maintenance: true)
+      @locales.each do |locale|
+        I18n.with_locale(locale) do
+          if id.nil?
+            get page, locale: locale.to_s
+          else
+            get page, id: id, locale: locale.to_s
+          end
+          assert_response :success
+          assert_template layout: :application
+        end
+      end
+    end
+
+    # Backend
+    def assert_no_maintenance_backend(page = :index, id = nil)
+      @setting.update_attributes(maintenance: true)
+      if id.nil?
+        get page
+      else
+        get page, id: id
+      end
+      assert_response :success
+    end
+
+    def assert_maintenance_backend(page = :index, id = nil)
+      @setting.update_attributes(maintenance: true)
+      if id.nil?
+        get page
+      else
+        get page, id: id
+      end
+    end
+
+    def assert_maintenance
+      assert_response :success
+      assert_template :maintenance
+      assert_template layout: :maintenance
+    end
+  end # TestCase
 end

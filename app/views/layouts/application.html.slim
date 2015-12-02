@@ -9,7 +9,17 @@ html lang="#{@language}"
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
+    noscript = stylesheet_link_tag 'noscript', media: 'all'
+
     = javascript_include_tag 'application', 'data-turbolinks-track': true
+
+    - if setting.logo_footer? && @video_module.enabled? && @video_settings.video_upload?
+      css:
+        .mejs-container .mejs-controls .mejs-logo-button span {
+          background: transparent url("#{setting.logo_footer.url(:thumb)}") no-repeat;
+          background-size: 20px auto;
+          margin: 8px 0;
+        }
 
     link type='text/plain' rel='author' href='/humans.txt'
     = favicon_link_tag '/favicon.ico'
@@ -23,13 +33,17 @@ html lang="#{@language}"
     = raw analytical.body_prepend_javascript
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'
+    = render 'elements/banner_maintenance' if maintenance?
 
-    #wrapper.wrapper
+    main#wrapper.wrapper
+      = render 'elements/no_js', setting: @setting
       = show_flash unless flash.nil?
       = render 'elements/header'
 
       .l-container
         == yield
+      .push
 
     = render 'elements/footer', newsletter_user: @newsletter_user
+    = render 'elements/easter_egg'
     = raw analytical.body_append_javascript

@@ -2,22 +2,22 @@
 #
 # Table name: string_boxes
 #
-#  id         :integer          not null, primary key
-#  key        :string(255)
-#  title      :string(255)
-#  content    :text(65535)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                 :integer          not null, primary key
+#  key                :string(255)
+#  title              :string(255)
+#  content            :text(65535)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  optional_module_id :integer
 #
 # Indexes
 #
-#  index_string_boxes_on_key  (key)
+#  index_string_boxes_on_key                 (key)
+#  index_string_boxes_on_optional_module_id  (optional_module_id)
 #
 
 error_404:
   key: error_404
-  title: Erreur 404
-  content: erreur 404
 
 error_422:
   key: error_422
@@ -38,3 +38,10 @@ adult_not_validated_popup_content:
   key: adult_not_validated_popup_content
   title: ~
   content: Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.
+  optional_module: adult
+
+welcome_newsletter:
+  key: welcome_newsletter
+  title: Bienvenue !
+  content: Vous êtes maintenant inscrit à la newsletter !
+  optional_module: newsletter

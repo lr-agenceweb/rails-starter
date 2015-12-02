@@ -42,6 +42,12 @@ module Admin
       assert_redirected_to admin_pictures_path
     end
 
+    test 'should render 404 if access new page' do
+      assert_raises(ActionController::UrlGenerationError) do
+        get :new
+      end
+    end
+
     #
     # == Crud actions
     #
@@ -53,6 +59,31 @@ module Admin
     test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
       assert_crud_actions(@picture, admin_dashboard_path, model_name)
+    end
+
+    #
+    # == Maintenance
+    #
+    test 'should not render maintenance even if enabled and SA' do
+      sign_in @super_administrator
+      assert_no_maintenance_backend
+    end
+
+    test 'should not render maintenance even if enabled and Admin' do
+      sign_in @administrator
+      assert_no_maintenance_backend
+    end
+
+    test 'should render maintenance if enabled and subscriber' do
+      sign_in @subscriber
+      assert_maintenance_backend
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should redirect to login if maintenance and not connected' do
+      sign_out @administrator
+      assert_maintenance_backend
+      assert_redirected_to new_user_session_path
     end
 
     #
@@ -117,6 +148,7 @@ module Admin
     private
 
     def initialize_test
+      @setting = settings(:one)
       @picture = pictures(:home)
 
       @subscriber = users(:alice)

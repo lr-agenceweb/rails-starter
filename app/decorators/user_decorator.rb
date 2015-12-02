@@ -15,7 +15,7 @@ class UserDecorator < ApplicationDecorator
 
     # Website avatar not present (use Gravatar)
     else
-      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) })
+      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: 64 })
     end
   end
 
@@ -28,8 +28,6 @@ class UserDecorator < ApplicationDecorator
     color = 'red' if model.administrator?
     color = 'blue' if model.super_administrator?
 
-    arbre do
-      status_tag I18n.t("role.#{model.role_name}"), color
-    end
+    status_tag_deco(I18n.t("role.#{model.role_name}"), color)
   end
 end

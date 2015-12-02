@@ -5,6 +5,7 @@ en:
       seconds: seconds
     formats:
       without_time: '%B %d, %Y'
+      without_time_no_year: '%B %d'
       long: "%B %d, %Y at %H:%M"
 
 # French
@@ -14,4 +15,5 @@ fr:
       seconds: secondes
     formats:
       without_time: '%A %d %B %Y'
+      without_time_no_year: '%A %d %B'
       long: "%A %d %B %Y à %Hh%M"

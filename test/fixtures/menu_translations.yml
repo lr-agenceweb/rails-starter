@@ -1,0 +1,15 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+home_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
+  locale: fr
+  title: Accueil
+
+home_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
+  locale: en
+  title: Home

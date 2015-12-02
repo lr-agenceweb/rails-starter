@@ -13,8 +13,7 @@ section.l-contact.one-page
     = render 'form'
 
   - else
-    = background.handle_background_tag 'background-contact' if @background_module.enabled? && !@background.nil?
-      = render 'form'
+    = background.handle_background_tag((render 'form'), 'background-contact') if @background_module.enabled? && !@background.nil?
 
 / Mapbox
 == map.map(@map_module.enabled?) unless map.nil?

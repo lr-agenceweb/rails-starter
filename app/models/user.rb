@@ -91,8 +91,7 @@ class User < ActiveRecord::Base
     username_changed? || super
   end
 
-  # TODO: make a test for this method
   def avatar?
-    avatar.exists?
+    avatar.present? && avatar.exists?
   end
 end

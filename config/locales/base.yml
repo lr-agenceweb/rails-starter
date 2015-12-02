@@ -34,17 +34,27 @@ fr:
   allow_comments:
     'true': Commentaires autorisés
     'false': Article non commentable
+  subtitles:
+    'true': Sous-titres présents
+    'false': Sous-titres absents
+  native_informations:
+    'true': Informations natives activées
+    'false': Informations natives désactivées
   additional: Informations complémentaires
   general: Informations générales
+  prev: Précédent
+  next: Suivant
+  no_js: "%{site} fonctionne mieux avec JavaScript activé ;)"
 
   # has_many button label
   add:
     feminin: Ajouter une nouvelle %{klass}
 
+
 # English
 en:
-  'true': yes
-  'false': no
+  'true': 'yes'
+  'false': 'no'
   online:
     'true': Online
     'false': Offline
@@ -79,3 +89,6 @@ en:
     'false': Comments not allowed
   additional: Additional information
   general: General information
+  prev: Previous
+  next: Next
+  no_js: "%{site} works better with JavaScript enabled ;)"

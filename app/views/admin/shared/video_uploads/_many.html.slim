@@ -1,0 +1,60 @@
+- f.inputs t('activerecord.models.video_upload.other')
+  - f.has_many :video_uploads, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.video.one')), allow_destroy: true, sortable: :position do |item|
+    - item.input :video_file,
+                 as: :file,
+                 label: I18n.t('form.label.video'),
+                 hint: raw("#{retina_image_tag(item.object, :video_file, :preview) unless item.object.new_record?}")
+
+    - if item.object.new_record?
+      li
+        p Après avoir envoyé votre vidéo, vous avez la possibilité d'ajouter un titre et une description. Pour cela, rendez-vous dans 'assets > Vidéos internes' et modifier les paramètres de votre vidéo.
+    - else
+      li
+        p = link_to 'Ajouter un titre et une description', edit_admin_video_upload_path(item.object), class: 'button success', target: :blank
+
+    .clearer.clearfix
+
+    = item.inputs 'Configurations des vidéos'
+      - item.input :video_autoplay,
+                   as: :boolean,
+                   hint: I18n.t('form.hint.video.autoplay')
+
+      - item.input :video_loop,
+                   as: :boolean,
+                   hint: I18n.t('form.hint.video.loop')
+
+      - item.input :video_controls,
+                   as: :boolean,
+                   hint: I18n.t('form.hint.video.controls')
+
+      - item.input :video_mute,
+                   as: :boolean,
+                   hint: I18n.t('form.hint.video.mute')
+      - item.input :online,
+                   as: :boolean,
+                   hint: I18n.t('form.hint.video.online')
+
+    = item.inputs t('activerecord.models.video_subtitle.other'), for: [:video_subtitle, item.object.video_subtitle || VideoSubtitle.new] do |subtitle|
+      br
+      - subtitle.input :subtitle_fr,
+                       as: :file,
+                       hint: raw("Sous titres au format VTT pour langue française <br /> #{subtitle.object.subtitle_fr_file_name + ' le ' if subtitle.object.subtitle_fr.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_fr.exists?}")
+
+      - if I18n.available_locales.include?(:en)
+        - subtitle.input :subtitle_en,
+                         as: :file,
+                         hint: raw("Sous titres au format VTT pour langue anglaise <br /> #{subtitle.object.subtitle_en_file_name + ' le ' if subtitle.object.subtitle_en.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_en.exists?}")
+
+      - subtitle.input :online,
+                       as: :boolean,
+                       hint: I18n.t('form.hint.subtitle.online')
+
+      - if subtitle.object.subtitle_fr.exists?
+        - subtitle.input :delete_subtitle_fr,
+                         as: :boolean,
+                         hint: I18n.t('form.hint.subtitle.fr.destroy')
+
+      - if subtitle.object.subtitle_en.exists? && I18n.available_locales.include?(:en)
+        - subtitle.input :delete_subtitle_en,
+                         as: :boolean,
+                         hint: I18n.t('form.hint.subtitle.en.destroy')

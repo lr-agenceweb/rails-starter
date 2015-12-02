@@ -1,8 +1,10 @@
 ActiveAdmin.register StringBox do
-  includes :translations
+  menu parent: I18n.t('admin_menu.config')
+  includes :translations, :optional_module
 
   permit_params :id,
                 :key,
+                :optional_module_id,
                 translations_attributes: [
                   :id, :locale, :title, :content
                 ]
@@ -14,6 +16,7 @@ ActiveAdmin.register StringBox do
     column :key
     column :title
     column :content
+    column :optional_module if current_user.super_administrator?
 
     translation_status
     actions
@@ -24,6 +27,7 @@ ActiveAdmin.register StringBox do
       row :key
       row :title
       row :content
+      row :optional_module if current_user.super_administrator?
     end
   end
 
@@ -43,6 +47,17 @@ ActiveAdmin.register StringBox do
                 hint: I18n.t('form.hint.string_box.content'),
                 input_html: { class: 'froala' }
       end
+
+      if current_user.super_administrator?
+        f.input :optional_module_id,
+                as: :select,
+                label: I18n.t('activerecord.attributes.string_box.optional_module'),
+                collection: OptionalModule.all.map { |m| [m.decorate.name_deco, m.id] },
+                include_blank: true,
+                input_html: {
+                  class: 'chosen-select'
+                }
+      end
     end
 
     f.actions
@@ -53,5 +68,21 @@ ActiveAdmin.register StringBox do
   #
   controller do
     include Skippable
+
+    def create
+      delete_key_before_save
+      super
+    end
+
+    def update
+      delete_key_before_save
+      super
+    end
+
+    private
+
+    def delete_key_before_save
+      params[:string_box].delete :optional_module_id unless current_user.super_administrator?
+    end
   end
 end

@@ -27,8 +27,10 @@ class NewslettersController < ApplicationController
   def welcome_user
     if @newsletter_user.token == params[:token]
       I18n.with_locale(@newsletter_user.lang) do
+        welcome_newsletter = NewsletterSetting.first
+        @title = welcome_newsletter.try(:title_subscriber)
+        @content = welcome_newsletter.try(:content_subscriber)
         @newsletter_user.name = @newsletter_user.extract_name_from_email
-        @title = I18n.t('newsletter.welcome')
       end
       render layout: 'newsletter'
     else
@@ -40,6 +42,7 @@ class NewslettersController < ApplicationController
 
   def set_variables
     @from_controller = true
+    @map = Map.joins(:location).select('locations.id, locations.address, locations.city, locations.postcode').first
   end
 
   def set_newsletter_user

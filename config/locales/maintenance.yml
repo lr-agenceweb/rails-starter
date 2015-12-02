@@ -1,0 +1,15 @@
+# English
+en:
+  maintenance:
+    title: Website in maintenance
+    content: The website is currently in maintenance, please come back later. Thank you
+    banner:
+      message: The website is currently offline for Internet users but you can see it because you are logged in as %{role}.
+
+# French
+fr:
+  maintenance:
+    title: Site en maintenance
+    content: Le site est actuellement en maintenance, merci de revenir plus tard !
+    banner:
+      message: Le site est actuellement hors-ligne pour les internautes mais vous pouvez quand même y accéder car vous êtes connecté en tant que %{role}.

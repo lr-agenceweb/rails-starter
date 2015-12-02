@@ -73,33 +73,66 @@ Modules
 In order to avoid spam email when sending newsletter to subscribers, you will need to sign your email address using SPF and DKIM keys and linked them to your DNS.
 Be sure to generate a `dkim.private.key` and `dkim.public.key` and move the `dkim.private.key` in `config/dkim` folder.
 
-* **Blog**
+* **Blog**  
 Write blog articles.
 
-* **Slider**
+* **Slider**  
 Add a slider on the page you want and customize its options.
 
-* **Comments**
+* **Comments**  
 Add comments for posts or blogs articles.
 
-* **Guest Book**
+* **Guest Book**  
 Allow users (connected or not) to leave a message in the guest book.
 
-* **Events**
+* **Events**  
 Create events (with start date and end date)
 
-* **Map**
-Display a mapbox map of your organization or business
+* **Map**  
+Display a Mapbox map of your organization or business
 
-* **Social Network**
+* **Social Network**  
 Display social networks icons to share your site or let users to follow you on this networks
 
-* **Breadcrumb**
-Sow a breadcrumb on the page of your site
+* **Breadcrumb**  
+Show a breadcrumb on the page of your site
+
+* **Video**  
+Upload your own videos or add it from video platform such as Youtube or Dailymotion
+
+* **Calendar**  
+Choose start date and end date for your Events
+
+* **Background**  
+Display a background image for your pages
+
+* **QrCode**  
+Show a contact QrCode on the website
+
+* **Adult**  
+Display a popup the first time you access the website to inform you than you must be over 18 to continue your visit
+
+* **RSS**  
+Add a RSS feed to the website
+
+* **Search**  
+Add a search form to look on title or content post articles
 
 Units Tests
 -----------
 Basics tests are included, just run `rake test`
+
+Code structure:
+---------------
+This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
+
+Bonus
+------
+Do you know the Konami code ?
+
+Screenshots
+-----------
+![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
 
 Contributing
 ------------
@@ -108,11 +141,3 @@ Contributing
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
-Bonus
-------
-* This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
-
-Screenshots
------------
-![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)

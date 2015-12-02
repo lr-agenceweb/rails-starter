@@ -119,13 +119,18 @@ class PostDecorator < ApplicationDecorator
   end
 
   def title_front_link
-    link = root_path
-    link = send("#{model.type.downcase.underscore.singularize}_path", model) unless model.type == 'Home'
-    link_to model.title, link, target: :_blank
+    if model.type == 'Home'
+      link = root_path
+    elsif model.type == 'LegalNotice'
+      link = legal_notices_path
+    else
+      link = send("#{model.type.singularize.underscore.downcase}_path", model)
+    end
+    link_to raw(model.title), link, target: :_blank
   end
 
   def admin_link
-    link = send("admin_#{model.type.downcase.underscore.singularize}_path", model)
+    link = send("admin_#{model.type.singularize.underscore.downcase}_path", model)
     link_to I18n.t('active_admin.show'), link
   end
 
@@ -140,7 +145,7 @@ class PostDecorator < ApplicationDecorator
   # ActiveAdmin
   #
   def title_aa_show
-    I18n.t('post.title_aa_show', page: resource.type_title)
+    I18n.t('post.title_aa_show', page: type_title)
   end
 
   #

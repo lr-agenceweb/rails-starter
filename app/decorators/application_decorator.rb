@@ -5,8 +5,6 @@ class ApplicationDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
-  @avatar_width = 64
-
   def title_for_given_name(name)
     header = content_tag(:h2, name, class: 'l-page-title', id: name)
     header
@@ -25,6 +23,7 @@ class ApplicationDecorator < Draper::Decorator
     suffix = absolute ? 'url' : 'path'
     model_name = model.class.to_s
     return send("root_#{suffix}") if model_name == 'Home'
+    return send("legal_notices_#{suffix}") if model_name == 'LegalNotice'
     send("#{model_name.underscore.downcase.singularize}_#{suffix}", model)
   end
 
@@ -37,6 +36,14 @@ class ApplicationDecorator < Draper::Decorator
     else
       awesome_share_buttons(element.title, popup: true)
     end
+  end
+
+  #
+  # == BlogSetting and EventSetting
+  #
+  def prev_next
+    color = model.prev_next? ? 'green' : 'red'
+    status_tag_deco I18n.t("enabled.#{model.prev_next}"), color
   end
 
   #

@@ -1,5 +1,5 @@
 set :stage, :staging
-set :deploy_to, Figaro.env.capistrano_deploy_to
+set :deploy_to, "#{Figaro.env.capistrano_deploy_to_backup}/#{fetch(:stage).to_s}/#{fetch(:application)}"
 
 # server-based syntax
 # ======================

@@ -2,26 +2,30 @@
 #
 # Table name: settings
 #
-#  id                :integer          not null, primary key
-#  name              :string(255)
-#  title             :string(255)
-#  subtitle          :string(255)
-#  phone             :string(255)
-#  phone_secondary   :string(255)
-#  email             :string(255)
-#  show_breadcrumb   :boolean          default(FALSE)
-#  show_social       :boolean          default(TRUE)
-#  show_qrcode       :boolean          default(FALSE)
-#  should_validate   :boolean          default(TRUE)
-#  maintenance       :boolean          default(FALSE)
-#  twitter_username  :string(255)
-#  logo_updated_at   :datetime
-#  logo_file_size    :integer
-#  logo_content_type :string(255)
-#  logo_file_name    :string(255)
-#  retina_dimensions :text(65535)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  id                       :integer          not null, primary key
+#  name                     :string(255)
+#  title                    :string(255)
+#  subtitle                 :string(255)
+#  phone                    :string(255)
+#  phone_secondary          :string(255)
+#  email                    :string(255)
+#  show_breadcrumb          :boolean          default(FALSE)
+#  show_social              :boolean          default(TRUE)
+#  show_qrcode              :boolean          default(FALSE)
+#  should_validate          :boolean          default(TRUE)
+#  maintenance              :boolean          default(FALSE)
+#  twitter_username         :string(255)
+#  logo_updated_at          :datetime
+#  logo_file_size           :integer
+#  logo_content_type        :string(255)
+#  logo_file_name           :string(255)
+#  logo_footer_updated_at   :datetime
+#  logo_footer_file_size    :integer
+#  logo_footer_content_type :string(255)
+#  logo_footer_file_name    :string(255)
+#  retina_dimensions        :text(65535)
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
 #
 
 #
@@ -45,8 +49,18 @@ class Setting < ActiveRecord::Base
                       small: '64x64>',
                       thumb: '32x32>'
                     }
+  handle_attachment :logo_footer,
+                    styles: {
+                      large: '256x256>',
+                      medium: '128x128>',
+                      small: '64x64>',
+                      thumb: '32x32>'
+                    }
 
   validates_attachment :logo,
+                       content_type: { content_type: %r{\Aimage\/.*\Z} },
+                       size: { less_than: 2.megabyte }
+  validates_attachment :logo_footer,
                        content_type: { content_type: %r{\Aimage\/.*\Z} },
                        size: { less_than: 2.megabyte }
 

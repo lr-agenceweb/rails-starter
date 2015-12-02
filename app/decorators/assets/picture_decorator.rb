@@ -13,8 +13,12 @@ class PictureDecorator < ApplicationDecorator
     base_image :large
   end
 
+  def title
+    raw(model.title) if title?
+  end
+
   def description
-    model.description.html_safe if description?
+    raw(model.description) if description?
   end
 
   def source_picture_title_link
@@ -32,12 +36,12 @@ class PictureDecorator < ApplicationDecorator
   # Article where the Picture comes from
   #
   def source_picture
-    model.attachable_type.constantize.find(model.attachable_id)
+    model.attachable
   end
 
   def source_picture_title
     return source_picture.menu_title if model.attachable_type == 'Category'
-    source_picture.title
+    raw(source_picture.title)
   end
 
   def base_image(size)

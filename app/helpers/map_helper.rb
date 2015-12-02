@@ -11,7 +11,7 @@ module MapHelper
       longitude: @map.location.try(:longitude),
       marker_icon: @map.marker_icon.nil? ? '' : @map.marker_icon,
       marker_color: @map.marker_color,
-      root_url: root_path(locale: @language)
+      root_url: I18n.with_locale(@language) { root_path }
     )
   end
 end

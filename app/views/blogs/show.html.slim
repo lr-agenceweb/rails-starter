@@ -15,5 +15,7 @@
       div == blog.content
 
       == blog.loop_hover_has_many_pictures true
+      = link_to t('link.back_to', page: @category.menu_title), blogs_path
 
+= render 'elements/prev_next', element: blog if @blog_settings.prev_next?
 = render 'comments/section', o: @blog

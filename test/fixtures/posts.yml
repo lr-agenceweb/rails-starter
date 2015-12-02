@@ -32,7 +32,6 @@ DEFAULTS: &DEFAULTS
 home:
   <<: *DEFAULTS
   type: Home
-  title: Home article !
   online: true
 
 home_offline:
@@ -45,7 +44,6 @@ home_offline:
 about:
   <<: *DEFAULTS
   type: About
-  title: Développement et Hébergement
   online: true
   user: anthony
 
@@ -73,3 +71,16 @@ about_test_offline:
   type: About
   title: Ruby on Rails website
   online: false
+
+# Legal notices posts
+legal_notice_super_admin:
+  <<: *DEFAULTS
+  type: LegalNotice
+  online: true
+  user: anthony
+
+legal_notice_admin:
+  <<: *DEFAULTS
+  type: LegalNotice
+  title: My Legal notices
+  online: true

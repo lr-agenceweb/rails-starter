@@ -17,6 +17,7 @@ module Admin
     #
     test 'should redirect index to show if logged in' do
       get :index
+      assert_response 301
       assert_redirected_to admin_parameter_path(@setting)
     end
 
@@ -33,6 +34,53 @@ module Admin
     test 'should update setting if logged in' do
       patch :update, id: @setting, setting: {}
       assert_redirected_to admin_parameter_path(@setting)
+    end
+
+    test 'should render 404 if access new page' do
+      assert_raises(ActionController::UrlGenerationError) do
+        get :new
+      end
+    end
+
+    test 'should render 404 if access destroy page' do
+      assert_raises(ActionController::UrlGenerationError) do
+        delete :destroy
+      end
+    end
+
+    #
+    # == Maintenance
+    #
+    test 'should still access admin page if maintenance is true' do
+      @setting.update_attribute(:maintenance, true)
+      get :index
+      assert_response 301
+      assert_redirected_to admin_parameter_path(@setting)
+    end
+
+    #
+    # == Maintenance
+    #
+    test 'should not render maintenance even if enabled and SA' do
+      sign_in @super_administrator
+      assert_no_maintenance_backend(:show, 1)
+    end
+
+    test 'should not render maintenance even if enabled and Admin' do
+      sign_in @administrator
+      assert_no_maintenance_backend(:show, 1)
+    end
+
+    test 'should render maintenance if enabled and subscriber' do
+      sign_in @subscriber
+      assert_maintenance_backend
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should redirect to login if maintenance and not connected' do
+      sign_out @administrator
+      assert_maintenance_backend
+      assert_redirected_to new_user_session_path
     end
 
     #

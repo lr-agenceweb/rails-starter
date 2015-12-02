@@ -6,5 +6,4 @@ $ ->
         left = 150 - $(this).val().length
         left = 0 if (left < 0)
 
-        console.log left
         $textarea.parent().parent().find('.counter').html(I18n.t('form.counter', count: left, locale: 'fr'))

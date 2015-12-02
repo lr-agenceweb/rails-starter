@@ -36,6 +36,7 @@ class Ability
     cannot [:update, :destroy], User, role: { name: 'super_administrator' }
     can :manage, User, id: @user.id
     optional_modules_check
+    can :manage, StringBox, optional_module_id: nil
   end
 
   def administrator_privilege
@@ -50,10 +51,10 @@ class Ability
     can :manage, User, id: @user.id
     can [:read, :update, :destroy], Picture
     cannot :manage, OptionalModule
-    cannot [:read, :update, :destroy], About
-    can :manage, About, user_id: @user.id
-    can [:read, :update], StringBox
+    cannot [:read, :update, :destroy], [About, LegalNotice]
+    can :manage, [About, LegalNotice], user_id: @user.id
     optional_modules_check
+    can [:read, :update], StringBox, optional_module_id: nil
   end
 
   def subscriber_privilege
@@ -62,7 +63,7 @@ class Ability
     cannot :create, User
     can [:create, :read, :destroy], Comment, user_id: @user.id
     cannot :destroy, Comment, user_id: nil
-    cannot :manage, [Home, About, Setting, Picture, StringBox, Menu]
+    cannot :manage, [Home, About, Setting, Picture, StringBox, Menu, LegalNotice]
     can :read, ActiveAdmin::Page, name: 'Dashboard'
   end
 
@@ -73,7 +74,7 @@ class Ability
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, Comment, Blog, Slider, Event, Map, Newsletter, Social, Background]
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, EventSetting, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting, AdultSetting]
   end
 
   def optional_modules_check
@@ -86,6 +87,8 @@ class Ability
     map_module
     social_module
     background_module
+    adult_module
+    video_module
   end
 
   #
@@ -106,10 +109,12 @@ class Ability
   def newsletter_module
     if @newsletter_module.enabled?
       can :manage, Newsletter
-      can [:create, :read, :update, :destroy], NewsletterUser
+      can :crud, NewsletterUser
+      can [:read, :update], NewsletterSetting
+      cannot [:create, :destroy], NewsletterSetting
     else
-      cannot :manage, Newsletter
-      cannot :manage, NewsletterUser
+      cannot :manage, [Newsletter, NewsletterUser, NewsletterSetting]
+      cannot :manage, StringBox, optional_module_id: @newsletter_module.id unless @newsletter_module.enabled?
     end
   end
 
@@ -133,8 +138,10 @@ class Ability
   def blog_module
     if @blog_module.enabled?
       can :crud, Blog
+      can [:read, :update], BlogSetting
+      cannot [:create, :destroy], BlogSetting
     else
-      cannot :manage, Blog
+      cannot :manage, [Blog, BlogSetting]
     end
   end
 
@@ -156,8 +163,10 @@ class Ability
   def event_module
     if @event_module.enabled?
       can :crud, Event
+      can [:read, :update], EventSetting
+      cannot [:create, :destroy], EventSetting
     else
-      cannot :manage, Event
+      cannot :manage, [Event, EventSetting]
     end
   end
 
@@ -193,6 +202,46 @@ class Ability
       can :crud, Background
     else
       cannot :manage, Background
+    end
+  end
+
+  #
+  # == Adult
+  #
+  def adult_module
+    if @adult_module.enabled?
+      can [:read, :update], AdultSetting
+      cannot [:create, :destroy], AdultSetting
+    else
+      cannot :manage, AdultSetting
+      cannot :manage, StringBox, optional_module: { id: @adult_module.id }
+    end
+  end
+
+  #
+  # == Video
+  #
+  def video_module
+    @video_settings = VideoSetting.first
+    if @video_module.enabled?
+      can [:read, :update], [VideoSetting]
+      cannot [:create, :destroy], [VideoSetting]
+
+      if @video_settings.video_platform?
+        can [:read, :update, :destroy], VideoPlatform
+        cannot :create, VideoPlatform
+      else
+        cannot :manage, VideoPlatform
+      end
+
+      if @video_settings.video_upload?
+        can [:read, :update, :destroy], VideoUpload
+        cannot :create, VideoUpload
+      else
+        cannot :manage, VideoUpload
+      end
+    else
+      cannot :manage, [VideoPlatform, VideoUpload, VideoSubtitle, VideoSetting]
     end
   end
 end

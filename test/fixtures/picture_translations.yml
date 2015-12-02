@@ -1,0 +1,32 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+# Home
+home_fr:
+  <<: *DEFAULTS
+  picture_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
+  locale: fr
+  title: Image article d'accueil
+  description: <p>Image principale de l'article d'accueil</p>
+
+home_en:
+  <<: *DEFAULTS
+  picture_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
+  locale: en
+  title: Home article picture
+  description: <p>Main home article image</p>
+
+home_two_fr:
+  <<: *DEFAULTS
+  picture_id: <%= ActiveRecord::FixtureSet.identify(:home_two) %>
+  locale: fr
+  title: ~
+  description: ~
+
+home_two_en:
+  <<: *DEFAULTS
+  picture_id: <%= ActiveRecord::FixtureSet.identify(:home_two) %>
+  locale: en
+  title: ~
+  description: ~

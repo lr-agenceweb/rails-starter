@@ -17,18 +17,18 @@ class SocialHelperTest < ActionView::TestCase
     seo_tag_index(@category.decorate)
 
     # Basics
-    assert_equal 'Home', meta_tags[:title]
+    assert_equal 'Accueil', meta_tags[:title]
     assert_equal 'Description pour catégorie home', meta_tags[:description]
     assert_equal 'Mots-clés, pour, catégorie, home', meta_tags[:keywords]
 
     # Facebook
-    assert_equal 'Home | Rails Starter, Démarre rapidement', meta_tags[:og][:title]
+    assert_equal 'Accueil | Rails Starter, Démarre rapidement', meta_tags[:og][:title]
     assert_equal 'Description pour catégorie home', meta_tags[:og][:description]
     assert_equal root_url, meta_tags[:og][:url]
     assert_nil meta_tags[:og][:image]
 
     # Twitter
-    assert_equal 'Home | Rails Starter, Démarre rapidement', meta_tags[:twitter][:title]
+    assert_equal 'Accueil | Rails Starter, Démarre rapidement', meta_tags[:twitter][:title]
     assert_equal 'Description pour catégorie home', meta_tags[:twitter][:description]
     assert_equal root_url, meta_tags[:twitter][:url]
     assert_nil meta_tags[:twitter][:image]

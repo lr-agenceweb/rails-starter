@@ -89,6 +89,19 @@ staging:
 
 
 #
+# == VideoInfo
+#
+youtube_api_key: ~
+vimeo_api_key: ~
+
+
+#
+# == Adult module
+#
+adult_not_validated_popup_redirect_link: 'http://www.lr-agenceweb.fr'
+
+
+#
 # == Backup gem
 #
 production:

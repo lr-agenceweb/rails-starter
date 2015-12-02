@@ -25,6 +25,6 @@ window.SocialShareClass =
         SocialShareClass.openUrl("https://twitter.com/intent/tweet?url=#{url}&text=#{title}#{via_str}", popup)
       when 'facebook'
         SocialShareClass.openUrl("http://www.facebook.com/sharer.php?u=#{url}", popup)
-      when 'google_plus'
+      when 'google+'
         SocialShareClass.openUrl("https://plus.google.com/share?url=#{url}", popup)
     false

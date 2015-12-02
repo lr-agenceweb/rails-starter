@@ -1,4 +1,5 @@
 include MenuHelper
+include AssetsHelper
 
 ActiveAdmin.register Category do
   menu parent: I18n.t('admin_menu.config')
@@ -24,6 +25,9 @@ ActiveAdmin.register Category do
                   translations_attributes: [
                     :id, :locale, :content
                   ]
+                ],
+                video_upload_attributes: [
+                  :id, :video_file, :online, :position, :_destroy
                 ]
 
   decorate_with CategoryDecorator
@@ -36,6 +40,7 @@ ActiveAdmin.register Category do
     column :title_d
     column :div_color
     column :slider if slider_module.enabled?
+    column :video_upload if show_video_background?(video_settings, video_module)
     column :module if current_user.super_administrator?
 
     actions
@@ -49,6 +54,7 @@ ActiveAdmin.register Category do
           row :div_color
           row :slider if slider_module.enabled?
           row :module if current_user.super_administrator?
+          row :video_preview if show_video_background?(video_settings, video_module) && resource.video?
         end
       end
 
@@ -88,6 +94,7 @@ ActiveAdmin.register Category do
         end
 
         render 'admin/shared/referencement/form', f: f
+        render 'admin/shared/video_uploads/one', f: f if video_module.enabled? && video_settings.video_upload? && video_settings.video_background?
       end
 
       column do
@@ -105,8 +112,11 @@ ActiveAdmin.register Category do
   # == Controller
   #
   controller do
+    include Skippable
+    include Videoable
+
     def scoped_collection
-      super.includes menu: [:translations]
+      super.includes :video_upload, menu: [:translations]
     end
 
     def edit
@@ -125,6 +135,7 @@ ActiveAdmin.register Category do
       end
 
       params[:category].delete :background_attributes unless @background_module.enabled?
+      params[:category].delete :video_upload_attributes unless show_video_background?(@video_settings, @video_module)
 
       super
     end

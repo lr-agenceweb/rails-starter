@@ -1,27 +1,48 @@
 footer.footer-container#footer
-  .row.footer
-    .small-12.large-4.columns
-      |&nbsp;
-      == setting.newsletter(newsletter_user) if @newsletter_module.enabled?
+  .upper-footer
+    .row
+      .small-12.large-4.columns
+        |&nbsp;
+        == setting.newsletter(newsletter_user) if @newsletter_module.enabled?
 
-    .small-12.large-4.columns.credentials
-      == setting.credentials
+      .small-12.large-4.columns.credentials
+        == "#{setting.about} #{setting.admin_link}"
 
-    .small-12.large-4.columns.socials
-      - if setting.show_social? && @social_module.enabled?
-        h3 Follow me
-        ul.inline-list
-          li = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
+      .small-12.large-2.columns.socials
+        - if setting.show_social? && @social_module.enabled?
+          h3 Follow me
+          ul.inline-list
+            li = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
+
+            - unless @socials_follow.nil?
+              - @socials_follow.each do |social_follow|
+                li
+                  - ikon = social_follow.title
+                  - ikon = fa_icon "#{social_follow.font_ikon} 2x" if social_follow.decorate.font_ikon?
+                  - ikon = retina_image_tag(social_follow, :ikon, :small) if social_follow.decorate.ikon?
+                  = link_to ikon, social_follow.link, target: :_blank
 
           - unless @socials_share.nil?
-            - @socials_follow.each do |social_follow|
-              li
-                = link_to retina_image_tag(social_follow, :ikon, :small), social_follow.link, target: :_blank
+            h4 Share me
+            = social_share_buttons
 
-        - unless @socials_share.nil?
-          h4 Share me
-          = social_share_buttons
+      .small-12.large-2.columns
+        p == link_to(setting.logo_footer_site, 'http://www.lr-agenceweb.fr', target: :blank, title: 'L&R Agence web')
 
-  .row.lower-footer
-    .small-12.colunms
-      p.no-margin-bottom.text-center == t('footer.made_by', amour: fa_icon('heart'), company: link_to(image_tag('logo.png', width: '40'), 'http://www.lr-agenceweb.fr', target: :blank, title: 'L&R Agence web'))
+
+  .lower-footer
+    .row
+      .small-12.medium-8.columns
+        p.credentials
+          == setting.credentials
+          span<> -
+          span< = link_to @legal_notice_category.menu_title, legal_notices_path
+      .small-12.medium-4.columns
+        p.made-by
+          == I18n.t('footer.made_by', amour: "<span class='love'> #{fa_icon('heart')} </span>")
+          a< href="http://www.lr-agenceweb.fr" target="_blank" title="L&amp;R Agence web"
+            span.initials>
+              span.letter-l L
+              span.letter-esperluette &amp;
+              span.letter-r R
+            span Agence web

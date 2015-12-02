@@ -5,7 +5,10 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.string :slug
       t.text :content
+      t.boolean :show_as_gallery, default: false
+      t.boolean :allow_comments, default: true
       t.boolean :online, default: true
+      t.integer :position
       t.references :user, index: true
 
       t.timestamps null: false

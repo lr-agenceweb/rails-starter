@@ -18,6 +18,7 @@ module Admin
     #
     test 'should redirect to show page if logged in' do
       get :index
+      assert_response 301
       assert_redirected_to admin_plan_path(@map)
     end
 
@@ -47,6 +48,31 @@ module Admin
     test 'should not update if postcode is not an integer' do
       patch :update, id: @map, map: { location_attributes: { postcode: 'bad_value' } }
       assert_not assigns(:plan).valid?
+    end
+
+    #
+    # == Maintenance
+    #
+    test 'should not render maintenance even if enabled and SA' do
+      sign_in @super_administrator
+      assert_no_maintenance_backend(:show, @map)
+    end
+
+    test 'should not render maintenance even if enabled and Admin' do
+      sign_in @administrator
+      assert_no_maintenance_backend(:show, @map)
+    end
+
+    test 'should render maintenance if enabled and subscriber' do
+      sign_in @subscriber
+      assert_maintenance_backend
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should redirect to login if maintenance and not connected' do
+      sign_out @administrator
+      assert_maintenance_backend
+      assert_redirected_to new_user_session_path
     end
 
     #
@@ -117,6 +143,7 @@ module Admin
     private
 
     def initialize_test
+      @setting = settings(:one)
       @map = maps(:one)
       @map_module = optional_modules(:map)
 

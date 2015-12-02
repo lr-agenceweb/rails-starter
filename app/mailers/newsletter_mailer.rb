@@ -12,7 +12,11 @@ class NewsletterMailer < ApplicationMailer
   def welcome_user(newsletter_user)
     @newsletter_user = newsletter_user
     @newsletter_user.name = @newsletter_user.extract_name_from_email
-    @title = t('newsletter.welcome')
+    I18n.with_locale(@newsletter_user.lang) do
+      welcome_newsletter = NewsletterSetting.first
+      @title = welcome_newsletter.title_subscriber
+      @content = welcome_newsletter.content_subscriber
+    end
     @is_welcome_user = true
     @see_in_browser = true
 
@@ -25,10 +29,13 @@ class NewsletterMailer < ApplicationMailer
   # Email Newsletter
   def send_newsletter(newsletter_user, newsletter)
     @newsletter_user = newsletter_user
-    @newsletter = newsletter
-    @title = @newsletter.title
+    I18n.with_locale(@newsletter_user.lang) do
+      @newsletter = Newsletter.find(newsletter.id)
+      @title = @newsletter.title
+      @content = @newsletter.content
+    end
 
-    mail(to: @newsletter_user.email, subject: @newsletter.title) do |format|
+    mail(to: @newsletter_user.email, subject: @title) do |format|
       format.html
       format.text
     end

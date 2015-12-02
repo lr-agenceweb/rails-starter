@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917160436) do
+ActiveRecord::Schema.define(version: 20151103232909) do
+
+  create_table "adult_setting_translations", force: :cascade do |t|
+    t.integer  "adult_setting_id", limit: 4,     null: false
+    t.string   "locale",           limit: 255,   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "title",            limit: 255
+    t.text     "content",          limit: 65535
+  end
+
+  add_index "adult_setting_translations", ["adult_setting_id"], name: "index_adult_setting_translations_on_adult_setting_id", using: :btree
+  add_index "adult_setting_translations", ["locale"], name: "index_adult_setting_translations_on_locale", using: :btree
+
+  create_table "adult_settings", force: :cascade do |t|
+    t.string   "redirect_link", limit: 255
+    t.boolean  "enabled",                   default: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+  end
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
@@ -26,6 +45,12 @@ ActiveRecord::Schema.define(version: 20150917160436) do
   end
 
   add_index "backgrounds", ["attachable_type", "attachable_id"], name: "index_backgrounds_on_attachable_type_and_attachable_id", using: :btree
+
+  create_table "blog_settings", force: :cascade do |t|
+    t.boolean  "prev_next",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "blog_translations", force: :cascade do |t|
     t.integer  "blog_id",    limit: 4,     null: false
@@ -44,8 +69,8 @@ ActiveRecord::Schema.define(version: 20150917160436) do
     t.string   "title",           limit: 255
     t.string   "slug",            limit: 255
     t.text     "content",         limit: 65535
-    t.boolean  "allow_comments",                default: true
     t.boolean  "show_as_gallery",               default: false
+    t.boolean  "allow_comments",                default: true
     t.boolean  "online",                        default: true
     t.integer  "user_id",         limit: 4
     t.datetime "created_at",                                    null: false
@@ -105,6 +130,12 @@ ActiveRecord::Schema.define(version: 20150917160436) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   add_index "delayed_jobs", ["queue"], name: "delayed_jobs_queue", using: :btree
+
+  create_table "event_settings", force: :cascade do |t|
+    t.boolean  "prev_next",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",   limit: 4,     null: false
@@ -184,7 +215,7 @@ ActiveRecord::Schema.define(version: 20150917160436) do
     t.string   "locationable_type", limit: 255
     t.string   "address",           limit: 255
     t.string   "city",              limit: 255
-    t.integer  "postcode",          limit: 4
+    t.string   "postcode",          limit: 255
     t.float    "latitude",          limit: 24
     t.float    "longitude",         limit: 24
     t.string   "geocode_address",   limit: 255
@@ -224,6 +255,26 @@ ActiveRecord::Schema.define(version: 20150917160436) do
     t.datetime "updated_at",                                 null: false
   end
 
+  create_table "newsletter_setting_translations", force: :cascade do |t|
+    t.integer  "newsletter_setting_id", limit: 4,     null: false
+    t.string   "locale",                limit: 255,   null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "title_subscriber",      limit: 255
+    t.text     "content_subscriber",    limit: 65535
+  end
+
+  add_index "newsletter_setting_translations", ["locale"], name: "index_newsletter_setting_translations_on_locale", using: :btree
+  add_index "newsletter_setting_translations", ["newsletter_setting_id"], name: "index_newsletter_setting_translations_on_newsletter_setting_id", using: :btree
+
+  create_table "newsletter_settings", force: :cascade do |t|
+    t.boolean  "send_welcome_email",               default: true
+    t.string   "title_subscriber",   limit: 255
+    t.text     "content_subscriber", limit: 65535
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
   create_table "newsletter_translations", force: :cascade do |t|
     t.integer  "newsletter_id", limit: 4,     null: false
     t.string   "locale",        limit: 255,   null: false
@@ -236,16 +287,39 @@ ActiveRecord::Schema.define(version: 20150917160436) do
   add_index "newsletter_translations", ["locale"], name: "index_newsletter_translations_on_locale", using: :btree
   add_index "newsletter_translations", ["newsletter_id"], name: "index_newsletter_translations_on_newsletter_id", using: :btree
 
+  create_table "newsletter_user_role_translations", force: :cascade do |t|
+    t.integer  "newsletter_user_role_id", limit: 4,   null: false
+    t.string   "locale",                  limit: 255, null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "title",                   limit: 255
+  end
+
+  add_index "newsletter_user_role_translations", ["locale"], name: "index_newsletter_user_role_translations_on_locale", using: :btree
+  add_index "newsletter_user_role_translations", ["newsletter_user_role_id"], name: "index_eda908bed34c8eafcfa35f3b63d6111221f532d2", using: :btree
+
+  create_table "newsletter_user_roles", force: :cascade do |t|
+    t.integer  "rollable_id",   limit: 4
+    t.string   "rollable_type", limit: 255
+    t.string   "title",         limit: 255
+    t.string   "kind",          limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "newsletter_user_roles", ["rollable_type", "rollable_id"], name: "index_newsletter_user_roles_on_rollable_type_and_rollable_id", using: :btree
+
   create_table "newsletter_users", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.string   "lang",       limit: 255, default: "fr"
-    t.string   "role",       limit: 255, default: "subscriber"
-    t.string   "token",      limit: 255
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.string   "email",                   limit: 255
+    t.string   "lang",                    limit: 255, default: "fr"
+    t.string   "token",                   limit: 255
+    t.integer  "newsletter_user_role_id", limit: 4
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "newsletter_users", ["email"], name: "index_newsletter_users_on_email", unique: true, using: :btree
+  add_index "newsletter_users", ["newsletter_user_role_id"], name: "index_newsletter_users_on_newsletter_user_role_id", using: :btree
 
   create_table "newsletters", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -369,25 +443,29 @@ ActiveRecord::Schema.define(version: 20150917160436) do
   add_index "setting_translations", ["setting_id"], name: "index_setting_translations_on_setting_id", using: :btree
 
   create_table "settings", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "title",             limit: 255
-    t.string   "subtitle",          limit: 255
-    t.string   "phone",             limit: 255
-    t.string   "phone_secondary",   limit: 255
-    t.string   "email",             limit: 255
-    t.boolean  "show_breadcrumb",                 default: false
-    t.boolean  "show_social",                     default: true
-    t.boolean  "show_qrcode",                     default: false
-    t.boolean  "should_validate",                 default: true
-    t.boolean  "maintenance",                     default: false
-    t.string   "twitter_username",  limit: 255
+    t.string   "name",                     limit: 255
+    t.string   "title",                    limit: 255
+    t.string   "subtitle",                 limit: 255
+    t.string   "phone",                    limit: 255
+    t.string   "phone_secondary",          limit: 255
+    t.string   "email",                    limit: 255
+    t.boolean  "show_breadcrumb",                        default: false
+    t.boolean  "show_social",                            default: true
+    t.boolean  "show_qrcode",                            default: false
+    t.boolean  "should_validate",                        default: true
+    t.boolean  "maintenance",                            default: false
     t.datetime "logo_updated_at"
-    t.integer  "logo_file_size",    limit: 4
-    t.string   "logo_content_type", limit: 255
-    t.string   "logo_file_name",    limit: 255
-    t.text     "retina_dimensions", limit: 65535
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.integer  "logo_file_size",           limit: 4
+    t.string   "logo_content_type",        limit: 255
+    t.string   "logo_file_name",           limit: 255
+    t.datetime "logo_footer_updated_at"
+    t.integer  "logo_footer_file_size",    limit: 4
+    t.string   "logo_footer_content_type", limit: 255
+    t.string   "logo_footer_file_name",    limit: 255
+    t.text     "retina_dimensions",        limit: 65535
+    t.string   "twitter_username",         limit: 255
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   create_table "slide_translations", force: :cascade do |t|
@@ -442,12 +520,12 @@ ActiveRecord::Schema.define(version: 20150917160436) do
     t.string   "link",              limit: 255
     t.string   "kind",              limit: 255
     t.boolean  "enabled",                         default: true
-    t.string   "font_ikon",         limit: 255
     t.datetime "ikon_updated_at"
     t.integer  "ikon_file_size",    limit: 4
     t.string   "ikon_content_type", limit: 255
     t.string   "ikon_file_name",    limit: 255
     t.text     "retina_dimensions", limit: 65535
+    t.string   "font_ikon",         limit: 255
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
   end
@@ -465,14 +543,16 @@ ActiveRecord::Schema.define(version: 20150917160436) do
   add_index "string_box_translations", ["string_box_id"], name: "index_string_box_translations_on_string_box_id", using: :btree
 
   create_table "string_boxes", force: :cascade do |t|
-    t.string   "key",        limit: 255
-    t.string   "title",      limit: 255
-    t.text     "content",    limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "key",                limit: 255
+    t.string   "title",              limit: 255
+    t.text     "content",            limit: 65535
+    t.integer  "optional_module_id", limit: 4
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "string_boxes", ["key"], name: "index_string_boxes_on_key", using: :btree
+  add_index "string_boxes", ["optional_module_id"], name: "index_string_boxes_on_optional_module_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
@@ -502,6 +582,88 @@ ActiveRecord::Schema.define(version: 20150917160436) do
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
 
-  add_foreign_key "categories", "menus", name: "fk_categories_menu_id"
-  add_foreign_key "menu_translations", "menus", name: "fk_menu_translations_menu_id"
+  create_table "video_platform_translations", force: :cascade do |t|
+    t.integer  "video_platform_id", limit: 4,     null: false
+    t.string   "locale",            limit: 255,   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "title",             limit: 255
+    t.text     "description",       limit: 65535
+  end
+
+  add_index "video_platform_translations", ["locale"], name: "index_video_platform_translations_on_locale", using: :btree
+  add_index "video_platform_translations", ["video_platform_id"], name: "index_video_platform_translations_on_video_platform_id", using: :btree
+
+  create_table "video_platforms", force: :cascade do |t|
+    t.integer  "videoable_id",        limit: 4
+    t.string   "videoable_type",      limit: 255
+    t.string   "url",                 limit: 255
+    t.boolean  "native_informations",             default: false
+    t.boolean  "online",                          default: true
+    t.integer  "position",            limit: 4
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "video_platforms", ["videoable_type", "videoable_id"], name: "index_video_platforms_on_videoable_type_and_videoable_id", using: :btree
+
+  create_table "video_settings", force: :cascade do |t|
+    t.boolean  "video_platform",   default: true
+    t.boolean  "video_upload",     default: true
+    t.boolean  "video_background", default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  create_table "video_subtitles", force: :cascade do |t|
+    t.integer  "subtitleable_id",          limit: 4
+    t.string   "subtitleable_type",        limit: 255
+    t.boolean  "online",                               default: true
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.string   "subtitle_fr_file_name",    limit: 255
+    t.string   "subtitle_fr_content_type", limit: 255
+    t.integer  "subtitle_fr_file_size",    limit: 4
+    t.datetime "subtitle_fr_updated_at"
+    t.string   "subtitle_en_file_name",    limit: 255
+    t.string   "subtitle_en_content_type", limit: 255
+    t.integer  "subtitle_en_file_size",    limit: 4
+    t.datetime "subtitle_en_updated_at"
+  end
+
+  add_index "video_subtitles", ["subtitleable_type", "subtitleable_id"], name: "index_video_subtitles_on_subtitleable_type_and_subtitleable_id", using: :btree
+
+  create_table "video_upload_translations", force: :cascade do |t|
+    t.integer  "video_upload_id", limit: 4,     null: false
+    t.string   "locale",          limit: 255,   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "title",           limit: 255
+    t.text     "description",     limit: 65535
+  end
+
+  add_index "video_upload_translations", ["locale"], name: "index_video_upload_translations_on_locale", using: :btree
+  add_index "video_upload_translations", ["video_upload_id"], name: "index_video_upload_translations_on_video_upload_id", using: :btree
+
+  create_table "video_uploads", force: :cascade do |t|
+    t.integer  "videoable_id",            limit: 4
+    t.string   "videoable_type",          limit: 255
+    t.boolean  "online",                                default: true
+    t.integer  "position",                limit: 4
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.string   "video_file_file_name",    limit: 255
+    t.string   "video_file_content_type", limit: 255
+    t.integer  "video_file_file_size",    limit: 4
+    t.datetime "video_file_updated_at"
+    t.boolean  "video_file_processing"
+    t.text     "retina_dimensions",       limit: 65535
+    t.boolean  "video_autoplay",                        default: false
+    t.boolean  "video_loop",                            default: false
+    t.boolean  "video_controls",                        default: true
+    t.boolean  "video_mute",                            default: false
+  end
+
+  add_index "video_uploads", ["videoable_type", "videoable_id"], name: "index_video_uploads_on_videoable_type_and_videoable_id", using: :btree
+
 end

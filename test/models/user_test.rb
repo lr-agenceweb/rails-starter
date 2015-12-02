@@ -26,7 +26,12 @@ class UserTest < ActiveSupport::TestCase
   #
   # == Avatar
   #
-  test 'should be true if user avatar is present' do
+  test 'should be true if user avatar is present with file' do
+    assert_equal 'bart.png', @subscriber.avatar_file_name
+    # assert @subscriber.avatar? # Not working with travis
+  end
+
+  test 'should be false if user avatar is present without file' do
     assert_equal 'bart.jpg', @guest.avatar_file_name
     assert_not @guest.avatar?
   end
@@ -37,27 +42,27 @@ class UserTest < ActiveSupport::TestCase
 
   test 'should not upload avatar if mime type is not allowed' do
     [:original, :large, :medium, :small, :thumb].each do |size|
-      assert_nil @subscriber.avatar.path(size)
+      assert_nil @administrator.avatar.path(size)
     end
 
     attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
-    @subscriber.update_attributes(avatar: attachment)
+    @administrator.update_attributes(avatar: attachment)
 
     [:original, :large, :medium, :small, :thumb].each do |size|
-      assert_not_processed 'fake.txt', size, @subscriber.avatar
+      assert_not_processed 'fake.txt', size, @administrator.avatar
     end
   end
 
   test 'should upload avatar if mime type is allowed' do
     [:original, :large, :medium, :small, :thumb].each do |size|
-      assert_nil @subscriber.avatar.path(size)
+      assert_nil @administrator.avatar.path(size)
     end
 
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
-    @subscriber.update_attributes!(avatar: attachment)
+    @administrator.update_attributes!(avatar: attachment)
 
     [:original, :large, :medium, :small, :thumb].each do |size|
-      assert_processed 'bart.png', size, @subscriber.avatar
+      assert_processed 'bart.png', size, @administrator.avatar
     end
   end
 

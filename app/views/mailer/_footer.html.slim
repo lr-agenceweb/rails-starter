@@ -1,0 +1,10 @@
+tr
+  td.panel align="center"
+    center
+      span style="text-align:center;"
+        span> = setting.name
+        | -
+        span<> = link_to setting.title, root_url
+        | -
+        span< = Time.zone.now.year
+  td.expander

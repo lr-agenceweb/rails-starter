@@ -6,15 +6,15 @@ class BackgroundDecorator < ApplicationDecorator
   delegate_all
 
   def image_deco
-    retina_image_tag model, :image, :small
+    h.retina_image_tag model, :image, :small
   end
 
   def category_name
     model.attachable.menu_title
   end
 
-  def handle_background_tag(klass = '')
-    content_tag(:div, '', class: "background #{klass}", style: "background-image: url(#{model.self_image_url_by_size(:background)});", data: interchange_background)
+  def handle_background_tag(content = nil, klass = '')
+    content_tag(:div, content, class: "background #{klass}", style: "background-image: url(#{model.self_image_url_by_size(:background)});", data: interchange_background)
   end
 
   #
