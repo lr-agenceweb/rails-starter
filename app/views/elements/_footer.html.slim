@@ -32,8 +32,11 @@ footer.footer-container#footer
 
   .lower-footer
     .row
-      .small-12.medium-5.medium-offset-3.columns.credentials
-        p == setting.credentials
+      .small-12.medium-8.columns
+        p.credentials
+          == setting.credentials
+          span<> -
+          span< = link_to @legal_notice_category.menu_title, legal_notices_path
       .small-12.medium-4.columns
         p.made-by
           == I18n.t('footer.made_by', amour: "<span class='love'> #{fa_icon('heart')} </span>")

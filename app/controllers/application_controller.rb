@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? || request.headers['HTTP_DNT'] == '1' }
 
   before_action :set_setting_or_maintenance
+  before_action :set_legal_notices
 
   # Core
   include Languageable
@@ -52,6 +53,10 @@ class ApplicationController < ActionController::Base
     )
 
     render template: 'elements/maintenance', layout: 'maintenance' if maintenance? && !current_user_and_administrator?
+  end
+
+  def set_legal_notices
+    @legal_notice_category = Category.find_by(name: 'LegalNotice')
   end
 
   def set_host_name
