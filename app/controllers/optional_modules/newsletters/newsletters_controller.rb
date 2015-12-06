@@ -3,7 +3,6 @@
 #
 class NewslettersController < ApplicationController
   include NewsletterAid
-  before_action :set_newsletter_user, only: [:see_in_browser, :welcome_user]
   before_action :set_variables, only: [:see_in_browser, :welcome_user]
 
   # See Newsletter in browser
@@ -43,9 +42,5 @@ class NewslettersController < ApplicationController
   def set_variables
     @from_controller = true
     @map = Map.joins(:location).select('locations.id, locations.address, locations.city, locations.postcode').first
-  end
-
-  def set_newsletter_user
-    @newsletter_user = NewsletterUser.find(params[:newsletter_user_id])
   end
 end
