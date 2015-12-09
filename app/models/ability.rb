@@ -41,7 +41,7 @@ class Ability
 
   def administrator_privilege
     can :read, :all
-    can :manage, Post
+    can :manage, [Post, MailingUser]
     can :update, [Setting, Category]
     can [:read, :update], Menu
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
@@ -74,7 +74,7 @@ class Ability
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, EventSetting, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting, AdultSetting]
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, EventSetting, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting, AdultSetting, MailingUser]
   end
 
   def optional_modules_check

@@ -12,18 +12,9 @@
 #  updated_at :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  fullname: MyString
-  email: MyString
-  token: MyString
-  lang: MyString
-  archive: false
-
-two:
-  fullname: MyString
-  email: MyString
-  token: MyString
-  lang: MyString
+  fullname: Lorie
+  email: lorie@mailing.com
+  token: ZK3Nvdx_JZerQyUnTlFo5Q
+  lang: fr
   archive: false
