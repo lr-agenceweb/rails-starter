@@ -31,11 +31,24 @@ class MailingUsersControllerTest < ActionController::TestCase
     end
   end
 
+  #
+  # == Module disabled
+  #
+  test 'should render 404 if module is disabled' do
+    disable_optional_module @super_administrator, @mailing_module, 'Mailing' # in test_helper.rb
+    assert_raises(ActionController::RoutingError) do
+      delete :unsubscribe, locale: 'fr', id: @mailing_user.id, token: @mailing_user.token
+    end
+  end
+
   private
 
   def initialize_test
     @locales = I18n.available_locales
     @mailing_user = mailing_users(:one)
     @setting = settings(:one)
+    @mailing_module = optional_modules(:mailing)
+
+    @super_administrator = users(:anthony)
   end
 end

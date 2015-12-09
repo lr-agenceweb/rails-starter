@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     !cookies[:cookiebar_cnil].nil?
   end
 
+  def not_found
+    fail ActionController::RoutingError, 'Not Found'
+  end
+
   private
 
   def set_setting_or_maintenance
@@ -74,9 +78,5 @@ class ApplicationController < ActionController::Base
 
   def access_denied(exception)
     redirect_to admin_dashboard_path, alert: exception.message
-  end
-
-  def not_found
-    fail ActionController::RoutingError, 'Not Found'
   end
 end
