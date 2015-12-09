@@ -88,6 +88,9 @@ fr:
       about:
         one: À propos
         other: À propos
+      legal_notice:
+        one: Mention Légale
+        other: Mentions Légales
       setting:
         one: Paramètre
         other: Paramètres
