@@ -74,7 +74,7 @@ class Ability
   end
 
   def cannot_manage_optional_modules
-    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, EventSetting, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting, AdultSetting, MailingUser]
+    cannot :manage, [OptionalModule, GuestBook, NewsletterUser, NewsletterSetting, Comment, Blog, Slider, Event, EventSetting, Map, Newsletter, Social, Background, VideoUpload, VideoPlatform, VideoSubtitle, VideoSetting, AdultSetting, MailingUser, MailingSetting]
   end
 
   def optional_modules_check
@@ -252,8 +252,10 @@ class Ability
   def mailing_module
     if @mailing_module.enabled?
       can :manage, [MailingUser]
+      can [:read, :update], [MailingSetting]
+      cannot [:create, :destroy], [MailingSetting]
     else
-      cannot :manage, [MailingUser]
+      cannot :manage, [MailingUser, MailingSetting]
     end
   end
 end

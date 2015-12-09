@@ -3,3 +3,6 @@ fr:
   mailing:
     people: Nouvel utilisateur
     archive: Archivé
+
+    setting:
+      email: "%{email} (email définit dans les paramètres généraux du site)"

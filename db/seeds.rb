@@ -900,6 +900,14 @@ VideoSetting.create!(
 )
 
 #
+# == MailingSetting
+#
+puts 'Create mailing settings'
+MailingSetting.create!(
+  email: nil
+)
+
+#
 # == FriendlyId
 #
 puts 'Setting Friendly Id'

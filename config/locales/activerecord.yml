@@ -196,7 +196,9 @@ fr:
       mailing_user:
         one: Mailing Utilisateur
         other: Mailing Utilisateurs
-
+      mailing_setting:
+        one: Mailing configuration
+        other: Mailing configuration
 
     attributes:
       post:
@@ -482,6 +484,8 @@ fr:
         created_at: Ajouté le
         archive_status: Archivé ?
         lang: Langue
+      mailing_setting:
+        email_status: Email
 
       shared:
         created_at: Créé le

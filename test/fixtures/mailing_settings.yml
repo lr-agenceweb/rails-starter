@@ -1,0 +1,15 @@
+# == Schema Information
+#
+# Table name: mailing_settings
+#
+#  id         :integer          not null, primary key
+#  email      :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  email: ~
+
+two:
+  email: mailing@test.com

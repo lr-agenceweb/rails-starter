@@ -60,6 +60,8 @@ fr:
         email: Email de l'utilisateur à qui sera envoyé l'email
         archive: Si coché, l'utilisateur sera considéré comme archivé
         lang: Langue de l'utilisateur
+      mailing_setting:
+        email: Saisissez l'email d'où seront envoyés les emails. Si le champs est vide, l'email spécifé dans les paramètres généraux du site sera utilisé.
 
       adult:
         enabled: Activer / Désactiver le popup de validation de l'âge
