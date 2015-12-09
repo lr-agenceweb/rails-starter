@@ -1,15 +1,15 @@
 f.semantic_errors(*f.object.errors.keys)
 
-# f.columns do
-#   f.column do
-#     f.inputs t('activerecord.models.mailing_user.other') do
-#       f.input :mailing_users,
-#               as: :check_boxes,
-#               collection: MailingUser.all,
-#               label: false
-#     end
-#   end
-# end
+f.columns do
+  f.column do
+    f.inputs t('activerecord.models.mailing_user.other') do
+      f.input :mailing_users,
+              as: :check_boxes,
+              collection: MailingUser.all,
+              label: false
+    end
+  end
+end
 
 f.columns do
   f.column do

@@ -20,6 +20,9 @@ class MailingMessage < ActiveRecord::Base
   translates :title, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :content
 
+  has_many :mailing_users, through: :mailing_message_users
+  has_many :mailing_message_users, dependent: :destroy
+
   def sent_at_message
     return I18n.t('newsletter.sent_on', date: I18n.l(sent_at, format: :long)) if already_sent?
     '/'

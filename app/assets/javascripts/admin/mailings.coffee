@@ -45,7 +45,7 @@ preview_mailing_message = (element, method) ->
 
 # Vex alert before sending newsletter
 alert_before_send_mailing_message = ->
-  $('.vex-alert').on 'click', (e) ->
+  $('.vex-alert.mailing-message').on 'click', (e) ->
     e.preventDefault()
     $link = $(this)
     vex.dialog.confirm

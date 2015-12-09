@@ -12,16 +12,24 @@
 #  updated_at :datetime         not null
 #
 
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
 one:
+  <<: *DEFAULTS
   fullname: Lorie
   email: lorie@mailing.com
   token: ZK3Nvdx_JZerQyUnTlFo5Q
   lang: fr
   archive: false
+  mailing_messages: one
 
 two:
+  <<: *DEFAULTS
   fullname: Bruno
   email: bruno@mailing.com
   token: Xzq3Nm95dx_DZerQC9f3snp
   lang: fr
   archive: false
+  mailing_messages: two

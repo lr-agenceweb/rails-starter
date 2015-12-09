@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209161058) do
+ActiveRecord::Schema.define(version: 20151209195723) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -236,6 +236,14 @@ ActiveRecord::Schema.define(version: 20151209161058) do
 
   add_index "mailing_message_translations", ["locale"], name: "index_mailing_message_translations_on_locale", using: :btree
   add_index "mailing_message_translations", ["mailing_message_id"], name: "index_mailing_message_translations_on_mailing_message_id", using: :btree
+
+  create_table "mailing_message_users", force: :cascade do |t|
+    t.integer "mailing_user_id",    limit: 4
+    t.integer "mailing_message_id", limit: 4
+  end
+
+  add_index "mailing_message_users", ["mailing_message_id"], name: "index_mailing_message_users_on_mailing_message_id", using: :btree
+  add_index "mailing_message_users", ["mailing_user_id"], name: "index_mailing_message_users_on_mailing_user_id", using: :btree
 
   create_table "mailing_messages", force: :cascade do |t|
     t.string   "title",      limit: 255

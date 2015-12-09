@@ -19,6 +19,9 @@ class MailingUser < ActiveRecord::Base
   include Tokenable
   include Mailable
 
+  has_many :mailing_messages, through: :mailing_message_users
+  has_many :mailing_message_users, dependent: :destroy
+
   scope :archive, -> { where(archive: true) }
   scope :not_archive, -> { where.not(archive: true) }
 

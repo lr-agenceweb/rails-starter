@@ -4,6 +4,7 @@ ActiveAdmin.register MailingMessage do
   permit_params :id,
                 :token,
                 :sent_at,
+                mailing_user_ids: [],
                 translations_attributes: [
                   :id, :locale, :title, :content
                 ]
