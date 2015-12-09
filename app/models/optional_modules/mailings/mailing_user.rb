@@ -33,7 +33,7 @@ class MailingUser < ActiveRecord::Base
   validates :lang,
             presence: true,
             allow_blank: false,
-            inclusion: %w( fr en )
+            inclusion: I18n.available_locales.map { |i| i.to_s }
 
   def name
     "#{email} <small>(#{fullname}) #{self.decorate.archive_status}</small>".html_safe

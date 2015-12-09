@@ -77,5 +77,5 @@ Rails.application.routes.draw do
 
   # Mailings
   get '/mailing_user/unsubscribe/:id/:token', to: 'mailing_users#unsubscribe', as: :unsubscribe_mailing_user
-  get '/admin/mailing_messages/:id/send', to: 'admin/mailing_messages#sendmailing_message', as: :send_mailing_message
+  get '/admin/mailing_messages/:id/send', to: 'admin/mailing_messages#send_mailing_message', as: :send_mailing_message
 end

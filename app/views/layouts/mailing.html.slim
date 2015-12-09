@@ -98,7 +98,7 @@ html
                           table.seven.columns
                             tr
                               td
-                                p = "Bonjour#{@mailing_user.fullname.blank? ? ',' : ' ' +  @mailing_user.fullname + ','}"
+                                p = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
                                 = yield
                               td.expander
 
@@ -125,5 +125,4 @@ html
                               tr
                                 td.twelve.sub-column
                                   p
-                                    | Si vous ne souhaitez plus recevoir d'emailing de la part de #{@setting.title},
-                                    span<>= link_to 'désabonnez-vous ici', unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :blank
+                                    == I18n.t('mailing.footer_unsubscribe', owner: @setting.title, link: link_to(I18n.t('mailing.unsubscribe_link'), unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :blank))

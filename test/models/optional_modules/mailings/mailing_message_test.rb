@@ -11,6 +11,10 @@ class MailingMessageTest < ActiveSupport::TestCase
     assert_not_includes @mailing_message.mailing_users.map(&:fullname), @mailing_user_two.fullname
   end
 
+  test 'should not be linked anymore if message destroyed' do
+    skip 'Find a way to make this test pass'
+  end
+
   private
 
   def initialize_test

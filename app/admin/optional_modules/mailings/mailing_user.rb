@@ -46,7 +46,7 @@ ActiveAdmin.register MailingUser do
       f.input :email,
               hint: I18n.t('form.hint.mailing_user.email')
       f.input :lang,
-              collection: %w( fr en ),
+              collection: I18n.available_locales.map { |i| [i.to_s] },
               include_blank: false,
               hint: I18n.t('form.hint.mailing_user.lang'),
               input_html: { class: 'chosen-select' }

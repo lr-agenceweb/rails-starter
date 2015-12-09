@@ -54,8 +54,8 @@ ActiveAdmin.register MailingMessage do
 
     def send_mailing_message
       @mailing_message.update_attributes(sent_at: Time.zone.now)
-      @mailing_users = @mailing_message.customers
-      make_cold_call_message_with_i18n(@mailing_message, @mailing_users)
+      @mailing_users = @mailing_message.mailing_users
+      make_mailing_message_with_i18n(@mailing_message, @mailing_users)
 
       flash[:notice] = I18n.t('mailing.notice_sending', count: @mailing_users.count)
       make_redirect
@@ -70,7 +70,7 @@ ActiveAdmin.register MailingMessage do
 
     private
 
-    def make_cold_call_message_with_i18n(message, mailing_users)
+    def make_mailing_message_with_i18n(message, mailing_users)
       mailing_users.each do |user|
         MailingMessageJob.set(wait: 3.seconds).perform_later(user, message)
       end
