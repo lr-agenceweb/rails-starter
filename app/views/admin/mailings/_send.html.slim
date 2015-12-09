@@ -1,0 +1,19 @@
+/ - if resource.customers.count > 0
+/   p
+/     = link_to "Envoyer le mail uniquement aux #{resource.customers.count} personnes cochées lors de la création du mail",
+/                  send_cold_call_message_for_checked_path(resource.id),
+/                  data: { vex_alert: t('cold_calling.send') },
+/                  class: 'button alert vex-alert cold-call'
+/   p == resource.customers.map(&:name).join('<br />') unless params[:action] == 'index'
+
+
+/ - customers = Customer.all
+/ - if customers.count > 0
+/   br
+/   br
+/   p
+/     = link_to "Forcer l'envoie du mail à TOUS les clients (répondus / non répondus /  archivés)",
+/                  send_cold_call_message_force_path(resource.id),
+/                  data: { vex_alert: t('cold_calling.send') },
+/                  class: 'button alert vex-alert cold-call'
+/     p == customers.map(&:name).join('<br />') unless params[:action] == 'index'

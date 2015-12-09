@@ -491,6 +491,11 @@ fr:
         email_status: Email
       mailing_message:
         title: Sujet
+        preview: Prévisualisation
+        status: Envoyé ?
+        sent_at: Envoyé le
+        send_link: Envoyer
+        live_preview: Prévisualisation en direct
 
       shared:
         created_at: Créé le
