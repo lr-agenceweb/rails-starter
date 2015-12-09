@@ -25,7 +25,7 @@ module Admin
       assert_response :success
     end
 
-    test 'should render 404 if access show page' do
+    test 'should get show page if logged in' do
       get :show, id: @mailing_user
       assert_response :success
     end

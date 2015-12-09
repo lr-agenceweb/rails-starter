@@ -40,7 +40,7 @@ ActiveAdmin.register MailingSetting do
     private
 
     def redirect_to_show
-      redirect_to admin_mailing_setting_path(MailingSetting.first)
+      redirect_to admin_mailing_setting_path(MailingSetting.first), status: 301
     end
   end
 end
