@@ -34,12 +34,16 @@ fr:
   allow_comments:
     'true': Commentaires autorisés
     'false': Article non commentable
+  archive:
+    'true': Archivé
+    'false': Non archivé
   subtitles:
     'true': Sous-titres présents
     'false': Sous-titres absents
   native_informations:
     'true': Informations natives activées
     'false': Informations natives désactivées
+  all: Tous
   additional: Informations complémentaires
   general: Informations générales
   prev: Précédent

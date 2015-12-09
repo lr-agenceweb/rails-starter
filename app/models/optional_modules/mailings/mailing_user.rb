@@ -16,4 +16,13 @@
 # == MailingUser Model
 #
 class MailingUser < ActiveRecord::Base
+  include Tokenable
+  include Mailable
+
+  scope :archive, -> { where(archive: true) }
+  scope :not_archive, -> { where.not(archive: true) }
+
+  def name
+    "#{email} <small>(#{fullname}) #{self.decorate.archive_status}</small>".html_safe
+  end
 end

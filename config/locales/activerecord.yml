@@ -189,6 +189,9 @@ fr:
       contact:
         one: Contact
         other: Contacts
+      mailing_user:
+        one: Mailing Utilisateur
+        other: Mailing Utilisateurs
 
 
     attributes:
@@ -468,6 +471,13 @@ fr:
         font_ikon: Icône
         status: État
         delete_ikon: Supprimer l'icône
+
+      mailing_user:
+        fullname: Nom complet
+        archive: Archivé ?
+        created_at: Ajouté le
+        archive_status: Archivé ?
+        lang: Langue
 
       shared:
         created_at: Créé le

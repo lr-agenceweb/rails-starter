@@ -55,6 +55,12 @@ fr:
       newsletter_user_role:
         title: Rôle de l'inscrit à la newsletter
 
+      mailing_user:
+        fullname: Nom complet de l'utilisateur à qui sera envoyé l'email
+        email: Email de l'utilisateur à qui sera envoyé l'email
+        archive: Si coché, l'utilisateur sera considéré comme archivé
+        lang: Langue de l'utilisateur
+
       adult:
         enabled: Activer / Désactiver le popup de validation de l'âge
         title: Titre du message d'accueil dans la popup
