@@ -41,7 +41,7 @@ class Ability
 
   def administrator_privilege
     can :read, :all
-    can :manage, [Post, MailingUser]
+    can :manage, [Post]
     can :update, [Setting, Category]
     can [:read, :update], Menu
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
@@ -89,6 +89,7 @@ class Ability
     background_module
     adult_module
     video_module
+    mailing_module
   end
 
   #
@@ -242,6 +243,17 @@ class Ability
       end
     else
       cannot :manage, [VideoPlatform, VideoUpload, VideoSubtitle, VideoSetting]
+    end
+  end
+
+  #
+  # == Mailing
+  #
+  def mailing_module
+    if @mailing_module.enabled?
+      can :manage, [MailingUser]
+    else
+      cannot :manage, [MailingUser]
     end
   end
 end

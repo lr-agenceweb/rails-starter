@@ -52,7 +52,7 @@ module Admin
     #
     test 'should not destroy user if logged in as subscriber' do
       sign_in @subscriber
-      assert_no_difference 'NewsletterUser.count' do
+      assert_no_difference 'MailingUser.count' do
         delete :destroy, id: @mailing_user
       end
     end
@@ -135,25 +135,25 @@ module Admin
       assert ability.can?(:destroy, @mailing_user), 'should be able to destroy'
     end
 
-    # #
-    # # == Module disabled
-    # #
-    # test 'should not access page if newsletter module is disabled' do
-    #   disable_optional_module @super_administrator, @mailing_module, 'Mailing' # in test_helper.rb
-    #   sign_in @super_administrator
-    #   assert_crud_actions(@mailing_user, admin_dashboard_path, model_name, no_show: true)
-    #   sign_in @administrator
-    #   assert_crud_actions(@mailing_user, admin_dashboard_path, model_name, no_show: true)
-    #   sign_in @subscriber
-    #   assert_crud_actions(@mailing_user, admin_dashboard_path, model_name, no_show: true)
-    # end
+    #
+    # == Module disabled
+    #
+    test 'should not access page if mailing module is disabled' do
+      disable_optional_module @super_administrator, @mailing_module, 'Mailing' # in test_helper.rb
+      sign_in @super_administrator
+      assert_crud_actions(@mailing_user, admin_dashboard_path, model_name)
+      sign_in @administrator
+      assert_crud_actions(@mailing_user, admin_dashboard_path, model_name)
+      sign_in @subscriber
+      assert_crud_actions(@mailing_user, admin_dashboard_path, model_name)
+    end
 
     private
 
     def initialize_test
       @setting = settings(:one)
       @mailing_user = mailing_users(:one)
-      # @mailing_module = optional_modules(:newsletter)
+      @mailing_module = optional_modules(:mailing)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)
