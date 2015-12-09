@@ -60,6 +60,10 @@ fr:
             email:
               blank: N'oubliez pas de renseigner votre email ;)
               taken: Cet email n'est pas disponible :(
+        mailing_user:
+          attributes:
+            email:
+              email: n'est pas valide
         guest_book:
           attributes:
             email:
