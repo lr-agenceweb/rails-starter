@@ -908,6 +908,36 @@ MailingSetting.create!(
 )
 
 #
+# == MailingUser
+#
+puts 'Creating users for mailing'
+10.times do
+  MailingUser.create(
+    fullname: Faker::Name.name,
+    email: Faker::Internet.email,
+    lang: @locales.include?(:en) ? ['fr', 'en'].sample : 'fr',
+    archive: [true, false].sample
+  )
+end
+
+#
+# == MailingMessage
+#
+puts 'Creating email message'
+mailing_message = MailingMessage.create!(
+  title: "Titre de l'email en Français",
+  content: "Contenu du mailing en Français"
+)
+if @locales.include?(:en)
+  MailingMessage::Translation.create!(
+    mail_mailing_id: mailing_message.id,
+    locale: 'en',
+    title: 'Title email in english',
+    content: 'English mailing content'
+  )
+end
+
+#
 # == FriendlyId
 #
 puts 'Setting Friendly Id'
