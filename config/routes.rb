@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'mailing_user/unsubscribe'
+
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -54,8 +56,7 @@ Rails.application.routes.draw do
     get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
     get '/admin/newsletters/:id/preview', to: 'admin/letters#preview', as: :preview_newsletter
 
-    # Mailing
-    get '/mailing_user/unsubscribe/:mailing_user_id/:token', to: 'mailing_users#unsubscribe', as: :unsubscribe_mailing_user
+    # Mailings
     get '/mailing_messages/:id-:token/:mailing_user_id/:mailing_user_token', to: 'mailing_messages#preview_in_browser', as: :preview_in_browser_mailing_message
     get '/admin/mailing_messages/:id/preview', to: 'admin/mailing_messages#preview', as: :preview_mailing_message
 
@@ -73,4 +74,7 @@ Rails.application.routes.draw do
   resources :newsletter_users, only: [:create]
   get '/admin/newsletters/:id/send', to: 'admin/letters#send_newsletter', as: :send_newsletter_for_subscribers
   get '/admin/newsletter_test/:id/send', to: 'admin/letters#send_newsletter_test', as: :send_newsletter_for_testers
+
+  # Mailings
+  get '/mailing_user/unsubscribe/:id/:token', to: 'mailing_users#unsubscribe', as: :unsubscribe_mailing_user
 end

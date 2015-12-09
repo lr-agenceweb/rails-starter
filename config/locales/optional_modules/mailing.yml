@@ -6,6 +6,8 @@ fr:
     preview: Prévisualisation du mail à envoyer
     notice_sending: "Le mail est en train d'être envoyé à %{count} personne(s)"
     preview_in_browser: Voir la version en ligne
+    unsubscribe: "Votre email a bien été retiré de notre liste. Vous ne recevrez plus de mails de %{company}"
+
 
     setting:
       email: "%{email} (email définit dans les paramètres généraux du site)"

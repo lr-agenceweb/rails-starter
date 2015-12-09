@@ -126,4 +126,4 @@ html
                                 td.twelve.sub-column
                                   p
                                     | Si vous ne souhaitez plus recevoir d'emailing de la part de #{@setting.title},
-                                    / span<>= link_to 'désabonnez-vous ici', unsusbcribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :blank
+                                    span<>= link_to 'désabonnez-vous ici', unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :blank
