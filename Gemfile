@@ -161,6 +161,7 @@ group :development do
   gem 'quiet_assets', '~> 1.0.2'
   gem 'seed_dump'
   gem 'annotate', '~> 2.6.5'
+  gem 'faker'
 
   # == Server
   gem 'unicorn-rails'
