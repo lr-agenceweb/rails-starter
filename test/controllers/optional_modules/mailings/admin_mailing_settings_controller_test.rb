@@ -36,7 +36,6 @@ module Admin
       assert_redirected_to admin_mailing_setting_path(@mailing_setting)
     end
 
-
     test 'should save if email is blank' do
       patch :update, id: @mailing_setting, mailing_setting: { email: '' }
       assert assigns(:mailing_setting).valid?
