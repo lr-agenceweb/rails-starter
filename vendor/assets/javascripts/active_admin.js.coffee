@@ -8,6 +8,7 @@
 #= require admin/froala_editor
 #= require admin/chosen
 #= require admin/newsletters_preview
+#= require admin/mailings
 #= require admin/counter_letters
 #= require gmaps.js
 #= require globals/_functions

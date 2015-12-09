@@ -199,6 +199,9 @@ fr:
       mailing_setting:
         one: Mailing configuration
         other: Mailing configuration
+      mailing_message:
+        one: Mailing Message
+        other: Mailing Messages
 
     attributes:
       post:
@@ -486,6 +489,8 @@ fr:
         lang: Langue
       mailing_setting:
         email_status: Email
+      mailing_message:
+        title: Sujet
 
       shared:
         created_at: Créé le

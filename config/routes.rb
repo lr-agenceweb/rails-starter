@@ -54,6 +54,12 @@ Rails.application.routes.draw do
     get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
     get '/admin/newsletters/:id/preview', to: 'admin/letters#preview', as: :preview_newsletter
 
+    # Mailing
+    get '/mailing_user/unsubscribe/:mailing_user_id/:token', to: 'mailing_users#unsubscribe', as: :unsubscribe_mailing_user
+    get '/mailing_messages/:id-:token/:mailing_user_id/:mailing_user_token', to: 'mailing_messages#preview_in_browser', as: :preview_in_browser_mailing_message
+    get '/admin/mailing_messages/:id/preview', to: 'admin/mailing_messages#preview', as: :preview_mailing_message
+
+
     # Mapbox popup content
     get 'contact/mapbox-popup', to: 'contacts#mapbox_popup', as: :mapbox_popup
 

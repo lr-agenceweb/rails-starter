@@ -1,0 +1,129 @@
+doctype strict
+html
+  head
+    meta charset='utf-8'
+    meta content=('text/html; charset=UTF-8') http-equiv='Content-Type'
+    title = @title
+    meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
+    link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'
+    = stylesheet_link_tag 'email', media: 'all'
+
+    body
+      table.body
+        tr
+          td.center align="center" valign="top"
+            center
+
+              / Upper header
+              table.container
+                - unless @hide_preview_link
+                  tr.upper-header
+                    td
+                      table.row
+                        tr
+                          td.wrapper.last
+                            table.twelve.columns
+                              tr
+                                td.twelve.sub-columns
+                                  p.preview-link = link_to I18n.t('mailing.preview_in_browser'), preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token), target: :blank
+                                td.expander
+
+
+              table.header
+                tr
+                  td.center align="center"
+                    center
+                      table.container
+                        tr
+                          td.wrapper.last
+                            table.twelve.columns
+                              = render 'mailer/header', setting: @setting, title: "#{@title}"
+
+
+              table.container.content-container
+                tr
+                  td
+                    table.row
+                      tr
+                        td.wrapper.about-content
+                          table.five.columns
+                            tr
+                              td.about-content-up
+                                p.no-margin-bottom Nous sommes des passionnés qui maîtrisent les technologies web.
+                                p.important Notre objectif ?
+                                p.no-margin-bottom retenir le visiteur et qu’il parcourt le reste de votre site.
+
+                                table
+                                  tr
+                                    td
+                                      <div><!--[if mso]>
+                                        <br />
+                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.lr-agenceweb.fr" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="3%" stroke="f" fillcolor="#0c708d">
+                                          <w:anchorlock/>
+                                          <center>
+                                        <![endif]-->
+                                            <a href="http://www.lr-agenceweb.fr" target="_blank" style="background-color:#0c708d;" class="btn-style">
+                                              | Visiter notre site
+                                            </a>
+                                        <!--[if mso]>
+                                          </center>
+                                        </v:roundrect>
+                                      <![endif]--></div>
+                              td.expander
+
+                          table.five.columns
+                            tr
+                              td.about-content-down
+                                p "Membre de Coop'Alpha, elle nous soutient dans les démarches administratives et comptables, nous permettons ainsi de nous concentrer sur notre coeur de métier, la conception de sites internet."
+
+                                table
+                                  tr
+                                    td
+                                      <div><!--[if mso]>
+                                        <br />
+                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.coopalpha.coop" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="3%" stroke="f" fillcolor="#ee732a">
+                                          <w:anchorlock/>
+                                          <center>
+                                        <![endif]-->
+                                            <a href="http://www.coopalpha.coop" target="_blank" style="background-color:#ee732a;" class="btn-style">
+                                              | Visiter Coop'Alpha
+                                            </a>
+                                        <!--[if mso]>
+                                          </center>
+                                        </v:roundrect>
+                                      <![endif]--></div>
+                              td.expander
+
+                        td.wrapper.main-content
+                          table.seven.columns
+                            tr
+                              td
+                                p = "Bonjour#{@mailing_user.fullname.blank? ? ',' : ' ' +  @mailing_user.fullname + ','}"
+                                = yield
+                              td.expander
+
+
+              table.upper-footer
+                tr
+                  td.center align="center"
+                    center
+                      table.container
+                        tr
+                          td.wrapper.last
+                            table.twelve.columns
+                              = render 'mailer/footer'
+
+
+              table.lower-footer
+                tr
+                  td.center align="center"
+                    center
+                      table.container
+                        tr
+                          td.wrapper.last
+                            table.twelve.columns
+                              tr
+                                td.twelve.sub-column
+                                  p
+                                    | Si vous ne souhaitez plus recevoir d'emailing de la part de #{@setting.title},
+                                    / span<>= link_to 'désabonnez-vous ici', unsusbcribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :blank
