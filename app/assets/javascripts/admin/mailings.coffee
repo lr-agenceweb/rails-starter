@@ -1,5 +1,6 @@
 $(document).on 'ready page:load page:restore', ->
   alert_before_send_mailing_message()
+  set_selection_buttons()
 
   $('a.mailing_message_preview_button.existing_record').on 'click', (e) ->
     e.preventDefault()
@@ -41,6 +42,28 @@ preview_mailing_message = (element, method) ->
       return false
     error: (jqXHR, textStatus, errorThrown) ->
       console.log 'Error'
+
+
+# Select all / Deselect all mailing users
+set_selection_buttons = ->
+  if $('form.formtastic.mailing_message').length
+    $select_btns = $('<div class="actions-customers"><div class="select-btn-container"><a class="button select_all">Séléctionner tous le monde</a><a class="button select_none">Désélctionner tous le monde</a></div></div>')
+    $('.inputs .check_boxes').each (i, el) ->
+      $(el).find('.choices-group').before $select_btns.clone()
+      return
+    $('.inputs').on('click', '.select_all', ->
+      $check_boxes = $(this).parents('.actions-customers').next('.choices-group').find('input')
+      $check_boxes.each ->
+        @checked = true
+        return
+      false
+    ).on 'click', '.select_none', ->
+      $check_boxes = $(this).parents('.actions-customers').next('.choices-group').find('input')
+      $check_boxes.each ->
+        @checked = false
+        return
+      false
+    return
 
 
 # Vex alert before sending newsletter
