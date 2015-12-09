@@ -31,10 +31,25 @@ module Admin
       assert_response :success
     end
 
-    # Valid params
-    test 'should update mailin_setting if logged in' do
-      patch :update, id: @mailing_setting, mailin_setting: {}
+    test 'should update mailing_setting if logged in' do
+      patch :update, id: @mailing_setting, mailing_setting: {}
       assert_redirected_to admin_mailing_setting_path(@mailing_setting)
+    end
+
+
+    test 'should save if email is blank' do
+      patch :update, id: @mailing_setting, mailing_setting: { email: '' }
+      assert assigns(:mailing_setting).valid?
+    end
+
+    test 'should not save if email is set but not correct' do
+      patch :update, id: @mailing_setting, mailing_setting: { email: 'mail' }
+      assert_not assigns(:mailing_setting).valid?
+    end
+
+    test 'should save if email is correct' do
+      patch :update, id: @mailing_setting, mailing_setting: { email: 'mailing@test.com' }
+      assert assigns(:mailing_setting).valid?
     end
 
     #
