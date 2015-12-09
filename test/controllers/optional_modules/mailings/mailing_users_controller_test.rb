@@ -31,6 +31,14 @@ class MailingUsersControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should not unsubscribe newsletter user N°2 by N°1' do
+    assert_no_difference ['MailingUser.count'] do
+      assert_raises(ActionController::RoutingError) do
+        delete :unsubscribe, locale: 'fr', id: @mailing_user_two.id, token: @mailing_user.token
+      end
+    end
+  end
+
   #
   # == Module disabled
   #
@@ -46,6 +54,7 @@ class MailingUsersControllerTest < ActionController::TestCase
   def initialize_test
     @locales = I18n.available_locales
     @mailing_user = mailing_users(:one)
+    @mailing_user_two = mailing_users(:two)
     @setting = settings(:one)
     @mailing_module = optional_modules(:mailing)
 

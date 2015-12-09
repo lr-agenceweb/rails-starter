@@ -18,3 +18,10 @@ one:
   token: ZK3Nvdx_JZerQyUnTlFo5Q
   lang: fr
   archive: false
+
+two:
+  fullname: Bruno
+  email: bruno@mailing.com
+  token: Xzq3Nm95dx_DZerQC9f3snp
+  lang: fr
+  archive: false
