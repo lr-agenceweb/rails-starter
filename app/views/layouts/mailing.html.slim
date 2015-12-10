@@ -49,6 +49,7 @@ html
                           table.eight.columns
                             tr
                               td.text-pad
+                                br
                                 p = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
                                 = yield
                               td.expander
@@ -76,13 +77,17 @@ html
 
                                             p.text-center.no-margin-bottom
                                               <!--[if mso]>
-                                                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.lr-agenceweb.fr" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="3%" stroke="f" fillcolor="#0c708d">
+                                                br
+                                                br
+                                                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.lr-agenceweb.fr" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="8%" stroke="f" fillcolor="#0c708d">
                                                   <w:anchorlock/>
+                                                  <center>
                                                 <![endif]-->
                                                     <a href="http://www.lr-agenceweb.fr" target="_blank" style="background-color:#0c708d;" class="btn-style">
                                                       | Visiter notre site
                                                     </a>
                                                 <!--[if mso]>
+                                                  <center>
                                                 </v:roundrect>
                                               <![endif]-->
                                           td.expander
@@ -94,20 +99,23 @@ html
                                           td.about-content-right
                                             p
                                               | “Avec le soutien de
-                                              span.weight-500< Coop’Alpha
+                                              span.weight-500<> Coop’Alpha
                                               | pour les démarches administratives et comptables, nous restons concentrés sur notre coeur de métier,
                                               span.weight-500< la conception de sites internet
                                               | .”
 
                                             p.text-center.no-margin-bottom
                                               <!--[if mso]>
-                                                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.coopalpha.coop" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="3%" stroke="f" fillcolor="#ee732a">
+                                                br
+                                                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.coopalpha.coop" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="8%" stroke="f" fillcolor="#ee732a">
                                                   <w:anchorlock/>
+                                                  <center>
                                                 <![endif]-->
                                                     <a href="http://www.coopalpha.coop" target="_blank" style="background-color:#ee732a;" class="btn-style">
                                                       | Visiter Coop'Alpha
                                                     </a>
                                                 <!--[if mso]>
+                                                  </center>
                                                 </v:roundrect>
                                             <![endif]-->
                                           td.expander
@@ -117,7 +125,7 @@ html
                 tr
                   td.center align="center"
                     center
-                      table.container
+                      table.row
                         tr
                           td.wrapper.last
                             table.twelve.columns

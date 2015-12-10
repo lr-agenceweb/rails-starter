@@ -9,7 +9,7 @@
       margin: 5px 0
     .about-content-left
       background-color: $secondary-color
-      max-height: 175px
+      height: 175px
       .btn-style
         margin-top: 63px
     .about-content-right
@@ -28,7 +28,6 @@
 
 .btn-style
   border-radius: 3px
-  color: $white !important
   display: inline-block
   font-family: 'Ubuntu', 'Arial', sans-serif
   font-size: 11px
@@ -38,6 +37,9 @@
   text-decoration: none
   width: 150px
   -webkit-text-size-adjust: none
+
+  &:link, &:visited, &:hover, &:active
+    color: $white
 
 .about-content
   .btn-style
