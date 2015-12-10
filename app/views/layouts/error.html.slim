@@ -13,6 +13,11 @@ html lang="#{@language}"
     = csrf_meta_tag
 
   body
-    #wrapper.wrapper
+    main#wrapper.wrapper
+      = render 'elements/header'
+
       .l-container
         == yield
+      .push
+
+    = render 'elements/footer', newsletter_user: @newsletter_user
