@@ -7,6 +7,6 @@ class MailingSettingDecorator < ApplicationDecorator
 
   def email_status
     return email unless model.email.blank?
-    I18n.t('mailing.setting.email', email: Setting.first.email)
+    Setting.first.email
   end
 end
