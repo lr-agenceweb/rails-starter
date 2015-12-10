@@ -29,7 +29,7 @@ html
                                 td.expander
 
 
-              table.header
+              table.container.header
                 tr
                   td.center align="center"
                     center
@@ -42,68 +42,78 @@ html
 
               table.container.content-container
                 tr
-                  td
+                  td.main-content
                     table.row
                       tr
-                        td.wrapper.about-content
-                          table.five.columns
+                        td.wrapper.offset-by-two.last
+                          table.eight.columns
                             tr
-                              td.about-content-up
-                                p.no-margin-bottom Nous sommes des passionnés qui maîtrisent les technologies web.
-                                p.important Notre objectif ?
-                                p.no-margin-bottom retenir le visiteur et qu’il parcourt le reste de votre site.
-
-                                table
-                                  tr
-                                    td
-                                      <div><!--[if mso]>
-                                        <br />
-                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.lr-agenceweb.fr" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="3%" stroke="f" fillcolor="#0c708d">
-                                          <w:anchorlock/>
-                                          <center>
-                                        <![endif]-->
-                                            <a href="http://www.lr-agenceweb.fr" target="_blank" style="background-color:#0c708d;" class="btn-style">
-                                              | Visiter notre site
-                                            </a>
-                                        <!--[if mso]>
-                                          </center>
-                                        </v:roundrect>
-                                      <![endif]--></div>
-                              td.expander
-
-                          table.five.columns
-                            tr
-                              td.about-content-down
-                                p "Membre de Coop'Alpha, elle nous soutient dans les démarches administratives et comptables, nous permettons ainsi de nous concentrer sur notre coeur de métier, la conception de sites internet."
-
-                                table
-                                  tr
-                                    td
-                                      <div><!--[if mso]>
-                                        <br />
-                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.coopalpha.coop" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="3%" stroke="f" fillcolor="#ee732a">
-                                          <w:anchorlock/>
-                                          <center>
-                                        <![endif]-->
-                                            <a href="http://www.coopalpha.coop" target="_blank" style="background-color:#ee732a;" class="btn-style">
-                                              | Visiter Coop'Alpha
-                                            </a>
-                                        <!--[if mso]>
-                                          </center>
-                                        </v:roundrect>
-                                      <![endif]--></div>
-                              td.expander
-
-                        td.wrapper.main-content
-                          table.seven.columns
-                            tr
-                              td
+                              td.text-pad
                                 p = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
                                 = yield
                               td.expander
 
 
-              table.upper-footer
+              table.container.content-container
+                tr
+                  td
+                    table.row
+                      tr
+                        td.last.about-content
+                          table.twelve.columns
+                            tr
+                              td.no-padding-bottom
+                                table.row
+                                  tr
+
+                                    // Left block
+                                    td.wrapper.fix-padding-block-left
+                                      table.six.columns
+                                        tr
+                                          td.about-content-left
+                                            p.important Notre objectif ?
+                                            p retenir le visiteur et qu’il parcourt le reste de votre site.
+
+                                            p.text-center.no-margin-bottom
+                                              <!--[if mso]>
+                                                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.lr-agenceweb.fr" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="3%" stroke="f" fillcolor="#0c708d">
+                                                  <w:anchorlock/>
+                                                <![endif]-->
+                                                    <a href="http://www.lr-agenceweb.fr" target="_blank" style="background-color:#0c708d;" class="btn-style">
+                                                      | Visiter notre site
+                                                    </a>
+                                                <!--[if mso]>
+                                                </v:roundrect>
+                                              <![endif]-->
+                                          td.expander
+
+                                    // Right block
+                                    td.wrapper.last.fix-padding-block-right
+                                      table.six.columns
+                                        tr
+                                          td.about-content-right
+                                            p
+                                              | “Avec le soutien de
+                                              span.weight-500< Coop’Alpha
+                                              | pour les démarches administratives et comptables, nous restons concentrés sur notre coeur de métier,
+                                              span.weight-500< la conception de sites internet
+                                              | .”
+
+                                            p.text-center.no-margin-bottom
+                                              <!--[if mso]>
+                                                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.coopalpha.coop" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="3%" stroke="f" fillcolor="#ee732a">
+                                                  <w:anchorlock/>
+                                                <![endif]-->
+                                                    <a href="http://www.coopalpha.coop" target="_blank" style="background-color:#ee732a;" class="btn-style">
+                                                      | Visiter Coop'Alpha
+                                                    </a>
+                                                <!--[if mso]>
+                                                </v:roundrect>
+                                            <![endif]-->
+                                          td.expander
+
+
+              table.container.upper-footer
                 tr
                   td.center align="center"
                     center
@@ -114,7 +124,7 @@ html
                               = render 'mailer/footer'
 
 
-              table.lower-footer
+              table.container.lower-footer
                 tr
                   td.center align="center"
                     center
@@ -123,6 +133,6 @@ html
                           td.wrapper.last
                             table.twelve.columns
                               tr
-                                td.twelve.sub-column
+                                td.twelve.sub-columns
                                   p
                                     == I18n.t('mailing.footer_unsubscribe', owner: @setting.title, link: link_to(I18n.t('mailing.unsubscribe_link'), unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :blank))

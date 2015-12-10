@@ -1,7 +1,5 @@
 .content-container
   .about-content
-    padding-right: 0
-    padding-top: 0
     background-color: $white
     p
       color: $white
@@ -9,19 +7,24 @@
     .important
       font-size: 19px
       margin: 5px 0
-    .about-content-up
+    .about-content-left
       background-color: $secondary-color
-    .about-content-down
+      max-height: 175px
+      .btn-style
+        margin-top: 63px
+    .about-content-right
       background-color: $primary-color
 
-    .about-content-up, .about-content-down
-      padding: 20px 10px
+    .about-content-left, .about-content-right
+      padding: 30px
+
+    .fix-padding-block-left
+      padding: 0 20px 0px 0px !important
+    .fix-padding-block-right
+      padding: 0 0 20px 0px !important
 
   .main-content
     background-color: $white
-    padding: 20px 10px
-    td
-      padding: 10px 20px
 
 .btn-style
   border-radius: 3px
