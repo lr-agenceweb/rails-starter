@@ -89,3 +89,27 @@ li.has_many_container.video_uploads
       &>li.input:not(.file):not(.has_many_delete)
         float: left
         width: 48%
+
+
+// Buttons for select / deselect all mailing users
+.formtastic.mailing_message
+  ol.choices-group
+    @include column-count(2)
+    @include column-gap(4)
+    width: 100%
+
+    li.choice
+      float: left
+      width: 100%
+      padding-bottom: 0 !important
+      padding-top: 0 !important
+
+      small
+        font-size: 11px
+        color: rgba(#5e6469,.83)
+  div.actions-customers
+    margin-bottom: 10px
+    .select-btn-container
+      text-align: center
+    a.button
+      cursor: pointer

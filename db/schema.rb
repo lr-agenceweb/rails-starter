@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103232909) do
+ActiveRecord::Schema.define(version: 20151209195723) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -224,6 +224,51 @@ ActiveRecord::Schema.define(version: 20151103232909) do
   end
 
   add_index "locations", ["locationable_type", "locationable_id"], name: "index_locations_on_locationable_type_and_locationable_id", using: :btree
+
+  create_table "mailing_message_translations", force: :cascade do |t|
+    t.integer  "mailing_message_id", limit: 4,     null: false
+    t.string   "locale",             limit: 255,   null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "title",              limit: 255
+    t.text     "content",            limit: 65535
+  end
+
+  add_index "mailing_message_translations", ["locale"], name: "index_mailing_message_translations_on_locale", using: :btree
+  add_index "mailing_message_translations", ["mailing_message_id"], name: "index_mailing_message_translations_on_mailing_message_id", using: :btree
+
+  create_table "mailing_message_users", force: :cascade do |t|
+    t.integer "mailing_user_id",    limit: 4
+    t.integer "mailing_message_id", limit: 4
+  end
+
+  add_index "mailing_message_users", ["mailing_message_id"], name: "index_mailing_message_users_on_mailing_message_id", using: :btree
+  add_index "mailing_message_users", ["mailing_user_id"], name: "index_mailing_message_users_on_mailing_user_id", using: :btree
+
+  create_table "mailing_messages", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.datetime "sent_at"
+    t.string   "token",      limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "mailing_settings", force: :cascade do |t|
+    t.string   "email",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "mailing_users", force: :cascade do |t|
+    t.string   "fullname",   limit: 255
+    t.string   "email",      limit: 255
+    t.string   "token",      limit: 255
+    t.string   "lang",       limit: 255
+    t.boolean  "archive",                default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
 
   create_table "maps", force: :cascade do |t|
     t.string   "marker_icon",  limit: 255

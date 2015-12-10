@@ -1,0 +1,36 @@
+f.semantic_errors(*f.object.errors.keys)
+
+f.columns do
+  f.column do
+    f.inputs t('activerecord.models.mailing_user.other') do
+      f.input :mailing_users,
+              as: :check_boxes,
+              collection: MailingUser.all,
+              label: false
+    end
+  end
+end
+
+f.columns do
+  f.column do
+    f.inputs t('activerecord.models.mailing_message.one') do
+      f.translated_inputs 'Translated fields', switch_locale: true do |t|
+        t.input :title,
+                hint: I18n.t('form.hint.mailing_message.title'),
+                label: I18n.t('activerecord.attributes.mailing_message.title')
+        t.input :content,
+                hint: I18n.t('form.hint.mailing_message.content'),
+                label: I18n.t('activerecord.attributes.post.content'),
+                input_html: { class: 'froala' }
+      end
+    end
+  end
+end
+
+f.columns do
+  f.column do
+    render '/admin/mailings/preview', f: f
+  end
+end
+
+f.actions

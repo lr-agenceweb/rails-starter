@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: mailing_messages
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  content    :text(65535)
+#  sent_at    :datetime
+#  token      :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+one:
+  <<: *DEFAULTS
+  title: Mailing 1
+  content: Content Mailing 1
+  token: XbuvM4QciejRCE3V1eB0LA
+  sent_at: 2015-12-09 17:10:58
+
+two:
+  <<: *DEFAULTS
+  title: Mailing 2
+  content: Content Mailing 2
+  token: XfOPmn7buvQ84-cieGu23sA
+  sent_at: 2015-12-09 17:10:58

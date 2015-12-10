@@ -1,0 +1,28 @@
+# French
+fr:
+  mailing:
+    people: Nouvel utilisateur
+    archive: Archivé
+    preview: Prévisualisation du mail à envoyer en %{lang}
+    notice_sending: "Le mail est en train d'être envoyé à %{count} personne(s)"
+    preview_in_browser: Voir la version en ligne
+    unsubscribe: "Votre email a bien été retiré de notre liste. Vous ne recevrez plus de mails de %{company}"
+
+    unsubscribe_link: désabonnez-vous ici
+    footer_unsubscribe: Si vous ne souhaitez plus recevoir d'emailing de la part de %{owner}, %{link}
+
+    hello: Bonjour%{user}
+    send: Êtes-vous sûr de vouloir envoyer un mail à cette (ces différentes) personne(s) ?
+    send_again: "Vous avez déjà envoyé ce mail le %{date}. Êtes-vous sûr de vouloir le renvoyer ?"
+    refresh_after_create: La page va se recharger afin de sauvegarder le contenu de votre mail
+
+    setting:
+      email: "%{email} (email définit dans les paramètres généraux du site)"
+
+# English
+en:
+  mailing:
+    preview_in_browser: See the online version
+    footer_unsubscribe: If you don't want to receive more messages from %{owner}, %{link}
+    unsubscribe_link: unsubscribe here
+    hello: Hi%{user}

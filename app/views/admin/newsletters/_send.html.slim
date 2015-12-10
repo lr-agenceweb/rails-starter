@@ -8,7 +8,7 @@
   = link_to "Envoyer la newsletter aux #{count} inscrits",
                  send_newsletter_for_subscribers_path(resource.id),
                  data: { vex_alert: t('newsletter.send') },
-                 class: 'button success vex-alert'
+                 class: 'button success vex-alert newsletter-button'
 
 - if NewsletterUser.testers?
   - newsletter_testers = NewsletterUser.testers.map(&:email).join(', ')

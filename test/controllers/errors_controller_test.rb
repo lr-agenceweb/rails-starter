@@ -4,6 +4,8 @@ require 'test_helper'
 # == ErrorsController Test
 #
 class ErrorsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup :initialize_test
 
   test 'should get show with error code 404' do

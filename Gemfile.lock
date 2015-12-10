@@ -303,6 +303,8 @@ GEM
     every_day_irb (2.0.0)
       cd (~> 1.0)
     execjs (2.5.2)
+    faker (1.6.1)
+      i18n (~> 0.5)
     fancy_irb (1.0.0)
       paint (>= 0.9, < 2.0)
       unicode-display_width (>= 0.2.0)
@@ -687,6 +689,7 @@ DEPENDENCIES
   devise
   dkim
   draper
+  faker
   figaro
   font-awesome-rails
   fotoramajs

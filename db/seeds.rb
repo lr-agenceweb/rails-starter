@@ -112,7 +112,8 @@ description = [
   'Module qui affiche un Qrcode pour créer automatiquement un contact sur son smartphone',
   'Module qui propose à l\'administrateur de choisir une image d\'arrière plan pour les pages du site',
   'Module qui affiche un calendrier',
-  'Module qui gère la visualisation de vidéos sur le site'
+  'Module qui gère la visualisation de vidéos sur le site',
+  'Module qui gère l\'envoie de mails en masse'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(
@@ -127,6 +128,7 @@ OptionalModule.list.each_with_index do |element, index|
   @optional_module_guest_book = optional_module if element == 'GuestBook'
   @optional_module_blog = optional_module if element == 'Blog'
   @optional_module_event = optional_module if element == 'Event'
+  @optional_module_mailing = optional_module if element == 'Mailing'
 end
 
 #
@@ -896,6 +898,44 @@ VideoSetting.create!(
   video_upload: true,
   video_background: true
 )
+
+#
+# == MailingSetting
+#
+puts 'Create mailing settings'
+MailingSetting.create!(
+  email: nil
+)
+
+#
+# == MailingUser
+#
+puts 'Creating users for mailing'
+10.times do
+  MailingUser.create(
+    fullname: Faker::Name.name,
+    email: Faker::Internet.email,
+    lang: @locales.include?(:en) ? ['fr', 'en'].sample : 'fr',
+    archive: [true, false].sample
+  )
+end
+
+#
+# == MailingMessage
+#
+puts 'Creating email message'
+mailing_message = MailingMessage.create!(
+  title: "Titre de l'email en Français",
+  content: "Contenu du mailing en Français"
+)
+if @locales.include?(:en)
+  MailingMessage::Translation.create!(
+    mail_mailing_id: mailing_message.id,
+    locale: 'en',
+    title: 'Title email in english',
+    content: 'English mailing content'
+  )
+end
 
 #
 # == FriendlyId
