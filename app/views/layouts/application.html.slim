@@ -38,7 +38,7 @@ html lang="#{@language}"
     main#wrapper.wrapper
       = render 'elements/no_js', setting: @setting
       = show_flash unless flash.nil?
-      = render 'elements/header'
+      = render 'elements/header', show_metadata: true
 
       .l-container
         == yield

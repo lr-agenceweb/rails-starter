@@ -14,7 +14,7 @@ html lang="#{@language}"
 
   body
     main#wrapper.wrapper
-      = render 'elements/header'
+      = render 'elements/header', show_metadata: false
 
       .l-container
         == yield
