@@ -930,7 +930,7 @@ mailing_message = MailingMessage.create!(
 )
 if @locales.include?(:en)
   MailingMessage::Translation.create!(
-    mail_mailing_id: mailing_message.id,
+    mailing_message_id: mailing_message.id,
     locale: 'en',
     title: 'Title email in english',
     content: 'English mailing content'
