@@ -33,3 +33,21 @@ two:
   lang: fr
   archive: false
   mailing_messages: two
+
+three:
+  <<: *DEFAULTS
+  fullname: Marie
+  email: marie@mailing.com
+  token: Ys3NbvkxMx2eEQ4UnmPlAo1V
+  lang: en
+  archive: false
+  mailing_messages: one
+
+four:
+  <<: *DEFAULTS
+  fullname: Kamel
+  email: kamel@mailing.com
+  token: 2_vthNbM3ExMZi90Q-UFPl3Sdf
+  lang: fr
+  archive: false
+  mailing_messages: one

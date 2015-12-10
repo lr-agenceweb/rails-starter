@@ -9,6 +9,7 @@ module Admin
   #
   class MailingMessagesControllerTest < ActionController::TestCase
     include Devise::TestHelpers
+    include Rails.application.routes.url_helpers
 
     setup :initialize_test
 
@@ -83,6 +84,20 @@ module Admin
     end
 
     #
+    # == Mailer
+    #
+    test 'should have correct enqueud mails number' do
+      clear_deliveries_and_queues
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+
+      assert_enqueued_jobs 3 do
+        get :send_mailing_message, id: @mailing_message.id
+        assert_redirected_to root_url
+      end
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -153,6 +168,7 @@ module Admin
 
     def initialize_test
       @locales = I18n.available_locales
+      @request.env['HTTP_REFERER'] = root_url
       @setting = settings(:one)
       @mailing_message = mailing_messages(:one)
       @mailing_module = optional_modules(:mailing)
@@ -161,6 +177,12 @@ module Admin
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
+    end
+
+    def clear_deliveries_and_queues
+      clear_enqueued_jobs
+      clear_performed_jobs
+      ActionMailer::Base.deliveries.clear
     end
   end
 end

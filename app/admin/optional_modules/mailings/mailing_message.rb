@@ -50,7 +50,6 @@ ActiveAdmin.register MailingMessage do
       :send_mailing_message,
       :preview
     ]
-    before_action :set_variables, only: [:preview]
 
     def send_mailing_message
       @mailing_message.update_attributes(sent_at: Time.zone.now)
@@ -82,10 +81,6 @@ ActiveAdmin.register MailingMessage do
 
     def make_redirect
       redirect_to :back
-    end
-
-    def set_variables
-      @preview_newsletter = true
     end
   end
 end
