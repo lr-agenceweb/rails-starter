@@ -14,9 +14,9 @@ html
           td.center align="center" valign="top"
             center
 
-              / Upper header
-              table.container
-                - unless @hide_preview_link
+              - unless @hide_preview_link
+                / Upper header
+                table.container
                   tr.upper-header
                     td
                       table.row
@@ -25,7 +25,8 @@ html
                             table.twelve.columns
                               tr
                                 td.twelve.sub-columns
-                                  p.preview-link = link_to I18n.t('mailing.preview_in_browser'), preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token), target: :blank
+                                  p.preview-link
+                                    == I18n.t('mailing.preview_in_browser', link: link_to(I18n.t('mailing.click_here_link'), preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token), target: :blank))
                                 td.expander
 
 
@@ -62,63 +63,7 @@ html
                       tr
                         td.last.about-content
                           table.twelve.columns
-                            tr
-                              td.no-padding-bottom
-                                table.row
-                                  tr
-
-                                    // Left block
-                                    td.wrapper.fix-padding-block-left
-                                      table.six.columns
-                                        tr
-                                          td.about-content-left
-                                            p.important Notre objectif ?
-                                            p retenir le visiteur et qu’il parcourt le reste de votre site.
-
-                                            p.text-center.no-margin-bottom
-                                              <!--[if mso]>
-                                                br
-                                                br
-                                                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.lr-agenceweb.fr" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="8%" stroke="f" fillcolor="#0c708d">
-                                                  <w:anchorlock/>
-                                                  <center>
-                                                <![endif]-->
-                                                    <a href="http://www.lr-agenceweb.fr" target="_blank" style="background-color:#0c708d;" class="btn-style">
-                                                      | Visiter notre site
-                                                    </a>
-                                                <!--[if mso]>
-                                                  <center>
-                                                </v:roundrect>
-                                              <![endif]-->
-                                          td.expander
-
-                                    // Right block
-                                    td.wrapper.last.fix-padding-block-right
-                                      table.six.columns
-                                        tr
-                                          td.about-content-right
-                                            p
-                                              | “Avec le soutien de
-                                              span.weight-500<> Coop’Alpha
-                                              | pour les démarches administratives et comptables, nous restons concentrés sur notre coeur de métier,
-                                              span.weight-500< la conception de sites internet
-                                              | .”
-
-                                            p.text-center.no-margin-bottom
-                                              <!--[if mso]>
-                                                br
-                                                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.coopalpha.coop" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="8%" stroke="f" fillcolor="#ee732a">
-                                                  <w:anchorlock/>
-                                                  <center>
-                                                <![endif]-->
-                                                    <a href="http://www.coopalpha.coop" target="_blank" style="background-color:#ee732a;" class="btn-style">
-                                                      | Visiter Coop'Alpha
-                                                    </a>
-                                                <!--[if mso]>
-                                                  </center>
-                                                </v:roundrect>
-                                            <![endif]-->
-                                          td.expander
+                            = render 'mailer/blocks'
 
 
               table.container.upper-footer

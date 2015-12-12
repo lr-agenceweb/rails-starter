@@ -5,11 +5,12 @@ fr:
     archive: Archivé
     preview: Prévisualisation du mail à envoyer en %{lang}
     notice_sending: "Le mail est en train d'être envoyé à %{count} personne(s)"
-    preview_in_browser: Voir la version en ligne
+    preview_in_browser: Si vous ne visualisez pas correctement cet email, %{link}
+    click_here_link: cliquez ici
     unsubscribe: "Votre email a bien été retiré de notre liste. Vous ne recevrez plus de mails de %{company}"
 
-    unsubscribe_link: désabonnez-vous ici
     footer_unsubscribe: Si vous ne souhaitez plus recevoir d'emailing de la part de %{owner}, %{link}
+    unsubscribe_link: désabonnez-vous ici
 
     hello: Bonjour%{user}
     send: Êtes-vous sûr de vouloir envoyer un mail à cette (ces différentes) personne(s) ?
@@ -22,7 +23,8 @@ fr:
 # English
 en:
   mailing:
-    preview_in_browser: See the online version
+    preview_in_browser: If you can not read this email properly, %{link}
+    click_here_link: click here
     footer_unsubscribe: If you don't want to receive more messages from %{owner}, %{link}
     unsubscribe_link: unsubscribe here
     hello: Hi%{user}
