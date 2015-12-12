@@ -2,6 +2,7 @@ DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
 
+# Home
 home_fr:
   <<: *DEFAULTS
   menu_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
@@ -13,3 +14,120 @@ home_en:
   menu_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
   locale: en
   title: Home
+
+# About
+about_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:about) %>
+  locale: fr
+  title: A propos
+
+about_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:about) %>
+  locale: en
+  title: About
+
+# Contact
+contact_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:contact) %>
+  locale: fr
+  title: Contact
+
+contact_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:contact) %>
+  locale: en
+  title: Contact
+
+# Search
+search_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:search) %>
+  locale: fr
+  title: Recherche
+
+search_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:search) %>
+  locale: en
+  title: Search
+
+# GuestBook
+guest_book_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:guest_book) %>
+  locale: fr
+  title: Livre d'or
+
+guest_book_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:guest_book) %>
+  locale: en
+  title: Guest Book
+
+# Blog
+blog_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:blog) %>
+  locale: fr
+  title: Blog
+
+blog_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:blog) %>
+  locale: en
+  title: Blog
+
+# Event
+event_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:event) %>
+  locale: fr
+  title: Evénements
+
+event_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:event) %>
+  locale: en
+  title: Events
+
+# LegalNotice
+legal_notice_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:legal_notice) %>
+  locale: fr
+  title: Mentions légales
+
+legal_notice_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:legal_notice) %>
+  locale: en
+  title: Legal notices
+
+# TestOffline
+test_offline_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:test_offline) %>
+  locale: fr
+  title: Test hors-ligne
+
+test_offline_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:test_offline) %>
+  locale: en
+  title: Test offline
+
+# TestOnline
+test_online_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:test_online) %>
+  locale: fr
+  title: Test en-ligne
+
+test_online_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:test_online) %>
+  locale: en
+  title: Test online

@@ -25,42 +25,33 @@ home:
 
 about:
   <<: *DEFAULTS
-  title: About
   ancestry: <%= ActiveRecord::FixtureSet.identify(:home) %>
   show_in_footer: true
 
 contact:
   <<: *DEFAULTS
-  title: Contact
 
 search:
   <<: *DEFAULTS
-  title: Search
   show_in_header: false
 
 guest_book:
   <<: *DEFAULTS
-  title: GuestBook
 
 blog:
   <<: *DEFAULTS
-  title: Blog
 
 event:
   <<: *DEFAULTS
-  title: Events
 
 legal_notice:
   <<: *DEFAULTS
-  title: Legal Notices
 
 test_offline:
   <<: *DEFAULTS
-  title: Test offline
   online: false
 
 test_online:
   <<: *DEFAULTS
-  title: Test online
   show_in_header: false
   show_in_footer: true

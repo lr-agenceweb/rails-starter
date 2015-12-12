@@ -8,8 +8,8 @@ class MenuTest < ActiveSupport::TestCase
 
   test 'should return only online menu elements' do
     menu_items = Menu.online
-    expected = %w(Accueil Search GuestBook Blog Events About Contact)
-    not_expected = %w(Test offline)
+    expected = ['Accueil', 'Recherche', 'Livre d\'or', 'Blog', 'Evénements', 'A propos', 'Contact']
+    not_expected = ['Test hors-ligne']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -17,8 +17,8 @@ class MenuTest < ActiveSupport::TestCase
 
   test 'should return only parents elements' do
     menu_items = Menu.only_parents
-    expected = ['Accueil', 'Search', 'GuestBook', 'Blog', 'Events', 'Contact', 'Test offline']
-    not_expected = %w(About)
+    expected = ['Accueil', 'Recherche', 'Livre d\'or', 'Blog', 'Evénements', 'Contact', 'Test hors-ligne']
+    not_expected = ['A propos']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -26,8 +26,8 @@ class MenuTest < ActiveSupport::TestCase
 
   test 'should return only online parents elements' do
     menu_items = Menu.online.only_parents
-    expected = %w(Accueil Search GuestBook Blog Events Contact)
-    not_expected = ['About', 'Test offline']
+    expected = ['Accueil', 'Recherche', 'Livre d\'or', 'Blog', 'Evénements', 'Contact']
+    not_expected = ['A propos', 'Test hors-ligne']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -35,8 +35,8 @@ class MenuTest < ActiveSupport::TestCase
 
   test 'should return only online menu items with category linked' do
     menu_items = Menu.online.with_page
-    expected = %w(Accueil Search GuestBook Blog Events Contact About)
-    not_expected = ['Test online', 'Test offline']
+    expected = ['Accueil', 'Recherche', 'Livre d\'or', 'Blog', 'Evénements', 'Contact', 'A propos']
+    not_expected = ['Test en-ligne', 'Test hors-ligne']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -44,8 +44,8 @@ class MenuTest < ActiveSupport::TestCase
 
   test 'should return only online visible header elements' do
     menu_items = Menu.online.visible_header
-    expected = %w(Accueil GuestBook Blog Events Contact About)
-    not_expected = ['Search', 'Test online', 'Test offline']
+    expected = ['Accueil', 'Livre d\'or', 'Blog', 'Evénements', 'Contact', 'A propos']
+    not_expected = ['Recherche', 'Test en-ligne', 'Test hors-ligne']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -53,8 +53,8 @@ class MenuTest < ActiveSupport::TestCase
 
   test 'should return only online visible footer elements' do
     menu_items = Menu.online.visible_footer
-    expected = ['About', 'Test online']
-    not_expected = ['Accueil', 'GuestBook', 'Blog', 'Events', 'Contact', 'Search', 'Test offline']
+    expected = ['A propos', 'Test en-ligne']
+    not_expected = ['Accueil', 'Livre d\'or', 'Blog', 'Evénements', 'Contact', 'Recherche', 'Test hors-ligne']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -63,8 +63,8 @@ class MenuTest < ActiveSupport::TestCase
   test 'should return only online elements with allowed modules' do
     @guest_book_module.update_attributes!(enabled: false)
     menu_items = Menu.online.with_allowed_modules
-    expected = %w(Accueil About Blog Events Contact Search)
-    not_expected = ['Test offline', 'GuestBook', 'Test online']
+    expected = ['Accueil', 'A propos', 'Blog', 'Evénements', 'Contact', 'Recherche']
+    not_expected = ['Test hors-ligne', 'Livre d\'or', 'Test en-ligne']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -73,8 +73,8 @@ class MenuTest < ActiveSupport::TestCase
   test 'should return only online, visible_header, only_parents, with_page, with allowed modules' do
     @event_module.update_attributes!(enabled: false)
     menu_items = Menu.online.only_parents.with_page.visible_header.with_allowed_modules
-    expected = %w(Accueil Blog Contact GuestBook)
-    not_expected = ['Test offline', 'Event', 'About', 'Test online', 'Search']
+    expected = ['Accueil', 'Blog', 'Contact', 'Livre d\'or']
+    not_expected = ['Test hors-ligne', 'Event', 'A propos', 'Test en-ligne', 'Recherche']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -85,8 +85,8 @@ class MenuTest < ActiveSupport::TestCase
   #
   test 'should return all menu except current (when nil) and submenu' do
     menu_items = Menu.except_current_and_submenus
-    expected = ['Accueil', 'Blog', 'Events', 'Contact', 'Search', 'Test offline', 'GuestBook', 'Test online']
-    not_expected = %w(About)
+    expected = ['Accueil', 'Blog', 'Evénements', 'Contact', 'Recherche', 'Test hors-ligne', 'Livre d\'or', 'Test en-ligne']
+    not_expected = ['A propos']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -94,8 +94,8 @@ class MenuTest < ActiveSupport::TestCase
 
   test 'should return all menu except current (not nil) and submenu' do
     menu_items = Menu.except_current_and_submenus(@menu_home)
-    expected = ['Blog', 'Events', 'Contact', 'Search', 'Test offline', 'GuestBook', 'Test online']
-    not_expected = %w(Accueil About)
+    expected = ['Blog', 'Evénements', 'Contact', 'Recherche', 'Test hors-ligne', 'Livre d\'or', 'Test en-ligne']
+    not_expected = ['Accueil', 'A propos']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -103,8 +103,8 @@ class MenuTest < ActiveSupport::TestCase
 
   test 'should return correct menu items to link page to category (current nil)' do
     menu_items = Menu.self_or_available
-    expected = ['Test online', 'Test offline']
-    not_expected = %w(Blog Events Contact Search GuestBook About)
+    expected = ['Test en-ligne', 'Test hors-ligne']
+    not_expected = ['Blog', 'Evénements', 'Contact', 'Recherche', 'Livre d\'or', 'A propos']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
@@ -112,8 +112,8 @@ class MenuTest < ActiveSupport::TestCase
 
   test 'should return correct menu items to link page to category (current not nil)' do
     menu_items = Menu.self_or_available(@menu_home.category)
-    expected = ['Accueil', 'Test online', 'Test offline']
-    not_expected = %w(Blog Events Contact Search GuestBook About)
+    expected = ['Accueil', 'Test en-ligne', 'Test hors-ligne']
+    not_expected = ['Blog', 'Evénements', 'Contact', 'Recherche', 'Livre d\'or', 'A propos']
 
     expected_in_menu(expected, menu_items)
     not_expected_in_menu(not_expected, menu_items)
