@@ -13,7 +13,7 @@ html lang="#{@language}"
     = csrf_meta_tag
 
   body
-    main#wrapper.wrapper
+    main#wrapper.wrapper.error-template
       = render 'elements/header', show_metadata: false
 
       .l-container

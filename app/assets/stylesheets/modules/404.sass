@@ -1,26 +1,27 @@
-.l-container
-  width: 100%
-  position: fixed
-  top: 50%
-  left: 50%
-  @include translate(-50%, -50%)
+.error-template, .maintenance-template
+  .l-container
+    width: 100%
+    position: fixed
+    top: 50%
+    left: 50%
+    @include translate(-50%, -50%)
 
-.error-container, .success-container
-  background-color: $secondary-color
-  padding: 25px
-  text-align: center
-  color: $white
-
-  .title
+  .error-container, .success-container
+    background-color: $secondary-color
+    padding: 25px
+    text-align: center
     color: $white
-  .content
-    font-size: 1.25rem
-  .link
-    font-size: 0.8rem
 
-  a
-    @include link-colors($white, $link-color)
-    text-decoration: underline
+    .title
+      color: $white
+    .content
+      font-size: 1.25rem
+    .link
+      font-size: 0.8rem
 
-.success-container
-  background-color: $success-color
+    a
+      @include link-colors($white, $link-color)
+      text-decoration: underline
+
+  .success-container
+    background-color: $success-color
