@@ -39,5 +39,6 @@ class MailingMessagesController < ApplicationController
     params[:token] &&
     @mailing_user.token == params[:mailing_user_token] &&
     @mailing_message.token == params[:token] &&
+    @mailing_message.already_sent?
   end
 end

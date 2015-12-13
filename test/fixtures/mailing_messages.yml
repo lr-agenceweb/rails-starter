@@ -27,4 +27,11 @@ two:
   title: Mailing 2
   content: Content Mailing 2
   token: XfOPmn7buvQ84-cieGu23sA
-  sent_at: 2015-12-09 17:10:58
+  sent_at: ~
+
+three:
+  <<: *DEFAULTS
+  title: Mailing 3
+  content: Content Mailing 3
+  token: NyoOmP06dWQcN3-43mQwA
+  sent_at: ~
