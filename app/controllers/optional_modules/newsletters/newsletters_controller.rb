@@ -3,8 +3,8 @@
 #
 class NewslettersController < ApplicationController
   include NewsletterUserable
+  include Newsletterable
   before_action :not_found, unless: proc { @newsletter_module.enabled? }
-  before_action :set_newsletter, only: [:see_in_browser, :welcome_user]
   before_action :set_variables, only: [:see_in_browser, :welcome_user]
   layout 'newsletter'
 
@@ -37,12 +37,6 @@ class NewslettersController < ApplicationController
   end
 
   private
-
-  def set_newsletter
-    @newsletter = Newsletter.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    fail ActionController::RoutingError, 'Not Found'
-  end
 
   def set_variables
     @hide_preview_link = true
