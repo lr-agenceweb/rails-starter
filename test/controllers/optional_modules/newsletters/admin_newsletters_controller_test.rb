@@ -60,7 +60,7 @@ module Admin
         I18n.with_locale(locale) do
           get :preview, locale: locale.to_s, id: @newsletter
           assert_response :success
-          assert_template :preview, layout: :newsletter
+          assert_template 'newsletter_mailer/send_newsletter', layout: 'newsletter'
         end
       end
     end

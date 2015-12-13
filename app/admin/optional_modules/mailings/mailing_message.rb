@@ -64,7 +64,7 @@ ActiveAdmin.register MailingMessage do
       @title = @mailing_message.title
       @content = @mailing_message.content
       @mailing_user = MailingUser.new(id: 1, email: 'test@test.fr', fullname: 'Testeur', token: '1234567-AZ')
-      render '/admin/mailings/preview', layout: 'mailing'
+      render 'mailing_message_mailer/send_email', layout: 'mailing'
     end
 
     private
