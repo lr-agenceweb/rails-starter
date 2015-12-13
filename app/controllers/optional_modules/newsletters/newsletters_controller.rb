@@ -3,22 +3,21 @@
 #
 class NewslettersController < ApplicationController
   include NewsletterAid
+  before_action :not_found, unless: proc { @newsletter_module.enabled? }
   before_action :set_variables, only: [:see_in_browser, :welcome_user]
+  layout 'newsletter'
 
   # See Newsletter in browser
   def see_in_browser
     if @newsletter_user.token == params[:token]
       I18n.with_locale(@newsletter_user.lang) do
         @newsletter = Newsletter.find(params[:id])
-        if @newsletter.already_sent?
-          @title = @newsletter.title
-          render layout: 'newsletter'
-        else
-          redirect_to root_path(locale: @newsletter_user.lang)
-        end
+        fail ActionController::RoutingError, 'Not Found' unless @newsletter.already_sent?
+        @title = @newsletter.title
+        @content = @newsletter.content
       end
     else
-      redirect_to root_path(locale: @newsletter_user.lang)
+      fail ActionController::RoutingError, 'Not Found'
     end
   end
 
@@ -31,16 +30,15 @@ class NewslettersController < ApplicationController
         @content = welcome_newsletter.try(:content_subscriber)
         @newsletter_user.name = @newsletter_user.extract_name_from_email
       end
-      render layout: 'newsletter'
     else
-      redirect_to :root
+      fail ActionController::RoutingError, 'Not Found'
     end
   end
 
   private
 
   def set_variables
-    @from_controller = true
+    @hide_preview_link = true
     @map = Map.joins(:location).select('locations.id, locations.address, locations.city, locations.postcode').first
   end
 end

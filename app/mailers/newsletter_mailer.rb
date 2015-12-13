@@ -18,7 +18,7 @@ class NewsletterMailer < ApplicationMailer
       @content = welcome_newsletter.content_subscriber
     end
     @is_welcome_user = true
-    @see_in_browser = true
+    @hide_preview_link = false
 
     mail(to: @newsletter_user.email, subject: @title) do |format|
       format.html
@@ -34,6 +34,7 @@ class NewsletterMailer < ApplicationMailer
       @title = @newsletter.title
       @content = @newsletter.content
     end
+    @hide_preview_link = false
 
     mail(to: @newsletter_user.email, subject: @title) do |format|
       format.html
@@ -44,8 +45,6 @@ class NewsletterMailer < ApplicationMailer
   private
 
   def set_newsletter_settings
-    @see_in_browser = false
-    @preview_newsletter = false
     @is_welcome_user = false
   end
 end

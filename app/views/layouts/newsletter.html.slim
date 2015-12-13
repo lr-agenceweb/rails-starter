@@ -14,6 +14,23 @@ html
         td.center align="center" valign="top"
           center
 
+
+            - unless @hide_preview_link
+              / Upper header
+              table.container
+                tr.upper-header
+                  td
+                    table.row
+                      tr
+                        td.wrapper.last
+                          table.twelve.columns
+                            tr
+                              td.twelve.sub-columns
+                                p.preview-link
+                                  = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user }
+                              td.expander
+
+
             / Header
             table.container.header
               tr
@@ -62,17 +79,14 @@ html
                           = render 'mailer/footer', setting: @setting
 
 
-            - if @see_in_browser || !@preview_newsletter
-              table.container.lower-footer
-                tr
-                  td.center align="center"
-                    center
-                      table.container
-                        tr
-                          td.wrapper.last
-                            table.twelve.columns
-                              tr
-                                td.twelve.sub-columns
-                                  = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user } unless @preview_newsletter
-
-                                  = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user } if @see_in_browser
+            table.container.lower-footer
+              tr
+                td.center align="center"
+                  center
+                    table.container
+                      tr
+                        td.wrapper.last
+                          table.twelve.columns
+                            tr
+                              td.twelve.sub-columns
+                                = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user }
