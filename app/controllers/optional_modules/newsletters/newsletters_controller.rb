@@ -2,7 +2,7 @@
 # == NewslettersController
 #
 class NewslettersController < ApplicationController
-  include NewsletterAid
+  include NewsletterUserable
   before_action :not_found, unless: proc { @newsletter_module.enabled? }
   before_action :set_newsletter, only: [:see_in_browser, :welcome_user]
   before_action :set_variables, only: [:see_in_browser, :welcome_user]
