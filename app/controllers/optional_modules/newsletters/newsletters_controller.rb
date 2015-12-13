@@ -29,7 +29,7 @@ class NewslettersController < ApplicationController
       @content = welcome_newsletter.try(:content_subscriber)
       @newsletter_user.name = @newsletter_user.extract_name_from_email
       I18n.with_locale(@newsletter_user.lang) do
-        render template: 'newsletter_mailer/welcome_user'
+        render 'newsletter_mailer/welcome_user'
       end
     else
       fail ActionController::RoutingError, 'Not Found'

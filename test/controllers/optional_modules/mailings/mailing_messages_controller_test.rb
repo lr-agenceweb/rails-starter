@@ -16,7 +16,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         get :preview_in_browser, locale: locale.to_s, id: @mailing_message.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token
-        assert_template :send_email
+        assert_response :success
         assert_template :send_email, layout: 'mailing'
       end
     end

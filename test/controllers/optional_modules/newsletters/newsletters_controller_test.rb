@@ -17,7 +17,7 @@ class NewslettersControllerTest < ActionController::TestCase
     I18n.with_locale(locale) do
       get :see_in_browser, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
       assert_response :success
-      assert_template :see_in_browser, layout: :newsletter
+      assert_template 'newsletter_mailer/send_newsletter', layout: 'newsletter'
     end
   end
 
@@ -47,7 +47,7 @@ class NewslettersControllerTest < ActionController::TestCase
     I18n.with_locale(locale) do
       get :welcome_user, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
       assert_response :success
-      assert_template :welcome_user, layout: :newsletter
+      assert_template 'newsletter_mailer/welcome_user', layout: 'newsletter'
     end
   end
 

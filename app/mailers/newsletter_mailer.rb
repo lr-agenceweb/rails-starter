@@ -16,13 +16,13 @@ class NewsletterMailer < ApplicationMailer
       welcome_newsletter = NewsletterSetting.first
       @title = welcome_newsletter.title_subscriber
       @content = welcome_newsletter.content_subscriber
-    end
-    @is_welcome_user = true
-    @hide_preview_link = false
+      @is_welcome_user = true
+      @hide_preview_link = false
 
-    mail(to: @newsletter_user.email, subject: @title) do |format|
-      format.html
-      format.text
+      mail(to: @newsletter_user.email, subject: @title) do |format|
+        format.html
+        format.text
+      end
     end
   end
 
@@ -33,12 +33,12 @@ class NewsletterMailer < ApplicationMailer
       @newsletter = Newsletter.find(newsletter.id)
       @title = @newsletter.title
       @content = @newsletter.content
-    end
-    @hide_preview_link = false
+      @hide_preview_link = false
 
-    mail(to: @newsletter_user.email, subject: @title) do |format|
-      format.html
-      format.text
+      mail(to: @newsletter_user.email, subject: @title) do |format|
+        format.html
+        format.text
+      end
     end
   end
 
