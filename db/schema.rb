@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213224610) do
+ActiveRecord::Schema.define(version: 20151213225649) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -138,10 +138,13 @@ ActiveRecord::Schema.define(version: 20151213224610) do
   end
 
   create_table "event_settings", force: :cascade do |t|
-    t.boolean  "prev_next",  default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "event_order_id", limit: 4
+    t.boolean  "prev_next",                default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
+
+  add_index "event_settings", ["event_order_id"], name: "index_event_settings_on_event_order_id", using: :btree
 
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",   limit: 4,     null: false
@@ -717,4 +720,5 @@ ActiveRecord::Schema.define(version: 20151213224610) do
 
   add_index "video_uploads", ["videoable_type", "videoable_id"], name: "index_video_uploads_on_videoable_type_and_videoable_id", using: :btree
 
+  add_foreign_key "event_settings", "event_orders"
 end
