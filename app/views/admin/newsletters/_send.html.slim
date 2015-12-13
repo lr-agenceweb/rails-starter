@@ -3,7 +3,7 @@
   = link_to "Renvoyer la newsletter aux #{count} inscrits ?",
                   send_newsletter_for_subscribers_path(resource.id),
                   data: { vex_alert: t('newsletter.send_again', date: l(resource.sent_at, format: :long)) },
-                  class: 'button vex-alert'
+                  class: 'button vex-alert newsletter-button'
 - else
   = link_to "Envoyer la newsletter aux #{count} inscrits",
                  send_newsletter_for_subscribers_path(resource.id),
@@ -16,5 +16,5 @@
   = link_to 'Send newsletter for testers',
                   send_newsletter_for_testers_path(resource.id),
                   data: { vex_alert: t('newsletter.send_testers') },
-                  class: 'vex-alert'
+                  class: 'vex-alert newsletter-button'
   = " (#{newsletter_testers})"
