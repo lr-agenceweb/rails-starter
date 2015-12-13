@@ -118,6 +118,9 @@ Add a RSS feed to the website
 * **Search**  
 Add a search form to look on title or content post articles
 
+* **Mailing**  
+Application developped to send heavy mails number to users
+
 Units Tests
 -----------
 Basics tests are included, just run `rake test`

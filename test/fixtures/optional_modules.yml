@@ -99,3 +99,8 @@ video_disabled:
   <<: *DEFAULTS
   name: Video_disabled
   enabled: false
+
+mailing:
+  <<: *DEFAULTS
+  name: Mailing
+  enabled: true

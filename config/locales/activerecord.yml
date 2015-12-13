@@ -60,6 +60,10 @@ fr:
             email:
               blank: N'oubliez pas de renseigner votre email ;)
               taken: Cet email n'est pas disponible :(
+        mailing_user:
+          attributes:
+            email:
+              email: n'est pas valide
         guest_book:
           attributes:
             email:
@@ -84,6 +88,9 @@ fr:
       about:
         one: À propos
         other: À propos
+      legal_notice:
+        one: Mention Légale
+        other: Mentions Légales
       setting:
         one: Paramètre
         other: Paramètres
@@ -189,7 +196,15 @@ fr:
       contact:
         one: Contact
         other: Contacts
-
+      mailing_user:
+        one: Mailing Utilisateur
+        other: Mailing Utilisateurs
+      mailing_setting:
+        one: Mailing configuration
+        other: Mailing configuration
+      mailing_message:
+        one: Mailing Message
+        other: Mailing Messages
 
     attributes:
       post:
@@ -468,6 +483,22 @@ fr:
         font_ikon: Icône
         status: État
         delete_ikon: Supprimer l'icône
+
+      mailing_user:
+        fullname: Nom complet
+        archive: Archivé ?
+        created_at: Ajouté le
+        archive_status: Archivé ?
+        lang: Langue
+      mailing_setting:
+        email_status: Email
+      mailing_message:
+        title: Sujet
+        preview: Prévisualisation
+        status: Envoyé ?
+        sent_at: Envoyé le
+        send_link: Envoyer
+        live_preview: Prévisualisation en direct
 
       shared:
         created_at: Créé le

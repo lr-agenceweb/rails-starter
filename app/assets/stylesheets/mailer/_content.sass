@@ -1,14 +1,36 @@
-.main-content
-  background-color: $white
-  .panel
-    background-color: transparent
-    border: none
-  .sent-from
-    text-align: right
-    font-weight: 300
-    font-weight: bold
-    margin-top: 20px
-    margin-bottom: 0
+.content-container
+  .about-content
+    background-color: $white
+    p
+      color: $white
+      line-height: 21px
+      text-align: center
+    .about-content-left
+      background-color: $secondary-color
+      padding: 26px 23px
+    .about-content-right
+      background-color: $primary-color
+      padding: 26px
+    .about-content-left, .about-content-right
 
-    a
-      color: $primary-color !important
+    .fix-padding-block-left
+      padding: 0 20px 0px 0px !important
+    .fix-padding-block-right
+      padding: 0 0 20px 0px !important
+
+  .main-content
+    background-color: $white
+
+.btn-style
+  border-radius: 3px
+  display: inline-block
+  font-family: 'Ubuntu', 'Arial', sans-serif
+  font-size: 11px
+  line-height: 40px
+  text-align: center
+  text-decoration: none
+  width: 150px
+  -webkit-text-size-adjust: none
+
+  &:link, &:visited, &:hover, &:active
+    color: $white

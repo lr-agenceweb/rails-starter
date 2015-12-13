@@ -1,3 +1,4 @@
+require File.expand_path('../environment',  __FILE__)
 require 'figaro'
 
 # config valid only for current version of Capistrano

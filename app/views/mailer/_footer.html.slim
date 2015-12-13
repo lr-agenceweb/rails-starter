@@ -1,10 +1,28 @@
 tr
-  td.panel align="center"
-    center
-      span style="text-align:center;"
-        span> = setting.name
-        | -
-        span<> = link_to setting.title, root_url
-        | -
-        span< = Time.zone.now.year
-  td.expander
+  td
+    table.row
+      tr
+
+        // Left block
+        td.wrapper.fix-padding-left.no-padding-bottom
+          table.six.columns
+            tr
+              td.text-pad.no-padding-bottom
+                span Coop’
+                span.letter-a A
+                span lpha Siret 48237148100029
+                br
+                span 1 Avenue de la Libération - 33310 Lormont
+
+
+
+        // Right block
+        td.wrapper.last.no-padding-bottom
+          table.six.columns
+            tr
+              td.text-right.text-pad.no-padding-bottom
+                span.initials>
+                  span.letter-l L
+                  span.letter-esperluette &amp;
+                  span.letter-r R
+                span Agence web, conception de sites en ligne

@@ -46,14 +46,14 @@ class BackgroundTest < ActiveSupport::TestCase
     not_expected_in_category_dropdown(not_expected, category_dropdown_items)
   end
 
-  test 'should return menu_title and if for pages which doesn\'t already contain background' do
+  test 'should return menu_title for pages which doesn\'t already contain background' do
     category_dropdown_items = Category.handle_pages_for_background(@background_home)
     assert_includes category_dropdown_items, ['Accueil', categories(:home).id]
-    assert_includes category_dropdown_items, ['About', categories(:about).id]
-    assert_includes category_dropdown_items, ['Search', categories(:search).id]
-    assert_includes category_dropdown_items, ['GuestBook', categories(:guest_book).id]
+    assert_includes category_dropdown_items, ['A propos', categories(:about).id]
+    assert_includes category_dropdown_items, ['Recherche', categories(:search).id]
+    assert_includes category_dropdown_items, ['Livre d\'or', categories(:guest_book).id]
     assert_includes category_dropdown_items, ['Blog', categories(:blog).id]
-    assert_includes category_dropdown_items, ['Events', categories(:event).id]
+    assert_includes category_dropdown_items, ['Evénements', categories(:event).id]
     assert_not category_dropdown_items.include?(['Contact', categories(:contact).id])
   end
 

@@ -1,0 +1,53 @@
+# == Schema Information
+#
+# Table name: mailing_users
+#
+#  id         :integer          not null, primary key
+#  fullname   :string(255)
+#  email      :string(255)
+#  token      :string(255)
+#  lang       :string(255)
+#  archive    :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+one:
+  <<: *DEFAULTS
+  fullname: Lorie
+  email: lorie@mailing.com
+  token: ZK3Nvdx_JZerQyUnTlFo5Q
+  lang: fr
+  archive: false
+  mailing_messages: one
+
+two:
+  <<: *DEFAULTS
+  fullname: Bruno
+  email: bruno@mailing.com
+  token: Xzq3Nm95dx_DZerQC9f3snp
+  lang: fr
+  archive: false
+  mailing_messages: two
+
+three:
+  <<: *DEFAULTS
+  fullname: Marie
+  email: marie@mailing.com
+  token: Ys3NbvkxMx2eEQ4UnmPlAo1V
+  lang: en
+  archive: false
+  mailing_messages: one
+
+four:
+  <<: *DEFAULTS
+  fullname: Kamel
+  email: kamel@mailing.com
+  token: 2_vthNbM3ExMZi90Q-UFPl3Sdf
+  lang: fr
+  archive: false
+  mailing_messages: one

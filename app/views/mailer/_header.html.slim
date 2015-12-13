@@ -1,10 +1,12 @@
 tr
-  td.six.sub-columns
-    a href="#{root_url}"
-      = image_tag(image_url setting.logo.url(:small))
+  td.six.sub-columns.text-pad style="vertical-align:middle;"
+    span.site-title
+      a href='http://www.lr-agenceweb.fr' target="_blank"
+        span.weight-500> L&amp;R
+        span Agence web
 
-  td.six.sub-columns.last style=("text-align:right; vertical-align:middle;")
-    strong.template-label = setting.title
+  td.six.sub-columns.text-pad style="text-align:right; vertical-align:middle;"
+    span = link_to @setting.phone, "tel:#{@setting.decorate.phone_w3c}"
     br
-    span.subject = title
+    span = link_to 'www.lr-agenceweb.fr', 'http://www.lr-agenceweb.fr', target: :blank
   td.expander

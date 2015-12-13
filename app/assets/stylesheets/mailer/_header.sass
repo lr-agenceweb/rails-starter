@@ -1,12 +1,27 @@
-.upper-upper-header
-  .panel
-    background-color: lighten($success-color, 30%)
-    border-color: $success-color
+// Link to see in browser and to unsubscribe
+.upper-header, .lower-footer
+  a:link, a:hover, a:active, a:visited
+    color: #414042
+    text-decoration: underline
 
 .upper-header
-  background-color: #AAA
-
-  td
-    color: $white
-    font-weight: 300
+  .preview-link
     text-align: right
+    margin-bottom: 0
+    font-size: 12px
+
+// Site title
+.header
+  background-color: $tercery-color
+  color: $white
+  a
+    color: $white
+
+  .site-title
+    margin-bottom: 0
+    a
+      font-weight: 400
+      text-align: left
+      font-size: 17px
+      color: $white
+      line-height: 40px

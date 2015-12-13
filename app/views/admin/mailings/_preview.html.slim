@@ -1,0 +1,24 @@
+- html = "<div id='mailing_message_preview'>"
+
+- html << "<p style='text-align: center; margin-bottom: 20px'>"
+
+- I18n.available_locales.each do |locale|
+  - I18n.with_locale(locale) do
+
+    - if f.object.new_record?
+      - klass = 'new'
+      - url = admin_mailing_messages_path
+    - else
+      - klass = 'existing'
+      - url = preview_mailing_message_path(f.object)
+
+    - html << "<a href='#' class='button mailing_message_preview_button #{klass}_record' data-url='#{url}' data-locale='#{locale.to_s}'>Prévisualisation de la newsletter en #{t('active_admin.globalize.language.' + locale.to_s)}</a>".html_safe
+- html << '</p>'
+
+- iframe = f.object.new_record? ? '' : render('/admin/mailings/iframe_preview', resource: f.object)
+- html << iframe
+
+- html << "</div>"
+
+- f.inputs t('activerecord.attributes.newsletter.preview') do
+  = html.html_safe
