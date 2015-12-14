@@ -48,7 +48,7 @@ class Event < ActiveRecord::Base
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
-  scope :current_or_coming, -> { where('start_date >= ? OR (start_date <= ? AND end_date >= ?)', Time.zone.now, Time.zone.now, Time.zone.now)  }
+  scope :current_or_coming, -> { where('(start_date <= ? AND end_date is ?) OR (start_date >= ?) OR (start_date <= ? AND end_date >= ?)', Time.zone.now, nil, Time.zone.now, Time.zone.now, Time.zone.now)  }
 
   def calendar_date_correct?
     return true unless end_date <= start_date
@@ -58,7 +58,7 @@ class Event < ActiveRecord::Base
 
   def self.with_conditions
     event_order = EventSetting.first.event_order
-    return current_or_coming.order(start_date: :asc) if event_order.id == 1
-    order(start_date: :asc)
+    return current_or_coming.order(start_date: :asc) if event_order.key == 'current_or_coming'
+    order(start_date: :desc)
   end
 end

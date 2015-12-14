@@ -6,13 +6,13 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
   setup :initialize_test
 
-  test 'should return correct count for events' do
-    assert_equal 3, Event.count
-  end
+  # test 'should return correct count for events' do
+  #   assert_equal 3, Event.count
+  # end
 
-  test 'should return correct count for online events' do
-    assert_equal 2, Event.online.count
-  end
+  # test 'should return correct count for online events' do
+  #   assert_equal 2, Event.online.count
+  # end
 
   test 'should return correct duration for event' do
     assert_equal '6 jours', @event.decorate.duration
@@ -36,6 +36,29 @@ class EventTest < ActiveSupport::TestCase
     assert_equal [I18n.t('form.errors.end_date')], event.calendar_date_correct?
   end
 
+  test 'should return only current or coming events' do
+    coc = Event.current_or_coming
+    ['Evénement 4', 'Evénement 5'].each do |item|
+      assert coc.map(&:title).include?(item), "\"#{item}\" should be in current or coming"
+    end
+
+    ['Evénement 1', 'Evénement 2'].each do |item|
+      assert_not coc.map(&:title).include?(item), "\"#{item}\" should not be in current or coming"
+    end
+  end
+
+  #
+  # == EventOrder
+  #
+  test 'should return correct order if current_or_coming' do
+    assert_equal 'Evénement 3', Event.with_conditions.first.title
+  end
+
+  test 'should return correct order if all are shown' do
+    @event_setting.update_attribute(:event_order_id, @event_order_all.id)
+    assert_equal 'Evénement 5', Event.with_conditions.first.title
+  end
+
   #
   # == Prev / Next
   #
@@ -54,7 +77,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'should not have a next record' do
-    assert_not @event_third.next?, 'should not have a next record'
+    assert_not @event_five.next?, 'should not have a next record'
   end
 
   private
@@ -62,5 +85,10 @@ class EventTest < ActiveSupport::TestCase
   def initialize_test
     @event = events(:event_online)
     @event_third = events(:event_third)
+    @event_five = events(:event_five)
+
+    @event_order_coc = event_orders(:one)
+    @event_order_all = event_orders(:two)
+    @event_setting = event_settings(:one)
   end
 end

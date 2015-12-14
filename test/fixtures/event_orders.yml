@@ -6,12 +6,13 @@
 #  name       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  key        :string(255)
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  name: MyString
+  key: current_or_coming
+  name: Courant et à venir (avec le plus récent en premier)
 
 two:
-  name: MyString
+  key: all
+  name: Tous (même ceux qui sont déjà passés)
