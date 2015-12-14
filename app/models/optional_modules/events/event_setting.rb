@@ -17,5 +17,5 @@
 # == EventSetting Model
 #
 class EventSetting < ActiveRecord::Base
-  has_one :event_order
+  belongs_to :event_order
 end

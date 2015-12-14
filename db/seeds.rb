@@ -647,7 +647,16 @@ end
 # == Event Setting
 #
 puts 'Creating Event Setting'
-EventSetting.create!(prev_next: true)
+EventSetting.create!(prev_next: true, event_order_id: 1)
+
+#
+# == Event Order
+#
+puts 'Creating Event Order'
+event_order_name = ['Courant et à venir (avec le plus récent en premier)', 'Tous (même ceux qui sont déjà passés)']
+event_order_name.each_with_index do |order, index|
+  EventOrder.create!(name: order)
+end
 
 #
 # == Newsletter Setting
