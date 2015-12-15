@@ -29,6 +29,7 @@ DEFAULTS: &DEFAULTS
 
 event_online:
   <<: *DEFAULTS
+  id: 1
   url: 'http://google.com'
   start_date: '2015-07-22 09:00:00'
   end_date: '2015-07-28 18:00:00'
@@ -37,12 +38,28 @@ event_online:
 
 event_offline:
   <<: *DEFAULTS
+  id: 2
   start_date: '2015-07-24 09:00:00'
   end_date: '2015-07-25 18:00:00'
   online: false
 
 event_third:
   <<: *DEFAULTS
+  id: 3
   start_date: '2015-08-15 09:00:00'
   online: true
   show_calendar: true
+
+event_four:
+  <<: *DEFAULTS
+  id: 4
+  start_date: <%= 1.week.ago.to_s(:db) %>
+  end_date: <%= Time.zone.now + 1.week.to_i %>
+  online: true
+
+event_five:
+  <<: *DEFAULTS
+  id: 5
+  start_date: <%= Time.zone.now + 1.weeks.to_i %>
+  end_date: <%= Time.zone.now + 2.weeks.to_i %>
+  online: true

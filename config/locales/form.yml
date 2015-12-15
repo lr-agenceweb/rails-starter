@@ -78,6 +78,7 @@ fr:
         link: Vous pouvez mettre un lien vers le site organisateur de l'événement
         online: En cochant la case en ligne, vous choisissez d'afficher l'événement sur le site
         show_calendar: Afficher un calendrier de l'événement sur le site ? (Attention, le calendrier ne sera visible que si les options "date de début" et "date de fin" de l'événement sont spécifiées)
+        event_order: Choisissez la manière dont vous souhaitez que les événements apparaissent
 
       allow_comments: Voulez-vous autoriser les commentaires sur cet article ?
 

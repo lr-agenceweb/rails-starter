@@ -4,7 +4,7 @@ DEFAULTS: &DEFAULTS
 
 event_online_fr:
   <<: *DEFAULTS
-  event_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
+  event_id: 1
   locale: fr
   title: Evénement 1
   slug: evenement-1
@@ -12,7 +12,7 @@ event_online_fr:
 
 event_online_en:
   <<: *DEFAULTS
-  event_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
+  event_id: 1
   locale: en
   title: Event 1
   slug: event-1
@@ -20,7 +20,7 @@ event_online_en:
 
 event_third_fr:
   <<: *DEFAULTS
-  event_id: <%= ActiveRecord::FixtureSet.identify(:event_third) %>
+  event_id: 3
   locale: fr
   title: Evénement 3
   slug: evenement-3
@@ -28,8 +28,40 @@ event_third_fr:
 
 event_third_en:
   <<: *DEFAULTS
-  event_id: <%= ActiveRecord::FixtureSet.identify(:event_third) %>
+  event_id: 3
   locale: en
   title: Event 3
   slug: event-3
+  content: ~
+
+event_four_fr:
+  <<: *DEFAULTS
+  event_id: 4
+  locale: fr
+  title: Evénement 4
+  slug: evenement-4
+  content: ~
+
+event_four_en:
+  <<: *DEFAULTS
+  event_id: 4
+  locale: en
+  title: Event 4
+  slug: event-4
+  content: ~
+
+event_five_fr:
+  <<: *DEFAULTS
+  event_id: 5
+  locale: fr
+  title: Evénement 5
+  slug: evenement-5
+  content: ~
+
+event_five_en:
+  <<: *DEFAULTS
+  event_id: 5
+  locale: en
+  title: Event 5
+  slug: event-5
   content: ~

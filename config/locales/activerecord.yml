@@ -456,6 +456,7 @@ fr:
         duration: Durée
       event_setting:
         prev_next: Liens précédent / suivant
+        event_order: Ordre des événements
       map:
         show_map: Afficher la carte ?
         full_address_inline: Adresse de votre organisation
