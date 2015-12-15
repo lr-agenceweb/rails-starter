@@ -643,11 +643,6 @@ event_title_fr.each_with_index do |element, index|
   end
 end
 
-#
-# == Event Setting
-#
-puts 'Creating Event Setting'
-EventSetting.create!(prev_next: true, event_order_id: 1)
 
 #
 # == Event Order
@@ -656,8 +651,15 @@ puts 'Creating Event Order'
 event_order_key = ['current_or_coming', 'all']
 event_order_name = ['Courant et à venir (avec le plus récent en premier)', 'Tous (même ceux qui sont déjà passés)']
 event_order_name.each_with_index do |order, index|
-  EventOrder.create!(key: event_order_key[index], name: order)
+  eo = EventOrder.create!(key: event_order_key[index], name: order)
+  @event_order = eo if index == 0
 end
+
+#
+# == Event Setting
+#
+puts 'Creating Event Setting'
+EventSetting.create!(prev_next: true, event_order_id: @event_order.id)
 
 #
 # == Newsletter Setting
