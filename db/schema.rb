@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214211904) do
+ActiveRecord::Schema.define(version: 20151215151900) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -504,6 +504,7 @@ ActiveRecord::Schema.define(version: 20151214211904) do
     t.string   "phone",                    limit: 255
     t.string   "phone_secondary",          limit: 255
     t.string   "email",                    limit: 255
+    t.integer  "per_page",                 limit: 4,     default: 3
     t.boolean  "show_breadcrumb",                        default: false
     t.boolean  "show_social",                            default: true
     t.boolean  "show_qrcode",                            default: false

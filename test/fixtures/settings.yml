@@ -9,12 +9,12 @@
 #  phone                    :string(255)
 #  phone_secondary          :string(255)
 #  email                    :string(255)
+#  per_page                 :integer          default(3)
 #  show_breadcrumb          :boolean          default(FALSE)
 #  show_social              :boolean          default(TRUE)
 #  show_qrcode              :boolean          default(FALSE)
 #  should_validate          :boolean          default(TRUE)
 #  maintenance              :boolean          default(FALSE)
-#  twitter_username         :string(255)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer
 #  logo_content_type        :string(255)
@@ -24,6 +24,7 @@
 #  logo_footer_content_type :string(255)
 #  logo_footer_file_name    :string(255)
 #  retina_dimensions        :text(65535)
+#  twitter_username         :string(255)
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #

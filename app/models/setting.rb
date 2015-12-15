@@ -9,12 +9,12 @@
 #  phone                    :string(255)
 #  phone_secondary          :string(255)
 #  email                    :string(255)
+#  per_page                 :string(255)      default("3")
 #  show_breadcrumb          :boolean          default(FALSE)
 #  show_social              :boolean          default(TRUE)
 #  show_qrcode              :boolean          default(FALSE)
 #  should_validate          :boolean          default(TRUE)
 #  maintenance              :boolean          default(FALSE)
-#  twitter_username         :string(255)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer
 #  logo_content_type        :string(255)
@@ -24,6 +24,7 @@
 #  logo_footer_content_type :string(255)
 #  logo_footer_file_name    :string(255)
 #  retina_dimensions        :text(65535)
+#  twitter_username         :string(255)
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #
@@ -39,6 +40,10 @@ class Setting < ActiveRecord::Base
   translates :title, :subtitle, fallbacks_for_empty_translations: true
   active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true
+  end
+
+  def self.per_page_values
+    [1, 2, 3, 5, 10, 15, 20, 0]
   end
 
   retina!
@@ -66,6 +71,10 @@ class Setting < ActiveRecord::Base
 
   validates :name,  presence: true
   validates :email, presence: true, email_format: true
+  validates :per_page,
+            presence: true,
+            allow_blank: false,
+            inclusion: self.per_page_values
 
   include DeletableAttachment
 

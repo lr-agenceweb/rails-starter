@@ -56,4 +56,17 @@ f.columns do
   end
 end
 
+f.columns do
+  f.column do
+    f.inputs 'Paramètres généraux' do
+      f.input :per_page,
+              as: :select,
+              collection: Setting.per_page_values,
+              include_blank: false,
+              input_html: { class: 'chosen-select' },
+              hint: 'Choisissez le nombre d\'articles à afficher avant la pagination. Si vous souhaitez afficher tous les articles sur une seule page, sélectionnez la valeur 0'
+    end
+  end
+end
+
 f.actions
