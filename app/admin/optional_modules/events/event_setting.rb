@@ -31,7 +31,8 @@ ActiveAdmin.register EventSetting do
                   as: :select,
                   collection: EventOrder.all,
                   include_blank: false,
-                  input_html: { class: 'chosen-select' }
+                  input_html: { class: 'chosen-select' },
+                  hint: I18n.t('form.hint.event.event_order')
         end
       end
     end
