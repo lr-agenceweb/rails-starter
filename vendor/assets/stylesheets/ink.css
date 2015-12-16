@@ -352,20 +352,20 @@ small {
 }
 
 a {
-  color: #2ba6cb;
+  /*color: #2ba6cb;*/
   text-decoration: none;
 }
 
 a:hover {
-  color: #2795b6;
+  /*color: #2795b6;*/
 }
 
 a:active {
-  color: #2795b6;
+  /*color: #2795b6;*/
 }
 
 a:visited {
-  color: #2ba6cb;
+  /*color: #2ba6cb;*/
 }
 
 h1 a,
