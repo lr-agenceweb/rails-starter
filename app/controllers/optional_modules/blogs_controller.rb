@@ -11,7 +11,9 @@ class BlogsController < ApplicationController
   # GET /blog
   # GET /blog.json
   def index
-    @blogs = BlogDecorator.decorate_collection(Blog.online.order(created_at: :desc).page params[:page])
+    @blogs = Blog.online.order(created_at: :desc)
+    per_p = @setting.per_page == 0 ? @blogs.count : @setting.per_page
+    @blogs = BlogDecorator.decorate_collection(@blogs.page(params[:page]).per(per_p))
     seo_tag_index category
   end
 

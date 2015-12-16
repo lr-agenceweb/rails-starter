@@ -9,10 +9,9 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    per_p = Event.count
-    per_p = @setting.per_page unless @setting.per_page == 0
-    @events = Event.with_conditions.includes(:translations, :location).online.page(params[:page]).per(per_p)
-    @events = EventDecorator.decorate_collection(@events)
+    @events = Event.with_conditions.online.includes(:translations, :location)
+    per_p = @setting.per_page == 0 ? @events.count : @setting.per_page
+    @events = EventDecorator.decorate_collection(@events.page(params[:page]).per(per_p))
     seo_tag_index category
   end
 
