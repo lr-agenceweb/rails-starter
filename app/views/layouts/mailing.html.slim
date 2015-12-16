@@ -53,6 +53,9 @@ html
                                 br
                                 p = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
                                 = yield
+
+                                div.signature
+                                  == @mailing_setting.signature
                               td.expander
 
 
