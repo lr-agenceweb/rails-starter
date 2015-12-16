@@ -9,4 +9,8 @@ class MailingSettingDecorator < ApplicationDecorator
     return email unless model.email.blank?
     Setting.first.email
   end
+
+  def signature_d
+    raw(model.signature)
+  end
 end

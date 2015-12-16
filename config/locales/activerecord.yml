@@ -494,6 +494,7 @@ fr:
         lang: Langue
       mailing_setting:
         email_status: Email
+        signature_d: Signature
       mailing_message:
         title: Sujet
         preview: Prévisualisation

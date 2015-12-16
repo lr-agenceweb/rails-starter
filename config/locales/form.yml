@@ -62,6 +62,7 @@ fr:
         lang: Langue de l'utilisateur
       mailing_setting:
         email: Saisissez l'email d'où seront envoyés les emails. Si le champs est vide, l'email spécifé dans les paramètres généraux du site sera utilisé.
+        signature: Saisissez ici la signature que vous souhaitez afficher dans chacun des mails que vous enverrez à partir du site.
       mailing_message:
         title: Sujet de l'email à envoyer
         content: Contenu de l'email à envoyer
