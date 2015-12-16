@@ -248,6 +248,7 @@ fr:
         name: Nom
         phone: Téléphone
         phone_secondary: Téléphone secondaire
+        per_page: Articles par page
         show_breadcrumb: Afficher le fil d'ariane ?
         show_social: Afficher le partage sur les réseaux sociaux ?
         show_qrcode: Afficher le QrCode sur la page contact ?
