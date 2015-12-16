@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     get '/admin/newsletters/:id/preview', to: 'admin/letters#preview', as: :preview_newsletter
 
     # Mailings
-    get '/mailing_messages/:id-:token/:mailing_user_id/:mailing_user_token', to: 'mailing_messages#preview_in_browser', as: :preview_in_browser_mailing_message
+    get '/mailing_messages/:id/:token/:mailing_user_id/:mailing_user_token', to: 'mailing_messages#preview_in_browser', as: :preview_in_browser_mailing_message
     get '/admin/mailing_messages/:id/preview', to: 'admin/mailing_messages#preview', as: :preview_mailing_message
 
 

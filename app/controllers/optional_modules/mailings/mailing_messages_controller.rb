@@ -2,9 +2,9 @@
 # == MailingMessages Controller
 #
 class MailingMessagesController < ApplicationController
+  include Mailingable
+
   before_action :not_found, unless: proc { @mailing_module.enabled? }
-  before_action :set_mailing_user, only: [:preview_in_browser]
-  before_action :set_mailing_message, only: [:preview_in_browser]
   layout 'mailing'
 
   def preview_in_browser
@@ -21,18 +21,6 @@ class MailingMessagesController < ApplicationController
   end
 
   private
-
-  def set_mailing_user
-    @mailing_user = MailingUser.find(params[:mailing_user_id])
-  rescue ActiveRecord::RecordNotFound
-    fail ActionController::RoutingError, 'Not Found'
-  end
-
-  def set_mailing_message
-    @mailing_message = MailingMessage.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    fail ActionController::RoutingError, 'Not Found'
-  end
 
   def all_conditions_respected?
     params[:mailing_user_token] &&

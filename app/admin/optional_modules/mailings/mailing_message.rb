@@ -44,12 +44,8 @@ ActiveAdmin.register MailingMessage do
   #
   controller do
     include Skippable
+    include Mailingable
     include NewsletterHelper
-
-    before_action :set_mailing_message, only: [
-      :send_mailing_message,
-      :preview
-    ]
 
     def send_mailing_message
       @mailing_message.update_attributes(sent_at: Time.zone.now)
@@ -63,7 +59,6 @@ ActiveAdmin.register MailingMessage do
     def preview
       @title = @mailing_message.title
       @content = @mailing_message.content
-      @mailing_setting = MailingSetting.first
       @mailing_user = MailingUser.new(id: 1, email: 'test@test.fr', fullname: 'Testeur', token: '1234567-AZ')
       render 'mailing_message_mailer/send_email', layout: 'mailing'
     end
@@ -74,10 +69,6 @@ ActiveAdmin.register MailingMessage do
       mailing_users.each do |user|
         MailingMessageJob.set(wait: 3.seconds).perform_later(user, message)
       end
-    end
-
-    def set_mailing_message
-      @mailing_message = MailingMessage.find(params[:id])
     end
 
     def make_redirect
