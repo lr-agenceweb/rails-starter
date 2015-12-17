@@ -4,6 +4,7 @@ ActiveAdmin.register MailingMessage do
   permit_params :id,
                 :token,
                 :sent_at,
+                :show_signature,
                 mailing_user_ids: [],
                 translations_attributes: [
                   :id, :locale, :title, :content
@@ -44,12 +45,8 @@ ActiveAdmin.register MailingMessage do
   #
   controller do
     include Skippable
+    include Mailingable
     include NewsletterHelper
-
-    before_action :set_mailing_message, only: [
-      :send_mailing_message,
-      :preview
-    ]
 
     def send_mailing_message
       @mailing_message.update_attributes(sent_at: Time.zone.now)
@@ -73,10 +70,6 @@ ActiveAdmin.register MailingMessage do
       mailing_users.each do |user|
         MailingMessageJob.set(wait: 3.seconds).perform_later(user, message)
       end
-    end
-
-    def set_mailing_message
-      @mailing_message = MailingMessage.find(params[:id])
     end
 
     def make_redirect

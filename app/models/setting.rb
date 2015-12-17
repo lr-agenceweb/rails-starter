@@ -9,7 +9,7 @@
 #  phone                    :string(255)
 #  phone_secondary          :string(255)
 #  email                    :string(255)
-#  per_page                 :string(255)      default("3")
+#  per_page                 :integer          default(3)
 #  show_breadcrumb          :boolean          default(FALSE)
 #  show_social              :boolean          default(TRUE)
 #  show_qrcode              :boolean          default(FALSE)

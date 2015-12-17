@@ -23,11 +23,12 @@ froala_init = ->
   $('.froala').editable
     inlineMode: false
     placeholder: I18n.t('form.placeholder.froala', locale: gon.language)
-    theme: 'gray',
+    theme: 'red',
     plainPaste: true
     toolbarFixed: false
     tabSpaces: true
     # buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline', 'createLink', 'blockStyle', 'indent', 'outdent', 'align', 'insertOrderedList', 'insertUnorderedList', 'html']
     language: 'fr'
-    minHeight: 300
+    minHeight: if $('.froala.small-height').length then null else 300
+    height: if $('.froala.small-height').length then 250 else null
     colorsStep: 6

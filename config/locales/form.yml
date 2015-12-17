@@ -61,10 +61,13 @@ fr:
         archive: Si coché, l'utilisateur sera considéré comme archivé
         lang: Langue de l'utilisateur
       mailing_setting:
+        name: Saisissez le nom que vous souhaitez faire apparaitre en tant qu'expéditeur du mail. Si le champs est vide, le nom spécifé dans les paramètres généraux du site sera utilisé.
         email: Saisissez l'email d'où seront envoyés les emails. Si le champs est vide, l'email spécifé dans les paramètres généraux du site sera utilisé.
+        signature: Saisissez ici la signature que vous souhaitez afficher dans chacun des mails que vous enverrez à partir du site.
       mailing_message:
         title: Sujet de l'email à envoyer
         content: Contenu de l'email à envoyer
+        signature: Si coché, votre signature personnelle, définie dans les paramètres du mailing, sera ajoutée à la fin du mail.
 
       adult:
         enabled: Activer / Désactiver le popup de validation de l'âge

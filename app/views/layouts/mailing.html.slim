@@ -53,6 +53,9 @@ html
                                 br
                                 p = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
                                 = yield
+
+                                - if @mailing_message.show_signature?
+                                  div.signature == @mailing_setting.signature
                               td.expander
 
 
@@ -89,3 +92,4 @@ html
                                 td.twelve.sub-columns
                                   p
                                     == I18n.t('mailing.footer_unsubscribe', owner: @setting.title, link: link_to(I18n.t('mailing.unsubscribe_link'), unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :blank))
+                                  p = I18n.t('mailing.no_reply')
