@@ -92,3 +92,4 @@ html
                                 td.twelve.sub-columns
                                   p
                                     == I18n.t('mailing.footer_unsubscribe', owner: @setting.title, link: link_to(I18n.t('mailing.unsubscribe_link'), unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :blank))
+                                  p = I18n.t('mailing.no_reply')

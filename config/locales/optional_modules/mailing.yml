@@ -9,7 +9,7 @@ fr:
     click_here_link: cliquez ici
     unsubscribe: "Votre email a bien été retiré de notre liste. Vous ne recevrez plus de mails de %{company}"
 
-    footer_unsubscribe: Si vous ne souhaitez plus recevoir d'emailing de la part de %{owner}, %{link}
+    footer_unsubscribe: Si vous ne souhaitez plus recevoir d'emails de la part de %{owner}, %{link}
     unsubscribe_link: désabonnez-vous ici
 
     hello: Bonjour%{user}
@@ -19,6 +19,7 @@ fr:
 
     setting:
       email: "%{email} (email définit dans les paramètres généraux du site)"
+    no_reply: Cet email vous est envoyé automatiquement, merci de ne pas y répondre :)
 
 # English
 en:
@@ -28,3 +29,5 @@ en:
     footer_unsubscribe: If you don't want to receive more messages from %{owner}, %{link}
     unsubscribe_link: unsubscribe here
     hello: Hi%{user}
+
+    no_reply: This email was sent to you automatically, please do not reply :)
