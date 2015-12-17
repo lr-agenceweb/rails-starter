@@ -66,6 +66,7 @@ fr:
       mailing_message:
         title: Sujet de l'email à envoyer
         content: Contenu de l'email à envoyer
+        signature: Si coché, votre signature personnelle, définie dans les paramètres du mailing, sera ajoutée à la fin du mail.
 
       adult:
         enabled: Activer / Désactiver le popup de validation de l'âge

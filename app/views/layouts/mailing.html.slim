@@ -54,8 +54,8 @@ html
                                 p = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
                                 = yield
 
-                                div.signature
-                                  == @mailing_setting.signature
+                                - if @mailing_message.show_signature?
+                                  div.signature == @mailing_setting.signature
                               td.expander
 
 

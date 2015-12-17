@@ -502,6 +502,7 @@ fr:
         sent_at: Envoyé le
         send_link: Envoyer
         live_preview: Prévisualisation en direct
+        show_signature: Afficher votre signature personnelle ?
 
       shared:
         created_at: Créé le

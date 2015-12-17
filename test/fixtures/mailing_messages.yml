@@ -2,13 +2,14 @@
 #
 # Table name: mailing_messages
 #
-#  id         :integer          not null, primary key
-#  title      :string(255)
-#  content    :text(65535)
-#  sent_at    :datetime
-#  token      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  title          :string(255)
+#  content        :text(65535)
+#  show_signature :boolean          default(TRUE)
+#  sent_at        :datetime
+#  token          :string(255)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 
 DEFAULTS: &DEFAULTS
