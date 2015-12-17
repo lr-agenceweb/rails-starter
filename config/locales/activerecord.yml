@@ -493,7 +493,10 @@ fr:
         archive_status: Archivé ?
         lang: Langue
       mailing_setting:
-        email_status: Email
+        email: Email d'envoi
+        email_status: Email d'envoi
+        name: Nom d'envoi
+        name_status: Nom d'envoi
         signature_d: Signature
       mailing_message:
         title: Sujet

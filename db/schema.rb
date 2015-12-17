@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216234929) do
+ActiveRecord::Schema.define(version: 20151217135234) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -277,6 +277,7 @@ ActiveRecord::Schema.define(version: 20151216234929) do
   add_index "mailing_setting_translations", ["mailing_setting_id"], name: "index_mailing_setting_translations_on_mailing_setting_id", using: :btree
 
   create_table "mailing_settings", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.string   "email",      limit: 255
     t.text     "signature",  limit: 65535
     t.datetime "created_at",               null: false
