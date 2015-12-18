@@ -10,9 +10,9 @@ ActiveAdmin.register Comment, as: 'PostComment' do
                 :role,
                 :validated
 
-  scope :all, default: true
-  scope :francais
-  scope :english
+  scope I18n.t('scope.all'), :all, default: true
+  scope I18n.t('active_admin.globalize.language.fr'), :french
+  scope I18n.t('active_admin.globalize.language.en'), :english
 
   decorate_with CommentDecorator
   config.clear_sidebar_sections!

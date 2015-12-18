@@ -13,9 +13,9 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
     link_to I18n.t('active_admin.action_item.update_newsletter_setting'), edit_admin_newsletter_setting_path(NewsletterSetting.first)
   end
 
-  scope :all, default: true
-  scope :francais
-  scope :english
+  scope I18n.t('scope.all'), :all, default: true
+  scope I18n.t('active_admin.globalize.language.fr'), :french
+  scope I18n.t('active_admin.globalize.language.en'), :english
 
   sidebar I18n.t('newsletter.active_admin.subscriber_by_lang'), only: :index do
     pie_chart NewsletterUser.subscribers.group(:lang).count, height: '150px'
