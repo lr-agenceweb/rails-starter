@@ -499,6 +499,8 @@ fr:
         name: Nom d'envoi
         name_status: Nom d'envoi
         signature_d: Signature
+        unsubscribe_title: Titre de la page de désinscription
+        unsubscribe_content: Contenu de la page de désinscription
       mailing_message:
         title: Sujet
         preview: Prévisualisation

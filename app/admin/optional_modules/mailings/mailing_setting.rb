@@ -5,7 +5,8 @@ ActiveAdmin.register MailingSetting do
                 :name,
                 :email,
                 translations_attributes: [
-                  :id, :locale, :signature
+                  :id, :locale, :signature,
+                  :unsubscribe_title, :unsubscribe_content
                 ]
 
   decorate_with MailingSettingDecorator
@@ -18,6 +19,8 @@ ActiveAdmin.register MailingSetting do
           row :name_status
           row :email_status
           row :signature_d
+          row :unsubscribe_title
+          row :unsubscribe_content
         end
       end
     end
@@ -42,6 +45,23 @@ ActiveAdmin.register MailingSetting do
             t.input :signature,
                     hint: I18n.t('form.hint.mailing_setting.signature'),
                     input_html: { class: 'froala small-height' }
+          end
+        end
+      end
+    end
+
+    columns do
+      column do
+        f.inputs t('mailing.setting.unsubscribe') do
+          f.translated_inputs 'Translated fields', switch_locale: true do |t|
+            t.input :unsubscribe_title,
+                    label: I18n.t('activerecord.attributes.mailing_setting.unsubscribe_title'),
+                    hint: I18n.t('form.hint.mailing_setting.unsubscribe_title')
+
+            t.input :unsubscribe_content,
+                    label: I18n.t('activerecord.attributes.mailing_setting.unsubscribe_content'),
+                    hint: I18n.t('form.hint.mailing_setting.unsubscribe_content'),
+                    input_html: { class: 'froala' }
           end
         end
       end

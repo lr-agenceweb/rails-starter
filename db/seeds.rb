@@ -48,7 +48,7 @@ User.create!(
 # == Settings for site
 #
 puts 'Creating site Setting'
-setting_site = Setting.create!(
+@setting_site = Setting.create!(
   name: 'L&R Agence web',
   title: 'Rails starter',
   subtitle: 'Site de Démonstration',
@@ -60,7 +60,7 @@ setting_site = Setting.create!(
 
 if @locales.include?(:en)
   Setting::Translation.create!(
-    setting_id: setting_site.id,
+    setting_id: @setting_site.id,
     locale: 'en',
     title: 'Rails starter',
     subtitle: 'Demo website'
@@ -922,9 +922,22 @@ VideoSetting.create!(
 # == MailingSetting
 #
 puts 'Create mailing settings'
-MailingSetting.create!(
-  email: nil
+mailing_setting = MailingSetting.create!(
+  name: nil,
+  email: nil,
+  signature: @setting.name,
+  unsubscribe_title: ':(',
+  unsubscribe_content: "<p>Votre email a bien été retiré de notre liste. Vous ne recevrez plus de mails de #{@setting.title}.</p>"
 )
+if @locales.include?(:en)
+  MailingSetting::Translation.create!(
+    mailing_setting_id: mailing_setting.id,
+    locale: 'en',
+    signature: @setting.name,
+    unsubscribe_title: ':(',
+    unsubscribe_content: "<p>Your email has been removed from our mailing list. You will no longer receive email from #{@setting.title}.</p>"
+  )
+end
 
 #
 # == MailingUser

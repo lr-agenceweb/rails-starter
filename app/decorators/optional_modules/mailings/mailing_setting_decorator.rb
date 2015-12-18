@@ -18,4 +18,8 @@ class MailingSettingDecorator < ApplicationDecorator
   def signature_d
     raw(model.signature)
   end
+
+  def unsubscribe_content
+    raw(model.unsubscribe_content)
+  end
 end

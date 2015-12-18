@@ -8,8 +8,18 @@ module Mailingable
     before_action :set_mailing_user,
                   only: [:preview_in_browser]
     before_action :set_mailing_message,
-                  :set_mailing_setting,
-                  only: [:send_mailing_message, :preview, :preview_in_browser]
+                  only: [
+                    :preview,
+                    :preview_in_browser,
+                    :send_mailing_message
+                  ]
+    before_action :set_mailing_setting,
+                  only: [
+                    :unsubscribe,
+                    :preview,
+                    :preview_in_browser,
+                    :send_mailing_message
+                  ]
 
     private
 

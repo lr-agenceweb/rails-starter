@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218121213) do
+ActiveRecord::Schema.define(version: 20151218135408) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -266,22 +266,26 @@ ActiveRecord::Schema.define(version: 20151218121213) do
   end
 
   create_table "mailing_setting_translations", force: :cascade do |t|
-    t.integer  "mailing_setting_id", limit: 4,     null: false
-    t.string   "locale",             limit: 255,   null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.text     "signature",          limit: 65535
+    t.integer  "mailing_setting_id",  limit: 4,     null: false
+    t.string   "locale",              limit: 255,   null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.text     "signature",           limit: 65535
+    t.string   "unsubscribe_title",   limit: 255
+    t.text     "unsubscribe_content", limit: 65535
   end
 
   add_index "mailing_setting_translations", ["locale"], name: "index_mailing_setting_translations_on_locale", using: :btree
   add_index "mailing_setting_translations", ["mailing_setting_id"], name: "index_mailing_setting_translations_on_mailing_setting_id", using: :btree
 
   create_table "mailing_settings", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "email",      limit: 255
-    t.text     "signature",  limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "name",                limit: 255
+    t.string   "email",               limit: 255
+    t.text     "signature",           limit: 65535
+    t.string   "unsubscribe_title",   limit: 255
+    t.text     "unsubscribe_content", limit: 65535
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "mailing_users", force: :cascade do |t|

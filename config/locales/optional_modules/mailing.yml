@@ -7,7 +7,6 @@ fr:
     notice_sending: "Le mail est en train d'être envoyé à %{count} personne(s)"
     preview_in_browser: Si vous ne visualisez pas correctement cet email, %{link}
     click_here_link: cliquez ici
-    unsubscribe: "Votre email a bien été retiré de notre liste. Vous ne recevrez plus de mails de %{company}"
 
     footer_unsubscribe: Si vous ne souhaitez plus recevoir d'emails de la part de %{owner}, %{link}
     unsubscribe_link: désabonnez-vous ici
@@ -19,6 +18,8 @@ fr:
 
     setting:
       email: "%{email} (email définit dans les paramètres généraux du site)"
+      unsubscribe: Contenu du message de désinscription des mailings
+
     no_reply: Cet email vous est envoyé automatiquement, merci de ne pas y répondre :)
     no_mailing_users: Oup's... Il semblerait qu'aucun utilisateur ne soit inscrit pour recevoir un mailing. N'oubliez pas d'ajouter des utilisateurs ;)
 
