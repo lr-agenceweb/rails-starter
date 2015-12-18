@@ -329,6 +329,7 @@ fr:
         content_d: Contenu
       string_box:
         title: Titre
+        description: Description
         content: Contenu
         key: Clé
         optional_module: Module Optionnel
