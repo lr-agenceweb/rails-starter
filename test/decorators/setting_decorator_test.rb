@@ -14,15 +14,15 @@ class SettingDecoratorTest < Draper::TestCase
   # == Title / Subtitle
   #
   test 'should return correct title with span tag wrapping it' do
-    assert_match "<span>Rails Starter</span>", @setting_decorated.title
+    assert_match '<span>Rails Starter</span>', @setting_decorated.title
   end
 
   test 'should return correct title with subtitle inline' do
-    assert_equal "Rails Starter démarre rapidement", @setting_decorated.title_subtitle_inline
+    assert_equal 'Rails Starter démarre rapidement', @setting_decorated.title_subtitle_inline
   end
 
   test 'should return correct title/subtitle formatted with html' do
-    assert_match "<a href=\"/\" class=\"l-header-site-title-link \"><h1 class=\"l-header-site-title\"><span>Rails Starter</span><small class=\"l-header-site-subtitle\">Démarre rapidement</small></h1></a>", @setting_decorated.title_subtitle
+    assert_match '<a href="/" class="l-header-site-title-link "><h1 class="l-header-site-title"><span>Rails Starter</span><small class="l-header-site-subtitle">Démarre rapidement</small></h1></a>', @setting_decorated.title_subtitle
   end
 
   test 'should return correct small subtitle formatted with html' do
@@ -78,19 +78,19 @@ class SettingDecoratorTest < Draper::TestCase
   # == Status tag for modules
   #
   test 'should return correct status_tag for breadcrumb' do
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @setting_decorated.breadcrumb
+    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @setting_decorated.breadcrumb
   end
 
   test 'should return correct status_tag for qrcode' do
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @setting_decorated.qrcode
+    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @setting_decorated.qrcode
   end
 
   test 'should return correct status_tag for social' do
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @setting_decorated.social
+    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @setting_decorated.social
   end
 
   test 'should return correct status_tag for maintenance' do
-    assert_match "<span class=\"status_tag en_ligne green\">En Ligne</span>", @setting_decorated.maintenance
+    assert_match '<span class="status_tag en_ligne green">En Ligne</span>', @setting_decorated.maintenance
   end
 
   private

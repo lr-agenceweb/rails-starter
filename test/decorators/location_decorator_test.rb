@@ -10,7 +10,7 @@ class LocationDecoratorTest < Draper::TestCase
 
   test 'should return correct address inline' do
     location = LocationDecorator.new(@location_one)
-    assert_equal "<span>1 Main Street, 06001 - Auckland</span>", location.full_address_inline
+    assert_equal '<span>1 Main Street, 06001 - Auckland</span>', location.full_address_inline
   end
 
   test 'should return true as boolean for latlon?' do

@@ -26,7 +26,7 @@ class GuestBook < ActiveRecord::Base
   validates :content, presence: true
   validates :lang,
             presence: true,
-            inclusion: { in: I18n.available_locales.map { |i| i.to_s } }
+            inclusion: { in: I18n.available_locales.map(&:to_s) }
 
   default_scope { order('created_at DESC') }
 

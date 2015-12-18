@@ -19,6 +19,6 @@ class MailingUsersController < ApplicationController
   def set_mailing_user
     @mailing_user = MailingUser.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    fail ActionController::RoutingError, 'Not Found'
+    raise ActionController::RoutingError, 'Not Found'
   end
 end

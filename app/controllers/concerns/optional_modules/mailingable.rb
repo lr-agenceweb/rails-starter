@@ -26,19 +26,19 @@ module Mailingable
     def set_mailing_message
       @mailing_message = MailingMessage.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      fail ActionController::RoutingError, 'Not Found'
+      raise ActionController::RoutingError, 'Not Found'
     end
 
     def set_mailing_setting
       @mailing_setting = MailingSetting.first
     rescue ActiveRecord::RecordNotFound
-      fail ActionController::RoutingError, 'Not Found'
+      raise ActionController::RoutingError, 'Not Found'
     end
 
     def set_mailing_user
       @mailing_user = MailingUser.find(params[:mailing_user_id])
     rescue ActiveRecord::RecordNotFound
-      fail ActionController::RoutingError, 'Not Found'
+      raise ActionController::RoutingError, 'Not Found'
     end
   end
 end

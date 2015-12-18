@@ -16,6 +16,6 @@ module Newsletterable
   def set_newsletter
     @newsletter = Newsletter.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    fail ActionController::RoutingError, 'Not Found'
+    raise ActionController::RoutingError, 'Not Found'
   end
 end
