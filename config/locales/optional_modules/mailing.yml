@@ -20,6 +20,7 @@ fr:
     setting:
       email: "%{email} (email définit dans les paramètres généraux du site)"
     no_reply: Cet email vous est envoyé automatiquement, merci de ne pas y répondre :)
+    no_mailing_users: Oup's... Il semblerait qu'aucun utilisateur ne soit inscrit pour recevoir un mailing. N'oubliez pas d'ajouter des utilisateurs ;)
 
 # English
 en:
