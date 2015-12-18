@@ -1,4 +1,4 @@
 .success-container.row
   .small-12.columns
-    h1.title = I18n.with_locale(@mailing_user.lang) { @mailing_setting.unsubscribe_title }
-    p.content == I18n.with_locale(@mailing_user.lang) { @mailing_setting.unsubscribe_content }
+    h1.title = @mailing_setting.unsubscribe_title
+    p.content == @mailing_setting.unsubscribe_content

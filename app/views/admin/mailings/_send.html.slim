@@ -5,3 +5,5 @@
               data: { vex_alert: t('mailing.send') },
               class: 'button alert vex-alert mailing-message'
   p == resource.mailing_users.map(&:name).join('<br />') unless params[:action] == 'index'
+- else
+  p Oup's... Il semblerait que vous n'ayez pas sélectionné d'utilisateurs à qui envoyer le mail

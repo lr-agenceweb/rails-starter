@@ -13,20 +13,20 @@ class MailingUsersControllerTest < ActionController::TestCase
   # == Unsubscribing
   #
   test 'should render success unsubscribe template' do
-    delete :unsubscribe, locale: 'fr', id: @mailing_user.id, token: @mailing_user.token
+    delete :unsubscribe, locale: @mailing_user.lang, id: @mailing_user.id, token: @mailing_user.token
     assert_template :success_unsubscribe
   end
 
   test 'should unsubscribe newsletter user if token is correct' do
     assert_difference ['MailingUser.count'], -1 do
-      delete :unsubscribe, locale: 'fr', id: @mailing_user.id, token: @mailing_user.token
+      delete :unsubscribe, locale: @mailing_user.lang, id: @mailing_user.id, token: @mailing_user.token
     end
   end
 
   test 'should not unsubscribe newsletter user if token is wrong' do
     assert_no_difference ['MailingUser.count'] do
       assert_raises(ActionController::RoutingError) do
-        delete :unsubscribe, locale: 'fr', id: @mailing_user.id, token: "#{@mailing_user.token}-abc"
+        delete :unsubscribe, locale: @mailing_user.lang, id: @mailing_user.id, token: "#{@mailing_user.token}-abc"
       end
     end
   end
@@ -34,7 +34,7 @@ class MailingUsersControllerTest < ActionController::TestCase
   test 'should not unsubscribe newsletter user N°2 by N°1' do
     assert_no_difference ['MailingUser.count'] do
       assert_raises(ActionController::RoutingError) do
-        delete :unsubscribe, locale: 'fr', id: @mailing_user_two.id, token: @mailing_user.token
+        delete :unsubscribe, locale: @mailing_user.lang, id: @mailing_user_two.id, token: @mailing_user.token
       end
     end
   end
@@ -45,7 +45,7 @@ class MailingUsersControllerTest < ActionController::TestCase
   test 'should render 404 if module is disabled' do
     disable_optional_module @super_administrator, @mailing_module, 'Mailing' # in test_helper.rb
     assert_raises(ActionController::RoutingError) do
-      delete :unsubscribe, locale: 'fr', id: @mailing_user.id, token: @mailing_user.token
+      delete :unsubscribe, locale: @mailing_user.lang, id: @mailing_user.id, token: @mailing_user.token
     end
   end
 
