@@ -44,7 +44,7 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
       column do
         f.inputs t('additional') do
           f.input :lang,
-                  collection: %w( fr en ),
+                  collection: I18n.available_locales.map { |i| [i.to_s] },
                   include_blank: false,
                   hint: 'Attention, changer ce paramètre changera la langue de la newsletter reçue par cet utilisateur !',
                   input_html: { class: 'chosen-select' }

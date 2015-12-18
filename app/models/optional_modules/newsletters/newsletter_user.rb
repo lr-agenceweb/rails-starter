@@ -37,7 +37,7 @@ class NewsletterUser < ActiveRecord::Base
   validates :lang,
             presence: true,
             allow_blank: false,
-            inclusion: %w( fr en )
+            inclusion: { in: I18n.available_locales.map { |i| i.to_s } }
 
   scope :testers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'tester') }
   scope :subscribers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'subscriber') }
