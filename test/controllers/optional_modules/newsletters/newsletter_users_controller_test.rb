@@ -176,7 +176,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
       end
     end
 
-    assert_performed_jobs 2
+    assert_performed_jobs @locales.count
   end
 
   private

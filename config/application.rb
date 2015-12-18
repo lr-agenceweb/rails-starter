@@ -24,6 +24,7 @@ module Startup
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr, :en]
     config.i18n.fallbacks = true
+    # config.i18n.enforce_available_locales = false
 
     config.autoload_paths += Dir["#{config.root}/app/controllers/**/"]
     config.autoload_paths += Dir["#{config.root}/app/models/**/"]
