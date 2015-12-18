@@ -3,7 +3,7 @@ fr:
   active_admin:
     globalize:
       language:
-        en: English
+        en: Anglais
         fr: Français
       translations: Traductions
     edit: Modifier
@@ -32,7 +32,7 @@ en:
     globalize:
       language:
         en: English
-        fr: Français
+        fr: Franch
       translations: Translations
     edit: Edit
     show: Show

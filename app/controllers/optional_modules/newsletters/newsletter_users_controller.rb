@@ -2,7 +2,7 @@
 # == NewsletterUsersController
 #
 class NewsletterUsersController < ApplicationController
-  include NewsletterAid
+  include NewsletterUserable
   before_action :set_newsletter_setting, only: [:create]
   after_action :send_welcome_newsletter, only: [:create], if: proc { @newsletter_setting.send_welcome_email && @success }
 

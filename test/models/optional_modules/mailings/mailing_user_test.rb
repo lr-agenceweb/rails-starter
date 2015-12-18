@@ -44,6 +44,12 @@ class MailingUserTest < ActiveSupport::TestCase
     assert_equal [:lang], mailing_user.errors.keys
   end
 
+  test 'should not save if email is already taken' do
+    mailing_user = MailingUser.new(email: 'lorie@mailing.com', lang: 'fr')
+    assert_not mailing_user.valid?
+    assert_equal [:email], mailing_user.errors.keys
+  end
+
   test 'should save if email is correct and with lang' do
     mailing_user = MailingUser.new(email: 'mailing@test.com', lang: 'fr')
     assert mailing_user.valid?

@@ -6,6 +6,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
                 :phone,
                 :phone_secondary,
                 :email,
+                :per_page,
                 :show_breadcrumb,
                 :show_social,
                 :show_qrcode,

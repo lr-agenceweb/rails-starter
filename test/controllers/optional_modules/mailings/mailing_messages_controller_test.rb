@@ -16,7 +16,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         get :preview_in_browser, locale: locale.to_s, id: @mailing_message.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token
-        assert_template :send_email
+        assert_response :success
         assert_template :send_email, layout: 'mailing'
       end
     end
@@ -39,7 +39,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview_in_browser, locale: locale.to_s, id: @mailing_message_two.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: ''
+          get :preview_in_browser, locale: locale.to_s, id: @mailing_message.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: ''
         end
       end
     end
@@ -49,7 +49,27 @@ class MailingMessagesControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview_in_browser, locale: locale.to_s, id: @mailing_message_two.id, token: '', mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token
+          get :preview_in_browser, locale: locale.to_s, id: @mailing_message.id, token: '', mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token
+        end
+      end
+    end
+  end
+
+  test 'should render 404 if mailing_message has not yet been sent' do
+    assert_raises(ActionController::RoutingError) do
+      @locales.each do |locale|
+        I18n.with_locale(locale.to_s) do
+          get :preview_in_browser, locale: locale.to_s, id: @mailing_message_two.id, token: @mailing_message_two.token, mailing_user_id: @mailing_user_two.id, mailing_user_token: @mailing_user_two.token
+        end
+      end
+    end
+  end
+
+  test 'should render 404 if user is not subscribed to mailing' do
+    assert_raises(ActionController::RoutingError) do
+      @locales.each do |locale|
+        I18n.with_locale(locale.to_s) do
+          get :preview_in_browser, locale: locale.to_s, id: @mailing_message_three.id, token: @mailing_message_three.token, mailing_user_id: @mailing_user_two.id, mailing_user_token: @mailing_user_two.token
         end
       end
     end
@@ -74,9 +94,15 @@ class MailingMessagesControllerTest < ActionController::TestCase
   def initialize_test
     @setting = settings(:one)
     @locales = I18n.available_locales
+
     @mailing_user = mailing_users(:one)
+    @mailing_user_two = mailing_users(:two)
+    @mailing_user_three = mailing_users(:three)
+
     @mailing_message = mailing_messages(:one)
     @mailing_message_two = mailing_messages(:two)
+    @mailing_message_three = mailing_messages(:three)
+
     @mailing_module = optional_modules(:mailing)
 
     @super_administrator = users(:anthony)

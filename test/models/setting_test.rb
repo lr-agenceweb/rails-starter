@@ -45,6 +45,27 @@ class SettingTest < ActiveSupport::TestCase
     end
   end
 
+  #
+  # == Per page
+  #
+  test 'should not update if per_page params is not alloweded' do
+    @setting.update_attributes(per_page: 31)
+    assert_not @setting.valid?, 'should not update if per_page param is not allowed'
+    assert_equal [:per_page], @setting.errors.keys
+  end
+
+  test 'should not update if per_page params is empty' do
+    @setting.update_attributes(per_page: nil)
+    assert_not @setting.valid?, 'should not update if per_page params is empty'
+    assert_equal [:per_page], @setting.errors.keys
+  end
+
+  test 'should update if per_page params is allowed' do
+    @setting.update_attributes(per_page: 5)
+    assert @setting.valid?, 'should update if per_page params is allowed'
+    assert @setting.errors.keys.empty?
+  end
+
   private
 
   def initialize_test

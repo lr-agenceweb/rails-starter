@@ -32,4 +32,5 @@ two:
   address: '4 avenue de la chouette'
   postcode: '77700'
   city: Gotham
-  locationable: event_online (Event)
+  locationable_id: 1
+  locationable_type: Event

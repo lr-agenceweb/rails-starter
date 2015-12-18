@@ -57,8 +57,9 @@ Rails.application.routes.draw do
     get '/admin/newsletters/:id/preview', to: 'admin/letters#preview', as: :preview_newsletter
 
     # Mailings
-    get '/mailing_messages/:id-:token/:mailing_user_id/:mailing_user_token', to: 'mailing_messages#preview_in_browser', as: :preview_in_browser_mailing_message
+    get '/mailing_messages/:id/:token/:mailing_user_id/:mailing_user_token', to: 'mailing_messages#preview_in_browser', as: :preview_in_browser_mailing_message
     get '/admin/mailing_messages/:id/preview', to: 'admin/mailing_messages#preview', as: :preview_mailing_message
+    get '/mailing_user/unsubscribe/:id/:token', to: 'mailing_users#unsubscribe', as: :unsubscribe_mailing_user
 
 
     # Mapbox popup content
@@ -76,6 +77,5 @@ Rails.application.routes.draw do
   get '/admin/newsletter_test/:id/send', to: 'admin/letters#send_newsletter_test', as: :send_newsletter_for_testers
 
   # Mailings
-  get '/mailing_user/unsubscribe/:id/:token', to: 'mailing_users#unsubscribe', as: :unsubscribe_mailing_user
   get '/admin/mailing_messages/:id/send', to: 'admin/mailing_messages#send_mailing_message', as: :send_mailing_message
 end

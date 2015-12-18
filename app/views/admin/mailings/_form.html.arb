@@ -3,10 +3,24 @@ f.semantic_errors(*f.object.errors.keys)
 f.columns do
   f.column do
     f.inputs t('activerecord.models.mailing_user.other') do
-      f.input :mailing_users,
-              as: :check_boxes,
-              collection: MailingUser.all,
-              label: false
+      if MailingUser.all.length > 0
+        f.input :mailing_users,
+                as: :check_boxes,
+                collection: MailingUser.all,
+                label: false
+      else
+        "<li><p>#{I18n.t('mailing.no_mailing_users')}</p></li>".html_safe
+      end
+    end
+  end
+end
+
+f.columns do
+  f.column do
+    f.inputs t('additional') do
+      f.input :show_signature,
+              as: :boolean,
+              hint: I18n.t('form.hint.mailing_message.signature')
     end
   end
 end
@@ -25,9 +39,7 @@ f.columns do
       end
     end
   end
-end
 
-f.columns do
   f.column do
     render '/admin/mailings/preview', f: f
   end

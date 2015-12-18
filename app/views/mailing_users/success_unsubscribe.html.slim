@@ -1,4 +1,4 @@
 .success-container.row
   .small-12.columns
-    h1.title Merci
-    p.content = I18n.t('mailing.unsubscribe', company: @setting.title)
+    h1.title = @mailing_setting.unsubscribe_title
+    p.content == @mailing_setting.unsubscribe_content

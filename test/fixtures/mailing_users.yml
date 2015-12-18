@@ -23,7 +23,7 @@ one:
   token: ZK3Nvdx_JZerQyUnTlFo5Q
   lang: fr
   archive: false
-  mailing_messages: one
+  mailing_messages: one, three
 
 two:
   <<: *DEFAULTS

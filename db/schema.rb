@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209195723) do
+ActiveRecord::Schema.define(version: 20151218135408) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -131,11 +131,21 @@ ActiveRecord::Schema.define(version: 20151209195723) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   add_index "delayed_jobs", ["queue"], name: "delayed_jobs_queue", using: :btree
 
-  create_table "event_settings", force: :cascade do |t|
-    t.boolean  "prev_next",  default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+  create_table "event_orders", force: :cascade do |t|
+    t.string   "key",        limit: 255
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
+
+  create_table "event_settings", force: :cascade do |t|
+    t.integer  "event_order_id", limit: 4
+    t.boolean  "prev_next",                default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "event_settings", ["event_order_id"], name: "index_event_settings_on_event_order_id", using: :btree
 
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",   limit: 4,     null: false
@@ -246,18 +256,36 @@ ActiveRecord::Schema.define(version: 20151209195723) do
   add_index "mailing_message_users", ["mailing_user_id"], name: "index_mailing_message_users_on_mailing_user_id", using: :btree
 
   create_table "mailing_messages", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.text     "content",    limit: 65535
+    t.string   "title",          limit: 255
+    t.text     "content",        limit: 65535
+    t.boolean  "show_signature",               default: true
     t.datetime "sent_at"
-    t.string   "token",      limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "token",          limit: 255
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
+  create_table "mailing_setting_translations", force: :cascade do |t|
+    t.integer  "mailing_setting_id",  limit: 4,     null: false
+    t.string   "locale",              limit: 255,   null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.text     "signature",           limit: 65535
+    t.string   "unsubscribe_title",   limit: 255
+    t.text     "unsubscribe_content", limit: 65535
+  end
+
+  add_index "mailing_setting_translations", ["locale"], name: "index_mailing_setting_translations_on_locale", using: :btree
+  add_index "mailing_setting_translations", ["mailing_setting_id"], name: "index_mailing_setting_translations_on_mailing_setting_id", using: :btree
+
   create_table "mailing_settings", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",                limit: 255
+    t.string   "email",               limit: 255
+    t.text     "signature",           limit: 65535
+    t.string   "unsubscribe_title",   limit: 255
+    t.text     "unsubscribe_content", limit: 65535
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "mailing_users", force: :cascade do |t|
@@ -494,6 +522,7 @@ ActiveRecord::Schema.define(version: 20151209195723) do
     t.string   "phone",                    limit: 255
     t.string   "phone_secondary",          limit: 255
     t.string   "email",                    limit: 255
+    t.integer  "per_page",                 limit: 4,     default: 3
     t.boolean  "show_breadcrumb",                        default: false
     t.boolean  "show_social",                            default: true
     t.boolean  "show_qrcode",                            default: false
@@ -589,6 +618,7 @@ ActiveRecord::Schema.define(version: 20151209195723) do
 
   create_table "string_boxes", force: :cascade do |t|
     t.string   "key",                limit: 255
+    t.text     "description",        limit: 65535
     t.string   "title",              limit: 255
     t.text     "content",            limit: 65535
     t.integer  "optional_module_id", limit: 4
@@ -711,4 +741,5 @@ ActiveRecord::Schema.define(version: 20151209195723) do
 
   add_index "video_uploads", ["videoable_type", "videoable_id"], name: "index_video_uploads_on_videoable_type_and_videoable_id", using: :btree
 
+  add_foreign_key "event_settings", "event_orders"
 end

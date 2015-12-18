@@ -2,6 +2,7 @@
 # == MailingUsers Controller
 #
 class MailingUsersController < ApplicationController
+  include Mailingable
   before_action :not_found, unless: proc { @mailing_module.enabled? }
   before_action :set_mailing_user, only: [:unsubscribe]
   layout 'error'
@@ -10,7 +11,7 @@ class MailingUsersController < ApplicationController
     fail ActionController::RoutingError, 'Not Found' if !params[:token] || @mailing_user.try(:token) != params[:token]
     @mailing_user.destroy
     @asocial = true
-    render template: 'mailing_users/success_unsubscribe'
+    render 'mailing_users/success_unsubscribe'
   end
 
   private

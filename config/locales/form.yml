@@ -61,10 +61,15 @@ fr:
         archive: Si coché, l'utilisateur sera considéré comme archivé
         lang: Langue de l'utilisateur
       mailing_setting:
+        name: Saisissez le nom que vous souhaitez faire apparaitre en tant qu'expéditeur du mail. Si le champs est vide, le nom spécifé dans les paramètres généraux du site sera utilisé.
         email: Saisissez l'email d'où seront envoyés les emails. Si le champs est vide, l'email spécifé dans les paramètres généraux du site sera utilisé.
+        signature: Saisissez ici la signature que vous souhaitez afficher dans chacun des mails que vous enverrez à partir du site.
+        unsubscribe_title: Titre du message à afficher sur la page qui confirme que l'utilisateur s'est bien désinscrit des mailings
+        unsubscribe_content: Contenu du message à afficher sur la page qui confirme que l'utilisateur s'est bien désinscrit des mailings
       mailing_message:
         title: Sujet de l'email à envoyer
         content: Contenu de l'email à envoyer
+        signature: Si coché, votre signature personnelle, définie dans les paramètres du mailing, sera ajoutée à la fin du mail.
 
       adult:
         enabled: Activer / Désactiver le popup de validation de l'âge
@@ -78,6 +83,7 @@ fr:
         link: Vous pouvez mettre un lien vers le site organisateur de l'événement
         online: En cochant la case en ligne, vous choisissez d'afficher l'événement sur le site
         show_calendar: Afficher un calendrier de l'événement sur le site ? (Attention, le calendrier ne sera visible que si les options "date de début" et "date de fin" de l'événement sont spécifiées)
+        event_order: Choisissez la manière dont vous souhaitez que les événements apparaissent
 
       allow_comments: Voulez-vous autoriser les commentaires sur cet article ?
 

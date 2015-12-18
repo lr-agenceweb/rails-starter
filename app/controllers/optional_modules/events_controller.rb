@@ -2,14 +2,16 @@
 # == EventsController
 #
 class EventsController < ApplicationController
+  before_action :not_found, unless: proc { @event_module.enabled? }
   before_action :set_event, only: [:show]
-  before_action :event_module_enabled?
   decorates_assigned :event, :comment
 
   # GET /events
   # GET /events.json
   def index
-    @events = EventDecorator.decorate_collection(Event.includes(:translations, :location).online.order(start_date: :asc).page params[:page])
+    @events = Event.with_conditions.online.includes(:translations, :location)
+    per_p = @setting.per_page == 0 ? @events.count : @setting.per_page
+    @events = EventDecorator.decorate_collection(@events.page(params[:page]).per(per_p))
     seo_tag_index category
   end
 
@@ -26,9 +28,5 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.online.includes(pictures: [:translations], referencement: [:translations]).friendly.find(params[:id])
-  end
-
-  def event_module_enabled?
-    not_found unless @event_module.enabled?
   end
 end

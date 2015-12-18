@@ -48,7 +48,7 @@ User.create!(
 # == Settings for site
 #
 puts 'Creating site Setting'
-setting_site = Setting.create!(
+@setting_site = Setting.create!(
   name: 'L&R Agence web',
   title: 'Rails starter',
   subtitle: 'Site de Démonstration',
@@ -60,7 +60,7 @@ setting_site = Setting.create!(
 
 if @locales.include?(:en)
   Setting::Translation.create!(
-    setting_id: setting_site.id,
+    setting_id: @setting_site.id,
     locale: 'en',
     title: 'Rails starter',
     subtitle: 'Demo website'
@@ -643,11 +643,23 @@ event_title_fr.each_with_index do |element, index|
   end
 end
 
+
+#
+# == Event Order
+#
+puts 'Creating Event Order'
+event_order_key = ['current_or_coming', 'all']
+event_order_name = ['Courant et à venir (avec le plus récent en premier)', 'Tous (même ceux qui sont déjà passés)']
+event_order_name.each_with_index do |order, index|
+  eo = EventOrder.create!(key: event_order_key[index], name: order)
+  @event_order = eo if index == 0
+end
+
 #
 # == Event Setting
 #
 puts 'Creating Event Setting'
-EventSetting.create!(prev_next: true)
+EventSetting.create!(prev_next: true, event_order_id: @event_order.id)
 
 #
 # == Newsletter Setting
@@ -766,6 +778,12 @@ string_box_keys = [
   'error_500',
   'success_contact_form'
 ]
+string_box_descriptions = [
+  'Message à afficher en cas d\'erreur 404 (page introuvable)',
+  'Message à afficher en cas d\'erreur 422 (page indisponible ponctuellement)',
+  'Message à afficher en cas d\'erreur 500 (erreur du serveur)',
+  'Message de succès à afficher lorsque le formulaire de contact a bien envoyé le mail à l\'administrateur'
+]
 string_box_title_fr = [
   '404',
   '422',
@@ -800,6 +818,7 @@ optional_module_id = [
 string_box_keys.each_with_index do |element, index|
   string_box = StringBox.create!(
     key: element,
+    description: string_box_descriptions[index],
     title: string_box_title_fr[index],
     content: string_box_content_fr[index],
     optional_module_id: optional_module_id[index]
@@ -903,9 +922,22 @@ VideoSetting.create!(
 # == MailingSetting
 #
 puts 'Create mailing settings'
-MailingSetting.create!(
-  email: nil
+mailing_setting = MailingSetting.create!(
+  name: nil,
+  email: nil,
+  signature: @setting_site.name,
+  unsubscribe_title: ':(',
+  unsubscribe_content: "<p>Votre email a bien été retiré de notre liste. Vous ne recevrez plus de mails de #{@setting_site.title}.</p>"
 )
+if @locales.include?(:en)
+  MailingSetting::Translation.create!(
+    mailing_setting_id: mailing_setting.id,
+    locale: 'en',
+    signature: @setting_site.name,
+    unsubscribe_title: ':(',
+    unsubscribe_content: "<p>Your email has been removed from our mailing list. You will no longer receive email from #{@setting_site.title}.</p>"
+  )
+end
 
 #
 # == MailingUser

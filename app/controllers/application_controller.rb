@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   include Mappable
   include Sliderable
   include Videoable
-  include NewsletterUserable
+  include NewsletterFrontUserable
 
   # Misc
   before_action :set_host_name

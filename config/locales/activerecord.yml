@@ -248,6 +248,7 @@ fr:
         name: Nom
         phone: Téléphone
         phone_secondary: Téléphone secondaire
+        per_page: Articles par page
         show_breadcrumb: Afficher le fil d'ariane ?
         show_social: Afficher le partage sur les réseaux sociaux ?
         show_qrcode: Afficher le QrCode sur la page contact ?
@@ -328,6 +329,7 @@ fr:
         content_d: Contenu
       string_box:
         title: Titre
+        description: Description
         content: Contenu
         key: Clé
         optional_module: Module Optionnel
@@ -456,6 +458,7 @@ fr:
         duration: Durée
       event_setting:
         prev_next: Liens précédent / suivant
+        event_order: Ordre des événements
       map:
         show_map: Afficher la carte ?
         full_address_inline: Adresse de votre organisation
@@ -491,7 +494,13 @@ fr:
         archive_status: Archivé ?
         lang: Langue
       mailing_setting:
-        email_status: Email
+        email: Email d'envoi
+        email_status: Email d'envoi
+        name: Nom d'envoi
+        name_status: Nom d'envoi
+        signature_d: Signature
+        unsubscribe_title: Titre de la page de désinscription
+        unsubscribe_content: Contenu de la page de désinscription
       mailing_message:
         title: Sujet
         preview: Prévisualisation
@@ -499,6 +508,7 @@ fr:
         sent_at: Envoyé le
         send_link: Envoyer
         live_preview: Prévisualisation en direct
+        show_signature: Afficher votre signature personnelle ?
 
       shared:
         created_at: Créé le

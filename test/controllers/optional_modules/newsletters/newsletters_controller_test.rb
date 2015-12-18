@@ -17,24 +17,25 @@ class NewslettersControllerTest < ActionController::TestCase
     I18n.with_locale(locale) do
       get :see_in_browser, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
       assert_response :success
-      assert_template :see_in_browser
-      assert_template layout: :newsletter
+      assert_template 'newsletter_mailer/send_newsletter', layout: 'newsletter'
     end
   end
 
-  test 'should redirect to homepage if newsletter have not already been sent' do
+  test 'should render 404 if newsletter have not already been sent' do
     locale = @newsletter_user.lang
-    I18n.with_locale(locale) do
-      get :see_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
-      assert_redirected_to root_path(locale: locale)
+    assert_raises(ActionController::RoutingError) do
+      I18n.with_locale(locale) do
+        get :see_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+      end
     end
   end
 
-  test 'should redirect to homepage if token not match newsletter user for see_in_browser' do
+  test 'should render 404 if token don\'t match for see_in_browser' do
     locale = @newsletter_user.lang
-    I18n.with_locale(locale) do
-      get :see_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
-      assert_redirected_to root_path(locale: locale)
+    assert_raises(ActionController::RoutingError) do
+      I18n.with_locale(locale) do
+        get :see_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
+      end
     end
   end
 
@@ -46,16 +47,38 @@ class NewslettersControllerTest < ActionController::TestCase
     I18n.with_locale(locale) do
       get :welcome_user, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
       assert_response :success
-      assert_template :welcome_user
-      assert_template layout: :newsletter
+      assert_template 'newsletter_mailer/welcome_user', layout: 'newsletter'
     end
   end
 
-  test 'should redirect to homepage if token not match newsletter user for welcome_user' do
+  test 'should render 404 if token don\'t match for welcome_user' do
     locale = @newsletter_user.lang
-    I18n.with_locale(locale) do
-      get :welcome_user, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
-      assert_redirected_to root_path(locale: locale)
+    assert_raises(ActionController::RoutingError) do
+      I18n.with_locale(locale) do
+        get :welcome_user, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
+      end
+    end
+  end
+
+  #
+  # == Module disabled
+  #
+  test 'should render 404 if module is disabled' do
+    disable_optional_module @super_administrator, @newsletter_module, 'Newsletter' # in test_helper.rb
+    assert_raises(ActionController::RoutingError) do
+      @locales.each do |locale|
+        I18n.with_locale(locale.to_s) do
+          get :welcome_user, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+        end
+      end
+    end
+
+    assert_raises(ActionController::RoutingError) do
+      @locales.each do |locale|
+        I18n.with_locale(locale.to_s) do
+          get :see_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
+        end
+      end
     end
   end
 
@@ -67,5 +90,8 @@ class NewslettersControllerTest < ActionController::TestCase
     @newsletter_not_sent = newsletters(:not_sent)
     @newsletter_user = newsletter_users(:newsletter_user_fr)
     @newsletter_user_en = newsletter_users(:newsletter_user_en)
+    @newsletter_module = optional_modules(:newsletter)
+
+    @super_administrator = users(:anthony)
   end
 end

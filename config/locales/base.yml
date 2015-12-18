@@ -54,6 +54,12 @@ fr:
   add:
     feminin: Ajouter une nouvelle %{klass}
 
+  # scopes
+  scope:
+    all: Tous
+    validated: Validés
+    to_validate: Non validés
+
 
 # English
 en:

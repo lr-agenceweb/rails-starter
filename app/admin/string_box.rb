@@ -13,7 +13,8 @@ ActiveAdmin.register StringBox do
   config.clear_sidebar_sections!
 
   index do
-    column :key
+    column :key if current_user.super_administrator?
+    column :description
     column :title
     column :content
     column :optional_module if current_user.super_administrator?
@@ -24,7 +25,8 @@ ActiveAdmin.register StringBox do
 
   show title: :title_aa_show do
     attributes_table do
-      row :key
+      row :key if current_user.super_administrator?
+      row :description
       row :title
       row :content
       row :optional_module if current_user.super_administrator?
@@ -34,29 +36,48 @@ ActiveAdmin.register StringBox do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs t('activerecord.models.string_box.one') do
-      if f.object.new_record?
-        f.input :key
-      else
-        f.input :key, input_html: { disabled: :disabled }
-      end
+    f.columns do
+      f.column do
+        f.inputs t('general') do
+          if f.object.new_record?
+            f.input :key
+          else
+            f.input :key, input_html: { disabled: :disabled }
+          end
 
-      f.translated_inputs 'Translated fields', switch_locale: false do |t|
-        t.input :title, hint: I18n.t('form.hint.string_box.title')
-        t.input :content,
-                hint: I18n.t('form.hint.string_box.content'),
-                input_html: { class: 'froala' }
+          f.input :optional_module_id,
+                  as: :select,
+                  label: I18n.t('activerecord.attributes.string_box.optional_module'),
+                  collection: OptionalModule.all.map { |m| [m.decorate.name_deco, m.id] },
+                  include_blank: true,
+                  input_html: {
+                    class: 'chosen-select'
+                  }
+        end
       end
+    end if current_user.super_administrator?
 
-      if current_user.super_administrator?
-        f.input :optional_module_id,
-                as: :select,
-                label: I18n.t('activerecord.attributes.string_box.optional_module'),
-                collection: OptionalModule.all.map { |m| [m.decorate.name_deco, m.id] },
-                include_blank: true,
-                input_html: {
-                  class: 'chosen-select'
-                }
+    f.columns do
+      f.column do
+        f.inputs t('activerecord.attributes.string_box.description') do
+          "<li><p>#{f.object.description}</p></li>".html_safe
+        end
+      end
+    end
+
+    f.columns do
+      f.column do
+        f.inputs t('activerecord.models.string_box.one') do
+          f.translated_inputs 'Translated fields', switch_locale: false do |t|
+            t.input :title,
+                    hint: I18n.t('form.hint.string_box.title'),
+                    label: I18n.t('activerecord.attributes.post.title')
+            t.input :content,
+                    hint: I18n.t('form.hint.string_box.content'),
+                    label: I18n.t('activerecord.attributes.post.content'),
+                    input_html: { class: 'froala' }
+          end
+        end
       end
     end
 

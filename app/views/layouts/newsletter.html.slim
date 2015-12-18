@@ -5,50 +5,71 @@ html
     meta content=('text/html; charset=UTF-8') http-equiv='Content-Type'
     title = @title
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
+    link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'
     = stylesheet_link_tag 'newsletter', media: 'all'
 
-  body
+  body.newsletter-template
     table.body
       tr
         td.center align="center" valign="top"
           center
 
+
+            - unless @hide_preview_link
+              / Upper header
+              table.container
+                tr.upper-header
+                  td
+                    table.row
+                      tr
+                        td.wrapper.last
+                          table.twelve.columns
+                            tr
+                              td.twelve.sub-columns
+                                p.preview-link
+                                  = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user }
+                              td.expander
+
+
             / Header
-            table.row.header
-              tr.upper-header
+            table.container.header
+              tr
                 td.center align="center"
                   center
                     table.container
                       tr
                         td.wrapper.last
                           table.twelve.columns
-                            = render 'mailer/header', setting: @setting, title: "Newsletter :: #{@title}"
-
+                            = render 'mailer/header', setting: @setting
 
 
             / Newsletter content
-            table.container
+            table.container.content-container
               tr
-                td
+                td.main-content
                   table.row
                     tr
-                      td.wrapper
-                        table.seven.columns
+                      td.wrapper.offset-by-two.last
+                        table.height.columns
                           tr
-                            td
+                            td.text-pad
                               br
                               = yield
+                      td.expander
 
-                            td.expander
 
-                      td.wrapper.last
-                        table.five.columns
+            table.container.content-container
+              tr
+                td.about-content
+                  table.row
+                    tr
+                      td.wrapper.offset-by-three.last
+                        table.six.columns
                           = render 'mailer/contact_informations', setting: @setting, map: @map, locale: @newsletter_user.lang
 
 
-
             / Footer
-            table.container
+            table.container.upper-footer
               tr
                 td
                   table.row.callout
@@ -57,11 +78,15 @@ html
                         table.twelve.columns
                           = render 'mailer/footer', setting: @setting
 
-                          - if @see_in_browser || !@preview_newsletter
-                            tr.lower-footer
-                              td align="center"
-                                center
-                                  br
-                                  = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user } unless @preview_newsletter
 
-                                  = render partial: 'newsletter_mailer/see_in_browser', locals: { newsletter_user: @newsletter_user, newsletter: @newsletter, is_welcome_user: @is_welcome_user } if @see_in_browser
+            table.container.lower-footer
+              tr
+                td.center align="center"
+                  center
+                    table.container
+                      tr
+                        td.wrapper.last
+                          table.twelve.columns
+                            tr
+                              td.twelve.sub-columns
+                                = render partial: 'newsletter_mailer/unsubscribe', locals: { newsletter_user: @newsletter_user }

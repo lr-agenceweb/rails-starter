@@ -48,9 +48,9 @@ ActiveAdmin.register Newsletter, as: 'Letter' do
   #
   controller do
     include Skippable
+    include Newsletterable
     include NewsletterHelper
 
-    before_action :set_newsletter, only: [:send_newsletter, :send_newsletter_test]
     before_action :set_variables, only: [:preview]
 
     def send_newsletter
@@ -78,9 +78,8 @@ ActiveAdmin.register Newsletter, as: 'Letter' do
         @title = @newsletter.title
         @content = @newsletter.content
         @newsletter_user = NewsletterUser.find_by(lang: params[:locale])
+        render 'newsletter_mailer/send_newsletter', layout: 'newsletter'
       end
-      @preview_newsletter = true
-      render '/admin/newsletters/preview', layout: 'newsletter'
     end
 
     private
@@ -106,7 +105,6 @@ ActiveAdmin.register Newsletter, as: 'Letter' do
     end
 
     def set_variables
-      @preview_newsletter = true
       @map = Map.joins(:location).select('locations.id, locations.address, locations.city, locations.postcode').first
     end
   end

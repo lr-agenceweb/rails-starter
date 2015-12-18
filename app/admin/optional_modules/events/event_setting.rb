@@ -2,7 +2,8 @@ ActiveAdmin.register EventSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
   permit_params :id,
-                :prev_next
+                :prev_next,
+                :event_order_id
 
   decorate_with EventSettingDecorator
   config.clear_sidebar_sections!
@@ -12,6 +13,7 @@ ActiveAdmin.register EventSetting do
       column do
         attributes_table do
           row :prev_next
+          row :event_order
         end
       end
     end
@@ -25,6 +27,12 @@ ActiveAdmin.register EventSetting do
         f.inputs t('general') do
           f.input :prev_next,
                   hint: I18n.t('form.hint.post.prev_next')
+          f.input :event_order,
+                  as: :select,
+                  collection: EventOrder.all,
+                  include_blank: false,
+                  input_html: { class: 'chosen-select' },
+                  hint: I18n.t('form.hint.event.event_order')
         end
       end
     end
