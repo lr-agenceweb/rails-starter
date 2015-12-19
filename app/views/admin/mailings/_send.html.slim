@@ -1,9 +1,21 @@
 - if resource.mailing_users.count > 0
   p
     = link_to "Envoyer le mail uniquement aux #{resource.mailing_users.count} personne(s) cochée(s) lors de la création du mail",
-              send_mailing_message_path(resource.id),
+              send_mailing_message_path(resource.id, option: 'checked'),
               data: { vex_alert: t('mailing.send') },
               class: 'button alert vex-alert mailing-message'
   p == resource.mailing_users.map(&:name).join('<br />') unless params[:action] == 'index'
 - else
   p Oup's... Il semblerait que vous n'ayez pas sélectionné d'utilisateurs à qui envoyer le mail
+
+
+- mu = MailingUser.all
+- if mu.count > 0
+  p
+    = link_to 'Forcer l\'envoie du mail à TOUS les clients (répondus / non répondus / archivés / non archivés)',
+              send_mailing_message_path(resource.id, option: 'all'),
+              data: { vex_alert: t('mailing.send') },
+              class: 'button alert vex-alert mailing-message button-secondary'
+  p == mu.map(&:name).join('<br />') unless params[:action] == 'index'
+- else
+  p Oup's... Il n'y a aucun utilisateur enregistré sur le site. Ajoutez-en un avant de pouvoir envoyer un email par cette option.

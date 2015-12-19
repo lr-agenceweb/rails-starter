@@ -30,8 +30,8 @@ ActiveAdmin.register MailingMessage do
         row :status
         row :sent_at
         row :preview
-        row :live_preview
         row :send_link
+        row :live_preview
       end
     end
   end
@@ -49,8 +49,10 @@ ActiveAdmin.register MailingMessage do
     include NewsletterHelper
 
     def send_mailing_message
+      return unless params[:option]
       @mailing_message.update_attributes(sent_at: Time.zone.now)
-      @mailing_users = @mailing_message.mailing_users
+      @mailing_users = @mailing_message.mailing_users if params[:option] == 'checked'
+      @mailing_users = MailingUser.all if params[:option] == 'all'
       make_mailing_message_with_i18n(@mailing_message, @mailing_users)
 
       flash[:notice] = I18n.t('mailing.notice_sending', count: @mailing_users.count)
