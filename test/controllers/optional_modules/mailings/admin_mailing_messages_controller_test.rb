@@ -86,14 +86,47 @@ module Admin
     #
     # == Mailer
     #
-    test 'should have correct enqueud mails number' do
+    test 'should send email for checked users in MailingMessage' do
       clear_deliveries_and_queues
       assert_no_enqueued_jobs
       assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 3 do
-        get :send_mailing_message, id: @mailing_message.id
+        get :send_mailing_message, id: @mailing_message.id, option: 'checked'
         assert_redirected_to root_url
+      end
+    end
+
+    test 'should send email to all users' do
+      clear_deliveries_and_queues
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+
+      assert_enqueued_jobs 4 do
+        get :send_mailing_message, id: @mailing_message.id, option: 'all'
+        assert_redirected_to root_url
+      end
+    end
+
+    test 'should not send any email if option get parameter is empty' do
+      clear_deliveries_and_queues
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+
+      assert_enqueued_jobs 0 do
+        get :send_mailing_message, id: @mailing_message.id, option: ''
+        assert_redirected_to admin_dashboard_path
+      end
+    end
+
+    test 'should not send any email if option get parameter is not set' do
+      clear_deliveries_and_queues
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+
+      assert_enqueued_jobs 0 do
+        get :send_mailing_message, id: @mailing_message.id
+        assert_redirected_to admin_dashboard_path
       end
     end
 

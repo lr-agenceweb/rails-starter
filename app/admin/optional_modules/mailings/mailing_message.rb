@@ -48,8 +48,9 @@ ActiveAdmin.register MailingMessage do
     include Mailingable
     include NewsletterHelper
 
+    before_action :redirect_to_dashboard, only: [:send_mailing_message]
+
     def send_mailing_message
-      return unless params[:option]
       @mailing_message.update_attributes(sent_at: Time.zone.now)
       @mailing_users = @mailing_message.mailing_users if params[:option] == 'checked'
       @mailing_users = MailingUser.all if params[:option] == 'all'
@@ -76,6 +77,10 @@ ActiveAdmin.register MailingMessage do
 
     def make_redirect
       redirect_to :back
+    end
+
+    def redirect_to_dashboard
+      redirect_to admin_dashboard_path if params[:option].blank?
     end
   end
 end
