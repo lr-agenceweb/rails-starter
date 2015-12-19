@@ -1,4 +1,4 @@
-.froala-box
+.fr-box
   width: 80% !important
   float: right
   margin-bottom: 5px
@@ -12,12 +12,34 @@
     & + div
       display: none !important
 
-  button
-    border-radius: 0
-    color: #222
-    text-shadow: none !important
-    box-shadow: none !important
-    font-weight: normal
+.fr-box button, .fr-btn
+  border-radius: 0
+  color: #222
+  @include box-shadow(none !important)
+  @include text-shadow(none !important)
+  text-shadow: none !important
+  font-weight: normal !important
 
 .small-height
   height: 100px
+
+.fr-wrapper
+  p
+    margin-bottom: 10px
+
+form fieldset ol > li .fr-checkbox-line label
+  width: initial
+  display: inline-block
+  text-transform: none
+  padding-top: 0
+  float: none
+  font-size: inherit
+  font-weight: normal
+  color: inherit
+
+.fr-input-line input:focus
+  @include box-shadow(none !important)
+
+// Codemirror
+.CodeMirror-code
+  font-size: 12px

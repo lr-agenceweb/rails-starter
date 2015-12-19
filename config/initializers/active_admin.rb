@@ -158,12 +158,14 @@ ActiveAdmin.setup do |config|
   # and feel.
   #
   # To load a stylesheet:
-  #   config.register_stylesheet 'my_stylesheet.css'
+  config.register_stylesheet '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css'
   #
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', media: :print
   #
   # To load a javascript file:
+  config.register_javascript '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js'
+  config.register_javascript '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js'
   config.register_javascript '//maps.googleapis.com/maps/api/js?sensor=false'
   config.register_javascript '//www.google.com/jsapi'
   config.register_javascript 'chartkick'
