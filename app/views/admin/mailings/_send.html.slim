@@ -1,7 +1,7 @@
 - if resource.mailing_users.count > 0
   p
     = link_to "Envoyer le mail uniquement aux #{resource.mailing_users.count} personne(s) cochée(s) lors de la création du mail",
-              send_mailing_message_path(resource.id, option: 'checked'),
+              send_mailing_message_path(resource.id, token: resource.token, option: 'checked'),
               data: { vex_alert: t('mailing.send') },
               class: 'button alert vex-alert mailing-message'
   p == resource.mailing_users.map(&:name).join('<br />') unless params[:action] == 'index'
@@ -13,7 +13,7 @@
 - if mu.count > 0
   p
     = link_to 'Forcer l\'envoie du mail à TOUS les clients (répondus / non répondus / archivés / non archivés)',
-              send_mailing_message_path(resource.id, option: 'all'),
+              send_mailing_message_path(resource.id, token: resource.token, option: 'all'),
               data: { vex_alert: t('mailing.send') },
               class: 'button alert vex-alert mailing-message button-secondary'
   p == mu.map(&:name).join('<br />') unless params[:action] == 'index'

@@ -80,7 +80,7 @@ ActiveAdmin.register MailingMessage do
     end
 
     def redirect_to_dashboard
-      redirect_to admin_dashboard_path if params[:option].blank?
+      redirect_to admin_dashboard_path if params[:option].blank? || @mailing_message.token != params[:token]
     end
   end
 end
