@@ -110,8 +110,6 @@ module Admin
 
     test 'should not send any email if get parameter is empty' do
       clear_deliveries_and_queues
-      assert_no_enqueued_jobs
-      assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 0 do
         get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token, option: ''
@@ -121,8 +119,6 @@ module Admin
 
     test 'should not send any email if get parameter is not set' do
       clear_deliveries_and_queues
-      assert_no_enqueued_jobs
-      assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 0 do
         get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token
@@ -132,8 +128,6 @@ module Admin
 
     test 'should not send any email if token parameter is empty' do
       clear_deliveries_and_queues
-      assert_no_enqueued_jobs
-      assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 0 do
         get :send_mailing_message, id: @mailing_message.id, token: '', option: 'all'
@@ -143,8 +137,6 @@ module Admin
 
     test 'should not send any email if token parameter is not set' do
       clear_deliveries_and_queues
-      assert_no_enqueued_jobs
-      assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 0 do
         assert_raises(ActionController::UrlGenerationError) do
@@ -239,6 +231,8 @@ module Admin
       clear_enqueued_jobs
       clear_performed_jobs
       ActionMailer::Base.deliveries.clear
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
     end
   end
 end
