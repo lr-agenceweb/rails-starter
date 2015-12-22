@@ -1,4 +1,5 @@
 #= require active_admin/base
+#= require activeadmin_addons/all
 #= require activeadmin-sortable
 #= require jquery-ui
 #= require jquery.datetimepicker

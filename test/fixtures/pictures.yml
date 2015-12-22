@@ -36,3 +36,7 @@ home_two:
 
 home_three:
   attachable: home (Post)
+
+mailing_message:
+  attachable: one (MailingMessage)
+  image_file_name: merry-christmas.jpg

@@ -19,6 +19,7 @@ gem 'database_cleaner'
 #
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre2'
+gem 'activeadmin_addons'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
 gem 'active_skin'

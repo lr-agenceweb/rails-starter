@@ -8,7 +8,7 @@ ActiveAdmin.register Background do
 
   index do
     selectable_column
-    column :image_deco
+    image_column :image, style: :small
     column :category_name
     actions
   end
@@ -16,7 +16,7 @@ ActiveAdmin.register Background do
   show title: :title_aa_show do
     attributes_table do
       row :category_name
-      row :image_deco
+      image_row :image, style: :large
     end
   end
 

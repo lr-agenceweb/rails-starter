@@ -11,10 +11,6 @@ class BackgroundDecoratorTest < Draper::TestCase
   #
   # == Background
   #
-  test 'should return correct image tag' do
-    assert_equal "<img src=\"/system/test/backgrounds/#{@background.id}/small-background-homepage.jpg\" alt=\"Small background homepage\" />", @background_decorated.image_deco
-  end
-
   test 'should return page title for background image' do
     assert_equal 'Accueil', @background_decorated.category_name
   end
