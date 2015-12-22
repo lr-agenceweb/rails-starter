@@ -7,3 +7,10 @@
   - item.input :online,
                as: :boolean,
                hint: I18n.t('form.hint.media.online')
+
+  - if item.object.picture?
+    - item.input :_destroy,
+                 as: :boolean,
+                 required: false,
+                 label: 'Supprimer ?',
+                 hint: 'Si coché, l\'image sera supprimée après mise à jour du mailing'
