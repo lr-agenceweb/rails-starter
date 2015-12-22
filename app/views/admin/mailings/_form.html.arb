@@ -27,6 +27,12 @@ end
 
 f.columns do
   f.column do
+    render 'admin/shared/pictures/one', f: f
+  end
+end
+
+f.columns do
+  f.column do
     f.inputs t('activerecord.models.mailing_message.one') do
       f.translated_inputs 'Translated fields', switch_locale: true do |t|
         t.input :title,

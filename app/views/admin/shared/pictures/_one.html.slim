@@ -1,11 +1,9 @@
 - f.inputs 'Picture', for: [:picture, f.object.picture || Picture.new] do |item|
 
-  = item.input :image,
+  - item.input :image,
                as: :file,
                label: I18n.t('form.label.picture'),
                hint: retina_image_tag(item.object, :image, :medium)
   - item.input :online,
                as: :boolean,
                hint: I18n.t('form.hint.media.online')
-
-  p style='text-align: center' = link_to "Modifier l'image ou la description pour le référencement", edit_admin_picture_path(item.object), class: 'button'

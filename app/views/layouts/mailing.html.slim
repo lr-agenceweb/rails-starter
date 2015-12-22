@@ -54,6 +54,9 @@ html
                                 p = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
                                 = yield
 
+                                - if @mailing_message.picture? && @mailing_message.picture_online
+                                  p = image_tag @mailing_message.picture.image.url(:medium), class: 'visual'
+
                                 - if @mailing_message.show_signature?
                                   div.signature == @mailing_setting.signature
                               td.expander

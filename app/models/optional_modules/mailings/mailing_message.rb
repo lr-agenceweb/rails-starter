@@ -18,6 +18,7 @@
 class MailingMessage < ActiveRecord::Base
   include Tokenable
   include Mailable
+  include Imageable
 
   translates :title, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :content
