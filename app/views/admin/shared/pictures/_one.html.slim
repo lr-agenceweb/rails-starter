@@ -8,7 +8,7 @@
                as: :boolean,
                hint: I18n.t('form.hint.media.online')
 
-  - if item.object.picture?
+  - if item.object.self_image?
     - item.input :_destroy,
                  as: :boolean,
                  required: false,
