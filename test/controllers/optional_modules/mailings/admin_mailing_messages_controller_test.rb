@@ -48,7 +48,7 @@ module Admin
     end
 
     test 'should destroy mailing message if logged in as admin' do
-      assert_difference 'MailingMessage.count', -1 do
+      assert_difference ['MailingMessage.count', 'Picture.count'], -1 do
         delete :destroy, id: @mailing_message
       end
     end
@@ -56,6 +56,15 @@ module Admin
     test 'should redirect to mailing users path after destroy' do
       delete :destroy, id: @mailing_message
       assert_redirected_to admin_mailing_messages_path
+    end
+
+    test 'should destroy picture if checkbox is checked' do
+      skip 'Find a way to make this test pass'
+      assert_equal 'merry-christmas.jpg', @mailing_message.picture.image_file_name
+      assert_difference 'Picture.count', -1 do
+        patch :update, id: @mailing_message, mailing_message: { picture_attributes: { _destroy: '1' } }
+        assert_nil assigns(:mailing_message).picture
+      end
     end
 
     #
