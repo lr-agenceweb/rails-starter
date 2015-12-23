@@ -50,7 +50,6 @@ class MailingMessageTest < ActiveSupport::TestCase
     end
   end
 
-
   private
 
   def initialize_test
