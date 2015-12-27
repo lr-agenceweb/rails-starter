@@ -336,7 +336,6 @@ fr:
       background:
         attachable_type: Page associée
         image: Image
-        image_deco: Image
         category_name: Page associée
         attachable_id: Page
         _destroy: Supprimer ?
@@ -345,7 +344,6 @@ fr:
         online: En ligne
         picture: Image
         image: Image
-        image_large: Image
         source_picture_title_link: Article associé
         status: Statut
         _destroy: Supprimer ?
@@ -394,8 +392,6 @@ fr:
         online: En ligne
         slide: Image
         image: Image
-        image_large: Image
-        image_deco: Image
         slider_page_name: Slide liée à la page
         status: État
         title: Titre

@@ -16,10 +16,6 @@ class SlideDecorator < PictureDecorator
     retina_image_tag self, :image, size, data: interchange_self
   end
 
-  def image_deco
-    retina_image_tag self, :image, :small
-  end
-
   def title_deco
     model.title if title?
   end

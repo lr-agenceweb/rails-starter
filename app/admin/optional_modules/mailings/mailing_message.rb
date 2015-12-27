@@ -8,7 +8,11 @@ ActiveAdmin.register MailingMessage do
                 mailing_user_ids: [],
                 translations_attributes: [
                   :id, :locale, :title, :content
+                ],
+                picture_attributes: [
+                  :id, :image, :online, :_destroy
                 ]
+
 
   decorate_with MailingMessageDecorator
   config.clear_sidebar_sections!
@@ -30,8 +34,8 @@ ActiveAdmin.register MailingMessage do
         row :status
         row :sent_at
         row :preview
-        row :live_preview
         row :send_link
+        row :live_preview
       end
     end
   end
@@ -48,9 +52,12 @@ ActiveAdmin.register MailingMessage do
     include Mailingable
     include NewsletterHelper
 
+    before_action :redirect_to_dashboard, only: [:send_mailing_message]
+
     def send_mailing_message
       @mailing_message.update_attributes(sent_at: Time.zone.now)
-      @mailing_users = @mailing_message.mailing_users
+      @mailing_users = @mailing_message.mailing_users if params[:option] == 'checked'
+      @mailing_users = MailingUser.all if params[:option] == 'all'
       make_mailing_message_with_i18n(@mailing_message, @mailing_users)
 
       flash[:notice] = I18n.t('mailing.notice_sending', count: @mailing_users.count)
@@ -60,7 +67,7 @@ ActiveAdmin.register MailingMessage do
     def preview
       @title = @mailing_message.title
       @content = @mailing_message.content
-      @mailing_user = MailingUser.new(id: 1, email: 'test@test.fr', fullname: 'Testeur', token: '1234567-AZ')
+      @mailing_user = MailingUser.new(id: current_user.id, email: current_user.email, fullname: current_user.username.capitalize, token: Digest::MD5.hexdigest(current_user.email))
       render 'mailing_message_mailer/send_email', layout: 'mailing'
     end
 
@@ -74,6 +81,10 @@ ActiveAdmin.register MailingMessage do
 
     def make_redirect
       redirect_to :back
+    end
+
+    def redirect_to_dashboard
+      redirect_to admin_dashboard_path if params[:option].blank? || @mailing_message.token != params[:token]
     end
   end
 end

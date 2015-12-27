@@ -67,11 +67,14 @@ form
   margin-top: 10px
 
 // Legend
-form fieldset.inputs legend
-  position: relative
-  span
+form fieldset.inputs:not(.locale)
+  border: none
+  legend
     position: relative
-    // width: 100%
+    span
+      position: relative
+      background-color: $tercery-color
+      color: $white
 
 // VideoUpload
 li.has_many_container.video_uploads
@@ -113,3 +116,48 @@ li.has_many_container.video_uploads
       text-align: center
     a.button
       cursor: pointer
+
+
+// Globalize locales
+form fieldset.inputs.locale
+  border: 3px solid $primary-color
+.active_admin #active_admin_content .activeadmin-translations > ul > li >
+  a
+    @include box-shadow(none !important)
+    @include rounded(0 !important)
+    background: lighten( $secondary-color, 30% ) !important
+    color: $white !important
+    border: none !important
+    text-shadow: none !important
+    padding: 11px 20px !important
+    &:hover
+      background: $secondary-color !important
+
+    &.active
+      background: $primary-color !important
+      &:hover
+        background: lighten( $primary-color, 10% ) !important
+
+
+// Misc
+p.inline-hints
+  font-size: 1.3em !important
+  color: #007637 !important
+
+li.boolean label input
+  margin: 0 0.5em 0 0.2em !important
+
+form fieldset.inputs ol > li.boolean label
+  width: 98%
+  padding-left: 2%
+
+form fieldset > ol > li.boolean
+  label
+    margin-bottom: 5px !important
+
+  p.inline-hints
+    padding-left: 2% !important
+    margin-left: 0 !important
+
+form.formtastic fieldset > ol li p.inline-errors
+  display: none

@@ -77,5 +77,5 @@ Rails.application.routes.draw do
   get '/admin/newsletter_test/:id/send', to: 'admin/letters#send_newsletter_test', as: :send_newsletter_for_testers
 
   # Mailings
-  get '/admin/mailing_messages/:id/send', to: 'admin/mailing_messages#send_mailing_message', as: :send_mailing_message
+  get '/admin/mailing_messages/:id/:token/send', to: 'admin/mailing_messages#send_mailing_message', as: :send_mailing_message
 end

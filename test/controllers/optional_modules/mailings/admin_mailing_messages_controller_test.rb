@@ -47,8 +47,8 @@ module Admin
       end
     end
 
-    test 'should destroy mailing message if logged in as administrator' do
-      assert_difference 'MailingMessage.count', -1 do
+    test 'should destroy mailing message if logged in as admin' do
+      assert_difference ['MailingMessage.count', 'Picture.count'], -1 do
         delete :destroy, id: @mailing_message
       end
     end
@@ -56,6 +56,15 @@ module Admin
     test 'should redirect to mailing users path after destroy' do
       delete :destroy, id: @mailing_message
       assert_redirected_to admin_mailing_messages_path
+    end
+
+    test 'should destroy picture if checkbox is checked' do
+      skip 'Find a way to make this test pass'
+      assert_equal 'merry-christmas.jpg', @mailing_message.picture.image_file_name
+      assert_difference 'Picture.count', -1 do
+        patch :update, id: @mailing_message, mailing_message: { picture_attributes: { _destroy: '1' } }
+        assert_nil assigns(:mailing_message).picture
+      end
     end
 
     #
@@ -86,14 +95,62 @@ module Admin
     #
     # == Mailer
     #
-    test 'should have correct enqueud mails number' do
+    test 'should send email for checked users in MailingMessage' do
       clear_deliveries_and_queues
       assert_no_enqueued_jobs
       assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 3 do
-        get :send_mailing_message, id: @mailing_message.id
+        get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token, option: 'checked'
         assert_redirected_to root_url
+      end
+    end
+
+    test 'should send email to all users' do
+      clear_deliveries_and_queues
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+
+      assert_enqueued_jobs 4 do
+        get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token, option: 'all'
+        assert_redirected_to root_url
+      end
+    end
+
+    test 'should not send any email if get parameter is empty' do
+      clear_deliveries_and_queues
+
+      assert_enqueued_jobs 0 do
+        get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token, option: ''
+        assert_redirected_to admin_dashboard_path
+      end
+    end
+
+    test 'should not send any email if get parameter is not set' do
+      clear_deliveries_and_queues
+
+      assert_enqueued_jobs 0 do
+        get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token
+        assert_redirected_to admin_dashboard_path
+      end
+    end
+
+    test 'should not send any email if token parameter is empty' do
+      clear_deliveries_and_queues
+
+      assert_enqueued_jobs 0 do
+        get :send_mailing_message, id: @mailing_message.id, token: '', option: 'all'
+        assert_redirected_to admin_dashboard_path
+      end
+    end
+
+    test 'should not send any email if token parameter is not set' do
+      clear_deliveries_and_queues
+
+      assert_enqueued_jobs 0 do
+        assert_raises(ActionController::UrlGenerationError) do
+          get :send_mailing_message, id: @mailing_message.id, option: 'all'
+        end
       end
     end
 
@@ -183,6 +240,8 @@ module Admin
       clear_enqueued_jobs
       clear_performed_jobs
       ActionMailer::Base.deliveries.clear
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
     end
   end
 end

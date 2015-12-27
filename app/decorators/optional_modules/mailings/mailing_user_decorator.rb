@@ -11,6 +11,6 @@ class MailingUserDecorator < ApplicationDecorator
   end
 
   def name_or_not
-    model.fullname.blank? ? ',' : ' ' +  model.fullname + ','
+    model.fullname.blank? ? ',' : ' ' + model.fullname + ','
   end
 end

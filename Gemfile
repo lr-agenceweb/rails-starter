@@ -18,7 +18,8 @@ gem 'database_cleaner'
 # == Administration
 #
 gem 'devise'
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '~> 1.0.0.pre2'
+gem 'activeadmin_addons'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
 gem 'active_skin'
@@ -183,7 +184,7 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
-  gem 'spring', '~> 1.3.4'
+  gem 'spring', '~> 1.6.0'
   gem 'faker'
 end
 

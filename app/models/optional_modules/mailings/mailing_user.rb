@@ -33,9 +33,9 @@ class MailingUser < ActiveRecord::Base
   validates :lang,
             presence: true,
             allow_blank: false,
-            inclusion: I18n.available_locales.map { |i| i.to_s }
+            inclusion: I18n.available_locales.map(&:to_s)
 
   def name
-    "#{email} <small>(#{fullname}) #{self.decorate.lang} #{self.decorate.archive_status}</small>".html_safe
+    "#{email} <small>(#{fullname}) #{decorate.lang} #{decorate.archive_status}</small>".html_safe
   end
 end

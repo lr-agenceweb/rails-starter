@@ -18,7 +18,7 @@
 class MailingSetting < ActiveRecord::Base
   translates :signature, :unsubscribe_title, :unsubscribe_content,
              fallbacks_for_empty_translations: true
-  active_admin_translates :signature,  :unsubscribe_title, :unsubscribe_content,
+  active_admin_translates :signature, :unsubscribe_title, :unsubscribe_content,
                           fallbacks_for_empty_translations: true
 
   validates :email,

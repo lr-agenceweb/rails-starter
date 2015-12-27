@@ -47,7 +47,7 @@ preview_mailing_message = (element, method) ->
 # Select all / Deselect all mailing users
 set_selection_buttons = ->
   if $('form.formtastic.mailing_message').length
-    $select_btns = $('<div class="actions-customers"><div class="select-btn-container"><a class="button select_all">Séléctionner tous le monde</a><a class="button select_none">Désélctionner tous le monde</a></div></div>')
+    $select_btns = $('<div class="actions-customers"><div class="select-btn-container"><a class="button select_all">Sélectionner tout le monde</a><a class="button select_none">Désélectionner tout le monde</a></div></div>')
     $('.inputs .check_boxes').each (i, el) ->
       $(el).find('.choices-group').before $select_btns.clone()
       return

@@ -24,9 +24,9 @@ class MailingMessagesController < ApplicationController
 
   def all_conditions_respected?
     params[:mailing_user_token] &&
-    params[:token] &&
-    @mailing_user.token == params[:mailing_user_token] &&
-    @mailing_message.token == params[:token] &&
-    @mailing_message.already_sent?
+      params[:token] &&
+      @mailing_user.token == params[:mailing_user_token] &&
+      @mailing_message.token == params[:token] &&
+      @mailing_message.already_sent?
   end
 end

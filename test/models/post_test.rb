@@ -9,7 +9,7 @@ class PostTest < ActiveSupport::TestCase
   test 'should return only RSS articles' do
     rss_items = Post.allowed_for_rss.online
     expected = []
-    not_expected = ["Article d'accueil", "Développement et Hébergement", "Mes mentions légales", "Hébergement"]
+    not_expected = ['Article d\'accueil', 'Développement et Hébergement', 'Mes mentions légales', 'Hébergement']
 
     expected_in_rss(expected, rss_items)
     not_expected_in_rss(not_expected, rss_items)

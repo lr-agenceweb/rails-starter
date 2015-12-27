@@ -74,7 +74,7 @@ class Setting < ActiveRecord::Base
   validates :per_page,
             presence: true,
             allow_blank: false,
-            inclusion: self.per_page_values
+            inclusion: per_page_values
 
   include DeletableAttachment
 
