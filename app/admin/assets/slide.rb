@@ -19,7 +19,7 @@ ActiveAdmin.register Slide do
 
   index do
     selectable_column
-    column :image_deco
+    image_column :image, style: :small
     column :title_deco
     column :description_deco
     column :slider_page_name
@@ -29,7 +29,7 @@ ActiveAdmin.register Slide do
 
   show title: :title_aa_show, decorate: true do
     attributes_table do
-      row :image_deco
+      image_row :image, style: :large
       row :title_deco
       row :description_deco
       row :status

@@ -15,7 +15,7 @@ br
 - mu = MailingUser.all
 - if mu.count > 0
   p
-    = link_to 'Forcer l\'envoie du mail à TOUS les utilisateurs (répondus / non répondus / archivés / non archivés)',
+    = link_to 'Forcer l\'envoie du mail à TOUS les utilisateurs',
               send_mailing_message_path(resource.id, token: resource.token, option: 'all'),
               data: { vex_alert: t('mailing.send') },
               class: 'button alert vex-alert mailing-message button-secondary'

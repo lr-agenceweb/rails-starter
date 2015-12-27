@@ -5,14 +5,6 @@ class PictureDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
-  def image_deco
-    base_image :small
-  end
-
-  def image_large
-    base_image :large
-  end
-
   def title
     raw(model.title) if title?
   end

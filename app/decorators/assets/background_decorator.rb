@@ -5,10 +5,6 @@ class BackgroundDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
-  def image_deco
-    h.retina_image_tag model, :image, :small
-  end
-
   def category_name
     model.attachable.menu_title
   end

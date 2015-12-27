@@ -41,7 +41,7 @@ class Picture < ActiveRecord::Base
                       huge:   '1024x1024>',
                       large:  '512x512>',
                       medium: '256x256>',
-                      small:  '90x90>>',
+                      small:  '90x90>',
                       thumb:  '30x30>'
                     }
 

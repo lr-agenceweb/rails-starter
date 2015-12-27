@@ -38,6 +38,8 @@ f.columns do
                 input_html: { class: 'froala' }
       end
     end
+
+    render 'admin/shared/pictures/one', f: f
   end
 
   f.column do

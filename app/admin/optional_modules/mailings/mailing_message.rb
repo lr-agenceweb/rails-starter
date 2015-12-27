@@ -8,7 +8,11 @@ ActiveAdmin.register MailingMessage do
                 mailing_user_ids: [],
                 translations_attributes: [
                   :id, :locale, :title, :content
+                ],
+                picture_attributes: [
+                  :id, :image, :online, :_destroy
                 ]
+
 
   decorate_with MailingMessageDecorator
   config.clear_sidebar_sections!

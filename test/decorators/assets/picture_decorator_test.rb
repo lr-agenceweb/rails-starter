@@ -11,14 +11,6 @@ class PictureDecoratorTest < Draper::TestCase
   #
   # == Image
   #
-  test 'should return correct small image tag' do
-    assert_equal "<img src=\"/system/test/pictures/#{@picture.id}/small-my-picture.jpg\" alt=\"Small my picture\" />", @picture_decorated.image_deco
-  end
-
-  test 'should return correct large image tag' do
-    assert_equal "<img src=\"/system/test/pictures/#{@picture.id}/large-my-picture.jpg\" alt=\"Large my picture\" />", @picture_decorated.image_large
-  end
-
   test 'should return correct base image tag' do
     assert_equal "<img src=\"/system/test/pictures/#{@picture.id}/large-my-picture.jpg\" alt=\"Large my picture\" />", @picture_decorated.send(:base_image, :large)
   end

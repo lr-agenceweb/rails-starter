@@ -19,7 +19,7 @@ ActiveAdmin.register Picture do
 
   index do
     selectable_column
-    column :image_deco
+    image_column :image, style: :medium
     column :source_picture_title_link
     column :status
 
@@ -29,7 +29,7 @@ ActiveAdmin.register Picture do
 
   show do
     attributes_table do
-      row :image_large
+      image_row :image, style: :large
       row :source_picture_title_link
       row :description
       row :status
