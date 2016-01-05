@@ -75,7 +75,6 @@ ActiveAdmin.register Category do
                   collection: nested_dropdown(Menu.self_or_available(f.object)),
                   include_blank: false,
                   input_html: {
-                    class: 'chosen-select',
                     disabled: current_user.super_administrator? ? false : :disbaled
                   },
                   hint: I18n.t('form.hint.category.menu_id')

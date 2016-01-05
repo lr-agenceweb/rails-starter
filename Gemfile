@@ -38,7 +38,6 @@ gem 'kaminari', '~> 0.16.1' # Pagination
 gem 'gretel', github: 'LoveMondays/gretel', branch: 'fix-semantic-breadcrumb-current-item' # Breadcrumb
 gem 'rails_autolink'
 gem 'truncate_html', github: 'AlexGunslinger/truncate_html'
-gem 'chosen-rails'
 gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
 gem 'vex_rails', github: 'anthony-robin/vex_rails'
 gem 'jquery-minicolors-rails'

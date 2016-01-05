@@ -66,7 +66,6 @@ ActiveAdmin.register Menu do
                     collection: Menu.except_current_and_submenus(f.object),
                     include_blank: true,
                     as: :select,
-                    input_html: { class: 'chosen-select' },
                     hint: I18n.t('form.hint.menu.parent_id')
 
             f.input :show_in_header,

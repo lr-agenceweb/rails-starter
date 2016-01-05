@@ -63,7 +63,6 @@ f.columns do
               as: :select,
               collection: Setting.per_page_values,
               include_blank: false,
-              input_html: { class: 'chosen-select' },
               hint: 'Choisissez le nombre d\'articles à afficher avant la pagination. Si vous souhaitez afficher tous les articles sur une seule page, sélectionnez la valeur 0'
     end
   end

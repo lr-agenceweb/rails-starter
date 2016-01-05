@@ -50,14 +50,12 @@ ActiveAdmin.register Social do
                   include_blank: false,
                   hint: 'Titre du réseau social',
                   input_html: {
-                    class: 'chosen-select',
                     disabled: current_user.super_administrator? ? false : :disbaled
                   }
 
           f.input :kind,
                   collection: Social.allowed_kind_social_network,
                   input_html: {
-                    class: 'chosen-select',
                     disabled: current_user.super_administrator? ? false : :disbaled
                   }
 
@@ -81,7 +79,6 @@ ActiveAdmin.register Social do
                   collection: Social.allowed_font_awesome_ikons,
                   hint: f.object.decorate.hint_by_ikon,
                   input_html: {
-                    class: 'chosen-select',
                     disabled: f.object.decorate.ikon? ? :disabled : false,
                     data: { placeholder: 'Sélectionnez une valeur' }
                   }

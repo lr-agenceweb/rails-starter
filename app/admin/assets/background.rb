@@ -27,8 +27,7 @@ ActiveAdmin.register Background do
       f.input :attachable_id,
               as: :select,
               collection: Category.handle_pages_for_background(f.object),
-              include_blank: false,
-              input_html: { class: 'chosen-select' }
+              include_blank: false
 
       f.input :attachable_type,
               as: :hidden,

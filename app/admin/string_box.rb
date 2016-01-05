@@ -49,10 +49,7 @@ ActiveAdmin.register StringBox do
                   as: :select,
                   label: I18n.t('activerecord.attributes.string_box.optional_module'),
                   collection: OptionalModule.all.map { |m| [m.decorate.name_deco, m.id] },
-                  include_blank: true,
-                  input_html: {
-                    class: 'chosen-select'
-                  }
+                  include_blank: true
         end
       end
     end if current_user.super_administrator?

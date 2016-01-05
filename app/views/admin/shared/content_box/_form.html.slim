@@ -1,8 +1,7 @@
 - f.inputs 'Contenu clé' do
   - f.input :category,
             collection: Background.child_classes,
-            include_blank: false,
-            input_html: { class: 'chosen-select' }
+            include_blank: false
   - f.input :tag,
             input_html: { disabled: params[:action] == 'edit' ? :disabled : false }
   = f.translated_inputs 'Translated fields', switch_locale: false do |t|

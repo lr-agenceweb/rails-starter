@@ -4,10 +4,8 @@
 #= require jquery-ui
 #= require jquery.datetimepicker
 #= require plugins/datetimepicker
-#= require chosen-jquery
 #= require admin/form_translation
 #= require admin/froala_editor
-#= require admin/chosen
 #= require admin/newsletters_preview
 #= require admin/mailings
 #= require admin/counter_letters

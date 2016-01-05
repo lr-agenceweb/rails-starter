@@ -68,8 +68,7 @@ ActiveAdmin.register Map, as: 'Plan' do
           f.input :marker_icon,
                   as: :select,
                   collection: Map.allowed_markers,
-                  hint: I18n.t('form.hint.map.marker_icon'),
-                  input_html: { class: 'chosen-select' }
+                  hint: I18n.t('form.hint.map.marker_icon')
 
           f.input :marker_color,
                   hint: I18n.t('form.hint.map.marker_color'),
