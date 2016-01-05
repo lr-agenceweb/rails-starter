@@ -17,7 +17,7 @@ LR_Backup.new(:rails_starter, "Site #{app_config['application_host']}") do
   # MySQL [Database]
   #
   database MySQL, app_config['db_name'].to_sym do |db|
-    db.name     = app_config['db_name']
+    db.name     = app_config['db_name'] + '_' + app_config['db_env']
     db.username = app_config['db_username']
     db.password = app_config['db_password']
     db.host     = app_config['db_host']
