@@ -54,7 +54,9 @@ ActiveAdmin.register Event do
 
   index do
     selectable_column
-    column :image
+    image_column :image, style: :small do |r|
+      r.picture.image if r.picture?
+    end
     column :title
     column :start_date
     column :end_date
@@ -72,7 +74,9 @@ ActiveAdmin.register Event do
     columns do
       column do
         attributes_table do
-          row :image
+          image_row :image, style: :medium do |r|
+            r.picture.image if r.picture?
+          end
           row :content
           row :start_date
           row :end_date

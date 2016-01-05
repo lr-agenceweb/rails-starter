@@ -6,7 +6,9 @@ columns do
         row :content
         row :status
         row :show_as_gallery_d
-        row :image
+        image_row :image, style: :medium do |r|
+          r.picture.image if r.picture?
+        end
         row :author_with_avatar
       end
     end
