@@ -1,3 +1,4 @@
+
 require 'test_helper'
 
 #
@@ -39,33 +40,6 @@ class HomesControllerTest < ActionController::TestCase
   test 'should get hompepage targetting home controller' do
     assert_routing '/', controller: 'homes', action: 'index', locale: 'fr' if @locales.include?(:fr)
     assert_routing '/en', controller: 'homes', action: 'index', locale: 'en' if @locales.include?(:en)
-  end
-
-  #
-  # == Easter egg
-  #
-  test 'should redirect to homepage if access easter_egg' do
-    @locales.each do |locale|
-      I18n.with_locale(locale) do
-        get :easter_egg, locale: locale.to_s
-        assert_redirected_to root_path(locale: locale)
-      end
-    end
-  end
-
-  test 'AJAX :: should render easter_egg' do
-    @locales.each do |locale|
-      I18n.with_locale(locale) do
-        xhr :get, :easter_egg, locale: locale.to_s
-        assert_response :success
-        assert_template :easter_egg
-      end
-    end
-  end
-
-  test 'should get easter-egg page by url' do
-    assert_routing '/accueil/easter-egg', controller: 'homes', action: 'easter_egg', locale: 'fr' if @locales.include?(:fr)
-    assert_routing '/en/home/easter-egg', controller: 'homes', action: 'easter_egg', locale: 'en' if @locales.include?(:en)
   end
 
   #

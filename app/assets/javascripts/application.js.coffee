@@ -34,8 +34,6 @@
 #= require plugins/cookie_adult_validation
 #= require plugins/fotorama
 #= require plugins/fullcalendar
-#= require plugins/easter_egg_class
-#= require plugins/easter-egg
 #= require base/flash
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
