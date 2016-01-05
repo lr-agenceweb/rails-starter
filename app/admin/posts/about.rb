@@ -56,7 +56,13 @@ ActiveAdmin.register About do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  # Sortable
+  sortable
+  config.sort_order = 'position_asc'
+  config.paginate   = false
+
   index do
+    sortable_handle_column
     selectable_column
     column :image
     column :title

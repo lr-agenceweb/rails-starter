@@ -1,5 +1,5 @@
 ActiveAdmin.register LegalNotice do
-  menu parent: I18n.t('admin_menu.config')
+  menu parent: I18n.t('admin_menu.posts')
   includes :translations
 
   permit_params :id,
@@ -18,7 +18,13 @@ ActiveAdmin.register LegalNotice do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  # Sortable
+  sortable
+  config.sort_order = 'position_asc'
+  config.paginate   = false
+
   index do
+    sortable_handle_column
     selectable_column
     column :title
     column :content
