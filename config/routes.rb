@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'mailing_user/unsubscribe'
-
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
