@@ -6,6 +6,7 @@ module Menuable
 
   included do
     before_action :set_menu_elements
+    before_action :not_found, unless: proc { @category.nil? || @category.menu_online }
 
     def set_menu_elements
       menu_elements = Menu.includes(:translations, :category).online.only_parents.with_page.with_allowed_modules

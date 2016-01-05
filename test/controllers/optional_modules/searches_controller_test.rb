@@ -148,6 +148,22 @@ class SearchesControllerTest < ActionController::TestCase
   end
 
   #
+  # == Menu offline
+  #
+  test 'should render 404 if menu item is offline' do
+    @menu.update_attribute(:online, false)
+    assert_not @menu.online, 'menu item should be offline'
+
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_raises(ActionController::RoutingError) do
+          get :index, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  #
   # == Maintenance
   #
   test 'should render maintenance if enabled and not connected' do
@@ -177,6 +193,7 @@ class SearchesControllerTest < ActionController::TestCase
 
     @locales = I18n.available_locales
     @setting = settings(:one)
+    @menu = menus(:search)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

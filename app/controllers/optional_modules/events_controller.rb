@@ -2,7 +2,7 @@
 # == EventsController
 #
 class EventsController < ApplicationController
-  before_action :not_found, unless: proc { @event_module.enabled? }
+  before_action :event_module_enabled?
   before_action :set_event, only: [:show]
   decorates_assigned :event, :comment
 
@@ -28,5 +28,9 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.online.includes(pictures: [:translations], referencement: [:translations]).friendly.find(params[:id])
+  end
+
+  def event_module_enabled?
+    not_found unless @event_module.enabled?
   end
 end

@@ -2,8 +2,8 @@
 # == BlogsController
 #
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show]
   before_action :blog_module_enabled?
+  before_action :set_blog, only: [:show]
   decorates_assigned :blog, :comment
 
   include Commentable
