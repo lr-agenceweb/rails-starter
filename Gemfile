@@ -143,6 +143,7 @@ gem 'gon'
 gem 'gravatar_image_tag'
 gem 'magnific-popup-rails'
 gem 'chartkick'
+gem 'faker'
 
 #
 # == Video
@@ -185,7 +186,6 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.6.0'
-  gem 'faker'
 end
 
 group :test do
