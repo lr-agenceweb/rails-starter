@@ -54,8 +54,8 @@ puts 'Creating site Setting'
   subtitle: 'Site de Démonstration',
   phone: '+33 (0)1 02 03 04 05',
   email: 'demo@starter.fr',
-  logo: File.new("#{Rails.root}/public/system/seeds/logo/logo.png"),
-  logo_footer: File.new("#{Rails.root}/public/system/seeds/logo/logo-lr-agenceweb.png")
+  logo: File.new("#{Rails.root}/db/seeds/logo/logo.png"),
+  logo_footer: File.new("#{Rails.root}/db/seeds/logo/logo-lr-agenceweb.png")
 )
 
 if @locales.include?(:en)
@@ -297,14 +297,14 @@ puts 'Uploading video background for homepage'
 video_background = VideoUpload.create!(
   videoable_id: @category_home.id,
   videoable_type: 'Category',
-  video_file: File.new("#{Rails.root}/public/system/seeds/videos/background_homepage.mp4")
+  video_file: File.new("#{Rails.root}/db/seeds/videos/background_homepage.mp4")
 )
 
 puts 'Uploading background image for event page'
 Background.create!(
   attachable_id: @category_event.id,
   attachable_type: 'Category',
-  image: File.new("#{Rails.root}/public/system/seeds/backgrounds/background_event.jpg")
+  image: File.new("#{Rails.root}/db/seeds/backgrounds/background_event.jpg")
 )
 
 #
@@ -438,7 +438,7 @@ puts 'Creating About picture'
 Picture.create!(
   attachable_id: about.id,
   attachable_type: 'Post',
-  image: File.new("#{Rails.root}/public/system/seeds/abouts/hosting.jpg"),
+  image: File.new("#{Rails.root}/db/seeds/abouts/hosting.jpg"),
   online: true
 )
 
@@ -465,15 +465,15 @@ puts 'Uploading video background for blog'
 video_blog = VideoUpload.create!(
   videoable_id: blog.id,
   videoable_type: 'Blog',
-  video_file: File.new("#{Rails.root}/public/system/seeds/videos/bubbles.mp4")
+  video_file: File.new("#{Rails.root}/db/seeds/videos/bubbles.mp4")
 )
 
 puts 'Uploading video subtitles for blog'
 video_background = VideoSubtitle.create!(
   subtitleable_id: video_blog.id,
   subtitleable_type: 'VideoUpload',
-  subtitle_fr: File.new("#{Rails.root}/public/system/seeds/subtitles/bubbles_fr.srt"),
-  subtitle_en: File.new("#{Rails.root}/public/system/seeds/subtitles/bubbles_en.srt")
+  subtitle_fr: File.new("#{Rails.root}/db/seeds/subtitles/bubbles_fr.srt"),
+  subtitle_en: File.new("#{Rails.root}/db/seeds/subtitles/bubbles_en.srt")
 )
 
 if @locales.include?(:en)
@@ -625,7 +625,7 @@ event_title_fr.each_with_index do |element, index|
       Picture.create!(
         attachable_id: event.id,
         attachable_type: 'Event',
-        image: File.new("#{Rails.root}/public/system/seeds/events/#{image}"),
+        image: File.new("#{Rails.root}/db/seeds/events/#{image}"),
         online: true
       )
     end
@@ -878,7 +878,7 @@ slides_image.each_with_index do |element, index|
   slide = Slide.create!(
     attachable_id: slider.id,
     attachable_type: 'Slider',
-    image: File.new("#{Rails.root}/public/system/seeds/slides/#{element}"),
+    image: File.new("#{Rails.root}/db/seeds/slides/#{element}"),
     title: slide_title_fr[index],
     description: slide_description_fr[index]
   )
