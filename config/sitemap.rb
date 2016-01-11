@@ -4,7 +4,7 @@ SitemapGenerator::Interpreter.send :include, SitemapHelper
 SitemapGenerator::Sitemap.default_host = Figaro.env.application_host
 SitemapGenerator::Sitemap.verbose = true
 SitemapGenerator::Sitemap.compress = false
-SitemapGenerator::Sitemap.sitemaps_path = 'shared/'
+SitemapGenerator::Sitemap.sitemaps_path = ''
 
 SitemapGenerator::Sitemap.create do
   group(sitemaps_path: 'sitemap/fr/', filename: :french) do
