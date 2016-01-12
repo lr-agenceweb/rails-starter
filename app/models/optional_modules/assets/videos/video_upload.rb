@@ -13,7 +13,7 @@
 #  video_file_content_type :string(255)
 #  video_file_file_size    :integer
 #  video_file_updated_at   :datetime
-#  video_file_processing   :boolean
+#  video_processing        :boolean
 #  retina_dimensions       :text(65535)
 #  video_autoplay          :boolean          default(FALSE)
 #  video_loop              :boolean          default(FALSE)
@@ -68,5 +68,5 @@ class VideoUpload < ActiveRecord::Base
   delegate :online, to: :video_subtitle, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
-  scope :not_precessing, -> { where.not(video_file_processing: true) }
+  scope :not_precessing, -> { where.not(video_processing: true) }
 end

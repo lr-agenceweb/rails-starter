@@ -17,7 +17,7 @@ Install [Maildev](https://github.com/djfarrelly/MailDev)
 
 Usage
 -----
-Clone it: `git clone git@github.com:anthony-robin/rails-starter.git`  
+Clone it: `git clone git@github.com:lr-agenceweb/rails-starter.git`  
 Duplicate `.env.example` and rename it in `.env`  
 Duplicate `application.example.yml` and rename it in `application.yml`  
 Duplicate `database.example.yml` and rename it in `database.yml`  

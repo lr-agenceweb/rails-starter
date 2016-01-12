@@ -46,14 +46,12 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
           f.input :lang,
                   collection: I18n.available_locales.map { |i| [i.to_s] },
                   include_blank: false,
-                  hint: 'Attention, changer ce paramètre changera la langue de la newsletter reçue par cet utilisateur !',
-                  input_html: { class: 'chosen-select' }
+                  hint: 'Attention, changer ce paramètre changera la langue de la newsletter reçue par cet utilisateur !'
 
           f.input :newsletter_user_role_id,
                   as: :select,
                   collection: NewsletterUserRole.newsletter_user_role_dropdown,
-                  include_blank: false,
-                  input_html: { class: 'chosen-select' }
+                  include_blank: false
         end
       end
     end

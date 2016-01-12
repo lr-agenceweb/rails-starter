@@ -69,6 +69,22 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   #
+  # == Menu offline
+  #
+  test 'should render 404 if menu item is offline' do
+    @menu.update_attribute(:online, false)
+    assert_not @menu.online, 'menu item should be offline'
+
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_raises(ActionController::RoutingError) do
+          get :index, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  #
   # == Module disabled
   #
   test 'should render 404 if module is disabled' do
@@ -113,6 +129,7 @@ class EventsControllerTest < ActionController::TestCase
 
     @locales = I18n.available_locales
     @setting = settings(:one)
+    @menu = menus(:event)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

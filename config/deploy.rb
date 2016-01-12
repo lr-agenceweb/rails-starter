@@ -28,7 +28,7 @@ set :scm, :git
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/application.yml', 'public/sitemap.xml', 'config/dkim/dkim.private.key', 'public/shared/sitemap.xml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/application.yml', 'config/dkim/dkim.private.key', 'public/sitemap.xml', 'config/analytical.yml')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/sitemap')
@@ -51,7 +51,8 @@ namespace :deploy do
       upload! StringIO.new(File.read("config/application.yml")), "#{shared_path}/config/application.yml"
       upload! StringIO.new(File.read("config/database.yml")), "#{shared_path}/config/database.yml"
       upload! StringIO.new(File.read("config/secrets.yml")), "#{shared_path}/config/secrets.yml"
-      upload! StringIO.new(File.read("public/shared/sitemap.xml")), "#{shared_path}/public/shared/sitemap.xml"
+      upload! StringIO.new(File.read("config/analytical.example.yml")), "#{shared_path}/config/analytical.yml"
+      upload! StringIO.new(File.read("public/sitemap.xml")), "#{shared_path}/public/sitemap.xml"
     end
   end
 

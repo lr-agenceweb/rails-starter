@@ -91,7 +91,7 @@ class SettingDecorator < ApplicationDecorator
       concat(tag(:meta, itemprop: 'telephone', content: setting.phone))
       concat(tag(:meta, itemprop: 'email', content: setting.email))
       concat(tag(:meta, itemprop: 'name legalName', content: title_subtitle_inline))
-      concat(map.microdata_meta)
+      concat(map.microdata_meta) unless map.nil?
     end
   end
 

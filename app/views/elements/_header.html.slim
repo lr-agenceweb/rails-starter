@@ -1,7 +1,7 @@
 header.l-header-site.hide-for-print
 
   .l-header-container
-    = render 'elements/language'
+    = render 'elements/language' if I18n.available_locales.length > 1
 
     .row
       .small-12.medium-4.columns

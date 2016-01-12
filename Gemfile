@@ -23,7 +23,6 @@ gem 'activeadmin_addons'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
 gem 'active_skin'
-gem 'active_admin-sortable_tree'
 
 #
 # == Decorator
@@ -38,7 +37,6 @@ gem 'kaminari', '~> 0.16.1' # Pagination
 gem 'gretel', github: 'LoveMondays/gretel', branch: 'fix-semantic-breadcrumb-current-item' # Breadcrumb
 gem 'rails_autolink'
 gem 'truncate_html', github: 'AlexGunslinger/truncate_html'
-gem 'chosen-rails'
 gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
 gem 'vex_rails', github: 'anthony-robin/vex_rails'
 gem 'jquery-minicolors-rails'
@@ -55,7 +53,6 @@ gem 'momentjs-rails'
 # == Media upload
 #
 gem 'paperclip', github: 'thoughtbot/paperclip'
-# gem 'paperclip-dropbox', '>= 1.1.7'
 gem 'retina_rails', '~> 2.0.0'
 gem 'paperclip-av-transcoder'
 gem 'delayed_paperclip'
@@ -143,6 +140,7 @@ gem 'gon'
 gem 'gravatar_image_tag'
 gem 'magnific-popup-rails'
 gem 'chartkick'
+gem 'faker'
 
 #
 # == Video
@@ -185,7 +183,6 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.6.0'
-  gem 'faker'
 end
 
 group :test do

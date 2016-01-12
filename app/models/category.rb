@@ -43,7 +43,7 @@ class Category < ActiveRecord::Base
 
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :enabled, to: :optional_module, prefix: true, allow_nil: true
-  delegate :title, :position, to: :menu, prefix: true, allow_nil: true
+  delegate :title, :position, :online, to: :menu, prefix: true, allow_nil: true
   delegate :online, to: :video_upload, prefix: true, allow_nil: true
 
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }

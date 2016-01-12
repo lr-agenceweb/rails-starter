@@ -46,7 +46,9 @@ ActiveAdmin.register Blog do
 
   index do
     selectable_column
-    column :image
+    image_column :image, style: :small do |r|
+      r.picture.image if r.picture?
+    end
     column :title
     column :allow_comments_status
     column :show_as_gallery_d

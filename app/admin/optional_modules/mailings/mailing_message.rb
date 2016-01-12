@@ -19,6 +19,9 @@ ActiveAdmin.register MailingMessage do
 
   index do
     selectable_column
+    image_column :image, style: :small do |r|
+      r.picture.image if r.picture?
+    end
     column :title
     column :preview
     column :status
@@ -31,6 +34,9 @@ ActiveAdmin.register MailingMessage do
   show do
     panel t('active_admin.details', model: active_admin_config.resource_label) do
       attributes_table_for resource.decorate do
+        image_row :image, style: :medium do |r|
+          r.picture.image if r.picture?
+        end
         row :status
         row :sent_at
         row :preview

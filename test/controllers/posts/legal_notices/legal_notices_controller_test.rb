@@ -36,11 +36,28 @@ class LegalNoticesControllerTest < ActionController::TestCase
     assert_routing '/en/legal-notices', controller: 'legal_notices', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
+  #
+  # == Menu offline
+  #
+  test 'should render 404 if menu item is offline' do
+    @menu.update_attribute(:online, false)
+    assert_not @menu.online, 'menu item should be offline'
+
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_raises(ActionController::RoutingError) do
+          get :index, locale: locale.to_s
+        end
+      end
+    end
+  end
+
   private
 
   def initialize_test
     @locales = I18n.available_locales
     @setting = settings(:one)
+    @menu = menus(:legal_notice)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

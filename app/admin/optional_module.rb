@@ -37,8 +37,7 @@ ActiveAdmin.register OptionalModule do
     f.inputs 'Général' do
       f.input :name,
               collection: OptionalModule.list,
-              include_blank: false,
-              input_html: { class: 'chosen-select' }
+              include_blank: false
       f.input :description
       f.input :enabled
     end

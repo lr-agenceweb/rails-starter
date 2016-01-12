@@ -74,7 +74,14 @@ fr:
             email:
               blank: N'oubliez pas de renseigner votre email ;)
               email: ''
-
+        contact_form:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+            name:
+              blank: N'oubliez pas de renseigner votre nom ;)
+            message:
+              blank: N'oubliez pas de renseigner votre message ;)
     models:
       user:
         one: Utilisateur

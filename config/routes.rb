@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'mailing_user/unsubscribe'
-
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -23,10 +21,6 @@ Rails.application.routes.draw do
   #
   localized do
     root 'homes#index'
-
-    resources :homes, only: [:easter_egg] do
-      get 'easter-egg', to: 'homes#easter_egg', on: :collection, as: :easter_egg # Easter egg
-    end
 
     resources :abouts, only: [:index, :show], concerns: [:paginatable, :commentable]
     resources :legal_notices, only: [:index]

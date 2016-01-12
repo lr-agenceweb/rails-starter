@@ -186,7 +186,7 @@ module Admin
     #
     test 'should be able to upload avatar' do
       sign_in @administrator
-      upload_dropbox_paperclip_attachment
+      upload_paperclip_attachment
 
       user = assigns(:user)
       assert user.avatar?
@@ -196,7 +196,7 @@ module Admin
 
     # test 'should delete avatar with user' do
     #   sign_in @super_administrator
-    #   upload_dropbox_paperclip_attachment
+    #   upload_paperclip_attachment
     #   user = assigns(:user)
     #   delete :destroy, id: @subscriber
     # end
@@ -309,14 +309,14 @@ module Admin
       sign_in @administrator
     end
 
-    def upload_dropbox_paperclip_attachment
-      puts '=== Uploading avatar to Dropbox'
+    def upload_paperclip_attachment
+      puts '=== Uploading avatar'
       attachment = fixture_file_upload 'images/bart.png', 'image/png'
       patch :update, id: @administrator, user: { avatar: attachment }
     end
 
-    def remove_dropbox_paperclip_attachment(user)
-      puts '=== Removing avatar from Dropbox'
+    def remove_paperclip_attachment(user)
+      puts '=== Removing avatar'
       patch :update, id: user, user: { avatar: nil, delete_avatar: '1' }
       assert_not assigns(:user).avatar?
     end

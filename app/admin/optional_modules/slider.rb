@@ -102,8 +102,7 @@ ActiveAdmin.register Slider do
           f.input :category_id,
                   as: :select,
                   collection: Category.except_already_slider,
-                  include_blank: false,
-                  input_html: { class: 'chosen-select' }
+                  include_blank: false
           f.input :online
         end
       end

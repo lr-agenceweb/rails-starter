@@ -15,13 +15,4 @@ class HomesController < PostsController
       format.json { render json: @homes }
     end
   end
-
-  def easter_egg
-    if request.xhr?
-      @asocial = true
-      render layout: false
-    else
-      redirect_to root_path
-    end
-  end
 end

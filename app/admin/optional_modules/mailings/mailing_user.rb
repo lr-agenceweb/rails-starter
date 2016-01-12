@@ -48,8 +48,7 @@ ActiveAdmin.register MailingUser do
       f.input :lang,
               collection: I18n.available_locales.map { |i| [i.to_s] },
               include_blank: false,
-              hint: I18n.t('form.hint.mailing_user.lang'),
-              input_html: { class: 'chosen-select' }
+              hint: I18n.t('form.hint.mailing_user.lang')
       f.input :archive,
               as: :boolean,
               hint: I18n.t('form.hint.mailing_user.archive')
