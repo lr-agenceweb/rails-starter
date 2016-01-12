@@ -33,9 +33,10 @@ mapbox_access_token: ~
 #
 # == Google and Bing
 #
-google_analytics_key: ~
-google_site_verification: ~
-bing_site_verification: ~
+production:
+  google_analytics_key: ~
+  google_site_verification: ~
+  bing_site_verification: ~
 
 
 #
@@ -48,7 +49,7 @@ mailer_password: ~
 
 
 #
-# == Froala [ActiveAdmin wysiwyg editor ]
+# == Froala [ActiveAdmin wysiwyg editor]
 #
 froala_key: ~
 
@@ -64,18 +65,6 @@ staging:
   capistrano_deploy_to: ~
 production:
   capistrano_deploy_to: ~
-
-
-#
-# == Dropbox Storage [Paperclip]
-#
-dropbox:
-  app_key: ~
-  app_secret: ~
-  access_token: ~
-  access_token_secret: ~
-  user_id: ~
-  access_type: ~
 
 
 #
