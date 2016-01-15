@@ -24,7 +24,10 @@ Rails.application.routes.draw do
 
     resources :abouts, only: [:index, :show], concerns: [:paginatable, :commentable]
     resources :legal_notices, only: [:index]
-    resources :contacts, only: [:index, :new, :create]
+    resources :contacts, only: [:index, :new, :create] do
+      # Mapbox popup content
+      get 'mapbox-popup', action: :mapbox_popup, as: :mapbox_popup, on: :collection
+    end
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
     # GuestBook
@@ -74,9 +77,6 @@ Rails.application.routes.draw do
         get 'preview', action: :preview, as: :preview, on: :member
       end
     end
-
-    # Mapbox popup content
-    get 'contact/mapbox-popup', to: 'contacts#mapbox_popup', as: :mapbox_popup
 
     # Errors
     %w( 404 422 500 ).each do |code|
