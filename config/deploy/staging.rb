@@ -1,6 +1,10 @@
 set :stage, :staging
 set :deploy_to, "#{Figaro.env.capistrano_deploy_to}/#{fetch(:stage).to_s}/#{fetch(:application)}"
 
+# Whenever cronjobs
+set :whenever_environment, -> { fetch(:stage) }
+set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
