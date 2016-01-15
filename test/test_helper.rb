@@ -136,7 +136,7 @@ module ActiveSupport
     end
 
     def assert_maintenance
-      assert_response :success
+      assert_response 503
       assert_template :maintenance
       assert_template layout: :maintenance
     end
