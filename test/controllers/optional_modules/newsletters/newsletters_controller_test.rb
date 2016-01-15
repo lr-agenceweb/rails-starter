@@ -12,10 +12,10 @@ class NewslettersControllerTest < ActionController::TestCase
   #
   # == See in browser [Newsletter]
   #
-  test 'should render see_in_browser template and newsletter layout' do
+  test 'should render preview_in_browser template and newsletter layout' do
     locale = @newsletter_user.lang
     I18n.with_locale(locale) do
-      get :see_in_browser, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+      get :preview_in_browser, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
       assert_response :success
       assert_template 'newsletter_mailer/send_newsletter', layout: 'newsletter'
     end
@@ -25,16 +25,16 @@ class NewslettersControllerTest < ActionController::TestCase
     locale = @newsletter_user.lang
     assert_raises(ActionController::RoutingError) do
       I18n.with_locale(locale) do
-        get :see_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+        get :preview_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
       end
     end
   end
 
-  test 'should render 404 if token don\'t match for see_in_browser' do
+  test 'should render 404 if token don\'t match for preview_in_browser' do
     locale = @newsletter_user.lang
     assert_raises(ActionController::RoutingError) do
       I18n.with_locale(locale) do
-        get :see_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
+        get :preview_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
       end
     end
   end
@@ -76,7 +76,7 @@ class NewslettersControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :see_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
+          get :preview_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
         end
       end
     end

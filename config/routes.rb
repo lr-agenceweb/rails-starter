@@ -14,8 +14,6 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-  get 'robots.:format', to: 'robots#index'
-
   #
   # == Translated routes
   #
@@ -24,7 +22,10 @@ Rails.application.routes.draw do
 
     resources :abouts, only: [:index, :show], concerns: [:paginatable, :commentable]
     resources :legal_notices, only: [:index]
-    resources :contacts, only: [:index, :new, :create]
+    resources :contacts, only: [:index, :new, :create] do
+      # Mapbox popup content
+      get 'mapbox-popup', action: :mapbox_popup, as: :mapbox_popup, on: :collection
+    end
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
     # GuestBook
@@ -44,20 +45,36 @@ Rails.application.routes.draw do
     # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss
 
-    # Newsletters
-    get '/newsletter/welcome_user/:newsletter_user_id/:token', to: 'newsletters#welcome_user', as: :welcome_user
-    get '/newsletter/:id/:newsletter_user_id/:token', to: 'newsletters#see_in_browser', as: :see_in_browser_newsletter
+    # Mailings (users)
+    resources :mailing_users do
+      get 'unsubscribe/:token', action: :unsubscribe, as: :unsubscribe, on: :member
+    end
+
+    # Mailings (messages)
+    resources :mailing_messages do
+      get ':token/:mailing_user_id/:mailing_user_token', action: :preview_in_browser, as: :preview_in_browser, on: :member
+    end
+
+    # Newsletters (users)
     get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
-    get '/admin/newsletters/:id/preview', to: 'admin/letters#preview', as: :preview_newsletter
 
-    # Mailings
-    get '/mailing_messages/:id/:token/:mailing_user_id/:mailing_user_token', to: 'mailing_messages#preview_in_browser', as: :preview_in_browser_mailing_message
-    get '/admin/mailing_messages/:id/preview', to: 'admin/mailing_messages#preview', as: :preview_mailing_message
-    get '/mailing_user/unsubscribe/:id/:token', to: 'mailing_users#unsubscribe', as: :unsubscribe_mailing_user
+    # Newsletters (messages)
+    resources :newsletters do
+      get ':newsletter_user_id/:token', action: :preview_in_browser, as: :preview_in_browser, on: :member
+      get 'welcome_user/:newsletter_user_id/:token', action: :welcome_user, as: :welcome_user, on: :collection
+    end
 
+    namespace :admin do
+      # Mailings (messages)
+      resources :mailing_messages do
+        get 'preview', action: :preview, as: :preview, on: :member
+      end
 
-    # Mapbox popup content
-    get 'contact/mapbox-popup', to: 'contacts#mapbox_popup', as: :mapbox_popup
+      # Newsletters (messages)
+      resources :newsletters do
+        get 'preview', action: :preview, as: :preview, on: :member
+      end
+    end
 
     # Errors
     %w( 404 422 500 ).each do |code|
@@ -65,11 +82,24 @@ Rails.application.routes.draw do
     end
   end
 
+  # Robots
+  get 'robots.:format', to: 'robots#index'
+
   # Newsletters
   resources :newsletter_users, only: [:create]
-  get '/admin/newsletters/:id/send', to: 'admin/letters#send_newsletter', as: :send_newsletter_for_subscribers
-  get '/admin/newsletter_test/:id/send', to: 'admin/letters#send_newsletter_test', as: :send_newsletter_for_testers
 
-  # Mailings
-  get '/admin/mailing_messages/:id/:token/send', to: 'admin/mailing_messages#send_mailing_message', as: :send_mailing_message
+  # Mailings (messages)
+  namespace :admin do
+    resources :mailing_messages do
+      member do
+        get ':token/send', action: :send_mailing_message, as: :send
+      end
+    end
+
+    resources :newsletters do
+      member do
+        get 'send', action: :send_newsletter, as: :send
+      end
+    end
+  end
 end

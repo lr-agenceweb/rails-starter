@@ -13,7 +13,6 @@ ActiveAdmin.register MailingMessage do
                   :id, :image, :online, :_destroy
                 ]
 
-
   decorate_with MailingMessageDecorator
   config.clear_sidebar_sections!
 

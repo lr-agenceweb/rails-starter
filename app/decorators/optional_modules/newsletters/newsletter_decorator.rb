@@ -10,7 +10,12 @@ class NewsletterDecorator < ApplicationDecorator
   end
 
   def preview
-    raw newsletter_preview(model.id)
+    html = ''
+    I18n.available_locales.each do |locale|
+      html += link_to I18n.t("active_admin.globalize.language.#{locale}"), send("preview_admin_newsletter_#{locale}_path", model.id), target: :_blank
+      html += '<br/>'
+    end
+    html
   end
 
   def live_preview

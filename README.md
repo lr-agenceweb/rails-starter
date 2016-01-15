@@ -129,10 +129,6 @@ Code structure:
 ---------------
 This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
 
-Bonus
-------
-Do you know the Konami code ?
-
 Screenshots
 -----------
 ![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)

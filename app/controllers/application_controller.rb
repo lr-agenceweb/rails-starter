@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
       root_url: root_url
     )
 
-    render template: 'elements/maintenance', layout: 'maintenance' if maintenance? && !current_user_and_administrator?
+    render template: 'elements/maintenance', layout: 'maintenance', status: 503 if maintenance? && !current_user_and_administrator?
   end
 
   def set_legal_notices

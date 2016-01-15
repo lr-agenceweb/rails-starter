@@ -7,7 +7,7 @@ class MapDecorator < ApplicationDecorator
   decorates_association :location
 
   def map(map_module_enabled, force = false, from_form = false)
-    content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : ''}", id: 'map', data: { url_popup: mapbox_popup_path }) if map?(map_module_enabled, force)
+    content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : ''}", id: 'map', data: { url_popup: mapbox_popup_contacts_path }) if map?(map_module_enabled, force)
   end
 
   #

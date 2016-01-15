@@ -1,3 +1,4 @@
+
 require 'test_helper'
 
 #
@@ -7,7 +8,7 @@ module Admin
   #
   # == NewslettersController test
   #
-  class LettersControllerTest < ActionController::TestCase
+  class NewslettersControllerTest < ActionController::TestCase
     include Devise::TestHelpers
 
     setup :initialize_test
@@ -49,7 +50,7 @@ module Admin
 
     test 'should redirect to newsletter path after destroy' do
       delete :destroy, id: @newsletter
-      assert_redirected_to admin_letters_path
+      assert_redirected_to admin_newsletters_path
     end
 
     #

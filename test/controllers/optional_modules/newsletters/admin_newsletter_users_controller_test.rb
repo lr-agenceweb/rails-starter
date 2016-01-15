@@ -5,9 +5,9 @@ require 'test_helper'
 #
 module Admin
   #
-  # == LetterUsersController test
+  # == NewsletterUsersController test
   #
-  class LetterUsersControllerTest < ActionController::TestCase
+  class NewsletterUsersControllerTest < ActionController::TestCase
     include Devise::TestHelpers
 
     setup :initialize_test
@@ -34,30 +34,30 @@ module Admin
     # Valid params
     test 'should update newsletter_user if logged in' do
       patch :update, id: @newsletter_user, newsletter_user: {}
-      assert_redirected_to admin_letter_users_path
+      assert_redirected_to admin_newsletter_users_path
     end
 
     test 'should update newsletter_user role' do
       patch :update, id: @newsletter_user, newsletter_user: { newsletter_user_role_id: @newsletter_user_role_tester.id }
-      assert assigns(:letter_user).valid?, 'record should be valid'
-      assert_equal 'testeur', assigns(:letter_user).newsletter_user_role_title
+      assert assigns(:newsletter_user).valid?, 'record should be valid'
+      assert_equal 'testeur', assigns(:newsletter_user).newsletter_user_role_title
     end
 
     # Invalid params
     test 'should not update if lang params is not allowed' do
       patch :update, id: @newsletter_user, newsletter_user: { lang: 'de' }
-      assert_not assigns(:letter_user).valid?
+      assert_not assigns(:newsletter_user).valid?
     end
 
     test 'should not update if role params is not allowed' do
       skip 'Don\'t know how to test InvalidForeignKey'
       patch :update, id: @newsletter_user, newsletter_user: { newsletter_user_role_id: 8 }
-      assert_not assigns(:letter_user).valid?
+      assert_not assigns(:newsletter_user).valid?
     end
 
     test 'should not update if email params is changed' do
       patch :update, id: @newsletter_user, newsletter_user: { email: 'test@test.com' }
-      assert_equal @newsletter_user.email, assigns(:letter_user).email
+      assert_equal @newsletter_user.email, assigns(:newsletter_user).email
     end
 
     test 'should render edit template if lang is not allowed' do
@@ -89,7 +89,7 @@ module Admin
 
     test 'should redirect to newsletter users path after destroy' do
       delete :destroy, id: @newsletter_user
-      assert_redirected_to admin_letter_users_path
+      assert_redirected_to admin_newsletter_users_path
     end
 
     #
