@@ -1,12 +1,12 @@
 - count = NewsletterUser.count
 - if resource.already_sent?
   = link_to "Renvoyer la newsletter aux #{count} inscrits ?",
-                  send_admin_newsletter_path(resource.id),
+                  send_admin_newsletter_path(resource.id, option: 'subscribers'),
                   data: { vex_alert: t('newsletter.send_again', date: l(resource.sent_at, format: :long)) },
                   class: 'button vex-alert newsletter-button'
 - else
   = link_to "Envoyer la newsletter aux #{count} inscrits",
-                 send_admin_newsletter_path(resource.id),
+                 send_admin_newsletter_path(resource.id, option: 'subscribers'),
                  data: { vex_alert: t('newsletter.send') },
                  class: 'button success vex-alert newsletter-button'
 
@@ -14,7 +14,7 @@
   - newsletter_testers = NewsletterUser.testers.map(&:email).join(', ')
   = raw '<br><br>'
   = link_to 'Send newsletter for testers',
-                  send_newsletter_for_testers_path(resource.id),
+                  send_admin_newsletter_path(resource.id, option: 'testers'),
                   data: { vex_alert: t('newsletter.send_testers') },
                   class: 'vex-alert newsletter-button'
   = " (#{newsletter_testers})"

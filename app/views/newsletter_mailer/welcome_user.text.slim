@@ -11,4 +11,4 @@
 = "\r\n===\r\n"
 = I18n.t('newsletter.see_in_browser', locale: @newsletter_user.lang)
 = ' - '
-= welcome_user_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)
+= welcome_user_newsletters_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)

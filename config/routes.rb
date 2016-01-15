@@ -47,9 +47,6 @@ Rails.application.routes.draw do
     # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss
 
-    # Newsletters
-    get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
-
     # Mailings (users)
     resources :mailing_users do
       get 'unsubscribe/:token', action: :unsubscribe, as: :unsubscribe, on: :member
@@ -59,6 +56,9 @@ Rails.application.routes.draw do
     resources :mailing_messages do
       get ':token/:mailing_user_id/:mailing_user_token', action: :preview_in_browser, as: :preview_in_browser, on: :member
     end
+
+    # Newsletters (users)
+    get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
 
     # Newsletters (messages)
     resources :newsletters do
@@ -86,8 +86,6 @@ Rails.application.routes.draw do
 
   # Newsletters
   resources :newsletter_users, only: [:create]
-
-  get '/admin/newsletter_test/:id/send', to: 'admin/letters#send_newsletter_test', as: :send_newsletter_for_testers
 
   # Mailings (messages)
   namespace :admin do

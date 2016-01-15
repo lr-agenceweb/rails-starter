@@ -54,21 +54,17 @@ ActiveAdmin.register Newsletter do
     before_action :set_variables, only: [:preview]
 
     def send_newsletter
-      @newsletter.update_attributes(sent_at: Time.zone.now)
-      @newsletter_users = NewsletterUser.find_each
+      if params[:option] == 'subscribers'
+        @newsletter.update_attributes(sent_at: Time.zone.now)
+        @newsletter_users = NewsletterUser.find_each
+        count = @newsletter_users.count
+      elsif params[:option] == 'testers'
+        @newsletter_users = NewsletterUser.testers
+        count = @newsletter_users.count
+      end
       make_newsletter_with_i18n(@newsletter, @newsletter_users)
 
-      count = @newsletter_users.count
       flash[:notice] = "La newsletter est en train d'être envoyée à #{count} personnes"
-      make_redirect
-    end
-
-    def send_newsletter_test
-      @newsletter_testers = NewsletterUser.testers
-      make_newsletter_with_i18n(@newsletter, @newsletter_testers)
-
-      newsletter_testers = @newsletter_testers.map(&:email).join(', ')
-      flash[:notice] = "La newsletter est en train d'être envoyée à #{newsletter_testers}"
       make_redirect
     end
 
