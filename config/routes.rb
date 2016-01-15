@@ -48,7 +48,6 @@ Rails.application.routes.draw do
     get '/newsletter/welcome_user/:newsletter_user_id/:token', to: 'newsletters#welcome_user', as: :welcome_user
     get '/newsletter/:id/:newsletter_user_id/:token', to: 'newsletters#see_in_browser', as: :see_in_browser_newsletter
     get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
-    get '/admin/newsletters/:id/preview', to: 'admin/letters#preview', as: :preview_newsletter
 
     # Mailings (users)
     resources :mailing_users do
@@ -70,6 +69,12 @@ Rails.application.routes.draw do
           get 'preview', action: :preview, as: :preview
         end
       end
+
+      resources :newsletters do
+        member do
+          get 'preview', action: :preview, as: :preview
+        end
+      end
     end
 
     # Mapbox popup content
@@ -83,7 +88,7 @@ Rails.application.routes.draw do
 
   # Newsletters
   resources :newsletter_users, only: [:create]
-  get '/admin/newsletters/:id/send', to: 'admin/letters#send_newsletter', as: :send_newsletter_for_subscribers
+
   get '/admin/newsletter_test/:id/send', to: 'admin/letters#send_newsletter_test', as: :send_newsletter_for_testers
 
   # Mailings (messages)
@@ -91,6 +96,12 @@ Rails.application.routes.draw do
     resources :mailing_messages do
       member do
         get ':token/send', action: :send_mailing_message, as: :send
+      end
+    end
+
+    resources :newsletters do
+      member do
+        get 'send', action: :send_newsletter, as: :send
       end
     end
   end

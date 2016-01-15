@@ -6,10 +6,10 @@
 
     - if f.object.new_record?
       - klass = 'new'
-      - url = admin_letters_path
+      - url = admin_newsletters_path
     - else
       - klass = 'existing'
-      - url = preview_newsletter_path(f.object)
+      - url = preview_admin_newsletter_path(f.object)
 
     - html << "<a href='#' class='button newsletter_preview_button #{klass}_record' data-url='#{url}' data-locale='#{locale.to_s}'>Prévisualisation de la newsletter en #{t('active_admin.globalize.language.' + locale.to_s)}</a>".html_safe
 - html << '</p>'

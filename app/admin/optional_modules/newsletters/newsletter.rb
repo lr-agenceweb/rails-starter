@@ -1,4 +1,4 @@
-ActiveAdmin.register Newsletter, as: 'Letter' do
+ActiveAdmin.register Newsletter do
   menu parent: I18n.t('admin_menu.modules')
 
   permit_params :id,
