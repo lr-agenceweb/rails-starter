@@ -16,7 +16,6 @@ class NewsletterDecorator < ApplicationDecorator
       html += '<br/>'
     end
     html
-    # raw newsletter_preview(model.id)
   end
 
   def live_preview

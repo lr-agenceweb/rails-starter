@@ -8,7 +8,7 @@ module Newsletterable
     before_action :set_newsletter, only: [
       :send_newsletter,
       :send_newsletter_test,
-      :see_in_browser,
+      :preview_in_browser,
       :welcome_user
     ]
   end

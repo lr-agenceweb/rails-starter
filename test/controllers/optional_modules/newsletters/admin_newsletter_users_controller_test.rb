@@ -34,7 +34,7 @@ module Admin
     # Valid params
     test 'should update newsletter_user if logged in' do
       patch :update, id: @newsletter_user, newsletter_user: {}
-      assert_redirected_to admin_letter_users_path
+      assert_redirected_to admin_newsletter_users_path
     end
 
     test 'should update newsletter_user role' do
@@ -89,7 +89,7 @@ module Admin
 
     test 'should redirect to newsletter users path after destroy' do
       delete :destroy, id: @newsletter_user
-      assert_redirected_to admin_letter_users_path
+      assert_redirected_to admin_newsletter_users_path
     end
 
     #

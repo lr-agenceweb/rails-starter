@@ -5,7 +5,7 @@ module NewsletterUserable
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_newsletter_user, only: [:unsubscribe, :see_in_browser, :welcome_user]
+    before_action :set_newsletter_user, only: [:unsubscribe, :preview_in_browser, :welcome_user]
   end
 
   def set_newsletter_user

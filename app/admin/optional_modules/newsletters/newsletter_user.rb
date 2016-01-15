@@ -1,4 +1,4 @@
-ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
+ActiveAdmin.register NewsletterUser do
   menu parent: I18n.t('admin_menu.modules')
 
   permit_params :id,
@@ -70,7 +70,7 @@ ActiveAdmin.register NewsletterUser, as: 'LetterUser' do
     end
 
     def update
-      super { admin_letter_users_path }
+      super { admin_newsletter_users_path }
     end
   end
 end

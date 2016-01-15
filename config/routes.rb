@@ -45,35 +45,33 @@ Rails.application.routes.draw do
     get 'feed', to: 'posts#feed', as: :posts_rss
 
     # Newsletters
-    get '/newsletter/welcome_user/:newsletter_user_id/:token', to: 'newsletters#welcome_user', as: :welcome_user
-    get '/newsletter/:id/:newsletter_user_id/:token', to: 'newsletters#see_in_browser', as: :see_in_browser_newsletter
     get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
 
     # Mailings (users)
     resources :mailing_users do
-      member do
-        get 'unsubscribe/:token', action: :unsubscribe, as: :unsubscribe
-      end
+      get 'unsubscribe/:token', action: :unsubscribe, as: :unsubscribe, on: :member
     end
 
     # Mailings (messages)
     resources :mailing_messages do
-      member do
-        get ':token/:mailing_user_id/:mailing_user_token', action: :preview_in_browser, as: :preview_in_browser
-      end
+      get ':token/:mailing_user_id/:mailing_user_token', action: :preview_in_browser, as: :preview_in_browser, on: :member
+    end
+
+    # Newsletters (messages)
+    resources :newsletters do
+      get ':newsletter_user_id/:token', action: :preview_in_browser, as: :preview_in_browser, on: :member
+      get 'welcome_user/:newsletter_user_id/:token', action: :welcome_user, as: :welcome_user, on: :collection
     end
 
     namespace :admin do
+      # Mailings (messages)
       resources :mailing_messages do
-        member do
-          get 'preview', action: :preview, as: :preview
-        end
+        get 'preview', action: :preview, as: :preview, on: :member
       end
 
+      # Newsletters (messages)
       resources :newsletters do
-        member do
-          get 'preview', action: :preview, as: :preview
-        end
+        get 'preview', action: :preview, as: :preview, on: :member
       end
     end
 

@@ -5,11 +5,11 @@ class NewslettersController < ApplicationController
   include NewsletterUserable
   include Newsletterable
   before_action :not_found, unless: proc { @newsletter_module.enabled? }
-  before_action :set_variables, only: [:see_in_browser, :welcome_user]
+  before_action :set_variables, only: [:preview_in_browser, :welcome_user]
   layout 'newsletter'
 
-  # See Newsletter in browser
-  def see_in_browser
+  # Preview Newsletter in browser
+  def preview_in_browser
     if all_conditions_respected? && @newsletter.already_sent?
       @title = @newsletter.title
       @content = @newsletter.content
