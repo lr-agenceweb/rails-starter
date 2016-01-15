@@ -50,11 +50,27 @@ Rails.application.routes.draw do
     get '/newsletter_user/unsubscribe/:newsletter_user_id/:token', to: 'newsletter_users#unsubscribe', as: :unsubscribe
     get '/admin/newsletters/:id/preview', to: 'admin/letters#preview', as: :preview_newsletter
 
-    # Mailings
-    get '/mailing_messages/:id/:token/:mailing_user_id/:mailing_user_token', to: 'mailing_messages#preview_in_browser', as: :preview_in_browser_mailing_message
-    get '/admin/mailing_messages/:id/preview', to: 'admin/mailing_messages#preview', as: :preview_mailing_message
-    get '/mailing_user/unsubscribe/:id/:token', to: 'mailing_users#unsubscribe', as: :unsubscribe_mailing_user
+    # Mailings (users)
+    resources :mailing_users do
+      member do
+        get 'unsubscribe/:token', action: :unsubscribe, as: :unsubscribe
+      end
+    end
 
+    # Mailings (messages)
+    resources :mailing_messages do
+      member do
+        get ':token/:mailing_user_id/:mailing_user_token', action: :preview_in_browser, as: :preview_in_browser
+      end
+    end
+
+    namespace :admin do
+      resources :mailing_messages do
+        member do
+          get 'preview', action: :preview, as: :preview
+        end
+      end
+    end
 
     # Mapbox popup content
     get 'contact/mapbox-popup', to: 'contacts#mapbox_popup', as: :mapbox_popup
@@ -70,6 +86,12 @@ Rails.application.routes.draw do
   get '/admin/newsletters/:id/send', to: 'admin/letters#send_newsletter', as: :send_newsletter_for_subscribers
   get '/admin/newsletter_test/:id/send', to: 'admin/letters#send_newsletter_test', as: :send_newsletter_for_testers
 
-  # Mailings
-  get '/admin/mailing_messages/:id/:token/send', to: 'admin/mailing_messages#send_mailing_message', as: :send_mailing_message
+  # Mailings (messages)
+  namespace :admin do
+    resources :mailing_messages do
+      member do
+        get ':token/send', action: :send_mailing_message, as: :send
+      end
+    end
+  end
 end
