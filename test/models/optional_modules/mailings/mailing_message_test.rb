@@ -25,7 +25,7 @@ class MailingMessageTest < ActiveSupport::TestCase
   end
 
   test 'should not upload picture if mime type is not allowed' do
-    [:original, :huge, :large, :medium, :small, :thumb].each do |size|
+    [:original, :huge, :large, :medium, :small, :thumb].each do
       assert_nil @mailing_message_two.picture
     end
 
@@ -38,7 +38,7 @@ class MailingMessageTest < ActiveSupport::TestCase
   end
 
   test 'should upload picture if mime type is allowed' do
-    [:original, :huge, :large, :medium, :small, :thumb].each do |size|
+    [:original, :huge, :large, :medium, :small, :thumb].each do
       assert_nil @mailing_message_two.picture
     end
 
