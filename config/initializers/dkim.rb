@@ -1,5 +1,5 @@
 if Rails.env.staging? || Rails.env.production?
-  Dkim::domain      = Figaro.env.application_domain_name
+  Dkim::domain      = Figaro.env.application_domain_name.sub(/www\.|www2\./, '')
   Dkim::selector    = 'default'
   Dkim::private_key = File.read('config/dkim/dkim.private.key')
 
