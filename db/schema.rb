@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218135408) do
+ActiveRecord::Schema.define(version: 20160123114714) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -731,7 +731,7 @@ ActiveRecord::Schema.define(version: 20151218135408) do
     t.string   "video_file_content_type", limit: 255
     t.integer  "video_file_file_size",    limit: 4
     t.datetime "video_file_updated_at"
-    t.boolean  "video_processing"
+    t.boolean  "video_file_processing"
     t.text     "retina_dimensions",       limit: 65535
     t.boolean  "video_autoplay",                        default: false
     t.boolean  "video_loop",                            default: false
