@@ -6,11 +6,11 @@ From: FRANCE
 
 == SITE ==
 ==========
-Last update: 27/11/2015
+Last update: 23/01/2016
 Language: English / French
 Doctype: HTML5
 IDE: Sublime Text 3
-Technologies: Ruby on Rails, jQuery (JS), Compass (CSS), Google Font, Font Awesome, Mapbox
+Technologies: Ruby on Rails, jQuery (JS), Sass, Google Font, Font Awesome, Mapbox
 Software: Photoshop
 
 

@@ -5,16 +5,6 @@ GIT
     truncate_html (0.9.3)
 
 GIT
-  remote: git://github.com/Compass/compass-rails.git
-  revision: 4e7d761b747a135ec9553e2b8131e2117d8f3be4
-  branch: master
-  specs:
-    compass-rails (2.0.4)
-      compass (~> 1.0.0)
-      sass-rails (<= 5.0.1)
-      sprockets (< 2.13)
-
-GIT
   remote: git://github.com/DavyJonesLocker/client_side_validations-simple_form.git
   revision: ac7d2f3a183a030281e1544d4a628c07e73c67cf
   specs:
@@ -176,6 +166,9 @@ GEM
     ast (2.1.0)
     astrolabe (1.3.1)
       parser (~> 2.2)
+    autoprefixer-rails (6.3.1)
+      execjs
+      json
     autosize-rails (1.18.17)
       rails (>= 3.1)
     av (0.9.0)
@@ -222,7 +215,6 @@ GEM
     cd (1.0.0)
     chartkick (1.4.1)
     chronic (0.10.2)
-    chunky_png (1.3.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     clipboard (1.0.6)
@@ -246,18 +238,6 @@ GEM
     colored (1.2)
     colorize (0.7.5)
     columnize (0.9.0)
-    compass (1.0.3)
-      chunky_png (~> 1.2)
-      compass-core (~> 1.0.2)
-      compass-import-once (~> 1.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      sass (>= 3.3.13, < 3.5)
-    compass-core (1.0.3)
-      multi_json (~> 1.0)
-      sass (>= 3.3.0, < 3.5)
-    compass-import-once (1.0.5)
-      sass (>= 3.2, < 3.5)
     css_parser (1.3.6)
       addressable
     daemons (1.1.9)
@@ -512,8 +492,6 @@ GEM
       i18n
       polyamorous (~> 1.2)
     rb-fsevent (0.9.4)
-    rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
     rdoc (4.2.0)
       json (~> 1.4)
     request_store (1.1.0)
@@ -545,6 +523,17 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    sassc (1.8.4)
+      bundler
+      ffi (~> 1.9.6)
+      sass (>= 3.3.0)
+    sassc-rails (1.2.0)
+      railties (>= 4.0.0)
+      sass
+      sassc (~> 1.6)
+      sprockets (> 2.11)
+      sprockets-rails
+      tilt
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -655,6 +644,7 @@ DEPENDENCIES
   analytical
   ancestry
   annotate (~> 2.6.5)
+  autoprefixer-rails
   autosize-rails
   best_in_place!
   better_errors
@@ -672,7 +662,6 @@ DEPENDENCIES
   client_side_validations-simple_form!
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
-  compass-rails!
   daemons
   database_cleaner
   delayed_job_active_record
@@ -728,7 +717,7 @@ DEPENDENCIES
   retina_rails (~> 2.0.0)
   route_translator
   rubocop
-  sass-rails (~> 5.0)
+  sassc-rails
   sdoc (~> 0.4.0)
   seed_dump
   shog

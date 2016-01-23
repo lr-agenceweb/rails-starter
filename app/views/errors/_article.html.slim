@@ -4,7 +4,7 @@
 
   .error-container.row
     .small-12.columns
-      h1.error-title = error.try(:title)
-      .error-content == error.try(:content)
+      h1.title = error.try(:title)
+      .content == error.try(:content)
 
-      p.error-link == I18n.t('link.back_to', page: link_to(I18n.t('routes.home'), root_path))
+      p.link == I18n.t('link.back_to', page: link_to(I18n.t('routes.home'), root_path))
