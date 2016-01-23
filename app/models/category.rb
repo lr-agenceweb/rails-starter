@@ -23,7 +23,9 @@
 class Category < ActiveRecord::Base
   include Imageable
 
-  attr_accessor :custom_background_color
+  attr_accessor :custom_background_color, :flash_notice
+
+  after_save :flash_upload_in_progress
 
   belongs_to :optional_module
   belongs_to :menu
@@ -75,6 +77,10 @@ class Category < ActiveRecord::Base
       categories << category if category.slider.nil? || category == myself
     end
     categories
+  end
+
+  def flash_upload_in_progress
+    self.flash_notice = I18n.t('video_upload.flash.upload_in_progress') if video_upload.video_file_processing? && !video_upload.destroyed?
   end
 
   # validates :menu_id,

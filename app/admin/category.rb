@@ -114,6 +114,8 @@ ActiveAdmin.register Category do
     include Skippable
     include Videoable
 
+    after_action :flash_notice, only: [:update], unless: proc { resource.flash_notice.blank? }
+
     def scoped_collection
       super.includes :video_upload, menu: [:translations]
     end
@@ -137,6 +139,12 @@ ActiveAdmin.register Category do
       params[:category].delete :video_upload_attributes unless show_video_background?(@video_settings, @video_module)
 
       super
+    end
+
+    private
+
+    def flash_notice
+      flash[:notice] = resource.flash_notice
     end
   end
 end
