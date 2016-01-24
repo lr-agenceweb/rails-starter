@@ -30,11 +30,26 @@ module Admin
       assert_response :success
     end
 
+    test 'should update blog if logged in' do
+      patch :update, id: @blog, blog: { title: 'blog edit', content: 'content edit' }
+      assert_redirected_to admin_blog_path(assigns(:blog))
+      assert flash[:notice].blank?
+    end
+
     test 'should destroy blog' do
       assert_difference ['Blog.count'], -1 do
         delete :destroy, id: @blog
       end
       assert_redirected_to admin_blogs_path
+    end
+
+    #
+    # == Flash content
+    #
+    test 'should return correct flash content after updating a video' do
+      video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
+      patch :update, id: @blog, blog: { video_uploads_attributes: [{ video_file: video }] }
+      assert_equal I18n.t('video_upload.flash.upload_in_progress'), flash[:notice]
     end
 
     #
