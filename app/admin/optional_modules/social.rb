@@ -34,7 +34,7 @@ ActiveAdmin.register Social do
       row :ikon_deco
       row :title
       row :kind
-      row :link unless resource.kind == 'share'
+      row :link unless resource.object.kind == 'share'
       row :status
     end
   end

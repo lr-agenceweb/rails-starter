@@ -20,8 +20,12 @@ class SocialDecorator < ApplicationDecorator
     end
   end
 
+  def kind
+    I18n.t("social.#{model.kind}")
+  end
+
   def link
-    link_to model.link, model.link, target: :_blank if link?
+    link_to model.link, model.link, target: :blank if link?
   end
 
   def hint_by_ikon
