@@ -17,10 +17,7 @@ footer.footer-container#footer
             - unless @socials_follow.nil?
               - @socials_follow.each do |social_follow|
                 li
-                  - ikon = social_follow.title
-                  - ikon = fa_icon "#{social_follow.font_ikon} 2x" if social_follow.decorate.font_ikon?
-                  - ikon = retina_image_tag(social_follow, :ikon, :small) if social_follow.decorate.ikon?
-                  = link_to ikon, social_follow.link, target: :_blank
+                  = link_to social_follow.decorate.ikon_deco('2x'), social_follow.link, target: :_blank
 
           - unless @socials_share.nil?
             h4 = I18n.t('social.share')

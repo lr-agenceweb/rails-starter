@@ -10,11 +10,11 @@ class SocialDecorator < ApplicationDecorator
     status_tag_deco(I18n.t("enabled.#{model.enabled}"), color)
   end
 
-  def ikon_deco
+  def ikon_deco(size='3x')
     if ikon?
       retina_image_tag model, :ikon, :small
     elsif font_ikon?
-      fa_icon "#{model.font_ikon} 3x"
+      fa_icon "#{model.font_ikon} #{size}"
     else
       model.title
     end
