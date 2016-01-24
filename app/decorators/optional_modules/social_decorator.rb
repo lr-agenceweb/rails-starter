@@ -21,7 +21,7 @@ class SocialDecorator < ApplicationDecorator
   end
 
   def link
-    link_to model.link, model.link, target: :_blank
+    link_to model.link, model.link, target: :_blank if link?
   end
 
   def hint_by_ikon
@@ -44,5 +44,9 @@ class SocialDecorator < ApplicationDecorator
 
   def font_ikon?
     !model.font_ikon.blank?
+  end
+
+  def link?
+    !model.link.blank?
   end
 end

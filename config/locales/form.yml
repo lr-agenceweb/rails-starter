@@ -28,6 +28,10 @@ fr:
 
     counter: "Caractères restants: %{count}"
 
+    placeholder:
+      social:
+        font_ikon: Sélectionnez une valeur
+
     hint:
       title: Titre de l'article (avoir un bon titre est important pour le référencement)
       title_newsletter: Titre de la newsletter
@@ -70,6 +74,14 @@ fr:
         title: Sujet de l'email à envoyer
         content: Contenu de l'email à envoyer
         signature: Si coché, votre signature personnelle, définie dans les paramètres du mailing, sera ajoutée à la fin du mail.
+
+      social:
+        title: Titre du réseaux social
+        kind: S'agit-il de votre page personnelle ou de partager sur les réseaux sociaux ?
+        link: Lien du réseau social
+        enabled: Si coché, ce réseau social sera activé sur le site
+        delete_ikon: Si coché, l'icône du réseau social sera supprimée après mise à jour de l'élément
+        font_ikon_blank: Je ne souhaite pas utiliser d'icône
 
       adult:
         enabled: Activer / Désactiver le popup de validation de l'âge
