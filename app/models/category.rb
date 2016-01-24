@@ -22,10 +22,9 @@
 #
 class Category < ActiveRecord::Base
   include Imageable
+  include VideoUploadable
 
-  attr_accessor :custom_background_color, :flash_notice
-
-  after_save :flash_upload_in_progress
+  attr_accessor :custom_background_color
 
   belongs_to :optional_module
   belongs_to :menu
@@ -40,13 +39,9 @@ class Category < ActiveRecord::Base
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
 
-  has_one :video_upload, as: :videoable, dependent: :destroy
-  accepts_nested_attributes_for :video_upload, reject_if: :all_blank, allow_destroy: true
-
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :enabled, to: :optional_module, prefix: true, allow_nil: true
   delegate :title, :position, :online, to: :menu, prefix: true, allow_nil: true
-  delegate :online, to: :video_upload, prefix: true, allow_nil: true
 
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 
@@ -77,10 +72,6 @@ class Category < ActiveRecord::Base
       categories << category if category.slider.nil? || category == myself
     end
     categories
-  end
-
-  def flash_upload_in_progress
-    self.flash_notice = I18n.t('video_upload.flash.upload_in_progress') if video_upload.video_file_processing? && !video_upload.destroyed?
   end
 
   # validates :menu_id,
