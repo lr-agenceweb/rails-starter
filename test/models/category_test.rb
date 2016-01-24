@@ -8,6 +8,17 @@ class CategoryTest < ActiveSupport::TestCase
 
   setup :initialize_test
 
+  test 'should return title for category' do
+    assert_equal 'Accueil', Category.title_by_category(@category.name)
+  end
+
+  test 'should return only allowed modules' do
+    assert_equal 9, Category.with_allowed_module.count
+  end
+
+  #
+  # == Flash content
+  #
   test 'should not have flash content if no video are uploaded' do
     @category.save!
     assert @category.flash_notice.blank?
@@ -20,14 +31,9 @@ class CategoryTest < ActiveSupport::TestCase
     assert_equal I18n.t('video_upload.flash.upload_in_progress'), @category.flash_notice
   end
 
-  test 'should return title for category' do
-    assert_equal 'Accueil', Category.title_by_category(@category.name)
-  end
-
-  test 'should return only allowed modules' do
-    assert_equal 9, Category.with_allowed_module.count
-  end
-
+  #
+  # == Slider
+  #
   test 'should have a slider linked for home category' do
     assert @category.slider?
   end
