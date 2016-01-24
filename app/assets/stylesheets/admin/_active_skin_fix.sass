@@ -29,11 +29,19 @@ table.index_table td a.button
 // Site title
 #header h1.site_title
   background: #FFF
-  padding-left: 30px
+  padding: 0
   text-indent: 0
 
   a
+    padding: 10px 15px
     color: #313131
+    &:hover
+      color: $primary-color
+
+    &:after
+      margin-left: 6px
+      font-family: FontAwesome
+      content: "\f015"
 
 // Breadcrumb
 #titlebar_left
