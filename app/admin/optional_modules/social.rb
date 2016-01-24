@@ -10,6 +10,10 @@ ActiveAdmin.register Social do
                 :delete_ikon,
                 :font_ikon
 
+  scope I18n.t('all'), :all, default: true
+  scope I18n.t('social.share'), :share
+  scope I18n.t('social.follow'), :follow
+
   decorate_with SocialDecorator
   config.clear_sidebar_sections!
 
