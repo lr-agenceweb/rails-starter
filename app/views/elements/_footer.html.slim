@@ -8,9 +8,9 @@ footer.footer-container#footer
       .small-12.large-4.columns.credentials
         == "#{setting.about} #{setting.admin_link}"
 
-      .small-12.large-2.columns.socials
+      .small-12.large-4.columns.socials
         - if setting.show_social? && @social_module.enabled?
-          h3 Follow me
+          h4 = I18n.t('social.follow')
           ul.inline-list
             li = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
 
@@ -23,11 +23,11 @@ footer.footer-container#footer
                   = link_to ikon, social_follow.link, target: :_blank
 
           - unless @socials_share.nil?
-            h4 Share me
+            h4 = I18n.t('social.share')
             = social_share_buttons
 
-      .small-12.large-2.columns
-        p == link_to(setting.logo_footer_site, 'http://www.lr-agenceweb.fr', target: :blank, title: 'L&R Agence web')
+      / .small-12.large-2.columns
+      /   p == link_to(setting.logo_footer_site, 'http://www.lr-agenceweb.fr', target: :blank, title: 'L&R Agence web')
 
 
   .lower-footer
