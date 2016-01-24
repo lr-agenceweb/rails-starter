@@ -60,13 +60,13 @@ ActiveAdmin.register MailingMessage do
     before_action :redirect_to_dashboard, only: [:send_mailing_message]
 
     def create
-      super do |success, failure|
+      super do |success, _failure|
         success.html { make_redirect }
       end
     end
 
     def update
-      super do |success, failure|
+      super do |success, _failure|
         success.html { make_redirect }
       end
     end

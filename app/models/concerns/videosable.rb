@@ -17,7 +17,7 @@ module Videosable
     delegate :online, to: :video_platforms, prefix: true, allow_nil: true
     delegate :online, to: :video_uploads, prefix: true, allow_nil: true
 
-    def flash_upload_in_progress(video_upload)
+    def flash_upload_in_progress(*)
       self.flash_notice = I18n.t('video_upload.flash.upload_in_progress')
     end
   end

@@ -53,13 +53,13 @@ module Admin
 
     test 'should redirect to edit form after update existing picture' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @mailing_message,  mailing_message: { picture_attributes: { image: attachment } }
+      patch :update, id: @mailing_message, mailing_message: { picture_attributes: { image: attachment } }
       assert_redirected_to edit_admin_mailing_message_path(assigns(:mailing_message))
     end
 
     test 'should redirect to edit form after update with picture' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @mailing_message_without_picture,  mailing_message: { picture_attributes: { image: attachment } }
+      patch :update, id: @mailing_message_without_picture, mailing_message: { picture_attributes: { image: attachment } }
       assert_redirected_to edit_admin_mailing_message_path(assigns(:mailing_message))
     end
 

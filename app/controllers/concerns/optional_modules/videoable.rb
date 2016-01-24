@@ -6,7 +6,7 @@ module Videoable
 
   included do
     before_action :set_video_settings, if: proc { @video_module.enabled? }
-    after_action :flash_notice, only: [:create, :update], unless: proc { resource.flash_notice.blank? }
+    after_action :flash_notice, only: [:create, :update], unless: proc { try(:flash_notice).blank? }
 
     private
 
