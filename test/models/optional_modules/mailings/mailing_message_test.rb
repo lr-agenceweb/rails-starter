@@ -18,6 +18,30 @@ class MailingMessageTest < ActiveSupport::TestCase
   end
 
   #
+  # == Should redirect
+  #
+  test 'should return correct value for redirect_to_form? if new record' do
+    mailing_message = MailingMessage.new
+    mailing_message.save!
+    assert_not mailing_message.should_redirect
+  end
+
+  test 'should return correct value for redirect_to_form? if new record and adding picture' do
+    mailing_message = MailingMessage.new
+    attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+    mailing_message.update_attributes(picture_attributes: { image: attachment })
+    mailing_message.save!
+    assert mailing_message.should_redirect
+  end
+
+  test 'should return correct value for redirect_to_form? if adding picture' do
+    attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+    @mailing_message_two.update_attributes(picture_attributes: { image: attachment })
+    @mailing_message_two.save!
+    assert @mailing_message_two.should_redirect
+  end
+
+  #
   # == Picture
   #
   test 'should have one picture linked' do
