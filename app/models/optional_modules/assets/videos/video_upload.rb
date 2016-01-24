@@ -13,7 +13,7 @@
 #  video_file_content_type :string(255)
 #  video_file_file_size    :integer
 #  video_file_updated_at   :datetime
-#  video_processing        :boolean
+#  video_file_processing   :boolean
 #  retina_dimensions       :text(65535)
 #  video_autoplay          :boolean          default(FALSE)
 #  video_loop              :boolean          default(FALSE)
@@ -63,10 +63,10 @@ class VideoUpload < ActiveRecord::Base
 
   validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
   validates_attachment_size :video_file, in: 0.megabytes..100.megabytes
-  process_in_background :video_file, processing_image_url: '/default/medium-missing.png'
+  process_in_background :video_file, processing_image_url: 'http://www.salons-sante-autonomie.com/content/themes/ssa/img/assets/spinner.gif'
 
   delegate :online, to: :video_subtitle, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
-  scope :not_precessing, -> { where.not(video_processing: true) }
+  scope :not_processing, -> { where.not(video_file_processing: true) }
 end

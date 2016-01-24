@@ -2,6 +2,9 @@
 fr:
   video:
     no_html5: Votre navigateur ne supporte pas la lecture de cette vidéo. Veuillez le mettre à jour pour lire la vidéo.
+  video_upload:
+    flash:
+      upload_in_progress: Votre vidéo est en train d'être envoyée sur le site. Cela peut prendre beaucoup de temps, soyez patient ;)
 
 # English
 en:

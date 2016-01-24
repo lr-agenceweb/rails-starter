@@ -7,5 +7,5 @@
 
   - if @video_settings.video_upload?
     .row
-      - VideoUploadDecorator.decorate_collection(resource.video_uploads_online.not_precessing.includes(:video_subtitle)).each_with_index do |video, index|
+      - VideoUploadDecorator.decorate_collection(resource.video_uploads_online.not_processing.includes(:video_subtitle)).each_with_index do |video, index|
         = render 'video_uploads/row', video: video, index: index

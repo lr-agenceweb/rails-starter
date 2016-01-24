@@ -59,6 +59,18 @@ ActiveAdmin.register MailingMessage do
 
     before_action :redirect_to_dashboard, only: [:send_mailing_message]
 
+    def create
+      super do |success, _failure|
+        success.html { make_redirect }
+      end
+    end
+
+    def update
+      super do |success, _failure|
+        success.html { make_redirect }
+      end
+    end
+
     def send_mailing_message
       @mailing_message.update_attributes(sent_at: Time.zone.now)
       @mailing_users = @mailing_message.mailing_users if params[:option] == 'checked'
@@ -66,7 +78,7 @@ ActiveAdmin.register MailingMessage do
       make_mailing_message_with_i18n(@mailing_message, @mailing_users)
 
       flash[:notice] = I18n.t('mailing.notice_sending', count: @mailing_users.count)
-      make_redirect
+      redirect_to :back
     end
 
     def preview
@@ -85,7 +97,11 @@ ActiveAdmin.register MailingMessage do
     end
 
     def make_redirect
-      redirect_to :back
+      if resource.should_redirect == true
+        redirect_to edit_admin_mailing_message_path(resource.id)
+      else
+        redirect_to admin_mailing_message_path(resource.id)
+      end
     end
 
     def redirect_to_dashboard

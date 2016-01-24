@@ -65,7 +65,7 @@ class CategoryDecorator < ApplicationDecorator
   end
 
   def video_background(video_settings, video_module)
-    return unless video? && show_video_background?(video_settings, video_module) && !model.video_upload.video_processing?
+    return unless video? && show_video_background?(video_settings, video_module) && !model.video_upload.video_file_processing?
     content_tag(:section, class: 'l-section heading-site') do
       concat(content_tag(:video, class: 'heading-video', preload: 'auto', autoplay: true, loop: true, muted: true) do
         concat(tag(:source, type: 'video/mp4', src: model.video_upload.video_file.url(:mp4video)))
@@ -85,6 +85,6 @@ class CategoryDecorator < ApplicationDecorator
   private
 
   def aa_page_name
-    "#{I18n.t('activerecord.models.category.one').downcase} \"#{resource.decorate.menu_title}\""
+    "#{I18n.t('activerecord.models.category.one').downcase} \"#{model.decorate.menu_title}\""
   end
 end

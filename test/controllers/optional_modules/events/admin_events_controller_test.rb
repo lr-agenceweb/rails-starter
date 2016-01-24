@@ -33,6 +33,17 @@ module Admin
     test 'should update event if logged in' do
       patch :update, id: @event, event: { title: 'event edit', content: 'content edit' }
       assert_redirected_to admin_event_path(assigns(:event))
+      assert flash[:notice].blank?
+    end
+
+    #
+    # == Flash content
+    #
+    test 'should return correct flash content after updating a video' do
+      skip 'skipped because of travis'
+      video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
+      patch :update, id: @event, event: { video_uploads_attributes: [{ video_file: video }] }
+      assert_equal I18n.t('video_upload.flash.upload_in_progress'), flash[:notice]
     end
 
     #

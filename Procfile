@@ -1,6 +1,9 @@
 # Rails server
 web: bin/procfile/web
 
+# Gulp browser-sync
+gulp: gulp
+
 # Mail server
 mailer: bin/procfile/maildev
 

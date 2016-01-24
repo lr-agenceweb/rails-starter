@@ -21,6 +21,11 @@ module Admin
       assert_response :success
     end
 
+    test 'should create mailing_message' do
+      post :create, mailing_message: {}
+      assert_redirected_to admin_mailing_message_path(assigns(:mailing_message))
+    end
+
     test 'should get edit page if logged in' do
       get :edit, id: @mailing_message
       assert_response :success
@@ -35,6 +40,27 @@ module Admin
     test 'should update mailing_message if logged in' do
       patch :update, id: @mailing_message, mailing_message: {}
       assert_redirected_to admin_mailing_message_path(@mailing_message)
+    end
+
+    #
+    # == Redirection after create or update
+    #
+    test 'should redirect to edit form after create with picture' do
+      attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+      post :create, mailing_message: { picture_attributes: { image: attachment } }
+      assert_redirected_to edit_admin_mailing_message_path(assigns(:mailing_message))
+    end
+
+    test 'should redirect to edit form after update existing picture' do
+      attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+      patch :update, id: @mailing_message, mailing_message: { picture_attributes: { image: attachment } }
+      assert_redirected_to edit_admin_mailing_message_path(assigns(:mailing_message))
+    end
+
+    test 'should redirect to edit form after update with picture' do
+      attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+      patch :update, id: @mailing_message_without_picture, mailing_message: { picture_attributes: { image: attachment } }
+      assert_redirected_to edit_admin_mailing_message_path(assigns(:mailing_message))
     end
 
     #
@@ -228,6 +254,7 @@ module Admin
       @request.env['HTTP_REFERER'] = root_url
       @setting = settings(:one)
       @mailing_message = mailing_messages(:one)
+      @mailing_message_without_picture = mailing_messages(:two)
       @mailing_module = optional_modules(:mailing)
 
       @subscriber = users(:alice)

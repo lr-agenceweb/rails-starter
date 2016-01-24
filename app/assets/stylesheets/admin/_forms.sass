@@ -73,7 +73,7 @@ form fieldset.inputs:not(.locale)
     position: relative
     span
       position: relative
-      background-color: $tercery-color
+      background-color: $formLegendHeading
       color: $white
 
 // VideoUpload
@@ -97,8 +97,8 @@ li.has_many_container.video_uploads
 // Buttons for select / deselect all mailing users
 .formtastic.mailing_message
   ol.choices-group
-    @include column-count(2)
-    @include column-gap(4)
+    column-count: 2
+    column-gap: 4
     width: 100%
 
     li.choice
@@ -123,7 +123,7 @@ form fieldset.inputs.locale
   border: 3px solid $primary-color
 .active_admin #active_admin_content .activeadmin-translations > ul > li >
   a
-    @include box-shadow(none !important)
+    box-shadow: none !important
     @include rounded(0 !important)
     background: lighten( $secondary-color, 30% ) !important
     color: $white !important

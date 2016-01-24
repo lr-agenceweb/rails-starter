@@ -51,7 +51,7 @@ It use [Slim](https://github.com/slim-template/slim-rails) template to write HTM
 
 Assets
 -------
-Style is writting in `scss` and `sass` (with compass)  
+Style is writting in `scss` and `sass` (using libsass)
 Scripts are created in `coffeescript`
 
 <!-- In development and test environments, assets are stored in `local` but in staging and production, they are stored with `dropbox` using dropbox-paperclip gem. The advantage of storing in an external server is that you relieve your server storage. -->
