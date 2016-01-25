@@ -1,5 +1,10 @@
-- f.inputs t('activerecord.models.video_subtitle.other'), for: [:video_subtitle, f.object.video_subtitle || VideoSubtitle.new] do |subtitle|
+= f.inputs t('activerecord.models.video_subtitle.other'), for: [:video_subtitle, f.object.video_subtitle || VideoSubtitle.new] do |subtitle|
+
   br
+
+  li
+    p == I18n.t('video_upload.subtitle.explanation', site: 'https://www.amara.org')
+
   - subtitle.input :subtitle_fr,
                    as: :file,
                    hint: raw("Sous titres au format SRT pour langue française <br /> #{subtitle.object.subtitle_fr_file_name + ' le ' if subtitle.object.subtitle_fr.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_fr.exists?}")
