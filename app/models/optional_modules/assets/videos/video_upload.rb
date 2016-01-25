@@ -56,7 +56,7 @@ class VideoUpload < ActiveRecord::Base
                       preview: {
                         geometry: '380x240#',
                         format: 'jpg',
-                        time: 2
+                        time: 1
                       }
                     },
                     processors: [:transcoder]
