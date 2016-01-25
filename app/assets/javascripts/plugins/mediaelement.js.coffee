@@ -2,6 +2,7 @@ $(document).on 'ready page:load page:restore', ->
 
   if $('.mediaelement').length > 0
     turn_off_the_light = gon.turn_off_the_light
+    $('body').append('<div id="shadow"></div>') if turn_off_the_light
 
     $('video.mediaelement').each (index, element) ->  #mediaelementplayer
       element = $(element)

@@ -44,6 +44,5 @@ html lang="#{@language}"
         == yield
       .push
 
-    #shadow
     = render 'elements/footer', newsletter_user: @newsletter_user
     = raw analytical.body_append_javascript
