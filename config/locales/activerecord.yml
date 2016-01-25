@@ -272,6 +272,7 @@ fr:
         last_sign_in_at: Dernière connexion
         created_at: Inscrit depuis
         avatar: Avatar
+        image_avatar: Avatar
         delete_avatar: Supprimer avatar
         status: Rôle
       category:

@@ -9,14 +9,7 @@ class UserDecorator < ApplicationDecorator
   decorates_association :posts
 
   def image_avatar
-    # Website avatar present
-    if model.avatar?
-      retina_thumb_square(model)
-
-    # Website avatar not present (use Gravatar)
-    else
-      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: 64 })
-    end
+    retina_thumb_square(model)
   end
 
   def admin_link
