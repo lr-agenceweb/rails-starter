@@ -25,7 +25,7 @@ class SocialTest < ActiveSupport::TestCase
   end
 
   test 'should return list of allowed kind for social newtwork' do
-    aksn = Social.allowed_kind_social_network
+    aksn = Social.allowed_kind_social_network.flatten(1)
     assert_includes aksn, 'follow'
     assert_includes aksn, 'share'
   end
