@@ -12,6 +12,9 @@ module Videoable
 
     def set_video_settings
       @video_settings = VideoSetting.first
+      gon.push(
+        turn_off_the_light: @video_settings.turn_off_the_light
+      )
     end
 
     def set_flash_notice

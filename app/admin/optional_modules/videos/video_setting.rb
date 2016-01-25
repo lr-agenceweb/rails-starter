@@ -4,18 +4,20 @@ ActiveAdmin.register VideoSetting do
   permit_params :id,
                 :video_platform,
                 :video_upload,
-                :video_background
+                :video_background,
+                :turn_off_the_light
 
   decorate_with VideoSettingDecorator
   config.clear_sidebar_sections!
 
-  show do
+  show title: I18n.t('activerecord.models.video_setting.one') do
     columns do
       column do
         attributes_table do
-          row :video_platform_d
-          row :video_upload_d
-          row :video_background_d if resource.video_background?
+          row :video_platform
+          row :video_upload
+          row :video_background if resource.video_background?
+          row :turn_off_the_light
         end
       end
     end
@@ -36,6 +38,9 @@ ActiveAdmin.register VideoSetting do
             f.input :video_background,
                     hint: I18n.t('form.hint.video.video_background')
           end
+
+          f.input :turn_off_the_light,
+                  hint: I18n.t('form.hint.video.turn_off_the_light')
         end
       end
     end

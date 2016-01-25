@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160123114714) do
+ActiveRecord::Schema.define(version: 20160125100618) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -683,11 +683,12 @@ ActiveRecord::Schema.define(version: 20160123114714) do
   add_index "video_platforms", ["videoable_type", "videoable_id"], name: "index_video_platforms_on_videoable_type_and_videoable_id", using: :btree
 
   create_table "video_settings", force: :cascade do |t|
-    t.boolean  "video_platform",   default: true
-    t.boolean  "video_upload",     default: true
-    t.boolean  "video_background", default: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.boolean  "video_platform",     default: true
+    t.boolean  "video_upload",       default: true
+    t.boolean  "video_background",   default: false
+    t.boolean  "turn_off_the_light", default: true
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "video_subtitles", force: :cascade do |t|

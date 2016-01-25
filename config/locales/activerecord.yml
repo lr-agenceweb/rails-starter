@@ -384,11 +384,9 @@ fr:
         _destroy: Supprimer ?
       video_setting:
         video_platform: Vidéos depuis platformes en ligne
-        video_platform_d: Vidéos depuis platformes en ligne
         video_upload: Vidéos mises en ligne depuis le site
-        video_upload_d: Vidéos mises en ligne depuis le site
         video_background: Vidéos d'arrière plan
-        video_background_d: Vidéos d'arrière plan
+        turn_off_the_light: Assombrir l'arrière-plan ?
       video_subtitle:
         subtitle_fr: Sous-titres français
         subtitle_en: Sous-titres anglais
