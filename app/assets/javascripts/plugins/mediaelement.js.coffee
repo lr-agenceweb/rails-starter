@@ -19,21 +19,20 @@ $(document).on 'ready page:load page:restore', ->
           mediaelement.addEventListener 'ended', (e) ->
             remove_darkness() if turn_off_the_light
 
+          mediaelement.addEventListener 'pause', (e) ->
+            remove_darkness() if turn_off_the_light
 
-    if turn_off_the_light
-      sel = $('#shadow')
-      $('.mediaelement .mejs-playpause-button button, .mediaelement .mejs-overlay-button, .mediaelement').on 'click', (e) ->
-        klass = 'night'
-        sel.css('height', $(document).outerHeight()).hide()
-        value = $('.mediaelement .mejs-playpause-button button').attr('aria-label')
-        if value == 'Play'
-          sel.addClass klass
-          $('.mejs-container').css('z-index', '3')
-        else
-          remove_darkness()
-        sel.toggle()
+          mediaelement.addEventListener 'play', (e) ->
+            create_darkness() if turn_off_the_light && !$('#shadow').hasClass('night')
 
+create_darkness = (sel=$('#shadow'), klass='night') ->
+  sel.css('height', $(document).outerHeight()).hide()
+  value = $('.mediaelement .mejs-playpause-button button').attr('aria-label')
+  sel.addClass(klass).fadeIn(200)
+  return
 
 remove_darkness = (sel=$('#shadow'), klass='night') ->
-  sel.removeClass klass
-  sel.css('height', 0).hide()
+  sel.fadeOut 200, ->
+    $(@).removeClass(klass)
+    $(@).css 'height', 0
+    return
