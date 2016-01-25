@@ -38,12 +38,12 @@
       br
       - subtitle.input :subtitle_fr,
                        as: :file,
-                       hint: raw("Sous titres au format VTT pour langue française <br /> #{subtitle.object.subtitle_fr_file_name + ' le ' if subtitle.object.subtitle_fr.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_fr.exists?}")
+                       hint: raw("Sous titres au format SRT pour langue française <br /> #{subtitle.object.subtitle_fr_file_name + ' le ' if subtitle.object.subtitle_fr.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_fr.exists?}")
 
       - if I18n.available_locales.include?(:en)
         - subtitle.input :subtitle_en,
                          as: :file,
-                         hint: raw("Sous titres au format VTT pour langue anglaise <br /> #{subtitle.object.subtitle_en_file_name + ' le ' if subtitle.object.subtitle_en.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_en.exists?}")
+                         hint: raw("Sous titres au format SRT pour langue anglaise <br /> #{subtitle.object.subtitle_en_file_name + ' le ' if subtitle.object.subtitle_en.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_en.exists?}")
 
       - subtitle.input :online,
                        as: :boolean,
