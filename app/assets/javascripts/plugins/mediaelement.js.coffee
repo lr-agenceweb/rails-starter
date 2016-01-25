@@ -1,4 +1,5 @@
 $(document).on 'ready page:load page:restore', ->
+
   $('video.mediaelement').each (index, element) ->  #mediaelementplayer
     element = $(element)
     $(element).attr('autoplay', 'true') if element.data('autoplay') is true
@@ -11,3 +12,26 @@ $(document).on 'ready page:load page:restore', ->
       logo:
         text: gon.site_title,
         link: gon.root_url
+      success: (mediaelement, domObject) ->
+        mediaelement.addEventListener 'ended', (e) ->
+          remove_darkness()
+
+
+  if $('.mediaelement').length > 0
+    sel = $('#shadow')
+    $('.mediaelement .mejs-playpause-button button, .mediaelement .mejs-overlay-button, .mediaelement').on 'click', (e) ->
+      console.log 'je clique'
+      klass = 'night'
+      sel.css('height', $(document).outerHeight()).hide()
+      value = $('.mediaelement .mejs-playpause-button button').attr('aria-label')
+      if value == 'Play'
+        sel.addClass klass
+        $('.mejs-container').css('z-index', '3')
+      else
+        remove_darkness()
+      sel.toggle()
+
+
+remove_darkness = (sel=$('#shadow'), klass='night') ->
+  sel.removeClass klass
+  sel.css('height', 0).hide()
