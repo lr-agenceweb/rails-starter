@@ -1347,7 +1347,7 @@ $topbar-bg: $topbar-bg-color;
 // $topbar-title-font-size: rem-calc(17);
 
 // Style the top bar dropdown elements
-$topbar-dropdown-bg: transparent;
+$topbar-dropdown-bg: $topbar-bg-color;
 $topbar-dropdown-link-color: $white;
 $topbar-dropdown-link-bg: $topbar-bg;
 $topbar-dropdown-link-bg-hover: $topbar-bg;
