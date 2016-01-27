@@ -1,43 +1,3 @@
-# English
-en:
-  errors:
-    messages:
-      email_format: Your email is invalid ;)
-
-  activerecord:
-    errors:
-      models:
-        newsletter_user:
-          attributes:
-            email:
-              blank: Don't forget your email address ;)
-              taken: This email is not avalaible :(
-        guest_book:
-          attributes:
-            email:
-              blank: Don't forget your email address ;)
-              taken: This email is not avalaible :(
-    models:
-      home:
-        one: Home
-        other: Homes
-      category:
-        one: Page
-        other: Pages
-      string_box:
-        one: Custom content
-        other: Custom contents
-      post_comment:
-        one: Comment
-        other: Comments
-      comment:
-        one: Comment
-        other: Comments
-
-    attributes:
-      adult:
-        adult_validated: I attest to be an adult
-
 # French
 fr:
   errors:
@@ -82,6 +42,15 @@ fr:
               blank: N'oubliez pas de renseigner votre nom ;)
             message:
               blank: N'oubliez pas de renseigner votre message ;)
+        comment:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+            username:
+              blank: N'oubliez pas de renseigner votre pseudo ;)
+            comment:
+              blank: N'oubliez pas de saisir votre commentaire ;)
+
     models:
       user:
         one: Utilisateur

@@ -1,0 +1,59 @@
+# English
+en:
+  errors:
+    messages:
+      email_format: Your email is invalid ;)
+
+  activerecord:
+    errors:
+      models:
+        newsletter_user:
+          attributes:
+            email:
+              blank: Don't forget your email address ;)
+              taken: This email is not avalaible :(
+        guest_book:
+          attributes:
+            email:
+              blank: Don't forget your email address ;)
+              taken: This email is not avalaible :(
+        comment:
+          attributes:
+            email:
+              blank: Don't forget your email address ;)
+            username:
+              blank: Do not forgot to add your name ;)
+            comment:
+              blank: Do not forgot to add your comment ;)
+
+    models:
+      home:
+        one: Home
+        other: Homes
+      category:
+        one: Page
+        other: Pages
+      string_box:
+        one: Custom content
+        other: Custom contents
+      post_comment:
+        one: Comment
+        other: Comments
+      comment:
+        one: Comment
+        other: Comments
+
+    attributes:
+      adult:
+        adult_validated: I attest to be an adult
+      comment:
+        username: Username
+        mail: Email
+        comment: Message
+        message: Comment
+        lang: Lang
+        link_source: Link source
+        link_and_image_source: Article source
+        status: Status
+        created_at: Created at
+        destroy: Destroy
