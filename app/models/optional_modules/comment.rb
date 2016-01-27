@@ -36,7 +36,8 @@ class Comment < ActiveRecord::Base
 
   validates :username, allow_blank: true, presence: true
   validates :email,    allow_blank: true, presence: true, email_format: true
-  validates :comment,  presence: true
+  validates :comment,
+            presence: { message: I18n.t('comment.form.presence') }
   validates :lang,
             presence: true,
             inclusion: { in: I18n.available_locales.map(&:to_s) }

@@ -1,4 +1,4 @@
 - if element.prev?
-  .prev_button = link_to fa_icon('chevron-circle-left 4x'), element.fetch_prev
+  .prev_button.hide-for-small-only = link_to fa_icon('chevron-circle-left 4x'), element.fetch_prev
 - if element.next?
-  .next_button = link_to fa_icon('chevron-circle-right 4x'), element.fetch_next
+  .next_button.hide-for-small-only = link_to fa_icon('chevron-circle-right 4x'), element.fetch_next

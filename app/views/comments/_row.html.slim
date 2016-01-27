@@ -1,15 +1,17 @@
 article.comment.row id="comment-#{comment.id}"
   == comment.microdata_meta
 
-  .small-12.columns.panel
+  .small-12.columns
     .row
-      .small-12.medium-2.columns
-        p = comment.comment_created_at
+      .small-2.columns
+        span.comment-avatar = comment.avatar
 
-        = comment.avatar
-      .small-12.medium-10.columns
+      .small-10.columns
+        p
+          == "#{comment.pseudo},"
+          span<> = comment.comment_created_at
+          - if can? :destroy, comment
+            | -
+            span.comment-destroy< = link_to I18n.t('activerecord.attributes.comment.destroy'), send("#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment), method: :delete, remote: true, data: { confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.comment.one')) }
+
         div = comment.content
-
-      footer
-        - if can? :destroy, comment
-          = link_to 'Destroy', send("#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment), method: :delete, remote: true, data: { confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.comment.one')) }

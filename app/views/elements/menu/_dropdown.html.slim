@@ -7,9 +7,9 @@ nav class="top-bar" data-topbar='' role="navigation" aria-label='navigation' ite
 
   section.top-bar-section
     ul.right
-      - if @search_module.enabled?
-        li.has-form
-          = render 'searches/form'
+      / - if @search_module.enabled?
+      /   li.has-form
+      /     = render 'searches/form'
 
       - if I18n.available_locales.length > 1
         li = render 'elements/language'

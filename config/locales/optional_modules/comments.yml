@@ -10,6 +10,9 @@ en:
       error: An error occured when trying to destroy the comment
       not_allowed: You are not allowed to destroy this comment
 
+    form:
+      presence: Do not forgot to add your comment ;)
+
 # French
 fr:
   comment:
@@ -21,3 +24,6 @@ fr:
       success: Le commentaire a été supprimé.
       error: Une erreur s'est produite au moment de supprimé le commentaire
       not_allowed: Vous n'êtes pas autorisé à supprimer ce commentaire
+
+    form:
+      presence: N'oubliez pas de saisir votre commentaire ;)

@@ -7,9 +7,10 @@ article.post-article
       small<: em = "(#{blog.created_at})"
 
   == blog.loop_hover_has_many_pictures true
-  / = render '/videos/index', resource: blog
 
-  div = blog.content
+  div == blog.content
+
+  = render '/videos/index', resource: blog if params[:action] == 'show'
 
   footer
     ul.inline-list
@@ -17,3 +18,10 @@ article.post-article
 
       - if @comment_module.enabled?
         li = "#{I18n.t('activerecord.models.comment.other')}: #{blog.comments.validated.count}"
+
+  - if params[:action] == 'show'
+    = render 'elements/prev_next', element: blog if @blog_settings.prev_next?
+
+- if params[:action] == 'show'
+  p.text-right = link_to t('link.back_to', page: @category.menu_title), blogs_path
+  = render 'comments/section', o: blog

@@ -13,21 +13,23 @@ class CommentDecorator < ApplicationDecorator
   def avatar
     # Not connected
     if model.user_id.nil?
-      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) }) + pseudo
+      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) })
 
     # Connected
     else
-      pseudo = pseudo(model.user_username)
-
       # Website avatar present
       if model.user.avatar?
-        retina_thumb_square(model.user) + pseudo
+        retina_thumb_square(model.user)
 
       # Website avatar not present (use Gravatar)
       else
-        gravatar_image_tag(model.user.email, alt: model.user.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) }) + pseudo
+        gravatar_image_tag(model.user.email, alt: model.user.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) })
       end
     end
+  end
+
+  def avatar_with_pseudo
+    avatar + pseudo
   end
 
   # Email associated to comment
@@ -114,6 +116,13 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
+  def pseudo(name = nil)
+    name = pseudo_registered_or_guest if name.nil?
+    content_tag(:span, '', itemprop: 'author', itemscope: '', itemtype: 'http://schema.org/Person') do
+      concat(content_tag(:strong, name, itemprop: 'name', class: 'comment-author'))
+    end
+  end
+
   private
 
   def pseudo_registered_or_guest
@@ -124,16 +133,10 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
-  def pseudo(name = model.username)
-    content_tag(:p, '', itemprop: 'author', itemscope: '', itemtype: 'http://schema.org/Person') do
-      concat(content_tag(:small, name, itemprop: 'name'))
-    end
-  end
-
   def form_connected(f)
     content_tag(:div, class: 'row') do
       concat(content_tag(:div, class: 'small-12 medium-2 columns') do
-        concat(retina_thumb_square(current_user))
+        concat(content_tag(:div, retina_thumb_square(current_user), class: 'comment-avatar'))
         concat(pseudo(current_user.username))
       end)
       textarea_and_submit(f, 'medium-10')

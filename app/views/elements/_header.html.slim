@@ -1,4 +1,6 @@
 header
   = render 'elements/menu/dropdown'
 
+.clearfix
+
 = breadcrumbs pretext: t('breadcrumb.here'), separator: '', style: :ol, semantic: true if @breadcrumb_module.enabled? && setting.show_breadcrumb?
