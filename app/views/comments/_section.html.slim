@@ -3,7 +3,7 @@
     .small-12.columns
       - if o.allow_comments?
         .comments-container
-          h3 Commentaires
+          h3 = I18n.t('activerecord.models.comment.other')
           = render 'comments/form'
           = render 'comments/comments'
 
