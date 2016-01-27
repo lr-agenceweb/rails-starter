@@ -25,7 +25,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def author_with_avatar
-    author_avatar + content_tag(:p, link_author, style: 'text-align: center')
+     content_tag(:p, author_avatar + '<br/>' + link_author, style: 'text-align: left')
   end
 
   def allow_comments_status

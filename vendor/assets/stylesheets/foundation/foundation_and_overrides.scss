@@ -361,7 +361,7 @@ $h6-font-size: 1rem;
 // $include-html-nav-classes: $include-html-classes;
 
 // We use this to set the background color for the breadcrumb container.
-$crumb-bg: scale-color($tercery-color, $lightness: 55%);
+$crumb-bg: $white;
 
 // We use these to set the padding around the breadcrumbs.
 // $crumb-padding: rem-calc(9 14 9);
@@ -905,7 +905,7 @@ $orbit-timer-show-progress-bar: false;
 // We use these for the pagination anchor links
 // $pagination-link-pad: rem-calc(1 10 1);
 $pagination-link-font-color: $body-font-color;
-$pagination-link-active-bg: #F2471A;
+$pagination-link-active-bg: $tercery-color;
 
 // We use these for disabled anchor links
 // $pagination-link-unavailable-cursor: default;
@@ -913,7 +913,7 @@ $pagination-link-active-bg: #F2471A;
 // $pagination-link-unavailable-bg-active: transparent;
 
 // We use these for currently selected anchor links
-$pagination-link-current-background: #F2471A;
+$pagination-link-current-background: $tercery-color;
 $pagination-link-current-font-color: $white;
 // $pagination-link-current-font-weight: $font-weight-bold;
 // $pagination-link-current-cursor: default;

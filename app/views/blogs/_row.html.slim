@@ -1,7 +1,19 @@
-article.panel
+article.post-article
   == blog.microdata_meta
 
-  h3 = link_to blog.title, blog_path(blog)
-  div = simple_format(blog.content)
+  header
+    h3
+      = link_to blog.title, blog_path(blog)
+      small<: em = "(#{blog.created_at})"
 
-  = render '/videos/index', resource: blog
+  == blog.loop_hover_has_many_pictures true
+  / = render '/videos/index', resource: blog
+
+  div = blog.content
+
+  footer
+    ul.inline-list
+      li = "#{I18n.t('activerecord.attributes.post.author_with_avatar')}: #{blog.author}"
+
+      - if @comment_module.enabled?
+        li = "#{I18n.t('activerecord.models.comment.other')}: #{blog.comments.validated.count}"
