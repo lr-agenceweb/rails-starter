@@ -8,12 +8,12 @@ footer.footer-container#footer
         - if setting.show_social? && @social_module.enabled?
           h4.social-header-title = I18n.t('social.follow')
           ul.inline-list
-            li = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
+            li = link_to fa_icon('rss'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
 
             - unless @socials_follow.nil?
               - @socials_follow.each do |social_follow|
                 li
-                  = link_to social_follow.decorate.ikon_deco('2x'), social_follow.link, target: :_blank
+                  = link_to social_follow.decorate.ikon_deco, social_follow.link, target: :_blank
 
           - unless @socials_share.nil?
             h4.social-header-title = I18n.t('social.share')

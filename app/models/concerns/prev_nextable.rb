@@ -16,6 +16,14 @@ module PrevNextable
       self.class.where('id > ?', id).online.first
     end
 
+    def fetch_prev_title
+      fetch_prev.title
+    end
+
+    def fetch_next_title
+      fetch_next.title
+    end
+
     def prev?
       !fetch_prev.blank?
     end
