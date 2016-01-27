@@ -147,9 +147,11 @@ class CommentDecorator < ApplicationDecorator
     content_tag(:div, class: 'row') do
       concat(content_tag(:div, class: 'small-12 medium-6 columns') do
         concat(f.input :username)
+      end)
+      concat(content_tag(:div, class: 'small-12 medium-6 columns') do
         concat(f.input :email, as: :email)
       end)
-      textarea_and_submit(f)
+      textarea_and_submit(f, 'small-12')
     end
   end
 
