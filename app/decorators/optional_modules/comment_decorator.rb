@@ -158,7 +158,7 @@ class CommentDecorator < ApplicationDecorator
   def textarea_and_submit(f, klass = 'medium-6')
     concat(content_tag(:div, class: "small-12 #{klass} columns") do
       concat(f.hidden_field :lang, value: params[:locale]) + # Lang
-      concat(f.input :comment, as: :text, label: false, input_html: { class: 'autosize' }) + # Textarea
+      concat(f.input :comment, as: :text, input_html: { class: 'autosize' }) + # Textarea
       concat(f.input :nickname, label: false, input_html: { class: 'hide-for-small-up' }) + # Captcha
       concat(button_tag(class: 'submit-btn text-right tiny right') do # Submit button
         fa_icon('paper-plane')

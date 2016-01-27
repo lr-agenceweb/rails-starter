@@ -406,7 +406,9 @@ fr:
         description_deco: Description
         _destroy: Supprimer ?
       comment:
+        username: Pseudo
         mail: Email
+        comment: Message
         message: Commentaire
         lang: Langue
         link_source: Article concerné
