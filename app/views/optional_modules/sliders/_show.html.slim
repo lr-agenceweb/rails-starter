@@ -1,4 +1,4 @@
-- if (@slider_module.enabled? && !slider.nil? && slider.slides?) || force
+- if (@slider_module.enabled? && !slider.nil? && slider.slides? && slider.online?) || force
   .fotorama data-nav="#{slider.bullet}" data-loop="#{slider.loop}" data-autoplay="#{slider.autoplay == false ? slider.autoplay : slider.time_to_show}" data-keyboard="true" data-shuffle="false" data-transition="#{slider.animate}" data-transitionduration="2500" data-stopautoplayontouch="#{slider.hover_pause}" data-arrows="#{slider.navigation}"
     - slider.slides_online.each_with_index do |slide, index|
       = link_to retina_image_tag(slide, :image, :crop_thumb), slide.self_image_url_by_size(:medium), data: { caption: html_escape_once(slide.decorate.caption) }
