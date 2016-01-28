@@ -375,6 +375,7 @@ fr:
         description_deco: Description
         _destroy: Supprimer ?
       comment:
+        author_with_avatar: Auteur
         username: Pseudo
         mail: Email
         comment: Message

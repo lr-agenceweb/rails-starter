@@ -28,8 +28,10 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
-  def avatar_with_pseudo
-    avatar + pseudo
+  def author_with_avatar
+    content_tag(:div, nil, class: 'author-with-avatar') do
+      concat("#{avatar} <br /> #{pseudo}".html_safe)
+    end
   end
 
   # Email associated to comment
@@ -136,8 +138,10 @@ class CommentDecorator < ApplicationDecorator
   def form_connected(f)
     content_tag(:div, class: 'row') do
       concat(content_tag(:div, class: 'small-12 medium-2 columns') do
-        concat(content_tag(:div, retina_thumb_square(current_user), class: 'comment-avatar'))
-        concat(pseudo(current_user.username))
+        concat(content_tag(:div, nil, class: 'auhtor-with-avatar') do
+          concat(content_tag(:div, retina_thumb_square(current_user), class: 'comment-avatar'))
+          concat(pseudo(current_user.username))
+        end)
       end)
       textarea_and_submit(f, 'medium-10')
     end

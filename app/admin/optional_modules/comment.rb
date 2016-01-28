@@ -25,9 +25,9 @@ ActiveAdmin.register Comment, as: 'PostComment' do
 
   index do
     selectable_column
-    column :avatar
+    column :author_with_avatar
     column :mail
-    column :message
+    # column :message
     column :lang
     column :status
     column :link_and_image_source
@@ -38,7 +38,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
 
   show do
     attributes_table do
-      row :avatar
+      row :author_with_avatar
       row :mail
       row :message
       row :lang
