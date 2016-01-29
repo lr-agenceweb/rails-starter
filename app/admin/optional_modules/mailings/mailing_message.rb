@@ -14,8 +14,8 @@ ActiveAdmin.register MailingMessage do
                 ]
 
   scope I18n.t('all'), :all, default: true
-  scope I18n.t('mailing.sent'), :sent
-  scope I18n.t('mailing.not_sent'), :not_sent
+  scope I18n.t('sent.true'), :sent
+  scope I18n.t('sent.false'), :not_sent
 
   decorate_with MailingMessageDecorator
   config.clear_sidebar_sections!

@@ -3,8 +3,6 @@ fr:
   mailing:
     people: Nouvel utilisateur
     archive: Archivé
-    sent: Envoyé(s)
-    not_sent: Non envoyé(s)
     preview: Prévisualisation du mail à envoyer en %{lang}
     notice_sending: "Le mail est en train d'être envoyé à %{count} personne(s)"
     preview_in_browser: Si vous ne visualisez pas correctement cet email, %{link}
