@@ -10,7 +10,7 @@ class CommentMailer < ApplicationMailer
     @comment.subject = I18n.t('comment.signalled.email.subject', site: @setting.title, locale: I18n.default_locale)
     @content = I18n.t('comment.signalled.email.content', user: @comment.decorate.pseudo_registered_or_guest, locale: I18n.default_locale)
 
-    mail from: @comment.email,
+    mail from: @comment.decorate.email_registered_or_guest,
          subject: @comment.subject do |format|
       format.html
       format.text

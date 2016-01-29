@@ -138,6 +138,14 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
+  def email_registered_or_guest
+    if model.user_id.nil?
+      model.email
+    else
+      model.user_email
+    end
+  end
+
   private
 
   def form_connected(f)
