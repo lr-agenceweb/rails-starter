@@ -205,6 +205,69 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   #
+  # == Signal
+  #
+  test 'should signal comment' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        @request.env['HTTP_REFERER'] = about_path(@about)
+        get :signal, id: @comment_alice, locale: locale.to_s
+        assert assigns(:comment).signalled?
+        assert_redirected_to about_path(@about, locale: locale.to_s)
+      end
+    end
+  end
+
+  test 'should not signal non existant comment' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_raises(ActionController::RoutingError) do
+          get :signal, id: 999999, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'should send email to admin after signalling email' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        clear_deliveries_and_queues
+        assert_no_enqueued_jobs
+        assert ActionMailer::Base.deliveries.empty?
+        @request.env['HTTP_REFERER'] = about_path(@about)
+
+        assert_enqueued_jobs 1 do
+          get :signal, id: @comment_alice, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should signal comment' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+        assert_response :success
+        assert assigns(:comment).signalled?
+      end
+    end
+  end
+
+  test 'AJAX :: should send email to admin after signalling email' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        clear_deliveries_and_queues
+        assert_no_enqueued_jobs
+        assert ActionMailer::Base.deliveries.empty?
+
+        assert_enqueued_jobs 1 do
+          xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  #
   # == Conditionals
   #
   test 'should fetch only validated comments' do
