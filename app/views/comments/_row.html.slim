@@ -8,7 +8,7 @@
 
         .small-9.medium-10.columns
           p
-            == "#{comment.pseudo},"
+            == "#{comment.pseudo_registered_or_guest},"
             span<> = comment.comment_created_at
             - if can? :destroy, comment
               | -
