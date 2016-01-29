@@ -19,6 +19,6 @@
                 = I18n.t('comment.signalled.already_signalled')
             - else
               span.comment-not-signalled<>
-                = link_to I18n.t('comment.signalled.not_signalled'), '#'
+                = link_to I18n.t('comment.signalled.not_signalled'), '#', data: { vex_alert: I18n.t('comment.signalled.alert') }
 
           div = comment.content
