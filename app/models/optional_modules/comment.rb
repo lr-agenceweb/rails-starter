@@ -30,6 +30,8 @@
 class Comment < ActiveRecord::Base
   include Scopable
 
+  attr_accessor :subject
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
 

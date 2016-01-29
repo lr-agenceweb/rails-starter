@@ -53,6 +53,8 @@ class CommentsController < ApplicationController
   def signal
     @comment = Comment.find(params[:id])
     @comment.update_attribute(:signalled, true)
+    CommentJob.set(wait: 3.seconds).perform_later(@comment)
+
     flash.now[:success] = I18n.t('comment.signalled.success')
     respond_to do |format|
       format.html { redirect_to :back }

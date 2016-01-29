@@ -1,4 +1,4 @@
-$('.comment-not-signalled').removeClass().addClass('comment-signalled').html(I18n.t('comment.signalled.already_signalled', { locale: gon.language }))
+$(".comment-not-signalled.number-<%= @comment.id %>").removeClass().addClass('comment-signalled').html(I18n.t('comment.signalled.already_signalled', { locale: gon.language }));
 
 NProgress.done();
 <%= render 'elements/alert' %>

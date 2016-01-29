@@ -6,11 +6,16 @@ fr:
     create_success_with_validate: Votre commentaire sera visible dès que l'administrateur l'aura validé
     captcha: Attrapé par le captcha !
     signalled:
-      scope: Signalé(s)
+      scope: Signalés
       alert: Êtes-vous sûr de vouloir signaler ce commentaire à l'administrateur ?
       already_signalled: Commentaire déjà signalé
       not_signalled: Signaler ce commentaire ?
       success: Merci, le commentaire a bien été signalé à l'administrateur
+      email:
+        subject: Un commentaire a été signalé sur le site %{site}
+        content: Un commentaire écrit par <strong>%{user}</strong> a été signalé comme non approprié sur le site.
+        link: Modérer le commentaire
+        all: Voir tous les commentaires à modérer
     destroy:
       success: Le commentaire a été supprimé.
       error: Une erreur s'est produite au moment de supprimé le commentaire

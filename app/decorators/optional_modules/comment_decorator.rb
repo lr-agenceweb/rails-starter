@@ -130,8 +130,6 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
-  private
-
   def pseudo_registered_or_guest
     if model.user_id.nil?
       model.username
@@ -139,6 +137,8 @@ class CommentDecorator < ApplicationDecorator
       model.user_username
     end
   end
+
+  private
 
   def form_connected(f)
     content_tag(:div, class: 'row') do
