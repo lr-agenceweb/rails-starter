@@ -13,6 +13,10 @@ ActiveAdmin.register MailingMessage do
                   :id, :image, :online, :_destroy
                 ]
 
+  scope I18n.t('all'), :all, default: true
+  scope I18n.t('mailing.sent'), :sent
+  scope I18n.t('mailing.not_sent'), :not_sent
+
   decorate_with MailingMessageDecorator
   config.clear_sidebar_sections!
 

@@ -5,6 +5,9 @@ module Mailable
   extend ActiveSupport::Concern
 
   included do
+    scope :not_sent, -> { where(sent_at: nil) }
+    scope :sent, -> { where.not(sent_at: nil) }
+
     def extract_name_from_email
       email.split('@').first
     end
