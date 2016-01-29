@@ -10,6 +10,7 @@ fr:
       alert: Êtes-vous sûr de vouloir signaler ce commentaire à l'administrateur ?
       already_signalled: Commentaire déjà signalé
       not_signalled: Signaler ce commentaire ?
+      success: Merci, le commentaire a bien été signalé à l'administrateur
     destroy:
       success: Le commentaire a été supprimé.
       error: Une erreur s'est produite au moment de supprimé le commentaire
@@ -26,6 +27,7 @@ en:
       alert: Are-you sure you want to signalled this comment to the administrator ?
       already_signalled: Comment already signalled
       not_signalled: Signal this comment ?
+      success: Thanks, this comment has been signalled to the administrator
     destroy:
       success: The comment has been destroyed.
       error: An error occured when trying to destroy the comment

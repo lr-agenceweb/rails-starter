@@ -34,6 +34,11 @@ Rails.application.routes.draw do
     # Blog
     resources :blogs, only: [:index, :show], concerns: [:paginatable, :commentable]
 
+    # Comment
+    resources :comments, only: [] do
+      get 'signal', on: :member
+    end
+
     # Search
     resources :searches, only: [:index], concerns: [:paginatable] do
       get 'autocomplete', on: :collection

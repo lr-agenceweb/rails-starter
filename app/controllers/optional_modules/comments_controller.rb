@@ -3,7 +3,7 @@
 #
 class CommentsController < ApplicationController
   before_action :comment_module_enabled?
-  before_action :load_commentable
+  before_action :load_commentable, except: :signal
   before_action :set_comment, only: [:destroy]
 
   decorates_assigned :comment, :about, :blog
@@ -48,6 +48,18 @@ class CommentsController < ApplicationController
       flash.now[:error] = I18n.t('comment.destroy.not_allowed')
       respond_action 'forbidden'
     end
+  end
+
+  def signal
+    @comment = Comment.find(params[:id])
+    @comment.update_attribute(:signalled, true)
+    flash.now[:success] = I18n.t('comment.signalled.success')
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { }
+    end
+  rescue ActiveRecord::RecordNotFound
+    raise ActionController::RoutingError, 'Not Found'
   end
 
   private
