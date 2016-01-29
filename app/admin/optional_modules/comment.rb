@@ -8,11 +8,13 @@ ActiveAdmin.register Comment, as: 'PostComment' do
                 :comment,
                 :user_id,
                 :role,
-                :validated
+                :validated,
+                :signalled
 
   scope I18n.t('scope.all'), :all, default: true
   scope I18n.t('active_admin.globalize.language.fr'), :french
   scope I18n.t('active_admin.globalize.language.en'), :english
+  scope I18n.t('comment.signalled'), :signalled
 
   decorate_with CommentDecorator
   config.clear_sidebar_sections!
@@ -23,6 +25,11 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  batch_action :toggle_signalled do |ids|
+    Comment.find(ids).each { |item| item.toggle! :signalled }
+    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+  end
+
   index do
     selectable_column
     column :author_with_avatar
@@ -30,6 +37,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     # column :message
     column :lang
     column :status
+    column :signalled_d
     column :link_and_image_source
     column :created_at
 
@@ -43,6 +51,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
       row :message
       row :lang
       row :status
+      row :signalled_d
       row :link_and_image_source
       row :created_at
     end
@@ -53,5 +62,9 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   #
   controller do
     include Skippable
+
+    def scoped_collection
+      super.includes user: [:role]
+    end
   end
 end

@@ -384,6 +384,8 @@ fr:
         link_source: Article concerné
         link_and_image_source: Article concerné
         status: Statut
+        signalled: Signalé
+        signalled_d: Signalé
         created_at: Créé le
         destroy: Supprimer
       optional_module:

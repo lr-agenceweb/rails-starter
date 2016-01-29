@@ -94,6 +94,11 @@ class CommentDecorator < ApplicationDecorator
     status_tag_deco(I18n.t("validate.#{model.validated}"), color)
   end
 
+  def signalled_d
+    color = model.signalled? ? 'red' : 'green'
+    status_tag_deco(I18n.t("#{model.signalled}"), color)
+  end
+
   # Comment form depending if user is connected or not
   #
   # * *Args*    :

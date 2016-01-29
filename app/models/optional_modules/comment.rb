@@ -9,6 +9,7 @@
 #  comment          :text(65535)
 #  lang             :string(255)
 #  validated        :boolean          default(FALSE)
+#  signalled        :boolean          default(FALSE)
 #  commentable_id   :integer
 #  commentable_type :string(255)
 #  user_id          :integer
@@ -49,6 +50,7 @@ class Comment < ActiveRecord::Base
 
   default_scope { order('created_at DESC') }
   scope :by_user, -> (user_id) { where(user_id: user_id) }
+  scope :signalled, -> { where(signalled: true) }
 
   attr_accessor :nickname
   paginates_per 15
