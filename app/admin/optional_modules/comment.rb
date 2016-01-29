@@ -14,7 +14,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   scope I18n.t('scope.all'), :all, default: true
   scope I18n.t('active_admin.globalize.language.fr'), :french
   scope I18n.t('active_admin.globalize.language.en'), :english
-  scope I18n.t('comment.signalled'), :signalled
+  scope I18n.t('comment.signalled.scope'), :signalled
 
   decorate_with CommentDecorator
   config.clear_sidebar_sections!
