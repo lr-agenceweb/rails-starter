@@ -48,3 +48,8 @@ $ ->
         $this.parents('li.input.boolean').next('div').slideDown()
 
     $('.activeadmin-translations').slideUp() if $('#video_platform_native_informations_input input').is(':checked')
+
+
+  # Spinner loader on create or update resource
+  $('form input[type=submit]').on 'click', (e) ->
+    $(this).parents('ol').append("<li style='margin-left: 10px'><img src='https://media.giphy.com/media/10kTz4r3ishQwU/giphy.gif' alt='loader' height='34' /></li>")
