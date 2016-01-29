@@ -1,7 +1,7 @@
 = "Bonjour #{@setting.name}"
 = "\r\n==============================================\r\n\r\n"
 
-= @content
+= strip_tags(@content)
 
 = "\r\n\r\n==============================================\r\n\r\n"
 = admin_post_comment_url(@comment)
