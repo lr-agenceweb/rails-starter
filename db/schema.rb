@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129144856) do
+ActiveRecord::Schema.define(version: 20160130094400) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -92,6 +92,13 @@ ActiveRecord::Schema.define(version: 20160129144856) do
 
   add_index "categories", ["menu_id"], name: "index_categories_on_menu_id", using: :btree
   add_index "categories", ["optional_module_id"], name: "index_categories_on_optional_module_id", using: :btree
+
+  create_table "comment_settings", force: :cascade do |t|
+    t.boolean  "should_signal", default: true
+    t.boolean  "send_email",    default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string   "title",            limit: 50,    default: ""
