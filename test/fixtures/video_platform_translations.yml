@@ -1,0 +1,17 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+one_fr:
+  <<: *DEFAULTS
+  video_platform_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: fr
+  title: Vidéo de démo
+  description: Je suis une description de test
+
+one_en:
+  <<: *DEFAULTS
+  video_platform_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: en
+  title: Demonstration video
+  description: I am a test description
