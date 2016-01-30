@@ -266,9 +266,7 @@ fr:
         online: En ligne
         status: État
         show_in_footer: Dans le footer
-        show_in_footer_d: Dans le footer
         show_in_header: Dans le menu principal
-        show_in_header_d: Dans le menu principal
         title: Titre
       referencement:
         description: Description
@@ -373,7 +371,6 @@ fr:
         slider_page_name: Slide liée à la page
         status: État
         title: Titre
-        title_deco: Titre
         description: Description
         description_deco: Description
         _destroy: Supprimer ?

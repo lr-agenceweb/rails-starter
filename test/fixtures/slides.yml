@@ -26,6 +26,8 @@
 slide_one:
   attachable: online (Slider)
   online: true
+  title: Title for slide one
+  description: Description for slide one
 
 slide_two:
   attachable: online (Slider)

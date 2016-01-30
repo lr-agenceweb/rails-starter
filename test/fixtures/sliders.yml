@@ -23,7 +23,7 @@
 DEFAULTS: &DEFAULTS
   animate: crossfade
   autoplay: true
-  time_to_show: true
+  time_to_show: 5000
   hover_pause: true
   loop: true
   navigation: true

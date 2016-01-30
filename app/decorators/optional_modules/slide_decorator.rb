@@ -5,6 +5,17 @@ class SlideDecorator < PictureDecorator
   include Draper::LazyHelpers
   delegate_all
 
+  #
+  # == Slide
+  #
+  def description_deco
+    raw(model.description) if description?
+  end
+
+  def slider_page_name
+    model.attachable.category.menu_title
+  end
+
   def caption
     raw(h.content_tag(:div, '', class: 'caption') do
       concat(h.content_tag(:h3, model.title, class: 'caption-title')) if slide.title?
@@ -14,18 +25,6 @@ class SlideDecorator < PictureDecorator
 
   def self_image_has_one_by_size(size = :slide)
     retina_image_tag self, :image, size, data: interchange_self
-  end
-
-  def title_deco
-    model.title if title?
-  end
-
-  def description_deco
-    model.description if description?
-  end
-
-  def slider_page_name
-    model.attachable.category.menu_title
   end
 
   #

@@ -6,10 +6,20 @@ class SliderDecorator < ApplicationDecorator
   include Imageable
   delegate_all
 
+  #
+  # == ActiveAdmin
+  #
+  def title_aa_show
+    "#{I18n.t('activerecord.models.slider.one')} page #{page}"
+  end
+
   def page
     I18n.t("activerecord.models.#{model.category_name.downcase}.one")
   end
 
+  #
+  # == Status tag
+  #
   def autoplay_deco
     status_slider 'autoplay'
   end
@@ -34,12 +44,11 @@ class SliderDecorator < ApplicationDecorator
     "#{model.time_to_show / 1000} #{I18n.t('time.label.seconds')}"
   end
 
+  #
+  # == Options
+  #
   def slider_options
     "animation: #{model.animate}; timer_speed: #{model.time_to_show}; pause_on_hover: #{model.hover_pause}; resume_on_mouseout: true; navigation_arrows: #{model.navigation}; slide_number: false; bullet: #{model.bullet}; circular: #{model.loop}; timer: #{model.autoplay}; swipe: true"
-  end
-
-  def title_aa_show
-    "#{I18n.t('activerecord.models.slider.one')} page #{resource.page}"
   end
 
   def loop_hover_has_many_pictures(size = :slide)
