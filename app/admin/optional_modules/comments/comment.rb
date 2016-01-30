@@ -12,8 +12,8 @@ ActiveAdmin.register Comment, as: 'PostComment' do
                 :signalled
 
   scope I18n.t('scope.all'), :all, default: true
-  scope I18n.t('active_admin.globalize.language.fr'), :french
-  scope I18n.t('active_admin.globalize.language.en'), :english
+  scope I18n.t('active_admin.globalize.language.fr'), :french, if: proc { @locales.length > 1 }
+  scope I18n.t('active_admin.globalize.language.en'), :english, if: proc { @locales.length > 1 }
   scope I18n.t('comment.signalled.scope'), :signalled, if: proc { @comment_setting.should_signal? }
 
   decorate_with CommentDecorator
@@ -34,7 +34,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     selectable_column
     column :author_with_avatar
     column :email_registered_or_guest
-    column :lang
+    column :lang if locales.length > 1
     column :status
     column :signalled_d if comment_setting.should_signal?
     column :link_and_image_source
@@ -48,7 +48,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
       row :author_with_avatar
       row :email_registered_or_guest
       row :message
-      row :lang
+      row :lang if locales.length > 1
       row :status
       row :signalled_d if comment_setting.should_signal?
       row :link_and_image_source
@@ -71,6 +71,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     private
 
     def set_comment_setting
+      @locales = I18n.available_locales
       @comment_setting = CommentSetting.first
     end
   end
