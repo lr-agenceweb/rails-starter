@@ -6,6 +6,7 @@ ActiveAdmin.register CommentSetting do
 
   decorate_with CommentSettingDecorator
   config.clear_sidebar_sections!
+  actions :all, except: [:new]
 
   show title: I18n.t('activerecord.models.comment_setting.one') do
     attributes_table do
