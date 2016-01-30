@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #
 # == Rails
 #
-gem 'rails', '4.2.5'
+gem 'rails', '~> 4.2.5'
 
 #
 # == Database
@@ -76,7 +76,7 @@ gem 'route_translator'
 gem 'globalize', '~> 5.0.0'
 gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize', branch: 'master'
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master'
-gem 'i18n-js', '>= 3.0.0.rc10'
+gem 'i18n-js', '>= 3.0.0.rc12'
 
 #
 # == Map
