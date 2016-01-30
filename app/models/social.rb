@@ -28,7 +28,7 @@ class Social < ActiveRecord::Base
   end
 
   def self.allowed_kind_social_network
-    %w( follow share )
+    [[I18n.t('social.follow'), 'follow'], [I18n.t('social.share'), 'share']]
   end
 
   def self.allowed_font_awesome_ikons
@@ -54,7 +54,7 @@ class Social < ActiveRecord::Base
   validates :kind,
             presence: true,
             allow_blank: true,
-            inclusion: { in: allowed_kind_social_network }
+            inclusion: { in: allowed_kind_social_network.flatten(1) }
   validates :link,
             presence: true, if: proc { |social| social.kind == 'follow' },
             url: true

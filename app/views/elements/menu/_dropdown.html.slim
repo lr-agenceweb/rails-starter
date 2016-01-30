@@ -1,19 +1,25 @@
-.contain-to-grid
-  nav class="top-bar" data-topbar='' role="navigation" aria-label='navigation' itemscope='' itemtype='http://schema.org/SiteNavigationElement' data-options="mobile_show_parent_link:true; custom_back_text"
-    ul class="title-area"
-      li class="name"
-      li class="toggle-topbar menu-icon"
-        a href="#"
-          span Menu
+nav class="top-bar" data-topbar='' role="navigation" aria-label='navigation' itemscope='' itemtype='http://schema.org/SiteNavigationElement' data-options="mobile_show_parent_link:true; custom_back_text"
+  ul.title-area
+    li.name: h1 = link_to @setting.title, root_path
+    li.toggle-topbar.menu-icon
+      a href="#"
+        span Menu
 
-    section class="top-bar-section"
-      ul class="right"
-        - @menu_elements_header.each do |element|
-          li class="#{set_active_class(element.category_name.tableize)} #{element.has_children? ? 'has-dropdown' : ''}"
-            = link_to element.title, element.decorate.menu_link(element.category.name), class: 'l-nav-item-link', itemprop: 'url'
-            - if element.has_children?
-              ul.dropdown
-                - element.children.online.with_page.each do |child|
-                  li class="#{set_active_class(child.category_name.tableize)}"
-                    = link_to child.title, child.decorate.menu_link(child.category_name)
-          li.divider
+  section.top-bar-section
+    ul.right
+      / - if @search_module.enabled?
+      /   li.has-form
+      /     = render 'searches/form'
+
+      - if I18n.available_locales.length > 1
+        li = render 'elements/language'
+
+    ul.left
+      - @menu_elements_header.each do |element|
+        li class="#{set_active_class(element.category_name.tableize)} #{element.has_children? ? 'has-dropdown' : ''}"
+          = link_to element.title, element.decorate.menu_link(element.category.name), class: 'l-nav-item-link', itemprop: 'url'
+          - if element.has_children?
+            ul.dropdown
+              - element.children.online.with_page.each do |child|
+                li class="#{set_active_class(child.category_name.tableize)}"
+                  = link_to child.title, child.decorate.menu_link(child.category_name)

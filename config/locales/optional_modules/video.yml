@@ -6,6 +6,9 @@ fr:
     flash:
       upload_in_progress: Votre vidéo est en train d'être envoyée sur le site. Cela peut prendre beaucoup de temps, soyez patient ;)
 
+    subtitle:
+      explanation: Vous pouvez utiliser le site <a href="%{site}" target="_blank">%{site}</a> afin de générer votre fichier de sous-titre pour votre vidéo.
+
 # English
 en:
   video:

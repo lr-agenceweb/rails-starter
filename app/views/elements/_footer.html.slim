@@ -2,33 +2,22 @@ footer.footer-container#footer
   .upper-footer
     .row
       .small-12.large-4.columns
-        |&nbsp;
         == setting.newsletter(newsletter_user) if @newsletter_module.enabled?
 
-      .small-12.large-4.columns.credentials
-        == "#{setting.about} #{setting.admin_link}"
-
-      .small-12.large-2.columns.socials
+      .small-12.large-4.columns.socials
         - if setting.show_social? && @social_module.enabled?
-          h3 Follow me
+          h4.social-header-title = I18n.t('social.follow')
           ul.inline-list
-            li = link_to fa_icon('rss 2x'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
+            li = link_to fa_icon('rss'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
 
             - unless @socials_follow.nil?
               - @socials_follow.each do |social_follow|
                 li
-                  - ikon = social_follow.title
-                  - ikon = fa_icon "#{social_follow.font_ikon} 2x" if social_follow.decorate.font_ikon?
-                  - ikon = retina_image_tag(social_follow, :ikon, :small) if social_follow.decorate.ikon?
-                  = link_to ikon, social_follow.link, target: :_blank
+                  = link_to social_follow.decorate.ikon_deco, social_follow.link, target: :_blank
 
           - unless @socials_share.nil?
-            h4 Share me
+            h4.social-header-title = I18n.t('social.share')
             = social_share_buttons
-
-      .small-12.large-2.columns
-        p == link_to(setting.logo_footer_site, 'http://www.lr-agenceweb.fr', target: :blank, title: 'L&R Agence web')
-
 
   .lower-footer
     .row

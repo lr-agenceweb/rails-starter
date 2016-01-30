@@ -78,6 +78,10 @@ ActiveAdmin.register Blog do
       blog.user_id = current_user.id
     end
 
+    def scoped_collection
+      super.includes :picture, :user
+    end
+
     def create
       delete_key_before_save
       super

@@ -7,37 +7,47 @@
     padding: 1rem 10px 15px 10px
     background-color: $topbar-bg-color
 
-    .input-wrapper
-      position: relative
+    .newsletter-form
+      .newsletter-form-header
+        display: block
+        text-align: center
 
-      .newsletter_user_email
-        input
-          width: 100%
-          height: auto
-          padding: 5px
-          padding-right: 37px
+      .input-wrapper
+        position: relative
 
-          &:focus
-            outline: none !important
+        .newsletter_user_email
+          input
+            width: 100%
+            height: auto
+            padding: 5px
+            padding-right: 37px
 
-      .submit-with-icon
-        background: none
-        position: absolute
-        top: 1px
-        right: 3px
+            &:focus
+              outline: none !important
 
-        margin: 0
-        padding: 0
-        border: 0
-        outline: none
-        box-shadow: none
+        .submit-with-icon
+          background: none
+          position: absolute
+          top: 1px
+          right: 3px
 
-        color: #000
-        cursor: pointer
+          margin: 0
+          padding: 0
+          border: 0
+          outline: none
+          box-shadow: none
 
-        i
-          font-size: 25px
-          margin-right: 1px
+          color: #000
+          cursor: pointer
+
+          i
+            font-size: 25px
+            margin-right: 1px
+
+    .socials
+      .social-header-title, a
+        color: $white
+        font-size: $h6-font-size
 
   .lower-footer
     padding: 15px

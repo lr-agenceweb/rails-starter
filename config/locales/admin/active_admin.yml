@@ -17,6 +17,7 @@ fr:
         toggle_enabled: Activer / Désactiver
         toggle_validated: Valider / Invalider
         toggle_show_calendar: Activer / Désactiver calendrier pour
+        toggle_signalled: Activer / Désactiver le signalement pour
       flash: Le (les) élement(s) sélectionnés ont bien changé de statut
     action_item:
       edit_heading_page: Modifier l'entête de la page %{page}
@@ -32,7 +33,7 @@ en:
     globalize:
       language:
         en: English
-        fr: Franch
+        fr: French
       translations: Translations
     edit: Edit
     show: Show

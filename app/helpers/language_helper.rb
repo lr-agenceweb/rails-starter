@@ -15,12 +15,12 @@ module LanguageHelper
       link = link_to_unless(current_locale?(locale),
                             I18n.t("active_admin.globalize.language.#{locale}"),
                             params.merge(params_language),
-                            class: 'l-nav-item-link') do |item|
+                            class: '') do |item|
         current_link_language('check', item)
       end
 
       # wrap link in li tag
-      language_menu_html += content_tag(:li, link, class: "#{active_language(locale)} l-nav-item")
+      language_menu_html += content_tag(:li, link, class: "#{active_language(locale)} no-margin-left")
     end
     raw language_menu_html
   end

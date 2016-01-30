@@ -1,4 +1,3 @@
-.row
-  nav.l-language.small-12.columns
-    ul.inline-list.right.no-margin-bottom
-      = language_menu(instance_variable_get("@#{controller_name.underscore.singularize}"))
+nav
+  ul.inline-list.no-margin-bottom
+    = language_menu(instance_variable_get("@#{controller_name.underscore.singularize}"))

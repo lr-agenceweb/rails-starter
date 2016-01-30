@@ -1,19 +1,6 @@
-header.l-header-site.hide-for-print
+header
+  = render 'elements/menu/dropdown'
 
-  .l-header-container
-    = render 'elements/language' if I18n.available_locales.length > 1
+.clearfix
 
-    .row
-      .small-12.medium-4.columns
-        = render 'elements/logo', show_metadata: show_metadata
-
-      .small-12.large-8.columns
-        .row.small-collapse
-          .small-12.medium-6.medium-offset-6.columns
-            = render 'searches/form' if @search_module.enabled?
-
-          .small-12.columns
-            = render 'elements/menu/no_dropdown'
-
-
-    = breadcrumbs pretext: t('breadcrumb.here'), separator: '', style: :ol, semantic: true if @breadcrumb_module.enabled? && setting.show_breadcrumb?
+= breadcrumbs pretext: t('breadcrumb.here'), separator: '', style: :ol, semantic: true if @breadcrumb_module.enabled? && setting.show_breadcrumb?

@@ -66,7 +66,7 @@ ActiveAdmin.register VideoUpload do
       end
 
       column do
-        render 'admin/subtitles/form', f: f
+        render 'admin/shared/subtitles', f: f
       end unless f.object.decorate.category?
     end
 

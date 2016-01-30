@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_legal_notices
-    @legal_notice_category = Category.find_by(name: 'LegalNotice')
+    @legal_notice_category = Category.includes(menu: [:translations]).find_by(name: 'LegalNotice')
   end
 
   def set_host_name

@@ -7,13 +7,21 @@ module PrevNextable
   # For Event object, start_date is used to determine the previous record
   included do
     def fetch_prev
-      return self.class.where('start_date < ? AND id <> ?', start_date, id).online.last if self.class.name == 'Event'
+      return self.class.where('start_date <= ? AND id <> ?', start_date, id).online.last if self.class.name == 'Event'
       self.class.where('id < ?', id).online.last
     end
 
     def fetch_next
-      return self.class.where('start_date > ? AND id <> ?', start_date, id).online.first if self.class.name == 'Event'
+      return self.class.where('start_date >= ? AND id <> ?', start_date, id).online.first if self.class.name == 'Event'
       self.class.where('id > ?', id).online.first
+    end
+
+    def fetch_prev_title
+      fetch_prev.title
+    end
+
+    def fetch_next_title
+      fetch_next.title
     end
 
     def prev?

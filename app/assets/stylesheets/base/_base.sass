@@ -15,8 +15,14 @@ a
 .no-margin-bottom
   margin-bottom: 0
 
+.no-margin-left
+  margin-left: 0 !important
+
 .no-margin
   margin: 0 auto
+
+.video-figure
+  margin: 0 auto 3rem auto
 
 .dtable
   display: table
@@ -26,6 +32,7 @@ a
   .dtcell
     display: table-cell
     vertical-align: middle
+
 
 /* Clearfix */
 .clearfix
@@ -48,6 +55,20 @@ a.button
   top: 20px
   right: 0
 
+
+// Overlay on video play
+#shadow
+  &.night
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 2
+    opacity: .8
+    background-color: #000
+.mejs-container
+  z-index: 3
 
 // Sticky footer
 .wrapper

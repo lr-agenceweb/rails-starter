@@ -1,9 +1,11 @@
 # English
 en:
   search:
+    search: Search
     no_results: No results to show for this request
 
 # French
 fr:
   search:
+    search: Rechercher
     no_results: Il n'y a aucun résultat pour cette recherche

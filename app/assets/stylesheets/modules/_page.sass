@@ -11,3 +11,30 @@
   .pictures.pictures-container
     background-color: $secondary-color
     margin-bottom: 25px
+
+.post-article
+  position: relative
+  margin: 1.5rem 0 3rem 0
+  .media
+  footer
+    border: 1px solid $primary-color
+    padding: 1rem
+
+    .inline-list
+      margin-bottom: 0
+
+.pictures
+  margin-bottom: 1rem
+  img
+    width: 100%
+
+
+// Pagination
+ul.pagination
+  transition: color .3s ease-in
+
+ul.pagination li:hover a,
+ul.pagination li a:focus,
+ul.pagination li:hover button,
+ul.pagination li button:focus
+  color: $white

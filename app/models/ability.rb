@@ -128,8 +128,10 @@ class Ability
       can [:read, :destroy], Comment, user_id: nil
       cannot [:create, :update], Comment
       can :destroy, Comment if @user.super_administrator?
+      can [:read, :update], CommentSetting
+      cannot [:create, :destroy], CommentSetting
     else
-      cannot :manage, Comment
+      cannot :manage, [Comment, CommentSetting]
     end
   end
 

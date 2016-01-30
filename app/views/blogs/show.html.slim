@@ -1,21 +1,5 @@
 - breadcrumb blog
 
 .row
-  .small-12.columns
-
-    article
-      == blog.microdata_meta
-
-      header
-        h2 = blog.title
-        p
-          small
-            = time_tag blog.created_at.to_datetime, blog.created_at
-
-      div == blog.content
-
-      == blog.loop_hover_has_many_pictures true
-      = link_to t('link.back_to', page: @category.menu_title), blogs_path
-
-= render 'elements/prev_next', element: blog if @blog_settings.prev_next?
-= render 'comments/section', o: @blog
+  .small-12.medium-8.medium-centered.columns
+    = render 'blogs/row', blog: blog

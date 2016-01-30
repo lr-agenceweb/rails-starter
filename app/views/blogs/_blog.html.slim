@@ -1,5 +1,5 @@
 .row
-  .small-12.columns
+  .small-12.medium-8.columns
     - if @blogs.blank?
       p = t('blog.no_results')
     - else
@@ -7,5 +7,11 @@
         - @blogs.each do |blog|
           = render 'row', blog: blog
 
-      .row
-        = paginate @blogs
+  .small-12.medium-4.columns
+    aside
+      ul
+        - @blogs.each do |blog|
+          li: h4 == link_to blog.title, blog_path(blog)
+
+.row
+  = paginate @blogs

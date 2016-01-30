@@ -2,9 +2,11 @@
   section.row
     .small-12.columns
       - if o.allow_comments?
-        h3 Commentaires
-        = render 'comments/form'
-        = render 'comments/comments'
+        .comments-container
+          h3 = I18n.t('activerecord.models.comment.other')
+          = render 'comments/form'
+          = render 'comments/comments'
 
       - else
-        p = I18n.t('comment.disabled')
+        .panel.callout
+          p = fa_icon 'ban', text: I18n.t('comment.disabled')

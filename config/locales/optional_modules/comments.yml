@@ -1,15 +1,3 @@
-# English
-en:
-  comment:
-    disabled: Comments are disabled for this article
-    create_success: Your comment was successfully created.
-    create_success_with_validate: Your comment was successfully created. It will appear on website after moderation.
-    captcha: Captcha caught you !
-    destroy:
-      success: The comment has been destroyed.
-      error: An error occured when trying to destroy the comment
-      not_allowed: You are not allowed to destroy this comment
-
 # French
 fr:
   comment:
@@ -17,7 +5,35 @@ fr:
     create_success: Votre commentaire a bien été ajouté.
     create_success_with_validate: Votre commentaire sera visible dès que l'administrateur l'aura validé
     captcha: Attrapé par le captcha !
+    signalled:
+      scope: Signalés
+      alert: Êtes-vous sûr de vouloir signaler ce commentaire à l'administrateur ?
+      already_signalled: Commentaire déjà signalé
+      not_signalled: Signaler ce commentaire ?
+      success: Merci, le commentaire a bien été signalé à l'administrateur
+      email:
+        subject: Un commentaire a été signalé sur le site %{site}
+        content: Un commentaire écrit par <strong>%{user}</strong> a été signalé comme non approprié sur le site.
+        link: Modérer le commentaire
+        all: Voir tous les commentaires à modérer
     destroy:
       success: Le commentaire a été supprimé.
       error: Une erreur s'est produite au moment de supprimé le commentaire
       not_allowed: Vous n'êtes pas autorisé à supprimer ce commentaire
+
+# English
+en:
+  comment:
+    disabled: Comments are disabled for this article
+    create_success: Your comment was successfully created.
+    create_success_with_validate: Your comment was successfully created. It will appear on website after moderation.
+    captcha: Captcha caught you !
+    signalled:
+      alert: Are-you sure you want to signalled this comment to the administrator ?
+      already_signalled: Comment already signalled
+      not_signalled: Signal this comment ?
+      success: Thanks, this comment has been signalled to the administrator
+    destroy:
+      success: The comment has been destroyed.
+      error: An error occured when trying to destroy the comment
+      not_allowed: You are not allowed to destroy this comment

@@ -101,7 +101,7 @@ ActiveAdmin.register Slider do
         f.inputs t('additional') do
           f.input :category_id,
                   as: :select,
-                  collection: Category.except_already_slider,
+                  collection: Category.except_already_slider(f.object.category),
                   include_blank: false
           f.input :online
         end

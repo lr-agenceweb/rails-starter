@@ -1,43 +1,3 @@
-# English
-en:
-  errors:
-    messages:
-      email_format: Your email is invalid ;)
-
-  activerecord:
-    errors:
-      models:
-        newsletter_user:
-          attributes:
-            email:
-              blank: Don't forget your email address ;)
-              taken: This email is not avalaible :(
-        guest_book:
-          attributes:
-            email:
-              blank: Don't forget your email address ;)
-              taken: This email is not avalaible :(
-    models:
-      home:
-        one: Home
-        other: Homes
-      category:
-        one: Page
-        other: Pages
-      string_box:
-        one: Custom content
-        other: Custom contents
-      post_comment:
-        one: Comment
-        other: Comments
-      comment:
-        one: Comment
-        other: Comments
-
-    attributes:
-      adult:
-        adult_validated: I attest to be an adult
-
 # French
 fr:
   errors:
@@ -82,6 +42,15 @@ fr:
               blank: N'oubliez pas de renseigner votre nom ;)
             message:
               blank: N'oubliez pas de renseigner votre message ;)
+        comment:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+            username:
+              blank: N'oubliez pas de renseigner votre pseudo ;)
+            comment:
+              blank: N'oubliez pas de saisir votre commentaire ;)
+
     models:
       user:
         one: Utilisateur
@@ -149,6 +118,9 @@ fr:
       comment:
         one: Commentaire
         other: Commentaires
+      comment_setting:
+        one: Commentaire configuration
+        other: Commentaires configuration
       post_comment:
         one: Commentaire
         other: Commentaires
@@ -272,6 +244,7 @@ fr:
         last_sign_in_at: Dernière connexion
         created_at: Inscrit depuis
         avatar: Avatar
+        image_avatar: Avatar
         delete_avatar: Supprimer avatar
         status: Rôle
       category:
@@ -384,11 +357,9 @@ fr:
         _destroy: Supprimer ?
       video_setting:
         video_platform: Vidéos depuis platformes en ligne
-        video_platform_d: Vidéos depuis platformes en ligne
         video_upload: Vidéos mises en ligne depuis le site
-        video_upload_d: Vidéos mises en ligne depuis le site
         video_background: Vidéos d'arrière plan
-        video_background_d: Vidéos d'arrière plan
+        turn_off_the_light: Assombrir l'arrière-plan ?
       video_subtitle:
         subtitle_fr: Sous-titres français
         subtitle_en: Sous-titres anglais
@@ -407,13 +378,22 @@ fr:
         description_deco: Description
         _destroy: Supprimer ?
       comment:
+        author_with_avatar: Auteur
+        username: Pseudo
         mail: Email
+        comment: Message
         message: Commentaire
         lang: Langue
         link_source: Article concerné
         link_and_image_source: Article concerné
         status: Statut
+        signalled: Signalé
+        signalled_d: Signalé
         created_at: Créé le
+        destroy: Supprimer
+      comment_setting:
+        should_signal: Signaler les commentaires
+        send_email: Envoyer mail après signalement
       optional_module:
         name: Nom
         name_deco: Nom

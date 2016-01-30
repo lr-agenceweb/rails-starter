@@ -13,6 +13,10 @@ ActiveAdmin.register MailingMessage do
                   :id, :image, :online, :_destroy
                 ]
 
+  scope I18n.t('all'), :all, default: true
+  scope I18n.t('sent.true'), :sent
+  scope I18n.t('sent.false'), :not_sent
+
   decorate_with MailingMessageDecorator
   config.clear_sidebar_sections!
 
@@ -58,6 +62,10 @@ ActiveAdmin.register MailingMessage do
     include NewsletterHelper
 
     before_action :redirect_to_dashboard, only: [:send_mailing_message]
+
+    def scoped_collection
+      super.includes :picture, :translations
+    end
 
     def create
       super do |success, _failure|

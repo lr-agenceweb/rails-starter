@@ -1,6 +1,6 @@
 .small-12.columns
   h3 = video.title if video.title?
-  figure.flex-video
+  figure.video-figure
     video.mediaelement id="video_#{index}" data-autoplay="#{video.video_autoplay?}" data-mute="#{video.video_mute?}" data-controls="#{video.video_controls?}" data-loop="#{video.video_loop?}" poster="#{video.video_file.url(:preview)}"
       source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
       source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
