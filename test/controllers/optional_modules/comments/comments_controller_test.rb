@@ -253,7 +253,6 @@ class CommentsControllerTest < ActionController::TestCase
         assert_no_enqueued_jobs
         assert ActionMailer::Base.deliveries.empty?
         @request.env['HTTP_REFERER'] = about_path(@about)
-
         assert_enqueued_jobs 0 do
           get :signal, id: @comment_alice, locale: locale.to_s
         end
@@ -272,8 +271,10 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
         @request.env['HTTP_REFERER'] = about_path(@about)
 
-        assert_enqueued_jobs 0 do
-          get :signal, id: @comment_alice, locale: locale.to_s
+        assert_raises(ActionController::RoutingError) do
+          assert_enqueued_jobs 0 do
+            get :signal, id: @comment_alice, locale: locale.to_s
+          end
         end
       end
     end
@@ -330,8 +331,10 @@ class CommentsControllerTest < ActionController::TestCase
         assert_no_enqueued_jobs
         assert ActionMailer::Base.deliveries.empty?
 
-        assert_enqueued_jobs 0 do
-          xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+        assert_raises(ActionController::RoutingError) do
+          assert_enqueued_jobs 0 do
+            xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+          end
         end
       end
     end

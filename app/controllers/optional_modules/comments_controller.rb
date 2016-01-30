@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   before_action :comment_module_enabled?
   before_action :load_commentable, except: :signal
   before_action :set_comment, only: [:destroy]
-  before_action :set_comment_setting, only: [:signal]
+  before_action :set_comment_setting
 
   decorates_assigned :comment, :about, :blog
 
@@ -52,13 +52,12 @@ class CommentsController < ApplicationController
   end
 
   def signal
+    fail ActionController::RoutingError, 'Not Found' unless @comment_setting.should_signal?
     @comment = Comment.find(params[:id])
     @comment.update_attribute(:signalled, true)
 
-    if @comment_setting.should_signal?
-      CommentJob.set(wait: 3.seconds).perform_later(@comment) if @comment_setting.send_email?
-      flash.now[:success] = I18n.t('comment.signalled.success')
-    end
+    CommentJob.set(wait: 3.seconds).perform_later(@comment) if @comment_setting.send_email?
+    flash.now[:success] = I18n.t('comment.signalled.success')
 
     respond_to do |format|
       format.html { redirect_to :back }
