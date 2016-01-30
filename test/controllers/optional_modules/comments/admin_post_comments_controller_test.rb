@@ -20,6 +20,12 @@ module Admin
       assert_response :success
     end
 
+    test 'should get index page with signalled option disabled' do
+      @comment_setting.update_attribute(:should_signal, false)
+      get :index
+      assert_response :success
+    end
+
     test 'should get show page if logged in' do
       get :show, id: @comment
       assert_response :success
@@ -166,6 +172,7 @@ module Admin
       @comment_administrator = comments(:two)
       @comment_subscriber = comments(:three)
       @comment_module = optional_modules(:comment)
+      @comment_setting = comment_settings(:one)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

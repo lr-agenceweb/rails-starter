@@ -14,7 +14,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   scope I18n.t('scope.all'), :all, default: true
   scope I18n.t('active_admin.globalize.language.fr'), :french
   scope I18n.t('active_admin.globalize.language.en'), :english
-  scope I18n.t('comment.signalled.scope'), :signalled
+  scope I18n.t('comment.signalled.scope'), :signalled, if: proc { @comment_setting.should_signal? }
 
   decorate_with CommentDecorator
   config.clear_sidebar_sections!
@@ -34,10 +34,9 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     selectable_column
     column :author_with_avatar
     column :mail
-    # column :message
     column :lang
     column :status
-    column :signalled_d
+    column :signalled_d if comment_setting.should_signal?
     column :link_and_image_source
     column :created_at
 
@@ -51,7 +50,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
       row :message
       row :lang
       row :status
-      row :signalled_d
+      row :signalled_d if comment_setting.should_signal?
       row :link_and_image_source
       row :created_at
     end
@@ -63,8 +62,16 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   controller do
     include Skippable
 
+    before_action :set_comment_setting, only: [:index, :show]
+
     def scoped_collection
       super.includes user: [:role]
+    end
+
+    private
+
+    def set_comment_setting
+      @comment_setting = CommentSetting.first
     end
   end
 end
