@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
   before_action :comment_module_enabled?
   before_action :load_commentable, except: :signal
   before_action :set_comment, only: [:destroy]
+  before_action :set_comment_setting, only: [:signal]
 
   decorates_assigned :comment, :about, :blog
 
@@ -53,9 +54,12 @@ class CommentsController < ApplicationController
   def signal
     @comment = Comment.find(params[:id])
     @comment.update_attribute(:signalled, true)
-    CommentJob.set(wait: 3.seconds).perform_later(@comment)
 
-    flash.now[:success] = I18n.t('comment.signalled.success')
+    if @comment_setting.should_signal?
+      CommentJob.set(wait: 3.seconds).perform_later(@comment) if @comment_setting.send_email?
+      flash.now[:success] = I18n.t('comment.signalled.success')
+    end
+
     respond_to do |format|
       format.html { redirect_to :back }
       format.js { }
@@ -69,6 +73,10 @@ class CommentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = @commentable.comments.find(params[:id])
+  end
+
+  def set_comment_setting
+    @comment_setting = CommentSetting.first
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

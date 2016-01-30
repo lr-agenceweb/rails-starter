@@ -243,6 +243,42 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should not send email to admin if send_email is disabled' do
+    @comment_setting.update_attribute(:send_email, false)
+    assert @comment_setting.should_signal?
+    assert_not @comment_setting.send_email?
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        clear_deliveries_and_queues
+        assert_no_enqueued_jobs
+        assert ActionMailer::Base.deliveries.empty?
+        @request.env['HTTP_REFERER'] = about_path(@about)
+
+        assert_enqueued_jobs 0 do
+          get :signal, id: @comment_alice, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'should not send email to admin if should_signal disabled but send_email is enabled' do
+    @comment_setting.update_attribute(:should_signal, false)
+    assert_not @comment_setting.should_signal?
+    assert @comment_setting.send_email?
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        clear_deliveries_and_queues
+        assert_no_enqueued_jobs
+        assert ActionMailer::Base.deliveries.empty?
+        @request.env['HTTP_REFERER'] = about_path(@about)
+
+        assert_enqueued_jobs 0 do
+          get :signal, id: @comment_alice, locale: locale.to_s
+        end
+      end
+    end
+  end
+
   test 'AJAX :: should signal comment' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
@@ -261,6 +297,40 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
 
         assert_enqueued_jobs 1 do
+          xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should not send email to admin if send_email is disabled' do
+    @comment_setting.update_attribute(:send_email, false)
+    assert @comment_setting.should_signal?
+    assert_not @comment_setting.send_email?
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        clear_deliveries_and_queues
+        assert_no_enqueued_jobs
+        assert ActionMailer::Base.deliveries.empty?
+
+        assert_enqueued_jobs 0 do
+          xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should not send email to admin if should_signal disabled but send_email is enabled' do
+    @comment_setting.update_attribute(:should_signal, false)
+    assert_not @comment_setting.should_signal?
+    assert @comment_setting.send_email?
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        clear_deliveries_and_queues
+        assert_no_enqueued_jobs
+        assert ActionMailer::Base.deliveries.empty?
+
+        assert_enqueued_jobs 0 do
           xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
         end
       end
@@ -303,6 +373,7 @@ class CommentsControllerTest < ActionController::TestCase
   def initialize_test
     @locales = I18n.available_locales
     @about = posts(:about_2)
+    @comment_setting = comment_settings(:one)
 
     @super_administrator = users(:anthony)
     @administrator = users(:bob)
