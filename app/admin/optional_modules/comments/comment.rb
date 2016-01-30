@@ -33,7 +33,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   index do
     selectable_column
     column :author_with_avatar
-    column :mail
+    column :email_registered_or_guest
     column :lang
     column :status
     column :signalled_d if comment_setting.should_signal?
@@ -46,7 +46,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   show do
     attributes_table do
       row :author_with_avatar
-      row :mail
+      row :email_registered_or_guest
       row :message
       row :lang
       row :status
