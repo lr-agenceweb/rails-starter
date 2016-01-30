@@ -526,6 +526,12 @@ Comment.create!(
 )
 
 #
+# == Comment Setting
+#
+puts 'Creating Comment Setting'
+CommentSetting.create!()
+
+#
 # == Event article
 #
 puts 'Creating Event article'
