@@ -140,5 +140,14 @@ module ActiveSupport
       assert_template :maintenance
       assert_template layout: :maintenance
     end
+
+    # Mails deliveries
+    def clear_deliveries_and_queues
+      clear_enqueued_jobs
+      clear_performed_jobs
+      ActionMailer::Base.deliveries.clear
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+    end
   end # TestCase
 end

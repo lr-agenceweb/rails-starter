@@ -8,10 +8,19 @@
 
         .small-9.medium-10.columns
           p
-            == "#{comment.pseudo},"
+            == "#{comment.pseudo_registered_or_guest},"
             span<> = comment.comment_created_at
             - if can? :destroy, comment
               | -
-              span.comment-destroy< = link_to I18n.t('activerecord.attributes.comment.destroy'), send("#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment), method: :delete, remote: true, data: { confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.comment.one')) }
+              span.comment-destroy<> = link_to I18n.t('activerecord.attributes.comment.destroy'), send("#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment), method: :delete, remote: true, data: { confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.comment.one')) }
+
+            - if @comment_setting.should_signal?
+              | -
+              - if comment.signalled?
+                span.comment-signalled<>
+                  = I18n.t('comment.signalled.already_signalled')
+              - else
+                span.comment-not-signalled<> class="number-#{comment.id}"
+                  = link_to I18n.t('comment.signalled.not_signalled'), signal_comment_path(comment), method: :get, remote: true, data: { confirm: I18n.t('comment.signalled.alert') }
 
           div = comment.content

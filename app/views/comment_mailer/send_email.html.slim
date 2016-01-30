@@ -1,0 +1,43 @@
+br
+
+p = "Bonjour #{@setting.name},"
+
+p == @content
+
+br
+
+p.text-center
+  <!--[if mso]>
+    br
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{admin_post_comment_url(@comment)}" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="8%" stroke="f" fillcolor="#0c708d">
+      <w:anchorlock/>
+      <center>
+    <![endif]-->
+        = link_to I18n.t('comment.signalled.email.link'), admin_post_comment_url(@comment), target: :blank, style: 'background-color:#0c708d;', class: 'btn-style weight-500'
+        </a>
+    <!--[if mso]>
+      </center>
+    </v:roundrect>
+<![endif]-->
+
+br
+
+p.text-center ou
+
+
+p.text-center
+  <!--[if mso]>
+    br
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{admin_post_comments_url(scope: 'signales')}" style="height:40px;v-text-anchor:middle;width:240px;" arcsize="8%" stroke="f" fillcolor="#ee732a">
+      <w:anchorlock/>
+      <center>
+    <![endif]-->
+        = link_to I18n.t('comment.signalled.email.all'), admin_post_comments_url(scope: 'signales'), target: :blank, style: 'background-color:#ee732a; width: 240px', class: 'btn-style weight-500'
+        </a>
+    <!--[if mso]>
+      </center>
+    </v:roundrect>
+<![endif]-->
+
+
+br

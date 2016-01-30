@@ -53,3 +53,12 @@ $ ->
   # Spinner loader on create or update resource
   $('form input[type=submit]').on 'click', (e) ->
     $(this).parents('ol').append("<li style='margin-left: 10px'><img src='https://media.giphy.com/media/10kTz4r3ishQwU/giphy.gif' alt='loader' height='34' /></li>")
+
+  # CommentSetting :: hide send_email if should_signal is not checked
+  if $('#comment_setting_should_signal_input').length
+    $this = $('#comment_setting_should_signal_input').find('input')
+    $nextLi = $this.parent().parent().next()
+    $nextLi.hide() unless $this.is(':checked')
+
+    $this.on 'click', (e) ->
+      if $this.is(':checked') then $nextLi.slideDown() else $nextLi.slideUp()

@@ -9,6 +9,7 @@
 #  comment          :text(65535)
 #  lang             :string(255)
 #  validated        :boolean          default(FALSE)
+#  signalled        :boolean          default(FALSE)
 #  commentable_id   :integer
 #  commentable_type :string(255)
 #  user_id          :integer
@@ -29,10 +30,10 @@
 class Comment < ActiveRecord::Base
   include Scopable
 
+  attr_accessor :subject, :nickname
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
-
-  delegate :username, :email, to: :user, prefix: true, allow_nil: true
 
   validates :username,
             allow_blank: true,
@@ -49,7 +50,9 @@ class Comment < ActiveRecord::Base
 
   default_scope { order('created_at DESC') }
   scope :by_user, -> (user_id) { where(user_id: user_id) }
+  scope :signalled, -> { where(signalled: true) }
 
-  attr_accessor :nickname
   paginates_per 15
+
+  delegate :username, :email, to: :user, prefix: true, allow_nil: true
 end

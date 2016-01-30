@@ -262,13 +262,5 @@ module Admin
       @super_administrator = users(:anthony)
       sign_in @administrator
     end
-
-    def clear_deliveries_and_queues
-      clear_enqueued_jobs
-      clear_performed_jobs
-      ActionMailer::Base.deliveries.clear
-      assert_no_enqueued_jobs
-      assert ActionMailer::Base.deliveries.empty?
-    end
   end
 end

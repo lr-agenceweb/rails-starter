@@ -118,6 +118,9 @@ fr:
       comment:
         one: Commentaire
         other: Commentaires
+      comment_setting:
+        one: Commentaire configuration
+        other: Commentaires configuration
       post_comment:
         one: Commentaire
         other: Commentaires
@@ -384,8 +387,13 @@ fr:
         link_source: Article concerné
         link_and_image_source: Article concerné
         status: Statut
+        signalled: Signalé
+        signalled_d: Signalé
         created_at: Créé le
         destroy: Supprimer
+      comment_setting:
+        should_signal: Signaler les commentaires
+        send_email: Envoyer mail après signalement
       optional_module:
         name: Nom
         name_deco: Nom
