@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   end
 
   concern :commentable do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy] do
+      get 'reply', on: :member
+    end
   end
 
   #

@@ -4,10 +4,14 @@
 class CommentsController < ApplicationController
   before_action :comment_module_enabled?
   before_action :load_commentable, except: :signal
-  before_action :set_comment, only: [:destroy]
+  before_action :set_comment, only: [:reply, :destroy]
   before_action :set_comment_setting
 
   decorates_assigned :comment, :about, :blog
+
+  def reply
+    @comment = Comment.new(parent_id: params[:id])
+  end
 
   # POST /comments
   # POST /comments.json
@@ -80,12 +84,12 @@ class CommentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
-    params.require(:comment).permit(:username, :email, :title, :comment, :lang, :user_id, :nickname)
+    params.require(:comment).permit(:username, :email, :title, :comment, :lang, :user_id, :nickname, :parent_id)
   end
 
   def load_commentable
     klass = [About, Blog].detect { |c| params["#{c.name.underscore}_id"] }
-    @commentable = klass.find(params["#{klass.name.underscore}_id"])
+    @commentable = klass.includes(:user).find(params["#{klass.name.underscore}_id"])
     @category = Category.find_by(name: klass.model_name.to_s)
     @controller_name = klass.name.underscore.pluralize
     redirect_to root_path unless @commentable.allow_comments?

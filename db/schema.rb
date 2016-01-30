@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130094400) do
+ActiveRecord::Schema.define(version: 20160130210316) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20160130094400) do
     t.string   "lang",             limit: 255
     t.boolean  "validated",                      default: false
     t.boolean  "signalled",                      default: false
+    t.string   "ancestry",         limit: 255
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
     t.integer  "user_id",          limit: 4
@@ -116,6 +117,7 @@ ActiveRecord::Schema.define(version: 20160130094400) do
     t.datetime "updated_at",                                          null: false
   end
 
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree

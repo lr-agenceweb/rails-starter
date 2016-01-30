@@ -25,12 +25,25 @@
   .comment-author
     opacity: .8
 
-  .comment-destroy, .comment-not-signalled, .comment-signalled
+  .comment-destroy, .comment-not-signalled, .comment-signalled, .comment-reply
     text-decoration: underline
     font-size: 11px
+
+  .comment-destroy a
+    color: $warning-color
 
   .comment-signalled
     text-decoration: none
 
 .auhtor-with-avatar,
   text-align: center
+
+
+.comment-highlight
+  background-color: rgba($success-color, .3) !important
+
+.nested_messages
+  margin-left: 50px
+
+.nested_messages .nested_messages .nested_messages
+  margin-left: 0

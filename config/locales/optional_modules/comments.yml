@@ -5,6 +5,8 @@ fr:
     create_success: Votre commentaire a bien été ajouté.
     create_success_with_validate: Votre commentaire sera visible dès que l'administrateur l'aura validé
     captcha: Attrapé par le captcha !
+    reply:
+      label: Répondre
     signalled:
       scope: Signalés
       alert: Êtes-vous sûr de vouloir signaler ce commentaire à l'administrateur ?
@@ -28,6 +30,8 @@ en:
     create_success: Your comment was successfully created.
     create_success_with_validate: Your comment was successfully created. It will appear on website after moderation.
     captcha: Captcha caught you !
+    reply:
+      label: Reply
     signalled:
       alert: Are-you sure you want to signalled this comment to the administrator ?
       already_signalled: Comment already signalled

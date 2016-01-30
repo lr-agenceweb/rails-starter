@@ -1,0 +1,25 @@
+- if @comment_module.enabled?
+  section.row
+    .small-12.medium-9.medium-centered.columns
+
+      article.post-article
+        == @commentable.decorate.microdata_meta
+
+        header
+          h3
+            = link_to @commentable.decorate.title, send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
+            small<: em
+              = "(#{@commentable.decorate.created_at})"
+
+        div == @commentable.decorate.content
+
+      - if @commentable.allow_comments?
+        .comments-container
+          .comments
+            = nested_messages @comment.ancestors.arrange(order: :created_at)
+
+          = render 'comments/form'
+
+.row
+  .small-12.medium-9.medium-centered.columns
+    = link_to I18n.t('link.back_to_article', article: @commentable.title), send("#{@commentable.class.name.underscore.singularize}_path", @commentable)

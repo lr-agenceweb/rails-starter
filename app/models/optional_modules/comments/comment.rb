@@ -10,6 +10,7 @@
 #  lang             :string(255)
 #  validated        :boolean          default(FALSE)
 #  signalled        :boolean          default(FALSE)
+#  ancestry         :string(255)
 #  commentable_id   :integer
 #  commentable_type :string(255)
 #  user_id          :integer
@@ -19,6 +20,7 @@
 #
 # Indexes
 #
+#  index_comments_on_ancestry          (ancestry)
 #  index_comments_on_commentable_id    (commentable_id)
 #  index_comments_on_commentable_type  (commentable_type)
 #  index_comments_on_user_id           (user_id)
@@ -31,6 +33,8 @@ class Comment < ActiveRecord::Base
   include Scopable
 
   attr_accessor :subject, :nickname
+
+  has_ancestry
 
   belongs_to :commentable, polymorphic: true
   belongs_to :user

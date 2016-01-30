@@ -1,5 +1,4 @@
 div#comments.comments
-  - @comments.each do |comment|
-    = render 'comments/row', comment: comment
+  = nested_messages @full_comments.arrange(order: :created_at)
 
 = paginate @comments

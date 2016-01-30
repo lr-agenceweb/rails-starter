@@ -1,5 +1,9 @@
 <% unless @setting.should_validate %>
-  $('.comments').prepend("<%= j render partial: 'comments/row', locals: { comment: comment } %>");
+  <% if comment.parent_id.nil? %>
+    $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
+  <% else %>
+    $("#comment-<%= comment.parent_id %>").after("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
+  <% end %>
 <% end %>
 
 $('#comment_username').val('');
@@ -8,5 +12,5 @@ $('#comment_comment').val('');
 
 NProgress.done();
 
-<%= render 'elements/alert' %>
-<%= render 'elements/scroll_to' %>
+<% # render 'elements/alert' %>
+<% # render 'elements/scroll_to' %>
