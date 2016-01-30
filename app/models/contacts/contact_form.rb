@@ -9,9 +9,9 @@ class ContactForm
 
   validates :name,
             presence: { message: I18n.t('activerecord.errors.models.contact_form.attributes.name.blank') }
-  validates :message,
-            presence: { message: I18n.t('activerecord.errors.models.contact_form.attributes.message.blank') }
   validates :email,
             presence: { message: I18n.t('activerecord.errors.models.contact_form.attributes.email.blank') },
             email_format: true
+  validates :message,
+            presence: { message: I18n.t('activerecord.errors.models.contact_form.attributes.message.blank') }
 end

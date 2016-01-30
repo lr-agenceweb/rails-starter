@@ -4,13 +4,10 @@ require 'test_helper'
 # == ContactForm Mailer test class
 #
 class ContactFormMailerTest < ActionMailer::TestCase
+  setup :initialize_test
+
   test 'should message me' do
-    msg = ContactForm.new(
-      name: 'cristiano',
-      email: 'cristiano@ronaldo.pt',
-      message: 'Hello from the internet'
-    )
-    email = ContactFormMailer.message_me(msg).deliver_now
+    email = ContactFormMailer.message_me(@message).deliver_now
 
     refute ActionMailer::Base.deliveries.empty?
     assert_equal ['demo@rails-starter.com'], email.to
@@ -21,12 +18,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
   end
 
   test 'should send copy of email contact to sender' do
-    msg = ContactForm.new(
-      name: 'cristiano',
-      email: 'cristiano@ronaldo.pt',
-      message: 'Hello from the internet'
-    )
-    email = ContactFormMailer.send_copy(msg).deliver_now
+    email = ContactFormMailer.send_copy(@message).deliver_now
 
     refute ActionMailer::Base.deliveries.empty?
     assert_equal ['cristiano@ronaldo.pt'], email.to
@@ -34,5 +26,15 @@ class ContactFormMailerTest < ActionMailer::TestCase
     assert_equal 'Copie de votre message de contact envoyé à Rails Starter', email.subject
     # assert_equal 'Hello from the internet', email.text_part.body.to_s
     # assert_equal 'Hello from the internet', email.html_part.body.to_s
+  end
+
+  private
+
+  def initialize_test
+    @message = ContactForm.new(
+      name: 'cristiano',
+      email: 'cristiano@ronaldo.pt',
+      message: 'Hello from the internet'
+    )
   end
 end

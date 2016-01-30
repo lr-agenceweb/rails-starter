@@ -5,8 +5,10 @@ module Mailable
   extend ActiveSupport::Concern
 
   included do
-    scope :not_sent, -> { where(sent_at: nil) }
-    scope :sent, -> { where.not(sent_at: nil) }
+    unless name == 'ContactForm' # class including Mailable
+      scope :not_sent, -> { where(sent_at: nil) }
+      scope :sent, -> { where.not(sent_at: nil) }
+    end
 
     def extract_name_from_email
       email.split('@').first
