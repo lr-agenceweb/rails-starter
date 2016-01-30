@@ -27,8 +27,8 @@ ActiveAdmin.register Menu do
   index do
     column :title
     column :status
-    column :show_in_header_d
-    column :show_in_footer_d
+    column :show_in_header
+    column :show_in_footer
     actions
   end
 
@@ -36,8 +36,8 @@ ActiveAdmin.register Menu do
     attributes_table do
       row :title
       row :status
-      row :show_in_header_d
-      row :show_in_footer_d
+      row :show_in_header
+      row :show_in_footer
     end
   end
 
