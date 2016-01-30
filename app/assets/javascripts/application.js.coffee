@@ -26,6 +26,7 @@
 #= require fullcalendar
 #= require fullcalendar/lang/fr
 #= require jquery.autosize
+#= require jquery.autosize.initializer
 #= require globals/_functions
 #= require modules/responsive_menu
 #= require modules/autocomplete_search
@@ -43,7 +44,7 @@
 #= require plugins/cookie_cnil
 
 $(document).on 'ready page:load page:restore', ->
-  $('.autosize').autosize()
+  # $('.autosize').autosize()
 
   $('.magnific-popup').magnificPopup
     type: 'image'
