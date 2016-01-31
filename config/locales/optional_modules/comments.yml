@@ -22,6 +22,9 @@ fr:
       success: Le commentaire a été supprimé.
       error: Une erreur s'est produite au moment de supprimé le commentaire
       not_allowed: Vous n'êtes pas autorisé à supprimer ce commentaire
+    seo:
+      title: Réponse à un commentaire sur l'article "%{article}"
+      description: Page permettant à un utilisateur de répondre à un commentaire d'un internaute.
 
 # English
 en:
@@ -41,3 +44,6 @@ en:
       success: The comment has been destroyed.
       error: An error occured when trying to destroy the comment
       not_allowed: You are not allowed to destroy this comment
+    seo:
+      title: Reply to a comment on the "%{article}" article
+      description: Page allowing a user to reply to a comment by another user.

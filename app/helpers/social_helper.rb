@@ -68,6 +68,14 @@ module SocialHelper
                   }
   end
 
+  def seo_tag_custom(title = '', description = '')
+    desc_seo = html_escape_once(sanitize_and_truncate(description))
+
+    set_meta_tags title: title,
+                  description: desc_seo,
+                  keywords: desc_seo.split(' ').join(',')
+  end
+
   # Social share buttons links
   #
   # * *Args*    :

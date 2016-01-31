@@ -68,6 +68,8 @@ class CommentsController < ApplicationController
   def reply
     fail ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token]
     @comment = @commentable.comments.new(parent_id: params[:id])
+    @asocial = true
+    seo_tag_custom I18n.t('comment.seo.title', article: @commentable.title), I18n.t('comment.seo.description')
   end
 
   private
