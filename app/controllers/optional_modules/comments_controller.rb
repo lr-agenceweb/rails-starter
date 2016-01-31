@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
   before_action :comment_module_enabled?
   before_action :load_commentable
   before_action :set_comment, only: [:reply, :signal, :destroy]
+  before_action :redirect_to_back_after_destroy, only: [:destroy]
   before_action :set_comment_setting
 
   decorates_assigned :comment, :about, :blog
@@ -35,9 +36,6 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     if can? :destroy, @comment
-      @comment_children = @comment.has_children? ? @comment.descendant_ids : []
-      @redirect_to_back = @comment.descendant_ids.include?(params[:current_comment_id].to_i) || @comment.root?
-      @show_page = send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
       if @comment.destroy
         flash.now[:error] = nil
         flash.now[:success] = I18n.t('comment.destroy.success')
@@ -109,5 +107,11 @@ class CommentsController < ApplicationController
 
   def comment_module_enabled?
     not_found unless @comment_module.enabled?
+  end
+
+  def redirect_to_back_after_destroy
+    @comment_children = @comment.has_children? ? @comment.descendant_ids : []
+    @show_page = send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
+    @redirect_to_back = (@comment.descendant_ids.include?(params[:current_comment_id].to_i) || @comment.root? || @comment.id == params[:current_comment_id].to_i) && params[:current_comment_action] == 'reply'
   end
 end

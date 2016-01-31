@@ -27,6 +27,6 @@
             - if can? :destroy, comment
               | -
               span.comment-destroy<>
-                = link_to I18n.t('activerecord.attributes.comment.destroy'), send("#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment, current_comment_id: params[:id]), method: :delete, remote: true, data: { confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.comment.one')) }
+                = link_to I18n.t('activerecord.attributes.comment.destroy'), send("#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment, current_comment_id: params[:id], current_comment_action: params[:action]), method: :delete, remote: true, data: { confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.comment.one')) }
 
           div = comment.content
