@@ -1,1 +1,2 @@
 $("#comment-<%= @comment.id %>").slideUp();
+$('.comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
