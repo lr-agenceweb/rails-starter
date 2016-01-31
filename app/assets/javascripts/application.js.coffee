@@ -57,6 +57,5 @@ $(document).on 'ready page:load page:restore', ->
     $this = $(this)
 
     window.ClientSideValidations.callbacks.form.pass = ($element, callback) ->
-      console.log 'Form valid'
       $this.prev().fadeIn()
       $('form.new_comment').resetClientSideValidations()

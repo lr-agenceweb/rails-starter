@@ -2,7 +2,7 @@
   <% if comment.parent_id.nil? %>
     $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
   <% else %>
-    $("#comment-<%= comment.parent_id %>").after("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
+    $("#comment-<%= comment.parent_id %>").parent().append("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
   <% end %>
 <% end %>
 
