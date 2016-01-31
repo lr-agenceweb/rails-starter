@@ -165,8 +165,12 @@ class CommentDecorator < ApplicationDecorator
       concat(f.hidden_field :lang, value: params[:locale]) + # Lang
       concat(f.input :comment, as: :text, input_html: { class: 'autosize', style: 'height: 120px' }) + # Textarea
       concat(f.input :nickname, label: false, input_html: { class: 'hide-for-small-up' }) + # Captcha
-      concat(button_tag(class: 'submit-btn text-right tiny right') do # Submit button
-        fa_icon('paper-plane')
+      concat(f.input :parent_id, as: :hidden, label: false, input_html: { class: 'hide-for-small-up' }) +
+      concat(content_tag(:div, class: 'submit-and-loader') do
+        concat(image_tag('http://www.salons-sante-autonomie.com/content/themes/ssa/img/assets/spinner.gif', class: 'submit-loader')) + # Loader div
+        concat(button_tag(class: 'submit-btn text-right tiny') do # Submit button
+          fa_icon('paper-plane')
+        end)
       end)
     end)
   end

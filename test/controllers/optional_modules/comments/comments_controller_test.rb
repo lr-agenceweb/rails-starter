@@ -67,7 +67,7 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should create comment with more informations if not connected' do
+  test 'should create comment with all good and not connected' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
@@ -204,14 +204,36 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should destroy comment with children if any' do
+    sign_in @administrator
+    @comment_anthony.update_attribute(:parent_id, @comment_lana.id)
+    @comment_bob.update_attribute(:parent_id, @comment_lana.id)
+    @comment_alice.update_attribute(:parent_id, @comment_lana.id)
+
+    assert_difference 'Comment.count', -4 do
+      delete :destroy, id: @comment_lana, about_id: @about, locale: 'fr'
+    end
+  end
+
+  test 'AJAX :: should destroy comment with children if any' do
+    sign_in @administrator
+    @comment_anthony.update_attribute(:parent_id, @comment_lana.id)
+    @comment_bob.update_attribute(:parent_id, @comment_lana.id)
+    @comment_alice.update_attribute(:parent_id, @comment_lana.id)
+
+    assert_difference 'Comment.count', -4 do
+      xhr :delete, :destroy, format: :js, id: @comment_lana, about_id: @about, locale: 'fr'
+    end
+  end
+
   #
   # == Signal
   #
   test 'should signal comment' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        @request.env['HTTP_REFERER'] = about_path(@about)
-        get :signal, id: @comment_alice, locale: locale.to_s
+        @request.env['HTTP_REFERER'] = about_path(@about, locale: locale.to_s)
+        get :signal, token: @comment_alice.token, about_id: @about, id: @comment_alice, locale: locale.to_s
         assert assigns(:comment).signalled?
         assert_redirected_to about_path(@about, locale: locale.to_s)
       end
@@ -222,7 +244,17 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_raises(ActionController::RoutingError) do
-          get :signal, id: 999999, locale: locale.to_s
+          get :signal, id: 999_999, token: @comment_alice.token, about_id: @about, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'should render 404 if token not set for signal' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_raises(ActionController::RoutingError) do
+          get :signal, id: @comment_alice, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -237,7 +269,7 @@ class CommentsControllerTest < ActionController::TestCase
         @request.env['HTTP_REFERER'] = about_path(@about)
 
         assert_enqueued_jobs 1 do
-          get :signal, id: @comment_alice, locale: locale.to_s
+          get :signal, id: @comment_alice, token: @comment_alice.token, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -254,7 +286,7 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
         @request.env['HTTP_REFERER'] = about_path(@about)
         assert_enqueued_jobs 0 do
-          get :signal, id: @comment_alice, locale: locale.to_s
+          get :signal, id: @comment_alice, token: @comment_alice.token, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -273,7 +305,7 @@ class CommentsControllerTest < ActionController::TestCase
 
         assert_raises(ActionController::RoutingError) do
           assert_enqueued_jobs 0 do
-            get :signal, id: @comment_alice, locale: locale.to_s
+            get :signal, id: @comment_alice, token: @comment_alice.token, about_id: @about, locale: locale.to_s
           end
         end
       end
@@ -283,9 +315,19 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should signal comment' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+        xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about, locale: locale.to_s
         assert_response :success
         assert assigns(:comment).signalled?
+      end
+    end
+  end
+
+  test 'AJAX :: should render 404 if token not set for signal' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_raises(ActionController::RoutingError) do
+          xhr :get, :signal, format: :js, id: @comment_luke.id, about_id: @about, locale: locale.to_s
+        end
       end
     end
   end
@@ -298,7 +340,7 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
 
         assert_enqueued_jobs 1 do
-          xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+          xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -315,7 +357,7 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
 
         assert_enqueued_jobs 0 do
-          xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+          xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -333,8 +375,60 @@ class CommentsControllerTest < ActionController::TestCase
 
         assert_raises(ActionController::RoutingError) do
           assert_enqueued_jobs 0 do
-            xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+            xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about, locale: locale.to_s
           end
+        end
+      end
+    end
+  end
+
+  #
+  # == Reply
+  #
+  test 'should render reply template and success response' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        get :reply, token: @comment_alice.token, about_id: @about, id: @comment_alice, locale: locale.to_s
+        assert_response :success
+        assert_template :reply
+      end
+    end
+  end
+
+  test 'should render 404 if token not set for reply' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_raises(ActionController::RoutingError) do
+          get :reply, token: '', id: @comment_alice, about_id: @about, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should render reply template and success response' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        xhr :get, :reply, format: :js, id: @comment_alice.id, token: @comment_alice.token, about_id: @about, locale: locale.to_s
+        assert_response :success
+        assert_template :reply
+      end
+    end
+  end
+
+  test 'should save children of a comment' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        post :create, about_id: @about, id: @comment_alice, comment: { parent_id: @comment_alice.id }, locale: locale.to_s
+        assert_equal @comment_alice.id, assigns(:comment).parent_id
+      end
+    end
+  end
+
+  test 'AJAX :: should render 404 if token not set for reply' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_raises(ActionController::RoutingError) do
+          xhr :get, :reply, token: '', id: @comment_luke.id, about_id: @about, locale: locale.to_s
         end
       end
     end

@@ -19,7 +19,7 @@ class SliderDecoratorTest < Draper::TestCase
   # == ActiveAdmin
   #
   test 'should return correct AA show page title' do
-    assert_equal "Slider page Accueil", @slider_decorated.title_aa_show
+    assert_equal 'Slider page Accueil', @slider_decorated.title_aa_show
   end
 
   test 'should return correct value for time_to_show' do

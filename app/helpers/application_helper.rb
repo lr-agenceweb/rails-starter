@@ -36,4 +36,13 @@ module ApplicationHelper
   def maintenance?(req = request)
     @setting.maintenance? && (!req.path.include?('/admin') || !self.class.name.to_s.split('::').first == 'ActiveAdmin')
   end
+
+  #
+  # == Comment
+  #
+  def nested_messages(messages)
+    messages.map do |message, sub_messages|
+      render(message.decorate) + content_tag(:div, nested_messages(sub_messages), class: 'nested_messages')
+    end.join.html_safe
+  end
 end

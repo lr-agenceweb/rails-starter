@@ -4,6 +4,7 @@ fr:
     read_more: Lire la suite
     know_more: En savoir plus
     back_to: "Retour à la page %{page}"
+    back_to_article: "Retour à l'article \"%{article}\""
     see_page: Voir la page
     go_to: Aller sur le site
 
@@ -13,5 +14,6 @@ en:
     read_more: Read more
     know_more: Know more
     back_to: "Back to the %{page} page"
+    back_to_article: "Back to the \"%{article}\" article"
     see_page: See the page
     go_to: Go on the website
