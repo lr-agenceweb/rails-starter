@@ -35,6 +35,7 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     if can? :destroy, @comment
+      @comment_children = @comment.child_ids if @comment.has_children?
       if @comment.destroy
         flash.now[:error] = nil
         flash.now[:success] = I18n.t('comment.destroy.success')

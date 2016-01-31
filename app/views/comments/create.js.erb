@@ -6,7 +6,9 @@
   <% end %>
 <% end %>
 
-$('.comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
+if ($('.comment-count').length > 0){
+  $('.comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
+}
 
 $('#comment_username').val('');
 $('#comment_email').val('');

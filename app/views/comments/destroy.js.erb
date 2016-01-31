@@ -1,2 +1,10 @@
 $("#comment-<%= @comment.id %>").slideUp();
-$('.comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
+<% unless @comment_children.empty? %>
+  <% @comment_children.each do |comment_child_id| %>
+    $("#comment-<%= comment_child_id %>").slideUp();
+  <% end %>
+<% end %>
+
+if ($('.comment-count').length > 0){
+  $('.comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
+}
