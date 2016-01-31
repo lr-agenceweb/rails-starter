@@ -20,7 +20,7 @@ article.post-article
         li
           = I18n.t('activerecord.models.comment.other')
           |:
-          span.comment-count =< blog.comments.validated.by_locale(@language).count
+          span#comment-count.comment-count =< blog.comments.validated.by_locale(@language).count
 
   - if params[:action] == 'show'
     = render 'elements/prev_next', element: blog if @blog_settings.prev_next?
