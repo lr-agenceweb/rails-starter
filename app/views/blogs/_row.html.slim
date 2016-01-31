@@ -16,7 +16,7 @@ article.post-article
     ul.inline-list
       li = "#{I18n.t('activerecord.attributes.post.author_with_avatar')}: #{blog.author}"
 
-      - if @comment_module.enabled?
+      - if @comment_module.enabled? && blog.allow_comments?
         li
           = I18n.t('activerecord.models.comment.other')
           |:
