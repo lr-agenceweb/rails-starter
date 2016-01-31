@@ -18,7 +18,7 @@
                   = I18n.t('comment.signalled.already_signalled')
               - else
                 span.comment-not-signalled<> class="number-#{comment.id}"
-                  = link_to I18n.t('comment.signalled.not_signalled'), signal_comment_path(comment), method: :get, remote: true, data: { confirm: I18n.t('comment.signalled.alert') }
+                  = link_to I18n.t('comment.signalled.not_signalled'), send("signal_#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment), method: :get, remote: true, data: { confirm: I18n.t('comment.signalled.alert') }
 
             | -
             span.comment-reply<>

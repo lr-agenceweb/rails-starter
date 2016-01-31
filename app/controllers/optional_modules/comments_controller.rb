@@ -3,15 +3,11 @@
 #
 class CommentsController < ApplicationController
   before_action :comment_module_enabled?
-  before_action :load_commentable, except: :signal
-  before_action :set_comment, only: [:reply, :destroy]
+  before_action :load_commentable
+  before_action :set_comment, only: [:signal, :destroy]
   before_action :set_comment_setting
 
   decorates_assigned :comment, :about, :blog
-
-  def reply
-    @comment = Comment.new(parent_id: params[:id])
-  end
 
   # POST /comments
   # POST /comments.json
@@ -57,7 +53,6 @@ class CommentsController < ApplicationController
 
   def signal
     fail ActionController::RoutingError, 'Not Found' unless @comment_setting.should_signal?
-    @comment = Comment.find(params[:id])
     @comment.update_attribute(:signalled, true)
 
     CommentJob.set(wait: 3.seconds).perform_later(@comment) if @comment_setting.send_email?
@@ -67,8 +62,10 @@ class CommentsController < ApplicationController
       format.html { redirect_to :back }
       format.js { }
     end
-  rescue ActiveRecord::RecordNotFound
-    raise ActionController::RoutingError, 'Not Found'
+  end
+
+  def reply
+    @comment = @commentable.comments.new(parent_id: params[:id])
   end
 
   private
@@ -76,6 +73,8 @@ class CommentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = @commentable.comments.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    raise ActionController::RoutingError, 'Not Found'
   end
 
   def set_comment_setting

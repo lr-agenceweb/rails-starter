@@ -12,7 +12,10 @@ Rails.application.routes.draw do
 
   concern :commentable do
     resources :comments, only: [:create, :destroy] do
-      get 'reply', on: :member
+      member do
+        get 'reply'
+        get 'signal'
+      end
     end
   end
 
