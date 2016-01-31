@@ -10,6 +10,8 @@ if ($('#comment-count').length > 0){
   $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
 }
 
+$('form.new_comment .submit-loader').fadeOut();
+
 $('#comment_username').val('');
 $('#comment_email').val('');
 $('#comment_comment').val('');

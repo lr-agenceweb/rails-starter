@@ -51,3 +51,12 @@ $(document).on 'ready page:load page:restore', ->
     # image:
     #   titleSrc: (item) ->
     #     return item.el.attr('title')
+
+  # Add loader after submiting comment form
+  $('form.new_comment button[type="submit"]').on 'click', (e) ->
+    $this = $(this)
+
+    window.ClientSideValidations.callbacks.form.pass = ($element, callback) ->
+      console.log 'Form valid'
+      $this.prev().fadeIn()
+      $('form.new_comment').resetClientSideValidations()
