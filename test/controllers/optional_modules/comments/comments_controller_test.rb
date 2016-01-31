@@ -210,8 +210,8 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should signal comment' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        @request.env['HTTP_REFERER'] = about_path(@about)
-        get :signal, id: @comment_alice, locale: locale.to_s
+        @request.env['HTTP_REFERER'] = about_path(@about, locale: locale.to_s)
+        get :signal, about_id: @about, id: @comment_alice, locale: locale.to_s
         assert assigns(:comment).signalled?
         assert_redirected_to about_path(@about, locale: locale.to_s)
       end
@@ -222,7 +222,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_raises(ActionController::RoutingError) do
-          get :signal, id: 999999, locale: locale.to_s
+          get :signal, id: 999999, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -237,7 +237,7 @@ class CommentsControllerTest < ActionController::TestCase
         @request.env['HTTP_REFERER'] = about_path(@about)
 
         assert_enqueued_jobs 1 do
-          get :signal, id: @comment_alice, locale: locale.to_s
+          get :signal, id: @comment_alice, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -254,7 +254,7 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
         @request.env['HTTP_REFERER'] = about_path(@about)
         assert_enqueued_jobs 0 do
-          get :signal, id: @comment_alice, locale: locale.to_s
+          get :signal, id: @comment_alice, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -273,7 +273,7 @@ class CommentsControllerTest < ActionController::TestCase
 
         assert_raises(ActionController::RoutingError) do
           assert_enqueued_jobs 0 do
-            get :signal, id: @comment_alice, locale: locale.to_s
+            get :signal, id: @comment_alice, about_id: @about, locale: locale.to_s
           end
         end
       end
@@ -283,7 +283,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should signal comment' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+        xhr :get, :signal, format: :js, id: @comment_luke.id, about_id: @about, locale: locale.to_s
         assert_response :success
         assert assigns(:comment).signalled?
       end
@@ -298,7 +298,7 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
 
         assert_enqueued_jobs 1 do
-          xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+          xhr :get, :signal, format: :js, id: @comment_luke.id, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -315,7 +315,7 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
 
         assert_enqueued_jobs 0 do
-          xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+          xhr :get, :signal, format: :js, id: @comment_luke.id, about_id: @about, locale: locale.to_s
         end
       end
     end
@@ -333,7 +333,7 @@ class CommentsControllerTest < ActionController::TestCase
 
         assert_raises(ActionController::RoutingError) do
           assert_enqueued_jobs 0 do
-            xhr :get, :signal, format: :js, id: @comment_luke.id, locale: locale.to_s
+            xhr :get, :signal, format: :js, id: @comment_luke.id, about_id: @about, locale: locale.to_s
           end
         end
       end
