@@ -215,6 +215,17 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'AJAX :: should destroy comment with children if any' do
+    sign_in @administrator
+    @comment_anthony.update_attribute(:parent_id, @comment_lana.id)
+    @comment_bob.update_attribute(:parent_id, @comment_lana.id)
+    @comment_alice.update_attribute(:parent_id, @comment_lana.id)
+
+    assert_difference 'Comment.count', -4 do
+      xhr :delete, :destroy, format: :js, id: @comment_lana, about_id: @about, locale: 'fr'
+    end
+  end
+
   #
   # == Signal
   #
