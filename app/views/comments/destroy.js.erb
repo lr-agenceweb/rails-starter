@@ -1,7 +1,13 @@
 $("#comment-<%= @comment.id %>").slideUp();
-<% unless @comment_children.empty? %>
-  <% @comment_children.each do |comment_child_id| %>
-    $("#comment-<%= comment_child_id %>").slideUp();
+
+<% if @redirect_to_back %>
+  $('.comments').slideUp();
+  Turbolinks.visit("<%= @show_page %>");
+<% else %>
+  <% unless @comment_children.empty? %>
+    <% @comment_children.each do |comment_child_id| %>
+      $("#comment-<%= comment_child_id %>").slideUp();
+    <% end %>
   <% end %>
 <% end %>
 

@@ -35,7 +35,9 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     if can? :destroy, @comment
-      @comment_children = @comment.has_children? ? @comment.child_ids : []
+      @comment_children = @comment.has_children? ? @comment.descendant_ids : []
+      @redirect_to_back = @comment.descendant_ids.include?(params[:current_comment_id].to_i) || @comment.root?
+      @show_page = send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
       if @comment.destroy
         flash.now[:error] = nil
         flash.now[:success] = I18n.t('comment.destroy.success')
