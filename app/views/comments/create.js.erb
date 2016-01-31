@@ -1,12 +1,19 @@
 <% unless @setting.should_validate %>
-  $('.comments').prepend("<%= j render partial: 'comments/row', locals: { comment: comment } %>");
+  <% if comment.parent_id.nil? %>
+    $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
+  <% else %>
+    $("#comment-<%= comment.parent_id %>").parent().append("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
+  <% end %>
 <% end %>
+
+if ($('#comment-count').length > 0){
+  $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
+}
+
+$('form.new_comment .submit-loader').fadeOut();
 
 $('#comment_username').val('');
 $('#comment_email').val('');
 $('#comment_comment').val('');
 
 NProgress.done();
-
-<%= render 'elements/alert' %>
-<%= render 'elements/scroll_to' %>

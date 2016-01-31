@@ -10,7 +10,8 @@ module Commentable
 
     def set_commentable
       @commentable = instance_variable_get("@#{controller_name.singularize}")
-      @comments = @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
+      @full_comments = @commentable.comments.validated.by_locale(@language).includes(:user)
+      @comments = @full_comments.page params[:page]
       @comments = CommentDecorator.decorate_collection(@comments)
       @comment = Comment.new
     end

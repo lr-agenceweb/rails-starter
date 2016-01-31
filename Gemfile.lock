@@ -169,8 +169,6 @@ GEM
     autoprefixer-rails (6.3.1)
       execjs
       json
-    autosize-rails (1.18.17)
-      rails (>= 3.1)
     av (0.9.0)
       cocaine (~> 0.5.3)
     bcrypt (3.1.10)
@@ -467,6 +465,7 @@ GEM
       loofah (~> 2.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
+    rails_autosize_jquery (3.0.15)
     rails_best_practices (1.15.7)
       activesupport
       code_analyzer (>= 0.4.3)
@@ -645,7 +644,6 @@ DEPENDENCIES
   ancestry
   annotate (~> 2.6.5)
   autoprefixer-rails
-  autosize-rails
   best_in_place!
   better_errors
   bullet
@@ -711,6 +709,7 @@ DEPENDENCIES
   rails (= 4.2.5)
   rails-i18n!
   rails_autolink
+  rails_autosize_jquery
   rails_best_practices
   rails_layout
   rb-fsevent

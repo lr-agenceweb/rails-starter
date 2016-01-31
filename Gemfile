@@ -63,7 +63,7 @@ gem 'delayed_paperclip'
 gem 'simple_form'
 gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_validations-simple_form'
-gem 'autosize-rails'
+gem 'rails_autosize_jquery'
 gem 'wysiwyg-rails' # Froala editor
 gem 'valid_url'
 gem 'best_in_place', github: 'bernat/best_in_place'

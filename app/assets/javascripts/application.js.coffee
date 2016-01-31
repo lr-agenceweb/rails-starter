@@ -26,6 +26,7 @@
 #= require fullcalendar
 #= require fullcalendar/lang/fr
 #= require jquery.autosize
+#= require jquery.autosize.initializer
 #= require globals/_functions
 #= require modules/responsive_menu
 #= require modules/autocomplete_search
@@ -43,10 +44,18 @@
 #= require plugins/cookie_cnil
 
 $(document).on 'ready page:load page:restore', ->
-  $('.autosize').autosize()
+  # $('.autosize').autosize()
 
   $('.magnific-popup').magnificPopup
     type: 'image'
     # image:
     #   titleSrc: (item) ->
     #     return item.el.attr('title')
+
+  # Add loader after submiting comment form
+  $('form.new_comment button[type="submit"]').on 'click', (e) ->
+    $this = $(this)
+
+    window.ClientSideValidations.callbacks.form.pass = ($element, callback) ->
+      $this.prev().fadeIn()
+      $('form.new_comment').resetClientSideValidations()

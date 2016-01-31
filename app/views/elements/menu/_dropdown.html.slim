@@ -11,7 +11,7 @@ nav class="top-bar" data-topbar='' role="navigation" aria-label='navigation' ite
       /   li.has-form
       /     = render 'searches/form'
 
-      - if I18n.available_locales.length > 1
+      - if I18n.available_locales.length > 1 && params[:action] != 'reply'
         li = render 'elements/language'
 
     ul.left
