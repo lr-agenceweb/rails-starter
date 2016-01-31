@@ -67,7 +67,7 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should create comment with more informations if not connected' do
+  test 'should create comment with all good and not connected' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
