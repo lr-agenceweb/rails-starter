@@ -21,7 +21,3 @@ article.post-article
 
   - if params[:action] == 'show'
     = render 'elements/prev_next', element: blog if @blog_settings.prev_next?
-
-- if params[:action] == 'show'
-  p.text-right = link_to t('link.back_to', page: @category.menu_title), blogs_path
-  = render 'comments/section', o: blog

@@ -3,3 +3,9 @@
 .row
   .small-12.medium-8.medium-centered.columns
     = render 'blogs/row', blog: blog
+
+.row
+  .small-12.medium-9.medium-centered.columns
+    - if params[:action] == 'show'
+      p.text-right = link_to t('link.back_to', page: @category.menu_title), blogs_path
+      = render 'comments/section', o: blog
