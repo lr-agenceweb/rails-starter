@@ -7,6 +7,7 @@
 #  username         :string(255)
 #  email            :string(255)
 #  comment          :text(65535)
+#  token            :string(255)
 #  lang             :string(255)
 #  validated        :boolean          default(FALSE)
 #  signalled        :boolean          default(FALSE)
@@ -30,6 +31,7 @@
 # == Comment Model
 #
 class Comment < ActiveRecord::Base
+  include Tokenable
   include Scopable
 
   attr_accessor :subject, :nickname

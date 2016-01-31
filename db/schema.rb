@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130210316) do
+ActiveRecord::Schema.define(version: 20160131155745) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20160130210316) do
     t.string   "username",         limit: 255
     t.string   "email",            limit: 255
     t.text     "comment",          limit: 65535
+    t.string   "token",            limit: 255
     t.string   "lang",             limit: 255
     t.boolean  "validated",                      default: false
     t.boolean  "signalled",                      default: false
