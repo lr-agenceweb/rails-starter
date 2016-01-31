@@ -31,11 +31,11 @@ class SlideDecoratorTest < Draper::TestCase
   # == ActiveAdmin
   #
   test 'should return correct AA show page title' do
-    assert_equal "Slide liée au slider de la page Accueil", @slide_decorated.title_aa_show
+    assert_equal 'Slide liée au slider de la page Accueil', @slide_decorated.title_aa_show
   end
 
   test 'should return correct AA edit page title' do
-    assert_equal "Modifier Slide liée au slider de la page Accueil", @slide_decorated.title_aa_edit
+    assert_equal 'Modifier Slide liée au slider de la page Accueil', @slide_decorated.title_aa_edit
   end
 
   private

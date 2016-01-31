@@ -244,7 +244,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_raises(ActionController::RoutingError) do
-          get :signal, id: 999999, token: @comment_alice.token, about_id: @about, locale: locale.to_s
+          get :signal, id: 999_999, token: @comment_alice.token, about_id: @about, locale: locale.to_s
         end
       end
     end
