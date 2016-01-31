@@ -4,7 +4,7 @@
 class CommentsController < ApplicationController
   before_action :comment_module_enabled?
   before_action :load_commentable
-  before_action :set_comment, only: [:signal, :destroy]
+  before_action :set_comment, only: [:reply, :signal, :destroy]
   before_action :set_comment_setting
 
   decorates_assigned :comment, :about, :blog
@@ -53,7 +53,7 @@ class CommentsController < ApplicationController
   end
 
   def signal
-    fail ActionController::RoutingError, 'Not Found' unless @comment_setting.should_signal?
+    fail ActionController::RoutingError, 'Not Found' if !@comment_setting.should_signal? || !params[:token] || @comment.try(:token) != params[:token]
     @comment.update_attribute(:signalled, true)
 
     CommentJob.set(wait: 3.seconds).perform_later(@comment) if @comment_setting.send_email?
@@ -66,12 +66,16 @@ class CommentsController < ApplicationController
   end
 
   def reply
+    fail ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token]
     @comment = @commentable.comments.new(parent_id: params[:id])
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  def comment_params
+    params.require(:comment).permit(:username, :email, :title, :comment, :lang, :user_id, :nickname, :parent_id)
+  end
+
   def set_comment
     @comment = @commentable.comments.find(params[:id])
   rescue ActiveRecord::RecordNotFound
@@ -80,11 +84,6 @@ class CommentsController < ApplicationController
 
   def set_comment_setting
     @comment_setting = CommentSetting.first
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def comment_params
-    params.require(:comment).permit(:username, :email, :title, :comment, :lang, :user_id, :nickname, :parent_id)
   end
 
   def load_commentable

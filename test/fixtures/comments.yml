@@ -37,6 +37,7 @@ one:
   user: anthony
   lang: fr
   validated: true
+  token: <%= SecureRandom.urlsafe_base64(nil, false) %>
   created_at: 2016-01-30 12:54:20
 
 two:
@@ -45,6 +46,7 @@ two:
   user: bob
   lang: en
   validated: false
+  token: <%= SecureRandom.urlsafe_base64(nil, false) %>
 
 three:
   <<: *DEFAULTS
@@ -52,6 +54,7 @@ three:
   user: alice
   lang: en
   validated: true
+  token: <%= SecureRandom.urlsafe_base64(nil, false) %>
 
 four:
   <<: *DEFAULTS
@@ -59,6 +62,7 @@ four:
   user: lana
   lang: fr
   validated: false
+  token: <%= SecureRandom.urlsafe_base64(nil, false) %>
 
 five:
   <<: *DEFAULTS
@@ -68,3 +72,4 @@ five:
   user_id: null
   lang: fr
   validated: false
+  token: <%= SecureRandom.urlsafe_base64(nil, false) %>

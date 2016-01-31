@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   concern :commentable do
     resources :comments, only: [:create, :destroy] do
       member do
-        get 'reply'
-        get 'signal'
+        get 'reply/:token', action: :reply, as: :reply
+        get 'signal/:token', action: :signal, as: :signal
       end
     end
   end
