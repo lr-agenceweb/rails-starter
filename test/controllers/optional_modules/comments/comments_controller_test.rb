@@ -341,6 +341,38 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   #
+  # == Reply
+  #
+  test 'should render reply template and success response' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        get :reply, about_id: @about, id: @comment_alice, locale: locale.to_s
+        assert_response :success
+        assert_template :reply
+      end
+    end
+  end
+
+  test 'AJAX :: should render reply template and success response' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        xhr :get, :reply, format: :js, id: @comment_alice.id, about_id: @about, locale: locale.to_s
+        assert_response :success
+        assert_template :reply
+      end
+    end
+  end
+
+  test 'should save children of a comment' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        post :create, about_id: @about, id: @comment_alice, comment: { parent_id: @comment_alice.id }, locale: locale.to_s
+        assert_equal @comment_alice.id, assigns(:comment).parent_id
+      end
+    end
+  end
+
+  #
   # == Conditionals
   #
   test 'should fetch only validated comments' do
