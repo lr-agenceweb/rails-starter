@@ -8,7 +8,12 @@ article.post-article
 
   == blog.loop_hover_has_many_pictures true
 
-  div == blog.content
+
+  .post-body
+    - if params[:action] == 'index'
+      == truncate_read_more(blog.content, blog_path(blog), 300)
+    - else
+      == blog.content
 
   = render '/videos/index', resource: blog if params[:action] == 'show'
 
