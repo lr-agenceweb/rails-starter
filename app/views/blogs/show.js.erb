@@ -1,0 +1,7 @@
+$('#comments').append('<%= j nested_messages(@comments.arrange(order: :created_at).sort_by{ |key, value| key[:created_at] }.reverse) %>');
+
+<% if @comments.next_page %>
+  $('.pagination').replaceWith('<%= j paginate(@comments) %>');
+<% else %>
+  $('.pagination').text(I18n.t('comment.scroll_infinite.fetch_end', { locale: gon.language }))
+<% end %>

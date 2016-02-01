@@ -25,6 +25,9 @@ fr:
     seo:
       title: Réponse à un commentaire sur l'article "%{article}"
       description: Page permettant à un utilisateur de répondre à un commentaire d'un internaute.
+    scroll_infinite:
+      fetch_nexts: Chargements des commentaires suivants ...
+      fetch_end: Il n'a plus de commentaires à afficher :(
 
 # English
 en:
@@ -47,3 +50,6 @@ en:
     seo:
       title: Reply to a comment on the "%{article}" article
       description: Page allowing a user to reply to a comment by another user.
+    scroll_infinite:
+      fetch_nexts: Loading nexts comments ...
+      fetch_end: There is no more comments to show :(
