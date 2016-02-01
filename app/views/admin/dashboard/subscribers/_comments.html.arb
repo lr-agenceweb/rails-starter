@@ -4,8 +4,11 @@ panel.panel t('activerecord.models.comment.other') do
       p.span t('post.no_results', category: t('activerecord.models.comment.one'))
     else
       p.column t('activerecord.attributes.comment.link_source'), :link_source
-      p.column t('activerecord.attributes.comment.message'), :message
+      p.column t('activerecord.attributes.comment.message') do |resource|
+        truncate_html(resource.message, length: 100)
+      end
       p.column t('activerecord.attributes.comment.lang'), :lang
+      p.column t('activerecord.attributes.comment.signalled'), :signalled_d
       p.column t('activerecord.attributes.shared.created_at'), :created_at
 
       p.column 'Actions' do |comment|
