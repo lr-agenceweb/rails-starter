@@ -1,4 +1,4 @@
 div#comments.comments
-  = nested_messages @full_comments.arrange(order: :created_at).sort_by{ |key, value| key[:created_at] }.reverse
+  = nested_messages @comments.arrange(order: :created_at).sort_by{ |key, value| key[:created_at] }.reverse
 
 = paginate @comments
