@@ -844,13 +844,15 @@ end
 # == GuestBook
 #
 puts 'Creating GuestBook'
-GuestBook.create!(
-  username: 'leo',
-  email: 'leo@test.com',
-  content: 'Merci pour votre site !',
-  lang: 'fr',
-  validated: true
-)
+15.times do
+  GuestBook.create(
+    fullname: Faker::Name.name,
+    email: Faker::Internet.email,
+    content: Faker::Lorem.paragraph(3, true),
+    lang: @locales.include?(:en) ? ['fr', 'en'].sample : 'fr',
+    validated: true
+  )
+end
 
 #
 # == Slider
