@@ -13,7 +13,7 @@ $('<%= selector %>').append('<%= j object_to_append %>');
   <% if defined?(model_name) %>
     resource = '<%= model_name %>'
   <% else %>
-    resource = I18n.t("activerecord.models.<%= controller_name.classify.downcase %>.one", { locale: gon.language })
+    resource = I18n.t("activerecord.models.<%= controller_name.classify.underscore.downcase %>.one", { locale: gon.language })
   <% end %>
 
   text = I18n.t('scroll_infinite.fetch_end', { resource: resource, locale: gon.language })

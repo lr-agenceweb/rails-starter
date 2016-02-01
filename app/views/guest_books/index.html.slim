@@ -6,5 +6,15 @@
   .small-12.columns
     = title_for_category(category)
 
-    #guest_book
-      = render 'guest_book'
+.row
+  .small-12.columns
+    .row
+      .small-12.medium-8.medium-centered.columns
+        = render 'form'
+
+      .row
+        .small-12.medium-9.medium-centered.columns
+          - if @guest_books.blank?
+            p = t('guest_book.no_results')
+          - else
+            = render 'guest_books'

@@ -1,10 +1,19 @@
 .row
-  .small-12.medium-6.columns
+  .small-12.columns
     = simple_form_for @guest_book, method: :post, remote: true, validate: true, authenticity_token: true do |f|
-      = f.input :username
-      = f.input :email, as: :email
-      = f.input :content, as: :text, input_html: { class: 'autosize' }
-      = f.hidden_field :lang, value: @language
-      = f.input :nickname, input_html: { class: 'hide', style: 'display: none' }, label: false
-      = button_tag class: 'submit-btn text-right tiny right' do
-        - fa_icon('paper-plane')
+      .row
+        .small-12.medium-6.columns
+          = f.input :username
+        .small-12.medium-6.columns
+          = f.input :email, as: :email
+
+      .row
+        .small-12.columns
+          = f.input :content, as: :text, input_html: { class: 'autosize' }
+          = f.hidden_field :lang, value: @language
+          = f.input :nickname, input_html: { class: 'hide', style: 'display: none' }, label: false
+
+      .row
+        .small-12.columns
+          = button_tag class: 'submit-btn text-right tiny right' do
+            - fa_icon('paper-plane')

@@ -32,4 +32,6 @@ class GuestBook < ActiveRecord::Base
 
   attr_accessor :nickname
   paginates_per 3
+
+  alias_attribute :comment, :content
 end

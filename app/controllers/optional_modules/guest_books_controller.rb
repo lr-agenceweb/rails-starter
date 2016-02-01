@@ -2,9 +2,9 @@
 # == GuestBooks Controller
 #
 class GuestBooksController < ApplicationController
-  before_action :set_guest_book
   before_action :guest_book_module_enabled?
-  decorates_assigned :guest_book
+  before_action :set_guest_books
+  before_action :set_guest_book, only: :destroy
 
   # GET /livre-d-or
   # GET /livre-d-or.json
@@ -19,6 +19,7 @@ class GuestBooksController < ApplicationController
       @guest_book = GuestBook.new(guest_book_params)
       @guest_book.validated = @setting.should_validate? ? false : true
       if @guest_book.save
+        @guest_book = CommentDecorator.decorate(@guest_book)
         flash.now[:success] = I18n.t('guest_book.success')
         respond_action 'create', false
       else
@@ -30,12 +31,36 @@ class GuestBooksController < ApplicationController
     end
   end
 
+  # DELETE /livre-d-or/1
+  # DELETE /livre-d-or/1.json
+  def destroy
+    if can? :destroy, @guest_book
+      if @guest_book.destroy
+        flash.now[:error] = nil
+        flash.now[:success] = I18n.t('comment.destroy.success')
+        respond_action 'destroy'
+      else
+        flash.now[:success] = nil
+        flash.now[:error] = I18n.t('comment.destroy.error')
+        respond_action 'comments/forbidden'
+      end
+    else
+      flash.now[:success] = nil
+      flash.now[:error] = I18n.t('comment.destroy.not_allowed')
+      respond_action 'comments/forbidden'
+    end
+  end
+
   private
 
   def set_guest_book
+    @guest_book = GuestBook.find(params[:id])
+  end
+
+  def set_guest_books
     @guest_book = GuestBook.new
     guest_books = GuestBook.validated.by_locale(@language)
-    @guest_books = GuestBookDecorator.decorate_collection(guest_books.page params[:page])
+    @guest_books = CommentDecorator.decorate_collection(guest_books.page params[:page])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -43,7 +68,7 @@ class GuestBooksController < ApplicationController
     params.require(:guest_book).permit(:username, :email, :lang, :content, :nickname)
   end
 
-  def respond_action(template, should_render)
+  def respond_action(template, should_render = false)
     respond_to do |format|
       format.html { redirect_to guest_books_path, flash: { success: I18n.t('guest_book.success') } } unless should_render
       format.html { render template } if should_render

@@ -402,6 +402,7 @@ fr:
         lang: Langue
         status: Statut
         created_at: Créé le
+        destroy: Supprimer
       slider:
         autoplay: Démarrage automatique
         hover_pause: Pause au survol
