@@ -42,6 +42,9 @@ en:
       comment:
         one: Comment
         other: Comments
+      blog:
+        one: Blog article
+        other: Blog articles
 
     attributes:
       adult:

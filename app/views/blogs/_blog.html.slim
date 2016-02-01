@@ -1,17 +1,26 @@
-.row
-  .small-12.medium-8.columns
-    - if @blogs.blank?
-      p = t('blog.no_results')
-    - else
-      section#blogs
-        - @blogs.each do |blog|
-          = render 'row', blog: blog
+article.post-article
+  == blog.microdata_meta
 
-  .small-12.medium-4.columns
-    aside
-      ul
-        - @blogs.each do |blog|
-          li: h4 == link_to blog.title, blog_path(blog)
+  header
+    h3
+      = link_to blog.title, blog_path(blog)
+      small<: em = "(#{blog.created_at})"
 
-.row
-  = paginate @blogs
+  == blog.loop_hover_has_many_pictures true
+
+  div == blog.content
+
+  = render '/videos/index', resource: blog if params[:action] == 'show'
+
+  footer
+    ul.inline-list
+      li = "#{I18n.t('activerecord.attributes.post.author_with_avatar')}: #{blog.author}"
+
+      - if @comment_module.enabled? && blog.allow_comments?
+        li
+          = I18n.t('activerecord.models.comment.other')
+          |:
+          span#comment-count.comment-count =< blog.comments.validated.by_locale(@language).count
+
+  - if params[:action] == 'show'
+    = render 'elements/prev_next', element: blog if @blog_settings.prev_next?

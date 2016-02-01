@@ -60,6 +60,9 @@ fr:
     validated: Validés
     to_validate: Non validés
 
+  scroll_infinite:
+    fetch_nexts: Chargement en cours ...
+    fetch_end: Il n'a plus de %{resource} à afficher :(
 
 # English
 en:
@@ -102,3 +105,7 @@ en:
   prev: Previous
   next: Next
   no_js: "%{site} works better with JavaScript enabled ;)"
+
+  scroll_infinite:
+    fetch_nexts: Loading ...
+    fetch_end: There is no more %{resource} to show :(

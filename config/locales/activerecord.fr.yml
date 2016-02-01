@@ -140,8 +140,8 @@ fr:
         one: Adulte configuration
         other: Adulte configuration
       blog:
-        one: Blog
-        other: Blog
+        one: Blog article
+        other: Blog articles
       blog_setting:
         one: Blog configuration
         other: Blog configuration
