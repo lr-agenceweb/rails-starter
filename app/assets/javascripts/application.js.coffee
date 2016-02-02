@@ -14,7 +14,7 @@
 #= require i18n
 #= require i18n/translations
 #= require js.cookie
-#= require plugins/form_backup
+#= require form_backup
 #= require vex.combined.min.js
 #= require plugins/vex_config
 #= require plugins/override_rails_confirm
