@@ -16,7 +16,13 @@
           = render 'blogs'
 
         .small-12.medium-4.columns
-          aside
+          aside.last-blogs
+            h4.last-blogs-title = I18n.t('blog.last_articles')
             ul
-              - @blogs.each do |blog|
-                li: h4 == link_to blog.title, blog_path(blog)
+              - @last_blogs.each do |blog|
+                li
+                  h5.last-blogs-article-title
+                  == link_to blog.title, blog_path(blog)
+                  span< = '('
+                  = blog.comments.by_locale(@language).validated.count
+                  span = ')'
