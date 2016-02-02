@@ -11,6 +11,17 @@ class CommentSettingDecoratorTest < Draper::TestCase
   #
   # == Status tag
   #
+  test 'should return correct status_tag if should validate' do
+    comment_setting_decorated = CommentSettingDecorator.new(@comment_setting)
+    assert_match "<span class=\"status_tag oui green\">Oui</span>", comment_setting_decorated.should_validate
+  end
+
+  test 'should return correct status_tag if should not validate' do
+    @comment_setting.update_attribute(:should_validate, false)
+    comment_setting_decorated = CommentSettingDecorator.new(@comment_setting)
+    assert_match "<span class=\"status_tag non red\">Non</span>", comment_setting_decorated.should_validate
+  end
+
   test 'should return correct status_tag if should signal' do
     comment_setting_decorated = CommentSettingDecorator.new(@comment_setting)
     assert_match "<span class=\"status_tag oui green\">Oui</span>", comment_setting_decorated.should_signal

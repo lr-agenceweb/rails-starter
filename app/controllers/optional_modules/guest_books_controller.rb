@@ -2,6 +2,8 @@
 # == GuestBooks Controller
 #
 class GuestBooksController < ApplicationController
+  include ModuleSettingable
+
   before_action :guest_book_module_enabled?
   before_action :set_guest_books
   before_action :set_guest_book, only: :destroy
@@ -17,7 +19,6 @@ class GuestBooksController < ApplicationController
   def create
     if guest_book_params[:nickname].blank?
       @guest_book = GuestBook.new(guest_book_params)
-      @guest_book.validated = @setting.should_validate? ? false : true
       if @guest_book.save
         @guest_book = CommentDecorator.decorate(@guest_book)
         flash.now[:success] = I18n.t('guest_book.success')
