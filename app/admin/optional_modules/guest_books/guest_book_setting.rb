@@ -36,7 +36,7 @@ ActiveAdmin.register GuestBookSetting do
     private
 
     def redirect_to_show
-      redirect_to admin_guest_book_setting_path(CommentSetting.first), status: 301
+      redirect_to admin_guest_book_setting_path(GuestBookSetting.first), status: 301
     end
   end
 end

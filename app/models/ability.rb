@@ -99,8 +99,10 @@ class Ability
     if @guest_book_module.enabled?
       can [:read, :destroy], GuestBook
       cannot [:create, :update], GuestBook
+      can [:read, :update], GuestBookSetting
+      cannot [:create, :destroy], GuestBookSetting
     else
-      cannot :manage, GuestBook
+      cannot :manage, [GuestBook, GuestBookSetting]
     end
   end
 
