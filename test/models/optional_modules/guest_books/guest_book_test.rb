@@ -19,11 +19,10 @@ class GuestBookTest < ActiveSupport::TestCase
     assert_equal [:username, :email, :content, :lang], guest_book.errors.keys
   end
 
-  # Robots thinks it's valid but nothing is created by controller
   test 'should not be able to create if captcha filled' do
     guest_book = GuestBook.new(content: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'fr')
-    assert guest_book.valid?
-    assert guest_book.errors.keys.empty?
+    assert_not guest_book.valid?
+    assert_equal [:nickname], guest_book.errors.keys
   end
 
   test 'should not be able to create if lang is not allowed' do

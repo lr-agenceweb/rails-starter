@@ -19,6 +19,8 @@ class GuestBook < ActiveRecord::Base
   include Scopable
   include Validatable
 
+  attr_accessor :nickname
+
   validates :username, presence: true
   validates :email,
             presence: true,
@@ -28,10 +30,11 @@ class GuestBook < ActiveRecord::Base
   validates :lang,
             presence: true,
             inclusion: { in: I18n.available_locales.map(&:to_s) }
+  validates :nickname,
+            absence: true
 
   default_scope { order('created_at DESC') }
 
-  attr_accessor :nickname
   paginates_per 3
 
   alias_attribute :comment, :content
