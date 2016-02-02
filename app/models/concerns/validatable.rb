@@ -8,7 +8,8 @@ module Validatable
     after_initialize :set_validated
 
     def set_validated
-      self.validated = CommentSetting.first.should_validate? ? false : true
+      klass = "#{self.class}Setting".constantize
+      self.validated = klass.first.should_validate? ? false : true
     end
   end
 end
