@@ -29,6 +29,10 @@ fr:
             email:
               blank: N'oubliez pas de renseigner votre email ;)
               taken: Cet email n'est pas disponible :(
+            username:
+              blank: N'oubliez pas de renseigner votre pseudo ;)
+            content:
+              blank: N'oubliez pas de saisir votre commentaire ;)
         user:
           attributes:
             email:

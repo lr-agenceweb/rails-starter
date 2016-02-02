@@ -21,14 +21,18 @@ class GuestBook < ActiveRecord::Base
 
   attr_accessor :nickname
 
-  validates :username, presence: true
+  validates :username,
+            allow_blank: false,
+            presence: true
   validates :email,
+            allow_blank: false,
             presence: true,
             email_format: true
 
   validates :content, presence: true
   validates :lang,
             presence: true,
+            allow_blank: false,
             inclusion: { in: I18n.available_locales.map(&:to_s) }
   validates :nickname,
             absence: true

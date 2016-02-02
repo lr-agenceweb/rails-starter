@@ -91,10 +91,11 @@ class CommentsController < ApplicationController
   end
 
   def redirect_to_back_after_destroy?
-    @redirect_to_back = (
+    @redirect_to_back = !@comment.nil? && params[:current_comment_action] == 'reply' &&
+      (
         @comment.root? ||
         @comment.id == params[:current_comment_id].to_i ||
         @comment.children_ids.include?(params[:current_comment_id].to_i)
-      ) && params[:current_comment_action] == 'reply'
+      )
   end
 end

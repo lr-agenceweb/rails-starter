@@ -1,4 +1,6 @@
-<% unless @guest_book_setting.should_validate %>
+<% if @guest_book_setting.should_validate %>
+  <%= render 'elements/alert' %>
+<% else %>
   $('#guest_books').prepend("<%= j render partial: 'guest_books/guest_book', locals: { guest_book: @guest_book } %>")
 <% end %>
 

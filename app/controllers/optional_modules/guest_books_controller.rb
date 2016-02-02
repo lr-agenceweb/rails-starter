@@ -22,7 +22,8 @@ class GuestBooksController < ApplicationController
     @guest_book = GuestBook.new(guest_book_params)
     if @guest_book.save
       @guest_book = CommentDecorator.decorate(@guest_book)
-      flash.now[:success] = I18n.t('guest_book.success')
+      flash.now[:success] = I18n.t('comment.create_success')
+      flash.now[:success] = I18n.t('comment.create_success_with_validate') if @guest_book_setting.should_validate?
       respond_action 'create', false
     else
       respond_action :index, false
