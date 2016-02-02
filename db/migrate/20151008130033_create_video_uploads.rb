@@ -5,6 +5,7 @@ class CreateVideoUploads < ActiveRecord::Migration
       t.boolean :online, default: true
       t.integer :position
       t.boolean :video_file_processing, default: true
+      t.text :retina_dimensions
 
       t.timestamps null: false
     end
