@@ -9,7 +9,7 @@ module Validatable
 
     def set_validated
       klass = "#{self.class}Setting".constantize
-      self.validated = klass.first.should_validate? ? false : true
+      self.validated = klass.first.try(:should_validate?) ? false : true
     end
   end
 end

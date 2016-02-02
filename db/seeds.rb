@@ -443,6 +443,12 @@ Picture.create!(
 )
 
 #
+# == Blog Setting
+#
+puts 'Creating Blog Setting'
+BlogSetting.create!(prev_next: true)
+
+#
 # == Blog article
 #
 puts 'Creating Blog article'
@@ -495,10 +501,10 @@ if @locales.include?(:en)
 end
 
 #
-# == Blog Setting
+# == Comment Setting
 #
-puts 'Creating Blog Setting'
-BlogSetting.create!(prev_next: true)
+puts 'Creating Comment Setting'
+CommentSetting.create!()
 
 #
 # == Comment
@@ -525,11 +531,6 @@ Comment.create!(
   user_id: administrator.id
 )
 
-#
-# == Comment Setting
-#
-puts 'Creating Comment Setting'
-CommentSetting.create!()
 
 #
 # == Event article
