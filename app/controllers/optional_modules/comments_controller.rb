@@ -11,6 +11,8 @@ class CommentsController < ApplicationController
   before_action :redirect_to_back_after_destroy?, only: [:destroy]
   before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
 
+  include DeletableCommentable
+
   decorates_assigned :comment, :about, :blog
 
   # POST /comments
@@ -25,26 +27,6 @@ class CommentsController < ApplicationController
     else # Render view user come from instead of the comments default view
       instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
       render "#{@commentable.class.name.underscore.pluralize}/show"
-    end
-  end
-
-  # DELETE /comments/1
-  # DELETE /comments/1.json
-  def destroy
-    if can? :destroy, @comment
-      if @comment.destroy
-        flash.now[:error] = nil
-        flash.now[:success] = I18n.t('comment.destroy.success')
-        respond_action 'destroy'
-      else
-        flash.now[:success] = nil
-        flash.now[:error] = I18n.t('comment.destroy.error')
-        respond_action 'forbidden'
-      end
-    else
-      flash.now[:success] = nil
-      flash.now[:error] = I18n.t('comment.destroy.not_allowed')
-      respond_action 'forbidden'
     end
   end
 

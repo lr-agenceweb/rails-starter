@@ -8,6 +8,8 @@ class GuestBooksController < ApplicationController
   before_action :set_guest_books
   before_action :set_guest_book, only: :destroy
 
+  include DeletableCommentable
+
   # GET /livre-d-or
   # GET /livre-d-or.json
   def index
@@ -29,26 +31,6 @@ class GuestBooksController < ApplicationController
     else # if nickname is filled => robots spam
       flash.now[:error] = 'Captcha caught you'
       respond_action 'captcha', false
-    end
-  end
-
-  # DELETE /livre-d-or/1
-  # DELETE /livre-d-or/1.json
-  def destroy
-    if can? :destroy, @guest_book
-      if @guest_book.destroy
-        flash.now[:error] = nil
-        flash.now[:success] = I18n.t('comment.destroy.success')
-        respond_action 'destroy'
-      else
-        flash.now[:success] = nil
-        flash.now[:error] = I18n.t('comment.destroy.error')
-        respond_action 'comments/forbidden'
-      end
-    else
-      flash.now[:success] = nil
-      flash.now[:error] = I18n.t('comment.destroy.not_allowed')
-      respond_action 'comments/forbidden'
     end
   end
 
