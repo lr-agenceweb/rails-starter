@@ -54,15 +54,6 @@ $(document).on 'ready page:load page:restore', ->
   # Save form inputs in LocalStorage
   $('form').formBackup()
 
-  # Add loader after submiting comment form
-  $('form button[type="submit"]').on 'click', (e) ->
-    $this = $(this)
-
-    window.ClientSideValidations.callbacks.form.pass = ($element, callback) ->
-      $this.prev().fadeIn()
-      $('form').resetClientSideValidations()
-
-
   # Scroll infinite for comments
   if $('.pagination').length
     $(window).on 'scroll', throttle(((e) ->

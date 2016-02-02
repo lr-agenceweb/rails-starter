@@ -21,6 +21,8 @@ $.fn.formBackup = ->
     localStorage.setItem 'formBackup', JSON.stringify(datas)
 
   forms.on 'click', (e) ->
+    $submit = $(this).find('button[type="submit"]')
     window.ClientSideValidations.callbacks.form.pass = ($element, callback) ->
-      console.log 'remove localstorage'
+      $submit.prev().fadeIn()
       localStorage.removeItem 'formBackup'
+      $(this).resetClientSideValidations()

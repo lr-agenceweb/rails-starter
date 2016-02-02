@@ -167,7 +167,7 @@ class CommentDecorator < ApplicationDecorator
       concat(f.input :nickname, label: false, input_html: { class: 'hide-for-small-up' }) + # Captcha
       concat(f.input :parent_id, as: :hidden, label: false, input_html: { class: 'hide-for-small-up' }) +
       concat(content_tag(:div, class: 'submit-and-loader') do
-        concat(image_tag('http://www.salons-sante-autonomie.com/content/themes/ssa/img/assets/spinner.gif', class: 'submit-loader')) + # Loader div
+        concat(image_tag(Figaro.env.loader_spinner_img, class: 'submit-loader')) + # Loader div
         concat(button_tag(class: 'submit-btn text-right tiny') do # Submit button
           fa_icon('paper-plane')
         end)

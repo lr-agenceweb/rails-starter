@@ -13,7 +13,7 @@ module DeletableCommentable
     def destroy
       if can? :destroy, @object_variable
         if @object_variable.destroy
-          flash[:success] = I18n.t('comment.destroy.success')
+          flash.now[:success] = I18n.t('comment.destroy.success')
           respond_action 'destroy'
         else
           flash.now[:error] = I18n.t('comment.destroy.error')
