@@ -104,6 +104,9 @@ fr:
         should_signal: Si coché, un lien permettant de signaler les commentaires sera affiché sur chaque commentaire
         send_email: Si coché, un email sera envoyé à l'administrateur lorsqu'un commentaire sera signalé par un internaute.
 
+      guest_book_setting:
+        should_validate: Si coché, les message ne seront pas affichés sur le site tant que vous ne les aurez pas validés
+
       map:
         marker_icon: Choisissez une icône à afficher pour le marqueur de la carte
         marker_color: Choisissez une couleur de fonds pour le marqueur de la carte

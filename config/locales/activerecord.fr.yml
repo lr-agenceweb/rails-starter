@@ -79,6 +79,9 @@ fr:
       guest_book:
         one: Livre d'Or
         other: Livre d'Or
+      guest_book_setting:
+        one: Livre d'Or configuration
+        other: Livre d'Or configuration
       picture:
         one: Image
         other: Images
@@ -404,6 +407,8 @@ fr:
         status: Statut
         created_at: Créé le
         destroy: Supprimer
+      guest_book_setting:
+        should_validate: Valider les messages
       slider:
         autoplay: Démarrage automatique
         hover_pause: Pause au survol
