@@ -10,7 +10,6 @@ ActiveAdmin.register Setting, as: 'Parameter' do
                 :show_breadcrumb,
                 :show_social,
                 :show_qrcode,
-                :should_validate,
                 :maintenance,
                 :logo,
                 :logo_footer,
@@ -78,7 +77,6 @@ ActiveAdmin.register Setting, as: 'Parameter' do
       params[:setting].delete :show_social unless @social_module.enabled?
       params[:setting].delete :show_qrcode unless @qrcode_module.enabled?
       params[:setting].delete :show_breadcrumb unless @breadcrumb_module.enabled?
-      params[:setting].delete :should_validate unless @guest_book_module.enabled? || @comment_module.enabled?
       super
     end
 

@@ -234,7 +234,6 @@ fr:
         show_breadcrumb: Afficher le fil d'ariane ?
         show_social: Afficher le partage sur les réseaux sociaux ?
         show_qrcode: Afficher le QrCode sur la page contact ?
-        should_validate: Valider les commentaires et les messages du livre d'or ?
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
         twitter_username: Nom d'utilisateur sur Twitter
