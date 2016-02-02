@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration
       t.boolean :show_as_gallery, default: false
       t.boolean :allow_comments, default: true
       t.boolean :online, default: true
+      t.boolean :prev_next, default: true
       t.integer :position
       t.references :user, index: true
 

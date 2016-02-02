@@ -10,6 +10,7 @@ class CreateEvents < ActiveRecord::Migration
       t.boolean :show_as_gallery, default: false
       t.boolean :show_calendar, default: false
       t.boolean :online, default: true
+      t.boolean :prev_next, default: true
 
       t.timestamps null: false
     end
