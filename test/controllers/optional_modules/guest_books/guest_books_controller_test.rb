@@ -77,7 +77,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not appears on site if should_validate is true' do
+  test 'should not appears on site if should_validate' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
@@ -166,7 +166,6 @@ class GuestBooksControllerTest < ActionController::TestCase
           xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s, nickname: 'spammer' }
         end
         assert_not assigns(:guest_book).valid?
-        assert_template :captcha
       end
     end
   end

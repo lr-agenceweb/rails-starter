@@ -1,4 +1,6 @@
-<% unless @comment_setting.should_validate %>
+<% if @comment_setting.should_validate %>
+  <%= render 'elements/alert' %>
+<% else %>
   <% if comment.parent_id.nil? %>
     $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
   <% else %>

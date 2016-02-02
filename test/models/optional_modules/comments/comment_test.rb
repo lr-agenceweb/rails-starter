@@ -22,11 +22,10 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal [:comment, :lang], comment.errors.keys
   end
 
-  # Robots thinks it's valid but nothing is created by controller
   test 'should not be able to create if captcha filled' do
     comment = Comment.new(comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'fr')
-    assert comment.valid?
-    assert comment.errors.keys.empty?
+    assert_not comment.valid?
+    assert_equal [:nickname], comment.errors.keys
   end
 
   test 'should not be able to create if lang is not allowed' do

@@ -4,8 +4,8 @@ $("#comment-<%= @comment.id %>").slideUp();
   $('.comments').slideUp();
   Turbolinks.visit("<%= @show_page %>");
 <% else %>
-  <% unless @comment_children.empty? %>
-    <% @comment_children.each do |comment_child_id| %>
+  <% unless @comment.children_ids.empty? %>
+    <% @comment.children_ids.each do |comment_child_id| %>
       $("#comment-<%= comment_child_id %>").slideUp();
     <% end %>
   <% end %>

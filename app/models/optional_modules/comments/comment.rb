@@ -35,7 +35,9 @@ class Comment < ActiveRecord::Base
   include Scopable
   include Validatable
 
-  attr_accessor :subject, :nickname
+  attr_accessor :subject, :nickname, :children_ids
+
+  before_destroy :set_descendants
 
   has_ancestry
 
@@ -54,6 +56,8 @@ class Comment < ActiveRecord::Base
   validates :lang,
             presence: true,
             inclusion: { in: I18n.available_locales.map(&:to_s) }
+  validates :nickname,
+            absence: true
 
   default_scope { order('created_at DESC') }
   scope :by_user, -> (user_id) { where(user_id: user_id) }
@@ -62,4 +66,11 @@ class Comment < ActiveRecord::Base
   paginates_per 15
 
   delegate :username, :email, to: :user, prefix: true, allow_nil: true
+
+  private
+
+  def set_descendants
+    self.children_ids = has_children? ? descendant_ids : []
+    self.children_ids
+  end
 end

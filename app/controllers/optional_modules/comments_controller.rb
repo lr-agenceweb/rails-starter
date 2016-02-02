@@ -7,48 +7,26 @@ class CommentsController < ApplicationController
   before_action :comment_module_enabled?
   before_action :load_commentable
   before_action :set_comment, only: [:reply, :signal, :destroy]
-  before_action :redirect_to_back_after_destroy, only: [:destroy]
+  before_action :set_comments, only: [:create]
+  before_action :redirect_to_back_after_destroy?, only: [:destroy]
+  before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
+
+  include DeletableCommentable
 
   decorates_assigned :comment, :about, :blog
 
   # POST /comments
   # POST /comments.json
   def create
-    if comment_params[:nickname].blank?
-      @comment = @commentable.comments.new(comment_params)
-      @comment.user_id = current_user.id if user_signed_in?
-      if @comment.save
-        flash.now[:success] = I18n.t('comment.create_success')
-        flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate?
-        respond_action 'create'
-      else # Render view user come from instead of the comments default view
-        instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
-        @comments = CommentDecorator.decorate_collection(paginate_commentable)
-        render "#{@commentable.class.name.underscore.pluralize}/show"
-      end
-    else # if nickname is filled => robots spam
-      flash.now[:error] = I18n.t('comment.captcha')
-      respond_action 'captcha'
-    end
-  end
-
-  # DELETE /comments/1
-  # DELETE /comments/1.json
-  def destroy
-    if can? :destroy, @comment
-      if @comment.destroy
-        flash.now[:error] = nil
-        flash.now[:success] = I18n.t('comment.destroy.success')
-        respond_action 'destroy'
-      else
-        flash.now[:success] = nil
-        flash.now[:error] = I18n.t('comment.destroy.error')
-        respond_action 'forbidden'
-      end
-    else
-      flash.now[:success] = nil
-      flash.now[:error] = I18n.t('comment.destroy.not_allowed')
-      respond_action 'forbidden'
+    @comment = @commentable.comments.new(comment_params)
+    @comment.user_id = current_user.id if user_signed_in?
+    if @comment.save
+      flash.now[:success] = I18n.t('comment.create_success')
+      flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate?
+      respond_action 'create'
+    else # Render view user come from instead of the comments default view
+      instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
+      render "#{@commentable.class.name.underscore.pluralize}/show"
     end
   end
 
@@ -92,8 +70,9 @@ class CommentsController < ApplicationController
     redirect_to root_path unless @commentable.allow_comments?
   end
 
-  def paginate_commentable
-    @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
+  def set_comments
+    paginated_comments = @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
+    @comments = CommentDecorator.decorate_collection(paginated_comments)
   end
 
   def respond_action(template)
@@ -107,9 +86,16 @@ class CommentsController < ApplicationController
     not_found unless @comment_module.enabled?
   end
 
-  def redirect_to_back_after_destroy
-    @comment_children = @comment.has_children? ? @comment.descendant_ids : []
+  def set_commentable_show_page
     @show_page = send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
-    @redirect_to_back = (@comment.descendant_ids.include?(params[:current_comment_id].to_i) || @comment.root? || @comment.id == params[:current_comment_id].to_i) && params[:current_comment_action] == 'reply'
+  end
+
+  def redirect_to_back_after_destroy?
+    @redirect_to_back = !@comment.nil? && params[:current_comment_action] == 'reply' &&
+      (
+        @comment.root? ||
+        @comment.id == params[:current_comment_id].to_i ||
+        @comment.children_ids.include?(params[:current_comment_id].to_i)
+      )
   end
 end
