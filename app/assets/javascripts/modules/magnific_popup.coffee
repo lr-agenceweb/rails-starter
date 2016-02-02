@@ -1,4 +1,7 @@
 $(document).on 'ready page:load page:restore', ->
+  magnific_popup_init()
+
+@magnific_popup_init = ->
   $('.magnific-popup').magnificPopup
     type: 'image'
     # image:
