@@ -141,8 +141,9 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should not create comment if nickname is filled' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :post, :create, format: :js, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot', lang: locale.to_s }, locale: locale.to_s
-        assert_template :captcha
+        assert_no_difference 'Comment.count' do
+          xhr :post, :create, format: :js, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot', lang: locale.to_s }, locale: locale.to_s
+        end
       end
     end
   end
@@ -213,6 +214,16 @@ class CommentsControllerTest < ActionController::TestCase
     assert_difference 'Comment.count', -4 do
       delete :destroy, id: @comment_lana, about_id: @about, locale: 'fr'
     end
+  end
+
+  test 'should redirect to show page if destroy root' do
+    sign_in @administrator
+    @comment_anthony.update_attribute(:parent_id, @comment_lana.id)
+    @comment_bob.update_attribute(:parent_id, @comment_lana.id)
+    @comment_alice.update_attribute(:parent_id, @comment_lana.id)
+
+    delete :destroy, id: @comment_lana, about_id: @about, locale: 'fr'
+    assert_redirected_to @about
   end
 
   test 'AJAX :: should destroy comment with children if any' do
