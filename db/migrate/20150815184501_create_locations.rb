@@ -4,7 +4,7 @@ class CreateLocations < ActiveRecord::Migration
       t.references :locationable, index: true, polymorphic: true
       t.string :address
       t.string :city
-      t.integer :postcode
+      t.string :postcode
       t.float :latitude
       t.float :longitude
       t.string :geocode_address

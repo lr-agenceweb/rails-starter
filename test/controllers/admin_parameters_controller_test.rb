@@ -117,14 +117,6 @@ module Admin
       assert_not assigns(:setting).show_qrcode?
     end
 
-    test 'should not update should_validate param if guest_book and comment modules are disabled' do
-      disable_optional_module @super_administrator, @guest_book_module, 'GuestBook' # in test_helper.rb
-      disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
-      sign_in @administrator
-      patch :update, id: @setting, setting: { should_validate: '0' }
-      assert assigns(:setting).should_validate?
-    end
-
     #
     # == Abilities
     #

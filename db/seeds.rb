@@ -443,6 +443,12 @@ Picture.create!(
 )
 
 #
+# == Blog Setting
+#
+puts 'Creating Blog Setting'
+BlogSetting.create!(prev_next: true)
+
+#
 # == Blog article
 #
 puts 'Creating Blog article'
@@ -495,10 +501,10 @@ if @locales.include?(:en)
 end
 
 #
-# == Blog Setting
+# == Comment Setting
 #
-puts 'Creating Blog Setting'
-BlogSetting.create!(prev_next: true)
+puts 'Creating Comment Setting'
+CommentSetting.create!()
 
 #
 # == Comment
@@ -525,11 +531,6 @@ Comment.create!(
   user_id: administrator.id
 )
 
-#
-# == Comment Setting
-#
-puts 'Creating Comment Setting'
-CommentSetting.create!()
 
 #
 # == Event article
@@ -841,16 +842,24 @@ string_box_keys.each_with_index do |element, index|
 end
 
 #
+# == GuestBook Setting
+#
+puts 'Creating GuestBook Setting'
+GuestBookSetting.create!()
+
+#
 # == GuestBook
 #
 puts 'Creating GuestBook'
-GuestBook.create!(
-  username: 'leo',
-  email: 'leo@test.com',
-  content: 'Merci pour votre site !',
-  lang: 'fr',
-  validated: true
-)
+15.times do
+  GuestBook.create(
+    username: Faker::Name.name,
+    email: Faker::Internet.email,
+    content: Faker::Lorem.paragraph(3, true),
+    lang: @locales.include?(:en) ? ['fr', 'en'].sample : 'fr',
+    validated: true
+  )
+end
 
 #
 # == Slider

@@ -44,8 +44,6 @@
 #= require plugins/cookie_cnil
 
 $(document).on 'ready page:load page:restore', ->
-  # $('.autosize').autosize()
-
   $('.magnific-popup').magnificPopup
     type: 'image'
     # image:
@@ -59,3 +57,15 @@ $(document).on 'ready page:load page:restore', ->
     window.ClientSideValidations.callbacks.form.pass = ($element, callback) ->
       $this.prev().fadeIn()
       $('form.new_comment').resetClientSideValidations()
+
+
+  # Scroll infinite for comments
+  if $('.pagination').length
+    $(window).on 'scroll', throttle(((e) ->
+      url = $('.pagination .next a').attr('href')
+      if url && $(window).scrollTop() > ($(document).height() - $(window).height() - 50)
+        $('.pagination').text(I18n.t('scroll_infinite.fetch_nexts', { locale: gon.language }))
+        $.getScript(url)
+      return
+    ), 100)
+    $(window).scroll()

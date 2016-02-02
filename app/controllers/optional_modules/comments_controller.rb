@@ -2,11 +2,12 @@
 # == CommentsController
 #
 class CommentsController < ApplicationController
+  include ModuleSettingable
+
   before_action :comment_module_enabled?
   before_action :load_commentable
   before_action :set_comment, only: [:reply, :signal, :destroy]
   before_action :redirect_to_back_after_destroy, only: [:destroy]
-  before_action :set_comment_setting
 
   decorates_assigned :comment, :about, :blog
 
@@ -16,10 +17,9 @@ class CommentsController < ApplicationController
     if comment_params[:nickname].blank?
       @comment = @commentable.comments.new(comment_params)
       @comment.user_id = current_user.id if user_signed_in?
-      @comment.validated = @setting.should_validate? ? false : true
       if @comment.save
         flash.now[:success] = I18n.t('comment.create_success')
-        flash.now[:success] = I18n.t('comment.create_success_with_validate') if @setting.should_validate?
+        flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate?
         respond_action 'create'
       else # Render view user come from instead of the comments default view
         instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
@@ -82,10 +82,6 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     raise ActionController::RoutingError, 'Not Found'
-  end
-
-  def set_comment_setting
-    @comment_setting = CommentSetting.first
   end
 
   def load_commentable

@@ -1,0 +1,22 @@
+<% if !defined?(selector) %>
+  <% selector = '#' + controller_name.underscore %>
+<% end %>
+<% if !defined?(object_to_append) %>
+  <% object_to_append = render object %>
+<% end %>
+
+$('<%= selector %>').append('<%= j object_to_append %>');
+
+<% if object.next_page %>
+  $('.pagination').replaceWith('<%= j paginate(object) %>');
+<% else %>
+  <% if defined?(model_name) %>
+    resource = '<%= model_name %>'
+  <% else %>
+    resource = I18n.t("activerecord.models.<%= controller_name.classify.underscore.downcase %>.one", { locale: gon.language })
+  <% end %>
+
+  text = I18n.t('scroll_infinite.fetch_end', { resource: resource, locale: gon.language })
+
+  $('.pagination').text(text);
+<% end %>

@@ -7,10 +7,10 @@ class CreateSettings < ActiveRecord::Migration
       t.string :phone
       t.string :phone_secondary, default: nil
       t.string :email
+      t.integer :per_page, default: 3
       t.boolean :show_breadcrumb, default: false
       t.boolean :show_social, default: true
       t.boolean :show_qrcode, default: false
-      t.boolean :should_validate, default: true
       t.boolean :maintenance, default: false
       t.string :twitter_username, default: nil
 

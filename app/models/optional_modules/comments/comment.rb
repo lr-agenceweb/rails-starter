@@ -33,6 +33,7 @@
 class Comment < ActiveRecord::Base
   include Tokenable
   include Scopable
+  include Validatable
 
   attr_accessor :subject, :nickname
 

@@ -13,7 +13,6 @@
 #  show_breadcrumb          :boolean          default(FALSE)
 #  show_social              :boolean          default(TRUE)
 #  show_qrcode              :boolean          default(FALSE)
-#  should_validate          :boolean          default(TRUE)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer
@@ -34,7 +33,6 @@ DEFAULTS: &DEFAULTS
   email: demo@rails-starter.com
   phone: +33 (0)1 02 03 04 05
   per_page: 3
-  should_validate: true
   show_social: false
   show_qrcode: false
   show_breadcrumb: false

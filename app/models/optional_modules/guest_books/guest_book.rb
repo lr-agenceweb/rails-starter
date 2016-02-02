@@ -17,6 +17,7 @@
 #
 class GuestBook < ActiveRecord::Base
   include Scopable
+  include Validatable
 
   validates :username, presence: true
   validates :email,
@@ -32,4 +33,6 @@ class GuestBook < ActiveRecord::Base
 
   attr_accessor :nickname
   paginates_per 3
+
+  alias_attribute :comment, :content
 end

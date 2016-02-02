@@ -21,7 +21,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should create message if params are properly filled' do
+  test 'should create if params are properly filled' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_difference ['GuestBook.count'], 1 do
@@ -32,7 +32,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not create message if params are empty' do
+  test 'should not create if params are empty' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
@@ -43,7 +43,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not create message if email is not properly formatted' do
+  test 'should not create if email is not properly formatted' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
@@ -54,7 +54,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not create message if lang params is not allowed' do
+  test 'should not create if lang params is not allowed' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
@@ -65,7 +65,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not create message if nickname is filled' do
+  test 'should not create if nickname is filled' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
@@ -77,12 +77,30 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not appears on site if setting should_validate is true' do
+  test 'should not appears on site if should_validate is true' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
         assert_not assigns(:guest_book).validated
       end
+    end
+  end
+
+  #
+  # == Destroy
+  #
+  test 'should destroy guest_book if administrator' do
+    sign_in @administrator
+    assert_difference ['GuestBook.count'], -1 do
+      delete :destroy, locale: 'fr', id: @guest_book
+      assert_redirected_to guest_books_path
+    end
+  end
+
+  test 'should destroy guest_book if < admin' do
+    assert_no_difference ['GuestBook.count'] do
+      delete :destroy, locale: 'fr', id: @guest_book
+      assert_redirected_to guest_books_path
     end
   end
 
@@ -119,7 +137,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should create message if params are properly filled' do
+  test 'AJAX :: should create if params are properly filled' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_difference ['GuestBook.count'], 1 do
@@ -130,7 +148,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should not create message if lang params is not allowed' do
+  test 'AJAX :: should not create if lang params is not allowed' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
@@ -141,7 +159,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should not create message if nickname is filled' do
+  test 'AJAX :: should not create if nickname is filled' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_no_difference ['GuestBook.count'] do
@@ -153,12 +171,30 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should not appears on site if setting should_validate is true' do
+  test 'AJAX :: should not appears on site if should_validate is true' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
         assert_not assigns(:guest_book).validated
       end
+    end
+  end
+
+  #
+  # == Destroy
+  #
+  test 'AJAX :: should destroy guest_book if administrator' do
+    sign_in @administrator
+    assert_difference ['GuestBook.count'], -1 do
+      xhr :delete, :destroy, format: :js, locale: 'fr', id: @guest_book
+      assert_template :destroy
+    end
+  end
+
+  test 'AJAX :: should not destroy guest_book if < admin' do
+    assert_no_difference ['GuestBook.count'] do
+      xhr :delete, :destroy, format: :js, locale: 'fr', id: @guest_book
+      assert_template :forbidden
     end
   end
 
@@ -180,7 +216,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should fetch only messages from current locale and validated' do
+  test 'should fetch only from current locale and validated' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         @guest_books = GuestBook.validated.by_locale(locale.to_s)
@@ -250,6 +286,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   private
 
   def initialize_test
+    @guest_book = guest_books(:fr_validate)
     @guest_book_module = optional_modules(:guest_book)
 
     @locales = I18n.available_locales

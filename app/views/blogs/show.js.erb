@@ -1,0 +1,7 @@
+<%=
+  render 'elements/scroll_infinite',
+    selector: '#comments',
+    object: @comments,
+    object_to_append: nested_messages(@comments.arrange(order: :created_at).sort_by{ |key, value| key[:created_at] }.reverse),
+    model_name: I18n.t('activerecord.models.comment.other').downcase
+%>

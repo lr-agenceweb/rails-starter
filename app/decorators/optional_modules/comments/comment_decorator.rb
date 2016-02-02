@@ -10,12 +10,12 @@ class CommentDecorator < ApplicationDecorator
   # == Extract pseudo and email from comment
   #
   def pseudo_registered_or_guest
-    name = model.user_id.nil? ? model.username : model.user_username
+    name = model.try(:user_id).nil? ? model.username : model.user_username
     name.capitalize
   end
 
   def email_registered_or_guest
-    model.user_id.nil? ? model.email : model.user_email
+    model.try(:user_id).nil? ? model.email : model.user_email
   end
 
   #
@@ -23,7 +23,7 @@ class CommentDecorator < ApplicationDecorator
   #
   def avatar
     # Not connected
-    if model.user_id.nil?
+    if model.try(:user_id).nil?
       gravatar_image_tag(model.email, alt: model.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) })
 
     # Connected
@@ -123,7 +123,7 @@ class CommentDecorator < ApplicationDecorator
     h.content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/Comment') do
       concat(tag(:meta, itemprop: 'text', content: model.comment))
       concat(tag(:meta, itemprop: 'dateCreated', content: model.created_at.to_datetime))
-      concat(content_tag(:div, nil, itemprop: 'author', itemscope: '', itemtype: 'http://schema.org/Person') do
+      concat(h.content_tag(:div, nil, itemprop: 'author', itemscope: '', itemtype: 'http://schema.org/Person') do
         concat(tag(:meta, itemprop: 'name', content: pseudo_registered_or_guest))
       end)
     end

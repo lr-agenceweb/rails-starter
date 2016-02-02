@@ -51,7 +51,6 @@ f.columns do
       f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site' if breadcrumb_module.enabled?
       f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site' if social_module.enabled?
       f.input :show_qrcode, hint: 'Afficher ou non le qrcode (sur la page contact) ajoutant vos informations de contact sur le smartphone des internautes ' if qrcode_module.enabled?
-      f.input :should_validate, hint: 'Si coché, les messages postés dans le livre d\'or et les commentaires ne seront pas visibles tant que vous ne les aurez pas validé manuellement' if comment_module.enabled? || guest_book_module.enabled?
     end
   end
 end

@@ -4,6 +4,7 @@ class CreateStringBoxes < ActiveRecord::Migration
       t.string :key, index: true, unique: true
       t.string :title
       t.text :content
+      t.text :description
       t.references :optional_module, index: true
 
       t.timestamps null: false

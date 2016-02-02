@@ -79,6 +79,9 @@ fr:
       guest_book:
         one: Livre d'Or
         other: Livre d'Or
+      guest_book_setting:
+        one: Livre d'Or configuration
+        other: Livre d'Or configuration
       picture:
         one: Image
         other: Images
@@ -140,8 +143,8 @@ fr:
         one: Adulte configuration
         other: Adulte configuration
       blog:
-        one: Blog
-        other: Blog
+        one: Blog article
+        other: Blog articles
       blog_setting:
         one: Blog configuration
         other: Blog configuration
@@ -231,7 +234,6 @@ fr:
         show_breadcrumb: Afficher le fil d'ariane ?
         show_social: Afficher le partage sur les réseaux sociaux ?
         show_qrcode: Afficher le QrCode sur la page contact ?
-        should_validate: Valider les commentaires et les messages du livre d'or ?
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
         twitter_username: Nom d'utilisateur sur Twitter
@@ -389,6 +391,7 @@ fr:
         created_at: Créé le
         destroy: Supprimer
       comment_setting:
+        should_validate: Valider les commentaires
         should_signal: Signaler les commentaires
         send_email: Envoyer mail après signalement
       optional_module:
@@ -402,6 +405,9 @@ fr:
         lang: Langue
         status: Statut
         created_at: Créé le
+        destroy: Supprimer
+      guest_book_setting:
+        should_validate: Valider les messages
       slider:
         autoplay: Démarrage automatique
         hover_pause: Pause au survol

@@ -3,6 +3,7 @@ class CreateMailingMessages < ActiveRecord::Migration
     create_table :mailing_messages do |t|
       t.string :title
       t.text :content
+      t.boolean :show_signature, default: true
       t.datetime :sent_at
       t.string :token
 

@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
 
     # GuestBook
-    resources :guest_books, only: [:index, :create], concerns: :paginatable
+    resources :guest_books, only: [:index, :create, :destroy], concerns: :paginatable
 
     # Blog
     resources :blogs, only: [:index, :show], concerns: [:paginatable, :commentable]

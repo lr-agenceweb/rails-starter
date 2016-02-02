@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131155745) do
+ActiveRecord::Schema.define(version: 20160202005847) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -94,10 +94,11 @@ ActiveRecord::Schema.define(version: 20160131155745) do
   add_index "categories", ["optional_module_id"], name: "index_categories_on_optional_module_id", using: :btree
 
   create_table "comment_settings", force: :cascade do |t|
-    t.boolean  "should_signal", default: true
-    t.boolean  "send_email",    default: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "should_signal",   default: true
+    t.boolean  "send_email",      default: false
+    t.boolean  "should_validate", default: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -199,6 +200,12 @@ ActiveRecord::Schema.define(version: 20160131155745) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "guest_book_settings", force: :cascade do |t|
+    t.boolean  "should_validate", default: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "guest_books", force: :cascade do |t|
     t.string   "username",   limit: 255,                   null: false
@@ -537,7 +544,6 @@ ActiveRecord::Schema.define(version: 20160131155745) do
     t.boolean  "show_breadcrumb",                        default: false
     t.boolean  "show_social",                            default: true
     t.boolean  "show_qrcode",                            default: false
-    t.boolean  "should_validate",                        default: true
     t.boolean  "maintenance",                            default: false
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size",           limit: 4

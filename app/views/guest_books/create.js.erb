@@ -1,10 +1,9 @@
-<% unless @setting.should_validate %>
-  $('#guest_books').prepend("<%= j render partial: 'guest_books/row', locals: { guest_book: guest_book } %>")
+<% unless @guest_book_setting.should_validate %>
+  $('#guest_books').prepend("<%= j render partial: 'guest_books/guest_book', locals: { guest_book: @guest_book } %>")
 <% end %>
 
-$('#guest_book_username').val('')
-$('#guest_book_content').val('')
+$('#guest_book_username').val('');
+$('#guest_book_email').val('');
+$('#guest_book_content').val('');
 
 NProgress.done();
-
-<%= render 'elements/alert' %>
