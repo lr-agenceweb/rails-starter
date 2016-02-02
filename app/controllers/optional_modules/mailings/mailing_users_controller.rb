@@ -2,7 +2,9 @@
 # == MailingUsers Controller
 #
 class MailingUsersController < ApplicationController
+  include ModuleSettingable
   include Mailingable
+
   before_action :not_found, unless: proc { @mailing_module.enabled? }
   before_action :set_mailing_user, only: [:unsubscribe]
   layout 'error'

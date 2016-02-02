@@ -13,24 +13,11 @@ module Mailingable
                     :preview_in_browser,
                     :send_mailing_message
                   ]
-    before_action :set_mailing_setting,
-                  only: [
-                    :unsubscribe,
-                    :preview,
-                    :preview_in_browser,
-                    :send_mailing_message
-                  ]
 
     private
 
     def set_mailing_message
       @mailing_message = MailingMessage.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      raise ActionController::RoutingError, 'Not Found'
-    end
-
-    def set_mailing_setting
-      @mailing_setting = MailingSetting.first
     rescue ActiveRecord::RecordNotFound
       raise ActionController::RoutingError, 'Not Found'
     end

@@ -58,6 +58,7 @@ ActiveAdmin.register MailingMessage do
   #
   controller do
     include Skippable
+    include ModuleSettingable
     include Mailingable
     include NewsletterHelper
 

@@ -2,6 +2,7 @@
 # == MailingMessages Controller
 #
 class MailingMessagesController < ApplicationController
+  include ModuleSettingable
   include Mailingable
 
   before_action :not_found, unless: proc { @mailing_module.enabled? }
