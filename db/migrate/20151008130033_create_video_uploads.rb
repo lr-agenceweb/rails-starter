@@ -1,5 +1,5 @@
 class CreateVideoUploads < ActiveRecord::Migration
-  def change
+  def up
     create_table :video_uploads do |t|
       t.references :videoable, polymorphic: true, index: true
       t.boolean :online, default: true
@@ -13,5 +13,11 @@ class CreateVideoUploads < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    VideoUpload.create_translation_table! title: :string, description: :text
+  end
+
+  def down
+    drop_table :video_uploads
+    VideoUpload.drop_translation_table!
   end
 end
