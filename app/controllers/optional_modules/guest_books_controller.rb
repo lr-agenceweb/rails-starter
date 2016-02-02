@@ -2,6 +2,8 @@
 # == GuestBooks Controller
 #
 class GuestBooksController < ApplicationController
+  include ModuleSettingable
+
   before_action :guest_book_module_enabled?
   before_action :set_guest_books
   before_action :set_guest_book, only: :destroy
