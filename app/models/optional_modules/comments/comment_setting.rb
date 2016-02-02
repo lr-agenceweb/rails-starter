@@ -2,11 +2,12 @@
 #
 # Table name: comment_settings
 #
-#  id            :integer          not null, primary key
-#  should_signal :boolean          default(TRUE)
-#  send_email    :boolean          default(FALSE)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id              :integer          not null, primary key
+#  should_signal   :boolean          default(TRUE)
+#  send_email      :boolean          default(FALSE)
+#  should_validate :boolean          default(TRUE)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 #

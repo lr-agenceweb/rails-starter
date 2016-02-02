@@ -2,7 +2,7 @@ ActiveAdmin.register CommentSetting do
   menu parent: I18n.t('admin_menu.modules_config')
   includes :user
 
-  permit_params :id, :should_signal, :send_email
+  permit_params :id, :should_signal, :send_email, :should_validate
 
   decorate_with CommentSettingDecorator
   config.clear_sidebar_sections!
@@ -10,6 +10,7 @@ ActiveAdmin.register CommentSetting do
 
   show title: I18n.t('activerecord.models.comment_setting.one') do
     attributes_table do
+      row :should_validate
       row :should_signal
       row :send_email if resource.should_signal?
     end
@@ -19,6 +20,9 @@ ActiveAdmin.register CommentSetting do
     f.semantic_errors(*f.object.errors.keys)
 
     f.inputs I18n.t('activerecord.models.comment_setting.one') do
+      f.input :should_validate,
+              as: :boolean,
+              hint: I18n.t('form.hint.comment_setting.should_validate')
       f.input :should_signal,
               as: :boolean,
               hint: I18n.t('form.hint.comment_setting.should_signal')

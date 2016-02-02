@@ -389,6 +389,7 @@ fr:
         created_at: Créé le
         destroy: Supprimer
       comment_setting:
+        should_validate: Valider les commentaires
         should_signal: Signaler les commentaires
         send_email: Envoyer mail après signalement
       optional_module:

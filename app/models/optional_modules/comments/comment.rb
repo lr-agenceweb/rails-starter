@@ -38,6 +38,8 @@ class Comment < ActiveRecord::Base
 
   has_ancestry
 
+  after_initialize :set_validated
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
 
@@ -61,4 +63,8 @@ class Comment < ActiveRecord::Base
   paginates_per 15
 
   delegate :username, :email, to: :user, prefix: true, allow_nil: true
+
+  def set_validated
+    self.validated = CommentSetting.first.should_validate? ? false : true
+  end
 end
