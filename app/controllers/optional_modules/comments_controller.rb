@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   before_action :comment_module_enabled?
   before_action :load_commentable
   before_action :set_comment, only: [:reply, :signal, :destroy]
+  before_action :set_comments, only: [:create]
   before_action :redirect_to_back_after_destroy?, only: [:destroy]
   before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
 
@@ -23,7 +24,6 @@ class CommentsController < ApplicationController
       respond_action 'create'
     else # Render view user come from instead of the comments default view
       instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
-      @comments = CommentDecorator.decorate_collection(paginate_commentable)
       render "#{@commentable.class.name.underscore.pluralize}/show"
     end
   end
@@ -88,8 +88,9 @@ class CommentsController < ApplicationController
     redirect_to root_path unless @commentable.allow_comments?
   end
 
-  def paginate_commentable
-    @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
+  def set_comments
+    paginated_comments = @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
+    @comments = CommentDecorator.decorate_collection(paginated_comments)
   end
 
   def respond_action(template)
