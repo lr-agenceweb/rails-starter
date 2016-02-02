@@ -5,8 +5,10 @@ class CreateComments < ActiveRecord::Migration
       t.string :username
       t.string :email
       t.text :comment
+      t.string :token
       t.string :lang
       t.boolean :validated, default: false
+      t.boolean :signalled, default: false
       t.references :commentable, polymorphic: true
       t.references :user, index: true
       t.string :role, default: 'comments'
