@@ -4,6 +4,8 @@
   $('#guest_books').prepend("<%= j render partial: 'guest_books/guest_book', locals: { guest_book: @guest_book } %>")
 <% end %>
 
+$('form.new_guest_book .submit-loader').fadeOut();
+
 $('#guest_book_username').val('');
 $('#guest_book_email').val('');
 $('#guest_book_content').val('');

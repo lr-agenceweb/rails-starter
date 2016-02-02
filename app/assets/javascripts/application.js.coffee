@@ -51,12 +51,12 @@ $(document).on 'ready page:load page:restore', ->
     #     return item.el.attr('title')
 
   # Add loader after submiting comment form
-  $('form.new_comment button[type="submit"]').on 'click', (e) ->
+  $('form button[type="submit"]').on 'click', (e) ->
     $this = $(this)
 
     window.ClientSideValidations.callbacks.form.pass = ($element, callback) ->
       $this.prev().fadeIn()
-      $('form.new_comment').resetClientSideValidations()
+      $('form').resetClientSideValidations()
 
 
   # Scroll infinite for comments
