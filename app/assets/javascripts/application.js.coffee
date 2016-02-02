@@ -14,6 +14,7 @@
 #= require i18n
 #= require i18n/translations
 #= require js.cookie
+#= require plugins/form_backup
 #= require vex.combined.min.js
 #= require plugins/vex_config
 #= require plugins/override_rails_confirm
@@ -49,6 +50,9 @@ $(document).on 'ready page:load page:restore', ->
     # image:
     #   titleSrc: (item) ->
     #     return item.el.attr('title')
+
+  # Save form inputs in LocalStorage
+  $('form').formBackup()
 
   # Add loader after submiting comment form
   $('form button[type="submit"]').on 'click', (e) ->
