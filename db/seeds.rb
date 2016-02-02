@@ -853,7 +853,7 @@ GuestBookSetting.create!()
 puts 'Creating GuestBook'
 15.times do
   GuestBook.create(
-    fullname: Faker::Name.name,
+    username: Faker::Name.name,
     email: Faker::Internet.email,
     content: Faker::Lorem.paragraph(3, true),
     lang: @locales.include?(:en) ? ['fr', 'en'].sample : 'fr',
