@@ -841,6 +841,12 @@ string_box_keys.each_with_index do |element, index|
 end
 
 #
+# == GuestBook Setting
+#
+puts 'Creating GuestBook Setting'
+GuestBookSetting.create!()
+
+#
 # == GuestBook
 #
 puts 'Creating GuestBook'
