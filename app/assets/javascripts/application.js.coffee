@@ -32,6 +32,7 @@
 #= require globals/_functions
 #= require modules/responsive_menu
 #= require modules/autocomplete_search
+#= require modules/magnific_popup
 #= require plugins/nprogress
 #= require plugins/cookie_ie
 #= require plugins/cookie_adult_validation
@@ -46,11 +47,5 @@
 #= require plugins/cookie_cnil
 
 $(document).on 'ready page:load page:restore', ->
-  $('.magnific-popup').magnificPopup
-    type: 'image'
-    # image:
-    #   titleSrc: (item) ->
-    #     return item.el.attr('title')
-
   # Save form inputs in LocalStorage
   $('form').formBackup()
