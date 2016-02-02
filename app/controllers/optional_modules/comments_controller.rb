@@ -7,8 +7,11 @@ class CommentsController < ApplicationController
   before_action :comment_module_enabled?
   before_action :load_commentable
   before_action :set_comment, only: [:reply, :signal, :destroy]
+  before_action :set_comments, only: [:create]
   before_action :redirect_to_back_after_destroy?, only: [:destroy]
   before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
+
+  include DeletableCommentable
 
   decorates_assigned :comment, :about, :blog
 
@@ -23,28 +26,7 @@ class CommentsController < ApplicationController
       respond_action 'create'
     else # Render view user come from instead of the comments default view
       instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
-      @comments = CommentDecorator.decorate_collection(paginate_commentable)
       render "#{@commentable.class.name.underscore.pluralize}/show"
-    end
-  end
-
-  # DELETE /comments/1
-  # DELETE /comments/1.json
-  def destroy
-    if can? :destroy, @comment
-      if @comment.destroy
-        flash.now[:error] = nil
-        flash.now[:success] = I18n.t('comment.destroy.success')
-        respond_action 'destroy'
-      else
-        flash.now[:success] = nil
-        flash.now[:error] = I18n.t('comment.destroy.error')
-        respond_action 'forbidden'
-      end
-    else
-      flash.now[:success] = nil
-      flash.now[:error] = I18n.t('comment.destroy.not_allowed')
-      respond_action 'forbidden'
     end
   end
 
@@ -88,8 +70,9 @@ class CommentsController < ApplicationController
     redirect_to root_path unless @commentable.allow_comments?
   end
 
-  def paginate_commentable
-    @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
+  def set_comments
+    paginated_comments = @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
+    @comments = CommentDecorator.decorate_collection(paginated_comments)
   end
 
   def respond_action(template)
@@ -108,10 +91,11 @@ class CommentsController < ApplicationController
   end
 
   def redirect_to_back_after_destroy?
-    @redirect_to_back = (
+    @redirect_to_back = !@comment.nil? && params[:current_comment_action] == 'reply' &&
+      (
         @comment.root? ||
         @comment.id == params[:current_comment_id].to_i ||
         @comment.children_ids.include?(params[:current_comment_id].to_i)
-      ) && params[:current_comment_action] == 'reply'
+      )
   end
 end

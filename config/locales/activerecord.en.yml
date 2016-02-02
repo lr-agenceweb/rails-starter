@@ -17,6 +17,10 @@ en:
             email:
               blank: Don't forget your email address ;)
               taken: This email is not avalaible :(
+            username:
+              blank: Do not forgot to add your name ;)
+            content:
+              blank: Do not forgot to add your content ;)
         comment:
           attributes:
             email:
