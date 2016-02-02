@@ -17,6 +17,7 @@
 #
 class GuestBook < ActiveRecord::Base
   include Scopable
+  include Validatable
 
   validates :username, presence: true
   validates :email,

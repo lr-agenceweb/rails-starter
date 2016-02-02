@@ -17,7 +17,6 @@ class GuestBooksController < ApplicationController
   def create
     if guest_book_params[:nickname].blank?
       @guest_book = GuestBook.new(guest_book_params)
-      @guest_book.validated = @setting.should_validate? ? false : true
       if @guest_book.save
         @guest_book = CommentDecorator.decorate(@guest_book)
         flash.now[:success] = I18n.t('guest_book.success')
