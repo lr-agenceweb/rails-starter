@@ -1,11 +1,31 @@
-article.panel
+article.post-article
   = render 'events/microdatas', resource: event
 
   header
-    h3 = link_to event.title, event_path(event)
+    h3.post-article-title
+      = link_to event.title, event_path(event)
+      small< == event.from_to_date
 
-    == event.from_to_date
+  .row
+    .small-12.medium-10.medium-centered.columns
+      .pictures-container
+        - if params[:action] == 'index'
+          = render 'elements/pictures/has_many_get_first', resource: event, link: true
+        - elsif event.show_as_gallery? && params[:action] == 'show'
+          = render 'elements/pictures/has_many_as_gallery', resource: event
+        - else
+          = render 'elements/pictures/has_many', resource: event, link: true
 
-    div = simple_format(event.content)
+  .post-body
+    - if params[:action] == 'index'
+      == truncate_read_more(event.content, event_path(event), 300)
+    - else
+      == event.content
 
-  = render '/videos/index', resource: event
+  .row
+    .small-12.medium-9.medium-centered.columns
+      .videos-container
+        = render '/videos/index', resource: event if params[:action] == 'show'
+
+  - if params[:action] == 'show'
+    = render 'elements/prev_next', element: event if @event_settings.prev_next?

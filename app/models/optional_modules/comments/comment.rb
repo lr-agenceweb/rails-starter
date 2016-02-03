@@ -71,6 +71,6 @@ class Comment < ActiveRecord::Base
 
   def set_descendants
     self.children_ids = has_children? ? descendant_ids : []
-    self.children_ids
+    children_ids
   end
 end

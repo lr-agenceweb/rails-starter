@@ -1,37 +1,10 @@
-- breadcrumb @event
+- breadcrumb event
 
 .row
   .small-12.columns
+    = render 'events/event', event: event
 
-    article.article-container
-      = render 'events/microdatas', resource: event
-
-      header
-        h2 = link_to event.title, event_path(event)
-
-      div = event.content
-
-      = render '/videos/index', resource: event
-
-      .row
-        .small-12.medium-7.columns
-          .pictures.pictures-container
-            - if event.show_as_gallery?
-              .row
-                .small-12.columns
-                  .fotorama data-nav="thumbs" data-loop="true" data-autoplay="4000" data-keyboard="true" data-shuffle="false" data-transition="crossfade" data-transitionduration="1200" data-stopautoplayontouch="true" data-arrows="true" data-width="100%"
-                    - event.pictures_online.each_with_index do |image, index|
-                      = link_to retina_image_tag(image, :image, :large), image.self_image_url_by_size(:medium), data: { caption: html_escape_once(image.decorate.title) }
-            - else
-              ul.small-block-grid-1.medium-block-grid-3.large-block-grid-6
-                - event.pictures_online.each do |picture|
-                  li
-                    = link_to picture.decorate.self_image_has_one_by_size(:medium), picture.decorate.self_image_url_by_size(:large), title: picture.title, class: 'magnific-popup'
-
-        .small-12.medium-5.columns
-          - if event.all_conditions_to_show_calendar?(@calendar_module)
-            div#calendar
-
-      = render 'elements/prev_next', element: event if @event_settings.prev_next?
-
-      = link_to t('link.back_to', page: @category.menu_title), events_path
+.row
+  .small-12.medium-9.medium-centered.columns
+    - if params[:action] == 'show'
+      p.text-right = link_to t('link.back_to', page: @category.menu_title), events_path

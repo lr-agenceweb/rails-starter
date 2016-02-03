@@ -1,15 +1,19 @@
 ActiveAdmin.register User do
   includes :role
 
-  permit_params :id,
-                :username,
-                :slug,
-                :email,
-                :password,
-                :avatar,
-                :delete_avatar,
-                :password_confirmation,
-                :role_id
+  permit_params do
+    params = [:id,
+              :username,
+              :slug,
+              :email,
+              :password,
+              :avatar,
+              :delete_avatar,
+              :password_confirmation
+             ]
+    params.push :role_id unless current_user.subscriber?
+    params
+  end
 
   decorate_with UserDecorator
   config.clear_sidebar_sections!
@@ -94,9 +98,7 @@ ActiveAdmin.register User do
     include Skippable
 
     def update
-      params_user = params[:user]
-      params_user_role_id = params_user[:role_id]
-      params_user.delete :role_id if current_user.subscriber?
+      params_user_role_id = params[:user][:role_id]
 
       if current_user.administrator? && (params_user_role_id.to_i == Role.find_by(name: 'super_administrator').id)
         params[:user][:role_id] = current_user.role_id

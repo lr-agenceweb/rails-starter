@@ -96,21 +96,21 @@ module Admin
       assert_not @setting.update(title: nil)
     end
 
-    test 'should not update social param if optional module is disabled' do
+    test 'should not update social param if module is disabled' do
       disable_optional_module @super_administrator, @social_module, 'Social' # in test_helper.rb
       sign_in @administrator
       patch :update, id: @setting, setting: { show_social: '1' }
       assert_not assigns(:setting).show_social?
     end
 
-    test 'should not update breadcrumb param if optional module is disabled' do
+    test 'should not update breadcrumb param if module is disabled' do
       disable_optional_module @super_administrator, @breadcrumb_module, 'Breadcrumb' # in test_helper.rb
       sign_in @administrator
       patch :update, id: @setting, setting: { show_breadcrumb: '1' }
       assert_not assigns(:setting).show_breadcrumb?
     end
 
-    test 'should not update qrcode param if optional module is disabled' do
+    test 'should not update qrcode param if module is disabled' do
       disable_optional_module @super_administrator, @qrcode_module, 'Qrcode' # in test_helper.rb
       sign_in @administrator
       patch :update, id: @setting, setting: { show_qrcode: '1' }

@@ -7,6 +7,7 @@ $(document).on 'ready page:load page:restore', ->
         $('.pagination').text(I18n.t('scroll_infinite.fetch_nexts', { locale: gon.language }))
         $.getScript(url).done((script, textStatus) ->
           magnific_popup_init()
+          $('.fotorama').fotorama()
           return
         )
       return

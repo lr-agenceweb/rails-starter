@@ -177,26 +177,26 @@ module Admin
     #
     # == Calendar module disabled
     #
-    test 'should not create calendar param if calendar module is disabled' do
+    test 'should not create calendar if calendar module is disabled' do
       disable_optional_module @super_administrator, @calendar_module, 'Calendar' # in test_helper.rb
       sign_in @administrator
       post :create, event: { show_calendar: true }
       assert_not assigns(:event).show_calendar
     end
 
-    test 'should create calendar param if calendar module is enabled' do
+    test 'should create calendar if calendar module is enabled' do
       post :create, event: { show_calendar: true }
       assert assigns(:event).show_calendar
     end
 
-    test 'should not update calendar param if calendar module is disabled' do
+    test 'should not update calendar if calendar module is disabled' do
       disable_optional_module @super_administrator, @calendar_module, 'Calendar' # in test_helper.rb
       sign_in @administrator
       patch :update, id: @event, event: { show_calendar: true }
       assert_not assigns(:event).show_calendar
     end
 
-    test 'should update calendar param if calendar module is enabled' do
+    test 'should update calendar if calendar module is enabled' do
       patch :update, id: @event, event: { show_calendar: true }
       assert assigns(:event).show_calendar
     end

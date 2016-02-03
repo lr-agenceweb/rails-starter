@@ -1,11 +1,15 @@
 ActiveAdmin.register VideoSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
-  permit_params :id,
-                :video_platform,
-                :video_upload,
-                :video_background,
-                :turn_off_the_light
+  permit_params do
+    params = [:id,
+              :video_platform,
+              :video_upload,
+              :turn_off_the_light
+             ]
+    params.push :video_background if current_user.super_administrator?
+    params
+  end
 
   decorate_with VideoSettingDecorator
   config.clear_sidebar_sections!
@@ -59,11 +63,6 @@ ActiveAdmin.register VideoSetting do
       @collection ||= VideoSetting.all.page(1).per(1)
     end
 
-    def update
-      remove_video_background_param
-      super
-    end
-
     private
 
     def redirect_to_dashboard
@@ -72,10 +71,6 @@ ActiveAdmin.register VideoSetting do
 
     def redirect_to_show
       redirect_to admin_video_setting_path(VideoSetting.first), status: 301
-    end
-
-    def remove_video_background_param
-      params[:video_setting].delete :video_background unless current_user.super_administrator?
     end
   end
 end

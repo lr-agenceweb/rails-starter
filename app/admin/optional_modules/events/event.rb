@@ -1,43 +1,45 @@
 ActiveAdmin.register Event do
   menu parent: I18n.t('admin_menu.modules')
 
-  permit_params :id,
-                :url,
-                :start_date,
-                :end_date,
-                :show_as_gallery,
-                :show_calendar,
-                :online,
-                translations_attributes: [
-                  :id, :locale, :title, :slug, :content
-                ],
-                pictures_attributes: [
-                  :id, :image, :online, :position, :_destroy
-                ],
-                video_platforms_attributes: [
-                  :id, :url, :online, :position, :_destroy
-                ],
-                video_uploads_attributes: [
-                  :id, :online, :position,
-                  :video_file,
-                  :video_autoplay,
-                  :video_loop,
-                  :video_controls,
-                  :video_mute,
-                  :_destroy,
-                  video_subtitle_attributes: [
-                    :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
-                  ]
-                ],
-                location_attributes: [
-                  :id, :address, :city, :postcode
-                ],
-                referencement_attributes: [
-                  :id,
-                  translations_attributes: [
-                    :id, :locale, :title, :description, :keywords
-                  ]
+  permit_params do
+    params = [:id,
+              :url,
+              :start_date,
+              :end_date,
+              :show_as_gallery,
+              :online,
+              translations_attributes: [
+                :id, :locale, :title, :slug, :content
+              ],
+              pictures_attributes: [
+                :id, :image, :online, :position, :_destroy
+              ],
+              video_uploads_attributes: [
+                :id, :online, :position,
+                :video_file,
+                :video_autoplay,
+                :video_loop,
+                :video_controls,
+                :video_mute,
+                :_destroy,
+                video_subtitle_attributes: [
+                  :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
                 ]
+              ],
+              location_attributes: [
+                :id, :address, :city, :postcode
+              ],
+              referencement_attributes: [
+                :id,
+                translations_attributes: [
+                  :id, :locale, :title, :description, :keywords
+                ]
+              ]
+             ]
+    params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
+    params.push :show_calendar if @calendar_module.enabled?
+    params
+  end
 
   decorate_with EventDecorator
   config.clear_sidebar_sections!
@@ -177,22 +179,6 @@ ActiveAdmin.register Event do
 
     def scoped_collection
       super.includes :translations, :location
-    end
-
-    def create
-      remove_calendar_param
-      super
-    end
-
-    def update
-      remove_calendar_param
-      super
-    end
-
-    private
-
-    def remove_calendar_param
-      params[:event].delete :show_calendar unless @calendar_module.enabled?
     end
   end
 end
