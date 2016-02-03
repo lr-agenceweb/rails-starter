@@ -23,10 +23,7 @@
                     - event.pictures_online.each_with_index do |image, index|
                       = link_to retina_image_tag(image, :image, :large), image.self_image_url_by_size(:medium), data: { caption: html_escape_once(image.decorate.title) }
             - else
-              ul.small-block-grid-1.medium-block-grid-3.large-block-grid-6
-                - event.pictures_online.each do |picture|
-                  li
-                    = link_to picture.decorate.self_image_has_one_by_size(:medium), picture.decorate.self_image_url_by_size(:large), title: picture.title, class: 'magnific-popup'
+              = render 'elements/pictures/has_many', resource: event, link: true
 
         .small-12.medium-5.columns
           - if event.all_conditions_to_show_calendar?(@calendar_module)

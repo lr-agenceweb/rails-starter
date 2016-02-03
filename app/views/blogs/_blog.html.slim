@@ -6,7 +6,7 @@ article.post-article
       = link_to blog.title, blog_path(blog)
       small<: em = "(#{blog.created_at})"
 
-  == blog.loop_hover_has_many_pictures true
+  = render 'elements/pictures/has_many', resource: blog, link: true
 
   .post-body
     - if params[:action] == 'index'
