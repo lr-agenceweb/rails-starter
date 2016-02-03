@@ -121,14 +121,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def title_front_link
-    if model.type == 'Home'
-      link = root_path
-    elsif model.type == 'LegalNotice'
-      link = legal_notices_path
-    else
-      link = send("#{model.type.singularize.underscore.downcase}_path", model)
-    end
-    link_to raw(model.title), link, target: :_blank
+    link_to raw(model.title), show_page_link, target: :_blank
   end
 
   def admin_link
