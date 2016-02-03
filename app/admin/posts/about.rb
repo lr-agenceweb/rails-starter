@@ -2,39 +2,42 @@ ActiveAdmin.register About do
   menu parent: I18n.t('admin_menu.posts')
   includes :translations
 
-  permit_params :id,
-                :type,
-                :show_as_gallery,
-                :online,
-                :allow_comments,
-                :user_id,
-                translations_attributes: [
-                  :id, :locale, :title, :slug, :content
-                ],
-                pictures_attributes: [
-                  :id, :locale, :image, :online, :position, :_destroy
-                ],
-                video_platforms_attributes: [
-                  :id, :url, :online, :position, :_destroy
-                ],
-                video_uploads_attributes: [
-                  :id, :online, :position,
-                  :video_file,
-                  :video_autoplay,
-                  :video_loop,
-                  :video_controls,
-                  :video_mute,
-                  :_destroy,
-                  video_subtitle_attributes: [
-                    :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
-                  ]
-                ],
-                referencement_attributes: [
-                  :id,
-                  translations_attributes: [
-                    :id, :locale, :title, :description, :keywords
-                  ]
+  permit_params do
+    params = [:id,
+              :type,
+              :show_as_gallery,
+              :online,
+              :user_id,
+              translations_attributes: [
+                :id, :locale, :title, :slug, :content
+              ],
+              pictures_attributes: [
+                :id, :locale, :image, :online, :position, :_destroy
+              ],
+              video_uploads_attributes: [
+                :id, :online, :position,
+                :video_file,
+                :video_autoplay,
+                :video_loop,
+                :video_controls,
+                :video_mute,
+                :_destroy,
+                video_subtitle_attributes: [
+                  :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
                 ]
+              ],
+              referencement_attributes: [
+                :id,
+                translations_attributes: [
+                  :id, :locale, :title, :description, :keywords
+                ]
+              ]
+             ]
+
+    params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
+    params.push :allow_comments if @comment_module.enabled?
+    params
+  end
 
   decorate_with AboutDecorator
   config.clear_sidebar_sections!
@@ -94,22 +97,6 @@ ActiveAdmin.register About do
     before_create do |post|
       post.type = post.object.class.name
       post.user_id = current_user.id
-    end
-
-    def create
-      delete_key_before_save
-      super
-    end
-
-    def update
-      delete_key_before_save
-      super
-    end
-
-    private
-
-    def delete_key_before_save
-      params[:about].delete :allow_comments unless @comment_module.enabled?
     end
   end
 end

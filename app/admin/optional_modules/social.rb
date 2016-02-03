@@ -1,14 +1,18 @@
 ActiveAdmin.register Social do
   menu parent: I18n.t('admin_menu.modules')
 
-  permit_params :id,
-                :title,
-                :link,
-                :kind,
-                :enabled,
-                :ikon,
-                :delete_ikon,
-                :font_ikon
+  permit_params do
+    params = [:id,
+              :link,
+              :enabled,
+              :ikon,
+              :delete_ikon,
+              :font_ikon
+             ]
+
+    params.push :title, :kind if current_user.super_administrator?
+    params
+  end
 
   scope I18n.t('all'), :all, default: true
   scope I18n.t('social.share'), :share
@@ -105,14 +109,5 @@ ActiveAdmin.register Social do
   #
   controller do
     include Skippable
-
-    def update
-      if !current_user.super_administrator? && params[:social]
-        params[:social].delete :title
-        params[:social].delete :kind
-      end
-
-      super
-    end
   end
 end
