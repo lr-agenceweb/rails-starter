@@ -2,12 +2,16 @@ ActiveAdmin.register StringBox do
   menu parent: I18n.t('admin_menu.config')
   includes :translations, :optional_module
 
-  permit_params :id,
-                :key,
-                :optional_module_id,
-                translations_attributes: [
-                  :id, :locale, :title, :content
-                ]
+  permit_params do
+    params = [:id,
+              :key,
+              translations_attributes: [
+                :id, :locale, :title, :content
+              ]
+             ]
+    params.push :optional_module_id if current_user.super_administrator?
+    params
+  end
 
   decorate_with StringBoxDecorator
   config.clear_sidebar_sections!
@@ -86,21 +90,5 @@ ActiveAdmin.register StringBox do
   #
   controller do
     include Skippable
-
-    def create
-      delete_key_before_save
-      super
-    end
-
-    def update
-      delete_key_before_save
-      super
-    end
-
-    private
-
-    def delete_key_before_save
-      params[:string_box].delete :optional_module_id unless current_user.super_administrator?
-    end
   end
 end
