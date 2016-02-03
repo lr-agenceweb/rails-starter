@@ -21,7 +21,7 @@ ActiveAdmin.register Category do
                   :id, :locale, :content
                 ]
               ]
-            ]
+             ]
     if current_user.super_administrator?
       params.push :optional
       params.push :menu_id

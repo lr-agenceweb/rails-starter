@@ -17,7 +17,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
               translations_attributes: [
                 :id, :locale, :title, :subtitle
               ]
-            ]
+             ]
     params.push :show_social if @social_module.enabled?
     params.push :show_qrcode if @qrcode_module.enabled?
     params.push :show_breadcrumb if @breadcrumb_module.enabled?
