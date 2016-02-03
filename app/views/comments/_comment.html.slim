@@ -1,7 +1,7 @@
+= render 'comments/microdatas', resource: comment
 .row
   .small-12.columns
     .comment id="comment-#{comment.id}" class="#{params[:action] == 'reply' && comment.id.to_s == params[:id] ? 'comment-highlight' : ''}"
-      == comment.microdata_meta
       .row
         .small-3.medium-2.columns
           span.comment-avatar = comment.avatar

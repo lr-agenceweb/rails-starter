@@ -81,20 +81,6 @@ class SettingDecorator < ApplicationDecorator
     end
   end
 
-  #
-  # Microdatas
-  #
-  def microdata_meta(map)
-    h.content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/ProfessionalService') do
-      concat(tag(:meta, itemprop: 'logo', content: attachment_url(model.logo, :medium))) if logo?
-      concat(tag(:meta, itemprop: 'url', content: root_url))
-      concat(tag(:meta, itemprop: 'telephone', content: setting.phone))
-      concat(tag(:meta, itemprop: 'email', content: setting.email))
-      concat(tag(:meta, itemprop: 'name legalName', content: title_subtitle_inline))
-      concat(map.microdata_meta) unless map.nil?
-    end
-  end
-
   def about
     link_to I18n.t('main_menu.about'), abouts_path
   end

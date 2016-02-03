@@ -1,0 +1,8 @@
+/
+/ == Microdatas
+/
+div itemscope='' itemtype='http://schema.org/Comment'
+  meta itemprop='text' content="#{sanitize_string(resource.content)}"
+  meta itemprop='dateCreated' content="#{resource.created_at.to_datetime}"
+  div itemprop='author' itemscope='' itemtype='http://schema.org/Person'
+    meta itemprop='name' content="#{resource.pseudo_registered_or_guest}"

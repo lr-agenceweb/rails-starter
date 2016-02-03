@@ -3,7 +3,7 @@
     .small-12.medium-8.medium-centered.columns
 
       article.post-article
-        == @commentable.decorate.microdata_meta
+        = render 'posts/microdatas', resource: @commentable.decorate
 
         header
           h3

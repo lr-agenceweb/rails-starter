@@ -1,5 +1,5 @@
 article.panel
-  == event.microdata_meta
+  = render 'events/microdatas', resource: event
 
   header
     h3 = link_to event.title, event_path(event)

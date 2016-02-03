@@ -1,0 +1,10 @@
+- VideoPlatformDecorator.decorate_collection(resource).each do |video_platform|
+  - video = VideoInfo.new(video_platform.url)
+  - if video.available?
+    div itemscope='' itemtype='http://schema.org/VideoObject'
+      meta itemprop='name' content="#{video_platform.title_d}"
+      meta itemprop='description' content="#{sanitize_string(video_platform.description_d)}"
+      meta itemprop='duration' content="#{video.duration}"
+      meta itemprop='thumbnail thumbnailUrl' content="#{video.thumbnail_medium}"
+      meta itemprop='embedUrl' content="#{video.embed_url}"
+      meta itemprop='uploadDate' content="#{video.date}"

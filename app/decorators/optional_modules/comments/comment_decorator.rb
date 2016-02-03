@@ -116,19 +116,6 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
-  #
-  # == Microdata
-  #
-  def microdata_meta
-    h.content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/Comment') do
-      concat(tag(:meta, itemprop: 'text', content: model.comment))
-      concat(tag(:meta, itemprop: 'dateCreated', content: model.created_at.to_datetime))
-      concat(h.content_tag(:div, nil, itemprop: 'author', itemscope: '', itemtype: 'http://schema.org/Person') do
-        concat(tag(:meta, itemprop: 'name', content: pseudo_registered_or_guest))
-      end)
-    end
-  end
-
   private
 
   def pseudo(name = nil)

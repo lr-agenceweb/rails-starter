@@ -137,31 +137,24 @@ class PostDecorator < ApplicationDecorator
   end
 
   #
-  # Type of Post
+  # == Type of Post
   #
   def type_title
     Category.title_by_category(type)
   end
 
   #
-  # ActiveAdmin
+  # == ActiveAdmin
   #
   def title_aa_show
     I18n.t('post.title_aa_show', page: type_title)
   end
 
   #
-  # Microdatas
+  # == Comments
   #
-  def microdata_meta
-    content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/Article') do
-      concat(tag(:meta, itemprop: 'name headline', content: model.title))
-      concat(tag(:meta, itemprop: 'text', content: model.content)) if content?
-      concat(tag(:meta, itemprop: 'url', content: show_page_link(true)))
-      concat(tag(:meta, itemprop: 'creator', content: model.user_username))
-      concat(tag(:meta, itemprop: 'datePublished', content: model.created_at.to_datetime))
-      concat(tag(:meta, itemprop: 'image', content: attachment_url(model.first_pictures_image, :medium))) if model.pictures?
-    end
+  def comments_count
+    comments.validated.count
   end
 
   private

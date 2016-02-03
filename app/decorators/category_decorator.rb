@@ -26,7 +26,7 @@ class CategoryDecorator < ApplicationDecorator
   end
 
   #
-  # ActiveAdmin
+  # == ActiveAdmin
   #
   def title_aa_show
     aa_page_name.titleize

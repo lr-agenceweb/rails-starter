@@ -9,11 +9,7 @@ class EventDecorator < PostDecorator
   decorates_association :location
 
   def url
-    if url?
-      link_to model.url, model.url, target: :_blank
-    else
-      'Pas de lien'
-    end
+    url? ? link_to(model.url, model.url, target: :_blank) : 'Pas de lien'
   end
 
   #
@@ -54,36 +50,14 @@ class EventDecorator < PostDecorator
     model.location.decorate.full_address_inline if location?
   end
 
-  #
-  # == Microdata
-  #
-  def microdata_meta
-    h.content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/Event') do
-      concat(tag(:meta, itemprop: 'name', content: model.title))
-      concat(tag(:meta, itemprop: 'url', content: show_page_link(true)))
-      concat(tag(:meta, itemprop: 'startDate', content: model.start_date.to_datetime)) unless model.start_date.nil?
-      concat(tag(:meta, itemprop: 'endDate', content: model.end_date.to_datetime)) unless model.end_date.nil?
-      concat(tag(:meta, itemprop: 'duration', content: duration))
-      concat(tag(:meta, itemprop: 'description', content: model.content))
-      concat(h.content_tag(:div, '', itemprop: 'location', itemscope: '', itemtype: 'http://schema.org/Place') do
-        concat(tag(:meta, itemprop: 'name', content: model.title))
-        concat(h.content_tag(:div, '', itemprop: 'address', itemscope: '', itemtype: 'http://schema.org/PostalAddress') do
-          concat(tag(:meta, itemprop: 'streetAddress', content: model.location_address))
-          concat(tag(:meta, itemprop: 'addressLocality', content: model.location_city))
-          concat(tag(:meta, itemprop: 'postalCode', content: model.location_postcode))
-        end)
-      end)
-    end
+  def location?
+    !model.location.blank?
   end
 
   private
 
   def url?
     !model.url.blank?
-  end
-
-  def location?
-    !model.location.blank?
   end
 
   def start_date?

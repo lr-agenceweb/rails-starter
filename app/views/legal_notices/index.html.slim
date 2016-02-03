@@ -6,5 +6,6 @@
 
     - @legal_notices.each do |legal_notice|
       article.panel
+        = render 'posts/microdatas', resource: legal_notice.decorate
         h3 = legal_notice.title
         div = simple_format(legal_notice.content)
