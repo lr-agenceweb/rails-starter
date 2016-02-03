@@ -6,7 +6,15 @@ article.post-article
       = link_to blog.title, blog_path(blog)
       small<: em = "(#{blog.created_at})"
 
-  = render 'elements/pictures/has_many', resource: blog, link: true
+  .row
+    .small-12.medium-9.medium-centered.columns
+      .pictures-container
+        - if params[:action] == 'index'
+          = render 'elements/pictures/has_many_get_first', resource: blog, link: true
+        - elsif blog.show_as_gallery? && params[:action] == 'show'
+          = render 'elements/pictures/has_many_as_gallery', resource: blog
+        - else
+          = render 'elements/pictures/has_many', resource: blog, link: true
 
   .post-body
     - if params[:action] == 'index'
@@ -14,7 +22,11 @@ article.post-article
     - else
       == blog.content
 
-  = render '/videos/index', resource: blog if params[:action] == 'show'
+
+  .row
+    .small-12.medium-9.medium-centered.columns
+      .videos-container
+        = render '/videos/index', resource: blog if params[:action] == 'show'
 
   footer
     ul.inline-list

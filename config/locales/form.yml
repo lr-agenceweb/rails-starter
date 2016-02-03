@@ -153,7 +153,7 @@ fr:
 
 
       picture:
-        show_as_gallery: Afficher les images sous forme de galerie ?
+        show_as_gallery: Afficher les images sous forme de galerie ? (Cette option est efficace lorsqu'il s'agit d'afficher plusieurs images)
 
       video:
         url: "Lien de la vidéo que vous souhaitez afficher sur votre site (Youtube, Dailymotion, Viméo, ...).

@@ -1,10 +1,9 @@
 - if resource.pictures?
-  .pictures
-    - resource.pictures_online.each do |picture|
-      div
-        - picture = picture.decorate
-        - img_version = picture.self_image_has_one_by_size(defined?(size) ? size : :large)
-        - if defined?(link) ? link : false
-          = link_to img_version, picture.self_image_url_by_size(:large), title: picture.title, class: 'magnific-popup'
-        - else
-          = img_version
+  - resource.pictures_online.each do |picture|
+    div
+      - picture = picture.decorate
+      - img_version = picture.self_image_has_one_by_size(defined?(size) ? size : :large)
+      - if defined?(link) ? link : false
+        = link_to img_version, picture.self_image_url_by_size(:large), title: picture.title, class: 'magnific-popup'
+      - else
+        = img_version

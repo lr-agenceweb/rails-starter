@@ -1,5 +1,5 @@
 section#events
   - @events.each do |event|
-    = render 'event', event: event.decorate
+    = render 'event', event: event
 
 = paginate @events
