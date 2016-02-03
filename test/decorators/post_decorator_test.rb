@@ -37,6 +37,14 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Comment
+  #
+  test 'should return correct comments count by article' do
+    @post_about_decorated = PostDecorator.new(@post_about_2)
+    assert_equal 2, @post_about_decorated.comments_count
+  end
+
+  #
   # ActiveAdmin
   #
   test 'should return correct AA show page title' do
@@ -48,6 +56,7 @@ class PostDecoratorTest < Draper::TestCase
   def initialize_test
     @post = posts(:home)
     @post_about = posts(:about)
+    @post_about_2 = posts(:about_2)
     @post_decorated = PostDecorator.new(@post)
   end
 end
