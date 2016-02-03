@@ -5,6 +5,14 @@ class VideoUploadDecorator < VideoDecorator
   include Draper::LazyHelpers
   delegate_all
 
+  def title_microdatas
+    title? ? title : model.video_file_file_name.humanize
+  end
+
+  def description_microdatas
+    title_microdatas
+  end
+
   def preview
     h.retina_image_tag model, :video_file, :preview
   end

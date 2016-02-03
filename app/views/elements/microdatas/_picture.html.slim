@@ -1,0 +1,5 @@
+- if resource.picture?
+  div itemprop='image' itemscope='' itemtype='http://schema.org/ImageObject'
+    meta itemprop='url' content="#{attachment_url(resource.first_pictures_image, :medium)}"
+    meta itemprop='width' content="#{resource.picture.retina_dimensions[:image][:medium][:width]}"
+    meta itemprop='height' content="#{resource.picture.retina_dimensions[:image][:medium][:width]}"

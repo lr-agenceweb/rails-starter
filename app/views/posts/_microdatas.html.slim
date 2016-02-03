@@ -1,0 +1,29 @@
+/
+/ == Microdatas
+/
+div itemscope='' itemtype="http://schema.org/#{defined?(kind) ? kind : 'Article'}"
+  meta itemprop='name headline' content="#{resource.title}"
+  - if resource.content?
+    meta itemprop='text' content="#{sanitize_string(resource.content)}"
+  meta itemprop='url mainEntityOfPage' content="#{resource.show_page_link(true)}"
+  meta itemprop='creator' content="#{resource.user_username}"
+  meta itemprop='datePublished' content="#{resource.created_at.to_datetime}"
+  meta itemprop='dateModified' content="#{resource.updated_at.to_datetime}"
+  meta itemprop='commentCount' content="#{resource.comments_count}"
+
+  div itemprop='author' itemscope='' itemtype='http://schema.org/Person'
+    meta itemprop='name' content="#{resource.user_username}"
+
+  div itemprop='publisher' itemscope='' itemtype='http://schema.org/Organization'
+    meta itemprop='name' content="#{@setting.title}"
+    meta itemprop='url' content="#{root_url}"
+
+    - if @setting.decorate.logo?
+      div itemprop='logo' itemscope='' itemtype='http://schema.org/ImageObject'
+        meta itemprop='url' content="#{attachment_url(@setting.logo, :small)}"
+        meta itemprop='width' content="#{@setting.retina_dimensions[:logo][:small][:width]}"
+        meta itemprop='height' content="#{@setting.retina_dimensions[:logo][:small][:width]}"
+
+  = render 'elements/microdatas/picture', resource: resource
+  = render 'elements/microdatas/video_uploads', resource: resource.video_uploads
+  = render 'elements/microdatas/video_platforms', resource: resource.video_platforms

@@ -1,5 +1,5 @@
 article.post-article
-  == blog.microdata_meta
+  = render 'posts/microdatas', resource: blog, kind: 'BlogPosting'
 
   header
     h3
@@ -7,7 +7,6 @@ article.post-article
       small<: em = "(#{blog.created_at})"
 
   == blog.loop_hover_has_many_pictures true
-
 
   .post-body
     - if params[:action] == 'index'

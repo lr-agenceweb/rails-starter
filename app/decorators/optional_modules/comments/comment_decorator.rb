@@ -116,19 +116,6 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
-  #
-  # == Microdata
-  #
-  def microdata_meta
-    h.content_tag(:div, '', itemscope: '', itemtype: 'http://schema.org/Comment') do
-      concat(tag(:meta, itemprop: 'text', content: model.comment))
-      concat(tag(:meta, itemprop: 'dateCreated', content: model.created_at.to_datetime))
-      concat(h.content_tag(:div, nil, itemprop: 'author', itemscope: '', itemtype: 'http://schema.org/Person') do
-        concat(tag(:meta, itemprop: 'name', content: pseudo_registered_or_guest))
-      end)
-    end
-  end
-
   private
 
   def pseudo(name = nil)
@@ -167,7 +154,7 @@ class CommentDecorator < ApplicationDecorator
       concat(f.input :nickname, label: false, input_html: { class: 'hide-for-small-up' }) + # Captcha
       concat(f.input :parent_id, as: :hidden, label: false, input_html: { class: 'hide-for-small-up' }) +
       concat(content_tag(:div, class: 'submit-and-loader') do
-        concat(image_tag('http://www.salons-sante-autonomie.com/content/themes/ssa/img/assets/spinner.gif', class: 'submit-loader')) + # Loader div
+        concat(image_tag(Figaro.env.loader_spinner_img, class: 'submit-loader')) + # Loader div
         concat(button_tag(class: 'submit-btn text-right tiny') do # Submit button
           fa_icon('paper-plane')
         end)

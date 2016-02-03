@@ -4,6 +4,7 @@
 class BlogsController < ApplicationController
   before_action :blog_module_enabled?
   before_action :set_blog, only: [:show]
+  before_action :set_last_blogs, only: [:index]
   decorates_assigned :blog, :comment
 
   include Commentable
@@ -29,6 +30,10 @@ class BlogsController < ApplicationController
 
   def set_blog
     @blog = Blog.online.includes(:pictures, referencement: [:translations]).friendly.find(params[:id])
+  end
+
+  def set_last_blogs
+    @last_blogs = Blog.select(:id, :title).includes(:comments, :translations).online.order('created_at DESC').last(5)
   end
 
   def blog_module_enabled?

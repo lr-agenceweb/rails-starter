@@ -7,7 +7,7 @@
 .row
   - @abouts.each do |about|
     article.small-12.columns
-      == about.microdata_meta
+      = render 'posts/microdatas', resource: about.decorate
 
       header
         h2 = link_to about.title, about_path(about)

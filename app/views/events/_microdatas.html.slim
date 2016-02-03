@@ -1,0 +1,26 @@
+/
+/ == Microdatas
+/
+div itemscope='' itemtype='http://schema.org/Event'
+  meta itemprop='name' content="#{resource.title}"
+  meta itemprop='url mainEntityOfPage' content="#{resource.show_page_link(true)}"
+
+  - unless resource.start_date.nil?
+    meta itemprop='startDate' content="#{resource.start_date.to_datetime}"
+  - unless resource.end_date.nil?
+    meta itemprop='endDate' content="#{resource.end_date.to_datetime}"
+  meta itemprop='duration' content="#{resource.duration}"
+  meta itemprop='description' content="#{resource.content}"
+
+  - if resource.location?
+    div itemprop='location' itemscope='' itemtype='http://schema.org/Place'
+      meta itemprop='name' content="#{resource.title}"
+      div itemprop='address' itemscope='' itemtype='http://schema.org/PostalAddress'
+
+        meta itemprop='streetAddress' content="#{resource.location_address}"
+        meta itemprop='addressLocality' content="#{resource.location_city}"
+        meta itemprop='postalCode' content="#{resource.location_postcode}"
+
+  = render 'elements/microdatas/picture', resource: resource
+  = render 'elements/microdatas/video_uploads', resource: resource.video_uploads
+  = render 'elements/microdatas/video_platforms', resource: resource.video_platforms

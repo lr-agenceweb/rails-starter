@@ -9,7 +9,7 @@
 .row
   - @homes.each do |home|
     article.small-12.columns
-      == home.microdata_meta
+      = render 'posts/microdatas', resource: home
 
       header
         h2 = home.title

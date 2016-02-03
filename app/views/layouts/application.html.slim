@@ -35,6 +35,8 @@ html lang="#{@language}"
     = render 'outdatedbrowser/outdatedbrowser'
     = render 'elements/banner_maintenance' if maintenance?
 
+    = render 'elements/microdatas', resource: setting
+
     main#wrapper.wrapper
       = render 'elements/no_js', setting: @setting
       = show_flash unless flash.nil?
