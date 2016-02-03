@@ -5,30 +5,34 @@ ActiveAdmin.register Category do
   menu parent: I18n.t('admin_menu.config')
   includes :background, :slider, :optional_module, :menu, menu: [:translations]
 
-  permit_params :id,
-                :name,
-                :color,
-                :optional,
-                :optional_module_id,
-                :menu_id,
-                referencement_attributes: [
-                  :id,
-                  translations_attributes: [
-                    :id, :locale, :title, :description, :keywords
-                  ]
-                ],
-                background_attributes: [
-                  :id, :image, :_destroy
-                ],
-                heading_attributes: [
-                  :id,
-                  translations_attributes: [
-                    :id, :locale, :content
-                  ]
-                ],
-                video_upload_attributes: [
-                  :id, :video_file, :online, :position, :_destroy
+  permit_params do
+    params = [:id,
+              :name,
+              :color,
+              referencement_attributes: [
+                :id,
+                translations_attributes: [
+                  :id, :locale, :title, :description, :keywords
                 ]
+              ],
+              heading_attributes: [
+                :id,
+                translations_attributes: [
+                  :id, :locale, :content
+                ]
+              ]
+            ]
+    if current_user.super_administrator?
+      params.push :optional
+      params.push :menu_id
+      params.push :optional_module_id
+    end
+
+    params.push background_attributes: [:id, :image, :_destroy] if @background_module.enabled?
+    params.push video_upload_attributes: [:id, :video_file, :online, :position, :_destroy] unless show_video_background?(@video_settings, @video_module)
+
+    params
+  end
 
   decorate_with CategoryDecorator
   config.clear_sidebar_sections!
@@ -123,19 +127,7 @@ ActiveAdmin.register Category do
     end
 
     def update
-      unless current_user.super_administrator?
-        params[:category].delete :optional_module_id
-        params[:category].delete :optional
-        params[:category].delete :menu_id
-      end
-
-      if params[:category][:custom_background_color] == '0'
-        params[:category][:color] = nil
-      end
-
-      params[:category].delete :background_attributes unless @background_module.enabled?
-      params[:category].delete :video_upload_attributes unless show_video_background?(@video_settings, @video_module)
-
+      params[:category][:color] = nil if params[:category][:custom_background_color] == '0'
       super
     end
   end
