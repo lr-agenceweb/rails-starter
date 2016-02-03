@@ -1,24 +1,28 @@
 ActiveAdmin.register Setting, as: 'Parameter' do
   menu parent: I18n.t('admin_menu.config')
 
-  permit_params :id,
-                :name,
-                :phone,
-                :phone_secondary,
-                :email,
-                :per_page,
-                :show_breadcrumb,
-                :show_social,
-                :show_qrcode,
-                :maintenance,
-                :logo,
-                :logo_footer,
-                :delete_logo,
-                :delete_logo_footer,
-                :twitter_username,
-                translations_attributes: [
-                  :id, :locale, :title, :subtitle
-                ]
+  permit_params do
+    params = [:id,
+              :name,
+              :phone,
+              :phone_secondary,
+              :email,
+              :per_page,
+              :maintenance,
+              :logo,
+              :logo_footer,
+              :delete_logo,
+              :delete_logo_footer,
+              :twitter_username,
+              translations_attributes: [
+                :id, :locale, :title, :subtitle
+              ]
+            ]
+    params.push :show_social if @social_module.enabled?
+    params.push :show_qrcode if @qrcode_module.enabled?
+    params.push :show_breadcrumb if @breadcrumb_module.enabled?
+    params
+  end
 
   decorate_with SettingDecorator
   config.clear_sidebar_sections!
@@ -72,13 +76,6 @@ ActiveAdmin.register Setting, as: 'Parameter' do
   #
   controller do
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? }
-
-    def update
-      params[:setting].delete :show_social unless @social_module.enabled?
-      params[:setting].delete :show_qrcode unless @qrcode_module.enabled?
-      params[:setting].delete :show_breadcrumb unless @breadcrumb_module.enabled?
-      super
-    end
 
     private
 
