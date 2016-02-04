@@ -16,6 +16,9 @@ ActiveAdmin.register Setting, as: 'Parameter' do
               :twitter_username,
               translations_attributes: [
                 :id, :locale, :title, :subtitle
+              ],
+              location_attributes: [
+                :id, :address, :city, :postcode, :geocode_address, :latitude, :longitude, :_destroy
               ]
              ]
     params.push :show_social if @social_module.enabled?
@@ -51,6 +54,18 @@ ActiveAdmin.register Setting, as: 'Parameter' do
           end
         end
       end
+    end
+
+    columns do
+      column do
+        panel I18n.t('activerecord.models.location.one') do
+          attributes_table_for parameter.decorate do
+            row :location_address
+            row :location_postcode
+            row :location_city
+          end
+        end
+      end
 
       if breadcrumb_module.enabled? || social_module.enabled? || qrcode_module.enabled?
         column do
@@ -63,7 +78,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
             end
           end
         end
-      end
+      end # if
     end
   end
 

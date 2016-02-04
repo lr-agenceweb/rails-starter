@@ -46,6 +46,10 @@ end
 
 f.columns do
   f.column do
+    render 'admin/shared/locations/one', f: f, full: true
+  end
+
+  f.column do
     f.inputs 'Paramètres des modules' do
       f.input :twitter_username, hint: 'Si vous disposez d\'un compte sur Twitter, vous pouvez indiquer votre nom d\'utilisateur. Cela permet aux personnes partageant votre site de vous identitfier sur Twitter'
       f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site' if breadcrumb_module.enabled?

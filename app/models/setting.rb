@@ -41,6 +41,11 @@ class Setting < ActiveRecord::Base
     validates :title, presence: true
   end
 
+  has_one :location, as: :locationable, dependent: :destroy
+  accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
+
+  delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
+
   def self.per_page_values
     [1, 2, 3, 5, 10, 15, 20, 0]
   end

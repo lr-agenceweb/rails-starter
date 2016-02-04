@@ -1,18 +1,18 @@
-f.inputs title, for: [:location, f.object.location || Location.new] do |item|
-  item.input :address
-  item.input :city
-  item.input :postcode
+f.inputs (defined?(title_inputs) ? title_inputs : t('activerecord.models.location.one')), for: [:location, f.object.location || Location.new] do |location|
+  location.input :address
+  location.input :postcode
+  location.input :city
 
   if full
-    item.input :geocode_address,
-               hint: t('form.hint.location.geocode_address'),
-               input_html: { id: 'gmaps-input-address' }
+    location.input :geocode_address,
+                   hint: t('form.hint.location.geocode_address'),
+                   input_html: { id: 'gmaps-input-address' }
 
-    item.input :latitude,
-               label: false,
-               input_html: { id: 'gmaps-output-latitude', class: 'hide' }
-    item.input :longitude,
-               label: false,
-               input_html: { id: 'gmaps-output-longitude', class: 'hide' }
+    location.input :latitude,
+                   label: false,
+                   input_html: { id: 'gmaps-output-latitude', class: 'hide' }
+    location.input :longitude,
+                   label: false,
+                   input_html: { id: 'gmaps-output-longitude', class: 'hide' }
   end
 end

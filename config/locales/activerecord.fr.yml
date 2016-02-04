@@ -170,6 +170,9 @@ fr:
       map:
         one: Carte
         other: Cartes
+      location:
+        one: Position géographique
+        other: Positions géographique
       role:
         one: Rôle
         other: Rôles
@@ -241,6 +244,9 @@ fr:
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
         twitter_username: Nom d'utilisateur sur Twitter
+        location_postcode: Code Postal
+        location_address: Adresse
+        location_city: Ville
       user:
         username: Nom d'utilisateur
         password: Mot de passe
@@ -458,13 +464,12 @@ fr:
         marker_color: Couleur du marqueur
         marker_color_deco: Couleur du marqueur
       location:
-        address: Adresse complète
-        full_address: Adresse complète
         postcode: Code Postal
         address: Adresse
         city: Ville
         geocode_address: Adresse avec géolocalisation
         latlon: Latitude / Longitude
+        full_address: Adresse complète
 
       social:
         title: Titre
