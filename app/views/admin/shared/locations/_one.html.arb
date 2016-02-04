@@ -9,10 +9,21 @@ f.inputs (defined?(title_inputs) ? title_inputs : t('activerecord.models.locatio
                    input_html: { id: 'gmaps-input-address' }
 
     location.input :latitude,
+                   as: :hidden,
                    label: false,
                    input_html: { id: 'gmaps-output-latitude', class: 'hide' }
     location.input :longitude,
+                   as: :hidden,
                    label: false,
                    input_html: { id: 'gmaps-output-longitude', class: 'hide' }
+  end
+
+  if f.object.decorate.location?
+    location.input :_destroy,
+                   as: :boolean,
+                   required: false,
+                   label: 'Supprimer ?',
+                   hint: 'Si coché, la position sera suprrimée après mise à jour des paramètres'
+
   end
 end

@@ -31,7 +31,8 @@ module QrcodeHelper
   end
 
   def set_address
-    location = @setting.location.decorate
+    location = @setting.location.try(:decorate)
+    return '' if location.nil?
     "ADR;WORK:;;#{location.address};#{location.city};;#{location.postcode};France\n"
   end
 
