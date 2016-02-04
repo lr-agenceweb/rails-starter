@@ -50,10 +50,6 @@ class EventDecorator < PostDecorator
     model.location.decorate.full_address_inline if location?
   end
 
-  def location?
-    !model.location.blank?
-  end
-
   private
 
   def url?

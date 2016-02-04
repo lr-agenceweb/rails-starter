@@ -6,14 +6,28 @@ module Mappable
 
   included do
     include MapHelper
-    before_action :set_map, if: proc { @map_module.enabled? }
-    decorates_assigned :map
+
+    before_action :set_map_setting, if: proc { set_map? }
+    before_action :set_map, if: proc { set_map? }
+    decorates_assigned :location
 
     private
 
     def set_map
-      @map = Map.first
-      mapbox_gon_params if !map.nil? && map.show_map?
+      @location = setting.location
+      mapbox_gon_params
+    end
+
+    def set_map_setting
+      @map_setting = MapSetting.first
+      mapbox_gon_params
+    end
+
+    def set_map?
+      @map_module.enabled? &&
+      setting.show_map? &&
+      setting.location? &&
+      setting.location.decorate.latlon?
     end
   end
 end

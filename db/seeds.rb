@@ -45,6 +45,15 @@ User.create!(
 )
 
 #
+# == Map Setting
+#
+puts 'Creating Map Setting'
+MapSetting.create!(
+  marker_icon: 'park',
+  marker_color: '#EE903E'
+)
+
+#
 # == Settings for site
 #
 puts 'Creating site Setting'
@@ -68,22 +77,12 @@ if @locales.include?(:en)
 end
 
 #
-# == Map
-#
-puts 'Creating Map'
-map = Map.create!(
-  show_map: true,
-  marker_icon: 'park',
-  marker_color: '#EE903E'
-)
-
-#
 # == Location
 #
-puts 'Creating Map Location'
+puts 'Creating Location for Setting'
 Location.create!(
-  locationable_id: map.id,
-  locationable_type: 'Map',
+  locationable_id: @setting_site.id,
+  locationable_type: 'Setting',
   address: 'Place du Père Noël',
   city: 'Rovaniemi',
   postcode: '96930',

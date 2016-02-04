@@ -25,5 +25,7 @@
 class Location < ActiveRecord::Base
   belongs_to :locationable, polymorphic: true
 
-  validates :postcode, allow_blank: true, numericality: { only_integer: true }
+  validates :postcode,
+            allow_blank: true,
+            numericality: { only_integer: true }
 end

@@ -24,7 +24,7 @@ class ContactFormMailer < ApplicationMailer
     @message.subject = I18n.t('contact.email.subject_cc', site: @setting.title, locale: I18n.default_locale)
     mail from: @setting.email,
          to: @message.email,
-         subject: I18n.t('contact.email.subject_cc', site: @setting.title),
+         subject: @message.subject,
          body: @message.message do |format|
       format.html { render :message_me }
       format.text { render :message_me }

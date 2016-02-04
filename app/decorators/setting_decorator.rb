@@ -54,6 +54,11 @@ class SettingDecorator < ApplicationDecorator
   #
   # == Modules
   #
+  def map
+    color = model.show_map? ? 'blue' : 'red'
+    status_tag_deco I18n.t("enabled.#{model.show_map}"), color
+  end
+
   def breadcrumb
     color = model.show_breadcrumb? ? 'blue' : 'red'
     status_tag_deco I18n.t("enabled.#{model.show_breadcrumb}"), color

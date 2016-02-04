@@ -164,12 +164,15 @@ fr:
       event_setting:
         one: Événement configuration
         other: Événements configuration
-      plan:
-        one: Carte
-        other: Cartes
       map:
         one: Carte
         other: Cartes
+      map_setting:
+        one: Carte configuration
+        other: Cartes configuration
+      location:
+        one: Position géographique
+        other: Positions géographique
       role:
         one: Rôle
         other: Rôles
@@ -238,9 +241,14 @@ fr:
         show_breadcrumb: Afficher le fil d'ariane ?
         show_social: Afficher le partage sur les réseaux sociaux ?
         show_qrcode: Afficher le QrCode sur la page contact ?
+        show_map: Afficher la carte sur la page contact ?
+        map: Carte
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
         twitter_username: Nom d'utilisateur sur Twitter
+        location_postcode: Code Postal
+        location_address: Adresse
+        location_city: Ville
       user:
         username: Nom d'utilisateur
         password: Mot de passe
@@ -449,22 +457,18 @@ fr:
       event_setting:
         prev_next: Liens précédent / suivant
         event_order: Ordre des événements
-      map:
-        show_map: Afficher la carte ?
+      map_setting:
         full_address_inline: Adresse de votre organisation
-        map_status: Carte
-        status: État
         marker_icon: Icône du marqueur
         marker_color: Couleur du marqueur
         marker_color_deco: Couleur du marqueur
       location:
-        address: Adresse complète
-        full_address: Adresse complète
         postcode: Code Postal
         address: Adresse
         city: Ville
         geocode_address: Adresse avec géolocalisation
         latlon: Latitude / Longitude
+        full_address: Adresse complète
 
       social:
         title: Titre

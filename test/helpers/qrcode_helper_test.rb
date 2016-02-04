@@ -48,7 +48,6 @@ class QrcodeHelperTest < ActionView::TestCase
 
   def initialize_test
     @setting = settings(:one)
-    @map = maps(:one)
     @vcard_string = "BEGIN:VCARD\nVERSION:3.0\nN:Rails Starter\nFN:Rails Starter\nTEL;WORK:+33 (0)1 02 03 04 05\nADR;WORK:;;1 Main Street;Auckland;;06001;France\nORG:Rails Starter démarre rapidement\nEMAIL:demo@rails-starter.com\nURL:http://test.host/\nEND:VCARD"
   end
 end
