@@ -164,12 +164,12 @@ fr:
       event_setting:
         one: Événement configuration
         other: Événements configuration
-      plan:
-        one: Carte
-        other: Cartes
       map:
         one: Carte
         other: Cartes
+      map_setting:
+        one: Carte configuration
+        other: Cartes configuration
       location:
         one: Position géographique
         other: Positions géographique
@@ -457,11 +457,8 @@ fr:
       event_setting:
         prev_next: Liens précédent / suivant
         event_order: Ordre des événements
-      map:
-        show_map: Afficher la carte ?
+      map_setting:
         full_address_inline: Adresse de votre organisation
-        map_status: Carte
-        status: État
         marker_icon: Icône du marqueur
         marker_color: Couleur du marqueur
         marker_color_deco: Couleur du marqueur

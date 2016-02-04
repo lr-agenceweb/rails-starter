@@ -1,14 +1,14 @@
 # == Schema Information
 #
-# Table name: maps
+# Table name: map_settings
 #
 #  id           :integer          not null, primary key
 #  marker_icon  :string(255)
 #  marker_color :string(255)
-#  show_map     :boolean
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
 
 one:
-  show_map: true
+  marker_icon: park
+  marker_color: '#EE903E'

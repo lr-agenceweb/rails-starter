@@ -1,11 +1,11 @@
 require 'test_helper'
 
 #
-# == Map model test
+# == MapSetting model test
 #
-class MapTest < ActiveSupport::TestCase
+class MapSettingTest < ActiveSupport::TestCase
   test 'should return list of allowed map markers' do
-    allowed_map_markers = Map.allowed_markers
+    allowed_map_markers = MapSetting.allowed_markers
     assert_includes allowed_map_markers, 'camera'
     assert_includes allowed_map_markers, 'building'
     assert_includes allowed_map_markers, 'park'

@@ -180,10 +180,10 @@ class Ability
   #
   def map_module
     if @map_module.enabled?
-      can [:update, :read], Map
-      cannot [:create, :destroy], Map
+      can [:update, :read], MapSetting
+      cannot [:create, :destroy], MapSetting
     else
-      cannot :manage, Map
+      cannot :manage, MapSetting
     end
   end
 

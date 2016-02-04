@@ -9,8 +9,8 @@ module MapHelper
       mapbox_access_token: Figaro.env.mapbox_access_token,
       latitude: @location.try(:latitude),
       longitude: @location.try(:longitude),
-      marker_icon: 'building', # @marker_icon.nil? ? '' : @marker_icon,
-      marker_color: '#0c708d',
+      marker_icon: @map_setting.marker_icon,
+      marker_color: @map_setting.marker_color,
       root_url: I18n.with_locale(@language) { root_path }
     )
   end

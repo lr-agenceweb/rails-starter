@@ -5,9 +5,9 @@ require 'test_helper'
 #
 module Admin
   #
-  # == MapsController test
+  # == MapSettingsController test
   #
-  class PlansControllerTest < ActionController::TestCase
+  class MapSettingsControllerTest < ActionController::TestCase
     include Devise::TestHelpers
     include Rails.application.routes.url_helpers
 
@@ -19,7 +19,7 @@ module Admin
     test 'should redirect to show page if logged in' do
       get :index
       assert_response 301
-      assert_redirected_to admin_plan_path(@map)
+      assert_redirected_to admin_map_setting_path(@map)
     end
 
     test 'should get show page if logged in' do
@@ -34,7 +34,7 @@ module Admin
 
     test 'should update slider if logged in' do
       patch :update, id: @map
-      assert_redirected_to admin_plan_path(assigns(:map))
+      assert_redirected_to admin_map_setting_path(assigns(:map))
     end
 
     #
@@ -42,12 +42,12 @@ module Admin
     #
     test 'should not update if marker_icon is not allowed' do
       patch :update, id: @map, map: { marker_icon: 'bad_value' }
-      assert_not assigns(:plan).valid?
+      assert_not assigns(:map_setting).valid?
     end
 
     test 'should not update if postcode is not an integer' do
       patch :update, id: @map, map: { location_attributes: { postcode: 'bad_value' } }
-      assert_not assigns(:plan).valid?
+      assert_not assigns(:map_setting).valid?
     end
 
     #
@@ -81,7 +81,7 @@ module Admin
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
-      assert ability.cannot?(:create, Map.new), 'should not be able to create'
+      assert ability.cannot?(:create, MapSetting.new), 'should not be able to create'
       assert ability.cannot?(:read, @map), 'should not be able to read'
       assert ability.cannot?(:update, @map), 'should not be able to update'
       assert ability.cannot?(:destroy, @map), 'should not be able to destroy'
@@ -89,7 +89,7 @@ module Admin
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
-      assert ability.cannot?(:create, Map.new), 'should not be able to create'
+      assert ability.cannot?(:create, MapSetting.new), 'should not be able to create'
       assert ability.can?(:read, @map), 'should be able to read'
       assert ability.can?(:update, @map), 'should be able to update'
       assert ability.cannot?(:destroy, @map), 'should not be able to destroy'
@@ -98,7 +98,7 @@ module Admin
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
-      assert ability.cannot?(:create, Map.new), 'should not be able to create'
+      assert ability.cannot?(:create, MapSetting.new), 'should not be able to create'
       assert ability.can?(:read, @map), 'should be able to read'
       assert ability.can?(:update, @map), 'should be able to update'
       assert ability.cannot?(:destroy, @map), 'should not be able to destroy'
@@ -108,7 +108,7 @@ module Admin
     # == Destroy
     #
     test 'should not destroy map' do
-      assert_no_difference ['Map.count', 'Location.count'] do
+      assert_no_difference ['MapSetting.count', 'Location.count'] do
         delete :destroy, id: @map
       end
       assert_redirected_to admin_dashboard_path
