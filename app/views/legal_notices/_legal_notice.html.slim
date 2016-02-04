@@ -1,0 +1,8 @@
+article.post-article
+  = render 'posts/microdatas', resource: legal_notice.decorate
+
+  header
+    h3.post-article-title = legal_notice.title
+
+  .post-body
+    == legal_notice.content
