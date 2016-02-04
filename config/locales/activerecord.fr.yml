@@ -74,9 +74,6 @@ fr:
       setting:
         one: Paramètre
         other: Paramètres
-      parameter:
-        one: Paramètre
-        other: Paramètres
       referencement:
         one: Référencement
         other: Référencements
