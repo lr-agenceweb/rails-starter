@@ -12,7 +12,9 @@ f.columns do
                     hint: 'Sous-titre du site'
           end
         end
+      end
 
+      f.columns id: 'logos-container' do
         f.column do
           f.input :logo, hint: raw("<p class='paperclip-preview'>#{retina_image_tag(f.object, :logo, :small)}</p>")
           if f.object.logo?
@@ -20,7 +22,9 @@ f.columns do
                     as: :boolean,
                     hint: 'Si coché, le logo sera supprimé après mise à jour des paramètres'
           end
+        end
 
+        f.column do
           f.input :logo_footer, hint: f.object.logo_footer? ? raw("<p class='paperclip-preview logo-footer'>#{retina_image_tag(f.object, :logo_footer, :small)}</p>") : ''
           if f.object.logo_footer?
             f.input :delete_logo_footer,
@@ -51,10 +55,11 @@ f.columns do
 
   f.column do
     f.inputs 'Paramètres des modules' do
-      f.input :twitter_username, hint: 'Si vous disposez d\'un compte sur Twitter, vous pouvez indiquer votre nom d\'utilisateur. Cela permet aux personnes partageant votre site de vous identitfier sur Twitter'
+      f.input :show_map, hint: 'Afficher ou non la carte positionnant votre activité sur la page contact' if map_module.enabled?
       f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site' if breadcrumb_module.enabled?
       f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site' if social_module.enabled?
       f.input :show_qrcode, hint: 'Afficher ou non le qrcode (sur la page contact) ajoutant vos informations de contact sur le smartphone des internautes ' if qrcode_module.enabled?
+      f.input :twitter_username, hint: 'Si vous disposez d\'un compte sur Twitter, vous pouvez indiquer votre nom d\'utilisateur. Cela permet aux personnes partageant votre site de vous identitfier sur Twitter'
     end
   end
 end

@@ -24,6 +24,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
     params.push :show_social if @social_module.enabled?
     params.push :show_qrcode if @qrcode_module.enabled?
     params.push :show_breadcrumb if @breadcrumb_module.enabled?
+    params.push :show_map if @map_module.enabled?
     params
   end
 
@@ -67,18 +68,17 @@ ActiveAdmin.register Setting, as: 'Parameter' do
         end
       end
 
-      if breadcrumb_module.enabled? || social_module.enabled? || qrcode_module.enabled?
-        column do
-          panel t('active_admin.details', model: 'Modules') do
-            attributes_table_for parameter.decorate do
-              row :breadcrumb if breadcrumb_module.enabled?
-              row :qrcode if qrcode_module.enabled?
-              row :social if social_module.enabled?
-              row :twitter_username
-            end
+      column do
+        panel t('active_admin.details', model: 'Modules') do
+          attributes_table_for parameter.decorate do
+            row :map if map_module.enabled?
+            row :breadcrumb if breadcrumb_module.enabled?
+            row :qrcode if qrcode_module.enabled?
+            row :social if social_module.enabled?
+            row :twitter_username
           end
         end
-      end # if
+      end
     end
   end
 

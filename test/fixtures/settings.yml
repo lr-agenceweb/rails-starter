@@ -13,6 +13,7 @@
 #  show_breadcrumb          :boolean          default(FALSE)
 #  show_social              :boolean          default(TRUE)
 #  show_qrcode              :boolean          default(FALSE)
+#  show_map                 :boolean          default(FALSE)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer
