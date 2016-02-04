@@ -1,19 +1,24 @@
 - breadcrumb :contact
 
-section.l-contact.one-page
-  .row
-    article.small-12.columns
+.row
+  .small-12.columns
+    = title_for_category(category)
       = title_for_category(category)
       - if Rails.env.development?
         = link_to 'Mail dev', root_url(locale: 'fr', port: 1080, only_path: false), target: :blank, class: 'button success tiny maildev hide-for-small'
 
-  = render 'optional_modules/sliders/show', slider: slider, force: false
+.row
+  .small-12.columns
+    = render 'optional_modules/sliders/show', slider: slider, force: false
 
-  - if @background.nil?
-    = render 'form'
+.row
+  .small-12.medium-9.medium-centered.columns
+    - if @background.nil?
+      = render 'form'
 
-  - else
-    = background.handle_background_tag((render 'form'), 'background-contact') if @background_module.enabled? && !@background.nil?
+    - else
+      = background.handle_background_tag((render 'form'), 'background-contact') if @background_module.enabled? && !@background.nil?
+
 
 / Mapbox
 - unless @location.nil?

@@ -2,7 +2,6 @@
 # == ContactsController
 #
 class ContactsController < ApplicationController
-  include Mappable
   include QrcodeHelper
 
   skip_before_action :allow_cors
