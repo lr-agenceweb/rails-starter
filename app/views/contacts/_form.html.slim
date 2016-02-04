@@ -14,4 +14,4 @@
 
         - if @qrcode_module.enabled? && setting.show_qrcode?
           .small-12.medium-6.columns.hide-for-small
-            = image_tag "http://chart.apis.google.com/chart?chs=350x350&cht=qr&chl=#{u vcard}", alt: 'QrCode'
+            = qrcode_image_tag
