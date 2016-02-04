@@ -6,9 +6,9 @@ class MapDecorator < ApplicationDecorator
   delegate_all
   decorates_association :location
 
-  def map(map_module_enabled, force = false, from_form = false)
-    content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : ''}", id: 'map', data: { url_popup: mapbox_popup_contacts_path }) if map?(map_module_enabled, force)
-  end
+  # def map(map_module_enabled, force = false, from_form = false)
+  #   content_tag(:div, nil, class: "map dark #{from_form ? 'from-form' : ''}", id: 'map', data: { url_popup: mapbox_popup_contacts_path }) if map?(map_module_enabled, force)
+  # end
 
   #
   # == Location
@@ -26,26 +26,26 @@ class MapDecorator < ApplicationDecorator
     content_tag(:div, '', style: "background-color: #{model.marker_color}; width: 35px; height: 20px;") unless model.marker_color.blank?
   end
 
-  #
-  # == Popup
-  #
-  def title_popup(setting)
-    content_tag(:a, href: root_path, class: 'logo-link') do
-      concat(setting.logo_deco)
-      concat(content_tag(:h3, class: 'marker-title popup-title text-center') do
-        concat(setting.title)
-        concat(content_tag(:span, class: 'popup-subtitle') do
-          concat(setting.subtitle)
-        end)
-      end)
-    end
-  end
+  # #
+  # # == Popup
+  # #
+  # def title_popup(setting)
+  #   content_tag(:a, href: root_path, class: 'logo-link') do
+  #     concat(setting.logo_deco)
+  #     concat(content_tag(:h3, class: 'marker-title popup-title text-center') do
+  #       concat(setting.title)
+  #       concat(content_tag(:span, class: 'popup-subtitle') do
+  #         concat(setting.subtitle)
+  #       end)
+  #     end)
+  #   end
+  # end
 
-  def address_popup
-    h.content_tag(:div) do
-      concat(h.content_tag(:p, model.location.decorate.full_address_inline))
-    end
-  end
+  # def address_popup
+  #   h.content_tag(:div) do
+  #     concat(h.content_tag(:p, model.location.decorate.full_address_inline))
+  #   end
+  # end
 
   #
   # == ActiveAdmin

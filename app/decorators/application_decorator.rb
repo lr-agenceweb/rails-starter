@@ -103,4 +103,8 @@ class ApplicationDecorator < Draper::Decorator
   def description?
     !model.description.blank?
   end
+
+  def location?
+    !model.location.blank?
+  end
 end

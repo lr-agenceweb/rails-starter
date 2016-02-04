@@ -31,7 +31,7 @@ module QrcodeHelper
   end
 
   def set_address
-    location = @map.location.decorate
+    location = @setting.location.decorate
     "ADR;WORK:;;#{location.address};#{location.city};;#{location.postcode};France\n"
   end
 
