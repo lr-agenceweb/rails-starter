@@ -22,7 +22,4 @@
 
 / Mapbox
 - unless @location.nil?
-  #map.map.dark data-url-popup="#{mapbox_popup_contacts_path}"
-
-  noscript
-    p.text-center = I18n.t('map.no_js')
+  = render 'elements/map'
