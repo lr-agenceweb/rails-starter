@@ -34,11 +34,12 @@ class LocationDecorator < ApplicationDecorator
     end
   end
 
+  #
+  # == Boolean
+  #
   def latlon?
     !model.latitude.nil? && !model.longitude.nil?
   end
-
-  private
 
   def address?
     !model.address.blank?

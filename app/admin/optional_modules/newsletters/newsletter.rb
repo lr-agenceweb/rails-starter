@@ -51,8 +51,6 @@ ActiveAdmin.register Newsletter do
     include Newsletterable
     include NewsletterHelper
 
-    before_action :set_variables, only: [:preview]
-
     def send_newsletter
       if params[:option] == 'subscribers'
         @newsletter.update_attributes(sent_at: Time.zone.now)
@@ -98,10 +96,6 @@ ActiveAdmin.register Newsletter do
 
     def make_redirect
       redirect_to :back
-    end
-
-    def set_variables
-      @map = Map.joins(:location).select('locations.id, locations.address, locations.city, locations.postcode').first
     end
   end
 end
