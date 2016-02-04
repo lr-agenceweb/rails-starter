@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202005847) do
+ActiveRecord::Schema.define(version: 20160204170630) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -316,10 +316,9 @@ ActiveRecord::Schema.define(version: 20160202005847) do
     t.datetime "updated_at",                             null: false
   end
 
-  create_table "maps", force: :cascade do |t|
+  create_table "map_settings", force: :cascade do |t|
     t.string   "marker_icon",  limit: 255
     t.string   "marker_color", limit: 255
-    t.boolean  "show_map"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -544,6 +543,7 @@ ActiveRecord::Schema.define(version: 20160202005847) do
     t.boolean  "show_breadcrumb",                        default: false
     t.boolean  "show_social",                            default: true
     t.boolean  "show_qrcode",                            default: false
+    t.boolean  "show_map",                               default: false
     t.boolean  "maintenance",                            default: false
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size",           limit: 4

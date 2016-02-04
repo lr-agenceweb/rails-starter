@@ -13,6 +13,7 @@
 #  show_breadcrumb          :boolean          default(FALSE)
 #  show_social              :boolean          default(TRUE)
 #  show_qrcode              :boolean          default(FALSE)
+#  show_map                 :boolean          default(FALSE)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer
@@ -35,6 +36,7 @@ DEFAULTS: &DEFAULTS
   per_page: 3
   show_social: false
   show_qrcode: false
+  show_map: false
   show_breadcrumb: false
   maintenance: false
   created_at: <%= 1.weeks.ago.to_s(:db) %>

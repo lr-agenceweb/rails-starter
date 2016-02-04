@@ -13,6 +13,7 @@
 #  show_breadcrumb          :boolean          default(FALSE)
 #  show_social              :boolean          default(TRUE)
 #  show_qrcode              :boolean          default(FALSE)
+#  show_map                 :boolean          default(FALSE)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer
@@ -40,6 +41,11 @@ class Setting < ActiveRecord::Base
   active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true
   end
+
+  has_one :location, as: :locationable, dependent: :destroy
+  accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
+
+  delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
   def self.per_page_values
     [1, 2, 3, 5, 10, 15, 20, 0]

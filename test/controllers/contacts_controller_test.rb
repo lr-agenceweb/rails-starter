@@ -220,10 +220,21 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should use correct action and no layout for mapbox popup action' do
+    @setting.update_attribute(:show_map, true)
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :get, :mapbox_popup, locale: locale.to_s
         assert_template :mapbox_popup
+        assert_template layout: false
+      end
+    end
+  end
+
+  test 'AJAX :: should not render anything if location not set for mapbox popup action' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        xhr :get, :mapbox_popup, locale: locale.to_s
+        assert_template nil
         assert_template layout: false
       end
     end

@@ -11,3 +11,14 @@ div itemscope='' itemtype='http://schema.org/ProfessionalService'
   meta itemprop='url' content="#{root_url}"
   meta itemprop='telephone' content="#{resource.phone}"
   meta itemprop='name legalName' content="#{resource.title_subtitle_inline}"
+
+  - if resource.location?
+    div itemprop='location' itemscope='' itemtype='http://schema.org/Place'
+      meta itemprop='name' content="#{resource.title_subtitle_inline}"
+      div itemprop='address' itemscope='' itemtype='http://schema.org/PostalAddress'
+        - if resource.location.address?
+          meta itemprop='streetAddress' content="#{resource.location_address}"
+        - if resource.location.postcode?
+          meta itemprop='postalCode' content="#{resource.location_postcode}"
+        - if resource.location.city?
+          meta itemprop='addressLocality' content="#{resource.location_city}"

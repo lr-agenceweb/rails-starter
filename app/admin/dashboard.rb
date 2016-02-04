@@ -60,10 +60,10 @@ ActiveAdmin.register_page 'Dashboard' do
           render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all
         end # column
 
-        if OptionalModule.find_by(name: 'Map').enabled?
+        unless location.nil?
           column do
             panel 'Mapbox' do
-              Map.first.decorate.map(true, true)
+              render 'elements/map'
             end
           end # column
         end # if / else
@@ -72,7 +72,6 @@ ActiveAdmin.register_page 'Dashboard' do
   end # content
 
   controller do
-    include Mappable
     before_action :set_setting
 
     private

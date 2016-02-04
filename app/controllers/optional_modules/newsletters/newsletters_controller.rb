@@ -4,6 +4,7 @@
 class NewslettersController < ApplicationController
   include NewsletterUserable
   include Newsletterable
+
   before_action :not_found, unless: proc { @newsletter_module.enabled? }
   before_action :set_variables, only: [:preview_in_browser, :welcome_user]
   layout 'newsletter'
@@ -40,7 +41,6 @@ class NewslettersController < ApplicationController
 
   def set_variables
     @hide_preview_link = true
-    @map = Map.joins(:location).select('locations.id, locations.address, locations.city, locations.postcode').first
   end
 
   def all_conditions_respected?

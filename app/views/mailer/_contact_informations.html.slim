@@ -13,10 +13,7 @@ tr
       = link_to setting.phone, "tel:#{setting.decorate.phone_w3c}"
     p
       strong> = I18n.t('contact.informations.address', locale: locale) + ':'
-      br
-      = map.decorate.address if map.decorate.address?
-      == '<br />' if map.decorate.city?
-      = map.decorate.postcode if map.decorate.postcode?
-      == ' - ' if map.decorate.city?
-      = map.decorate.city if map.decorate.city?
+      - if setting.decorate.location? && setting.location.decorate.latlon?
+        br
+        = setting.location.decorate.full_address_inline
   td.expander

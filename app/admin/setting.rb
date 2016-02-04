@@ -16,11 +16,15 @@ ActiveAdmin.register Setting, as: 'Parameter' do
               :twitter_username,
               translations_attributes: [
                 :id, :locale, :title, :subtitle
+              ],
+              location_attributes: [
+                :id, :address, :city, :postcode, :geocode_address, :latitude, :longitude, :_destroy
               ]
              ]
     params.push :show_social if @social_module.enabled?
     params.push :show_qrcode if @qrcode_module.enabled?
     params.push :show_breadcrumb if @breadcrumb_module.enabled?
+    params.push :show_map if @map_module.enabled?
     params
   end
 
@@ -51,16 +55,27 @@ ActiveAdmin.register Setting, as: 'Parameter' do
           end
         end
       end
+    end
 
-      if breadcrumb_module.enabled? || social_module.enabled? || qrcode_module.enabled?
-        column do
-          panel t('active_admin.details', model: 'Modules') do
-            attributes_table_for parameter.decorate do
-              row :breadcrumb if breadcrumb_module.enabled?
-              row :qrcode if qrcode_module.enabled?
-              row :social if social_module.enabled?
-              row :twitter_username
-            end
+    columns do
+      column do
+        panel I18n.t('activerecord.models.location.one') do
+          attributes_table_for parameter.decorate do
+            row :location_address
+            row :location_postcode
+            row :location_city
+          end
+        end
+      end
+
+      column do
+        panel t('active_admin.details', model: 'Modules') do
+          attributes_table_for parameter.decorate do
+            row :map if map_module.enabled?
+            row :breadcrumb if breadcrumb_module.enabled?
+            row :qrcode if qrcode_module.enabled?
+            row :social if social_module.enabled?
+            row :twitter_username
           end
         end
       end
