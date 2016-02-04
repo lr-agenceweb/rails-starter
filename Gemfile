@@ -169,6 +169,7 @@ group :development do
 
   gem 'bullet'
   gem 'shog'
+  gem 'brakeman', require: false # check for security vulnerabilities
 
   # == Deploy
   gem 'capistrano', '~> 3.1'
