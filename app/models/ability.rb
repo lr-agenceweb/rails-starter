@@ -158,7 +158,7 @@ class Ability
       if instance_variable_get(:"@#{model_object.to_s.underscore}_module").enabled?
         can :crud, model_object
         can [:read, :update], model_object_setting
-        can [:create, :destroy], model_object_setting
+        cannot [:create, :destroy], model_object_setting
       else
         cannot :manage, [model_object, model_object_setting]
       end
