@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include SocialHelper
   include HtmlHelper
   include UserHelper
+  include AdminBarHelper
 
   protect_from_forgery with: :exception
   analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? || request.headers['HTTP_DNT'] == '1' }

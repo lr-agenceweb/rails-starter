@@ -1,7 +1,8 @@
 #admin_bar.hide-for-small
   .left
     ul.inline-list
-      li = link_to I18n.t('admin_bar.go_to_admin'), admin_dashboard_path, class: 'dahsboard-link', data: { no_turbolink: true }
+      li
+        = fa_icon 'unlock', text: link_to(I18n.t('admin_bar.go_to_admin'), admin_dashboard_path, class: 'dahsboard-link', data: { no_turbolink: true }), right: true
 
   .right
     ul.inline-list
@@ -29,5 +30,5 @@
 
 
       li
-        span.admin_bar-username = "Bonjour #{current_user.username}, "
+        span.admin_bar-username = "#{morning_or_evening} #{current_user.username}, "
         span.admin_bar-avatar = current_user.decorate.image_avatar(24)
