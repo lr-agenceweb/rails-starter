@@ -58,7 +58,7 @@ class CommentDecorator < ApplicationDecorator
     html = ''
     html << content_tag(:p, image_source) if commentable_image?
     html << content_tag(:p, link_source)
-    html
+    html.html_safe
   end
 
   #
