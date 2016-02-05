@@ -6,7 +6,7 @@
 
   .right
     ul.inline-list
-      - if @guest_book_module.enabled? && GuestBookSetting.first.should_validate?
+      - if @guest_book_module.enabled? && @guest_book_setting.should_validate?
         li
           = t('activerecord.models.guest_book.other')
           .admin_bar-comments

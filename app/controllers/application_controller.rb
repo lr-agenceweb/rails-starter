@@ -24,10 +24,10 @@ class ApplicationController < ActionController::Base
   include Socialable
   include Backgroundable
   include Mappable
-  include Commentable
   include Sliderable
   include Videoable
   include NewsletterFrontUserable
+  before_action :set_module_settings # for AdminBar
 
   # Misc
   before_action :set_host_name
@@ -63,6 +63,11 @@ class ApplicationController < ActionController::Base
 
   def set_legal_notices
     @legal_notice_category = Category.includes(menu: [:translations]).find_by(name: 'LegalNotice')
+  end
+
+  def set_module_settings
+    @comment_setting = CommentSetting.first
+    @guest_book_setting = GuestBookSetting.first
   end
 
   def set_host_name
