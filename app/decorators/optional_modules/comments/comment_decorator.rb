@@ -44,26 +44,26 @@ class CommentDecorator < ApplicationDecorator
   end
 
   #
-  # == Link to article where the Comment comes from
+  # == Link and Image for Commentable
   #
   def link_source
     link_to commentable.title, polymorphic_path(commentable), target: :_blank
   end
 
-  #
-  # == Image from article where Comment comes from
-  #
   def image_source
-    retina_image_tag commentable.pictures.first, :image, :small if commentable.pictures.present?
+    retina_image_tag commentable.pictures.first, :image, :small
   end
 
-  #
-  # == Link and Image from article where Comment comes from
-  #
   def link_and_image_source
-    content_tag(:p, image_source) + content_tag(:p, link_source)
+    html = ''
+    html << content_tag(:p, image_source) if commentable_image?
+    html << content_tag(:p, link_source)
+    html
   end
 
+  #
+  # == Status tag
+  #
   def status
     color = model.validated? ? 'green' : 'orange'
     status_tag_deco(I18n.t("validate.#{model.validated}"), color)
@@ -77,5 +77,11 @@ class CommentDecorator < ApplicationDecorator
   def pseudo(name = nil)
     name = pseudo_registered_or_guest if name.nil?
     content_tag(:strong, name, class: 'comment-author')
+  end
+
+  private
+
+  def commentable_image?
+    commentable.pictures.present?
   end
 end

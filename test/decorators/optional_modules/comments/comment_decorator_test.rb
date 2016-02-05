@@ -54,6 +54,25 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Link and Image for Commentable
+  #
+  test 'should return correct commentable link' do
+    assert_equal '<a target="_blank" href="/a-propos/article-2-a-propos">Article 2 A Propos</a>', @comment_decorated.link_source
+  end
+
+  test 'should return correct commentable image' do
+    assert_equal '<img src="/system/test/pictures/337532635/small-my-picture-3.jpg" alt="Small my picture 3" />', @comment_decorated.image_source
+  end
+
+  test 'should return correct commentable link and image' do
+    assert_equal '<p><img src="/system/test/pictures/337532635/small-my-picture-3.jpg" alt="Small my picture 3" /></p><p><a target="_blank" href="/a-propos/article-2-a-propos">Article 2 A Propos</a></p>', @comment_decorated.link_and_image_source
+  end
+
+  test 'should return correct value for commentable_image?' do
+    assert @comment_decorated.send(:commentable_image?)
+  end
+
+  #
   # == Status tag
   #
   test 'should return correct status_tag when validated' do
