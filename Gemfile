@@ -48,6 +48,7 @@ gem 'fotoramajs'
 #
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'timecop'
 
 #
 # == Media upload
