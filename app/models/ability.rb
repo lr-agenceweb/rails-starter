@@ -138,19 +138,6 @@ class Ability
   end
 
   #
-  # == Blog
-  #
-  def blog_module
-    if @blog_module.enabled?
-      can :crud, Blog
-      can [:read, :update], BlogSetting
-      cannot [:create, :destroy], BlogSetting
-    else
-      cannot :manage, [Blog, BlogSetting]
-    end
-  end
-
-  #
   # == Slider
   #
   def slider_module
@@ -163,15 +150,18 @@ class Ability
   end
 
   #
-  # == Event
+  # == Blog / Event
   #
-  def event_module
-    if @event_module.enabled?
-      can :crud, Event
-      can [:read, :update], EventSetting
-      cannot [:create, :destroy], EventSetting
-    else
-      cannot :manage, [Event, EventSetting]
+  [Blog, Event].each do |model_object|
+    define_method "#{model_object.to_s.underscore}_module" do
+      model_object_setting = "#{model_object}Setting".constantize
+      if instance_variable_get(:"@#{model_object.to_s.underscore}_module").enabled?
+        can :crud, model_object
+        can [:read, :update], model_object_setting
+        cannot [:create, :destroy], model_object_setting
+      else
+        cannot :manage, [model_object, model_object_setting]
+      end
     end
   end
 

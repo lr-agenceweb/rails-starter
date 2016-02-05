@@ -9,17 +9,12 @@ module SitemapHelper
     add legal_notices_path, priority: 0.7, changefreq: 'monthly' if Category.find_by(name: 'LegalNotice').menu_online
   end
 
-  def blog_module
-    add blogs_path, priority: 0.7, changefreq: 'monthly'
-    Blog.online.find_each do |blog|
-      add blog_path(blog), priority: 0.7, changefreq: 'monthly'
-    end
-  end
-
-  def event_module
-    add events_path, priority: 0.7, changefreq: 'monthly'
-    Event.online.find_each do |event|
-      add event_path(event), priority: 0.7, changefreq: 'monthly'
+  [Blog, Event].each do |mod|
+    define_method "#{mod.to_s.underscore}_module" do
+      add send("#{mod.to_s.underscore.pluralize}_path"), priority: 0.7, changefreq: 'monthly'
+      mod.online.find_each do |resource|
+        add send("#{mod.to_s.underscore}_path", resource), priority: 0.7, changefreq: 'monthly'
+      end
     end
   end
 

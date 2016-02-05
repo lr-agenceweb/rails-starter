@@ -5,9 +5,9 @@ require 'test_helper'
 #
 module Admin
   #
-  # == ParametersController test
+  # == SettingsController test
   #
-  class ParametersControllerTest < ActionController::TestCase
+  class SettingsControllerTest < ActionController::TestCase
     include Devise::TestHelpers
 
     setup :initialize_test
@@ -18,7 +18,7 @@ module Admin
     test 'should redirect index to show if logged in' do
       get :index
       assert_response 301
-      assert_redirected_to admin_parameter_path(@setting)
+      assert_redirected_to admin_setting_path(@setting)
     end
 
     test 'should show show page if logged in' do
@@ -33,7 +33,7 @@ module Admin
 
     test 'should update setting if logged in' do
       patch :update, id: @setting, setting: {}
-      assert_redirected_to admin_parameter_path(@setting)
+      assert_redirected_to admin_setting_path(@setting)
     end
 
     test 'should render 404 if access new page' do
@@ -55,7 +55,7 @@ module Admin
       @setting.update_attribute(:maintenance, true)
       get :index
       assert_response 301
-      assert_redirected_to admin_parameter_path(@setting)
+      assert_redirected_to admin_setting_path(@setting)
     end
 
     #
@@ -130,26 +130,26 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Setting.new), 'should not be able to create'
-      assert ability.cannot?(:read, Setting.new), 'should not be able to read'
-      assert ability.cannot?(:update, Setting.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Setting.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @setting), 'should not be able to read'
+      assert ability.cannot?(:update, @setting), 'should not be able to update'
+      assert ability.cannot?(:destroy, @setting), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.cannot?(:create, Setting.new), 'should not be able to create'
-      assert ability.can?(:read, Setting.new), 'should be able to read'
-      assert ability.can?(:update, Setting.new), 'should be able to update'
-      assert ability.cannot?(:destroy, Setting.new), 'should not be able to destroy'
+      assert ability.can?(:read, @setting), 'should be able to read'
+      assert ability.can?(:update, @setting), 'should be able to update'
+      assert ability.cannot?(:destroy, @setting), 'should not be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.can?(:create, Setting.new), 'should be able to create'
-      assert ability.can?(:read, Setting.new), 'should be able to read'
-      assert ability.can?(:update, Setting.new), 'should be able to update'
-      assert ability.can?(:destroy, Setting.new), 'should be able to destroy'
+      assert ability.can?(:read, @setting), 'should be able to read'
+      assert ability.can?(:update, @setting), 'should be able to update'
+      assert ability.can?(:destroy, @setting), 'should be able to destroy'
     end
 
     #
@@ -170,7 +170,7 @@ module Admin
     #
     test 'should be able to upload logo' do
       upload_paperclip_attachment
-      setting = assigns(:parameter)
+      setting = assigns(:setting)
       assert setting.logo?, 'a logo should have been uploaded'
       assert_equal 'bart.png', setting.logo_file_name
       assert_equal 'image/png', setting.logo_content_type
@@ -181,7 +181,7 @@ module Admin
       existing_styles = []
 
       upload_paperclip_attachment
-      setting = assigns(:parameter)
+      setting = assigns(:setting)
 
       setting.logo.styles.keys.collect do |style|
         f = setting.logo.path(style)
@@ -190,7 +190,7 @@ module Admin
       end
 
       # remove_paperclip_attachment(setting)
-      # setting = assigns(:parameter)
+      # setting = assigns(:setting)
 
       # assert_nil setting.logo_file_name
       # assert_not setting.logo?

@@ -1,4 +1,4 @@
-ActiveAdmin.register Setting, as: 'Parameter' do
+ActiveAdmin.register Setting do
   menu parent: I18n.t('admin_menu.config')
 
   permit_params do
@@ -36,7 +36,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
     columns do
       column do
         panel t('active_admin.details', model: active_admin_config.resource_label) do
-          attributes_table_for parameter.decorate do
+          attributes_table_for setting.decorate do
             row :logo_deco
             row :title
             row :subtitle
@@ -47,7 +47,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
 
       column do
         panel t('active_admin.details', model: t('role.administrator')) do
-          attributes_table_for parameter.decorate do
+          attributes_table_for setting.decorate do
             row :name
             row :phone
             row :phone_secondary unless resource.phone_secondary.blank?
@@ -60,7 +60,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
     columns do
       column do
         panel I18n.t('activerecord.models.location.one') do
-          attributes_table_for parameter.decorate do
+          attributes_table_for setting.decorate do
             row :location_address
             row :location_postcode
             row :location_city
@@ -70,7 +70,7 @@ ActiveAdmin.register Setting, as: 'Parameter' do
 
       column do
         panel t('active_admin.details', model: 'Modules') do
-          attributes_table_for parameter.decorate do
+          attributes_table_for setting.decorate do
             row :map if map_module.enabled?
             row :breadcrumb if breadcrumb_module.enabled?
             row :qrcode if qrcode_module.enabled?
@@ -90,12 +90,17 @@ ActiveAdmin.register Setting, as: 'Parameter' do
   # == Controller
   #
   controller do
+    before_action :redirect_to_dashboard, unless: proc { current_user_and_administrator? }
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? }
 
     private
 
     def redirect_to_show
-      redirect_to admin_parameter_path(Setting.first), status: 301
+      redirect_to admin_setting_path(Setting.first), status: 301
+    end
+
+    def redirect_to_dashboard
+      redirect_to admin_dashboard_path, status: 301
     end
   end
 end

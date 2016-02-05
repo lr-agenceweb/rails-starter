@@ -125,13 +125,17 @@ Units Tests
 -----------
 Basics tests are included, just run `rake test`
 
-Code structure:
+Code structure
 ---------------
 This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
 
 Screenshots
 -----------
 ![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
+
+Thanks
+-------
+A big thanks to [Grafikart](http://grafikart.fr) for all his amazing tutorials !
 
 Contributing
 ------------

@@ -31,7 +31,7 @@ set :scm, :git
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/application.yml', 'config/dkim/dkim.private.key', 'public/sitemap.xml', 'config/analytical.yml')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/sitemap')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/sitemap', 'db/seeds')
 
 # Default value for default_env is {}
 set :default_env, rvm_bin_path: '~/.rvm/bin'
