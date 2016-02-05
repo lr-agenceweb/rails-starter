@@ -28,14 +28,7 @@ class CommentDecorator < ApplicationDecorator
 
     # Connected
     else
-      # Website avatar present
-      if model.user.avatar?
-        retina_thumb_square(model.user)
-
-      # Website avatar not present (use Gravatar)
-      else
-        gravatar_image_tag(model.user.email, alt: model.user_username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) })
-      end
+      retina_thumb_square(model.user, @avatar_width)
     end
   end
 
