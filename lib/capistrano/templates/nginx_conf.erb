@@ -1,0 +1,14 @@
+server {
+  listen 80;
+  listen [::]:80;
+
+  root <%= current_path %>/public;
+  index index.html index.htm;
+
+  # Make site accessible from http://<%= Figaro.env.application_domain_name %>
+  server_name <%= Figaro.env.application_domain_name %>;
+
+  passenger_enabled on;
+  passenger_app_env <%= fetch(:stage) %>;
+  passenger_friendly_error_pages on;
+}
