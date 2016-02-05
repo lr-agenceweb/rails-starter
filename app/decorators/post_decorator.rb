@@ -25,9 +25,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def author_with_avatar
-    content_tag(:div, nil, class: 'author-with-avatar') do
-      concat(raw("#{author_avatar} <br /> #{link_author}"))
-    end
+    author_with_avatar_html(author_avatar, link_author)
   end
 
   def allow_comments_status

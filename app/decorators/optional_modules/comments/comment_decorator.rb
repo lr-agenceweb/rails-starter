@@ -33,9 +33,7 @@ class CommentDecorator < ApplicationDecorator
   end
 
   def author_with_avatar
-    content_tag(:div, nil, class: 'author-with-avatar') do
-      concat("#{avatar} <br /> #{pseudo_registered_or_guest}".html_safe)
-    end
+    author_with_avatar_html(avatar, pseudo_registered_or_guest)
   end
 
   #
