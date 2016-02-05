@@ -2,7 +2,7 @@
   background-color: $jet
   padding: 10px
   overflow: auto
-  color: $white
+  color: $gainsboro
 
   .inline-list
     font-size: .8rem
@@ -12,20 +12,30 @@
       display: initial
 
   .admin_bar-bubble
-    display: block
+    display: inline-block
     // padding: 4px
     border-radius: 50%
     width: 25px
     height: 25px
     text-align: center
+    &:not(:last-child)
+      margin-right: 10px
     .has-tip
-      color: $white
+      display: inline-block
+      color: $gainsboro
       cursor: pointer
       vertical-align: sub
-
 
   .admin_bar
     &-comments-tovalidate-link
       background-color: $primary-color
     &-comments-signalled-link
       background-color: $warning-color
+
+  .dahsboard-link
+    text-decoration: underline
+    color: $gainsboro
+
+  .divider
+    border-right: 1px solid $gainsboro
+    height: 25px
