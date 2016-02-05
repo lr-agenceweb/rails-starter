@@ -16,6 +16,11 @@ class CommentDecoratorTest < Draper::TestCase
     assert_equal 'Anthony', comment_decorated.pseudo_registered_or_guest
   end
 
+  test 'should return correct name if user is not connected' do
+    comment_decorated = CommentDecorator.new(@comment_not_connected)
+    assert_equal 'Luke', comment_decorated.pseudo_registered_or_guest
+  end
+
   test 'should return correct email if user is connected' do
     comment_decorated = CommentDecorator.new(@comment)
     assert_equal 'anthony@test.fr', comment_decorated.email_registered_or_guest
@@ -24,11 +29,6 @@ class CommentDecoratorTest < Draper::TestCase
   test 'should return correct email if user is not connected' do
     comment_decorated = CommentDecorator.new(@comment_not_connected)
     assert_equal 'luke@skywalker.sw', comment_decorated.email_registered_or_guest
-  end
-
-  test 'should return correct name if user is not connected' do
-    comment_decorated = CommentDecorator.new(@comment_not_connected)
-    assert_equal 'Luke', comment_decorated.pseudo_registered_or_guest
   end
 
   #

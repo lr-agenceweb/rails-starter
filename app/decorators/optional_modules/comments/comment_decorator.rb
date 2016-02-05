@@ -52,31 +52,17 @@ class CommentDecorator < ApplicationDecorator
   end
 
   #
-  # == Article where the Comment comes from
-  #
-  def source
-    model.commentable_type.constantize.find(model.commentable_id)
-  end
-
-  #
   # == Link to article where the Comment comes from
   #
   def link_source
-    from = source
-    if model == 'Post'
-      link = send("#{from.type.downcase.underscore.singularize}_path", from)
-    else
-      link = send('blog_path', from)
-    end
-    link_to from.title, link, target: :_blank
+    link_to commentable.title, polymorphic_path(commentable), target: :_blank
   end
 
   #
   # == Image from article where Comment comes from
   #
   def image_source
-    from = source
-    retina_image_tag from.pictures.first, :image, :small if from.pictures.present?
+    retina_image_tag commentable.pictures.first, :image, :small if commentable.pictures.present?
   end
 
   #
