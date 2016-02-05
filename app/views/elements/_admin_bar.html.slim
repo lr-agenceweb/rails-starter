@@ -1,33 +1,31 @@
-#admin_bar
+#admin_bar.hide-for-small
   .left
     ul.inline-list
       li = link_to I18n.t('admin_bar.go_to_admin'), admin_dashboard_path, class: 'dahsboard-link', data: { no_turbolink: true }
 
   .right
     ul.inline-list
-      - if @guest_book_module.enabled?
-        - if GuestBookSetting.first.should_validate?
-          li = t('activerecord.models.guest_book.other')
-          li
-            .admin_bar-comments
-              a.admin_bar-bubble.admin_bar-comments-tovalidate-link href="#{admin_guest_books_path(scope: 'a_valider')}"
-                span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('guest_book.admin_bar.to_moderate')}" = GuestBook.select(:id).to_validate.count
-          li.divider
+      - if @guest_book_module.enabled? && GuestBookSetting.first.should_validate?
+        li
+          = t('activerecord.models.guest_book.other')
+          .admin_bar-comments
+            a.admin_bar-bubble.admin_bar-comments-tovalidate-link href="#{admin_guest_books_path(scope: 'a_valider')}"
+              span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('guest_book.admin_bar.to_moderate')}" = GuestBook.select(:id).to_validate.count
+        li.divider
 
 
-      - if @comment_module.enabled?
-        - if @comment_setting.should_validate? || @comment_setting.should_signal?
-          li = t('activerecord.models.comment.other')
-          li
-            .admin_bar-comments
-              - if @comment_setting.should_validate?
-                a.admin_bar-bubble.admin_bar-comments-tovalidate-link href="#{admin_post_comments_path(scope: 'a_valider')}"
-                  span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.to_moderate')}" = Comment.to_validate.count
+      - if @comment_module.enabled? && (@comment_setting.should_validate? || @comment_setting.should_signal?)
+        li
+          = t('activerecord.models.comment.other')
+          .admin_bar-comments
+            - if @comment_setting.should_validate?
+              a.admin_bar-bubble.admin_bar-comments-tovalidate-link href="#{admin_post_comments_path(scope: 'a_valider')}"
+                span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.to_moderate')}" = Comment.to_validate.count
 
-              - if @comment_setting.should_signal?
-                a.admin_bar-bubble.admin_bar-comments-signalled-link href="#{admin_post_comments_path(scope: 'signales')}"
-                  span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.signalled')}" = Comment.signalled.count
-          li.divider
+            - if @comment_setting.should_signal?
+              a.admin_bar-bubble.admin_bar-comments-signalled-link href="#{admin_post_comments_path(scope: 'signales')}"
+                span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.signalled')}" = Comment.signalled.count
+        li.divider
 
 
       li
