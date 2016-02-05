@@ -37,16 +37,8 @@ class CommentDecorator < ApplicationDecorator
   end
 
   #
-  # == Content
+  # == Date
   #
-  def message
-    simple_format(model.comment)
-  end
-
-  def content
-    message
-  end
-
   def comment_created_at
     content_tag(:small, time_tag(model.created_at.to_datetime, l(model.created_at, format: :without_time)))
   end

@@ -47,7 +47,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     attributes_table do
       row :author_with_avatar
       row :email_registered_or_guest
-      row :message
+      row :content
       row :lang if locales.length > 1
       row :status
       row :signalled_d if comment_setting.should_signal?

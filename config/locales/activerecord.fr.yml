@@ -389,8 +389,8 @@ fr:
         author_with_avatar: Auteur
         username: Pseudo
         mail: Email
-        comment: Message
-        message: Commentaire
+        email_registered_or_guest: Email
+        content: Commentaire
         lang: Langue
         link_source: Article concerné
         link_and_image_source: Article concerné
