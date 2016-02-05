@@ -33,6 +33,7 @@ html lang="#{@language}"
     = raw analytical.body_prepend_javascript
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'
+    = render 'elements/admin_bar' if current_user_and_administrator?
     = render 'elements/banner_maintenance' if maintenance?
 
     = render 'elements/microdatas', resource: setting

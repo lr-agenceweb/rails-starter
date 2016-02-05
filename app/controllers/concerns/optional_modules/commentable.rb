@@ -5,10 +5,10 @@ module Commentable
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_commentable, only: [:show]
-    before_action :set_comments, only: [:show]
-    before_action :set_pagination, only: [:show]
-    before_action :set_comment_setting, only: [:show]
+    before_action :set_commentable, only: [:show], if: proc { @comment_module.enabled? }
+    before_action :set_comments, only: [:show], if: proc { @comment_module.enabled? }
+    before_action :set_pagination, only: [:show], if: proc { @comment_module.enabled? }
+    before_action :set_comment_setting, if: proc { @comment_module.enabled? }
 
     def set_commentable
       @commentable = instance_variable_get("@#{controller_name.singularize}")

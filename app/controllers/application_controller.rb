@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
   include Socialable
   include Backgroundable
   include Mappable
+  include Commentable
   include Sliderable
   include Videoable
   include NewsletterFrontUserable

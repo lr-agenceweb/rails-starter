@@ -1,0 +1,31 @@
+#admin_bar
+  background-color: $jet
+  padding: 10px
+  overflow: auto
+  color: $white
+
+  .inline-list
+    font-size: .8rem
+    margin-bottom: 0
+
+    &> li > *
+      display: initial
+
+  .admin_bar-bubble
+    display: block
+    // padding: 4px
+    border-radius: 50%
+    width: 25px
+    height: 25px
+    text-align: center
+    .has-tip
+      color: $white
+      cursor: pointer
+      vertical-align: sub
+
+
+  .admin_bar
+    &-comments-tovalidate-link
+      background-color: $primary-color
+    &-comments-signalled-link
+      background-color: $warning-color
