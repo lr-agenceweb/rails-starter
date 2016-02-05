@@ -7,7 +7,7 @@ article.post-article
       small<: em = "(#{blog.created_at})"
 
   .row
-    .small-12.medium-9.medium-centered.columns
+    .small-12.columns
       .pictures-container
         - if params[:action] == 'index'
           = render 'elements/pictures/has_many_get_first', resource: blog, link: true

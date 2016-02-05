@@ -11,6 +11,15 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
+  # == Avatar
+  #
+  def author_with_avatar_html(avatar, pseudo)
+    content_tag(:div, nil, class: 'author-with-avatar') do
+      concat("#{avatar} <br /> #{pseudo}".html_safe)
+    end
+  end
+
+  #
   # == Dynamic menu link
   #
   def menu_link(model_name, absolute = false)

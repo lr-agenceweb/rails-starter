@@ -28,73 +28,42 @@ class CommentDecorator < ApplicationDecorator
 
     # Connected
     else
-      # Website avatar present
-      if model.user.avatar?
-        retina_thumb_square(model.user)
-
-      # Website avatar not present (use Gravatar)
-      else
-        gravatar_image_tag(model.user.email, alt: model.user_username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) })
-      end
+      retina_thumb_square(model.user, @avatar_width)
     end
   end
 
   def author_with_avatar
-    content_tag(:div, nil, class: 'author-with-avatar') do
-      concat("#{avatar} <br /> #{pseudo_registered_or_guest}".html_safe)
-    end
+    author_with_avatar_html(avatar, pseudo_registered_or_guest)
   end
 
   #
-  # == Content
+  # == Date
   #
-  def message
-    simple_format(model.comment)
-  end
-
-  def content
-    message
-  end
-
   def comment_created_at
     content_tag(:small, time_tag(model.created_at.to_datetime, l(model.created_at, format: :without_time)))
   end
 
   #
-  # == Article where the Comment comes from
-  #
-  def source
-    model.commentable_type.constantize.find(model.commentable_id)
-  end
-
-  #
-  # == Link to article where the Comment comes from
+  # == Link and Image for Commentable
   #
   def link_source
-    from = source
-    if model == 'Post'
-      link = send("#{from.type.downcase.underscore.singularize}_path", from)
-    else
-      link = send('blog_path', from)
-    end
-    link_to from.title, link, target: :_blank
+    link_to commentable.title, polymorphic_path(commentable), target: :_blank
   end
 
-  #
-  # == Image from article where Comment comes from
-  #
   def image_source
-    from = source
-    retina_image_tag from.pictures.first, :image, :small if from.pictures.present?
+    retina_image_tag commentable.pictures.first, :image, :small
   end
 
-  #
-  # == Link and Image from article where Comment comes from
-  #
   def link_and_image_source
-    content_tag(:p, image_source) + content_tag(:p, link_source)
+    html = ''
+    html << content_tag(:p, image_source) if commentable_image?
+    html << content_tag(:p, link_source)
+    html
   end
 
+  #
+  # == Status tag
+  #
   def status
     color = model.validated? ? 'green' : 'orange'
     status_tag_deco(I18n.t("validate.#{model.validated}"), color)
@@ -105,60 +74,14 @@ class CommentDecorator < ApplicationDecorator
     status_tag_deco(I18n.t("#{model.signalled}"), color)
   end
 
-  #
-  # == Comment form depending if user is connected or not
-  #
-  def form(f)
-    if user_signed_in?
-      form_connected(f)
-    else
-      form_not_connected(f)
-    end
-  end
-
-  private
-
   def pseudo(name = nil)
     name = pseudo_registered_or_guest if name.nil?
     content_tag(:strong, name, class: 'comment-author')
   end
 
-  def form_connected(f)
-    content_tag(:div, class: 'row') do
-      concat(content_tag(:div, class: 'small-12 medium-2 columns') do
-        concat(content_tag(:div, nil, class: 'auhtor-with-avatar') do
-          concat(content_tag(:div, retina_thumb_square(current_user), class: 'comment-avatar'))
-          concat(pseudo(current_user.username))
-        end)
-      end)
-      textarea_and_submit(f, 'medium-10')
-    end
-  end
+  private
 
-  def form_not_connected(f)
-    content_tag(:div, class: 'row') do
-      concat(content_tag(:div, class: 'small-12 medium-6 columns') do
-        concat(f.input :username)
-      end)
-      concat(content_tag(:div, class: 'small-12 medium-6 columns') do
-        concat(f.input :email, as: :email)
-      end)
-      textarea_and_submit(f, 'small-12')
-    end
-  end
-
-  def textarea_and_submit(f, klass = 'medium-6')
-    concat(content_tag(:div, class: "small-12 #{klass} columns") do
-      concat(f.hidden_field :lang, value: params[:locale]) + # Lang
-      concat(f.input :comment, as: :text, input_html: { class: 'autosize', style: 'height: 120px' }) + # Textarea
-      concat(f.input :nickname, label: false, input_html: { class: 'hide-for-small-up' }) + # Captcha
-      concat(f.input :parent_id, as: :hidden, label: false, input_html: { class: 'hide-for-small-up' }) +
-      concat(content_tag(:div, class: 'submit-and-loader') do
-        concat(image_tag(Figaro.env.loader_spinner_img, class: 'submit-loader')) + # Loader div
-        concat(button_tag(class: 'submit-btn text-right tiny') do # Submit button
-          fa_icon('paper-plane')
-        end)
-      end)
-    end)
+  def commentable_image?
+    commentable.pictures.present?
   end
 end

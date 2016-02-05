@@ -1,2 +1,23 @@
 = simple_form_for [@commentable, @comment], validate: true, remote: true, authenticity_token: true, method: :post do |f|
-  = comment.form(f)
+
+  - if user_signed_in?
+    .row
+      .small-12.medium-2.columns
+        .author-with-avatar
+          .comment-avatar = retina_thumb_square(current_user)
+          = comment.pseudo(current_user.username)
+
+      .small-12.medium-10.columns
+        = render 'comments/textarea_and_submit', f: f
+
+  - else
+    .row
+      .small-12.medium-6.columns
+        = f.input :username
+
+      .small-12.medium-6.columns
+        = f.input :email,
+                  as: :email
+    .row
+      .small-12.columns
+        = render 'comments/textarea_and_submit', f: f

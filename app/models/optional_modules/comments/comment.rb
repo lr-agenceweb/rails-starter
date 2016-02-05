@@ -36,6 +36,7 @@ class Comment < ActiveRecord::Base
   include Validatable
 
   attr_accessor :subject, :nickname, :children_ids
+  alias_attribute :content, :comment
 
   before_destroy :set_descendants
 
