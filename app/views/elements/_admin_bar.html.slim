@@ -30,5 +30,7 @@
 
 
       li
-        span.admin_bar-username = "#{morning_or_evening} #{current_user.username}, "
-        span.admin_bar-avatar = current_user.decorate.image_avatar(24)
+        span.admin_bar-username<>
+          == "#{morning_or_evening} #{link_to(current_user.username, admin_user_path(current_user))}, "
+        span.admin_bar-avatar<>
+          = current_user.decorate.image_avatar(24)
