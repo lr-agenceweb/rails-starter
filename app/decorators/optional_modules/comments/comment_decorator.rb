@@ -105,60 +105,8 @@ class CommentDecorator < ApplicationDecorator
     status_tag_deco(I18n.t("#{model.signalled}"), color)
   end
 
-  #
-  # == Comment form depending if user is connected or not
-  #
-  def form(f)
-    if user_signed_in?
-      form_connected(f)
-    else
-      form_not_connected(f)
-    end
-  end
-
-  private
-
   def pseudo(name = nil)
     name = pseudo_registered_or_guest if name.nil?
     content_tag(:strong, name, class: 'comment-author')
-  end
-
-  def form_connected(f)
-    content_tag(:div, class: 'row') do
-      concat(content_tag(:div, class: 'small-12 medium-2 columns') do
-        concat(content_tag(:div, nil, class: 'auhtor-with-avatar') do
-          concat(content_tag(:div, retina_thumb_square(current_user), class: 'comment-avatar'))
-          concat(pseudo(current_user.username))
-        end)
-      end)
-      textarea_and_submit(f, 'medium-10')
-    end
-  end
-
-  def form_not_connected(f)
-    content_tag(:div, class: 'row') do
-      concat(content_tag(:div, class: 'small-12 medium-6 columns') do
-        concat(f.input :username)
-      end)
-      concat(content_tag(:div, class: 'small-12 medium-6 columns') do
-        concat(f.input :email, as: :email)
-      end)
-      textarea_and_submit(f, 'small-12')
-    end
-  end
-
-  def textarea_and_submit(f, klass = 'medium-6')
-    concat(content_tag(:div, class: "small-12 #{klass} columns") do
-      concat(f.hidden_field :lang, value: params[:locale]) + # Lang
-      concat(f.input :comment, as: :text, input_html: { class: 'autosize', style: 'height: 120px' }) + # Textarea
-      concat(f.input :nickname, label: false, input_html: { class: 'hide-for-small-up' }) + # Captcha
-      concat(f.input :parent_id, as: :hidden, label: false, input_html: { class: 'hide-for-small-up' }) +
-      concat(content_tag(:div, class: 'submit-and-loader') do
-        concat(image_tag(Figaro.env.loader_spinner_img, class: 'submit-loader')) + # Loader div
-        concat(button_tag(class: 'submit-btn text-right tiny') do # Submit button
-          fa_icon('paper-plane')
-        end)
-      end)
-    end)
   end
 end
