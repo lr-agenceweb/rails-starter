@@ -1,0 +1,6 @@
+- if slide.caption?
+  .caption
+    - if slide.title?
+      h3.caption-title = slide.title
+    - if slide.description?
+    .caption-content = slide.description

@@ -23,8 +23,9 @@ class SlideDecoratorTest < Draper::TestCase
     assert_equal 'Description for slide one', @slide_decorated.description_deco
   end
 
-  test 'should format caption for slide image' do
-    assert_equal "<div class=\"caption\"><h3 class=\"caption-title\">Title for slide one</h3><div class=\"caption-content\">Description for slide one</div></div>", @slide_decorated.caption
+  test 'should return correct value for caption?' do
+    assert @slide_decorated.caption?
+    assert_not @slide_two_decorated.caption?
   end
 
   #
@@ -42,6 +43,8 @@ class SlideDecoratorTest < Draper::TestCase
 
   def initialize_test
     @slide = slides(:slide_one)
+    @slide_two = slides(:slide_two)
     @slide_decorated = SlideDecorator.new(@slide)
+    @slide_two_decorated = SlideDecorator.new(@slide_two)
   end
 end
