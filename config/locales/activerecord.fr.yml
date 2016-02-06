@@ -239,6 +239,7 @@ fr:
         show_social: Afficher le partage sur les réseaux sociaux ?
         show_qrcode: Afficher le QrCode sur la page contact ?
         show_map: Afficher la carte sur la page contact ?
+        show_admin_bar: Afficher la barre d'administration ?
         map: Carte
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux

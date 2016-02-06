@@ -3,9 +3,13 @@ en:
   guest_book:
     no_results: No guest book message to show
     success: Your message has been submitted properly
+    admin_bar:
+      to_moderate: Messages to moderate
 
 # French
 fr:
   guest_book:
     no_results: Il n'y a aucun message dans le livre d'or
     success: Votre message a bien été ajouté
+    admin_bar:
+      to_moderate: Messages à modérer

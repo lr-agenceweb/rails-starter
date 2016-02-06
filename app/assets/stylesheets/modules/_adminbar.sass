@@ -1,0 +1,53 @@
+#admin_bar
+  background-color: $jet
+  padding: 10px
+  overflow: auto
+  color: $gainsboro
+
+  .inline-list
+    font-size: .8rem
+    margin-bottom: 0
+
+    &> li > *
+      display: initial
+
+  .admin_bar-bubble
+    display: inline-block
+    vertical-align: middle
+    border-radius: 50%
+    width: 25px
+    height: 25px
+    text-align: center
+    margin-left: 10px
+
+    .has-tip
+      display: block
+      width: 25px
+      height: 25px
+      line-height: 25px
+      color: $gainsboro
+      cursor: pointer
+
+  .admin_bar-username
+    a
+      color: $secondary-color
+  .admin_bar-avatar
+    img
+      max-width: 24px
+      max-height: 24px
+
+
+  .admin_bar
+    &-comments-tovalidate-link
+      background-color: $primary-color
+    &-comments-signalled-link
+      background-color: $warning-color
+
+  .dahsboard-link
+    text-decoration: underline
+    color: $gainsboro
+    margin-right: 3px
+
+  .divider
+    border-right: 1px solid $gainsboro
+    height: 25px

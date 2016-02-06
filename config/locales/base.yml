@@ -64,6 +64,9 @@ fr:
     fetch_nexts: Chargement en cours ...
     fetch_end: Il n'a plus de %{resource} à afficher :(
 
+  admin_bar:
+    go_to_admin: Voir l'administration
+
 # English
 en:
   'true': 'yes'
@@ -109,3 +112,6 @@ en:
   scroll_infinite:
     fetch_nexts: Loading ...
     fetch_end: There is no more %{resource} to show :(
+
+  admin_bar:
+    go_to_admin: Go to the administration

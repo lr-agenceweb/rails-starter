@@ -8,8 +8,8 @@ class UserDecorator < ApplicationDecorator
   delegate_all
   decorates_association :posts
 
-  def image_avatar
-    retina_thumb_square(model)
+  def image_avatar(size = 64)
+    retina_thumb_square(model, size)
   end
 
   def admin_link

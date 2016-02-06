@@ -5,6 +5,7 @@ fr:
     administrator: Administrateur
     subscriber: Abonné
     tester: Testeur
+  log_out: Déconnexion
 
 # English
 en:
@@ -13,3 +14,4 @@ en:
     administrator: Administrator
     subscriber: Subscriber
     tester: Tester
+  log_out: Log out

@@ -46,6 +46,9 @@ en:
       comment:
         one: Comment
         other: Comments
+      guest_book:
+        one: Guest Book
+        other: Guest Book
       blog:
         one: Blog article
         other: Blog articles
