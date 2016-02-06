@@ -40,7 +40,7 @@ froala_init = ->
       'bold', 'italic', 'underline', '|',
       'paragraphStyle', 'fontFamily', 'fontSize', '|',
       'color', 'insertLink', 'insertImage', '|',
-      'indent', 'outdent', 'align', 'insertOrderedList', 'insertUnorderedList', '|',
+      'formatUL', 'indent', 'outdent', 'align', 'insertOrderedList', 'insertUnorderedList', '|',
       'undo', 'redo' , '|',
       'html'
     ]

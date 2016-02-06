@@ -6,12 +6,8 @@
   = render 'optional_modules/sliders/show', slider: slider, force: false
   = background.handle_background_tag if @background_module.enabled? && !@background.nil?
 
-.row
-  - @homes.each do |home|
-    article.small-12.columns
-      = render 'posts/microdatas', resource: home
-
-      header
-        h2 = home.title
-
-      div == home.content
+.homepage-content
+  .row
+    - @homes.each do |home|
+      .small-12.medium-7.medium-centered.columns
+        = render 'homes/home', home: home
