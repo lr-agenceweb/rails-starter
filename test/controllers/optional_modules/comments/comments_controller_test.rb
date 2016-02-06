@@ -24,7 +24,7 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not be able to create comment if nickname (captcha) is filled' do
+  test 'should not be able to create comment if captcha is filled' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
@@ -161,7 +161,7 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should be able to delete every comments if user is superadministrator' do
+  test 'should be able to delete every comments if user is SA' do
     if @locales.include?(:fr)
       sign_in @super_administrator
       locale = 'fr'
@@ -187,7 +187,7 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'administrator should be able to delete comments except superadministrator' do
+  test 'administrator should be able to delete comments except SA' do
     sign_in @administrator
     ability = Ability.new(@administrator)
     locale = 'fr'
