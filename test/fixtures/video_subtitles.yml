@@ -25,3 +25,5 @@
 one:
   subtitleable: one (VideoUpload)
   online: true
+  subtitle_fr_file_name: subtitle-fr.srt
+  subtitle_en_file_name: subtitle-en.srt

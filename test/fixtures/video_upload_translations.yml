@@ -1,0 +1,17 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+two_fr:
+  <<: *DEFAULTS
+  video_upload_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  locale: fr
+  title: Paysages de France
+  description: <p>Vidéo présentant les paysages de France</p>
+
+two_en:
+  <<: *DEFAULTS
+  video_upload_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  locale: en
+  title: Beautiful landscapes
+  description: <p>Video showing France landscapes</p>
