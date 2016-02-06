@@ -10,21 +10,24 @@ class VideoUploadDecorator < VideoDecorator
   end
 
   def description_microdatas
-    title_microdatas
+    description? ? description : title_microdatas
   end
 
   def preview
     h.retina_image_tag model, :video_file, :preview
   end
 
+  def category?
+    videoable_type == 'Category'
+  end
+
+  #
+  # == Status tag
+  #
   def subtitles
     bool = subtitles?.nil? ? false : subtitles?
     color = bool ? 'green' : 'red'
     status_tag_deco I18n.t("subtitles.#{bool}"), color
-  end
-
-  def category?
-    videoable_type == 'Category'
   end
 
   private

@@ -25,7 +25,18 @@
 #  index_video_uploads_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
 #
 
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
 one:
+  <<: *DEFAULTS
   videoable: home (Post)
+  online: true
+  video_file_file_name: 'landscape.mp4'
+
+two:
+  <<: *DEFAULTS
+  videoable: home (Category)
   online: true
   video_file_file_name: 'landscape.mp4'
