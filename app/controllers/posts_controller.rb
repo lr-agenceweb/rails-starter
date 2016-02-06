@@ -2,7 +2,7 @@
 # == Posts Controller
 #
 class PostsController < ApplicationController
-  before_action :not_found, only: [:feed], unless: proc { @rss_module.enabled? }
+  before_action :redirect_to_home, only: [:feed], unless: proc { @rss_module.enabled? }
   before_action :add_posts_to_feed, only: [:feed]
   before_action :add_blogs_to_feed, only: [:feed], if: proc { @blog_module.enabled? }
   before_action :add_events_to_feed, only: [:feed], if: proc { @event_module.enabled? }
@@ -16,6 +16,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def redirect_to_home
+    redirect_to root_path
+  end
 
   def add_posts_to_feed
     @posts = Post.includes(:translations).allowed_for_rss.online

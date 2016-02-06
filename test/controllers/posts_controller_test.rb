@@ -5,6 +5,7 @@ require 'test_helper'
 #
 class PostsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
+  include Rails.application.routes.url_helpers
 
   setup :initialize_test
 
@@ -40,8 +41,9 @@ class PostsControllerTest < ActionController::TestCase
     disable_optional_module @super_administrator, @rss_module, 'RSS' # in test_helper.rb
     sign_in @administrator
     @locales.each do |locale|
-      assert_raises(ActionController::RoutingError) do
+      I18n.with_locale(locale) do
         get :feed, format: :atom, locale: locale.to_s
+        assert_redirected_to root_path(locale: locale.to_s)
       end
     end
   end
