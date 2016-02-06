@@ -12,43 +12,48 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   #
   # == Subscribing
   #
-  test 'should not create newsletter user if email not properly formatted' do
+  test 'should not create if email not properly formatted' do
     assert_no_difference ['NewsletterUser.count'] do
       post :create, newsletter_user: { email: 'aaabbb.cc', lang: 'fr' }
+      assert_not assigns(:newsletter_user).valid?
     end
   end
 
-  test 'should not create newsletter user if lang is empty' do
+  test 'should not create if lang is empty' do
     assert_no_difference ['NewsletterUser.count'] do
       post :create, newsletter_user: { email: @email, lang: '' }
+      assert_not assigns(:newsletter_user).valid?
     end
   end
 
-  test 'should not create newsletter user if lang is not allowed' do
+  test 'should not create if lang is not allowed' do
     assert_no_difference ['NewsletterUser.count'] do
       post :create, newsletter_user: { email: @email, lang: 'de' }
+      assert_not assigns(:newsletter_user).valid?
     end
   end
 
-  test 'should not create newsletter user if captcha is filled' do
+  test 'should not create if captcha is filled' do
     assert_no_difference ['NewsletterUser.count'] do
       post :create, newsletter_user: { email: @email, lang: @lang, nickname: 'robot' }
+      assert_not assigns(:newsletter_user).valid?
     end
   end
 
-  test 'should create newsletter user if captcha is blank' do
+  test 'should create if captcha is blank' do
     assert_difference ['NewsletterUser.count'] do
       post :create, newsletter_user: { email: @email, lang: @lang, nickname: '' }
+      assert assigns(:newsletter_user).valid?
     end
   end
 
   test 'should not render template if captcha is filled' do
     post :create, newsletter_user: { email: @email, lang: @lang, nickname: 'robot' }
-    assert_response :success
-    assert_empty @response.body
+    assert_response 302
+    assert_redirected_to :back
   end
 
-  test 'should create newsletter user' do
+  test 'should create' do
     assert_difference ['NewsletterUser.count'], 1 do
       post :create, newsletter_user: { email: @email, lang: @lang }
     end
@@ -65,34 +70,37 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   end
 
   # == Ajax
-  test 'AJAX :: should create newsletter user' do
+  test 'AJAX :: should create' do
     xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang }
     assert_response :success
   end
 
-  test 'AJAX :: should render show template if newsletter user created' do
+  test 'AJAX :: should render show template if created' do
     xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang }
     assert_template :show
   end
 
-  test 'AJAX :: should not create newsletter user' do
+  test 'AJAX :: should not create if email is wrong' do
     xhr :post, :create, format: :js, newsletter_user: { email: 'aaabbb.cc', lang: @lang }
     assert_response :unprocessable_entity
+    assert_not assigns(:newsletter_user).valid?
   end
 
-  test 'AJAX :: should not create newsletter user if captcha is filled' do
+  test 'AJAX :: should not create if captcha is filled' do
     assert_no_difference ['NewsletterUser.count'] do
       xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang, nickname: 'robot' }
+      assert_not assigns(:newsletter_user).valid?
     end
   end
 
-  test 'AJAX :: should create newsletter user if captcha is blank' do
+  test 'AJAX :: should create if captcha is blank' do
     assert_difference ['NewsletterUser.count'] do
       xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang, nickname: '' }
+      assert assigns(:newsletter_user).valid?
     end
   end
 
-  test 'AJAX :: should render error template if newsletter user not being created' do
+  test 'AJAX :: should render error template if not being created' do
     xhr :post, :create, format: :js, newsletter_user: { email: 'aaabbb.cc', lang: @lang }
     assert_template :errors
   end
@@ -100,23 +108,23 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   #
   # == Unsubscribing
   #
-  test 'should get redirected to french homepage after unsubscribing' do
+  test 'should get redirected to french home after unsubscribing' do
     delete :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
     assert_redirected_to root_path(locale: 'fr')
   end
 
-  test 'should get redirected to english homepage after unsubscribing' do
+  test 'should get redirected to english home after unsubscribing' do
     delete :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user_en.id, token: @newsletter_user_en.token
     assert_redirected_to root_path(locale: 'en')
   end
 
-  test 'should unsubscribe newsletter user if token is correct' do
+  test 'should unsubscribe if token is correct' do
     assert_difference ['NewsletterUser.count'], -1 do
       delete :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
     end
   end
 
-  test 'should not unsubscribe newsletter user if token is wrong' do
+  test 'should not unsubscribe if token is wrong' do
     assert_no_difference ['NewsletterUser.count'] do
       delete :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: "#{@newsletter_user.token}-abc"
     end
@@ -125,16 +133,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   #
   # == Mailer
   #
-  test 'should not send a welcome_user email when a newsletter user subscription fails' do
-    clear_deliveries_and_queues
-    assert ActionMailer::Base.deliveries.empty?
-
-    assert_no_enqueued_jobs do
-      post :create, newsletter_user: { email: @email, lang: 'de' }
-    end
-  end
-
-  test 'should send a welcome_user email when a newsletter user subscribed' do
+  test 'should send an email when a subscribed' do
     clear_deliveries_and_queues
     assert_no_enqueued_jobs
     assert ActionMailer::Base.deliveries.empty?
@@ -144,14 +143,32 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not send a welcome_user email if setting is disabled' do
+  test 'should not send an email when a subscription fails' do
+    clear_deliveries_and_queues
+    assert ActionMailer::Base.deliveries.empty?
+
+    assert_no_enqueued_jobs do
+      post :create, newsletter_user: { email: @email, lang: 'de' }
+    end
+  end
+
+  test 'should not send an email if captcha is filled' do
+    clear_deliveries_and_queues
+    assert ActionMailer::Base.deliveries.empty?
+
+    assert_no_enqueued_jobs do
+      post :create, newsletter_user: { email: @email, lang: 'de', captcha: 'robot' }
+    end
+  end
+
+  test 'should not send an email if setting is disabled' do
     clear_deliveries_and_queues
     assert_no_enqueued_jobs
     assert ActionMailer::Base.deliveries.empty?
 
     @newsletter_setting.update_attributes(send_welcome_email: false)
 
-    assert_enqueued_jobs 0 do
+    assert_no_enqueued_jobs do
       post :create, newsletter_user: { email: @email, lang: @lang }
     end
   end
