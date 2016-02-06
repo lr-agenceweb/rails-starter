@@ -3,6 +3,8 @@
     ul.inline-list
       li
         = fa_icon 'unlock', text: link_to(I18n.t('admin_bar.go_to_admin'), admin_dashboard_path, class: 'dahsboard-link', data: { no_turbolink: true }), right: true
+      li
+        = fa_icon 'sign-out', text: link_to(t('log_out'), destroy_user_session_path, method: :delete, class: 'dahsboard-link'), right: true
 
   .right
     ul.inline-list
