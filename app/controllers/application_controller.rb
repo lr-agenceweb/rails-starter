@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   include Sliderable
   include Videoable
   include NewsletterFrontUserable
-  before_action :set_module_settings # for AdminBar
+  before_action :set_module_settings, if: proc { @setting.show_admin_bar? } # for AdminBar
 
   # Misc
   before_action :set_host_name
@@ -66,8 +66,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_module_settings
-    @comment_setting = CommentSetting.first
-    @guest_book_setting = GuestBookSetting.first
+    @comment_setting_admin_bar = CommentSetting.first
+    @guest_book_setting_admin_bar = GuestBookSetting.first
   end
 
   def set_host_name
