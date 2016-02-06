@@ -67,6 +67,8 @@ end
 f.columns do
   f.column do
     f.inputs 'Paramètres généraux' do
+      f.input :show_admin_bar,
+              hint: 'Si coché, un bandeau sera présent en haut du site (partie publique), donnant accès à quelques raccourcis de l\'administration. Ce bandeau n\'est visible que par l\'administrateur du site, les internautes ne le verront pas.'
       f.input :per_page,
               as: :select,
               collection: Setting.per_page_values,

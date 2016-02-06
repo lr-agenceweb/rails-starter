@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204170630) do
+ActiveRecord::Schema.define(version: 20160205235525) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -544,6 +544,7 @@ ActiveRecord::Schema.define(version: 20160204170630) do
     t.boolean  "show_social",                            default: true
     t.boolean  "show_qrcode",                            default: false
     t.boolean  "show_map",                               default: false
+    t.boolean  "show_admin_bar",                         default: true
     t.boolean  "maintenance",                            default: false
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size",           limit: 4
