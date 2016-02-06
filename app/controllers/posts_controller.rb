@@ -2,8 +2,11 @@
 # == Posts Controller
 #
 class PostsController < ApplicationController
-  before_action :make_redirect, only: [:feed], unless: proc { @rss_module.enabled? }
-  before_action :set_posts, only: [:feed]
+  before_action :not_found, only: [:feed], unless: proc { @rss_module.enabled? }
+  before_action :add_posts_to_feed, only: [:feed]
+  before_action :add_blogs_to_feed, only: [:feed], if: proc { @blog_module.enabled? }
+  before_action :add_events_to_feed, only: [:feed], if: proc { @event_module.enabled? }
+  before_action :sort_feed, only: [:feed]
 
   def feed
     respond_to do |format|
@@ -14,14 +17,19 @@ class PostsController < ApplicationController
 
   private
 
-  def make_redirect
-    redirect_to root_path
+  def add_posts_to_feed
+    @posts = Post.includes(:translations).allowed_for_rss.online
   end
 
-  def set_posts
-    @posts = Post.includes(:translations).allowed_for_rss.online
-    @posts += Blog.includes(:translations).online if @blog_module.enabled?
-    @posts += Event.includes(:translations).online if @event_module.enabled?
+  def add_blogs_to_feed
+    @posts += Blog.includes(:translations).online
+  end
+
+  def add_events_to_feed
+    @posts += Event.includes(:translations).online
+  end
+
+  def sort_feed
     @posts = @posts.sort_by(&:updated_at).reverse
     @updated = @posts.first.updated_at unless @posts.empty?
   end
