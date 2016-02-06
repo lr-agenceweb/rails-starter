@@ -5,6 +5,7 @@ require 'test_helper'
 #
 class PostsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
+  include Rails.application.routes.url_helpers
 
   setup :initialize_test
 
@@ -18,7 +19,7 @@ class PostsControllerTest < ActionController::TestCase
   test 'should use feed template' do
     @locales.each do |locale|
       get :feed, format: :atom, locale: locale.to_s
-      assert_template :feed
+      assert_template :feed, layout: false
     end
   end
 
@@ -27,24 +28,23 @@ class PostsControllerTest < ActionController::TestCase
     assert_routing '/en/feed.atom', controller: 'posts', action: 'feed', locale: 'en', format: 'atom' if @locales.include?(:en)
   end
 
-  test 'should redirect to french atom version if access to french rss' do
-    get :feed, format: :rss, locale: 'fr'
-    assert_redirected_to action: :feed, format: :atom, locale: 'fr'
-  end
-
-  if I18n.available_locales.include?(:en)
-    test 'should redirect to english atom version if access to english rss' do
-      get :feed, format: :rss, locale: 'en'
-      assert_redirected_to action: :feed, format: :atom, locale: 'en'
+  test 'should redirect to correct atom version by locale' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        get :feed, format: :rss, locale: locale.to_s
+        assert_redirected_to action: :feed, format: :atom, locale: locale.to_s
+      end
     end
   end
 
-  test 'should redirect to homepage if trying to access rss with disabled module' do
+  test 'should render 404 if RSS module is diabled' do
     disable_optional_module @super_administrator, @rss_module, 'RSS' # in test_helper.rb
     sign_in @administrator
     @locales.each do |locale|
-      get :feed, format: :atom, locale: locale.to_s
-      assert_redirected_to controller: :homes, action: :index, locale: locale.to_s
+      I18n.with_locale(locale) do
+        get :feed, format: :atom, locale: locale.to_s
+        assert_redirected_to root_path(locale: locale.to_s)
+      end
     end
   end
 

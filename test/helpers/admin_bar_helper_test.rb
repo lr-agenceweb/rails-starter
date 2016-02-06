@@ -7,7 +7,7 @@ class AdminBarHelperTest < ActionView::TestCase
   setup :initialize_test
 
   test 'should return correct greeting value if morning' do
-    Timecop.freeze(Time.local(2016, 2, 6, 10, 50, 0)) do
+    Timecop.freeze(Time.zone.local(2016, 2, 6, 10, 50, 0)) do
       @locales.each do |locale|
         I18n.with_locale(locale) do
           assert_equal 'Bonjour', morning_or_evening if locale == :fr
@@ -18,7 +18,7 @@ class AdminBarHelperTest < ActionView::TestCase
   end
 
   test 'should return correct greeting value if afternoon' do
-    Timecop.freeze(Time.local(2016, 2, 6, 14, 50, 0)) do
+    Timecop.freeze(Time.zone.local(2016, 2, 6, 14, 50, 0)) do
       @locales.each do |locale|
         I18n.with_locale(locale) do
           assert_equal 'Bonjour', morning_or_evening if locale == :fr
@@ -29,7 +29,7 @@ class AdminBarHelperTest < ActionView::TestCase
   end
 
   test 'should return correct greeting value if evening' do
-    Timecop.freeze(Time.local(2016, 2, 6, 19, 50, 0)) do
+    Timecop.freeze(Time.zone.local(2016, 2, 6, 19, 50, 0)) do
       @locales.each do |locale|
         I18n.with_locale(locale) do
           assert_equal 'Bonsoir', morning_or_evening if locale == :fr

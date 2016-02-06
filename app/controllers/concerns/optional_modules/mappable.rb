@@ -25,9 +25,9 @@ module Mappable
 
     def set_map?
       @map_module.enabled? &&
-      setting.show_map? &&
-      setting.location? &&
-      setting.location.decorate.latlon?
+        setting.show_map? &&
+        setting.location? &&
+        setting.location.decorate.latlon?
     end
   end
 end

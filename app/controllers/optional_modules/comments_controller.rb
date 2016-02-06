@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
   before_action :set_comments, only: [:create]
   before_action :redirect_to_back_after_destroy?, only: [:destroy]
   before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
+  after_action :send_email, only: [:signal], if: proc { @comment.signalled? && @comment_setting.send_email? }
 
   include DeletableCommentable
 
@@ -34,7 +35,6 @@ class CommentsController < ApplicationController
     fail ActionController::RoutingError, 'Not Found' if !@comment_setting.should_signal? || !params[:token] || @comment.try(:token) != params[:token]
     @comment.update_attribute(:signalled, true)
 
-    CommentJob.set(wait: 3.seconds).perform_later(@comment) if @comment_setting.send_email?
     flash.now[:success] = I18n.t('comment.signalled.success')
 
     respond_to do |format|
@@ -73,6 +73,10 @@ class CommentsController < ApplicationController
   def set_comments
     paginated_comments = @commentable.comments.validated.by_locale(@language).includes(:user).page params[:page]
     @comments = CommentDecorator.decorate_collection(paginated_comments)
+  end
+
+  def send_email
+    CommentJob.set(wait: 3.seconds).perform_later(@comment)
   end
 
   def respond_action(template)

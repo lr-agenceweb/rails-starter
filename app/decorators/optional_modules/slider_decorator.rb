@@ -44,24 +44,6 @@ class SliderDecorator < ApplicationDecorator
     "#{model.time_to_show / 1000} #{I18n.t('time.label.seconds')}"
   end
 
-  #
-  # == Options
-  #
-  def slider_options
-    "animation: #{model.animate}; timer_speed: #{model.time_to_show}; pause_on_hover: #{model.hover_pause}; resume_on_mouseout: true; navigation_arrows: #{model.navigation}; slide_number: false; bullet: #{model.bullet}; circular: #{model.loop}; timer: #{model.autoplay}; swipe: true"
-  end
-
-  def loop_hover_has_many_pictures(size = :slide)
-    h.content_tag(:ul, '', class: 'slides', data: { orbit: '', options: slider_options }) do
-      model.slides_online.each do |slide|
-        concat(h.content_tag(:li) do
-          concat(slide.decorate.self_image_has_one_by_size(size))
-          concat(slide.decorate.caption)
-        end)
-      end
-    end if model.slides?
-  end
-
   private
 
   def status_slider(property)
