@@ -14,11 +14,6 @@ class VideoPlatformDecorator < VideoDecorator
     link_to model.url, model.url, target: :blank
   end
 
-  def native_informations_d
-    color = model.native_informations? ? 'green' : 'red'
-    status_tag_deco I18n.t("native_informations.#{model.native_informations?}"), color
-  end
-
   def title_d
     video_info = VideoInfo.new(model.url)
     return video_info.title if model.native_informations? && video_platform_available?(video_info)
@@ -30,6 +25,14 @@ class VideoPlatformDecorator < VideoDecorator
     desc = video_info.description if model.native_informations? && video_platform_available?(video_info)
     desc = model.description if description? && !model.native_informations?
     raw(desc)
+  end
+
+  #
+  # == Status tag
+  #
+  def native_informations_d
+    color = model.native_informations? ? 'green' : 'red'
+    status_tag_deco I18n.t("native_informations.#{model.native_informations?}"), color
   end
 
   private

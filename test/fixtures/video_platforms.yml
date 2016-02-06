@@ -20,4 +20,5 @@
 one:
   videoable: home (Post)
   url: http://www.dailymotion.com/video/x2z92v3
+  native_informations: true
   online: true
