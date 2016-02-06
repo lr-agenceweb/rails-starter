@@ -12,18 +12,7 @@ class CommentDecoratorTest < Draper::TestCase
   # == Pseudo and Email
   #
   test 'should return correct name if user is connected' do
-    comment_decorated = CommentDecorator.new(@comment)
-    assert_equal 'Anthony', comment_decorated.pseudo_registered_or_guest
-  end
-
-  test 'should return correct email if user is connected' do
-    comment_decorated = CommentDecorator.new(@comment)
-    assert_equal 'anthony@test.fr', comment_decorated.email_registered_or_guest
-  end
-
-  test 'should return correct email if user is not connected' do
-    comment_decorated = CommentDecorator.new(@comment_not_connected)
-    assert_equal 'luke@skywalker.sw', comment_decorated.email_registered_or_guest
+    assert_equal 'Anthony', @comment_decorated.pseudo_registered_or_guest
   end
 
   test 'should return correct name if user is not connected' do
@@ -31,12 +20,20 @@ class CommentDecoratorTest < Draper::TestCase
     assert_equal 'Luke', comment_decorated.pseudo_registered_or_guest
   end
 
+  test 'should return correct email if user is connected' do
+    assert_equal 'anthony@test.fr', @comment_decorated.email_registered_or_guest
+  end
+
+  test 'should return correct email if user is not connected' do
+    comment_decorated = CommentDecorator.new(@comment_not_connected)
+    assert_equal 'luke@skywalker.sw', comment_decorated.email_registered_or_guest
+  end
+
   #
   # == Avatar
   #
   test 'should return correct avatar for connected user' do
-    comment_decorated = CommentDecorator.new(@comment)
-    assert_equal "<img alt=\"anthony\" src=\"http://gravatar.com/avatar/d7097d5b6b00db57b0bf772923729a7d?secure=false\" width=\"80\" height=\"80\" />", comment_decorated.avatar
+    assert_equal "<img alt=\"anthony\" src=\"http://gravatar.com/avatar/d7097d5b6b00db57b0bf772923729a7d?secure=false\" width=\"80\" height=\"80\" />", @comment_decorated.avatar
   end
 
   test 'should return correct avatar for guest user' do
@@ -53,33 +50,47 @@ class CommentDecoratorTest < Draper::TestCase
   # == Date
   #
   test 'should return correct date of creation for comment' do
-    comment_decorated = CommentDecorator.new(@comment)
-    assert_equal '<small><time datetime="2016-01-30T13:54:20+01:00">samedi 30 janvier 2016</time></small>', comment_decorated.comment_created_at
+    assert_equal '<small><time datetime="2016-01-30T13:54:20+01:00">samedi 30 janvier 2016</time></small>', @comment_decorated.comment_created_at
+  end
+
+  #
+  # == Link and Image for Commentable
+  #
+  test 'should return correct commentable link' do
+    assert_equal '<a target="_blank" href="/a-propos/article-2-a-propos">Article 2 A Propos</a>', @comment_decorated.link_source
+  end
+
+  test 'should return correct commentable image' do
+    assert_equal '<img src="/system/test/pictures/337532635/small-my-picture-3.jpg" alt="Small my picture 3" />', @comment_decorated.image_source
+  end
+
+  test 'should return correct commentable link and image' do
+    assert_equal '<p><img src="/system/test/pictures/337532635/small-my-picture-3.jpg" alt="Small my picture 3" /></p><p><a target="_blank" href="/a-propos/article-2-a-propos">Article 2 A Propos</a></p>', @comment_decorated.link_and_image_source
+  end
+
+  test 'should return correct value for commentable_image?' do
+    assert @comment_decorated.send(:commentable_image?)
   end
 
   #
   # == Status tag
   #
   test 'should return correct status_tag when validated' do
-    comment_decorated = CommentDecorator.new(@comment)
-    assert_match "<span class=\"status_tag validé green\">Validé</span>", comment_decorated.status
+    assert_match "<span class=\"status_tag validé green\">Validé</span>", @comment_decorated.status
   end
 
   test 'should return correct status_tag when not validated' do
     @comment.update_attribute(:validated, false)
-    comment_decorated = CommentDecorator.new(@comment)
-    assert_match "<span class=\"status_tag non_validé orange\">Non Validé</span>", comment_decorated.status
+    assert_match "<span class=\"status_tag non_validé orange\">Non Validé</span>", @comment_decorated.status
   end
 
   test 'should return correct status_tag when not signalled' do
-    comment_decorated = CommentDecorator.new(@comment)
-    assert_match "<span class=\"status_tag non green\">Non</span>", comment_decorated.signalled_d
+    assert_match "<span class=\"status_tag non green\">Non</span>", @comment_decorated.signalled_d
   end
 
   test 'should return correct status_tag when signalled' do
     @comment.update_attribute(:signalled, true)
-    comment_decorated = CommentDecorator.new(@comment)
-    assert_match "<span class=\"status_tag oui red\">Oui</span>", comment_decorated.signalled_d
+    assert_match "<span class=\"status_tag oui red\">Oui</span>", @comment_decorated.signalled_d
   end
 
   private
@@ -87,5 +98,6 @@ class CommentDecoratorTest < Draper::TestCase
   def initialize_test
     @comment = comments(:one)
     @comment_not_connected = comments(:five)
+    @comment_decorated = CommentDecorator.new(@comment)
   end
 end

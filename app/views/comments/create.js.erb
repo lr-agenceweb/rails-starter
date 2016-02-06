@@ -1,12 +1,12 @@
-<% if @comment_setting.should_validate %>
-  <%= render 'elements/alert' %>
-<% else %>
+<% unless @comment_setting.should_validate %>
   <% if comment.parent_id.nil? %>
     $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
   <% else %>
     $("#comment-<%= comment.parent_id %>").parent().append("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
   <% end %>
 <% end %>
+
+<%= render 'elements/alert' %>
 
 if ($('#comment-count').length > 0){
   $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")

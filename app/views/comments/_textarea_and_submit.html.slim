@@ -1,0 +1,13 @@
+= f.hidden_field :lang,
+                 value: params[:locale]
+= f.input :comment,
+          as: :text,
+          input_html: { class: 'autosize', style: 'height: 120px' }
+= f.input :nickname,
+          label: false,
+          input_html: { class: 'hide-for-small-up' }
+
+.submit-and-loader
+  = image_tag(Figaro.env.loader_spinner_img, class: 'submit-loader')
+  = button_tag(class: 'submit-btn text-right tiny') do
+    - fa_icon('paper-plane')

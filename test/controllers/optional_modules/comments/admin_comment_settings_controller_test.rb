@@ -91,26 +91,26 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, CommentSetting.new), 'should not be able to create'
-      assert ability.cannot?(:read, CommentSetting.new), 'should not be able to read'
-      assert ability.cannot?(:update, CommentSetting.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, CommentSetting.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @comment_setting), 'should not be able to read'
+      assert ability.cannot?(:update, @comment_setting), 'should not be able to update'
+      assert ability.cannot?(:destroy, @comment_setting), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.cannot?(:create, CommentSetting.new), 'should not be able to create'
-      assert ability.can?(:read, CommentSetting.new), 'should be able to read'
-      assert ability.can?(:update, CommentSetting.new), 'should be able to update'
-      assert ability.cannot?(:destroy, CommentSetting.new), 'should not be able to destroy'
+      assert ability.can?(:read, @comment_setting), 'should be able to read'
+      assert ability.can?(:update, @comment_setting), 'should be able to update'
+      assert ability.cannot?(:destroy, @comment_setting), 'should not be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.cannot?(:create, CommentSetting.new), 'should not be able to create'
-      assert ability.can?(:read, CommentSetting.new), 'should be able to read'
-      assert ability.can?(:update, CommentSetting.new), 'should be able to update'
-      assert ability.cannot?(:destroy, CommentSetting.new), 'should not be able to destroy'
+      assert ability.can?(:read, @comment_setting), 'should be able to read'
+      assert ability.can?(:update, @comment_setting), 'should be able to update'
+      assert ability.cannot?(:destroy, @comment_setting), 'should not be able to destroy'
     end
 
     #

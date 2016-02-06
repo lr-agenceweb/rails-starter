@@ -34,6 +34,7 @@ html lang="#{@language}"
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'
     = render 'elements/banner_maintenance' if maintenance?
+    = render 'elements/admin_bar' if current_user_and_administrator? && @setting.show_admin_bar?
 
     = render 'elements/microdatas', resource: setting
 

@@ -7,6 +7,10 @@ en:
       without_time: '%B %d, %Y'
       without_time_no_year: '%B %d'
       long: "%B %d, %Y at %H:%M"
+    greeting:
+      morning: Good morning
+      afternoon: Good afternoon
+      evening: Good evening
 
 # French
 fr:
@@ -17,3 +21,7 @@ fr:
       without_time: '%A %d %B %Y'
       without_time_no_year: '%A %d %B'
       long: "%A %d %B %Y à %Hh%M"
+    greeting:
+      morning: Bonjour
+      afternoon: Bonjour
+      evening: Bonsoir

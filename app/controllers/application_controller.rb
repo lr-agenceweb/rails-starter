@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include SocialHelper
   include HtmlHelper
   include UserHelper
+  include AdminBarHelper
 
   protect_from_forgery with: :exception
   analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? || request.headers['HTTP_DNT'] == '1' }
@@ -26,6 +27,7 @@ class ApplicationController < ActionController::Base
   include Sliderable
   include Videoable
   include NewsletterFrontUserable
+  before_action :set_module_settings, if: proc { @setting.show_admin_bar? } # for AdminBar
 
   # Misc
   before_action :set_host_name
@@ -61,6 +63,11 @@ class ApplicationController < ActionController::Base
 
   def set_legal_notices
     @legal_notice_category = Category.includes(menu: [:translations]).find_by(name: 'LegalNotice')
+  end
+
+  def set_module_settings
+    @comment_setting_admin_bar = CommentSetting.first
+    @guest_book_setting_admin_bar = GuestBookSetting.first
   end
 
   def set_host_name

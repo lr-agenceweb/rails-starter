@@ -35,6 +35,7 @@ one:
   <<: *DEFAULTS
   commentable: about_2 (Post)
   user: anthony
+  comment: 'Mon commentaire de test'
   lang: fr
   validated: true
   token: <%= SecureRandom.urlsafe_base64(nil, false) %>

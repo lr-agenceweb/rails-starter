@@ -7,6 +7,8 @@ fr:
     captcha: Attrapé par le captcha !
     reply:
       label: Répondre
+    to_validate:
+      scope: À valider
     signalled:
       scope: Signalés
       alert: Êtes-vous sûr de vouloir signaler ce commentaire à l'administrateur ?
@@ -25,6 +27,9 @@ fr:
     seo:
       title: Réponse à un commentaire sur l'article "%{article}"
       description: Page permettant à un utilisateur de répondre à un commentaire d'un internaute.
+    admin_bar:
+      to_moderate: Commentaires à modérer
+      signalled: Commentaires signalés
 
 # English
 en:
@@ -47,3 +52,6 @@ en:
     seo:
       title: Reply to a comment on the "%{article}" article
       description: Page allowing a user to reply to a comment by another user.
+    admin_bar:
+      to_moderate: Comments to moderate
+      signalled: Comments signalled

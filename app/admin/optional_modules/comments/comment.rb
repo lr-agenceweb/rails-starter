@@ -14,6 +14,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   scope I18n.t('scope.all'), :all, default: true
   scope I18n.t('active_admin.globalize.language.fr'), :french, if: proc { @locales.length > 1 }
   scope I18n.t('active_admin.globalize.language.en'), :english, if: proc { @locales.length > 1 }
+  scope I18n.t('comment.to_validate.scope'), :to_validate, if: proc { @comment_setting.should_validate? }
   scope I18n.t('comment.signalled.scope'), :signalled, if: proc { @comment_setting.should_signal? }
 
   decorate_with CommentDecorator
@@ -47,7 +48,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     attributes_table do
       row :author_with_avatar
       row :email_registered_or_guest
-      row :message
+      row :content
       row :lang if locales.length > 1
       row :status
       row :signalled_d if comment_setting.should_signal?

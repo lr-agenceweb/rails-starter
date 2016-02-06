@@ -57,8 +57,8 @@ class PictureTest < ActiveSupport::TestCase
 
   test 'should return first paperclip picture object' do
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
-    picture = Picture.create(image: attachment, attachable_type: 'Post', attachable_id: @about_2_post.id)
-    assert_equal picture.image.instance, @about_2_post.first_pictures_image.instance
+    picture = Picture.create(image: attachment, attachable_type: 'Post', attachable_id: @about_offline_post.id)
+    assert_equal picture.image.instance, @about_offline_post.first_pictures_image.instance
   end
 
   private
@@ -68,5 +68,6 @@ class PictureTest < ActiveSupport::TestCase
     @home_post = posts(:home)
     @about_post = posts(:about)
     @about_2_post = posts(:about_2)
+    @about_offline_post = posts(:about_offline)
   end
 end

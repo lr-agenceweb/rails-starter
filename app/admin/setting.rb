@@ -9,6 +9,7 @@ ActiveAdmin.register Setting do
               :email,
               :per_page,
               :maintenance,
+              :show_admin_bar,
               :logo,
               :logo_footer,
               :delete_logo,
