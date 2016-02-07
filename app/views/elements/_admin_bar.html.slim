@@ -2,6 +2,13 @@
   .left
     ul.inline-list
       li
+        - if @setting.maintenance?
+          span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('maintenance.title')}"
+            = fa_icon 'exclamation-triangle 2x', class: 'warning'
+        - else
+          span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('no_maintenance.title')}"
+            = fa_icon 'check-circle-o 2x', class: 'success'
+      li
         = fa_icon 'unlock', text: link_to(I18n.t('admin_bar.go_to_admin'), admin_dashboard_path, class: 'dahsboard-link', data: { no_turbolink: true }), right: true
       li
         = fa_icon 'sign-out', text: link_to(t('log_out'), destroy_user_session_path, method: :delete, class: 'dahsboard-link'), right: true
@@ -33,6 +40,6 @@
 
       li
         span.admin_bar-username<>
-          == "#{morning_or_evening} #{link_to(current_user.username, admin_user_path(current_user))}, "
+          == "#{morning_or_evening} #{link_to(current_user.username, admin_user_path(current_user))}"
         span.admin_bar-avatar<>
           = current_user.decorate.image_avatar(24)
