@@ -60,7 +60,13 @@ ul.pagination li button:focus
   .article-title
     font-size: 3rem
     margin-bottom: 2rem
-    border-bottom: 1px solid $white
+
+    &:after
+      content: ''
+      display: block
+      margin: 0 auto
+      width: 50%
+      border-bottom: 1px solid $white
 
   .post-body, .article-title
     color: $white
