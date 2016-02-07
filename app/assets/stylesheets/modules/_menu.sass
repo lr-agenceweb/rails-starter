@@ -1,15 +1,21 @@
 .l-nav-item .l-nav-item-link
-  @include link-colors($menu-font-color, $link-hover-color)
+  @include link-colors(rgba($black, .4), $black)
   text-decoration: none
 
 .active .l-nav-item-link
   @include link-colors($link-active-color)
+
+.is-homepage
+  .l-nav-item .l-nav-item-link
+    @include link-colors($menu-font-color, $white)
+
 
 .l-nav-container
   position: relative
   height: 40px
   width: 100%
   font-weight: 400
+  margin-top: 20px
 
   ul
     padding: 0
@@ -22,6 +28,7 @@
     float: left
     font-size: 13px
     margin-left: 0
+    text-transform: uppercase
 
     &:last-child
       .l-nav-item-link
@@ -29,14 +36,16 @@
         border-right: none
 
     .l-nav-item-link
-      font-size: 12pt
+      font-size: 13px
       display: inline-block
       text-decoration: none
       padding: 0 5px
 
-    &:not(:last-child):after
-      content: '~'
-      color: $menu-font-color
+    &:not(:last-child)
+      margin-right: 1.5rem
+    // &:not(:last-child):after
+    //   content: ''
+    //   color: $menu-font-color
 
   a#pull
     display: none

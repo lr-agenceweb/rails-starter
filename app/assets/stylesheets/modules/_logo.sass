@@ -1,22 +1,32 @@
 // Logo
 .logo-container
-  background: #FFF
-  position: absolute
-  top: -30px
-  left: 0
-  z-index: 10
-  padding: 5px 0
-  width: $logo_width
-  height: $logo_width
-  box-shadow: 1.2px 4.9px 5px rgba(0, 0, 0, 0.3)
+  // background: #FFF
+  // position: absolute
+  // top: -30px
+  // left: 0
+  // z-index: 10
+  // padding: 5px 0
+  // width: $logo_width
+  // height: $logo_height
+  // box-shadow: 1.2px 4.9px 5px rgba(0, 0, 0, 0.3)
 
   .logo
-    width: $logo_width
-    height: 100px
+    max-width: $logo_width
+    max-height: $logo_height
+    height: $logo_height
     background-repeat: no-repeat
-    background-position: center center
-    padding-bottom: 180px
-    margin-top: 12px
+    background-position: left center
+    // text-indent: -9999px
+    font-size: 13px
+    // padding-bottom: 180px
+    // margin-top: 12px
+
+.is-homepage
+  .logo-container
+    .logo
+      opacity: .8
+  .header-title-link
+    @include link-colors($menu-font-color, $white)
 
 // Mapbox popup
 .logo-link
@@ -26,28 +36,40 @@
 
 .header-title-link
   display: block
-  color: #414042
+  @include link-colors(rgba($black, .4), $black)
+  transition: color .3s ease-in
 
   .header-title
-    position: absolute
-    top: 0
-    font-size: 20px
+    display: block
     text-transform: uppercase
     text-align: center
     font-weight: 700
-    color: rgba(0, 0, 0, .60)
-    letter-spacing: 3px
+    text-indent: 77px
+    color: inherit
 
-  .header-subtitle
-    position: absolute
-    bottom: 13px
-    text-transform: none
-    font-weight: 300
-    font-size: 14px
-    text-align: center
-    display: block
-    width: $logo_width
-    letter-spacing: normal
+    span
+      display: block
+      padding-top: 3px
+      font-size: 1rem
+    // position: absolute
+    // top: 0
+    // left: 0
+    // right: 0
+    // bottom: 0
+    // letter-spacing: 3px
+
+    .header-subtitle
+      text-transform: none
+      font-weight: 300
+      font-size: .8rem
+      display: block
+      letter-spacing: normal
+      padding-top: 7px
+      color: inherit
+    //   position: absolute
+    //   bottom: 13px
+    //   text-align: center
+    //   width: $logo_width
 
 @if variable-exists(small-only)
   @media #{$small-only}

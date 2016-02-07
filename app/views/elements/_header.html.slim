@@ -1,5 +1,9 @@
-header
-  = render 'elements/menu/dropdown'
+header.l-header-site
+  .row
+    .small-12.medium-3.medium-offset-1.columns
+      = render 'elements/logo', show_metadata: false
+    .small-12.medium-8.columns
+      = render 'elements/menu/no_dropdown'
 
 .clearfix
 
