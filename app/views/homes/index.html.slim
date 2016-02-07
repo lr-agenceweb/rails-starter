@@ -3,8 +3,10 @@
 - if category.video?
   = render 'assets/videos/video_background', video_background: category.video_upload.decorate
 - else
-  = render 'optional_modules/sliders/show', slider: slider, force: false
-  = background.handle_background_tag if @background_module.enabled? && !@background.nil?
+  - if category.background? && @background_module.enabled? && !@background.nil?
+    = background.handle_background_tag
+  - else
+    = render 'optional_modules/sliders/show', slider: slider, force: false
 
 .homepage-content
   .row
