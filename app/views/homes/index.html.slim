@@ -4,7 +4,7 @@
   = render 'assets/videos/video_background', video_background: category.video_upload.decorate
 - else
   - if category.background? && @background_module.enabled? && !@background.nil?
-    = background.handle_background_tag
+    = render 'assets/backgrounds/background', background: category.background
   - else
     = render 'optional_modules/sliders/show', slider: slider, force: false
 
