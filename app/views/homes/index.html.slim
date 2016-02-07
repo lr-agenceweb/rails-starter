@@ -13,3 +13,7 @@
     - @homes.each do |home|
       .small-12.medium-7.medium-centered.columns
         = render 'homes/home', home: home
+
+  .row
+    .small-12.medium-4.medium-centered.columns
+      .button-discover = link_to t('demo.discover_demo_site'), blogs_path

@@ -1,21 +1,21 @@
 .l-nav-item .l-nav-item-link
   @include link-colors(rgba($black, .4), $black)
   text-decoration: none
-
 .active .l-nav-item-link
   @include link-colors($link-active-color)
 
 .is-homepage
   .l-nav-item .l-nav-item-link
     @include link-colors($menu-font-color, $white)
-
+  .active .l-nav-item-link
+    @include link-colors($link-active-color)
 
 .l-nav-container
   position: relative
   height: 40px
   width: 100%
   font-weight: 400
-  margin-top: 20px
+  margin-top: 15px
 
   ul
     padding: 0
