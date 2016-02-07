@@ -54,31 +54,37 @@
 
 
 @media screen and (max-width: $menu-breakpoint-one)
-  .menu-site, .title-site
-    float: none
-    width: 100%
+  .columns-for-logo, .columns-for-menu
+    margin-left: 0 !important
+  // .menu-site, .title-site
+  //   float: none
+  //   width: 100%
 
-  .l-header-site .menu-site.v-bottom
-    margin-top: 20px
+  // .l-header-site .menu-site.v-bottom
+  //   margin-top: 20px
 
-  .title-site
-    text-align: center
+  // .title-site
+  //   text-align: center
 
-  .l-nav-container
-    ul
-      float: none
-      width: 70%
+  // .l-nav-container
+  //   ul
+  //     float: none
+  //     width: 70%
 
-    .l-nav-item
-      &.show-for-breakpoint-one
-        display: block
+  //   .l-nav-item
+  //     &.show-for-breakpoint-one
+  //       display: block
 
-    .hide-for-breakpoint-one
-      display: none
+  //   .hide-for-breakpoint-one
+  //     display: none
 
 
 // Version sur deux colonnes
 @media screen and (max-width: $menu-breakpoint-two)
+  .columns-for-logo, .columns-for-menu
+    float: none
+    width: 100%
+
   .menu-site
     padding: 0 !important
 
@@ -119,12 +125,13 @@
       background-color: $menu-bg-color
       border-bottom: 1px solid $border-color
       display: block
+      &:not(:last-child)
+        margin-right: 0
 
       .l-nav-item-link
         text-align: center
         padding: 8px 0
         width: 100%
-        @include link-colors($menu-font-color, $menu-font-color)
 
       &:after
         content: none !important
@@ -133,7 +140,7 @@
 // Menu déroulant sur une colonne
 @media only screen and (max-width : $menu-breakpoint-three)
   .l-nav-container
-    margin: 0
+    margin-top: 1rem
     border: none
 
     ul
@@ -155,7 +162,7 @@
       // border-bottom: 1px solid $link-active-color
       padding: 10px
       background-color: $menu-bg-color
-      color: $menu-font-color
+      color: $white
 
       // /* L'icône hamburger, en utilisant le box-shadow */
       &:after
