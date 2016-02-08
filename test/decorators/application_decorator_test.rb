@@ -19,6 +19,20 @@ class ApplicationDecoratorTest < Draper::TestCase
   end
 
   #
+  # == DateTime
+  #
+  test 'should return correct created_at format' do
+    assert_equal '01 fév. 13h32', @blog_article_decorated.created_at
+  end
+
+  #
+  # == Paginator
+  #
+  test 'should return correct decorator class' do
+    assert_equal PaginatingDecorator, ApplicationDecorator.collection_decorator_class
+  end
+
+  #
   # == Status tag
   #
   test 'should return status_tag if prev_next' do
