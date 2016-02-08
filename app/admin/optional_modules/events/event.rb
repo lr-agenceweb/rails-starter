@@ -84,7 +84,7 @@ ActiveAdmin.register Event do
           row :end_date
           row :duration
           row :url
-          row :show_as_gallery_d
+          row :show_as_gallery
           row :show_calendar_d if calendar_module.enabled?
           row :status
           row :full_address_inline
