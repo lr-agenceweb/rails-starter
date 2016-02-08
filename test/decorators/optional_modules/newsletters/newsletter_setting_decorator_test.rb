@@ -20,7 +20,10 @@ class NewsletterSettingDecoratorTest < Draper::TestCase
   end
 
   test 'should get list of newsletter user roles' do
-    assert_equal ['abonné', 'testeur'], @newsletter_setting_decorated.newsletter_user_roles_list
+    roles = @newsletter_setting_decorated.newsletter_user_roles_list
+    ['testeur', 'abonné'].each do |role|
+      assert roles.include?(role), "\"#{role}\" should be included in list"
+    end
   end
 
   #
