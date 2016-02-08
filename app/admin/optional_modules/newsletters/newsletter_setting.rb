@@ -15,12 +15,12 @@ ActiveAdmin.register NewsletterSetting do
   decorate_with NewsletterSettingDecorator
   config.clear_sidebar_sections!
 
-  show do
+  show title: I18n.t('activerecord.models.newsletter_setting.one') do
     columns do
       column do
         attributes_table do
-          row :send_welcome_email_d
-          row :newsletter_user_roles_d
+          row :send_welcome_email
+          list_row :newsletter_user_roles_list, list_type: :ul
         end
       end
 

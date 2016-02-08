@@ -7,7 +7,7 @@ ActiveAdmin.register BlogSetting do
   decorate_with BlogSettingDecorator
   config.clear_sidebar_sections!
 
-  show do
+  show title: I18n.t('activerecord.models.blog_setting.one') do
     columns do
       column do
         attributes_table do
