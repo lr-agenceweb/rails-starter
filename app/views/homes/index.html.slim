@@ -3,15 +3,17 @@
 - if category.video?
   = render 'assets/videos/video_background', video_background: category.video_upload.decorate
 - else
-  = render 'optional_modules/sliders/show', slider: slider, force: false
-  = background.handle_background_tag if @background_module.enabled? && !@background.nil?
+  - if category.background? && @background_module.enabled? && !@background.nil?
+    = render 'assets/backgrounds/background', background: category.background
+  - else
+    = render 'optional_modules/sliders/show', slider: slider, force: false
 
-.row
-  - @homes.each do |home|
-    article.small-12.columns
-      = render 'posts/microdatas', resource: home
+.homepage-content
+  .row
+    - @homes.each do |home|
+      .small-12.medium-9.large-7.medium-centered.columns
+        = render 'homes/home', home: home
 
-      header
-        h2 = home.title
-
-      div == home.content
+  .row
+    .small-12.medium-4.medium-centered.columns
+      .button-discover = link_to t('demo.discover_demo_site'), blogs_path

@@ -6,6 +6,13 @@ require 'test_helper'
 class PostTest < ActiveSupport::TestCase
   setup :initialize_test
 
+  test 'should have correct list of subclasses' do
+    subclasses = Post.type
+    %w(Home About Contact).each do |item|
+      assert subclasses.include?(item), "\"#{item}\" should be a subclass of post"
+    end
+  end
+
   test 'should return only RSS articles' do
     rss_items = Post.allowed_for_rss.online
     expected = []

@@ -26,7 +26,7 @@ ActiveAdmin.register Category do
       params.push :optional, :menu_id, :optional_module_id
     end
     params.push background_attributes: [:id, :image, :_destroy] if @background_module.enabled?
-    params.push video_upload_attributes: [:id, :video_file, :online, :position, :_destroy] unless show_video_background?(@video_settings, @video_module)
+    params.push video_upload_attributes: [:id, :video_file, :online, :position, :_destroy] if show_video_background?(@video_settings, @video_module)
 
     params
   end

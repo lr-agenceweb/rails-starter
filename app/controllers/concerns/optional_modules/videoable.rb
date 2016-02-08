@@ -6,7 +6,7 @@ module Videoable
 
   included do
     before_action :set_video_settings, if: proc { @video_module.enabled? }
-    after_action :set_flash_notice, only: [:create, :update], if: proc { defined?(flash_notice) && !flash_notice.blank? }
+    after_action :set_flash_notice, only: [:create, :update], if: proc { defined?(resource.flash_notice) && !resource.flash_notice.blank? }
 
     private
 
@@ -18,7 +18,7 @@ module Videoable
     end
 
     def set_flash_notice
-      flash[:notice] = flash_notice
+      flash[:notice] = resource.flash_notice
     end
   end
 end

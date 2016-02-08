@@ -4,12 +4,24 @@
   overflow: auto
   color: $gainsboro
 
+  .f-dropdown li a
+    display: inline-block
+
+  a
+    color: $white
+
   .inline-list
     font-size: .8rem
     margin-bottom: 0
 
     &> li > *
       display: initial
+
+  .fa
+    &.success
+      color: $success-color
+    &.warning
+      color: $warning-color
 
   .admin_bar-bubble
     display: inline-block
@@ -44,8 +56,6 @@
       background-color: $warning-color
 
   .dahsboard-link
-    text-decoration: underline
-    color: $gainsboro
     margin-right: 3px
 
   .divider

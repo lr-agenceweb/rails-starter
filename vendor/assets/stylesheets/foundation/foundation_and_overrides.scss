@@ -498,7 +498,7 @@ $crumb-slash-color: $black;
 // $f-dropdown-margin-bottom: $f-dropdown-margin-top;
 
 // We use this to control the background color
-// $f-dropdown-bg: $white;
+$f-dropdown-bg: $jet;
 
 // We use this to set the border styles for dropdowns.
 // $f-dropdown-border-style: solid;
@@ -512,11 +512,11 @@ $crumb-slash-color: $black;
 
 // We use these to control styles for the list elements.
 // $f-dropdown-list-style: none;
-// $f-dropdown-font-color: $charcoal;
+$f-dropdown-font-color: $gainsboro;
 // $f-dropdown-font-size: rem-calc(14);
 // $f-dropdown-list-padding: rem-calc(5, 10);
 // $f-dropdown-line-height: rem-calc(18);
-// $f-dropdown-list-hover-bg: $smoke;
+$f-dropdown-list-hover-bg: lighten($jet, 5%);
 // $dropdown-mobile-default-float: 0;
 
 // We use this to control the styles for when the dropdown has custom content.

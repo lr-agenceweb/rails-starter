@@ -31,7 +31,7 @@ class ApplicationControllerTest < ActionController::TestCase
   end
 
   test 'should return correct Froala wysiwyg key' do
-    assert_equal ({froala_key: Figaro.env.froala_key}), @controller.send(:set_froala_key)
+    assert_equal ({ froala_key: Figaro.env.froala_key }), @controller.send(:set_froala_key)
   end
 
   test 'should not have nil legal_notice content' do

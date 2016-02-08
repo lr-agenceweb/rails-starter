@@ -1,0 +1,2 @@
+.background class="#{defined?(klass) ? klass : ''}" style="background-image: url(#{background.self_image_url_by_size(:background)});" data-interchange="[#{background.self_image_url_by_size(:background)}, (default)], [#{background.self_image_url_by_size(:medium)}, (small)], [#{background.self_image_url_by_size(:medium)}, (medium)], [#{background.self_image_url_by_size(:background)}, (large)]"
+  = defined?(content) ? content : ''

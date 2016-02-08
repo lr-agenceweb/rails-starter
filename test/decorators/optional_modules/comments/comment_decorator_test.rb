@@ -20,6 +20,10 @@ class CommentDecoratorTest < Draper::TestCase
     assert_equal 'Luke', comment_decorated.pseudo_registered_or_guest
   end
 
+  test 'should return correct html_tag for user' do
+    assert_equal '<strong class="comment-author">Anthony</strong>', @comment_decorated.pseudo
+  end
+
   test 'should return correct email if user is connected' do
     assert_equal 'anthony@test.fr', @comment_decorated.email_registered_or_guest
   end
