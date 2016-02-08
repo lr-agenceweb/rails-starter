@@ -45,7 +45,7 @@ class NewsletterUser < ActiveRecord::Base
   scope :testers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'tester') }
   scope :subscribers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'subscriber') }
 
-  delegate :title, to: :newsletter_user_role, prefix: true, allow_nil: true
+  delegate :title, :kind, to: :newsletter_user_role, prefix: true, allow_nil: true
 
   def self.testers?
     testers.length > 0

@@ -11,7 +11,7 @@ class NewsletterUserDecorator < ApplicationDecorator
 
     arbre do
       Globalize.with_locale(:en) do
-        status_tag I18n.t("role.#{model.newsletter_user_role_title}"), color
+        status_tag I18n.t("role.#{model.newsletter_user_role_kind}"), color
       end
     end
   end
