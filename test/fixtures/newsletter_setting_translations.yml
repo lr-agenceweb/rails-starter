@@ -1,0 +1,17 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+one_fr:
+  <<: *DEFAULTS
+  newsletter_setting_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: fr
+  title_subscriber: 'Je suis le titre'
+  content_subscriber: 'Je suis le contenu'
+
+one_en:
+  <<: *DEFAULTS
+  newsletter_setting_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: en
+  title_subscriber: 'I am the title'
+  content_subscriber: 'I am the content'
