@@ -128,10 +128,10 @@ fr:
       post_comment:
         one: Commentaire
         other: Commentaires
-      letter_user:
+      newsletter_user:
         one: Newsletter Utilisateur
         other: Newsletter Utilisateurs
-      letter:
+      newsletter:
         one: Newsletter
         other: Newsletters
       newsletter_setting:
@@ -208,7 +208,6 @@ fr:
         allow_comments: Autoriser les commentaires
         allow_comments_status: Autoriser les commentaires
         show_as_gallery: Galerie d'images
-        show_as_gallery_d: Galerie d'images
       blog:
         title: Titre
         content: Contenu
@@ -219,7 +218,6 @@ fr:
         allow_comments: Autoriser les commentaires
         allow_comments_status: Autoriser les commentaires
         show_as_gallery: Galerie d'images
-        show_as_gallery_d: Galerie d'images
       blog_setting:
         prev_next: Liens précédent / suivant
       setting:
@@ -301,12 +299,11 @@ fr:
         created_at: Inscrit le
         newsletter_user_role_id: Rôle
       newsletter_setting:
-        send_welcome_email_d: Mail de bienvenue ?
         send_welcome_email: Mail de bienvenue ?
         title_subscriber: Titre du mail
         content_subscriber: Contenu du mail
         newsletter_user_roles: Rôles utilisateur
-        newsletter_user_roles_d: Rôles utilisateur
+        newsletter_user_roles_list: Rôles utilisateur
       newsletter_user_role:
         title: Rôle
       adult_setting:
@@ -447,7 +444,6 @@ fr:
         prev_next: Liens précédent/suivant
         prev_next_d: Liens précédent/suivant
         show_as_gallery: Galerie d'images
-        show_as_gallery_d: Galerie d'images
         show_calendar_d: Calendrier
         show_calendar: Calendrier
         full_address_inline: Adresse de l'événement

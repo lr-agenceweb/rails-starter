@@ -5,7 +5,7 @@ columns do
       attributes_table_for resource do
         row :content
         row :status
-        row :show_as_gallery_d
+        row :show_as_gallery
         image_row :image, style: :medium do |r|
           r.picture.image if r.picture?
         end

@@ -5,11 +5,6 @@ class ApplicationDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
-  def title_for_given_name(name)
-    header = content_tag(:h2, name, class: 'l-page-title', id: name)
-    header
-  end
-
   #
   # == Avatar
   #
@@ -48,20 +43,15 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
-  # == BlogSetting and EventSetting
-  #
-  def prev_next
-    color = model.prev_next? ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.prev_next}"), color
-  end
-
-  #
   # == Methods used in all decorators
   #
   def self.collection_decorator_class
     PaginatingDecorator
   end
 
+  #
+  # == ActiveAdmin views
+  #
   def arbre_context
     @arbre_context ||= Arbre::Context.new({}, self)
     @arbre_context.dup
@@ -71,18 +61,26 @@ class ApplicationDecorator < Draper::Decorator
     arbre_context.instance_eval(&block).to_s
   end
 
+  #
+  # == DateTime
+  #
   def created_at
     I18n.l(model.created_at, format: :short)
   end
 
+  #
+  # == Status tag
+  #
+  def status_tag_deco(value, color)
+    arbre do
+      status_tag(value, color)
+    end
+  end
+
   def lang
-    color = 'green'
     color = 'blue' if model.lang == 'fr'
     color = 'red' if model.lang == 'en'
-
-    arbre do
-      status_tag_deco I18n.t("active_admin.globalize.language.#{model.lang}"), color
-    end
+    status_tag_deco I18n.t("active_admin.globalize.language.#{model.lang}"), color
   end
 
   def status
@@ -90,17 +88,19 @@ class ApplicationDecorator < Draper::Decorator
     status_tag_deco I18n.t("online.#{model.online}"), color
   end
 
-  def show_as_gallery_d
+  def show_as_gallery
     color = model.show_as_gallery? ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.show_as_gallery}"), color
+    status_tag_deco I18n.t("enabled.#{model.show_as_gallery?}"), color
   end
 
-  def status_tag_deco(value, color)
-    arbre do
-      status_tag(value, color)
-    end
+  def prev_next
+    color = model.prev_next? ? 'green' : 'red'
+    status_tag_deco I18n.t("enabled.#{model.prev_next}"), color
   end
 
+  #
+  # == Boolean
+  #
   def content?
     !model.content.blank?
   end

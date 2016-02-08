@@ -54,7 +54,7 @@ ActiveAdmin.register Blog do
     end
     column :title
     column :allow_comments_status
-    column :show_as_gallery_d
+    column :show_as_gallery
     column :status
     translation_status
     column :author_with_avatar

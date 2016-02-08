@@ -8,7 +8,7 @@ ActiveAdmin.register EventSetting do
   decorate_with EventSettingDecorator
   config.clear_sidebar_sections!
 
-  show do
+  show title: I18n.t('activerecord.models.event_setting.one') do
     columns do
       column do
         attributes_table do
