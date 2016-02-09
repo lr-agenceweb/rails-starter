@@ -16,7 +16,7 @@ class SocialTest < ActiveSupport::TestCase
     assert_equal 2, Social.follow.count
   end
 
-  test 'should return list of allowed title for social newtwork' do
+  test 'should return list of allowed title for social' do
     atsn = Social.allowed_title_social_network
     assert_includes atsn, 'Facebook'
     assert_includes atsn, 'Twitter'
@@ -24,18 +24,63 @@ class SocialTest < ActiveSupport::TestCase
     assert_includes atsn, 'Email'
   end
 
-  test 'should return list of allowed kind for social newtwork' do
+  test 'should return list of allowed kind for social' do
     aksn = Social.allowed_kind_social_network.flatten(1)
     assert_includes aksn, 'follow'
     assert_includes aksn, 'share'
   end
 
-  test 'should return list of allowed font awesome for social newtwork' do
+  test 'should return list of allowed font awesome for social' do
     afai = Social.allowed_font_awesome_ikons
     assert_includes afai, 'facebook'
     assert_includes afai, 'twitter'
     assert_includes afai, 'google'
     assert_includes afai, 'envelope'
+  end
+
+  #
+  # == Validation
+  #
+  test 'should save follow social if all good' do
+    social = Social.new(title: 'Facebook', kind: 'follow', link: 'http://facebook.com', font_ikon: 'facebook')
+    assert social.valid?
+    assert_empty social.errors.keys
+  end
+
+  test 'should save share social if all good' do
+    social = Social.new(title: 'Facebook', kind: 'share', font_ikon: 'facebook')
+    assert social.valid?
+    assert_empty social.errors.keys
+  end
+
+  test 'should not be valid if title is not set' do
+    social = Social.new(kind: 'share')
+    assert_not social.valid?
+    assert_equal [:title], social.errors.keys
+  end
+
+  test 'should not be valid if kind is not allowed' do
+    social = Social.new(title: 'Facebook', kind: 'bad_value')
+    assert_not social.valid?
+    assert_equal [:kind], social.errors.keys
+  end
+
+  test 'should not save link if social kind is share' do
+    social = Social.new(title: 'Facebook', kind: 'share', link: 'http://facebook.com')
+    assert_not social.valid?
+    assert_equal [:link], social.errors.keys
+  end
+
+  test 'should not save link if url is not correct' do
+    social = Social.new(title: 'Facebook', kind: 'share', link: 'http://facebook')
+    assert_not social.valid?
+    assert_equal [:link], social.errors.keys
+  end
+
+  test 'should not save ikon if not allowed' do
+    social = Social.new(title: 'Email', kind: 'share', font_ikon: 'car')
+    assert_not social.valid?
+    assert_equal [:font_ikon], social.errors.keys
   end
 
   #
