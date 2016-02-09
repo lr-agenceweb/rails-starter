@@ -4,8 +4,6 @@ require 'test_helper'
 # == AssetsHelper Test
 #
 class AssetsHelperTest < ActionView::TestCase
-  include AssetsHelper
-
   setup :initialize_test
 
   test 'should return full path for attachment' do
@@ -28,6 +26,15 @@ class AssetsHelperTest < ActionView::TestCase
     result = attachment_url(nil, :small, ActionController::TestRequest.new)
     expected = 'http://test.host/default/small-missing.png'
     assert_equal expected, result
+  end
+
+  #
+  # == Pictures
+  #
+  test 'should return retina avatar for user' do
+    attachment = fixture_file_upload 'images/bart.png', 'image/png'
+    @user.update_attributes!(avatar: attachment)
+    assert_equal "<img width=\"64\" height=\"64\" src=\"#{@user.avatar.url(:thumb)}\" alt=\"Thumb bart\" />", retina_thumb_square(@user)
   end
 
   #
@@ -55,6 +62,7 @@ class AssetsHelperTest < ActionView::TestCase
 
   def initialize_test
     @video_settings = video_settings(:one)
+    @user = users(:maria)
 
     @video_module = optional_modules(:video)
     @video_module_disabled = optional_modules(:video_disabled)
