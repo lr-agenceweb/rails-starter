@@ -137,26 +137,26 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, NewsletterUser.new), 'should not be able to create'
-      assert ability.cannot?(:read, NewsletterUser.new), 'should not be able to read'
-      assert ability.cannot?(:update, NewsletterUser.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, NewsletterUser.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @newsletter_user), 'should not be able to read'
+      assert ability.cannot?(:update, @newsletter_user), 'should not be able to update'
+      assert ability.cannot?(:destroy, @newsletter_user), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.can?(:create, NewsletterUser.new), 'should be able to create'
-      assert ability.can?(:read, NewsletterUser.new), 'should be able to read'
-      assert ability.can?(:update, NewsletterUser.new), 'should be able to update'
-      assert ability.can?(:destroy, NewsletterUser.new), 'should be able to destroy'
+      assert ability.can?(:read, @newsletter_user), 'should be able to read'
+      assert ability.can?(:update, @newsletter_user), 'should be able to update'
+      assert ability.can?(:destroy, @newsletter_user), 'should be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.can?(:create, NewsletterUser.new), 'should be able to create'
-      assert ability.can?(:read, NewsletterUser.new), 'should be able to read'
-      assert ability.can?(:update, NewsletterUser.new), 'should be able to update'
-      assert ability.can?(:destroy, NewsletterUser.new), 'should be able to destroy'
+      assert ability.can?(:read, @newsletter_user), 'should be able to read'
+      assert ability.can?(:update, @newsletter_user), 'should be able to update'
+      assert ability.can?(:destroy, @newsletter_user), 'should be able to destroy'
     end
 
     #

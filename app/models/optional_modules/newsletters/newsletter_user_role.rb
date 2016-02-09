@@ -27,6 +27,15 @@ class NewsletterUserRole < ActiveRecord::Base
   belongs_to :rollable, polymorphic: true
   has_many :newsletter_users
 
+  def self.allowed_newsletter_user_roles
+    %w( subscriber tester )
+  end
+
+  validates :kind,
+            presence: true,
+            allow_blank: false,
+            inclusion: { in: allowed_newsletter_user_roles }
+
   def self.newsletter_user_role_dropdown
     includes(:translations).all.map { |nur| [nur.title, nur.id] }
   end
