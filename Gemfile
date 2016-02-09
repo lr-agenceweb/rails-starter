@@ -149,6 +149,11 @@ gem 'faker'
 gem 'mediaelement_rails' # HTML5 video player
 gem 'video_info'
 
+#
+# == Logs
+#
+gem 'lograge'
+
 group :development do
   gem 'better_errors'
   gem 'rb-fsevent', require: false

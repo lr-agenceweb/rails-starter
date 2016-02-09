@@ -392,6 +392,10 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
+    lograge (0.3.5)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     looksee (3.1.0)
@@ -713,6 +717,7 @@ DEPENDENCIES
   jquery-ui-rails
   js_cookie_rails
   kaminari (~> 0.16.1)
+  lograge
   magnific-popup-rails
   mapbox-rails!
   mediaelement_rails
