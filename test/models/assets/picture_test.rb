@@ -38,7 +38,7 @@ class PictureTest < ActiveSupport::TestCase
   end
 
   test 'should have picture linked' do
-    # skip 'skip this test because of travis which doesn\'t understand this'
+    skip 'skip this test because of travis which doesn\'t understand this'
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     Picture.create(image: attachment, attachable_type: 'Post', attachable_id: @home_post.id)
     assert @home_post.pictures?, 'should have picture linked to home article'
@@ -49,7 +49,7 @@ class PictureTest < ActiveSupport::TestCase
   end
 
   test 'should return first picture object' do
-    # skip 'skip this test because of travis which doesn\'t understand this'
+    skip 'skip this test because of travis which doesn\'t understand this'
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     picture = Picture.create(image: attachment, attachable_type: 'Post', attachable_id: @home_post.id)
     assert_equal picture, @home_post.first_pictures
