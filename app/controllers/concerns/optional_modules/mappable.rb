@@ -5,7 +5,7 @@ module Mappable
   extend ActiveSupport::Concern
 
   included do
-    include MapHelper
+    include OptionalModules::MapHelper
 
     before_action :set_map_setting, if: proc { set_map? }
     before_action :set_map, if: proc { set_map? }

@@ -2,7 +2,7 @@
 # == ContactsController
 #
 class ContactsController < ApplicationController
-  include QrcodeHelper
+  include OptionalModules::QrcodeHelper
 
   skip_before_action :allow_cors
   skip_before_action :set_menu_elements, :set_adult_validation, :set_background, :set_newsletter_user, :set_search_autocomplete, :set_slider, :set_social_network, :set_froala_key, only: :mapbox_popup

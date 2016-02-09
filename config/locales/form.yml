@@ -82,6 +82,8 @@ fr:
         enabled: Si coché, ce réseau social sera activé sur le site
         delete_ikon: Si coché, l'icône du réseau social sera supprimée après mise à jour de l'élément
         font_ikon_blank: Je ne souhaite pas utiliser d'icône
+        already_picture: Ce champs est désactivé car vous avez choisi d'utiliser une image en guise d'icône
+        default_hint: "Si vous ne choisissez aucune image ou icône (%{list}), le titre du réseau social sera utilisé."
 
       adult:
         enabled: Activer / Désactiver le popup de validation de l'âge

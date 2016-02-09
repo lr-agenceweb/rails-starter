@@ -60,7 +60,7 @@ ActiveAdmin.register MailingMessage do
     include Skippable
     include ModuleSettingable
     include Mailingable
-    include NewsletterHelper
+    include OptionalModules::NewsletterHelper
 
     before_action :redirect_to_dashboard, only: [:send_mailing_message]
 
