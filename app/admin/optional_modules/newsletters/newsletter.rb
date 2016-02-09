@@ -49,7 +49,7 @@ ActiveAdmin.register Newsletter do
   controller do
     include Skippable
     include Newsletterable
-    include NewsletterHelper
+    include OptionalModules::NewsletterHelper
 
     def send_newsletter
       if params[:option] == 'subscribers'

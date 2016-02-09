@@ -2,7 +2,7 @@
 # == CommentsController
 #
 class CommentsController < ApplicationController
-  include CommentHelper
+  include OptionalModules::CommentHelper
   include ModuleSettingable
 
   before_action :comment_module_enabled?

@@ -3,7 +3,7 @@
 #
 class ApplicationController < ActionController::Base
   include ApplicationHelper
-  include SocialHelper
+  include OptionalModules::SocialHelper
   include HtmlHelper
   include UserHelper
   include AdminBarHelper
