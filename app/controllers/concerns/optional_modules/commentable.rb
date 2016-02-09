@@ -5,6 +5,8 @@ module Commentable
   extend ActiveSupport::Concern
 
   included do
+    include CommentHelper
+
     before_action :set_commentable, only: [:show], if: proc { @comment_module.enabled? }
     before_action :set_comments, only: [:show], if: proc { @comment_module.enabled? && !@commentable.nil? }
     before_action :set_pagination, only: [:show], if: proc { @comment_module.enabled? && !@commentable.nil? }

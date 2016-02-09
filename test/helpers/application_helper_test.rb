@@ -8,10 +8,16 @@ class ApplicationHelperTest < ActionView::TestCase
 
   setup :initialize_test
 
+  #
+  # == DateTime
+  #
   test 'should return current year' do
     assert_equal current_year, Time.zone.now.year
   end
 
+  #
+  # == Maintenance
+  #
   test 'should return true if maintenance is enabled' do
     @setting.update_attributes(maintenance: true)
     assert maintenance?(@request), 'should be in maintenance'
