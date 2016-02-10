@@ -28,6 +28,9 @@ class PostDecorator < ApplicationDecorator
     author_with_avatar_html(author_avatar, link_author)
   end
 
+  #
+  # == Status tag
+  #
   def allow_comments_status
     color = model.allow_comments? ? 'green' : 'red'
     status_tag_deco I18n.t("allow_comments.#{model.allow_comments}"), color
