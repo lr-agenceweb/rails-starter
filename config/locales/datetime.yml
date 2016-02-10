@@ -4,9 +4,10 @@ en:
     label:
       seconds: seconds
     formats:
+      with_time: '%B %d, %Y %I.%m %p'
       without_time: '%B %d, %Y'
       without_time_no_year: '%B %d'
-      long: "%B %d, %Y at %H:%M"
+      long: "%B %d, %Y at %I.%m %p"
     greeting:
       morning: Good morning
       afternoon: Good afternoon
@@ -18,6 +19,7 @@ fr:
     label:
       seconds: secondes
     formats:
+      with_time: '%A %d %B %Hh:%M'
       without_time: '%A %d %B %Y'
       without_time_no_year: '%A %d %B'
       long: "%A %d %B %Y à %Hh%M"
