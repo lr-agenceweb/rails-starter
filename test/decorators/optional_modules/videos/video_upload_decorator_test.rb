@@ -4,6 +4,8 @@ require 'test_helper'
 # == VideoUploadDecorator test
 #
 class VideoUploadDecoratorTest < Draper::TestCase
+  include ActionDispatch::TestProcess
+
   setup :initialize_test
 
   test 'should get correct title for microdatas' do
@@ -31,9 +33,16 @@ class VideoUploadDecoratorTest < Draper::TestCase
   #
   # == Status tag
   #
-  test 'should return correct status_tag for subtitles?' do
+  test 'should return correct value for subtitles?' do
     skip 'Find a way to test exists? methods'
-    assert_match "<span class=\"status_tag sous_titres_presents green\">Sous Titres Présents</span>", @video_upload_decorated.subtitles
+    attachment = fixture_file_upload 'videos/subtitle.srt', 'text/srt'
+    @video_upload.create_video_subtitle(subtitle_fr: attachment)
+    assert @video_upload_decorated.send(:subtitles?)
+  end
+
+  test 'should return correct status_tag for subtitles' do
+    skip 'Find a way to test exists? methods'
+    assert_match "<span class=\"status_tag sous_titres_présents green\">Sous Titres Présents</span>", @video_upload_decorated.subtitles
     assert_match "<span class=\"status_tag sous_titres_absents red\">Sous Titres Absents</span>", @video_upload_two_decorated.subtitles
   end
 

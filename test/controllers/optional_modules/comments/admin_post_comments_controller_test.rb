@@ -48,7 +48,7 @@ module Admin
       end
     end
 
-    test 'should not be able to destroy administrator comments if subscriber' do
+    test 'should not be able to destroy admin comments if subscriber' do
       sign_in @subscriber
       assert_no_difference ['Comment.count'] do
         delete :destroy, id: @comment_administrator
@@ -56,7 +56,7 @@ module Admin
       assert_redirected_to admin_dashboard_path
     end
 
-    test 'should not be able to destroy super_administrator comments if administrator' do
+    test 'should not be able to destroy SA comments if administrator' do
       assert_no_difference ['Comment.count'] do
         delete :destroy, id: @comment
       end
@@ -103,26 +103,30 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Comment.new), 'should not be able to create'
-      assert ability.cannot?(:read, Comment.new), 'should not be able to read'
-      assert ability.cannot?(:update, Comment.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Comment.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @comment), 'should not be able to read'
+      assert ability.cannot?(:update, @comment), 'should not be able to update'
+      assert ability.cannot?(:destroy, @comment), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.cannot?(:create, Comment.new), 'should not be able to create'
-      assert ability.can?(:read, Comment.new), 'should be able to read'
-      assert ability.cannot?(:update, Comment.new), 'should not be able to update'
-      assert ability.can?(:destroy, Comment.new), 'should be able to destroy'
+      assert ability.can?(:read, @comment), 'should be able to read'
+      assert ability.cannot?(:update, @comment), 'should not be able to update'
+      assert ability.cannot?(:destroy, @comment), 'should not be able to destroy'
+
+      assert ability.can?(:read, @comment_administrator), 'should be able to read'
+      assert ability.cannot?(:update, @comment_administrator), 'should not be able to update'
+      assert ability.can?(:destroy, @comment_administrator), 'should be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.cannot?(:create, Comment.new), 'should not be able to create'
-      assert ability.can?(:read, Comment.new), 'should be able to read'
-      assert ability.cannot?(:update, Comment.new), 'should not be able to update'
-      assert ability.can?(:destroy, Comment.new), 'should be able to destroy'
+      assert ability.can?(:read, @comment), 'should be able to read'
+      assert ability.cannot?(:update, @comment), 'should not be able to update'
+      assert ability.can?(:destroy, @comment), 'should be able to destroy'
     end
 
     #

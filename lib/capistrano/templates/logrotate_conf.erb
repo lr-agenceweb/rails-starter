@@ -1,0 +1,10 @@
+<%= current_path %>/log/*.log {
+  su <%= fetch(:deploy_user) %> <%= fetch(:deploy_user) %>
+  daily
+  missingok
+  notifempty
+  rotate 4
+  compress
+  delaycompress
+  copytruncate
+}
