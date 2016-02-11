@@ -1,3 +1,6 @@
+.search-container
+  height: 37px
+
 .search-form-header
   position: relative
   input, button
@@ -19,7 +22,7 @@
       width: 0
       position: absolute
       top: 0
-      right: -30px
+      right: 0
       background: none
       z-index: 3
       transition: width 0.3s ease-in
@@ -34,12 +37,10 @@
   button[type="submit"]
     display: inline-block
     float: right
+    text-align: right
     border: none
     color: rgba($black, .4)
     background: none
-    position: absolute
-    top: 0
-    right: 0
     z-index: 2
     cursor: pointer
     transition: opacity .3s ease
