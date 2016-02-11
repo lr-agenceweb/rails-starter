@@ -51,15 +51,33 @@ It use [Slim](https://github.com/slim-template/slim-rails) template to write HTM
 
 Assets
 -------
-Style is writting in `scss` and `sass` (using libsass)
+Style is writting in `scss` and `sass` (using libsass)  
 Scripts are created in `coffeescript`
 
 <!-- In development and test environments, assets are stored in `local` but in staging and production, they are stored with `dropbox` using dropbox-paperclip gem. The advantage of storing in an external server is that you relieve your server storage. -->
 
 Tasks
 ------
+### Rails 
+
 * Color Routes: colored version of rake routes (run `rake color_routes`)
 * Dump SQL: make a quick save of your Database (run `rake db:backup`)
+
+### Capistrano
+
+* `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
+* `cap <env> logrotate:upload_config` : Upload logrotate config file to remote server
+
+* **Nginx**  
+  * `cap <env> nginx:upload_vhost` : Upload vhost config file to remote server (create file in sites-availables)
+  * `cap <env> nginx:symlink_vhost` : Symlink vhost config file previously uploaded (in sites-enabled)
+  * `cap <env> nginx:remove_vhost` : Remove uploaded vhost and symlink
+  * `cap <env> nginx:remove_symlink_vhost` : Remove only symlink
+
+* **Paperclip**  
+  * `cap <env> paperclip:refresh:all` : Regenerate all Paperclip style
+  * `cap <env> paperclip:refresh:missing` : Regenerate only missing Paperclip style
+
 
 Mail
 -----
