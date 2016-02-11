@@ -39,7 +39,7 @@ class Slide < ActiveRecord::Base
   handle_attachment :image,
                     styles: {
                       slide: '1920x650#',
-                      medium: '960x250#',
+                      medium: '960x450#',
                       small: '480x250#',
                       crop_thumb: '100x100#'
                     }

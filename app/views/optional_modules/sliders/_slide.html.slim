@@ -1,4 +1,4 @@
 - caption = render('assets/slides/caption', slide: slide)
 
-a href="#{slide.self_image_url_by_size(:medium)}" data-caption="#{CGI.escapeHTML(caption).html_safe}"
+a href="#{slide.self_image_url_by_size(:slide)}" data-caption="#{CGI.escapeHTML(caption).html_safe}"
   = retina_image_tag(slide, :image, :crop_thumb)
