@@ -7,6 +7,11 @@
           label: false,
           input_html: { class: 'hide-for-small-up' }
 
+- if params[:action] == 'reply'
+  = f.hidden_field :parent_id,
+                   label: false,
+                   input_html: { class: 'hide-for-small-up' }
+
 .submit-and-loader
   = image_tag(Figaro.env.loader_spinner_img, class: 'submit-loader')
   = button_tag(class: 'submit-btn text-right tiny') do
