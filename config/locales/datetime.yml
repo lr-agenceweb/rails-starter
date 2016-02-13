@@ -4,7 +4,7 @@ en:
     label:
       seconds: seconds
     formats:
-      with_time: '%B %d, %Y %I.%m %p'
+      with_time: '%B %d %Y, %Y %I.%m %p'
       without_time: '%B %d, %Y'
       without_time_no_year: '%B %d'
       long: "%B %d, %Y at %I.%m %p"
@@ -19,7 +19,7 @@ fr:
     label:
       seconds: secondes
     formats:
-      with_time: '%A %d %B %Hh:%M'
+      with_time: '%A %d %B %Y %H:%M'
       without_time: '%A %d %B %Y'
       without_time_no_year: '%A %d %B'
       long: "%A %d %B %Y à %Hh%M"
