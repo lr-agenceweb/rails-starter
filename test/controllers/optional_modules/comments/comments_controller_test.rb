@@ -177,7 +177,7 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'subscriber should not be able to delete comments except his own' do
+  test 'subscriber should not be able to delete except his own' do
     sign_in @subscriber
     locale = 'fr'
     I18n.with_locale(locale) do

@@ -17,8 +17,8 @@ class CategoryDecoratorTest < Draper::TestCase
     assert_equal 'Pas de Background associé', @category_decorated.background_deco
 
     attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-    @category_about_decorated.background.update_attributes(image: attachment)
-    assert_equal "<img width=\"300\" height=\"169\" src=\"#{@category_about_decorated.background.image.url(:small)}\" alt=\"Small background paris\" />", @category_about_decorated.background_deco
+    @category_blog_decorated.background.update_attributes(image: attachment)
+    assert_equal "<img width=\"300\" height=\"169\" src=\"#{@category_blog_decorated.background.image.url(:small)}\" alt=\"Small background paris\" />", @category_blog_decorated.background_deco
   end
 
   test 'should return correct value for div_color' do
