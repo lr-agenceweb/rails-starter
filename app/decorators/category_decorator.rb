@@ -37,7 +37,18 @@ class CategoryDecorator < ApplicationDecorator
   end
 
   #
-  # == Optional Modules
+  # == Videos
+  #
+  def video_preview
+    h.retina_image_tag model.video_upload, :video_file, :preview
+  end
+
+  def video?
+    model.try(:video_upload_online) && model.try(:video_upload).try(:video_file).exists? && !model.try(:video_upload).try(:video_file_processing)
+  end
+
+  #
+  # == Status tag
   #
   def module
     message = 'Module activé'
@@ -52,23 +63,7 @@ class CategoryDecorator < ApplicationDecorator
       end
     end
 
-    arbre do
-      status_tag message, color
-    end
-  end
-
-  #
-  # == Optional Modules
-  #
-  def video_preview
-    h.retina_image_tag model.video_upload, :video_file, :preview
-  end
-
-  #
-  # == Videos
-  #
-  def video?
-    model.try(:video_upload_online) && model.try(:video_upload).try(:video_file).exists? && !model.try(:video_upload).try(:video_file_processing)
+    status_tag_deco message, color
   end
 
   private
