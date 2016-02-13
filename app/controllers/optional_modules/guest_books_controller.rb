@@ -48,7 +48,7 @@ class GuestBooksController < ApplicationController
 
   def respond_action(template, should_render = false)
     respond_to do |format|
-      format.html { redirect_to guest_books_path, flash: { success: I18n.t('guest_book.success') } } unless should_render
+      format.html { redirect_to guest_books_path } unless should_render
       format.html { render template } if should_render
       format.js { render template }
     end

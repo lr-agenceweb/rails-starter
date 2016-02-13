@@ -69,7 +69,55 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     assert_equal newsletter_user.newsletter_user_role_title, 'abonné'
   end
 
+  #
+  # == Flash
+  #
+  # Create
+  test 'should have correct flash if create' do
+    post :create, newsletter_user: { email: @email, lang: @lang }
+    assert_equal I18n.t('newsletter.subscribe_success', email: @email), flash[:success]
+  end
+
+  test 'should have correct flash if error' do
+    post :create, newsletter_user: { email: 'newsletteruser@test.fr', lang: @lang }
+    assert_equal I18n.t('newsletter.subscribe_error'), flash[:error]
+  end
+
+  test 'AJAX :: should have correct flash if create' do
+    xhr :post, :create, newsletter_user: { email: @email, lang: @lang }
+    assert_equal I18n.t('newsletter.subscribe_success', email: @email), flash[:success]
+  end
+
+  test 'AJAX :: should have correct flash if error' do
+    xhr :post, :create, newsletter_user: { email: 'newsletteruser@test.fr', lang: @lang }
+    assert_equal I18n.t('newsletter.subscribe_error'), flash[:error]
+  end
+
+  # Delete
+  test 'should have correct flash if unsubscribe' do
+    delete :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+    assert_equal I18n.t('newsletter.unsubscribe.success'), flash[:success]
+  end
+
+  test 'should have correct flash if unsubscribe fails' do
+    delete :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: "#{@newsletter_user.token}-abc"
+    assert_equal I18n.t('newsletter.unsubscribe.fail'), flash[:error]
+  end
+
+  test 'AJAX :: should have correct flash if unsubscribe' do
+    xhr :delete, :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+    assert_equal I18n.t('newsletter.unsubscribe.success'), flash[:success]
+  end
+
+  test 'AJAX :: should have correct flash if can\'t unsubscribe' do
+    xhr :delete, :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: "#{@newsletter_user.token}-abc"
+    assert_equal I18n.t('newsletter.unsubscribe.fail'), flash[:error]
+  end
+
+
+  #
   # == Ajax
+  #
   test 'AJAX :: should create' do
     xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang }
     assert_response :success

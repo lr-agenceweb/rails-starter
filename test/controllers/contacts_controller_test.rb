@@ -84,7 +84,7 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should deliver successfully a message and send copy to sender' do
+  test 'should deliver successfully a message and copy to sender' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         ActionMailer::Base.deliveries.clear
@@ -132,7 +132,7 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not send a contact message if email is not properly formatted' do
+  test 'should not send a contact message if email is not correct' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         post :create, locale: locale.to_s, contact_form: { email: 'johnletesteur.com' }
@@ -151,11 +151,20 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should redirect to index action if try to access mapbox popup action' do
+  test 'should redirect to index if try to access map popup' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         get :mapbox_popup, locale: locale.to_s
         assert_redirected_to contacts_path
+      end
+    end
+  end
+
+  test 'should have correct flash content after sending' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        post :create, locale: locale.to_s, contact_form: { email: 'john@test.com', name: 'john', message: 'Thanks for this site', nickname: '' }
+        assert_equal @string_box_success.content, flash[:success]
       end
     end
   end
@@ -190,7 +199,7 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should send a contact message if all fields are valid' do
+  test 'AJAX :: should send a message if all fields are valid' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { email: 'john@test.fr', name: 'john', message: 'Thanks for this site', nickname: '' }
@@ -200,7 +209,7 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should not send a contact message if fields are empty' do
+  test 'AJAX :: should not send a message if fields are empty' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { name: '', email: '', message: '', send_copy: '' }
@@ -210,7 +219,7 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should not send a contact message if captcha is filled' do
+  test 'AJAX :: should not send a message if captcha is filled' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { email: 'john@test.fr', name: 'john', message: 'Thanks for this site', nickname: 'I am a robot' }
@@ -219,7 +228,7 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should use correct action and no layout for mapbox popup action' do
+  test 'AJAX :: should use correct action and no layout for popup' do
     @setting.update_attribute(:show_map, true)
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -230,12 +239,21 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should not render anything if location not set for mapbox popup action' do
+  test 'AJAX :: should not render popup if location not set' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :get, :mapbox_popup, locale: locale.to_s
         assert_template nil
         assert_template layout: false
+      end
+    end
+  end
+
+  test 'AJAX :: should have correct flash content after sending' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        xhr :post, :create, locale: locale.to_s, contact_form: { email: 'john@test.com', name: 'john', message: 'Thanks for this site', nickname: '' }
+        assert_equal @string_box_success.content, flash[:success]
       end
     end
   end
@@ -284,6 +302,7 @@ class ContactsControllerTest < ActionController::TestCase
     @locales = I18n.available_locales
     @setting = settings(:one)
     @menu = menus(:contact)
+    @string_box_success = string_boxes(:success_contact_form)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

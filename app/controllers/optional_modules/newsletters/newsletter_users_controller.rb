@@ -12,10 +12,12 @@ class NewsletterUsersController < ApplicationController
     @newsletter_user.newsletter_user_role_id = NewsletterUserRole.find_by(kind: 'subscriber').id
     respond_to do |format|
       if @newsletter_user.save
-        format.html { redirect_to :back, flash: { success: I18n.t('newsletter.subscribe_success', email: @newsletter_user.email) } }
+        flash[:success] = I18n.t('newsletter.subscribe_success', email: @newsletter_user.email)
+        format.html { redirect_to :back }
         format.js { render :show, status: :created }
       else
-        format.html { redirect_to :back, flash: { alert: I18n.t('newsletter.subscribe_error') } }
+        flash[:error] = I18n.t('newsletter.subscribe_error')
+        format.html { redirect_to :back }
         format.js { render 'errors', status: :unprocessable_entity }
       end
     end
