@@ -156,6 +156,8 @@ class CommentsControllerTest < ActionController::TestCase
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
           delete :destroy, id: @comment_alice, about_id: @about, locale: locale.to_s
+          assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
+          assert flash[:success].blank?
         end
       end
     end
@@ -168,6 +170,8 @@ class CommentsControllerTest < ActionController::TestCase
       I18n.with_locale(locale) do
         assert_difference 'Comment.count', -1 do
           delete :destroy, id: @comment_alice, about_id: @about, locale: locale
+          assert_equal I18n.t('comment.destroy.success'), flash[:success]
+          assert flash[:error].blank?
         end
       end
     end
@@ -179,10 +183,12 @@ class CommentsControllerTest < ActionController::TestCase
     I18n.with_locale(locale) do
       assert_difference 'Comment.count', -1 do
         delete :destroy, id: @comment_lana, about_id: @about, locale: locale
+        assert_equal I18n.t('comment.destroy.success'), flash[:success]
       end
 
       assert_no_difference 'Comment.count' do
         delete :destroy, id: @comment_alice, about_id: @about, locale: locale
+        assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
       end
     end
   end
@@ -196,11 +202,13 @@ class CommentsControllerTest < ActionController::TestCase
       assert ability.can?(:destroy, @comment_lana)
       assert_difference 'Comment.count', -1 do
         delete :destroy, id: @comment_lana, about_id: @about, locale: locale
+        assert_equal I18n.t('comment.destroy.success'), flash[:success]
       end
 
       assert ability.cannot?(:destroy, @comment_anthony)
       assert_no_difference 'Comment.count' do
         delete :destroy, id: @comment_anthony, about_id: @about, locale: locale
+        assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
       end
     end
   end
@@ -234,6 +242,47 @@ class CommentsControllerTest < ActionController::TestCase
 
     assert_difference 'Comment.count', -4 do
       xhr :delete, :destroy, format: :js, id: @comment_lana, about_id: @about, locale: 'fr'
+    end
+  end
+
+  #
+  # == Flash
+  #
+  test 'should have correct flash if should validate' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        assert_equal I18n.t('comment.create_success_with_validate'), flash[:success]
+      end
+    end
+  end
+
+  test 'should have correct flash if should not validate' do
+    @comment_setting.update_attribute(:should_validate, false)
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        assert_equal I18n.t('comment.create_success'), flash[:success]
+      end
+    end
+  end
+
+  test 'AJAX :: should have correct flash if should validate' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        xhr :post, :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        assert_equal I18n.t('comment.create_success_with_validate'), flash[:success]
+      end
+    end
+  end
+
+  test 'AJAX :: should have correct flash if should not validate' do
+    @comment_setting.update_attribute(:should_validate, false)
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        xhr :post, :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        assert_equal I18n.t('comment.create_success'), flash[:success]
+      end
     end
   end
 

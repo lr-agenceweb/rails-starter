@@ -32,8 +32,6 @@ error_500:
 
 success_contact_form:
   key: success_contact_form
-  title: Message envoyé avec succès
-  content: Votre message a bien été envoyé. Merci :)
 
 adult_not_validated_popup_content:
   key: adult_not_validated_popup_content
