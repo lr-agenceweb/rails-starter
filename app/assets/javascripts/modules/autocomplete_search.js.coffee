@@ -2,7 +2,12 @@ $(document).on 'ready page:load page:restore', ->
   $('#term.autocomplete').autocomplete(
     source: $('#search_form').attr('action')
     minLength: 3
+    focus: (event, ui) ->
+      $('#term.autocomplete').val ui.item.title
+      return
+
     select: (event, ui) ->
+      $('#term.autocomplete').val ui.item.title
       Turbolinks.visit(ui.item.url)
       return
   )

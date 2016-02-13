@@ -1,3 +1,13 @@
+- if @search_module.enabled? || I18n.available_locales.length > 1
+  .upper-header
+    .row
+      .small-12.medium-4.medium-offset-4.large-3.large-offset-6.columns.search-container
+        - if @search_module.enabled?
+          = render 'searches/form'
+      .small-12.medium-4.large-3.end.columns
+        - if I18n.available_locales.length > 1
+          = render 'elements/language'
+
 header.l-header-site
   .row
     .small-12.medium-3.medium-offset-1.columns.columns-for-logo
