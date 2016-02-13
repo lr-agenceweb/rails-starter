@@ -22,5 +22,8 @@ home:
   attachable: home (Category)
   image_file_name: background-homepage.jpg
 
+about:
+  attachable: about (Category)
+
 contact:
   attachable: contact (Category)

@@ -5,6 +5,7 @@ require 'test_helper'
 #
 class PostDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
+  include ActionDispatch::TestProcess
 
   setup :initialize_test
 
@@ -45,6 +46,25 @@ class PostDecoratorTest < Draper::TestCase
 
   test 'should return correct author_with_avatar value' do
     assert_equal "<div class=\"author-with-avatar\">#{retina_thumb_square(@post_decorated.user)} <br /> <a href=\"/admin/users/bob\">bob</a></div>", @post_decorated.author_with_avatar
+  end
+
+  #
+  # == Picture
+  #
+  test 'should return correct content for image method' do
+    attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+    @post_decorated.picture.update_attributes(image: attachment)
+
+    assert_equal "<img width=\"90\" height=\"50\" src=\"#{@post_decorated.picture.image.url(:small)}\" alt=\"Small background paris\" />", @post_decorated.image
+    assert_equal 'Pas d\'image', @post_about_decorated.image
+  end
+
+  test 'should return correct content for image_and_content' do
+    attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+    @post_decorated.picture.update_attributes(image: attachment)
+
+    assert_equal "<p>Premier article d'accueil</p><img src=\"#{attachment_url(@post_decorated.picture.image, :medium)}\" alt=\"Medium background paris\" />", @post_decorated.image_and_content
+    assert @post_about_decorated.image_and_content.blank?
   end
 
   #
