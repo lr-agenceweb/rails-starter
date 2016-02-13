@@ -37,24 +37,24 @@ class BackgroundTest < ActiveSupport::TestCase
     end
   end
 
-  test 'should return categories except with backgroud already setted' do
+  test 'should return categories except when backgroud setted' do
     category_dropdown_items = Category.except_already_background
-    expected = %w(Search GuestBook Blog Event Test)
-    not_expected = %w(Home Contact)
+    expected = %w(Search GuestBook Event Test)
+    not_expected = %w(Home Contact Blog)
 
     expected_in_category_dropdown(expected, category_dropdown_items)
     not_expected_in_category_dropdown(not_expected, category_dropdown_items)
   end
 
-  test 'should return menu_title for pages which doesn\'t already contain background' do
+  test 'should return menu_title for pages without background' do
     category_dropdown_items = Category.handle_pages_for_background(@background_home)
     assert_includes category_dropdown_items, ['Accueil', categories(:home).id]
     assert_includes category_dropdown_items, ['A propos', categories(:about).id]
     assert_includes category_dropdown_items, ['Recherche', categories(:search).id]
     assert_includes category_dropdown_items, ['Livre d\'or', categories(:guest_book).id]
-    assert_includes category_dropdown_items, ['Blog', categories(:blog).id]
     assert_includes category_dropdown_items, ['Evénements', categories(:event).id]
     assert_not category_dropdown_items.include?(['Contact', categories(:contact).id])
+    assert_not category_dropdown_items.include?(['Blog', categories(:blog).id])
   end
 
   private

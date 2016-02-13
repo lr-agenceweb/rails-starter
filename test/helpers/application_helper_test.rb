@@ -12,7 +12,7 @@ class ApplicationHelperTest < ActionView::TestCase
   # == DateTime
   #
   test 'should return current year' do
-    assert_equal current_year, Time.zone.now.year
+    assert_equal Time.zone.now.year, current_year
   end
 
   #
