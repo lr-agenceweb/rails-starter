@@ -1,0 +1,63 @@
+.search-container
+  height: 37px
+
+.search-form-header
+  position: relative
+  input, button
+    margin-bottom: 0
+    box-shadow: none
+
+  input, input:focus
+    background-color: $menu-font-color
+
+
+  input
+    &[type="text"]
+      display: inline-block
+      font-weight: 300
+      border: none
+      outline: none
+      color: rgba($black, .4)
+      padding: 3px 60px 3px 20px
+      width: 0
+      position: absolute
+      top: 0
+      right: 0
+      background: none
+      z-index: 3
+      transition: width 0.3s ease-in
+      cursor: pointer
+      &:focus
+        width: 300px
+        z-index: 1
+        border-bottom: 1px solid rgba($black, .4)
+        cursor: text
+        &:hover
+          border-bottom: 1px solid rgba($black, .4)
+  button[type="submit"]
+    display: inline-block
+    float: right
+    text-align: right
+    border: none
+    color: rgba($black, .4)
+    background: none
+    z-index: 2
+    cursor: pointer
+    transition: opacity .3s ease
+    &:hover
+      opacity: 0.8
+
+
+.is-homepage
+  .search-form-header
+    input
+      &[type="text"]
+        color: $menu-font-color
+
+        &:focus
+          border-color: $menu-font-color
+          &:hover
+            border-color: $menu-font-color
+
+    button[type="submit"]
+      color: $menu-font-color

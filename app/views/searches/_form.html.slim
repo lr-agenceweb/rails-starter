@@ -1,7 +1,5 @@
-= simple_form_for :search, url: autocomplete_searches_path, method: :get, remote: true, html: { itemscope: '', itemprop: 'potentialAction', itemtype: 'http://schema.org/SearchAction', id: 'search_form' } do |f|
-  .row.collapse
-    .small-10.columns
+.search-form-header
+  = simple_form_for :search, url: autocomplete_searches_path, method: :get, remote: true, html: { itemscope: '', itemprop: 'potentialAction', itemtype: 'http://schema.org/SearchAction', id: 'search_form' } do |f|
       = text_field_tag :term, params[:term], placeholder: I18n.t('search.search'), class: 'autocomplete', data: { controller: params[:controller] }, itemprop: 'query'
-    .small-2.columns
       = button_tag class: 'button postfix expand', name: nil do
-        - fa_icon 'paper-plane'
+        - fa_icon 'search'

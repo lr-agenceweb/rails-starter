@@ -40,7 +40,7 @@ class CommentDecorator < ApplicationDecorator
   # == Date
   #
   def comment_created_at
-    content_tag(:small, time_tag(model.created_at.to_datetime, l(model.created_at, format: :without_time)))
+    content_tag(:small, time_tag(model.created_at.to_datetime, l(model.created_at, format: :with_time)))
   end
 
   #

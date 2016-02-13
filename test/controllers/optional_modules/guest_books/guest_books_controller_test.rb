@@ -77,7 +77,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not appears on site if should_validate' do
+  test 'should not appears if should_validate is true' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
@@ -89,17 +89,19 @@ class GuestBooksControllerTest < ActionController::TestCase
   #
   # == Destroy
   #
-  test 'should destroy guest_book if administrator' do
+  test 'should destroy guest_book if >= admin' do
     sign_in @administrator
     assert_difference ['GuestBook.count'], -1 do
       delete :destroy, locale: 'fr', id: @guest_book
+      assert_equal I18n.t('comment.destroy.success'), flash[:success]
       assert_redirected_to guest_books_path
     end
   end
 
-  test 'should destroy guest_book if < admin' do
+  test 'should not destroy guest_book if < admin' do
     assert_no_difference ['GuestBook.count'] do
       delete :destroy, locale: 'fr', id: @guest_book
+      assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
       assert_redirected_to guest_books_path
     end
   end
@@ -170,7 +172,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     end
   end
 
-  test 'AJAX :: should not appears on site if should_validate is true' do
+  test 'AJAX :: should not appears if should_validate is true' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
@@ -186,6 +188,7 @@ class GuestBooksControllerTest < ActionController::TestCase
     sign_in @administrator
     assert_difference ['GuestBook.count'], -1 do
       xhr :delete, :destroy, format: :js, locale: 'fr', id: @guest_book
+      assert_equal I18n.t('comment.destroy.success'), flash[:success]
       assert_template :destroy
     end
   end
@@ -193,7 +196,49 @@ class GuestBooksControllerTest < ActionController::TestCase
   test 'AJAX :: should not destroy guest_book if < admin' do
     assert_no_difference ['GuestBook.count'] do
       xhr :delete, :destroy, format: :js, locale: 'fr', id: @guest_book
+      assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
       assert_template :forbidden
+    end
+  end
+
+  #
+  # == Flash
+  #
+  test 'should have correct flash if should validate' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
+        assert_equal I18n.t('comment.create_success_with_validate'), flash[:success]
+      end
+    end
+  end
+
+  test 'should have correct flash if should not validate' do
+    @guest_book_setting.update_attribute(:should_validate, false)
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        post :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
+        assert_equal I18n.t('comment.create_success'), flash[:success]
+      end
+    end
+  end
+
+  test 'AJAX :: should have correct flash if should validate' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        xhr :post, :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
+        assert_equal I18n.t('comment.create_success_with_validate'), flash[:success]
+      end
+    end
+  end
+
+  test 'AJAX :: should have correct flash if should not validate' do
+    @guest_book_setting.update_attribute(:should_validate, false)
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        xhr :post, :create, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
+        assert_equal I18n.t('comment.create_success'), flash[:success]
+      end
     end
   end
 
@@ -287,6 +332,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   def initialize_test
     @guest_book = guest_books(:fr_validate)
     @guest_book_module = optional_modules(:guest_book)
+    @guest_book_setting = guest_book_settings(:one)
 
     @locales = I18n.available_locales
     @setting = settings(:one)

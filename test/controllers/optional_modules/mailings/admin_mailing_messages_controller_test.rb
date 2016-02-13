@@ -180,6 +180,15 @@ module Admin
       end
     end
 
+    test 'should have correct flash message while sending email' do
+      clear_deliveries_and_queues
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+
+      get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token, option: 'checked'
+      assert_equal "Le mail est en train d'être envoyé à 3 personne(s)", flash[:notice]
+    end
+
     #
     # == Maintenance
     #

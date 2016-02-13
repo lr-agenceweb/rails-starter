@@ -132,6 +132,12 @@
         text-align: center
         padding: 8px 0
         width: 100%
+        @include link-colors($white, $menu-font-color)
+
+
+      &.active
+        .l-nav-item-link
+          color: $link-active-color
 
       &:after
         content: none !important

@@ -15,3 +15,17 @@ error_404_en:
   locale: en
   title: Error 404
   content: <p>The page you want to access doesn't exist :(</p>
+
+success_contact_form_fr:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:success_contact_form) %>
+  locale: fr
+  title: Message envoyé avec succès
+  content: Votre message a bien été envoyé. Merci :)
+
+success_contact_form_en:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:success_contact_form) %>
+  locale: en
+  title: Message sent with success
+  content: Your message has been properly sent. Thank you :)

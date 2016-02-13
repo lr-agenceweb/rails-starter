@@ -68,7 +68,7 @@ class CategoryDecorator < ApplicationDecorator
   # == Videos
   #
   def video?
-    model.try(:video_upload_online) && model.try(:video_upload).try(:video_file).exists?
+    model.try(:video_upload_online) && model.try(:video_upload).try(:video_file).exists? && !model.try(:video_upload).try(:video_file_processing)
   end
 
   private
