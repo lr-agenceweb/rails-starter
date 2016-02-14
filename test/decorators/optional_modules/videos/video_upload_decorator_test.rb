@@ -42,8 +42,8 @@ class VideoUploadDecoratorTest < Draper::TestCase
 
   test 'should return correct status_tag for subtitles' do
     skip 'Find a way to test exists? methods'
-    assert_match "<span class=\"status_tag sous_titres_présents green\">Sous Titres Présents</span>", @video_upload_decorated.subtitles
-    assert_match "<span class=\"status_tag sous_titres_absents red\">Sous Titres Absents</span>", @video_upload_two_decorated.subtitles
+    assert_match '<span class="status_tag sous_titres_présents green">Sous Titres Présents</span>', @video_upload_decorated.subtitles
+    assert_match '<span class="status_tag sous_titres_absents red">Sous Titres Absents</span>', @video_upload_two_decorated.subtitles
   end
 
   private

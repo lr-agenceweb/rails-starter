@@ -132,10 +132,9 @@ class Ability
   end
 
   def newsletter_frontend
-    if @newsletter_module.enabled?
-      can [:preview_in_browser, :welcome_user], Newsletter
-      can [:unsubscribe], NewsletterUser
-    end
+    return unless @newsletter_module.enabled?
+    can [:preview_in_browser, :welcome_user], Newsletter
+    can [:unsubscribe], NewsletterUser
   end
 
   #
@@ -275,7 +274,7 @@ class Ability
     if @mailing_module.enabled?
       can [:crud,
            :send_mailing_message,
-           :preview,
+           :preview
           ], MailingMessage
       can [:crud], MailingUser
       can [:read, :update], [MailingSetting]
@@ -286,10 +285,9 @@ class Ability
   end
 
   def mailing_frontend
-    if @mailing_module.enabled?
-      can :preview_in_browser, MailingMessage
-      can :unsubscribe, MailingUser
-    end
+    return unless @mailing_module.enabled?
+    can :preview_in_browser, MailingMessage
+    can :unsubscribe, MailingUser
   end
 
   #

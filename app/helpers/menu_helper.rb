@@ -3,11 +3,7 @@
 #
 module MenuHelper
   def set_active_class(controller, action = false)
-    if action == false
-      'active' if controller?(controller)
-    else
-      'active' if controller?(controller) && action?(action)
-    end
+    'active' if (action == false && controller?(controller)) || (controller?(controller) && action?(action))
   end
 
   def even_or_odd_menu_item(items)

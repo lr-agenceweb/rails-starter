@@ -25,6 +25,6 @@ class NewsletterSettingDecorator < ApplicationDecorator
   #
   def send_welcome_email
     color = model.send_welcome_email? ? 'green' : 'red'
-    status_tag_deco I18n.t("#{send_welcome_email?}"), color
+    status_tag_deco I18n.t(send_welcome_email?.to_s), color
   end
 end

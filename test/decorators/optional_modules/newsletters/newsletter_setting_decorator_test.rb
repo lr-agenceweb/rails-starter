@@ -30,12 +30,12 @@ class NewsletterSettingDecoratorTest < Draper::TestCase
   # == Status tag
   #
   test 'should return correct status_tag if send_welcome enabled' do
-    assert_match "<span class=\"status_tag oui green\">Oui</span>", @newsletter_setting_decorated.send_welcome_email
+    assert_match '<span class="status_tag oui green">Oui</span>', @newsletter_setting_decorated.send_welcome_email
   end
 
   test 'should return correct status_tag if send_welcome disabled' do
     @newsletter_setting.update_attribute(:send_welcome_email, false)
-    assert_match "<span class=\"status_tag non red\">Non</span>", @newsletter_setting_decorated.send_welcome_email
+    assert_match '<span class="status_tag non red">Non</span>', @newsletter_setting_decorated.send_welcome_email
   end
 
   private

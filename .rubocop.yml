@@ -2,6 +2,7 @@ Rails:
   Enabled: true
 
 AllCops:
+  TargetRubyVersion: 2.2
   Exclude:
     - 'db/**/*'
     - 'config/**/*'

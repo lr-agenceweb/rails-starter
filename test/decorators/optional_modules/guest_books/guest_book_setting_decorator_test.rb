@@ -12,12 +12,12 @@ class GuestBookSettingDecoratorTest < Draper::TestCase
   # == Status tag
   #
   test 'should return correct status_tag if should validate' do
-    assert_match "<span class=\"status_tag oui green\">Oui</span>", @guest_book_setting_decorated.should_validate
+    assert_match '<span class="status_tag oui green">Oui</span>', @guest_book_setting_decorated.should_validate
   end
 
   test 'should return correct status_tag if should not validate' do
     @guest_book_setting.update_attribute(:should_validate, false)
-    assert_match "<span class=\"status_tag non red\">Non</span>", @guest_book_setting_decorated.should_validate
+    assert_match '<span class="status_tag non red">Non</span>', @guest_book_setting_decorated.should_validate
   end
 
   private
