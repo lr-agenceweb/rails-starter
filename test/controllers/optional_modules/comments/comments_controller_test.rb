@@ -16,7 +16,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about, comment: { comment: nil }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: nil }, locale: locale.to_s
         end
         assert_not assigns(:comment).valid?
         assert_not assigns(:comment).save
@@ -28,7 +28,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         end
       end
     end
@@ -38,7 +38,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw' }, locale: locale.to_s
         end
         assert_not assigns(:comment).valid?
       end
@@ -49,7 +49,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'ch' }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'ch' }, locale: locale.to_s
         end
         assert_not assigns(:comment).valid?
       end
@@ -60,7 +60,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          post :create, about_id: @about, comment: { comment: 'youpi', nickname: '', username: 'leila', email: 'not_valid', lang: locale.to_s }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', nickname: '', username: 'leila', email: 'not_valid', lang: locale.to_s }, locale: locale.to_s
         end
         assert_not assigns(:comment).valid?
       end
@@ -71,7 +71,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
-          post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         end
         assert assigns(:comment).valid?
         assert_redirected_to @about
@@ -82,7 +82,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should have informations of user given if not connected' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_nil assigns(:comment).user_id
         assert_equal assigns(:comment).username, 'leila'
         assert_equal assigns(:comment).email, 'leila@skywalker.sw'
@@ -96,7 +96,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_difference 'Comment.count' do
-          post :create, about_id: @about, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
+          post :create, about_id: @about.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
         end
         assert assigns(:comment).valid?
         assert_redirected_to @about
@@ -108,7 +108,7 @@ class CommentsControllerTest < ActionController::TestCase
     sign_in @subscriber
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        post :create, about_id: @about, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
+        post :create, about_id: @about.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
         assert assigns(:comment).valid?
         assert_nil assigns(:comment).username
         assert_nil assigns(:comment).email
@@ -123,7 +123,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should create comment' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :post, :create, format: :js, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_response :success
       end
     end
@@ -132,7 +132,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should render show template if comment created' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :post, :create, format: :js, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_template :create
       end
     end
@@ -142,7 +142,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          xhr :post, :create, format: :js, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot', lang: locale.to_s }, locale: locale.to_s
+          xhr :post, :create, format: :js, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', nickname: 'robot', lang: locale.to_s }, locale: locale.to_s
         end
       end
     end
@@ -155,7 +155,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_no_difference 'Comment.count' do
-          delete :destroy, id: @comment_alice, about_id: @about, locale: locale.to_s
+          delete :destroy, id: @comment_alice, about_id: @about.id, locale: locale.to_s
           assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
           assert flash[:success].blank?
         end
@@ -169,7 +169,7 @@ class CommentsControllerTest < ActionController::TestCase
       locale = 'fr'
       I18n.with_locale(locale) do
         assert_difference 'Comment.count', -1 do
-          delete :destroy, id: @comment_alice, about_id: @about, locale: locale
+          delete :destroy, id: @comment_alice, about_id: @about.id, locale: locale
           assert_equal I18n.t('comment.destroy.success'), flash[:success]
           assert flash[:error].blank?
         end
@@ -182,12 +182,12 @@ class CommentsControllerTest < ActionController::TestCase
     locale = 'fr'
     I18n.with_locale(locale) do
       assert_difference 'Comment.count', -1 do
-        delete :destroy, id: @comment_lana, about_id: @about, locale: locale
+        delete :destroy, id: @comment_lana, about_id: @about.id, locale: locale
         assert_equal I18n.t('comment.destroy.success'), flash[:success]
       end
 
       assert_no_difference 'Comment.count' do
-        delete :destroy, id: @comment_alice, about_id: @about, locale: locale
+        delete :destroy, id: @comment_alice, about_id: @about.id, locale: locale
         assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
       end
     end
@@ -201,13 +201,13 @@ class CommentsControllerTest < ActionController::TestCase
     I18n.with_locale(locale) do
       assert ability.can?(:destroy, @comment_lana)
       assert_difference 'Comment.count', -1 do
-        delete :destroy, id: @comment_lana, about_id: @about, locale: locale
+        delete :destroy, id: @comment_lana, about_id: @about.id, locale: locale
         assert_equal I18n.t('comment.destroy.success'), flash[:success]
       end
 
       assert ability.cannot?(:destroy, @comment_anthony)
       assert_no_difference 'Comment.count' do
-        delete :destroy, id: @comment_anthony, about_id: @about, locale: locale
+        delete :destroy, id: @comment_anthony, about_id: @about.id, locale: locale
         assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
       end
     end
@@ -220,7 +220,7 @@ class CommentsControllerTest < ActionController::TestCase
     @comment_alice.update_attribute(:parent_id, @comment_lana.id)
 
     assert_difference 'Comment.count', -4 do
-      delete :destroy, id: @comment_lana, about_id: @about, locale: 'fr'
+      delete :destroy, id: @comment_lana, about_id: @about.id, locale: 'fr'
     end
   end
 
@@ -230,7 +230,7 @@ class CommentsControllerTest < ActionController::TestCase
     @comment_bob.update_attribute(:parent_id, @comment_lana.id)
     @comment_alice.update_attribute(:parent_id, @comment_lana.id)
 
-    delete :destroy, id: @comment_lana, about_id: @about, locale: 'fr'
+    delete :destroy, id: @comment_lana, about_id: @about.id, locale: 'fr'
     assert_redirected_to @about
   end
 
@@ -241,7 +241,7 @@ class CommentsControllerTest < ActionController::TestCase
     @comment_alice.update_attribute(:parent_id, @comment_lana.id)
 
     assert_difference 'Comment.count', -4 do
-      xhr :delete, :destroy, format: :js, id: @comment_lana, about_id: @about, locale: 'fr'
+      xhr :delete, :destroy, format: :js, id: @comment_lana, about_id: @about.id, locale: 'fr'
     end
   end
 
@@ -251,7 +251,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should have correct flash if should validate' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_equal I18n.t('comment.create_success_with_validate'), flash[:success]
       end
     end
@@ -261,7 +261,7 @@ class CommentsControllerTest < ActionController::TestCase
     @comment_setting.update_attribute(:should_validate, false)
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        post :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_equal I18n.t('comment.create_success'), flash[:success]
       end
     end
@@ -270,7 +270,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should have correct flash if should validate' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :post, :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        xhr :post, :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_equal I18n.t('comment.create_success_with_validate'), flash[:success]
       end
     end
@@ -280,7 +280,7 @@ class CommentsControllerTest < ActionController::TestCase
     @comment_setting.update_attribute(:should_validate, false)
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :post, :create, about_id: @about, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        xhr :post, :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
         assert_equal I18n.t('comment.create_success'), flash[:success]
       end
     end
@@ -293,7 +293,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         @request.env['HTTP_REFERER'] = about_path(@about, locale: locale.to_s)
-        get :signal, token: @comment_alice.token, about_id: @about, id: @comment_alice, locale: locale.to_s
+        get :signal, token: @comment_alice.token, about_id: @about.id, id: @comment_alice, locale: locale.to_s
         assert assigns(:comment).signalled?
         assert_redirected_to about_path(@about, locale: locale.to_s)
       end
@@ -304,7 +304,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_raises(ActionController::RoutingError) do
-          get :signal, id: 999_999, token: @comment_alice.token, about_id: @about, locale: locale.to_s
+          get :signal, id: 999_999, token: @comment_alice.token, about_id: @about.id, locale: locale.to_s
         end
       end
     end
@@ -314,7 +314,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_raises(ActionController::RoutingError) do
-          get :signal, id: @comment_alice, about_id: @about, locale: locale.to_s
+          get :signal, id: @comment_alice, about_id: @about.id, locale: locale.to_s
         end
       end
     end
@@ -329,7 +329,7 @@ class CommentsControllerTest < ActionController::TestCase
         @request.env['HTTP_REFERER'] = about_path(@about)
 
         assert_enqueued_jobs 1 do
-          get :signal, id: @comment_alice, token: @comment_alice.token, about_id: @about, locale: locale.to_s
+          get :signal, id: @comment_alice, token: @comment_alice.token, about_id: @about.id, locale: locale.to_s
         end
       end
     end
@@ -346,7 +346,7 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
         @request.env['HTTP_REFERER'] = about_path(@about)
         assert_enqueued_jobs 0 do
-          get :signal, id: @comment_alice, token: @comment_alice.token, about_id: @about, locale: locale.to_s
+          get :signal, id: @comment_alice, token: @comment_alice.token, about_id: @about.id, locale: locale.to_s
         end
       end
     end
@@ -365,7 +365,7 @@ class CommentsControllerTest < ActionController::TestCase
 
         assert_raises(ActionController::RoutingError) do
           assert_enqueued_jobs 0 do
-            get :signal, id: @comment_alice, token: @comment_alice.token, about_id: @about, locale: locale.to_s
+            get :signal, id: @comment_alice, token: @comment_alice.token, about_id: @about.id, locale: locale.to_s
           end
         end
       end
@@ -375,7 +375,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should signal comment' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about, locale: locale.to_s
+        xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about.id, locale: locale.to_s
         assert_response :success
         assert assigns(:comment).signalled?
       end
@@ -386,7 +386,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_raises(ActionController::RoutingError) do
-          xhr :get, :signal, format: :js, id: @comment_luke.id, about_id: @about, locale: locale.to_s
+          xhr :get, :signal, format: :js, id: @comment_luke.id, about_id: @about.id, locale: locale.to_s
         end
       end
     end
@@ -400,7 +400,7 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
 
         assert_enqueued_jobs 1 do
-          xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about, locale: locale.to_s
+          xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about.id, locale: locale.to_s
         end
       end
     end
@@ -417,7 +417,7 @@ class CommentsControllerTest < ActionController::TestCase
         assert ActionMailer::Base.deliveries.empty?
 
         assert_enqueued_jobs 0 do
-          xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about, locale: locale.to_s
+          xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about.id, locale: locale.to_s
         end
       end
     end
@@ -435,7 +435,7 @@ class CommentsControllerTest < ActionController::TestCase
 
         assert_raises(ActionController::RoutingError) do
           assert_enqueued_jobs 0 do
-            xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about, locale: locale.to_s
+            xhr :get, :signal, format: :js, id: @comment_luke.id, token: @comment_luke.token, about_id: @about.id, locale: locale.to_s
           end
         end
       end
@@ -448,7 +448,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should render reply template and success response' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :reply, token: @comment_alice.token, about_id: @about, id: @comment_alice, locale: locale.to_s
+        get :reply, token: @comment_alice.token, about_id: @about.id, id: @comment_alice, locale: locale.to_s
         assert_response :success
         assert_template :reply
       end
@@ -459,7 +459,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_raises(ActionController::RoutingError) do
-          get :reply, token: '', id: @comment_alice, about_id: @about, locale: locale.to_s
+          get :reply, token: '', id: @comment_alice, about_id: @about.id, locale: locale.to_s
         end
       end
     end
@@ -468,7 +468,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should render reply template and success response' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :get, :reply, format: :js, id: @comment_alice.id, token: @comment_alice.token, about_id: @about, locale: locale.to_s
+        xhr :get, :reply, format: :js, id: @comment_alice.id, token: @comment_alice.token, about_id: @about.id, locale: locale.to_s
         assert_response :success
         assert_template :reply
       end
@@ -478,7 +478,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should save children of a comment' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        post :create, about_id: @about, id: @comment_alice, comment: { parent_id: @comment_alice.id }, locale: locale.to_s
+        post :create, about_id: @about.id, id: @comment_alice, comment: { parent_id: @comment_alice.id }, locale: locale.to_s
         assert_equal @comment_alice.id, assigns(:comment).parent_id
       end
     end
@@ -488,7 +488,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         assert_raises(ActionController::RoutingError) do
-          xhr :get, :reply, token: '', id: @comment_luke.id, about_id: @about, locale: locale.to_s
+          xhr :get, :reply, token: '', id: @comment_luke.id, about_id: @about.id, locale: locale.to_s
         end
       end
     end
