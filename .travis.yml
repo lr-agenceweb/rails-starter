@@ -13,7 +13,7 @@ env:
 
 before_install:
   - export TZ=Europe/Paris
-  - bash .travis_setup.sh
+  - bash .travis_mariadb.sh
 
 before_script:
   - sleep 5
