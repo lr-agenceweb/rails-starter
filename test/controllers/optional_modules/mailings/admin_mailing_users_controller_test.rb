@@ -116,6 +116,13 @@ module Admin
       assert ability.cannot?(:read, @mailing_user), 'should not be able to read'
       assert ability.cannot?(:update, @mailing_user), 'should not be able to update'
       assert ability.cannot?(:destroy, @mailing_user), 'should not be able to destroy'
+
+      @mailing_module.update_attribute(:enabled, false)
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, MailingUser.new), 'should not be able to create'
+      assert ability.cannot?(:read, @mailing_user), 'should not be able to read'
+      assert ability.cannot?(:update, @mailing_user), 'should not be able to update'
+      assert ability.cannot?(:destroy, @mailing_user), 'should not be able to destroy'
     end
 
     test 'should test abilities for administrator' do
@@ -124,6 +131,13 @@ module Admin
       assert ability.can?(:read, @mailing_user), 'should be able to read'
       assert ability.can?(:update, @mailing_user), 'should be able to update'
       assert ability.can?(:destroy, @mailing_user), 'should be able to destroy'
+
+      @mailing_module.update_attribute(:enabled, false)
+      ability = Ability.new(@administrator)
+      assert ability.cannot?(:create, MailingUser.new), 'should not be able to create'
+      assert ability.cannot?(:read, @mailing_user), 'should not be able to read'
+      assert ability.cannot?(:update, @mailing_user), 'should not be able to update'
+      assert ability.cannot?(:destroy, @mailing_user), 'should not be able to destroy'
     end
 
     test 'should test abilities for super_administrator' do
@@ -133,6 +147,13 @@ module Admin
       assert ability.can?(:read, @mailing_user), 'should be able to read'
       assert ability.can?(:update, @mailing_user), 'should be able to update'
       assert ability.can?(:destroy, @mailing_user), 'should be able to destroy'
+
+      @mailing_module.update_attribute(:enabled, false)
+      ability = Ability.new(@super_administrator)
+      assert ability.cannot?(:create, MailingUser.new), 'should not be able to create'
+      assert ability.cannot?(:read, @mailing_user), 'should not be able to read'
+      assert ability.cannot?(:update, @mailing_user), 'should not be able to update'
+      assert ability.cannot?(:destroy, @mailing_user), 'should not be able to destroy'
     end
 
     #

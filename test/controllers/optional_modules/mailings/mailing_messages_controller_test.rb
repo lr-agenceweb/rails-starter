@@ -76,6 +76,39 @@ class MailingMessagesControllerTest < ActionController::TestCase
   end
 
   #
+  # == Abilities
+  #
+  test 'should test abilities for subscriber' do
+    sign_in @subscriber
+    ability = Ability.new(@subscriber)
+    assert ability.can?(:preview_in_browser, @mailing_message), 'should be able to preview_in_browser'
+
+    @mailing_module.update_attribute(:enabled, false)
+    ability = Ability.new(@subscriber)
+    assert ability.cannot?(:preview_in_browser, @mailing_message), 'should not be able to preview_in_browser'
+  end
+
+  test 'should test abilities for administrator' do
+    sign_in @administrator
+    ability = Ability.new(@administrator)
+    assert ability.can?(:preview_in_browser, @mailing_message), 'should be able to preview_in_browser'
+
+    @mailing_module.update_attribute(:enabled, false)
+    ability = Ability.new(@administrator)
+    assert ability.cannot?(:preview_in_browser, @mailing_message), 'should not be able to preview_in_browser'
+  end
+
+  test 'should test abilities for super_administrator' do
+    sign_in @super_administrator
+    ability = Ability.new(@super_administrator)
+    assert ability.can?(:preview_in_browser, @mailing_message), 'should be able to preview_in_browser'
+
+    @mailing_module.update_attribute(:enabled, false)
+    ability = Ability.new(@super_administrator)
+    assert ability.cannot?(:preview_in_browser, @mailing_message), 'should not be able to preview_in_browser'
+  end
+
+  #
   # == Module disabled
   #
   test 'should render 404 if module is disabled' do
@@ -105,6 +138,8 @@ class MailingMessagesControllerTest < ActionController::TestCase
 
     @mailing_module = optional_modules(:mailing)
 
+    @subscriber = users(:alice)
+    @administrator = users(:bob)
     @super_administrator = users(:anthony)
   end
 end

@@ -63,6 +63,15 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_not @controller.cookie_cnil_check?
   end
 
+  #
+  # == Concern
+  #
+  test 'should not have newsletter_user with nil value' do
+    make_get_index(assertions) do
+      assert_not assigns(:newsletter_user).nil?
+    end
+  end
+
   private
 
   def initialize_test

@@ -12,7 +12,7 @@
             span<> = comment.comment_created_at
 
             - if comment.object.class.name == 'Comment'
-              - if @comment_setting.should_signal?
+              - if can? :signal, comment
                 | -
                 - if comment.signalled?
                   span.comment-signalled<>
