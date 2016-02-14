@@ -217,13 +217,13 @@ module Admin
     end
 
     def upload_paperclip_attachment
-      puts '=== Uploading logo'
+      # puts '=== Uploading logo'
       attachment = fixture_file_upload 'images/bart.png', 'image/png'
       patch :update, id: @setting, setting: { logo: attachment }
     end
 
     def remove_paperclip_attachment(setting)
-      puts '=== Removing logo'
+      # puts '=== Removing logo'
       patch :update, id: setting, setting: { delete_logo: '1' }
     end
   end

@@ -37,6 +37,42 @@ class PostsControllerTest < ActionController::TestCase
     end
   end
 
+  #
+  # == Abilities
+  #
+  test 'should test abilities for subscriber' do
+    sign_in @subscriber
+    ability = Ability.new(@subscriber)
+    assert ability.can?(:feed, Post.new), 'should be able to see feed'
+
+    @rss_module.update_attribute(:enabled, false)
+    ability = Ability.new(@subscriber)
+    assert ability.cannot?(:feed, Post.new), 'should not be able to see feed'
+  end
+
+  test 'should test abilities for administrator' do
+    sign_in @administrator
+    ability = Ability.new(@administrator)
+    assert ability.can?(:feed, Post.new), 'should be able to see feed'
+
+    @rss_module.update_attribute(:enabled, false)
+    ability = Ability.new(@administrator)
+    assert ability.cannot?(:feed, Post.new), 'should not be able to see feed'
+  end
+
+  test 'should test abilities for super_administrator' do
+    sign_in @super_administrator
+    ability = Ability.new(@super_administrator)
+    assert ability.can?(:feed, Post.new), 'should be able to see feed'
+
+    @rss_module.update_attribute(:enabled, false)
+    ability = Ability.new(@super_administrator)
+    assert ability.cannot?(:feed, Post.new), 'should not be able to see feed'
+  end
+
+  #
+  # == Module disabled
+  #
   test 'should render 404 if RSS module is diabled' do
     disable_optional_module @super_administrator, @rss_module, 'RSS' # in test_helper.rb
     sign_in @administrator

@@ -525,12 +525,64 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
+  #
+  # == Abilities
+  #
+  test 'should test abilities for subscriber' do
+    sign_in @subscriber
+    ability = Ability.new(@subscriber)
+    assert ability.can?(:signal, @comment_bob), 'should be able to signal'
+    assert ability.can?(:reply, @comment_bob), 'should be able to reply'
+
+    @comment_setting.update_attribute(:should_signal, false)
+    ability = Ability.new(@subscriber)
+    assert ability.cannot?(:signal, @comment_bob), 'should not be able to signal'
+
+    @comment_module.update_attribute(:enabled, false)
+    ability = Ability.new(@subscriber)
+    assert ability.cannot?(:reply, @comment_bob), 'should not be able to reply'
+    assert ability.cannot?(:signal, @comment_bob), 'should not be able to signal'
+  end
+
+  test 'should test abilities for administrator' do
+    sign_in @administrator
+    ability = Ability.new(@administrator)
+    assert ability.can?(:signal, @comment_bob), 'should be able to signal'
+    assert ability.can?(:reply, @comment_bob), 'should be able to reply'
+
+    @comment_setting.update_attribute(:should_signal, false)
+    ability = Ability.new(@administrator)
+    assert ability.cannot?(:signal, @comment_bob), 'should not be able to signal'
+
+    @comment_module.update_attribute(:enabled, false)
+    ability = Ability.new(@subscriber)
+    assert ability.cannot?(:reply, @comment_bob), 'should not be able to reply'
+    assert ability.cannot?(:signal, @comment_bob), 'should not be able to signal'
+  end
+
+  test 'should test abilities for super_administrator' do
+    sign_in @super_administrator
+    ability = Ability.new(@super_administrator)
+    assert ability.can?(:signal, @comment_bob), 'should be able to signal'
+    assert ability.can?(:reply, @comment_bob), 'should be able to reply'
+
+    @comment_setting.update_attribute(:should_signal, false)
+    ability = Ability.new(@super_administrator)
+    assert ability.cannot?(:signal, @comment_bob), 'should not be able to signal'
+
+    @comment_module.update_attribute(:enabled, false)
+    ability = Ability.new(@subscriber)
+    assert ability.cannot?(:reply, @comment_bob), 'should not be able to reply'
+    assert ability.cannot?(:signal, @comment_bob), 'should not be able to signal'
+  end
+
   private
 
   def initialize_test
     @locales = I18n.available_locales
     @about = posts(:about_2)
     @comment_setting = comment_settings(:one)
+    @comment_module = optional_modules(:comment)
 
     @super_administrator = users(:anthony)
     @administrator = users(:bob)

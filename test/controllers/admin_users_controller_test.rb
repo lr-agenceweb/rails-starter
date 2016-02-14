@@ -311,13 +311,13 @@ module Admin
     end
 
     def upload_paperclip_attachment
-      puts '=== Uploading avatar'
+      # puts '=== Uploading avatar'
       attachment = fixture_file_upload 'images/bart.png', 'image/png'
       patch :update, id: @administrator, user: { avatar: attachment }
     end
 
     def remove_paperclip_attachment(user)
-      puts '=== Removing avatar'
+      # puts '=== Removing avatar'
       patch :update, id: user, user: { avatar: nil, delete_avatar: '1' }
       assert_not assigns(:user).avatar?
     end
