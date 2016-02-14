@@ -1,5 +1,6 @@
 language: ruby
 cache: bundler
+bundler_args: --without development
 
 rvm:
   - 2.2.2
@@ -10,10 +11,9 @@ env:
   - DB=sqlite
   - DB=mariadb
 
-bundler_args: --without development
-
 before_install:
   - export TZ=Europe/Paris
+  - bash .travis_setup.sh
 
 before_script:
   - sleep 5
