@@ -8,6 +8,12 @@ mysql: &mysql
   password:
   database: rails_starter_<%= Rails.env %>
 
+mariadb: &mariadb
+  adapter: mysql2
+  username: root
+  password:
+  database: rails_starter_<%= Rails.env %>
+
 postgresql: &postgresql
   adapter: postgresql
   username: postgres
