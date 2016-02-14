@@ -26,7 +26,7 @@ class UserDecoratorTest < Draper::TestCase
   #
   test 'should return correct admin link' do
     user_decorated = UserDecorator.new(@administrator)
-    assert_match "<a href=\"/admin/users/bob\">Voir</a>", user_decorated.admin_link
+    assert_match '<a href="/admin/users/bob">Voir</a>', user_decorated.admin_link
   end
 
   #
@@ -34,17 +34,17 @@ class UserDecoratorTest < Draper::TestCase
   #
   test 'should return correct status_tag for subscriber' do
     user_decorated = UserDecorator.new(@subscriber)
-    assert_match "<span class=\"status_tag abonné green\">Abonné</span>", user_decorated.status
+    assert_match '<span class="status_tag abonné green">Abonné</span>', user_decorated.status
   end
 
   test 'should return correct status_tag for administrator' do
     user_decorated = UserDecorator.new(@administrator)
-    assert_match "<span class=\"status_tag administrateur red\">Administrateur</span>", user_decorated.status
+    assert_match '<span class="status_tag administrateur red">Administrateur</span>', user_decorated.status
   end
 
   test 'should return correct status_tag for super_administrator' do
     user_decorated = UserDecorator.new(@super_administrator)
-    assert_match "<span class=\"status_tag super_administrateur blue\">Super Administrateur</span>", user_decorated.status
+    assert_match '<span class="status_tag super_administrateur blue">Super Administrateur</span>', user_decorated.status
   end
 
   private

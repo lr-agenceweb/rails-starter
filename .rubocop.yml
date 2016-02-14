@@ -1,5 +1,8 @@
+Rails:
+  Enabled: true
+
 AllCops:
-  RunRailsCops: true
+  TargetRubyVersion: 2.2
   Exclude:
     - 'db/**/*'
     - 'config/**/*'

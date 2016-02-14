@@ -22,11 +22,11 @@ class NewsletterUserDecoratorTest < Draper::TestCase
   # == Status tag
   #
   test 'should return correct status_tag if tester' do
-    assert_match "<span class=\"status_tag testeur orange\">Testeur</span>", @newsletter_user_test_decorated.role_status
+    assert_match '<span class="status_tag testeur orange">Testeur</span>', @newsletter_user_test_decorated.role_status
   end
 
   test 'should return correct status_tag if subscriber' do
-    assert_match "<span class=\"status_tag abonné green\">Abonné</span>", @newsletter_user_decorated.role_status
+    assert_match '<span class="status_tag abonné green">Abonné</span>', @newsletter_user_decorated.role_status
   end
 
   private

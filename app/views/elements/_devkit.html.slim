@@ -1,0 +1,5 @@
+- if current_user.try(:super_administrator?) && Rails.env.development?
+  .devkit.initial.hide-for-small
+    span == "Rails environment: <strong>#{Rails.env}</strong>"
+    br
+    span == "Rails version: <strong>#{Rails.version}</strong>"

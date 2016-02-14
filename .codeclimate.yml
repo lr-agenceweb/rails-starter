@@ -3,3 +3,6 @@ languages:
   JavaScript: true
   PHP: false
   Python: false
+
+exclude_paths:
+- "config/application.rb"

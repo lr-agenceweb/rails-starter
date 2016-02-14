@@ -55,9 +55,4 @@ class Menu < ActiveRecord::Base
     end
     menu
   end
-
-  # validates :ancestry,
-  #           presence: false,
-  #           allow_blank: true,
-  #           inclusion: { in: except_current_and_submenus }
 end

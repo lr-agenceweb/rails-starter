@@ -37,17 +37,17 @@ class CommentDecoratorTest < Draper::TestCase
   # == Avatar
   #
   test 'should return correct avatar for connected user' do
-    assert_equal "<img alt=\"anthony\" src=\"http://gravatar.com/avatar/d7097d5b6b00db57b0bf772923729a7d?default=mm&secure=false\" width=\"80\" height=\"80\" />", @comment_decorated.avatar
+    assert_equal '<img alt="anthony" src="http://gravatar.com/avatar/d7097d5b6b00db57b0bf772923729a7d?default=mm&secure=false" width="80" height="80" />', @comment_decorated.avatar
   end
 
   test 'should return correct avatar for guest user' do
     comment_decorated = CommentDecorator.new(@comment_not_connected)
-    assert_equal "<img alt=\"luke\" src=\"http://gravatar.com/avatar/2e5c8c61be4beb99af2f3c5fbb77e988?default=mm&secure=false\" width=\"80\" height=\"80\" />", comment_decorated.avatar
+    assert_equal '<img alt="luke" src="http://gravatar.com/avatar/2e5c8c61be4beb99af2f3c5fbb77e988?default=mm&secure=false" width="80" height="80" />', comment_decorated.avatar
   end
 
   test 'should return correct author with avatar' do
     comment_decorated = CommentDecorator.new(@comment_not_connected)
-    assert_equal "<div class=\"author-with-avatar\"><img alt=\"luke\" src=\"http://gravatar.com/avatar/2e5c8c61be4beb99af2f3c5fbb77e988?default=mm&secure=false\" width=\"80\" height=\"80\" /> <br /> Luke</div>", comment_decorated.author_with_avatar
+    assert_equal '<div class="author-with-avatar"><img alt="luke" src="http://gravatar.com/avatar/2e5c8c61be4beb99af2f3c5fbb77e988?default=mm&secure=false" width="80" height="80" /> <br /> Luke</div>', comment_decorated.author_with_avatar
   end
 
   #
@@ -80,21 +80,21 @@ class CommentDecoratorTest < Draper::TestCase
   # == Status tag
   #
   test 'should return correct status_tag when validated' do
-    assert_match "<span class=\"status_tag validé green\">Validé</span>", @comment_decorated.status
+    assert_match '<span class="status_tag validé green">Validé</span>', @comment_decorated.status
   end
 
   test 'should return correct status_tag when not validated' do
     @comment.update_attribute(:validated, false)
-    assert_match "<span class=\"status_tag non_validé orange\">Non Validé</span>", @comment_decorated.status
+    assert_match '<span class="status_tag non_validé orange">Non Validé</span>', @comment_decorated.status
   end
 
   test 'should return correct status_tag when not signalled' do
-    assert_match "<span class=\"status_tag non green\">Non</span>", @comment_decorated.signalled_d
+    assert_match '<span class="status_tag non green">Non</span>', @comment_decorated.signalled_d
   end
 
   test 'should return correct status_tag when signalled' do
     @comment.update_attribute(:signalled, true)
-    assert_match "<span class=\"status_tag oui red\">Oui</span>", @comment_decorated.signalled_d
+    assert_match '<span class="status_tag oui red">Oui</span>', @comment_decorated.signalled_d
   end
 
   private

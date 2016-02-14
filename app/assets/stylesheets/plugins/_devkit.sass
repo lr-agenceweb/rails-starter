@@ -1,0 +1,26 @@
+.devkit
+  position: fixed
+  bottom: 15px
+  padding: 20px
+  background-color: $success-color
+  color: $white
+  transition: right .5s ease-in
+
+  &.initial
+    right: -257px
+  &.open
+    right: 0
+
+  &:before
+    content: "\f0ad";
+    font-family: FontAwesome
+    position: absolute
+    top: 0
+    left: -25px
+    background-color: $success-color
+    height: 88px
+    line-height: 88px
+    padding: 0 10px
+    display: block
+    cursor: pointer
+    border-right: 1px solid $white

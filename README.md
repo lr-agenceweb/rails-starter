@@ -11,7 +11,7 @@ Requirements:
 ------------
 ~~a computer~~  
 RVM with Ruby 2.2.2  
-Rails 4.2.5  
+Rails 4.2.5.1  
 Install [Foreman](https://github.com/ddollar/foreman)  
 Install [Maildev](https://github.com/djfarrelly/MailDev)  
 
@@ -34,7 +34,7 @@ That's it !
 Ruby and Rails versions
 -----------------------
 Ruby 2.2.2  
-Rails 4.2.5  
+Rails 4.2.5.1  
 
 Server
 ------

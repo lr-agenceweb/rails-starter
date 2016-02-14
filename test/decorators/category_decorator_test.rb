@@ -30,13 +30,13 @@ class CategoryDecoratorTest < Draper::TestCase
   # ActiveAdmin
   #
   test 'should return correct AA show page title' do
-    assert_equal "Page \"Accueil\"", @category_decorated.title_aa_show
-    assert_equal "Page \"A Propos\"", @category_about_decorated.title_aa_show
+    assert_equal 'Page "Accueil"', @category_decorated.title_aa_show
+    assert_equal 'Page "A Propos"', @category_about_decorated.title_aa_show
   end
 
   test 'should return correct AA edit page title' do
-    assert_equal "Modifier page \"Accueil\"", @category_decorated.title_aa_edit
-    assert_equal "Modifier page \"A propos\"", @category_about_decorated.title_aa_edit
+    assert_equal 'Modifier page "Accueil"', @category_decorated.title_aa_edit
+    assert_equal 'Modifier page "A propos"', @category_about_decorated.title_aa_edit
   end
 
   #
@@ -65,16 +65,16 @@ class CategoryDecoratorTest < Draper::TestCase
   # == Status tag
   #
   test 'should return correct status_tag for basic module' do
-    assert_match "<span class=\"status_tag module_de_base\">Module De Base</span>", @category_decorated.module
+    assert_match '<span class="status_tag module_de_base">Module De Base</span>', @category_decorated.module
   end
 
   test 'should return correct status_tag for enabled module' do
-    assert_match "<span class=\"status_tag module_activé blue\">Module Activé</span>", @category_blog_decorated.module
+    assert_match '<span class="status_tag module_activé blue">Module Activé</span>', @category_blog_decorated.module
   end
 
   test 'should return correct status_tag for disabled module' do
     @blog_module.update_attribute(:enabled, false)
-    assert_match "<span class=\"status_tag module_non_activé red\">Module Non Activé</span>", @category_blog_decorated.module
+    assert_match '<span class="status_tag module_non_activé red">Module Non Activé</span>', @category_blog_decorated.module
   end
 
   private

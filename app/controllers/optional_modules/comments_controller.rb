@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
   end
 
   def signal
-    fail ActionController::RoutingError, 'Not Found' if !@comment_setting.should_signal? || !params[:token] || @comment.try(:token) != params[:token]
+    raise ActionController::RoutingError, 'Not Found' if !@comment_setting.should_signal? || !params[:token] || @comment.try(:token) != params[:token]
     @comment.update_attribute(:signalled, true)
 
     flash.now[:success] = I18n.t('comment.signalled.success')
@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
   end
 
   def reply
-    fail ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token]
+    raise ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token]
     @comment = @commentable.comments.new(parent_id: params[:id])
     @asocial = true
     seo_tag_custom I18n.t('comment.seo.title', article: @commentable.title), I18n.t('comment.seo.description')
