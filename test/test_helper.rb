@@ -1,11 +1,13 @@
+require 'codeclimate-test-reporter'
 require 'simplecov'
 require 'simplecov-json'
-require 'codeclimate-test-reporter'
 
 # Start reporters
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  CodeClimate::TestReporter::Formatter
+]
 SimpleCov.start 'rails'
-SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
-CodeClimate::TestReporter.start
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -23,7 +25,8 @@ module ActiveSupport
     include ActiveJob::TestHelper
 
     ActiveRecord::Migration.check_pending!
-    Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
+    Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
+    # Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all

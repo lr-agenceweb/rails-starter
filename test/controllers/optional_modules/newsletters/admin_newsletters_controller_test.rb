@@ -97,26 +97,60 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Newsletter.new), 'should not be able to create'
-      assert ability.cannot?(:read, Newsletter.new), 'should not be able to read'
-      assert ability.cannot?(:update, Newsletter.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Newsletter.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @newsletter), 'should not be able to read'
+      assert ability.cannot?(:update, @newsletter), 'should not be able to update'
+      assert ability.cannot?(:destroy, @newsletter), 'should not be able to destroy'
+      assert ability.cannot?(:preview, @newsletter), 'should not be able to preview'
+      assert ability.cannot?(:send, @newsletter), 'should not be able to send'
+
+      @newsletter_module.update_attribute(:enabled, false)
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, Newsletter.new), 'should not be able to create'
+      assert ability.cannot?(:read, @newsletter), 'should not be able to read'
+      assert ability.cannot?(:update, @newsletter), 'should not be able to update'
+      assert ability.cannot?(:destroy, @newsletter), 'should not be able to destroy'
+      assert ability.cannot?(:preview, @newsletter), 'should not be able to preview'
+      assert ability.cannot?(:send, @newsletter), 'should not be able to send'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.can?(:create, Newsletter.new), 'should be able to create'
-      assert ability.can?(:read, Newsletter.new), 'should be able to read'
-      assert ability.can?(:update, Newsletter.new), 'should be able to update'
-      assert ability.can?(:destroy, Newsletter.new), 'should be able to destroy'
+      assert ability.can?(:read, @newsletter), 'should be able to read'
+      assert ability.can?(:update, @newsletter), 'should be able to update'
+      assert ability.can?(:destroy, @newsletter), 'should be able to destroy'
+      assert ability.can?(:preview, @newsletter), 'should be able to preview'
+      assert ability.can?(:send, @newsletter), 'should be able to send'
+
+      @newsletter_module.update_attribute(:enabled, false)
+      ability = Ability.new(@administrator)
+      assert ability.cannot?(:create, Newsletter.new), 'should not be able to create'
+      assert ability.cannot?(:read, @newsletter), 'should not be able to read'
+      assert ability.cannot?(:update, @newsletter), 'should not be able to update'
+      assert ability.cannot?(:destroy, @newsletter), 'should not be able to destroy'
+      assert ability.cannot?(:preview, @newsletter), 'should not be able to preview'
+      assert ability.cannot?(:send, @newsletter), 'should not be able to send'
+      assert ability.cannot?(:send, @newsletter), 'should not be able to send'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.can?(:create, Newsletter.new), 'should be able to create'
-      assert ability.can?(:read, Newsletter.new), 'should be able to read'
-      assert ability.can?(:update, Newsletter.new), 'should be able to update'
-      assert ability.can?(:destroy, Newsletter.new), 'should be able to destroy'
+      assert ability.can?(:read, @newsletter), 'should be able to read'
+      assert ability.can?(:update, @newsletter), 'should be able to update'
+      assert ability.can?(:destroy, @newsletter), 'should be able to destroy'
+      assert ability.can?(:preview, @newsletter), 'should be able to preview'
+      assert ability.can?(:send, @newsletter), 'should be able to send'
+
+      @newsletter_module.update_attribute(:enabled, false)
+      ability = Ability.new(@super_administrator)
+      assert ability.cannot?(:create, Newsletter.new), 'should not be able to create'
+      assert ability.cannot?(:read, @newsletter), 'should not be able to read'
+      assert ability.cannot?(:update, @newsletter), 'should not be able to update'
+      assert ability.cannot?(:destroy, @newsletter), 'should not be able to destroy'
+      assert ability.cannot?(:preview, @newsletter), 'should not be able to preview'
+      assert ability.cannot?(:send, @newsletter), 'should not be able to send'
     end
 
     #

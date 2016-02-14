@@ -8,6 +8,8 @@ module ActiveAdmin
   # == ActiveAdminHelper Test
   #
   class ActiveAdminHelperTest < ActionView::TestCase
+    include Rails.application.routes.url_helpers
+
     setup :initialize_test
 
     test 'should return correct edit page title' do
@@ -23,3 +25,4 @@ module ActiveAdmin
     end
   end
 end
+

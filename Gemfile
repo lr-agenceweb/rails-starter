@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 # == Rails
 #
 gem 'rails', '4.2.5'
+gem 'sprockets', '2.12.4'
 
 #
 # == Database
@@ -76,7 +77,7 @@ gem 'actionmailer-with-request'
 gem 'route_translator'
 gem 'globalize', '~> 5.0.0'
 gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize', branch: 'master'
-gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master'
+gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x'
 gem 'i18n-js', '>= 3.0.0.rc12'
 
 #
@@ -134,7 +135,7 @@ gem 'jquery-scrollto-rails'
 gem 'jquery-datetimepicker-rails'
 gem 'turbolinks'
 gem 'nprogress-rails'
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.5.3.2'
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
@@ -184,11 +185,11 @@ group :development do
   gem 'capistrano-rails-collection'
   gem 'capistrano-passenger'
   gem 'capistrano3-delayed-job', '~> 1.0'
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.6.0'
 end
 

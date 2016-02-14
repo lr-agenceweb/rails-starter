@@ -275,6 +275,27 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   #
+  # == Abilities
+  #
+  test 'should test abilities for subscriber' do
+    sign_in @subscriber
+    ability = Ability.new(@subscriber)
+    assert ability.can?(:mapbox_popup, Contact.new), 'should be able to see mapbox_popup'
+  end
+
+  test 'should test abilities for administrator' do
+    sign_in @administrator
+    ability = Ability.new(@administrator)
+    assert ability.can?(:mapbox_popup, Contact.new), 'should be able to see mapbox_popup'
+  end
+
+  test 'should test abilities for super_administrator' do
+    sign_in @super_administrator
+    ability = Ability.new(@super_administrator)
+    assert ability.can?(:mapbox_popup, Contact.new), 'should be able to see mapbox_popup'
+  end
+
+  #
   # == Maintenance
   #
   test 'should not render maintenance even if enabled and SA' do

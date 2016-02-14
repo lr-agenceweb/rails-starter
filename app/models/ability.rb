@@ -41,7 +41,7 @@ class Ability
 
   def administrator_privilege
     can :read, :all
-    can :manage, [Post]
+    can [:crud], [Post]
     can :update, [Setting, Category]
     can [:read, :update], Menu
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
@@ -59,6 +59,11 @@ class Ability
 
   def subscriber_privilege
     cannot_manage_optional_modules
+    rss_module
+    comment_frontend
+    newsletter_frontend
+    mailing_frontend
+    can :mapbox_popup, Contact
     can [:update, :read, :destroy], User, id: @user.id
     cannot :create, User
     can [:create, :read, :destroy], Comment, user_id: @user.id
@@ -70,7 +75,8 @@ class Ability
   def visitor_privilege
     cannot_manage_optional_modules
     cannot [:create, :update, :destroy], :all
-    can :read, Post
+    can [:read], Post
+    rss_module
   end
 
   def cannot_manage_optional_modules
@@ -78,6 +84,9 @@ class Ability
   end
 
   def optional_modules_check
+    comment_frontend
+    newsletter_frontend
+    mailing_frontend
     guest_book_module
     newsletter_module
     comment_module
@@ -90,6 +99,7 @@ class Ability
     adult_module
     video_module
     mailing_module
+    rss_module
   end
 
   #
@@ -111,13 +121,20 @@ class Ability
   #
   def newsletter_module
     if @newsletter_module.enabled?
-      can :manage, Newsletter
+      can [:crud, :send, :preview], Newsletter
       can :crud, NewsletterUser
       can [:read, :update], NewsletterSetting
       cannot [:create, :destroy], NewsletterSetting
     else
       cannot :manage, [Newsletter, NewsletterUser, NewsletterSetting]
       cannot :manage, StringBox, optional_module_id: @newsletter_module.id unless @newsletter_module.enabled?
+    end
+  end
+
+  def newsletter_frontend
+    if @newsletter_module.enabled?
+      can [:preview_in_browser, :welcome_user], Newsletter
+      can [:unsubscribe], NewsletterUser
     end
   end
 
@@ -134,6 +151,16 @@ class Ability
       cannot [:create, :destroy], CommentSetting
     else
       cannot :manage, [Comment, CommentSetting]
+    end
+  end
+
+  def comment_frontend
+    if @comment_module.enabled?
+      can [:reply], Comment
+      cannot [:signal], Comment
+      can [:signal], Comment if CommentSetting.first.should_signal?
+    else
+      cannot :manage, Comment
     end
   end
 
@@ -172,6 +199,7 @@ class Ability
     if @map_module.enabled?
       can [:update, :read], MapSetting
       cannot [:create, :destroy], MapSetting
+      can :mapbox_popup, Contact
     else
       cannot :manage, MapSetting
     end
@@ -245,11 +273,33 @@ class Ability
   #
   def mailing_module
     if @mailing_module.enabled?
-      can :manage, [MailingUser, MailingMessage]
+      can [:crud,
+           :send_mailing_message,
+           :preview,
+          ], MailingMessage
+      can [:crud], MailingUser
       can [:read, :update], [MailingSetting]
       cannot [:create, :destroy], [MailingSetting]
     else
       cannot :manage, [MailingUser, MailingSetting, MailingMessage]
+    end
+  end
+
+  def mailing_frontend
+    if @mailing_module.enabled?
+      can :preview_in_browser, MailingMessage
+      can :unsubscribe, MailingUser
+    end
+  end
+
+  #
+  # == RSS
+  #
+  def rss_module
+    if @rss_module.enabled?
+      can :feed, Post
+    else
+      cannot :feed, Post
     end
   end
 end

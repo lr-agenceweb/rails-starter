@@ -244,19 +244,59 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     assert_performed_jobs @locales.count
   end
 
+  #
+  # == Abilities
+  #
+  test 'should test abilities for subscriber' do
+    sign_in @subscriber
+    ability = Ability.new(@subscriber)
+    assert ability.can?(:unsubscribe, @newsletter_user), 'should be able to unsubscribe'
+
+    @newsletter_module.update_attribute(:enabled, false)
+    ability = Ability.new(@subscriber)
+    assert ability.cannot?(:unsubscribe, @newsletter_user), 'should not be able to unsubscribe'
+  end
+
+  test 'should test abilities for administrator' do
+    sign_in @administrator
+    ability = Ability.new(@administrator)
+    assert ability.can?(:unsubscribe, @newsletter_user), 'should be able to unsubscribe'
+
+    @newsletter_module.update_attribute(:enabled, false)
+    ability = Ability.new(@administrator)
+    assert ability.cannot?(:unsubscribe, @newsletter_user), 'should not be able to unsubscribe'
+  end
+
+  test 'should test abilities for super_administrator' do
+    sign_in @super_administrator
+    ability = Ability.new(@super_administrator)
+    assert ability.can?(:unsubscribe, @newsletter_user), 'should be able to unsubscribe'
+
+    @newsletter_module.update_attribute(:enabled, false)
+    ability = Ability.new(@super_administrator)
+    assert ability.cannot?(:unsubscribe, @newsletter_user), 'should not be able to unsubscribe'
+  end
+
   private
 
   def initialize_test
     @locales = I18n.available_locales
     @request.env['HTTP_REFERER'] = root_url
+    @setting = settings(:one)
+
+    @newsletter_module = optional_modules(:newsletter)
     @newsletter_setting = newsletter_settings(:one)
+
     @newsletter_user = newsletter_users(:newsletter_user_fr)
     @newsletter_user_en = newsletter_users(:newsletter_user_en)
     @newsletter_user_role_subscriber = newsletter_user_roles(:subscriber)
-    @setting = settings(:one)
 
     @email = 'aaa@bbb.cc'
     @lang = 'fr'
+
+    @subscriber = users(:alice)
+    @administrator = users(:bob)
+    @super_administrator = users(:anthony)
   end
 
   def clear_deliveries_and_queues

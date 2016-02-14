@@ -224,6 +224,17 @@ module Admin
       assert ability.cannot?(:read, @mailing_message), 'should not be able to read'
       assert ability.cannot?(:update, @mailing_message), 'should not be able to update'
       assert ability.cannot?(:destroy, @mailing_message), 'should not be able to destroy'
+      assert ability.cannot?(:send_mailing_message, @mailing_message), 'should not be able to send_mailing_message'
+      assert ability.cannot?(:preview, @mailing_message), 'should not be able to preview'
+
+      @mailing_module.update_attribute(:enabled, false)
+      ability = Ability.new(@subscriber)
+      assert ability.cannot?(:create, MailingMessage.new), 'should not be able to create'
+      assert ability.cannot?(:read, @mailing_message), 'should not be able to read'
+      assert ability.cannot?(:update, @mailing_message), 'should not be able to update'
+      assert ability.cannot?(:destroy, @mailing_message), 'should not be able to destroy'
+      assert ability.cannot?(:preview, @mailing_message), 'should not be able to preview'
+      assert ability.cannot?(:send_mailing_message, @mailing_message), 'should not be able to send'
     end
 
     test 'should test abilities for administrator' do
@@ -232,6 +243,17 @@ module Admin
       assert ability.can?(:read, @mailing_message), 'should be able to read'
       assert ability.can?(:update, @mailing_message), 'should be able to update'
       assert ability.can?(:destroy, @mailing_message), 'should be able to destroy'
+      assert ability.can?(:send_mailing_message, @mailing_message), 'should be able to send_mailing_message'
+      assert ability.can?(:preview, @mailing_message), 'should be able to preview'
+
+      @mailing_module.update_attribute(:enabled, false)
+      ability = Ability.new(@administrator)
+      assert ability.cannot?(:create, MailingMessage.new), 'should not be able to create'
+      assert ability.cannot?(:read, @mailing_message), 'should not be able to read'
+      assert ability.cannot?(:update, @mailing_message), 'should not be able to update'
+      assert ability.cannot?(:destroy, @mailing_message), 'should not be able to destroy'
+      assert ability.cannot?(:preview, @mailing_message), 'should not be able to preview'
+      assert ability.cannot?(:send_mailing_message, @mailing_message), 'should not be able to send'
     end
 
     test 'should test abilities for super_administrator' do
@@ -241,6 +263,17 @@ module Admin
       assert ability.can?(:read, @mailing_message), 'should be able to read'
       assert ability.can?(:update, @mailing_message), 'should be able to update'
       assert ability.can?(:destroy, @mailing_message), 'should be able to destroy'
+      assert ability.can?(:send_mailing_message, @mailing_message), 'should be able to send_mailing_message'
+      assert ability.can?(:preview, @mailing_message), 'should be able to preview'
+
+      @mailing_module.update_attribute(:enabled, false)
+      ability = Ability.new(@super_administrator)
+      assert ability.cannot?(:create, MailingMessage.new), 'should not be able to create'
+      assert ability.cannot?(:read, @mailing_message), 'should not be able to read'
+      assert ability.cannot?(:update, @mailing_message), 'should not be able to update'
+      assert ability.cannot?(:destroy, @mailing_message), 'should not be able to destroy'
+      assert ability.cannot?(:preview, @mailing_message), 'should not be able to preview'
+      assert ability.cannot?(:send_mailing_message, @mailing_message), 'should not be able to send'
     end
 
     #
