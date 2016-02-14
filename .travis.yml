@@ -8,6 +8,7 @@ env:
   - DB=mysql
   - DB=postgresql
   - DB=sqlite
+  - DB=mariadb
 
 bundler_args: --without development
 
@@ -27,6 +28,11 @@ script:
   - RAILS_ENV=test bundle exec rake test
   - RAILS_ENV=test bundle exec rake db:seed
 
+matrix:
+  allow_failures:
+    - env: DB=mariadb
+  fast_finish: true
+
 after_failure:
   - date
   - "mysql -e 'show databases;'"
@@ -40,6 +46,7 @@ branches:
     - develop
 
 addons:
+  mariadb: 10.1
   code_climate:
     repo_token:
       secure: aLmZcxs6oDsqFB8fdivlOsdyWAePxZkdj2vFrd4iS3GwaZz0S6NhJxQzHW+jWAz8L2EEGsFthSBeKzOYR8q/ja7SfowRQ0qLxXY7lVgV4Iv9Y3GiIBjff42e0dCRNeZIVkEBLouLL/GYUp7jdelxlzpibY2t+vt5QtycLiF9+Is=
