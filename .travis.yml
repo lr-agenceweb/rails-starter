@@ -29,7 +29,7 @@ script:
 
 matrix:
   allow_failures:
-    # - env: DB=sqlite
+    - env: RAILS_VERSION=5.0.0.beta2
 
 after_failure:
   - date
