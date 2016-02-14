@@ -8,7 +8,9 @@ env:
   - DB=mysql
   - DB=postgresql
   - DB=sqlite
-  - RAILS_VERSION=5.0.0.beta2
+
+gemfile:
+  - gemfiles/rails5.0.gemfile
 
 bundler_args: --without development
 

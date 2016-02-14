@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #
 # == Rails
 #
-gem 'rails', '4.2.5'
+gem 'rails', '~> 5.0.0.beta2'
 
 #
 # == Database
@@ -104,11 +104,6 @@ gem 'cancancan', '~> 1.10'
 gem 'analytical'
 
 #
-# == Social
-#
-# gem 'awesome-share-buttons', github: 'anthony-robin/awesome-share-buttons'
-
-#
 # == Background Tasks
 #
 gem 'whenever', require: false # Cron tasks
@@ -154,38 +149,6 @@ gem 'video_info'
 #
 gem 'lograge'
 
-group :development do
-  gem 'better_errors'
-  gem 'rb-fsevent', require: false
-  gem 'irbtools-more', require: 'binding.repl'
-
-  gem 'rails_best_practices'
-  gem 'rubocop', require: false
-  gem 'rails_layout'
-  gem 'railroady' # graph of models
-  gem 'quiet_assets', '~> 1.0.2'
-  gem 'seed_dump'
-  gem 'annotate', '~> 2.6.5'
-
-  # == Server
-  gem 'unicorn-rails'
-
-  # == Debug Rails request in Chrome DevTools
-  gem 'meta_request'
-
-  gem 'bullet'
-  gem 'shog'
-  gem 'brakeman', require: false # check for security vulnerabilities
-
-  # == Deploy
-  gem 'capistrano', '~> 3.1'
-  gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-rvm'
-  gem 'capistrano-rails-collection'
-  gem 'capistrano-passenger'
-  gem 'capistrano3-delayed-job', '~> 1.0'
-end
-
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -198,9 +161,4 @@ group :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'simplecov-json', require: false
-end
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', '~> 0.4.0'
 end
