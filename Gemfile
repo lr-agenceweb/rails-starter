@@ -185,11 +185,11 @@ group :development do
   gem 'capistrano-rails-collection'
   gem 'capistrano-passenger'
   gem 'capistrano3-delayed-job', '~> 1.0'
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.6.0'
 end
 
