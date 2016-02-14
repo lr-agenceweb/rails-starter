@@ -9,9 +9,6 @@ env:
   - DB=postgresql
   - DB=sqlite
 
-gemfile:
-  - gemfiles/rails5.0.gemfile
-
 bundler_args: --without development
 
 before_install:
@@ -29,11 +26,6 @@ script:
   - RAILS_ENV=test bundle exec rake --trace db:schema:load
   - RAILS_ENV=test bundle exec rake test
   - RAILS_ENV=test bundle exec rake db:seed
-
-matrix:
-  allow_failures:
-    - env: RAILS_VERSION=5.0.0.beta2
-  fast_finish: true
 
 after_failure:
   - date
