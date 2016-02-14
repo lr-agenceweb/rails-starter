@@ -11,7 +11,7 @@ class NewslettersController < ApplicationController
 
   # Preview Newsletter in browser
   def preview_in_browser
-    raise ActionController::RoutingError, 'Not Found' if !all_conditions_respected? && !@newsletter.already_sent?
+    raise ActionController::RoutingError, 'Not Found' if !all_conditions_respected? || !@newsletter.already_sent?
     @title = @newsletter.title
     @content = @newsletter.content
     I18n.with_locale(@newsletter_user.lang) do
