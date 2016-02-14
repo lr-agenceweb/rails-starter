@@ -13,7 +13,7 @@ module HtmlHelper
   end
 
   def truncate_read_more(string, link, length = 160)
-    truncate_html(string, length: length, omission: '... ' + (link_to(t('link.read_more'), link)))
+    truncate_html(string, length: length, omission: '... ' + link_to(t('link.read_more'), link))
   end
 
   def show_flash
@@ -23,7 +23,7 @@ module HtmlHelper
       klass = klass_by_type(type)
       f << content_tag(:div, class: "alert-box #{klass}", data: { alert: '' }, 'tabindex': 0, 'aria-live': 'assertive', role: 'dialogalert') do
         concat(message.html_safe) +
-          concat(content_tag(:a, '&times'.html_safe, href: '#', class: 'close', 'tabindex': 0, 'aria-label': 'Close Alert'))
+        concat(content_tag(:a, '&times'.html_safe, href: '#', class: 'close', 'tabindex': 0, 'aria-label': 'Close Alert'))
       end
     end
     f.html_safe

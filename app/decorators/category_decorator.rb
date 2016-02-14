@@ -56,11 +56,9 @@ class CategoryDecorator < ApplicationDecorator
     if !model.optional && model.optional_module_id.nil?
       message = 'Module de base'
       color = ''
-    else
-      if model.optional && !model.optional_module_enabled
-        message = 'Module non activé'
-        color = 'red'
-      end
+    elsif model.optional && !model.optional_module_enabled
+      message = 'Module non activé'
+      color = 'red'
     end
 
     status_tag_deco message, color

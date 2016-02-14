@@ -9,15 +9,12 @@ class MailingMessagesController < ApplicationController
   layout 'mailing'
 
   def preview_in_browser
-    if all_conditions_respected?
-      @title = @mailing_message.title
-      @content = @mailing_message.content
-      @hide_preview_link = true
-      I18n.with_locale(params[:locale]) do
-        render 'mailing_message_mailer/send_email'
-      end
-    else
-      fail ActionController::RoutingError, 'Not Found'
+    raise ActionController::RoutingError, 'Not Found' unless all_conditions_respected?
+    @title = @mailing_message.title
+    @content = @mailing_message.content
+    @hide_preview_link = true
+    I18n.with_locale(params[:locale]) do
+      render 'mailing_message_mailer/send_email'
     end
   end
 

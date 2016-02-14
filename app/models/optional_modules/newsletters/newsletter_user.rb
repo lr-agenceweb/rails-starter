@@ -48,6 +48,6 @@ class NewsletterUser < ActiveRecord::Base
   delegate :title, :kind, to: :newsletter_user_role, prefix: true, allow_nil: true
 
   def self.testers?
-    testers.length > 0
+    !testers.empty?
   end
 end

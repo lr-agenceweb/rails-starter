@@ -11,6 +11,8 @@ module OptionalModules
     include Gon::ControllerHelpers
     include Rails.application.routes.url_helpers
 
+    attr_reader :request
+
     setup :initialize_test
 
     test 'should return correct gon object map params' do
@@ -47,10 +49,6 @@ module OptionalModules
     private
 
     def env
-    end
-
-    def request
-      @request
     end
 
     def set_figaro_datas

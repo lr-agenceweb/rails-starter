@@ -114,7 +114,6 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     assert_equal I18n.t('newsletter.unsubscribe.fail'), flash[:error]
   end
 
-
   #
   # == Ajax
   #

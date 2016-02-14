@@ -71,7 +71,7 @@ class CommentDecorator < ApplicationDecorator
 
   def signalled_d
     color = model.signalled? ? 'red' : 'green'
-    status_tag_deco(I18n.t("#{model.signalled}"), color)
+    status_tag_deco(I18n.t(model.signalled.to_s), color)
   end
 
   def pseudo(name = nil)

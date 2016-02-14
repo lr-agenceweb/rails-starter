@@ -10,7 +10,7 @@ class MailingUsersController < ApplicationController
   layout 'error'
 
   def unsubscribe
-    fail ActionController::RoutingError, 'Not Found' if !params[:token] || @mailing_user.try(:token) != params[:token]
+    raise ActionController::RoutingError, 'Not Found' if !params[:token] || @mailing_user.try(:token) != params[:token]
     @mailing_user.destroy
     @asocial = true
     render 'mailing_users/success_unsubscribe'
