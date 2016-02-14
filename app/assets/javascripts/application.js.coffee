@@ -64,6 +64,8 @@
 
 #= require modules/scroll_infinite
 
+#= require plugins/devkit
+
 $(document).on 'ready page:load page:restore', ->
   # Save form inputs in LocalStorage
   $('form').formBackup()
