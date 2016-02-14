@@ -8,6 +8,7 @@ env:
   - DB=mysql
   - DB=postgresql
   - DB=sqlite
+  - RAILS_VERSION=5.0.0.beta2
 
 bundler_args: --without development
 
@@ -29,7 +30,8 @@ script:
 
 matrix:
   allow_failures:
-    - env: RAILS_VERSION=5.0.0.beta2
+    env: RAILS_VERSION=5.0.0.beta2
+  fast_finish: true
 
 after_failure:
   - date
