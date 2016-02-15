@@ -1,5 +1,6 @@
 Rails Starter
 ==============
+[![Circle CI](https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master.svg?style=svg)](https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master)
 [![Build Status](https://travis-ci.org/lr-agenceweb/rails-starter.svg?branch=master)](https://travis-ci.org/lr-agenceweb/rails-starter)
 [![Code Climate](https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/gpa.svg)](https://codeclimate.com/github/lr-agenceweb/rails-starter)
 [![Test Coverage](https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/coverage.svg)](https://codeclimate.com/github/lr-agenceweb/rails-starter/coverage)
