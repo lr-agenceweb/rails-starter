@@ -4,9 +4,6 @@ machine:
   ruby:
     version: 2.2.2
 
-  pre:
-    - cp config/application.example.yml config/application.yml
-
 database:
   pre:
     - cp config/database.travis.yml config/database.yml
@@ -14,6 +11,8 @@ database:
     - psql -c 'create database rails_starter_test' -U postgres
 
 test:
+  pre:
+    - cp config/application.example.yml config/application.yml
   override:
     - RAILS_ENV=test bundle exec rake --trace db:schema:load
     - RAILS_ENV=test bundle exec rake test
