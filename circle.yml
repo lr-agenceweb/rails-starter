@@ -24,3 +24,7 @@ general:
     only:
       - master
       - develop
+
+notify:
+  webhooks:
+    - url: https://hooks.slack.com/services/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
