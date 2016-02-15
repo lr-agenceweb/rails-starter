@@ -1,0 +1,30 @@
+machine:
+  timezone: Europe/Paris
+
+  ruby:
+    version: 2.2.2
+
+database:
+  pre:
+    - cp config/database.travis.yml config/database.yml
+    - mysql -e 'create database rails_starter_test'
+    - psql -c 'create database rails_starter_test' -U postgres
+
+test:
+  pre:
+    - cp config/application.example.yml config/application.yml
+  override:
+    - RAILS_ENV=test bundle exec rake --trace db:schema:load
+    - RAILS_ENV=test bundle exec rake test
+  post:
+    - RAILS_ENV=test bundle exec rake db:seed
+
+general:
+  branches:
+    only:
+      - master
+      - develop
+
+notify:
+  webhooks:
+    - url: https://hooks.slack.com/services/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
