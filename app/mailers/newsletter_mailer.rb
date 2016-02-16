@@ -3,7 +3,6 @@
 #
 class NewsletterMailer < ApplicationMailer
   add_template_helper(HtmlHelper)
-  default from: Setting.first.try(:email)
   layout 'newsletter'
 
   before_action :set_newsletter_settings
@@ -19,7 +18,11 @@ class NewsletterMailer < ApplicationMailer
       @is_welcome_user = true
       @hide_preview_link = false
 
-      mail(to: @newsletter_user.email, subject: @title) do |format|
+      mail(
+        from: Setting.first.try(:email),
+        to: @newsletter_user.email,
+        subject: @title
+      ) do |format|
         format.html
         format.text
       end
@@ -35,7 +38,11 @@ class NewsletterMailer < ApplicationMailer
       @content = @newsletter.content
       @hide_preview_link = false
 
-      mail(to: @newsletter_user.email, subject: @title) do |format|
+      mail(
+        from: Setting.first.try(:email),
+        to: @newsletter_user.email,
+        subject: @title
+      ) do |format|
         format.html
         format.text
       end

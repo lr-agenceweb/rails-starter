@@ -54,7 +54,7 @@ ActiveAdmin.register Newsletter do
     def send_newsletter
       if params[:option] == 'subscribers'
         @newsletter.update_attributes(sent_at: Time.zone.now)
-        @newsletter_users = NewsletterUser.find_each
+        @newsletter_users = NewsletterUser.subscribers.find_each
         count = @newsletter_users.count
       elsif params[:option] == 'testers'
         @newsletter_users = NewsletterUser.testers
@@ -62,8 +62,8 @@ ActiveAdmin.register Newsletter do
       end
       make_newsletter_with_i18n(@newsletter, @newsletter_users)
 
-      flash[:notice] = "La newsletter est en train d'être envoyée à #{count} personnes"
-      make_redirect
+      flash[:notice] = "La newsletter est en train d'être envoyée à #{count} " + 'personne'.pluralize(count)
+      redirect_to :back
     end
 
     def preview
@@ -92,10 +92,6 @@ ActiveAdmin.register Newsletter do
 
     def set_newsletter
       @newsletter = Newsletter.find(params[:id])
-    end
-
-    def make_redirect
-      redirect_to :back
     end
   end
 end

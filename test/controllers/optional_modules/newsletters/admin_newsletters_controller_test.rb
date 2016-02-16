@@ -66,6 +66,35 @@ module Admin
     end
 
     #
+    # == Mailer
+    #
+    test 'should send email to subscribers' do
+      clear_deliveries_and_queues
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+
+      assert_enqueued_jobs 2 do
+        get :send_newsletter, id: @newsletter_not_sent.id, option: 'subscribers'
+        assert_not assigns(:newsletter).sent_at.nil?
+        assert_equal 'La newsletter est en train d\'être envoyée à 2 personnes', flash[:notice]
+        assert_redirected_to admin_newsletters_path
+      end
+    end
+
+    test 'should send email to testers only' do
+      clear_deliveries_and_queues
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+
+      assert_enqueued_jobs 1 do
+        get :send_newsletter, id: @newsletter_not_sent.id, option: 'testers'
+        assert assigns(:newsletter).sent_at.nil?
+        assert_equal 'La newsletter est en train d\'être envoyée à 1 personne', flash[:notice]
+        assert_redirected_to admin_newsletters_path
+      end
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -182,8 +211,10 @@ module Admin
     private
 
     def initialize_test
+      @request.env['HTTP_REFERER'] = admin_newsletters_path
       @setting = settings(:one)
       @newsletter = newsletters(:one)
+      @newsletter_not_sent = newsletters(:not_sent)
       @newsletter_user = newsletter_users(:newsletter_user_fr)
       @newsletter_module = optional_modules(:newsletter)
 

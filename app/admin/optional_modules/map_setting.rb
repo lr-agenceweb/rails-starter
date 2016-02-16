@@ -14,14 +14,6 @@ ActiveAdmin.register MapSetting do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
-  index do
-    selectable_column
-    row :full_address_inline
-    column :status
-
-    actions
-  end
-
   show title: I18n.t('activerecord.models.map_setting.one') do
     columns do
       column do
