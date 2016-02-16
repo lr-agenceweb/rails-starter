@@ -104,6 +104,12 @@ class NewsletterUsersControllerTest < ActionController::TestCase
     assert_equal I18n.t('newsletter.unsubscribe.fail'), flash[:error]
   end
 
+  test 'should return correct flash if not found' do
+    delete :unsubscribe, locale: 'fr', newsletter_user_id: -9, token: @newsletter_user.token
+    assert_equal I18n.t('newsletter.unsubscribe.invalid'), flash[:error]
+    assert_redirected_to root_url
+  end
+
   test 'AJAX :: should have correct flash if unsubscribe' do
     xhr :delete, :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
     assert_equal I18n.t('newsletter.unsubscribe.success'), flash[:success]
@@ -112,6 +118,12 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   test 'AJAX :: should have correct flash if can\'t unsubscribe' do
     xhr :delete, :unsubscribe, locale: 'fr', newsletter_user_id: @newsletter_user.id, token: "#{@newsletter_user.token}-abc"
     assert_equal I18n.t('newsletter.unsubscribe.fail'), flash[:error]
+  end
+
+  test 'AJAX :: should return correct flash if not found' do
+    xhr :delete, :unsubscribe, locale: 'fr', newsletter_user_id: -9, token: @newsletter_user.token
+    assert_equal I18n.t('newsletter.unsubscribe.invalid'), flash[:error]
+    assert_redirected_to root_url
   end
 
   #

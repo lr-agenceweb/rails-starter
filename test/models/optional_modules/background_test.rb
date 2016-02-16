@@ -11,6 +11,15 @@ class BackgroundTest < ActiveSupport::TestCase
   #
   # == Background
   #
+  test 'should have correct child_classes' do
+    child_classes = Background.child_classes
+    assert_includes child_classes, :Home
+    assert_includes child_classes, :About
+    assert_includes child_classes, :Contact
+    assert_includes child_classes, :LegalNotice
+    assert_not child_classes.include?(:Blog)
+  end
+
   test 'should not upload background if mime type is not allowed' do
     [:original, :background, :large, :medium, :small].each do |size|
       assert_nil @background.image.path(size)

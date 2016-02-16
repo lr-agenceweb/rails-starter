@@ -3,7 +3,6 @@
 #
 class MailingMessageMailer < ApplicationMailer
   add_template_helper(HtmlHelper)
-  default from: "#{MailingSetting.first.decorate.name_status} <#{MailingSetting.first.decorate.email_status}>"
   layout 'mailing'
 
   # Email MailingMessage
@@ -17,7 +16,11 @@ class MailingMessageMailer < ApplicationMailer
       @show_in_email = true
       @hide_preview_link = false
 
-      mail(to: @mailing_user.email, subject: @title) do |format|
+      mail(
+        to: @mailing_user.email,
+        subject: @title,
+        from: "#{MailingSetting.first.decorate.name_status} <#{MailingSetting.first.decorate.email_status}>"
+      ) do |format|
         format.html
         format.text
       end

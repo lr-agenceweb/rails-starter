@@ -140,7 +140,7 @@ gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
 gem 'gravatar_image_tag'
-gem 'magnific-popup-rails'
+gem 'magnific-popup-rails', '~> 1.0.1'
 gem 'chartkick'
 gem 'faker'
 
@@ -164,7 +164,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'rails_layout'
   gem 'railroady' # graph of models
-  gem 'quiet_assets', '~> 1.0.2'
+  gem 'shut_up_assets'
   gem 'seed_dump'
   gem 'annotate'
 
@@ -185,7 +185,7 @@ group :development do
   gem 'capistrano-rails-collection'
   gem 'capistrano-passenger'
   gem 'capistrano3-delayed-job', '~> 1.0'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.0'
 end
 
 group :development, :test do

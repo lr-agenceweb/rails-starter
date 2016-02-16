@@ -30,6 +30,15 @@ module Admin
       assert_response :success
     end
 
+    test 'should create legal_notice if logged in' do
+      assert_difference 'LegalNotice.count' do
+        post :create, legal_notice: {}
+        assert_equal 'LegalNotice', assigns(:legal_notice).type
+        assert_equal @administrator.id, assigns(:legal_notice).user_id
+        assert_redirected_to admin_legal_notice_path(assigns(:legal_notice))
+      end
+    end
+
     test 'should update legal_notice if logged in' do
       patch :update, id: @legal_notice_admin, legal_notice: {}
       assert_redirected_to admin_legal_notice_path(@legal_notice_admin)
