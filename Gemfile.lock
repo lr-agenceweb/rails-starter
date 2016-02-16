@@ -164,8 +164,8 @@ GEM
     analytical (3.0.12)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
-    annotate (2.6.10)
-      activerecord (>= 3.2, <= 4.3)
+    annotate (2.7.0)
+      activerecord (>= 3.2, < 6.0)
       rake (~> 10.4)
     ansi (1.5.0)
     arbre (1.0.3)
@@ -676,7 +676,7 @@ DEPENDENCIES
   acts_as_list
   analytical
   ancestry
-  annotate (~> 2.6.5)
+  annotate
   autoprefixer-rails
   best_in_place!
   better_errors
