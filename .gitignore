@@ -36,4 +36,6 @@
 README.html
 
 coverage
+test/reports
+
 dploy.yaml

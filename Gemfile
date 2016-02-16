@@ -196,6 +196,7 @@ end
 group :test do
   gem 'minitest'
   gem 'minitest-reporters', require: false
+  gem 'minitest-ci', github: 'circleci/minitest-ci'
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'simplecov-json', require: false
