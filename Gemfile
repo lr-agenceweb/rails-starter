@@ -166,7 +166,7 @@ group :development do
   gem 'railroady' # graph of models
   gem 'quiet_assets', '~> 1.0.2'
   gem 'seed_dump'
-  gem 'annotate', '~> 2.6.5'
+  gem 'annotate'
 
   # == Server
   gem 'unicorn-rails'
