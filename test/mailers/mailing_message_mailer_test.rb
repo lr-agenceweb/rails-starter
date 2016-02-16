@@ -28,7 +28,6 @@ class MailingMessageMailerTest < ActionMailer::TestCase
   end
 
   test 'should send email with custom headers' do
-    skip 'Skipped until I found a way to remove delayed_job cache'
     @mailing_setting.update_attribute(:email, 'customemail@host.com')
     assert_equal 'customemail@host.com', @mailing_setting.email
 
