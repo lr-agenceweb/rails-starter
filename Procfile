@@ -2,7 +2,7 @@
 web: bin/procfile/web
 
 # Gulp browser-sync
-gulp: gulp
+gulp: bin/procfile/gulp
 
 # Mail server
 mailer: bin/procfile/maildev
