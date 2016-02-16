@@ -47,7 +47,7 @@ class Background < ActiveRecord::Base
 
   def self.child_classes
     Post.subclasses.each do |subclass|
-      @child_classes << subclass.name
+      @child_classes << subclass.name.to_sym
     end
 
     @child_classes
