@@ -16,8 +16,6 @@ class MailingMessageMailerTest < ActionMailer::TestCase
 
   test 'should send email with default headers' do
     clear_deliveries_and_queues
-    assert_no_enqueued_jobs
-    assert ActionMailer::Base.deliveries.empty?
 
     email = MailingMessageMailer.send_email(@mailing_user, @mailing_message).deliver_now
 
@@ -32,8 +30,6 @@ class MailingMessageMailerTest < ActionMailer::TestCase
     assert_equal 'customemail@host.com', @mailing_setting.email
 
     clear_deliveries_and_queues
-    assert_no_enqueued_jobs
-    assert ActionMailer::Base.deliveries.empty?
 
     email = MailingMessageMailer.send_email(@mailing_user, @mailing_message).deliver_now
 
