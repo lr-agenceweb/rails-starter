@@ -1,0 +1,4 @@
+#!/bin/bash
+if [[ "$RACK_ENV" == "development" ]]; then
+  gulp
+fi
