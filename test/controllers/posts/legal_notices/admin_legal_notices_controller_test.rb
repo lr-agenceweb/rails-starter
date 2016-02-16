@@ -58,7 +58,6 @@ module Admin
       assert_redirected_to admin_dashboard_path
     end
 
-
     #
     # == Crud actions
     #
