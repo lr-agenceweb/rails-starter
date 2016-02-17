@@ -30,6 +30,15 @@ module Admin
       assert_response :success
     end
 
+    test 'should create if logged in' do
+      assert_difference 'About.count' do
+        post :create, about: {}
+        assert_equal 'About', assigns(:about).type
+        assert_equal @administrator.id, assigns(:about).user_id
+        assert_redirected_to admin_about_path(assigns(:about))
+      end
+    end
+
     test 'should update about if logged in' do
       patch :update, id: @about, about: {}
       assert_redirected_to admin_about_path(@about)
