@@ -25,7 +25,7 @@ class VideoUploadDecorator < VideoDecorator
   # == Status tag
   #
   def subtitles
-    bool = subtitles? ? false : true
+    bool = subtitles? ? true : false
     color = bool ? 'green' : 'red'
     status_tag_deco I18n.t("subtitles.#{bool}"), color
   end
