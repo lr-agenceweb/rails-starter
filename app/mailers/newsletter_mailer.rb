@@ -17,15 +17,7 @@ class NewsletterMailer < ApplicationMailer
       @content = welcome_newsletter.content_subscriber
       @is_welcome_user = true
       @hide_preview_link = false
-
-      mail(
-        from: Setting.first.try(:email),
-        to: @newsletter_user.email,
-        subject: @title
-      ) do |format|
-        format.html
-        format.text
-      end
+      process_email
     end
   end
 
@@ -37,15 +29,7 @@ class NewsletterMailer < ApplicationMailer
       @title = @newsletter.title
       @content = @newsletter.content
       @hide_preview_link = false
-
-      mail(
-        from: Setting.first.try(:email),
-        to: @newsletter_user.email,
-        subject: @title
-      ) do |format|
-        format.html
-        format.text
-      end
+      process_email
     end
   end
 
@@ -53,5 +37,16 @@ class NewsletterMailer < ApplicationMailer
 
   def set_newsletter_settings
     @is_welcome_user = false
+  end
+
+  def process_email
+    mail(
+      from: Setting.first.try(:email),
+      to: @newsletter_user.email,
+      subject: @title
+    ) do |format|
+      format.html
+      format.text
+    end
   end
 end
