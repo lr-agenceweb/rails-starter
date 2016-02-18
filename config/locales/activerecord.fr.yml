@@ -246,6 +246,7 @@ fr:
         location_address: Adresse
         location_city: Ville
       user:
+        email: Email
         username: Nom d'utilisateur
         password: Mot de passe
         password_confirmation: Confirmation du mot de passe

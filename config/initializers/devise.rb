@@ -236,7 +236,8 @@ Devise.setup do |config|
                   Figaro.env.facebook_app_id,
                   Figaro.env.facebook_app_secret,
                   scope: 'email',
-                  callback_url: Figaro.env.application_host
+                  info_fields: 'email, name',
+                  callback_url: "#{Figaro.env.application_host}/admin/auth/facebook/callback"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

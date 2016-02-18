@@ -73,10 +73,17 @@ class User < ActiveRecord::Base
 
   validates :username,
             presence: true,
-            uniqueness: { case_sensitive: false }
+            uniqueness: {
+              case_sensitive: false,
+              scope: :provider
+            }
   validates :email,
             presence: { message: 'Ne doit pas être vide' },
-            email_format: true
+            email_format: true,
+            uniqueness: {
+              case_sensitive: false,
+              scope: :provider
+            }
 
   scope :except_super_administrator, -> { where.not(role_id: 1) }
 
@@ -101,11 +108,24 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       user.username = auth.info.name
-      user.avatar = auth.info.image
+      user.username = "#{auth.info.name} #{auth.info.uid}" if User.exists?(username: auth.info.name)
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
+      user.avatar = URI.parse(process_uri(auth.info.image)) if auth.info.image?
     end
+  end
+
+  def self.process_uri(uri)
+    require 'open-uri'
+    require 'open_uri_redirections'
+    open(uri, allow_redirections: :safe) do |r|
+      r.base_uri.to_s
+    end
+  end
+
+  def from_omniauth?
+    !(provider.blank? && uid.blank?)
   end
 end
