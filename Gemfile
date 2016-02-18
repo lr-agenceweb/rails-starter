@@ -19,6 +19,7 @@ gem 'database_cleaner'
 # == Administration
 #
 gem 'devise'
+gem 'devise-i18n-views'
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'activeadmin_addons'
 gem 'acts_as_list'

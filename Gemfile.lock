@@ -273,6 +273,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-i18n-views (0.3.4)
     did_you_mean (0.10.0)
       interception
     dkim (1.0.0)
@@ -699,6 +700,7 @@ DEPENDENCIES
   delayed_job_active_record
   delayed_paperclip
   devise
+  devise-i18n-views
   dkim
   draper
   faker
