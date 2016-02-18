@@ -26,6 +26,10 @@ fr:
       new_menu_item: Créer un nouvel élément de menu
       new_slider: Créer Slider
       update_newsletter_setting: Modifier la configuration Newsletter
+    devise:
+      sign_up:
+        title: Inscription
+        submit: S'inscrire
 
 # English
 en:

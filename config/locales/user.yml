@@ -7,6 +7,12 @@ fr:
     tester: Testeur
   log_out: Déconnexion
 
+  password:
+    weak: Faible
+    medium: Moyen
+    strong: Fort
+    instructions: Un mot de passe fort combine des chiffres, des lettres (majuscules / minuscules) ainsi que des caractères spéciaux (underscore, tiret, ...)
+
 # English
 en:
   role:

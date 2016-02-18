@@ -7,6 +7,8 @@
 #= require jquery.datetimepicker
 #= require plugins/datetimepicker
 
+#= require modules/password_strength
+
 #= require globals/_functions
 #= require plugins/override_rails_confirm
 

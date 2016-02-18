@@ -80,13 +80,15 @@ ActiveAdmin.register User do
           end
         end
       end
+    end
 
-      if current_user_and_administrator?
+    if current_user_and_administrator?
+      columns do
         column do
           render 'admin/shared/roles/form', f: f
         end
       end
-    end
+    end # if
 
     f.actions
   end
