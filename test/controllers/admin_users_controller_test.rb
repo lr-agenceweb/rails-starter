@@ -72,7 +72,7 @@ module Admin
       assert_response :success
     end
 
-    test 'should be able to update SA if user is SA' do
+    test 'should be able to update itself if user is SA' do
       sign_in @super_administrator
       patch :update, id: @super_administrator, user: {}
       assert_redirected_to admin_user_path(@super_administrator)
