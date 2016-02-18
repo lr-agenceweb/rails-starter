@@ -62,7 +62,9 @@ class User < ActiveRecord::Base
                       thumb:  '64x64#'
                     }
 
-  validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
+  validates_attachment :avatar,
+                       content_type: { content_type: %r{\Aimage\/.*\Z} },
+                       size: { less_than: 2.megabyte }
 
   include DeletableAttachment
 

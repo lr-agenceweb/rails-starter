@@ -30,6 +30,15 @@ module Admin
       assert_response :success
     end
 
+    test 'should create if logged in' do
+      assert_difference 'Home.count' do
+        post :create, home: {}
+        assert_equal 'Home', assigns(:home).type
+        assert_equal @administrator.id, assigns(:home).user_id
+        assert_redirected_to admin_home_path(assigns(:home))
+      end
+    end
+
     test 'should update home if logged in' do
       patch :update, id: @home, home: {}
       assert_redirected_to admin_home_path(@home)

@@ -34,14 +34,14 @@ class VideoUploadDecoratorTest < Draper::TestCase
   # == Status tag
   #
   test 'should return correct value for subtitles?' do
-    skip 'Find a way to test exists? methods'
-    attachment = fixture_file_upload 'videos/subtitle.srt', 'text/srt'
-    @video_upload.create_video_subtitle(subtitle_fr: attachment)
-    assert @video_upload_decorated.send(:subtitles?)
+    upload_subtitles
+    assert @video_upload_decorated.send(:subtitles?), 'should have subtitles'
   end
 
   test 'should return correct status_tag for subtitles' do
-    skip 'Find a way to test exists? methods'
+    upload_subtitles
+    assert @video_upload_decorated.send(:subtitles?), 'should have subtitles'
+
     assert_match '<span class="status_tag sous_titres_présents green">Sous Titres Présents</span>', @video_upload_decorated.subtitles
     assert_match '<span class="status_tag sous_titres_absents red">Sous Titres Absents</span>', @video_upload_two_decorated.subtitles
   end
@@ -54,5 +54,11 @@ class VideoUploadDecoratorTest < Draper::TestCase
     @video_upload_two = video_uploads(:two)
     @video_upload_decorated = VideoUploadDecorator.new(@video_upload)
     @video_upload_two_decorated = VideoUploadDecorator.new(@video_upload_two)
+  end
+
+  def upload_subtitles
+    assert_not @video_upload_decorated.send(:subtitles?), 'should not have subtitles'
+    attachment = fixture_file_upload 'videos/subtitle.srt', 'text/srt'
+    @video_upload.video_subtitle.update_attribute(:subtitle_fr, attachment)
   end
 end

@@ -72,6 +72,39 @@ class ApplicationControllerTest < ActionController::TestCase
     end
   end
 
+  #
+  # == Analytical
+  #
+  test 'should be true for analytical_modules? if all good' do
+    good_analytical_conditions
+    assert_not @controller.send(:analytical_modules?), 'analytical should not be disabled'
+    reset_analytical_conditions
+  end
+
+  test 'should be false for analytical_modules? if env is not production' do
+    good_analytical_conditions
+    Rails.env = 'test'
+    assert_not Rails.env.production?
+    assert @controller.send(:analytical_modules?), 'analytical should be disabled'
+    reset_analytical_conditions
+  end
+
+  test 'should be false for analytical_modules? with google_analytics_key blank' do
+    good_analytical_conditions
+    ENV['google_analytics_key'] = nil
+    assert Figaro.env.google_analytics_key.blank?
+    assert @controller.send(:analytical_modules?), 'analytical should be disabled'
+    reset_analytical_conditions
+  end
+
+  test 'should be false for analytical_modules? if DNT is enabled' do
+    good_analytical_conditions
+    @request.env['HTTP_DNT'] = '1'
+    assert_equal '1', @request.headers['HTTP_DNT']
+    assert @controller.send(:analytical_modules?), 'analytical should be disabled'
+    reset_analytical_conditions
+  end
+
   private
 
   def initialize_test
@@ -86,5 +119,25 @@ class ApplicationControllerTest < ActionController::TestCase
     yield(assertions)
   ensure
     @controller = old_controller
+  end
+
+  def good_analytical_conditions
+    Rails.env = 'production'
+    assert Rails.env.production?
+
+    @request.env['HTTP_DNT'] = '0'
+    assert_equal '0', @request.headers['HTTP_DNT']
+
+    @request.cookies['cookie_cnil_cancel'] = '0'
+
+    ENV['google_analytics_key'] = 'my_key'
+    assert_equal 'my_key', Figaro.env.google_analytics_key
+  end
+
+  def reset_analytical_conditions
+    Rails.env = 'test'
+    @request.env['HTTP_DNT'] = '1'
+    ENV['google_analytics_key'] = nil
+    @request.cookies['cookie_cnil_cancel'] = '1'
   end
 end
