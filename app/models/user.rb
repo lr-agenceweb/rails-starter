@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
   friendly_id :username, use: [:slugged, :finders]
 
   include Attachable
+  include AssetsHelper
 
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -108,21 +109,16 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
-      user.username = auth.info.name
-      user.username = "#{auth.info.name} #{auth.info.uid}" if User.exists?(username: auth.info.name)
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.avatar = URI.parse(process_uri(auth.info.image)) if auth.info.image?
-    end
+    where(provider: auth.provider, uid: auth.uid).first_or_create(
+      username: username_for_omniauth(auth),
+      email: auth.info.email,
+      password: Devise.friendly_token[0, 20],
+      avatar: auth.info.image? ? URI.parse(process_uri(auth.info.image)) : nil
+    )
   end
 
-  def self.process_uri(uri)
-    require 'open-uri'
-    require 'open_uri_redirections'
-    open(uri, allow_redirections: :safe) do |r|
-      r.base_uri.to_s
-    end
+  def self.username_for_omniauth(auth)
+    User.exists?(username: auth.info.name) ? "#{auth.info.name} #{auth.uid}" : auth.info.name
   end
 
   def from_omniauth?

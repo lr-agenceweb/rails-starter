@@ -71,3 +71,11 @@ lana:
   email: lana@test.fr
   role: subscriber
   avatar_file_name: bart.jpg
+
+rafa:
+  username: rafa
+  slug: rafa
+  email: rafa@nadal.es
+  role: subscriber
+  provider: facebook
+  uid: 123456789
