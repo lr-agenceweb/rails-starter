@@ -16,10 +16,15 @@ gem 'ancestry'
 gem 'database_cleaner'
 
 #
-# == Administration
+# == Authentication
 #
 gem 'devise'
 gem 'devise-i18n-views'
+gem 'omniauth-facebook'
+
+#
+# == Administration
+#
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'activeadmin_addons'
 gem 'acts_as_list'

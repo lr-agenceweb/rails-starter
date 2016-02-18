@@ -23,6 +23,8 @@
 #  avatar_content_type    :string(255)
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  provider               :string(255)
+#  uid                    :string(255)
 #
 # Indexes
 #

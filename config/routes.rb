@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, ActiveAdmin::Devise.config
+  devise_config = ActiveAdmin::Devise.config
+  devise_config[:controllers][:omniauth_callbacks] = 'users/omniauth_callbacks'
+  devise_for :users, devise_config
+
   ActiveAdmin.routes(self)
 
   concern :paginatable do

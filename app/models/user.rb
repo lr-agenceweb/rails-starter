@@ -23,6 +23,8 @@
 #  avatar_content_type    :string(255)
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  provider               :string(255)
+#  uid                    :string(255)
 #
 # Indexes
 #
@@ -44,7 +46,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook]
 
   has_many :posts, dependent: :destroy
   has_many :blogs, dependent: :destroy
@@ -95,5 +98,14 @@ class User < ActiveRecord::Base
 
   def avatar?
     avatar.present? && avatar.exists?
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.username = auth.info.name
+      user.avatar = auth.info.image
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+    end
   end
 end
