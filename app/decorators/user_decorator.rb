@@ -20,7 +20,11 @@ class UserDecorator < ApplicationDecorator
   # == Omniauth
   #
   def link_to_facebook
-    link_to fa_icon('facebook', text: I18n.t('omniauth.link', provider: 'Facebook')), user_omniauth_authorize_path(provider: :facebook), class: 'button omniauth facebook', id: 'omniauth_facebook'
+    if user.from_omniauth?
+      link_to fa_icon('facebook', text: I18n.t('omniauth.unlink', provider: 'Facebook')), user_omniauth_authorize_path(provider: :facebook, option: 'unlink'), class: 'button omniauth facebook', id: 'omniauth_facebook'
+    else
+      link_to fa_icon('facebook', text: I18n.t('omniauth.link', provider: 'Facebook')), user_omniauth_authorize_path(provider: :facebook), class: 'button omniauth facebook', id: 'omniauth_facebook'
+    end
   end
 
   #

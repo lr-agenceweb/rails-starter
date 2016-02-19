@@ -15,6 +15,7 @@ fr:
 
   omniauth:
     link: Lier à mon compte %{provider}
+    unlink: Supprimer le lien avec mon compte %{provider}
     message: Êtes-vous sûre de vouloir lier votre compte classique actuel à votre compte Facebook ?
     email:
       not_match: L'adresse email de votre compte %{provider} ne correspond pas à votre email actuel

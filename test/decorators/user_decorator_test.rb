@@ -32,9 +32,14 @@ class UserDecoratorTest < Draper::TestCase
   #
   # == Omniauth
   #
-  test 'should return correct link_to_facebook link' do
+  test 'should return correct link_to_facebook content if not yet linked' do
     user_decorated = UserDecorator.new(@subscriber)
     assert_equal '<a class="button omniauth facebook" id="omniauth_facebook" href="/admin/auth/facebook"><i class="fa fa-facebook"></i> Lier à mon compte Facebook</a>', user_decorated.link_to_facebook
+  end
+
+  test 'should return correct link_to_facebook content if linked' do
+    user_decorated = UserDecorator.new(@facebook_user)
+    assert_equal '<a class="button omniauth facebook" id="omniauth_facebook" href="/admin/auth/facebook?option=unlink"><i class="fa fa-facebook"></i> Supprimer le lien avec mon compte Facebook</a>', user_decorated.link_to_facebook
   end
 
   #
@@ -61,5 +66,6 @@ class UserDecoratorTest < Draper::TestCase
     @subscriber = users(:alice)
     @administrator = users(:bob)
     @super_administrator = users(:anthony)
+    @facebook_user = users(:rafa)
   end
 end
