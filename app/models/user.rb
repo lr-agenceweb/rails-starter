@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
   friendly_id :username, use: [:slugged, :finders]
 
   include Attachable
+  include Omniauthable
   include AssetsHelper
 
   # Include default devise modules. Others available are:
@@ -106,22 +107,5 @@ class User < ActiveRecord::Base
 
   def avatar?
     avatar.present? && avatar.exists?
-  end
-
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create(
-      username: username_for_omniauth(auth),
-      email: auth.info.email,
-      password: Devise.friendly_token[0, 20],
-      avatar: auth.info.image? ? URI.parse(process_uri(auth.info.image)) : nil
-    )
-  end
-
-  def self.username_for_omniauth(auth)
-    User.exists?(username: auth.info.name) ? "#{auth.info.name} #{auth.uid}" : auth.info.name
-  end
-
-  def from_omniauth?
-    !(provider.blank? && uid.blank?)
   end
 end

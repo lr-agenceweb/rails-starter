@@ -258,6 +258,7 @@ fr:
         image_avatar: Avatar
         delete_avatar: Supprimer avatar
         status: Rôle
+        link_to_facebook: Compte Facebook
       category:
         title: Titre
         title_d: Titre

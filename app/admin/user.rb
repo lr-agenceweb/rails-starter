@@ -39,6 +39,7 @@ ActiveAdmin.register User do
           row :last_sign_in_at
           row :status
           row :created_at
+          row :link_to_facebook unless current_user.from_omniauth?
         end
       end
 

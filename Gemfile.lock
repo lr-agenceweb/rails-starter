@@ -67,13 +67,6 @@ GIT
       railties (>= 3.2)
 
 GIT
-  remote: git://github.com/circleci/minitest-ci.git
-  revision: e98c99797b683013e5507602999a2ca5c1e4b607
-  specs:
-    minitest-ci (3.0.4.pre)
-      minitest (~> 5.0, >= 5.0.6)
-
-GIT
   remote: git://github.com/mvdstam/activeadmin-sortable.git
   revision: be5806ee5e1dc94da9331c9527f64e0f894a0b87
   specs:
@@ -751,7 +744,6 @@ DEPENDENCIES
   meta-tags
   meta_request
   minitest
-  minitest-ci!
   minitest-reporters
   momentjs-rails
   mysql2

@@ -13,6 +13,15 @@ fr:
     strong: Fort
     instructions: Un mot de passe fort combine des chiffres, des lettres (majuscules / minuscules) ainsi que des caractères spéciaux (underscore, tiret, ...)
 
+  omniauth:
+    link: Lier à mon compte %{provider}
+    message: Êtes-vous sûre de vouloir lier votre compte classique actuel à votre compte Facebook ?
+    email:
+      not_match: L'adresse email de votre compte %{provider} ne correspond pas à votre email actuel
+      already_linked: Votre compte est déjà lié à %{provider}
+    login:
+      not_exist: Vous ne pouvez pas vous inscrire avec %{provider}, seulement vous connecter
+
 # English
 en:
   role:

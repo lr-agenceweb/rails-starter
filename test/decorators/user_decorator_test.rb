@@ -30,6 +30,14 @@ class UserDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Omniauth
+  #
+  test 'should return correct link_to_facebook link' do
+    user_decorated = UserDecorator.new(@subscriber)
+    assert_equal '<a class="button omniauth facebook" id="omniauth_facebook" href="/admin/auth/facebook"><i class="fa fa-facebook"></i> Lier à mon compte Facebook</a>', user_decorated.link_to_facebook
+  end
+
+  #
   # == Status tag
   #
   test 'should return correct status_tag for subscriber' do
