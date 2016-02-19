@@ -39,7 +39,7 @@ ActiveAdmin.register User do
           row :last_sign_in_at
           row :status
           row :created_at
-          row :link_to_facebook unless current_user.from_omniauth?
+          row :link_to_facebook
         end
       end
 
@@ -101,6 +101,10 @@ ActiveAdmin.register User do
   #
   controller do
     include Skippable
+
+    def scoped_collection
+      super.includes posts: [:translations]
+    end
 
     def update
       params_user_role_id = params[:user][:role_id]
