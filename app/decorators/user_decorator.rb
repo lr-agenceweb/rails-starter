@@ -22,23 +22,27 @@ class UserDecorator < ApplicationDecorator
   def link_to_facebook
     provider = 'facebook'
     if user.from_omniauth?
-      link_to fa_icon('facebook', text: I18n.t('omniauth.unlink.button', provider: 'Facebook')),
-              user_omniauth_unlink_path(provider: provider),
-              class: 'button omniauth facebook',
-              id: 'omniauth_facebook',
-              data: {
-                vex_title: I18n.t('omniauth.title', provider: provider.capitalize),
-                vex_message: I18n.t('omniauth.unlink.message', provider: provider.capitalize)
-              }
+      link_to(
+        fa_icon('facebook', text: I18n.t('omniauth.unlink.button', provider: 'Facebook')),
+        user_omniauth_unlink_path(provider: provider),
+        class: 'button omniauth facebook',
+        id: 'omniauth_facebook',
+        data: {
+          vex_title: I18n.t('omniauth.title', provider: provider.capitalize),
+          vex_message: I18n.t('omniauth.unlink.message', provider: provider.capitalize)
+        }
+      )
     else
-      link_to fa_icon('facebook', text: I18n.t('omniauth.link.button', provider: 'Facebook')),
-              user_omniauth_authorize_path(provider: provider),
-              class: 'button omniauth facebook',
-              id: 'omniauth_facebook',
-              data: {
-                vex_title: I18n.t('omniauth.title', provider: provider.capitalize),
-                vex_message: I18n.t('omniauth.link.message', provider: provider.capitalize)
-              }
+      link_to(
+        fa_icon('facebook', text: I18n.t('omniauth.link.button', provider: 'Facebook')),
+        user_omniauth_authorize_path(provider: provider),
+        class: 'button omniauth facebook',
+        id: 'omniauth_facebook',
+        data: {
+          vex_title: I18n.t('omniauth.title', provider: provider.capitalize),
+          vex_message: I18n.t('omniauth.link.message', provider: provider.capitalize)
+        }
+      )
     end
   end
 
