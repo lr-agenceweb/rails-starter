@@ -46,14 +46,14 @@ module Users
       if @user.blank? || !@user.persisted?
         redirect_to new_user_session_path, alert: I18n.t('omniauth.login.not_exist', provider: @provider.capitalize)
       else
-        do_magick
+        do_magick admin_dashboard_path
       end
     end
 
-    def do_magick
+    def do_magick(redirect = admin_user_path(@user))
       sign_in @user, event: :authentication
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: @provider.capitalize if is_navigational_format?
-      redirect_to admin_user_path(@user)
+      redirect_to redirect
     end
 
     def redirect_to_user

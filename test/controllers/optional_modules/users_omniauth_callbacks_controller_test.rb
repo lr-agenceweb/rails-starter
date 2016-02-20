@@ -27,7 +27,7 @@ module Users
       get :facebook
       assert_not assigns(:user).blank?
       assert_equal I18n.t('devise.omniauth_callbacks.success', kind: 'Facebook'), flash[:notice]
-      assert_redirected_to admin_user_path(assigns(:user))
+      assert_redirected_to admin_dashboard_path
     end
 
     #
