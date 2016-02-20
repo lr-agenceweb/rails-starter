@@ -115,4 +115,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  devise_scope :user do
+    get '/admin/auth/:provider/unlink', controller: 'users/omniauth_callbacks', action: :unlink, as: :user_omniauth_unlink
+  end
 end

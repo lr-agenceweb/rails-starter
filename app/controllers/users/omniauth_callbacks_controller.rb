@@ -11,6 +11,18 @@ module Users
       omniauth_providers 'facebook'
     end
 
+    def unlink
+      @user = User.from_omniauth(current_user)
+      if @user.blank?
+        redirect_to admin_user_path(@user), alert: I18n.t('omniauth.unlink.alert.error', provider: params[:provider])
+      else
+        @user.update_attributes(provider: nil, uid: nil)
+        sign_out @user
+        sign_in @user, event: :authentication
+        redirect_to admin_user_path(@user), notice: I18n.t('omniauth.unlink.alert.success', provider: params[:provider])
+      end
+    end
+
     private
 
     def omniauth_providers(provider)
@@ -47,7 +59,7 @@ module Users
     def do_magick
       sign_in @user, event: :authentication
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: @provider.capitalize if is_navigational_format?
-      redirect_to admin_dashboard_path
+      redirect_to admin_user_path(@user)
     end
 
     # def omniauth_providers(provider)

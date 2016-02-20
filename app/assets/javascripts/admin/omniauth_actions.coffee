@@ -4,6 +4,6 @@ $ ->
       e.preventDefault()
       $link = $(@)
       vex.dialog.confirm
-        message: "<h3>#{I18n.t('omniauth.link', provider: 'Facebook', locale: 'fr')}</h3> #{I18n.t('omniauth.message', locale: 'fr')}"
+        message: "<h3>#{$link.data('vex-title')}</h3> #{$link.data('vex-message')}"
         callback: (value) ->
           window.location.href = $link.attr 'href' if value is true
