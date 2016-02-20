@@ -24,7 +24,7 @@ class UserDecorator < ApplicationDecorator
     if user.from_omniauth?
       link_to(
         fa_icon('facebook', text: I18n.t('omniauth.unlink.button', provider: 'Facebook')),
-        user_omniauth_unlink_path(provider: provider),
+        user_omniauth_unlink_path(provider: provider, id: model.id),
         class: 'button omniauth facebook',
         id: 'omniauth_facebook',
         data: {

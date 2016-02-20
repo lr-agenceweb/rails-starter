@@ -39,7 +39,7 @@ class UserDecoratorTest < Draper::TestCase
 
   test 'should return correct link_to_facebook content if linked' do
     user_decorated = UserDecorator.new(@facebook_user)
-    assert_equal "<a class=\"button omniauth facebook\" id=\"omniauth_facebook\" data-vex-title=\"#{I18n.t('omniauth.title', provider: 'Facebook')}\" data-vex-message=\"#{I18n.t('omniauth.unlink.message', provider: 'Facebook')}\" href=\"/admin/auth/facebook/unlink\"><i class=\"fa fa-facebook\"></i> Supprimer le lien avec mon compte Facebook</a>", user_decorated.link_to_facebook
+    assert_equal "<a class=\"button omniauth facebook\" id=\"omniauth_facebook\" data-vex-title=\"#{I18n.t('omniauth.title', provider: 'Facebook')}\" data-vex-message=\"#{I18n.t('omniauth.unlink.message', provider: 'Facebook')}\" href=\"/admin/auth/#{@facebook_user.id}/facebook/unlink\"><i class=\"fa fa-facebook\"></i> Supprimer le lien avec mon compte Facebook</a>", user_decorated.link_to_facebook
   end
 
   #

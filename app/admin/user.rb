@@ -39,7 +39,7 @@ ActiveAdmin.register User do
           row :last_sign_in_at
           row :status
           row :created_at
-          row :link_to_facebook if resource.user == current_user
+          row :link_to_facebook if resource == current_user
         end
       end
 

@@ -5,7 +5,7 @@ module Omniauthable
   extend ActiveSupport::Concern
 
   included do
-    def self.from_omniauth(auth)
+    def self.find_by_provider_and_uid(auth)
       find_by(provider: auth.provider, uid: auth.uid)
     end
 

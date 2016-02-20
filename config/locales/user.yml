@@ -24,6 +24,7 @@ fr:
       alert:
         success: Votre compte n'est plus lié à %{provider}
         error: Erreur lors de la suppression du lien avec votre compte %{provider}}
+        wrong_identity: Erreur lors de la suppression de la connexion au réseau social.
     email:
       not_match: L'adresse email de votre compte %{provider} ne correspond pas à votre email actuel
       already_linked: Votre compte est déjà lié à %{provider}
