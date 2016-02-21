@@ -170,7 +170,6 @@ group :development do
 
   gem 'rails_best_practices'
   gem 'rubocop', require: false
-  gem 'rails_layout'
   gem 'railroady' # graph of models
   gem 'shut_up_assets'
   gem 'seed_dump'

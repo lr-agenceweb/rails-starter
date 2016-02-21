@@ -523,7 +523,6 @@ GEM
       json
       require_all
       ruby-progressbar
-    rails_layout (1.0.29)
     railties (4.2.5.1)
       actionpack (= 4.2.5.1)
       activesupport (= 4.2.5.1)
@@ -773,7 +772,6 @@ DEPENDENCIES
   rails_autolink
   rails_autosize_jquery
   rails_best_practices
-  rails_layout
   rb-fsevent
   retina_rails (~> 2.0.0)
   route_translator
