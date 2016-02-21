@@ -118,6 +118,9 @@ Add a search form to look on title or content post articles
 **Mailing**  
 Application developped to send heavy mails number to users
 
+**SocialConnect**  
+Allow users to LINK their ALREADY EXISTING Devise account to Facebook, Twitter or Google Social Connect.
+
 
 ### Units Tests
 Basics tests are included, just run `rake test`

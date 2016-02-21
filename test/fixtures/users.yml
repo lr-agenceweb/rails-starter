@@ -23,6 +23,8 @@
 #  avatar_content_type    :string(255)
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  provider               :string(255)
+#  uid                    :string(255)
 #
 # Indexes
 #
@@ -69,3 +71,11 @@ lana:
   email: lana@test.fr
   role: subscriber
   avatar_file_name: bart.jpg
+
+rafa:
+  username: rafa
+  slug: rafa
+  email: rafa@nadal.es
+  role: subscriber
+  provider: facebook
+  uid: 123_456_789

@@ -104,3 +104,8 @@ mailing:
   <<: *DEFAULTS
   name: Mailing
   enabled: true
+
+social_connect:
+  <<: *DEFAULTS
+  name: SocialConnect
+  enabled: true

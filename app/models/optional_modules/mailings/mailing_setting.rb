@@ -16,6 +16,8 @@
 # == MailingSetting Model
 #
 class MailingSetting < ActiveRecord::Base
+  include MaxRowable
+
   translates :signature, :unsubscribe_title, :unsubscribe_content,
              fallbacks_for_empty_translations: true
   active_admin_translates :signature, :unsubscribe_title, :unsubscribe_content,

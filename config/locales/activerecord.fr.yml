@@ -176,6 +176,12 @@ fr:
       social:
         one: Réseau Social
         other: Réseaux Sociaux
+      social_connect_setting:
+        one: Connexion social configuration
+        other: Connexion social configuration
+      social_provider:
+        one: Réseau Social
+        other: Réseaux Sociaux
       search:
         one: Recherche
         other: Recherches
@@ -246,6 +252,7 @@ fr:
         location_address: Adresse
         location_city: Ville
       user:
+        email: Email
         username: Nom d'utilisateur
         password: Mot de passe
         password_confirmation: Confirmation du mot de passe
@@ -257,6 +264,9 @@ fr:
         image_avatar: Avatar
         delete_avatar: Supprimer avatar
         status: Rôle
+        link_to_facebook: Compte Facebook
+        link_to_twitter: Compte Twitter
+        link_to_google: Compte Google
       category:
         title: Titre
         title_d: Titre
@@ -474,6 +484,16 @@ fr:
         font_ikon: Icône
         status: État
         delete_ikon: Supprimer l'icône
+
+      social_connect_setting:
+        enabled: Activé ?
+      social_provider:
+        name: Nom
+        enabled: Activé ?
+        status: Activé ?
+        social_facebook: Social Facebook
+        social_twitter: Social Twitter
+        social_google_oauth2: Social Google
 
       mailing_user:
         fullname: Nom complet

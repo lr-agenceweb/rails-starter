@@ -17,5 +17,7 @@
 # == EventSetting Model
 #
 class EventSetting < ActiveRecord::Base
+  include MaxRowable
+
   belongs_to :event_order
 end

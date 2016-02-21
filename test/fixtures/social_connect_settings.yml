@@ -1,0 +1,12 @@
+# == Schema Information
+#
+# Table name: social_connect_settings
+#
+#  id         :integer          not null, primary key
+#  enabled    :boolean          default(TRUE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  enabled: true

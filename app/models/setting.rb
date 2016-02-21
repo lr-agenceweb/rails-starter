@@ -35,6 +35,7 @@
 #
 class Setting < ActiveRecord::Base
   include Attachable
+  include MaxRowable
 
   after_validation :clean_paperclip_errors
 

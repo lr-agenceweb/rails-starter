@@ -112,7 +112,8 @@ description = [
   'Module qui propose à l\'administrateur de choisir une image d\'arrière plan pour les pages du site',
   'Module qui affiche un calendrier',
   'Module qui gère la visualisation de vidéos sur le site',
-  'Module qui gère l\'envoie de mails en masse'
+  'Module qui gère l\'envoie de mails en masse',
+  'Module qui gère la connexion par réseaux sociaux'
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(
@@ -905,6 +906,26 @@ slides_image.each_with_index do |element, index|
       description: slide_description_en[index]
     )
   end
+end
+
+#
+# == SocialConnectSetting
+#
+puts 'Create SocialConnectSetting'
+social_connect_setting = SocialConnectSetting.create!(
+  enabled: true
+)
+
+#
+# == SocialProviders
+#
+SocialProvider.allowed_social_providers.find_each do |provider|
+  puts "Create SocialProvider #{provider}"
+  SocialProvider.create!(
+    name: provider,
+    enabled: true,
+    social_connect_setting_id: social_connect_setting.id
+  )
 end
 
 #
