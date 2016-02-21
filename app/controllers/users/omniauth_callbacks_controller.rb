@@ -13,6 +13,11 @@ module Users
       omniauth_providers 'facebook'
     end
 
+    def twitter
+      request.env['omniauth.auth']['info']['email'] = current_user.email if signed_in?
+      omniauth_providers 'twitter'
+    end
+
     def google_oauth2
       omniauth_providers 'google'
     end

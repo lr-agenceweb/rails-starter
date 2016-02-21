@@ -19,7 +19,7 @@ class UserDecorator < ApplicationDecorator
   #
   # == Omniauth
   #
-  %w( facebook google ).each do |provider|
+  %w( facebook twitter google ).each do |provider|
     define_method "link_to_#{provider}" do
       if user.from_omniauth?(provider == 'google' ? 'google_oauth2' : provider)
         link_to(

@@ -244,6 +244,10 @@ Devise.setup do |config|
                   Figaro.env.google_app_secret,
                   access_type: 'online'
 
+  config.omniauth :twitter,
+                  Figaro.env.twitter_app_id,
+                  Figaro.env.twitter_app_secret
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

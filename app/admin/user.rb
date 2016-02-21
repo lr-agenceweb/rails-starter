@@ -42,6 +42,7 @@ ActiveAdmin.register User do
           if resource == current_user
             row :link_to_facebook
             row :link_to_google
+            row :link_to_twitter
           end
         end
       end

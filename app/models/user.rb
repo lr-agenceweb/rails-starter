@@ -49,7 +49,10 @@ class User < ActiveRecord::Base
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+         :omniauthable,
+         omniauth_providers: [
+          :facebook, :twitter, :google_oauth2
+        ]
 
   has_many :posts, dependent: :destroy
   has_many :blogs, dependent: :destroy
