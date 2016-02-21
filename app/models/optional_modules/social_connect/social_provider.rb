@@ -36,7 +36,7 @@ class SocialProvider < ActiveRecord::Base
     find_by(name: name)
   end
 
-  def self.allowed_to_use?(scm, scs)
-    scm.enabled? && scs.enabled?
+  def self.allowed_to_use?
+    OptionalModule.find_by(name: 'SocialConnect').enabled? && SocialConnectSetting.first.enabled?
   end
 end

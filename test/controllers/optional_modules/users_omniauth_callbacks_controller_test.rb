@@ -70,7 +70,7 @@ module Users
       assert_redirected_to admin_user_path(@administrator)
     end
 
-    test 'should not unlink omniauth if user is not omniauth friendly' do
+    test 'should not unlink omniauth if user is not omniauth user' do
       sign_in @administrator
       get :unlink, provider: 'facebook', id: @subscriber.id
       assert_equal I18n.t('omniauth.unlink.alert.wrong_identity'), flash[:alert]
@@ -110,6 +110,68 @@ module Users
       assert ability.cannot?(:unlink, @administrator), 'should not be able to unlink'
     end
 
+    #
+    # == Module or provider disabled
+    #
+    test 'should not access page if social_connect module is disabled' do
+      @social_connect_module.update_attribute(:enabled, false)
+      assert_raises(ActionController::RoutingError) do
+        get :facebook
+      end
+    end
+
+    test 'should not access page if social_connect setting is disabled' do
+      @social_connect_setting.update_attribute(:enabled, false)
+      assert_raises(ActionController::RoutingError) do
+        get :facebook
+      end
+    end
+
+    test 'should not access page if facebook provider is disabled' do
+      @social_provider_facebook.update_attribute(:enabled, false)
+      assert_raises(ActionController::RoutingError) do
+        get :facebook
+      end
+    end
+
+    test 'should not access page if twitter provider is disabled' do
+      @social_provider_twitter.update_attribute(:enabled, false)
+      assert_raises(ActionController::RoutingError) do
+        get :twitter
+      end
+    end
+
+    test 'should not access page if google provider is disabled' do
+      @social_provider_google.update_attribute(:enabled, false)
+      assert_raises(ActionController::RoutingError) do
+        get :google_oauth2
+      end
+    end
+
+    # Unlink
+    test 'should not unlink user if social_connect module is disabled' do
+      @social_connect_module.update_attribute(:enabled, false)
+      sign_in @facebook_user
+      assert_raises(ActionController::RoutingError) do
+        get :unlink, provider: 'facebook', id: @facebook_user.id
+      end
+    end
+
+    test 'should not unlink user if social_connect setting is disabled' do
+      @social_connect_setting.update_attribute(:enabled, false)
+      sign_in @facebook_user
+      assert_raises(ActionController::RoutingError) do
+        get :unlink, provider: 'facebook', id: @facebook_user.id
+      end
+    end
+
+    test 'should not unlink user if facebook provider is disabled' do
+      @social_provider_facebook.update_attribute(:enabled, false)
+      assert_raises(ActionController::RoutingError) do
+        get :unlink, provider: 'facebook', id: @facebook_user.id
+      end
+    end
+
     private
 
     def initialize_test
@@ -117,6 +179,13 @@ module Users
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       @facebook_user = users(:rafa)
+
+      @social_provider_facebook = social_providers(:facebook)
+      @social_provider_twitter = social_providers(:twitter)
+      @social_provider_google = social_providers(:google)
+
+      @social_connect_module = optional_modules(:social_connect)
+      @social_connect_setting = social_connect_settings(:one)
 
       request.env['devise.mapping'] = Devise.mappings[:user]
       request.env['omniauth.auth'] = OmniAuth::AuthHash.new(

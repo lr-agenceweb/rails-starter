@@ -37,17 +37,17 @@ class SocialProviderTest < ActiveSupport::TestCase
   end
 
   test 'should allow social connect if all enabled' do
-    assert SocialProvider.allowed_to_use?(@social_connect_module, @social_connect_setting)
+    assert SocialProvider.allowed_to_use?
   end
 
   test 'should not allow social connect if social_connect_module disabled' do
     @social_connect_module.update_attribute(:enabled, false)
-    assert_not SocialProvider.allowed_to_use?(@social_connect_module, @social_connect_setting)
+    assert_not SocialProvider.allowed_to_use?
   end
 
   test 'should not allow social connect if social_connect_setting disabled' do
     @social_connect_setting.update_attribute(:enabled, false)
-    assert_not SocialProvider.allowed_to_use?(@social_connect_module, @social_connect_setting)
+    assert_not SocialProvider.allowed_to_use?
   end
 
   private

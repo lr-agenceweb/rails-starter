@@ -6,6 +6,7 @@ module Users
   # == OmniauthCallbacks controller
   #
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    before_action :not_found, if: :module_or_provider_disabled?
     before_action :redirect_to_user, only: :unlink, if: :should_redirect?
 
     def facebook
@@ -73,16 +74,13 @@ module Users
       !(params[:id].to_s == current_user.id.to_s && current_user.from_omniauth?(params[:provider] == 'google' ? 'google_oauth2' : params[:provider]))
     end
 
-    # def omniauth_providers(provider)
-    #   @user = User.from_omniauth(request.env['omniauth.auth'])
+    def not_found
+      raise ActionController::RoutingError, 'Not Found'
+    end
 
-    #   if @user.persisted?
-    #     sign_in_and_redirect @user, event: :authentication
-    #     flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: provider.capitalize if is_navigational_format?
-    #   else
-    #     session["devise.#{provider}_data"] = request.env['omniauth.auth']
-    #     redirect_to new_user_registration_url
-    #   end
-    # end
+    def module_or_provider_disabled?(provider = params[:action])
+      provider = provider == 'unlink' ? params[:provider] : provider
+      !SocialProvider.find_by(name: provider).enabled? || !SocialProvider.allowed_to_use?
+    end
   end
 end

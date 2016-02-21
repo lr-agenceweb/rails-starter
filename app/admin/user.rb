@@ -39,7 +39,7 @@ ActiveAdmin.register User do
           row :last_sign_in_at
           row :status
           row :created_at
-          if resource == current_user && SocialProvider.allowed_to_use?(social_connect_module, social_connect_setting)
+          if resource == current_user && SocialProvider.allowed_to_use?
             row :link_to_facebook if SocialProvider.provider_by_name('facebook').enabled?
             row :link_to_twitter if SocialProvider.provider_by_name('twitter').enabled?
             row :link_to_google if SocialProvider.provider_by_name('google_oauth2').enabled?
@@ -106,8 +106,6 @@ ActiveAdmin.register User do
   controller do
     include Skippable
 
-    before_action :set_social_connect_setting, only: [:show]
-
     def scoped_collection
       super.includes posts: [:translations]
     end
@@ -127,12 +125,6 @@ ActiveAdmin.register User do
     def update_resource(object, attributes)
       update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
       object.send(update_method, *attributes)
-    end
-
-    private
-
-    def set_social_connect_setting
-      @social_connect_setting = SocialConnectSetting.first
     end
   end
 end
