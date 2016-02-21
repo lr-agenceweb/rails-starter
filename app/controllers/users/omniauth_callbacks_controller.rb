@@ -32,7 +32,7 @@ module Users
     def link_me_with_omniauth
       @errors = User.check_for_errors(request.env['omniauth.auth'], current_user)
       if @errors.empty?
-        @user = User.link_with_omniauth(request.env['omniauth.auth'], current_user)
+        @user = current_user.link_with_omniauth(request.env['omniauth.auth'])
         sign_out @user
         do_magick
       else

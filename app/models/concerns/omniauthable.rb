@@ -9,18 +9,18 @@ module Omniauthable
       find_by(provider: auth.provider, uid: auth.uid)
     end
 
-    def self.link_with_omniauth(auth, current_user)
-      unless current_user.provider == auth.provider && current_user.uid == auth.uid
-        current_user.update_attributes(
+    def link_with_omniauth(auth)
+      unless provider == auth.provider && uid == auth.uid
+        update_attributes(
           provider: auth.provider,
           uid: auth.uid
         )
       end
-      current_user.update_attributes(
-        username: username_for_omniauth(auth, current_user),
+      update_attributes(
+        username: username_for_omniauth(auth),
         avatar: auth.info.image? ? URI.parse(process_uri(auth.info.image)) : nil
       )
-      current_user
+      self
     end
 
     def from_omniauth?
@@ -36,8 +36,8 @@ module Omniauthable
 
     private
 
-    def self.username_for_omniauth(auth, current_user)
-      User.where.not(id: current_user.id).exists?(username: auth.info.name) ? "#{auth.info.name} #{auth.uid}" : auth.info.name
+    def username_for_omniauth(auth)
+      User.where.not(id: id).exists?(username: auth.info.name) ? "#{auth.info.name} #{auth.uid}" : auth.info.name
     end
   end
 end

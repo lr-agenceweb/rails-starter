@@ -135,7 +135,7 @@ class UserTest < ActiveSupport::TestCase
     @request.env['devise.mapping'] = Devise.mappings[:user]
     @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
 
-    user = User.link_with_omniauth(@request.env['omniauth.auth'], @super_administrator)
+    user = @super_administrator.link_with_omniauth(@request.env['omniauth.auth'])
     assert_equal 'rafa 1357908642', user.username
     assert_equal 'rafa-1357908642', user.slug
   end
@@ -156,10 +156,10 @@ class UserTest < ActiveSupport::TestCase
     @request.env['devise.mapping'] = Devise.mappings[:user]
     @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
 
-    user = User.link_with_omniauth(@request.env['omniauth.auth'], @facebook_user)
+    user = @facebook_user.link_with_omniauth(@request.env['omniauth.auth'])
     assert_equal 'rafa', user.username
     assert_equal 'rafa', user.slug
-    user = User.link_with_omniauth(@request.env['omniauth.auth'], @facebook_user)
+    user = @facebook_user.link_with_omniauth(@request.env['omniauth.auth'])
     assert_equal 'rafa', user.username
     assert_equal 'rafa', user.slug
   end
@@ -180,7 +180,7 @@ class UserTest < ActiveSupport::TestCase
     @request.env['devise.mapping'] = Devise.mappings[:user]
     @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
 
-    user = User.link_with_omniauth(@request.env['omniauth.auth'], @facebook_user)
+    user = @facebook_user.link_with_omniauth(@request.env['omniauth.auth'])
     assert_equal 'Rafael Nadal', user.username
     assert_equal 'rafael-nadal', user.slug
   end
