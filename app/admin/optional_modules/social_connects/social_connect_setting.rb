@@ -1,11 +1,15 @@
 ActiveAdmin.register SocialConnectSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
-  permit_params :id,
-                :enabled,
-                social_providers_attributes: [
-                  :id, :name, :enabled
-                ]
+  permit_params do
+    params = [:id,
+              :enabled,
+              social_providers_attributes: [
+                :id, :enabled
+              ]
+             ]
+    params.push social_providers_attributes: [:name], if: proc { current_user.super_administrator? }
+  end
 
   decorate_with SocialConnectSettingDecorator
   config.clear_sidebar_sections!
@@ -45,7 +49,7 @@ ActiveAdmin.register SocialConnectSetting do
                        include_blank: false,
                        hint: I18n.t('form.hint.social_provider.name'),
                        input_html: {
-                         disabled: item.object.new_record? || !current_user_and_administrator? ? false : :disbaled
+                         disabled: item.object.new_record? || current_user.super_administrator? ? false : :disbaled
                        }
 
             item.input :enabled,
@@ -69,7 +73,7 @@ ActiveAdmin.register SocialConnectSetting do
     private
 
     def redirect_to_show
-      redirect_to admin_social_connect_setting_path(SocialConnectSetting.first)
+      redirect_to admin_social_connect_setting_path(SocialConnectSetting.first), status: 301
     end
   end
 end

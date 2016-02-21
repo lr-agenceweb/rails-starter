@@ -100,6 +100,7 @@ class Ability
     adult_module
     video_module
     mailing_module
+    social_connect_module
     rss_module
   end
 
@@ -289,6 +290,18 @@ class Ability
     return unless @mailing_module.enabled?
     can :preview_in_browser, MailingMessage
     can :unsubscribe, MailingUser
+  end
+
+  #
+  # == SocialConnect
+  #
+  def social_connect_module
+    if @social_connect_module.enabled?
+      can [:read, :update], [SocialConnectSetting]
+      cannot [:create, :destroy], [SocialConnectSetting]
+    else
+      cannot :manage, [SocialConnectSetting, SocialProvider]
+    end
   end
 
   #
