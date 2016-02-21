@@ -26,8 +26,22 @@ module Users
       set_rafa_omniauth
       get :facebook
       assert_not assigns(:user).blank?
+      assert_equal 'rafa', assigns(:user).username
+      assert_equal 'rafa', assigns(:user).slug
+      assert assigns(:user).avatar_file_name.nil?
+
       assert_equal I18n.t('devise.omniauth_callbacks.success', kind: 'Facebook'), flash[:notice]
       assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should update user information if changed since last connexion' do
+      set_base_request_for_omniauth(123_456_789, 'Raf Nadal', 'rafa@nadal.es')
+      request.env['omniauth.auth']['info']['image'] = 'http://www.gravatar.com/avatar/00000000000000000000000000000000'
+
+      get :facebook
+      assert_equal 'Raf Nadal', assigns(:user).username
+      assert_equal 'raf-nadal', assigns(:user).slug
+      assert_equal '00000000000000000000000000000000', assigns(:user).avatar_file_name
     end
 
     #
@@ -187,35 +201,25 @@ module Users
       @social_connect_module = optional_modules(:social_connect)
       @social_connect_setting = social_connect_settings(:one)
 
-      request.env['devise.mapping'] = Devise.mappings[:user]
-      request.env['omniauth.auth'] = OmniAuth::AuthHash.new(
-        provider: 'facebook',
-        uid: 2_456_789,
-        info: {
-          name: 'Tester',
-          email: 'facebook@omniauth.com'
-        }
-      )
+      set_base_request_for_omniauth(2_456_789, 'Testeur', 'facebook@omniauth.com')
     end
 
     def set_rafa_omniauth
-      request.env['omniauth.auth'] = OmniAuth::AuthHash.new(
-        provider: 'facebook',
-        uid: 123_456_789,
-        info: {
-          name: 'rafa',
-          email: 'rafa@nadal.es'
-        }
-      )
+      set_base_request_for_omniauth(123_456_789, 'rafa', 'rafa@nadal.es')
     end
 
     def set_admin_omniauth
+      set_base_request_for_omniauth(5_320_619, 'Bob', 'bob@test.fr')
+    end
+
+    def set_base_request_for_omniauth(id, name, email)
+      request.env['devise.mapping'] = Devise.mappings[:user]
       request.env['omniauth.auth'] = OmniAuth::AuthHash.new(
         provider: 'facebook',
-        uid: 5_320_619,
+        uid: id,
         info: {
-          name: 'Bob',
-          email: 'bob@test.fr'
+          name: name,
+          email: email
         }
       )
     end

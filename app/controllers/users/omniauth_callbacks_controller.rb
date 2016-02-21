@@ -57,6 +57,7 @@ module Users
       if @user.blank? || !@user.persisted?
         redirect_to new_user_session_path, alert: I18n.t('omniauth.login.not_exist', provider: @provider.capitalize)
       else
+        @user.update_infos_since_last_connection request.env['omniauth.auth']
         do_magick admin_dashboard_path
       end
     end

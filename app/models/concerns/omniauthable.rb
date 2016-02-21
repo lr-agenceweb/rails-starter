@@ -16,10 +16,15 @@ module Omniauthable
           uid: auth.uid
         )
       end
-      update_attributes(
-        username: username_for_omniauth(auth),
-        avatar: auth.info.image? ? URI.parse(process_uri(auth.info.image)) : nil
-      )
+      update_infos_since_last_connection(auth)
+      self
+    end
+
+    def update_infos_since_last_connection(auth)
+      update_attributes(username: username_for_omniauth(auth)) if username != auth.info.name
+      if auth.info.image? && avatar_file_name != File.basename(URI.parse(auth.info.image).path)
+        update_attributes(avatar: URI.parse(process_uri(auth.info.image)))
+      end
       self
     end
 

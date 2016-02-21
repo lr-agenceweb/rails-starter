@@ -75,40 +75,14 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'should return nil if omniauth user doesn\'t exist' do
-    @request = ActionController::TestRequest.new
-
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
-      provider: 'facebook',
-      uid: 987_654_321,
-      info: {
-        name: 'rafael',
-        email: 'rafael.nadal@test.com'
-      }
-    )
-
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-    @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+    set_base_request_for_omniauth(987_654_321, 'rafael', 'rafael.nadal@test.com')
 
     user = User.find_by_provider_and_uid(@request.env['omniauth.auth'])
     assert user.nil?
   end
 
   test 'should return user if facebook omniauth exists' do
-    @request = ActionController::TestRequest.new
-
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
-      provider: 'facebook',
-      uid: 123_456_789,
-      info: {
-        name: 'rafa',
-        email: 'rafa@nadal.es'
-      }
-    )
-
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-    @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+    set_base_request_for_omniauth(123_456_789, 'rafa', 'rafa@nadal.es')
 
     user = User.find_by_provider_and_uid(@request.env['omniauth.auth'])
     assert_equal 'rafa', user.username
@@ -120,20 +94,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'should use name with uid if name already exists' do
-    @request = ActionController::TestRequest.new
-
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
-      provider: 'facebook',
-      uid: 1_357_908_642,
-      info: {
-        name: 'rafa',
-        email: 'rafael.nadal@test.com'
-      }
-    )
-
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-    @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+    set_base_request_for_omniauth(1_357_908_642, 'rafa', 'rafael.nadal@test.com')
 
     user = @super_administrator.link_with_omniauth(@request.env['omniauth.auth'])
     assert_equal 'rafa 1357908642', user.username
@@ -141,20 +102,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'should not update name if connect twice as same user' do
-    @request = ActionController::TestRequest.new
-
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
-      provider: 'facebook',
-      uid: 1_357_908_642,
-      info: {
-        name: 'rafa',
-        email: 'rafael.nadal@test.com'
-      }
-    )
-
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-    @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+    set_base_request_for_omniauth(1_357_908_642, 'rafa', 'rafael.nadal@test.com')
 
     user = @facebook_user.link_with_omniauth(@request.env['omniauth.auth'])
     assert_equal 'rafa', user.username
@@ -165,41 +113,16 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'should update name from facebook if it changed after linking account' do
-    @request = ActionController::TestRequest.new
-
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
-      provider: 'facebook',
-      uid: 1_357_908_642,
-      info: {
-        name: 'Rafael Nadal',
-        email: 'rafa@nadal.es'
-      }
-    )
-
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-    @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+    set_base_request_for_omniauth(1_357_908_642, 'Rafael Nadal', 'rafa@nadal.es')
 
     user = @facebook_user.link_with_omniauth(@request.env['omniauth.auth'])
     assert_equal 'Rafael Nadal', user.username
     assert_equal 'rafael-nadal', user.slug
+    assert user.avatar_file_name.nil?
   end
 
   test 'should not be valid if omniauth email is not the same as classic account email' do
-    @request = ActionController::TestRequest.new
-
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
-      provider: 'facebook',
-      uid: 1_357_908_642,
-      info: {
-        name: 'rafael',
-        email: 'rafael.nadal@test.com'
-      }
-    )
-
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-    @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+    set_base_request_for_omniauth(1_357_908_642, 'rafael', 'rafael.nadal@test.com')
 
     errors = User.check_for_errors(@request.env['omniauth.auth'], @super_administrator)
     assert_not errors.empty?
@@ -207,26 +130,23 @@ class UserTest < ActiveSupport::TestCase
     assert I18n.t('omniauth.email.not_match', provider: 'facebook'), errors[:wrong_email]
   end
 
-  test 'should not be valid if user has already is account linked to facebook' do
-    @request = ActionController::TestRequest.new
-
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
-      provider: 'facebook',
-      uid: 1_357_908_642,
-      info: {
-        name: 'rafael',
-        email: 'rafa@nadal.es'
-      }
-    )
-
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-    @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+  test 'should not be valid if user has already his account linked to facebook' do
+    set_base_request_for_omniauth(1_357_908_642, 'rafael', 'rafa@nadal.es')
 
     errors = User.check_for_errors(@request.env['omniauth.auth'], @facebook_user)
     assert_not errors.empty?
     assert errors[:wrong_email].blank?
     assert I18n.t('omniauth.email.not_match', provider: 'facebook'), errors[:already_linked]
+  end
+
+  test 'should update omniauth info after logged in if changes' do
+    set_base_request_for_omniauth(1_357_908_642, 'Rafael Nadal', 'rafa@nadal.es')
+    OmniAuth.config.mock_auth[:facebook]['info']['image'] = 'http://www.gravatar.com/avatar/00000000000000000000000000000000'
+
+    @facebook_user.update_infos_since_last_connection(@request.env['omniauth.auth'])
+    assert_equal 'Rafael Nadal', @facebook_user.username
+    assert_equal 'rafael-nadal', @facebook_user.slug
+    assert_equal '00000000000000000000000000000000', @facebook_user.avatar_file_name
   end
 
   private
@@ -240,5 +160,22 @@ class UserTest < ActiveSupport::TestCase
     @facebook_user = users(:rafa)
 
     OmniAuth.config.mock_auth[:twitter] = nil
+  end
+
+  def set_base_request_for_omniauth(id, name, email)
+    @request = ActionController::TestRequest.new
+    OmniAuth.config.test_mode = true
+
+    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
+      provider: 'facebook',
+      uid: id,
+      info: {
+        name: name,
+        email: email
+      }
+    )
+
+    @request.env['devise.mapping'] = Devise.mappings[:user]
+    @request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
   end
 end
