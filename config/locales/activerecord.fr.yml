@@ -179,6 +179,9 @@ fr:
       social_connect_setting:
         one: Connexion social configuration
         other: Connexion social configuration
+      social_provider:
+        one: Réseau Social
+        other: Réseaux Sociaux
       search:
         one: Recherche
         other: Recherches
@@ -483,6 +486,9 @@ fr:
         delete_ikon: Supprimer l'icône
 
       social_connect_setting:
+        enabled: Activé ?
+      social_provider:
+        name: Nom
         enabled: Activé ?
 
       mailing_user:

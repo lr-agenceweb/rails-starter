@@ -13,4 +13,5 @@
 #
 class SocialConnectSetting < ActiveRecord::Base
   has_many :social_providers
+  accepts_nested_attributes_for :social_providers, reject_if: :all_blank, allow_destroy: true
 end

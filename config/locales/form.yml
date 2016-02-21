@@ -85,6 +85,12 @@ fr:
         already_picture: Ce champs est désactivé car vous avez choisi d'utiliser une image en guise d'icône
         default_hint: "Si vous ne choisissez aucune image ou icône (%{list}), le titre du réseau social sera utilisé."
 
+      social_connect_setting:
+        enabled: Si coché, vous serez en mesure de lier votre compte et de vous connecter à travers les réseaux sociaux.
+      social_provider:
+        name: Nom du réseau social autorisé pour se connecter
+        enabled: Activer ou non ce réseau social pour autoriser la connexion
+
       adult:
         enabled: Activer / Désactiver le popup de validation de l'âge
         title: Titre du message d'accueil dans la popup

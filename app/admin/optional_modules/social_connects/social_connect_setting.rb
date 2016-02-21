@@ -2,7 +2,10 @@ ActiveAdmin.register SocialConnectSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
   permit_params :id,
-                :enabled
+                :enabled,
+                social_providers_attributes: [
+                  :id, :name, :enabled
+                ]
 
   decorate_with SocialConnectSettingDecorator
   config.clear_sidebar_sections!
@@ -25,7 +28,22 @@ ActiveAdmin.register SocialConnectSetting do
         f.inputs t('general') do
           f.input :enabled,
                   as: :boolean,
-                  hint: I18n.t('form.hint.adult.enabled')
+                  hint: I18n.t('form.hint.social_connect_setting.enabled')
+        end
+      end
+    end
+
+    columns do
+      column do
+        f.inputs t('activerecord.models.social_provider.other') do
+          f.has_many :social_providers, heading: false do |item|
+            item.input :name,
+                       as: :select,
+                       hint: I18n.t('form.hint.social_provider.name')
+            item.input :enabled,
+                       as: :boolean,
+                       hint: I18n.t('form.hint.social_provider.enabled')
+          end
         end
       end
     end
