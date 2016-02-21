@@ -12,4 +12,5 @@
 # == BlogSetting Model
 #
 class BlogSetting < ActiveRecord::Base
+  include MaxRowable
 end

@@ -4,11 +4,12 @@ require 'test_helper'
 # == CommentSetting model test
 #
 class CommentSettingTest < ActiveSupport::TestCase
-  setup :initialize_test
-
-  private
-
-  def initialize_test
-    @comment_setting = comment_settings(:one)
+  #
+  # == Validation
+  #
+  test 'should not create more than one setting' do
+    comment_setting = CommentSetting.new
+    assert_not comment_setting.valid?
+    assert_equal [:max_row], comment_setting.errors.keys
   end
 end

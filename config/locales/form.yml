@@ -192,6 +192,4 @@ fr:
     errors:
       start_date: L'événement ne peut pas commencer après la fin présumée de celui-ci
       end_date: L'événement ne peut pas terminer après la début présumé de celui-ci
-
-      social_connect_setting:
-        max_row: Le nombre maximum de paramètres Social Connexion a déjé été atteint
+      max_row: Vous ne pouvez pas créer plus de resource de ce type
