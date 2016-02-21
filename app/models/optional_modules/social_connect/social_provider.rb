@@ -31,4 +31,12 @@ class SocialProvider < ActiveRecord::Base
               case_sensitive: false
             },
             inclusion: { in: allowed_social_providers }
+
+  def self.provider_by_name(name)
+    find_by(name: name)
+  end
+
+  def self.allowed_to_use?(scm, scs)
+    scm.enabled? && scs.enabled?
+  end
 end
