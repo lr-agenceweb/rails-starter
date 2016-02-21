@@ -1,0 +1,17 @@
+# == Schema Information
+#
+# Table name: social_connect_settings
+#
+#  id         :integer          not null, primary key
+#  enabled    :boolean          default(TRUE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  enabled: false
+
+two:
+  enabled: false

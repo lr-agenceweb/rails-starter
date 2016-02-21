@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218180434) do
+ActiveRecord::Schema.define(version: 20160221102220) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -606,6 +606,22 @@ ActiveRecord::Schema.define(version: 20160218180434) do
   end
 
   add_index "slides", ["attachable_type", "attachable_id"], name: "index_slides_on_attachable_type_and_attachable_id", using: :btree
+
+  create_table "social_connect_settings", force: :cascade do |t|
+    t.boolean  "enabled",    default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "social_providers", force: :cascade do |t|
+    t.string   "name",                      limit: 255
+    t.boolean  "enabled",                               default: true
+    t.integer  "social_connect_setting_id", limit: 4
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+  end
+
+  add_index "social_providers", ["social_connect_setting_id"], name: "index_social_providers_on_social_connect_setting_id", using: :btree
 
   create_table "socials", force: :cascade do |t|
     t.string   "title",             limit: 255
