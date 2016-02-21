@@ -42,19 +42,6 @@ module Admin
       end
     end
 
-    # #
-    # # == Validation
-    # #
-    # test 'should not update if redirect_link is not a correct url' do
-    #   patch :update, id: @social_connect_setting, social_connect_setting: { redirect_link: 'fake' }
-    #   assert_not assigns(:social_connect_setting).valid?
-    # end
-
-    # test 'should update if redirect_link is not present' do
-    #   patch :update, id: @social_connect_setting, social_connect_setting: { redirect_link: '' }
-    #   assert assigns(:social_connect_setting).valid?
-    # end
-
     #
     # == Subscriber
     #

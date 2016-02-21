@@ -49,7 +49,7 @@ ActiveAdmin.register SocialConnectSetting do
                        include_blank: false,
                        hint: I18n.t('form.hint.social_provider.name'),
                        input_html: {
-                         disabled: item.object.new_record? || current_user.super_administrator? ? false : :disbaled
+                         disabled: item.object.new_record? ? false : :disbaled
                        }
 
             item.input :enabled,
