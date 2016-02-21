@@ -13,6 +13,10 @@ module Users
       omniauth_providers 'facebook'
     end
 
+    def google_oauth2
+      omniauth_providers 'google'
+    end
+
     def unlink
       @user = current_user
       @user.update_attributes(provider: nil, uid: nil)
@@ -61,7 +65,7 @@ module Users
     end
 
     def should_redirect?
-      !(params[:id].to_s == current_user.id.to_s && current_user.from_omniauth?)
+      !(params[:id].to_s == current_user.id.to_s && current_user.from_omniauth?(params[:provider] == 'google' ? 'google_oauth2' : params[:provider]))
     end
 
     # def omniauth_providers(provider)

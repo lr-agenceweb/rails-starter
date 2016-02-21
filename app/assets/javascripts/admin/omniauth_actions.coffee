@@ -1,6 +1,6 @@
 $ ->
-  if ('#omniauth_facebook').length
-    $('#omniauth_facebook').on 'click', (e) ->
+  if ('.button.omniauth').length
+    $('.button.omniauth').on 'click', (e) ->
       e.preventDefault()
       $link = $(@)
       vex.dialog.confirm

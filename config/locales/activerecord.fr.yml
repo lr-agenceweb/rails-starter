@@ -259,6 +259,7 @@ fr:
         delete_avatar: Supprimer avatar
         status: Rôle
         link_to_facebook: Compte Facebook
+        link_to_google: Compte Google
       category:
         title: Titre
         title_d: Titre

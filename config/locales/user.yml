@@ -20,7 +20,7 @@ fr:
       message: Êtes-vous sûre de vouloir lier votre compte classique actuel à votre compte %{provider} ?
     unlink:
       button: Supprimer le lien avec mon compte %{provider}
-      message: Êtes-vous sûre de vouloir supprimer le lien avec votre compte %{provider} ? (Attention, vous ne pourrez plus vous connecter avec Facebook sur ce site)
+      message: Êtes-vous sûre de vouloir supprimer le lien avec votre compte %{provider} ? (Attention, vous ne pourrez plus vous connecter avec %{provider} sur ce site)
       alert:
         success: Votre compte n'est plus lié à %{provider}
         error: Erreur lors de la suppression du lien avec votre compte %{provider}}

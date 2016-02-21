@@ -239,6 +239,11 @@ Devise.setup do |config|
                   info_fields: 'email, name',
                   callback_url: "#{Figaro.env.application_host}/admin/auth/facebook/callback"
 
+  config.omniauth :google_oauth2,
+                  Figaro.env.google_app_id,
+                  Figaro.env.google_app_secret,
+                  access_type: 'online'
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

@@ -21,6 +21,7 @@ gem 'database_cleaner'
 gem 'devise'
 gem 'devise-i18n-views'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 #
 # == Administration

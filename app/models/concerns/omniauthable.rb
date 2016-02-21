@@ -23,8 +23,8 @@ module Omniauthable
       self
     end
 
-    def from_omniauth?
-      !(provider.blank? && uid.blank?)
+    def from_omniauth?(kind = 'facebook')
+      !(provider.blank? && uid.blank?) && provider == kind
     end
 
     def self.check_for_errors(auth, current_user)
