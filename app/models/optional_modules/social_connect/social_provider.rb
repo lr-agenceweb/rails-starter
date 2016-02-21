@@ -32,6 +32,8 @@ class SocialProvider < ActiveRecord::Base
             },
             inclusion: { in: allowed_social_providers }
 
+  scope :enabled, -> { where(enabled: true) }
+
   def self.provider_by_name(name)
     find_by(name: name)
   end
