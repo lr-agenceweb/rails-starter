@@ -19,4 +19,16 @@
 #
 class SocialProvider < ActiveRecord::Base
   belongs_to :social_connect_setting
+
+  def self.allowed_social_providers
+    User.omniauth_providers.map(&:to_s)
+  end
+
+  validates :name,
+            presence: true,
+            allow_blank: false,
+            uniqueness: {
+              case_sensitive: false
+            },
+            inclusion: { in: allowed_social_providers }
 end

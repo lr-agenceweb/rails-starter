@@ -490,6 +490,10 @@ fr:
       social_provider:
         name: Nom
         enabled: Activé ?
+        status: Activé ?
+        social_facebook: Social Facebook
+        social_twitter: Social Twitter
+        social_google_oauth2: Social Google
 
       mailing_user:
         fullname: Nom complet

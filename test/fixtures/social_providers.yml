@@ -17,11 +17,14 @@
 facebook:
   name: facebook
   enabled: true
+  social_connect_setting: one
 
 twitter:
   name: twitter
   enabled: true
+  social_connect_setting: one
 
 google:
-  name: google
+  name: google_oauth2
   enabled: true
+  social_connect_setting: one

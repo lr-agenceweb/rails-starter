@@ -909,6 +909,26 @@ slides_image.each_with_index do |element, index|
 end
 
 #
+# == SocialConnectSetting
+#
+puts 'Create SocialConnectSetting'
+social_connect_setting = SocialConnectSetting.create!(
+  enabled: true
+)
+
+#
+# == SocialProviders
+#
+SocialProvider.allowed_social_providers.find_each do |provider|
+  puts "Create SocialProvider #{provider}"
+  SocialProvider.create!(
+    name: provider,
+    enabled: true,
+    social_connect_setting_id: social_connect_setting.id
+  )
+end
+
+#
 # == Social
 #
 social_share_title = ['Facebook', 'Twitter', 'Google+', 'Email']

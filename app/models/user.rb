@@ -51,8 +51,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable,
          omniauth_providers: [
-          :facebook, :twitter, :google_oauth2
-        ]
+           :facebook, :twitter, :google_oauth2
+         ]
 
   has_many :posts, dependent: :destroy
   has_many :blogs, dependent: :destroy
