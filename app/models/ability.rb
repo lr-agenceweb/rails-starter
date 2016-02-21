@@ -34,6 +34,7 @@ class Ability
   def super_administrator_privilege
     can :manage, :all
     cannot [:update, :destroy], User, role: { name: 'super_administrator' }
+    cannot [:unlink], User
     can :manage, User, id: @user.id
     optional_modules_check
     can :manage, StringBox, optional_module_id: nil
@@ -45,7 +46,7 @@ class Ability
     can :update, [Setting, Category]
     can [:read, :update], Menu
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
-    cannot :create, User
+    cannot [:create, :unlink], User
     cannot [:update, :destroy], User, role: { name: %w( administrator ) }
     cannot :manage, User, role: { name: %w( super_administrator ) }
     can :manage, User, id: @user.id
@@ -64,7 +65,7 @@ class Ability
     newsletter_frontend
     mailing_frontend
     can :mapbox_popup, Contact
-    can [:update, :read, :destroy], User, id: @user.id
+    can [:update, :read, :destroy, :unlink], User, id: @user.id
     cannot :create, User
     can [:create, :read, :destroy], Comment, user_id: @user.id
     cannot :destroy, Comment, user_id: nil
@@ -99,6 +100,7 @@ class Ability
     adult_module
     video_module
     mailing_module
+    social_connect_module
     rss_module
   end
 
@@ -288,6 +290,18 @@ class Ability
     return unless @mailing_module.enabled?
     can :preview_in_browser, MailingMessage
     can :unsubscribe, MailingUser
+  end
+
+  #
+  # == SocialConnect
+  #
+  def social_connect_module
+    if @social_connect_module.enabled?
+      can [:read, :update], [SocialConnectSetting]
+      cannot [:create, :destroy], [SocialConnectSetting]
+    else
+      cannot :manage, [SocialConnectSetting, SocialProvider]
+    end
   end
 
   #

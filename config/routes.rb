@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, ActiveAdmin::Devise.config
+  devise_config = ActiveAdmin::Devise.config
+  devise_config[:controllers][:omniauth_callbacks] = 'users/omniauth_callbacks'
+  devise_for :users, devise_config
+
   ActiveAdmin.routes(self)
 
   concern :paginatable do
@@ -111,5 +114,9 @@ Rails.application.routes.draw do
         get 'send', action: :send_newsletter, as: :send
       end
     end
+  end
+
+  devise_scope :user do
+    delete '/admin/auth/:id/:provider/unlink', controller: 'users/omniauth_callbacks', action: :unlink, as: :user_omniauth_unlink
   end
 end

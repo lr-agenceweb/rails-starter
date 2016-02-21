@@ -1,6 +1,7 @@
 # French
 fr:
   active_admin:
+    powered_by: Développé avec amour par <a href='http://www.lr-agenceweb.fr'>L&R Agence web</a> | Propulsé par %{active_admin} version %{version}
     globalize:
       language:
         en: Anglais
@@ -26,10 +27,15 @@ fr:
       new_menu_item: Créer un nouvel élément de menu
       new_slider: Créer Slider
       update_newsletter_setting: Modifier la configuration Newsletter
+    devise:
+      sign_up:
+        title: Inscription
+        submit: S'inscrire
 
 # English
 en:
   active_admin:
+    powered_by: Developed with love by L&R Agence web
     globalize:
       language:
         en: English

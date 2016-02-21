@@ -14,4 +14,13 @@ class MapSettingTest < ActiveSupport::TestCase
     assert_includes allowed_map_markers, 'college'
     assert_includes allowed_map_markers, 'gift'
   end
+
+  #
+  # == Validation
+  #
+  test 'should not create more than one setting' do
+    map_setting = MapSetting.new
+    assert_not map_setting.valid?
+    assert_equal [:max_row], map_setting.errors.keys
+  end
 end

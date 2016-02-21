@@ -16,9 +16,17 @@ gem 'ancestry'
 gem 'database_cleaner'
 
 #
-# == Administration
+# == Authentication
 #
 gem 'devise'
+gem 'devise-i18n-views'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+
+#
+# == Administration
+#
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'activeadmin_addons'
 gem 'acts_as_list'
@@ -162,7 +170,6 @@ group :development do
 
   gem 'rails_best_practices'
   gem 'rubocop', require: false
-  gem 'rails_layout'
   gem 'railroady' # graph of models
   gem 'shut_up_assets'
   gem 'seed_dump'
@@ -196,7 +203,6 @@ end
 group :test do
   gem 'minitest'
   gem 'minitest-reporters', require: false
-  gem 'minitest-ci', github: 'circleci/minitest-ci'
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'simplecov-json', require: false

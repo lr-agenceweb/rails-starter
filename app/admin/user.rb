@@ -39,6 +39,11 @@ ActiveAdmin.register User do
           row :last_sign_in_at
           row :status
           row :created_at
+          if resource == current_user && SocialProvider.allowed_to_use?
+            row :link_to_facebook if SocialProvider.provider_by_name('facebook').enabled?
+            row :link_to_twitter if SocialProvider.provider_by_name('twitter').enabled?
+            row :link_to_google if SocialProvider.provider_by_name('google_oauth2').enabled?
+          end
         end
       end
 
@@ -59,11 +64,13 @@ ActiveAdmin.register User do
 
     columns do
       column do
-        f.inputs 'User Details' do
+        f.inputs t('active_admin.details', model: I18n.t('activerecord.models.user.one')) do
           f.input :username
           f.input :email
-          f.input :password
-          f.input :password_confirmation
+          unless f.object.from_omniauth?
+            f.input :password
+            f.input :password_confirmation
+          end
         end
       end
 
@@ -79,14 +86,16 @@ ActiveAdmin.register User do
                     hint: 'Si coché, l\'avatar sera supprimé après mise à jour du profil et l\'image de gravatar sera utilisée'
           end
         end
-      end
+      end unless f.object.from_omniauth?
+    end
 
-      if current_user_and_administrator?
+    if current_user_and_administrator?
+      columns do
         column do
           render 'admin/shared/roles/form', f: f
         end
       end
-    end
+    end # if
 
     f.actions
   end
@@ -96,6 +105,10 @@ ActiveAdmin.register User do
   #
   controller do
     include Skippable
+
+    def scoped_collection
+      super.includes posts: [:translations]
+    end
 
     def update
       params_user_role_id = params[:user][:role_id]

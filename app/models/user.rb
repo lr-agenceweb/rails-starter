@@ -23,6 +23,8 @@
 #  avatar_content_type    :string(255)
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  provider               :string(255)
+#  uid                    :string(255)
 #
 # Indexes
 #
@@ -40,11 +42,17 @@ class User < ActiveRecord::Base
   friendly_id :username, use: [:slugged, :finders]
 
   include Attachable
+  include Omniauthable
+  include AssetsHelper
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable,
+         omniauth_providers: [
+           :facebook, :twitter, :google_oauth2
+         ]
 
   has_many :posts, dependent: :destroy
   has_many :blogs, dependent: :destroy
@@ -70,10 +78,17 @@ class User < ActiveRecord::Base
 
   validates :username,
             presence: true,
-            uniqueness: { case_sensitive: false }
+            uniqueness: {
+              case_sensitive: false,
+              scope: :provider
+            }
   validates :email,
             presence: { message: 'Ne doit pas être vide' },
-            email_format: true
+            email_format: true,
+            uniqueness: {
+              case_sensitive: false,
+              scope: :provider
+            }
 
   scope :except_super_administrator, -> { where.not(role_id: 1) }
 

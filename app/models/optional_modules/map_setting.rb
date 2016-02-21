@@ -13,6 +13,8 @@
 # == MapSetting Model
 #
 class MapSetting < ActiveRecord::Base
+  include MaxRowable
+
   def self.allowed_markers
     %w( camera building park car bus college gift )
   end

@@ -52,8 +52,3 @@ two:
   <<: *DEFAULTS
   title: Rails Starter
   subtitle: ''
-
-three:
-  id: 3
-  <<: *DEFAULTS
-  maintenance: true

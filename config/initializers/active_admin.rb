@@ -205,7 +205,7 @@ ActiveAdmin.setup do |config|
     end
 
     admin.build_menu :utility_navigation do |menu|
-      menu.add label: proc { raw "#{retina_thumb_square(current_user)} #{display_name(current_active_admin_user)} (#{I18n.t('role.'+current_active_admin_user.role_name)})" },
+      menu.add label: proc { raw "#{retina_thumb_square(current_user)} #{display_name(current_active_admin_user)} (#{I18n.t('role.' + current_active_admin_user.role_name)})" },
                url: proc { url_for([:admin, current_active_admin_user]) },
                id: 'current_user'
 
@@ -254,9 +254,11 @@ end
 module ActiveAdmin
   module Views
     module Pages
+      #
+      # == Base class
+      #
       class Base < Arbre::HTML::Document
-
-        alias_method :original_build_head, :build_active_admin_head
+        alias original_build_head build_active_admin_head
 
         def build_active_admin_head
           original_build_head

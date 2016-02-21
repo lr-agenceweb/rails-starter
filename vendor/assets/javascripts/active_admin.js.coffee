@@ -7,6 +7,8 @@
 #= require jquery.datetimepicker
 #= require plugins/datetimepicker
 
+#= require modules/password_strength
+
 #= require globals/_functions
 #= require plugins/override_rails_confirm
 
@@ -14,6 +16,7 @@
 #= require admin/froala_editor
 
 #= require admin/newsletters_preview
+#= require admin/omniauth_actions
 #= require admin/mailings
 #= require admin/counter_letters
 

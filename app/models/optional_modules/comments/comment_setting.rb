@@ -14,4 +14,5 @@
 # == CommentSetting Model
 #
 class CommentSetting < ActiveRecord::Base
+  include MaxRowable
 end

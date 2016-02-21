@@ -12,4 +12,5 @@
 # == GuestBookSetting model
 #
 class GuestBookSetting < ActiveRecord::Base
+  include MaxRowable
 end

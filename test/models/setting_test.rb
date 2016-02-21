@@ -66,6 +66,17 @@ class SettingTest < ActiveSupport::TestCase
     assert @setting.errors.keys.empty?
   end
 
+  #
+  # == Validation
+  #
+  test 'should not create more than one setting' do
+    @setting_without_subtitle.destroy
+
+    setting = Setting.new(name: 'My name', title: 'My title', email: 'my-email@test.com')
+    assert_not setting.valid?
+    assert_equal [:max_row], setting.errors.keys
+  end
+
   private
 
   def initialize_test
