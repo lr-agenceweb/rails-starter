@@ -20,6 +20,6 @@ class SocialConnectSetting < ActiveRecord::Base
   private
 
   def validate_max_row_allowed
-    errors.add :max_row, I18n.t('form.errors.social_connect_setting.max_row') if SocialConnectSetting.count >= 1
+    errors.add :max_row, I18n.t('form.errors.social_connect_setting.max_row') if SocialConnectSetting.count >= 1 && new_record?
   end
 end

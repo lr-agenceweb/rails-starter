@@ -29,6 +29,7 @@ module Admin
     # Valid params
     test 'should update social_connect_setting if logged in' do
       patch :update, id: @social_connect_setting, social_connect_setting: {}
+      assert assigns(:social_connect_setting).valid?
       assert_redirected_to admin_social_connect_setting_path
     end
 
