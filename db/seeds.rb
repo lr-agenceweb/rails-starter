@@ -919,7 +919,7 @@ social_connect_setting = SocialConnectSetting.create!(
 #
 # == SocialProviders
 #
-SocialProvider.allowed_social_providers.find_each do |provider|
+SocialProvider.allowed_social_providers.each do |provider|
   puts "Create SocialProvider #{provider}"
   SocialProvider.create!(
     name: provider,
