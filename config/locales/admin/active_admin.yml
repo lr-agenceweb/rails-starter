@@ -1,6 +1,7 @@
 # French
 fr:
   active_admin:
+    powered_by: Développé avec amour par <a href='http://www.lr-agenceweb.fr'>L&R Agence web</a> | Propulsé par %{active_admin} version %{version}
     globalize:
       language:
         en: Anglais
@@ -34,6 +35,7 @@ fr:
 # English
 en:
   active_admin:
+    powered_by: Developed with love by L&R Agence web
     globalize:
       language:
         en: English

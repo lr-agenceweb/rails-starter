@@ -8,6 +8,7 @@ module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     before_action :not_found, if: :module_or_provider_disabled?
     before_action :redirect_to_user, only: :unlink, if: :should_redirect?
+    skip_before_action :verify_authenticity_token, only: :unlink
 
     def facebook
       redirect_to '/admin/auth/facebook?auth_type=rerequest&scope=email' if request.env['omniauth.auth'].info.email.blank?

@@ -25,6 +25,7 @@ class UserDecorator < ApplicationDecorator
         link_to(
           fa_icon(provider, text: I18n.t('omniauth.unlink.button', provider: provider.capitalize)),
           user_omniauth_unlink_path(provider: provider, id: model.id),
+          method: :delete,
           class: "button omniauth #{provider}",
           id: "omniauth_#{provider}",
           data: {
