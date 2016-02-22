@@ -38,10 +38,10 @@ class PictureTest < ActiveSupport::TestCase
   end
 
   test 'should have picture linked' do
-    skip 'skip this test because of travis which doesn\'t understand this'
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
-    Picture.create(image: attachment, attachable_type: 'Post', attachable_id: @home_post.id)
-    assert @home_post.pictures?, 'should have picture linked to home article'
+    Picture.create(image: attachment, attachable_type: 'Blog', attachable_id: @blog.id)
+    assert @blog.pictures?, 'should have picture linked to home article'
+    assert_equal 'bart.png', @blog.pictures.first.image_file_name
   end
 
   test 'should not have picture linked' do
@@ -49,10 +49,9 @@ class PictureTest < ActiveSupport::TestCase
   end
 
   test 'should return first picture object' do
-    skip 'skip this test because of travis which doesn\'t understand this'
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
-    picture = Picture.create(image: attachment, attachable_type: 'Post', attachable_id: @home_post.id)
-    assert_equal picture, @home_post.first_pictures
+    picture = Picture.create(image: attachment, attachable_type: 'Blog', attachable_id: @blog.id)
+    assert_equal picture, @blog.first_pictures
   end
 
   test 'should return first paperclip picture object' do
@@ -65,9 +64,12 @@ class PictureTest < ActiveSupport::TestCase
 
   def initialize_test
     @picture = pictures(:home_three)
+
     @home_post = posts(:home)
     @about_post = posts(:about)
     @about_2_post = posts(:about_2)
     @about_offline_post = posts(:about_offline)
+
+    @blog = blogs(:blog_online)
   end
 end

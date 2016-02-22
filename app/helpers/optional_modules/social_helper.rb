@@ -130,7 +130,7 @@ module OptionalModules
     #
     def image_for_object(obj)
       return attachment_url(obj.picture.image, :large) if defined?(obj.picture) && obj.picture?
-      return attachment_url(obj.pictures.first.image, :large) if defined?(obj.pictures) && obj.pictures?
+      return attachment_url(obj.first_pictures_image, :large) if defined?(obj.pictures) && obj.pictures?
       nil
     end
 
