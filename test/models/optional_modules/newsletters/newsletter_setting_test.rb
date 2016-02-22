@@ -11,5 +11,6 @@ class NewsletterSettingTest < ActiveSupport::TestCase
     newsletter_setting = NewsletterSetting.new
     assert_not newsletter_setting.valid?
     assert_equal [:max_row], newsletter_setting.errors.keys
+    assert_equal [I18n.t('form.errors.max_row')], newsletter_setting.errors[:max_row]
   end
 end

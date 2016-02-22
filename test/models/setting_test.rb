@@ -37,11 +37,90 @@ class SettingTest < ActiveSupport::TestCase
       assert_nil @setting.logo.path(size)
     end
 
-    attachment = fixture_file_upload 'images/bart.png', 'image/png'
-    @setting.update_attributes!(logo: attachment)
+    upload_paperclip_attachment
 
     [:original, :large, :medium, :small, :thumb].each do |size|
       assert_processed 'bart.png', size, @setting.logo
+    end
+
+    assert_equal 'bart.png', @setting.logo_file_name
+    assert_equal 'image/png', @setting.logo_content_type
+    assert @setting.logo?, 'a logo should have been uploaded'
+  end
+
+  test 'should be able to destroy logo' do
+    existing_styles = []
+    upload_paperclip_attachment
+
+    # Save logo styles in array
+    @setting.logo.styles.keys.collect do |size|
+      f = @setting.logo.path(size)
+      assert File.exist?(f), "File #{f} should exist"
+      existing_styles << f
+    end
+
+    # Destroy logo
+    @setting.logo.destroy
+
+    assert_nil @setting.logo_file_name
+    assert_not @setting.logo?
+
+    existing_styles.each do |file|
+      assert_not File.exist?(file), "#{file} should not exist anymore"
+    end
+  end
+
+  #
+  # == Logo footer
+  #
+  test 'should not upload logo_footer if mime type is not allowed' do
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @setting.logo_footer.path(size)
+    end
+
+    attachment = fixture_file_upload 'images/fake.txt', 'text/plain'
+    @setting.update_attributes(logo_footer: attachment)
+
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_not_processed 'fake.txt', size, @setting.logo_footer
+    end
+  end
+
+  test 'should upload logo_footer if mime type is allowed' do
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_nil @setting.logo_footer.path(size)
+    end
+
+    upload_paperclip_attachment 'logo_footer'
+
+    [:original, :large, :medium, :small, :thumb].each do |size|
+      assert_processed 'bart.png', size, @setting.logo_footer
+    end
+
+    assert_equal 'bart.png', @setting.logo_footer_file_name
+    assert_equal 'image/png', @setting.logo_footer_content_type
+    assert @setting.logo_footer?, 'a logo_footer should have been uploaded'
+  end
+
+  test 'should be able to destroy logo_footer' do
+    existing_styles = []
+    upload_paperclip_attachment 'logo_footer'
+
+    # Save logo_footer styles in array
+    @setting.logo_footer.styles.keys.collect do |size|
+      f = @setting.logo_footer.path(size)
+      assert File.exist?(f), "File #{f} should exist"
+      existing_styles << f
+    end
+
+    # Destroy logo_footer
+    @setting.logo_footer.destroy
+
+    assert_nil @setting.logo_footer_file_name
+    assert_not @setting.logo_footer?
+
+    existing_styles.each do |file|
+      assert_not File.exist?(file), "#{file} should not exist anymore"
     end
   end
 
@@ -75,6 +154,7 @@ class SettingTest < ActiveSupport::TestCase
     setting = Setting.new(name: 'My name', title: 'My title', email: 'my-email@test.com')
     assert_not setting.valid?
     assert_equal [:max_row], setting.errors.keys
+    assert_equal [I18n.t('form.errors.max_row')], setting.errors[:max_row]
   end
 
   private
@@ -82,5 +162,10 @@ class SettingTest < ActiveSupport::TestCase
   def initialize_test
     @setting = settings(:one)
     @setting_without_subtitle = settings(:two)
+  end
+
+  def upload_paperclip_attachment(property = 'logo')
+    attachment = fixture_file_upload 'images/bart.png', 'image/png'
+    @setting.update_attributes!("#{property}": attachment)
   end
 end

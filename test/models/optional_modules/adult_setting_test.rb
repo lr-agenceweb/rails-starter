@@ -13,6 +13,7 @@ class AdultSettingTest < ActiveSupport::TestCase
     adult_setting = AdultSetting.new
     assert_not adult_setting.valid?
     assert_equal [:max_row], adult_setting.errors.keys
+    assert_equal [I18n.t('form.errors.max_row')], adult_setting.errors[:max_row]
   end
 
   test 'should not be valid if link is not a correct url' do

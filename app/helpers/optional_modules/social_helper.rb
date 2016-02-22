@@ -87,14 +87,10 @@ module OptionalModules
     #
     def social_share_buttons
       return nil if return_nil_for_social_share? || @asocial
+      element = element_by_action
+      t = element.try(:menu_title).nil? ? element.title : element.menu_title
 
-      element = params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
-
-      t = element.try(:menu_title)
-      t = element.title if t.nil?
-      title_seo = title_seo_structure(t)
-
-      awesome_share_buttons(title_seo,
+      awesome_share_buttons(title_seo_structure(t),
                             desc: html_escape_once(element.referencement_description),
                             image: image_for_object(element),
                             via: @setting.try(:twitter_username),
@@ -116,10 +112,7 @@ module OptionalModules
         ikon = retina_image_tag(social, :ikon, :small) if social.decorate.ikon?
 
         html << link_to(ikon, '#',
-                        rel: [
-                          'nofollow',
-                          rel
-                        ],
+                        rel: ['nofollow', rel],
                         'data-site': social.title.downcase,
                         onclick: 'return SocialShareClass.share(this);',
                         title: h(link_title))
@@ -136,11 +129,8 @@ module OptionalModules
     #   - the image for a given object if any
     #
     def image_for_object(obj)
-      if defined?(obj.picture) && !obj.picture.nil?
-        return attachment_url(obj.picture.image, :large)
-      elsif defined?(obj.pictures) && !obj.pictures.first.nil?
-        return attachment_url(obj.pictures.first.image, :large)
-      end
+      return attachment_url(obj.picture.image, :large) if defined?(obj.picture) && obj.picture?
+      return attachment_url(obj.first_pictures_image, :large) if defined?(obj.pictures) && obj.pictures?
       nil
     end
 
@@ -158,6 +148,10 @@ module OptionalModules
 
     def return_nil_for_social_share?
       params[:controller] == 'comments' || params[:controller] == 'errors'
+    end
+
+    def element_by_action
+      params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
     end
   end
 end

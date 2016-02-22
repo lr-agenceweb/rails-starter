@@ -97,9 +97,9 @@ module Admin
     end
 
     test 'should not update if postcode is not numeric' do
-      skip 'Not working anymore'
       patch :update, id: @setting, setting: { location_attributes: { postcode: 'bad_value' } }
       assert_not assigns(:setting).valid?
+      assert assigns(:setting).errors.keys.include?('location.postcode'.to_sym)
     end
 
     test 'should not update social param if module is disabled' do
@@ -165,41 +165,6 @@ module Admin
       assert_crud_actions(@setting, admin_dashboard_path, model_name, no_delete: true)
     end
 
-    #
-    # == Logo
-    #
-    test 'should be able to upload logo' do
-      upload_paperclip_attachment
-      setting = assigns(:setting)
-      assert setting.logo?, 'a logo should have been uploaded'
-      assert_equal 'bart.png', setting.logo_file_name
-      assert_equal 'image/png', setting.logo_content_type
-    end
-
-    test 'should be able to destroy logo' do
-      skip 'Fix this broken test'
-      existing_styles = []
-
-      upload_paperclip_attachment
-      setting = assigns(:setting)
-
-      setting.logo.styles.keys.collect do |style|
-        f = setting.logo.path(style)
-        assert File.exist?(f), "File #{f} should exist"
-        existing_styles << f
-      end
-
-      # remove_paperclip_attachment(setting)
-      # setting = assigns(:setting)
-
-      # assert_nil setting.logo_file_name
-      # assert_not setting.logo?
-
-      # existing_styles.each do |f|
-      #   assert_not File.exist?(f), "File #{f} should not exist"
-      # end
-    end
-
     private
 
     def initialize_test
@@ -214,17 +179,6 @@ module Admin
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
-    end
-
-    def upload_paperclip_attachment
-      # puts '=== Uploading logo'
-      attachment = fixture_file_upload 'images/bart.png', 'image/png'
-      patch :update, id: @setting, setting: { logo: attachment }
-    end
-
-    def remove_paperclip_attachment(setting)
-      # puts '=== Removing logo'
-      patch :update, id: setting, setting: { delete_logo: '1' }
     end
   end
 end
