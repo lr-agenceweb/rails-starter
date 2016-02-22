@@ -3,6 +3,8 @@ require 'simplecov'
 require 'simplecov-json'
 
 # Start reporters
+CodeClimate::TestReporter.start
+
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::JSONFormatter,
   SimpleCov::Formatter::HTMLFormatter,
