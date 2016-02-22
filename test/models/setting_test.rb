@@ -75,6 +75,7 @@ class SettingTest < ActiveSupport::TestCase
     setting = Setting.new(name: 'My name', title: 'My title', email: 'my-email@test.com')
     assert_not setting.valid?
     assert_equal [:max_row], setting.errors.keys
+    assert_equal [I18n.t('form.errors.max_row')], setting.errors[:max_row]
   end
 
   private

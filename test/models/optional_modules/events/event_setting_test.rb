@@ -11,5 +11,6 @@ class EventSettingTest < ActiveSupport::TestCase
     event_setting = EventSetting.new
     assert_not event_setting.valid?
     assert_equal [:max_row], event_setting.errors.keys
+    assert_equal [I18n.t('form.errors.max_row')], event_setting.errors[:max_row]
   end
 end
