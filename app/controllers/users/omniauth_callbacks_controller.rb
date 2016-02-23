@@ -8,6 +8,7 @@ module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     before_action :not_found, if: :module_or_provider_disabled?
     before_action :redirect_to_user, only: :unlink, if: :should_redirect?
+    before_action :check_for_errors, except: :unlink, if: proc { signed_in? }
     skip_before_action :verify_authenticity_token, only: :unlink
 
     def facebook
@@ -41,7 +42,6 @@ module Users
     end
 
     def link_me_with_omniauth
-      @errors = User.check_for_errors(request.env['omniauth.auth'], current_user)
       if @errors.empty?
         @user = current_user.link_with_omniauth(request.env['omniauth.auth'])
         sign_out @user
@@ -83,6 +83,10 @@ module Users
     def module_or_provider_disabled?(provider = params[:action])
       provider = provider == 'unlink' ? params[:provider] : provider
       !SocialProvider.find_by(name: provider).enabled? || !SocialProvider.allowed_to_use?
+    end
+
+    def check_for_errors
+      @errors = User.check_for_errors(request.env['omniauth.auth'], current_user)
     end
   end
 end
