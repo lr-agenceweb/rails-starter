@@ -22,7 +22,7 @@ module Users
       assert_redirected_to new_user_session_url
     end
 
-    test 'should connect user if already exists in DB' do
+    test 'should connect user with facebook if already exists in DB' do
       set_rafa_omniauth
       get :facebook
       assert_not assigns(:user).blank?
@@ -31,6 +31,30 @@ module Users
       assert assigns(:user).avatar_file_name.nil?
 
       assert_equal I18n.t('devise.omniauth_callbacks.success', kind: 'Facebook'), flash[:notice]
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should connect user with twitter if already exists in DB' do
+      set_base_request_for_omniauth(123_456_789, 'Homer Simpson', nil, 'twitter')
+      get :twitter
+      assert_not assigns(:user).blank?
+      assert_equal 'Homer Simpson', assigns(:user).username
+      assert_equal 'homer-simpson', assigns(:user).slug
+      assert assigns(:user).avatar_file_name.nil?
+
+      assert_equal I18n.t('devise.omniauth_callbacks.success', kind: 'Twitter'), flash[:notice]
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should connect user with google if already exists in DB' do
+      set_base_request_for_omniauth(123_456_789, 'Marge Simpson', nil, 'google_oauth2')
+      get :google_oauth2
+      assert_not assigns(:user).blank?
+      assert_equal 'Marge Simpson', assigns(:user).username
+      assert_equal 'marge-simpson', assigns(:user).slug
+      assert assigns(:user).avatar_file_name.nil?
+
+      assert_equal I18n.t('devise.omniauth_callbacks.success', kind: 'Google'), flash[:notice]
       assert_redirected_to admin_dashboard_path
     end
 
@@ -186,6 +210,9 @@ module Users
       end
     end
 
+
+
+
     private
 
     def initialize_test
@@ -212,10 +239,10 @@ module Users
       set_base_request_for_omniauth(5_320_619, 'Bob', 'bob@test.fr')
     end
 
-    def set_base_request_for_omniauth(id, name, email)
+    def set_base_request_for_omniauth(id, name, email, provider = 'facebook')
       request.env['devise.mapping'] = Devise.mappings[:user]
       request.env['omniauth.auth'] = OmniAuth::AuthHash.new(
-        provider: 'facebook',
+        provider: provider,
         uid: id,
         info: {
           name: name,

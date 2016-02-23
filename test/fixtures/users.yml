@@ -79,3 +79,19 @@ rafa:
   role: subscriber
   provider: facebook
   uid: 123_456_789
+
+homer:
+  username: Homer
+  slug: homer
+  email: homer@simpson.com
+  role: subscriber
+  provider: twitter
+  uid: 123_456_789
+
+marge:
+  username: Marge
+  slug: marge
+  email: marge@simpson.com
+  role: subscriber
+  provider: google_oauth2
+  uid: 123_456_789
