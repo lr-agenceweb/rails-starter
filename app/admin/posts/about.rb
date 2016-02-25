@@ -92,7 +92,7 @@ ActiveAdmin.register About do
   # == Controller
   #
   controller do
-    include Videoable
+    include OptionalModules::Videoable
 
     before_create do |post|
       post.type = post.object.class.name

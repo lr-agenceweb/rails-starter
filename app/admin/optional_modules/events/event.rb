@@ -175,7 +175,7 @@ ActiveAdmin.register Event do
   #
   controller do
     include Skippable
-    include Videoable
+    include OptionalModules::Videoable
 
     def scoped_collection
       super.includes :translations, :location
