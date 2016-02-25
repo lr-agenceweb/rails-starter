@@ -53,6 +53,11 @@ class VideoUpload < ActiveRecord::Base
                         geometry: '1280x720',
                         format: 'webm'
                       },
+                      preview_large: {
+                        geometry: '1920x1080#',
+                        format: 'jpg',
+                        time: 2
+                      },
                       preview: {
                         geometry: '380x240#',
                         format: 'jpg',
