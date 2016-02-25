@@ -1,4 +1,4 @@
-include MenuHelper
+include Core::MenuHelper
 include AssetsHelper
 
 ActiveAdmin.register Category do

@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
   before_action :set_legal_notices
 
   # Core
-  include Languageable
-  include Menuable
+  include Core::Languageable
+  include Core::Menuable
 
   # Optional modules
   include OptionalModulable
