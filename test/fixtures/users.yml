@@ -93,5 +93,5 @@ marge:
   slug: marge
   email: marge@simpson.com
   role: subscriber
-  provider: google_oauth2
+  provider: google
   uid: 123_456_789

@@ -6,13 +6,15 @@ module Omniauthable
 
   included do
     def self.find_by_provider_and_uid(auth)
-      find_by(provider: auth.provider, uid: auth.uid)
+      formatted_provider = SocialProvider.format_provider_by_name(auth.provider)
+      find_by(provider: formatted_provider, uid: auth.uid)
     end
 
     def link_with_omniauth(auth)
-      unless provider == auth.provider && uid == auth.uid
+      formatted_provider = SocialProvider.format_provider_by_name(auth.provider)
+      unless provider == formatted_provider && uid == auth.uid
         update_attributes(
-          provider: auth.provider,
+          provider: formatted_provider,
           uid: auth.uid
         )
       end

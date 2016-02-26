@@ -1,10 +1,14 @@
 require 'test_helper'
+require 'minitest/autorun'
 
 #
 # == SocialProvider test
 #
 class SocialProviderTest < ActiveSupport::TestCase
   setup :initialize_test
+
+  ENV['facebook_app_id'] = '123'
+  ENV['facebook_app_secret'] = '123'
 
   #
   # == Validation
@@ -14,6 +18,16 @@ class SocialProviderTest < ActiveSupport::TestCase
     social_provider = SocialProvider.new(name: 'facebook')
     assert social_provider.valid?
     assert_empty social_provider.errors.keys
+  end
+
+  test 'should not save social provider if env keys are not set' do
+    skip 'Find a way to stub env variable'
+    ENV.stub(:[]).with(:facebook_app_id).returns(nil)
+    ENV.stub(:[]).with(:facebook_app_secret).returns(nil)
+    @facebook_provider.destroy
+    social_provider = SocialProvider.new(name: 'facebook')
+    assert_not social_provider.valid?
+    assert_equal [:name], social_provider.errors.keys
   end
 
   test 'should not save social provider if not unique' do

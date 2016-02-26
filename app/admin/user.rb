@@ -42,7 +42,7 @@ ActiveAdmin.register User do
           if resource == current_user && SocialProvider.allowed_to_use?
             row :link_to_facebook if SocialProvider.provider_by_name('facebook').enabled?
             row :link_to_twitter if SocialProvider.provider_by_name('twitter').enabled?
-            row :link_to_google if SocialProvider.provider_by_name('google_oauth2').enabled?
+            row :link_to_google if SocialProvider.provider_by_name('google').enabled?
           end
         end
       end
