@@ -7,8 +7,8 @@ require 'minitest/autorun'
 class SocialProviderTest < ActiveSupport::TestCase
   setup :initialize_test
 
-  ENV['facebook_app_id'] = '123'
-  ENV['facebook_app_secret'] = '123'
+  ENV['facebook_app_id'] = 'test'
+  ENV['facebook_app_secret'] = 'test'
 
   #
   # == Validation

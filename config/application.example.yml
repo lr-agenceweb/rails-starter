@@ -40,7 +40,13 @@ production:
   facebook_app_secret: ~
   google_app_id: ~
   google_app_secret: ~
-
+test:
+  facebook_app_id: 'test'
+  facebook_app_secret: 'test'
+  google_app_id: 'test'
+  google_app_secret: 'test'
+  twitter_app_id: 'test'
+  twitter_app_secret: 'test'
 
 #
 # == Mapbox
