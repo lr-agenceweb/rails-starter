@@ -8,7 +8,8 @@ ActiveAdmin.register SocialConnectSetting do
                 :id, :enabled
               ]
              ]
-    params.push social_providers_attributes: [:name], if: proc { current_user.super_administrator? }
+    # params.push social_providers_attributes: [:name], if: proc { current_user.super_administrator? }
+    params
   end
 
   decorate_with SocialConnectSettingDecorator
