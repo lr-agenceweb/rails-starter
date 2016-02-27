@@ -1,5 +1,5 @@
 set :stage, :backup
-set :deploy_to, "#{Figaro.env.capistrano_deploy_to_backup}/#{fetch(:stage).to_s}/#{fetch(:application)}"
+set :deploy_to, "#{Figaro.env.capistrano_deploy_to_backup}/#{fetch(:stage)}/#{fetch(:application)}"
 
 # server-based syntax
 # ======================
@@ -9,7 +9,7 @@ set :deploy_to, "#{Figaro.env.capistrano_deploy_to_backup}/#{fetch(:stage).to_s}
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-server Figaro.env.capistrano_server_ip_backup, user: "#{fetch(:deploy_user_backup)}", roles: %w( web app db )
+server Figaro.env.capistrano_server_ip_backup, user: fetch(:deploy_user_backup).to_s, roles: %w( web app db )
 
 # role-based syntax
 # ==================

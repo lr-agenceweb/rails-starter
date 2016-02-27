@@ -1,3 +1,4 @@
+# Automatisation of database export
 namespace :backup do
   desc 'Upload backup config files.'
   task :upload_config do
