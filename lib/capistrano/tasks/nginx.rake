@@ -21,7 +21,7 @@ namespace :nginx do
   task :remove_vhost do
     on roles(:web) do
       sudo :rm, '-f', "/etc/nginx/sites-available/#{Figaro.env.application_domain_name}"
-        invoke 'nginx:remove_symlink_vhost'
+      invoke 'nginx:remove_symlink_vhost'
     end
   end
 
