@@ -53,6 +53,7 @@ namespace :deploy do
       upload! StringIO.new(File.read('config/secrets.yml')), "#{shared_path}/config/secrets.yml"
       upload! StringIO.new(File.read('config/analytical.example.yml')), "#{shared_path}/config/analytical.yml"
       upload! StringIO.new(File.read('public/sitemap.xml')), "#{shared_path}/public/sitemap.xml"
+      sudo :chmod, '644', "#{shared_path}/public/sitemap.xml"
     end
   end
 
