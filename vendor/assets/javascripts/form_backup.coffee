@@ -1,7 +1,7 @@
 $.fn.formBackup = ->
   return false if !localStorage
 
-  forms = this
+  forms = @
   datas = {}
   ls = false
   datas.href = window.location.href
@@ -17,12 +17,12 @@ $.fn.formBackup = ->
           datas[id] = ls[id]
 
   forms.find('input, textarea').keyup (e) ->
-    datas[$(this).attr('id')] = $(this).val()
+    datas[$(@).attr('id')] = $(@).val()
     localStorage.setItem 'formBackup', JSON.stringify(datas)
 
   forms.on 'click', (e) ->
-    $submit = $(this).find('button[type="submit"]')
+    $submit = $(@).find('button[type="submit"]')
     window.ClientSideValidations.callbacks.form.pass = ($element, callback) ->
       $submit.prev().fadeIn()
       localStorage.removeItem 'formBackup'
-      $(this).resetClientSideValidations()
+      forms.resetClientSideValidations()
