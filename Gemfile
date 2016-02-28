@@ -76,7 +76,6 @@ gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_
 gem 'rails_autosize_jquery'
 gem 'wysiwyg-rails' # Froala editor
 gem 'valid_url'
-gem 'best_in_place', github: 'bernat/best_in_place'
 gem 'actionmailer-with-request'
 
 #
@@ -113,11 +112,6 @@ gem 'cancancan', '~> 1.10'
 gem 'analytical'
 
 #
-# == Social
-#
-# gem 'awesome-share-buttons', github: 'anthony-robin/awesome-share-buttons'
-
-#
 # == Background Tasks
 #
 gem 'whenever', require: false # Cron tasks
@@ -139,7 +133,6 @@ gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-ui-rails'
-gem 'jquery-scrollto-rails'
 gem 'jquery-datetimepicker-rails'
 gem 'turbolinks'
 gem 'nprogress-rails'
@@ -161,18 +154,16 @@ gem 'video_info'
 #
 # == Logs
 #
-gem 'lograge'
+gem 'lograge' # cleaner logs
 
 group :development do
   gem 'better_errors'
   gem 'rb-fsevent', require: false
   gem 'irbtools-more', require: 'binding.repl'
 
-  gem 'rails_best_practices'
   gem 'rubocop', require: false
   gem 'railroady' # graph of models
   gem 'shut_up_assets'
-  gem 'seed_dump'
   gem 'annotate'
 
   # == Server
@@ -181,8 +172,8 @@ group :development do
   # == Debug Rails request in Chrome DevTools
   gem 'meta_request'
 
-  gem 'bullet'
-  gem 'shog'
+  gem 'bullet' # display N+1 db queries
+  gem 'shog' # colorize logs
   gem 'brakeman', require: false # check for security vulnerabilities
 
   # == Deploy
