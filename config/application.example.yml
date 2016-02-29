@@ -111,12 +111,6 @@ vimeo_api_key: ~
 
 
 #
-# == Misc
-#
-loader_spinner_img: http://www.salons-sante-autonomie.com/content/themes/ssa/img/assets/spinner.gif
-
-
-#
 # == Adult module
 #
 adult_not_validated_popup_redirect_link: 'http://www.lr-agenceweb.fr'

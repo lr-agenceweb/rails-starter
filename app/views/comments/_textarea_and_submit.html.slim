@@ -13,6 +13,6 @@
                    input_html: { class: 'hide-for-small-up' }
 
 .submit-and-loader
-  = image_tag(Figaro.env.loader_spinner_img, class: 'submit-loader')
+  = image_tag image_path('loader-dark.gif'), class: 'submit-loader'
   = button_tag(class: 'submit-btn text-right tiny') do
     - fa_icon('paper-plane')

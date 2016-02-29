@@ -46,7 +46,7 @@ class CategoryDecoratorTest < Draper::TestCase
     attachment = fixture_file_upload 'videos/test.mp4', 'video/mp4'
     @category_decorated.video_upload.update_attributes(video_file: attachment)
 
-    assert_equal "<img src=\"#{Figaro.env.loader_spinner_img}\" alt=\"Spinner\" />", @category_decorated.video_preview
+    assert_equal "<img src=\"#{image_path('loader-dark.gif')}\" alt=\"Loader dark\" />", @category_decorated.video_preview
   end
 
   test 'should return boolean for video? if no video' do
