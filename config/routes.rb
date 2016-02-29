@@ -95,8 +95,9 @@ Rails.application.routes.draw do
     end
   end
 
-  # Robots
+  # Robots and humans
   get 'robots.:format', to: 'robots#index'
+  get 'humans.:format', to: 'humans#index'
 
   # Newsletters
   resources :newsletter_users, only: [:create]
