@@ -46,8 +46,11 @@ Scripts are created in `coffeescript`
 
 #### Capistrano
 
-* `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
-* `cap <env> logrotate:upload_config` : Upload logrotate config file to remote server
+* **Database backup**  
+  * `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
+
+* **Logrotate**  
+  * `cap <env> logrotate:upload_config` : Upload logrotate config file to remote server
 
 * **Nginx**  
   * `cap <env> nginx:upload_vhost` : Upload vhost config file to remote server (create file in sites-availables)
