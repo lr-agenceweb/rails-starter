@@ -51,6 +51,7 @@ Scripts are created in `coffeescript`
 
 * **Nginx**  
   * `cap <env> nginx:upload_vhost` : Upload vhost config file to remote server (create file in sites-availables)
+  * `cap <env> nginx:upload_ssl_vhost` : Same as above with SSL configuration for vhost (Let's Encrypt)
   * `cap <env> nginx:symlink_vhost` : Symlink vhost config file previously uploaded (in sites-enabled)
   * `cap <env> nginx:remove_vhost` : Remove uploaded vhost and symlink
   * `cap <env> nginx:remove_symlink_vhost` : Remove only symlink
