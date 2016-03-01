@@ -59,6 +59,12 @@ GIT
     vex_rails (0.2.0)
 
 GIT
+  remote: git://github.com/lr-agenceweb/rails_autosize_jquery.git
+  revision: 13f004abc892d29ef7f9b86de830d0a12da19493
+  specs:
+    rails_autosize_jquery (3.0.15)
+
+GIT
   remote: git://github.com/mvdstam/activeadmin-sortable.git
   revision: be5806ee5e1dc94da9331c9527f64e0f894a0b87
   specs:
@@ -501,7 +507,6 @@ GEM
       loofah (~> 2.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
-    rails_autosize_jquery (3.0.15)
     railties (4.2.5.2)
       actionpack (= 4.2.5.2)
       activesupport (= 4.2.5.2)
@@ -743,7 +748,7 @@ DEPENDENCIES
   rails (= 4.2.5.2)
   rails-i18n!
   rails_autolink
-  rails_autosize_jquery
+  rails_autosize_jquery!
   rb-fsevent
   retina_rails (~> 2.0.0)
   route_translator
