@@ -1,6 +1,9 @@
 set :stage, :backup
 set :deploy_to, "#{Figaro.env.capistrano_deploy_to_backup}/#{fetch(:stage)}/#{fetch(:application)}"
 
+set :domain_name, -> { Figaro.env.application_domain_name_backup }
+set :host_name, -> { Figaro.env.application_host_backup }
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.

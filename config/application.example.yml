@@ -11,6 +11,9 @@ application_domain_name_staging: ~
 application_host_production: ~
 application_domain_name_production: ~
 
+application_host_backup: ~
+application_domain_name_backup: ~
+
 
 #
 # == Keys
