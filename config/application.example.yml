@@ -1,9 +1,20 @@
 #
 # == Application
 #
+application_name: ~ # Ex: my-application
 application_host : 'http://localhost:3000'
 application_domain_name: 'localhost:3000'
-application_name: ~
+
+application_host_staging: ~
+application_domain_name_staging: ~
+
+application_host_production: ~
+application_domain_name_production: ~
+
+
+#
+# == Keys
+#
 application_devise_secret_key: ~
 application_base_secret_key: ~
 
@@ -47,6 +58,7 @@ test:
   google_app_secret: 'test'
   twitter_app_id: 'test'
   twitter_app_secret: 'test'
+
 
 #
 # == Mapbox

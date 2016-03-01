@@ -5,6 +5,9 @@ set :deploy_to, "#{Figaro.env.capistrano_deploy_to}/#{fetch(:stage)}/#{fetch(:ap
 set :whenever_environment, -> { fetch(:stage) }
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
+set :domain_name, -> { Figaro.env.application_domain_name_staging }
+set :host_name, -> { Figaro.env.application_host_staging }
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
