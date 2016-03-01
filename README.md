@@ -3,7 +3,7 @@
 ### Overview [![Circle CI](https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master.svg?style=svg)](https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master) [![Licence](https://img.shields.io/badge/Licence-MIT-3d8273.svg)](Licence)
 This project has been built to increase speed when creating a new application: it's annoying to reconfigure always and always the same gems so this starter pack comes with plugins already configured such as activeadmin, devise, globalize, and many others.
 
-### Requirements ![Ruby version](https://img.shields.io/badge/Ruby-2.2.2-5aaed7.svg) ![Rails version](https://img.shields.io/badge/Rails-4.2.5.1-5aaed7.svg)
+### Requirements ![Ruby version](https://img.shields.io/badge/Ruby-2.2.2-5aaed7.svg) ![Rails version](https://img.shields.io/badge/Rails-4.2.5.2-5aaed7.svg)
 Install [Foreman](https://github.com/ddollar/foreman)  
 Install [Maildev](https://github.com/djfarrelly/MailDev)  
 

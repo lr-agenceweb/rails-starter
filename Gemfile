@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #
 # == Rails
 #
-gem 'rails', '4.2.5.1'
+gem 'rails', '4.2.5.2'
 gem 'sprockets', '2.12.4'
 
 #
