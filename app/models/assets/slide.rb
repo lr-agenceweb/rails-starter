@@ -28,7 +28,7 @@
 #
 class Slide < ActiveRecord::Base
   include Attachable
-  include Imageable
+  include SelfImageable
 
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description

@@ -27,11 +27,6 @@ module Imageable
     pictures.online.first.present? && pictures.online.first.image.exists?
   end
 
-  # check if own model has image
-  def self_image?
-    image.exists?
-  end
-
   # Return first object model when :has_many relation
   def first_pictures
     pictures.online.first if pictures?
@@ -52,22 +47,10 @@ module Imageable
     picture.image.url(size) if picture?
   end
 
-  # Return paperclip object url for own model
-  def self_image_url_by_size(size)
-    image.url(size)
-  end
-
   #
   # == Background
   #
   def background?
     background.present? && background.image.exists?
-  end
-
-  #
-  # == Slides
-  #
-  def slides?
-    slides.online.first.present? && slides.online.first.image.exists?
   end
 end
