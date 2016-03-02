@@ -1,14 +1,15 @@
 tr
   td.six.sub-columns.text-pad style="vertical-align:middle;"
     span.site-title
-      a href='http://www.lr-agenceweb.fr' target="_blank"
+      a href="#{root_url}" target="_blank"
         span.weight-500> L&amp;R
         span Agence web
     br
     span.site-subtitle = @setting.subtitle
 
   td.six.sub-columns.text-pad style="text-align:right; vertical-align:middle;"
-    span = link_to @setting.phone, "tel:#{@setting.decorate.phone_w3c}"
-    br
-    span = link_to 'www.lr-agenceweb.fr', 'http://www.lr-agenceweb.fr', target: :blank
+    - if @setting.decorate.phone?
+      span = link_to @setting.phone, "tel:#{@setting.decorate.phone_w3c}"
+      br
+    span = link_to root_url, root_url target: :blank
   td.expander
