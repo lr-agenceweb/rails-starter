@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   include AdminBarHelper
 
   protect_from_forgery with: :exception
-  analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? || request.headers['HTTP_DNT'] == '1' }
+  analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? }
 
   before_action :set_setting_or_maintenance
   before_action :set_legal_notices
