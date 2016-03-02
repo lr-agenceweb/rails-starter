@@ -21,7 +21,7 @@
 # == Social Model
 #
 class Social < ActiveRecord::Base
-  include Attachable
+  include Assets::Attachable
 
   def self.allowed_title_social_network
     %w( Facebook Twitter Google+ Email )
@@ -45,7 +45,7 @@ class Social < ActiveRecord::Base
                     }
   validates_attachment_content_type :ikon, content_type: %r{\Aimage\/.*\Z}
 
-  include DeletableAttachment
+  include Assets::DeletableAttachment
 
   validates :title,
             presence: true,

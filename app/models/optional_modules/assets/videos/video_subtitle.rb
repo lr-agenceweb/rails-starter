@@ -26,7 +26,7 @@
 # == VideoSubtitleModel
 #
 class VideoSubtitle < ActiveRecord::Base
-  include Attachable
+  include Assets::Attachable
 
   belongs_to :subtitleable, polymorphic: true
 
@@ -36,7 +36,7 @@ class VideoSubtitle < ActiveRecord::Base
   do_not_validate_attachment_file_type :subtitle_fr
   do_not_validate_attachment_file_type :subtitle_en
 
-  include DeletableAttachment
+  include Assets::DeletableAttachment
 
   scope :online, -> { where(online: true) }
 end

@@ -24,7 +24,7 @@
 # == Slider Model
 #
 class Slider < ActiveRecord::Base
-  include Slideable
+  include OptionalModules::Assets::Slideable
 
   has_many :slides, -> { order(:position) }, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :slides, reject_if: :all_blank, allow_destroy: true

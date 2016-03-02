@@ -21,8 +21,8 @@
 # == Category Model
 #
 class Category < ActiveRecord::Base
-  include Imageable
-  include VideoUploadable
+  include OptionalModules::Assets::Backgroundable
+  include OptionalModules::Assets::VideoUploadable
 
   attr_accessor :custom_background_color
 
@@ -32,9 +32,6 @@ class Category < ActiveRecord::Base
 
   has_one :heading, as: :headingable, dependent: :destroy
   accepts_nested_attributes_for :heading, reject_if: :all_blank, allow_destroy: true
-
-  has_one :background, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :background, reject_if: :all_blank, allow_destroy: true
 
   has_one :referencement, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true

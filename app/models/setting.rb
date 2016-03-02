@@ -34,7 +34,7 @@
 # == Setting Model
 #
 class Setting < ActiveRecord::Base
-  include Attachable
+  include Assets::Attachable
   include MaxRowable
 
   after_validation :clean_paperclip_errors
@@ -83,7 +83,7 @@ class Setting < ActiveRecord::Base
             allow_blank: false,
             inclusion: per_page_values
 
-  include DeletableAttachment
+  include Assets::DeletableAttachment
 
   def title_and_subtitle
     return "#{title}, #{subtitle}" if subtitle?

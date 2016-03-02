@@ -29,7 +29,7 @@
 # == VideoUpload Model
 #
 class VideoUpload < ActiveRecord::Base
-  include Attachable
+  include Assets::Attachable
 
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
