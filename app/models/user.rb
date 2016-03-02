@@ -41,8 +41,11 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: [:slugged, :finders]
 
-  include Attachable
-  include Omniauthable
+  # Concerns
+  include Assets::Attachable
+  include OptionalModules::Omniauthable
+
+  # Helpers
   include AssetsHelper
 
   # Include default devise modules. Others available are:
@@ -74,7 +77,7 @@ class User < ActiveRecord::Base
                        content_type: { content_type: %r{\Aimage\/.*\Z} },
                        size: { less_than: 2.megabyte }
 
-  include DeletableAttachment
+  include Assets::DeletableAttachment
 
   validates :username,
             presence: true,

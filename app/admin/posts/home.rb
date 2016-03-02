@@ -82,7 +82,7 @@ ActiveAdmin.register Home do
   #
   controller do
     include Skippable
-    include Videoable
+    include OptionalModules::Videoable
 
     before_create do |post|
       post.type = post.object.class.name

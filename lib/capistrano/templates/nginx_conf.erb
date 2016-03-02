@@ -5,10 +5,15 @@ server {
   root <%= current_path %>/public;
   index index.html index.htm;
 
-  # Make site accessible from http://<%= Figaro.env.application_domain_name %>
-  server_name <%= Figaro.env.application_domain_name %>;
+  # Make site accessible from http://<%= fetch(:domain_name) %>
+  server_name <%= fetch(:domain_name) %>;
 
+  # Passenger
   passenger_enabled on;
   passenger_app_env <%= fetch(:stage) %>;
   passenger_friendly_error_pages on;
+
+  # Logs
+  error_log /var/log/nginx/<%= fetch(:domain_name) %>.log notice;
+  access_log off;
 }

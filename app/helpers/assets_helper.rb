@@ -25,7 +25,7 @@ module AssetsHelper
     if resource.avatar?
       retina_image_tag(resource, :avatar, :thumb, default: [size, size])
     else
-      gravatar_image_tag(resource.email, alt: resource.username, gravatar: { size: size })
+      gravatar_image_tag(resource.email, alt: resource.username, gravatar: { size: size, secure: true })
     end
   end
 

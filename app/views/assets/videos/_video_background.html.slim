@@ -5,3 +5,8 @@
       source type='video/mp4' src="#{video_background.video_file.url(:mp4video)}"
       source type='video/webm' src="#{video_background.video_file.url(:webmvideo)}"
       source type='video/ogg' src="#{video_background.video_file.url(:oggvideo)}"
+
+  css:
+    .heading-site:before {
+      background-image: url("#{video_background.video_file.url(:preview_large)}")
+    }

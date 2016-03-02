@@ -71,7 +71,7 @@ ActiveAdmin.register About do
       r.picture.image if r.picture?
     end
     column :title
-    column :allow_comments_status
+    column :allow_comments_status if comment_module.enabled?
     column :show_as_gallery
     column :status
     translation_status
@@ -92,7 +92,7 @@ ActiveAdmin.register About do
   # == Controller
   #
   controller do
-    include Videoable
+    include OptionalModules::Videoable
 
     before_create do |post|
       post.type = post.object.class.name

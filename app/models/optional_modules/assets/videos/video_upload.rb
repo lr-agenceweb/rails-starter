@@ -29,7 +29,7 @@
 # == VideoUpload Model
 #
 class VideoUpload < ActiveRecord::Base
-  include Attachable
+  include Assets::Attachable
 
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
@@ -53,6 +53,11 @@ class VideoUpload < ActiveRecord::Base
                         geometry: '1280x720',
                         format: 'webm'
                       },
+                      preview_large: {
+                        geometry: '1920x1080#',
+                        format: 'jpg',
+                        time: 2
+                      },
                       preview: {
                         geometry: '380x240#',
                         format: 'jpg',
@@ -63,7 +68,7 @@ class VideoUpload < ActiveRecord::Base
 
   validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
   validates_attachment_size :video_file, in: 0.megabytes..100.megabytes
-  process_in_background :video_file, processing_image_url: Figaro.env.loader_spinner_img
+  process_in_background :video_file, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
   delegate :online, to: :video_subtitle, prefix: true, allow_nil: true
 

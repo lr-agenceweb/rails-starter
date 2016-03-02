@@ -15,18 +15,18 @@ class ApplicationController < ActionController::Base
   before_action :set_legal_notices
 
   # Core
-  include Languageable
-  include Menuable
+  include Core::Languageable
+  include Core::Menuable
 
   # Optional modules
-  include OptionalModulable
-  include Adultable
-  include Socialable
-  include Backgroundable
-  include Mappable
-  include Sliderable
-  include Videoable
-  include NewsletterFrontUserable
+  include OptionalModules::OptionalModulable
+  include OptionalModules::Adultable
+  include OptionalModules::Socialable
+  include OptionalModules::Backgroundable
+  include OptionalModules::Mappable
+  include OptionalModules::Sliderable
+  include OptionalModules::Videoable
+  include OptionalModules::NewsletterFrontUserable
   before_action :set_module_settings, if: proc { @setting.show_admin_bar? } # for AdminBar
 
   # Misc

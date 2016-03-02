@@ -8,6 +8,12 @@ require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
 
+dir = "#{Rails.root}/public/system/#{Rails.env}"
+if Dir.exist?(dir)
+  puts "Delete public/system/#{Rails.env} folder"
+  FileUtils.rm_rf(dir)
+end
+
 #
 # == Create user roles
 #
@@ -122,13 +128,7 @@ OptionalModule.list.each_with_index do |element, index|
     enabled: true
   )
 
-  @optional_module_newsletter = optional_module if element == 'Newsletter'
-  @optional_module_adult = optional_module if element == 'Adult'
-  @optional_module_search = optional_module if element == 'Search'
-  @optional_module_guest_book = optional_module if element == 'GuestBook'
-  @optional_module_blog = optional_module if element == 'Blog'
-  @optional_module_event = optional_module if element == 'Event'
-  @optional_module_mailing = optional_module if element == 'Mailing'
+  instance_variable_set("@optional_module_#{element.to_s.underscore}", optional_module)
 end
 
 #
@@ -191,14 +191,7 @@ models_name.each_with_index do |element, index|
     )
   end
 
-  @menu_home = menu.id if element == 'Home'
-  @menu_search = menu.id if element == 'Search'
-  @menu_guest_book = menu.id if element == 'GuestBook'
-  @menu_blog = menu.id if element == 'Blog'
-  @menu_event = menu.id if element == 'Event'
-  @menu_about = menu.id if element == 'About'
-  @menu_contact = menu.id if element == 'Contact'
-  @menu_legal_notice = menu.id if element == 'LegalNotice'
+  instance_variable_set("@menu_#{element.to_s.underscore}", menu)
 end
 
 #
@@ -248,26 +241,13 @@ keywords_fr = [
 
 models_name.each_with_index do |element, index|
   element = element.to_s
-  optional_module_id = nil
-  optional_module_id = @optional_module_search.id if element == 'Search'
-  optional_module_id = @optional_module_guest_book.id if element == 'GuestBook'
-  optional_module_id = @optional_module_blog.id if element == 'Blog'
-  optional_module_id = @optional_module_event.id if element == 'Event'
-
-  menu_id = @menu_home if element == 'Home'
-  menu_id = @menu_search if element == 'Search'
-  menu_id = @menu_guest_book if element == 'GuestBook'
-  menu_id = @menu_blog if element == 'Blog'
-  menu_id = @menu_event if element == 'Event'
-  menu_id = @menu_about if element == 'About'
-  menu_id = @menu_contact if element == 'Contact'
-  menu_id = @menu_legal_notice if element == 'LegalNotice'
+  optional_module = instance_variable_get("@optional_module_#{element.to_s.underscore}")
 
   category = Category.create!(
     name: element,
-    optional: optional_module_id.nil? ? false : true,
-    optional_module_id: optional_module_id,
-    menu_id: menu_id
+    optional: optional_module.nil? ? false : true,
+    optional_module_id: optional_module.try(:id),
+    menu_id: instance_variable_get("@menu_#{element.underscore}").id
   )
 
   referencement = Referencement.create!(
@@ -288,9 +268,7 @@ models_name.each_with_index do |element, index|
     )
   end
 
-  @category_home = category if element == 'Home'
-  @category_blog = category if element == 'Blog'
-  @category_event = category if element == 'Event'
+  instance_variable_set("@category_#{element.to_s.underscore}", category)
 end
 
 puts 'Uploading video background for homepage'

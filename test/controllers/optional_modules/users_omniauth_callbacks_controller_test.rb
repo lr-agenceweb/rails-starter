@@ -210,9 +210,6 @@ module Users
       end
     end
 
-
-
-
     private
 
     def initialize_test

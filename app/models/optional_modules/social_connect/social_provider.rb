@@ -20,8 +20,31 @@
 class SocialProvider < ActiveRecord::Base
   belongs_to :social_connect_setting
 
+  def self.format_provider_by_name(name)
+    case name
+    when 'google_oauth2'
+      name = 'google'
+    else
+      name
+    end
+  end
+
+  def self.revert_format_provider_by_name(name)
+    case name
+    when 'google'
+      name = 'google_oauth2'
+    else
+      name
+    end
+  end
+
   def self.allowed_social_providers
-    User.omniauth_providers.map(&:to_s)
+    providers = []
+    User.omniauth_providers.each do |provider|
+      provider = format_provider_by_name(provider.to_s)
+      providers << provider.to_s unless ENV["#{provider}_app_id"].blank? || ENV["#{provider}_app_secret"].blank?
+    end
+    providers
   end
 
   validates :name,

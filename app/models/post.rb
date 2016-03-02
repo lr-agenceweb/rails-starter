@@ -25,9 +25,9 @@
 # == Post Model
 #
 class Post < ActiveRecord::Base
-  include Imageable
-  include Videosable
-  include Searchable
+  include OptionalModules::Assets::Imageable
+  include OptionalModules::Assets::Videosable
+  include OptionalModules::Searchable
   include Positionable
   include PrevNextable
 

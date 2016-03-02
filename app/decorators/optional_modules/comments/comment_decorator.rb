@@ -24,7 +24,7 @@ class CommentDecorator < ApplicationDecorator
   def avatar
     # Not connected
     if model.try(:user_id).nil?
-      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width) })
+      gravatar_image_tag(model.email, alt: model.username, gravatar: { size: model.class.instance_variable_get(:@avatar_width), secure: true })
 
     # Connected
     else

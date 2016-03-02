@@ -1,4 +1,4 @@
-include MenuHelper
+include Core::MenuHelper
 include AssetsHelper
 
 ActiveAdmin.register Category do
@@ -113,7 +113,7 @@ ActiveAdmin.register Category do
   #
   controller do
     include Skippable
-    include Videoable
+    include OptionalModules::Videoable
 
     def scoped_collection
       super.includes :video_upload, menu: [:translations]

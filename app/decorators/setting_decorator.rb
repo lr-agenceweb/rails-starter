@@ -48,7 +48,7 @@ class SettingDecorator < ApplicationDecorator
   end
 
   def phone_w3c
-    model.phone.delete(' ').remove('(0)')
+    model.phone.delete(' ').remove('(0)') if phone?
   end
 
   #
@@ -106,6 +106,10 @@ class SettingDecorator < ApplicationDecorator
 
   def subtitle?
     !model.subtitle.blank?
+  end
+
+  def phone?
+    !model.phone.blank?
   end
 
   def copyright

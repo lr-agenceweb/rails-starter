@@ -22,8 +22,8 @@
 # == Background Model
 #
 class Background < ActiveRecord::Base
-  include Imageable
-  include Attachable
+  include Assets::Attachable
+  include Assets::SelfImageable
 
   belongs_to :attachable, polymorphic: true
 

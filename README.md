@@ -3,7 +3,7 @@
 ### Overview [![Circle CI](https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master.svg?style=svg)](https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master) [![Licence](https://img.shields.io/badge/Licence-MIT-3d8273.svg)](Licence)
 This project has been built to increase speed when creating a new application: it's annoying to reconfigure always and always the same gems so this starter pack comes with plugins already configured such as activeadmin, devise, globalize, and many others.
 
-### Requirements ![Ruby version](https://img.shields.io/badge/Ruby-2.2.2-5aaed7.svg) ![Rails version](https://img.shields.io/badge/Rails-4.2.5.1-5aaed7.svg)
+### Requirements ![Ruby version](https://img.shields.io/badge/Ruby-2.2.2-5aaed7.svg) ![Rails version](https://img.shields.io/badge/Rails-4.2.5.2-5aaed7.svg)
 Install [Foreman](https://github.com/ddollar/foreman)  
 Install [Maildev](https://github.com/djfarrelly/MailDev)  
 
@@ -46,11 +46,15 @@ Scripts are created in `coffeescript`
 
 #### Capistrano
 
-* `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
-* `cap <env> logrotate:upload_config` : Upload logrotate config file to remote server
+* **Database backup**  
+  * `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
+
+* **Logrotate**  
+  * `cap <env> logrotate:upload_config` : Upload logrotate config file to remote server
 
 * **Nginx**  
   * `cap <env> nginx:upload_vhost` : Upload vhost config file to remote server (create file in sites-availables)
+  * `cap <env> nginx:upload_vhost_ssl` : Same as above with SSL configuration for vhost (Let's Encrypt)
   * `cap <env> nginx:symlink_vhost` : Symlink vhost config file previously uploaded (in sites-enabled)
   * `cap <env> nginx:remove_vhost` : Remove uploaded vhost and symlink
   * `cap <env> nginx:remove_symlink_vhost` : Remove only symlink

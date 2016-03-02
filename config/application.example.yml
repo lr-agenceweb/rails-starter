@@ -1,9 +1,23 @@
 #
 # == Application
 #
+application_name: ~ # Ex: my-application
 application_host : 'http://localhost:3000'
 application_domain_name: 'localhost:3000'
-application_name: ~
+
+application_host_staging: ~
+application_domain_name_staging: ~
+
+application_host_production: ~
+application_domain_name_production: ~
+
+application_host_backup: ~
+application_domain_name_backup: ~
+
+
+#
+# == Keys
+#
 application_devise_secret_key: ~
 application_base_secret_key: ~
 
@@ -40,6 +54,13 @@ production:
   facebook_app_secret: ~
   google_app_id: ~
   google_app_secret: ~
+test:
+  facebook_app_id: 'test'
+  facebook_app_secret: 'test'
+  google_app_id: 'test'
+  google_app_secret: 'test'
+  twitter_app_id: 'test'
+  twitter_app_secret: 'test'
 
 
 #
@@ -102,12 +123,6 @@ staging:
 #
 youtube_api_key: ~
 vimeo_api_key: ~
-
-
-#
-# == Misc
-#
-loader_spinner_img: http://www.salons-sante-autonomie.com/content/themes/ssa/img/assets/spinner.gif
 
 
 #

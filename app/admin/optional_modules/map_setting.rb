@@ -61,7 +61,7 @@ ActiveAdmin.register MapSetting do
   # == Controller
   #
   controller do
-    include Mappable
+    include OptionalModules::Mappable
 
     before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? && current_user_and_administrator? }
 

@@ -75,7 +75,7 @@ ActiveAdmin.register Blog do
   #
   controller do
     include Skippable
-    include Videoable
+    include OptionalModules::Videoable
 
     before_create do |blog|
       blog.user_id = current_user.id

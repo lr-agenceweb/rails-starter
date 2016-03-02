@@ -14,7 +14,7 @@ class UserDecoratorTest < Draper::TestCase
   #
   test 'should return gravatar image if no avatar uploaded' do
     user_decorated = UserDecorator.new(@administrator)
-    assert_equal gravatar_image_tag(@administrator.email, alt: @administrator.username, gravatar: { size: 64 }), user_decorated.image_avatar
+    assert_equal gravatar_image_tag(@administrator.email, alt: @administrator.username, gravatar: { size: 64, secure: true }), user_decorated.image_avatar
   end
 
   test 'should return correct uploaded avatar' do

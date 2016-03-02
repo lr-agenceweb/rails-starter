@@ -21,7 +21,7 @@ class UserDecorator < ApplicationDecorator
   #
   %w( facebook twitter google ).each do |provider|
     define_method "link_to_#{provider}" do
-      if user.from_omniauth?(provider == 'google' ? 'google_oauth2' : provider)
+      if user.from_omniauth? provider
         link_to(
           fa_icon(provider, text: I18n.t('omniauth.unlink.button', provider: provider.capitalize)),
           user_omniauth_unlink_path(provider: provider, id: model.id),

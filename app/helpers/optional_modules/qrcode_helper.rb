@@ -15,7 +15,7 @@ module OptionalModules
     private
 
     def qrcode_base_url(size)
-      "http://chart.apis.google.com/chart?chs=#{size}x#{size}&cht=qr&chl=#{u vcard}"
+      "//chart.apis.google.com/chart?chs=#{size}x#{size}&cht=qr&chl=#{u vcard}"
     end
 
     def vcard

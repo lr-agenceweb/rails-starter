@@ -82,7 +82,7 @@ module Users
 
     def module_or_provider_disabled?(provider = params[:action])
       provider = provider == 'unlink' ? params[:provider] : provider
-      !SocialProvider.find_by(name: provider).enabled? || !SocialProvider.allowed_to_use?
+      !SocialProvider.find_by(name: SocialProvider.format_provider_by_name(provider)).enabled? || !SocialProvider.allowed_to_use?
     end
 
     def check_for_errors

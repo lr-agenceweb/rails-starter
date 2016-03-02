@@ -31,7 +31,7 @@ class SocialConnectSettingDecorator < ApplicationDecorator
   end
 
   def social_google_oauth2
-    provider = social_providers.find_by(name: 'google_oauth2')
+    provider = social_providers.find_by(name: 'google')
     social_provider_base(provider)
   end
 
