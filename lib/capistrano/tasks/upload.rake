@@ -33,4 +33,17 @@ namespace :upload do
       system 'cd public; rm default.zip'
     end
   end
+
+  desc 'Upload seeds pictures'
+  task :seeds do
+    on roles(:app) do
+      remote_db_folder = "#{shared_path}/db"
+      execute "mkdir -p #{shared_path}/db/seeds"
+      system 'cd db; zip -r seeds.zip seeds'
+      upload! 'db/seeds.zip', "#{remote_db_folder}/seeds.zip"
+      execute "unzip -o #{remote_db_folder}/seeds.zip -d #{remote_db_folder}/"
+      execute "rm #{remote_db_folder}/seeds.zip"
+      system 'cd db; rm seeds.zip'
+    end
+  end
 end
