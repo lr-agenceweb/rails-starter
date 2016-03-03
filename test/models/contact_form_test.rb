@@ -11,6 +11,9 @@ class ContactFormTest < ActiveSupport::TestCase
     end
   end
 
+  #
+  # == Validations
+  #
   test 'should accept valid attributes' do
     valid_attrs = {
       name: 'maria',
@@ -44,5 +47,17 @@ class ContactFormTest < ActiveSupport::TestCase
     }
     msg = ContactForm.new attrs
     refute msg.valid?, 'should not be valid if email is not properly formatted'
+  end
+
+  test 'should not be valid if captcha is filled' do
+    attrs = {
+      name: 'maria',
+      email: 'maria@example.com',
+      message: 'Lorem ipsum dolor sit amet',
+      nickname: 'robots'
+    }
+    msg = ContactForm.new attrs
+    assert_not msg.valid?
+    assert_equal [:nickname], msg.errors.keys
   end
 end

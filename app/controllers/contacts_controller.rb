@@ -44,17 +44,13 @@ class ContactsController < ApplicationController
   end
 
   def create
-    if params[:contact_form][:nickname].blank?
-      @contact_form = ContactForm.new(contact_form_params)
-      if @contact_form.valid?
-        ContactFormMailer.message_me(@contact_form).deliver_now
-        ContactFormMailer.send_copy(@contact_form).deliver_now if @contact_form.send_copy == '1'
-        respond_action :create
-      else
-        render :new
-      end
-    else
+    @contact_form = ContactForm.new(contact_form_params)
+    if @contact_form.valid?
+      ContactFormMailer.message_me(@contact_form).deliver_now
+      ContactFormMailer.send_copy(@contact_form).deliver_now if @contact_form.send_copy == '1'
       respond_action :create
+    else
+      render :new
     end
   end
 
@@ -73,7 +69,7 @@ class ContactsController < ApplicationController
   private
 
   def contact_form_params
-    params.require(:contact_form).permit(:name, :email, :message, :send_copy)
+    params.require(:contact_form).permit(:name, :email, :message, :send_copy, :nickname)
   end
 
   def respond_action(template)
