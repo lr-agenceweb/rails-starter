@@ -130,6 +130,13 @@ class UserTest < ActiveSupport::TestCase
     assert I18n.t('omniauth.email.not_match', provider: 'facebook'), errors[:wrong_email]
   end
 
+  test 'should be valid if omniauth email is not the same as classic account email on twitter' do
+    set_base_request_for_omniauth(1_357_908_642, 'rafael', 'rafael.nadal@test.com', 'twitter')
+
+    errors = User.check_for_errors(@request.env['omniauth.auth'], @super_administrator)
+    assert errors.empty?
+  end
+
   test 'should not be valid if user has already his account linked to facebook' do
     set_base_request_for_omniauth(1_357_908_642, 'rafael', 'rafa@nadal.es')
 
@@ -162,12 +169,12 @@ class UserTest < ActiveSupport::TestCase
     OmniAuth.config.mock_auth[:twitter] = nil
   end
 
-  def set_base_request_for_omniauth(id, name, email)
+  def set_base_request_for_omniauth(id, name, email, provider = 'facebook')
     @request = ActionController::TestRequest.new
     OmniAuth.config.test_mode = true
 
     OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
-      provider: 'facebook',
+      provider: provider,
       uid: id,
       info: {
         name: name,

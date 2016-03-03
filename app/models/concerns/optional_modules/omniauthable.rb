@@ -40,7 +40,7 @@ module OptionalModules
 
       def self.check_for_errors(auth, current_user)
         errors = {}
-        errors[:wrong_email] = I18n.t('omniauth.email.not_match', provider: auth.provider.capitalize) if auth.info.email != current_user.email
+        errors[:wrong_email] = I18n.t('omniauth.email.not_match', provider: auth.provider.capitalize) if auth.info.email != current_user.email && auth.provider != 'twitter'
         errors[:already_linked] = I18n.t('omniauth.email.already_linked', provider: auth.provider.capitalize) if current_user.from_omniauth?
         errors
       end
