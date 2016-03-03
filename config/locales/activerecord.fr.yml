@@ -4,6 +4,21 @@ fr:
     messages:
       email_format: Veuillez renseigner un email valide ;)
       in_between: doit être entre %{min} et %{max}
+    attributes:
+      email:
+        blank: N'oubliez pas de renseigner votre email ;)
+        taken: Cet email n'est pas disponible :(
+        email: n'est pas valide
+      name:
+        blank: N'oubliez pas de renseigner votre nom ;)
+      username:
+        blank: N'oubliez pas de renseigner votre pseudo ;)
+      content:
+        blank: N'oubliez pas de saisir votre commentaire ;)
+      message:
+        blank: N'oubliez pas de renseigner votre message ;)
+      comment:
+        blank: N'oubliez pas de saisir votre commentaire ;)
 
   activemodel: &errors
     errors:
@@ -12,49 +27,6 @@ fr:
         email_address_not_routable: n'est pas routable
 
   activerecord:
-    <<: *errors
-    errors:
-      models:
-        newsletter_user:
-          attributes:
-            email:
-              blank: N'oubliez pas de renseigner votre email ;)
-              taken: Cet email n'est pas disponible :(
-        mailing_user:
-          attributes:
-            email:
-              email: n'est pas valide
-        guest_book:
-          attributes:
-            email:
-              blank: N'oubliez pas de renseigner votre email ;)
-              taken: Cet email n'est pas disponible :(
-            username:
-              blank: N'oubliez pas de renseigner votre pseudo ;)
-            content:
-              blank: N'oubliez pas de saisir votre commentaire ;)
-        user:
-          attributes:
-            email:
-              blank: N'oubliez pas de renseigner votre email ;)
-              email: ''
-        contact_form:
-          attributes:
-            email:
-              blank: N'oubliez pas de renseigner votre email ;)
-            name:
-              blank: N'oubliez pas de renseigner votre nom ;)
-            message:
-              blank: N'oubliez pas de renseigner votre message ;)
-        comment:
-          attributes:
-            email:
-              blank: N'oubliez pas de renseigner votre email ;)
-            username:
-              blank: N'oubliez pas de renseigner votre pseudo ;)
-            comment:
-              blank: N'oubliez pas de saisir votre commentaire ;)
-
     models:
       user:
         one: Utilisateur
