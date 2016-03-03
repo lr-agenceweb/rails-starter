@@ -183,8 +183,7 @@ fr:
         type_title: Page
         author_with_avatar: Auteur
         status: Statut
-        allow_comments: Autoriser les commentaires
-        allow_comments_status: Autoriser les commentaires
+        allow_comments: Commentaires ?
         show_as_gallery: Galerie d'images
       blog:
         title: Titre
@@ -193,8 +192,7 @@ fr:
         status: Statut
         prev_next: Liens précédent/suivant
         prev_next_d: Liens précédent/suivant
-        allow_comments: Autoriser les commentaires
-        allow_comments_status: Autoriser les commentaires
+        allow_comments: Commentaires ?
         show_as_gallery: Galerie d'images
       blog_setting:
         prev_next: Liens précédent / suivant

@@ -1,0 +1,11 @@
+object.selectable_column
+object.image_column :image, style: :small do |r|
+  r.picture.image if r.picture?
+end
+object.column :title
+object.bool_column :allow_comments if comment_module.enabled?
+object.column :status
+object.translation_status
+object.column :author_with_avatar
+
+object.actions

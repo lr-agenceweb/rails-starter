@@ -25,13 +25,7 @@ ActiveAdmin.register LegalNotice do
 
   index do
     sortable_handle_column
-    selectable_column
-    column :title
-    column :content
-    column :status
-    translation_status
-
-    actions
+    render 'admin/posts/index', object: self
   end
 
   show title: :title_aa_show do

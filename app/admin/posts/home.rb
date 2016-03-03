@@ -57,16 +57,7 @@ ActiveAdmin.register Home do
 
   index do
     sortable_handle_column
-    selectable_column
-    image_column :image, style: :small do |r|
-      r.picture.image if r.picture?
-    end
-    column :title
-    column :status
-    translation_status
-    column :author_with_avatar
-
-    actions
+    render 'admin/posts/index', object: self
   end
 
   show do

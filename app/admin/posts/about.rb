@@ -66,18 +66,7 @@ ActiveAdmin.register About do
 
   index do
     sortable_handle_column
-    selectable_column
-    image_column :image, style: :small do |r|
-      r.picture.image if r.picture?
-    end
-    column :title
-    column :allow_comments_status if comment_module.enabled?
-    column :show_as_gallery
-    column :status
-    translation_status
-    column :author_with_avatar
-
-    actions
+    render 'admin/posts/index', object: self
   end
 
   show title: :title_aa_show do
