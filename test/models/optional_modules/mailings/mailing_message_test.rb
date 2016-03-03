@@ -14,7 +14,10 @@ class MailingMessageTest < ActiveSupport::TestCase
   end
 
   test 'should not be linked anymore if message destroyed' do
-    skip 'Find a way to make this test pass'
+    assert_not @mailing_user_two.mailing_messages.empty?, 'user should be link to message'
+    @mailing_message_two.destroy
+    assert @mailing_message_two.destroyed?
+    assert @mailing_user_two.mailing_messages.empty?, 'user should not be link to message'
   end
 
   #
