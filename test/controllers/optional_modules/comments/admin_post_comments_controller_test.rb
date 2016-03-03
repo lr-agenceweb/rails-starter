@@ -48,7 +48,66 @@ module Admin
       end
     end
 
-    test 'should not be able to destroy admin comments if subscriber' do
+    #
+    # == Destroy
+    #
+    # Super Administrator
+    test 'should destroy own comment if super_administrator' do
+      sign_in @super_administrator
+      assert_difference ['Comment.count'], -1 do
+        delete :destroy, id: @comment
+      end
+      assert_redirected_to admin_post_comments_path
+    end
+
+    test 'should destroy administrator comment if super_administrator' do
+      sign_in @super_administrator
+      assert_difference ['Comment.count'], -1 do
+        delete :destroy, id: @comment_administrator
+      end
+      assert_redirected_to admin_post_comments_path
+    end
+
+    test 'should destroy subscriber comment if super_administrator' do
+      sign_in @super_administrator
+      assert_difference ['Comment.count'], -1 do
+        delete :destroy, id: @comment_subscriber
+      end
+      assert_redirected_to admin_post_comments_path
+    end
+
+    # Administrator
+    test 'should not be able to destroy SA comment if administrator' do
+      assert_no_difference ['Comment.count'] do
+        delete :destroy, id: @comment
+      end
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should be able to destroy own comment if administrator' do
+      assert_difference ['Comment.count'], -1 do
+        delete :destroy, id: @comment_administrator
+      end
+      assert_redirected_to admin_post_comments_path
+    end
+
+    test 'should be able to destroy subscriber comment if administrator' do
+      assert_difference ['Comment.count'], -1 do
+        delete :destroy, id: @comment_subscriber
+      end
+      assert_redirected_to admin_post_comments_path
+    end
+
+    # Subscriber
+    test 'should not be able to destroy super_administrator comment if subscriber' do
+      sign_in @subscriber
+      assert_no_difference ['Comment.count'] do
+        delete :destroy, id: @comment
+      end
+      assert_redirected_to admin_dashboard_path
+    end
+
+    test 'should not be able to destroy admin comment if subscriber' do
       sign_in @subscriber
       assert_no_difference ['Comment.count'] do
         delete :destroy, id: @comment_administrator
@@ -56,14 +115,7 @@ module Admin
       assert_redirected_to admin_dashboard_path
     end
 
-    test 'should not be able to destroy SA comments if administrator' do
-      assert_no_difference ['Comment.count'] do
-        delete :destroy, id: @comment
-      end
-      assert_redirected_to admin_dashboard_path
-    end
-
-    test 'should destroy own comment' do
+    test 'should destroy own comment if subscriber' do
       sign_in @subscriber
       assert_difference ['Comment.count'], -1 do
         delete :destroy, id: @comment_subscriber
@@ -127,6 +179,9 @@ module Admin
       assert ability.can?(:read, @comment), 'should be able to read'
       assert ability.cannot?(:update, @comment), 'should not be able to update'
       assert ability.can?(:destroy, @comment), 'should be able to destroy'
+
+      assert ability.can?(:destroy, @comment_subscriber), 'should be able to destroy'
+      assert ability.can?(:destroy, @comment_administrator), 'should be able to destroy'
     end
 
     #
@@ -142,17 +197,6 @@ module Admin
       get :index
       assert_response :success
       assert_crud_actions(@comment, admin_dashboard_path, model_name, no_index: true)
-    end
-
-    test 'should destroy all comments if super_administrator' do
-      skip 'Fix this broken test'
-      sign_in @super_administrator
-      assert_difference ['Comment.count'], -3 do
-        delete :destroy, id: @comment
-        delete :destroy, id: @comment_subscriber
-        delete :destroy, id: @comment_administrator
-      end
-      assert_redirected_to admin_post_comments_path
     end
 
     #
@@ -172,7 +216,7 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
-      @comment = comments(:one)
+      @comment = comments(:one) # comment super_administrator
       @comment_administrator = comments(:two)
       @comment_subscriber = comments(:three)
       @comment_module = optional_modules(:comment)
