@@ -1,3 +1,5 @@
+= render 'elements/ribbon' if Rails.env.development? || Rails.env.staging?
+
 - if @search_module.enabled? || I18n.available_locales.length > 1
   .upper-header
     .row

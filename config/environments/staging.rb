@@ -66,7 +66,7 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: Figaro.env.application_domain_name }
+  config.action_mailer.default_url_options = { host: Figaro.env.application_domain_name_staging }
   # config.action_mailer.asset_host = Figaro.env.application_host
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
@@ -94,8 +94,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # RESTRICTING ACCESS TO THE STAGE ENVIRONMENT
-  config.middleware.insert_before(::Rack::Runtime, "::Rack::Auth::Basic", 'Staging environment') do |u, p|
+  config.middleware.insert_before(::Rack::Runtime, '::Rack::Auth::Basic', 'Staging environment') do |u, p|
     (u == Figaro.env.admin_username && p == Figaro.env.admin_password) ||
-    (u == Figaro.env.guest_username && p == Figaro.env.guest_password)
+      (u == Figaro.env.guest_username && p == Figaro.env.guest_password)
   end
 end

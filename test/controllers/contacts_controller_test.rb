@@ -1,26 +1,3 @@
-# == Schema Information
-#
-# Table name: posts
-#
-#  id              :integer          not null, primary key
-#  type            :string(255)
-#  title           :string(255)
-#  slug            :string(255)
-#  content         :text(65535)
-#  show_as_gallery :boolean          default(FALSE)
-#  allow_comments  :boolean          default(TRUE)
-#  online          :boolean          default(TRUE)
-#  position        :integer
-#  user_id         :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#
-# Indexes
-#
-#  index_posts_on_slug     (slug) UNIQUE
-#  index_posts_on_user_id  (user_id)
-#
-
 require 'test_helper'
 
 #
@@ -169,7 +146,7 @@ class ContactsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         post :create, locale: locale.to_s, contact_form: { email: 'john@test.fr', name: 'john', message: 'Thanks for this site', nickname: 'I am a robot' }
-        assert_redirected_to new_contact_path
+        assert_template :new
       end
     end
   end
@@ -246,7 +223,7 @@ class ContactsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :post, :create, format: :js, locale: locale.to_s, contact_form: { email: 'john@test.fr', name: 'john', message: 'Thanks for this site', nickname: 'I am a robot' }
-        assert_template :create
+        assert_template :new
       end
     end
   end

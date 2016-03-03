@@ -8,10 +8,12 @@ class ContactForm
   attr_accessor :name, :email, :message, :send_copy, :subject, :nickname
 
   validates :name,
-            presence: { message: I18n.t('activerecord.errors.models.contact_form.attributes.name.blank') }
+            presence: true
   validates :email,
-            presence: { message: I18n.t('activerecord.errors.models.contact_form.attributes.email.blank') },
+            presence: true,
             email_format: true
   validates :message,
-            presence: { message: I18n.t('activerecord.errors.models.contact_form.attributes.message.blank') }
+            presence: true
+  validates :nickname,
+            absence: true
 end

@@ -1,6 +1,13 @@
 == setting.microdata_meta(map) if show_metadata
 
-a.header-title-link.logo-container href='/'
-  h1.header-title.logo style="background-image: url(#{setting.logo.url(:thumb)})"
+- logo_link = setting.logo.url(:thumb)
+- suffix = 'path'
+- html_tag_tag = defined?(html_tag) ? html_tag : :h1
+- if defined?(absolute) && absolute
+  - logo_link = asset_url(logo_link)
+  - suffix = 'url'
+
+a.header-title-link.logo-container href="#{send("root_#{suffix}")}"
+  = content_tag(html_tag_tag, nil, class: 'header-title logo', style: "background-image: url(#{logo_link})") do
     = setting.title
     small.header-subtitle = setting.subtitle

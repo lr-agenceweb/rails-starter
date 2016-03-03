@@ -46,6 +46,12 @@ Scripts are created in `coffeescript`
 
 #### Capistrano
 
+* **Uploads**  
+  * `cap <env> upload:yml` : Upload yml configuration files such as application, database, secrets, ...
+  * `cap <env> upload:dkim` : Upload DKIM private key
+  * `cap <env> upload:missing` : Upload default pictures when missing or unavailable paperclip model objects
+  * `cap <env> upload:seeds` : Upload seeds fixtures files before in order to seed database
+
 * **Database backup**  
   * `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
 
