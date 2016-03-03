@@ -20,4 +20,17 @@ namespace :upload do
       upload! StringIO.new(File.read('config/dkim/dkim.private.key')), "#{shared_path}/config/dkim/dkim.private.key"
     end
   end
+
+  desc 'Upload default missing pictures'
+  task :missing do
+    on roles(:app) do
+      remote_public_folder = "#{shared_path}/public"
+      execute "mkdir -p #{shared_path}/public"
+      system 'cd public; zip -r default.zip default'
+      upload! 'public/default.zip', "#{remote_public_folder}/default.zip"
+      execute "unzip -o #{remote_public_folder}/default.zip -d #{remote_public_folder}/"
+      execute "rm #{remote_public_folder}/default.zip"
+      system 'cd public; rm default.zip'
+    end
+  end
 end
