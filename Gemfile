@@ -141,7 +141,7 @@ gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
 gem 'gravatar_image_tag'
-gem 'magnific-popup-rails', '~> 1.0.1'
+gem 'magnific-popup-rails', '~> 1.1.0'
 gem 'chartkick'
 gem 'faker'
 
