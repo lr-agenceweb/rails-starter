@@ -1,9 +1,42 @@
-# Rails Starter [![Build Status](https://travis-ci.org/lr-agenceweb/rails-starter.svg?branch=master)](https://travis-ci.org/lr-agenceweb/rails-starter) [![Code Climate](https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/gpa.svg)](https://codeclimate.com/github/lr-agenceweb/rails-starter) [![Test Coverage](https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/coverage.svg)](https://codeclimate.com/github/lr-agenceweb/rails-starter/coverage) [![security](https://hakiri.io/github/lr-agenceweb/rails-starter/master.svg)](https://hakiri.io/github/lr-agenceweb/rails-starter/master) [![Dependency Status](https://gemnasium.com/lr-agenceweb/rails-starter.svg)](https://gemnasium.com/lr-agenceweb/rails-starter)
+<p align="center">
+  <a href="https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master">
+    <img src="https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master.svg?style=svg" alt="Circle CI" />
+  </a>
+  <a href="https://travis-ci.org/lr-agenceweb/rails-starter">
+    <img src="https://travis-ci.org/lr-agenceweb/rails-starter.svg?branch=master" alt="Travis CI" />
+  </a>
+  <a href="https://codeclimate.com/github/lr-agenceweb/rails-starter">
+    <img src="https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/gpa.svg" alt="CodeClimate" />
+  </a>
+  <a href="https://codeclimate.com/github/lr-agenceweb/rails-starter/coverage">
+    <img src="https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/coverage.svg" alt="Test Coverage" />
+  </a>
+</p>
 
-### Overview [![Circle CI](https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master.svg?style=svg)](https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master) [![Licence](https://img.shields.io/badge/Licence-MIT-3d8273.svg)](Licence)
-This project has been built to increase speed when creating a new application: it's annoying to reconfigure always and always the same gems so this starter pack comes with plugins already configured such as activeadmin, devise, globalize, and many others.
+<p align="center">
+  <a href="https://hakiri.io/github/lr-agenceweb/rails-starter/master">
+    <img src="https://hakiri.io/github/lr-agenceweb/rails-starter/master.svg" alt="Security Hakiri" />
+  </a>
+  <a href="https://gemnasium.com/lr-agenceweb/rails-starter">
+    <img src="https://gemnasium.com/lr-agenceweb/rails-starter.svg" alt="Gemnasium" />
+  </a>
+  <img src="https://img.shields.io/badge/Licence-MIT-3d8273.svg?style=flat-square" alt="Licence MIT" />
+</p>
 
-### Requirements ![Ruby version](https://img.shields.io/badge/Ruby-2.2.2-5aaed7.svg) ![Rails version](https://img.shields.io/badge/Rails-4.2.5.2-5aaed7.svg)
+<h1 align='center'>
+  Rails Starter
+</h1>
+
+<p align='center'>
+  This project has been built to increase speed when creating a new application: <br /> it's annoying to reconfigure always and always the same gems so this starter pack comes with <br /> plugins already configured such as activeadmin, devise, globalize, and many others.
+</p>
+
+<p align='center'>
+  <img src="https://img.shields.io/badge/Ruby-2.2.2-5aaed7.svg?style=flat-square" alt="Ruby version" />
+  <img src="https://img.shields.io/badge/Rails-4.2.5.2-5aaed7.svg?style=flat-square" alt="Rails version" />
+</p>
+
+### Requirements
 Install [Foreman](https://github.com/ddollar/foreman)  
 Install [Maildev](https://github.com/djfarrelly/MailDev)  
 
@@ -22,17 +55,17 @@ Run `foreman start`
 Visit `http://localhost:3000`  
 That's it !  
 
-### Server ![Server](https://img.shields.io/badge/Server-Unicorn-5aaed7.svg)
+### Server ![Server](https://img.shields.io/badge/Server-Unicorn-5aaed7.svg?style=flat-square)
 This project use unicorn in local development. The server is launched using `foreman start`
 
-### Database ![SGBD](https://img.shields.io/badge/Database-MySQL%20%7C%20PostgreSQL%20%7C%20SQLite%20%7C%20MariaDB-5aaed7.svg)
+### Database ![SGBD](https://img.shields.io/badge/Database-MySQL%20%7C%20PostgreSQL%20%7C%20SQLite%20%7C%20MariaDB-5aaed7.svg?style=flat-square)
 It use `MySQL2` but you can choose to use `PostgreSQL`, `SQlite` or `MariaDB`.  
 To create a dump of your database, run `rake db:backup`
 
-### Template ![Template](https://img.shields.io/badge/Template-Slim-5aaed7.svg)
+### Template ![Template](https://img.shields.io/badge/Template-Slim-5aaed7.svg?style=flat-square)
 It use [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
 
-### Assets ![Assets](https://img.shields.io/badge/Assets-Sass%20%7C%20Coffeescript-5aaed7.svg)
+### Assets ![Assets](https://img.shields.io/badge/Assets-Sass%20%7C%20Coffeescript-5aaed7.svg?style=flat-square)
 Style is writting in `scss` and `sass` (using libsass)  
 Scripts are created in `coffeescript`
 
