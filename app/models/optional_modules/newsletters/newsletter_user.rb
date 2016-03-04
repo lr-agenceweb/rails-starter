@@ -44,7 +44,7 @@ class NewsletterUser < ActiveRecord::Base
 
   validates :newsletter_user_role_id,
             presence: true,
-            inclusion: { in: NewsletterUserRole.all.map(&:id) }
+            inclusion: { in: proc { NewsletterUserRole.all.map(&:id) } }
 
   scope :testers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'tester') }
   scope :subscribers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'subscriber') }
