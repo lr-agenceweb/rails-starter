@@ -29,7 +29,7 @@ class NewsletterUserTest < ActiveSupport::TestCase
     assert_equal [:email], newsletter_user.errors.keys
   end
 
-  test 'should save if email is blank' do
+  test 'should not save if email is blank' do
     newsletter_user = NewsletterUser.new(email: '', newsletter_user_role: @newsletter_user_role_tester)
     assert_not newsletter_user.valid?
     assert_equal [:email], newsletter_user.errors.keys
@@ -53,7 +53,7 @@ class NewsletterUserTest < ActiveSupport::TestCase
     assert_equal [:email], newsletter_user.errors.keys
   end
 
-  test 'should save if email is correct and with lang' do
+  test 'should save if all good' do
     newsletter_user = NewsletterUser.new(email: 'newsletter@test.com', lang: 'fr', newsletter_user_role: @newsletter_user_role_tester)
     assert newsletter_user.valid?
     assert newsletter_user.errors.keys.empty?
