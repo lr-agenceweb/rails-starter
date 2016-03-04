@@ -62,7 +62,7 @@ gem 'timecop'
 #
 # == Media upload
 #
-gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'paperclip', '~> 4.3'
 gem 'retina_rails', '~> 2.0.0'
 gem 'paperclip-av-transcoder'
 gem 'delayed_paperclip'
@@ -141,7 +141,7 @@ gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
 gem 'gravatar_image_tag'
-gem 'magnific-popup-rails', '~> 1.0.1'
+gem 'magnific-popup-rails', '~> 1.1.0'
 gem 'chartkick'
 gem 'faker'
 

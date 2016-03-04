@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   friendly_id :username, use: [:slugged, :finders]
 
   # Concerns
-  include Assets::Attachable
+  include Assets::Avatarable
   include OptionalModules::Omniauthable
 
   # Helpers
@@ -63,21 +63,6 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :role, reject_if: :all_blank
 
   delegate :name, to: :role, prefix: true, allow_nil: true
-
-  retina!
-  handle_attachment :avatar,
-                    styles: {
-                      large:  '512x512#',
-                      medium: '256x256#',
-                      small:  '128x128#',
-                      thumb:  '64x64#'
-                    }
-
-  validates_attachment :avatar,
-                       content_type: { content_type: %r{\Aimage\/.*\Z} },
-                       size: { less_than: 2.megabyte }
-
-  include Assets::DeletableAttachment
 
   validates :username,
             presence: true,
@@ -109,9 +94,5 @@ class User < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     username_changed? || super
-  end
-
-  def avatar?
-    avatar.present? && avatar.exists?
   end
 end

@@ -1,9 +1,10 @@
 ActiveAdmin.register NewsletterUser do
   menu parent: I18n.t('admin_menu.modules')
 
-  permit_params :id,
-                :lang,
-                :newsletter_user_role_id
+  permit_params do
+    params = [:id, :lang, :email, :newsletter_user_role_id]
+    params
+  end
 
   decorate_with NewsletterUserDecorator
   config.clear_sidebar_sections!
@@ -36,8 +37,11 @@ ActiveAdmin.register NewsletterUser do
 
     columns do
       column do
-        f.inputs t('activerecord.models.letter_user.one') do
-          f.input :email, input_html: { disabled: :disabled }
+        f.inputs t('activerecord.models.newsletter_user.one') do
+          f.input :email,
+                  input_html: {
+                    disabled: f.object.new_record? ? false : 'disabled'
+                  }
         end
       end
 
@@ -70,6 +74,7 @@ ActiveAdmin.register NewsletterUser do
     end
 
     def update
+      params[:newsletter_user].delete(:email)
       super { admin_newsletter_users_path }
     end
   end

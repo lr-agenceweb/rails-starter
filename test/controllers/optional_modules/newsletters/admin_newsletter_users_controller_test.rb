@@ -50,8 +50,7 @@ module Admin
     end
 
     test 'should not update if role params is not allowed' do
-      skip 'Don\'t know how to test InvalidForeignKey'
-      patch :update, id: @newsletter_user, newsletter_user: { newsletter_user_role_id: 8 }
+      patch :update, id: @newsletter_user, newsletter_user: { newsletter_user_role_id: 9999 }
       assert_not assigns(:newsletter_user).valid?
     end
 
@@ -66,8 +65,7 @@ module Admin
     end
 
     test 'should render edit template if role is not allowed' do
-      skip 'Don\'t know how to test InvalidForeignKey'
-      patch :update, id: @newsletter_user, newsletter_user: { newsletter_user_role_id: 8 }
+      patch :update, id: @newsletter_user, newsletter_user: { newsletter_user_role_id: 9999 }
       assert_template :edit
     end
 

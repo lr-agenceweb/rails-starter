@@ -24,45 +24,51 @@ class NewsletterUserTest < ActiveSupport::TestCase
   # == Validations
   #
   test 'should not save if email is nil' do
-    newsletter_user = NewsletterUser.new
+    newsletter_user = NewsletterUser.new newsletter_user_role: @newsletter_user_role_tester
     assert_not newsletter_user.valid?
     assert_equal [:email], newsletter_user.errors.keys
   end
 
   test 'should save if email is blank' do
-    newsletter_user = NewsletterUser.new(email: '')
+    newsletter_user = NewsletterUser.new(email: '', newsletter_user_role: @newsletter_user_role_tester)
     assert_not newsletter_user.valid?
     assert_equal [:email], newsletter_user.errors.keys
   end
 
   test 'should not save if email is not correct' do
-    newsletter_user = NewsletterUser.new(email: 'newsletter')
+    newsletter_user = NewsletterUser.new(email: 'newsletter', newsletter_user_role: @newsletter_user_role_tester)
     assert_not newsletter_user.valid?
     assert_equal [:email], newsletter_user.errors.keys
   end
 
   test 'should not save if email is correct but lang is forbidden' do
-    newsletter_user = NewsletterUser.new(email: 'newsletter@test.com', lang: 'de')
+    newsletter_user = NewsletterUser.new(email: 'newsletter@test.com', lang: 'de', newsletter_user_role: @newsletter_user_role_tester)
     assert_not newsletter_user.valid?
     assert_equal [:lang], newsletter_user.errors.keys
   end
 
   test 'should not save if email is already taken' do
-    newsletter_user = NewsletterUser.new(email: 'newsletteruser@test.fr', lang: 'fr')
+    newsletter_user = NewsletterUser.new(email: 'newsletteruser@test.fr', lang: 'fr', newsletter_user_role: @newsletter_user_role_tester)
     assert_not newsletter_user.valid?
     assert_equal [:email], newsletter_user.errors.keys
   end
 
   test 'should save if email is correct and with lang' do
-    newsletter_user = NewsletterUser.new(email: 'newsletter@test.com', lang: 'fr')
+    newsletter_user = NewsletterUser.new(email: 'newsletter@test.com', lang: 'fr', newsletter_user_role: @newsletter_user_role_tester)
     assert newsletter_user.valid?
     assert newsletter_user.errors.keys.empty?
   end
 
   test 'should not save if captcha is filled' do
-    newsletter_user = NewsletterUser.new(email: 'newsletteruseruniq@test.fr', lang: 'fr', nickname: 'robot')
+    newsletter_user = NewsletterUser.new(email: 'newsletteruseruniq@test.fr', lang: 'fr', nickname: 'robot', newsletter_user_role: @newsletter_user_role_tester)
     assert_not newsletter_user.valid?
     assert_equal [:nickname], newsletter_user.errors.keys
+  end
+
+  test 'should not save if role is not allowed' do
+    newsletter_user = NewsletterUser.new(email: 'newsletteruseruniq@test.fr', lang: 'fr', nickname: '', newsletter_user_role_id: 9999)
+    assert_not newsletter_user.valid?
+    assert_equal [:newsletter_user_role_id], newsletter_user.errors.keys
   end
 
   private
