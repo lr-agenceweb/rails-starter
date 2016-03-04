@@ -62,7 +62,7 @@ gem 'timecop'
 #
 # == Media upload
 #
-gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'paperclip', '~> 4.3'
 gem 'retina_rails', '~> 2.0.0'
 gem 'paperclip-av-transcoder'
 gem 'delayed_paperclip'
