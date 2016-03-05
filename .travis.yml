@@ -5,6 +5,7 @@ bundler_args: --without development
 
 rvm:
   - 2.2.2
+  - 2.3.0
 
 env:
   - DB=mysql

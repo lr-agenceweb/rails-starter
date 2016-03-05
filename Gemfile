@@ -159,7 +159,7 @@ gem 'lograge' # cleaner logs
 group :development do
   gem 'better_errors'
   gem 'rb-fsevent', require: false
-  gem 'irbtools-more', require: 'binding.repl'
+  gem 'irbtools', require: 'irbtools/binding'
 
   gem 'rubocop', require: false
   gem 'railroady' # graph of models

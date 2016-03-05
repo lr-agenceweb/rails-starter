@@ -1,2 +1,4 @@
-span#rails_env
-  span.env class="#{Rails.env}" = Rails.env.capitalize
+#ribbon.hide-for-small
+  .ribbon-container class="#{Rails.env}"
+    span.env = Rails.env.capitalize
+    span.version == "Ruby: <strong>#{RUBY_VERSION}</strong>, Rails: <strong>#{Rails.version}</strong>"
