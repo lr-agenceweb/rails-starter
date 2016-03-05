@@ -1,24 +1,23 @@
-#rails_env
+#ribbon
   display: block
   top: 0
   left: 0
-  width: 145px
-  height: 145px
+  width: 170px
+  height: 170px
   overflow: hidden
   z-index: 3
   position: fixed
 
-  .env
+  .ribbon-container
     position: absolute
-    top: 36px
-    left: -45px
-    width: 200px
+    top: 35px
+    left: -85px
+    width: 290px
     color: $white
     text-decoration: none
     text-align: center
     padding: 5px 40px
     font-size: 1rem
-    line-height: 2rem
     transition: 0.5s
     transform: rotate(-45deg)
     box-shadow: 4px 4px 10px rgba($black, .8)
@@ -42,3 +41,19 @@
     &::after
       bottom: 1px
       top: auto
+
+    .env
+      margin-bottom: 0
+    .version
+      font-size: 11px
+      display: block
+
+
+  // Bottom Left
+  &.bottom-left
+    top: initial
+    bottom: 0
+    .ribbon-container
+      top: 85px
+      left: -80px
+      transform: rotate(45deg)
