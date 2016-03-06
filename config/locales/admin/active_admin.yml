@@ -20,7 +20,9 @@ fr:
         toggle_validated: Valider / Invalider
         toggle_show_calendar: Activer / Désactiver calendrier pour
         toggle_signalled: Activer / Désactiver le signalement pour
+        reset_cache: Supprimer le cache pour
       flash: Le (les) élement(s) sélectionnés ont bien changé de statut
+      reset_cache: Le cache a bien été supprimé pour les éléments sélectionnés
     action_item:
       edit_heading_page: Modifier l'entête de la page %{page}
       see_article_in_frontend: Voir l'article sur le site

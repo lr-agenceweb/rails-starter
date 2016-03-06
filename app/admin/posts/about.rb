@@ -59,6 +59,11 @@ ActiveAdmin.register About do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  batch_action :reset_cache do |ids|
+    About.find(ids).each(&:touch)
+    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
   # Sortable
   sortable
   config.sort_order = 'position_asc'

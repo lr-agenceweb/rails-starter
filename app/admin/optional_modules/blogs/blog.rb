@@ -47,8 +47,12 @@ ActiveAdmin.register Blog do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  batch_action :reset_cache do |ids|
+    Blog.find(ids).each(&:touch)
+    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
   index do
-    selectable_column
     render 'admin/posts/index', object: self
   end
 
