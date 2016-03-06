@@ -75,6 +75,8 @@ ActiveAdmin.register Home do
     include Skippable
     include OptionalModules::Videoable
 
+    cache_sweeper :home_sweeper
+
     before_create do |post|
       post.type = post.object.class.name
       post.user_id = current_user.id
