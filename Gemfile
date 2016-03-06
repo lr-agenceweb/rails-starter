@@ -166,6 +166,7 @@ group :development do
   gem 'better_errors'
   gem 'rb-fsevent', require: false
   gem 'irbtools', require: 'irbtools/binding'
+  gem 'binding_of_caller'
 
   gem 'rubocop', require: false
   gem 'railroady' # graph of models
