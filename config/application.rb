@@ -7,6 +7,9 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Starter
+  #
+  # == Application
+  #
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -45,6 +48,6 @@ module Starter
     config.active_job.queue_adapter = :delayed_job
 
     # Override default errors
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
   end
 end
