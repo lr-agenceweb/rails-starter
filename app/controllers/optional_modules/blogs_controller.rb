@@ -33,7 +33,7 @@ class BlogsController < ApplicationController
   end
 
   def set_last_blogs
-    @last_blogs = Blog.select(:id, :title).includes(:comments, :translations).online.order('created_at DESC').last(5)
+    @last_blogs = Blog.select(:id, :title, :updated_at).includes(:comments, :translations).online.order('created_at DESC').last(5)
   end
 
   def blog_module_enabled?

@@ -28,7 +28,7 @@
 class VideoSubtitle < ActiveRecord::Base
   include Assets::Attachable
 
-  belongs_to :subtitleable, polymorphic: true
+  belongs_to :subtitleable, polymorphic: true, touch: true
 
   handle_attachment :subtitle_fr
   handle_attachment :subtitle_en
