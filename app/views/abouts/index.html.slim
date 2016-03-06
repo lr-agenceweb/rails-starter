@@ -6,10 +6,11 @@
 
 .row
   - @abouts.each do |about|
-    article.small-12.columns
-      = render 'posts/microdatas', resource: about.decorate
+    - cache ['list', about] do |_|
+      article.small-12.columns
+        = render 'posts/microdatas', resource: about.decorate
 
-      header
-        h2 = link_to about.title, about_path(about)
+        header
+          h2 = link_to about.title, about_path(about)
 
-      div itemprop='text' == truncate_read_more(about.content, about_path(about))
+        div itemprop='text' == truncate_read_more(about.content, about_path(about))

@@ -83,6 +83,8 @@ ActiveAdmin.register About do
   controller do
     include OptionalModules::Videoable
 
+    cache_sweeper :about_sweeper
+
     before_create do |post|
       post.type = post.object.class.name
       post.user_id = current_user.id
