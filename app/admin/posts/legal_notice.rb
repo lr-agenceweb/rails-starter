@@ -29,6 +29,7 @@ ActiveAdmin.register LegalNotice do
   end
 
   show title: :title_aa_show do
+    h3 resource.title
     columns do
       column do
         panel t('active_admin.details', model: active_admin_config.resource_label) do
@@ -67,6 +68,8 @@ ActiveAdmin.register LegalNotice do
   # == Controller
   #
   controller do
+    cache_sweeper :legal_notice_sweeper
+
     before_create do |post|
       post.type = post.object.class.name
       post.user_id = current_user.id
