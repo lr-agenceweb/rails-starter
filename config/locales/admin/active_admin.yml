@@ -4,7 +4,8 @@ fr:
     powered_by: Développé avec amour par <a href='http://www.lr-agenceweb.fr'>L&R Agence web</a> | Propulsé par %{active_admin} version %{version}
     globalize:
       language:
-        en: Anglais
+        en: English
+        es: Español
         fr: Français
       translations: Traductions
     edit: Modifier
@@ -39,10 +40,21 @@ en:
     globalize:
       language:
         en: English
-        fr: French
+        es: Español
+        fr: Français
       translations: Translations
     edit: Edit
     show: Show
     destroy:
       label: Delete
       confirm: "Are you sure you want to remove this %{object_kind} ?"
+
+# Spanish
+es:
+  active_admin:
+    globalize:
+      language:
+        en: English
+        es: Español
+        fr: Français
+      translations: Traducciones
