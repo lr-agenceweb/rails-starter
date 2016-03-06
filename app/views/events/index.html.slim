@@ -1,7 +1,8 @@
 - breadcrumb :events
 
 - if category.background? && @background_module.enabled? && !@background.nil?
-  = render 'assets/backgrounds/background', background: category.background
+  - cache category.background do
+    = render 'assets/backgrounds/background', background: category.background
 / = render 'optional_modules/sliders/show', slider: @category.slider, force: false unless @category.slider.nil?
 
 .row
