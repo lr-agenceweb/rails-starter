@@ -19,18 +19,18 @@ ActiveAdmin.register Slide do
 
   index do
     selectable_column
-    image_column :image, style: :small
-    column :title_deco
+    image_column :image, style: :crop_thumb
+    column :title
     column :description_deco
-    column :slider_page_name
+    column :attachable
     column :status
     actions
   end
 
   show title: :title_aa_show, decorate: true do
     attributes_table do
-      image_row :image, style: :large
-      row :title_deco
+      image_row :image, style: :small
+      row :title
       row :description_deco
       row :status
     end
@@ -75,6 +75,8 @@ ActiveAdmin.register Slide do
   #
   controller do
     include Skippable
+
+    cache_sweeper :slide_sweeper
 
     def scoped_collection
       super.includes attachable: [category: [menu: [:translations]]]
