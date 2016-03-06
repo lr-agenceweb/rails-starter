@@ -156,6 +156,12 @@ gem 'video_info'
 #
 gem 'lograge' # cleaner logs
 
+#
+# == Cache
+#
+gem 'rails-observers'
+gem 'dalli'
+
 group :development do
   gem 'better_errors'
   gem 'rb-fsevent', require: false
