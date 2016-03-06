@@ -25,7 +25,7 @@ class Background < ActiveRecord::Base
   include Assets::Attachable
   include Assets::SelfImageable
 
-  belongs_to :attachable, polymorphic: true
+  belongs_to :attachable, polymorphic: true, touch: true
 
   retina!
   handle_attachment :image,
