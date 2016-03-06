@@ -15,10 +15,10 @@ module Assets
       retina!
       handle_attachment :avatar,
                         styles: {
-                          large:  '512x512#',
-                          medium: '256x256#',
-                          small:  '128x128#',
-                          thumb:  '64x64#'
+                          large:  '256x256#',
+                          medium: '128x128#',
+                          small:  '64x64#',
+                          thumb:  '32x32#'
                         }
 
       validates_attachment :avatar,

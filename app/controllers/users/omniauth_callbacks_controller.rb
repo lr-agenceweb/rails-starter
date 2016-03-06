@@ -73,7 +73,7 @@ module Users
     end
 
     def should_redirect?
-      !(params[:id].to_s == current_user.id.to_s && current_user.from_omniauth?(params[:provider] == 'google' ? 'google_oauth2' : params[:provider]))
+      !(params[:id].to_s == current_user.id.to_s && current_user.from_omniauth?(params[:provider]))
     end
 
     def not_found

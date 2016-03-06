@@ -19,7 +19,7 @@ ActiveAdmin.register User do
   config.clear_sidebar_sections!
 
   index do
-    column :image_avatar
+    image_column :avatar, style: :medium
     column :username
     column :email
     column :current_sign_in_at
@@ -32,7 +32,7 @@ ActiveAdmin.register User do
     columns do
       column do
         attributes_table do
-          row :image_avatar
+          image_row :avatar, style: :medium
           row :email
           row :sign_in_count
           row :current_sign_in_at

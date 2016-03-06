@@ -237,16 +237,21 @@ Devise.setup do |config|
                   Figaro.env.facebook_app_secret,
                   scope: 'email',
                   info_fields: 'email, name',
-                  callback_url: "#{Figaro.env.application_host}/admin/auth/facebook/callback"
+                  callback_url: "#{Figaro.env.application_host}/admin/auth/facebook/callback",
+                  image_size: :large
 
   config.omniauth :google_oauth2,
                   Figaro.env.google_app_id,
                   Figaro.env.google_app_secret,
-                  access_type: 'online'
+                  access_type: 'online',
+                  image_aspect_ratio: :square,
+                  image_size: 200
 
   config.omniauth :twitter,
                   Figaro.env.twitter_app_id,
-                  Figaro.env.twitter_app_secret
+                  Figaro.env.twitter_app_secret,
+                  image_size: 'original',
+                  secure_image_url: 'true'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
