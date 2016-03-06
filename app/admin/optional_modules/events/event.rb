@@ -54,6 +54,11 @@ ActiveAdmin.register Event do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  batch_action :reset_cache do |ids|
+    Event.find(ids).each(&:touch)
+    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
   index do
     selectable_column
     image_column :image, style: :small do |r|
@@ -177,8 +182,10 @@ ActiveAdmin.register Event do
     include Skippable
     include OptionalModules::Videoable
 
+    cache_sweeper :event_sweeper
+
     def scoped_collection
-      super.includes :translations, :location
+      super.includes :translations, :location, :picture
     end
   end
 end

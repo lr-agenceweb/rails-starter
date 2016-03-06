@@ -28,6 +28,10 @@ module OptionalModules
         def flash_upload_in_progress(*)
           self.flash_notice = I18n.t('video_upload.flash.upload_in_progress')
         end
+
+        def video_platforms?
+          video_platforms.first.present?
+        end
       end
     end
   end

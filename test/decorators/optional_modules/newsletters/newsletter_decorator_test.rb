@@ -20,7 +20,11 @@ class NewsletterDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct value language buttons preview' do
-    assert_equal "<a target=\"_blank\" href=\"/admin/newsletters/#{@newsletter.id}/preview\">Français</a><br/><a target=\"_blank\" href=\"/en/admin/newsletters/#{@newsletter.id}/preview\">Anglais</a><br/>", @newsletter_decorated.preview
+    html = ''
+    html << "<a target=\"_blank\" href=\"/admin/newsletters/#{@newsletter.id}/preview\">Français</a><br/>" if @locales.include?(:fr)
+    html << "<a target=\"_blank\" href=\"/en/admin/newsletters/#{@newsletter.id}/preview\">English</a><br/>" if @locales.include?(:en)
+    html << "<a target=\"_blank\" href=\"/es/admin/newsletters/#{@newsletter.id}/preview\">Español</a><br/>" if @locales.include?(:es)
+    assert_equal html, @newsletter_decorated.preview
   end
 
   test 'should return correct value for live preview' do
@@ -46,6 +50,7 @@ class NewsletterDecoratorTest < Draper::TestCase
   private
 
   def initialize_test
+    @locales = I18n.available_locales
     @newsletter = newsletters(:one)
     @newsletter_decorated = NewsletterDecorator.new(@newsletter)
   end

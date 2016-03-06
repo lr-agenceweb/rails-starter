@@ -1,10 +1,11 @@
 - breadcrumb event
 
-.row
-  .small-12.columns
-    = render 'events/event', event: event
+- cache event do |_|
+  .row
+    .small-12.columns
+      = render 'events/event', event: event
 
-.row
-  .small-12.medium-9.medium-centered.columns
-    - if params[:action] == 'show'
-      p.text-right = link_to t('link.back_to', page: @category.menu_title), events_path
+  .row
+    .small-12.medium-9.medium-centered.columns
+      - if params[:action] == 'show'
+        p.text-right = link_to t('link.back_to', page: @category.menu_title), events_path

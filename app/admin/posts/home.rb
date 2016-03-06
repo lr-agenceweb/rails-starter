@@ -50,6 +50,11 @@ ActiveAdmin.register Home do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  batch_action :reset_cache do |ids|
+    Post.find(ids).each(&:touch)
+    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
   # Sortable
   sortable
   config.sort_order = 'position_asc'
@@ -74,6 +79,8 @@ ActiveAdmin.register Home do
   controller do
     include Skippable
     include OptionalModules::Videoable
+
+    cache_sweeper :home_sweeper
 
     before_create do |post|
       post.type = post.object.class.name

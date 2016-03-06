@@ -25,15 +25,15 @@ class Background < ActiveRecord::Base
   include Assets::Attachable
   include Assets::SelfImageable
 
-  belongs_to :attachable, polymorphic: true
+  belongs_to :attachable, polymorphic: true, touch: true
 
   retina!
   handle_attachment :image,
                     styles: {
-                      background: '4000x2000>',
-                      large:      '2000x1200>',
-                      medium:     '1000x600>',
-                      small:      '300x300>'
+                      background: '2000x1000>',
+                      large:      '1000x600>',
+                      medium:     '500x300>',
+                      small:      '150x150>'
                     }
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}

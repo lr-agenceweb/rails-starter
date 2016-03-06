@@ -40,6 +40,7 @@
 ### Requirements
 Install [Foreman](https://github.com/ddollar/foreman)  
 Install [Maildev](https://github.com/djfarrelly/MailDev)  
+Install [Memcached](http://memcached.org/)  
 
 ### Usage
 Clone it: `git clone git@github.com:lr-agenceweb/rails-starter.git`  
@@ -70,7 +71,9 @@ It use [Slim](https://github.com/slim-template/slim-rails) template to write HTM
 Style is writting in `scss` and `sass` (using libsass)  
 Scripts are created in `coffeescript`
 
-<!-- In development and test environments, assets are stored in `local` but in staging and production, they are stored with `dropbox` using dropbox-paperclip gem. The advantage of storing in an external server is that you relieve your server storage. -->
+### Cache
+Caching is handled by memcached with [Dalli](https://github.com/petergoldstein/dalli)
+
 
 ### Tasks
 #### Rails 

@@ -1,5 +1,6 @@
 section#events
   - @events.each do |event|
-    = render 'event', event: event
+    - cache ['list', event]
+      = render 'event', event: event
 
 = paginate @events

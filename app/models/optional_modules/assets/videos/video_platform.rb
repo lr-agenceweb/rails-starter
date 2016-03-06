@@ -24,7 +24,7 @@ class VideoPlatform < ActiveRecord::Base
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
-  belongs_to :videoable, polymorphic: true
+  belongs_to :videoable, polymorphic: true, touch: true
 
   validates :url, allow_blank: false, presence: true, url: true
 

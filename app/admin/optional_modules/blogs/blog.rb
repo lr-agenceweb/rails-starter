@@ -47,8 +47,12 @@ ActiveAdmin.register Blog do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  batch_action :reset_cache do |ids|
+    Blog.find(ids).each(&:touch)
+    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
   index do
-    selectable_column
     render 'admin/posts/index', object: self
   end
 
@@ -66,6 +70,8 @@ ActiveAdmin.register Blog do
   controller do
     include Skippable
     include OptionalModules::Videoable
+
+    cache_sweeper :blog_sweeper
 
     before_create do |blog|
       blog.user_id = current_user.id

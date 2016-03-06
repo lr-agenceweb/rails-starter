@@ -68,7 +68,7 @@ class ApplicationDecoratorTest < Draper::TestCase
 
   test 'should return status_tag for english language' do
     @newsletter_user.update_attribute(:lang, 'en')
-    assert_match '<span class="status_tag anglais red">Anglais</span>', @newsletter_user_decorated.lang
+    assert_match '<span class="status_tag english red">English</span>', @newsletter_user_decorated.lang
   end
 
   private
