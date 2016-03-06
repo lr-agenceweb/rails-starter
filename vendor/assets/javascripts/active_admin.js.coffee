@@ -65,6 +65,7 @@ $ ->
 
   # Spinner loader on create or update resource
   $('form input[type=submit]').on 'click', (e) ->
+    $('ol li#spinner').remove()
     $(this).parents('ol').append("<li style='margin-left: 10px'><img src='https://media.giphy.com/media/10kTz4r3ishQwU/giphy.gif' alt='loader' height='34' /></li>")
 
   # CommentSetting :: hide send_email if should_signal is not checked
