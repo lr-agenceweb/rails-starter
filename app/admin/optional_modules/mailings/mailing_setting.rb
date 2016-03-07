@@ -13,14 +13,16 @@ ActiveAdmin.register MailingSetting do
   config.clear_sidebar_sections!
 
   show do
-    columns do
-      column do
-        attributes_table do
-          row :name_status
-          row :email_status
-          row :signature_d
-          row :unsubscribe_title
-          row :unsubscribe_content
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :name_status
+            row :email_status
+            row :signature_d
+            row :unsubscribe_title
+            row :unsubscribe_content
+          end
         end
       end
     end

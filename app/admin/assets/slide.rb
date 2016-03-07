@@ -28,11 +28,13 @@ ActiveAdmin.register Slide do
   end
 
   show title: :title_aa_show, decorate: true do
-    attributes_table do
-      image_row :image, style: :small
-      row :title
-      row :description_deco
-      row :status
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        image_row :image, style: :small
+        row :title
+        row :description_deco
+        row :status
+      end
     end
   end
 

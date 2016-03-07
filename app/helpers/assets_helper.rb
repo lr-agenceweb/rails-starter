@@ -23,7 +23,7 @@ module AssetsHelper
   #
   def retina_thumb_square(resource, size = 64)
     if resource.avatar?
-      retina_image_tag(resource, :avatar, :thumb, default: [size, size])
+      retina_image_tag(resource, :avatar, :small, default: [size, size])
     else
       gravatar_image_tag(resource.email, alt: resource.username, gravatar: { size: size, secure: true })
     end

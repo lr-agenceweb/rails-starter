@@ -48,19 +48,21 @@ ActiveAdmin.register Category do
   end
 
   show title: :title_aa_show do
-    columns do
-      column do
-        attributes_table do
-          row :background_deco if background_module.enabled?
-          row :div_color
-          row :slider if slider_module.enabled?
-          row :module if current_user.super_administrator?
-          row :video_preview if show_video_background?(video_settings, video_module) && resource.video?
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :background_deco if background_module.enabled?
+            row :div_color
+            row :slider if slider_module.enabled?
+            row :module if current_user.super_administrator?
+            row :video_preview if show_video_background?(video_settings, video_module) && resource.video?
+          end
         end
-      end
 
-      column do
-        render 'admin/shared/referencement/show', referencement: resource.referencement
+        column do
+          render 'admin/shared/referencement/show', referencement: resource.referencement
+        end
       end
     end
   end

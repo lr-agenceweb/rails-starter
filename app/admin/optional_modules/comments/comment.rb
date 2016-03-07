@@ -45,15 +45,17 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   end
 
   show do
-    attributes_table do
-      row :author_with_avatar
-      row :email_registered_or_guest
-      row :content
-      row :lang if locales.length > 1
-      row :status
-      row :signalled_d if comment_setting.should_signal?
-      row :link_and_image_source
-      row :created_at
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :author_with_avatar
+        row :email_registered_or_guest
+        row :content
+        row :lang if locales.length > 1
+        row :status
+        row :signalled_d if comment_setting.should_signal?
+        row :link_and_image_source
+        row :created_at
+      end
     end
   end
 

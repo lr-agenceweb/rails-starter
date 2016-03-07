@@ -57,7 +57,9 @@ ActiveAdmin.register Blog do
   end
 
   show title: :title_aa_show do
-    render 'admin/posts/show', resource: resource
+    arbre_cache(self, resource.cache_key) do
+      render 'admin/posts/show', resource: resource
+    end
   end
 
   form do |f|

@@ -9,10 +9,12 @@ ActiveAdmin.register CommentSetting do
   actions :all, except: [:new]
 
   show title: I18n.t('activerecord.models.comment_setting.one') do
-    attributes_table do
-      row :should_validate
-      row :should_signal
-      row :send_email if resource.should_signal?
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :should_validate
+        row :should_signal
+        row :send_email if resource.should_signal?
+      end
     end
   end
 

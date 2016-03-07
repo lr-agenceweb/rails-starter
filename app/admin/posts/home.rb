@@ -66,7 +66,9 @@ ActiveAdmin.register Home do
   end
 
   show do
-    render 'admin/posts/show', resource: resource
+    arbre_cache(self, resource.cache_key) do
+      render 'admin/posts/show', resource: resource
+    end
   end
 
   form do |f|

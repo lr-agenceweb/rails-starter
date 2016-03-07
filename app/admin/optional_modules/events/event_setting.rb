@@ -9,11 +9,13 @@ ActiveAdmin.register EventSetting do
   config.clear_sidebar_sections!
 
   show title: I18n.t('activerecord.models.event_setting.one') do
-    columns do
-      column do
-        attributes_table do
-          row :prev_next
-          row :event_order
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :prev_next
+            row :event_order
+          end
         end
       end
     end

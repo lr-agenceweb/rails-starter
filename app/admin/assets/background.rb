@@ -14,9 +14,11 @@ ActiveAdmin.register Background do
   end
 
   show title: :title_aa_show do
-    attributes_table do
-      row :category_name
-      image_row :image, style: :medium
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :category_name
+        image_row :image, style: :medium
+      end
     end
   end
 

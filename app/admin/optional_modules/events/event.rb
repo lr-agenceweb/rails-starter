@@ -78,26 +78,28 @@ ActiveAdmin.register Event do
   end
 
   show do
-    columns do
-      column do
-        attributes_table do
-          image_row :image, style: :medium do |r|
-            r.picture.image if r.picture?
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            image_row :image, style: :medium do |r|
+              r.picture.image if r.picture?
+            end
+            row :content
+            row :start_date
+            row :end_date
+            row :duration
+            row :url
+            row :show_as_gallery
+            row :show_calendar_d if calendar_module.enabled?
+            row :status
+            row :full_address_inline
           end
-          row :content
-          row :start_date
-          row :end_date
-          row :duration
-          row :url
-          row :show_as_gallery
-          row :show_calendar_d if calendar_module.enabled?
-          row :status
-          row :full_address_inline
         end
-      end
 
-      column do
-        render 'admin/shared/referencement/show', referencement: resource.referencement
+        column do
+          render 'admin/shared/referencement/show', referencement: resource.referencement
+        end
       end
     end
   end

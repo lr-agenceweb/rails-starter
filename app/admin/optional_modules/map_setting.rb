@@ -15,19 +15,21 @@ ActiveAdmin.register MapSetting do
   end
 
   show title: I18n.t('activerecord.models.map_setting.one') do
-    columns do
-      column do
-        panel t('active_admin.details', model: t('activerecord.models.map.one')) do
-          attributes_table_for resource.decorate do
-            row :marker_icon
-            row :marker_color_d
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          panel t('active_admin.details', model: t('activerecord.models.map.one')) do
+            attributes_table_for resource.decorate do
+              row :marker_icon
+              row :marker_color_d
+            end
           end
         end
-      end
 
-      column do
-        panel t('activerecord.models.map.one') do
-          render 'elements/map'
+        column do
+          panel t('activerecord.models.map.one') do
+            render 'elements/map'
+          end
         end
       end
     end

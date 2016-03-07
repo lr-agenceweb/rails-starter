@@ -12,13 +12,15 @@ ActiveAdmin.register AdultSetting do
   config.clear_sidebar_sections!
 
   show do
-    columns do
-      column do
-        attributes_table do
-          row :status
-          row :title_d
-          row :content_d
-          row :redirect_link
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :status
+            row :title_d
+            row :content_d
+            row :redirect_link
+          end
         end
       end
     end

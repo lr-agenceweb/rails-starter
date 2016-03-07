@@ -33,12 +33,14 @@ ActiveAdmin.register GuestBook do
   end
 
   show do
-    attributes_table do
-      row :username
-      row :content
-      row :lang
-      row :status
-      row :created_at
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :username
+        row :content
+        row :lang
+        row :status
+        row :created_at
+      end
     end
   end
 

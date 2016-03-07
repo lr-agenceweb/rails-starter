@@ -29,21 +29,23 @@ ActiveAdmin.register VideoPlatform do
   end
 
   show do
-    columns do
-      column do
-        attributes_table do
-          row :preview
-          row :video_link
-          row :from_article
-          row :status
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :preview
+            row :video_link
+            row :from_article
+            row :status
+          end
         end
-      end
 
-      column do
-        attributes_table do
-          row :native_informations_d
-          row :title_d
-          row :description_d
+        column do
+          attributes_table do
+            row :native_informations_d
+            row :title_d
+            row :description_d
+          end
         end
       end
     end
