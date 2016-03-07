@@ -133,14 +133,8 @@ module Admin
     #
     # == Color
     #
-    test 'should remove color if checkbox is not checked' do
-      assert_equal '#F0F', @category.color
-      patch :update, id: @category, category: { custom_background_color: '0' }
-      assert_nil assigns(:category).color
-    end
-
-    test 'should keep color if checkbox is checked' do
-      patch :update, id: @category, category: { custom_background_color: '1' }
+    test 'should update color' do
+      patch :update, id: @category, category: { color: '#F0F' }
       assert_equal '#F0F', assigns(:category).color
     end
 

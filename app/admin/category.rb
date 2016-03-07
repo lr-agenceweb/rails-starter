@@ -82,17 +82,8 @@ ActiveAdmin.register Category do
                   },
                   hint: I18n.t('form.hint.category.menu_id')
 
-          f.input :custom_background_color,
-                  as: :boolean,
-                  input_html: {
-                    checked: f.object.color.blank? ? false : true
-                  }
-
           f.input :color,
-                  input_html: {
-                    class: 'colorpicker',
-                    value: f.object.color.blank? ? '' : f.object.color
-                  }
+                  as: :color_picker
         end
 
         render 'admin/shared/referencement/form', f: f
@@ -123,11 +114,6 @@ ActiveAdmin.register Category do
 
     def edit
       @page_title = resource.decorate.title_aa_edit
-    end
-
-    def update
-      params[:category][:color] = nil if params[:category][:custom_background_color] == '0'
-      super
     end
   end
 end

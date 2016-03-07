@@ -345,9 +345,6 @@ GEM
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-datetimepicker-rails (2.4.1.0)
-    jquery-minicolors-rails (2.2.3.0)
-      jquery-rails
-      rails (>= 3.2.8)
     jquery-rails (4.1.0)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -708,7 +705,6 @@ DEPENDENCIES
   irbtools
   jbuilder (~> 2.0)
   jquery-datetimepicker-rails
-  jquery-minicolors-rails
   jquery-ui-rails
   js_cookie_rails
   kaminari (~> 0.16.1)
