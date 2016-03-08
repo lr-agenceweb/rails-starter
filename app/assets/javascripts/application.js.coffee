@@ -69,3 +69,4 @@
 $(document).on 'ready page:load page:restore', ->
   # Save form inputs in LocalStorage
   $('form').formBackup()
+  $('form[data-validate]').validate()

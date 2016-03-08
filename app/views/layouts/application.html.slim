@@ -8,18 +8,13 @@ html lang="#{@language}"
     == google_bing_site_verification
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
 
+    / CSS
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
+    = render 'elements/head_tags/custom_css'
     noscript = stylesheet_link_tag 'noscript', media: 'all'
 
-    = javascript_include_tag 'application', 'data-turbolinks-track': true
-
-    - if setting.logo_footer? && @video_module.enabled? && @video_settings.video_upload?
-      css:
-        .mejs-container .mejs-controls .mejs-logo-button span {
-          background: transparent url("#{setting.logo_footer.url(:thumb)}") no-repeat;
-          background-size: 20px auto;
-          margin: 8px 0;
-        }
+    / JS
+    = render 'elements/head_tags/async_javascript', path: 'application'
 
     link type='text/plain' rel='author' href='/humans.txt'
     = favicon_link_tag '/favicon.ico'
