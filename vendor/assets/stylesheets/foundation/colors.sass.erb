@@ -18,17 +18,16 @@ $oil         : #333333
 $jet         : #222222
 $black       : #000000
 
-// We use these as default colors throughout
-$primary-color: #0c708d
-$secondary-color: #ee732a
-$tercery-color: #614394
+// To avoid to breaks DRY rule, main colors are defined in lib/assets config file (these variables are shared between sass and froala editor)
+$primary-color: <%= SharedColoredVariables::PRIMARY_COLOR %>
+$secondary-color: <%= SharedColoredVariables::SECONDARY_COLOR %>
+$tercery-color: <%= SharedColoredVariables::TERCERY_COLOR %>
 
 $alert-color: #f04124
 $success-color: #43AC6A
 $warning-color: #f08a24
 $info-color: #a0d3e8
 
-// We use these to control various global styles
 $body-bg: $white
 $body-font-color: #303030
 
