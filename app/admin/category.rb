@@ -83,7 +83,14 @@ ActiveAdmin.register Category do
                   hint: I18n.t('form.hint.category.menu_id')
 
           f.input :color,
-                  as: :color_picker
+                  as: :color_picker,
+                  palette: [
+                    SharedColoredVariables::PRIMARY_COLOR,
+                    SharedColoredVariables::SECONDARY_COLOR,
+                    SharedColoredVariables::TERCERY_COLOR,
+                    '#FFFFFF',
+                    '#000000'
+                  ]
         end
 
         render 'admin/shared/referencement/form', f: f
