@@ -29,12 +29,14 @@ ActiveAdmin.register MailingUser do
   end
 
   show title: proc { resource.fullname } do
-    attributes_table do
-      row :fullname
-      row :email
-      row :lang
-      row :created_at
-      row :archive_status
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :fullname
+        row :email
+        row :lang
+        row :created_at
+        row :archive_status
+      end
     end
   end
 

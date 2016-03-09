@@ -24,8 +24,6 @@ class Category < ActiveRecord::Base
   include OptionalModules::Assets::Backgroundable
   include OptionalModules::Assets::VideoUploadable
 
-  attr_accessor :custom_background_color
-
   belongs_to :optional_module
   belongs_to :menu
   has_one :slider, dependent: :destroy

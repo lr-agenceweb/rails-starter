@@ -48,19 +48,21 @@ ActiveAdmin.register Category do
   end
 
   show title: :title_aa_show do
-    columns do
-      column do
-        attributes_table do
-          row :background_deco if background_module.enabled?
-          row :div_color
-          row :slider if slider_module.enabled?
-          row :module if current_user.super_administrator?
-          row :video_preview if show_video_background?(video_settings, video_module) && resource.video?
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :background_deco if background_module.enabled?
+            row :div_color
+            row :slider if slider_module.enabled?
+            row :module if current_user.super_administrator?
+            row :video_preview if show_video_background?(video_settings, video_module) && resource.video?
+          end
         end
-      end
 
-      column do
-        render 'admin/shared/referencement/show', referencement: resource.referencement
+        column do
+          render 'admin/shared/referencement/show', referencement: resource.referencement
+        end
       end
     end
   end
@@ -80,17 +82,15 @@ ActiveAdmin.register Category do
                   },
                   hint: I18n.t('form.hint.category.menu_id')
 
-          f.input :custom_background_color,
-                  as: :boolean,
-                  input_html: {
-                    checked: f.object.color.blank? ? false : true
-                  }
-
           f.input :color,
-                  input_html: {
-                    class: 'colorpicker',
-                    value: f.object.color.blank? ? '' : f.object.color
-                  }
+                  as: :color_picker,
+                  palette: [
+                    SharedColoredVariables::PRIMARY_COLOR,
+                    SharedColoredVariables::SECONDARY_COLOR,
+                    SharedColoredVariables::TERCERY_COLOR,
+                    '#FFFFFF',
+                    '#000000'
+                  ]
         end
 
         render 'admin/shared/referencement/form', f: f
@@ -121,11 +121,6 @@ ActiveAdmin.register Category do
 
     def edit
       @page_title = resource.decorate.title_aa_edit
-    end
-
-    def update
-      params[:category][:color] = nil if params[:category][:custom_background_color] == '0'
-      super
     end
   end
 end

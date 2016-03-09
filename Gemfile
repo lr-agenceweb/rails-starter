@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #
 # == Rails
 #
-gem 'rails', '4.2.5.2'
+gem 'rails', '4.2.6'
 gem 'sprockets', '2.12.4'
 
 #
@@ -48,7 +48,6 @@ gem 'rails_autolink'
 gem 'truncate_html', github: 'AlexGunslinger/truncate_html'
 gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
 gem 'vex_rails', github: 'anthony-robin/vex_rails'
-gem 'jquery-minicolors-rails'
 gem 'js_cookie_rails'
 gem 'fotoramajs'
 
@@ -156,10 +155,17 @@ gem 'video_info'
 #
 gem 'lograge' # cleaner logs
 
+#
+# == Cache
+#
+gem 'rails-observers'
+gem 'dalli'
+
 group :development do
   gem 'better_errors'
   gem 'rb-fsevent', require: false
   gem 'irbtools', require: 'irbtools/binding'
+  gem 'binding_of_caller'
 
   gem 'rubocop', require: false
   gem 'railroady' # graph of models

@@ -28,12 +28,14 @@ ActiveAdmin.register StringBox do
   end
 
   show title: :title_aa_show do
-    attributes_table do
-      row :key if current_user.super_administrator?
-      row :description
-      row :title
-      row :content
-      row :optional_module if current_user.super_administrator?
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :key if current_user.super_administrator?
+        row :description
+        row :title
+        row :content
+        row :optional_module if current_user.super_administrator?
+      end
     end
   end
 

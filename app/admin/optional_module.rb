@@ -24,10 +24,12 @@ ActiveAdmin.register OptionalModule do
   end
 
   show title: :title_aa_show do
-    attributes_table do
-      row :name_deco
-      row :status
-      row :description
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :name_deco
+        row :status
+        row :description
+      end
     end
   end
 

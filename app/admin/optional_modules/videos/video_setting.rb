@@ -15,13 +15,15 @@ ActiveAdmin.register VideoSetting do
   config.clear_sidebar_sections!
 
   show title: I18n.t('activerecord.models.video_setting.one') do
-    columns do
-      column do
-        attributes_table do
-          row :video_platform
-          row :video_upload
-          row :video_background if resource.video_background?
-          row :turn_off_the_light
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :video_platform
+            row :video_upload
+            row :video_background if resource.video_background?
+            row :turn_off_the_light
+          end
         end
       end
     end

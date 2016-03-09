@@ -38,12 +38,14 @@ ActiveAdmin.register Social do
   end
 
   show do
-    attributes_table do
-      row :ikon_deco
-      row :title
-      row :kind
-      row :link unless resource.object.kind == 'share'
-      row :status
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :ikon_deco
+        row :title
+        row :kind
+        row :link unless resource.object.kind == 'share'
+        row :status
+      end
     end
   end
 

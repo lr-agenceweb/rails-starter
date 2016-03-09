@@ -54,6 +54,11 @@ ActiveAdmin.register Event do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  batch_action :reset_cache do |ids|
+    Event.find(ids).each(&:touch)
+    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
   index do
     selectable_column
     image_column :image, style: :small do |r|
@@ -73,26 +78,28 @@ ActiveAdmin.register Event do
   end
 
   show do
-    columns do
-      column do
-        attributes_table do
-          image_row :image, style: :medium do |r|
-            r.picture.image if r.picture?
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            image_row :image, style: :medium do |r|
+              r.picture.image if r.picture?
+            end
+            row :content
+            row :start_date
+            row :end_date
+            row :duration
+            row :url
+            row :show_as_gallery
+            row :show_calendar_d if calendar_module.enabled?
+            row :status
+            row :full_address_inline
           end
-          row :content
-          row :start_date
-          row :end_date
-          row :duration
-          row :url
-          row :show_as_gallery
-          row :show_calendar_d if calendar_module.enabled?
-          row :status
-          row :full_address_inline
         end
-      end
 
-      column do
-        render 'admin/shared/referencement/show', referencement: resource.referencement
+        column do
+          render 'admin/shared/referencement/show', referencement: resource.referencement
+        end
       end
     end
   end
@@ -177,8 +184,10 @@ ActiveAdmin.register Event do
     include Skippable
     include OptionalModules::Videoable
 
+    cache_sweeper :event_sweeper
+
     def scoped_collection
-      super.includes :translations, :location
+      super.includes :translations, :location, :picture
     end
   end
 end

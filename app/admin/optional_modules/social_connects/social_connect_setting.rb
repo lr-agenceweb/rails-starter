@@ -16,12 +16,14 @@ ActiveAdmin.register SocialConnectSetting do
   config.clear_sidebar_sections!
 
   show title: proc { resource.title_aa_show } do
-    columns do
-      column do
-        attributes_table do
-          row :status
-          resource.social_providers.each do |provider|
-            row "social_#{provider.name}".to_sym
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :status
+            resource.social_providers.each do |provider|
+              row "social_#{provider.name}".to_sym
+            end
           end
         end
       end

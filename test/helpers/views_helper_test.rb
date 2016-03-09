@@ -5,9 +5,9 @@ require 'test_helper'
 #
 module ActiveAdmin
   #
-  # == ActiveAdminHelper Test
+  # == ViewsHelper Test
   #
-  class ActiveAdminHelperTest < ActionView::TestCase
+  class ViewsHelperTest < ActionView::TestCase
     include Rails.application.routes.url_helpers
 
     setup :initialize_test

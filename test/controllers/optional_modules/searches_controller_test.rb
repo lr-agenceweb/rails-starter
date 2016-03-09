@@ -83,7 +83,7 @@ class SearchesControllerTest < ActionController::TestCase
       I18n.with_locale(locale.to_s) do
         get :index, locale: locale.to_s, term: term
         searches = assigns(:searches)
-        assert_equal searches.count, 1
+        assert_equal 1, searches.count
       end
     end
   end

@@ -31,22 +31,24 @@ ActiveAdmin.register VideoUpload do
   end
 
   show do
-    columns do
-      column do
-        attributes_table do
-          image_row :video_file, style: :preview
-          row :from_article
-          row :subtitles
-          row :status
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            image_row :video_file, style: :preview
+            row :from_article
+            row :subtitles
+            row :status
+          end
         end
-      end
 
-      column do
-        attributes_table do
-          row :title
-          row :description_d
-        end
-      end unless resource.category?
+        column do
+          attributes_table do
+            row :title
+            row :description_d
+          end
+        end unless resource.category?
+      end
     end
   end
 

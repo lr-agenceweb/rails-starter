@@ -33,11 +33,13 @@ ActiveAdmin.register Menu do
   end
 
   show title: :title_aa_show do
-    attributes_table do
-      row :title
-      row :status
-      bool_row :show_in_header
-      bool_row :show_in_footer
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :title
+        row :status
+        bool_row :show_in_header
+        bool_row :show_in_footer
+      end
     end
   end
 

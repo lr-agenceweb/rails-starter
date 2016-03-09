@@ -8,8 +8,10 @@ ActiveAdmin.register GuestBookSetting do
   actions :all, except: [:new]
 
   show title: I18n.t('activerecord.models.guest_book_setting.one') do
-    attributes_table do
-      row :should_validate
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        row :should_validate
+      end
     end
   end
 

@@ -12,7 +12,7 @@ namespace :paperclip do
         end
       else
         puts "\n\nFailed! You need to specify the 'CLASS' parameter!",
-               "Usage: cap <stage> paperclip:refresh:all CLASS=YourClass"
+             'Usage: cap <env> paperclip:refresh:all CLASS=YourClass'
       end
     end
 

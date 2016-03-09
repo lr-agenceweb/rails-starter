@@ -34,7 +34,7 @@ class AssetsHelperTest < ActionView::TestCase
   test 'should return retina avatar for user' do
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     @user.update_attributes!(avatar: attachment)
-    assert_equal "<img width=\"64\" height=\"64\" src=\"#{@user.avatar.url(:thumb)}\" alt=\"Thumb bart\" />", retina_thumb_square(@user)
+    assert_equal "<img width=\"64\" height=\"64\" src=\"#{@user.avatar.url(:small)}\" alt=\"Small bart\" />", retina_thumb_square(@user)
   end
 
   #

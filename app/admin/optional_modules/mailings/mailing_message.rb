@@ -35,16 +35,18 @@ ActiveAdmin.register MailingMessage do
   end
 
   show do
-    panel t('active_admin.details', model: active_admin_config.resource_label) do
-      attributes_table_for resource.decorate do
-        image_row :image, style: :medium do |r|
-          r.picture.image if r.picture?
+    arbre_cache(self, resource.cache_key) do
+      panel t('active_admin.details', model: active_admin_config.resource_label) do
+        attributes_table_for resource.decorate do
+          image_row :image, style: :medium do |r|
+            r.picture.image if r.picture?
+          end
+          row :status
+          row :sent_at
+          row :preview
+          row :send_link
+          row :live_preview
         end
-        row :status
-        row :sent_at
-        row :preview
-        row :send_link
-        row :live_preview
       end
     end
   end

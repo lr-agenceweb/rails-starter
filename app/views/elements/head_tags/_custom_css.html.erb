@@ -1,0 +1,9 @@
+<% if setting.logo_footer? && @video_module.enabled? && @video_settings.video_upload? %>
+  <style type="text/css">
+      .mejs-container .mejs-controls .mejs-logo-button span {
+        background: transparent url("<%= setting.logo_footer.url(:thumb) %>") no-repeat;
+        background-size: 20px auto;
+        margin: 8px 0;
+      }
+  </style>
+<% end %>

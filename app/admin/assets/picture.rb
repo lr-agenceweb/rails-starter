@@ -28,11 +28,13 @@ ActiveAdmin.register Picture do
   end
 
   show do
-    attributes_table do
-      image_row :image, style: :large
-      row :source_picture_title_link
-      row :description
-      row :status
+    arbre_cache(self, resource.cache_key) do
+      attributes_table do
+        image_row :image, style: :large
+        row :source_picture_title_link
+        row :description
+        row :status
+      end
     end
   end
 

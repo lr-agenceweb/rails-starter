@@ -244,7 +244,6 @@ fr:
         background: Arrière-plan
         background_deco: Arrière-plan
         position: Position
-        custom_background_color: Couleur de fond de page personnalisée
         color: Couleur
         div_color: Couleur de fond de site
         video_preview: Vidéo
@@ -357,6 +356,7 @@ fr:
         online: En ligne
         slide: Image
         image: Image
+        attachable: Slide liée à la page
         slider_page_name: Slide liée à la page
         status: État
         title: Titre

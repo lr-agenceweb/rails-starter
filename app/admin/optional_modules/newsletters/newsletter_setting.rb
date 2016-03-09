@@ -16,22 +16,24 @@ ActiveAdmin.register NewsletterSetting do
   config.clear_sidebar_sections!
 
   show title: I18n.t('activerecord.models.newsletter_setting.one') do
-    columns do
-      column do
-        attributes_table do
-          row :send_welcome_email
-          list_row :newsletter_user_roles_list, list_type: :ul
-        end
-      end
-
-      column do
-        panel I18n.t('newsletter.active_admin.welcome_panel_title') do
-          attributes_table_for resource.decorate do
-            row :title_subscriber
-            row :content_subscriber
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :send_welcome_email
+            list_row :newsletter_user_roles_list, list_type: :ul
           end
         end
-      end if resource.send_welcome_email?
+
+        column do
+          panel I18n.t('newsletter.active_admin.welcome_panel_title') do
+            attributes_table_for resource.decorate do
+              row :title_subscriber
+              row :content_subscriber
+            end
+          end
+        end if resource.send_welcome_email?
+      end
     end
   end
 

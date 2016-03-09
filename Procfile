@@ -9,3 +9,6 @@ mailer: bin/procfile/maildev
 
 # Delayed Jobs
 delayed_job: bin/procfile/delayed_job
+
+# Memcached (Dalli)
+memcached: bin/procfile/memcached

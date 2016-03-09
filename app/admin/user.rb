@@ -19,7 +19,8 @@ ActiveAdmin.register User do
   config.clear_sidebar_sections!
 
   index do
-    column :image_avatar
+    selectable_column
+    image_column :avatar, style: :thumb
     column :username
     column :email
     column :current_sign_in_at
@@ -29,30 +30,32 @@ ActiveAdmin.register User do
   end
 
   show do
-    columns do
-      column do
-        attributes_table do
-          row :image_avatar
-          row :email
-          row :sign_in_count
-          row :current_sign_in_at
-          row :last_sign_in_at
-          row :status
-          row :created_at
-          if resource == current_user && SocialProvider.allowed_to_use?
-            row :link_to_facebook if SocialProvider.provider_by_name('facebook').enabled?
-            row :link_to_twitter if SocialProvider.provider_by_name('twitter').enabled?
-            row :link_to_google if SocialProvider.provider_by_name('google').enabled?
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            image_row :avatar, style: :medium
+            row :email
+            row :sign_in_count
+            row :current_sign_in_at
+            row :last_sign_in_at
+            row :status
+            row :created_at
+            if resource == current_user && SocialProvider.allowed_to_use?
+              row :link_to_facebook if SocialProvider.provider_by_name('facebook').enabled?
+              row :link_to_twitter if SocialProvider.provider_by_name('twitter').enabled?
+              row :link_to_google if SocialProvider.provider_by_name('google').enabled?
+            end
           end
         end
-      end
 
-      column do
-        panel t('activerecord.models.post.other') do
-          table_for resource.posts do
-            column :image
-            column :title
-            column :status
+        column do
+          panel t('activerecord.models.post.other') do
+            table_for resource.posts do
+              column :image
+              column :title
+              column :status
+            end
           end
         end
       end

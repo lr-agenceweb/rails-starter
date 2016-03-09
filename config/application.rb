@@ -7,6 +7,9 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Starter
+  #
+  # == Application
+  #
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -30,6 +33,8 @@ module Starter
     config.autoload_paths += Dir["#{config.root}/app/models/**/"]
     config.autoload_paths += Dir["#{config.root}/app/decorators/**/"]
     config.autoload_paths += Dir["#{config.root}/app/admin/**/"]
+    config.autoload_paths += Dir["#{config.root}/app/sweepers/**/"]
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.i18n.load_path += Dir["#{config.root}/config/locales/**/*.yml"]
 
     # Remove Helper, CSS, Coffee generating when scaffolding ressources
@@ -44,6 +49,6 @@ module Starter
     config.active_job.queue_adapter = :delayed_job
 
     # Override default errors
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
   end
 end

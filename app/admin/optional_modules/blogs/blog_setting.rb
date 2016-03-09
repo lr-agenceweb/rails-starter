@@ -8,10 +8,12 @@ ActiveAdmin.register BlogSetting do
   config.clear_sidebar_sections!
 
   show title: I18n.t('activerecord.models.blog_setting.one') do
-    columns do
-      column do
-        attributes_table do
-          row :prev_next
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :prev_next
+          end
         end
       end
     end

@@ -47,7 +47,11 @@ froala_init = ->
     linkList: []
     linkStyles: {}
     multiLine: true
-    colorsStep: 6
+    colorsStep: 5
+    colorsText: [
+      "<%= SharedColoredVariables::PRIMARY_COLOR %>", "<%= SharedColoredVariables::SECONDARY_COLOR %>", "<%= SharedColoredVariables::TERCERY_COLOR %>", '#000000',
+      '#FFFFFF', 'REMOVE'
+    ]
     heightMin: 300
     language: 'fr'
     placeholderText: I18n.t('form.placeholder.froala', locale: gon.language)

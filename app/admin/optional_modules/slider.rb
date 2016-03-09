@@ -47,22 +47,24 @@ ActiveAdmin.register Slider do
   end
 
   show title: :title_aa_show do
-    columns do
-      column do
-        attributes_table do
-          row :page
-          row :status
-          row :autoplay_deco
-          row :hover_pause_deco
-          row :loop_deco
-          row :navigation_deco
-          row :bullet_deco
-          row :time_to_show_deco
-          row :animate
+    arbre_cache(self, resource.cache_key) do
+      columns do
+        column do
+          attributes_table do
+            row :page
+            row :status
+            row :autoplay_deco
+            row :hover_pause_deco
+            row :loop_deco
+            row :navigation_deco
+            row :bullet_deco
+            row :time_to_show_deco
+            row :animate
+          end
         end
-      end
 
-      column do
+        column do
+        end
       end
     end
 

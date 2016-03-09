@@ -31,9 +31,6 @@
 #= require i18n
 #= require i18n/translations
 
-#= require jquery.minicolors
-#= require admin/minicolors
-
 #= require fotorama
 
 $ ->
@@ -65,7 +62,8 @@ $ ->
 
   # Spinner loader on create or update resource
   $('form input[type=submit]').on 'click', (e) ->
-    $(this).parents('ol').append("<li style='margin-left: 10px'><img src='https://media.giphy.com/media/10kTz4r3ishQwU/giphy.gif' alt='loader' height='34' /></li>")
+    $('ol li#spinner').remove()
+    $(this).parents('ol').append("<li id='spinner' style='margin-left: 10px'><img src='https://media.giphy.com/media/10kTz4r3ishQwU/giphy.gif' alt='loader' height='34' /></li>")
 
   # CommentSetting :: hide send_email if should_signal is not checked
   if $('#comment_setting_should_signal_input').length

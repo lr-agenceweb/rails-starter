@@ -4,15 +4,17 @@
   = render 'assets/videos/video_background', video_background: category.video_upload.decorate
 - else
   - if category.background? && @background_module.enabled? && !@background.nil?
-    = render 'assets/backgrounds/background', background: category.background
+    - cache category.background do
+      = render 'assets/backgrounds/background', background: category.background
   - else
     = render 'optional_modules/sliders/show', slider: slider, force: false
 
 .homepage-content
   .row
     - @homes.each do |home|
-      .small-12.medium-9.large-7.medium-centered.columns
-        = render 'homes/home', home: home
+      - cache home do |_|
+        .small-12.medium-9.large-7.medium-centered.columns
+          = render 'homes/home', home: home
 
   .row
     .small-12.medium-4.medium-centered.columns
