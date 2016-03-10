@@ -4,9 +4,6 @@
 
 #= require jquery-ui
 
-#= require jquery.datetimepicker
-#= require plugins/datetimepicker
-
 #= require modules/password_strength
 
 #= require globals/_functions
