@@ -1,6 +1,23 @@
 .alert-box
-  margin-bottom: 0
   position: fixed
   bottom: 15px
   left: 15px
   z-index: 1
+  font-size: .8rem
+  padding-right: 2rem !important
+  color: $white
+  margin-bottom: 0
+
+  &.notice, &.success
+    background-color: $success-color
+
+  &.error, &.alert
+    background-color: $alert-color
+
+  &.warning
+    background-color: $warning-color
+
+  .close-button
+    right: 0.5rem
+    top: 0.2rem
+    color: $white

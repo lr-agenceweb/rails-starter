@@ -19,22 +19,6 @@ class HtmlHelperTest < ActionView::TestCase
     assert_equal '<p>In quis nisl blandit, commodo massa vitae, congue sapien.... <a href="/a-propos">Lire la suite</a></p>', truncate_read_more(text, '/a-propos', 100)
   end
 
-  test 'should return success flash html code' do
-    flash['success'] = 'Congratulation !'
-    result = show_flash
-    expected = '<div class="alert-box success" data-alert="" tabindex="0" aria-live="assertive" role="dialogalert">Congratulation !<a href="#" class="close" tabindex="0" aria-label="Close Alert">&times</a></div>'
-    assert_equal expected, result
-  end
-
-  test 'should concat success and error flash html code' do
-    flash['success'] = 'Congratulation !'
-    flash['error'] = 'Action error !'
-    result = show_flash
-    expected = '<div class="alert-box success" data-alert="" tabindex="0" aria-live="assertive" role="dialogalert">Congratulation !<a href="#" class="close" tabindex="0" aria-label="Close Alert">&times</a></div>'
-    expected << '<div class="alert-box alert" data-alert="" tabindex="0" aria-live="assertive" role="dialogalert">Action error !<a href="#" class="close" tabindex="0" aria-label="Close Alert">&times</a></div>'
-    assert_equal expected, result
-  end
-
   test 'should return success klass' do
     assert_equal 'success', klass_by_type('success')
     assert_equal 'success', klass_by_type('notice')
