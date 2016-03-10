@@ -1,0 +1,5 @@
+.maintenance-container.row
+  .small-12.columns
+    h1.maintenance-title
+      = fa_icon 'exclamation-triangle', text: I18n.t('maintenance.title', locale: locale.to_sym)
+    .maintenance-content = I18n.t('maintenance.content', locale: locale.to_sym)
