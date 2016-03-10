@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # == Rails
 #
 gem 'rails', '4.2.6'
-gem 'sprockets', '2.12.4'
+# gem 'sprockets'
 
 #
 # == Database
@@ -136,7 +136,7 @@ gem 'jquery-ui-rails'
 gem 'jquery-datetimepicker-rails'
 gem 'turbolinks'
 gem 'nprogress-rails'
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 6.2.0'
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'
