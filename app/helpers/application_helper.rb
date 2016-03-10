@@ -6,9 +6,9 @@ module ApplicationHelper
     Time.zone.now.year
   end
 
-  def title_for_category(category)
+  def title_for_category(category, misc = nil)
     link = link_to category.menu_title, category.menu_link(category.name), class: 'l-page-title-link'
-    content_tag(:h2, link, class: 'l-page-title', id: category.name.downcase)
+    content_tag(:h2, link + misc, class: 'l-page-title', id: category.name.downcase)
   end
 
   def background_from_color_picker(category)

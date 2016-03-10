@@ -1,12 +1,6 @@
 - breadcrumb :contact
 
 section.contacts-section#contacts
-  .row
-    .small-12.columns
-      = title_for_category(category)
-        = title_for_category(category)
-        - if Rails.env.development?
-          = link_to 'Mail dev', root_url(locale: 'fr', port: 1080, only_path: false), target: :blank, class: 'button success tiny maildev hide-for-small'
 
   - if category.slider?
     .row
@@ -14,11 +8,11 @@ section.contacts-section#contacts
         = render 'optional_modules/sliders/show', slider: slider, force: false
 
   - if category.background? && @background_module.enabled? && !@background.nil?
-    = render 'assets/backgrounds/background', background: category.background, content: render('form'), klass: 'background-contact'
+    = render 'assets/backgrounds/background', background: category.background, content: (render('contacts/title', category: category) + render('contacts/form')), klass: 'background-contact'
+
   - else
-    .row.align-center
-      .small-12.medium-9.columns
-        = render 'form'
+    = render 'contacts/title', category: category
+    = render 'contacts/form'
 
   / Mapbox
   - unless @location.nil?
