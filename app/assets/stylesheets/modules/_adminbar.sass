@@ -1,11 +1,7 @@
 #admin_bar
   background-color: $jet
   padding: 10px
-  overflow: auto
   color: $gainsboro
-
-  .dropdown-pane li a
-    display: inline-block
 
   a
     color: $white
@@ -40,15 +36,6 @@
       color: $gainsboro
       cursor: pointer
 
-  .admin_bar-username
-    a
-      color: $secondary-color
-  .admin_bar-avatar
-    img
-      max-width: 24px
-      max-height: 24px
-
-
   .admin_bar
     &-comments-tovalidate-link
       background-color: $tercery-color
@@ -62,5 +49,22 @@
     border-right: 1px solid $gainsboro
     height: 25px
 
-  .dropdown-pane
-    background-color: $dropdown-background
+  .dropdown.menu
+    font-size: .8rem
+
+    img
+      min-width: 24px
+      max-width: 24px
+      margin-left: 0.25rem
+
+    > li > a
+      padding-top: 0
+      padding-left: 0
+      padding-bottom: 0
+
+    li
+      display: block
+
+    li.is-submenu-item
+      &:hover
+        background-color: $aluminum

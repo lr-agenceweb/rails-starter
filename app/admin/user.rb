@@ -18,9 +18,14 @@ ActiveAdmin.register User do
   decorate_with UserDecorator
   config.clear_sidebar_sections!
 
+  batch_action :reset_cache do |ids|
+    User.find(ids).each(&:touch)
+    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
   index do
     selectable_column
-    image_column :avatar, style: :thumb
+    column :image_avatar
     column :username
     column :email
     column :current_sign_in_at
@@ -34,7 +39,7 @@ ActiveAdmin.register User do
       columns do
         column do
           attributes_table do
-            image_row :avatar, style: :medium
+            row :image_avatar
             row :email
             row :sign_in_count
             row :current_sign_in_at
