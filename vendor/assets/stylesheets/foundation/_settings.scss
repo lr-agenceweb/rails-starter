@@ -279,10 +279,11 @@ $drilldown-background: $white;
 // 16. Dropdown
 // ------------
 
-$dropdown-padding: 1rem;
+$dropdown-padding: 0.5rem;
 $dropdown-border: 1px solid $medium-gray;
-$dropdown-font-size: 1rem;
+$dropdown-font-size: .7rem;
 $dropdown-width: 300px;
+$dropdown-background: #313131;
 $dropdown-radius: $global-radius;
 $dropdown-sizes: (
   tiny: 100px,
@@ -523,7 +524,7 @@ $titlebar-icon-spacing: 0.25rem;
 // -----------
 
 $has-tip-font-weight: $global-weight-bold;
-$has-tip-border-bottom: dotted 1px $dark-gray;
+$has-tip-border-bottom: none;
 $tooltip-background-color: $black;
 $tooltip-color: $white;
 $tooltip-padding: 0.75rem;

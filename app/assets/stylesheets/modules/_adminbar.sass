@@ -4,18 +4,18 @@
   overflow: auto
   color: $gainsboro
 
-  .f-dropdown li a
+  .dropdown-pane li a
     display: inline-block
 
   a
     color: $white
 
-  .inline-list
+  .menu.simple
     font-size: .8rem
     margin-bottom: 0
 
     &> li > *
-      display: initial
+      display: inline-block
 
   .fa
     &.success
@@ -61,3 +61,6 @@
   .divider
     border-right: 1px solid $gainsboro
     height: 25px
+
+  .dropdown-pane
+    background-color: $dropdown-background
