@@ -9,13 +9,13 @@
 
 .row
   .small-12.columns
-    .row
-      .small-12.medium-8.medium-centered.columns
+    .row.align-center
+      .small-12.medium-8.columns
         .guest-books-form
           = render 'form'
 
-    .row
-      .small-12.medium-9.medium-centered.columns
+    .row.align-center
+      .small-12.medium-9.columns
         - if @guest_books.blank?
           p = t('guest_book.no_results')
         - else

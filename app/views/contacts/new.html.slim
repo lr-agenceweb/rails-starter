@@ -1,25 +1,25 @@
 - breadcrumb :contact
 
-.row
-  .small-12.columns
-    = title_for_category(category)
-      = title_for_category(category)
-      - if Rails.env.development?
-        = link_to 'Mail dev', root_url(locale: 'fr', port: 1080, only_path: false), target: :blank, class: 'button success tiny maildev hide-for-small'
-
-- if category.slider?
+section.contacts-section#contacts
   .row
     .small-12.columns
-      = render 'optional_modules/sliders/show', slider: slider, force: false
+      = title_for_category(category)
+        = title_for_category(category)
+        - if Rails.env.development?
+          = link_to 'Mail dev', root_url(locale: 'fr', port: 1080, only_path: false), target: :blank, class: 'button success tiny maildev hide-for-small'
 
-- if category.background? && @background_module.enabled? && !@background.nil?
-  = render 'assets/backgrounds/background', background: category.background, content: render('form'), klass: 'background-contact'
-- else
-  .row
-    .small-12.medium-9.medium-centered.columns
-      = render 'form'
+  - if category.slider?
+    .row
+      .small-12.columns
+        = render 'optional_modules/sliders/show', slider: slider, force: false
 
+  - if category.background? && @background_module.enabled? && !@background.nil?
+    = render 'assets/backgrounds/background', background: category.background, content: render('form'), klass: 'background-contact'
+  - else
+    .row.align-center
+      .small-12.medium-9.columns
+        = render 'form'
 
-/ Mapbox
-- unless @location.nil?
-  = render 'elements/map'
+  / Mapbox
+  - unless @location.nil?
+    = render 'elements/map'

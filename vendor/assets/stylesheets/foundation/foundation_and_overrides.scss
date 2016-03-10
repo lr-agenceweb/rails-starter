@@ -2,12 +2,7 @@
 
 @import 'settings';
 @import 'foundation';
-
-// If you'd like to include motion-ui, you need to install the motion-ui sass package.
-//
 // @import 'motion-ui/motion-ui';
-
-// We include everything by default.  To slim your CSS, remove components you don't use.
 
 @include foundation-global-styles;
 
@@ -50,7 +45,5 @@
 @include foundation-tooltip;
 @include foundation-top-bar;
 
-// If you'd like to include motion-ui, you need to install the motion-ui sass package.
-//
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
