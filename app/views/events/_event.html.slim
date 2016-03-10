@@ -1,7 +1,7 @@
 article.post-article
   = render 'events/microdatas', resource: event
 
-  header
+  header.post-header
     h3.post-article-title
       = link_to event.title, event_path(event)
       small< == event.from_to_date

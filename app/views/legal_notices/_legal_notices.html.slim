@@ -1,6 +1,5 @@
-section#legal-notices
-  .row
-    - @legal_notices.each do |legal_notice|
-      = cache legal_notice do |_|
-        div class="small-12 medium-#{12/@legal_notices.length} columns"
-          = render 'legal_notice', legal_notice: legal_notice
+.row
+  - @legal_notices.each do |legal_notice|
+    = cache legal_notice do |_|
+      article class="small-12 medium-#{12/@legal_notices.length} columns"
+        = render 'legal_notice', legal_notice: legal_notice

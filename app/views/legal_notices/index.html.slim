@@ -1,9 +1,8 @@
 - breadcrumb :legal_notices
 
-.row
-  .small-12.columns
-    = title_for_category(category)
+section.legal_notices-section.page-section#legal_notices
+  .row
+    .small-12.columns
+      = title_for_category(category)
 
-.row
-  .small-12.columns
-    = render 'legal_notices'
+  = render 'legal_notices'
