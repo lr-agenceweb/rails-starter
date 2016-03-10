@@ -35,9 +35,16 @@ ActiveAdmin.register Category do
   config.clear_sidebar_sections!
   config.sort_order = 'menus.position asc'
 
+  batch_action :reset_cache do |ids|
+    Category.find(ids).each(&:touch)
+    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
   index do
     selectable_column
-    column :background_deco if background_module.enabled?
+    image_column :image, style: :small do |r|
+      r.background.image if r.background?
+    end if background_module.enabled?
     column :title_d
     column :div_color
     column :slider if slider_module.enabled?
@@ -52,7 +59,9 @@ ActiveAdmin.register Category do
       columns do
         column do
           attributes_table do
-            row :background_deco if background_module.enabled?
+            image_row :image, style: :medium do |r|
+              r.background.image if r.background?
+            end if background_module.enabled?
             row :div_color
             row :slider if slider_module.enabled?
             row :module if current_user.super_administrator?

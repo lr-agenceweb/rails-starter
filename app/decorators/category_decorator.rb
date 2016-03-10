@@ -9,14 +9,6 @@ class CategoryDecorator < ApplicationDecorator
     model.menu_title
   end
 
-  def background_deco
-    if background?
-      retina_image_tag model.background, :image, :small
-    else
-      'Pas de Background associé'
-    end
-  end
-
   def div_color
     if model.color.blank?
       content_tag(:span, 'Pas de couleur')

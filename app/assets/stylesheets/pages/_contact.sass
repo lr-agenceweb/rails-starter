@@ -1,0 +1,33 @@
+.contacts-section
+  .l-contact-info
+    @extend .panel
+    margin-bottom: 0
+    border: none
+    background-color: $secondary-color
+    min-height: 139px
+    p
+      color: $white
+
+    a
+      @include link-colors($link-active-color)
+
+  .contact_form_send_copy label
+    color: $white
+    text-align: right
+    font-weight: 300
+    margin-top: 8px
+    font-size: .8rem
+
+  .submit-btn
+    font-weight: 300
+    padding: 10px 20px
+
+  .required-fields
+    text-align: right
+    color: $white
+    font-size: .6rem
+    margin-top: 10px
+
+  // Captcha
+  #contact_form_nickname
+    display: none !important

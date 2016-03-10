@@ -109,12 +109,6 @@ module Admin
       assert_redirected_to admin_categories_path
     end
 
-    test 'should destroy background if check_box is checked' do
-      assert_not_nil @category.background
-      patch :update, id: @category, category: { background_attributes: { _destroy: true } }
-      assert_equal 'Pas de Background associé', assigns(:category).background_deco
-    end
-
     test 'should remove background parameter if module is disabled' do
       disable_optional_module @super_administrator, @background_module, 'Background' # in test_helper.rb
       sign_in @administrator

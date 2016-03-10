@@ -5,7 +5,7 @@
 
   .upper-footer
     padding: 1rem 10px 15px 10px
-    background-color: $topbar-bg-color
+    background-color: $topbar-background
 
     .newsletter-form
       .newsletter-form-header
@@ -47,7 +47,7 @@
     .socials
       .social-header-title, a
         color: $white
-        font-size: $h6-font-size
+        font-size: map-get($header-sizes, h6)
 
   .lower-footer
     padding: 15px
@@ -85,7 +85,3 @@
           color: #E34
         a
           color: #ee732a
-
-// Sticky footer
-.footer-container, .push
-  height: $footer-height

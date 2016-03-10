@@ -1,7 +1,7 @@
 article.post-article
   = render 'posts/microdatas', resource: blog, kind: 'BlogPosting'
 
-  header
+  header.post-header
     h3
       = link_to blog.title, blog_path(blog)
       small<: em = "(#{blog.created_at})"

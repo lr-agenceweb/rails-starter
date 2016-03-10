@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # == Rails
 #
 gem 'rails', '4.2.6'
-gem 'sprockets', '2.12.4'
+# gem 'sprockets'
 
 #
 # == Database
@@ -128,14 +128,14 @@ gem 'nokogiri'
 # == Assets
 #
 gem 'sassc-rails'
+gem 'sassc', '1.8.2'
 gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-ui-rails'
-gem 'jquery-datetimepicker-rails'
 gem 'turbolinks'
 gem 'nprogress-rails'
-gem 'foundation-rails', '~> 5.5.3.2'
+gem 'foundation-rails', '~> 6.2.0'
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'gon'

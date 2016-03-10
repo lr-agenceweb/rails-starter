@@ -35,14 +35,14 @@ html lang="#{@language}"
 
     main#wrapper.wrapper
       = render 'elements/no_js', setting: @setting
-      = show_flash unless flash.nil?
-      = render 'elements/header', show_metadata: true
+      = render 'elements/flash' unless flash.nil?
+      = render 'elements/header/header', show_metadata: true
 
       .l-container
         == yield
       .push
 
-    = render 'elements/footer', newsletter_user: @newsletter_user
+    = render 'elements/footer/footer', newsletter_user: @newsletter_user
     = raw analytical.body_append_javascript
 
     / = render 'elements/devkit'

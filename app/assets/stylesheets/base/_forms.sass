@@ -1,65 +1,57 @@
-.one-page
+.comments-container, .guest-books-form, .new_contact_form
   textarea
-    min-height: 200px
-    transition: height .3s ease-in
-    resize: vertical
-
-    &.tiny
-      min-height: 0
-      height: 100px !important
-
-    &.contact-form
-      height: 198px
-      min-height: 0
-      margin-bottom: 0
-
-  .submit-btn
-    width: 100%
-    display: block
-    background-color: $secondary-color
-    border: none
-    color: $white
-    padding: 10px
-    font-size: 13px
-    cursor: pointer
-
-  .l-contact-info
-    @extend .panel
     margin-bottom: 0
-    border: none
-    background-color: $secondary-color
-    min-height: 139px
-    p
-      color: $white
+  .submit-and-loader
+    margin-top: 1rem
+    float: right
+    .submit-loader
+      margin-right: 10px
+      max-height: 34px
+      display: none
 
-    a
-      @include link-colors($link-active-color)
+textarea
+  min-height: 200px
+  transition: height .3s ease-in
+  resize: vertical
 
-  #contact_form_nickname
-    display: none !important
+  &.tiny
+    min-height: 0
+    height: 100px !important
+
+  &.contact-form
+    height: 198px
+    min-height: 0
+    margin-bottom: 0
+
+.submit-btn
+  width: 100%
+  display: block
+  background-color: $secondary-color
+  border: none
+  color: $white
+  padding: 10px
+  font-size: 13px
+  cursor: pointer
 
 form
-  span.error
-    background: transparent
-    color: $warning-color
-    padding-left: 0
-
-    &.hide
-      display: none !important
-
-  span.success
+  span.error, span.success
     display: block
     padding: 0.375rem 0.5625rem 0.5625rem
-    margin-top: -1rem
     margin-bottom: 1rem
     font-size: 0.75rem
     font-weight: normal
     font-style: italic
+    padding-left: 0
+    .hide
+      display: none !important
+
+  span.error
+    background: transparent
+    color: $warning-color
+
+  span.success
     background: $success-color
     color: #FFFFFF
-
-    &.hide
-      display: none !important
 
   input.string + span.error
     margin-top: -1rem

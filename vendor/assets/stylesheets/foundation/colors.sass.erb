@@ -18,6 +18,10 @@ $oil         : #333333
 $jet         : #222222
 $black       : #000000
 
+$light-gray: #e6e6e6
+$medium-gray: #cacaca
+$dark-gray: #8a8a8a
+
 // To avoid to breaks DRY rule, main colors are defined in lib/assets config file (these variables are shared between sass and froala editor)
 $primary-color: <%= SharedColoredVariables::PRIMARY_COLOR %>
 $secondary-color: <%= SharedColoredVariables::SECONDARY_COLOR %>
@@ -28,7 +32,8 @@ $success-color: #43AC6A
 $warning-color: #f08a24
 $info-color: #a0d3e8
 
-$body-bg: $white
+// $body-bg: $white
+$body-background: $white
 $body-font-color: #303030
 
 // Socials
@@ -42,3 +47,11 @@ $skinActiveColor: $secondary-color
 $skinHeaderBck: $tercery-color
 $panelHeaderBck: $tercery-color
 $formLegendHeading: $primary-color
+
+// Link and menu
+$link-color: $primary-color
+$link-hover-color: $link-color
+$link-active-color: $secondary-color
+$border-color: #FFF
+$menu-font-color: rgba(#FFF, .4)
+$menu-bg-color: $tercery-color

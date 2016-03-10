@@ -1,6 +1,5 @@
 $(document).ready(function() {
-  $('#wrapper').prepend("<%= j show_flash %>");
-  $(document).foundation('alert', 'reflow');
+  $('#wrapper').prepend("<%= j render 'elements/flash' %>");
 
   setTimeout((function() {
     $('.alert-box').fadeOut();

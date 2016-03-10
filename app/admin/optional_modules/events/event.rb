@@ -136,19 +136,11 @@ ActiveAdmin.register Event do
       column do
         f.inputs t('activerecord.models.event.one') do
           f.input :start_date,
-                  as: :string,
-                  input_html: {
-                    class: 'datetimepicker',
-                    value: f.object.start_date.blank? ? '' : f.object.start_date.localtime.to_s(:db)
-                  },
+                  as: :date_time_picker,
                   hint: I18n.t('form.hint.event.start_date')
 
           f.input :end_date,
-                  as: :string,
-                  input_html: {
-                    class: 'datetimepicker',
-                    value: f.object.end_date.blank? ? '' : f.object.end_date.localtime.to_s(:db)
-                  },
+                  as: :date_time_picker,
                   hint: I18n.t('form.hint.event.end_date')
         end
       end
