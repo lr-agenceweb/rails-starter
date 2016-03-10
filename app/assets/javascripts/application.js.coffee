@@ -1,10 +1,7 @@
-#= require vendor/modernizr
-
 #= require jquery
 #= require jquery_ujs
 #= require jquery-ui/autocomplete
 
-#= require foundation/foundation
 #= require foundation
 #= require plugins/foundation_init
 

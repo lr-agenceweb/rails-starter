@@ -1,6 +1,6 @@
-#admin_bar.hide-for-small
-  .left
-    ul.inline-list
+#admin_bar.hide-for-small.clearfix
+  .float-left
+    ul.menu.simple class="#{!Rails.env.production? ? 'ribbon-margin-left' : ''}"
       li
         - if @setting.maintenance?
           span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('maintenance.title')}"
@@ -30,18 +30,16 @@
               a.admin_bar-bubble.admin_bar-comments-signalled-link href="#{admin_post_comments_path(scope: 'signales')}"
                 span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.signalled')}" = Comment.signalled.count
 
-  .right
-    ul.inline-list
+  .float-right
+    ul.dropdown.menu data-dropdown-menu=''
       li
-        span.admin_bar-username<>
-          == "#{morning_or_evening} #{link_to(current_user.username, admin_user_path(current_user))}"
-        span.admin_bar-avatar<>
+        a href="#"
+          == "#{morning_or_evening} #{current_user.username} "
           = current_user.decorate.image_avatar(24)
-      li
-        a aria-controls="admin_bar_nav" aria-expanded="false" data-dropdown="admin_bar_nav"
-          = fa_icon 'bars 2x'
-        ul#admin_bar_nav.f-dropdown aria-hidden="true" data-dropdown-content="" tabindex="-1"
+        ul.menu
           li
-            = fa_icon 'unlock', text: link_to(I18n.t('admin_bar.go_to_admin'), admin_dashboard_path, class: 'dahsboard-link', data: { no_turbolink: true }), right: true
+            = link_to(fa_icon('user', text: I18n.t('admin_bar.my_profile'), right: true), admin_user_path(current_user), class: 'dahsboard-link', data: { no_turbolink: true })
           li
-            = fa_icon 'sign-out', text: link_to(t('log_out'), destroy_user_session_path, method: :delete, class: 'dahsboard-link'), right: true
+            = link_to(fa_icon('unlock', text: I18n.t('admin_bar.go_to_admin'), right: true), admin_dashboard_path, class: 'dahsboard-link', data: { no_turbolink: true })
+          li
+            = link_to(fa_icon('sign-out', text: t('log_out'), right: true), destroy_user_session_path, method: :delete, class: 'dahsboard-link')

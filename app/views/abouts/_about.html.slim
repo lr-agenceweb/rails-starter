@@ -1,0 +1,7 @@
+article.post-article
+  = render 'posts/microdatas', resource: about.decorate
+
+  header.post-header
+    h2 = link_to about.title, about_path(about)
+
+  .post-body == truncate_read_more(about.content, about_path(about))

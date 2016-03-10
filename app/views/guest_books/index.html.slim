@@ -3,20 +3,19 @@
 - if category.video?
   = render 'assets/videos/video_background', video_background: category.video_upload.decorate
 
-.row
-  .small-12.columns
-    = title_for_category(category)
+section.guest_books-section.page-section#guest_books
+  .row
+    .small-12.columns
+      = title_for_category(category)
 
-.row
-  .small-12.columns
-    .row
-      .small-12.medium-8.medium-centered.columns
-        .guest-books-form
-          = render 'form'
+  .row.align-center
+    .small-12.medium-8.columns
+      .guest-books-form
+        = render 'form'
 
-    .row
-      .small-12.medium-9.medium-centered.columns
-        - if @guest_books.blank?
-          p = t('guest_book.no_results')
-        - else
-          = render 'guest_books'
+  .row.align-center
+    .small-12.medium-9.columns
+      - if @guest_books.blank?
+        p = t('guest_book.no_results')
+      - else
+        = render 'guest_books'

@@ -1,9 +1,12 @@
+$ribbon_width: 170px
+$ribbon_height: $ribbon_width
+
 #ribbon
   display: block
   top: 0
   left: 0
-  width: 170px
-  height: 170px
+  width: $ribbon_width
+  height: $ribbon_height
   overflow: hidden
   z-index: 3
   position: fixed
@@ -57,3 +60,6 @@
       top: 85px
       left: -80px
       transform: rotate(45deg)
+
+.ribbon-margin-left
+  margin-left: $ribbon_width

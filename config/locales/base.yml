@@ -66,6 +66,7 @@ fr:
 
   admin_bar:
     go_to_admin: Voir l'administration
+    my_profile: Mon profil
 
 # English
 en:
@@ -115,3 +116,4 @@ en:
 
   admin_bar:
     go_to_admin: Go to the administration
+    my_profile: My profile

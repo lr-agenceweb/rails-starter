@@ -14,10 +14,10 @@ html lang="#{@language}"
 
   body
     main#wrapper.wrapper.error-template
-      = render 'elements/header', show_metadata: false
+      = render 'elements/header/header', show_metadata: false
 
       .l-container
         == yield
       .push
 
-    = render 'elements/footer', newsletter_user: @newsletter_user
+    = render 'elements/footer/footer', newsletter_user: @newsletter_user
