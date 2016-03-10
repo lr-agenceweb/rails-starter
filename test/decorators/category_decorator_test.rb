@@ -13,14 +13,6 @@ class CategoryDecoratorTest < Draper::TestCase
     assert_equal 'Accueil', @category_decorated.title_d
   end
 
-  test 'should return correct value for background_deco' do
-    assert_equal 'Pas de Background associé', @category_decorated.background_deco
-
-    attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-    @category_blog_decorated.background.update_attributes(image: attachment)
-    assert_equal "<img width=\"150\" height=\"84\" src=\"#{@category_blog_decorated.background.image.url(:small)}\" alt=\"Small background paris\" />", @category_blog_decorated.background_deco
-  end
-
   test 'should return correct value for div_color' do
     assert_equal '<div style="background-color: #F0F; width: 35px; height: 20px;"></div>', @category_decorated.div_color
     assert_equal '<span>Pas de couleur</span>', @category_about_decorated.div_color

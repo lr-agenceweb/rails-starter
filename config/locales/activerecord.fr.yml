@@ -242,7 +242,6 @@ fr:
         title_d: Titre
         name: Nom de la catégorie
         background: Arrière-plan
-        background_deco: Arrière-plan
         position: Position
         color: Couleur
         div_color: Couleur de fond de site
