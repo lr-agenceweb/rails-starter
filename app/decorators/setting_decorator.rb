@@ -82,7 +82,7 @@ class SettingDecorator < ApplicationDecorator
   def newsletter(newsletter_user)
     content_tag(:div, class: 'newsletter-form') do
       concat(content_tag(:span, I18n.t('newsletter.header'), class: 'newsletter-form-header'))
-      concat(render('footer/newsletter_form', newsletter_user: newsletter_user))
+      concat(render('elements/footer/newsletter_form', newsletter_user: newsletter_user))
     end
   end
 
