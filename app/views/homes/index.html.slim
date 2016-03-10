@@ -10,12 +10,12 @@
     = render 'optional_modules/sliders/show', slider: slider, force: false
 
 .homepage-content
-  .row
+  .row.align-center.text-center
     - @homes.each do |home|
       - cache home do |_|
-        .small-12.medium-9.large-7.medium-centered.columns
+        .small-12.medium-9.large-7.columns
           = render 'homes/home', home: home
 
-  .row
-    .small-12.medium-4.medium-centered.columns
+  .row.align-center.text-center
+    .small-12.medium-4.columns
       .button-discover = link_to t('demo.discover_demo_site'), blogs_path
