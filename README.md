@@ -88,6 +88,7 @@ Caching is handled by memcached with [Dalli](https://github.com/petergoldstein/d
   * `cap <env> upload:dkim` : Upload DKIM private key
   * `cap <env> upload:missing` : Upload default pictures when missing or unavailable paperclip model objects
   * `cap <env> upload:seeds` : Upload seeds fixtures files before in order to seed database
+  * `cap <env> upload:all` : Execute all previous commands in one task
 
 * **Database backup**  
   * `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
