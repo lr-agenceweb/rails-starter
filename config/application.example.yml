@@ -132,6 +132,13 @@ adult_not_validated_popup_redirect_link: 'http://www.lr-agenceweb.fr'
 
 
 #
+# == ExceptionNotification [slack integration]
+#
+exception_notification_slack_webhook_url: ~
+exception_notification_slack_channel: '#exceptions'
+
+
+#
 # == Backup gem
 #
 production:

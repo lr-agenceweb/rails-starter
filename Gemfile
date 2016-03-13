@@ -205,6 +205,11 @@ group :test do
   gem 'simplecov-json', require: false
 end
 
+group :production, :staging, :backup do
+  gem 'exception_notification' # Notify when exceptions raised
+  gem 'slack-notifier' # Use slack as Notifier
+end
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0'

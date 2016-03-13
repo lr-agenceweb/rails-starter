@@ -92,4 +92,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Send slack notification whenever uncaught exception occurs in production
+  config.middleware.use ExceptionNotification::Rack, slack: {
+    webhook_url: Figaro.env.exception_notification_slack_webhook_url,
+    channel: Figaro.env.exception_notification_slack_channel
+  }
 end
