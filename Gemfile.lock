@@ -563,6 +563,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    secure_headers (3.0.3)
+      useragent
     select2-rails (3.5.10)
       thor (~> 0.14)
     sexp_processor (4.7.0)
@@ -634,6 +636,7 @@ GEM
       rack
       unicorn
     uniform_notifier (1.9.0)
+    useragent (0.16.5)
     valid_url (0.0.4)
       addressable
       rails
@@ -755,6 +758,7 @@ DEPENDENCIES
   sassc (= 1.8.2)
   sassc-rails
   sdoc (~> 0.4.0)
+  secure_headers (~> 3.0)
   shog
   shut_up_assets
   simple_form

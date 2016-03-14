@@ -104,6 +104,7 @@ gem 'meta-tags'
 #
 gem 'figaro'
 gem 'cancancan', '~> 1.10'
+gem 'secure_headers', '~> 3.0'
 
 #
 # == Analytics
