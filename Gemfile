@@ -129,7 +129,6 @@ gem 'nokogiri'
 # == Assets
 #
 gem 'sassc-rails'
-gem 'sassc', '1.8.2'
 gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
