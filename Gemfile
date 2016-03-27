@@ -22,7 +22,7 @@ gem 'devise'
 gem 'devise-i18n-views'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '~> 0.4.1'
 
 #
 # == Administration
