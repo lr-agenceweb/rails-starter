@@ -3,13 +3,13 @@
     <img src="https://circleci.com/gh/lr-agenceweb/rails-starter/tree/master.svg?style=svg" alt="Circle CI" />
   </a>
   <a href="https://travis-ci.org/lr-agenceweb/rails-starter">
-    <img src="https://travis-ci.org/lr-agenceweb/rails-starter.svg?branch=master" alt="Travis CI" />
+    <img src="https://img.shields.io/travis/lr-agenceweb/rails-starter/master.svg?style=flat-square" alt="Travis CI" />
   </a>
   <a href="https://codeclimate.com/github/lr-agenceweb/rails-starter">
-    <img src="https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/gpa.svg" alt="CodeClimate" />
+    <img src="https://img.shields.io/codeclimate/github/lr-agenceweb/rails-starter.svg?style=flat-square" alt="CodeClimate" />
   </a>
   <a href="https://codeclimate.com/github/lr-agenceweb/rails-starter/coverage">
-    <img src="https://codeclimate.com/github/lr-agenceweb/rails-starter/badges/coverage.svg" alt="Test Coverage" />
+    <img src="https://img.shields.io/codeclimate/coverage/github/lr-agenceweb/rails-starter.svg?style=flat-square" alt="Test Coverage" />
   </a>
 </p>
 
