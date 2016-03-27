@@ -29,6 +29,9 @@ class ApplicationController < ActionController::Base
   include OptionalModules::NewsletterFrontUserable
   before_action :set_module_settings, if: proc { @setting.show_admin_bar? } # for AdminBar
 
+  # Security
+  include Security::NotificationSettings
+
   # Misc
   before_action :set_host_name
   before_action :set_froala_key

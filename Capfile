@@ -8,7 +8,7 @@ require 'capistrano/rvm'
 require 'capistrano/rails/collection'
 require 'capistrano/passenger'
 require 'capistrano/sitemap_generator'
-# require 'capistrano/delayed-job'
+require 'capistrano/delayed-job'
 require 'whenever/capistrano'
 
 # Include tasks from other gems included in your Gemfile

@@ -22,7 +22,7 @@ gem 'devise'
 gem 'devise-i18n-views'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '~> 0.4.1'
 
 #
 # == Administration
@@ -104,6 +104,7 @@ gem 'meta-tags'
 #
 gem 'figaro'
 gem 'cancancan', '~> 1.10'
+gem 'secure_headers', '~> 3.0'
 
 #
 # == Analytics
@@ -128,7 +129,6 @@ gem 'nokogiri'
 # == Assets
 #
 gem 'sassc-rails'
-gem 'sassc', '1.8.2'
 gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -203,6 +203,11 @@ group :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'simplecov-json', require: false
+end
+
+group :production, :staging, :backup do
+  gem 'exception_notification' # Notify when exceptions raised
+  gem 'slack-notifier' # Use slack as Notifier
 end
 
 group :doc do
