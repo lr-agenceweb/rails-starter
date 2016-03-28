@@ -22,7 +22,7 @@ class NewsletterDecorator < ApplicationDecorator
       html += link_to I18n.t("active_admin.globalize.language.#{locale}"), send("preview_admin_newsletter_#{locale}_path", model.id), target: :_blank
       html += '<br/>'
     end
-    html
+    html.html_safe
   end
 
   def live_preview
