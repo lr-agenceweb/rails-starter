@@ -12,7 +12,7 @@ ActiveAdmin.register BlogSetting do
       columns do
         column do
           attributes_table do
-            row :prev_next
+            bool_row :prev_next
           end
         end
       end

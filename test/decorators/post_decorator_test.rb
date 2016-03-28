@@ -86,19 +86,6 @@ class PostDecoratorTest < Draper::TestCase
     assert_equal '<a href="/admin/abouts/developpement-hebergement">Voir</a>', @post_about_decorated.admin_link
   end
 
-  #
-  # == Status tag
-  #
-  test 'should return correct status_tag if comments enabled' do
-    @post.update_attribute(:allow_comments, true)
-    assert_match '<span class="status_tag commentaires_autorisés green">Commentaires Autorisés</span>', @post_decorated.allow_comments_status
-  end
-
-  test 'should return correct status_tag if comments disabled' do
-    @post.update_attribute(:allow_comments, false)
-    assert_match '<span class="status_tag article_non_commentable red">Article Non Commentable</span>', @post_decorated.allow_comments_status
-  end
-
   private
 
   def initialize_test

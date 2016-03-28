@@ -16,38 +16,7 @@ class SliderDecorator < ApplicationDecorator
     I18n.t("activerecord.models.#{model.category_name.downcase}.one")
   end
 
-  #
-  # == Status tag
-  #
-  def autoplay_deco
-    status_slider 'autoplay'
-  end
-
-  def hover_pause_deco
-    status_slider 'hover_pause'
-  end
-
-  def loop_deco
-    status_slider 'loop'
-  end
-
-  def navigation_deco
-    status_slider 'navigation'
-  end
-
-  def bullet_deco
-    status_slider 'bullet'
-  end
-
-  def time_to_show_deco
+  def time_to_show
     "#{model.time_to_show / 1000} #{I18n.t('time.label.seconds')}"
-  end
-
-  private
-
-  def status_slider(property)
-    v = model[property]
-    color = v ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{v}"), color
   end
 end

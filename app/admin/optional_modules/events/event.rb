@@ -67,11 +67,8 @@ ActiveAdmin.register Event do
     column :title
     column :start_date
     column :end_date
-    column :duration
-    column :url
-    column :show_calendar_d if calendar_module.enabled?
-    column :status
-    column :full_address_inline
+    bool_column :show_calendar if calendar_module.enabled?
+    bool_column :online
 
     translation_status
     actions
@@ -83,17 +80,17 @@ ActiveAdmin.register Event do
         column do
           attributes_table do
             image_row :image, style: :medium do |r|
-              r.picture.image if r.picture?
-            end
+              r.picture.image
+            end if resource.picture?
             row :content
             row :start_date
             row :end_date
             row :duration
             row :url
-            row :show_as_gallery
-            row :show_calendar_d if calendar_module.enabled?
-            row :status
             row :full_address_inline
+            bool_row :show_as_gallery
+            bool_row :show_calendar if calendar_module.enabled?
+            bool_row :online
           end
         end
 
@@ -124,6 +121,16 @@ ActiveAdmin.register Event do
       end
 
       column do
+        f.inputs t('activerecord.models.event.one') do
+          f.input :start_date,
+                  as: :date_time_picker,
+                  hint: I18n.t('form.hint.event.start_date')
+
+          f.input :end_date,
+                  as: :date_time_picker,
+                  hint: I18n.t('form.hint.event.end_date')
+        end
+
         render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
       end
     end
@@ -134,15 +141,7 @@ ActiveAdmin.register Event do
       end
 
       column do
-        f.inputs t('activerecord.models.event.one') do
-          f.input :start_date,
-                  as: :date_time_picker,
-                  hint: I18n.t('form.hint.event.start_date')
-
-          f.input :end_date,
-                  as: :date_time_picker,
-                  hint: I18n.t('form.hint.event.end_date')
-        end
+        render 'admin/shared/referencement/form', f: f
       end
     end # columns
 
@@ -152,15 +151,11 @@ ActiveAdmin.register Event do
       end
 
       column do
-        render 'admin/shared/referencement/form', f: f
-      end
+        render 'admin/shared/video_platforms/many', f: f
+      end if video_settings.video_platform?
     end
 
     columns do
-      column do
-        render 'admin/shared/video_platforms/many', f: f
-      end if video_settings.video_platform?
-
       column do
         render 'admin/shared/video_uploads/many', f: f
       end if video_settings.video_upload?

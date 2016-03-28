@@ -1,10 +1,10 @@
 object.selectable_column
 object.image_column :image, style: :small do |r|
   r.picture.image if r.picture?
-end
+end unless defined?(hide_image_column)
 object.column :title
-object.bool_column :allow_comments if comment_module.enabled?
-object.column :status
+object.bool_column :allow_comments if comment_module.enabled? && !defined?(hide_comments_column)
+object.bool_column :online
 object.translation_status
 object.column :author_with_avatar
 

@@ -27,14 +27,6 @@ class VideoPlatformDecorator < VideoDecorator
     raw(desc)
   end
 
-  #
-  # == Status tag
-  #
-  def native_informations_d
-    color = model.native_informations? ? 'green' : 'red'
-    status_tag_deco I18n.t("native_informations.#{model.native_informations?}"), color
-  end
-
   private
 
   def video_platform_available?(video_info)

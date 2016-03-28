@@ -68,12 +68,6 @@ class EventDecoratorTest < Draper::TestCase
   #
   # == Calendar
   #
-  test 'should return correct status_tag for show_calendar' do
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @event_decorated.show_calendar_d
-    @event.update_attributes(show_calendar: true)
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @event_decorated.show_calendar_d
-  end
-
   test 'should return correct boolean value if show calendar' do
     assert_not @event_decorated.all_conditions_to_show_calendar?(@calendar_module)
     @event.update_attributes(show_calendar: true)

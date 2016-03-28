@@ -16,10 +16,10 @@ ActiveAdmin.register AdultSetting do
       columns do
         column do
           attributes_table do
-            row :status
-            row :title_d
-            row :content_d
+            row :title
+            row :content
             row :redirect_link
+            bool_row :enabled
           end
         end
       end

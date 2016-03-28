@@ -32,7 +32,7 @@ ActiveAdmin.register Social do
     column :title
     column :kind
     column :link
-    column :status
+    bool_column :enabled
 
     actions
   end
@@ -44,7 +44,7 @@ ActiveAdmin.register Social do
         row :title
         row :kind
         row :link unless resource.object.kind == 'share'
-        row :status
+        bool_row :enabled
       end
     end
   end

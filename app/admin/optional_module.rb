@@ -16,9 +16,9 @@ ActiveAdmin.register OptionalModule do
 
   index do
     selectable_column
-    column :name_deco
-    column :status
+    column :name
     column :description
+    bool_column :enabled
 
     actions
   end
@@ -26,9 +26,9 @@ ActiveAdmin.register OptionalModule do
   show title: :title_aa_show do
     arbre_cache(self, resource.cache_key) do
       attributes_table do
-        row :name_deco
-        row :status
+        row :name
         row :description
+        bool_row :enabled
       end
     end
   end

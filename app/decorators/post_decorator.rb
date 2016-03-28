@@ -29,14 +29,6 @@ class PostDecorator < ApplicationDecorator
   end
 
   #
-  # == Status tag
-  #
-  def allow_comments_status
-    color = model.allow_comments? ? 'green' : 'red'
-    status_tag_deco I18n.t("allow_comments.#{model.allow_comments}"), color
-  end
-
-  #
   # == Picture
   #
   def image

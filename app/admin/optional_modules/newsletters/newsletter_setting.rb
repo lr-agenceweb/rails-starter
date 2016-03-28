@@ -20,7 +20,7 @@ ActiveAdmin.register NewsletterSetting do
       columns do
         column do
           attributes_table do
-            row :send_welcome_email
+            bool_row :send_welcome_email
             list_row :newsletter_user_roles_list, list_type: :ul
           end
         end

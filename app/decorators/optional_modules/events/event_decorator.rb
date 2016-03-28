@@ -38,11 +38,6 @@ class EventDecorator < PostDecorator
     model.show_calendar? && calendar_module.enabled? && start_date? && end_date?
   end
 
-  def show_calendar_d
-    color = model.show_calendar? ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.show_calendar}"), color
-  end
-
   #
   # == Location
   #

@@ -8,8 +8,8 @@ panel.panel t('activerecord.models.comment.other') do
         truncate_html(resource.content, length: 100)
       end
       p.column t('activerecord.attributes.comment.lang'), :lang
-      p.column t('activerecord.attributes.comment.signalled'), :signalled_d
-      p.column t('activerecord.attributes.shared.created_at'), :created_at
+      p.bool_column t('activerecord.attributes.comment.signalled_d'), :signalled_d
+      p.column t('activerecord.attributes.comment.created_at'), :created_at
 
       p.column 'Actions' do |comment|
         link_to t('active_admin.show'), admin_post_comment_path(comment)

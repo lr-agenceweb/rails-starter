@@ -6,12 +6,10 @@ panel.panel t('activerecord.models.post.other') do
       p.column t('activerecord.attributes.shared.image'), :image
       p.column t('activerecord.attributes.post.title'), :title_front_link
       p.column t('activerecord.attributes.post.type_title'), :type_title
-      p.column t('activerecord.attributes.shared.status'), :status
+      p.bool_column t('activerecord.attributes.post.online'), :online
       p.column t('activerecord.attributes.shared.created_at'), :created_at
 
-      p.column 'Actions' do |post|
-        post.admin_link
-      end
+      p.column 'Actions', &:admin_link
     end
   end
 end

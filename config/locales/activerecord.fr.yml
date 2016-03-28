@@ -176,9 +176,8 @@ fr:
         excerpt: Extrait
         content: Contenu
         keywords: Mot-clés
-        online: En ligne
-        prev_next: Liens précédent/suivant
-        prev_next_d: Liens précédent/suivant
+        online: En ligne ?
+        prev_next: Liens précédent / suivant ?
         link: Lien
         type_title: Page
         author_with_avatar: Auteur
@@ -189,13 +188,12 @@ fr:
         title: Titre
         content: Contenu
         author_with_avatar: Auteur
-        status: Statut
-        prev_next: Liens précédent/suivant
-        prev_next_d: Liens précédent/suivant
+        online: En ligne ?
+        prev_next: Liens précédent / suivant ?
         allow_comments: Commentaires ?
         show_as_gallery: Galerie d'images
       blog_setting:
-        prev_next: Liens précédent / suivant
+        prev_next: Liens précédent / suivant ?
       setting:
         title: Titre
         subtitle: Sous-titre
@@ -249,13 +247,12 @@ fr:
         video_upload: Vidéo d'arrière plan
         delete_video_file: Supprimer vidéo d'arrière plan ?
       menu:
+        title: Titre
         parent_id: Menu parent
         children_list: Sous-menu(s)
-        online: En ligne
-        status: État
-        show_in_footer: Dans le footer
-        show_in_header: Dans le menu principal
-        title: Titre
+        online: En ligne ?
+        show_in_footer: Dans le footer ?
+        show_in_header: Dans le menu principal ?
       referencement:
         description: Description
         keywords: Mots-clés
@@ -285,13 +282,10 @@ fr:
       newsletter_user_role:
         title: Rôle
       adult_setting:
-        enabled: Statut
-        status: Statut
         redirect_link: Lien de redirection
         title: Titre
-        title_d: Titre
         content: Contenu
-        content_d: Contenu
+        enabled: Activé ?
       string_box:
         title: Titre
         description: Description
@@ -306,32 +300,27 @@ fr:
         _destroy: Supprimer ?
       picture:
         type: Catégorie
-        online: En ligne
         picture: Image
-        image: Image
         source_picture_title_link: Article associé
-        status: Statut
         _destroy: Supprimer ?
+        online: En ligne ?
       video_platform:
         preview: Prévisualisation
         video_link: Lien de la vidéo
-        native_informations: Informations natives ?
-        native_informations_d: Informations natives ?
         title: Titre
         title_d: Titre
         description: Description
         description_d: Description
         from_article: Lié à
         url: Lien de la vidéo
-        online: En ligne ?
-        status: Statut
         _destroy: Supprimer ?
+        native_informations: Informations natives ?
+        online: En ligne ?
       video_upload:
         preview: Prévisualisation
+        video_file: Prévisualisation
         from_article: Lié à
-        online: En ligne ?
-        status: Statut
-        subtitles: Sous-titres
+        subtitles: Sous-titres ?
         video_autoplay: Démarrage automatique
         video_loop: Répéter la vidéo
         video_controls: Contrôles de la vidéo
@@ -340,6 +329,7 @@ fr:
         description: Description
         description_d: Description
         _destroy: Supprimer ?
+        online: En ligne ?
       video_setting:
         video_platform: Vidéos depuis platformes en ligne
         video_upload: Vidéos mises en ligne depuis le site
@@ -352,9 +342,7 @@ fr:
         delete_subtitle_en: Supprimer sous-titres anglais ?
         online: En ligne ?
       slide:
-        online: En ligne
         slide: Image
-        image: Image
         attachable: Slide liée à la page
         slider_page_name: Slide liée à la page
         status: État
@@ -362,6 +350,7 @@ fr:
         description: Description
         description_deco: Description
         _destroy: Supprimer ?
+        online: En ligne ?
       comment:
         author_with_avatar: Auteur
         username: Pseudo
@@ -371,46 +360,36 @@ fr:
         lang: Langue
         link_source: Article concerné
         link_and_image_source: Article concerné
-        status: Statut
-        signalled: Signalé
-        signalled_d: Signalé
-        created_at: Créé le
+        validated: Validé ? (en ligne)
+        signalled_d: Signalé ?
+        created_at: Ajouté le
         destroy: Supprimer
       comment_setting:
-        should_validate: Valider les commentaires
-        should_signal: Signaler les commentaires
-        send_email: Envoyer mail après signalement
+        should_validate: Valider les commentaires ?
+        should_signal: Signaler les commentaires ?
+        send_email: Envoyer mail après signalement ?
       optional_module:
         name: Nom
-        name_deco: Nom
-        enabled: Activé
-        status: Statut
+        enabled: Activé ?
       guest_book:
         username: Nom d'utilisateur
         content: Message
         lang: Langue
-        status: Statut
-        created_at: Créé le
+        validated: Validé ? (en ligne)
+        created_at: Ajouté le
         destroy: Supprimer
       guest_book_setting:
-        should_validate: Valider les messages
+        should_validate: Valider les messages ?
       slider:
-        autoplay: Démarrage automatique
-        hover_pause: Pause au survol
+        autoplay: Démarrage automatique ?
+        hover_pause: Pause au survol ?
         loop: En boucle ?
         looper: En boucle ?
-        navigation: Lien Précédent / Suivant
-        bullet: Ronds de navigation
-        autoplay_deco: Démarrage automatique
-        hover_pause_deco: Pause au survol
-        loop_deco: En boucle ?
-        navigation_deco: Lien Précédent / Suivant
-        bullet_deco: Ronds de navigation
+        navigation: Flèches Précédent / Suivant ?
+        bullet: Ronds de navigation ?
         time_to_show: Temps entre chaque image
-        time_to_show_deco: Temps entre chaque image
         animate: Effet d'animation
         online: En ligne ?
-        status: État
         category_id: Page
       event:
         title: Titre
@@ -418,23 +397,20 @@ fr:
         url: Lien
         start_date: Date de début
         end_date: Date de fin
-        online: En ligne ?
-        status: État
-        prev_next: Liens précédent/suivant
-        prev_next_d: Liens précédent/suivant
-        show_as_gallery: Galerie d'images
-        show_calendar_d: Calendrier
-        show_calendar: Calendrier
-        full_address_inline: Adresse de l'événement
+        full_address_inline: Adresse
         duration: Durée
+        prev_next: Liens précédent / suivant ?
+        show_as_gallery: Galerie d'images ?
+        show_calendar: Calendrier ?
+        online: En ligne ?
       event_setting:
-        prev_next: Liens précédent / suivant
+        prev_next: Liens précédent / suivant ?
         event_order: Ordre des événements
       map_setting:
         full_address_inline: Adresse de votre organisation
         marker_icon: Icône du marqueur
         marker_color: Couleur du marqueur
-        marker_color_deco: Couleur du marqueur
+        marker_color_d: Couleur du marqueur
       location:
         postcode: Code Postal
         address: Adresse
@@ -446,12 +422,11 @@ fr:
       social:
         title: Titre
         link: Lien
-        enabled: Activer
         kind: Type
         ikon: Image
         ikon_deco: Icône
         font_ikon: Icône
-        status: État
+        enabled: Activé ?
         delete_ikon: Supprimer l'icône
 
       social_connect_setting:

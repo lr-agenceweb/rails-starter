@@ -8,7 +8,7 @@ class OptionalModuleDecorator < ApplicationDecorator
   #
   # Content
   #
-  def name_deco
+  def name
     content_tag :strong, translated_module_name
   end
 
@@ -17,14 +17,6 @@ class OptionalModuleDecorator < ApplicationDecorator
   #
   def title_aa_show
     translated_module_name
-  end
-
-  #
-  # == Status tag
-  #
-  def status
-    color = model.enabled? ? 'green' : 'red'
-    status_tag_deco(I18n.t("enabled.#{model.enabled}"), color)
   end
 
   private
