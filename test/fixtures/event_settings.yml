@@ -16,4 +16,5 @@
 
 one:
   prev_next: false
+  show_map: false
   event_order: one
