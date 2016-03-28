@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register StringBox do
   menu parent: I18n.t('admin_menu.config')
   includes :translations, :optional_module

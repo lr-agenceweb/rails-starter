@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 json.array! @not_paginated_searches do |search|
   json.title search.title
   json.url search.decorate.show_page_link

@@ -463,7 +463,7 @@ GEM
     paperclip-av-transcoder (0.6.4)
       av (~> 0.9.0)
       paperclip (>= 2.5.2)
-    parser (2.3.0.6)
+    parser (2.3.0.7)
       ast (~> 2.2)
     pg (0.18.4)
     polyamorous (1.3.0)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 json.array! [@event] do
   json.title @event.title
   json.start @event.start_date
