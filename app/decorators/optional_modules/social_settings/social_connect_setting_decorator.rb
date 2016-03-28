@@ -15,11 +15,6 @@ class SocialConnectSettingDecorator < ApplicationDecorator
   #
   # == Status tag
   #
-  def status
-    color = model.enabled? ? 'green' : 'red'
-    status_tag_deco(I18n.t("enabled.#{model.enabled}"), color)
-  end
-
   def social_facebook
     provider = social_providers.find_by(name: 'facebook')
     social_provider_base(provider)
@@ -30,7 +25,7 @@ class SocialConnectSettingDecorator < ApplicationDecorator
     social_provider_base(provider)
   end
 
-  def social_google_oauth2
+  def social_google
     provider = social_providers.find_by(name: 'google')
     social_provider_base(provider)
   end

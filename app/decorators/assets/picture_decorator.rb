@@ -25,7 +25,7 @@ class PictureDecorator < ApplicationDecorator
   private
 
   #
-  # Article where the Picture comes from
+  # == Article where the Picture comes from
   #
   def source_picture
     model.attachable

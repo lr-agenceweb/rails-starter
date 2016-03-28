@@ -13,7 +13,7 @@ ActiveAdmin.register EventSetting do
       columns do
         column do
           attributes_table do
-            row :prev_next
+            bool_row :prev_next
             row :event_order
           end
         end

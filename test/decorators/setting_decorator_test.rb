@@ -74,25 +74,6 @@ class SettingDecoratorTest < Draper::TestCase
     assert_equal 'Tous droits réservés', @setting_decorated.send(:copyright)
   end
 
-  #
-  # == Status tag for modules
-  #
-  test 'should return correct status_tag for breadcrumb' do
-    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @setting_decorated.breadcrumb
-  end
-
-  test 'should return correct status_tag for qrcode' do
-    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @setting_decorated.qrcode
-  end
-
-  test 'should return correct status_tag for social' do
-    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @setting_decorated.social
-  end
-
-  test 'should return correct status_tag for maintenance' do
-    assert_match '<span class="status_tag en_ligne green">En Ligne</span>', @setting_decorated.maintenance
-  end
-
   private
 
   def initialize_test

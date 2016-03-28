@@ -19,10 +19,10 @@ ActiveAdmin.register VideoSetting do
       columns do
         column do
           attributes_table do
-            row :video_platform
-            row :video_upload
-            row :video_background if resource.video_background?
-            row :turn_off_the_light
+            bool_row :video_platform
+            bool_row :video_upload
+            bool_row :video_background if resource.video_background?
+            bool_row :turn_off_the_light
           end
         end
       end

@@ -23,7 +23,7 @@ ActiveAdmin.register Slide do
     column :title
     column :description_deco
     column :attachable
-    column :status
+    bool_column :online
     actions
   end
 
@@ -33,7 +33,7 @@ ActiveAdmin.register Slide do
         image_row :image, style: :small
         row :title
         row :description_deco
-        row :status
+        bool_row :online
       end
     end
   end

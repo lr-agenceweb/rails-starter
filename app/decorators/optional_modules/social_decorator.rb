@@ -41,14 +41,6 @@ class SocialDecorator < ApplicationDecorator
     model.ikon.present? && model.ikon.exists?
   end
 
-  #
-  # == Status tag
-  #
-  def status
-    color = model.enabled? ? 'green' : 'red'
-    status_tag_deco(I18n.t("enabled.#{model.enabled}"), color)
-  end
-
   private
 
   def font_ikon_list

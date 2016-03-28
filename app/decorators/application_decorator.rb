@@ -83,21 +83,6 @@ class ApplicationDecorator < Draper::Decorator
     status_tag_deco I18n.t("active_admin.globalize.language.#{model.lang}"), color
   end
 
-  def status
-    color = model.online? ? 'green' : 'red'
-    status_tag_deco I18n.t("online.#{model.online}"), color
-  end
-
-  def show_as_gallery
-    color = model.show_as_gallery? ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.show_as_gallery?}"), color
-  end
-
-  def prev_next
-    color = model.prev_next? ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.prev_next}"), color
-  end
-
   #
   # == Boolean
   #

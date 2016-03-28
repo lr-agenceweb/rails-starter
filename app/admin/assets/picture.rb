@@ -21,7 +21,7 @@ ActiveAdmin.register Picture do
     selectable_column
     image_column :image, style: :medium
     column :source_picture_title_link
-    column :status
+    bool_column :online
 
     translation_status
     actions
@@ -33,7 +33,7 @@ ActiveAdmin.register Picture do
         image_row :image, style: :large
         row :source_picture_title_link
         row :description
-        row :status
+        bool_row :online
       end
     end
   end

@@ -25,12 +25,6 @@ ActiveAdmin.register MapSetting do
             end
           end
         end
-
-        column do
-          panel t('activerecord.models.map.one') do
-            render 'elements/map'
-          end
-        end
       end
     end
   end
