@@ -1,6 +1,6 @@
 ActiveAdmin.register LegalNotice do
   menu parent: I18n.t('admin_menu.posts')
-  includes :translations
+  includes :translations, :user, :picture
 
   permit_params :id,
                 :type,
