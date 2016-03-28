@@ -405,6 +405,7 @@ fr:
         online: En ligne ?
       event_setting:
         prev_next: Liens précédent / suivant ?
+        show_map: Afficher carte ?
         event_order: Ordre des événements
       map_setting:
         full_address_inline: Adresse de votre organisation
