@@ -7,7 +7,7 @@ class ConnectionDecorator < PostDecorator
   delegate_all
 
   def link
-    model.link.url if link?
+    link_to model.link.url, model.link.url, target: :blank if link?
   end
 
   private
