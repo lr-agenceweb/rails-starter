@@ -169,6 +169,9 @@ fr:
       mailing_message:
         one: Mailing Message
         other: Mailing Messages
+      connection:
+        one: Lien
+        other: Liens
 
     attributes:
       post:
@@ -419,6 +422,8 @@ fr:
         geocode_address: Adresse avec géolocalisation
         latlon: Latitude / Longitude
         full_address: Adresse complète
+      link:
+        url: Lien
 
       social:
         title: Titre
