@@ -37,7 +37,7 @@ ActiveAdmin.register Connection do
 
   index do
     sortable_handle_column
-    render 'admin/posts/index', object: self, hide_comments_column: true
+    render 'admin/posts/index', object: self, hide_comments_column: true, hide_author_column: true
   end
 
   show title: :title_aa_show do
@@ -50,6 +50,9 @@ ActiveAdmin.register Connection do
               row :content
               bool_row :online
               row :link
+              image_row :image, style: :medium do |r|
+                r.picture.image if r.picture?
+              end
             end
           end
         end
