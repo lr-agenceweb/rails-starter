@@ -19,6 +19,10 @@
 # == Link model
 #
 class Link < ActiveRecord::Base
+  belongs_to :linkable,
+             polymorphic: true,
+             touch: true
+
   validates :url,
             allow_blank: true,
             url: true
