@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328212801) do
+ActiveRecord::Schema.define(version: 20160329155936) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -238,6 +238,16 @@ ActiveRecord::Schema.define(version: 20160328212801) do
   end
 
   add_index "headings", ["headingable_type", "headingable_id"], name: "index_headings_on_headingable_type_and_headingable_id", using: :btree
+
+  create_table "links", force: :cascade do |t|
+    t.integer  "linkable_id",   limit: 4
+    t.string   "linkable_type", limit: 255
+    t.string   "url",           limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "links", ["linkable_type", "linkable_id"], name: "index_links_on_linkable_type_and_linkable_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.integer  "locationable_id",   limit: 4

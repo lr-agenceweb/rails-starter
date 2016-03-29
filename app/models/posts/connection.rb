@@ -26,4 +26,5 @@
 # == LegalNotice Model
 #
 class Connection < Post
+  include Linkable
 end
