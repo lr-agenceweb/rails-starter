@@ -8,5 +8,7 @@ module Linkable
   included do
     has_one :link, as: :linkable, dependent: :destroy
     accepts_nested_attributes_for :link, reject_if: :all_blank, allow_destroy: true
+
+    delegate :url, to: :link, prefix: true, allow_nil: true
   end
 end
