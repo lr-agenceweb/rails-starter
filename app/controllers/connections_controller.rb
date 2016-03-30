@@ -8,7 +8,7 @@ class ConnectionsController < PostsController
   # GET /liens
   # GET /liens.json
   def index
-    @connections = Connection.includes(:translations, :user, :picture, :video_uploads, :video_platforms).online.by_position
+    @connections = Connection.includes(:translations, :user, :picture, :video_uploads, :video_platforms, :link).online.by_position
     per_p = @setting.per_page == 0 ? @connections.count : @setting.per_page
     @connections = ConnectionDecorator.decorate_collection(@connections.page(params[:page]).per(per_p))
     seo_tag_index category
