@@ -49,7 +49,7 @@ ActiveAdmin.register Connection do
             attributes_table_for resource do
               row :content
               bool_row :online
-              row :link
+              row :link_with_link
               image_row :image, style: :medium do |r|
                 r.picture.image if r.picture?
               end

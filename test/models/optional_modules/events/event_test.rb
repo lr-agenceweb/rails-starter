@@ -98,6 +98,21 @@ class EventTest < ActiveSupport::TestCase
     assert_equal I18n.t('video_upload.flash.upload_in_progress'), @event.flash_notice
   end
 
+  #
+  # == Validation rules
+  #
+  test 'should not create event if link is not correct' do
+    event = Event.new link_attributes: { url: 'bad-link' }
+    assert_not event.valid?
+    assert_equal [:'link.url'], event.errors.keys
+  end
+
+  test 'should create event if link is correct' do
+    event = Event.new link_attributes: { url: 'http://test.com' }
+    assert event.valid?
+    assert_empty event.errors.keys
+  end
+
   private
 
   def initialize_test

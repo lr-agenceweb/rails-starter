@@ -9,10 +9,6 @@ class EventDecorator < PostDecorator
   delegate_all
   decorates_association :location
 
-  def url
-    url? ? link_to(model.url, model.url, target: :_blank) : 'Pas de lien'
-  end
-
   #
   # == Dates
   #
@@ -47,10 +43,6 @@ class EventDecorator < PostDecorator
   end
 
   private
-
-  def url?
-    !model.url.blank?
-  end
 
   def start_date?
     !model.start_date.blank?

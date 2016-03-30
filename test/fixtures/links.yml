@@ -17,3 +17,8 @@
 one:
   linkable: connection (Post)
   url: http://www.google.com
+
+event:
+  linkable_id: 1
+  linkable_type: Event
+  url: http://www.google.com

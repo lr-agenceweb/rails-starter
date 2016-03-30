@@ -6,7 +6,6 @@
 #  title           :string(255)
 #  slug            :string(255)
 #  content         :text(65535)
-#  url             :string(255)
 #  start_date      :datetime
 #  end_date        :datetime
 #  show_as_gallery :boolean          default(FALSE)
@@ -30,7 +29,6 @@ DEFAULTS: &DEFAULTS
 event_online:
   <<: *DEFAULTS
   id: 1
-  url: 'http://google.com'
   start_date: '2015-07-22 09:00:00'
   end_date: '2015-07-28 18:00:00'
   online: true

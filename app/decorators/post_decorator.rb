@@ -79,4 +79,17 @@ class PostDecorator < ApplicationDecorator
   def comments_count
     comments.validated.count
   end
+
+  #
+  # == Link (linkable polymorphic)
+  #
+  def link_with_link
+    link_to model.link.url, model.link.url, target: :blank if link?
+  end
+
+  private
+
+  def link?
+    model.link.try(:url).present?
+  end
 end

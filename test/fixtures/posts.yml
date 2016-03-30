@@ -90,4 +90,3 @@ connection:
   <<: *DEFAULTS
   type: Connection
   online: true
-  user: bob
