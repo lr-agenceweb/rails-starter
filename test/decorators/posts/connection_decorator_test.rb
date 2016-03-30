@@ -7,8 +7,13 @@ require 'test_helper'
 class ConnectionDecoratorTest < Draper::TestCase
   setup :initialize_test
 
-  test 'should have link' do
+  test 'should have link is url is correct' do
     assert @connection_decorated.send(:link?)
+  end
+
+  test 'should not have link if url is empty' do
+    @link.update_attributes! url: ''
+    assert_not @connection_decorated.send(:link?)
   end
 
   test 'should return correct content for link method' do
@@ -18,6 +23,7 @@ class ConnectionDecoratorTest < Draper::TestCase
   private
 
   def initialize_test
+    @link = links(:connection)
     @connection = posts(:connection)
     @connection_decorated = ConnectionDecorator.new(@connection)
   end

@@ -27,6 +27,11 @@ class EventDecoratorTest < Draper::TestCase
     assert_not @event_two_decorated.send(:link?)
   end
 
+  test 'should return false for link? method if link is empty' do
+    @link.update_attributes! url: ''
+    assert_not @event_two_decorated.send(:link?)
+  end
+
   #
   # == Event dates
   #
@@ -98,6 +103,8 @@ class EventDecoratorTest < Draper::TestCase
     @event = events(:event_online)
     @event_two = events(:event_third)
     @calendar_module = optional_modules(:calendar)
+
+    @link = links(:event)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

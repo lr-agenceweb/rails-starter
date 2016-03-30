@@ -46,7 +46,7 @@ module Admin
     end
 
     test 'should destroy connection article' do
-      assert_difference 'Connection.count', -1 do
+      assert_difference ['Connection.count', 'Link.count'], -1 do
         delete :destroy, id: @connection
       end
       assert_redirected_to admin_connections_path
