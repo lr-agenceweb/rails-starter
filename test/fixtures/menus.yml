@@ -47,6 +47,9 @@ event:
 legal_notice:
   <<: *DEFAULTS
 
+connection:
+  <<: *DEFAULTS
+
 test_offline:
   <<: *DEFAULTS
   online: false

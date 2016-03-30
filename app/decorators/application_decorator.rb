@@ -29,6 +29,7 @@ class ApplicationDecorator < Draper::Decorator
     model_name = model.class.to_s
     return send("root_#{suffix}") if model_name == 'Home'
     return send("legal_notices_#{suffix}") if model_name == 'LegalNotice'
+    return send("connections_#{suffix}") if model_name == 'Connection'
     send("#{model_name.underscore.singularize}_#{suffix}", model)
   end
 

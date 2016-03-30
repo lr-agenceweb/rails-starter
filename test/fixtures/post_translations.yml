@@ -98,3 +98,20 @@ legal_notice_admin_en:
   title: My legal notices
   slug: my-legal-notices
   content: ~
+
+# Connection
+connection_fr:
+  <<: *DEFAULTS
+  post_id: <%= ActiveRecord::FixtureSet.identify(:connection) %>
+  locale: fr
+  title: Site ami-1
+  slug: site-ami-1
+  content: ~
+
+connection_en:
+  <<: *DEFAULTS
+  post_id: <%= ActiveRecord::FixtureSet.identify(:connection) %>
+  locale: en
+  title: Friend website 1
+  slug: friend-website-1
+  content: ~

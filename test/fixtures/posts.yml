@@ -84,3 +84,9 @@ legal_notice_admin:
   type: LegalNotice
   title: My Legal notices
   online: true
+
+# Connection posts
+connection:
+  <<: *DEFAULTS
+  type: Connection
+  online: true

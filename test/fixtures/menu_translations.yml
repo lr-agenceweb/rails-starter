@@ -106,6 +106,19 @@ legal_notice_en:
   locale: en
   title: Legal notices
 
+# Connection
+connection_fr:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:connection) %>
+  locale: fr
+  title: Liens
+
+connection_en:
+  <<: *DEFAULTS
+  menu_id: <%= ActiveRecord::FixtureSet.identify(:connection) %>
+  locale: en
+  title: Links
+
 # TestOffline
 test_offline_fr:
   <<: *DEFAULTS

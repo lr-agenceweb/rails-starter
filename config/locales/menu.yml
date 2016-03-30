@@ -11,6 +11,7 @@ fr:
     blogs: blog
     events: evenements
     legal_notices: mentions-legales
+    connections: liens
 
   main_menu:
     dashboard: Dashboard
@@ -44,6 +45,7 @@ en:
     blogs: blog
     events: events
     legal_notices: legal-notices
+    connections: links
 
   main_menu:
     dashboard: Dashboard

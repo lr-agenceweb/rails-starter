@@ -7,7 +7,6 @@
 #  title           :string(255)
 #  slug            :string(255)
 #  content         :text(65535)
-#  url             :string(255)
 #  start_date      :datetime
 #  end_date        :datetime
 #  show_as_gallery :boolean          default(FALSE)
@@ -29,6 +28,7 @@ class Event < ActiveRecord::Base
   include OptionalModules::Assets::Videosable
   include OptionalModules::Searchable
   include PrevNextable
+  include Linkable
 
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content, fallbacks_for_empty_translations: true
@@ -43,7 +43,6 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
   validate :calendar_date_correct?, unless: proc { end_date.blank? && start_date.blank? }
-  validates :url, allow_blank: true, url: true
 
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true

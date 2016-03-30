@@ -1,12 +1,12 @@
 #
-# == Homepage
+# == Homepage [Post]
 #
 crumb :root do
   link Category.includes(menu: [:translations]).title_by_category('Home'), root_path
 end
 
 #
-# == About
+# == About [Post]
 #
 crumb :abouts do
   link Category.includes(menu: [:translations]).title_by_category('About'), abouts_path
@@ -18,10 +18,17 @@ crumb :about do |about|
 end
 
 #
-# == LegalNotice
+# == LegalNotice [Post]
 #
 crumb :legal_notices do
   link Category.includes(menu: [:translations]).title_by_category('LegalNotice'), legal_notices_path
+end
+
+#
+# == Connection [Post]
+#
+crumb :connections do
+  link Category.includes(menu: [:translations]).title_by_category('Connection'), connections_path
 end
 
 #

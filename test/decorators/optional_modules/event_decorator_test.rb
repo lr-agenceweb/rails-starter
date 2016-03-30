@@ -12,19 +12,24 @@ class EventDecoratorTest < Draper::TestCase
   # == Event URL
   #
   test 'should have a link for the event' do
-    assert_match '<a target="_blank" href="http://google.com">http://google.com</a>', @event_decorated.url
+    assert_match '<a target="blank" href="http://www.google.com">http://www.google.com</a>', @event_decorated.link_with_link
   end
 
   test 'should not have a link for the event' do
-    assert_match 'Pas de lien', @event_two_decorated.url
+    assert_not @event_two_decorated.link_with_link
   end
 
-  test 'should return true for url? method if link' do
-    assert @event_decorated.send(:url?)
+  test 'should return true for link? method if link' do
+    assert @event_decorated.send(:link?)
   end
 
-  test 'should return false for url? method if no link' do
-    assert_not @event_two_decorated.send(:url?)
+  test 'should return false for link? method if no link' do
+    assert_not @event_two_decorated.send(:link?)
+  end
+
+  test 'should return false for link? method if link is empty' do
+    @link.update_attributes! url: ''
+    assert_not @event_two_decorated.send(:link?)
   end
 
   #
@@ -98,6 +103,8 @@ class EventDecoratorTest < Draper::TestCase
     @event = events(:event_online)
     @event_two = events(:event_third)
     @calendar_module = optional_modules(:calendar)
+
+    @link = links(:event)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

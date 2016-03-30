@@ -1,19 +1,19 @@
-- breadcrumb :events
+- breadcrumb :connections
 
 - if category.background? && @background_module.enabled? && !@background.nil?
   - cache category.background do
     = render 'assets/backgrounds/background', background: category.background
 / = render 'optional_modules/sliders/show', slider: @category.slider, force: false unless @category.slider.nil?
 
-section.events-section.page-section#events
+section.connections-section.page-section
   .row
     .small-12.columns
       = title_for_category(category)
 
   .row.align-center
-    - if @events.blank?
+    - if @connections.blank?
       .small-12.columns
-        p = t('event.no_results')
+        p = t('connection.no_results')
     - else
       .small-12.medium-8.columns
-        = render 'events'
+        = render 'connections'

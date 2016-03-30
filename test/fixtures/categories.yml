@@ -78,6 +78,12 @@ legal_notice:
   optional: false
   menu: legal_notice
 
+connection:
+  <<: *DEFAULTS
+  name: Connection
+  optional: false
+  menu: connection
+
 test_online:
   <<: *DEFAULTS
   name: Test

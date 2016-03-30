@@ -4,11 +4,13 @@ ActiveAdmin.register Event do
 
   permit_params do
     params = [:id,
-              :url,
               :start_date,
               :end_date,
               :show_as_gallery,
               :online,
+              link_attributes: [
+                :id, :url, :_destroy
+              ],
               translations_attributes: [
                 :id, :locale, :title, :slug, :content
               ],
@@ -87,8 +89,8 @@ ActiveAdmin.register Event do
             row :start_date
             row :end_date
             row :duration
-            row :url
             row :full_address_inline
+            row :link_with_link
             bool_row :show_as_gallery
             bool_row :show_calendar if calendar_module.enabled?
             bool_row :online
@@ -117,8 +119,9 @@ ActiveAdmin.register Event do
           end
 
           f.input :online, hint: I18n.t('form.hint.event.online')
-          f.input :url, hint: I18n.t('form.hint.event.link')
         end
+
+        render 'admin/shared/links/one', f: f
       end
 
       column do

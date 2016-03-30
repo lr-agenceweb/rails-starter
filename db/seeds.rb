@@ -135,7 +135,7 @@ end
 # == Menu
 #
 puts 'Creating Menu elements'
-models_name = [:Home, :Search, :GuestBook, :Blog, :Event, :About, :Contact, :LegalNotice]
+models_name = [:Home, :Search, :GuestBook, :Blog, :Event, :About, :Contact, :LegalNotice, :Connection]
 title_en = [
   'Home',
   'Search',
@@ -144,7 +144,8 @@ title_en = [
   'Events',
   'About',
   'Contact',
-  'Legal notices'
+  'Legal notices',
+  'Links',
 ]
 title_fr = [
   'Accueil',
@@ -154,18 +155,23 @@ title_fr = [
   'Événements',
   'À Propos',
   'Me contacter',
-  'Mentions légales'
+  'Mentions légales',
+  'Liens'
 ]
 show_in_header = [
   true,
+  false,
   true,
   true,
   true,
+  false,
   true,
-  true,
+  false,
   true
 ]
 show_in_footer = [
+  false,
+  false,
   false,
   false,
   false,
@@ -206,7 +212,8 @@ description_en = [
   'Event description',
   'About description',
   'Contact description',
-  'Legal notices description'
+  'Legal notices description',
+  'Link description'
 ]
 description_fr = [
   'Description pour la page d\'accueil',
@@ -216,7 +223,8 @@ description_fr = [
   'Description de la page événement',
   'Description de la page à propos',
   'Description de la page contact',
-  'Description de la page mentions légales'
+  'Description de la page mentions légales',
+  'Description de la page liens'
 ]
 keywords_en = [
   'home',
@@ -226,7 +234,8 @@ keywords_en = [
   'event',
   'about',
   'contact',
-  'legal notices'
+  'legal notices',
+  'links'
 ]
 keywords_fr = [
   'accueil',
@@ -236,7 +245,8 @@ keywords_fr = [
   'événement',
   'à propos',
   'contact',
-  'mentions légales'
+  'mentions légales',
+  'liens'
 ]
 
 models_name.each_with_index do |element, index|
@@ -336,6 +346,73 @@ legal_notice_title_fr.each_with_index do |element, index|
       content: legal_notice_content_en[index]
     )
   end
+end
+
+#
+# == Connection articles
+#
+puts 'Creating Connection article'
+connection_title_fr = [
+  'Grafikart :: développeur web !'
+]
+connection_title_en = [
+  'Grafikart :: web developer'
+]
+connection_slug_fr = [
+  'grafikart-developpeur-web'
+]
+connection_slug_en = [
+  'grafikart-web-developer'
+]
+connection_content_fr = [
+  '<p>Visitez le site de Grafikart !</p>'
+]
+connection_content_en = [
+  '<p>Visit Grafikart website !</p>'
+]
+connection_user_id = [
+  administrator.id
+]
+connection_links = [
+  'http://grafikart.fr'
+]
+connection_pictures = [
+  'grafikart.jpg'
+]
+
+connection_title_fr.each_with_index do |element, index|
+  connection = Connection.create!(
+    title: connection_title_fr[index],
+    slug: connection_slug_fr[index],
+    content: connection_content_fr[index],
+    online: true,
+    user_id: connection_user_id[index]
+  )
+
+  if @locales.include?(:en)
+    Connection::Translation.create!(
+      post_id: connection.id,
+      locale: 'en',
+      title: connection_title_en[index],
+      slug: connection_slug_en[index],
+      content: connection_content_en[index]
+    )
+  end
+
+  puts 'Creating Connection Link'
+  Link.create!(
+    linkable_id: connection.id,
+    linkable_type: 'Post',
+    url: connection_links[index]
+  )
+
+  puts 'Creating Connection Picture'
+  Picture.create!(
+    attachable_id: connection.id,
+    attachable_type: 'Post',
+    image: File.new("#{Rails.root}/db/seeds/connections/#{connection_pictures[index]}"),
+    online: true
+  )
 end
 
 #
@@ -541,7 +618,7 @@ event_content_en = [
 
 event_start_date = [2.weeks.ago.to_s(:db), 2.weeks.ago.to_s(:db)]
 event_end_date = [Time.zone.now + 1.week.to_i, Time.zone.now + 3.week.to_i]
-event_url = [nil, nil]
+event_url = ['http://google.com', nil]
 
 event_address = ['Rue des Limaces', 'Zénith de Paris, 205 Bd Sérurier']
 event_city = ['Lyon', 'Paris']
@@ -561,7 +638,6 @@ event_title_fr.each_with_index do |element, index|
     title: event_title_fr[index],
     slug: event_slug_fr[index],
     content: event_content_fr[index],
-    url: event_url[index],
     start_date: event_start_date[index],
     end_date: event_end_date[index],
     online: true
@@ -591,6 +667,13 @@ event_title_fr.each_with_index do |element, index|
     )
   end
 
+  puts 'Creating Event Link'
+  Link.create!(
+    linkable_id: event.id,
+    linkable_type: 'Event',
+    url: event_url[index]
+  )
+
   puts 'Creating Event Location'
   Location.create!(
     locationable_id: event.id,
@@ -603,8 +686,7 @@ event_title_fr.each_with_index do |element, index|
     longitude: event_longitude[index]
   )
 
-
-  event_images[index].each_with_index do |image, index|
+  event_images[index].each_with_index do |image, _|
     unless image.nil?
       puts 'Creating Event pictures'
       Picture.create!(

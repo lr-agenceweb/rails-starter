@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+f.inputs (defined?(title_inputs) ? title_inputs : t('activerecord.models.connection.one')), for: [:link, f.object.link || Link.new] do |link|
+  link.input :url,
+             hint: t('form.hint.connection.link.url')
+
+  if f.object.link.present?
+    link.input :_destroy,
+               as: :boolean,
+               required: false,
+               label: 'Supprimer ?',
+               hint: 'Si coché, le lien sera suprrimé'
+
+  end
+end

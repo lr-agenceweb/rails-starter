@@ -1,0 +1,13 @@
+article.post-article
+  = render 'posts/microdatas', resource: connection
+
+  header.post-header
+    h3.post-article-title = connection.title
+
+  .post-body
+    .row
+      .small-12.medium-6.columns
+        == connection.content
+        = connection.link_with_link
+      .small-12.medium-6.columns
+        = render 'elements/pictures/has_many_get_first', resource: connection, link: connection.link_url
