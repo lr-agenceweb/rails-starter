@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 VideoInfo.disable_providers = [] # enable all providers
 VideoInfo.provider_api_keys = {
   youtube: Figaro.env.youtube_api_key,

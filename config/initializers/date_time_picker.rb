@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 datetime_picker_input = Formtastic::Inputs::StringInput::DateTimePickerInput
 
 # This if for front-end javascript side

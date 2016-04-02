@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'yaml'
 app_config = YAML.load_file("#{path}/config/application.yml")
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # == Homepage [Post]
 #
@@ -68,7 +69,6 @@ crumb :event do |event|
   link event.title, event_path(event)
   parent :events
 end
-
 
 #
 # == Contact

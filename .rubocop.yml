@@ -5,7 +5,6 @@ AllCops:
   TargetRubyVersion: 2.3
   Exclude:
     - 'db/**/*'
-    - 'config/**/*'
     - 'script/**/*'
     - 'lib/**/*'
     - 'bin/**/*'
