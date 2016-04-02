@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :nginx do
   desc 'Upload the nginx vhost configuration file'
   task :upload_vhost do

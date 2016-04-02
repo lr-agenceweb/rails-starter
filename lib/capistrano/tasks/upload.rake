@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :upload do
   desc 'Symlink shared directories and files'
   task :yml do

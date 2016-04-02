@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :logrotate do
   desc 'Upload logrotate configuration for application'
   task :upload_config do
