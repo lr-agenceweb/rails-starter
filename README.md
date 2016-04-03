@@ -97,11 +97,11 @@ Caching is handled by memcached with [Dalli](https://github.com/petergoldstein/d
   * `cap <env> logrotate:upload_config` : Upload logrotate config file to remote server
 
 * **Nginx**  
-  * `cap <env> nginx:upload_vhost` : Upload vhost config file to remote server (create file in sites-availables)
-  * `cap <env> nginx:upload_vhost_ssl` : Same as above with SSL configuration for vhost (Let's Encrypt)
-  * `cap <env> nginx:symlink_vhost` : Symlink vhost config file previously uploaded (in sites-enabled)
-  * `cap <env> nginx:remove_vhost` : Remove uploaded vhost and symlink
-  * `cap <env> nginx:remove_symlink_vhost` : Remove only symlink
+  * `cap <env> nginx:upload:vhost` : Upload vhost config file to remote server (create file in conf.d)
+  * `cap <env> nginx:upload:vhost_ssl` : Same as above with SSL configuration for vhost (Let's Encrypt)
+  * `cap <env> nginx:vhost:disable` : Disable vhost (rename extension to .disabled)
+  * `cap <env> nginx:vhost:enable` : Enable vhost (rename extension to .conf)
+  * `cap <env> nginx:vhost:remove` : Remove uploaded vhost to conf.d folder
 
 * **Paperclip**  
   * `cap <env> paperclip:refresh:all` : Regenerate all Paperclip styles

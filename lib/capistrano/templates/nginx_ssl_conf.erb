@@ -26,7 +26,7 @@ server {
   index index.html index.htm;
 
   # Logs
-  error_log /var/log/nginx/<%= fetch(:domain_name) %>.log notice;
+  error_log /var/log/nginx/<%= fetch(:application) %>.<%= fetch(:stage) %>.log notice;
   access_log off;
 
   # Passenger
