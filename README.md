@@ -57,22 +57,19 @@ Run `foreman start`
 Visit `http://localhost:3000`  
 That's it !  
 
-### Server ![Server](https://img.shields.io/badge/Server-Unicorn-5aaed7.svg?style=flat-square)
-This project use unicorn in local development. The server is launched using `foreman start`
 
-### Database ![SGBD](https://img.shields.io/badge/Database-MySQL%20%7C%20PostgreSQL%20%7C%20SQLite%20%7C%20MariaDB-5aaed7.svg?style=flat-square)
-It use `MySQL2` but you can choose to use `PostgreSQL`, `SQlite` or `MariaDB`.  
-To create a dump of your database, run `rake db:backup`
+### Stack
 
-### Template ![Template](https://img.shields.io/badge/Template-Slim-5aaed7.svg?style=flat-square)
-It use [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
-
-### Assets ![Assets](https://img.shields.io/badge/Assets-Sass%20%7C%20Coffeescript-5aaed7.svg?style=flat-square)
-Style is writting in `scss` and `sass` (using libsass)  
-Scripts are created in `coffeescript`
-
-### Cache
-Caching is handled by memcached with [Dalli](https://github.com/petergoldstein/dalli)
+ Technology                                                                        | Description
+---------------------------------------------------------------------------------- | -----------
+![Server](https://img.shields.io/badge/Server-Unicorn-5aaed7.svg?style=flat-square)| This project use unicorn in local development. <br /> The server is launched using `foreman start`
+![SGBD](https://img.shields.io/badge/Database-MySQL%20%7C%20SQLite-5aaed7.svg?style=flat-square) <br /> ![SGBD](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20SQLite-5aaed7.svg?style=flat-square) | It use `MySQL2` but you can choose to use `PostgreSQL`, `SQlite` or `MariaDB`. <br /> To create a dump of your database, run `rake db:backup`
+![Template](https://img.shields.io/badge/Template-Slim-5aaed7.svg?style=flat-square) | It use [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
+![Assets](https://img.shields.io/badge/Assets-Sass%20%7C%20Coffeescript-5aaed7.svg?style=flat-square) | Style is writting in `scss` and `sass` (using libsass) <br /> Scripts are created in `coffeescript`
+![Cache](https://img.shields.io/badge/Cache-Memcached-5aaed7.svg?style=flat-square) | Caching is handled by `memcached` with [Dalli](https://github.com/petergoldstein/dalli)
+![Mail](https://img.shields.io/badge/Mail-Maildev-5aaed7.svg?style=flat-square) | It use [maildev](http://djfarrelly.github.io/MailDev/) NodeJS package to test emails in local. <br /> You don't have nothing to do, `maildev` server will be launched in the same time as the rails server with `foreman start`. <br /> To see your mails, visit `http://localhost:1080`
+Units Tests | Vanilla rails tests are included, just run `rake test`
+Code structure | This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
 
 
 ### Tasks
@@ -80,6 +77,7 @@ Caching is handled by memcached with [Dalli](https://github.com/petergoldstein/d
 
 * Color Routes: colored version of rake routes (run `rake color_routes`)
 * Dump SQL: make a quick save of your Database (run `rake db:backup`)
+
 
 #### Capistrano
 
@@ -108,11 +106,6 @@ Caching is handled by memcached with [Dalli](https://github.com/petergoldstein/d
   * `cap <env> paperclip:refresh:missing` : Regenerate only missing Paperclip styles
 
 
-### Mail
-It use [maildev](http://djfarrelly.github.io/MailDev/) to test emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
-To see your mails, visit `http://localhost:1080`
-
-
 ### Modules
 
 Name                | Description
@@ -136,12 +129,6 @@ Name                | Description
 **Mailing**         | Application developped to send heavy mails number to users
 **SocialConnect**   | Allow users to LINK their ALREADY EXISTING Devise account to Facebook, Twitter or Google Social Connect.
 
-
-### Units Tests
-Basics tests are included, just run `rake test`
-
-### Code structure
-This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
 
 ### Screenshots
 ![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
