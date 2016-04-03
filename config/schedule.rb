@@ -15,3 +15,7 @@ when 'production'
     command "backup perform -t #{app_config['application_name'].tr('-', '_')}"
   end
 end
+
+every :reboot do
+  command "cd #{path} && bin/delayed_job start" # Restart delayed_job
+end
