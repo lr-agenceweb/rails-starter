@@ -21,7 +21,7 @@ server {
   listen [::]:443 ssl spdy;
   spdy_headers_comp 9;
 
-  root <%= current_path %>/public;
+  root /var/www/<%= fetch(:stage) %>/<%= fetch(:application) %>/public;
   server_name <%= fetch(:domain_name) %>;
   index index.html index.htm;
 

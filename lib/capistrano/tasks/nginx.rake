@@ -25,6 +25,14 @@ namespace :nginx do
   end
 
   namespace :vhost do
+    desc 'Symlink to /var/www'
+    task :symlink do
+      on roles(:web) do
+        sudo :mkdir, '-p', "/var/www/#{fetch(:stage)}"
+        sudo :ln, '-fs', current_path, "/var/www/#{fetch(:stage)}/#{fetch(:application)}"
+      end
+    end
+
     desc 'Disable vhost configuration'
     task :disable do
       on roles(:web) do

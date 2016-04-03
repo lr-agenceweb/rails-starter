@@ -2,7 +2,7 @@ server {
   listen 80;
   listen [::]:80;
 
-  root <%= current_path %>/public;
+  root /var/www/<%= fetch(:stage) %>/<%= fetch(:application) %>/public;
   index index.html index.htm;
 
   # Make site accessible from http://<%= fetch(:domain_name) %>
