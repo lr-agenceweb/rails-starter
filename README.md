@@ -92,7 +92,7 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
   * `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
 
 * **Logrotate**  
-  * `cap <env> logrotate:upload_config` : Upload logrotate config file to remote server
+  * `cap <env> logrotate:upload` : Upload logrotate config file to remote server
 
 * **Nginx**  
   * `cap <env> nginx:upload:vhost` : Upload vhost config file to remote server (create file in conf.d)
