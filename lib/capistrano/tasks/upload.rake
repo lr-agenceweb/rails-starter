@@ -19,6 +19,7 @@ namespace :upload do
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config/dkim"
       upload! StringIO.new(File.read('config/dkim/dkim.private.key')), "#{shared_path}/config/dkim/dkim.private.key"
+      sudo :chmod, '755', "#{shared_path}/config/dkim/dkim.private.key"
     end
   end
 
