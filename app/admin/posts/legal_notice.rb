@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 ActiveAdmin.register LegalNotice do
   menu parent: I18n.t('admin_menu.posts')
-  includes :translations
+  includes :translations, :user, :picture
 
   permit_params :id,
                 :type,
@@ -14,12 +15,12 @@ ActiveAdmin.register LegalNotice do
   config.clear_sidebar_sections!
 
   batch_action :toggle_online do |ids|
-    About.find(ids).each { |item| item.toggle! :online }
+    LegalNotice.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
   batch_action :reset_cache do |ids|
-    About.find(ids).each(&:touch)
+    LegalNotice.find(ids).each(&:touch)
     redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
   end
 
@@ -30,7 +31,7 @@ ActiveAdmin.register LegalNotice do
 
   index do
     sortable_handle_column
-    render 'admin/posts/index', object: self
+    render 'admin/posts/index', object: self, hide_image_column: true, hide_comments_column: true
   end
 
   show title: :title_aa_show do
@@ -41,7 +42,7 @@ ActiveAdmin.register LegalNotice do
           panel t('active_admin.details', model: active_admin_config.resource_label) do
             attributes_table_for resource do
               row :content
-              row :status
+              bool_row :online
             end
           end
         end

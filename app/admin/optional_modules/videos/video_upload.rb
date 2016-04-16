@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register VideoUpload do
   menu parent: I18n.t('admin_menu.assets')
   includes :videoable, :video_subtitle
@@ -25,7 +26,7 @@ ActiveAdmin.register VideoUpload do
     image_column :video_file, style: :preview
     column :from_article
     column :subtitles
-    column :status
+    bool_column :online
 
     actions
   end
@@ -38,7 +39,7 @@ ActiveAdmin.register VideoUpload do
             image_row :video_file, style: :preview
             row :from_article
             row :subtitles
-            row :status
+            bool_row :online
           end
         end
 

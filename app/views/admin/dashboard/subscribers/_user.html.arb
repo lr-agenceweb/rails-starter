@@ -8,9 +8,7 @@ panel.panel t('activerecord.models.user.other') do
       p.column t('activerecord.attributes.user.email'), :email
       p.column t('activerecord.attributes.shared.status'), :status
 
-      p.column 'Actions' do |user|
-        user.admin_link
-      end
+      p.column 'Actions', &:admin_link
     end
   end
 end

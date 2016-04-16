@@ -57,29 +57,27 @@ Run `foreman start`
 Visit `http://localhost:3000`  
 That's it !  
 
-### Server ![Server](https://img.shields.io/badge/Server-Unicorn-5aaed7.svg?style=flat-square)
-This project use unicorn in local development. The server is launched using `foreman start`
 
-### Database ![SGBD](https://img.shields.io/badge/Database-MySQL%20%7C%20PostgreSQL%20%7C%20SQLite%20%7C%20MariaDB-5aaed7.svg?style=flat-square)
-It use `MySQL2` but you can choose to use `PostgreSQL`, `SQlite` or `MariaDB`.  
-To create a dump of your database, run `rake db:backup`
+### Stack
 
-### Template ![Template](https://img.shields.io/badge/Template-Slim-5aaed7.svg?style=flat-square)
-It use [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
-
-### Assets ![Assets](https://img.shields.io/badge/Assets-Sass%20%7C%20Coffeescript-5aaed7.svg?style=flat-square)
-Style is writting in `scss` and `sass` (using libsass)  
-Scripts are created in `coffeescript`
-
-### Cache
-Caching is handled by memcached with [Dalli](https://github.com/petergoldstein/dalli)
-
+ Technology                                                                        | Description
+---------------------------------------------------------------------------------- | -----------
+![Server](https://img.shields.io/badge/Server-Unicorn-5aaed7.svg?style=flat-square)| This project use unicorn in local development. <br /> The server is launched using `foreman start`
+![SGBD](https://img.shields.io/badge/Database-MySQL%20%7C%20MariaDB-5aaed7.svg?style=flat-square) <br /> ![SGBD](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20SQLite-5aaed7.svg?style=flat-square) | It use `MySQL2` but you can choose to use `PostgreSQL`, `SQlite` or `MariaDB`. <br /> To create a dump of your database, run `rake db:backup`
+![Template](https://img.shields.io/badge/Template-Slim-5aaed7.svg?style=flat-square) | It use [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
+![Assets](https://img.shields.io/badge/Assets-Sass%20%7C%20Coffeescript-5aaed7.svg?style=flat-square) | Style is writting in `scss` and `sass` (using libsass) <br /> Scripts are created in `coffeescript`
+![Cache](https://img.shields.io/badge/Cache-Memcached-5aaed7.svg?style=flat-square) | Caching is handled by `memcached` with [Dalli](https://github.com/petergoldstein/dalli)
+![Mail](https://img.shields.io/badge/Mail-Maildev-5aaed7.svg?style=flat-square) | It use [maildev](http://djfarrelly.github.io/MailDev/) NodeJS package to test emails in local. <br /> You don't have nothing to do, `maildev` server will be launched in the same time as the rails server with `foreman start`. <br /> To see your mails, visit `http://localhost:1080`
+Units Tests | Vanilla rails tests are included, just run `rake test`
+Code structure | This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
+![Deploy](https://img.shields.io/badge/Deploy-Capistrano-5aaed7.svg?style=flat-square) | `Capistrano` is used for an easy deploy to a private VPS
 
 ### Tasks
 #### Rails 
 
 * Color Routes: colored version of rake routes (run `rake color_routes`)
 * Dump SQL: make a quick save of your Database (run `rake db:backup`)
+
 
 #### Capistrano
 
@@ -94,87 +92,43 @@ Caching is handled by memcached with [Dalli](https://github.com/petergoldstein/d
   * `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
 
 * **Logrotate**  
-  * `cap <env> logrotate:upload_config` : Upload logrotate config file to remote server
+  * `cap <env> logrotate:upload` : Upload logrotate config file to remote server
 
 * **Nginx**  
-  * `cap <env> nginx:upload_vhost` : Upload vhost config file to remote server (create file in sites-availables)
-  * `cap <env> nginx:upload_vhost_ssl` : Same as above with SSL configuration for vhost (Let's Encrypt)
-  * `cap <env> nginx:symlink_vhost` : Symlink vhost config file previously uploaded (in sites-enabled)
-  * `cap <env> nginx:remove_vhost` : Remove uploaded vhost and symlink
-  * `cap <env> nginx:remove_symlink_vhost` : Remove only symlink
+  * `cap <env> nginx:upload:vhost` : Upload vhost config file to remote server (create file in conf.d)
+  * `cap <env> nginx:upload:vhost_ssl` : Same as above with SSL configuration for vhost (Let's Encrypt)
+  * `cap <env> nginx:vhost:disable` : Disable vhost (rename extension to .disabled)
+  * `cap <env> nginx:vhost:enable` : Enable vhost (rename extension to .conf)
+  * `cap <env> nginx:vhost:remove` : Remove uploaded vhost to conf.d folder
 
 * **Paperclip**  
   * `cap <env> paperclip:refresh:all` : Regenerate all Paperclip styles
   * `cap <env> paperclip:refresh:missing` : Regenerate only missing Paperclip styles
 
 
-### Mail
-It use [maildev](http://djfarrelly.github.io/MailDev/) to test emails in local. You don't have nothing to do, maildev server will be launched in the same time as the rails server with `foreman start`.  
-To see your mails, visit `http://localhost:1080`
-
-
 ### Modules
-**Newsletter**  
-In order to avoid spam email when sending newsletter to subscribers, you will need to sign your email address using SPF and DKIM keys and linked them to your DNS.
-Be sure to generate a `dkim.private.key` and `dkim.public.key` and move the `dkim.private.key` in `config/dkim` folder.
 
-**Blog**  
-Write blog articles.
+Name                | Description
+------------------- | -----------
+**Newsletter**      | In order to avoid spam email when sending newsletter to subscribers, you will need to sign your email address using SPF and DKIM keys and linked them to your DNS. <br /> Be sure to generate a `dkim.private.key` and `dkim.public.key` and move the `dkim.private.key` in `config/dkim` folder.
+**Blog**            | Write blog articles.
+**Slider**          | Add a slider on the page you want and customize its options.
+**Comment**         | Add comments for posts or blogs articles.
+**Guest Book**      | Allow users (connected or not) to leave a message in the guest book.
+**Event**           | Create events (with start date and end date)
+**Map**             | Display a Mapbox map of your organization or business
+**Social Network**  | Display social networks icons to share your site or let users to follow you on this networks
+**Breadcrumb**      | Show a breadcrumb on the page of your site
+**Video**           | Upload your own videos or add it from video platform such as Youtube or Dailymotion
+**Calendar**        | Choose start date and end date for your Events
+**Background**      | Display a background image for your pages
+**QrCode**          | Show a contact QrCode on the website
+**Adult**           | Display a popup the first time you access the website to inform you than you must be over 18 to continue your visit
+**RSS**             | Add a RSS feed to the website
+**Search**          | Add a search form to look on title or content post articles
+**Mailing**         | Application developped to send heavy mails number to users
+**SocialConnect**   | Allow users to LINK their ALREADY EXISTING Devise account to Facebook, Twitter or Google Social Connect.
 
-**Slider**  
-Add a slider on the page you want and customize its options.
-
-**Comments**  
-Add comments for posts or blogs articles.
-
-**Guest Book**  
-Allow users (connected or not) to leave a message in the guest book.
-
-**Events**  
-Create events (with start date and end date)
-
-**Map**  
-Display a Mapbox map of your organization or business
-
-**Social Network**  
-Display social networks icons to share your site or let users to follow you on this networks
-
-**Breadcrumb**  
-Show a breadcrumb on the page of your site
-
-**Video**  
-Upload your own videos or add it from video platform such as Youtube or Dailymotion
-
-**Calendar**  
-Choose start date and end date for your Events
-
-**Background**  
-Display a background image for your pages
-
-**QrCode**  
-Show a contact QrCode on the website
-
-**Adult**  
-Display a popup the first time you access the website to inform you than you must be over 18 to continue your visit
-
-**RSS**  
-Add a RSS feed to the website
-
-**Search**  
-Add a search form to look on title or content post articles
-
-**Mailing**  
-Application developped to send heavy mails number to users
-
-**SocialConnect**  
-Allow users to LINK their ALREADY EXISTING Devise account to Facebook, Twitter or Google Social Connect.
-
-
-### Units Tests
-Basics tests are included, just run `rake test`
-
-### Code structure
-This project follow most of [Rubocop](https://github.com/bbatsov/rubocop) rules
 
 ### Screenshots
 ![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)

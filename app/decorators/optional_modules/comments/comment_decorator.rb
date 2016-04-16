@@ -1,3 +1,4 @@
+# frozen_string_literal: false
 #
 # == CommentDecorator
 #
@@ -64,11 +65,6 @@ class CommentDecorator < ApplicationDecorator
   #
   # == Status tag
   #
-  def status
-    color = model.validated? ? 'green' : 'orange'
-    status_tag_deco(I18n.t("validate.#{model.validated}"), color)
-  end
-
   def signalled_d
     color = model.signalled? ? 'red' : 'green'
     status_tag_deco(I18n.t(model.signalled.to_s), color)

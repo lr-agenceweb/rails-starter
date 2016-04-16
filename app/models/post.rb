@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: posts
@@ -52,7 +53,7 @@ class Post < ActiveRecord::Base
   scope :home, -> { where(type: 'Home') }
   scope :about, -> { where(type: 'About') }
   scope :by_user, -> (user_id) { where(user_id: user_id) }
-  scope :allowed_for_rss, -> { where.not(type: 'Home').where.not(type: 'About').where.not(type: 'LegalNotice') }
+  scope :allowed_for_rss, -> { where.not(type: 'Home').where.not(type: 'About').where.not(type: 'LegalNotice').where.not(type: 'Connection') }
 
   self.inheritance_column = :type
   @child_classes = []
@@ -61,7 +62,7 @@ class Post < ActiveRecord::Base
   paginates_per 10
 
   def self.type
-    %w(Home About Contact)
+    %w(Home About Connection Contact)
   end
 
   def self.inherited(child)

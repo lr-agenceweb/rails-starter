@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # == PostDecorator
 #
@@ -26,14 +27,6 @@ class PostDecorator < ApplicationDecorator
 
   def author_with_avatar
     author_with_avatar_html(author_avatar, link_author)
-  end
-
-  #
-  # == Status tag
-  #
-  def allow_comments_status
-    color = model.allow_comments? ? 'green' : 'red'
-    status_tag_deco I18n.t("allow_comments.#{model.allow_comments}"), color
   end
 
   #
@@ -85,5 +78,18 @@ class PostDecorator < ApplicationDecorator
   #
   def comments_count
     comments.validated.count
+  end
+
+  #
+  # == Link (linkable polymorphic)
+  #
+  def link_with_link
+    link_to model.link.url, model.link.url, target: :blank if link?
+  end
+
+  private
+
+  def link?
+    model.link.try(:url).present?
   end
 end

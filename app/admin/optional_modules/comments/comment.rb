@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register Comment, as: 'PostComment' do
   menu parent: I18n.t('admin_menu.modules')
   includes :user
@@ -36,7 +37,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     column :author_with_avatar
     column :email_registered_or_guest
     column :lang if locales.length > 1
-    column :status
+    bool_column :validated
     column :signalled_d if comment_setting.should_signal?
     column :link_and_image_source
     column :created_at
@@ -51,7 +52,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
         row :email_registered_or_guest
         row :content
         row :lang if locales.length > 1
-        row :status
+        bool_row :validated
         row :signalled_d if comment_setting.should_signal?
         row :link_and_image_source
         row :created_at

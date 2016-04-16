@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -49,7 +50,7 @@ module Admin
     # == Destroy
     #
     test 'should destroy event' do
-      assert_difference ['Event.count'], -1 do
+      assert_difference ['Event.count', 'Link.count'], -1 do
         delete :destroy, id: @event
       end
       assert_redirected_to admin_events_path
@@ -134,7 +135,7 @@ module Admin
 
     test 'should not save event if link is not correct' do
       assert_no_difference ['Event.count'] do
-        post :create, event: { url: 'fake.url' }
+        post :create, event: { link_attributes: { url: 'fake.url' } }
       end
       assert_not assigns(:event).valid?
     end

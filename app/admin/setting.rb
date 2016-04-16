@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register Setting do
   menu parent: I18n.t('admin_menu.config')
 

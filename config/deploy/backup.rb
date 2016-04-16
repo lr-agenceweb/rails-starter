@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 set :stage, :backup
 set :deploy_to, "#{Figaro.env.capistrano_deploy_to_backup}/#{fetch(:stage)}/#{fetch(:application)}"
 

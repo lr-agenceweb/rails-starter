@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :paperclip do
   namespace :refresh do
     desc 'Refresh All Paperclip Styles (Must Specify \'CLASS\' parameter)'

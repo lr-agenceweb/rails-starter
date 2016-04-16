@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register BlogSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
@@ -12,7 +13,7 @@ ActiveAdmin.register BlogSetting do
       columns do
         column do
           attributes_table do
-            row :prev_next
+            bool_row :prev_next
           end
         end
       end

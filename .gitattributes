@@ -1,0 +1,73 @@
+# Define the line ending behavior of the different file extensions
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text=auto
+* text eol=lf
+
+# Documents
+*.doc  diff=astextplain
+*.DOC  diff=astextplain
+*.docx diff=astextplain
+*.DOCX diff=astextplain
+*.dot  diff=astextplain
+*.DOT  diff=astextplain
+*.pdf  diff=astextplain
+*.PDF  diff=astextplain
+*.rtf  diff=astextplain
+*.RTF  diff=astextplain
+*.md text
+*.adoc text
+*.textile text
+*.mustache text
+*.csv text
+*.tab text
+*.tsv text
+*.sql text
+
+# Graphics
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.tif binary
+*.tiff binary
+*.ico binary
+*.svg binary
+*.eps binary
+
+
+#
+# == Ignore while exporting
+#
+
+# Folders
+/bin/procfile export-ignore
+/config/deploy export-ignore
+/coverage export-ignore
+/doc export-ignore
+/lib/capistrano export-ignore
+/test export-ignore
+
+# Files
+/config/deploy.rb export-ignore
+analytical.example.yml export-ignore
+application.example.yml export-ignore
+database.example.yml export-ignore
+database.travis.yml export-ignore
+
+.codeclimate.yml export-ignore
+.editorconfig export-ignore
+.env.example export-ignore
+.powrc export-ignore
+.rubocop.yml export-ignore
+.travis.yml export-ignore
+.travis_mariadb.sh export-ignore
+autoprefixer.yml export-ignore
+circle.yml export-ignore
+coffeelint.json export-ignore
+gulpfile.coffee export-ignore
+gulpfile.js export-ignore
+LICENSE export-ignore
+package.json export-ignore
+Procfile export-ignore
+README.html export-ignore
+README.md export-ignore

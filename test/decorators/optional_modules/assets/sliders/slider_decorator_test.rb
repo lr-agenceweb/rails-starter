@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -23,55 +24,7 @@ class SliderDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct value for time_to_show' do
-    assert_equal '5 secondes', @slider_decorated.time_to_show_deco
-  end
-
-  #
-  # == Status tag
-  #
-  test 'should return correct status_tag with autoplay enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @slider_decorated.autoplay_deco
-  end
-
-  test 'should return correct status_tag with autoplay disabled' do
-    @slider.update_attribute(:autoplay, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @slider_decorated.autoplay_deco
-  end
-
-  test 'should return correct status_tag with hover_pause enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @slider_decorated.hover_pause_deco
-  end
-
-  test 'should return correct status_tag with hover_pause disabled' do
-    @slider.update_attribute(:hover_pause, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @slider_decorated.hover_pause_deco
-  end
-
-  test 'should return correct status_tag with loop enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @slider_decorated.loop_deco
-  end
-
-  test 'should return correct status_tag with loop disabled' do
-    @slider.update_attribute(:loop, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @slider_decorated.loop_deco
-  end
-
-  test 'should return correct status_tag with navigation enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @slider_decorated.navigation_deco
-  end
-
-  test 'should return correct status_tag with navigation disabled' do
-    @slider.update_attribute(:navigation, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @slider_decorated.navigation_deco
-  end
-
-  test 'should return correct status_tag with bullet enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @slider_decorated.bullet_deco
-  end
-
-  test 'should return correct status_tag with bullet disabled' do
-    @slider.update_attribute(:bullet, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @slider_decorated.bullet_deco
+    assert_equal '5 secondes', @slider_decorated.time_to_show
   end
 
   private

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register GuestBook do
   menu parent: I18n.t('admin_menu.modules')
 
@@ -26,7 +27,7 @@ ActiveAdmin.register GuestBook do
     column :username
     column :content
     column :lang
-    column :status
+    bool_column :validated
     column :created_at
 
     actions
@@ -38,7 +39,7 @@ ActiveAdmin.register GuestBook do
         row :username
         row :content
         row :lang
-        row :status
+        bool_row :validated
         row :created_at
       end
     end

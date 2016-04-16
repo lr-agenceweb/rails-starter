@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register CommentSetting do
   menu parent: I18n.t('admin_menu.modules_config')
   includes :user
@@ -11,9 +12,9 @@ ActiveAdmin.register CommentSetting do
   show title: I18n.t('activerecord.models.comment_setting.one') do
     arbre_cache(self, resource.cache_key) do
       attributes_table do
-        row :should_validate
-        row :should_signal
-        row :send_email if resource.should_signal?
+        bool_row :should_validate
+        bool_row :should_signal
+        bool_row :send_email if resource.should_signal?
       end
     end
   end

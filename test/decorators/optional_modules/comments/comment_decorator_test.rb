@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -79,15 +80,6 @@ class CommentDecoratorTest < Draper::TestCase
   #
   # == Status tag
   #
-  test 'should return correct status_tag when validated' do
-    assert_match '<span class="status_tag validé green">Validé</span>', @comment_decorated.status
-  end
-
-  test 'should return correct status_tag when not validated' do
-    @comment.update_attribute(:validated, false)
-    assert_match '<span class="status_tag non_validé orange">Non Validé</span>', @comment_decorated.status
-  end
-
   test 'should return correct status_tag when not signalled' do
     assert_match '<span class="status_tag non green">Non</span>', @comment_decorated.signalled_d
   end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -53,6 +54,26 @@ module Admin
     test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
       assert_crud_actions(@event_settings, admin_dashboard_path, model_name)
+    end
+
+    #
+    # == Map module
+    #
+    test 'should not update show_map setting if map module is disabled' do
+      disable_optional_module @super_administrator, @map_module, 'Map' # in test_helper.rb
+      sign_in @administrator
+
+      assert_not @event_settings.show_map?
+      patch :update, id: @event_settings, event_setting: { show_map: true }
+      assert assigns(:event_setting).valid?
+      assert_not assigns(:event_setting).show_map?, 'map should not change of status'
+    end
+
+    test 'should update show_map setting if map module is enabled' do
+      assert_not @event_settings.show_map?
+      patch :update, id: @event_settings, event_setting: { show_map: true }
+      assert assigns(:event_setting).valid?
+      assert assigns(:event_setting).show_map?, 'map should have changed of status'
     end
 
     #
@@ -128,6 +149,7 @@ module Admin
       @setting = settings(:one)
       @event_settings = event_settings(:one)
       @event_module = optional_modules(:event)
+      @map_module = optional_modules(:map)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

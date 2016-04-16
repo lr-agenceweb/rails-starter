@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register About do
   menu parent: I18n.t('admin_menu.posts')
   includes :translations

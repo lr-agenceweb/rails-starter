@@ -97,6 +97,10 @@ fr:
         content: Contenu du message d'accueil dans la popup
         redirect_link: "Lien de redirection dans le cas où l'utilisateur refuse de valider le message (ex: http://google.com).<br /> Si aucun lien n'est renseigné, l'utilisateur sera redirigé sur le site de L&R Agence web"
 
+      connection:
+        link:
+          url: Lien à ajouter à l'article
+
       event:
         start_date: Date de début de l'événement
         end_date: Date de fin de l'événement
@@ -104,6 +108,7 @@ fr:
         online: En cochant la case en ligne, vous choisissez d'afficher l'événement sur le site
         show_calendar: Afficher un calendrier de l'événement sur le site ? (Attention, le calendrier ne sera visible que si les options "date de début" et "date de fin" de l'événement sont spécifiées)
         event_order: Choisissez la manière dont vous souhaitez que les événements apparaissent
+        show_map: Si coché, une carte affichera pour chaque événement sa position géographique (les informations de localisation devront avoir été saisies correctement au sein de l'événement au préalable)
 
       allow_comments: Voulez-vous autoriser les commentaires sur cet article ?
 
@@ -185,6 +190,7 @@ fr:
           destroy: Si coché, les sous-titres anglais seront supprimés
         fr:
           destroy: Si coché, les sous-titres français seront supprimés
+
 
     placeholder:
       froala: Contenu de l'article ici :)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 
 #
@@ -28,7 +29,7 @@ gem 'omniauth-google-oauth2', '~> 0.4.1'
 # == Administration
 #
 gem 'activeadmin', '~> 1.0.0.pre2'
-gem 'activeadmin_addons'
+gem 'activeadmin_addons', github: 'platanus/activeadmin_addons', branch: 'master'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
 gem 'active_skin'

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register SocialConnectSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
@@ -20,7 +21,7 @@ ActiveAdmin.register SocialConnectSetting do
       columns do
         column do
           attributes_table do
-            row :status
+            bool_row :enabled
             resource.social_providers.each do |provider|
               row "social_#{provider.name}".to_sym
             end

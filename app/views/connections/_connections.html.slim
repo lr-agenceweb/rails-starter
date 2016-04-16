@@ -1,0 +1,6 @@
+section#connections
+  - @connections.each do |connection|
+    - cache ['list', connection]
+      = render 'connection', connection: connection
+
+= paginate @connections

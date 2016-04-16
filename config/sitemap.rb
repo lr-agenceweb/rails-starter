@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 SitemapGenerator::Interpreter.send :include, SitemapHelper
 
 # Set the host name for URL creation

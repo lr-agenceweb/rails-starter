@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register Slider do
   menu parent: I18n.t('admin_menu.modules')
   includes :category
@@ -31,17 +32,22 @@ ActiveAdmin.register Slider do
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
+  batch_action :reset_cache do |ids|
+    Slider.find(ids).each(&:touch)
+    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
   index do
     selectable_column
     column :page
-    column :autoplay_deco
-    column :hover_pause_deco
-    column :loop_deco
-    column :navigation_deco
-    column :bullet_deco
-    column :time_to_show_deco
+    bool_column :autoplay
+    bool_column :hover_pause
+    bool_column :loop
+    bool_column :navigation
+    bool_column :bullet
+    column :time_to_show
     column :animate
-    column :status
+    bool_column :online
 
     actions
   end
@@ -52,14 +58,14 @@ ActiveAdmin.register Slider do
         column do
           attributes_table do
             row :page
-            row :status
-            row :autoplay_deco
-            row :hover_pause_deco
-            row :loop_deco
-            row :navigation_deco
-            row :bullet_deco
-            row :time_to_show_deco
+            bool_row :autoplay
+            bool_row :hover_pause
+            bool_row :loop
+            bool_row :navigation
+            bool_row :bullet
+            row :time_to_show
             row :animate
+            bool_row :online
           end
         end
 

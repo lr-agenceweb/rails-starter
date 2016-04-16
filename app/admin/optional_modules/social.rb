@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register Social do
   menu parent: I18n.t('admin_menu.modules')
 
@@ -32,7 +33,7 @@ ActiveAdmin.register Social do
     column :title
     column :kind
     column :link
-    column :status
+    bool_column :enabled
 
     actions
   end
@@ -44,7 +45,7 @@ ActiveAdmin.register Social do
         row :title
         row :kind
         row :link unless resource.object.kind == 'share'
-        row :status
+        bool_row :enabled
       end
     end
   end

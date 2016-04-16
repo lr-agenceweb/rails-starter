@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register Menu do
   menu parent: I18n.t('admin_menu.config')
   includes :translations
@@ -25,8 +26,9 @@ ActiveAdmin.register Menu do
   end
 
   index do
+    selectable_column
     column :title
-    column :status
+    bool_column :online
     bool_column :show_in_header
     bool_column :show_in_footer
     actions
@@ -36,7 +38,7 @@ ActiveAdmin.register Menu do
     arbre_cache(self, resource.cache_key) do
       attributes_table do
         row :title
-        row :status
+        bool_row :online
         bool_row :show_in_header
         bool_row :show_in_footer
       end

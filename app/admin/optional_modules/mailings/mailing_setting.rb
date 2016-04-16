@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register MailingSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 

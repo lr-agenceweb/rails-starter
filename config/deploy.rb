@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require File.expand_path('../environment', __FILE__)
 require 'figaro'
 

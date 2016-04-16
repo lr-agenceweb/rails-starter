@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -35,33 +36,6 @@ class ApplicationDecoratorTest < Draper::TestCase
   #
   # == Status tag
   #
-  test 'should return status_tag if prev_next' do
-    @blog_setting.update_attribute(:prev_next, true)
-    assert_match '<span class="status_tag activé green">Activé</span>', @blog_setting_decorated.prev_next
-  end
-
-  test 'should return status_tag if prev_next disabled' do
-    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @blog_setting_decorated.prev_next
-  end
-
-  test 'should return status_tag if show_as_gallery' do
-    @blog_article.update_attribute(:show_as_gallery, true)
-    assert_match '<span class="status_tag activé green">Activé</span>', @blog_article_decorated.show_as_gallery
-  end
-
-  test 'should return status_tag if show_as_gallery disabled' do
-    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @blog_article_decorated.show_as_gallery
-  end
-
-  test 'should return status_tag if online' do
-    assert_match '<span class="status_tag en_ligne green">En Ligne</span>', @blog_article_decorated.status
-  end
-
-  test 'should return status_tag if offline' do
-    @blog_article.update_attribute(:online, false)
-    assert_match '<span class="status_tag hors_ligne red">Hors Ligne</span>', @blog_article_decorated.status
-  end
-
   test 'should return status_tag for french language' do
     assert_match '<span class="status_tag français blue">Français</span>', @newsletter_user_decorated.lang
   end

@@ -1,4 +1,5 @@
 
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -11,19 +12,24 @@ class EventDecoratorTest < Draper::TestCase
   # == Event URL
   #
   test 'should have a link for the event' do
-    assert_match '<a target="_blank" href="http://google.com">http://google.com</a>', @event_decorated.url
+    assert_match '<a target="blank" href="http://www.google.com">http://www.google.com</a>', @event_decorated.link_with_link
   end
 
   test 'should not have a link for the event' do
-    assert_match 'Pas de lien', @event_two_decorated.url
+    assert_not @event_two_decorated.link_with_link
   end
 
-  test 'should return true for url? method if link' do
-    assert @event_decorated.send(:url?)
+  test 'should return true for link? method if link' do
+    assert @event_decorated.send(:link?)
   end
 
-  test 'should return false for url? method if no link' do
-    assert_not @event_two_decorated.send(:url?)
+  test 'should return false for link? method if no link' do
+    assert_not @event_two_decorated.send(:link?)
+  end
+
+  test 'should return false for link? method if link is empty' do
+    @link.update_attributes! url: ''
+    assert_not @event_two_decorated.send(:link?)
   end
 
   #
@@ -68,12 +74,6 @@ class EventDecoratorTest < Draper::TestCase
   #
   # == Calendar
   #
-  test 'should return correct status_tag for show_calendar' do
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @event_decorated.show_calendar_d
-    @event.update_attributes(show_calendar: true)
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @event_decorated.show_calendar_d
-  end
-
   test 'should return correct boolean value if show calendar' do
     assert_not @event_decorated.all_conditions_to_show_calendar?(@calendar_module)
     @event.update_attributes(show_calendar: true)
@@ -103,6 +103,8 @@ class EventDecoratorTest < Draper::TestCase
     @event = events(:event_online)
     @event_two = events(:event_third)
     @calendar_module = optional_modules(:calendar)
+
+    @link = links(:event)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -13,7 +14,7 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test 'should return only allowed modules' do
-    assert_equal 9, Category.with_allowed_module.count
+    assert_equal 10, Category.with_allowed_module.count
   end
 
   #

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # == Setting Decorator
 #
@@ -54,31 +55,6 @@ class SettingDecorator < ApplicationDecorator
   #
   # == Modules
   #
-  def map
-    color = model.show_map? ? 'blue' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.show_map}"), color
-  end
-
-  def breadcrumb
-    color = model.show_breadcrumb? ? 'blue' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.show_breadcrumb}"), color
-  end
-
-  def social
-    color = model.show_social? ? 'blue' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.show_social}"), color
-  end
-
-  def qrcode
-    color = model.show_qrcode? ? 'blue' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.show_qrcode}"), color
-  end
-
-  def maintenance
-    color = model.maintenance? ? 'red' : 'green'
-    status_tag_deco I18n.t("maintenance.#{model.maintenance}"), color
-  end
-
   def newsletter(newsletter_user)
     content_tag(:div, class: 'newsletter-form') do
       concat(content_tag(:span, I18n.t('newsletter.header'), class: 'newsletter-form-header'))

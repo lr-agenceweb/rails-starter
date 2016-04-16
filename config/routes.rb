@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
   devise_config = ActiveAdmin::Devise.config
   devise_config[:controllers][:omniauth_callbacks] = 'users/omniauth_callbacks'
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
       get 'mapbox-popup', action: :mapbox_popup, as: :mapbox_popup, on: :collection
     end
     resources :contact_forms, controller: 'contacts', only: [:index, :new, :create]
+    resources :connections, only: [:index]
 
     # GuestBook
     resources :guest_books, only: [:index, :create, :destroy], concerns: :paginatable

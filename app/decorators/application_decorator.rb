@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # == ApplicationDecorator
 #
@@ -28,6 +29,7 @@ class ApplicationDecorator < Draper::Decorator
     model_name = model.class.to_s
     return send("root_#{suffix}") if model_name == 'Home'
     return send("legal_notices_#{suffix}") if model_name == 'LegalNotice'
+    return send("connections_#{suffix}") if model_name == 'Connection'
     send("#{model_name.underscore.singularize}_#{suffix}", model)
   end
 
@@ -81,21 +83,6 @@ class ApplicationDecorator < Draper::Decorator
     color = 'blue' if model.lang == 'fr'
     color = 'red' if model.lang == 'en'
     status_tag_deco I18n.t("active_admin.globalize.language.#{model.lang}"), color
-  end
-
-  def status
-    color = model.online? ? 'green' : 'red'
-    status_tag_deco I18n.t("online.#{model.online}"), color
-  end
-
-  def show_as_gallery
-    color = model.show_as_gallery? ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.show_as_gallery?}"), color
-  end
-
-  def prev_next
-    color = model.prev_next? ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.prev_next}"), color
   end
 
   #

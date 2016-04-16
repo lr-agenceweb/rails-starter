@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # == SocialDecorator
 #
@@ -39,14 +40,6 @@ class SocialDecorator < ApplicationDecorator
 
   def ikon?
     model.ikon.present? && model.ikon.exists?
-  end
-
-  #
-  # == Status tag
-  #
-  def status
-    color = model.enabled? ? 'green' : 'red'
-    status_tag_deco(I18n.t("enabled.#{model.enabled}"), color)
   end
 
   private

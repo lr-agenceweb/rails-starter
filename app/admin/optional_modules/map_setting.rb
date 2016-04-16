@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register MapSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
@@ -23,12 +24,6 @@ ActiveAdmin.register MapSetting do
               row :marker_icon
               row :marker_color_d
             end
-          end
-        end
-
-        column do
-          panel t('activerecord.models.map.one') do
-            render 'elements/map'
           end
         end
       end

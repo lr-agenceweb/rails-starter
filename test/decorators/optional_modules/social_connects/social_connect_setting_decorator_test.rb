@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -16,15 +17,6 @@ class SocialConnectSettingDecoratorTest < Draper::TestCase
   #
   # == Status tag
   #
-  test 'should return correct status_tag if enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @social_connect_setting_decorated.status
-  end
-
-  test 'should return correct status_tag if disabled' do
-    @social_connect_setting.update_attribute(:enabled, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @social_connect_setting_decorated.status
-  end
-
   test 'should return correct status_tag for social_facebook if enabled' do
     assert_match "<span class=\"status_tag activé green\">Activé</span>", @social_connect_setting_decorated.social_facebook
   end
@@ -44,12 +36,12 @@ class SocialConnectSettingDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct status_tag for social_google if enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @social_connect_setting_decorated.social_google_oauth2
+    assert_match "<span class=\"status_tag activé green\">Activé</span>", @social_connect_setting_decorated.social_google
   end
 
   test 'should return correct status_tag for social_google if disabled' do
     @google_provider.update_attribute(:enabled, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @social_connect_setting_decorated.social_google_oauth2
+    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @social_connect_setting_decorated.social_google
   end
 
   private

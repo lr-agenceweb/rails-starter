@@ -1,9 +1,16 @@
+# frozen_string_literal: true
 ActiveAdmin.register EventSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
-  permit_params :id,
-                :prev_next,
-                :event_order_id
+  permit_params do
+    params = [:id,
+              :prev_next,
+              :event_order_id
+             ]
+
+    params.push :show_map if @map_module.enabled?
+    params
+  end
 
   decorate_with EventSettingDecorator
   config.clear_sidebar_sections!
@@ -13,7 +20,8 @@ ActiveAdmin.register EventSetting do
       columns do
         column do
           attributes_table do
-            row :prev_next
+            bool_row :prev_next
+            bool_row :show_map if map_module.enabled?
             row :event_order
           end
         end
@@ -29,6 +37,12 @@ ActiveAdmin.register EventSetting do
         f.inputs t('general') do
           f.input :prev_next,
                   hint: I18n.t('form.hint.post.prev_next')
+
+          if map_module.enabled?
+            f.input :show_map,
+                    hint: I18n.t('form.hint.event.show_map')
+          end
+
           f.input :event_order,
                   as: :select,
                   collection: EventOrder.all,

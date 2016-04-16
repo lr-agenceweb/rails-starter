@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # == NewsletterSettingDecorator
 #
@@ -18,13 +19,5 @@ class NewsletterSettingDecorator < ApplicationDecorator
 
   def newsletter_user_roles_list
     model.newsletter_user_roles.map(&:title)
-  end
-
-  #
-  # == Status tag
-  #
-  def send_welcome_email
-    color = model.send_welcome_email? ? 'green' : 'red'
-    status_tag_deco I18n.t(send_welcome_email?.to_s), color
   end
 end

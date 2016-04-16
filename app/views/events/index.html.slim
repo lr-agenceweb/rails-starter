@@ -13,7 +13,7 @@ section.events-section.page-section#events
   .row.align-center
     - if @events.blank?
       .small-12.columns
-        p = t('blog.no_results')
+        p = t('event.no_results')
     - else
       .small-12.medium-8.columns
         = render 'events'

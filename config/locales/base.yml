@@ -40,9 +40,6 @@ fr:
   subtitles:
     'true': Sous-titres présents
     'false': Sous-titres absents
-  native_informations:
-    'true': Informations natives activées
-    'false': Informations natives désactivées
   all: Tous
   additional: Informations complémentaires
   general: Informations générales

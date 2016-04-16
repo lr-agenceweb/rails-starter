@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register VideoPlatform do
   menu parent: I18n.t('admin_menu.assets')
   includes :videoable
@@ -23,7 +24,7 @@ ActiveAdmin.register VideoPlatform do
     column :preview
     column :video_link
     column :from_article
-    column :status
+    bool_column :online
 
     actions
   end
@@ -36,13 +37,13 @@ ActiveAdmin.register VideoPlatform do
             row :preview
             row :video_link
             row :from_article
-            row :status
+            bool_row :online
           end
         end
 
         column do
           attributes_table do
-            row :native_informations_d
+            bool_row :native_informations
             row :title_d
             row :description_d
           end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -66,18 +67,6 @@ class SocialDecoratorTest < Draper::TestCase
   #
   test 'should return correct kind' do
     assert_equal I18n.t("social.#{@facebook_follow.kind}"), @facebook_follow_decorated.kind
-  end
-
-  #
-  # == Status tag
-  #
-  test 'should return correct status_tag if enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @facebook_follow_decorated.status
-  end
-
-  test 'should return correct status_tag if disabled' do
-    @facebook_follow.update_attribute(:enabled, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @facebook_follow_decorated.status
   end
 
   private

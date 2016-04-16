@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # == EventDecorator
 #
@@ -7,10 +8,6 @@ class EventDecorator < PostDecorator
 
   delegate_all
   decorates_association :location
-
-  def url
-    url? ? link_to(model.url, model.url, target: :_blank) : 'Pas de lien'
-  end
 
   #
   # == Dates
@@ -38,11 +35,6 @@ class EventDecorator < PostDecorator
     model.show_calendar? && calendar_module.enabled? && start_date? && end_date?
   end
 
-  def show_calendar_d
-    color = model.show_calendar? ? 'green' : 'red'
-    status_tag_deco I18n.t("enabled.#{model.show_calendar}"), color
-  end
-
   #
   # == Location
   #
@@ -51,10 +43,6 @@ class EventDecorator < PostDecorator
   end
 
   private
-
-  def url?
-    !model.url.blank?
-  end
 
   def start_date?
     !model.start_date.blank?

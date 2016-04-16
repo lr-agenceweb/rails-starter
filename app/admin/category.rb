@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 include Core::MenuHelper
 include AssetsHelper
 

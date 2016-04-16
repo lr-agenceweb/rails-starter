@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 #
@@ -24,18 +25,6 @@ class VideoPlatformDecoratorTest < Draper::TestCase
 
   test 'should get correct preview for video' do
     assert_equal '<img src="http://s2.dmcdn.net/MkYFP/x240-qKj.png" alt="X240 qkj" />', @video_platform_decorated.preview
-  end
-
-  #
-  # == Status tag
-  #
-  test 'should return status_tag for enabled native_informations' do
-    assert_match "<span class=\"status_tag informations_natives_activées green\">Informations Natives Activées</span>", @video_platform_decorated.native_informations_d
-  end
-
-  test 'should return status_tag for disabled native_informations' do
-    @video_platform.update_attribute(:native_informations, false)
-    assert_match "<span class=\"status_tag informations_natives_désactivées red\">Informations Natives Désactivées</span>", @video_platform_decorated.native_informations_d
   end
 
   private

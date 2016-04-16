@@ -17,9 +17,5 @@
     "install": "^0.2.6",
     "npm": "^3.3.12",
     "require-dir": "^0.1.0"
-  },
-  "dependencies": {
-    "del": "^2.1.0",
-    "path": "^0.12.7"
   }
 }
