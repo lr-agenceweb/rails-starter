@@ -16,6 +16,7 @@
 #  show_qrcode              :boolean          default(FALSE)
 #  show_map                 :boolean          default(FALSE)
 #  show_admin_bar           :boolean          default(TRUE)
+#  date_format              :integer          default(0)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer
@@ -35,6 +36,7 @@
 # == Setting Model
 #
 class Setting < ActiveRecord::Base
+  extend Enumerize
   include Assets::Attachable
   include MaxRowable
 
@@ -49,6 +51,8 @@ class Setting < ActiveRecord::Base
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
+
+  enumerize :date_format, in: { date: 0, date_with_time: 1, ago: 2 }, default: :date
 
   def self.per_page_values
     [1, 2, 3, 5, 10, 15, 20, 0]

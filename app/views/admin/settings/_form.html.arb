@@ -74,6 +74,11 @@ f.columns do
               collection: Setting.per_page_values,
               include_blank: false,
               hint: 'Choisissez le nombre d\'articles à afficher avant la pagination. Si vous souhaitez afficher tous les articles sur une seule page, sélectionnez la valeur 0'
+
+      f.input :date_format,
+              as: :radio,
+              collection: Setting.date_format.options,
+              hint: 'Choisissez le format de la date à afficher (<strong>date seulement</strong>, <strong>date + heure</strong> ou sous la forme "<strong>Il y a 10 minutes</strong>)"'.html_safe
     end
   end
 end

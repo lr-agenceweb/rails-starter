@@ -6,6 +6,7 @@ columns do
         row :title
         row :subtitle
         bool_row :maintenance
+        tag_row :date_format
       end
     end
   end
