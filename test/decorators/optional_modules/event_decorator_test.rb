@@ -52,11 +52,11 @@ class EventDecoratorTest < Draper::TestCase
   end
 
   test 'should have correct start_date html formatted' do
-    assert_equal '<time datetime="2015-07-22T09:00:00+02:00">mercredi 22 juillet</time>', @event_decorated.start_date_deco
+    assert_equal '<time datetime="2015-07-22T09:00:00+02:00">22/07</time>', @event_decorated.start_date_deco
   end
 
   test 'should have correct end_date html formatted' do
-    assert_equal '<time datetime="2015-07-28T18:00:00+02:00">mardi 28 juillet 2015</time>', @event_decorated.end_date_deco
+    assert_equal '<time datetime="2015-07-28T18:00:00+02:00">28/07/2015</time>', @event_decorated.end_date_deco
   end
 
   test 'should not have end_date if setting not specified' do
@@ -64,7 +64,7 @@ class EventDecoratorTest < Draper::TestCase
   end
 
   test 'should have correct from_to_date html formatted' do
-    assert_equal 'Du <time datetime="2015-07-22T09:00:00+02:00">mercredi 22 juillet</time> au <time datetime="2015-07-28T18:00:00+02:00">mardi 28 juillet 2015</time>', @event_decorated.from_to_date
+    assert_equal 'Du <time datetime="2015-07-22T09:00:00+02:00">22/07</time> au <time datetime="2015-07-28T18:00:00+02:00">28/07/2015</time>', @event_decorated.from_to_date
   end
 
   test 'should not return from_to_date if start or end not set' do
