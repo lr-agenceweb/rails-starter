@@ -61,4 +61,38 @@ class ContactFormTest < ActiveSupport::TestCase
     assert_not msg.valid?
     assert_equal [:nickname], msg.errors.keys
   end
+
+  test 'should not be valid if attachment type is not allowed' do
+    file = File.new('./test/fixtures/images/bart.png')
+    file.stubs(:size).returns(1.megabytes)
+    file.stubs(:content_type).returns('images/psd')
+
+    attrs = {
+      name: 'maria',
+      email: 'maria@example.com',
+      message: 'Lorem ipsum dolor sit amet',
+      attachment: file,
+      nickname: ''
+    }
+    msg = ContactForm.new attrs
+    assert_not msg.valid?
+    assert_equal [:attachment], msg.errors.keys
+  end
+
+  test 'should not be valid if attachment size is too heavy' do
+    file = File.new('./test/fixtures/images/bart.png')
+    file.stubs(:size).returns(6.megabytes)
+    file.stubs(:content_type).returns('text/plain')
+
+    attrs = {
+      name: 'maria',
+      email: 'maria@example.com',
+      message: 'Lorem ipsum dolor sit amet',
+      attachment: file,
+      nickname: ''
+    }
+    msg = ContactForm.new attrs
+    assert_not msg.valid?
+    assert_equal [:attachment], msg.errors.keys
+  end
 end

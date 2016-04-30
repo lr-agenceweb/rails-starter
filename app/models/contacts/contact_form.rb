@@ -17,17 +17,17 @@ class ContactForm
             presence: true
   validates :nickname,
             absence: true
-  validate :attachment_size_validation,
+  validate :attachment_size,
            unless: proc { attachment.blank? }
-  validate :attachment_type_validation,
+  validate :attachment_type,
            unless: proc { attachment.blank? }
 
-  def attachment_size_validation
+  def attachment_size
     max_size = 3
     errors[:attachment] << I18n.t('form.errors.contact_form.size', size: max_size) if attachment.size > max_size.megabytes
   end
 
-  def attachment_type_validation
+  def attachment_type
     acceptable_types = ['application/pdf', 'image/jpeg', 'image/png', 'text/plain']
     errors[:attachment] << I18n.t('form.errors.contact_form.type') unless acceptable_types.include? attachment.content_type.chomp
   end
