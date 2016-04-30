@@ -158,6 +158,11 @@ class SettingTest < ActiveSupport::TestCase
     assert_equal [I18n.t('form.errors.max_row')], setting.errors[:max_row]
   end
 
+  test 'should enumerize correct attribute and values' do
+    skip 'Find a way to test enumerize'
+    assert enumerize(:date_format).in(with_time: 0, without_time: 1, ago: 2).with_default(:with_time)
+  end
+
   private
 
   def initialize_test

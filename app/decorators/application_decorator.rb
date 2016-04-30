@@ -70,6 +70,10 @@ class ApplicationDecorator < Draper::Decorator
     I18n.l(model.created_at, format: :short)
   end
 
+  def pretty_created_at(date_format)
+    time_tag(model.created_at.to_datetime, l(model.created_at, format: date_format.to_sym), class: 'date-format')
+  end
+
   #
   # == Status tag
   #

@@ -15,6 +15,7 @@
 #  show_qrcode              :boolean          default(FALSE)
 #  show_map                 :boolean          default(FALSE)
 #  show_admin_bar           :boolean          default(TRUE)
+#  date_format              :integer          default(0)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer

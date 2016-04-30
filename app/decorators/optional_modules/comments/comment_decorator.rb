@@ -38,13 +38,6 @@ class CommentDecorator < ApplicationDecorator
   end
 
   #
-  # == Date
-  #
-  def comment_created_at
-    content_tag(:small, time_tag(model.created_at.to_datetime, l(model.created_at, format: :with_time)))
-  end
-
-  #
   # == Link and Image for Commentable
   #
   def link_source

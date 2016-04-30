@@ -59,7 +59,8 @@ class ApplicationController < ActionController::Base
     @setting = Setting.first
     gon.push(
       site_title: @setting.title,
-      root_url: root_url
+      root_url: root_url,
+      date_format: @setting.date_format
     )
 
     render template: 'maintenance/maintenance', layout: 'maintenance', status: 503 if maintenance? && !current_user_and_administrator?

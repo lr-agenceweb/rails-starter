@@ -223,6 +223,7 @@ fr:
         location_postcode: Code Postal
         location_address: Adresse
         location_city: Ville
+        date_format: Formatage de la date
       user:
         email: Email
         username: Nom d'utilisateur
@@ -484,3 +485,10 @@ fr:
       setting:
         title: Titre
         subtitle: Sous-titre
+
+  enumerize:
+    setting:
+      date_format:
+        date: "30/04/2016"
+        date_with_time: "30/04/2016 15:32"
+        ago: "Il y a 10 minutes"
