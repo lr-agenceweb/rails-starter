@@ -10,6 +10,11 @@ en:
       start_date: starting date of the event
       end_date: ending date of the event
 
+    errors:
+      contact_form:
+        size: Attachment should be less than %{size}MB
+        type: Attachment should be a picture or a PDF file
+
 # French
 fr:
   form:
@@ -199,3 +204,7 @@ fr:
       start_date: L'événement ne peut pas commencer après la fin présumée de celui-ci
       end_date: L'événement ne peut pas terminer après la début présumé de celui-ci
       max_row: Vous ne pouvez pas créer plus de resource de ce type
+
+      contact_form:
+        size: L'attachment doit faire moins de %{size}MB
+        type: L'attachment doit être une image ou un PDF

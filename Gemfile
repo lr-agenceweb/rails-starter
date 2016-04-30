@@ -202,6 +202,7 @@ end
 group :test do
   gem 'minitest'
   gem 'minitest-reporters', require: false
+  gem 'mocha'
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'simplecov-json', require: false
