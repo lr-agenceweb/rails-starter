@@ -8,7 +8,7 @@
     .small-9.medium-10.columns
       p
         == "#{comment.pseudo_registered_or_guest},"
-        small<> = comment.pretty_created_at
+        small<> = comment.pretty_created_at(setting.date_format)
 
         - if comment.object.class.name == 'Comment'
           - if can? :signal, comment
