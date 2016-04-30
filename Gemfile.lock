@@ -389,6 +389,7 @@ GEM
       callsite (~> 0.0, >= 0.0.11)
       rack-contrib (~> 1.1)
       railties (>= 3.0.0, < 5.1.0)
+    metaclass (0.0.4)
     method_locator (0.0.4)
     method_source (0.8.2)
     methodfinder (2.0.0)
@@ -403,6 +404,8 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
+    mocha (1.1.0)
+      metaclass (~> 0.0.1)
     momentjs-rails (2.11.0)
       railties (>= 3.1)
     multi_json (1.11.2)
@@ -737,6 +740,7 @@ DEPENDENCIES
   meta_request
   minitest
   minitest-reporters
+  mocha
   momentjs-rails
   mysql2
   nokogiri
