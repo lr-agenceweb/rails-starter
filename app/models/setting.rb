@@ -52,7 +52,13 @@ class Setting < ActiveRecord::Base
 
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
-  enumerize :date_format, in: { date: 0, date_with_time: 1, ago: 2 }, default: :date
+  enumerize :date_format,
+            in: {
+              with_time: 0,
+              without_time: 1,
+              ago: 2
+            },
+            default: :with_time
 
   def self.per_page_values
     [1, 2, 3, 5, 10, 15, 20, 0]

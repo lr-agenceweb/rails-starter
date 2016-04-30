@@ -52,13 +52,6 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Date
-  #
-  test 'should return correct date of creation for comment' do
-    assert_equal '<small><time datetime="2016-01-30T13:54:20+01:00">samedi 30 janvier 2016 13:54</time></small>', @comment_decorated.comment_created_at
-  end
-
-  #
   # == Link and Image for Commentable
   #
   test 'should return correct commentable link' do

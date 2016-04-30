@@ -6,6 +6,7 @@ $(document).on 'ready page:load page:restore', ->
       if url && $(window).scrollTop() > ($(document).height() - $(window).height() - 50)
         $('.pagination').text(I18n.t('scroll_infinite.fetch_nexts', { locale: gon.language }))
         $.getScript(url).done((script, textStatus) ->
+          friendly_date()
           magnific_popup_init()
           $('.fotorama').fotorama()
           return

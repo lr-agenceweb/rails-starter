@@ -37,3 +37,14 @@
 @sleep = (ms) ->
   start = new Date().getTime()
   continue while new Date().getTime() - start < ms
+
+# Display date as "xx minutes ago"
+@friendly_date = ->
+  if gon.date_format == 'ago' && $('.date-format').length > 0
+    moment.locale(gon.language)
+    $('.date-format').each (_index, _value) ->
+      that = $(@)
+      unless that.hasClass('is-ago')
+        created_at = that.attr('datetime')
+        that.text(moment(created_at).fromNow())
+        that.addClass('is-ago')

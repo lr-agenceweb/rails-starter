@@ -45,6 +45,7 @@
 #= require plugins/fotorama
 
 #= require moment
+#= require moment/en-gb
 #= require fullcalendar
 #= require fullcalendar/lang/fr
 #= require plugins/fullcalendar
@@ -67,3 +68,5 @@ $(document).on 'ready page:load page:restore', ->
   # Save form inputs in LocalStorage
   $('form').formBackup()
   $('form[data-validate]').validate()
+
+  friendly_date()

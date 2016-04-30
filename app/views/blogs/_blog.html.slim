@@ -4,7 +4,7 @@ article.post-article
   header.post-header
     h3
       = link_to blog.title, blog_path(blog)
-      small<: em = "(#{blog.created_at})"
+      small<> = blog.pretty_created_at
 
   .row
     .small-12.columns
