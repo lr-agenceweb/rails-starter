@@ -27,17 +27,22 @@ class ApplicationDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct date of creation for comment' do
-    assert_equal '<time datetime="2016-01-30T13:54:20+01:00" class="date-format">30/01/2016 13:54</time>', @comment_decorated.pretty_created_at(@setting.date_format)
+    assert_equal '<time datetime="2016-01-30T13:54:20+01:00" class="date-format" title="30/01/2016 13:54">30/01/2016 13:54</time>', @comment_decorated.pretty_created_at(@setting.date_format)
   end
 
   test 'should return date with time' do
     @setting.update_attribute(:date_format, 0)
-    assert_equal '<time datetime="2016-01-30T13:54:20+01:00" class="date-format">30/01/2016 13:54</time>', @comment_decorated.pretty_created_at(@setting.date_format)
+    assert_equal '<time datetime="2016-01-30T13:54:20+01:00" class="date-format" title="30/01/2016 13:54">30/01/2016 13:54</time>', @comment_decorated.pretty_created_at(@setting.date_format)
   end
 
   test 'should return date without time' do
     @setting.update_attribute(:date_format, 1)
-    assert_equal '<time datetime="2016-01-30T13:54:20+01:00" class="date-format">30/01/2016</time>', @comment_decorated.pretty_created_at(@setting.date_format)
+    assert_equal '<time datetime="2016-01-30T13:54:20+01:00" class="date-format" title="30/01/2016">30/01/2016</time>', @comment_decorated.pretty_created_at(@setting.date_format)
+  end
+
+  test 'should return date with time if format is "ago"' do
+    @setting.update_attribute(:date_format, 2)
+    assert_equal '<time datetime="2016-01-30T13:54:20+01:00" class="date-format" title="30/01/2016 13:54">30/01/2016 13:54</time>', @comment_decorated.pretty_created_at(@setting.date_format)
   end
 
   #
