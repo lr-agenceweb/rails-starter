@@ -17,5 +17,5 @@ class BlogCategory < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history, :globalize, :finders]
 
-  has_many :blogs
+  has_many :blogs, dependent: :destroy
 end
