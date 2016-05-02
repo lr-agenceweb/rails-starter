@@ -1,6 +1,17 @@
+# frozen_string_literal: true
+
 f.semantic_errors(*f.object.errors.keys)
 
 render 'admin/shared/form_general', f: f
+
+if f.object.is_a?(Blog)
+  f.inputs t('activerecord.models.blog_category.one') do
+    f.input :blog_category,
+            as: :select,
+            include_blank: false,
+            collection: BlogCategory.all
+  end
+end
 
 f.columns do
   f.column do

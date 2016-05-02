@@ -196,6 +196,9 @@ fr:
         fr:
           destroy: Si coché, les sous-titres français seront supprimés
 
+      blog_category:
+        name: Nom de la catégorie à créer
+        slug: Nom de la catégorie à afficher dans l'url
 
     placeholder:
       froala: Contenu de l'article ici :)

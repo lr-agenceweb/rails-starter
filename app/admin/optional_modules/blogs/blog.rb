@@ -9,6 +9,7 @@ ActiveAdmin.register Blog do
               :show_as_gallery,
               :online,
               :user_id,
+              :blog_category_id,
               translations_attributes: [
                 :id, :locale, :title, :slug, :content
               ],
