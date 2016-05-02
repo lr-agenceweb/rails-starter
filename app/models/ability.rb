@@ -184,12 +184,13 @@ class Ability
   [Blog, Event].each do |model_object|
     define_method "#{model_object.to_s.underscore}_module" do
       model_object_setting = "#{model_object}Setting".constantize
+      model_object_category = model_object == 'Blog' ? "#{model_object}Category".constantize : ''
       if instance_variable_get(:"@#{model_object.to_s.underscore}_module").enabled?
-        can :crud, model_object
+        can :crud, [model_object, model_object_category]
         can [:read, :update], model_object_setting
         cannot [:create, :destroy], model_object_setting
       else
-        cannot :manage, [model_object, model_object_setting]
+        cannot :manage, [model_object, model_object_setting, model_object_category]
       end
     end
   end
