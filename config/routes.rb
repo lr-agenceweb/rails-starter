@@ -42,7 +42,9 @@ Rails.application.routes.draw do
     resources :guest_books, only: [:index, :create, :destroy], concerns: :paginatable
 
     # Blog
-    resources :blogs, only: [:index, :show], concerns: [:paginatable, :commentable]
+    resources :blog_categories, only: [:index, :show] do
+      resources :blogs, only: [:index, :show], concerns: [:paginatable, :commentable]
+    end
 
     # Comment
     resources :comments, only: [] do
