@@ -32,6 +32,8 @@ class Blog < ActiveRecord::Base
   include OptionalModules::Searchable
   include PrevNextable
 
+  after_update :update_counter_cache, if: proc { online_changed? }
+
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :slug, :content
 
@@ -39,7 +41,7 @@ class Blog < ActiveRecord::Base
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 
   belongs_to :user
-  belongs_to :blog_category, counter_cache: true, inverse_of: :blogs
+  belongs_to :blog_category, inverse_of: :blogs, counter_cache: true
 
   has_many :comments, as: :commentable, dependent: :destroy
   accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true
@@ -56,4 +58,11 @@ class Blog < ActiveRecord::Base
 
   scope :online, -> { where(online: true) }
   scope :by_category, -> (category) { where(blog_category_id: category) }
+
+  private
+
+  def update_counter_cache
+    BlogCategory.increment_counter(:blogs_count, blog_category.id) if online?
+    BlogCategory.decrement_counter(:blogs_count, blog_category.id) unless online?
+  end
 end

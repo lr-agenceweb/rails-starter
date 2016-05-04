@@ -32,7 +32,7 @@ class BlogTest < ActiveSupport::TestCase
     assert_empty blog.errors.keys
   end
 
-  test 'should increase counter cache' do
+  test 'should increase counter cache when creating object' do
     reset_counter_cache
     attrs = { blog_category_id: @blog_category.id }
     blog = Blog.new attrs
@@ -42,7 +42,7 @@ class BlogTest < ActiveSupport::TestCase
     assert_equal 3, @blog_category.blogs.size
   end
 
-  test 'should decrease counter cache' do
+  test 'should decrease counter cache when destroying object' do
     reset_counter_cache
     blog = Blog.new(blog_category_id: @blog_category.id)
     blog_2 = Blog.new(blog_category_id: @blog_category.id)
@@ -52,6 +52,20 @@ class BlogTest < ActiveSupport::TestCase
     assert_equal 4, @blog_category.blogs.size
 
     blog.destroy
+    @blog_category.reload
+    assert_equal 3, @blog_category.blogs.size
+  end
+
+  test 'should decrease counter cache when object is set to offline' do
+    reset_counter_cache
+    @blog.update_attribute(:online, false)
+    @blog_category.reload
+    assert_equal 1, @blog_category.blogs.size
+  end
+
+  test 'should increase counter cache when object is set to online' do
+    reset_counter_cache
+    @blog_offline.update_attribute(:online, true)
     @blog_category.reload
     assert_equal 3, @blog_category.blogs.size
   end
@@ -109,6 +123,7 @@ class BlogTest < ActiveSupport::TestCase
 
   def initialize_test
     @blog = blogs(:blog_online)
+    @blog_offline = blogs(:blog_offline)
     @blog_third = blogs(:blog_third)
 
     @blog_category = blog_categories(:one)
