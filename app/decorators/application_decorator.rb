@@ -30,6 +30,7 @@ class ApplicationDecorator < Draper::Decorator
     return send("root_#{suffix}") if model_name == 'Home'
     return send("legal_notices_#{suffix}") if model_name == 'LegalNotice'
     return send("connections_#{suffix}") if model_name == 'Connection'
+    return send("blog_category_blog_#{suffix}", model.blog_category, model) if model_name == 'Blog'
     send("#{model_name.underscore.singularize}_#{suffix}", model)
   end
 

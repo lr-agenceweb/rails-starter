@@ -3,9 +3,11 @@ en:
   blog:
     no_results: No blog post to show
     last_articles: Last articles
+    blog_categories: Categories
 
 # French
 fr:
   blog:
     no_results: Il n'y a aucun article de blog à montrer
     last_articles: Derniers articles
+    blog_categories: Catégories

@@ -53,4 +53,5 @@ class Blog < ActiveRecord::Base
   paginates_per 10
 
   scope :online, -> { where(online: true) }
+  scope :by_category, -> (category) { where(blog_category_id: category) }
 end

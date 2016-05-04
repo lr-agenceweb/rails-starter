@@ -3,7 +3,7 @@ article.post-article
 
   header.post-header
     h3
-      = link_to blog.title, blog_path(blog)
+      = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
       small<> = blog.pretty_created_at(setting.date_format)
 
   .row
@@ -18,7 +18,7 @@ article.post-article
 
   .post-body
     - if params[:action] == 'index'
-      == truncate_read_more(blog.content, blog_path(blog), 300)
+      == truncate_read_more(blog.content, blog_category_blog_path(blog.blog_category, blog), 300)
     - else
       == blog.content
 

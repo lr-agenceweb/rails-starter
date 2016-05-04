@@ -1,2 +1,8 @@
-h1 BlogCategory#show
-p Find me in app/views/blog_category/show.html.slim
+.row
+  .small-12.columns
+
+    article
+      h2 Articles de blogs liés à la catégorie #{params[:id]}
+      - @blogs.each do |blog|
+        h3 = blog.title
+        div = blog.content
