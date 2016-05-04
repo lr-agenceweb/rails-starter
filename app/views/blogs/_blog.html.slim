@@ -4,7 +4,9 @@ article.post-article
   header.post-header
     h3
       = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
-      small<> = blog.pretty_created_at(setting.date_format)
+    small
+      = blog.pretty_created_at(setting.date_format)
+      span< = link_to blog.blog_category_name, blog_category_path(blog.blog_category)
 
   .row
     .small-12.columns

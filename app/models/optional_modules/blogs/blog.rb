@@ -51,6 +51,7 @@ class Blog < ActiveRecord::Base
 
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :username, to: :user, prefix: true, allow_nil: true
+  delegate :name, to: :blog_category, prefix: true, allow_nil: true
 
   validates :blog_category, presence: true
 
