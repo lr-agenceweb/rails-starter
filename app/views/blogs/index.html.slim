@@ -26,7 +26,7 @@ section.blogs-section.page-section#blogs
                       h5.last-blogs-article-title
                       == link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
                       span< = '('
-                      = blog.comments.by_locale(@language).validated.count
+                      = pluralize blog.comments.by_locale(@language).validated.count, I18n.t('activerecord.models.comment.one').downcase
                       span = ')'
 
             aside.blog-categories
@@ -36,5 +36,5 @@ section.blogs-section.page-section#blogs
                   li
                     == link_to blog_category.name, blog_category_path(blog_category)
                     span< = '('
-                    = blog_category.blogs.size
+                    = pluralize blog_category.blogs.size, 'article'
                     span = ')'

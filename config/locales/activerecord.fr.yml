@@ -116,8 +116,8 @@ fr:
         one: Adulte configuration
         other: Adulte configuration
       blog:
-        one: Blog article
-        other: Blog articles
+        one: Article de Blog
+        other: Articles de Blog
       blog_category:
         one: Blog catégorie
         other: Blog catégories
