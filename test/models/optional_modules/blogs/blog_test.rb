@@ -10,6 +10,29 @@ class BlogTest < ActiveSupport::TestCase
   setup :initialize_test
 
   #
+  # == Validation rules
+  #
+  test 'should not be valid if no category specified' do
+    blog = Blog.new
+    refute blog.valid?, 'should not be valid if all fields are blank'
+    assert_equal [:blog_category], blog.errors.keys
+  end
+
+  test 'should not be valid if category doesn\'t exist' do
+    attrs = { blog_category_id: 999 }
+    blog = Blog.new attrs
+    refute blog.valid?, 'should not be valid if category doesn\'t exist'
+    assert_equal [:blog_category], blog.errors.keys
+  end
+
+  test 'should be valid if category exists' do
+    attrs = { blog_category_id: @blog_category.id }
+    blog = Blog.new attrs
+    assert blog.valid?, 'should be valid if category exists'
+    assert_empty blog.errors.keys
+  end
+
+  #
   # == Count
   #
   test 'should return correct count for blogs posts' do
@@ -43,14 +66,20 @@ class BlogTest < ActiveSupport::TestCase
   # == Flash content
   #
   test 'should not have flash content if no video are uploaded' do
+    @blog.blog_category_id = @blog_category.id
     @blog.save!
+    assert @blog.valid?, 'should be valid'
+    assert_empty @blog.errors.keys
     assert @blog.flash_notice.blank?
   end
 
   test 'should return correct flash content after updating a video' do
     video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
     @blog.update_attributes(video_uploads_attributes: [{ video_file: video }, { video_file: video }])
+    @blog.blog_category_id = @blog_category.id
     @blog.save!
+    assert @blog.valid?, 'should be valid'
+    assert_empty @blog.errors.keys
     assert_equal I18n.t('video_upload.flash.upload_in_progress'), @blog.flash_notice
   end
 
@@ -59,5 +88,7 @@ class BlogTest < ActiveSupport::TestCase
   def initialize_test
     @blog = blogs(:blog_online)
     @blog_third = blogs(:blog_third)
+
+    @blog_category = blog_categories(:one)
   end
 end

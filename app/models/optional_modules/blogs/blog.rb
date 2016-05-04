@@ -50,6 +50,8 @@ class Blog < ActiveRecord::Base
   delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :username, to: :user, prefix: true, allow_nil: true
 
+  validates :blog_category, presence: true
+
   paginates_per 10
 
   scope :online, -> { where(online: true) }
