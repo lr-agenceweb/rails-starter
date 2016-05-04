@@ -35,7 +35,7 @@ blog_online:
   content: ~
   created_at: 2016-02-01 12:32:10
   updated_at: 2016-02-01 12:32:10
-  blog_category: one (BlogCategory)
+  blog_category: one
 
 blog_offline:
   <<: *DEFAULTS
@@ -43,11 +43,11 @@ blog_offline:
   slug: article-de-blog-hors-ligne
   content: Premier article de blog
   online: false
-  blog_category: one (BlogCategory)
+  blog_category: one
 
 blog_third:
   <<: *DEFAULTS
   title: ~
   slug: ~
   content: ~
-  blog_category: two (BlogCategory)
+  blog_category: two

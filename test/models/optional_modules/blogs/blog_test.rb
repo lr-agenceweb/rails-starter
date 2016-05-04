@@ -66,7 +66,6 @@ class BlogTest < ActiveSupport::TestCase
   # == Flash content
   #
   test 'should not have flash content if no video are uploaded' do
-    @blog.blog_category_id = @blog_category.id
     @blog.save!
     assert @blog.valid?, 'should be valid'
     assert_empty @blog.errors.keys
@@ -76,7 +75,6 @@ class BlogTest < ActiveSupport::TestCase
   test 'should return correct flash content after updating a video' do
     video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
     @blog.update_attributes(video_uploads_attributes: [{ video_file: video }, { video_file: video }])
-    @blog.blog_category_id = @blog_category.id
     @blog.save!
     assert @blog.valid?, 'should be valid'
     assert_empty @blog.errors.keys
