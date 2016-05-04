@@ -18,4 +18,6 @@ class BlogCategory < ActiveRecord::Base
   friendly_id :name, use: [:slugged, :history, :globalize, :finders]
 
   has_many :blogs, dependent: :destroy, inverse_of: :blog_category
+
+  validates :name, presence: true
 end
