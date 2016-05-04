@@ -14,7 +14,7 @@ ActiveAdmin.register_page 'Dashboard' do
       if OptionalModule.find_by(name: 'Comment').enabled?
         columns do
           column do |panel|
-            # render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.includes(:commentable).by_user(current_user.id).last(5)
+            render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.includes(:commentable).by_user(current_user.id).last(5)
           end
         end # columns
       end
@@ -36,7 +36,7 @@ ActiveAdmin.register_page 'Dashboard' do
       columns do
         if OptionalModule.find_by(name: 'Comment').enabled?
           column do |panel|
-            # render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.includes(:commentable).order(id: :desc).last(5)
+            render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.includes(:commentable).order(id: :desc).last(5)
           end
         end
       end # columns

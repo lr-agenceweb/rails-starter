@@ -20,7 +20,7 @@ class BlogDecoratorTest < Draper::TestCase
   # == ActiveAdmin
   #
   test 'should return correct AA show page title' do
-    assert_equal "Article lié à la page \"Blog articles\"", @blog_decorated.title_aa_show
+    assert_equal "Article lié à la page \"Articles de Blog\"", @blog_decorated.title_aa_show
   end
 
   private

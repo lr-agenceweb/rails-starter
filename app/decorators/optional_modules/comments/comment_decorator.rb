@@ -40,9 +40,14 @@ class CommentDecorator < ApplicationDecorator
   #
   # == Link and Image for Commentable
   #
-  # def link_source
-  #   link_to commentable.title, h.polymorphic_path(commentable), target: :_blank
-  # end
+  def link_source
+    if commentable.is_a?(Blog)
+      link = blog_category_blog_path(commentable.blog_category, commentable)
+    else
+      link = polymorphic_path(commentable)
+    end
+    link_to commentable.title, link, target: :_blank
+  end
 
   def image_source
     retina_image_tag commentable.pictures.first, :image, :small

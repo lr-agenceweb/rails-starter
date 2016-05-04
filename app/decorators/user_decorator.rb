@@ -24,7 +24,7 @@ class UserDecorator < ApplicationDecorator
     define_method "link_to_#{provider}" do
       if user.from_omniauth? provider
         link_to(
-          fa_icon(provider, text: I18n.t('omniauth.unlink.button', provider: provider.capitalize)),
+          h.fa_icon(provider, text: I18n.t('omniauth.unlink.button', provider: provider.capitalize)),
           user_omniauth_unlink_path(provider: provider, id: model.id),
           method: :delete,
           class: "button omniauth #{provider}",
@@ -36,7 +36,7 @@ class UserDecorator < ApplicationDecorator
         )
       else
         link_to(
-          fa_icon(provider, text: I18n.t('omniauth.link.button', provider: provider.capitalize)),
+          h.fa_icon(provider, text: I18n.t('omniauth.link.button', provider: provider.capitalize)),
           user_omniauth_authorize_path(provider: provider == 'google' ? 'google_oauth2' : provider),
           class: "button omniauth #{provider}",
           id: "omniauth_#{provider}",

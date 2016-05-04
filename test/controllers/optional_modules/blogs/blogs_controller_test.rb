@@ -35,7 +35,7 @@ class BlogsControllerTest < ActionController::TestCase
   test 'should get show page with all locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @blog
+        get :show, locale: locale.to_s, id: @blog, blog_category_id: @blog.blog_category
         assert_response :success
       end
     end
@@ -44,7 +44,7 @@ class BlogsControllerTest < ActionController::TestCase
   test 'assert integrity of request for each locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @blog
+        get :show, locale: locale.to_s, id: @blog, blog_category_id: @blog.blog_category
         assert_equal request.path_parameters[:id], @blog.slug
         assert_equal request.path_parameters[:locale], locale.to_s
       end
@@ -52,8 +52,8 @@ class BlogsControllerTest < ActionController::TestCase
   end
 
   test 'should get index page targetting blogs controller' do
-    assert_routing '/blog', controller: 'blogs', action: 'index', locale: 'fr' if @locales.include?(:fr)
-    assert_routing '/en/blog', controller: 'blogs', action: 'index', locale: 'en' if @locales.include?(:en)
+    assert_routing '/blogs', controller: 'blogs', action: 'index', locale: 'fr' if @locales.include?(:fr)
+    assert_routing '/en/blogs', controller: 'blogs', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
   #
@@ -63,7 +63,7 @@ class BlogsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActiveRecord::RecordNotFound) do
-          get :show, locale: locale.to_s, id: @blog_offline
+          get :show, locale: locale.to_s, id: @blog_offline, blog_category_id: @blog_offline.blog_category
         end
       end
     end

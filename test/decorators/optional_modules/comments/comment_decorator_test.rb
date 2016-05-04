@@ -54,8 +54,12 @@ class CommentDecoratorTest < Draper::TestCase
   #
   # == Link and Image for Commentable
   #
-  test 'should return correct commentable link' do
+  test 'should return correct commentable link for regular articles' do
     assert_equal '<a target="_blank" href="/a-propos/article-2-a-propos">Article 2 A Propos</a>', @comment_decorated.link_source
+  end
+
+  test 'should return correct commentable link for blog articles' do
+    assert_equal '<a target="_blank" href="/blogs/foo/article-de-blog-en-ligne">Article de blog en ligne</a>', @blog_comment_decorated.link_source
   end
 
   test 'should return correct commentable image' do
@@ -86,7 +90,10 @@ class CommentDecoratorTest < Draper::TestCase
 
   def initialize_test
     @comment = comments(:one)
+    @blog_comment = comments(:blog)
     @comment_not_connected = comments(:five)
+
     @comment_decorated = CommentDecorator.new(@comment)
+    @blog_comment_decorated = CommentDecorator.new(@blog_comment)
   end
 end

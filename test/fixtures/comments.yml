@@ -74,3 +74,13 @@ five:
   lang: fr
   validated: false
   token: <%= SecureRandom.urlsafe_base64(nil, false) %>
+
+blog:
+  <<: *DEFAULTS
+  commentable: blog_online (Blog)
+  username: luke
+  email: luke@skywalker.sw
+  user_id: null
+  lang: fr
+  validated: false
+  token: <%= SecureRandom.urlsafe_base64(nil, false) %>
