@@ -11,7 +11,7 @@ module OptionalModules
 
     included do
       before_action :blog_module_enabled?
-      before_action :set_blog_settings, only: [:show]
+      before_action :set_blog_settings, only: [:index, :show]
       before_action :set_last_blogs, only: [:index, :show]
 
       def blog_module_enabled?

@@ -204,6 +204,8 @@ fr:
         name: Nom
       blog_setting:
         prev_next: Liens précédent / suivant ?
+        show_last_posts: Afficher derniers articles crées ?
+        show_categories: Afficher lien des différentes catégories ?
       setting:
         title: Titre
         subtitle: Sous-titre

@@ -56,6 +56,8 @@ fr:
 
       post:
         prev_next: Si coché, un lien permettant d'accéder à l'article précédent et suivant sera ajouté sur le site
+        show_last_posts: Si coché, une liste des derniers articles de blog crées sera affichée sur la page Blog et permettra de naviguer plus facilement entre eux.
+        show_categories: Si coché, une liste affichera les différentes catégories existantes dans lesquelles des articles de blog ont été crées. Cela permet de filtrer les différents articles par catégorie.
 
       newsletter:
         send_welcome_email: Si coché, le nouvel abonné à la newsletter recevra un email de bienvenue

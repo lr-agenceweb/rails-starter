@@ -3,7 +3,9 @@ ActiveAdmin.register BlogSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
   permit_params :id,
-                :prev_next
+                :prev_next,
+                :show_last_posts,
+                :show_categories
 
   decorate_with BlogSettingDecorator
   config.clear_sidebar_sections!
@@ -14,6 +16,8 @@ ActiveAdmin.register BlogSetting do
         column do
           attributes_table do
             bool_row :prev_next
+            bool_row :show_last_posts
+            bool_row :show_categories
           end
         end
       end
@@ -28,6 +32,10 @@ ActiveAdmin.register BlogSetting do
         f.inputs t('general') do
           f.input :prev_next,
                   hint: I18n.t('form.hint.post.prev_next')
+          f.input :show_last_posts,
+                  hint: I18n.t('form.hint.post.show_last_posts')
+          f.input :show_categories,
+                  hint: I18n.t('form.hint.post.show_categories')
         end
       end
     end
