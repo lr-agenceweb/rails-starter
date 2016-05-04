@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502115629) do
+ActiveRecord::Schema.define(version: 20160504115922) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -47,10 +47,11 @@ ActiveRecord::Schema.define(version: 20160502115629) do
   add_index "backgrounds", ["attachable_type", "attachable_id"], name: "index_backgrounds_on_attachable_type_and_attachable_id", using: :btree
 
   create_table "blog_categories", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
-    t.string   "slug",       limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",        limit: 255,             null: false
+    t.string   "slug",        limit: 255,             null: false
+    t.integer  "blogs_count", limit: 4,   default: 0, null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "blog_settings", force: :cascade do |t|

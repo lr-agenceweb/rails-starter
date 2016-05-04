@@ -32,6 +32,30 @@ class BlogTest < ActiveSupport::TestCase
     assert_empty blog.errors.keys
   end
 
+  test 'should increase counter cache' do
+    reset_counter_cache
+    attrs = { blog_category_id: @blog_category.id }
+    blog = Blog.new attrs
+    blog.save
+    @blog_category.reload
+
+    assert_equal 3, @blog_category.blogs.size
+  end
+
+  test 'should decrease counter cache' do
+    reset_counter_cache
+    blog = Blog.new(blog_category_id: @blog_category.id)
+    blog_2 = Blog.new(blog_category_id: @blog_category.id)
+    blog.save
+    blog_2.save
+    @blog_category.reload
+    assert_equal 4, @blog_category.blogs.size
+
+    blog.destroy
+    @blog_category.reload
+    assert_equal 3, @blog_category.blogs.size
+  end
+
   #
   # == Count
   #
@@ -88,5 +112,18 @@ class BlogTest < ActiveSupport::TestCase
     @blog_third = blogs(:blog_third)
 
     @blog_category = blog_categories(:one)
+    @blog_category_2 = blog_categories(:two)
+  end
+
+  def reset_counter_cache
+    BlogCategory.reset_column_information
+    BlogCategory.all.each do |p|
+      BlogCategory.update_counters p.id, blogs_count: p.blogs.length
+    end
+
+    @blog_category.reload
+    @blog_category_2.reload
+    assert_equal 2, @blog_category.blogs.size
+    assert_equal 1, @blog_category_2.blogs.size
   end
 end

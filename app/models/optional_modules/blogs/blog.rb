@@ -39,7 +39,7 @@ class Blog < ActiveRecord::Base
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 
   belongs_to :user
-  belongs_to :blog_category
+  belongs_to :blog_category, counter_cache: true, inverse_of: :blogs
 
   has_many :comments, as: :commentable, dependent: :destroy
   accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true

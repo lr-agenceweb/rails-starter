@@ -33,4 +33,8 @@ section.blogs-section.page-section#blogs
               h4.blog-categories-title = I18n.t('blog.blog_categories')
               ul
                 - BlogCategory.find_each do |blog_category|
-                  li == link_to blog_category.name, blog_category_path(blog_category)
+                  li
+                    == link_to blog_category.name, blog_category_path(blog_category)
+                    span< = '('
+                    = blog_category.blogs.size
+                    span = ')'
