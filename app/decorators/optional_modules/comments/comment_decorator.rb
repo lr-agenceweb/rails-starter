@@ -46,7 +46,7 @@ class CommentDecorator < ApplicationDecorator
   end
 
   def image_source
-    retina_image_tag commentable.pictures.first, :image, :small
+    h.retina_image_tag commentable.pictures.first, :image, :small
   end
 
   def link_and_image_source

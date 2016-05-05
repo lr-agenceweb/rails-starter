@@ -18,6 +18,6 @@ class BlogCategoriesController < ApplicationController
   private
 
   def set_blog_category
-    @blog_category = BlogCategory.friendly.find(params[:id])
+    @blog_category = BlogCategory.find(params[:id])
   end
 end

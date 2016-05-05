@@ -64,6 +64,7 @@ class Comment < ActiveRecord::Base
   default_scope { order('created_at DESC') }
   scope :by_user, -> (user_id) { where(user_id: user_id) }
   scope :signalled, -> { where(signalled: true) }
+  scope :only_blogs, -> { where(commentable_type: 'Blog') }
 
   paginates_per 15
 
