@@ -529,7 +529,7 @@ blog = Blog.create!(
   slug: 'fonds-marins',
   content: '<p>Voici ce qu\'il se passe sous l\'eau</p>',
   online: true,
-  blog_category_id: blog_category.id
+  blog_category_id: blog_category.id,
   user_id: administrator.id
 )
 referencement = Referencement.create!(
