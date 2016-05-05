@@ -7,9 +7,10 @@
           li
             h5.last-blogs-article-title
             == link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
-            span< = '('
-            = pluralize blog.comments.by_locale(@language).validated.count, I18n.t('activerecord.models.comment.one').downcase
-            span = ')'
+            - if @comment_module.enabled?
+              span< = '('
+              = pluralize blog.comments.by_locale(@language).validated.count, I18n.t('activerecord.models.comment.one').downcase
+              span = ')'
 
 - if @blog_settings.show_categories?
   aside.blog-categories
