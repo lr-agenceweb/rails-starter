@@ -21,6 +21,13 @@ class BlogCategoryTest < ActiveSupport::TestCase
     assert_equal [:name], blog_category.errors.keys
   end
 
+  test 'should not be valid if name is already taken' do
+    attrs = { name: 'foo' }
+    blog_category = BlogCategory.new attrs
+    refute blog_category.valid?, 'should not be valid if name is already taken'
+    assert_equal [:name], blog_category.errors.keys
+  end
+
   test 'should be valid if name is set properly' do
     attrs = { name: 'foobar' }
     blog_category = BlogCategory.new attrs
