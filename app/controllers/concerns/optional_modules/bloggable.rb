@@ -34,7 +34,7 @@ module OptionalModules
       end
 
       def set_last_comments
-        last_comments = Comment.includes(:user, :commentable).only_blogs.validated.last(5).reject { |r| !r.commentable.online? }
+        last_comments = Comment.includes(:user, :commentable).only_blogs.by_locale(@language).validated.last(5).reject { |r| !r.commentable.online? }
         @last_comments = CommentDecorator.decorate_collection(last_comments)
       end
     end

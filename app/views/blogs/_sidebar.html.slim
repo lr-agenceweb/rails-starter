@@ -25,11 +25,14 @@
 - if @comment_module.enabled? && @blog_settings.show_last_comments?
   aside.last-comments
     h4.last-comments-title = I18n.t('blog.last_comments')
-    - @last_comments.each do |comment|
-      .row
-        .small-2.columns
-          span.avatar = comment.avatar
-        .small-10.columns
-          span.pseudo< = comment.pseudo_registered_or_guest
-          span<> -
-          span.commentable< = link_to comment.commentable.title, blog_category_blog_path(comment.commentable.blog_category, comment.commentable, anchor: "comment-#{comment.id}")
+    - if @last_comments.blank?
+      = I18n.t('comment.no_last_comments')
+    - else
+      - @last_comments.each do |comment|
+        .row
+          .small-2.columns
+            span.avatar = comment.avatar
+          .small-10.columns
+            span.pseudo< = comment.pseudo_registered_or_guest
+            span<> -
+            span.commentable< = link_to comment.commentable.title, blog_category_blog_path(comment.commentable.blog_category, comment.commentable, anchor: "comment-#{comment.id}")
