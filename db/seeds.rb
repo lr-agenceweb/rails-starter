@@ -504,6 +504,23 @@ puts 'Creating Blog Setting'
 BlogSetting.create!(prev_next: true)
 
 #
+# == Blog categories
+#
+puts 'Creating Blog categories'
+blog_category = BlogCategory.create!(
+  name: 'Catégorie 1',
+  slug: 'categorie-1'
+)
+if @locales.include?(:en)
+  BlogCategory::Translation.create!(
+    blog_category_id: blog_category.id,
+    locale: 'en',
+    title: 'Category 1',
+    slug: 'category-1'
+  )
+end
+
+#
 # == Blog article
 #
 puts 'Creating Blog article'
@@ -512,6 +529,7 @@ blog = Blog.create!(
   slug: 'fonds-marins',
   content: '<p>Voici ce qu\'il se passe sous l\'eau</p>',
   online: true,
+  blog_category_id: blog_category.id
   user_id: administrator.id
 )
 referencement = Referencement.create!(
@@ -1071,6 +1089,7 @@ puts 'Setting Friendly Id'
 User.find_each(&:save)
 Post.find_each(&:save)
 Blog.find_each(&:save)
+BlogCategory.find_each(&:save)
 Event.find_each(&:save)
 
 puts 'Seeds successfuly loaded :)'
