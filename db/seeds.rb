@@ -515,7 +515,7 @@ if @locales.include?(:en)
   BlogCategory::Translation.create!(
     blog_category_id: blog_category.id,
     locale: 'en',
-    title: 'Category 1',
+    name: 'Category 1',
     slug: 'category-1'
   )
 end
