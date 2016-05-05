@@ -79,6 +79,19 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
+  # == Prev / Next
+  #
+  def prev_post
+    prev_blog = model.fetch_prev
+    model.is_a?(Blog) ? blog_category_blog_path(prev_blog.blog_category, prev_blog) : prev_blog
+  end
+
+  def next_post
+    next_blog = model.fetch_next
+    model.is_a?(Blog) ? blog_category_blog_path(next_blog.blog_category, next_blog) : next_blog
+  end
+
+  #
   # == Status tag
   #
   def status_tag_deco(value, color)
