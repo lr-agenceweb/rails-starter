@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504223103) do
+ActiveRecord::Schema.define(version: 20160505085305) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -53,6 +53,18 @@ ActiveRecord::Schema.define(version: 20160504223103) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
+
+  create_table "blog_category_translations", force: :cascade do |t|
+    t.integer  "blog_category_id", limit: 4,   null: false
+    t.string   "locale",           limit: 255, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "name",             limit: 255
+    t.string   "slug",             limit: 255
+  end
+
+  add_index "blog_category_translations", ["blog_category_id"], name: "index_blog_category_translations_on_blog_category_id", using: :btree
+  add_index "blog_category_translations", ["locale"], name: "index_blog_category_translations_on_locale", using: :btree
 
   create_table "blog_settings", force: :cascade do |t|
     t.boolean  "prev_next",       default: false

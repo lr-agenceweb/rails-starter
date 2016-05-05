@@ -19,9 +19,12 @@ class BlogCategory < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history, :globalize, :finders]
 
-  has_many :blogs, dependent: :destroy, inverse_of: :blog_category
+  translates :name, :slug
+  active_admin_translates :name, :slug do
+    validates :name,
+              uniqueness: true,
+              presence: true
+  end
 
-  validates :name,
-            uniqueness: true,
-            presence: true
+  has_many :blogs, dependent: :destroy, inverse_of: :blog_category
 end

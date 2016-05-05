@@ -43,7 +43,8 @@ module Core
     def change_slug?
       (params[:controller] == 'abouts' ||
        params[:controller] == 'blogs' ||
-       params[:controller] == 'events'
+       params[:controller] == 'events' ||
+       params[:controller] == 'blog_categories'
       ) && params[:action] == 'show'
     end
 

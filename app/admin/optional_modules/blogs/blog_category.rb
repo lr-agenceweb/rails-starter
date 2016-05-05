@@ -4,7 +4,11 @@ ActiveAdmin.register BlogCategory do
   # includes :translations
 
   permit_params do
-    params = [:id, :name, :slug]
+    params = [:id,
+              translations_attributes: [
+                :id, :locale, :name, :slug
+              ]
+             ]
     params
   end
 
@@ -27,10 +31,13 @@ ActiveAdmin.register BlogCategory do
     f.semantic_errors(*f.object.errors.keys)
 
     f.inputs t('active_admin.details', model: I18n.t('activerecord.models.blog_category.one')) do
-      f.input :name,
-              hint: t('form.hint.blog_category.name')
-      f.input :slug,
-              hint: t('form.hint.blog_category.slug')
+      f.translated_inputs 'Translated fields', switch_locale: true do |t|
+        t.input :name,
+                hint: t('form.hint.blog_category.name'),
+                label: t('activerecord.attributes.post.title')
+        t.input :slug,
+                as: :hidden
+      end
     end
 
     f.actions

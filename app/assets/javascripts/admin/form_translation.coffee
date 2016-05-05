@@ -22,11 +22,12 @@ switch_locale = (element) ->
 
 
 slugify = ->
-  categories = ['home', 'about', 'content', 'blog', 'event']
+  categories = ['home', 'about', 'content', 'blog', 'event', 'blog_category']
   $.each categories, (i, val) ->
+    column = if val == 'blog_category' then 'name' else 'title'
     j = 0
     while j < 2
-      $("#"+val+"_translations_attributes_"+j+"_title").keyup (e) ->
+      $("#"+val+"_translations_attributes_"+j+"_" + column).keyup (e) ->
         title = $(this).val()
         slug = string_to_slug($(this).val())
         $(this).parent().next('li').find('input').val(slug)
