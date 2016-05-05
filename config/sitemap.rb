@@ -2,8 +2,8 @@
 SitemapGenerator::Interpreter.send :include, SitemapHelper
 
 # Set the host name for URL creation
-renv = Rails.env.development? ? '' : Rails.env
-application_host = ENV["application_host_#{renv}"]
+renv = Rails.env.development? ? '' : "_#{Rails.env}"
+application_host = ENV["application_host#{renv}"]
 SitemapGenerator::Sitemap.default_host = application_host
 SitemapGenerator::Sitemap.verbose = true
 SitemapGenerator::Sitemap.compress = false
