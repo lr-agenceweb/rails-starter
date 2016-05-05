@@ -6,7 +6,7 @@ class AboutsController < PostsController
   before_action :set_about, only: [:show]
   decorates_assigned :about, :comment
 
-  include Commentable
+  include OptionalModules::Commentable
 
   # GET /a-propos
   # GET /a-propos.json
