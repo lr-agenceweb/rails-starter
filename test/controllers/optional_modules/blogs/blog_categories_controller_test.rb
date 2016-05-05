@@ -2,9 +2,9 @@
 require 'test_helper'
 
 #
-# == BlogsController Test
+# == BlogCategoriesController Test
 #
-class BlogsControllerTest < ActionController::TestCase
+class BlogCategoriesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   include Rails.application.routes.url_helpers
 
@@ -13,29 +13,10 @@ class BlogsControllerTest < ActionController::TestCase
   #
   # == Routes / Templates / Responses
   #
-  test 'should get index' do
+  test 'should get show' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :index, locale: locale.to_s
-        assert_response :success
-        assert_not_nil assigns(:blogs)
-      end
-    end
-  end
-
-  test 'should use index template' do
-    @locales.each do |locale|
-      I18n.with_locale(locale) do
-        get :index, locale: locale.to_s
-        assert_template :index
-      end
-    end
-  end
-
-  test 'should get show page with all locales' do
-    @locales.each do |locale|
-      I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @blog, blog_category_id: @blog.blog_category
+        get :show, locale: locale.to_s, id: @blog_category
         assert_response :success
       end
     end
@@ -44,27 +25,9 @@ class BlogsControllerTest < ActionController::TestCase
   test 'assert integrity of request for each locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @blog, blog_category_id: @blog.blog_category
-        assert_equal request.path_parameters[:id], @blog.slug
+        get :show, locale: locale.to_s, id: @blog_category
+        assert_equal request.path_parameters[:id], @blog_category.slug
         assert_equal request.path_parameters[:locale], locale.to_s
-      end
-    end
-  end
-
-  test 'should get index page targetting blogs controller' do
-    assert_routing '/blogs', controller: 'blogs', action: 'index', locale: 'fr' if @locales.include?(:fr)
-    assert_routing '/en/blogs', controller: 'blogs', action: 'index', locale: 'en' if @locales.include?(:en)
-  end
-
-  #
-  # == Object
-  #
-  test 'should render 404 if blog article is offline' do
-    @locales.each do |locale|
-      I18n.with_locale(locale.to_s) do
-        assert_raises(ActiveRecord::RecordNotFound) do
-          get :show, locale: locale.to_s, id: @blog_offline, blog_category_id: @blog_offline.blog_category
-        end
       end
     end
   end
@@ -79,7 +42,7 @@ class BlogsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
-          get :index, locale: locale.to_s
+          get :show, locale: locale.to_s, id: @blog_category
         end
       end
     end
@@ -93,7 +56,7 @@ class BlogsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
-          get :index, locale: locale.to_s
+          get :show, locale: locale.to_s, id: @blog_category
         end
       end
     end
@@ -103,34 +66,33 @@ class BlogsControllerTest < ActionController::TestCase
   # == Maintenance
   #
   test 'should render maintenance if enabled and not connected' do
-    assert_maintenance_frontend
+    assert_maintenance_frontend(:show, @blog_category)
   end
 
   test 'should not render maintenance even if enabled and SA' do
     sign_in @super_administrator
-    assert_no_maintenance_frontend
+    assert_no_maintenance_frontend(:show, @blog_category)
   end
 
   test 'should not render maintenance even if enabled and Admin' do
     sign_in @administrator
-    assert_no_maintenance_frontend
+    assert_no_maintenance_frontend(:show, @blog_category)
   end
 
   test 'should render maintenance if enabled and subscriber' do
     sign_in @subscriber
-    assert_maintenance_frontend
+    assert_maintenance_frontend(:show, @blog_category)
   end
 
   private
 
   def initialize_test
-    @blog = blogs(:blog_online)
-    @blog_offline = blogs(:blog_offline)
-    @blog_module = optional_modules(:blog)
-
     @locales = I18n.available_locales
     @setting = settings(:one)
     @menu = menus(:blog)
+
+    @blog_module = optional_modules(:blog)
+    @blog_category = blog_categories(:one)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

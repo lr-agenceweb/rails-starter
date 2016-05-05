@@ -30,6 +30,7 @@ fr:
     admin_bar:
       to_moderate: Commentaires à modérer
       signalled: Commentaires signalés
+    no_last_comments: Il n'y a pas de commentaires récents
 
 # English
 en:
@@ -55,3 +56,4 @@ en:
     admin_bar:
       to_moderate: Comments to moderate
       signalled: Comments signalled
+    no_last_comments: There is no recent comments

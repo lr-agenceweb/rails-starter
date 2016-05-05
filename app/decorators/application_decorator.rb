@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == ApplicationDecorator
 #
@@ -30,6 +31,7 @@ class ApplicationDecorator < Draper::Decorator
     return send("root_#{suffix}") if model_name == 'Home'
     return send("legal_notices_#{suffix}") if model_name == 'LegalNotice'
     return send("connections_#{suffix}") if model_name == 'Connection'
+    return send("blog_category_blog_#{suffix}", model.blog_category, model) if model_name == 'Blog'
     send("#{model_name.underscore.singularize}_#{suffix}", model)
   end
 
@@ -74,6 +76,19 @@ class ApplicationDecorator < Draper::Decorator
     time = l(model.created_at, format: date_format.to_sym)
     title = date_format == 'ago' ? l(model.created_at, format: :with_time) : time
     time_tag(model.created_at.to_datetime, time, class: 'date-format', title: title)
+  end
+
+  #
+  # == Prev / Next
+  #
+  def prev_post
+    prev_blog = model.fetch_prev
+    model.is_a?(Blog) ? blog_category_blog_path(prev_blog.blog_category, prev_blog) : prev_blog
+  end
+
+  def next_post
+    next_blog = model.fetch_next
+    model.is_a?(Blog) ? blog_category_blog_path(next_blog.blog_category, next_blog) : next_blog
   end
 
   #

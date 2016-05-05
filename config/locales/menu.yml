@@ -8,10 +8,11 @@ fr:
     contacts: contact
     new: formulaire
     searches: rechercher
-    blogs: blog
     events: evenements
     legal_notices: mentions-legales
     connections: liens
+    blogs: blogs
+    blog_categories: blogs
 
   main_menu:
     dashboard: Dashboard
@@ -42,10 +43,11 @@ en:
     contacts: contact
     new: form
     searches: search
-    blogs: blog
     events: events
     legal_notices: legal-notices
     connections: links
+    blogs: blogs
+    blog_categories: blogs
 
   main_menu:
     dashboard: Dashboard

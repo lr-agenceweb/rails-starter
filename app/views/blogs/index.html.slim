@@ -14,17 +14,7 @@ section.blogs-section.page-section#blogs
       - else
         .row
           .small-12.medium-8.columns
-            = render 'blogs'
+            = render 'blogs/blogs'
 
           .small-12.medium-4.columns
-            aside.last-blogs
-              h4.last-blogs-title = I18n.t('blog.last_articles')
-              ul
-                - @last_blogs.each do |blog|
-                  - cache ['sidebar', blog] do |_|
-                    li
-                      h5.last-blogs-article-title
-                      == link_to blog.title, blog_path(blog)
-                      span< = '('
-                      = blog.comments.by_locale(@language).validated.count
-                      span = ')'
+            = render 'blogs/sidebar'

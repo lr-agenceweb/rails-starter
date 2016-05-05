@@ -139,7 +139,6 @@ module OptionalModules
     #
     # * *Args*    :
     #   - +element_title+ -> page title
-    #   - +site_title+ -> site title
     # * *Returns* :
     #   - the formatted title for SEO
     #
@@ -152,7 +151,7 @@ module OptionalModules
     end
 
     def element_by_action
-      params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
+      params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' || (params[:controller] == 'blog_categories' && params[:action] == 'show') ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
     end
   end
 end

@@ -116,8 +116,11 @@ fr:
         one: Adulte configuration
         other: Adulte configuration
       blog:
-        one: Blog article
-        other: Blog articles
+        one: Article de Blog
+        other: Articles de Blog
+      blog_category:
+        one: Blog catégorie
+        other: Blog catégories
       blog_setting:
         one: Blog configuration
         other: Blog configuration
@@ -196,8 +199,14 @@ fr:
         prev_next: Liens précédent / suivant ?
         allow_comments: Commentaires ?
         show_as_gallery: Galerie d'images
+        blog_category: Catégorie de l'article
+      blog_category:
+        name: Nom
       blog_setting:
         prev_next: Liens précédent / suivant ?
+        show_last_posts: Afficher derniers articles crées ?
+        show_categories: Afficher lien des différentes catégories ?
+        show_last_comments: Afficher derniers commentaires ?
       setting:
         title: Titre
         subtitle: Sous-titre

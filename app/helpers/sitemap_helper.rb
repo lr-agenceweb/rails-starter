@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == SitemapHelper
 #
@@ -14,7 +15,11 @@ module SitemapHelper
     define_method "#{mod.to_s.underscore}_module" do
       add send("#{mod.to_s.underscore.pluralize}_path"), priority: 0.7, changefreq: 'monthly'
       mod.online.find_each do |resource|
-        add send("#{mod.to_s.underscore}_path", resource), priority: 0.7, changefreq: 'monthly'
+        if resource.is_a?(Blog)
+          add blog_category_blog_path(resource.blog_category, resource)
+        else
+          add send("#{mod.to_s.underscore}_path", resource), priority: 0.7, changefreq: 'monthly'
+        end
       end
     end
   end

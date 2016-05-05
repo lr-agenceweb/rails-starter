@@ -1,9 +1,8 @@
 # frozen_string_literal: true
-
 #
-# == BlogSettingDecorator
+# == BlogCategoryDecorator
 #
-class BlogSettingDecorator < ApplicationDecorator
+class BlogCategoryDecorator < PostDecorator
   include Draper::LazyHelpers
   delegate_all
 end

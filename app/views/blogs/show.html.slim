@@ -8,5 +8,5 @@
   .row.align-center
     .small-12.medium-9.columns
       - if params[:action] == 'show'
-        p.text-right = link_to t('link.back_to', page: @category.menu_title), blogs_path
+        p.text-right = link_to t('link.back_to', page: @category.menu_title), blog_category_path(blog.blog_category)
         = render 'comments/section', o: blog
