@@ -34,6 +34,7 @@ module Core
 
     def params_language(element, locale)
       if change_slug?
+        return { locale: locale, blog_category_id: slug_for_locale(element.blog_category, locale), id: slug_for_locale(element, locale) } if element.is_a?(Blog)
         return { locale: locale, id: slug_for_locale(element, locale) }
       end
 
