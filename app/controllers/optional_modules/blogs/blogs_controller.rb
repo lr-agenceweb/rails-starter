@@ -5,9 +5,10 @@
 #
 class BlogsController < ApplicationController
   include OptionalModules::Bloggable
-  include Commentable
 
   before_action :set_blog, only: [:show]
+  include Commentable
+
   decorates_assigned :blog, :comment
 
   # GET /blog
