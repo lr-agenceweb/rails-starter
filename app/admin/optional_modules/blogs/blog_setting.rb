@@ -2,10 +2,16 @@
 ActiveAdmin.register BlogSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
-  permit_params :id,
-                :prev_next,
-                :show_last_posts,
-                :show_categories
+  permit_params do
+    params = [:id,
+              :prev_next,
+              :show_last_posts,
+              :show_categories
+             ]
+
+    params.push :show_last_comments if @comment_module.enabled?
+    params
+  end
 
   decorate_with BlogSettingDecorator
   config.clear_sidebar_sections!
@@ -18,6 +24,7 @@ ActiveAdmin.register BlogSetting do
             bool_row :prev_next
             bool_row :show_last_posts
             bool_row :show_categories
+            bool_row :show_last_comments if comment_module.enabled?
           end
         end
       end
@@ -36,6 +43,11 @@ ActiveAdmin.register BlogSetting do
                   hint: I18n.t('form.hint.post.show_last_posts')
           f.input :show_categories,
                   hint: I18n.t('form.hint.post.show_categories')
+
+          if comment_module.enabled?
+            f.input :show_last_comments,
+                    hint: I18n.t('form.hint.post.show_last_comments')
+          end
         end
       end
     end

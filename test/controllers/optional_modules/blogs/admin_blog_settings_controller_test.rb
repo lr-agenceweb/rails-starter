@@ -37,10 +37,25 @@ module Admin
       assert_redirected_to admin_blog_setting_path(@blog_settings)
     end
 
-    test 'should not destroy background' do
+    test 'should not destroy blog_setting' do
       assert_no_difference 'BlogSetting.count' do
         delete :destroy, id: @blog_settings
       end
+    end
+
+    #
+    # == Allowed params
+    #
+    test 'should save show_last_comments params if module is enabled' do
+      patch :update, id: @blog_settings, blog_setting: { show_last_comments: true }
+      assert assigns(:blog_setting).show_last_comments?
+    end
+
+    test 'should not save show_last_comments params if module is disabled' do
+      disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @blog_settings, blog_setting: { show_last_comments: true }
+      assert_not assigns(:blog_setting).show_last_comments?
     end
 
     #
@@ -129,6 +144,7 @@ module Admin
       @setting = settings(:one)
       @blog_settings = blog_settings(:one)
       @blog_module = optional_modules(:blog)
+      @comment_module = optional_modules(:comment)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

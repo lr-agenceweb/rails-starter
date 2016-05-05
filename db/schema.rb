@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505085305) do
+ActiveRecord::Schema.define(version: 20160505193652) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -47,11 +47,11 @@ ActiveRecord::Schema.define(version: 20160505085305) do
   add_index "backgrounds", ["attachable_type", "attachable_id"], name: "index_backgrounds_on_attachable_type_and_attachable_id", using: :btree
 
   create_table "blog_categories", force: :cascade do |t|
-    t.string   "name",        limit: 255,             null: false
-    t.string   "slug",        limit: 255,             null: false
-    t.integer  "blogs_count", limit: 4,   default: 0, null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "name",        limit: 255, default: ""
+    t.string   "slug",        limit: 255, default: ""
+    t.integer  "blogs_count", limit: 4,   default: 0,  null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "blog_category_translations", force: :cascade do |t|
@@ -67,11 +67,12 @@ ActiveRecord::Schema.define(version: 20160505085305) do
   add_index "blog_category_translations", ["locale"], name: "index_blog_category_translations_on_locale", using: :btree
 
   create_table "blog_settings", force: :cascade do |t|
-    t.boolean  "prev_next",       default: false
-    t.boolean  "show_last_posts", default: true
-    t.boolean  "show_categories", default: true
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.boolean  "prev_next",          default: false
+    t.boolean  "show_last_posts",    default: true
+    t.boolean  "show_categories",    default: true
+    t.boolean  "show_last_comments", default: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "blog_translations", force: :cascade do |t|

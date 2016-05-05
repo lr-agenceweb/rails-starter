@@ -22,7 +22,7 @@
           = pluralize blog_category.blogs.size, 'article'
           span = ')'
 
-- if @comment_module.enabled?
+- if @comment_module.enabled? && @blog_settings.show_last_comments?
   aside.last-comments
     h4.last-comments-title = I18n.t('blog.last_comments')
     - @last_comments.each do |comment|
