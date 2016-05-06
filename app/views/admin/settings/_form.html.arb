@@ -36,6 +36,14 @@ f.columns do
 
       f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
     end
+
+    f.inputs 'Paramètres des modules' do
+      f.input :show_map, hint: 'Afficher ou non la carte positionnant votre activité sur la page contact' if map_module.enabled?
+      f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site' if breadcrumb_module.enabled?
+      f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site' if social_module.enabled?
+      f.input :show_qrcode, hint: 'Afficher ou non le qrcode (sur la page contact) ajoutant vos informations de contact sur le smartphone des internautes ' if qrcode_module.enabled?
+      f.input :twitter_username, hint: 'Si vous disposez d\'un compte sur Twitter, vous pouvez indiquer votre nom d\'utilisateur. Cela permet aux personnes partageant votre site de vous identitfier sur Twitter'
+    end
   end
 
   f.column do
@@ -45,21 +53,12 @@ f.columns do
       f.input :phone, as: :phone, hint: 'Numéro de téléphone à afficher sur le site pour vous joindre'
       f.input :phone_secondary, as: :phone, hint: 'Numéro de téléphone secondaire. Laissez vide si ce champs ne vous sert pas'
     end
-  end
-end
 
-f.columns do
-  f.column do
     render 'admin/shared/locations/one', f: f, full: true
-  end
 
-  f.column do
-    f.inputs 'Paramètres des modules' do
-      f.input :show_map, hint: 'Afficher ou non la carte positionnant votre activité sur la page contact' if map_module.enabled?
-      f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site' if breadcrumb_module.enabled?
-      f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site' if social_module.enabled?
-      f.input :show_qrcode, hint: 'Afficher ou non le qrcode (sur la page contact) ajoutant vos informations de contact sur le smartphone des internautes ' if qrcode_module.enabled?
-      f.input :twitter_username, hint: 'Si vous disposez d\'un compte sur Twitter, vous pouvez indiquer votre nom d\'utilisateur. Cela permet aux personnes partageant votre site de vous identitfier sur Twitter'
+    f.inputs 'Paramètres du formulaire de contact' do
+      f.input :show_file_upload,
+              hint: 'Si coché, un champ permettant à l\'internaute d\'envoyer une pièce jointe sera ajouté au formulaire de contact'
     end
   end
 end

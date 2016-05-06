@@ -62,6 +62,9 @@ class ContactFormTest < ActiveSupport::TestCase
     assert_equal [:nickname], msg.errors.keys
   end
 
+  #
+  # == Attachment
+  #
   test 'should not be valid if attachment type is not allowed' do
     file = File.new('./test/fixtures/images/bart.png')
     file.stubs(:size).returns(1.megabytes)

@@ -18,10 +18,11 @@
         .small-12.columns
           = f.input :message, as: :text, required: true, input_html: { class: 'autosize contact-form' }, placeholder: "* #{I18n.t('contact.placeholder.message')}", label: false
 
-          = f.file_field :attachment,
-                         label: 'Attachment'
-          - unless @contact_form.errors[:attachment].blank?
-            small.error = @contact_form.errors[:attachment].join(', ')
+          - if @setting.show_file_upload?
+            = f.file_field :attachment,
+                           label: 'Attachment'
+            - unless @contact_form.errors[:attachment].blank?
+              small.error = @contact_form.errors[:attachment].join(', ')
 
           = f.input :send_copy, inline_label: I18n.t('form.label.send_copy'), as: :boolean, required: false, input_html: { checked: true }
 

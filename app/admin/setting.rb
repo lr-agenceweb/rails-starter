@@ -11,6 +11,7 @@ ActiveAdmin.register Setting do
               :per_page,
               :maintenance,
               :show_admin_bar,
+              :show_file_upload,
               :date_format,
               :logo,
               :logo_footer,

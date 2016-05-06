@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == ContactForm Mailer
 #
@@ -12,7 +13,7 @@ class ContactFormMailer < ApplicationMailer
     @message = message
     @message.subject = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
 
-    if message.attachment
+    if message.attachment && @setting.show_file_upload?
       attachment_name = message.attachment.original_filename
       attachments[attachment_name] = message.attachment.read
     end

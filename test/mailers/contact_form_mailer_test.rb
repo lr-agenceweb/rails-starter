@@ -5,8 +5,12 @@ require 'test_helper'
 # == ContactForm Mailer test class
 #
 class ContactFormMailerTest < ActionMailer::TestCase
+  include ActionDispatch::TestProcess
   setup :initialize_test
 
+  #
+  # == Send email
+  #
   test 'should message me' do
     email = ContactFormMailer.message_me(@message).deliver_now
 
@@ -29,9 +33,32 @@ class ContactFormMailerTest < ActionMailer::TestCase
     # assert_equal 'Hello from the internet', email.html_part.body.to_s
   end
 
+  #
+  # == Attachment
+  #
+  test 'should not attach file if input is disabled' do
+    @message.attachment = fixture_file_upload('/images/bart.png')
+    assert_not @message.attachment.blank?
+
+    email = ContactFormMailer.message_me(@message).deliver_now
+    assert_equal 0, email.attachments.size
+    assert email.attachments.blank?
+  end
+
+  test 'should attach file if input is enabled' do
+    @settings.update_attribute(:show_file_upload, true)
+    @message.attachment = fixture_file_upload('/images/bart.png')
+    assert_not @message.attachment.blank?
+
+    email = ContactFormMailer.message_me(@message).deliver_now
+    assert_equal 1, email.attachments.size
+    assert_equal 'bart.png', email.attachments[0].filename
+  end
+
   private
 
   def initialize_test
+    @settings = settings(:one)
     @message = ContactForm.new(
       name: 'cristiano',
       email: 'cristiano@ronaldo.pt',

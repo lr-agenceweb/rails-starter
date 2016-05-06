@@ -225,6 +225,7 @@ fr:
         show_qrcode: Afficher le QrCode sur la page contact ?
         show_map: Afficher la carte sur la page contact ?
         show_admin_bar: Afficher la barre d'administration ?
+        show_file_upload: Autoriser pièce jointe ?
         map: Carte
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
