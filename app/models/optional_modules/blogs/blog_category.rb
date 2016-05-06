@@ -24,6 +24,9 @@ class BlogCategory < ActiveRecord::Base
     validates :name,
               uniqueness: true,
               presence: true
+    validates :slug,
+              uniqueness: true,
+              presence: true
   end
 
   has_many :blogs, dependent: :destroy, inverse_of: :blog_category
