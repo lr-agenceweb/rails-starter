@@ -376,7 +376,7 @@ fr:
         link_source: Article concerné
         link_and_image_source: Article concerné
         validated: Validé ? (en ligne)
-        signalled_d: Signalé ?
+        signalled: Signalé ?
         created_at: Ajouté le
         destroy: Supprimer
       comment_setting:

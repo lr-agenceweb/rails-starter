@@ -56,14 +56,6 @@ class CommentDecorator < ApplicationDecorator
     html.html_safe
   end
 
-  #
-  # == Status tag
-  #
-  def signalled_d
-    color = model.signalled? ? 'red' : 'green'
-    status_tag_deco(I18n.t(model.signalled.to_s), color)
-  end
-
   def pseudo(name = nil)
     name = pseudo_registered_or_guest if name.nil?
     content_tag(:strong, name, class: 'comment-author')

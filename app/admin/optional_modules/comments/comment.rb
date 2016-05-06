@@ -38,7 +38,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     column :email_registered_or_guest
     column :lang if locales.length > 1
     bool_column :validated
-    column :signalled_d if comment_setting.should_signal?
+    bool_column :signalled if comment_setting.should_signal?
     column :link_and_image_source
     column :created_at
 
@@ -53,7 +53,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
         row :content
         row :lang if locales.length > 1
         bool_row :validated
-        row :signalled_d if comment_setting.should_signal?
+        bool_row :signalled if comment_setting.should_signal?
         row :link_and_image_source
         row :created_at
       end

@@ -8,7 +8,8 @@ panel.panel t('activerecord.models.comment.other') do
         truncate_html(resource.content, length: 100)
       end
       p.column t('activerecord.attributes.comment.lang'), :lang
-      p.bool_column t('activerecord.attributes.comment.signalled_d'), :signalled_d
+      p.bool_column t('activerecord.attributes.comment.validated'), :validated
+      # p.bool_column t('activerecord.attributes.comment.signalled'), :signalled
       p.column t('activerecord.attributes.comment.created_at'), :created_at
 
       p.column 'Actions' do |comment|

@@ -74,18 +74,6 @@ class CommentDecoratorTest < Draper::TestCase
     assert @comment_decorated.send(:commentable_image?)
   end
 
-  #
-  # == Status tag
-  #
-  test 'should return correct status_tag when not signalled' do
-    assert_match '<span class="status_tag non green">Non</span>', @comment_decorated.signalled_d
-  end
-
-  test 'should return correct status_tag when signalled' do
-    @comment.update_attribute(:signalled, true)
-    assert_match '<span class="status_tag oui red">Oui</span>', @comment_decorated.signalled_d
-  end
-
   private
 
   def initialize_test
