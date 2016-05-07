@@ -19,9 +19,9 @@
 #
 
 one:
-  attachable: blog_online (Blog)
+  audioable: blog_online (Blog)
   online: true
 
 two:
-  attachable: blog_online (Blog)
+  audioable: blog_online (Blog)
   online: false
