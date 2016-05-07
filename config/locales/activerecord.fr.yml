@@ -357,6 +357,7 @@ fr:
         delete_subtitle_en: Supprimer sous-titres anglais ?
         online: En ligne ?
       audio:
+        audioable: Article lié
         audio: Fichier audio
         online: En ligne ?
       slide:

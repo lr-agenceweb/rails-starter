@@ -18,6 +18,7 @@ ActiveAdmin.register Audio do
   index do
     selectable_column
     attachment_column(t('activerecord.attributes.audio.audio'), :audio, truncate: false)
+    column :audioable
     bool_column :online
     actions
   end
@@ -26,6 +27,7 @@ ActiveAdmin.register Audio do
     arbre_cache(self, resource.cache_key) do
       attributes_table do
         attachment_row(t('activerecord.attributes.audio.audio'), :audio, truncate: false)
+        row :audioable
         bool_row :online
       end
     end
