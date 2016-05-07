@@ -109,3 +109,8 @@ social_connect:
   <<: *DEFAULTS
   name: SocialConnect
   enabled: true
+
+audio:
+  <<: *DEFAULTS
+  name: Audio
+  enabled: true

@@ -312,9 +312,10 @@ class Ability
   #
   def audio_module
     if @audio_module.enabled?
-      can :crud, [Audio]
+      can [:read, :update, :destroy], Audio
+      cannot :create, Audio
     else
-      cannot :manage, [Audio]
+      cannot :manage, Audio
     end
   end
 
