@@ -12,7 +12,7 @@
 #  audio_file_size    :integer
 #  audio_updated_at   :datetime
 #  audio_autoplay     :boolean          default(FALSE)
-#  online             :boolean
+#  online             :boolean          default(TRUE)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

@@ -3,7 +3,7 @@ class CreateAudios < ActiveRecord::Migration
     create_table :audios do |t|
       t.references :audioable, polymorphic: true, index: true
       t.attachment :audio
-      t.boolean :online
+      t.boolean :online, default: true
 
       t.timestamps null: false
     end

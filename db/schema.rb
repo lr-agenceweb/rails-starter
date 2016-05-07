@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20160507195815) do
     t.integer  "audio_file_size",    limit: 4
     t.datetime "audio_updated_at"
     t.boolean  "audio_autoplay",                 default: false
-    t.boolean  "online"
+    t.boolean  "online",                         default: true
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
   end
