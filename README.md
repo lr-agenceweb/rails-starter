@@ -128,6 +128,7 @@ Name                | Description
 **Search**          | Add a search form to look on title or content post articles
 **Mailing**         | Application developped to send heavy mails number to users
 **SocialConnect**   | Allow users to LINK their ALREADY EXISTING Devise account to Facebook, Twitter or Google Social Connect.
+**Audio**           | Upload audio files and play them in an HTML5 player.
 
 
 ### Screenshots
