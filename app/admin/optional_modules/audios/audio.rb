@@ -68,5 +68,9 @@ ActiveAdmin.register Audio do
       resource.save
       super
     end
+
+    def edit
+      @page_title = t('audio.aa_edit', article: resource.audioable.title)
+    end
   end
 end
