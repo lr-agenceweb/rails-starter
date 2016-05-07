@@ -32,4 +32,6 @@ class Audio < ActiveRecord::Base
 
   validates_attachment_size :audio, less_than: 5.megabytes
   validates_attachment_content_type :audio, content_type: ['audio/mpeg', 'audio/mp3']
+
+  process_in_background :audio, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 end
