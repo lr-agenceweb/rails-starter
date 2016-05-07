@@ -6,7 +6,7 @@ ActiveAdmin.register Audio do
                 :online,
                 :audio
 
-  # decorate_with PictureDecorator
+  # decorate_with AudioDecorator
   config.clear_sidebar_sections!
   actions :all, except: [:new]
 
