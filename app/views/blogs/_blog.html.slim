@@ -24,6 +24,11 @@ article.post-article
     - else
       == blog.content
 
+  - if blog.audios?
+    .row
+      .small-12.medium-9.medium-centered.columns
+        .audios-container
+          = render '/assets/audios/index', audios: blog.audios if params[:action] == 'show'
 
   .row
     .small-12.medium-9.medium-centered.columns
