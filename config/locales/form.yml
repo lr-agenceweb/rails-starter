@@ -200,7 +200,7 @@ fr:
           destroy: Si coché, les sous-titres français seront supprimés
 
       audio:
-        audio_file: Fichier audio à uploader sur le site. Accepte les formats MP3 et WMA
+        audio_file: Fichier audio à uploader sur le site. Accepte les formats MP3 et OGG
         autoplay: Si coché le son audio démarrera automatiquement au chargement de la page. <br /> Attention !!! La majorité des internautes n'apprécient pas ce comportement par défaut.
 
       blog_category:

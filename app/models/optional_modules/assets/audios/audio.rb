@@ -29,10 +29,19 @@ class Audio < ActiveRecord::Base
 
   belongs_to :audioable, polymorphic: true, touch: true
 
-  handle_attachment :audio
+  handle_attachment :audio,
+                    styles: {
+                      mp3audio: {
+                        format: 'mp3'
+                      },
+                      oggaudio: {
+                        format: 'ogg'
+                      }
+                    },
+                    processors: [:transcoder]
 
   validates_attachment_size :audio, less_than: 5.megabytes
-  validates_attachment_content_type :audio, content_type: ['audio/mpeg', 'audio/mp3']
+  validates_attachment_content_type :audio, content_type: ['audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio', 'audio/ogg', 'application/ogg']
 
   process_in_background :audio, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
