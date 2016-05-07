@@ -10,6 +10,7 @@ $(document).on 'ready page:load page:restore', ->
         alwaysShowControls: true,
         features: ['playpause','progress', 'current', 'duration', 'volume', 'logo'],
         audioVolume: 'horizontal'
+        startVolume: 0.5
         logo:
           text: gon.site_title,
           link: gon.root_url
