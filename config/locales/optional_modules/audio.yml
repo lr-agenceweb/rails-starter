@@ -1,0 +1,11 @@
+# French
+fr:
+  audio:
+    no_html5: Votre navigateur ne supporte pas la lecture de ce son audio. Veuillez le mettre à jour pour lire le son.
+    flash:
+      upload_in_progress: Votre son audio est en train d'être envoyé sur le site. Cela peut prendre beaucoup de temps, soyez patient ;)
+
+# English
+en:
+  audio:
+    no_html5: Your browser doesn't support this video format. Please update your browser in order to read it.
