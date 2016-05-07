@@ -199,6 +199,9 @@ fr:
         fr:
           destroy: Si coché, les sous-titres français seront supprimés
 
+      audio:
+        audio_file: Fichier audio à uploader sur le site. Accepte les formats MP3 et WMA
+
       blog_category:
         name: Nom de la catégorie à créer
         slug: Nom de la catégorie à afficher dans l'url
