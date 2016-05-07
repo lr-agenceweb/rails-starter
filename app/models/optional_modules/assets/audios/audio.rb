@@ -40,8 +40,16 @@ class Audio < ActiveRecord::Base
                     },
                     processors: [:transcoder]
 
-  validates_attachment_size :audio, less_than: 5.megabytes
-  validates_attachment_content_type :audio, content_type: ['audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio', 'audio/ogg', 'application/ogg']
+  validates_attachment :audio,
+                       content_type: {
+                         content_type: [
+                           'audio/mpeg', 'audio/x-mpeg', 'audio/mp3',
+                           'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3',
+                           'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio',
+                           'audio/ogg', 'application/ogg'
+                         ]
+                       },
+                       size: { less_than: 5.megabytes }
 
   process_in_background :audio, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
