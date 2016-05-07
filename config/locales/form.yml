@@ -201,6 +201,7 @@ fr:
 
       audio:
         audio_file: Fichier audio à uploader sur le site. Accepte les formats MP3 et WMA
+        autoplay: Si coché le son audio démarrera automatiquement au chargement de la page. <br /> Attention !!! La majorité des internautes n'apprécient pas ce comportement par défaut.
 
       blog_category:
         name: Nom de la catégorie à créer

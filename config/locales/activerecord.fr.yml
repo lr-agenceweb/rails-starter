@@ -359,6 +359,7 @@ fr:
       audio:
         audioable: Article lié
         audio: Fichier audio
+        audio_autoplay: Démarrage automatique ?
         online: En ligne ?
       slide:
         slide: Image

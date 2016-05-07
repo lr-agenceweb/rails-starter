@@ -3,8 +3,9 @@ ActiveAdmin.register Audio do
   menu parent: I18n.t('admin_menu.assets')
 
   permit_params :id,
-                :online,
-                :audio
+                :audio,
+                :audio_autoplay,
+                :online
 
   # decorate_with AudioDecorator
   config.clear_sidebar_sections!
@@ -19,6 +20,7 @@ ActiveAdmin.register Audio do
     selectable_column
     attachment_column(t('activerecord.attributes.audio.audio'), :audio, truncate: false)
     column :audioable
+    bool_column :audio_autoplay
     bool_column :online
     actions
   end
@@ -28,6 +30,7 @@ ActiveAdmin.register Audio do
       attributes_table do
         attachment_row(t('activerecord.attributes.audio.audio'), :audio, truncate: false)
         row :audioable
+        bool_row :audio_autoplay
         bool_row :online
       end
     end
@@ -42,6 +45,8 @@ ActiveAdmin.register Audio do
           f.input :audio,
                   as: :file,
                   hint: I18n.t('form.hint.audio.audio_file')
+          f.input :audio_autoplay,
+                  hint: I18n.t('form.hint.audio.autoplay').html_safe
           f.input :online,
                   label: I18n.t('form.label.online'),
                   hint: I18n.t('form.hint.online')

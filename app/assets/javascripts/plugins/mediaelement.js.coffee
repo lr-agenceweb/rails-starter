@@ -4,6 +4,8 @@ $(document).on 'ready page:load page:restore', ->
   if $('audio.mediaelement').length > 0
     $('audio.mediaelement').each (index, element) ->  #mediaelementplayer
       element = $(element)
+      $(element).attr('autoplay', 'true') if element.data('autoplay') is true
+
       element.mediaelementplayer
         alwaysShowControls: true,
         features: ['playpause','progress', 'current', 'duration', 'volume', 'logo'],

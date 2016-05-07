@@ -11,6 +11,7 @@
 #  audio_content_type :string(255)
 #  audio_file_size    :integer
 #  audio_updated_at   :datetime
+#  audio_autoplay     :boolean          default(FALSE)
 #  online             :boolean
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
