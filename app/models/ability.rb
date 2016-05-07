@@ -311,7 +311,7 @@ class Ability
   # == Audio
   #
   def audio_module
-    if @audio.enabled?
+    if @audio_module.enabled?
       can :crud, [Audio]
     else
       cannot :manage, [Audio]
