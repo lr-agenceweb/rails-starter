@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 div.panel t('activerecord.models.video.other') do
-  if video_platforms.nil? || video_uploads.nil?
+  if video_platforms.blank? && video_uploads.blank?
     span 'Aucune vidéo n\'est liée à cet article'
   else
     video_platforms.find_each do |video|
