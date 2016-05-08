@@ -206,6 +206,7 @@ group :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'simplecov-json', require: false
+  gem 'test_after_commit'
 end
 
 group :production, :staging, :backup do

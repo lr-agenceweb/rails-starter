@@ -40,10 +40,34 @@ class AudioTest < ActiveSupport::TestCase
     assert_equal [:audio_content_type, :audio], audio.errors.keys
   end
 
+  #
+  # == Flash content
+  #
+  test 'should not have flash content if no audio is uploaded' do
+    @audio.save!
+    assert @audio.valid?, 'should be valid'
+    assert_empty @audio.errors.keys
+    assert @audio.audio_flash_notice.blank?
+  end
+
+  test 'should not have flash content after destroying audio' do
+    @audio.destroy
+    assert @audio.audio_flash_notice.blank?
+  end
+
+  test 'should return correct flash content after updating an audio file' do
+    audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+    @audio.update_attribute(:audio, audio)
+    assert @audio.valid?, 'should be valid'
+    assert_empty @audio.errors.keys
+    assert_equal I18n.t('audio.flash.upload_in_progress'), @audio.audio_flash_notice
+  end
+
   private
 
   def initialize_test
     @blog = blogs(:blog_online)
+    @audio = audios(:one)
     @file = fixture_file_upload('audios/test.mp3', 'audio/mpeg')
     set_attrs
   end

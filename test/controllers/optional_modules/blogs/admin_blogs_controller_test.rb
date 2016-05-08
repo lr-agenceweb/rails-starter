@@ -47,10 +47,28 @@ module Admin
     #
     # == Flash content
     #
+    test 'should return empty flash notice if no update' do
+      patch :update, id: @blog, blog: {}
+      assert flash[:notice].blank?
+    end
+
     test 'should return correct flash content after updating a video' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
       patch :update, id: @blog, blog: { video_uploads_attributes: [{ video_file: video }] }
-      assert_equal I18n.t('video_upload.flash.upload_in_progress'), flash[:notice]
+      assert_equal [I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
+    end
+
+    test 'should return correct flash content after updating an audio file' do
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      patch :update, id: @blog, blog: { audio_attributes: { audio: audio } }
+      assert_equal [I18n.t('audio.flash.upload_in_progress')], flash[:notice]
+    end
+
+    test 'should return correct both flash content after updating audio and video files' do
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
+      patch :update, id: @blog, blog: { audio_attributes: { audio: audio }, video_uploads_attributes: [{ video_file: video }] }
+      assert_equal [I18n.t('audio.flash.upload_in_progress'), I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
     end
 
     #

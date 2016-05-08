@@ -24,6 +24,7 @@ one:
   audioable: blog_online (Blog)
   audio_file_name: foo_bar_2016.mp3
   online: true
+  audio_processing: false
 
 two:
   audioable: blog_third (Blog)

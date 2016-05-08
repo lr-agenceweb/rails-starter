@@ -16,7 +16,7 @@ module OptionalModules
 
       included do
         attr_accessor :audio_flash_notice
-        after_save :audio_flash_upload_in_progress
+        after_commit :audio_flash_upload_in_progress
 
         private
 

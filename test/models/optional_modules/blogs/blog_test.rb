@@ -119,6 +119,28 @@ class BlogTest < ActiveSupport::TestCase
     assert_equal I18n.t('video_upload.flash.upload_in_progress'), @blog.flash_notice
   end
 
+  test 'should not have flash content if no audio is uploaded' do
+    @blog.save!
+    assert @blog.valid?, 'should be valid'
+    assert_empty @blog.errors.keys
+    assert @blog.audio.audio_flash_notice.blank?
+  end
+
+  test 'should not have flash content after destroying audio' do
+    @blog.audio.destroy
+    @blog.reload
+    assert @blog.audio.blank?
+    assert @blog.try(:audio).try(:audio_flash_notice).blank?
+  end
+
+  test 'should return correct flash content after updating an audio file' do
+    audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+    @blog.update_attributes(audio_attributes: { audio: audio })
+    assert @blog.valid?, 'should be valid'
+    assert_empty @blog.errors.keys
+    assert_equal I18n.t('audio.flash.upload_in_progress'), @blog.audio.audio_flash_notice
+  end
+
   private
 
   def initialize_test
