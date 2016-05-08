@@ -8,9 +8,8 @@
           label: I18n.t('form.label.online'),
           hint: I18n.t('form.hint.online')
 
-  / - if item.object.self_image?
-  /   - item.input :_destroy,
-  /                as: :boolean,
-  /                required: false,
-  /                label: 'Supprimer ?',
-  /                hint: 'Si coché, l\'image sera supprimée après mise à jour du mailing'
+  - if item.object.audio?
+    - item.input :_destroy,
+                 as: :boolean,
+                 required: false,
+                 hint: I18n.t('form.hint.audio._destroy')

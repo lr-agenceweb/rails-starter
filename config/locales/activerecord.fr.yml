@@ -364,6 +364,7 @@ fr:
         audio: Fichier audio
         audio_autoplay: Démarrage automatique ?
         online: En ligne ?
+        _destroy: Supprimer ?
       slide:
         slide: Image
         attachable: Slide liée à la page
