@@ -32,6 +32,15 @@ class BlogTest < ActiveSupport::TestCase
     assert_empty blog.errors.keys
   end
 
+  test 'should not save nested audio if input file is empty' do
+    attrs = { blog_category_id: @blog_category.id, audio_attributes: { online: true } }
+    blog = Blog.new attrs
+    assert blog.audio.blank?
+  end
+
+  #
+  # == Counter cache
+  #
   test 'should increase counter cache when creating object' do
     reset_counter_cache
     attrs = { blog_category_id: @blog_category.id }
