@@ -3,6 +3,7 @@ DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
 
+# Blog online
 blog_online_fr:
   <<: *DEFAULTS
   blog_id: <%= ActiveRecord::FixtureSet.identify(:blog_online) %>
@@ -16,3 +17,18 @@ blog_online_en:
   locale: en
   title: Blog article online
   slug: blog-article-online
+
+# Blog offline
+blog_offline_fr:
+  <<: *DEFAULTS
+  blog_id: <%= ActiveRecord::FixtureSet.identify(:blog_offline) %>
+  locale: fr
+  title: Article de blog hors ligne
+  slug: article-de-blog-hors-ligne
+
+blog_offline_en:
+  <<: *DEFAULTS
+  blog_id: <%= ActiveRecord::FixtureSet.identify(:blog_offline) %>
+  locale: en
+  title: Blog article offline
+  slug: blog-article-offline

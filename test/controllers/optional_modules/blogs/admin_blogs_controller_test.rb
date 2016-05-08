@@ -172,6 +172,15 @@ module Admin
       assert_crud_actions(@blog, admin_dashboard_path, model_name)
     end
 
+    test 'should not save audio nested resource if audio module is disabled' do
+      disable_optional_module @super_administrator, @audio_module, 'Audio' # in test_helper.rb
+      sign_in @administrator
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      assert @blog_not_validate.audio.blank?
+      patch :update, id: @blog_not_validate, blog: { audio_attributes: { audio: audio } }
+      assert assigns(:blog).audio.blank?
+    end
+
     private
 
     def initialize_test
@@ -181,6 +190,7 @@ module Admin
       @blog_not_validate = blogs(:blog_offline)
       @blog_module = optional_modules(:blog)
       @comment_module = optional_modules(:comment)
+      @audio_module = optional_modules(:audio)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)
