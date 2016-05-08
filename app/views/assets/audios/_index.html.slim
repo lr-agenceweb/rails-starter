@@ -1,4 +1,6 @@
 - audios.online.each do |audio|
-  audio.mediaelement data-autoplay="#{audio.audio_autoplay?}"
-   source src="#{audio.audio.url(:oggaudio)}" type="audio/ogg"
-   source src="#{audio.audio.url(:mp3audio)}" type="audio/mpeg"
+  figure
+    audio.mediaelement data-autoplay="#{audio.audio_autoplay?}"
+      source src="#{audio.audio.url(:oggaudio)}" type="audio/ogg"
+      source src="#{audio.audio.url(:mp3audio)}" type="audio/mpeg"
+    figcaption = audio.decorate.file_name_without_extension
