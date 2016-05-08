@@ -30,5 +30,6 @@ end
 
 render 'admin/shared/video_platforms/many', f: f if video_settings.video_platform? && video_module.enabled?
 render 'admin/shared/video_uploads/many', f: f if video_settings.video_upload? && video_module.enabled?
+render 'admin/shared/audios/one', f: f if f.object.is_a?(Blog) && audio_module.enabled?
 
 f.actions
