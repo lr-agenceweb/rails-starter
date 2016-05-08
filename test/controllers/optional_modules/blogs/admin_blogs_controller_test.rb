@@ -44,13 +44,37 @@ module Admin
       assert_redirected_to admin_blogs_path
     end
 
+    test 'should destroy nested audio with blog' do
+      assert_difference ['Audio.count'], -1 do
+        delete :destroy, id: @blog
+      end
+    end
+
     #
     # == Flash content
     #
+    test 'should return empty flash notice if no update' do
+      patch :update, id: @blog, blog: {}
+      assert flash[:notice].blank?
+    end
+
     test 'should return correct flash content after updating a video' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
       patch :update, id: @blog, blog: { video_uploads_attributes: [{ video_file: video }] }
-      assert_equal I18n.t('video_upload.flash.upload_in_progress'), flash[:notice]
+      assert_equal [I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
+    end
+
+    test 'should return correct flash content after updating an audio file' do
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      patch :update, id: @blog, blog: { audio_attributes: { audio: audio } }
+      assert_equal [I18n.t('audio.flash.upload_in_progress')], flash[:notice]
+    end
+
+    test 'should return correct both flash content after updating audio and video files' do
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
+      patch :update, id: @blog, blog: { audio_attributes: { audio: audio }, video_uploads_attributes: [{ video_file: video }] }
+      assert_equal [I18n.t('audio.flash.upload_in_progress'), I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
     end
 
     #
@@ -148,6 +172,15 @@ module Admin
       assert_crud_actions(@blog, admin_dashboard_path, model_name)
     end
 
+    test 'should not save audio nested resource if audio module is disabled' do
+      disable_optional_module @super_administrator, @audio_module, 'Audio' # in test_helper.rb
+      sign_in @administrator
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      assert @blog_not_validate.audio.blank?
+      patch :update, id: @blog_not_validate, blog: { audio_attributes: { audio: audio } }
+      assert assigns(:blog).audio.blank?
+    end
+
     private
 
     def initialize_test
@@ -157,6 +190,7 @@ module Admin
       @blog_not_validate = blogs(:blog_offline)
       @blog_module = optional_modules(:blog)
       @comment_module = optional_modules(:comment)
+      @audio_module = optional_modules(:audio)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

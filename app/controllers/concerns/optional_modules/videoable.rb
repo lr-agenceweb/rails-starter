@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == OptionalModules namespace
 #
@@ -23,7 +24,7 @@ module OptionalModules
       end
 
       def set_flash_notice
-        flash[:notice] = resource.flash_notice
+        (flash[:notice] ||= []) << resource.flash_notice
       end
     end
   end

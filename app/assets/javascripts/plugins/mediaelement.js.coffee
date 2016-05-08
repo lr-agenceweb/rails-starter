@@ -1,6 +1,22 @@
 $(document).on 'ready page:load page:restore', ->
 
-  if $('.mediaelement').length > 0
+  # Audio
+  if $('audio.mediaelement').length > 0
+    $('audio.mediaelement').each (index, element) ->  #mediaelementplayer
+      element = $(element)
+      $(element).attr('autoplay', 'true') if element.data('autoplay') is true
+
+      element.mediaelementplayer
+        alwaysShowControls: true,
+        features: ['playpause','progress', 'current', 'duration', 'volume', 'logo'],
+        audioVolume: 'horizontal'
+        startVolume: 0.5
+        logo:
+          text: gon.site_title,
+          link: gon.root_url
+
+  # Video
+  if $('video.mediaelement').length > 0
     turn_off_the_light = gon.turn_off_the_light
     $('body').append('<div id="shadow"></div>') if turn_off_the_light
 

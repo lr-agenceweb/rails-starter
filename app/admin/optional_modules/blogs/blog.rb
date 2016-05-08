@@ -37,6 +37,7 @@ ActiveAdmin.register Blog do
              ]
 
     params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
+    params.push audio_attributes: [:id, :audio, :online, :_destroy] if @audio_module.enabled?
     params.push :allow_comments if @comment_module.enabled?
     params
   end
@@ -74,6 +75,7 @@ ActiveAdmin.register Blog do
   controller do
     include Skippable
     include OptionalModules::Videoable
+    include OptionalModules::Audioable
 
     cache_sweeper :blog_sweeper
 

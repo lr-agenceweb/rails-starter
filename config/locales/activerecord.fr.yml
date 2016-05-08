@@ -76,6 +76,9 @@ fr:
       video_background:
         one: Vidéo d'arrière-plan
         other: Vidéos d'arrière-plan
+      audio:
+        one: Fichier Audio
+        other: Fichiers Audio
       background:
         one: Arrière-plan
         other: Arrière-plans
@@ -356,6 +359,12 @@ fr:
         delete_subtitle_fr: Supprimer sous-titres français ?
         delete_subtitle_en: Supprimer sous-titres anglais ?
         online: En ligne ?
+      audio:
+        audioable: Article lié
+        audio: Fichier audio
+        audio_autoplay: Démarrage automatique ?
+        online: En ligne ?
+        _destroy: Supprimer ?
       slide:
         slide: Image
         attachable: Slide liée à la page

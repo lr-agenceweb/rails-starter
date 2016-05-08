@@ -131,7 +131,7 @@ module Admin
     # == Module disabled
     #
     test 'should not access page if guest_book module is disabled' do
-      disable_optional_module @super_administrator, @guest_book_module, 'GuestBookSetting' # in test_helper.rb
+      disable_optional_module @super_administrator, @guest_book_module, 'GuestBook' # in test_helper.rb
       sign_in @super_administrator
       assert_crud_actions(@guest_book_setting, admin_dashboard_path, model_name)
       sign_in @administrator

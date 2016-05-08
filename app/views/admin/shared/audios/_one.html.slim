@@ -1,0 +1,15 @@
+- f.inputs I18n.t('activerecord.models.audio.one'), for: [:audio, f.object.audio || Audio.new] do |item|
+  - item.input :audio,
+          as: :file,
+          hint: raw(item.object.decorate.hint_for_file) + raw(I18n.t('form.hint.audio.audio_file'))
+  - item.input :audio_autoplay,
+          hint: raw(I18n.t('form.hint.audio.autoplay'))
+  - item.input :online,
+          label: I18n.t('form.label.online'),
+          hint: I18n.t('form.hint.online')
+
+  - if item.object.audio?
+    - item.input :_destroy,
+                 as: :boolean,
+                 required: false,
+                 hint: I18n.t('form.hint.audio._destroy')

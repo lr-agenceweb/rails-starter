@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+div.panel t('activerecord.models.audio.one') do
+  if resource.blank?
+    span 'Aucune fichier audio n\'est lié à cet article'
+  else
+    strong resource.decorate.file_name_without_extension
+    span "(#{I18n.t('audio.processing')})" if resource.audio_processing?
+  end
+end

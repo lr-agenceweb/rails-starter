@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506082514) do
+ActiveRecord::Schema.define(version: 20160508172312) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -31,6 +31,22 @@ ActiveRecord::Schema.define(version: 20160506082514) do
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
   end
+
+  create_table "audios", force: :cascade do |t|
+    t.integer  "audioable_id",       limit: 4
+    t.string   "audioable_type",     limit: 255
+    t.string   "audio_file_name",    limit: 255
+    t.string   "audio_content_type", limit: 255
+    t.integer  "audio_file_size",    limit: 4
+    t.datetime "audio_updated_at"
+    t.boolean  "audio_autoplay",                 default: false
+    t.boolean  "online",                         default: true
+    t.boolean  "audio_processing",               default: true
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  add_index "audios", ["audioable_type", "audioable_id"], name: "index_audios_on_audioable_type_and_audioable_id", using: :btree
 
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4

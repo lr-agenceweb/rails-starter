@@ -79,6 +79,14 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
+  # == Files
+  #
+  def file_name_without_extension(assets)
+    file = model.send("#{assets}_file_name")
+    File.basename(file, File.extname(file)).humanize
+  end
+
+  #
   # == Prev / Next
   #
   def prev_post

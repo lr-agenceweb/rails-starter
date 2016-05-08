@@ -16,7 +16,7 @@ module OptionalModules
 
       included do
         attr_accessor :flash_notice
-        after_save :flash_upload_in_progress
+        after_commit :flash_upload_in_progress
 
         has_one :video_upload, as: :videoable, dependent: :destroy
         accepts_nested_attributes_for :video_upload, reject_if: proc { |attributes| attributes['video_file'].blank? }, allow_destroy: true

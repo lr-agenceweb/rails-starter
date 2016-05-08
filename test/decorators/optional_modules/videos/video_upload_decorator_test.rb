@@ -32,6 +32,13 @@ class VideoUploadDecoratorTest < Draper::TestCase
   end
 
   #
+  # == File
+  #
+  test 'should return correct file name without extension' do
+    assert_equal 'Landscape', @video_upload_decorated.file_name_without_extension
+  end
+
+  #
   # == Status tag
   #
   test 'should return correct value for subtitles?' do

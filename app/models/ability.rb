@@ -102,6 +102,7 @@ class Ability
     video_module
     mailing_module
     social_connect_module
+    audio_module
     rss_module
   end
 
@@ -303,6 +304,18 @@ class Ability
       cannot [:create, :destroy], [SocialConnectSetting]
     else
       cannot :manage, [SocialConnectSetting, SocialProvider]
+    end
+  end
+
+  #
+  # == Audio
+  #
+  def audio_module
+    if @audio_module.enabled?
+      can [:read, :update, :destroy], Audio
+      cannot :create, Audio
+    else
+      cannot :manage, Audio
     end
   end
 
