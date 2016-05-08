@@ -44,6 +44,12 @@ module Admin
       assert_redirected_to admin_blogs_path
     end
 
+    test 'should destroy nested audio with blog' do
+      assert_difference ['Audio.count'], -1 do
+        delete :destroy, id: @blog
+      end
+    end
+
     #
     # == Flash content
     #
