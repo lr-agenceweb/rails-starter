@@ -45,6 +45,6 @@ class SocialDecorator < ApplicationDecorator
   private
 
   def font_ikon_list
-    Social.allowed_font_awesome_ikons.map { |ikon| fa_icon(ikon, title: ikon) }.join(', ')
+    Social.allowed_font_awesome_ikons.map { |ikon| h.fa_icon(ikon, title: ikon) }.join(', ')
   end
 end
