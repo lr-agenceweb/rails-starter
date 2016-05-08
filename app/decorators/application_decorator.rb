@@ -81,8 +81,8 @@ class ApplicationDecorator < Draper::Decorator
   #
   # == Files
   #
-  def file_name_without_extension
-    file = model.audio_file_name
+  def file_name_without_extension(assets)
+    file = model.send("#{assets}_file_name")
     File.basename(file, File.extname(file)).humanize
   end
 

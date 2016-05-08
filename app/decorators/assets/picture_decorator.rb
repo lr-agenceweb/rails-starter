@@ -23,6 +23,13 @@ class PictureDecorator < ApplicationDecorator
     retina_image_tag self, :image, size, data: interchange_self
   end
 
+  #
+  # == File
+  #
+  def file_name_without_extension
+    super 'image'
+  end
+
   private
 
   #
