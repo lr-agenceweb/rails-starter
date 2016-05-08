@@ -76,6 +76,9 @@ fr:
       video_background:
         one: Vidéo d'arrière-plan
         other: Vidéos d'arrière-plan
+      audio:
+        one: Fichier Audio
+        other: Fichiers Audio
       background:
         one: Arrière-plan
         other: Arrière-plans
