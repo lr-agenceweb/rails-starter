@@ -23,6 +23,16 @@ class BlogsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'AJAX :: should get index' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        xhr :get, :index, locale: locale.to_s
+        assert_response :success
+        assert_not_nil assigns(:blogs)
+      end
+    end
+  end
+
   test 'should use index template' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
@@ -36,6 +46,15 @@ class BlogsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         get :show, locale: locale.to_s, id: @blog, blog_category_id: @blog.blog_category
+        assert_response :success
+      end
+    end
+  end
+
+  test 'AJAX :: should get show' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        xhr :get, :show, locale: locale.to_s, id: @blog, blog_category_id: @blog.blog_category
         assert_response :success
       end
     end
