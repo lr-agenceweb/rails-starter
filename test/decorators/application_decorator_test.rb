@@ -46,13 +46,6 @@ class ApplicationDecoratorTest < Draper::TestCase
   end
 
   #
-  # == File
-  #
-  test 'should return correct file name without extension' do
-    assert_equal 'Foo bar 2016', @audio_decorated.file_name_without_extension
-  end
-
-  #
   # == Prev / Next
   #
   test 'should return correct prev blog' do
@@ -92,7 +85,6 @@ class ApplicationDecoratorTest < Draper::TestCase
     @blog_article = blogs(:blog_online)
     @blog_article_2 = blogs(:blog_third)
     @newsletter_user = newsletter_users(:newsletter_user_fr)
-    @audio = audios(:one)
 
     @comment_decorated = ApplicationDecorator.new(@comment)
     @blog_setting_decorated = ApplicationDecorator.new(@blog_setting)
@@ -100,6 +92,5 @@ class ApplicationDecoratorTest < Draper::TestCase
     @blog_article_2_decorated = ApplicationDecorator.new(@blog_article_2)
     @contact_decorated = ApplicationDecorator.new(@contact)
     @newsletter_user_decorated = ApplicationDecorator.new(@newsletter_user)
-    @audio_decorated = ApplicationDecorator.new(@audio)
   end
 end
