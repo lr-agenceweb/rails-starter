@@ -18,10 +18,10 @@ module OptionalModules
         attr_accessor :flash_notice
 
         has_many :audios, as: :audioable, dependent: :destroy
-        accepts_nested_attributes_for :audios, reject_if: :all_blank, allow_destroy: true
+        accepts_nested_attributes_for :audios, reject_if: proc { |attribute| attribute['audio'].blank? }, allow_destroy: true
 
         has_one :audio, as: :audioable, dependent: :destroy
-        accepts_nested_attributes_for :audio, reject_if: :all_blank, allow_destroy: true
+        accepts_nested_attributes_for :audio, reject_if: proc { |attribute| attribute['audio'].blank? }, allow_destroy: true
 
         delegate :online, to: :audios, prefix: true, allow_nil: true
 
