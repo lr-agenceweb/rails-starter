@@ -21,8 +21,10 @@
 
 one:
   audioable: blog_online (Blog)
+  audio_file_name: foo_bar_2016.mp3
   online: true
 
 two:
-  audioable: blog_online (Blog)
+  audioable: blog_third (Blog)
+  audio_file_name: bar_foo_2015.mp3
   online: false
