@@ -27,6 +27,7 @@
 #
 class Audio < ActiveRecord::Base
   include Assets::Attachable
+  include OptionalModules::Assets::AudioNotifiable
 
   belongs_to :audioable, polymorphic: true, touch: true
 

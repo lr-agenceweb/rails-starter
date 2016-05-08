@@ -15,19 +15,15 @@ module OptionalModules
       extend ActiveSupport::Concern
 
       included do
-        attr_accessor :flash_notice
+        include OptionalModules::Assets::AudioNotifiable
 
         has_many :audios, as: :audioable, dependent: :destroy
-        accepts_nested_attributes_for :audios, reject_if: proc { |attribute| attribute['audio'].blank? }, allow_destroy: true
+        accepts_nested_attributes_for :audios, reject_if: proc { |attributes| attributes['audio'].blank? }, allow_destroy: true
 
         has_one :audio, as: :audioable, dependent: :destroy
-        accepts_nested_attributes_for :audio, reject_if: proc { |attribute| attribute['audio'].blank? }, allow_destroy: true
+        accepts_nested_attributes_for :audio, reject_if: proc { |attributes| attributes['audio'].blank? }, allow_destroy: true
 
         delegate :online, to: :audios, prefix: true, allow_nil: true
-
-        def flash_upload_in_progress(*)
-          self.flash_notice = I18n.t('audio.flash.upload_in_progress')
-        end
 
         def audio?
           audio.present? && audio.audio.exists? && audio.online?

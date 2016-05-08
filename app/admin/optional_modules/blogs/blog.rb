@@ -75,6 +75,7 @@ ActiveAdmin.register Blog do
   controller do
     include Skippable
     include OptionalModules::Videoable
+    include OptionalModules::Audioable
 
     cache_sweeper :blog_sweeper
 

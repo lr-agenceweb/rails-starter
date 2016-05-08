@@ -62,6 +62,7 @@ ActiveAdmin.register Audio do
   #
   controller do
     include Skippable
+    include OptionalModules::Audioable
 
     def destroy
       resource.audio.clear
