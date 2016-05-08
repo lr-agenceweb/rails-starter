@@ -131,7 +131,7 @@ module Admin
     # == Module disabled
     #
     test 'should not access page if comment module is disabled' do
-      disable_optional_module @super_administrator, @comment_module, 'CommentSetting' # in test_helper.rb
+      disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
       sign_in @super_administrator
       assert_crud_actions(@comment_setting, admin_dashboard_path, model_name)
       sign_in @administrator
