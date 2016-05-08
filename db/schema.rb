@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507195815) do
+ActiveRecord::Schema.define(version: 20160508172312) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20160507195815) do
     t.datetime "audio_updated_at"
     t.boolean  "audio_autoplay",                 default: false
     t.boolean  "online",                         default: true
+    t.boolean  "audio_processing",               default: true
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
   end

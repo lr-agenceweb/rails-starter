@@ -13,6 +13,7 @@
 #  audio_updated_at   :datetime
 #  audio_autoplay     :boolean          default(FALSE)
 #  online             :boolean          default(TRUE)
+#  audio_processing   :boolean          default(TRUE)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
@@ -54,4 +55,5 @@ class Audio < ActiveRecord::Base
   process_in_background :audio, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
   scope :online, -> { where(online: true) }
+  scope :not_processing, -> { where.not(audio_processing: true) }
 end

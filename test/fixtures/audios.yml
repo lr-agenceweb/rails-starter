@@ -11,6 +11,7 @@
 #  audio_updated_at   :datetime
 #  audio_autoplay     :boolean          default(FALSE)
 #  online             :boolean          default(TRUE)
+#  audio_processing   :boolean          default(TRUE)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
