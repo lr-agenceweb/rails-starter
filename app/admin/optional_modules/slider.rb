@@ -75,7 +75,7 @@ ActiveAdmin.register Slider do
     end
 
     panel 'Slider prévisualisation' do
-      render 'optional_modules/sliders/show', slider: resource, force: true
+      render 'assets/sliders/show', slider: resource, force: true
     end
   end
 

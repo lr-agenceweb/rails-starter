@@ -1,4 +1,5 @@
-- @guest_books.each do |guest_book|
-  = render 'guest_book', guest_book: guest_book
+#guest_books-container
+  - @guest_books.each do |guest_book|
+    = render 'guest_book', guest_book: guest_book
 
 = paginate @guest_books

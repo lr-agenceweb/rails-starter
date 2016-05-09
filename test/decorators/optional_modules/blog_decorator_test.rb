@@ -9,14 +9,24 @@ class BlogDecoratorTest < Draper::TestCase
 
   setup :initialize_test
 
+  #
+  # == URL
+  #
+  test 'should return show_page_link' do
+    assert_equal blog_category_blog_path(@blog.blog_category, @blog), @blog_decorated.show_page_link
+  end
+
+  #
+  # == ActiveAdmin
+  #
   test 'should return correct AA show page title' do
-    blog_decorated = BlogDecorator.new(@blog)
-    assert_equal "Article lié à la page \"Blog articles\"", blog_decorated.title_aa_show
+    assert_equal "Article lié à la page \"Articles de Blog\"", @blog_decorated.title_aa_show
   end
 
   private
 
   def initialize_test
     @blog = blogs(:blog_online)
+    @blog_decorated = BlogDecorator.new(@blog)
   end
 end

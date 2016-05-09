@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == VideoUploadDecorator
 #
@@ -20,6 +21,13 @@ class VideoUploadDecorator < VideoDecorator
 
   def category?
     videoable_type == 'Category'
+  end
+
+  #
+  # == File
+  #
+  def file_name_without_extension
+    super 'video_file'
   end
 
   #

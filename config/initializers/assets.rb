@@ -13,3 +13,6 @@ Rails.application.config.assets.precompile += %w( icons-*.png )
 
 # Email / Newsletter / Maintenance assets
 Rails.application.config.assets.precompile += %w( email.css newsletter.css maintenance.css noscript.css )
+
+# ActiveAdmin Addons (paperclip attachment)
+Rails.application.config.assets.precompile += %w( fileicons/*.png )

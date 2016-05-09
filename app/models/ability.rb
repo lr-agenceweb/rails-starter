@@ -102,6 +102,7 @@ class Ability
     video_module
     mailing_module
     social_connect_module
+    audio_module
     rss_module
   end
 
@@ -184,12 +185,13 @@ class Ability
   [Blog, Event].each do |model_object|
     define_method "#{model_object.to_s.underscore}_module" do
       model_object_setting = "#{model_object}Setting".constantize
+      model_object_category = model_object == Blog ? "#{model_object}Category".constantize : ''
       if instance_variable_get(:"@#{model_object.to_s.underscore}_module").enabled?
-        can :crud, model_object
+        can :crud, [model_object, model_object_category]
         can [:read, :update], model_object_setting
         cannot [:create, :destroy], model_object_setting
       else
-        cannot :manage, [model_object, model_object_setting]
+        cannot :manage, [model_object, model_object_setting, model_object_category]
       end
     end
   end
@@ -302,6 +304,18 @@ class Ability
       cannot [:create, :destroy], [SocialConnectSetting]
     else
       cannot :manage, [SocialConnectSetting, SocialProvider]
+    end
+  end
+
+  #
+  # == Audio
+  #
+  def audio_module
+    if @audio_module.enabled?
+      can [:read, :update, :destroy], Audio
+      cannot :create, Audio
+    else
+      cannot :manage, Audio
     end
   end
 

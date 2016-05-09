@@ -52,17 +52,14 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Date
-  #
-  test 'should return correct date of creation for comment' do
-    assert_equal '<small><time datetime="2016-01-30T13:54:20+01:00">samedi 30 janvier 2016 13:54</time></small>', @comment_decorated.comment_created_at
-  end
-
-  #
   # == Link and Image for Commentable
   #
-  test 'should return correct commentable link' do
+  test 'should return correct commentable link for regular articles' do
     assert_equal '<a target="_blank" href="/a-propos/article-2-a-propos">Article 2 A Propos</a>', @comment_decorated.link_source
+  end
+
+  test 'should return correct commentable link for blog articles' do
+    assert_equal '<a target="_blank" href="/blogs/foo/article-de-blog-en-ligne">Article de blog en ligne</a>', @blog_comment_decorated.link_source
   end
 
   test 'should return correct commentable image' do
@@ -77,23 +74,14 @@ class CommentDecoratorTest < Draper::TestCase
     assert @comment_decorated.send(:commentable_image?)
   end
 
-  #
-  # == Status tag
-  #
-  test 'should return correct status_tag when not signalled' do
-    assert_match '<span class="status_tag non green">Non</span>', @comment_decorated.signalled_d
-  end
-
-  test 'should return correct status_tag when signalled' do
-    @comment.update_attribute(:signalled, true)
-    assert_match '<span class="status_tag oui red">Oui</span>', @comment_decorated.signalled_d
-  end
-
   private
 
   def initialize_test
     @comment = comments(:one)
+    @blog_comment = comments(:blog)
     @comment_not_connected = comments(:five)
+
     @comment_decorated = CommentDecorator.new(@comment)
+    @blog_comment_decorated = CommentDecorator.new(@blog_comment)
   end
 end

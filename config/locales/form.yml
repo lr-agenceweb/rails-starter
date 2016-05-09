@@ -10,6 +10,11 @@ en:
       start_date: starting date of the event
       end_date: ending date of the event
 
+    errors:
+      contact_form:
+        size: Attachment should be less than %{size}MB
+        type: Attachment should be a picture or a PDF file
+
 # French
 fr:
   form:
@@ -51,6 +56,9 @@ fr:
 
       post:
         prev_next: Si coché, un lien permettant d'accéder à l'article précédent et suivant sera ajouté sur le site
+        show_last_posts: Si coché, une liste des derniers articles de blog crées sera affichée sur la page Blog et permettra de naviguer plus facilement entre eux.
+        show_categories: Si coché, une liste affichera les différentes catégories existantes dans lesquelles des articles de blog ont été crées. Cela permet de filtrer les différents articles par catégorie.
+        show_last_comments: Si coché, une liste des derniers commentaires sera affichée sur la page Blog.
 
       newsletter:
         send_welcome_email: Si coché, le nouvel abonné à la newsletter recevra un email de bienvenue
@@ -191,6 +199,14 @@ fr:
         fr:
           destroy: Si coché, les sous-titres français seront supprimés
 
+      audio:
+        audio_file: Fichier audio à uploader sur le site. Accepte les formats MP3 et OGG
+        autoplay: Si coché le son audio démarrera automatiquement au chargement de la page. <br /> Attention !!! La majorité des internautes n'apprécient pas ce comportement par défaut.
+        _destroy: Si coché, le fichier audio sera supprimé après mise à jour de l'article
+
+      blog_category:
+        name: Nom de la catégorie à créer
+        slug: Nom de la catégorie à afficher dans l'url
 
     placeholder:
       froala: Contenu de l'article ici :)
@@ -199,3 +215,7 @@ fr:
       start_date: L'événement ne peut pas commencer après la fin présumée de celui-ci
       end_date: L'événement ne peut pas terminer après la début présumé de celui-ci
       max_row: Vous ne pouvez pas créer plus de resource de ce type
+
+      contact_form:
+        size: L'attachment doit faire moins de %{size}MB
+        type: L'attachment doit être une image ou un PDF

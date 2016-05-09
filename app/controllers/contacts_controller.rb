@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == ContactsController
 #
@@ -47,7 +48,7 @@ class ContactsController < ApplicationController
   private
 
   def contact_form_params
-    params.require(:contact_form).permit(:name, :email, :message, :send_copy, :nickname)
+    params.require(:contact_form).permit(:name, :email, :message, :send_copy, :attachment, :nickname)
   end
 
   def respond_action(template)

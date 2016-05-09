@@ -10,6 +10,13 @@ class PictureDecoratorTest < Draper::TestCase
   setup :initialize_test
 
   #
+  # == File
+  #
+  test 'should return correct file name without extension' do
+    assert_equal 'My-picture', @picture_decorated.file_name_without_extension
+  end
+
+  #
   # == Image
   #
   test 'should return correct base image tag' do

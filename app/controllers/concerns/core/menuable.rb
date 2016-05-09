@@ -18,6 +18,7 @@ module Core
         @menu_elements_header ||= MenuDecorator.decorate_collection(menu_elements.visible_header.by_position)
         @menu_elements_footer ||= MenuDecorator.decorate_collection(menu_elements.visible_footer.by_position)
         @controller_name = controller_name.classify
+        @controller_name = 'Blog' if @controller_name == 'BlogCategory'
         @category = Category.includes(menu: [:translations]).find_by(name: @controller_name)
       end
     end

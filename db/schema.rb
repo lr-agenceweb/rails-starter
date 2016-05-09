@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329221708) do
+ActiveRecord::Schema.define(version: 20160508172312) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -32,6 +32,22 @@ ActiveRecord::Schema.define(version: 20160329221708) do
     t.datetime "updated_at",                                null: false
   end
 
+  create_table "audios", force: :cascade do |t|
+    t.integer  "audioable_id",       limit: 4
+    t.string   "audioable_type",     limit: 255
+    t.string   "audio_file_name",    limit: 255
+    t.string   "audio_content_type", limit: 255
+    t.integer  "audio_file_size",    limit: 4
+    t.datetime "audio_updated_at"
+    t.boolean  "audio_autoplay",                 default: false
+    t.boolean  "online",                         default: true
+    t.boolean  "audio_processing",               default: true
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  add_index "audios", ["audioable_type", "audioable_id"], name: "index_audios_on_audioable_type_and_audioable_id", using: :btree
+
   create_table "backgrounds", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4
     t.string   "attachable_type",    limit: 255
@@ -46,10 +62,33 @@ ActiveRecord::Schema.define(version: 20160329221708) do
 
   add_index "backgrounds", ["attachable_type", "attachable_id"], name: "index_backgrounds_on_attachable_type_and_attachable_id", using: :btree
 
+  create_table "blog_categories", force: :cascade do |t|
+    t.string   "name",        limit: 255, default: ""
+    t.string   "slug",        limit: 255, default: ""
+    t.integer  "blogs_count", limit: 4,   default: 0,  null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  create_table "blog_category_translations", force: :cascade do |t|
+    t.integer  "blog_category_id", limit: 4,   null: false
+    t.string   "locale",           limit: 255, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "name",             limit: 255
+    t.string   "slug",             limit: 255
+  end
+
+  add_index "blog_category_translations", ["blog_category_id"], name: "index_blog_category_translations_on_blog_category_id", using: :btree
+  add_index "blog_category_translations", ["locale"], name: "index_blog_category_translations_on_locale", using: :btree
+
   create_table "blog_settings", force: :cascade do |t|
-    t.boolean  "prev_next",  default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.boolean  "prev_next",          default: false
+    t.boolean  "show_last_posts",    default: true
+    t.boolean  "show_categories",    default: true
+    t.boolean  "show_last_comments", default: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "blog_translations", force: :cascade do |t|
@@ -66,17 +105,19 @@ ActiveRecord::Schema.define(version: 20160329221708) do
   add_index "blog_translations", ["locale"], name: "index_blog_translations_on_locale", using: :btree
 
   create_table "blogs", force: :cascade do |t|
-    t.string   "title",           limit: 255
-    t.string   "slug",            limit: 255
-    t.text     "content",         limit: 65535
-    t.boolean  "show_as_gallery",               default: false
-    t.boolean  "allow_comments",                default: true
-    t.boolean  "online",                        default: true
-    t.integer  "user_id",         limit: 4
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.string   "title",            limit: 255
+    t.string   "slug",             limit: 255
+    t.text     "content",          limit: 65535
+    t.boolean  "show_as_gallery",                default: false
+    t.boolean  "allow_comments",                 default: true
+    t.boolean  "online",                         default: true
+    t.integer  "user_id",          limit: 4
+    t.integer  "blog_category_id", limit: 4
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
+  add_index "blogs", ["blog_category_id"], name: "index_blogs_on_blog_category_id", using: :btree
   add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
@@ -555,6 +596,8 @@ ActiveRecord::Schema.define(version: 20160329221708) do
     t.boolean  "show_qrcode",                            default: false
     t.boolean  "show_map",                               default: false
     t.boolean  "show_admin_bar",                         default: true
+    t.boolean  "show_file_upload",                       default: false
+    t.integer  "date_format",              limit: 4,     default: 0
     t.boolean  "maintenance",                            default: false
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size",           limit: 4
@@ -788,5 +831,6 @@ ActiveRecord::Schema.define(version: 20160329221708) do
 
   add_index "video_uploads", ["videoable_type", "videoable_id"], name: "index_video_uploads_on_videoable_type_and_videoable_id", using: :btree
 
+  add_foreign_key "blogs", "blog_categories"
   add_foreign_key "event_settings", "event_orders"
 end

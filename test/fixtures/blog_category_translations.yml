@@ -1,0 +1,17 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+one_fr:
+  <<: *DEFAULTS
+  blog_category_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: fr
+  name: foo
+  slug: foo
+
+one_en:
+  <<: *DEFAULTS
+  blog_category_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: en
+  name: bar
+  slug: bar

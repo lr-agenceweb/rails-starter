@@ -6,7 +6,7 @@ require 'simplecov-json'
 # Start reporters
 CodeClimate::TestReporter.start
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+SimpleCov.formatters = [
   SimpleCov::Formatter::JSONFormatter,
   SimpleCov::Formatter::HTMLFormatter,
   CodeClimate::TestReporter::Formatter
@@ -17,6 +17,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/reporters'
+require 'mocha/mini_test'
 
 #
 # == ActiveSupport namespace
@@ -46,7 +47,7 @@ module ActiveSupport
       sign_in user
       @controller = Admin::OptionalModulesController.new
       patch :update, id: optional_module, optional_module: { enabled: '0' }
-      assert name, assigns(:optional_module).name
+      assert_equal name, assigns(:optional_module).object.name
       assert_not assigns(:optional_module).enabled, 'Module should be disabled'
       assert_redirected_to admin_optional_module_path(assigns(:optional_module))
       sign_out user

@@ -19,7 +19,7 @@ gem 'database_cleaner'
 #
 # == Authentication
 #
-gem 'devise'
+gem 'devise', '~> 3.5.9'
 gem 'devise-i18n-views'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
@@ -29,15 +29,16 @@ gem 'omniauth-google-oauth2', '~> 0.4.1'
 # == Administration
 #
 gem 'activeadmin', '~> 1.0.0.pre2'
-gem 'activeadmin_addons', github: 'platanus/activeadmin_addons', branch: 'master'
+gem 'activeadmin_addons'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
 gem 'active_skin'
 
 #
-# == Decorator
+# == Core enhancement
 #
 gem 'draper'
+gem 'enumerize'
 
 #
 # == Html
@@ -106,6 +107,7 @@ gem 'meta-tags'
 gem 'figaro'
 gem 'cancancan', '~> 1.10'
 gem 'secure_headers', '~> 3.0'
+gem 'open_uri_redirections' # HTTP(S) redirections
 
 #
 # == Analytics
@@ -195,15 +197,17 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'spring', '~> 1.6.0'
+  gem 'spring', '~> 1.7.0'
 end
 
 group :test do
   gem 'minitest'
   gem 'minitest-reporters', require: false
+  gem 'mocha'
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'simplecov-json', require: false
+  gem 'test_after_commit'
 end
 
 group :production, :staging, :backup do

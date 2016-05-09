@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 ActiveAdmin.register Blog do
   menu parent: I18n.t('admin_menu.modules')
-  includes :translations
+  includes :translations, blog_category: [:translations]
 
   permit_params do
     params = [:id,
@@ -9,6 +9,7 @@ ActiveAdmin.register Blog do
               :show_as_gallery,
               :online,
               :user_id,
+              :blog_category_id,
               translations_attributes: [
                 :id, :locale, :title, :slug, :content
               ],
@@ -36,6 +37,7 @@ ActiveAdmin.register Blog do
              ]
 
     params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
+    params.push audio_attributes: [:id, :audio, :online, :_destroy] if @audio_module.enabled?
     params.push :allow_comments if @comment_module.enabled?
     params
   end
@@ -54,7 +56,7 @@ ActiveAdmin.register Blog do
   end
 
   index do
-    render 'admin/posts/index', object: self
+    render 'admin/posts/index', object: self, show_blog_category: true
   end
 
   show title: :title_aa_show do
@@ -73,6 +75,7 @@ ActiveAdmin.register Blog do
   controller do
     include Skippable
     include OptionalModules::Videoable
+    include OptionalModules::Audioable
 
     cache_sweeper :blog_sweeper
 

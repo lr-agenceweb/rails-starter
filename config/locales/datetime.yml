@@ -4,10 +4,11 @@ en:
     label:
       seconds: seconds
     formats:
-      with_time: '%B %d %Y, %Y %I.%m %p'
-      without_time: '%B %d, %Y'
-      without_time_no_year: '%B %d'
-      long: "%B %d, %Y at %I.%m %p"
+      with_time: '%d/%m/%Y %I.%m %p'
+      without_time: '%d/%m/%Y'
+      without_time_no_year: '%d/%m'
+      long: '%B %d, %Y at %I.%m %p'
+      ago: '%d/%m/%Y %I.%m %p'
     greeting:
       morning: Good morning
       afternoon: Good afternoon
@@ -19,10 +20,11 @@ fr:
     label:
       seconds: secondes
     formats:
-      with_time: '%A %d %B %Y %H:%M'
-      without_time: '%A %d %B %Y'
-      without_time_no_year: '%A %d %B'
+      with_time: '%d/%m/%Y %H:%M'
+      without_time: '%d/%m/%Y'
+      without_time_no_year: '%d/%m'
       long: "%A %d %B %Y à %Hh%M"
+      ago: '%d/%m/%Y %H:%M'
     greeting:
       morning: Bonjour
       afternoon: Bonjour

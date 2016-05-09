@@ -38,21 +38,15 @@ class CommentDecorator < ApplicationDecorator
   end
 
   #
-  # == Date
-  #
-  def comment_created_at
-    content_tag(:small, time_tag(model.created_at.to_datetime, l(model.created_at, format: :with_time)))
-  end
-
-  #
   # == Link and Image for Commentable
   #
   def link_source
-    link_to commentable.title, polymorphic_path(commentable), target: :_blank
+    link = commentable.is_a?(Blog) ? blog_category_blog_path(commentable.blog_category, commentable) : polymorphic_path(commentable)
+    link_to commentable.title, link, target: :_blank
   end
 
   def image_source
-    retina_image_tag commentable.pictures.first, :image, :small
+    h.retina_image_tag commentable.pictures.first, :image, :small
   end
 
   def link_and_image_source
@@ -60,14 +54,6 @@ class CommentDecorator < ApplicationDecorator
     html << content_tag(:p, image_source) if commentable_image?
     html << content_tag(:p, link_source)
     html.html_safe
-  end
-
-  #
-  # == Status tag
-  #
-  def signalled_d
-    color = model.signalled? ? 'red' : 'green'
-    status_tag_deco(I18n.t(model.signalled.to_s), color)
   end
 
   def pseudo(name = nil)
