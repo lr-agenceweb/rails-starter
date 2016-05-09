@@ -3,7 +3,7 @@ require File.expand_path('../environment', __FILE__)
 require 'figaro'
 
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.5.0'
 
 set :application, Figaro.env.application_name
 set :repo_url, Figaro.env.capistrano_repo_url

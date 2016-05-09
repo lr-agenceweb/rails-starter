@@ -19,7 +19,7 @@ gem 'database_cleaner'
 #
 # == Authentication
 #
-gem 'devise'
+gem 'devise', '~> 3.5.9'
 gem 'devise-i18n-views'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
@@ -107,6 +107,7 @@ gem 'meta-tags'
 gem 'figaro'
 gem 'cancancan', '~> 1.10'
 gem 'secure_headers', '~> 3.0'
+gem 'open_uri_redirections' # HTTP(S) redirections
 
 #
 # == Analytics
@@ -196,7 +197,7 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'spring', '~> 1.6.0'
+  gem 'spring', '~> 1.7.0'
 end
 
 group :test do
