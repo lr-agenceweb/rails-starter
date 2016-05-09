@@ -50,6 +50,13 @@ module Admin
       end
     end
 
+    test 'should update nested audio and enqueued it' do
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      assert_enqueued_jobs 1 do
+        patch :update, id: @blog, blog: { audio_attributes: { audio: audio } }
+      end
+    end
+
     #
     # == Flash content
     #

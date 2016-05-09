@@ -36,6 +36,13 @@ module Admin
       assert_redirected_to admin_audio_path(@audio)
     end
 
+    test 'should update audio and enqueued it' do
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      assert_enqueued_jobs 1 do
+        patch :update, id: @audio, audio: { audio: audio }
+      end
+    end
+
     test 'should destroy Audio' do
       assert_difference 'Audio.count', -1 do
         delete :destroy, id: @audio
