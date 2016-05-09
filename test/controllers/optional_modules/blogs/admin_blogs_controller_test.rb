@@ -31,6 +31,13 @@ module Admin
       assert_response :success
     end
 
+    test 'should create blog if logged in' do
+      post :create, blog: { title: 'blog edit', content: 'content edit', blog_category_id: @blog_category.id }
+      assert assigns(:blog).valid?
+      assert flash[:notice].blank?
+      assert_equal @administrator.id, assigns(:blog).user_id
+    end
+
     test 'should update blog if logged in' do
       patch :update, id: @blog, blog: { title: 'blog edit', content: 'content edit' }
       assert_redirected_to admin_blog_path(assigns(:blog))
@@ -196,6 +203,7 @@ module Admin
       @blog = blogs(:blog_online)
       @blog_not_validate = blogs(:blog_offline)
       @blog_module = optional_modules(:blog)
+      @blog_category = blog_categories(:one)
       @comment_module = optional_modules(:comment)
       @audio_module = optional_modules(:audio)
 
