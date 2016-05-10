@@ -250,6 +250,7 @@ fr:
         image_avatar: Avatar
         delete_avatar: Supprimer avatar
         status: Rôle
+        account_active: Compte validé ?
         link_to_facebook: Compte Facebook
         link_to_twitter: Compte Twitter
         link_to_google: Compte Google

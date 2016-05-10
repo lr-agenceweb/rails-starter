@@ -39,6 +39,7 @@ ActiveAdmin.register User do
     column :current_sign_in_at
     column :sign_in_count
     column :status
+    bool_column :account_active
     actions
   end
 
@@ -53,6 +54,7 @@ ActiveAdmin.register User do
             row :current_sign_in_at
             row :last_sign_in_at
             row :status
+            bool_row :account_active
             row :created_at
             if resource == current_user && SocialProvider.allowed_to_use?
               row :link_to_facebook if SocialProvider.provider_by_name('facebook').enabled?
