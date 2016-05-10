@@ -108,3 +108,11 @@ marge:
   role: subscriber
   provider: google
   uid: 123_456_789
+
+bart:
+  <<: *DEFAULTS
+  username: Bart
+  slug: bart
+  email: bart@simpson.com
+  role: subscriber
+  account_active: false

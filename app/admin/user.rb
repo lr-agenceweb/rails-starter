@@ -24,6 +24,11 @@ ActiveAdmin.register User do
     redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
   end
 
+  batch_action :toggle_active do |ids|
+    User.find(ids).each { |item| item.toggle! :account_active }
+    redirect_to :back, notice: t('active_admin.batch_actions.toggle_active')
+  end
+
   index do
     selectable_column
     column :image_avatar

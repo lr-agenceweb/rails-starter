@@ -13,6 +13,9 @@ module Admin
 
     setup :initialize_test
 
+    #
+    # == Routes / Templates
+    #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
       assert_crud_actions(@administrator, new_user_session_path, model_name)
@@ -33,6 +36,22 @@ module Admin
         delete :destroy, id: @administrator
       end
       assert_redirected_to admin_users_path
+    end
+
+    #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_active batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@administrator_2.id, @bart.id]
+      [@administrator_2, @bart].each(&:reload)
+      assert_not @administrator_2.account_active?
+      assert @bart.account_active?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_active batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@administrator_2.id]
+      assert_redirected_to admin_users_path
+      assert_equal I18n.t('active_admin.batch_actions.toggle_active'), flash[:notice]
     end
 
     #####################
@@ -303,11 +322,15 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_users_path
+
+      @bart = users(:bart)
       @subscriber = users(:alice)
       @administrator = users(:bob)
       @administrator_2 = users(:lorie)
       @super_administrator = users(:anthony)
       @super_administrator_2 = users(:maria)
+
       sign_in @administrator
     end
 
