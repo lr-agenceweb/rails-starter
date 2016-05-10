@@ -1,5 +1,8 @@
 # French
 fr:
+  user:
+    registration:
+      not_activated: Votre compte a bien été créé, vous recevrez un email lorsque l'administrateur l'aura activé
   role:
     super_administrator: Super administrateur
     administrator: Administrateur

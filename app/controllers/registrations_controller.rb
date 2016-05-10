@@ -11,7 +11,7 @@ class RegistrationsController < ActiveAdmin::Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(_resource)
-    flash[:notice] = 'Votre compte a bien été créé, vous pourrez vous connecter quand admin aura validé'
-    blogs_path
+    flash[:notice] = t('user.registration.not_activated')
+    root_path
   end
 end
