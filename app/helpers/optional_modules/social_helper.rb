@@ -89,6 +89,7 @@ module OptionalModules
     def social_share_buttons
       return nil if return_nil_for_social_share? || @asocial
       element = element_by_action
+      return nil if element.nil?
       t = element.try(:menu_title).nil? ? element.title : element.menu_title
 
       awesome_share_buttons(title_seo_structure(t),
