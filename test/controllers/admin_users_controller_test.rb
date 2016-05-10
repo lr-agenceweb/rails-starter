@@ -54,6 +54,23 @@ module Admin
       assert_equal I18n.t('active_admin.batch_actions.toggle_active'), flash[:notice]
     end
 
+    #
+    # == Account validation
+    #
+    test 'should not be able to sign in if account is not active' do
+      sign_in @bart
+      get :show, id: @bart
+      assert_redirected_to new_user_session_path
+      assert_equal I18n.t('devise.failure.inactive'), flash[:alert]
+    end
+
+    test 'should be able to sign in if account is active' do
+      @bart.update_attribute(:account_active, true)
+      sign_in @bart
+      get :show, id: @bart
+      assert_response :success
+    end
+
     #####################
     ## Superadministator
     ####################
