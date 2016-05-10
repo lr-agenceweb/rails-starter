@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -26,6 +27,7 @@
 #  avatar_updated_at      :datetime
 #  provider               :string(255)
 #  uid                    :string(255)
+#  account_active         :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -43,6 +45,7 @@ class User < ActiveRecord::Base
   friendly_id :username, use: [:slugged, :finders]
 
   # Concerns
+  include Users::RegisterActivable
   include Assets::Avatarable
   include OptionalModules::Omniauthable
 
@@ -70,7 +73,9 @@ class User < ActiveRecord::Base
             uniqueness: {
               case_sensitive: false,
               scope: :provider
-            }
+            },
+            if: proc { |u| u.new_record? || u.changed? }
+
   validates :email,
             presence: { message: 'Ne doit pas être vide' },
             email_format: true,

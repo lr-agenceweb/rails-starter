@@ -25,6 +25,7 @@
 #  avatar_updated_at      :datetime
 #  provider               :string(255)
 #  uid                    :string(255)
+#  account_active         :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -34,31 +35,39 @@
 #  index_users_on_slug                  (slug)
 #
 
+DEFAULTS: &DEFAULTS
+  account_active: true
+
 anthony:
+  <<: *DEFAULTS
   username: anthony
   slug: anthony
   email: anthony@test.fr
   role: super_administrator
 
 maria:
+  <<: *DEFAULTS
   username: maria
   slug: maria
   email: maria@test.fr
   role: super_administrator
 
 bob:
+  <<: *DEFAULTS
   username: bob
   slug: bob
   email: bob@test.fr
   role: administrator
 
 lorie:
+  <<: *DEFAULTS
   username: lorie
   slug: lorie
   email: lorie@test.fr
   role: administrator
 
 alice:
+  <<: *DEFAULTS
   username: alice
   slug: alice
   email: alice@test.fr
@@ -66,6 +75,7 @@ alice:
   avatar_file_name: bart.png
 
 lana:
+  <<: *DEFAULTS
   username: lana
   slug: lana
   email: lana@test.fr
@@ -73,6 +83,7 @@ lana:
   avatar_file_name: bart.jpg
 
 rafa:
+  <<: *DEFAULTS
   username: rafa
   slug: rafa
   email: rafa@nadal.es
@@ -81,6 +92,7 @@ rafa:
   uid: 123_456_789
 
 homer:
+  <<: *DEFAULTS
   username: Homer
   slug: homer
   email: homer@simpson.com
@@ -89,6 +101,7 @@ homer:
   uid: 123_456_789
 
 marge:
+  <<: *DEFAULTS
   username: Marge
   slug: marge
   email: marge@simpson.com
