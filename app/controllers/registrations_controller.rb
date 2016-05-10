@@ -12,6 +12,6 @@ class RegistrationsController < ActiveAdmin::Devise::RegistrationsController
 
   def after_sign_up_path_for(_resource)
     flash[:notice] = t('user.registration.not_activated')
-    root_path
+    root_url
   end
 end

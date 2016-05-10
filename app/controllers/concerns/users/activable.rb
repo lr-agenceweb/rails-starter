@@ -13,10 +13,10 @@ module Users
     included do
       before_action :configure_permitted_parameters, if: :devise_controller?
 
-      private
+      protected
 
       def configure_permitted_parameters
-        devise_parameter_sanitizer.for(:sign_up) << :provider
+        devise_parameter_sanitizer.for(:sign_up) << :username
       end
     end
   end
