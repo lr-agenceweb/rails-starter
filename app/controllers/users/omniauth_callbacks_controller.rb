@@ -57,6 +57,8 @@ module Users
       @user = User.find_by_provider_and_uid(request.env['omniauth.auth'])
       if @user.blank? || !@user.persisted?
         redirect_to new_user_session_path, alert: I18n.t('omniauth.login.not_exist', provider: @provider.capitalize)
+      elsif !@user.account_active?
+        redirect_to new_user_session_path, alert: I18n.t('devise.failure.inactive')
       else
         @user.update_infos_since_last_connection request.env['omniauth.auth']
         do_magick admin_dashboard_path

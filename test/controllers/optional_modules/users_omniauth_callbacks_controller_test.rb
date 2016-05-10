@@ -23,6 +23,15 @@ module Users
       assert_redirected_to new_user_session_url
     end
 
+    test 'should refuse to connect user if his account has not been validated' do
+      @facebook_user.update_attribute(:account_active, false)
+      set_rafa_omniauth
+      get :facebook
+
+      assert_equal I18n.t('devise.failure.inactive'), flash[:alert]
+      assert_redirected_to new_user_session_url
+    end
+
     test 'should connect user with facebook if already exists in DB' do
       set_rafa_omniauth
       get :facebook
