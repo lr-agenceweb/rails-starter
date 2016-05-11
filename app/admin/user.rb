@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-include UserHelper
-
 ActiveAdmin.register User do
   includes :role
 
@@ -21,12 +19,12 @@ ActiveAdmin.register User do
   decorate_with UserDecorator
   config.clear_sidebar_sections!
 
-  batch_action :reset_cache, if: proc { current_user_and_administrator? } do |ids|
+  batch_action :reset_cache, if: proc { can? :reset_cache, User } do |ids|
     User.find(ids).each(&:touch)
     redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
   end
 
-  batch_action :toggle_active, if: proc { current_user_and_administrator? } do |ids|
+  batch_action :toggle_active, if: proc { can? :toggle_active, User } do |ids|
     toggle_active(ids)
   end
 

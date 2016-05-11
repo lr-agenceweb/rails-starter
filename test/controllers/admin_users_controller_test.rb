@@ -304,6 +304,11 @@ module Admin
       assert ability.cannot?(:destroy, User.new), 'should not be able to destroy'
       assert ability.cannot?(:destroy, @administrator), 'should not be able to destroy administrator'
       assert ability.cannot?(:destroy, @super_administrator), 'should not be able to destroy super_administrator'
+
+      assert ability.cannot?(:reset_cache, @subscriber), 'should not be able to reset_cache batch_action'
+      assert ability.cannot?(:toggle_active, @subscriber), 'should not be able to toggle_active itself'
+      assert ability.cannot?(:toggle_active, @administrator), 'should not be able to toggle_active administrator'
+      assert ability.cannot?(:toggle_active, @super_administrator), 'should not be able to toggle_active super_administrator'
     end
 
     test 'should test abilities for administrator' do
@@ -327,6 +332,12 @@ module Admin
       assert ability.can?(:destroy, @administrator), 'should be able to destroy itself'
       assert ability.cannot?(:destroy, @administrator_2), 'should not be able to destroy other administrator'
       assert ability.cannot?(:destroy, @super_administrator), 'should not be able to destroy super_administrator'
+
+      assert ability.can?(:reset_cache, @subscriber), 'should be able to reset_cache batch_action'
+      assert ability.can?(:toggle_active, @subscriber), 'should be able to toggle_active batch_action'
+      assert ability.cannot?(:toggle_active, @administrator), 'should not be able to toggle_active itslef'
+      assert ability.cannot?(:toggle_active, @administrator_2), 'should not be able to toggle_active other administrator'
+      assert ability.cannot?(:toggle_active, @super_administrator), 'should not be able to toggle_active super_administrator'
     end
 
     test 'should test abilities for super_administrator' do
@@ -351,6 +362,12 @@ module Admin
       assert ability.can?(:destroy, @administrator), 'should be able to destroy administrator'
       assert ability.can?(:destroy, @super_administrator), 'should be able to destroy itself'
       assert ability.cannot?(:destroy, @super_administrator_2), 'should not be able to destroy other super_administrator'
+
+      assert ability.can?(:reset_cache, @subscriber), 'should be able to reset_cache batch_action'
+      assert ability.can?(:toggle_active, @subscriber), 'should be able to toggle_active batch_action'
+      assert ability.can?(:toggle_active, @administrator), 'should be able to toggle_active administrator'
+      assert ability.cannot?(:toggle_active, @super_administrator), 'should not be able to toggle_active itself'
+      assert ability.cannot?(:toggle_active, @super_administrator_2), 'should not be able to toggle_active other super_administrator'
     end
 
     private
