@@ -27,11 +27,7 @@ ActiveAdmin.register User do
   end
 
   batch_action :toggle_active, if: proc { current_user_and_administrator? } do |ids|
-    User.find(ids).each do |user|
-      user.toggle! :account_active
-      ActiveUserJob.set(wait: 3.seconds).perform_later(user) if user.account_active?
-    end
-    redirect_to :back, notice: t('active_admin.batch_actions.toggle_active')
+    toggle_active(ids)
   end
 
   index do
@@ -146,6 +142,17 @@ ActiveAdmin.register User do
     def update_resource(object, attributes)
       update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
       object.send(update_method, *attributes)
+    end
+
+    private
+
+    def toggle_active(ids)
+      User.find(ids).each do |user|
+        next if user == current_user || user.super_administrator?
+        user.toggle! :account_active
+        ActiveUserJob.set(wait: 3.seconds).perform_later(user) if user.account_active?
+      end
+      redirect_to :back, notice: t('active_admin.batch_actions.toggle_active')
     end
   end
 end

@@ -48,6 +48,18 @@ module Admin
       assert @bart.account_active?
     end
 
+    test 'should not toggle_active current user in batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@administrator.id]
+      [@administrator].each(&:reload)
+      assert @administrator.account_active?
+    end
+
+    test 'should not toggle_active super_administrator by administrator in batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@super_administrator.id]
+      [@super_administrator].each(&:reload)
+      assert @super_administrator.account_active?
+    end
+
     test 'should redirect to back and have correct flash notice for toggle_active batch action' do
       post :batch_action, batch_action: 'toggle_active', collection_selection: [@administrator_2.id]
       assert_redirected_to admin_users_path
