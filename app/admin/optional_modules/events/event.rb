@@ -47,17 +47,17 @@ ActiveAdmin.register Event do
   decorate_with EventDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_online do |ids|
+  batch_action :toggle_online, if: proc { can? :reset_cache, Event } do |ids|
     Event.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
-  batch_action :toggle_show_calendar, if: proc { @calendar_module.enabled? } do |ids|
+  batch_action :toggle_show_calendar, if: proc { can?(:reset_cache, Event) && @calendar_module.enabled? } do |ids|
     Event.find(ids).each { |event| event.toggle! :show_calendar }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
-  batch_action :reset_cache do |ids|
+  batch_action :reset_cache, if: proc { can? :reset_cache, Event } do |ids|
     Event.find(ids).each(&:touch)
     redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
   end

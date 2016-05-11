@@ -60,6 +60,28 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@legal_notice_super_admin.id, @legal_notice_admin.id]
+      [@legal_notice_super_admin, @legal_notice_admin].each(&:reload)
+      assert_not @legal_notice_super_admin.online?
+      assert_not @legal_notice_admin.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@legal_notice_admin.id]
+      assert_redirected_to admin_legal_notices_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    test 'should redirect to back and have correct flash notice for reset_cache batch action' do
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@legal_notice_admin.id]
+      assert_redirected_to admin_legal_notices_path
+      assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
+    end
+
+    #
     # == Crud actions
     #
     test 'should redirect to users/sign_in if not logged in' do
@@ -157,6 +179,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_legal_notices_path
+
       @legal_notice_super_admin = posts(:legal_notice_super_admin)
       @legal_notice_admin = posts(:legal_notice_admin)
 

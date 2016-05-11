@@ -70,6 +70,21 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_archive_customer batch action' do
+      post :batch_action, batch_action: 'toggle_archive_customer', collection_selection: [@mailing_user.id]
+      [@mailing_user].each(&:reload)
+      assert @mailing_user.archive?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_archive_customer batch action' do
+      post :batch_action, batch_action: 'toggle_archive_customer', collection_selection: [@mailing_user.id]
+      assert_redirected_to admin_mailing_users_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Subscriber
     #
     test 'should redirect to users/sign_in if not logged in' do
@@ -180,6 +195,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_mailing_users_path
+
       @mailing_user = mailing_users(:one)
       @mailing_module = optional_modules(:mailing)
 

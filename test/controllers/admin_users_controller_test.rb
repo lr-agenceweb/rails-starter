@@ -72,6 +72,12 @@ module Admin
       assert_enqueued_jobs 1
     end
 
+    test 'should redirect to back and have correct flash notice for reset_cache batch action' do
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@bart.id]
+      assert_redirected_to admin_users_path
+      assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
+    end
+
     #
     # == Account validation
     #

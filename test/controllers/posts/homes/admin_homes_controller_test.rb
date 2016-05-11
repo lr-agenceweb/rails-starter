@@ -53,6 +53,27 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@home.id]
+      [@home].each(&:reload)
+      assert_not @home.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@home.id]
+      assert_redirected_to admin_homes_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    test 'should redirect to back and have correct flash notice for reset_cache batch action' do
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@home.id]
+      assert_redirected_to admin_homes_path
+      assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -131,8 +152,10 @@ module Admin
     private
 
     def initialize_test
-      @home = posts(:home)
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_homes_path
+
+      @home = posts(:home)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

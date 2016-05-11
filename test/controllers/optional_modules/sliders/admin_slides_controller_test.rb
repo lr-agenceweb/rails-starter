@@ -44,6 +44,21 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slide.id]
+      [@slide].each(&:reload)
+      assert_not @slide.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slide.id]
+      assert_redirected_to admin_slides_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -163,6 +178,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_slides_path
+
       @slide = slides(:slide_one)
       @slider_module = optional_modules(:slider)
 

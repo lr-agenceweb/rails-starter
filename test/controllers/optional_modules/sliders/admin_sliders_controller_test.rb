@@ -55,6 +55,27 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slider.id]
+      [@slider].each(&:reload)
+      assert_not @slider.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slider.id]
+      assert_redirected_to admin_sliders_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    test 'should redirect to back and have correct flash notice for reset_cache batch action' do
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@slider.id]
+      assert_redirected_to admin_sliders_path
+      assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -147,6 +168,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_sliders_path
+
       @slider = sliders(:online)
       @slider_module = optional_modules(:slider)
 

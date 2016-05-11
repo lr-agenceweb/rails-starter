@@ -67,6 +67,7 @@ class Ability
     can [:reset_cache, :toggle_online, :toggle_enabled], :all
     can [:toggle_validated, :toggle_signalled], [Comment, GuestBook]
     can [:toggle_archive_customer], [MailingUser]
+    can [:toggle_show_calendar], [Event]
     can [:toggle_active], User, role: { name: %w( subscriber ) }
     cannot [:toggle_active], User, id: @user.id
     cannot [:toggle_enabled], OptionalModule

@@ -50,6 +50,21 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@picture.id]
+      [@picture].each(&:reload)
+      assert_not @picture.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@picture.id]
+      assert_redirected_to admin_pictures_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Crud actions
     #
     test 'should redirect to users/sign_in if not logged in' do
@@ -156,6 +171,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_pictures_path
+
       @picture = pictures(:home)
 
       @subscriber = users(:alice)

@@ -65,6 +65,27 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@blog.id]
+      [@blog].each(&:reload)
+      assert_not @blog.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@blog.id]
+      assert_redirected_to admin_blogs_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    test 'should redirect to back and have correct flash notice for reset_cache batch action' do
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@blog.id]
+      assert_redirected_to admin_blogs_path
+      assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
+    end
+
+    #
     # == Flash content
     #
     test 'should return empty flash notice if no update' do
@@ -209,6 +230,7 @@ module Admin
     def initialize_test
       @setting = settings(:one)
       @request.env['HTTP_REFERER'] = admin_blogs_path
+
       @blog = blogs(:blog_online)
       @blog_not_validate = blogs(:blog_offline)
       @blog_module = optional_modules(:blog)

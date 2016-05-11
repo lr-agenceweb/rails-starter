@@ -44,6 +44,21 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_validated batch action' do
+      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@guest_book.id]
+      [@guest_book].each(&:reload)
+      assert_not @guest_book.validated?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_validated batch action' do
+      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@guest_book.id]
+      assert_redirected_to admin_guest_books_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -134,6 +149,7 @@ module Admin
     def initialize_test
       @setting = settings(:one)
       @request.env['HTTP_REFERER'] = admin_guest_books_path
+
       @guest_book = guest_books(:fr_validate)
       @guest_book_not_validate = guest_books(:fr_not_validate)
       @guest_book_module = optional_modules(:guest_book)

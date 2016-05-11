@@ -38,6 +38,39 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@event.id]
+      [@event].each(&:reload)
+      assert_not @event.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@event.id]
+      assert_redirected_to admin_events_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    test 'should return correct value for toggle_show_calendar batch action' do
+      post :batch_action, batch_action: 'toggle_show_calendar', collection_selection: [@event.id]
+      [@event].each(&:reload)
+      assert @event.show_calendar?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_show_calendar batch action' do
+      post :batch_action, batch_action: 'toggle_show_calendar', collection_selection: [@event.id]
+      assert_redirected_to admin_events_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    test 'should redirect to back and have correct flash notice for reset_cache batch action' do
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@event.id]
+      assert_redirected_to admin_events_path
+      assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
+    end
+
+    #
     # == Flash content
     #
     test 'should return empty flash notice if no update' do
@@ -93,26 +126,38 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Event.new), 'should not be able to create'
-      assert ability.cannot?(:read, Event.new), 'should not be able to read'
-      assert ability.cannot?(:update, Event.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Event.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @event), 'should not be able to read'
+      assert ability.cannot?(:update, @event), 'should not be able to update'
+      assert ability.cannot?(:destroy, @event), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @event), 'should not be able to toggle_online'
+      assert ability.cannot?(:toggle_show_calendar, @event), 'should not be able to toggle_show_calendar'
+      assert ability.cannot?(:reset_cache, @event), 'should not be able to reset_cache'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.can?(:create, Event.new), 'should be able to create'
-      assert ability.can?(:read, Event.new), 'should be able to read'
-      assert ability.can?(:update, Event.new), 'should be able to update'
-      assert ability.can?(:destroy, Event.new), 'should be able to destroy'
+      assert ability.can?(:read, @event), 'should be able to read'
+      assert ability.can?(:update, @event), 'should be able to update'
+      assert ability.can?(:destroy, @event), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @event), 'should be able to toggle_online'
+      assert ability.can?(:toggle_show_calendar, @event), 'should be able to toggle_show_calendar'
+      assert ability.can?(:reset_cache, @event), 'should be able to reset_cache'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.can?(:create, Event.new), 'should be able to create'
-      assert ability.can?(:read, Event.new), 'should be able to read'
-      assert ability.can?(:update, Event.new), 'should be able to update'
-      assert ability.can?(:destroy, Event.new), 'should be able to destroy'
+      assert ability.can?(:read, @event), 'should be able to read'
+      assert ability.can?(:update, @event), 'should be able to update'
+      assert ability.can?(:destroy, @event), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @event), 'should be able to toggle_online'
+      assert ability.can?(:toggle_show_calendar, @event), 'should be able to toggle_show_calendar'
+      assert ability.can?(:reset_cache, @event), 'should be able to reset_cache'
     end
 
     #
