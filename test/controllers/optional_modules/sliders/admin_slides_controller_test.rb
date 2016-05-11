@@ -78,6 +78,8 @@ module Admin
       assert ability.cannot?(:read, @slide), 'should not be able to read'
       assert ability.cannot?(:update, @slide), 'should not be able to update'
       assert ability.cannot?(:destroy, @slide), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @slide), 'should not be able to toggle_online'
     end
 
     test 'should test abilities for administrator' do
@@ -86,6 +88,8 @@ module Admin
       assert ability.can?(:read, @slide), 'should be able to read'
       assert ability.can?(:update, @slide), 'should be able to update'
       assert ability.can?(:destroy, @slide), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @slide), 'should be able to toggle_online'
     end
 
     test 'should test abilities for super_administrator' do
@@ -95,6 +99,8 @@ module Admin
       assert ability.can?(:read, @slide), 'should be able to read'
       assert ability.can?(:update, @slide), 'should be able to update'
       assert ability.can?(:destroy, @slide), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @slide), 'should be able to toggle_online'
     end
 
     #

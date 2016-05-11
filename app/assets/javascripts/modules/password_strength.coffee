@@ -1,7 +1,7 @@
 $ ->
   if show_password_strength()
     instructions = I18n.t('password.instructions', locale: 'fr')
-    $('#user_password').parent().prepend("<p id='password_instructions'>#{instructions}</p>")
+    $('#user_password').parents('.input.password').prepend("<p id='password_instructions'>#{instructions}</p>")
 
     $('#user_password').parent().append("<div id='password_strength'></div>")
     $('#user_password').keyup (e) ->

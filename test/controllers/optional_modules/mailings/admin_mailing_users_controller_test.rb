@@ -118,6 +118,8 @@ module Admin
       assert ability.cannot?(:update, @mailing_user), 'should not be able to update'
       assert ability.cannot?(:destroy, @mailing_user), 'should not be able to destroy'
 
+      assert ability.cannot?(:toggle_archive_customer, @mailing_user), 'should not be able to toggle_archive_customer'
+
       @mailing_module.update_attribute(:enabled, false)
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, MailingUser.new), 'should not be able to create'
@@ -132,6 +134,8 @@ module Admin
       assert ability.can?(:read, @mailing_user), 'should be able to read'
       assert ability.can?(:update, @mailing_user), 'should be able to update'
       assert ability.can?(:destroy, @mailing_user), 'should be able to destroy'
+
+      assert ability.can?(:toggle_archive_customer, @mailing_user), 'should be able to toggle_archive_customer'
 
       @mailing_module.update_attribute(:enabled, false)
       ability = Ability.new(@administrator)
@@ -148,6 +152,8 @@ module Admin
       assert ability.can?(:read, @mailing_user), 'should be able to read'
       assert ability.can?(:update, @mailing_user), 'should be able to update'
       assert ability.can?(:destroy, @mailing_user), 'should be able to destroy'
+
+      assert ability.can?(:toggle_archive_customer, @mailing_user), 'should be able to toggle_archive_customer'
 
       @mailing_module.update_attribute(:enabled, false)
       ability = Ability.new(@super_administrator)

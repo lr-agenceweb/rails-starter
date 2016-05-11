@@ -19,9 +19,13 @@ ActiveAdmin.register User do
   decorate_with UserDecorator
   config.clear_sidebar_sections!
 
-  batch_action :reset_cache do |ids|
+  batch_action :reset_cache, if: proc { can? :reset_cache, User } do |ids|
     User.find(ids).each(&:touch)
     redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+  end
+
+  batch_action :toggle_active, if: proc { can? :toggle_active, User } do |ids|
+    toggle_active(ids)
   end
 
   index do
@@ -32,6 +36,7 @@ ActiveAdmin.register User do
     column :current_sign_in_at
     column :sign_in_count
     column :status
+    bool_column :account_active
     actions
   end
 
@@ -46,6 +51,7 @@ ActiveAdmin.register User do
             row :current_sign_in_at
             row :last_sign_in_at
             row :status
+            bool_row :account_active
             row :created_at
             if resource == current_user && SocialProvider.allowed_to_use?
               row :link_to_facebook if SocialProvider.provider_by_name('facebook').enabled?
@@ -134,6 +140,17 @@ ActiveAdmin.register User do
     def update_resource(object, attributes)
       update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
       object.send(update_method, *attributes)
+    end
+
+    private
+
+    def toggle_active(ids)
+      User.find(ids).each do |user|
+        next if user == current_user || user.super_administrator?
+        user.toggle! :account_active
+        ActiveUserJob.set(wait: 3.seconds).perform_later(user) if user.account_active?
+      end
+      redirect_to :back, notice: t('active_admin.batch_actions.toggle_active')
     end
   end
 end

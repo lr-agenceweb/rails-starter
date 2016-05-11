@@ -10,11 +10,6 @@ ActiveAdmin.register MapSetting do
   decorate_with MapSettingDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_online do |ids|
-    Map.find(ids).each { |item| item.toggle! :online }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
-  end
-
   show title: I18n.t('activerecord.models.map_setting.one') do
     arbre_cache(self, resource.cache_key) do
       columns do

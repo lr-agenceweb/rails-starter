@@ -22,12 +22,12 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   config.clear_sidebar_sections!
   actions :all, except: [:new]
 
-  batch_action :toggle_validated do |ids|
+  batch_action :toggle_validated, if: proc { can? :toggle_validated, Comment } do |ids|
     Comment.find(ids).each { |item| item.toggle! :validated }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
-  batch_action :toggle_signalled do |ids|
+  batch_action :toggle_signalled, if: proc { can? :toggle_signalled, Comment } do |ids|
     Comment.find(ids).each { |item| item.toggle! :signalled }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end

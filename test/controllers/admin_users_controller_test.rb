@@ -13,6 +13,9 @@ module Admin
 
     setup :initialize_test
 
+    #
+    # == Routes / Templates
+    #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
       assert_crud_actions(@administrator, new_user_session_path, model_name)
@@ -33,6 +36,57 @@ module Admin
         delete :destroy, id: @administrator
       end
       assert_redirected_to admin_users_path
+    end
+
+    #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_active batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@administrator_2.id, @bart.id]
+      [@administrator_2, @bart].each(&:reload)
+      assert_not @administrator_2.account_active?
+      assert @bart.account_active?
+    end
+
+    test 'should not toggle_active current user in batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@administrator.id]
+      [@administrator].each(&:reload)
+      assert @administrator.account_active?
+    end
+
+    test 'should not toggle_active super_administrator by administrator in batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@super_administrator.id]
+      [@super_administrator].each(&:reload)
+      assert @super_administrator.account_active?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_active batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@administrator_2.id]
+      assert_redirected_to admin_users_path
+      assert_equal I18n.t('active_admin.batch_actions.toggle_active'), flash[:notice]
+    end
+
+    test 'should send correct number of email after activating user account by batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@administrator_2.id, @bart.id]
+      [@administrator_2, @bart].each(&:reload)
+      assert_enqueued_jobs 1
+    end
+
+    #
+    # == Account validation
+    #
+    test 'should not be able to sign in if account is not active' do
+      sign_in @bart
+      get :show, id: @bart
+      assert_redirected_to new_user_session_path
+      assert_equal I18n.t('devise.failure.inactive'), flash[:alert]
+    end
+
+    test 'should be able to sign in if account is active' do
+      @bart.update_attribute(:account_active, true)
+      sign_in @bart
+      get :show, id: @bart
+      assert_response :success
     end
 
     #####################
@@ -196,12 +250,16 @@ module Admin
       assert_equal 'image/png', user.avatar_content_type
     end
 
-    # test 'should delete avatar with user' do
-    #   sign_in @super_administrator
-    #   upload_paperclip_attachment
-    #   user = assigns(:user)
-    #   delete :destroy, id: @subscriber
-    # end
+    test 'should delete avatar with user' do
+      sign_in @super_administrator
+      upload_paperclip_attachment
+      user = assigns(:user)
+
+      delete :destroy, id: user
+      assert_not user.avatar?
+      assert user.avatar_file_name.blank?
+      assert user.avatar_content_type.blank?
+    end
 
     #
     # == Maintenance
@@ -250,6 +308,11 @@ module Admin
       assert ability.cannot?(:destroy, User.new), 'should not be able to destroy'
       assert ability.cannot?(:destroy, @administrator), 'should not be able to destroy administrator'
       assert ability.cannot?(:destroy, @super_administrator), 'should not be able to destroy super_administrator'
+
+      assert ability.cannot?(:reset_cache, @subscriber), 'should not be able to reset_cache batch_action'
+      assert ability.cannot?(:toggle_active, @subscriber), 'should not be able to toggle_active itself'
+      assert ability.cannot?(:toggle_active, @administrator), 'should not be able to toggle_active administrator'
+      assert ability.cannot?(:toggle_active, @super_administrator), 'should not be able to toggle_active super_administrator'
     end
 
     test 'should test abilities for administrator' do
@@ -273,6 +336,12 @@ module Admin
       assert ability.can?(:destroy, @administrator), 'should be able to destroy itself'
       assert ability.cannot?(:destroy, @administrator_2), 'should not be able to destroy other administrator'
       assert ability.cannot?(:destroy, @super_administrator), 'should not be able to destroy super_administrator'
+
+      assert ability.can?(:reset_cache, @subscriber), 'should be able to reset_cache batch_action'
+      assert ability.can?(:toggle_active, @subscriber), 'should be able to toggle_active batch_action'
+      assert ability.cannot?(:toggle_active, @administrator), 'should not be able to toggle_active itslef'
+      assert ability.cannot?(:toggle_active, @administrator_2), 'should not be able to toggle_active other administrator'
+      assert ability.cannot?(:toggle_active, @super_administrator), 'should not be able to toggle_active super_administrator'
     end
 
     test 'should test abilities for super_administrator' do
@@ -297,17 +366,27 @@ module Admin
       assert ability.can?(:destroy, @administrator), 'should be able to destroy administrator'
       assert ability.can?(:destroy, @super_administrator), 'should be able to destroy itself'
       assert ability.cannot?(:destroy, @super_administrator_2), 'should not be able to destroy other super_administrator'
+
+      assert ability.can?(:reset_cache, @subscriber), 'should be able to reset_cache batch_action'
+      assert ability.can?(:toggle_active, @subscriber), 'should be able to toggle_active batch_action'
+      assert ability.can?(:toggle_active, @administrator), 'should be able to toggle_active administrator'
+      assert ability.cannot?(:toggle_active, @super_administrator), 'should not be able to toggle_active itself'
+      assert ability.cannot?(:toggle_active, @super_administrator_2), 'should not be able to toggle_active other super_administrator'
     end
 
     private
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_users_path
+
+      @bart = users(:bart)
       @subscriber = users(:alice)
       @administrator = users(:bob)
       @administrator_2 = users(:lorie)
       @super_administrator = users(:anthony)
       @super_administrator_2 = users(:maria)
+
       sign_in @administrator
     end
 

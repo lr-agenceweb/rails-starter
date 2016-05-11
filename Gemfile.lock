@@ -257,6 +257,7 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0)
+    draper-cancancan (1.1.1)
     enumerize (1.1.1)
       activesupport (>= 3.2)
     erubis (2.7.0)
@@ -695,6 +696,7 @@ DEPENDENCIES
   devise-i18n-views
   dkim
   draper
+  draper-cancancan
   enumerize
   exception_notification
   faker

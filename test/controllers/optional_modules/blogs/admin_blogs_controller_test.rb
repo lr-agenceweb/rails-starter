@@ -141,6 +141,9 @@ module Admin
       assert ability.cannot?(:read, @blog), 'should not be able to read'
       assert ability.cannot?(:update, @blog), 'should not be able to update'
       assert ability.cannot?(:destroy, @blog), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @blog), 'should not be able to toggle_online'
+      assert ability.cannot?(:reset_cache, @blog), 'should not be able to reset_cache'
     end
 
     test 'should test abilities for administrator' do
@@ -149,6 +152,9 @@ module Admin
       assert ability.can?(:read, @blog), 'should be able to read'
       assert ability.can?(:update, @blog), 'should be able to update'
       assert ability.can?(:destroy, @blog), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @blog), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @blog), 'should be able to reset_cache'
     end
 
     test 'should test abilities for super_administrator' do
@@ -158,6 +164,9 @@ module Admin
       assert ability.can?(:read, @blog), 'should be able to read'
       assert ability.can?(:update, @blog), 'should be able to update'
       assert ability.can?(:destroy, @blog), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @blog), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @blog), 'should be able to reset_cache'
     end
 
     #

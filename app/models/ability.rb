@@ -1,9 +1,11 @@
 # frozen_string_literal: true
+
 #
 # == Ability Class
 #
 class Ability
   include CanCan::Ability
+  prepend Draper::CanCanCan
 
   def initialize(user)
     user ||= User.new # visitor user (not logged in)
@@ -39,6 +41,11 @@ class Ability
     can :manage, User, id: @user.id
     optional_modules_check
     can :manage, StringBox, optional_module_id: nil
+
+    # batch_actions
+    can [:toggle_active], User, role: { name: %w( administrator subscriber ) }
+    cannot [:toggle_active], User, id: @user.id
+    cannot [:toggle_active], User, role: { name: %w( super_administrator ) }
   end
 
   def administrator_privilege
@@ -55,7 +62,18 @@ class Ability
     cannot :manage, OptionalModule
     cannot [:read, :update, :destroy], [About, LegalNotice]
     can :manage, [About, LegalNotice], user_id: @user.id
+
+    # batch_actions
+    can [:reset_cache, :toggle_online, :toggle_enabled], :all
+    can [:toggle_validated, :toggle_signalled], [Comment, GuestBook]
+    can [:toggle_archive_customer], [MailingUser]
+    can [:toggle_active], User, role: { name: %w( subscriber ) }
+    cannot [:toggle_active], User, id: @user.id
+    cannot [:toggle_enabled], OptionalModule
+
+    # Optional modules
     optional_modules_check
+
     can [:read, :update], StringBox, optional_module_id: nil
   end
 
@@ -67,7 +85,7 @@ class Ability
     mailing_frontend
     can :mapbox_popup, Contact
     can [:update, :read, :destroy, :unlink], User, id: @user.id
-    cannot :create, User
+    cannot [:create], User
     can [:create, :read, :destroy], Comment, user_id: @user.id
     cannot :destroy, Comment, user_id: nil
     cannot :manage, [Home, About, Setting, Picture, StringBox, Menu, LegalNotice]

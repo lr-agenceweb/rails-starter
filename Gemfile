@@ -106,6 +106,7 @@ gem 'meta-tags'
 #
 gem 'figaro'
 gem 'cancancan', '~> 1.10'
+gem 'draper-cancancan'
 gem 'secure_headers', '~> 3.0'
 gem 'open_uri_redirections' # HTTP(S) redirections
 
