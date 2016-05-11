@@ -1,9 +1,11 @@
 # frozen_string_literal: true
+
 #
 # == Ability Class
 #
 class Ability
   include CanCan::Ability
+  prepend Draper::CanCanCan
 
   def initialize(user)
     user ||= User.new # visitor user (not logged in)
