@@ -54,6 +54,12 @@ module Admin
       assert_equal I18n.t('active_admin.batch_actions.toggle_active'), flash[:notice]
     end
 
+    test 'should send correct number of email after activating user account by batch action' do
+      post :batch_action, batch_action: 'toggle_active', collection_selection: [@administrator_2.id, @bart.id]
+      [@administrator_2, @bart].each(&:reload)
+      assert_enqueued_jobs 1
+    end
+
     #
     # == Account validation
     #

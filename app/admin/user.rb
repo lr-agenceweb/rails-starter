@@ -27,7 +27,10 @@ ActiveAdmin.register User do
   end
 
   batch_action :toggle_active, if: proc { current_user_and_administrator? } do |ids|
-    User.find(ids).each { |item| item.toggle! :account_active }
+    User.find(ids).each do |user|
+      user.toggle! :account_active
+      ActiveUserJob.set(wait: 3.seconds).perform_later(user) if user.account_active?
+    end
     redirect_to :back, notice: t('active_admin.batch_actions.toggle_active')
   end
 
