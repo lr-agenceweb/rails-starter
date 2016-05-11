@@ -250,12 +250,16 @@ module Admin
       assert_equal 'image/png', user.avatar_content_type
     end
 
-    # test 'should delete avatar with user' do
-    #   sign_in @super_administrator
-    #   upload_paperclip_attachment
-    #   user = assigns(:user)
-    #   delete :destroy, id: @subscriber
-    # end
+    test 'should delete avatar with user' do
+      sign_in @super_administrator
+      upload_paperclip_attachment
+      user = assigns(:user)
+
+      delete :destroy, id: user
+      assert_not user.avatar?
+      assert user.avatar_file_name.blank?
+      assert user.avatar_content_type.blank?
+    end
 
     #
     # == Maintenance
