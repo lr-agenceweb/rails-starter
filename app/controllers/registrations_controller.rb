@@ -4,8 +4,6 @@
 # == Registrations Controller
 #
 class RegistrationsController < ActiveAdmin::Devise::RegistrationsController
-  protected
-
   def sign_up(_resource_name, _resource)
     true
   end
