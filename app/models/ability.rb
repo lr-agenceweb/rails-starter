@@ -43,7 +43,6 @@ class Ability
     can :manage, StringBox, optional_module_id: nil
 
     # batch_actions
-    can [:reset_cache], :all
     can [:toggle_active], User, role: { name: %w( administrator subscriber ) }
     cannot [:toggle_active], User, id: @user.id
     cannot [:toggle_active], User, role: { name: %w( super_administrator ) }
@@ -65,11 +64,16 @@ class Ability
     can :manage, [About, LegalNotice], user_id: @user.id
 
     # batch_actions
-    can [:reset_cache], :all
+    can [:reset_cache, :toggle_online, :toggle_enabled], :all
+    can [:toggle_validated, :toggle_signalled], [Comment, GuestBook]
+    can [:toggle_archive_customer], [MailingUser]
     can [:toggle_active], User, role: { name: %w( subscriber ) }
     cannot [:toggle_active], User, id: @user.id
+    cannot [:toggle_enabled], OptionalModule
 
+    # Optional modules
     optional_modules_check
+
     can [:read, :update], StringBox, optional_module_id: nil
   end
 

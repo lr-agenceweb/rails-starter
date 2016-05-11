@@ -159,6 +159,9 @@ module Admin
       assert ability.cannot?(:read, @comment), 'should not be able to read'
       assert ability.cannot?(:update, @comment), 'should not be able to update'
       assert ability.cannot?(:destroy, @comment), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_validated, @comment), 'should not be able to toggle_validated'
+      assert ability.cannot?(:toggle_signalled, @comment), 'should not be able to toggle_signalled'
     end
 
     test 'should test abilities for administrator' do
@@ -171,6 +174,11 @@ module Admin
       assert ability.can?(:read, @comment_administrator), 'should be able to read'
       assert ability.cannot?(:update, @comment_administrator), 'should not be able to update'
       assert ability.can?(:destroy, @comment_administrator), 'should be able to destroy'
+
+      assert ability.can?(:toggle_validated, @comment), 'should be able to toggle_validated'
+      assert ability.can?(:toggle_signalled, @comment), 'should be able to toggle_signalled'
+      assert ability.can?(:toggle_validated, @comment_administrator), 'should be able to toggle_validated'
+      assert ability.can?(:toggle_signalled, @comment_administrator), 'should be able to toggle_signalled'
     end
 
     test 'should test abilities for super_administrator' do
@@ -183,6 +191,11 @@ module Admin
 
       assert ability.can?(:destroy, @comment_subscriber), 'should be able to destroy'
       assert ability.can?(:destroy, @comment_administrator), 'should be able to destroy'
+
+      assert ability.can?(:toggle_validated, @comment), 'should be able to toggle_validated'
+      assert ability.can?(:toggle_signalled, @comment), 'should be able to toggle_signalled'
+      assert ability.can?(:toggle_validated, @comment_administrator), 'should be able to toggle_validated'
+      assert ability.can?(:toggle_signalled, @comment_administrator), 'should be able to toggle_signalled'
     end
 
     #

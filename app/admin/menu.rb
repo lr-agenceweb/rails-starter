@@ -20,7 +20,7 @@ ActiveAdmin.register Menu do
     link_to I18n.t('active_admin.action_item.new_menu_item'), new_admin_menu_path if can? :create, Menu
   end
 
-  batch_action :toggle_online do |ids|
+  batch_action :toggle_online, if: proc { can? :toggle_online, Menu } do |ids|
     Menu.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end

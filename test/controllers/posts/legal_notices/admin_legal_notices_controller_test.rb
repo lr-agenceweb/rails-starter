@@ -107,6 +107,9 @@ module Admin
       assert ability.cannot?(:read, @legal_notice_admin), 'should not be able to read'
       assert ability.cannot?(:update, @legal_notice_admin), 'should not be able to update'
       assert ability.cannot?(:destroy, @legal_notice_admin), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @legal_notice_admin), 'should not be able to toggle_online'
+      assert ability.cannot?(:reset_cache, @legal_notice_admin), 'should not be able to reset_cache'
     end
 
     test 'should test abilities for administrator with own LN' do
@@ -115,6 +118,9 @@ module Admin
       assert ability.can?(:read, @legal_notice_admin), 'should be able to read'
       assert ability.can?(:update, @legal_notice_admin), 'should be able to update'
       assert ability.can?(:destroy, @legal_notice_admin), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @legal_notice_admin), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @legal_notice_admin), 'should be able to reset_cache'
     end
 
     test 'should test abilities for administrator with SA LN' do
@@ -131,6 +137,9 @@ module Admin
       assert ability.can?(:read, @legal_notice_admin), 'should be able to read'
       assert ability.can?(:update, @legal_notice_admin), 'should be able to update'
       assert ability.can?(:destroy, @legal_notice_admin), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @legal_notice_admin), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @legal_notice_admin), 'should be able to reset_cache'
     end
 
     test 'should test abilities for super_administrator with own LN' do
@@ -139,6 +148,9 @@ module Admin
       assert ability.can?(:read, @legal_notice_super_admin), 'should be able to read'
       assert ability.can?(:update, @legal_notice_super_admin), 'should be able to update'
       assert ability.can?(:destroy, @legal_notice_super_admin), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @legal_notice_super_admin), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @legal_notice_super_admin), 'should be able to reset_cache'
     end
 
     private

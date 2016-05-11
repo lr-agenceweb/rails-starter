@@ -179,6 +179,8 @@ module Admin
       assert ability.cannot?(:read, @category), 'should not be able to read'
       assert ability.cannot?(:update, @category), 'should not be able to update'
       assert ability.cannot?(:destroy, @category), 'should not be able to destroy'
+
+      assert ability.cannot?(:reset_cache, @category), 'should be able to reset_cache'
     end
 
     test 'should test abilities for administrator' do
@@ -187,6 +189,8 @@ module Admin
       assert ability.can?(:read, @category), 'should be able to read'
       assert ability.can?(:update, @category), 'should be able to update'
       assert ability.cannot?(:destroy, @category), 'should not be able to destroy'
+
+      assert ability.can?(:reset_cache, @category), 'should be able to reset_cache'
     end
 
     test 'should test abilities for super_administrator' do
@@ -196,6 +200,8 @@ module Admin
       assert ability.can?(:read, @category), 'should be able to read'
       assert ability.can?(:update, @category), 'should be able to update'
       assert ability.can?(:destroy, @category), 'should be able to destroy'
+
+      assert ability.can?(:reset_cache, @category), 'should be able to reset_cache'
     end
 
     #

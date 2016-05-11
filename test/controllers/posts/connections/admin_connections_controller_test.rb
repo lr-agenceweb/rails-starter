@@ -100,6 +100,9 @@ module Admin
       assert ability.cannot?(:read, @connection), 'should not be able to read'
       assert ability.cannot?(:update, @connection), 'should not be able to update'
       assert ability.cannot?(:destroy, @connection), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @connection), 'should not be able to toggle_online'
+      assert ability.cannot?(:reset_cache, @connection), 'should not be able to reset_cache'
     end
 
     test 'should test abilities for administrator with own LN' do
@@ -108,6 +111,9 @@ module Admin
       assert ability.can?(:read, @connection), 'should be able to read'
       assert ability.can?(:update, @connection), 'should be able to update'
       assert ability.can?(:destroy, @connection), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @connection), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @connection), 'should be able to reset_cache'
     end
 
     test 'should test abilities for super_administrator' do
@@ -117,6 +123,9 @@ module Admin
       assert ability.can?(:read, @connection), 'should be able to read'
       assert ability.can?(:update, @connection), 'should be able to update'
       assert ability.can?(:destroy, @connection), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @connection), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @connection), 'should be able to reset_cache'
     end
 
     private

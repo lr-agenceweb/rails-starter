@@ -137,6 +137,8 @@ module Admin
       assert ability.cannot?(:read, @social), 'should not be able to read'
       assert ability.cannot?(:update, @social), 'should not be able to update'
       assert ability.cannot?(:destroy, @social), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_enabled, @social), 'should not be able to toggle_enabled'
     end
 
     test 'should test abilities for administrator' do
@@ -145,6 +147,8 @@ module Admin
       assert ability.can?(:read, @social), 'should be able to read'
       assert ability.can?(:update, @social), 'should be able to update'
       assert ability.cannot?(:destroy, @social), 'should not be able to destroy'
+
+      assert ability.can?(:toggle_enabled, @social), 'should be able to toggle_enabled'
     end
 
     test 'should test abilities for super_administrator' do
@@ -154,6 +158,8 @@ module Admin
       assert ability.can?(:read, @social), 'should be able to read'
       assert ability.can?(:update, @social), 'should be able to update'
       assert ability.can?(:destroy, @social), 'should be able to destroy'
+
+      assert ability.can?(:toggle_enabled, @social), 'should be able to toggle_enabled'
     end
 
     #

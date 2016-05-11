@@ -15,7 +15,7 @@ ActiveAdmin.register MailingUser do
   decorate_with MailingUserDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_archive_customer do |ids|
+  batch_action :toggle_archive_customer, if: proc { can? :toggle_archive_customer, Home } do |ids|
     MailingUser.find(ids).each { |item| item.toggle! :archive }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end

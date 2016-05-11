@@ -75,26 +75,32 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, GuestBook.new), 'should not be able to create'
-      assert ability.cannot?(:read, GuestBook.new), 'should not be able to read'
-      assert ability.cannot?(:update, GuestBook.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, GuestBook.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @guest_book), 'should not be able to read'
+      assert ability.cannot?(:update, @guest_book), 'should not be able to update'
+      assert ability.cannot?(:destroy, @guest_book), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_validated, @guest_book), 'should not be able to toggle_validated'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.cannot?(:create, GuestBook.new), 'should not be able to create'
-      assert ability.can?(:read, GuestBook.new), 'should be able to read'
-      assert ability.cannot?(:update, GuestBook.new), 'should not be able to update'
-      assert ability.can?(:destroy, GuestBook.new), 'should be able to destroy'
+      assert ability.can?(:read, @guest_book), 'should be able to read'
+      assert ability.cannot?(:update, @guest_book), 'should not be able to update'
+      assert ability.can?(:destroy, @guest_book), 'should be able to destroy'
+
+      assert ability.can?(:toggle_validated, @guest_book), 'should be able to toggle_validated'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.cannot?(:create, GuestBook.new), 'should not be able to create'
-      assert ability.can?(:read, GuestBook.new), 'should be able to read'
-      assert ability.cannot?(:update, GuestBook.new), 'should not be able to update'
-      assert ability.can?(:destroy, GuestBook.new), 'should be able to destroy'
+      assert ability.can?(:read, @guest_book), 'should be able to read'
+      assert ability.cannot?(:update, @guest_book), 'should not be able to update'
+      assert ability.can?(:destroy, @guest_book), 'should be able to destroy'
+
+      assert ability.can?(:toggle_validated, @guest_book), 'should be able to toggle_validated'
     end
 
     #

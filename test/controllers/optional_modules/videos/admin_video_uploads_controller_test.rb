@@ -104,6 +104,8 @@ module Admin
       assert ability.cannot?(:read, @video_upload), 'should not be able to read'
       assert ability.cannot?(:update, @video_upload), 'should not be able to update'
       assert ability.cannot?(:destroy, @video_upload), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @video_upload), 'should not be able to toggle_online'
     end
 
     test 'should test abilities for administrator' do
@@ -112,6 +114,8 @@ module Admin
       assert ability.can?(:read, @video_upload), 'should be able to read'
       assert ability.can?(:update, @video_upload), 'should be able to update'
       assert ability.can?(:destroy, @video_upload), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @video_upload), 'should be able to toggle_online'
     end
 
     test 'should test abilities for super_administrator' do
@@ -121,6 +125,8 @@ module Admin
       assert ability.can?(:read, @video_upload), 'should be able to read'
       assert ability.can?(:update, @video_upload), 'should be able to update'
       assert ability.can?(:destroy, @video_upload), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @video_upload), 'should be able to toggle_online'
     end
 
     test 'should test abilities for administrator with video_upload disabled' do

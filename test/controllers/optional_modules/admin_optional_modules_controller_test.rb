@@ -82,6 +82,8 @@ module Admin
       assert ability.cannot?(:read, OptionalModule.new), 'should not be able to read'
       assert ability.cannot?(:update, OptionalModule.new), 'should not be able to update'
       assert ability.cannot?(:destroy, OptionalModule.new), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_enabled, @optional_module), 'should not be able to toggle_enabled'
     end
 
     test 'should test abilities for administrator' do
@@ -90,6 +92,8 @@ module Admin
       assert ability.cannot?(:read, OptionalModule.new), 'should not be able to read'
       assert ability.cannot?(:update, OptionalModule.new), 'should not be able to update'
       assert ability.cannot?(:destroy, OptionalModule.new), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_enabled, @optional_module), 'should not be able to toggle_enabled'
     end
 
     test 'should test abilities for super_administrator' do
@@ -99,6 +103,8 @@ module Admin
       assert ability.can?(:read, OptionalModule.new), 'should be able to read'
       assert ability.can?(:update, OptionalModule.new), 'should be able to update'
       assert ability.can?(:destroy, OptionalModule.new), 'should be able to destroy'
+
+      assert ability.can?(:toggle_enabled, @optional_module), 'should be able to toggle_enabled'
     end
 
     private

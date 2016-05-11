@@ -14,12 +14,12 @@ ActiveAdmin.register LegalNotice do
   decorate_with LegalNoticeDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_online do |ids|
+  batch_action :toggle_online, if: proc { can? :toggle_online, LegalNotice } do |ids|
     LegalNotice.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
-  batch_action :reset_cache do |ids|
+  batch_action :reset_cache, if: proc { can? :reset_cache, LegalNotice } do |ids|
     LegalNotice.find(ids).each(&:touch)
     redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
   end
