@@ -44,6 +44,21 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@video_upload.id]
+      [@video_upload].each(&:reload)
+      assert_not @video_upload.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@video_upload.id]
+      assert_redirected_to admin_video_uploads_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Crud actions
     #
     test 'should redirect to users/sign_in if not logged in' do
@@ -104,6 +119,8 @@ module Admin
       assert ability.cannot?(:read, @video_upload), 'should not be able to read'
       assert ability.cannot?(:update, @video_upload), 'should not be able to update'
       assert ability.cannot?(:destroy, @video_upload), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @video_upload), 'should not be able to toggle_online'
     end
 
     test 'should test abilities for administrator' do
@@ -112,6 +129,8 @@ module Admin
       assert ability.can?(:read, @video_upload), 'should be able to read'
       assert ability.can?(:update, @video_upload), 'should be able to update'
       assert ability.can?(:destroy, @video_upload), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @video_upload), 'should be able to toggle_online'
     end
 
     test 'should test abilities for super_administrator' do
@@ -121,6 +140,8 @@ module Admin
       assert ability.can?(:read, @video_upload), 'should be able to read'
       assert ability.can?(:update, @video_upload), 'should be able to update'
       assert ability.can?(:destroy, @video_upload), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @video_upload), 'should be able to toggle_online'
     end
 
     test 'should test abilities for administrator with video_upload disabled' do
@@ -146,6 +167,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_video_uploads_path
+
       @video_settings = video_settings(:one)
       @video_module = optional_modules(:video)
       @video_upload = video_uploads(:one)

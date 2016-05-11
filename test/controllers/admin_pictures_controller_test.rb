@@ -50,6 +50,21 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@picture.id]
+      [@picture].each(&:reload)
+      assert_not @picture.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@picture.id]
+      assert_redirected_to admin_pictures_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Crud actions
     #
     test 'should redirect to users/sign_in if not logged in' do
@@ -97,6 +112,8 @@ module Admin
       assert ability.cannot?(:read, @picture), 'should not be able to read'
       assert ability.cannot?(:update, @picture), 'should not be able to update'
       assert ability.cannot?(:destroy, @picture), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @picture), 'should not be able to toggle_online'
     end
 
     test 'should test abilities for administrator' do
@@ -105,6 +122,8 @@ module Admin
       assert ability.can?(:read, @picture), 'should be able to read'
       assert ability.can?(:update, @picture), 'should be able to update'
       assert ability.can?(:destroy, @picture), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @picture), 'should be able to toggle_online'
     end
 
     test 'should test abilities for super_administrator' do
@@ -114,6 +133,8 @@ module Admin
       assert ability.can?(:read, @picture), 'should be able to read'
       assert ability.can?(:update, @picture), 'should be able to update'
       assert ability.can?(:destroy, @picture), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @picture), 'should be able to toggle_online'
     end
 
     #
@@ -150,6 +171,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_pictures_path
+
       @picture = pictures(:home)
 
       @subscriber = users(:alice)

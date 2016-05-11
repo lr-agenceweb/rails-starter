@@ -2,6 +2,7 @@
 Rails.application.routes.draw do
   devise_config = ActiveAdmin::Devise.config
   devise_config[:controllers][:omniauth_callbacks] = 'users/omniauth_callbacks'
+  devise_config[:controllers][:registrations] = 'registrations'
   devise_for :users, devise_config
 
   ActiveAdmin.routes(self)

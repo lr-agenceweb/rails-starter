@@ -125,6 +125,33 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_validated batch action' do
+      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@comment.id]
+      [@comment].each(&:reload)
+      assert_not @comment.validated?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_validated batch action' do
+      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@comment.id]
+      assert_redirected_to admin_comments_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    test 'should return correct value for toggle_signalled batch action' do
+      post :batch_action, batch_action: 'toggle_signalled', collection_selection: [@comment.id]
+      [@comment].each(&:reload)
+      assert @comment.signalled?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_signalled batch action' do
+      post :batch_action, batch_action: 'toggle_signalled', collection_selection: [@comment.id]
+      assert_redirected_to admin_comments_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -159,6 +186,9 @@ module Admin
       assert ability.cannot?(:read, @comment), 'should not be able to read'
       assert ability.cannot?(:update, @comment), 'should not be able to update'
       assert ability.cannot?(:destroy, @comment), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_validated, @comment), 'should not be able to toggle_validated'
+      assert ability.cannot?(:toggle_signalled, @comment), 'should not be able to toggle_signalled'
     end
 
     test 'should test abilities for administrator' do
@@ -171,6 +201,11 @@ module Admin
       assert ability.can?(:read, @comment_administrator), 'should be able to read'
       assert ability.cannot?(:update, @comment_administrator), 'should not be able to update'
       assert ability.can?(:destroy, @comment_administrator), 'should be able to destroy'
+
+      assert ability.can?(:toggle_validated, @comment), 'should be able to toggle_validated'
+      assert ability.can?(:toggle_signalled, @comment), 'should be able to toggle_signalled'
+      assert ability.can?(:toggle_validated, @comment_administrator), 'should be able to toggle_validated'
+      assert ability.can?(:toggle_signalled, @comment_administrator), 'should be able to toggle_signalled'
     end
 
     test 'should test abilities for super_administrator' do
@@ -183,6 +218,11 @@ module Admin
 
       assert ability.can?(:destroy, @comment_subscriber), 'should be able to destroy'
       assert ability.can?(:destroy, @comment_administrator), 'should be able to destroy'
+
+      assert ability.can?(:toggle_validated, @comment), 'should be able to toggle_validated'
+      assert ability.can?(:toggle_signalled, @comment), 'should be able to toggle_signalled'
+      assert ability.can?(:toggle_validated, @comment_administrator), 'should be able to toggle_validated'
+      assert ability.can?(:toggle_signalled, @comment_administrator), 'should be able to toggle_signalled'
     end
 
     #
@@ -217,6 +257,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_comments_path
+
       @comment = comments(:one) # comment super_administrator
       @comment_administrator = comments(:two)
       @comment_subscriber = comments(:three)

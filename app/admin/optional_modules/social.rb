@@ -22,7 +22,7 @@ ActiveAdmin.register Social do
   decorate_with SocialDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_enabled do |ids|
+  batch_action :toggle_enabled, if: proc { can? :toggle_enabled, Social } do |ids|
     Social.find(ids).each { |item| item.toggle! :enabled }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end

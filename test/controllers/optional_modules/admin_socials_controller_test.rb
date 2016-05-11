@@ -49,6 +49,21 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_enabled batch action' do
+      post :batch_action, batch_action: 'toggle_enabled', collection_selection: [@social.id]
+      [@social].each(&:reload)
+      assert_not @social.enabled?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_enabled batch action' do
+      post :batch_action, batch_action: 'toggle_enabled', collection_selection: [@social.id]
+      assert_redirected_to admin_socials_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Validation rules
     #
     test 'should remove forbidden key from object if administrator' do
@@ -137,6 +152,8 @@ module Admin
       assert ability.cannot?(:read, @social), 'should not be able to read'
       assert ability.cannot?(:update, @social), 'should not be able to update'
       assert ability.cannot?(:destroy, @social), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_enabled, @social), 'should not be able to toggle_enabled'
     end
 
     test 'should test abilities for administrator' do
@@ -145,6 +162,8 @@ module Admin
       assert ability.can?(:read, @social), 'should be able to read'
       assert ability.can?(:update, @social), 'should be able to update'
       assert ability.cannot?(:destroy, @social), 'should not be able to destroy'
+
+      assert ability.can?(:toggle_enabled, @social), 'should be able to toggle_enabled'
     end
 
     test 'should test abilities for super_administrator' do
@@ -154,6 +173,8 @@ module Admin
       assert ability.can?(:read, @social), 'should be able to read'
       assert ability.can?(:update, @social), 'should be able to update'
       assert ability.can?(:destroy, @social), 'should be able to destroy'
+
+      assert ability.can?(:toggle_enabled, @social), 'should be able to toggle_enabled'
     end
 
     #
@@ -186,6 +207,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_socials_path
+
       @social = socials(:facebook_follow)
       @social_facebook_share = socials(:facebook_share)
       @social_module = optional_modules(:social)

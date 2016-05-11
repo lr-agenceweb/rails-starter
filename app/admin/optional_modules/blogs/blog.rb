@@ -45,12 +45,12 @@ ActiveAdmin.register Blog do
   decorate_with BlogDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_online do |ids|
+  batch_action :toggle_online, if: proc { can? :toggle_online, Blog } do |ids|
     Blog.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
-  batch_action :reset_cache do |ids|
+  batch_action :reset_cache, if: proc { can? :reset_cache, Blog } do |ids|
     Blog.find(ids).each(&:touch)
     redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
   end

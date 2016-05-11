@@ -2,11 +2,14 @@ article.post-article
   = render 'posts/microdatas', resource: blog, kind: 'BlogPosting'
 
   header.post-header
-    h3
+    h3.post-title
       = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
     small
       = blog.pretty_created_at(setting.date_format)
+      span< = t('in')
       span< = link_to blog.blog_category_name, blog_category_path(blog.blog_category)
+      - if can? :update, blog
+        span.frontend-actions< = link_to t('active_admin.edit'), edit_admin_blog_path(blog), target: :blank
 
   .row
     .small-12.columns

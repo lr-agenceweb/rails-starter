@@ -44,6 +44,21 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slide.id]
+      [@slide].each(&:reload)
+      assert_not @slide.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slide.id]
+      assert_redirected_to admin_slides_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -78,6 +93,8 @@ module Admin
       assert ability.cannot?(:read, @slide), 'should not be able to read'
       assert ability.cannot?(:update, @slide), 'should not be able to update'
       assert ability.cannot?(:destroy, @slide), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @slide), 'should not be able to toggle_online'
     end
 
     test 'should test abilities for administrator' do
@@ -86,6 +103,8 @@ module Admin
       assert ability.can?(:read, @slide), 'should be able to read'
       assert ability.can?(:update, @slide), 'should be able to update'
       assert ability.can?(:destroy, @slide), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @slide), 'should be able to toggle_online'
     end
 
     test 'should test abilities for super_administrator' do
@@ -95,6 +114,8 @@ module Admin
       assert ability.can?(:read, @slide), 'should be able to read'
       assert ability.can?(:update, @slide), 'should be able to update'
       assert ability.can?(:destroy, @slide), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @slide), 'should be able to toggle_online'
     end
 
     #
@@ -157,6 +178,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_slides_path
+
       @slide = slides(:slide_one)
       @slider_module = optional_modules(:slider)
 

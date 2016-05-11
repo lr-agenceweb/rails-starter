@@ -55,6 +55,27 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slider.id]
+      [@slider].each(&:reload)
+      assert_not @slider.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slider.id]
+      assert_redirected_to admin_sliders_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    test 'should redirect to back and have correct flash notice for reset_cache batch action' do
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@slider.id]
+      assert_redirected_to admin_sliders_path
+      assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -86,26 +107,35 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, Slider.new), 'should not be able to create'
-      assert ability.cannot?(:read, Slider.new), 'should not be able to read'
-      assert ability.cannot?(:update, Slider.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, Slider.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @slider), 'should not be able to read'
+      assert ability.cannot?(:update, @slider), 'should not be able to update'
+      assert ability.cannot?(:destroy, @slider), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @slider), 'should not be able to toggle_online'
+      assert ability.cannot?(:reset_cache, @slider), 'should not be able to reset_cache'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.can?(:create, Slider.new), 'should be able to create'
-      assert ability.can?(:read, Slider.new), 'should be able to read'
-      assert ability.can?(:update, Slider.new), 'should be able to update'
-      assert ability.can?(:destroy, Slider.new), 'should be able to destroy'
+      assert ability.can?(:read, @slider), 'should be able to read'
+      assert ability.can?(:update, @slider), 'should be able to update'
+      assert ability.can?(:destroy, @slider), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @slider), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @slider), 'should be able to reset_cache'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.can?(:create, Slider.new), 'should be able to create'
-      assert ability.can?(:read, Slider.new), 'should be able to read'
-      assert ability.can?(:update, Slider.new), 'should be able to update'
-      assert ability.can?(:destroy, Slider.new), 'should be able to destroy'
+      assert ability.can?(:read, @slider), 'should be able to read'
+      assert ability.can?(:update, @slider), 'should be able to update'
+      assert ability.can?(:destroy, @slider), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @slider), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @slider), 'should be able to reset_cache'
     end
 
     #
@@ -138,6 +168,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_sliders_path
+
       @slider = sliders(:online)
       @slider_module = optional_modules(:slider)
 

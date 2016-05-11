@@ -11,7 +11,7 @@ ActiveAdmin.register Audio do
   config.clear_sidebar_sections!
   actions :all, except: [:new]
 
-  batch_action :toggle_online do |ids|
+  batch_action :toggle_online, if: proc { can? :toggle_online, Audio } do |ids|
     Audio.find(ids).each { |item| item.toggle! :online }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end

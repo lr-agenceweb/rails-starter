@@ -14,6 +14,23 @@ module Admin
     setup :initialize_test
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_enabled batch action' do
+      sign_in @super_administrator
+      post :batch_action, batch_action: 'toggle_enabled', collection_selection: [@optional_module.id]
+      [@optional_module].each(&:reload)
+      assert_not @optional_module.enabled?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_enabled batch action' do
+      sign_in @super_administrator
+      post :batch_action, batch_action: 'toggle_enabled', collection_selection: [@optional_module.id]
+      assert_redirected_to admin_optional_modules_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == User role
     #
     test 'should redirect to users/sign_in if not logged in' do
@@ -82,6 +99,8 @@ module Admin
       assert ability.cannot?(:read, OptionalModule.new), 'should not be able to read'
       assert ability.cannot?(:update, OptionalModule.new), 'should not be able to update'
       assert ability.cannot?(:destroy, OptionalModule.new), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_enabled, @optional_module), 'should not be able to toggle_enabled'
     end
 
     test 'should test abilities for administrator' do
@@ -90,6 +109,8 @@ module Admin
       assert ability.cannot?(:read, OptionalModule.new), 'should not be able to read'
       assert ability.cannot?(:update, OptionalModule.new), 'should not be able to update'
       assert ability.cannot?(:destroy, OptionalModule.new), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_enabled, @optional_module), 'should not be able to toggle_enabled'
     end
 
     test 'should test abilities for super_administrator' do
@@ -99,12 +120,16 @@ module Admin
       assert ability.can?(:read, OptionalModule.new), 'should be able to read'
       assert ability.can?(:update, OptionalModule.new), 'should be able to update'
       assert ability.can?(:destroy, OptionalModule.new), 'should be able to destroy'
+
+      assert ability.can?(:toggle_enabled, @optional_module), 'should be able to toggle_enabled'
     end
 
     private
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_optional_modules_path
+
       @optional_module = optional_modules(:guest_book)
 
       @subscriber = users(:alice)

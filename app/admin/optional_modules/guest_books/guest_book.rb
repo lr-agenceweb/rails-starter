@@ -17,7 +17,7 @@ ActiveAdmin.register GuestBook do
   decorate_with GuestBookDecorator
   config.clear_sidebar_sections!
 
-  batch_action :toggle_validated do |ids|
+  batch_action :toggle_validated, if: proc { can? :toggle_validated, GuestBook } do |ids|
     GuestBook.find(ids).each { |item| item.toggle! :validated }
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end

@@ -44,6 +44,21 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_validated batch action' do
+      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@guest_book.id]
+      [@guest_book].each(&:reload)
+      assert_not @guest_book.validated?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_validated batch action' do
+      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@guest_book.id]
+      assert_redirected_to admin_guest_books_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -75,26 +90,32 @@ module Admin
       sign_in @subscriber
       ability = Ability.new(@subscriber)
       assert ability.cannot?(:create, GuestBook.new), 'should not be able to create'
-      assert ability.cannot?(:read, GuestBook.new), 'should not be able to read'
-      assert ability.cannot?(:update, GuestBook.new), 'should not be able to update'
-      assert ability.cannot?(:destroy, GuestBook.new), 'should not be able to destroy'
+      assert ability.cannot?(:read, @guest_book), 'should not be able to read'
+      assert ability.cannot?(:update, @guest_book), 'should not be able to update'
+      assert ability.cannot?(:destroy, @guest_book), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_validated, @guest_book), 'should not be able to toggle_validated'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
       assert ability.cannot?(:create, GuestBook.new), 'should not be able to create'
-      assert ability.can?(:read, GuestBook.new), 'should be able to read'
-      assert ability.cannot?(:update, GuestBook.new), 'should not be able to update'
-      assert ability.can?(:destroy, GuestBook.new), 'should be able to destroy'
+      assert ability.can?(:read, @guest_book), 'should be able to read'
+      assert ability.cannot?(:update, @guest_book), 'should not be able to update'
+      assert ability.can?(:destroy, @guest_book), 'should be able to destroy'
+
+      assert ability.can?(:toggle_validated, @guest_book), 'should be able to toggle_validated'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
       assert ability.cannot?(:create, GuestBook.new), 'should not be able to create'
-      assert ability.can?(:read, GuestBook.new), 'should be able to read'
-      assert ability.cannot?(:update, GuestBook.new), 'should not be able to update'
-      assert ability.can?(:destroy, GuestBook.new), 'should be able to destroy'
+      assert ability.can?(:read, @guest_book), 'should be able to read'
+      assert ability.cannot?(:update, @guest_book), 'should not be able to update'
+      assert ability.can?(:destroy, @guest_book), 'should be able to destroy'
+
+      assert ability.can?(:toggle_validated, @guest_book), 'should be able to toggle_validated'
     end
 
     #
@@ -128,6 +149,7 @@ module Admin
     def initialize_test
       @setting = settings(:one)
       @request.env['HTTP_REFERER'] = admin_guest_books_path
+
       @guest_book = guest_books(:fr_validate)
       @guest_book_not_validate = guest_books(:fr_not_validate)
       @guest_book_module = optional_modules(:guest_book)

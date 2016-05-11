@@ -31,6 +31,13 @@ module Admin
       assert_response :success
     end
 
+    test 'should create blog if logged in' do
+      post :create, blog: { title: 'blog edit', content: 'content edit', blog_category_id: @blog_category.id }
+      assert assigns(:blog).valid?
+      assert flash[:notice].blank?
+      assert_equal @administrator.id, assigns(:blog).user_id
+    end
+
     test 'should update blog if logged in' do
       patch :update, id: @blog, blog: { title: 'blog edit', content: 'content edit' }
       assert_redirected_to admin_blog_path(assigns(:blog))
@@ -55,6 +62,27 @@ module Admin
       assert_enqueued_jobs 1 do
         patch :update, id: @blog, blog: { audio_attributes: { audio: audio } }
       end
+    end
+
+    #
+    # == Batch actions
+    #
+    test 'should return correct value for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@blog.id]
+      [@blog].each(&:reload)
+      assert_not @blog.online?
+    end
+
+    test 'should redirect to back and have correct flash notice for toggle_online batch action' do
+      post :batch_action, batch_action: 'toggle_online', collection_selection: [@blog.id]
+      assert_redirected_to admin_blogs_path
+      assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+    end
+
+    test 'should redirect to back and have correct flash notice for reset_cache batch action' do
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@blog.id]
+      assert_redirected_to admin_blogs_path
+      assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
     end
 
     #
@@ -134,6 +162,9 @@ module Admin
       assert ability.cannot?(:read, @blog), 'should not be able to read'
       assert ability.cannot?(:update, @blog), 'should not be able to update'
       assert ability.cannot?(:destroy, @blog), 'should not be able to destroy'
+
+      assert ability.cannot?(:toggle_online, @blog), 'should not be able to toggle_online'
+      assert ability.cannot?(:reset_cache, @blog), 'should not be able to reset_cache'
     end
 
     test 'should test abilities for administrator' do
@@ -142,6 +173,9 @@ module Admin
       assert ability.can?(:read, @blog), 'should be able to read'
       assert ability.can?(:update, @blog), 'should be able to update'
       assert ability.can?(:destroy, @blog), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @blog), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @blog), 'should be able to reset_cache'
     end
 
     test 'should test abilities for super_administrator' do
@@ -151,6 +185,9 @@ module Admin
       assert ability.can?(:read, @blog), 'should be able to read'
       assert ability.can?(:update, @blog), 'should be able to update'
       assert ability.can?(:destroy, @blog), 'should be able to destroy'
+
+      assert ability.can?(:toggle_online, @blog), 'should be able to toggle_online'
+      assert ability.can?(:reset_cache, @blog), 'should be able to reset_cache'
     end
 
     #
@@ -193,9 +230,11 @@ module Admin
     def initialize_test
       @setting = settings(:one)
       @request.env['HTTP_REFERER'] = admin_blogs_path
+
       @blog = blogs(:blog_online)
       @blog_not_validate = blogs(:blog_offline)
       @blog_module = optional_modules(:blog)
+      @blog_category = blog_categories(:one)
       @comment_module = optional_modules(:comment)
       @audio_module = optional_modules(:audio)
 

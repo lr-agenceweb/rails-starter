@@ -39,6 +39,15 @@ module Admin
     end
 
     #
+    # == Batch actions
+    #
+    test 'should redirect to back and have correct flash notice for reset_cache batch action' do
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@category.id]
+      assert_redirected_to admin_categories_path
+      assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
+    end
+
+    #
     # == Flash content
     #
     test 'should return correct flash content after updating a video' do
@@ -179,6 +188,8 @@ module Admin
       assert ability.cannot?(:read, @category), 'should not be able to read'
       assert ability.cannot?(:update, @category), 'should not be able to update'
       assert ability.cannot?(:destroy, @category), 'should not be able to destroy'
+
+      assert ability.cannot?(:reset_cache, @category), 'should be able to reset_cache'
     end
 
     test 'should test abilities for administrator' do
@@ -187,6 +198,8 @@ module Admin
       assert ability.can?(:read, @category), 'should be able to read'
       assert ability.can?(:update, @category), 'should be able to update'
       assert ability.cannot?(:destroy, @category), 'should not be able to destroy'
+
+      assert ability.can?(:reset_cache, @category), 'should be able to reset_cache'
     end
 
     test 'should test abilities for super_administrator' do
@@ -196,6 +209,8 @@ module Admin
       assert ability.can?(:read, @category), 'should be able to read'
       assert ability.can?(:update, @category), 'should be able to update'
       assert ability.can?(:destroy, @category), 'should be able to destroy'
+
+      assert ability.can?(:reset_cache, @category), 'should be able to reset_cache'
     end
 
     #
@@ -215,6 +230,8 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @request.env['HTTP_REFERER'] = admin_categories_path
+
       @category = categories(:home)
       @category_about = categories(:about)
       @category_search = categories(:search)

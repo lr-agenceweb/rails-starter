@@ -36,7 +36,7 @@ ActiveAdmin.register Category do
   config.clear_sidebar_sections!
   config.sort_order = 'menus.position asc'
 
-  batch_action :reset_cache do |ids|
+  batch_action :reset_cache, if: proc { can? :reset_cache, Category } do |ids|
     Category.find(ids).each(&:touch)
     redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
   end
