@@ -86,16 +86,11 @@ class User < ActiveRecord::Base
 
   scope :except_super_administrator, -> { where.not(role_id: 1) }
 
-  def super_administrator?
-    role_name == 'super_administrator'
-  end
-
-  def administrator?
-    role_name == 'administrator'
-  end
-
-  def subscriber?
-    role_name == 'subscriber'
+  # define has_role? methods
+  %w(super_administrator administrator subscriber).each do |role|
+    define_method(:"#{role}?") do
+      role_name == role
+    end
   end
 
   def should_generate_new_friendly_id?
