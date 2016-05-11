@@ -41,6 +41,7 @@ DEFAULTS: &DEFAULTS
 anthony:
   <<: *DEFAULTS
   username: anthony
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   slug: anthony
   email: anthony@test.fr
   role: super_administrator
