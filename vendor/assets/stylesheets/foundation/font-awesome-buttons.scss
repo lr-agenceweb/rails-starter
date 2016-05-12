@@ -1,0 +1,271 @@
+.ffab:hover:not(.disabled):not(.static)::after {
+  -webkit-transform: skewX(0deg) !important;
+      -ms-transform: skewX(0deg) !important;
+          transform: skewX(0deg) !important;
+  width: 0% !important; }
+
+.ffab.remove:hover:not(.disabled)::after {
+  -webkit-transform: skewX(0deg) !important;
+      -ms-transform: skewX(0deg) !important;
+          transform: skewX(0deg) !important;
+  width: 0% !important; }
+
+.ffab.cover:hover:not(.disabled)::after {
+  -webkit-transform: skewX(0deg) !important;
+      -ms-transform: skewX(0deg) !important;
+          transform: skewX(0deg) !important;
+  width: 112% !important; }
+
+.ffab.rotate-90::before {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg); }
+
+.ffab.rotate-180::before {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+.ffab.rotate-270::before {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg); }
+
+.ffab.flip-horizontal::before {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1); }
+
+.ffab.flip-vertical::before {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1); }
+
+.ffab.after {
+  padding-right: 3.6375rem; }
+  .ffab.after:before {
+    right: 1em; }
+  .ffab.after:after {
+    right: -15px;
+    -webkit-transform: skewX(-15deg);
+        -ms-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right; }
+
+.ffab.before {
+  padding-left: 3.6375rem; }
+  .ffab.before:before {
+    left: 1em; }
+  .ffab.before:after {
+    left: -15px;
+    -webkit-transform: skewX(15deg);
+        -ms-transform: skewX(15deg);
+            transform: skewX(15deg);
+    -webkit-transform-origin: left;
+        -ms-transform-origin: left;
+            transform-origin: left; }
+
+.ffab:not(.before):not(.after) {
+  padding-right: 3.6375rem; }
+  .ffab:not(.before):not(.after):before {
+    right: 1em; }
+  .ffab:not(.before):not(.after):after {
+    right: -15px;
+    -webkit-transform: skewX(-15deg);
+        -ms-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right; }
+
+.tiny:not(.before):not(.after) {
+  padding-right: 2.7375rem; }
+  .tiny:not(.before):not(.after):before {
+    right: 1em; }
+  .tiny:not(.before):not(.after):after {
+    right: -15px;
+    -webkit-transform: skewX(-15deg);
+        -ms-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right; }
+  .tiny:not(.before):not(.after)::after {
+    width: 2.7375rem; }
+
+.tiny.after {
+  padding-right: 2.7375rem; }
+  .tiny.after:before {
+    right: 1em; }
+  .tiny.after:after {
+    right: -15px;
+    -webkit-transform: skewX(-15deg);
+        -ms-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right; }
+  .tiny.after::after {
+    width: 2.7375rem; }
+
+.tiny.before {
+  padding-left: 2.7375rem; }
+  .tiny.before:before {
+    left: 1em; }
+  .tiny.before:after {
+    left: -15px;
+    -webkit-transform: skewX(15deg);
+        -ms-transform: skewX(15deg);
+            transform: skewX(15deg);
+    -webkit-transform-origin: left;
+        -ms-transform-origin: left;
+            transform-origin: left; }
+  .tiny.before::after {
+    width: 2.7375rem; }
+
+.small:not(.before):not(.after) {
+  padding-right: 3.1875rem; }
+  .small:not(.before):not(.after):before {
+    right: 1em; }
+  .small:not(.before):not(.after):after {
+    right: -15px;
+    -webkit-transform: skewX(-15deg);
+        -ms-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right; }
+  .small:not(.before):not(.after)::after {
+    width: 3.1875rem; }
+
+.small.after {
+  padding-right: 3.1875rem; }
+  .small.after:before {
+    right: 1em; }
+  .small.after:after {
+    right: -15px;
+    -webkit-transform: skewX(-15deg);
+        -ms-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right; }
+  .small.after::after {
+    width: 3.1875rem; }
+
+.small.before {
+  padding-left: 3.1875rem; }
+  .small.before:before {
+    left: 1em; }
+  .small.before:after {
+    left: -15px;
+    -webkit-transform: skewX(15deg);
+        -ms-transform: skewX(15deg);
+            transform: skewX(15deg);
+    -webkit-transform-origin: left;
+        -ms-transform-origin: left;
+            transform-origin: left; }
+  .small.before::after {
+    width: 3.1875rem; }
+
+.large:not(.before):not(.after) {
+  padding-right: 4.6875rem; }
+  .large:not(.before):not(.after):before {
+    right: 1em; }
+  .large:not(.before):not(.after):after {
+    right: -15px;
+    -webkit-transform: skewX(-15deg);
+        -ms-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right; }
+  .large:not(.before):not(.after)::after {
+    width: 4.6875rem; }
+
+.large.after {
+  padding-right: 4.6875rem; }
+  .large.after:before {
+    right: 1em; }
+  .large.after:after {
+    right: -15px;
+    -webkit-transform: skewX(-15deg);
+        -ms-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right; }
+  .large.after::after {
+    width: 4.6875rem; }
+
+.large.before {
+  padding-left: 4.6875rem; }
+  .large.before:before {
+    left: 1em; }
+  .large.before:after {
+    left: -15px;
+    -webkit-transform: skewX(15deg);
+        -ms-transform: skewX(15deg);
+            transform: skewX(15deg);
+    -webkit-transform-origin: left;
+        -ms-transform-origin: left;
+            transform-origin: left; }
+  .large.before::after {
+    width: 4.6875rem; }
+
+.ffab {
+  overflow: hidden;
+  position: relative; }
+  .ffab::before {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1;
+    position: absolute;
+    transition: all 0.3s;
+    z-index: 2; }
+  .ffab::after {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 0 solid currentColor;
+    content: '';
+    height: 110%;
+    position: absolute;
+    top: -5%;
+    transition: all 0.3s;
+    width: 3.6375rem;
+    z-index: 1; }
+  .ffab .ffab:hover:not(.disabled):not(.static)::after {
+    -webkit-transform: skewX(0deg) !important;
+        -ms-transform: skewX(0deg) !important;
+            transform: skewX(0deg) !important;
+    width: 0% !important; }
+  .ffab .ffab.remove:hover:not(.disabled)::after {
+    -webkit-transform: skewX(0deg) !important;
+        -ms-transform: skewX(0deg) !important;
+            transform: skewX(0deg) !important;
+    width: 0% !important; }
+  .ffab .ffab.cover:hover:not(.disabled)::after {
+    -webkit-transform: skewX(0deg) !important;
+        -ms-transform: skewX(0deg) !important;
+            transform: skewX(0deg) !important;
+    width: 112% !important; }
+  .ffab.hollow::after, .ffab.bordered::after {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid currentColor;
+    content: '';
+    height: 110%;
+    position: absolute;
+    top: -5%;
+    transition: all 0.3s;
+    width: 3.6375rem;
+    z-index: 1; }

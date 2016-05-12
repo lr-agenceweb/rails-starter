@@ -14,5 +14,6 @@
 
 .submit-and-loader
   = image_tag image_path('loader-dark.gif'), class: 'submit-loader'
-  = button_tag(class: 'submit-btn text-right tiny') do
-    - fa_icon('paper-plane')
+  = button_tag(class: 'button ffab after fa-arrow-right') do
+    = t('comment.submit.button') unless params[:action] == 'reply'
+    = t('comment.reply.button') if params[:action] == 'reply'
