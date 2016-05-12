@@ -1,0 +1,5 @@
+// Hide all previous opened reply forms
+$('.comments form.new_comment').hide()
+
+// Inject reply form after comment
+$("#comment-<%= @parent_comment.id %>").after("<%= j render 'comments/form' %>");

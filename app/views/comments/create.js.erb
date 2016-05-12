@@ -1,8 +1,14 @@
+function reset_form() {
+  $('#comment_username').val('');
+  $('#comment_email').val('');
+  $('#comment_comment').val('');
+}
+
 <% unless @comment_setting.should_validate %>
   <% if comment.parent_id.nil? %>
     $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
   <% else %>
-    $("#comment-<%= comment.parent_id %>").parent().append("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
+    $("#comment-<%= comment.parent_id %>").after("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
   <% end %>
 <% end %>
 
@@ -12,10 +18,13 @@ if ($('#comment-count').length > 0){
   $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
 }
 
-$('form.new_comment .submit-loader').fadeOut();
+// Hide and reset reply form if any
+if ($('.comments form.new_comment').length > 0){
+  reset_form();
+  $('.comments form.new_comment').hide();
+}
 
-$('#comment_username').val('');
-$('#comment_email').val('');
-$('#comment_comment').val('');
+$('form.new_comment .submit-loader').fadeOut();
+reset_form();
 
 NProgress.done();

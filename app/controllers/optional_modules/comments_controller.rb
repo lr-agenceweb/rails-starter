@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == CommentsController
 #
@@ -47,9 +48,15 @@ class CommentsController < ApplicationController
 
   def reply
     raise ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token]
+    @parent_comment = @comment
     @comment = @commentable.comments.new(parent_id: params[:id])
     @asocial = true
     seo_tag_custom I18n.t('comment.seo.title', article: @commentable.title), I18n.t('comment.seo.description')
+
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
   private
