@@ -27,7 +27,7 @@
                 span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.to_moderate')}" = Comment.to_validate.count
 
             - if @comment_setting_admin_bar.should_signal?
-              a.admin_bar-bubble.admin_bar-comments-signalled-link href="#{admin_post_comments_path(scope: 'signales')}"
+              a.admin_bar-bubble.admin_bar-comments-signalled-link id="comments-signalled-count" href="#{admin_post_comments_path(scope: 'signales')}"
                 span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.signalled')}" = Comment.signalled.count
 
   .float-right
