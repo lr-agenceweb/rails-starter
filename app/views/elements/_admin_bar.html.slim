@@ -23,7 +23,7 @@
           = t('activerecord.models.comment.other')
           .admin_bar-comments
             - if @comment_setting_admin_bar.should_validate?
-              a.admin_bar-bubble.admin_bar-comments-tovalidate-link href="#{admin_post_comments_path(scope: 'a_valider')}"
+              a.admin_bar-bubble.admin_bar-comments-tovalidate-link id="comments-to-validate-count" href="#{admin_post_comments_path(scope: 'a_valider')}"
                 span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.to_moderate')}" = Comment.to_validate.count
 
             - if @comment_setting_admin_bar.should_signal?
