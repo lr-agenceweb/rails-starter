@@ -249,10 +249,22 @@ class CommentsControllerTest < ActionController::TestCase
   #
   # == Flash
   #
-  test 'should have correct flash if should validate' do
+  test 'should have correct flash if should validate and logged in as admin' do
+    sign_in @administrator
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        post :create, about_id: @about.id, comment: { comment: 'youpi', user_id: @administrator.id, lang: locale.to_s }, locale: locale.to_s
+        assert assigns(:comment).validated?
+        assert_equal I18n.t('comment.create_success'), flash[:success]
+      end
+    end
+  end
+
+  test 'should have correct flash if should validate and not logged in as admin' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        assert_not assigns(:comment).validated?
         assert_equal I18n.t('comment.create_success_with_validate'), flash[:success]
       end
     end
@@ -263,6 +275,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        assert assigns(:comment).validated?
         assert_equal I18n.t('comment.create_success'), flash[:success]
       end
     end

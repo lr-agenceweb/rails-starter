@@ -96,4 +96,13 @@ class User < ActiveRecord::Base
   def should_generate_new_friendly_id?
     username_changed? || super
   end
+
+  # Access current_user in model
+  def self.current_user
+    Thread.current[:current_user]
+  end
+
+  def self.current_user=(user)
+    Thread.current[:current_user] = user
+  end
 end
