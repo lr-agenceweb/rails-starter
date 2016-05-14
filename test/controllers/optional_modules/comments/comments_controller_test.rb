@@ -249,10 +249,22 @@ class CommentsControllerTest < ActionController::TestCase
   #
   # == Flash
   #
-  test 'should have correct flash if should validate' do
+  test 'should have correct flash if should validate and logged in as admin' do
+    sign_in @administrator
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        post :create, about_id: @about.id, comment: { comment: 'youpi', user_id: @administrator.id, lang: locale.to_s }, locale: locale.to_s
+        assert assigns(:comment).validated?
+        assert_equal I18n.t('comment.create_success'), flash[:success]
+      end
+    end
+  end
+
+  test 'should have correct flash if should validate and not logged in as admin' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        assert_not assigns(:comment).validated?
         assert_equal I18n.t('comment.create_success_with_validate'), flash[:success]
       end
     end
@@ -263,6 +275,7 @@ class CommentsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         post :create, about_id: @about.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        assert assigns(:comment).validated?
         assert_equal I18n.t('comment.create_success'), flash[:success]
       end
     end
@@ -449,7 +462,13 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should render reply template and success response' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
+        # About article
         get :reply, token: @comment_alice.token, about_id: @about.id, id: @comment_alice, locale: locale.to_s
+        assert_response :success
+        assert_template :reply
+
+        # Blog article
+        get :reply, token: @comment_blog.token, blog_id: @blog.id, id: @comment_blog, locale: locale.to_s
         assert_response :success
         assert_template :reply
       end
@@ -469,7 +488,13 @@ class CommentsControllerTest < ActionController::TestCase
   test 'AJAX :: should render reply template and success response' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
+        # About article
         xhr :get, :reply, format: :js, id: @comment_alice.id, token: @comment_alice.token, about_id: @about.id, locale: locale.to_s
+        assert_response :success
+        assert_template :reply
+
+        # Blog article
+        xhr :get, :reply, format: :js, token: @comment_blog.token, blog_id: @blog.id, id: @comment_blog, locale: locale.to_s
         assert_response :success
         assert_template :reply
       end
@@ -582,6 +607,7 @@ class CommentsControllerTest < ActionController::TestCase
   def initialize_test
     @locales = I18n.available_locales
     @about = posts(:about_2)
+    @blog = blogs(:blog_online)
     @comment_setting = comment_settings(:one)
     @comment_module = optional_modules(:comment)
 
@@ -594,5 +620,6 @@ class CommentsControllerTest < ActionController::TestCase
     @comment_alice = comments(:three)
     @comment_lana = comments(:four)
     @comment_luke = comments(:five)
+    @comment_blog = comments(:blog)
   end
 end

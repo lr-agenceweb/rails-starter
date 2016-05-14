@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
   # Optional modules
   include OptionalModules::OptionalModulable
   include OptionalModules::Adultable
+  include OptionalModules::AdminBarable
   include OptionalModules::Socialable
   include OptionalModules::Backgroundable
   include OptionalModules::Mappable

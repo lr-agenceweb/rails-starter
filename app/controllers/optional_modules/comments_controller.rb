@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == CommentsController
 #
@@ -11,6 +12,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:reply, :signal, :destroy]
   before_action :set_comments, only: [:create]
   before_action :redirect_to_back_after_destroy?, only: [:destroy]
+  before_action :set_current_user, only: [:create]
   before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
   after_action :send_email, only: [:signal], if: proc { @comment.signalled? && @comment_setting.send_email? }
 
@@ -25,7 +27,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id if user_signed_in?
     if @comment.save
       flash.now[:success] = I18n.t('comment.create_success')
-      flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate?
+      flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate? && !current_user_and_administrator?(User.current_user)
       respond_action 'create'
     else # Render view user come from instead of the comments default view
       instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
@@ -47,9 +49,15 @@ class CommentsController < ApplicationController
 
   def reply
     raise ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token]
+    @parent_comment = @comment
     @comment = @commentable.comments.new(parent_id: params[:id])
     @asocial = true
     seo_tag_custom I18n.t('comment.seo.title', article: @commentable.title), I18n.t('comment.seo.description')
+
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
   private
@@ -102,5 +110,9 @@ class CommentsController < ApplicationController
       @comment.id == params[:current_comment_id].to_i ||
       @comment.children_ids.include?(params[:current_comment_id].to_i)
     )
+  end
+
+  def set_current_user
+    User.current_user = try(:current_user)
   end
 end

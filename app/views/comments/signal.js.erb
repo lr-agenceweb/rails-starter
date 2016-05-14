@@ -1,4 +1,8 @@
 $(".comment-not-signalled.number-<%= @comment.id %>").removeClass().addClass('comment-signalled').html(I18n.t('comment.signalled.already_signalled', { locale: gon.language }));
 
+if ($('#comments-signalled-count').length > 0){
+  $('#comments-signalled-count span').text("<%= Comment.signalled.count %>");
+}
+
 NProgress.done();
 <%= render 'elements/alert' %>
