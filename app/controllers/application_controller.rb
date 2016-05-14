@@ -33,7 +33,6 @@ class ApplicationController < ActionController::Base
   include OptionalModules::Sliderable
   include OptionalModules::Videoable
   include OptionalModules::NewsletterFrontUserable
-  before_action :set_module_settings, if: proc { @setting.show_admin_bar? } # for AdminBar
 
   # Security
   include Security::NotificationSettings
@@ -73,11 +72,6 @@ class ApplicationController < ActionController::Base
 
   def set_legal_notices
     @legal_notice_category = Category.includes(menu: [:translations]).find_by(name: 'LegalNotice')
-  end
-
-  def set_module_settings
-    @comment_setting_admin_bar = CommentSetting.first
-    @guest_book_setting_admin_bar = GuestBookSetting.first
   end
 
   def set_host_name

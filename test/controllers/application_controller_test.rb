@@ -43,11 +43,23 @@ class ApplicationControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not have nil module settings content' do
+  #
+  # == AdminBarable
+  #
+  test 'should not have nil module settings content if logged in as administrator' do
+    sign_in users(:bob)
     assert @setting.show_admin_bar?
     make_get_index(assertions) do
       assert_not assigns(:comment_setting_admin_bar).nil?
       assert_not assigns(:guest_book_setting_admin_bar).nil?
+    end
+  end
+
+  test 'should have nil module settings content if not logged in as administrator' do
+    assert @setting.show_admin_bar?
+    make_get_index(assertions) do
+      assert_nil assigns(:comment_setting_admin_bar)
+      assert_nil assigns(:guest_book_setting_admin_bar)
     end
   end
 
