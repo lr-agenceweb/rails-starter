@@ -4,7 +4,7 @@ function reset_form() {
   $('#comment_comment').val('');
 }
 
-<% if !@comment_setting.should_validate? || current_user_and_administrator?(User.current_user) %>
+<% if !@comment_setting.should_validate? || current_user_and_administrator?(current_user) %>
   <% if comment.parent_id.nil? %>
     $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
   <% else %>
@@ -14,15 +14,10 @@ function reset_form() {
 
 <%= render 'elements/alert' %>
 
+// Update number of comments for a post
 if ($('#comment-count').length > 0){
   $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
 }
-
-<% if @comment_setting.should_validate? %>
-  if ($('#comments-to-validate-count').length > 0){
-    $('#comments-to-validate-count span').text("<%= Comment.to_validate.count %>");
-  }
-<% end %>
 
 // Hide and reset reply form if any
 if ($('.comments form.new_comment').length > 0){
