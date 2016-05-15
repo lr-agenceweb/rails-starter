@@ -25,7 +25,8 @@
 #
 class Event < ActiveRecord::Base
   include OptionalModules::Assets::Imageable
-  include OptionalModules::Assets::Videosable
+  include OptionalModules::Assets::VideoPlatformable
+  include OptionalModules::Assets::VideoUploadable
   include OptionalModules::Searchable
   include PrevNextable
   include Linkable
