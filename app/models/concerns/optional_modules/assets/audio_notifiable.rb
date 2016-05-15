@@ -21,14 +21,25 @@ module OptionalModules
         private
 
         def audio_flash_upload_in_progress(*)
-          # Audio object
-          if defined?(resource) && resource.is_a?(Audio)
-            self.audio_flash_notice = I18n.t('audio.flash.upload_in_progress') if !resource.nil? && resource.audio_processing? && !resource.destroyed?
+          return unless self_audioable? || resource_audioable?
+          self.audio_flash_notice = I18n.t('audio.flash.upload_in_progress')
+        end
 
-          # self Audio object
-          elsif is_a?(Audio) && !nil? && audio_processing? && !destroyed?
-            self.audio_flash_notice = I18n.t('audio.flash.upload_in_progress')
+        def self_audioable?
+          is_a?(Audio) &&
+            !nil? &&
+            !destroyed? &&
+            audio_processing?
+        end
+
+        def resource_audioable?
+          return false if is_a?(Audio)
+          audios.each do |audio|
+            return true if !audio.nil? &&
+                           !audio.destroyed? &&
+                           audio.audio_processing?
           end
+          false
         end
       end
     end

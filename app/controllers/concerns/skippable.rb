@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == SkippableConcern
 #
@@ -13,6 +14,12 @@ module Skippable
                        :set_newsletter_user,
                        :set_slider,
                        :set_socials_network,
-                       :set_map
+                       :set_map,
+
+                       # AdminBar
+                       :admin_bar_enabled?,
+                       :set_comments_count,
+                       :set_guest_books_count,
+                       :set_module_settings
   end
 end

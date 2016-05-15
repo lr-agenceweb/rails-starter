@@ -7,14 +7,15 @@
 
         header
           h3
-            = link_to @commentable.decorate.title, send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
+            - link = @commentable.is_a?(Blog) ? blog_category_blog_path(@commentable.blog_category, @commentable) : send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
+            = link_to @commentable.decorate.title, link
             small<: em
               = "(#{@commentable.decorate.created_at})"
 
         div == @commentable.decorate.content
 
       p.text-right
-        = link_to I18n.t('link.back_to_article', article: @commentable.title), send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
+        = link_to I18n.t('link.back_to_article', article: @commentable.title), link
 
 
   section.row

@@ -14,7 +14,7 @@ class CommentTest < ActiveSupport::TestCase
     comment = Comment.new(comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'fr')
     assert comment.valid?
     assert comment.errors.keys.empty?
-    assert_not comment.validated?
+    assert_not comment.validated?, 'comment should not be validated'
   end
 
   test 'should not be able to create if empty' do

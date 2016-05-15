@@ -59,6 +59,25 @@ module Admin
     end
 
     #
+    # == Flash content
+    #
+    test 'should return empty flash notice if no update' do
+      patch :update, id: @video_upload, video_upload: {}
+      assert flash[:notice].blank?
+    end
+
+    test 'should return empty flash notice if destroy' do
+      delete :destroy, id: @video_upload
+      assert flash[:notice].blank?
+    end
+
+    test 'should return correct flash content after updating an video_upload file' do
+      video_upload = fixture_file_upload 'videos/test.mp4', 'video/mp4'
+      patch :update, id: @video_upload, video_upload: { video_file: video_upload }
+      assert_equal [I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
+    end
+
+    #
     # == Crud actions
     #
     test 'should redirect to users/sign_in if not logged in' do

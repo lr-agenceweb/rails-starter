@@ -31,6 +31,7 @@
 #
 class VideoUpload < ActiveRecord::Base
   include Assets::Attachable
+  include OptionalModules::Assets::VideoNotifiable
 
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description

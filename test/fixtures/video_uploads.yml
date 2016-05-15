@@ -32,11 +32,19 @@ DEFAULTS: &DEFAULTS
 one:
   <<: *DEFAULTS
   videoable: home (Post)
-  online: true
   video_file_file_name: 'landscape.mp4'
+  online: true
 
 two:
   <<: *DEFAULTS
   videoable: home (Category)
-  online: true
   video_file_file_name: 'landscape.mp4'
+  video_file_processing: false
+  online: true
+
+three:
+  <<: *DEFAULTS
+  videoable: blog_online (Blog)
+  video_file_file_name: 'landscape.mp4'
+  video_file_processing: false
+  online: true

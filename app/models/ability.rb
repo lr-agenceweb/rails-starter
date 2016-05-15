@@ -41,11 +41,7 @@ class Ability
     can :manage, User, id: @user.id
     optional_modules_check
     can :manage, StringBox, optional_module_id: nil
-
-    # batch_actions
-    can [:toggle_active], User, role: { name: %w( administrator subscriber ) }
-    cannot [:toggle_active], User, id: @user.id
-    cannot [:toggle_active], User, role: { name: %w( super_administrator ) }
+    super_admin_batch_actions # Batch actions
   end
 
   def administrator_privilege
@@ -62,20 +58,10 @@ class Ability
     cannot :manage, OptionalModule
     cannot [:read, :update, :destroy], [About, LegalNotice]
     can :manage, [About, LegalNotice], user_id: @user.id
-
-    # batch_actions
-    can [:reset_cache, :toggle_online, :toggle_enabled], :all
-    can [:toggle_validated, :toggle_signalled], [Comment, GuestBook]
-    can [:toggle_archive_customer], [MailingUser]
-    can [:toggle_show_calendar], [Event]
-    can [:toggle_active], User, role: { name: %w( subscriber ) }
-    cannot [:toggle_active], User, id: @user.id
-    cannot [:toggle_enabled], OptionalModule
-
-    # Optional modules
-    optional_modules_check
-
     can [:read, :update], StringBox, optional_module_id: nil
+
+    admin_batch_actions # Batch actions
+    optional_modules_check # Optional modules
   end
 
   def subscriber_privilege
@@ -347,5 +333,24 @@ class Ability
     else
       cannot :feed, Post
     end
+  end
+
+  #
+  # == batch_actions
+  #
+  def super_admin_batch_actions
+    can [:toggle_active], User, role: { name: %w( administrator subscriber ) }
+    cannot [:toggle_active], User, id: @user.id
+    cannot [:toggle_active], User, role: { name: %w( super_administrator ) }
+  end
+
+  def admin_batch_actions
+    can [:reset_cache, :toggle_online, :toggle_enabled], :all
+    can [:toggle_validated, :toggle_signalled], [Comment, GuestBook]
+    can [:toggle_archive_customer], [MailingUser]
+    can [:toggle_show_calendar], [Event]
+    can [:toggle_active], User, role: { name: %w( subscriber ) }
+    cannot [:toggle_active], User, id: @user.id
+    cannot [:toggle_enabled], OptionalModule
   end
 end

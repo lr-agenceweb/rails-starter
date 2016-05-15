@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 require 'test_helper'
 
+#
+# == GuestBook model test
+#
 class GuestBookTest < ActiveSupport::TestCase
   setup :initialize_test
 
@@ -11,7 +14,7 @@ class GuestBookTest < ActiveSupport::TestCase
     guest_book = GuestBook.new(content: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'fr')
     assert guest_book.valid?
     assert guest_book.errors.keys.empty?
-    assert_not guest_book.validated?
+    assert_not guest_book.validated?, 'guest_book should not be validated'
   end
 
   test 'should not be able to create if empty' do

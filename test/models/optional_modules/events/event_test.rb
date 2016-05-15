@@ -88,14 +88,14 @@ class EventTest < ActiveSupport::TestCase
   #
   test 'should not have flash content if no video are uploaded' do
     @event.save!
-    assert @event.flash_notice.blank?
+    assert @event.video_flash_notice.blank?
   end
 
   test 'should return correct flash content after updating a video' do
     video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
     @event.update_attributes(video_uploads_attributes: [{ video_file: video }, { video_file: video }])
     @event.save!
-    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @event.flash_notice
+    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @event.video_flash_notice
   end
 
   #

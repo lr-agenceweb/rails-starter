@@ -1,21 +1,31 @@
-<% unless @comment_setting.should_validate %>
+function reset_form() {
+  $('#comment_username').val('');
+  $('#comment_email').val('');
+  $('#comment_comment').val('');
+}
+
+<% if !@comment_setting.should_validate? || current_user_and_administrator?(current_user) %>
   <% if comment.parent_id.nil? %>
     $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
   <% else %>
-    $("#comment-<%= comment.parent_id %>").parent().append("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
+    $("#comment-<%= comment.parent_id %>").after("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
   <% end %>
 <% end %>
 
 <%= render 'elements/alert' %>
 
+// Update number of comments for a post
 if ($('#comment-count').length > 0){
   $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
 }
 
-$('form.new_comment .submit-loader').fadeOut();
+// Hide and reset reply form if any
+if ($('.comments form.new_comment').length > 0){
+  reset_form();
+  $('.comments form.new_comment').hide();
+}
 
-$('#comment_username').val('');
-$('#comment_email').val('');
-$('#comment_comment').val('');
+$('form.new_comment .submit-loader').fadeOut();
+reset_form();
 
 NProgress.done();

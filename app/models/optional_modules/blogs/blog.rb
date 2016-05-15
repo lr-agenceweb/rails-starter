@@ -28,8 +28,9 @@
 class Blog < ActiveRecord::Base
   include Scopable
   include OptionalModules::Assets::Imageable
-  include OptionalModules::Assets::Videosable
   include OptionalModules::Assets::Audioable
+  include OptionalModules::Assets::VideoUploadable
+  include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Searchable
   include PrevNextable
 

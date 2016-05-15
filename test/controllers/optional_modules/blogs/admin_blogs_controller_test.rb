@@ -96,12 +96,14 @@ module Admin
     test 'should return correct flash content after updating a video' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
       patch :update, id: @blog, blog: { video_uploads_attributes: [{ video_file: video }] }
+      assert assigns(:blog).video_uploads.last.video_file_processing?, 'should be processing video task'
       assert_equal [I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
     end
 
     test 'should return correct flash content after updating an audio file' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
       patch :update, id: @blog, blog: { audio_attributes: { audio: audio } }
+      assert assigns(:blog).audio.audio_processing?, 'should be processing audio task'
       assert_equal [I18n.t('audio.flash.upload_in_progress')], flash[:notice]
     end
 
@@ -109,6 +111,8 @@ module Admin
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
       patch :update, id: @blog, blog: { audio_attributes: { audio: audio }, video_uploads_attributes: [{ video_file: video }] }
+      assert assigns(:blog).audio.audio_processing?, 'should be processing audio task'
+      assert assigns(:blog).video_uploads.last.video_file_processing?, 'should be processing video task'
       assert_equal [I18n.t('audio.flash.upload_in_progress'), I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
     end
 
