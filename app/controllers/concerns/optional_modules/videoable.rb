@@ -12,7 +12,7 @@ module OptionalModules
 
     included do
       before_action :set_video_settings, if: proc { @video_module.enabled? }
-      after_action :set_video_flash_notice, only: [:create, :update], if: proc { defined?(resource) }
+      after_action :set_video_flash_notice, only: [:create, :update], if: :defined_video_flash_notice?
 
       private
 
@@ -37,6 +37,11 @@ module OptionalModules
       def video_flash_notice?(r)
         defined?(r.video_flash_notice) &&
           !r.video_flash_notice.blank?
+      end
+
+      def defined_video_flash_notice?
+        defined?(resource.video_flash_notice) ||
+          defined?(resource.video_upload.video_flash_notice)
       end
     end
   end

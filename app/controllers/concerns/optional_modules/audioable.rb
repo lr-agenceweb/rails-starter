@@ -11,7 +11,7 @@ module OptionalModules
     extend ActiveSupport::Concern
 
     included do
-      after_action :set_audio_flash_notice, only: [:create, :update], if: proc { defined?(resource) }
+      after_action :set_audio_flash_notice, only: [:create, :update], if: :defined_audio_flash_notice?
 
       private
 
@@ -29,6 +29,11 @@ module OptionalModules
       def audio_flash_notice?(r)
         defined?(r.audio_flash_notice) &&
           !r.audio_flash_notice.blank?
+      end
+
+      def defined_audio_flash_notice?
+        defined?(resource.audio_flash_notice) ||
+          defined?(resource.audio.audio_flash_notice)
       end
     end
   end
