@@ -16,11 +16,12 @@ module OptionalModules
 
       included do
         attr_accessor :video_flash_notice
-        after_commit :video_flash_upload_in_progress, if: :self_videouploadable? || :resource_videouploadable?
+        after_commit :video_flash_upload_in_progress
 
         private
 
         def video_flash_upload_in_progress(*)
+          return unless self_videouploadable? || resource_videouploadable?
           self.video_flash_notice = I18n.t('video_upload.flash.upload_in_progress')
         end
 
@@ -32,11 +33,13 @@ module OptionalModules
         end
 
         def resource_videouploadable?
-          defined?(resource) &&
-            resource.is_a?(VideoUpload) &&
-            !resource.nil? &&
-            !resource.destroyed? &&
-            resource.video_file_processing?
+          return false if is_a?(VideoUpload)
+          video_uploads.each do |video_upload|
+            return true if !video_upload.nil? &&
+                           !video_upload.destroyed? &&
+                           video_upload.video_file_processing?
+          end
+          false
         end
       end
     end
