@@ -16,19 +16,19 @@ class VideoUploadTest < ActiveSupport::TestCase
     @video_upload.save!
     assert @video_upload.valid?, 'should be valid'
     assert_empty @video_upload.errors.keys
-    assert @video_upload.video_flash_notice.blank?
+    assert @video_upload.video_upload_flash_notice.blank?
   end
 
   test 'should not have flash content after destroying video' do
     @video_upload.destroy
-    assert @video_upload.video_flash_notice.blank?
+    assert @video_upload.video_upload_flash_notice.blank?
   end
 
   test 'should return correct flash content after updating an video file' do
     @video_upload.update_attribute(:video_file, @file)
     assert @video_upload.valid?, 'should be valid'
     assert_empty @video_upload.errors.keys
-    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @video_upload.video_flash_notice
+    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @video_upload.video_upload_flash_notice
   end
 
   private

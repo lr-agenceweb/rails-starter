@@ -116,7 +116,7 @@ class BlogTest < ActiveSupport::TestCase
     @blog.save!
     assert @blog.valid?, 'should be valid'
     assert_empty @blog.errors.keys
-    assert @blog.video_flash_notice.blank?
+    assert @blog.video_upload_flash_notice.blank?
   end
 
   test 'should return correct flash content after updating a video' do
@@ -125,7 +125,7 @@ class BlogTest < ActiveSupport::TestCase
     @blog.save!
     assert @blog.valid?, 'should be valid'
     assert_empty @blog.errors.keys
-    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @blog.video_flash_notice
+    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @blog.video_upload_flash_notice
   end
 
   test 'should not have flash content if no audio is uploaded' do

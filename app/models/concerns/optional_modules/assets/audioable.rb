@@ -15,7 +15,7 @@ module OptionalModules
       extend ActiveSupport::Concern
 
       included do
-        include OptionalModules::Assets::AudioNotifiable
+        include OptionalModules::Assets::FlashNotifiable
 
         has_many :audios, as: :audioable, dependent: :destroy, before_add: :audio_flash_upload_in_progress
         accepts_nested_attributes_for :audios, reject_if: proc { |attributes| attributes['audio'].blank? }, allow_destroy: true
