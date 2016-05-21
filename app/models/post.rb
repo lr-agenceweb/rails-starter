@@ -26,11 +26,12 @@
 # == Post Model
 #
 class Post < ActiveRecord::Base
-  include Core::Referenceable
   include Core::Userable
+  include Core::Referenceable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
+  include OptionalModules::Commentable
   include OptionalModules::Searchable
   include Positionable
   include PrevNextable
@@ -40,9 +41,6 @@ class Post < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
-
-  has_many :comments, as: :commentable, dependent: :destroy
-  accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true
 
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }

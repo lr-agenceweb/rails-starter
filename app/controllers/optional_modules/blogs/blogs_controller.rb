@@ -7,7 +7,7 @@ class BlogsController < ApplicationController
   include OptionalModules::Bloggable
 
   before_action :set_blog, only: [:show]
-  include OptionalModules::Commentable
+  include OptionalModules::Commentsable
 
   decorates_assigned :blog, :comment
 
