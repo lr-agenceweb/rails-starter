@@ -1,7 +1,7 @@
 # is this a small screen?
 @isSmall = ->
   if typeof Foundation != 'undefined'
-    matchMedia(Foundation.media_queries.small).matches and !matchMedia(Foundation.media_queries.medium).matches
+    Foundation.MediaQuery.current == 'small'
 
 @isSmallBreakOne = ->
   matchMedia('(max-width: 949px)').matches
