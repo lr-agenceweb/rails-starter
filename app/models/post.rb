@@ -26,6 +26,7 @@
 # == Post Model
 #
 class Post < ActiveRecord::Base
+  include Core::Referenceable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
@@ -44,10 +45,6 @@ class Post < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true
 
-  has_one :referencement, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
-
-  delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :username, to: :user, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }

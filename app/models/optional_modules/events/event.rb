@@ -24,6 +24,7 @@
 # == Event model
 #
 class Event < ActiveRecord::Base
+  include Core::Referenceable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
@@ -37,15 +38,11 @@ class Event < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 
-  has_one :referencement, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
-
   has_one :location, as: :locationable, dependent: :destroy
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
   validate :calendar_date_correct?, unless: proc { end_date.blank? && start_date.blank? }
 
-  delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
