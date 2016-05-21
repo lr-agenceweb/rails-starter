@@ -170,8 +170,6 @@ group :development do
   gem 'rb-fsevent', require: false
   gem 'irbtools', require: 'irbtools/binding'
   gem 'binding_of_caller'
-
-  gem 'rubocop', require: false
   gem 'railroady' # graph of models
   gem 'shut_up_assets'
   gem 'annotate'
