@@ -27,6 +27,7 @@
 #
 class Post < ActiveRecord::Base
   include Core::Referenceable
+  include Core::Userable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
@@ -40,12 +41,8 @@ class Post < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 
-  belongs_to :user
-
   has_many :comments, as: :commentable, dependent: :destroy
   accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true
-
-  delegate :username, to: :user, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }

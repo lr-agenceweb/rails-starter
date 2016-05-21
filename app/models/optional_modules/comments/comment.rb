@@ -32,6 +32,7 @@
 # == Comment Model
 #
 class Comment < ActiveRecord::Base
+  include Core::Userable
   include Tokenable
   include Scopable
   include Validatable
@@ -44,7 +45,6 @@ class Comment < ActiveRecord::Base
   has_ancestry
 
   belongs_to :commentable, polymorphic: true, touch: true
-  belongs_to :user
 
   validates :username,
             allow_blank: true,
@@ -67,8 +67,6 @@ class Comment < ActiveRecord::Base
   scope :only_blogs, -> { where(commentable_type: 'Blog') }
 
   paginates_per 15
-
-  delegate :username, :email, to: :user, prefix: true, allow_nil: true
 
   private
 
