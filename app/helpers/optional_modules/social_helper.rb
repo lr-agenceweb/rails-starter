@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == OptionalModules namespace
 #
@@ -32,8 +33,8 @@ module OptionalModules
                     },
                     twitter: {
                       card: 'summary_large_image',
-                      site: Figaro.env.twitter_username,
-                      creator: Figaro.env.twitter_username,
+                      site: @setting.try(:twitter_username),
+                      creator: @setting.try(:twitter_username),
                       title: title_seo,
                       description: sanitize_and_truncate(category.referencement_description),
                       url: category.menu_link(category.name, true),
