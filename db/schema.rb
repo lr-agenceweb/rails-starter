@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510105043) do
+ActiveRecord::Schema.define(version: 20160523215920) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -218,6 +218,7 @@ ActiveRecord::Schema.define(version: 20160510105043) do
     t.string   "title",           limit: 255
     t.string   "slug",            limit: 255
     t.text     "content",         limit: 65535
+    t.boolean  "all_day",                       default: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.boolean  "show_as_gallery",               default: false

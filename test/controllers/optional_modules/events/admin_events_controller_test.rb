@@ -178,14 +178,14 @@ module Admin
     # == Validation rules
     #
     test 'should save event if link is correct' do
-      assert_difference ['Event.count'] do
-        post :create, event: { url: 'http://google.com' }
+      assert_difference ['Event.count', 'Link.count'] do
+        post :create, event: { link_attributes: { url: 'http://google.com' } }
       end
       assert assigns(:event).valid?
     end
 
     test 'should not save event if link is not correct' do
-      assert_no_difference ['Event.count'] do
+      assert_no_difference ['Event.count', 'Link.count'] do
         post :create, event: { link_attributes: { url: 'fake.url' } }
       end
       assert_not assigns(:event).valid?
