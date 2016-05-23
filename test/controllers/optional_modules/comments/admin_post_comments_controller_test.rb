@@ -152,6 +152,22 @@ module Admin
     end
 
     #
+    # == Emails
+    #
+    test 'should send email from batch_action if comment state changed from not validated to validated' do
+      clear_deliveries_and_queues
+      assert_no_enqueued_jobs
+      assert ActionMailer::Base.deliveries.empty?
+
+      assert_enqueued_jobs 1 do
+        post :batch_action, batch_action: 'toggle_validated', collection_selection: [@comment_not_validated.id, @comment_subscriber.id]
+        @comment_not_validated.reload
+        @comment_subscriber.reload
+        assert @comment_not_validated.validated?
+      end
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do
@@ -257,13 +273,14 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+      @comment_module = optional_modules(:comment)
+      @comment_setting = comment_settings(:one)
       @request.env['HTTP_REFERER'] = admin_comments_path
 
       @comment = comments(:one) # comment super_administrator
       @comment_administrator = comments(:two)
       @comment_subscriber = comments(:three)
-      @comment_module = optional_modules(:comment)
-      @comment_setting = comment_settings(:one)
+      @comment_not_validated = comments(:four)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

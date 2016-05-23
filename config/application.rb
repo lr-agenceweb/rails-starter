@@ -34,6 +34,7 @@ module Starter
     config.autoload_paths += Dir["#{config.root}/app/models/**/"]
     config.autoload_paths += Dir["#{config.root}/app/decorators/**/"]
     config.autoload_paths += Dir["#{config.root}/app/admin/**/"]
+    config.autoload_paths += Dir["#{config.root}/app/jobs/**/"]
     config.autoload_paths += Dir["#{config.root}/app/sweepers/**/"]
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.i18n.load_path += Dir["#{config.root}/config/locales/**/*.yml"]
