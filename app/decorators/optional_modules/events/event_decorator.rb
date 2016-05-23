@@ -29,6 +29,12 @@ class EventDecorator < PostDecorator
     start_date_deco(:without_time) if start_date? && all_day?
   end
 
+  def current_event?
+    return Time.zone.now.between?(model.start_date, model.end_date) if start_date? && end_date?
+    return (Time.zone.now.to_datetime >= model.start_date) && (Time.zone.now.to_datetime <= model.start_date + 1.day) if model.start_date?
+    false
+  end
+
   #
   # == Calendar
   #
