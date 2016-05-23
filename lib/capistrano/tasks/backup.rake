@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Automatisation of database export
 namespace :backup do
   desc 'Upload backup config files.'

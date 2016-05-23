@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Video
 Mime::Type.register 'video/mp4', :mp4
 Mime::Type.register 'video/mp4', :m4v
