@@ -23,7 +23,10 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   actions :all, except: [:new]
 
   batch_action :toggle_validated, if: proc { can? :toggle_validated, Comment } do |ids|
-    Comment.find(ids).each { |item| item.toggle! :validated }
+    Comment.find(ids).each do |comment|
+      comment.toggle! :validated
+      email_comment_validated(comment) if comment.validated?
+    end
     redirect_to :back, notice: t('active_admin.batch_actions.flash')
   end
 
@@ -77,6 +80,10 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     def set_comment_setting
       @locales = I18n.available_locales
       @comment_setting = CommentSetting.first
+    end
+
+    def email_comment_validated(comment)
+      CommentValidatedJob.set(wait: 3.seconds).perform_later(comment)
     end
   end
 end
