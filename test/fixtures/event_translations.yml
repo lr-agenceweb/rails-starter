@@ -65,3 +65,19 @@ event_five_en:
   title: Event 5
   slug: event-5
   content: ~
+
+all_day_fr:
+  <<: *DEFAULTS
+  event_id: 6
+  locale: fr
+  title: Evénement toute la journée
+  slug: evenement-toute-la-journee
+  content: ~
+
+all_day_en:
+  <<: *DEFAULTS
+  event_id: 6
+  locale: en
+  title: Event all day
+  slug: event all day
+  content: ~

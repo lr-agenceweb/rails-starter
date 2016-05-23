@@ -62,3 +62,10 @@ event_five:
   start_date: <%= Time.zone.now + 1.weeks.to_i %>
   end_date: <%= Time.zone.now + 2.weeks.to_i %>
   online: true
+
+all_day:
+  <<: *DEFAULTS
+  id: 6
+  start_date: '2016-05-23 00:00:00'
+  all_day: true
+  online: true

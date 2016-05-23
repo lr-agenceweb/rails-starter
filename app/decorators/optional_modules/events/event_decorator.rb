@@ -16,16 +16,17 @@ class EventDecorator < PostDecorator
     distance_of_time_in_words(model.end_date, model.start_date) if start_date? && end_date?
   end
 
-  def start_date_deco
-    time_tag model.start_date.to_datetime, l(model.start_date, format: :without_time_no_year) if start_date?
+  def start_date_deco(format = :without_time_no_year)
+    time_tag model.start_date.to_datetime, l(model.start_date, format: format) if start_date?
   end
 
-  def end_date_deco
-    time_tag model.end_date.to_datetime, l(model.end_date, format: :without_time) if end_date?
+  def end_date_deco(format = :without_time)
+    time_tag model.end_date.to_datetime, l(model.end_date, format: format) if end_date?
   end
 
   def from_to_date
-    I18n.t('event.from_to_date', start_date: start_date_deco, end_date: end_date_deco) if start_date? && end_date?
+    return I18n.t('event.from_to_date', start_date: start_date_deco, end_date: end_date_deco) if start_date? && end_date? && !all_day?
+    start_date_deco(:without_time) if start_date? && all_day?
   end
 
   #
