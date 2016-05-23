@@ -43,7 +43,8 @@ class Event < ActiveRecord::Base
   has_one :location, as: :locationable, dependent: :destroy
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
-  validate :calendar_date_correct?, unless: proc { end_date.blank? && start_date.blank? }
+  validates :start_date, presence: true
+  validate :calendar_date_correct?, if: :should_validate_calendar_dates?
 
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
@@ -60,5 +61,13 @@ class Event < ActiveRecord::Base
     event_order = EventSetting.first.event_order
     return current_or_coming.order(start_date: :asc) if event_order.key == 'current_or_coming'
     order(start_date: :desc)
+  end
+
+  private
+
+  def should_validate_calendar_dates?
+    !all_day? ||
+      (has_attribute?(end_date) &&
+        !start_date.blank? && !end_date.blank?)
   end
 end
