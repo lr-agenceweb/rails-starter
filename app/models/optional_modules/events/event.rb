@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: events
@@ -7,6 +8,7 @@
 #  title           :string(255)
 #  slug            :string(255)
 #  content         :text(65535)
+#  all_day         :boolean          default(FALSE)
 #  start_date      :datetime
 #  end_date        :datetime
 #  show_as_gallery :boolean          default(FALSE)
@@ -41,12 +43,13 @@ class Event < ActiveRecord::Base
   has_one :location, as: :locationable, dependent: :destroy
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
-  validate :calendar_date_correct?, unless: proc { end_date.blank? && start_date.blank? }
+  validates :start_date, presence: true
+  validate :calendar_date_correct?, if: :should_validate_calendar_dates?
 
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
-  scope :current_or_coming, -> { where('(start_date <= ? AND end_date is ?) OR (start_date >= ?) OR (start_date <= ? AND end_date >= ?)', Time.zone.now, nil, Time.zone.now, Time.zone.now, Time.zone.now) }
+  scope :current_or_coming, -> { where('(start_date >= ?) OR (start_date <= ? AND end_date >= ?) OR (start_date = ? AND all_day = ?)', Time.zone.now, Time.zone.now, Time.zone.now, Time.zone.today, true) }
 
   def calendar_date_correct?
     return true unless end_date <= start_date
@@ -58,5 +61,13 @@ class Event < ActiveRecord::Base
     event_order = EventSetting.first.event_order
     return current_or_coming.order(start_date: :asc) if event_order.key == 'current_or_coming'
     order(start_date: :desc)
+  end
+
+  private
+
+  def should_validate_calendar_dates?
+    !all_day? ||
+      (has_attribute?(end_date) &&
+        !start_date.blank? && !end_date.blank?)
   end
 end

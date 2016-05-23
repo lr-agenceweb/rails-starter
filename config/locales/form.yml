@@ -110,6 +110,7 @@ fr:
           url: Lien à ajouter à l'article
 
       event:
+        all_day: Cocher cette case si l'événement ne dure qu'une seule journée
         start_date: Date de début de l'événement
         end_date: Date de fin de l'événement
         link: Vous pouvez mettre un lien vers le site organisateur de l'événement

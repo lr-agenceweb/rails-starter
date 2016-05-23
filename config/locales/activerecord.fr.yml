@@ -421,6 +421,7 @@ fr:
         content: Contenu
         link: Lien
         link_with_link: Lien
+        all_day: Toute la journée ?
         start_date: Date de début
         end_date: Date de fin
         full_address_inline: Adresse
