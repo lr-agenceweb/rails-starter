@@ -60,6 +60,19 @@ class BlogCategoriesControllerTest < ActionController::TestCase
   end
 
   #
+  # == Category not found
+  #
+  test 'should render 404 if trying to access unexisting blog_category' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_raises(ActiveRecord::RecordNotFound) do
+          get :show, locale: locale.to_s, id: 'foobar'
+        end
+      end
+    end
+  end
+
+  #
   # == Module disabled
   #
   test 'should render 404 if module is disabled' do
