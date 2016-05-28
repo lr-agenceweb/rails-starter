@@ -23,7 +23,7 @@ class BlogsController < ApplicationController
   # GET /blog/1
   # GET /blog/1.json
   def show
-    redirect_to @blog, status: :moved_permanently if request.path_parameters[:id] != @blog.slug
+    redirect_to blog_category_path(@blog.blog_category, @blog), status: :moved_permanently if request.path_parameters[:id] != @blog.slug
     seo_tag_show blog
   end
 
