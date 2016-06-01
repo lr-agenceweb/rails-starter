@@ -16,7 +16,7 @@ ActiveAdmin.register Blog do
               pictures_attributes: [
                 :id, :locale, :image, :online, :position, :_destroy
               ],
-              video_uploads_attributes: [
+              video_upload_attributes: [
                 :id, :online, :position,
                 :video_file,
                 :video_autoplay,
