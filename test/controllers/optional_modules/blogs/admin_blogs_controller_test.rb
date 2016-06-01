@@ -87,6 +87,27 @@ module Admin
     end
 
     #
+    # == VideoPlatform
+    #
+    test 'should be able to update video_platform attributes from blog' do
+      patch :update, id: @blog, blog: { video_platform_attributes: { online: false } }
+      assert_not assigns(:blog).video_platform.blank?
+      assert_not assigns(:blog).video_platform.online?
+    end
+
+    test 'should not be able to create blank video_platform attributes from blog' do
+      post :create, blog: { video_platform_attributes: { url: '' }, blog_category_id: @blog_category.id }
+      assert assigns(:blog).valid?
+      assert assigns(:blog).video_platform.blank?
+    end
+
+    test 'should be able to create video_platform attributes when creating blog' do
+      post :create, blog: { video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3' }, blog_category_id: @blog_category.id }
+      assert assigns(:blog).valid?
+      assert_not assigns(:blog).video_platform.blank?
+    end
+
+    #
     # == Audio
     #
     test 'should be able to update audio attributes from blog' do
