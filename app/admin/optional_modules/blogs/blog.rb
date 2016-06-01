@@ -36,7 +36,7 @@ ActiveAdmin.register Blog do
               ]
              ]
 
-    params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
+    params.push video_platform_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
     params.push audio_attributes: [:id, :audio, :online, :_destroy] if @audio_module.enabled?
     params.push :allow_comments if @comment_module.enabled?
     params
@@ -66,7 +66,7 @@ ActiveAdmin.register Blog do
   end
 
   form do |f|
-    render 'admin/posts/form', f: f
+    render 'admin/posts/form', f: f, has_one_relation: true
   end
 
   #
