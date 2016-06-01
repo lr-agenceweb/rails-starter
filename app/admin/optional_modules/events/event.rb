@@ -4,6 +4,7 @@ ActiveAdmin.register Event do
 
   permit_params do
     params = [:id,
+              :all_day,
               :start_date,
               :end_date,
               :show_as_gallery,
@@ -37,8 +38,7 @@ ActiveAdmin.register Event do
                 translations_attributes: [
                   :id, :locale, :title, :description, :keywords
                 ]
-              ]
-             ]
+              ]]
     params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
     params.push :show_calendar if @calendar_module.enabled?
     params
@@ -68,6 +68,7 @@ ActiveAdmin.register Event do
       r.picture.image if r.picture?
     end
     column :title
+    bool_column :all_day
     column :start_date
     column :end_date
     bool_column :show_calendar if calendar_module.enabled?
@@ -86,6 +87,7 @@ ActiveAdmin.register Event do
               r.picture.image
             end if resource.picture?
             row :content
+            bool_row :all_day
             row :start_date
             row :end_date
             row :duration
@@ -126,6 +128,9 @@ ActiveAdmin.register Event do
 
       column do
         f.inputs t('activerecord.models.event.one') do
+          f.input :all_day,
+                  hint: I18n.t('form.hint.event.all_day')
+
           f.input :start_date,
                   as: :date_time_picker,
                   hint: I18n.t('form.hint.event.start_date')
@@ -179,6 +184,37 @@ ActiveAdmin.register Event do
 
     def scoped_collection
       super.includes :translations, :location, :picture
+    end
+
+    def create
+      reset_end_date if lasts_all_day?
+      check_all_day if empty_end_date?
+      super
+    end
+
+    def update
+      reset_end_date if lasts_all_day?
+      check_all_day if empty_end_date?
+      super
+    end
+
+    private
+
+    def reset_end_date
+      params[:event][:start_date] = params[:event][:start_date].to_datetime.change(hour: 0, min: 0, sec: 0)
+      params[:event][:end_date] = nil
+    end
+
+    def check_all_day
+      params[:event][:all_day] = true
+    end
+
+    def lasts_all_day?
+      params[:event][:all_day] == true
+    end
+
+    def empty_end_date?
+      params[:event][:end_date].blank?
     end
   end
 end

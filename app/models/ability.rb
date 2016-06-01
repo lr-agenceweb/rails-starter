@@ -40,15 +40,20 @@ class Ability
     cannot [:unlink], User
     can :manage, User, id: @user.id
     optional_modules_check
-    can :manage, StringBox, optional_module_id: nil
+    can :manage, StringBox, optional_module: nil
     super_admin_batch_actions # Batch actions
   end
 
   def administrator_privilege
     can :read, :all
     can [:crud], [Post]
-    can :update, [Setting, Category]
-    can [:read, :update], Menu
+    can :update, [Setting]
+
+    # Menu / Category
+    cannot :manage, [Menu, Category], optional_module: { enabled: false }
+    can [:update], [Menu, Category], optional_module: { enabled: true }
+    can [:update], [Menu, Category], optional_module: nil
+
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
     cannot [:create, :unlink], User
     cannot [:update, :destroy], User, role: { name: %w( administrator ) }
@@ -58,7 +63,7 @@ class Ability
     cannot :manage, OptionalModule
     cannot [:read, :update, :destroy], [About, LegalNotice]
     can :manage, [About, LegalNotice], user_id: @user.id
-    can [:read, :update], StringBox, optional_module_id: nil
+    can [:read, :update], StringBox, optional_module: nil
 
     admin_batch_actions # Batch actions
     optional_modules_check # Optional modules
@@ -136,7 +141,7 @@ class Ability
       cannot [:create, :destroy], NewsletterSetting
     else
       cannot :manage, [Newsletter, NewsletterUser, NewsletterSetting]
-      cannot :manage, StringBox, optional_module_id: @newsletter_module.id unless @newsletter_module.enabled?
+      cannot :manage, StringBox, optional_module: @newsletter_module unless @newsletter_module.enabled?
     end
   end
 

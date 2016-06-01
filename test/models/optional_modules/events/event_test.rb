@@ -9,14 +9,6 @@ class EventTest < ActiveSupport::TestCase
 
   setup :initialize_test
 
-  # test 'should return correct count for events' do
-  #   assert_equal 3, Event.count
-  # end
-
-  # test 'should return correct count for online events' do
-  #   assert_equal 2, Event.online.count
-  # end
-
   test 'should return correct duration for event' do
     assert_equal '6 jours', @event.decorate.duration
   end
@@ -54,7 +46,7 @@ class EventTest < ActiveSupport::TestCase
   # == EventOrder
   #
   test 'should return correct order if current_or_coming' do
-    assert_equal 'Evénement 3', Event.with_conditions.first.title
+    assert_equal 'Evénement 4', Event.with_conditions.first.title
   end
 
   test 'should return correct order if all are shown' do
@@ -88,27 +80,39 @@ class EventTest < ActiveSupport::TestCase
   #
   test 'should not have flash content if no video are uploaded' do
     @event.save!
-    assert @event.video_flash_notice.blank?
+    assert @event.video_upload_flash_notice.blank?
   end
 
   test 'should return correct flash content after updating a video' do
     video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
     @event.update_attributes(video_uploads_attributes: [{ video_file: video }, { video_file: video }])
     @event.save!
-    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @event.video_flash_notice
+    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @event.video_upload_flash_notice
   end
 
   #
   # == Validation rules
   #
+  test 'should not be valid if start_date is not present' do
+    event = Event.new all_day: true
+    assert_not event.valid?
+    assert_equal [:start_date], event.errors.keys
+  end
+
+  test 'should not be valid if start_date finish after end_date' do
+    event = Event.new start_date: Time.zone.now + 1.day, end_date: Time.zone.now
+    assert_not event.valid?
+    assert_equal [:start_date, :end_date], event.errors.keys
+  end
+
   test 'should not create event if link is not correct' do
-    event = Event.new link_attributes: { url: 'bad-link' }
+    event = Event.new link_attributes: { url: 'bad-link' }, start_date: Time.zone.now, all_day: true
     assert_not event.valid?
     assert_equal [:'link.url'], event.errors.keys
   end
 
   test 'should create event if link is correct' do
-    event = Event.new link_attributes: { url: 'http://test.com' }
+    event = Event.new link_attributes: { url: 'http://test.com' }, start_date: Time.zone.now, all_day: true
     assert event.valid?
     assert_empty event.errors.keys
   end

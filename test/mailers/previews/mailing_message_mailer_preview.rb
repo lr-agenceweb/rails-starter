@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == MailingMessage Mailer preview
 # Preview all emails at http://localhost:3000/rails/mailers/mailing_message_preview

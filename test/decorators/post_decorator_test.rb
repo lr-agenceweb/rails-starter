@@ -69,6 +69,57 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Custom cover
+  #
+  test 'should return picture cover if any' do
+    @blog_decorated.pictures.each(&:destroy)
+    @blog_decorated.video_upload.destroy
+    @blog_decorated.video_platform.destroy
+
+    pic = fixture_file_upload 'images/bart.png', 'image/png'
+    Picture.create(attachable_type: 'Blog', attachable_id: @blog_decorated.id, image: pic)
+
+    assert @blog_decorated.pictures?
+    assert_not @blog_decorated.video_uploads?
+    assert_not @blog_decorated.video_platforms?
+
+    assert_equal "<img width=\"50\" height=\"90\" src=\"#{@blog_decorated.picture.image.url(:small)}\" alt=\"Small bart\" />", @blog_decorated.custom_cover
+  end
+
+  test 'should return video_upload cover if any and no picture' do
+    @blog_decorated.pictures.each(&:destroy)
+    @blog_decorated.video_platform.destroy
+
+    assert_not @blog_decorated.pictures?
+    assert @blog_decorated.video_uploads?
+    assert_not @blog_decorated.video_platforms?
+
+    assert_equal "<img src=\"/system/test/video_uploads/#{@blog_decorated.video_upload.id}/preview-landscape.jpg\" alt=\"Preview landscape\" />", @blog_decorated.custom_cover
+  end
+
+  test 'should return video_platform cover if no picture or video_upload' do
+    @blog_decorated.pictures.each(&:destroy)
+    @blog_decorated.video_upload.destroy
+
+    assert_not @blog_decorated.pictures?
+    assert_not @blog_decorated.video_uploads?
+    assert @blog_decorated.video_platforms?
+
+    assert_equal "<img src=\"http://s2.dmcdn.net/MkYFP/x240-qKj.png\" alt=\"X240 qkj\" />", @blog_decorated.custom_cover
+  end
+
+  test 'should return any cover picture if no condition works' do
+    @blog_decorated.pictures.each(&:destroy)
+    @blog_decorated.video_upload.destroy
+    @blog_decorated.video_platform.destroy
+
+    assert_not @blog_decorated.pictures?
+    assert_not @blog_decorated.video_uploads?
+    assert_not @blog_decorated.video_platforms?
+    assert @blog_decorated.custom_cover.blank?
+  end
+
+  #
   # == Comment
   #
   test 'should return correct comments count by article' do
@@ -93,7 +144,10 @@ class PostDecoratorTest < Draper::TestCase
     @post = posts(:home)
     @post_about = posts(:about)
     @post_about_2 = posts(:about_2)
+    @blog = blogs(:blog_online)
+
     @post_decorated = PostDecorator.new(@post)
     @post_about_decorated = PostDecorator.new(@post_about)
+    @blog_decorated = PostDecorator.new(@blog)
   end
 end

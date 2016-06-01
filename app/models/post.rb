@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -26,9 +27,12 @@
 # == Post Model
 #
 class Post < ActiveRecord::Base
+  include Core::Userable
+  include Core::Referenceable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
+  include OptionalModules::Commentable
   include OptionalModules::Searchable
   include Positionable
   include PrevNextable
@@ -38,17 +42,6 @@ class Post < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
-
-  belongs_to :user
-
-  has_many :comments, as: :commentable, dependent: :destroy
-  accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true
-
-  has_one :referencement, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
-
-  delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
-  delegate :username, to: :user, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }

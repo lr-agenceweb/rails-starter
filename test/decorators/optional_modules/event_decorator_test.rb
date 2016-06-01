@@ -67,8 +67,46 @@ class EventDecoratorTest < Draper::TestCase
     assert_equal 'Du <time datetime="2015-07-22T09:00:00+02:00">22/07</time> au <time datetime="2015-07-28T18:00:00+02:00">28/07/2015</time>', @event_decorated.from_to_date
   end
 
+  test 'should have correct from_to_date html for all_day event' do
+    assert_equal '<time datetime="2016-05-23T00:00:00+02:00">23/05/2016</time>', @event_all_day_decorated.from_to_date
+  end
+
   test 'should not return from_to_date if start or end not set' do
     assert_nil @event_two_decorated.from_to_date
+  end
+
+  test 'should return correct value for current_event? with all_day?' do
+    local_time_1 = Time.zone.local(2016, 5, 23, 14, 0, 0)
+    local_time_2 = Time.zone.local(2016, 5, 20, 14, 0, 0)
+    local_time_3 = Time.zone.local(2016, 5, 26, 14, 0, 0)
+    Timecop.freeze(local_time_1) do
+      assert @event_all_day_decorated.current_event?
+    end
+
+    Timecop.freeze(local_time_2) do
+      assert_not @event_all_day_decorated.current_event?
+    end
+
+    Timecop.freeze(local_time_3) do
+      assert_not @event_all_day_decorated.current_event?
+    end
+  end
+
+  test 'should return correct value for current_event? with start_date and end_date event' do
+    local_time_1 = Time.zone.local(2015, 7, 25, 14, 0, 0)
+    local_time_2 = Time.zone.local(2015, 7, 18, 14, 0, 0)
+    local_time_3 = Time.zone.local(2015, 7, 30, 14, 0, 0)
+    Timecop.freeze(local_time_1) do
+      assert @event_decorated.current_event?
+    end
+
+    Timecop.freeze(local_time_2) do
+      assert_not @event_decorated.current_event?
+    end
+
+    Timecop.freeze(local_time_3) do
+      assert_not @event_decorated.current_event?
+    end
   end
 
   #
@@ -102,6 +140,7 @@ class EventDecoratorTest < Draper::TestCase
   def initialize_test
     @event = events(:event_online)
     @event_two = events(:event_third)
+    @event_all_day = events(:all_day)
     @calendar_module = optional_modules(:calendar)
 
     @link = links(:event)
@@ -113,5 +152,6 @@ class EventDecoratorTest < Draper::TestCase
     @locales = I18n.available_locales
     @event_decorated = EventDecorator.new(@event)
     @event_two_decorated = EventDecorator.new(@event_two)
+    @event_all_day_decorated = EventDecorator.new(@event_all_day)
   end
 end

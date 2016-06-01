@@ -16,6 +16,15 @@ class CommentMailerTest < ActionMailer::TestCase
     assert_equal I18n.t('comment.signalled.email.subject', site: @setting.title, locale: I18n.default_locale), email.subject
   end
 
+  test 'should send validated email' do
+    email = CommentMailer.send_validated_comment(@comment).deliver_now
+
+    refute ActionMailer::Base.deliveries.empty?
+    assert_equal [@setting.email], email.from
+    assert_equal [@comment.decorate.email_registered_or_guest], email.to
+    assert_equal I18n.t('comment.validated.email.subject', site: @setting.title, locale: I18n.default_locale), email.subject
+  end
+
   private
 
   def initialize_test

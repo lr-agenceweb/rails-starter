@@ -28,8 +28,24 @@ f.columns do
   end
 end
 
-render 'admin/shared/video_platforms/many', f: f if video_settings.video_platform? && video_module.enabled?
-render 'admin/shared/video_uploads/many', f: f if video_settings.video_upload? && video_module.enabled?
+if video_module.enabled?
+  if video_settings.video_platform?
+    if defined?(has_one_relation) && has_one_relation
+      render 'admin/shared/video_platforms/one', f: f
+    else
+      render 'admin/shared/video_platforms/many', f: f
+    end
+  end
+
+  if video_settings.video_upload?
+    if defined?(has_one_relation) && has_one_relation
+      render 'admin/shared/video_uploads/one', f: f
+    else
+      render 'admin/shared/video_uploads/many', f: f
+    end
+  end
+end
+
 render 'admin/shared/audios/one', f: f if f.object.is_a?(Blog) && audio_module.enabled?
 
 f.actions

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == Abouts Controller
 #
@@ -6,7 +7,7 @@ class AboutsController < PostsController
   before_action :set_about, only: [:show]
   decorates_assigned :about, :comment
 
-  include OptionalModules::Commentable
+  include OptionalModules::Commentsable
 
   # GET /a-propos
   # GET /a-propos.json

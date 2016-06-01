@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: blogs
@@ -27,10 +28,13 @@
 #
 class Blog < ActiveRecord::Base
   include Scopable
+  include Core::Userable
+  include Core::Referenceable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::Audioable
   include OptionalModules::Assets::VideoUploadable
   include OptionalModules::Assets::VideoPlatformable
+  include OptionalModules::Commentable
   include OptionalModules::Searchable
   include PrevNextable
 
@@ -42,17 +46,8 @@ class Blog < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 
-  belongs_to :user
   belongs_to :blog_category, inverse_of: :blogs, counter_cache: true
 
-  has_many :comments, as: :commentable, dependent: :destroy
-  accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true
-
-  has_one :referencement, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
-
-  delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
-  delegate :username, to: :user, prefix: true, allow_nil: true
   delegate :name, to: :blog_category, prefix: true, allow_nil: true
 
   validates :blog_category, presence: true

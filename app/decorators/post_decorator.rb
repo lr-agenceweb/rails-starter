@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == PostDecorator
 #
@@ -34,6 +35,16 @@ class PostDecorator < ApplicationDecorator
   #
   def image
     pictures? ? retina_image_tag(first_pictures, :image, :small) : 'Pas d\'image'
+  end
+
+  def custom_cover
+    if model.pictures?
+      retina_image_tag(first_pictures, :image, :small)
+    elsif model.video_uploads?
+      retina_image_tag(model.video_upload, :video_file, :preview)
+    elsif model.video_platforms?
+      model.video_platform.decorate.preview
+    end
   end
 
   # Method used to display content in RSS Feed

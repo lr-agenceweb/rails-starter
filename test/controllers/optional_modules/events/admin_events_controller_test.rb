@@ -71,6 +71,23 @@ module Admin
     end
 
     #
+    # == Controller actions
+    #
+    test 'should not save end_date if all_day param is checked' do
+      assert_not @event.end_date.nil?
+      patch :update, id: @event, event: { all_day: true, start_date: '2015-07-22 09:00:00', end_date: '2015-07-28 18:00:00' }
+      assert_nil assigns(:event).end_date
+      assert assigns(:event).all_day?
+    end
+
+    test 'should save end_date if all_day param is not checked' do
+      assert @event_all_day.end_date.nil?
+      patch :update, id: @event_all_day, event: { all_day: false, end_date: '2016-05-23 19:08:43' }
+      assert_not assigns(:event).end_date.nil?
+      assert_not assigns(:event).all_day?
+    end
+
+    #
     # == Flash content
     #
     test 'should return empty flash notice if no update' do
@@ -178,15 +195,15 @@ module Admin
     # == Validation rules
     #
     test 'should save event if link is correct' do
-      assert_difference ['Event.count'] do
-        post :create, event: { url: 'http://google.com' }
+      assert_difference ['Event.count', 'Link.count'] do
+        post :create, event: { link_attributes: { url: 'http://google.com' }, start_date: Time.zone.now, end_date: Time.zone.now + 1.day }
       end
       assert assigns(:event).valid?
     end
 
     test 'should not save event if link is not correct' do
-      assert_no_difference ['Event.count'] do
-        post :create, event: { link_attributes: { url: 'fake.url' } }
+      assert_no_difference ['Event.count', 'Link.count'] do
+        post :create, event: { link_attributes: { url: 'fake.url' }, start_date: Time.zone.now, end_date: Time.zone.now + 1.day }
       end
       assert_not assigns(:event).valid?
     end
@@ -256,11 +273,13 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
-      @request.env['HTTP_REFERER'] = admin_events_path
-      @event = events(:event_online)
-      @event_not_validate = events(:event_offline)
       @event_module = optional_modules(:event)
       @calendar_module = optional_modules(:calendar)
+      @request.env['HTTP_REFERER'] = admin_events_path
+
+      @event = events(:event_online)
+      @event_all_day = events(:all_day)
+      @event_not_validate = events(:event_offline)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

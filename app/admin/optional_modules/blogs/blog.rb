@@ -16,7 +16,7 @@ ActiveAdmin.register Blog do
               pictures_attributes: [
                 :id, :locale, :image, :online, :position, :_destroy
               ],
-              video_uploads_attributes: [
+              video_upload_attributes: [
                 :id, :online, :position,
                 :video_file,
                 :video_autoplay,
@@ -36,7 +36,7 @@ ActiveAdmin.register Blog do
               ]
              ]
 
-    params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
+    params.push video_platform_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
     params.push audio_attributes: [:id, :audio, :online, :_destroy] if @audio_module.enabled?
     params.push :allow_comments if @comment_module.enabled?
     params
@@ -56,17 +56,17 @@ ActiveAdmin.register Blog do
   end
 
   index do
-    render 'admin/posts/index', object: self, show_blog_category: true
+    render 'admin/posts/index', object: self, show_blog_category: true, custom_cover: true
   end
 
   show title: :title_aa_show do
     arbre_cache(self, resource.cache_key) do
-      render 'admin/posts/show', resource: resource
+      render 'admin/posts/show', resource: resource, custom_cover: true
     end
   end
 
   form do |f|
-    render 'admin/posts/form', f: f
+    render 'admin/posts/form', f: f, has_one_relation: true
   end
 
   #

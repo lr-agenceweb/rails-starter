@@ -92,9 +92,5 @@ ActiveAdmin.register Newsletter do
         end
       end
     end
-
-    def set_newsletter
-      @newsletter = Newsletter.find(params[:id])
-    end
   end
 end

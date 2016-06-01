@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # == PictureDecorator
 #
@@ -49,6 +50,6 @@ class PictureDecorator < ApplicationDecorator
   end
 
   def interchange_self
-    { interchange: "[#{model.self_image_url_by_size(:large)}, (default)], [#{model.self_image_url_by_size(:medium)}, (small)], [#{model.self_image_url_by_size(:medium)}, (medium)], [#{model.self_image_url_by_size(:large)}, (large)]" }
+    { interchange: "[#{model.self_image_url_by_size(:medium)}, small], [#{model.self_image_url_by_size(:medium)}, medium], [#{model.self_image_url_by_size(:large)}, large]" }
   end
 end

@@ -23,6 +23,10 @@ fr:
         content: Un commentaire écrit par <strong>%{user}</strong> a été signalé comme non approprié sur le site.
         link: Modérer le commentaire
         all: Voir tous les commentaires à modérer
+    validated:
+      email:
+        subject: Votre commentaire posté sur le site "%{site}" a été validé par l'administrateur !
+        content: "Le commentaire que vous avez posté le <strong>%{date}</strong> sur l'article <strong>%{article}</strong> a été validé par l'administrateur ! <br /> Vous pouvez le visualiser à travers ce lien: <br /> %{link}."
     destroy:
       success: Le commentaire a été supprimé.
       error: Une erreur s'est produite au moment de supprimé le commentaire
@@ -34,6 +38,8 @@ fr:
       to_moderate: Commentaires à modérer
       signalled: Commentaires signalés
     no_last_comments: Il n'y a pas de commentaires récents
+    email:
+      greeting: Bonjour %{author},
 
 # English
 en:
@@ -52,6 +58,10 @@ en:
       already_signalled: Comment already signalled
       not_signalled: Signal this comment ?
       success: Thanks, this comment has been signalled to the administrator
+    validated:
+      email:
+        subject: Your comment submitted to the "%{site}" website has been approved by the administrator !
+        content: "Comment you submitted on <strong>%{date}</strong> to the <strong>%{article}</strong> article has been validated by the administrator ! <br /> You can see it following this link: <br /> %{link}"
     destroy:
       success: The comment has been destroyed.
       error: An error occured when trying to destroy the comment
@@ -63,3 +73,5 @@ en:
       to_moderate: Comments to moderate
       signalled: Comments signalled
     no_last_comments: There is no recent comments
+    email:
+      greeting: Hello %{author},

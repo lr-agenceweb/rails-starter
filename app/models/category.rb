@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: categories
@@ -22,6 +23,7 @@
 # == Category Model
 #
 class Category < ActiveRecord::Base
+  include Core::Referenceable
   include OptionalModules::Assets::Backgroundable
   include OptionalModules::Assets::VideoUploadable
 
@@ -32,10 +34,6 @@ class Category < ActiveRecord::Base
   has_one :heading, as: :headingable, dependent: :destroy
   accepts_nested_attributes_for :heading, reject_if: :all_blank, allow_destroy: true
 
-  has_one :referencement, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :referencement, reject_if: :all_blank, allow_destroy: true
-
-  delegate :description, :keywords, to: :referencement, prefix: true, allow_nil: true
   delegate :enabled, to: :optional_module, prefix: true, allow_nil: true
   delegate :title, :position, :online, to: :menu, prefix: true, allow_nil: true
 

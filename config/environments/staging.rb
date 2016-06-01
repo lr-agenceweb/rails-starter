@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Staging configuration is identical to production, with some overrides
 require_relative './production'
 

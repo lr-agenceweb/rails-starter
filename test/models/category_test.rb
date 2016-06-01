@@ -22,14 +22,14 @@ class CategoryTest < ActiveSupport::TestCase
   #
   test 'should not have flash content if no video are uploaded' do
     @category.save!
-    assert @category.video_upload.video_flash_notice.blank?
+    assert @category.video_upload.video_upload_flash_notice.blank?
   end
 
   test 'should return correct flash content after updating a video' do
     video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
     @category.update_attributes(video_upload_attributes: { video_file: video })
     @category.save!
-    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @category.video_upload.video_flash_notice
+    assert_equal I18n.t('video_upload.flash.upload_in_progress'), @category.video_upload.video_upload_flash_notice
   end
 
   #

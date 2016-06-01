@@ -13,6 +13,7 @@
 #= require admin/froala_editor
 
 #= require admin/newsletters_preview
+#= require admin/calendar_all_day
 #= require admin/omniauth_actions
 #= require admin/mailings
 #= require admin/counter_letters

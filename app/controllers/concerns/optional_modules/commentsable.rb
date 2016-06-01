@@ -5,9 +5,9 @@
 #
 module OptionalModules
   #
-  # == CommentableConcern
+  # == CommentsableConcern
   #
-  module Commentable
+  module Commentsable
     extend ActiveSupport::Concern
 
     included do

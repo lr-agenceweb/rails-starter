@@ -6,6 +6,7 @@
 #  title           :string(255)
 #  slug            :string(255)
 #  content         :text(65535)
+#  all_day         :boolean          default(FALSE)
 #  start_date      :datetime
 #  end_date        :datetime
 #  show_as_gallery :boolean          default(FALSE)
@@ -60,4 +61,11 @@ event_five:
   id: 5
   start_date: <%= Time.zone.now + 1.weeks.to_i %>
   end_date: <%= Time.zone.now + 2.weeks.to_i %>
+  online: true
+
+all_day:
+  <<: *DEFAULTS
+  id: 6
+  start_date: '2016-05-23 00:00:00'
+  all_day: true
   online: true
