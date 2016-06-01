@@ -30,6 +30,10 @@ module OptionalModules
           (new_record? && attributes['video_file'].blank?) ||
             (!attributes['id'].blank? && attributes['video_file'].blank?)
         end
+
+        def video_uploads?
+          video_uploads.online.any? && !video_uploads.first.video_file_processing?
+        end
       end
     end
   end

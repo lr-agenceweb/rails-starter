@@ -203,6 +203,7 @@ fr:
         allow_comments: Commentaires ?
         show_as_gallery: Galerie d'images
         blog_category: Catégorie de l'article
+        custom_cover: Couverture
       blog_category:
         name: Nom
       blog_setting:

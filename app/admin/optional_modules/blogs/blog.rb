@@ -56,12 +56,12 @@ ActiveAdmin.register Blog do
   end
 
   index do
-    render 'admin/posts/index', object: self, show_blog_category: true
+    render 'admin/posts/index', object: self, show_blog_category: true, custom_cover: true
   end
 
   show title: :title_aa_show do
     arbre_cache(self, resource.cache_key) do
-      render 'admin/posts/show', resource: resource
+      render 'admin/posts/show', resource: resource, custom_cover: true
     end
   end
 

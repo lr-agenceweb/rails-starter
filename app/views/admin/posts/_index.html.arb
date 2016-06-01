@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 object.selectable_column
-object.image_column :image, style: :small do |r|
-  r.picture.image if r.picture?
-end unless defined?(hide_image_column)
+
+if defined?(custom_cover) && custom_cover
+  object.column :custom_cover
+else
+  object.image_column :image, style: :small do |r|
+    r.picture.image if r.picture?
+  end unless defined?(hide_image_column)
+end
+
 object.column :title
 object.column :blog_category if defined?(show_blog_category)
 object.bool_column :allow_comments if comment_module.enabled? && !defined?(hide_comments_column)

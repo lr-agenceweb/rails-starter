@@ -54,7 +54,7 @@ module OptionalModules
       end
 
       def pictures?
-        pictures.online.first.present? && pictures.online.first.image.exists?
+        pictures.online.any? && pictures.online.last.image.exists?
       end
     end
   end

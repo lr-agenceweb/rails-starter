@@ -14,8 +14,12 @@ columns do
           blog.audio.audio
         end if resource.is_a?(Blog) && resource.blog.audio? && audio_module.enabled?
 
-        image_row :image, style: :medium do |r|
-          r.picture.image if r.picture?
+        if defined?(custom_cover) && custom_cover
+          row :custom_cover
+        else
+          image_row :image, style: :medium do |r|
+            r.picture.image if r.picture?
+          end
         end
       end
     end
