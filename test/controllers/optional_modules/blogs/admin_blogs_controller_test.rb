@@ -87,6 +87,28 @@ module Admin
     end
 
     #
+    # == Audio
+    #
+    test 'should be able to update audio attributes from blog' do
+      patch :update, id: @blog, blog: { audio_attributes: { online: false } }
+      assert_not assigns(:blog).audio.blank?
+      assert_not assigns(:blog).audio.online?
+    end
+
+    test 'should not be able to create blank audio attributes from blog' do
+      post :create, blog: { audio_attributes: { audio: '' }, blog_category_id: @blog_category.id }
+      assert assigns(:blog).valid?
+      assert assigns(:blog).audio.blank?
+    end
+
+    test 'should be able to create audio attributes when creating blog' do
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      post :create, blog: { audio_attributes: { audio: audio }, blog_category_id: @blog_category.id }
+      assert assigns(:blog).valid?
+      assert_not assigns(:blog).audio.blank?
+    end
+
+    #
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
