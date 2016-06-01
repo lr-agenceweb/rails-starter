@@ -201,6 +201,11 @@ module Admin
       assert ability.cannot?(:destroy, @category), 'should not be able to destroy'
 
       assert ability.can?(:reset_cache, @category), 'should be able to reset_cache'
+
+      # OptionalModule disabled
+      disable_optional_module @super_administrator, @guest_book_module, 'GuestBook' # in test_helper.rb
+      assert ability.cannot?(:read, @category_guest_book), 'should not be able to read'
+      assert ability.cannot?(:update, @category_guest_book), 'should not be able to update'
     end
 
     test 'should test abilities for super_administrator' do
@@ -237,7 +242,9 @@ module Admin
       @category_about = categories(:about)
       @category_search = categories(:search)
       @category_blog = categories(:blog)
+      @category_guest_book = categories(:guest_book)
       @background_module = optional_modules(:background)
+      @guest_book_module = optional_modules(:guest_book)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

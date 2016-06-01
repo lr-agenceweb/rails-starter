@@ -47,8 +47,13 @@ class Ability
   def administrator_privilege
     can :read, :all
     can [:crud], [Post]
-    can :update, [Setting, Category]
-    can [:read, :update], Menu
+    can :update, [Setting]
+
+    # Menu / Category
+    cannot :manage, [Menu, Category], optional_module: { enabled: false }
+    can [:update], [Menu, Category], optional_module: { enabled: true }
+    can [:update], [Menu, Category], optional_module: nil
+
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
     cannot [:create, :unlink], User
     cannot [:update, :destroy], User, role: { name: %w( administrator ) }

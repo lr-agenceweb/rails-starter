@@ -71,9 +71,9 @@ module Admin
 
     test 'should delete menu if super_administrator' do
       sign_in @super_administrator
-      @category = @menu_with_optional_module.category
+      @category = @menu_blog.category
       assert_difference ['Menu.count'], -1 do
-        delete :destroy, id: @menu_with_optional_module
+        delete :destroy, id: @menu_blog
       end
       assert_redirected_to admin_menus_path
     end
@@ -125,6 +125,11 @@ module Admin
       assert ability.cannot?(:destroy, @menu), 'should not be able to destroy'
 
       assert ability.can?(:toggle_online, @menu), 'should be able to toggle_online'
+
+      # OptionalModule disabled
+      disable_optional_module @super_administrator, @guest_book_module, 'GuestBook' # in test_helper.rb
+      assert ability.cannot?(:read, @menu_guest_book), 'should not be able to read'
+      assert ability.cannot?(:update, @menu_guest_book), 'should not be able to update'
     end
 
     test 'should test abilities for super_administrator' do
@@ -158,7 +163,9 @@ module Admin
       @request.env['HTTP_REFERER'] = admin_menus_path
 
       @menu = menus(:home)
-      @menu_with_optional_module = menus(:blog)
+      @menu_guest_book = menus(:guest_book)
+      @menu_blog = menus(:blog)
+      @guest_book_module = optional_modules(:guest_book)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)
