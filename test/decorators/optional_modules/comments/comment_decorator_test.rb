@@ -6,6 +6,7 @@ require 'test_helper'
 #
 class CommentDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
+  include ActionDispatch::TestProcess
 
   setup :initialize_test
 
@@ -62,16 +63,12 @@ class CommentDecoratorTest < Draper::TestCase
     assert_equal '<a target="_blank" href="/blogs/foo/article-de-blog-en-ligne">Article de blog en ligne</a>', @blog_comment_decorated.link_source
   end
 
-  test 'should return correct commentable image' do
-    assert_equal '<img src="/system/test/pictures/337532635/small-my-picture-3.jpg" alt="Small my picture 3" />', @comment_decorated.image_source
-  end
-
   test 'should return correct commentable link and image' do
-    assert_equal '<p><img src="/system/test/pictures/337532635/small-my-picture-3.jpg" alt="Small my picture 3" /></p><p><a target="_blank" href="/a-propos/article-2-a-propos">Article 2 A Propos</a></p>', @comment_decorated.link_and_image_source
-  end
+    @blog_comment.commentable.pictures.each(&:destroy)
 
-  test 'should return correct value for commentable_image?' do
-    assert @comment_decorated.send(:commentable_image?)
+    attachment = fixture_file_upload 'images/bart.png', 'image/png'
+    Picture.create(attachable_id: @blog_comment.commentable_id, attachable_type: 'Blog', image: attachment)
+    assert_equal "<p><img width=\"50\" height=\"90\" src=\"#{@blog_comment.commentable.picture.image.url(:small)}\" alt=\"Small bart\" /></p><p><a target=\"_blank\" href=\"/blogs/foo/article-de-blog-en-ligne\">Article de blog en ligne</a></p>", @blog_comment_decorated.link_and_image_source
   end
 
   private
