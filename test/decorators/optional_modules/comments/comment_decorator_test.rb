@@ -53,6 +53,16 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Content
+  #
+  test 'should return preview of comment' do
+    assert_equal 'Mon commentaire de test', @comment_decorated.preview_content
+
+    @comment_decorated.update_attribute(:comment, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+    assert_equal 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut...', @comment_decorated.preview_content
+  end
+
+  #
   # == Link and Image for Commentable
   #
   test 'should return correct commentable link for regular articles' do

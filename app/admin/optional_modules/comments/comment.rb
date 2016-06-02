@@ -49,6 +49,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     selectable_column
     column :author_with_avatar
     column :email_registered_or_guest
+    column :preview_content
     column :lang if locales.length > 1
     bool_column :validated
     bool_column :signalled if comment_setting.should_signal?

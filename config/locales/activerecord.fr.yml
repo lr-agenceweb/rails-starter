@@ -383,6 +383,7 @@ fr:
         mail: Email
         email_registered_or_guest: Email
         content: Commentaire
+        preview_content: Commentaire
         lang: Langue
         link_source: Article concerné
         link_and_image_source: Article concerné

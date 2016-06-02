@@ -38,6 +38,13 @@ class CommentDecorator < ApplicationDecorator
   end
 
   #
+  # == Content
+  #
+  def preview_content
+    truncate_html(model.content, length: 100, escape: true)
+  end
+
+  #
   # == Link and Image for Commentable
   #
   def link_source
