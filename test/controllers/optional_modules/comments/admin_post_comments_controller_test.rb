@@ -152,6 +152,17 @@ module Admin
     end
 
     #
+    # == Member actions
+    #
+    test 'should toggle validated value of comment' do
+      @request.env['HTTP_REFERER'] = admin_comment_path(@comment)
+      assert @comment.validated?
+      put :toggle_validated, id: @comment
+      assert_not assigns(:post_comment).validated?
+      assert_redirected_to admin_comment_path(@comment)
+    end
+
+    #
     # == Emails
     #
     test 'should send email from batch_action if comment state changed from not validated to validated' do
