@@ -13,7 +13,7 @@
         li
           = t('activerecord.models.guest_book.other')
           .admin_bar-comments
-            a.admin_bar-bubble.admin_bar-comments-tovalidate-link href="#{admin_guest_books_path(scope: 'a_valider')}"
+            a.admin_bar-bubble.admin_bar-comments-tovalidate-link href="#{admin_guest_books_path(scope: 'a_valider')}" target="_blank"
               span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('guest_book.admin_bar.to_moderate')}" = @guest_books_to_validate_count
 
 
@@ -23,11 +23,11 @@
           = t('activerecord.models.comment.other')
           .admin_bar-comments
             - if @comment_setting_admin_bar.should_validate?
-              a.admin_bar-bubble.admin_bar-comments-tovalidate-link id="comments-to-validate-count" href="#{admin_post_comments_path(scope: 'a_valider')}"
+              a.admin_bar-bubble.admin_bar-comments-tovalidate-link id="comments-to-validate-count" href="#{admin_post_comments_path(scope: 'a_valider')}" target="_blank"
                 span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.to_moderate')}" = @comments_to_validate_count
 
             - if @comment_setting_admin_bar.should_signal?
-              a.admin_bar-bubble.admin_bar-comments-signalled-link id="comments-signalled-count" href="#{admin_post_comments_path(scope: 'signales')}"
+              a.admin_bar-bubble.admin_bar-comments-signalled-link id="comments-signalled-count" href="#{admin_post_comments_path(scope: 'signales')}" target="_blank"
                 span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.signalled')}" = @comments_signalled_count
 
   .float-right
