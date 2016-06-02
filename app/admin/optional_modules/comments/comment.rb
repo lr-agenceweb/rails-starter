@@ -22,6 +22,16 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   config.clear_sidebar_sections!
   actions :all, except: [:new]
 
+  # Toggle comment validation on show view
+  action_item :toggle_validated, only: [:show] do
+    link_to I18n.t('active_admin.batch_actions.labels.toggle_validated'), toggle_validated_admin_post_comment_path(resource), method: :put, data: { confirm: I18n.t('active_admin.toggle_validated.confirm', verb: resource.validated? ? 'invalider' : 'valider', object_kind: I18n.t('activerecord.models.comment.one').downcase) }
+  end
+
+  member_action :toggle_validated, method: :put do
+    resource.toggle! :validated
+    redirect_to :back, notice: t('active_admin.toggle_validated.flash', verb: resource.validated? ? 'validé' : 'invalidé')
+  end
+
   batch_action :toggle_validated, if: proc { can? :toggle_validated, Comment } do |ids|
     Comment.find(ids).each do |comment|
       comment.toggle! :validated
