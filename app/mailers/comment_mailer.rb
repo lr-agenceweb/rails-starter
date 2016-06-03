@@ -7,7 +7,6 @@ class CommentMailer < ApplicationMailer
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::UrlHelper
 
-  default to: Setting.first.try(:email)
   layout 'comment'
 
   # Email sent when comment is being created
@@ -33,6 +32,7 @@ class CommentMailer < ApplicationMailer
     @content = I18n.t('comment.signalled.email.content', user: @comment.decorate.pseudo_registered_or_guest, locale: I18n.default_locale)
 
     mail from: @comment.decorate.email_registered_or_guest,
+         to: @setting.email,
          subject: @comment.subject do |format|
       format.html
       format.text
