@@ -5,12 +5,12 @@
           input_html: { class: 'autosize', style: 'height: 120px' }
 = f.input :nickname,
           label: false,
-          input_html: { class: 'hide-for-small-up' }
+          input_html: { class: 'hide' }
 
-- if params[:action] == 'reply'
+- if can?(:reply, comment) && params[:action] == 'reply'
   = f.hidden_field :parent_id,
                    label: false,
-                   input_html: { class: 'hide-for-small-up' }
+                   class: 'hide'
 
 .submit-and-loader
   = image_tag image_path('loader-dark.gif'), class: 'submit-loader'

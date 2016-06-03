@@ -28,6 +28,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user_id = current_user.id if user_signed_in?
+    @comment.parent_id = nil unless can? :reply, @comment
     if @comment.save
       @success_comment = true
       flash.now[:success] = I18n.t('comment.create_success')
@@ -52,7 +53,7 @@ class CommentsController < ApplicationController
   end
 
   def reply
-    raise ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token]
+    raise ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token] || cannot?(:reply, @comment)
     @parent_comment = @comment
     @comment = @commentable.comments.new(parent_id: params[:id])
     @asocial = true
@@ -67,7 +68,9 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:username, :email, :title, :comment, :lang, :user_id, :nickname, :parent_id)
+    a = [:username, :email, :title, :comment, :lang, :user_id, :nickname]
+    a.push(:parent_id) if @comment_setting.allow_reply?
+    params.require(:comment).permit(a)
   end
 
   def set_comment
