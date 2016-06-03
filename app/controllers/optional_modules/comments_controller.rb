@@ -15,8 +15,9 @@ class CommentsController < ApplicationController
   before_action :set_current_user, only: [:create]
   before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
 
+  # Mailer
   after_action :comment_created, only: [:create], if: :email_comment_created?
-  after_action :send_email, only: [:signal], if: :email_comment_signalled?
+  after_action :comment_signalled, only: [:signal], if: :email_comment_signalled?
 
   include DeletableCommentable
 
@@ -140,7 +141,7 @@ class CommentsController < ApplicationController
     CommentCreatedJob.set(wait: 3.seconds).perform_later(@comment)
   end
 
-  def send_email
-    CommentJob.set(wait: 3.seconds).perform_later(@comment)
+  def comment_signalled
+    CommentSignalledJob.set(wait: 3.seconds).perform_later(@comment)
   end
 end

@@ -7,6 +7,6 @@
 class CommentMailerPreview < ActionMailer::Preview
   def comment_preview
     @comment = Comment.first
-    CommentMailer.send_email(@comment)
+    CommentMailer.comment_created(@comment)
   end
 end

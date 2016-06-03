@@ -17,40 +17,24 @@ class CommentMailer < ApplicationMailer
       @content = I18n.t('comment.created.email.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :blank), link_admin: link_to(@link, admin_post_comment_url(@comment), target: :blank))
     end
 
-    mail from: @comment.email_registered_or_guest,
-         to: @setting.email,
-         subject: @comment.subject do |format|
-      format.html { render 'send_validated_comment' }
-      format.text { render 'send_validated_comment' }
-    end
+    user_to_admin 'comment_validated'
   end
 
   # Email sent when comment is being signalled
-  def send_email(comment)
+  def comment_signalled(comment)
     @comment = comment
     @comment.subject = I18n.t('comment.signalled.email.subject', site: @setting.title, locale: I18n.default_locale)
     @content = I18n.t('comment.signalled.email.content', user: @comment.decorate.pseudo_registered_or_guest, locale: I18n.default_locale)
 
-    mail from: @comment.decorate.email_registered_or_guest,
-         to: @setting.email,
-         subject: @comment.subject do |format|
-      format.html
-      format.text
-    end
+    user_to_admin 'comment_signalled'
   end
 
   # Email sent when comment is being validated
-  def send_validated_comment(comment)
+  def comment_validated(comment)
     I18n.with_locale(comment.lang) do
       set_comment_variables(comment)
     end
-
-    mail from: @setting.email,
-         to: @comment.email_registered_or_guest,
-         subject: @comment.subject do |format|
-      format.html
-      format.text
-    end
+    admin_to_user
   end
 
   private
@@ -67,5 +51,23 @@ class CommentMailer < ApplicationMailer
     @comment.subject = I18n.t('comment.validated.email.subject', site: @setting.title)
     @greeting = I18n.t('comment.email.greeting', author: @comment.pseudo_registered_or_guest)
     @content = I18n.t('comment.validated.email.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :blank))
+  end
+
+  def admin_to_user
+    mail from: @setting.email,
+         to: @comment.email_registered_or_guest,
+         subject: @comment.subject do |format|
+      format.html
+      format.text
+    end
+  end
+
+  def user_to_admin(template)
+    mail from: @comment.decorate.email_registered_or_guest,
+         to: @setting.email,
+         subject: @comment.subject do |format|
+      format.html { render template }
+      format.text { render template }
+    end
   end
 end
