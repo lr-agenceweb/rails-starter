@@ -1,7 +1,8 @@
-// Hide all previous opened reply forms
-$('.comments form.new_comment').hide();
+// Remove all previous opened reply forms
+$('.comments form.new_comment').remove();
+$('.comment-reply .spinner').addClass('hide');
 
 // Inject reply form after comment
 $("#comment-<%= @parent_comment.id %>").after("<%= j render 'comments/form' %>");
-
+$('form').formBackup();
 $('form.new_comment').enableClientSideValidations();
