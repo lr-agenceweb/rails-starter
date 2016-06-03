@@ -395,6 +395,7 @@ fr:
         should_validate: Valider les commentaires ?
         should_signal: Signaler les commentaires ?
         send_email: Envoyer mail après signalement ?
+        allow_reply: Réponse aux commentaires ?
       optional_module:
         name: Nom
         enabled: Activé ?

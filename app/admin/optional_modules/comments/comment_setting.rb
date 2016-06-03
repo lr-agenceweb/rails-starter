@@ -3,7 +3,11 @@ ActiveAdmin.register CommentSetting do
   menu parent: I18n.t('admin_menu.modules_config')
   includes :user
 
-  permit_params :id, :should_signal, :send_email, :should_validate
+  permit_params :id,
+                :should_signal,
+                :send_email,
+                :should_validate,
+                :allow_reply
 
   decorate_with CommentSettingDecorator
   config.clear_sidebar_sections!
@@ -15,6 +19,7 @@ ActiveAdmin.register CommentSetting do
         bool_row :should_validate
         bool_row :should_signal
         bool_row :send_email if resource.should_signal?
+        bool_row :allow_reply
       end
     end
   end
@@ -32,6 +37,9 @@ ActiveAdmin.register CommentSetting do
       f.input :send_email,
               as: :boolean,
               hint: I18n.t('form.hint.comment_setting.send_email')
+      f.input :allow_reply,
+              as: :boolean,
+              hint: I18n.t('form.hint.comment_setting.allow_reply')
     end
 
     f.actions
