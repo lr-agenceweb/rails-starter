@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
   before_action :redirect_to_back_after_destroy?, only: [:destroy]
   before_action :set_current_user, only: [:create]
   before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
+  after_action :comment_created, only: [:create], if: proc { @comment_setting.send_email? && !current_user_and_administrator? }
   after_action :send_email, only: [:signal], if: proc { @comment.signalled? && @comment_setting.send_email? }
 
   include DeletableCommentable
@@ -85,10 +86,6 @@ class CommentsController < ApplicationController
     @comments = CommentDecorator.decorate_collection(paginated_comments)
   end
 
-  def send_email
-    CommentJob.set(wait: 3.seconds).perform_later(@comment)
-  end
-
   def respond_action(template)
     respond_to do |format|
       format.html { redirect_to @commentable }
@@ -114,5 +111,16 @@ class CommentsController < ApplicationController
 
   def set_current_user
     User.current_user = try(:current_user)
+  end
+
+  #
+  # == Mailer Job
+  #
+  def comment_created
+    CommentCreatedJob.set(wait: 3.seconds).perform_later(@comment)
+  end
+
+  def send_email
+    CommentJob.set(wait: 3.seconds).perform_later(@comment)
   end
 end

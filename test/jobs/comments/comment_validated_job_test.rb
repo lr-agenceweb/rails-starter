@@ -9,7 +9,6 @@ class CommentValidatedJobTest < ActiveJob::TestCase
 
   test 'should enqueued job' do
     clear_deliveries_and_queues
-
     assert_enqueued_jobs 0
 
     assert_enqueued_with(job: CommentValidatedJob, args: [@comment], queue: 'default') do
@@ -21,7 +20,6 @@ class CommentValidatedJobTest < ActiveJob::TestCase
 
   test 'should perform job' do
     clear_deliveries_and_queues
-
     assert_performed_jobs 0
 
     perform_enqueued_jobs do
