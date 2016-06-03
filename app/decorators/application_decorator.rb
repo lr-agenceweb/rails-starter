@@ -68,8 +68,8 @@ class ApplicationDecorator < Draper::Decorator
   #
   # == DateTime
   #
-  def created_at
-    I18n.l(model.created_at, format: :short)
+  def created_at(format = :short)
+    I18n.l(model.created_at, format: format)
   end
 
   def pretty_created_at(date_format)

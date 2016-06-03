@@ -2,18 +2,17 @@
 require 'test_helper'
 
 #
-# == CommentJobTest
+# == CommentCreatedJobTest
 #
-class CommentJobTest < ActiveJob::TestCase
+class CommentCreatedJobTest < ActiveJob::TestCase
   setup :initialize_test
 
   test 'should enqueued job' do
     clear_deliveries_and_queues
-
     assert_enqueued_jobs 0
 
-    assert_enqueued_with(job: CommentJob, args: [@comment], queue: 'default') do
-      CommentJob.perform_later(@comment)
+    assert_enqueued_with(job: CommentCreatedJob, args: [@comment], queue: 'default') do
+      CommentCreatedJob.perform_later(@comment)
     end
 
     assert_enqueued_jobs 1
@@ -21,20 +20,19 @@ class CommentJobTest < ActiveJob::TestCase
 
   test 'should perform job' do
     clear_deliveries_and_queues
-
     assert_performed_jobs 0
 
     perform_enqueued_jobs do
-      assert_performed_with(job: CommentJob, args: [@comment], queue: 'default') do
-        CommentJob.perform_later(@comment)
+      assert_performed_with(job: CommentCreatedJob, args: [@comment], queue: 'default') do
+        CommentCreatedJob.perform_later(@comment)
       end
     end
 
     assert_performed_jobs 1
 
     perform_enqueued_jobs do
-      assert_performed_with(job: CommentJob, args: [@comment], queue: 'default') do
-        CommentJob.perform_later(@comment)
+      assert_performed_with(job: CommentCreatedJob, args: [@comment], queue: 'default') do
+        CommentCreatedJob.perform_later(@comment)
       end
     end
 

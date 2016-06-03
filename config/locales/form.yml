@@ -124,7 +124,7 @@ fr:
       comment_setting:
         should_validate: Si coché, les commentaires ne seront pas affichés sur le site tant que vous ne les aurez pas validés
         should_signal: Si coché, un lien permettant de signaler les commentaires sera affiché sur chaque commentaire
-        send_email: Si coché, un email sera envoyé à l'administrateur lorsqu'un commentaire sera signalé par un internaute.
+        send_email: Si coché, un email sera envoyé à l'administrateur lorsqu'un nouveau commentaire sera créé ou lorsqu'un commentaire déjà existant sera signalé par un internaute.
 
       guest_book_setting:
         should_validate: Si coché, les message ne seront pas affichés sur le site tant que vous ne les aurez pas validés
