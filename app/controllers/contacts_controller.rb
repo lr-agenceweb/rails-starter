@@ -48,7 +48,9 @@ class ContactsController < ApplicationController
   private
 
   def contact_form_params
-    params.require(:contact_form).permit(:name, :email, :message, :send_copy, :attachment, :nickname)
+    a = [:name, :email, :message, :send_copy, :nickname]
+    a.push(:attachment) if @setting.show_file_upload?
+    params.require(:contact_form).permit(a)
   end
 
   def respond_action(template)
