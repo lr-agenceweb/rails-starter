@@ -20,9 +20,10 @@
               span.comment-not-signalled<> class="number-#{comment.id}"
                 = link_to I18n.t('comment.signalled.not_signalled'), send("signal_#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment, token: comment.token), method: :get, remote: true, data: { confirm: I18n.t('comment.signalled.alert') }
 
-          | -
-          span.comment-reply<>
-            = link_to I18n.t('comment.reply.label'), send("reply_#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment, token: comment.token), remote: true
+          - if can? :reply, comment
+            | -
+            span.comment-reply<>
+              = link_to I18n.t('comment.reply.label'), send("reply_#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment, token: comment.token), remote: true
 
           - if can? :destroy, comment
             | -
