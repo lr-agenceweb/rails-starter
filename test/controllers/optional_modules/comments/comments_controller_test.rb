@@ -119,6 +119,111 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   #
+  # == Mailer on creation
+  #
+  test 'should send created email if send_email and not connected' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        comment_config
+
+        assert_enqueued_jobs 1 do
+          post :create, blog_id: @blog.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should send created email if send_email and not connected' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        comment_config
+
+        assert_enqueued_jobs 1 do
+          xhr :post, :create, blog_id: @blog.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'should send created email if send_email and connected as subscriber' do
+    sign_in @subscriber
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        comment_config
+
+        assert_enqueued_jobs 1 do
+          post :create, blog_id: @blog.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should send created email if send_email and connected as subscriber' do
+    sign_in @subscriber
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        comment_config
+
+        assert_enqueued_jobs 1 do
+          xhr :post, :create, blog_id: @blog.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'should not send created email if send_email and connected as administrator' do
+    sign_in @administrator
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        comment_config
+
+        assert_enqueued_jobs 0 do
+          post :create, blog_id: @blog.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should not send created email if send_email and connected as administrator' do
+    sign_in @administrator
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        comment_config
+
+        assert_enqueued_jobs 0 do
+          xhr :post, :create, blog_id: @blog.id, comment: { comment: 'youpi', lang: locale.to_s }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'should not send created email if send_email is disabled' do
+    @comment_setting.update_attribute(:send_email, false)
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        comment_config
+
+        assert_enqueued_jobs 0 do
+          post :create, blog_id: @blog.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should not send created email if send_email is disabled' do
+    @comment_setting.update_attribute(:send_email, false)
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        comment_config
+
+        assert_enqueued_jobs 0 do
+          xhr :post, :create, blog_id: @blog.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  #
   # == Ajax
   #
   test 'AJAX :: should create comment' do
@@ -632,5 +737,12 @@ class CommentsControllerTest < ActionController::TestCase
     @comment_lana = comments(:four)
     @comment_luke = comments(:five)
     @comment_blog = comments(:blog)
+  end
+
+  def comment_config
+    clear_deliveries_and_queues
+    assert_no_enqueued_jobs
+    assert ActionMailer::Base.deliveries.empty?
+    @request.env['HTTP_REFERER'] = blog_category_blog_path(@blog.blog_category, @blog)
   end
 end

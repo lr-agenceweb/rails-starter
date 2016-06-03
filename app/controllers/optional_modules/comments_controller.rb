@@ -14,8 +14,9 @@ class CommentsController < ApplicationController
   before_action :redirect_to_back_after_destroy?, only: [:destroy]
   before_action :set_current_user, only: [:create]
   before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
-  after_action :comment_created, only: [:create], if: proc { @comment_setting.send_email? && !current_user_and_administrator? }
-  after_action :send_email, only: [:signal], if: proc { @comment.signalled? && @comment_setting.send_email? }
+
+  after_action :comment_created, only: [:create], if: :email_comment_created?
+  after_action :send_email, only: [:signal], if: :email_comment_signalled?
 
   include DeletableCommentable
 
@@ -27,6 +28,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params)
     @comment.user_id = current_user.id if user_signed_in?
     if @comment.save
+      @success_comment = true
       flash.now[:success] = I18n.t('comment.create_success')
       flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate? && !current_user_and_administrator?(User.current_user)
       respond_action 'create'
@@ -88,7 +90,7 @@ class CommentsController < ApplicationController
 
   def respond_action(template)
     respond_to do |format|
-      format.html { redirect_to @commentable }
+      format.html { redirect_to source }
       format.js { render template }
     end
   end
@@ -111,6 +113,24 @@ class CommentsController < ApplicationController
 
   def set_current_user
     User.current_user = try(:current_user)
+  end
+
+  def source
+    @commentable.is_a?(Blog) ? blog_category_blog_path(@commentable.blog_category, @commentable) : @commentable
+  end
+
+  #
+  # == Callback action
+  #
+  def email_comment_created?
+    @comment_setting.send_email? &&
+      !current_user_and_administrator? &&
+      @success_comment
+  end
+
+  def email_comment_signalled?
+    @comment.signalled? &&
+      @comment_setting.send_email?
   end
 
   #
