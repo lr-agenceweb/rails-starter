@@ -68,7 +68,9 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:username, :email, :title, :comment, :lang, :user_id, :nickname, :parent_id)
+    a = [:username, :email, :title, :comment, :lang, :user_id, :nickname]
+    a.push(:parent_id) if @comment_setting.allow_reply?
+    params.require(:comment).permit(a)
   end
 
   def set_comment
