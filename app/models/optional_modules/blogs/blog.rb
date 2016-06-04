@@ -30,6 +30,7 @@ class Blog < ActiveRecord::Base
   include Scopable
   include Core::Userable
   include Core::Referenceable
+  include Core::FriendlyGlobalizeSluggable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::Audioable
   include OptionalModules::Assets::VideoUploadable
@@ -38,16 +39,8 @@ class Blog < ActiveRecord::Base
   include OptionalModules::Searchable
   include PrevNextable
 
+
   after_update :update_counter_cache, if: proc { online_changed? }
-
-  translates :title, :slug, :content, fallbacks_for_empty_translations: true
-  active_admin_translates :title, :slug, :content do
-    validates :title,
-              presence: true
-  end
-
-  extend FriendlyId
-  friendly_id :slug_candidates, use: [:slugged, :history, :globalize, :finders]
 
   belongs_to :blog_category, inverse_of: :blogs, counter_cache: true
 
@@ -61,15 +54,6 @@ class Blog < ActiveRecord::Base
   scope :by_category, -> (category) { where(blog_category_id: category) }
 
   private
-
-  def slug_candidates
-    [[:title, :deduced_id]]
-  end
-
-  def deduced_id
-    record_id = self.class.where(title: title).count
-    return record_id + 1 unless record_id == 0
-  end
 
   def update_counter_cache
     BlogCategory.increment_counter(:blogs_count, blog_category.id) if online?

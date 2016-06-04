@@ -156,6 +156,8 @@ class EventTest < ActiveSupport::TestCase
       assert_equal 'My event', event.title
       assert_equal 'my-event', event.slug
     end
+
+    event.destroy
   end
 
   test 'should add id to slug if slug already exists' do
@@ -175,6 +177,8 @@ class EventTest < ActiveSupport::TestCase
     I18n.with_locale('en') do
       assert_equal 'event-1-2', event.slug
     end
+
+    event.destroy
   end
 
   private

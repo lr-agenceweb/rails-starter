@@ -70,6 +70,8 @@ class BlogTest < ActiveSupport::TestCase
       assert_equal 'My blog article', blog.title
       assert_equal 'my-blog-article', blog.slug
     end
+
+    blog.destroy
   end
 
   test 'should add id to slug if slug already exists' do
@@ -89,6 +91,8 @@ class BlogTest < ActiveSupport::TestCase
     I18n.with_locale('en') do
       assert_equal 'blog-article-online-2', blog.slug
     end
+
+    blog.destroy
   end
 
   #
