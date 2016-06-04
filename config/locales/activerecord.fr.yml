@@ -513,6 +513,6 @@ fr:
   enumerize:
     setting:
       date_format:
-        date: "30/04/2016"
-        date_with_time: "30/04/2016 15:32"
+        with_time: "30/04/2016 15:32"
+        without_time: "30/04/2016"
         ago: "Il y a 10 minutes"
