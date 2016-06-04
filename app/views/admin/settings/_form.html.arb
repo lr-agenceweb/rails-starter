@@ -77,7 +77,7 @@ f.columns do
       f.input :date_format,
               as: :radio,
               collection: Setting.date_format.options,
-              hint: 'Choisissez le format de la date à afficher (<strong>date seulement</strong>, <strong>date + heure</strong> ou sous la forme "<strong>Il y a 10 minutes</strong>)"'.html_safe
+              hint: 'Choisissez le format de la date à afficher (<strong>date + heure</strong>, <strong>date seulement</strong> ou sous la forme "<strong>Il y a 10 minutes</strong>")'.html_safe
     end
   end
 end
