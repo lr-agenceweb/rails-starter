@@ -52,5 +52,8 @@ module Starter
 
     # Override default errors
     config.exceptions_app = routes
+
+    # Silent deprecation warnings
+    ActiveSupport::Deprecation.silenced = true
   end
 end
