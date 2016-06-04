@@ -35,10 +35,13 @@ class Event < ActiveRecord::Base
   include Linkable
 
   translates :title, :slug, :content, fallbacks_for_empty_translations: true
-  active_admin_translates :title, :slug, :content, fallbacks_for_empty_translations: true
+  active_admin_translates :title, :slug, :content, fallbacks_for_empty_translations: true do
+    validates :title,
+              presence: true
+  end
 
   extend FriendlyId
-  friendly_id :title, use: [:slugged, :history, :globalize, :finders]
+  friendly_id :slug_candidates, use: [:slugged, :history, :globalize, :finders]
 
   has_one :location, as: :locationable, dependent: :destroy
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
@@ -64,6 +67,15 @@ class Event < ActiveRecord::Base
   end
 
   private
+
+  def slug_candidates
+    [[:title, :deduced_id]]
+  end
+
+  def deduced_id
+    record_id = self.class.where(title: title).count
+    return record_id + 1 unless record_id == 0
+  end
 
   def should_validate_calendar_dates?
     !all_day? ||
