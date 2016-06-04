@@ -15,27 +15,80 @@ class BlogTest < ActiveSupport::TestCase
   test 'should not be valid if no category specified' do
     blog = Blog.new
     refute blog.valid?, 'should not be valid if all fields are blank'
-    assert_equal [:blog_category], blog.errors.keys
+    assert_equal [:"translations.title", :blog_category], blog.errors.keys
   end
 
   test 'should not be valid if category doesn\'t exist' do
     attrs = { blog_category_id: 999 }
     blog = Blog.new attrs
     refute blog.valid?, 'should not be valid if category doesn\'t exist'
-    assert_equal [:blog_category], blog.errors.keys
+    assert_equal [:"translations.title", :blog_category], blog.errors.keys
+  end
+
+  test 'should not be valid if title is not filled' do
+    attrs = { blog_category_id: @blog_category.id }
+    blog = Blog.new attrs
+    refute blog.valid?, 'should not be valid if title is not set'
+    assert_equal [:"translations.title"], blog.errors.keys
   end
 
   test 'should be valid if category exists' do
-    attrs = { blog_category_id: @blog_category.id }
-    blog = Blog.new attrs
+    blog = set_blog_record
+
     assert blog.valid?, 'should be valid if category exists'
     assert_empty blog.errors.keys
   end
 
   test 'should not save nested audio if input file is empty' do
-    attrs = { blog_category_id: @blog_category.id, audio_attributes: { online: true } }
+    attrs = { id: SecureRandom.uuid, blog_category_id: @blog_category.id, audio_attributes: { online: true } }
     blog = Blog.new attrs
+    blog.set_translations(
+      fr: { title: 'Bar and Foo' },
+      en: { title: 'Foo and Bar' }
+    )
     assert blog.audio.blank?
+  end
+
+  #
+  # == Slug
+  #
+  test 'should be valid if title is set properly' do
+    blog = Blog.new(id: SecureRandom.uuid, blog_category_id: @blog_category.id)
+    blog.set_translations(
+      fr: { title: 'Mon article de blog' },
+      en: { title: 'My blog article' }
+    )
+
+    assert blog.valid?, 'should be valid if title is set properly'
+    assert_empty blog.errors.keys
+
+    I18n.with_locale('fr') do
+      assert_equal 'Mon article de blog', blog.title
+      assert_equal 'mon-article-de-blog', blog.slug
+    end
+    I18n.with_locale('en') do
+      assert_equal 'My blog article', blog.title
+      assert_equal 'my-blog-article', blog.slug
+    end
+  end
+
+  test 'should add id to slug if slug already exists' do
+    blog = Blog.new(id: SecureRandom.uuid, blog_category_id: @blog_category.id)
+    blog.set_translations(
+      fr: { title: 'Article de blog en ligne' },
+      en: { title: 'Blog article online' }
+    )
+
+    assert blog.valid?, 'should be valid'
+    assert_empty blog.errors.keys
+    assert_empty blog.errors.messages
+
+    I18n.with_locale('fr') do
+      assert_equal 'article-de-blog-en-ligne-2', blog.slug
+    end
+    I18n.with_locale('en') do
+      assert_equal 'blog-article-online-2', blog.slug
+    end
   end
 
   #
@@ -43,8 +96,8 @@ class BlogTest < ActiveSupport::TestCase
   #
   test 'should increase counter cache when creating object' do
     reset_counter_cache
-    attrs = { blog_category_id: @blog_category.id }
-    blog = Blog.new attrs
+    blog = set_blog_record
+
     blog.save
     @blog_category.reload
 
@@ -53,8 +106,9 @@ class BlogTest < ActiveSupport::TestCase
 
   test 'should decrease counter cache when destroying object' do
     reset_counter_cache
-    blog = Blog.new(blog_category_id: @blog_category.id)
-    blog_2 = Blog.new(blog_category_id: @blog_category.id)
+    blog = set_blog_record
+    blog_2 = set_blog_record
+
     blog.save
     blog_2.save
     @blog_category.reload
@@ -171,5 +225,15 @@ class BlogTest < ActiveSupport::TestCase
     @blog_category_2.reload
     assert_equal 2, @blog_category.blogs.size
     assert_equal 1, @blog_category_2.blogs.size
+  end
+
+  def set_blog_record
+    attrs = { id: SecureRandom.uuid, blog_category_id: @blog_category.id, title: 'Foo and Bar' }
+    blog = Blog.new attrs
+    blog.set_translations(
+      fr: { title: 'Bar and Foo' },
+      en: { title: 'Foo and Bar' }
+    )
+    blog
   end
 end
