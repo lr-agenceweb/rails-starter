@@ -15,7 +15,7 @@ class BlogCategoryTest < ActiveSupport::TestCase
       en: {}
     )
     refute blog_category.valid?, 'should not be valid if name is not set'
-    assert_equal [:'translations.name', :'translations.slug'], blog_category.errors.keys
+    assert_equal [:'translations.name'], blog_category.errors.keys
   end
 
   test 'should not be valid if name is empty' do
@@ -25,25 +25,24 @@ class BlogCategoryTest < ActiveSupport::TestCase
       en: { name: '' }
     )
     refute blog_category.valid?, 'should not be valid if name is empty'
-    assert_equal [:'translations.name', :'translations.slug'], blog_category.errors.keys
+    assert_equal [:'translations.name'], blog_category.errors.keys
   end
 
   test 'should not be valid if name is already taken' do
     blog_category = BlogCategory.new(id: SecureRandom.uuid)
     blog_category.set_translations(
-      fr: { name: 'foo', slug: 'foo' },
-      en: { name: 'bar', slug: 'bar' }
+      fr: { name: 'foo' },
+      en: { name: 'bar' }
     )
     refute blog_category.valid?, 'should not be valid if name is already taken'
     assert_equal [:'translations.name', :'translations.slug'], blog_category.errors.keys
   end
 
   test 'should be valid if name is set properly but same for both locales' do
-    skip 'Find a way to test not conflict uniqueness for a same record translations'
     blog_category = BlogCategory.new(id: SecureRandom.uuid)
     blog_category.set_translations(
-      fr: { name: 'Foo Foo', slug: 'foofoo' },
-      en: { name: 'Foo Foo', slug: 'foofoo' }
+      fr: { name: 'Foo Foo' },
+      en: { name: 'Foo Foo' }
     )
 
     assert blog_category.valid?, 'should be valid if name is set properly but same for both locales'
@@ -51,19 +50,19 @@ class BlogCategoryTest < ActiveSupport::TestCase
 
     I18n.with_locale('fr') do
       assert_equal 'Foo Foo', blog_category.name
-      assert_equal 'foofoo', blog_category.slug
+      assert_equal 'foo-foo', blog_category.slug
     end
     I18n.with_locale('en') do
       assert_equal 'Foo Foo', blog_category.name
-      assert_equal 'foofoo', blog_category.slug
+      assert_equal 'foo-foo', blog_category.slug
     end
   end
 
   test 'should be valid if name is set properly' do
     blog_category = BlogCategory.new(id: SecureRandom.uuid)
     blog_category.set_translations(
-      fr: { name: 'Foo Foo', slug: 'foofoo' },
-      en: { name: 'Bar Bar', slug: 'barbar' }
+      fr: { name: 'Foo Foo' },
+      en: { name: 'Bar Bar' }
     )
 
     assert blog_category.valid?, 'should be valid if name is set properly'
@@ -71,11 +70,11 @@ class BlogCategoryTest < ActiveSupport::TestCase
 
     I18n.with_locale('fr') do
       assert_equal 'Foo Foo', blog_category.name
-      assert_equal 'foofoo', blog_category.slug
+      assert_equal 'foo-foo', blog_category.slug
     end
     I18n.with_locale('en') do
       assert_equal 'Bar Bar', blog_category.name
-      assert_equal 'barbar', blog_category.slug
+      assert_equal 'bar-bar', blog_category.slug
     end
   end
 end

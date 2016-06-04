@@ -98,6 +98,7 @@ gem 'gmaps-autocomplete-rails'
 # == SEO
 #
 gem 'friendly_id', '~> 5.1'
+gem 'friendly_id-globalize'
 gem 'sitemap_generator'
 gem 'meta-tags'
 

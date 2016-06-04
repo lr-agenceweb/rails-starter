@@ -16,9 +16,6 @@
 # == BlogCategory Model
 #
 class BlogCategory < ActiveRecord::Base
-  extend FriendlyId
-  friendly_id :name, use: [:slugged, :history, :globalize, :finders]
-
   translates :name, :slug
   active_admin_translates :name, :slug do
     validates :name,
@@ -29,5 +26,18 @@ class BlogCategory < ActiveRecord::Base
               presence: true
   end
 
+  extend FriendlyId
+  friendly_id :slug_candidates, use: [:slugged, :history, :globalize, :finders]
+
   has_many :blogs, dependent: :destroy, inverse_of: :blog_category
+
+  private
+
+  def slug_candidates
+    [:name, [:name, :deduced_id]]
+  end
+
+  def deduced_id
+    self.class.where(name: name).count + 1
+  end
 end
