@@ -28,7 +28,7 @@ module OptionalModules
 
         def reject_video_upload?(attributes)
           (new_record? && attributes['video_file'].blank?) ||
-            (!attributes['id'].blank? && attributes['video_file'].blank?)
+            (attributes['id'].blank? && attributes['video_file'].blank?)
         end
 
         def video_uploads?

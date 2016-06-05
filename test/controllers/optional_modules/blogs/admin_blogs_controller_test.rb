@@ -67,10 +67,25 @@ module Admin
     end
 
     #
+    # == Nested resources
+    #
+    test 'should be able to update naked blog without any errors' do
+      patch :update, id: @blog_naked, blog: {}
+
+      assert assigns(:blog).valid?
+      assert_empty assigns(:blog).errors.keys
+      assert assigns(:blog).video_upload.blank?
+      assert assigns(:blog).audio.blank?
+      assert assigns(:blog).video_platform.blank?
+      assert_nil flash[:notice]
+    end
+
+    #
     # == VideoUpload
     #
-    test 'should be able to update video_upload attributes from blog' do
-      patch :update, id: @blog, blog: { video_upload_attributes: { online: false } }
+    test 'should be able to update video_upload attributes from naked blog' do
+      video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
+      patch :update, id: @blog_naked, blog: { video_upload_attributes: { video_file: video, online: false } }
       assert_not assigns(:blog).video_upload.blank?
       assert_not assigns(:blog).video_upload.online?
     end
@@ -99,8 +114,8 @@ module Admin
     #
     # == VideoPlatform
     #
-    test 'should be able to update video_platform attributes from blog' do
-      patch :update, id: @blog, blog: { video_platform_attributes: { online: false } }
+    test 'should be able to update naked video_platform attributes from blog' do
+      patch :update, id: @blog_naked, blog: { video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3', online: false } }
       assert_not assigns(:blog).video_platform.blank?
       assert_not assigns(:blog).video_platform.online?
     end
@@ -129,7 +144,8 @@ module Admin
     # == Audio
     #
     test 'should be able to update audio attributes from blog' do
-      patch :update, id: @blog, blog: { audio_attributes: { online: false } }
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      patch :update, id: @blog_naked, blog: { audio_attributes: { audio: audio, online: false } }
       assert_not assigns(:blog).audio.blank?
       assert_not assigns(:blog).audio.online?
     end
@@ -328,8 +344,10 @@ module Admin
 
       @blog = blogs(:blog_online)
       @blog_not_validate = blogs(:blog_offline)
-      @blog_module = optional_modules(:blog)
+      @blog_naked = blogs(:naked)
       @blog_category = blog_categories(:one)
+
+      @blog_module = optional_modules(:blog)
       @comment_module = optional_modules(:comment)
       @audio_module = optional_modules(:audio)
 
