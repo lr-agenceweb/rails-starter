@@ -78,7 +78,7 @@ class CommentDecoratorTest < Draper::TestCase
 
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     Picture.create(attachable_id: @blog_comment.commentable_id, attachable_type: 'Blog', image: attachment)
-    assert_equal "<p><img width=\"125\" height=\"223\" src=\"#{@blog_comment.commentable.picture.image.url(:medium)}\" alt=\"Medium bart\" /><br /><a target=\"_blank\" class=\"button\" href=\"/blogs/foo/article-de-blog-en-ligne\">Article de blog en ligne <br /> (#{I18n.t('comment.admin.go_to_source')})</a></p>", @blog_comment_decorated.link_and_image_source
+    assert_equal "<p><img width=\"125\" height=\"223\" src=\"#{@blog_comment.commentable.picture.image.url(:medium)}\" alt=\"Medium bart\" /> <br /> <a target=\"_blank\" class=\"button\" href=\"/blogs/foo/article-de-blog-en-ligne\">Article de blog en ligne <br /> (#{I18n.t('comment.admin.go_to_source')})</a></p>", @blog_comment_decorated.link_and_image_source
   end
 
   private
