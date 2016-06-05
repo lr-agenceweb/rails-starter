@@ -179,11 +179,12 @@ fr:
         show_as_gallery: Afficher les images sous forme de galerie ? (Cette option est efficace lorsqu'il s'agit d'afficher plusieurs images)
 
       video:
-        url: "Lien de la vidéo que vous souhaitez afficher sur votre site (Youtube, Dailymotion, Viméo, ...).
+        url: "Lien de la vidéo que vous souhaitez afficher sur votre site <br /> (Attention, seuls les vidéos provenant de Youtube, Dailymotion et Viméo peuvent être affichées).
         <br />
-        Exemple: http://www.dailymotion.com/video/xxxxxxx
-        <br /> <br />
-        Attention ! Assurez-vous d'avoir les droits d'exploitation de la vidéo avant de la publier."
+        Dailymotion: <strong>http://www.dailymotion.com/video/xxxxxxx</strong>
+        <br />
+        Youtube: <strong>https://www.youtube.com/watch?v=xxxxxxxx</strong>
+        "
         online: Si coché, la vidéo sera visible sur le site
         video_platform: Si coché, l'administrateur aura le droit d'insérer des vidéos provenant de Youtube, Dailymotion ou Viméo sur le site
         video_upload: Si coché, l'administrateur aura le droit de mettre en ligne ses propres vidéos par l'intermédiaire du site
