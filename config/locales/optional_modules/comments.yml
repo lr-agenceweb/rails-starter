@@ -44,6 +44,8 @@ fr:
     no_last_comments: Il n'y a pas de commentaires récents
     email:
       greeting: Bonjour %{author},
+    admin:
+      go_to_source: Voir directement l'article sur lequel le commentaire a été posté
 
 # English
 en:

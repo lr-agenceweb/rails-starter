@@ -49,13 +49,16 @@ class CommentDecorator < ApplicationDecorator
   #
   def link_source
     link = commentable.is_a?(Blog) ? blog_category_blog_path(commentable.blog_category, commentable) : polymorphic_path(commentable)
-    link_to commentable.title, link, target: :_blank
+    link_to "#{commentable.title} <br /> (#{t('comment.admin.go_to_source')})".html_safe, link, target: :_blank, class: 'button'
   end
 
   def link_and_image_source
     html = ''
-    html << content_tag(:p, commentable.decorate.custom_cover)
-    html << content_tag(:p, link_source)
+    html << content_tag(:p) do
+      commentable.decorate.custom_cover +
+      '<br />'.html_safe +
+      link_source
+    end
     html.html_safe
   end
 
