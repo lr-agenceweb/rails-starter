@@ -70,7 +70,7 @@ class VideoUpload < ActiveRecord::Base
                     processors: [:transcoder]
 
   validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
-  validates_attachment_size :video_file, in: 0.megabytes..100.megabytes
+  validates_attachment_size :video_file, in: 0.megabytes..40.megabytes
   process_in_background :video_file, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
   delegate :online, to: :video_subtitle, prefix: true, allow_nil: true

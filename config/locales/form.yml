@@ -201,6 +201,8 @@ fr:
           destroy: Si coché, les sous-titres anglais seront supprimés
         fr:
           destroy: Si coché, les sous-titres français seront supprimés
+      video_upload:
+        video_file: Accepte les fichiers MP4, AVI, ... inférieurs à 40 mo
 
       audio:
         audio_file: Fichier audio à uploader sur le site. Accepte les formats MP3 et OGG
