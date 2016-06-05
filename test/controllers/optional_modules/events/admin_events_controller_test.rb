@@ -196,35 +196,49 @@ module Admin
     #
     test 'should save event if link is correct' do
       assert_difference ['Event.count', 'Link.count'] do
-        post :create, event: { link_attributes: { url: 'http://google.com' }, start_date: Time.zone.now, end_date: Time.zone.now + 1.day }
+        attrs = set_default_event_attrs
+        attrs.merge!(link_attributes: { url: 'http://google.com' }, start_date: Time.zone.now, end_date: Time.zone.now + 1.day)
+        post :create, event: attrs
       end
       assert assigns(:event).valid?
     end
 
     test 'should not save event if link is not correct' do
       assert_no_difference ['Event.count', 'Link.count'] do
-        post :create, event: { link_attributes: { url: 'fake.url' }, start_date: Time.zone.now, end_date: Time.zone.now + 1.day }
+        attrs = set_default_event_attrs
+        attrs.merge!(link_attributes: { url: 'fake.url' }, start_date: Time.zone.now, end_date: Time.zone.now + 1.day)
+
+        post :create, event: attrs
       end
       assert_not assigns(:event).valid?
     end
 
     test 'should save event if dates are corrects' do
       assert_difference ['Event.count'] do
-        post :create, event: { start_date: '2015-07-19 09:00:00', end_date: '2015-07-22 09:00:00' }
+        attrs = set_default_event_attrs
+        attrs.merge!(start_date: '2015-07-19 09:00:00', end_date: '2015-07-22 09:00:00')
+
+        post :create, event: attrs
       end
       assert assigns(:event).valid?
     end
 
     test 'should save event if dates are equals but hours corrects' do
       assert_difference ['Event.count'] do
-        post :create, event: { start_date: '2015-07-19 09:00:00', end_date: '2015-07-19 10:00:00' }
+        attrs = set_default_event_attrs
+        attrs.merge!(start_date: '2015-07-19 09:00:00', end_date: '2015-07-19 10:00:00')
+
+        post :create, event: attrs
       end
       assert assigns(:event).valid?
     end
 
     test 'should not save event if dates are not corrects' do
       assert_no_difference ['Event.count'] do
-        post :create, event: { start_date: '2015-07-22 09:00:00', end_date: '2015-07-19 09:00:00' }
+        attrs = set_default_event_attrs
+        attrs.merge!(start_date: '2015-07-22 09:00:00', end_date: '2015-07-19 09:00:00')
+
+        post :create, event: attrs
       end
       assert_not assigns(:event).valid?
     end
@@ -285,6 +299,10 @@ module Admin
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
+    end
+
+    def set_default_event_attrs
+      { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
     end
   end
 end

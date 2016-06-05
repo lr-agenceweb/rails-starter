@@ -33,7 +33,8 @@ module Admin
 
     test 'should create if logged in' do
       assert_difference 'About.count' do
-        post :create, about: {}
+        attrs = set_default_about_attrs
+        post :create, about: attrs
         assert_equal 'About', assigns(:about).type
         assert_equal @administrator.id, assigns(:about).user_id
         assert_redirected_to admin_about_path(assigns(:about))
@@ -201,7 +202,9 @@ module Admin
       @super_administrator = users(:anthony)
       sign_in @administrator
     end
+
+    def set_default_about_attrs
+      { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+    end
   end
 end
-
-# TODO: Add test for create

@@ -16,6 +16,7 @@ class BlogTest < ActiveSupport::TestCase
     blog = Blog.new
     refute blog.valid?, 'should not be valid if all fields are blank'
     assert_equal [:"translations.title", :blog_category], blog.errors.keys
+    blog.delete
   end
 
   test 'should not be valid if category doesn\'t exist' do
@@ -23,6 +24,7 @@ class BlogTest < ActiveSupport::TestCase
     blog = Blog.new attrs
     refute blog.valid?, 'should not be valid if category doesn\'t exist'
     assert_equal [:"translations.title", :blog_category], blog.errors.keys
+    blog.delete
   end
 
   test 'should not be valid if title is not filled' do
@@ -30,6 +32,7 @@ class BlogTest < ActiveSupport::TestCase
     blog = Blog.new attrs
     refute blog.valid?, 'should not be valid if title is not set'
     assert_equal [:"translations.title"], blog.errors.keys
+    blog.delete
   end
 
   test 'should be valid if category exists' do
@@ -37,6 +40,7 @@ class BlogTest < ActiveSupport::TestCase
 
     assert blog.valid?, 'should be valid if category exists'
     assert_empty blog.errors.keys
+    blog.delete
   end
 
   test 'should not save nested audio if input file is empty' do
@@ -47,6 +51,7 @@ class BlogTest < ActiveSupport::TestCase
       en: { title: 'Foo and Bar' }
     )
     assert blog.audio.blank?
+    blog.delete
   end
 
   #
@@ -71,7 +76,7 @@ class BlogTest < ActiveSupport::TestCase
       assert_equal 'my-blog-article', blog.slug
     end
 
-    blog.destroy
+    blog.delete
   end
 
   test 'should add id to slug if slug already exists' do
@@ -92,7 +97,7 @@ class BlogTest < ActiveSupport::TestCase
       assert_equal 'blog-article-online-2', blog.slug
     end
 
-    blog.destroy
+    blog.delete
   end
 
   #
@@ -106,21 +111,15 @@ class BlogTest < ActiveSupport::TestCase
     @blog_category.reload
 
     assert_equal 3, @blog_category.blogs.size
+    blog.delete
   end
 
   test 'should decrease counter cache when destroying object' do
     reset_counter_cache
-    blog = set_blog_record
-    blog_2 = set_blog_record
-
-    blog.save
-    blog_2.save
+    count = @blog_category.blogs.size
+    @blog_category.blogs.first.destroy
     @blog_category.reload
-    assert_equal 4, @blog_category.blogs.size
-
-    blog.destroy
-    @blog_category.reload
-    assert_equal 3, @blog_category.blogs.size
+    assert_equal count - 1, @blog_category.blogs.size
   end
 
   test 'should decrease counter cache when object is set to offline' do
@@ -232,12 +231,13 @@ class BlogTest < ActiveSupport::TestCase
   end
 
   def set_blog_record
-    attrs = { id: SecureRandom.uuid, blog_category_id: @blog_category.id, title: 'Foo and Bar' }
+    attrs = { id: SecureRandom.hex(4), blog_category_id: @blog_category.id }
     blog = Blog.new attrs
     blog.set_translations(
       fr: { title: 'Bar and Foo' },
       en: { title: 'Foo and Bar' }
     )
+    assert blog.valid?
     blog
   end
 end

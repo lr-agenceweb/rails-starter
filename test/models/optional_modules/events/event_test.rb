@@ -21,6 +21,7 @@ class EventTest < ActiveSupport::TestCase
     }
     event = set_event_record(attrs)
     assert event.calendar_date_correct?
+    event.delete
   end
 
   test 'should return false if dates are not corrects' do
@@ -31,6 +32,7 @@ class EventTest < ActiveSupport::TestCase
     }
     event = set_event_record(attrs)
     assert_equal [I18n.t('form.errors.end_date')], event.calendar_date_correct?
+    event.delete
   end
 
   test 'should return only current or coming events' do
@@ -101,6 +103,7 @@ class EventTest < ActiveSupport::TestCase
 
     refute event.valid?, 'should not be valid if title is not set'
     assert_equal [:"translations.title"], event.errors.keys
+    event.delete
   end
 
   test 'should not be valid if start_date is not present' do
@@ -109,6 +112,7 @@ class EventTest < ActiveSupport::TestCase
 
     assert_not event.valid?
     assert_equal [:start_date], event.errors.keys
+    event.delete
   end
 
   test 'should not be valid if start_date finish after end_date' do
@@ -117,6 +121,7 @@ class EventTest < ActiveSupport::TestCase
 
     assert_not event.valid?
     assert_equal [:start_date, :end_date], event.errors.keys
+    event.delete
   end
 
   test 'should not create event if link is not correct' do
@@ -133,6 +138,7 @@ class EventTest < ActiveSupport::TestCase
 
     assert event.valid?
     assert_empty event.errors.keys
+    event.delete
   end
 
   #
@@ -157,7 +163,7 @@ class EventTest < ActiveSupport::TestCase
       assert_equal 'my-event', event.slug
     end
 
-    event.destroy
+    event.delete
   end
 
   test 'should add id to slug if slug already exists' do
@@ -178,7 +184,7 @@ class EventTest < ActiveSupport::TestCase
       assert_equal 'event-1-2', event.slug
     end
 
-    event.destroy
+    event.delete
   end
 
   private

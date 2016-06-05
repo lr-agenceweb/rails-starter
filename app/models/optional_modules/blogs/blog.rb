@@ -39,7 +39,6 @@ class Blog < ActiveRecord::Base
   include OptionalModules::Searchable
   include PrevNextable
 
-
   after_update :update_counter_cache, if: proc { online_changed? }
 
   belongs_to :blog_category, inverse_of: :blogs, counter_cache: true

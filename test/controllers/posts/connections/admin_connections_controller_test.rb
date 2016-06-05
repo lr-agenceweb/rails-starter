@@ -33,7 +33,8 @@ module Admin
 
     test 'should create connection if logged in' do
       assert_difference 'Connection.count' do
-        post :create, connection: {}
+        attrs = set_default_connection_attrs
+        post :create, connection: attrs
         assert_equal 'Connection', assigns(:connection).type
         assert_equal @administrator.id, assigns(:connection).user_id
         assert_redirected_to admin_connection_path(assigns(:connection))
@@ -161,6 +162,10 @@ module Admin
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
+    end
+
+    def set_default_connection_attrs
+      { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
     end
   end
 end

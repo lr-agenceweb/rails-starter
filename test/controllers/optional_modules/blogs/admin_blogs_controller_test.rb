@@ -32,7 +32,8 @@ module Admin
     end
 
     test 'should create blog if logged in' do
-      post :create, blog: { title: 'blog edit', content: 'content edit', blog_category_id: @blog_category.id }
+      attrs = set_default_blog_attrs
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert flash[:notice].blank?
       assert_equal @administrator.id, assigns(:blog).user_id
@@ -74,14 +75,20 @@ module Admin
     end
 
     test 'should not be able to create blank video_upload attributes from blog' do
-      post :create, blog: { video_upload_attributes: { video_file: '' }, blog_category_id: @blog_category.id }
+      attrs = set_default_blog_attrs
+      attrs.merge!(video_upload_attributes: { video_file: '' })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert assigns(:blog).video_upload.blank?
     end
 
     test 'should be able to create video_upload attributes when creating blog' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      post :create, blog: { video_upload_attributes: { video_file: video }, blog_category_id: @blog_category.id }
+      attrs = set_default_blog_attrs
+      attrs.merge!(video_upload_attributes: { video_file: video })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert_not assigns(:blog).video_upload.blank?
     end
@@ -96,13 +103,19 @@ module Admin
     end
 
     test 'should not be able to create blank video_platform attributes from blog' do
-      post :create, blog: { video_platform_attributes: { url: '' }, blog_category_id: @blog_category.id }
+      attrs = set_default_blog_attrs
+      attrs.merge!(video_platform_attributes: { url: '' })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert assigns(:blog).video_platform.blank?
     end
 
     test 'should be able to create video_platform attributes when creating blog' do
-      post :create, blog: { video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3' }, blog_category_id: @blog_category.id }
+      attrs = set_default_blog_attrs
+      attrs.merge!(video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3' })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert_not assigns(:blog).video_platform.blank?
     end
@@ -117,14 +130,20 @@ module Admin
     end
 
     test 'should not be able to create blank audio attributes from blog' do
-      post :create, blog: { audio_attributes: { audio: '' }, blog_category_id: @blog_category.id }
+      attrs = set_default_blog_attrs
+      attrs.merge!(audio_attributes: { audio: '' })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert assigns(:blog).audio.blank?
     end
 
     test 'should be able to create audio attributes when creating blog' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
-      post :create, blog: { audio_attributes: { audio: audio }, blog_category_id: @blog_category.id }
+      attrs = set_default_blog_attrs
+      attrs.merge!(audio_attributes: { audio: audio })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert_not assigns(:blog).audio.blank?
     end
@@ -311,6 +330,10 @@ module Admin
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
+    end
+
+    def set_default_blog_attrs
+      { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } }, blog_category_id: @blog_category.id }
     end
   end
 end
