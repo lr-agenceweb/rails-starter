@@ -180,3 +180,23 @@ form fieldset > ol > li.boolean
 
 form.formtastic fieldset > ol li p.inline-errors
   display: none
+
+// Manual columns on AA form
+.form-left-column, .form-right-column
+  width: 50%
+  li
+    margin-bottom: 1rem
+    .inline-hints
+      margin-top: 5px
+      font-style: italic
+
+.form-left-column
+  float: left
+  li
+    margin-left: 2rem
+    margin-right: 1rem
+
+.form-right-column
+  float: right
+  li
+    margin-right: 2rem
