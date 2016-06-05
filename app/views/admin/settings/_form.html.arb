@@ -67,17 +67,17 @@ f.columns do
   f.column do
     f.inputs 'Paramètres généraux' do
       f.input :show_admin_bar,
-              hint: 'Si coché, un bandeau sera présent en haut du site (partie publique), donnant accès à quelques raccourcis de l\'administration. Ce bandeau n\'est visible que par l\'administrateur du site, les internautes ne le verront pas.'
+              hint: 'Si coché, un bandeau sera présent en haut du site (partie publique), donnant accès à quelques raccourcis de l\'administration. <br /> Ce bandeau n\'est visible que par l\'administrateur du site, les internautes ne le verront pas.'.html_safe
       f.input :per_page,
               as: :select,
               collection: Setting.per_page_values,
               include_blank: false,
-              hint: 'Choisissez le nombre d\'articles à afficher avant la pagination. Si vous souhaitez afficher tous les articles sur une seule page, sélectionnez la valeur 0'
+              hint: 'Choisissez le nombre d\'articles à afficher avant la pagination (concerne les article de blogs, événements et les liens partenaires). <br /> Si vous souhaitez afficher tous les articles sur une seule page, sélectionnez la valeur 0'.html_safe
 
       f.input :date_format,
               as: :radio,
               collection: Setting.date_format.options,
-              hint: 'Choisissez le format de la date à afficher (<strong>date + heure</strong>, <strong>date seulement</strong> ou sous la forme "<strong>Il y a 10 minutes</strong>")'.html_safe
+              hint: 'Choisissez le format de la date à afficher (<strong>date seulement</strong>, <strong>date + heure</strong> ou sous la forme "<strong>Il y a 10 minutes</strong>)"'.html_safe
     end
   end
 end
