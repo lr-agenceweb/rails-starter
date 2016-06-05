@@ -1,52 +1,104 @@
-article.post-article
+article.post-article class="#{params[:action]}"
   = render 'posts/microdatas', resource: blog, kind: 'BlogPosting'
-
-  header.post-header
-    h3.post-title
-      = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
-    small
-      = blog.pretty_created_at(setting.date_format)
-      span< = t('in')
-      span< = link_to blog.blog_category_name, blog_category_path(blog.blog_category)
-      - if can? :update, blog
-        span.frontend-actions< = link_to t('active_admin.edit'), edit_admin_blog_path(blog), target: :blank
 
   .row
     .small-12.columns
-      .pictures-container
-        - if params[:action] == 'index'
-          = render 'elements/pictures/has_many_get_first', resource: blog, link: true
-        - elsif blog.show_as_gallery? && params[:action] == 'show'
-          = render 'elements/pictures/has_many_as_gallery', resource: blog
+      header.post-header
+        h3.post-title
+          = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
+          - if can? :update, blog
+            span.frontend-actions =< link_to t('active_admin.edit'), edit_admin_blog_path(blog), target: :blank, class: 'button tiny ffab after fa-pencil'
+
+        p.post-meta-title
+          span.post-created-at
+            = blog.pretty_created_at(setting.date_format)
+
+          span.post-category<
+            == t('blog.in_category', category: link_to(blog.blog_category_name, blog_category_path(blog.blog_category)))
+
+      - if blog.pictures? || blog.video_uploads? || blog.video_platforms?
+        .pictures-container
+          - if index_page?
+            - if blog.pictures?
+              = render 'elements/pictures/has_many_get_first', resource: blog, link: false
+            - elsif blog.video_uploads?
+              = retina_image_tag blog.video_upload, :video_file, :preview
+              .video-icon = link_to fa_icon('play-circle'), blog_category_blog_path(blog.blog_category, blog)
+            - elsif blog.video_platforms?
+              - begin
+                = blog.video_platform.decorate.preview
+                .video-icon = link_to fa_icon('play-circle'), blog_category_blog_path(blog.blog_category, blog)
+              - rescue
+
+          - if show_page?
+            - if blog.show_as_gallery?
+              = render 'elements/pictures/has_many_as_gallery', resource: blog
+            - else
+              = render 'elements/pictures/has_many', resource: blog, link: true
+
+      .post-content
+        - if index_page?
+          - link = blog_category_blog_path(blog.blog_category, blog)
+          == truncate_read_more(blog.content, link, 300)
         - else
-          = render 'elements/pictures/has_many', resource: blog, link: true
+          == blog.content
 
-  .post-body
-    - if params[:action] == 'index'
-      == truncate_read_more(blog.content, blog_category_blog_path(blog.blog_category, blog), 300)
-    - else
-      == blog.content
+      - if show_page?
+        .videos-container
+          = render '/assets/videos/index', resource: blog
 
-  - if @audio_module.enabled? && blog.audios?
-    .row
-      .small-12.medium-9.medium-centered.columns
-        .audios-container
-          = render '/assets/audios/index', audios: blog.audios if params[:action] == 'show'
+        - if @audio_module.enabled? && blog.audios?
+          .audios-container
+            = render '/assets/audios/index', audios: blog.audios
 
-  .row
-    .small-12.medium-9.medium-centered.columns
-      .videos-container
-        = render '/assets/videos/index', resource: blog if params[:action] == 'show'
+      footer.post-footer
+        .upper-footer
+          .row.align-middle
+            .small-12.medium-6.columns
+              ul.inline-list
+                li
+                  span = I18n.t('activerecord.attributes.post.author_with_avatar')
+                  |:
+                  span.author< = blog.author
 
-  footer
-    ul.inline-list
-      li = "#{I18n.t('activerecord.attributes.post.author_with_avatar')}: #{blog.author}"
+                - if @comment_module.enabled? && blog.allow_comments?
+                  li
+                    - list_comments = blog.comments.validated.by_locale(@language)
+                    = I18n.t('activerecord.models.comment.one').pluralize(list_comments.count)
+                    |:
+                    span#comment-count.comment-count< = list_comments.count
 
-      - if @comment_module.enabled? && blog.allow_comments?
-        li
-          = I18n.t('activerecord.models.comment.other')
-          |:
-          span#comment-count.comment-count =< blog.comments.validated.by_locale(@language).count
+            .small-12.medium-6.columns
+              .social-share
+                = awesome_share_buttons(blog.title,
+                                  desc: html_escape_once(blog.referencement_description),
+                                  image: image_for_object(blog),
+                                  via: @setting.try(:twitter_username),
+                                  url: blog_category_blog_url(blog.blog_category, blog),
+                                  popup: true)
 
-  - if params[:action] == 'show'
-    = render 'elements/prev_next', element: blog if @blog_settings.prev_next?
+            - if index_page? && @comment_module.enabled? && blog.allow_comments?
+              .small-12.columns.last-comment
+                - comment_sentence = t('comment.be_the_first')
+                - if !list_comments.empty?
+                  - comment_sentence = t('comment.add_your_own')
+                  .last-comment-title = t('blog.last_comment')
+                  blockquote
+                    - last_comment = list_comments.first
+                    = last_comment.content
+                    cite = last_comment.decorate.pseudo_registered_or_guest
+
+                = link_to raw("#{fa_icon 'comment', text: comment_sentence}"), blog_category_blog_path(blog.blog_category, blog, anchor: 'new_comment')
+
+        - if show_page?
+          - if @blog_settings.prev_next? && (blog.prev? || blog.next?)
+            .lower-footer
+              .row.align-center
+                .small-12.columns
+                  .prev_next_buttons = render 'elements/prev_next', element: blog
+
+          .small-12.columns
+            p.back-to
+              = link_to t('link.back_to', page: @category.menu_title), blogs_path
+              br
+              = link_to t('link.blog_category.back_to', category: blog.blog_category_name), blog_category_path(blog.blog_category)

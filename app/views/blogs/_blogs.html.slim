@@ -1,6 +1,0 @@
-section#blogs
-  - @blogs.each do |blog|
-    - cache ['list', blog]
-      = render 'blogs/blog', blog: blog
-
-= paginate @blogs

@@ -44,6 +44,8 @@ fr:
     no_last_comments: Il n'y a pas de commentaires récents
     email:
       greeting: Bonjour %{author},
+    be_the_first: Soyez le premier à poster un commentaire
+    add_your_own: Ajouter votre commentaire
     admin:
       go_to_source: Voir directement l'article sur lequel le commentaire a été posté
 
@@ -81,3 +83,5 @@ en:
     no_last_comments: There is no recent comments
     email:
       greeting: Hello %{author},
+    be_the_first: Be the first to submit a comment
+    add_your_own: Add your own comment
