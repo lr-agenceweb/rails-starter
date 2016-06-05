@@ -54,10 +54,8 @@ class CommentDecorator < ApplicationDecorator
 
   def link_and_image_source
     html = ''
-    html << content_tag(:p) do
-      commentable.decorate.custom_cover +
-      '<br />'.html_safe +
-      link_source
+    html << h.content_tag(:p) do
+      "#{commentable.decorate.custom_cover} <br /> #{link_source}".html_safe
     end
     html.html_safe
   end
