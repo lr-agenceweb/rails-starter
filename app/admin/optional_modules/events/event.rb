@@ -123,7 +123,8 @@ ActiveAdmin.register Event do
           f.input :online, hint: I18n.t('form.hint.event.online')
         end
 
-        render 'admin/shared/links/one', f: f
+        render 'admin/shared/form_translation', f: f
+        render 'admin/shared/referencement/form', f: f
       end
 
       column do
@@ -140,19 +141,10 @@ ActiveAdmin.register Event do
                   hint: I18n.t('form.hint.event.end_date')
         end
 
+        render 'admin/shared/links/one', f: f
         render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
       end
     end
-
-    columns do
-      column do
-        render 'admin/shared/form_translation', f: f
-      end
-
-      column do
-        render 'admin/shared/referencement/form', f: f
-      end
-    end # columns
 
     columns do
       column do
