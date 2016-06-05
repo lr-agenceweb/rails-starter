@@ -44,7 +44,7 @@ class BlogTest < ActiveSupport::TestCase
   end
 
   test 'should not save nested audio if input file is empty' do
-    attrs = { id: SecureRandom.uuid, blog_category_id: @blog_category.id, audio_attributes: { online: true } }
+    attrs = { id: SecureRandom.random_number(1_000), blog_category_id: @blog_category.id, audio_attributes: { online: true } }
     blog = Blog.new attrs
     blog.set_translations(
       fr: { title: 'Bar and Foo' },
@@ -58,7 +58,7 @@ class BlogTest < ActiveSupport::TestCase
   # == Slug
   #
   test 'should be valid if title is set properly' do
-    blog = Blog.new(id: SecureRandom.uuid, blog_category_id: @blog_category.id)
+    blog = Blog.new(id: SecureRandom.random_number(1_000), blog_category_id: @blog_category.id)
     blog.set_translations(
       fr: { title: 'Mon article de blog' },
       en: { title: 'My blog article' }
@@ -80,7 +80,7 @@ class BlogTest < ActiveSupport::TestCase
   end
 
   test 'should add id to slug if slug already exists' do
-    blog = Blog.new(id: SecureRandom.uuid, blog_category_id: @blog_category.id)
+    blog = Blog.new(id: SecureRandom.random_number(1_000), blog_category_id: @blog_category.id)
     blog.set_translations(
       fr: { title: 'Article de blog en ligne' },
       en: { title: 'Blog article online' }
@@ -231,7 +231,7 @@ class BlogTest < ActiveSupport::TestCase
   end
 
   def set_blog_record
-    attrs = { id: SecureRandom.hex(4), blog_category_id: @blog_category.id }
+    attrs = { id: SecureRandom.random_number(1_000), blog_category_id: @blog_category.id }
     blog = Blog.new attrs
     blog.set_translations(
       fr: { title: 'Bar and Foo' },

@@ -9,7 +9,7 @@ class BlogCategoryTest < ActiveSupport::TestCase
   # == Validation rules
   #
   test 'should not be valid if name is not set' do
-    blog_category = BlogCategory.new(id: SecureRandom.uuid)
+    blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
     blog_category.set_translations(
       fr: {},
       en: {}
@@ -19,7 +19,7 @@ class BlogCategoryTest < ActiveSupport::TestCase
   end
 
   test 'should not be valid if name is empty' do
-    blog_category = BlogCategory.new(id: SecureRandom.uuid)
+    blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
     blog_category.set_translations(
       fr: { name: '' },
       en: { name: '' }
@@ -29,7 +29,7 @@ class BlogCategoryTest < ActiveSupport::TestCase
   end
 
   test 'should not be valid if name is already taken' do
-    blog_category = BlogCategory.new(id: SecureRandom.uuid)
+    blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
     blog_category.set_translations(
       fr: { name: 'foo' },
       en: { name: 'bar' }
@@ -39,7 +39,7 @@ class BlogCategoryTest < ActiveSupport::TestCase
   end
 
   test 'should be valid if name is set properly but same for both locales' do
-    blog_category = BlogCategory.new(id: SecureRandom.uuid)
+    blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
     blog_category.set_translations(
       fr: { name: 'Foo Foo' },
       en: { name: 'Foo Foo' }
@@ -59,7 +59,7 @@ class BlogCategoryTest < ActiveSupport::TestCase
   end
 
   test 'should be valid if name is set properly' do
-    blog_category = BlogCategory.new(id: SecureRandom.uuid)
+    blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
     blog_category.set_translations(
       fr: { name: 'Foo Foo' },
       en: { name: 'Bar Bar' }

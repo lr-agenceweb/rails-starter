@@ -9,7 +9,7 @@ class ConnectionTest < ActiveSupport::TestCase
   # == Validation rules
   #
   test 'should not create connection if link is not correct' do
-    attrs = { id: SecureRandom.uuid, link_attributes: { url: 'bad-link' } }
+    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'bad-link' } }
     connection = set_connection_record(attrs)
     assert_not connection.valid?
     assert_equal [:'link.url'], connection.errors.keys
@@ -17,7 +17,7 @@ class ConnectionTest < ActiveSupport::TestCase
   end
 
   test 'should create connection if link is correct' do
-    attrs = { id: SecureRandom.uuid, link_attributes: { url: 'http://test.com' } }
+    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'http://test.com' } }
     connection = set_connection_record(attrs)
     assert connection.valid?
     assert_empty connection.errors.keys

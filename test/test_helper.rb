@@ -157,5 +157,10 @@ module ActiveSupport
       assert_no_enqueued_jobs
       assert ActionMailer::Base.deliveries.empty?
     end
+
+    # Default record attrs
+    def set_default_record_attrs
+      { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+    end
   end # TestCase
 end

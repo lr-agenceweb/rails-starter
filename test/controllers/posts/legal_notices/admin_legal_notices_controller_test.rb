@@ -33,7 +33,7 @@ module Admin
 
     test 'should create legal_notice if logged in' do
       assert_difference 'LegalNotice.count' do
-        attrs = set_default_legal_notice_attrs
+        attrs = set_default_record_attrs
         post :create, legal_notice: attrs
         assert_equal 'LegalNotice', assigns(:legal_notice).type
         assert_equal @administrator.id, assigns(:legal_notice).user_id
@@ -189,10 +189,6 @@ module Admin
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
-    end
-
-    def set_default_legal_notice_attrs
-      { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
     end
   end
 end

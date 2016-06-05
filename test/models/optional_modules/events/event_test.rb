@@ -15,7 +15,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'should return true if dates are corrects' do
     attrs = {
-      id: SecureRandom.uuid,
+      id: SecureRandom.random_number(1_000),
       start_date: Time.zone.now,
       end_date: Time.zone.now + 1.day.to_i
     }
@@ -26,7 +26,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'should return false if dates are not corrects' do
     attrs = {
-      id: SecureRandom.uuid,
+      id: SecureRandom.random_number(1_000),
       start_date: Time.zone.now + 1.day.to_i,
       end_date: Time.zone.now
     }
@@ -98,7 +98,7 @@ class EventTest < ActiveSupport::TestCase
   # == Validation rules
   #
   test 'should not be valid if title is not filled' do
-    attrs = { id: SecureRandom.uuid, start_date: Time.zone.now + 1.day, all_day: true }
+    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true }
     event = Event.new attrs
 
     refute event.valid?, 'should not be valid if title is not set'
@@ -107,7 +107,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'should not be valid if start_date is not present' do
-    attrs = { id: SecureRandom.uuid, all_day: true }
+    attrs = { id: SecureRandom.random_number(1_000), all_day: true }
     event = set_event_record(attrs)
 
     assert_not event.valid?
@@ -116,7 +116,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'should not be valid if start_date finish after end_date' do
-    attrs = { id: SecureRandom.uuid, start_date: Time.zone.now + 1.day, end_date: Time.zone.now }
+    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, end_date: Time.zone.now }
     event = set_event_record(attrs)
 
     assert_not event.valid?
@@ -125,7 +125,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'should not create event if link is not correct' do
-    attrs = { id: SecureRandom.uuid, link_attributes: { url: 'bad-link' }, start_date: Time.zone.now, all_day: true }
+    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'bad-link' }, start_date: Time.zone.now, all_day: true }
     event = set_event_record(attrs)
 
     assert_not event.valid?
@@ -133,7 +133,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'should create event if link is correct' do
-    attrs = { id: SecureRandom.uuid, link_attributes: { url: 'http://test.com' }, start_date: Time.zone.now, all_day: true }
+    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'http://test.com' }, start_date: Time.zone.now, all_day: true }
     event = set_event_record(attrs)
 
     assert event.valid?
@@ -145,7 +145,7 @@ class EventTest < ActiveSupport::TestCase
   # == Slug
   #
   test 'should be valid if title is set properly' do
-    event = Event.new(id: SecureRandom.uuid, start_date: Time.zone.now + 1.day, all_day: true)
+    event = Event.new(id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true)
     event.set_translations(
       fr: { title: 'Mon événement' },
       en: { title: 'My event' }
@@ -167,7 +167,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'should add id to slug if slug already exists' do
-    event = Event.new(id: SecureRandom.uuid, start_date: Time.zone.now + 1.day, all_day: true)
+    event = Event.new(id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true)
     event.set_translations(
       fr: { title: 'Evénement 1' },
       en: { title: 'Event 1' }

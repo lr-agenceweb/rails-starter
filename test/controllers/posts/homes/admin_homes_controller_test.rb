@@ -33,7 +33,7 @@ module Admin
 
     test 'should create if logged in' do
       assert_difference 'Home.count' do
-        attrs = { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+        attrs = set_default_record_attrs
         post :create, home: attrs
         assert_equal 'Home', assigns(:home).type
         assert_equal @administrator.id, assigns(:home).user_id

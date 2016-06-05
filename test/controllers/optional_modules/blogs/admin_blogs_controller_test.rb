@@ -32,7 +32,8 @@ module Admin
     end
 
     test 'should create blog if logged in' do
-      attrs = set_default_blog_attrs
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
       post :create, blog: attrs
       assert assigns(:blog).valid?
       assert flash[:notice].blank?
@@ -75,7 +76,8 @@ module Admin
     end
 
     test 'should not be able to create blank video_upload attributes from blog' do
-      attrs = set_default_blog_attrs
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
       attrs.merge!(video_upload_attributes: { video_file: '' })
 
       post :create, blog: attrs
@@ -85,7 +87,8 @@ module Admin
 
     test 'should be able to create video_upload attributes when creating blog' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      attrs = set_default_blog_attrs
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
       attrs.merge!(video_upload_attributes: { video_file: video })
 
       post :create, blog: attrs
@@ -103,7 +106,8 @@ module Admin
     end
 
     test 'should not be able to create blank video_platform attributes from blog' do
-      attrs = set_default_blog_attrs
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
       attrs.merge!(video_platform_attributes: { url: '' })
 
       post :create, blog: attrs
@@ -112,7 +116,8 @@ module Admin
     end
 
     test 'should be able to create video_platform attributes when creating blog' do
-      attrs = set_default_blog_attrs
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
       attrs.merge!(video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3' })
 
       post :create, blog: attrs
@@ -130,7 +135,8 @@ module Admin
     end
 
     test 'should not be able to create blank audio attributes from blog' do
-      attrs = set_default_blog_attrs
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
       attrs.merge!(audio_attributes: { audio: '' })
 
       post :create, blog: attrs
@@ -140,7 +146,8 @@ module Admin
 
     test 'should be able to create audio attributes when creating blog' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
-      attrs = set_default_blog_attrs
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
       attrs.merge!(audio_attributes: { audio: audio })
 
       post :create, blog: attrs
@@ -330,10 +337,6 @@ module Admin
       @administrator = users(:bob)
       @super_administrator = users(:anthony)
       sign_in @administrator
-    end
-
-    def set_default_blog_attrs
-      { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } }, blog_category_id: @blog_category.id }
     end
   end
 end

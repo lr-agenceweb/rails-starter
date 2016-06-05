@@ -11,7 +11,7 @@ class LegalNoticeTest < ActiveSupport::TestCase
   # == Validation rules
   #
   test 'should be valid if title filled' do
-    legal_notice = LegalNotice.new(id: SecureRandom.uuid)
+    legal_notice = LegalNotice.new(id: SecureRandom.random_number(1_000))
     legal_notice.set_translations(
       fr: { title: 'Mon article de Mentions Légales' },
       en: { title: 'My Legal Notice article' }
@@ -31,7 +31,7 @@ class LegalNoticeTest < ActiveSupport::TestCase
   # == Slug
   #
   test 'should be valid if title is set properly' do
-    legal_notice = LegalNotice.new(id: SecureRandom.uuid)
+    legal_notice = LegalNotice.new(id: SecureRandom.random_number(1_000))
     legal_notice.set_translations(
       fr: { title: 'Mon article de Mentions Légales' },
       en: { title: 'My Legal Notice article' }
@@ -53,7 +53,7 @@ class LegalNoticeTest < ActiveSupport::TestCase
   end
 
   test 'should add id to slug if slug already exists' do
-    legal_notice = LegalNotice.new(id: SecureRandom.uuid)
+    legal_notice = LegalNotice.new(id: SecureRandom.random_number(1_000))
     legal_notice.set_translations(
       fr: { title: 'Mes mentions légales' },
       en: { title: 'My legal notices' }
