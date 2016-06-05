@@ -4,7 +4,7 @@
 # == Blog article
 #
 puts 'Creating Blog article'
-@blog = Blog.create!(
+@blog = Blog.new(
   title: 'Fonds marins',
   slug: 'fonds-marins',
   content: '<p>Voici ce qu\'il se passe sous l\'eau</p>',
@@ -12,6 +12,8 @@ puts 'Creating Blog article'
   blog_category_id: @blog_category.id,
   user_id: @administrator.id
 )
+@blog.save(validate: false)
+
 referencement = Referencement.create!(
   attachable_id: @blog.id,
   attachable_type: 'Blog',
@@ -36,13 +38,14 @@ VideoSubtitle.create!(
 )
 
 if @locales.include?(:en)
-  Blog::Translation.create!(
+  bt = Blog::Translation.create!(
     blog_id: @blog.id,
     locale: 'en',
     title: 'Underwater',
     slug: 'underwater',
     content: '<p>This is what happend underwater</p>'
   )
+  bt.save(validate: false)
 
   Referencement::Translation.create!(
     referencement_id: referencement.id,
