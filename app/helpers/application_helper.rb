@@ -8,9 +8,12 @@ module ApplicationHelper
     Time.zone.now.year
   end
 
-  def title_for_category(category, misc = nil)
-    link = link_to category.menu_title, category.menu_link(category.name), class: 'l-page-title-link'
-    content_tag(:h2, link + misc, class: 'l-page-title', id: category.name.downcase)
+  def title_for_category(category, opts = {})
+    extra_title = defined?(opts[:title]) ? opts[:title] : ''
+    page_title = category.menu_title
+    page_title << " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
+    link = link_to raw(page_title), category.menu_link(category.name), class: 'page-title-link'
+    content_tag(:h2, link, class: 'page-title', id: category.name.downcase)
   end
 
   def background_from_color_picker(category)
