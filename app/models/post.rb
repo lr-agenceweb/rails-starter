@@ -29,6 +29,7 @@
 class Post < ActiveRecord::Base
   include Core::Userable
   include Core::Referenceable
+  include Core::FriendlyGlobalizeSluggable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
@@ -36,12 +37,6 @@ class Post < ActiveRecord::Base
   include OptionalModules::Searchable
   include Positionable
   include PrevNextable
-
-  translates :title, :slug, :content, fallbacks_for_empty_translations: true
-  active_admin_translates :title, :slug, :content
-
-  extend FriendlyId
-  friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }

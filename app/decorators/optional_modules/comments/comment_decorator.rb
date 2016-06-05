@@ -38,32 +38,30 @@ class CommentDecorator < ApplicationDecorator
   end
 
   #
+  # == Content
+  #
+  def preview_content
+    truncate_html(model.content, length: 100, escape: true)
+  end
+
+  #
   # == Link and Image for Commentable
   #
   def link_source
     link = commentable.is_a?(Blog) ? blog_category_blog_path(commentable.blog_category, commentable) : polymorphic_path(commentable)
-    link_to commentable.title, link, target: :_blank
-  end
-
-  def image_source
-    h.retina_image_tag commentable.pictures.first, :image, :small
+    link_to "#{commentable.title} <br /> (#{t('comment.admin.go_to_source')})".html_safe, link, target: :_blank, class: 'button'
   end
 
   def link_and_image_source
     html = ''
-    html << content_tag(:p, image_source) if commentable_image?
-    html << content_tag(:p, link_source)
+    html << h.content_tag(:p) do
+      "#{commentable.decorate.custom_cover} <br /> #{link_source}".html_safe
+    end
     html.html_safe
   end
 
   def pseudo(name = nil)
     name = pseudo_registered_or_guest if name.nil?
     content_tag(:strong, name, class: 'comment-author')
-  end
-
-  private
-
-  def commentable_image?
-    commentable.pictures.present?
   end
 end

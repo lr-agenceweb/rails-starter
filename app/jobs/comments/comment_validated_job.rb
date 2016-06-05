@@ -7,6 +7,6 @@ class CommentValidatedJob < ActiveJob::Base
   queue_as :default
 
   def perform(comment)
-    CommentMailer.send_validated_comment(comment).deliver_now
+    CommentMailer.comment_validated(comment).deliver_now
   end
 end

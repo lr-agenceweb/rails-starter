@@ -68,13 +68,13 @@ class ApplicationDecorator < Draper::Decorator
   #
   # == DateTime
   #
-  def created_at
-    I18n.l(model.created_at, format: :short)
+  def created_at(format = :short)
+    I18n.l(model.created_at, format: format)
   end
 
   def pretty_created_at(date_format)
     time = l(model.created_at, format: date_format.to_sym)
-    title = date_format == 'ago' ? l(model.created_at, format: :with_time) : time
+    title = l(model.created_at, format: :long)
     time_tag(model.created_at.to_datetime, time, class: 'date-format', title: title)
   end
 

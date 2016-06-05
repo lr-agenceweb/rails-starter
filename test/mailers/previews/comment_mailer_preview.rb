@@ -5,8 +5,21 @@
 # Preview all emails at http://localhost:3000/rails/mailers/comment_preview
 #
 class CommentMailerPreview < ActionMailer::Preview
-  def comment_preview
+  # Comment created
+  def comment_created_preview
     @comment = Comment.first
-    CommentMailer.send_email(@comment)
+    CommentMailer.comment_created(@comment)
+  end
+
+  # Comment signalled
+  def comment_signalled_preview
+    @comment = Comment.first
+    CommentMailer.comment_signalled(@comment)
+  end
+
+  # Comment validated
+  def comment_validated_preview
+    @comment = Comment.first
+    CommentMailer.comment_validated(@comment)
   end
 end

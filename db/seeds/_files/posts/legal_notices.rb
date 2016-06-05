@@ -34,21 +34,23 @@ legal_notice_user_id = [
 ]
 
 legal_notice_title_fr.each_with_index do |element, index|
-  legal_notice = LegalNotice.create!(
+  legal_notice = LegalNotice.new(
     title: legal_notice_title_fr[index],
     slug: legal_notice_slug_fr[index],
     content: legal_notice_content_fr[index],
     online: true,
     user_id: legal_notice_user_id[index]
   )
+  legal_notice.save(validate: false)
 
   if @locales.include?(:en)
-    LegalNotice::Translation.create!(
+    lnt = LegalNotice::Translation.new(
       post_id: legal_notice.id,
       locale: 'en',
       title: legal_notice_title_en[index],
       slug: legal_notice_slug_en[index],
       content: legal_notice_content_en[index]
     )
+    lnt.save(validate: false)
   end
 end

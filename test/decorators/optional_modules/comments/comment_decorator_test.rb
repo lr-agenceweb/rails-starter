@@ -6,6 +6,7 @@ require 'test_helper'
 #
 class CommentDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
+  include ActionDispatch::TestProcess
 
   setup :initialize_test
 
@@ -52,26 +53,32 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Content
+  #
+  test 'should return preview of comment' do
+    assert_equal 'Mon commentaire de test', @comment_decorated.preview_content
+
+    @comment_decorated.update_attribute(:comment, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+    assert_equal 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut...', @comment_decorated.preview_content
+  end
+
+  #
   # == Link and Image for Commentable
   #
   test 'should return correct commentable link for regular articles' do
-    assert_equal '<a target="_blank" href="/a-propos/article-2-a-propos">Article 2 A Propos</a>', @comment_decorated.link_source
+    assert_equal "<a target=\"_blank\" class=\"button\" href=\"/a-propos/article-2-a-propos\">Article 2 A Propos <br /> (#{I18n.t('comment.admin.go_to_source')})</a>", @comment_decorated.link_source
   end
 
   test 'should return correct commentable link for blog articles' do
-    assert_equal '<a target="_blank" href="/blogs/foo/article-de-blog-en-ligne">Article de blog en ligne</a>', @blog_comment_decorated.link_source
-  end
-
-  test 'should return correct commentable image' do
-    assert_equal '<img src="/system/test/pictures/337532635/small-my-picture-3.jpg" alt="Small my picture 3" />', @comment_decorated.image_source
+    assert_equal "<a target=\"_blank\" class=\"button\" href=\"/blogs/foo/article-de-blog-en-ligne\">Article de blog en ligne <br /> (#{I18n.t('comment.admin.go_to_source')})</a>", @blog_comment_decorated.link_source
   end
 
   test 'should return correct commentable link and image' do
-    assert_equal '<p><img src="/system/test/pictures/337532635/small-my-picture-3.jpg" alt="Small my picture 3" /></p><p><a target="_blank" href="/a-propos/article-2-a-propos">Article 2 A Propos</a></p>', @comment_decorated.link_and_image_source
-  end
+    @blog_comment.commentable.pictures.each(&:destroy)
 
-  test 'should return correct value for commentable_image?' do
-    assert @comment_decorated.send(:commentable_image?)
+    attachment = fixture_file_upload 'images/bart.png', 'image/png'
+    Picture.create(attachable_id: @blog_comment.commentable_id, attachable_type: 'Blog', image: attachment)
+    assert_equal "<p><img width=\"125\" height=\"223\" src=\"#{@blog_comment.commentable.picture.image.url(:medium)}\" alt=\"Medium bart\" /> <br /> <a target=\"_blank\" class=\"button\" href=\"/blogs/foo/article-de-blog-en-ligne\">Article de blog en ligne <br /> (#{I18n.t('comment.admin.go_to_source')})</a></p>", @blog_comment_decorated.link_and_image_source
   end
 
   private

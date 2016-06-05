@@ -33,7 +33,8 @@ module Admin
 
     test 'should create if logged in' do
       assert_difference 'About.count' do
-        post :create, about: {}
+        attrs = set_default_record_attrs
+        post :create, about: attrs
         assert_equal 'About', assigns(:about).type
         assert_equal @administrator.id, assigns(:about).user_id
         assert_redirected_to admin_about_path(assigns(:about))
@@ -203,5 +204,3 @@ module Admin
     end
   end
 end
-
-# TODO: Add test for create

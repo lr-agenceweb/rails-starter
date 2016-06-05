@@ -50,11 +50,13 @@
         color: $white
         font-size: map-get($header-sizes, h6)
 
-
-  // Lower Footer
+  // Lower Footer (made with love by ...)
   .lower-footer
     padding: 15px
     background-color: #333132
+    p
+      font-size: 12px
+      margin-bottom: 0
 
     a
       color: $secondary-color
@@ -62,28 +64,5 @@
     .credentials
       text-align: left
 
-    p
-      font-size: 12px
-      margin-bottom: 0
-
-    .made-by
-      text-align: right
-      a
-        color: $white
-        transition: color .3s ease-in
-      .initials
-        font-size: 8px
-        background-color: $white
-        padding: 7px 4px
-        .letter-l
-          color: #0c708d
-        .letter-esperluette
-          color: #ee732a
-        .letter-r
-          color: #614394
-
-      &:hover
-        .love
-          color: #E34
-        a
-          color: #ee732a
+// LR credentials
+@import modules/lr_credentials

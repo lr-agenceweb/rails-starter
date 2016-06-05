@@ -5,6 +5,8 @@ en:
     last_articles: Last articles
     blog_categories: Categories
     last_comments: Last comments
+    last_comment: Last comment
+    in_category: in %{category} category
 
 # French
 fr:
@@ -13,3 +15,5 @@ fr:
     last_articles: Derniers articles
     blog_categories: Catégories
     last_comments: Derniers commentaires
+    last_comment: Dernier commentaire
+    in_category: dans la catégorie %{category}

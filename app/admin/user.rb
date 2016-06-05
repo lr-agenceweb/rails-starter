@@ -63,10 +63,10 @@ ActiveAdmin.register User do
 
         column do
           panel t('activerecord.models.post.other') do
-            table_for resource.posts do
-              column :image
-              column :title
-              column :status
+            table_for resource.posts.last(5) do
+              column t('activerecord.attributes.picture.picture'), :image
+              column t('activerecord.attributes.post.title'), :title
+              bool_column t('activerecord.attributes.post.online'), :online
             end
           end
         end

@@ -43,7 +43,7 @@ module Admin
     end
 
     test 'should destroy blogs posts linked to category' do
-      assert_difference 'Blog.count', -2 do
+      assert_difference 'Blog.count', -3 do
         delete :destroy, id: @blog_category
       end
     end

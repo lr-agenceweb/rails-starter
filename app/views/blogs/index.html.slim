@@ -1,20 +1,27 @@
 - breadcrumb :blogs
 
-= render 'assets/sliders/show', slider: @category.slider, force: false unless @category.slider.nil?
+/= render 'assets/sliders/show', slider: @category.slider, force: false unless @category.slider.nil?
 
-section.blogs-section.page-section#blogs
-  .row
-    .small-12.columns
-      = title_for_category(category)
+.row.align-center
+  .small-12.columns
+    section.blogs-section.page-section#blogs
+      .row
+        .small-12.columns
+          = title_for_category(category, defined?(opts) ? opts : {})
 
-  .row
-    .small-12.columns
-      - if @blogs.blank?
-        p = t('blog.no_results')
-      - else
-        .row
-          .small-12.medium-8.columns
-            = render 'blogs/blogs'
+      .row.align-center
+        .small-11.columns
+          - if @blogs.blank?
+            p = t('blog.no_results')
+          - else
+            .row
+              .small-12.large-8.columns
+                #blogs-container
+                  - @blogs.each do |blog|
+                    - cache ['list', blog]
+                      = render 'blogs/blog', blog: blog
 
-          .small-12.medium-4.columns
-            = render 'blogs/sidebar'
+                = paginate @blogs
+
+              .large-4.columns.show-for-large
+                = render 'blogs/sidebar'

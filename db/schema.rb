@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160523215920) do
+ActiveRecord::Schema.define(version: 20160603211052) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20160523215920) do
     t.boolean  "should_signal",   default: true
     t.boolean  "send_email",      default: false
     t.boolean  "should_validate", default: true
+    t.boolean  "allow_reply",     default: true
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end

@@ -40,7 +40,7 @@ class Ability
     cannot [:unlink], User
     can :manage, User, id: @user.id
     optional_modules_check
-    can :manage, StringBox, optional_module: nil
+    can :manage, StringBox
     super_admin_batch_actions # Batch actions
   end
 
@@ -63,7 +63,7 @@ class Ability
     cannot :manage, OptionalModule
     cannot [:read, :update, :destroy], [About, LegalNotice]
     can :manage, [About, LegalNotice], user_id: @user.id
-    can [:read, :update], StringBox, optional_module: nil
+    can [:read, :update], StringBox
 
     admin_batch_actions # Batch actions
     optional_modules_check # Optional modules
@@ -89,6 +89,7 @@ class Ability
     cannot [:create, :update, :destroy], :all
     can [:read], Post
     rss_module
+    comment_frontend
   end
 
   def cannot_manage_optional_modules
@@ -141,7 +142,6 @@ class Ability
       cannot [:create, :destroy], NewsletterSetting
     else
       cannot :manage, [Newsletter, NewsletterUser, NewsletterSetting]
-      cannot :manage, StringBox, optional_module: @newsletter_module unless @newsletter_module.enabled?
     end
   end
 
@@ -168,10 +168,11 @@ class Ability
   end
 
   def comment_frontend
+    @comment_setting = CommentSetting.first
     if @comment_module.enabled?
-      can [:reply], Comment
       cannot [:signal], Comment
-      can [:signal], Comment if CommentSetting.first.should_signal?
+      can [:signal], Comment if @comment_setting.should_signal?
+      can [:reply], Comment if @comment_setting.allow_reply?
     else
       cannot :manage, Comment
     end
@@ -251,7 +252,6 @@ class Ability
       cannot [:create, :destroy], AdultSetting
     else
       cannot :manage, AdultSetting
-      cannot :manage, StringBox, optional_module: { id: @adult_module.id }
     end
   end
 

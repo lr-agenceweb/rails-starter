@@ -51,3 +51,10 @@ blog_third:
   slug: ~
   content: ~
   blog_category: two
+
+naked:
+  <<: *DEFAULTS
+  title: ~
+  slug: ~
+  content: ~
+  blog_category: one

@@ -26,7 +26,7 @@ module OptionalModules
 
         def reject_video_platform?(attributes)
           (new_record? && attributes['url'].blank?) ||
-            (!attributes['id'].blank? && attributes['url'].blank?)
+            (attributes['id'].blank? && attributes['url'].blank?)
         end
 
         def video_platforms?

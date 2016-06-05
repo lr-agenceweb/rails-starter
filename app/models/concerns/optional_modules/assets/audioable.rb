@@ -27,7 +27,7 @@ module OptionalModules
 
         def reject_audio?(attributes)
           (new_record? && attributes['audio'].blank?) ||
-            (!attributes['id'].blank? && attributes['audio'].blank?)
+            (attributes['id'].blank? && attributes['audio'].blank?)
         end
 
         def audio?

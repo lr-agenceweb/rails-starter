@@ -1,7 +1,7 @@
 $ ->
   if $('.available-locales, form.slider, form.newsletter_setting').length
     switch_locale($('.available-locales'))
-    slugify()
+    # slugify()
 
 
     $('form.slider .button.has_many_add, form.newsletter_setting .button.has_many_add').on 'click', (e) ->

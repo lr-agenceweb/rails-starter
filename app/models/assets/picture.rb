@@ -47,7 +47,15 @@ class Picture < ActiveRecord::Base
                       thumb:  '30x30>'
                     }
 
-  validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
+  validates_attachment :image,
+                       content_type: {
+                         content_type: [
+                           'image/jpeg',
+                           'image/png',
+                           'image/gif'
+                         ]
+                       },
+                       size: { less_than: 3.megabytes }
 
   scope :online, -> { where(online: true) }
 end

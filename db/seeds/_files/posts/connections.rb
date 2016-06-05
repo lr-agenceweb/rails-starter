@@ -33,22 +33,24 @@ connection_pictures = [
 ]
 
 connection_title_fr.each_with_index do |_element, index|
-  connection = Connection.create!(
+  connection = Connection.new(
     title: connection_title_fr[index],
     slug: connection_slug_fr[index],
     content: connection_content_fr[index],
     online: true,
     user_id: connection_user_id[index]
   )
+  connection.save(validate: false)
 
   if @locales.include?(:en)
-    Connection::Translation.create!(
+    ct = Connection::Translation.new(
       post_id: connection.id,
       locale: 'en',
       title: connection_title_en[index],
       slug: connection_slug_en[index],
       content: connection_content_en[index]
     )
+    ct.save(validate: false)
   end
 
   puts 'Creating Connection Link'

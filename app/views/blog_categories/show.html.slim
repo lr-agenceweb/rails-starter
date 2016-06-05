@@ -1,8 +1,1 @@
-.row
-  .small-12.columns
-
-    article
-      h2 Articles de blogs liés à la catégorie #{params[:id]}
-      - @blogs.each do |blog|
-        h3 = blog.title
-        div = blog.content
+= render template: 'blogs/index', locals: { opts: { title: "(#{@blog_category.name})" } }

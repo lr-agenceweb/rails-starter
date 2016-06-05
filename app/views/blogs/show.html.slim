@@ -2,11 +2,21 @@
 
 - cache blog do |_|
   .row.align-center
-    .small-12.medium-8.columns
-      = render 'blogs/blog', blog: blog
+    .small-12.columns
+      section.blogs-section.page-section#blogs
+        .row
+          .small-12.columns
+             = title_for_category(category)
 
-  .row.align-center
-    .small-12.medium-9.columns
-      - if params[:action] == 'show'
-        p.text-right = link_to t('link.back_to', page: @category.menu_title), blog_category_path(blog.blog_category)
-        = render 'comments/section', o: blog
+        .row.align-center
+          .small-11.columns
+            .row
+              .small-12.large-8.columns#blogs-container
+                = render 'blogs/blog', blog: blog
+
+              .large-4.columns.show-for-large
+                = render 'blogs/sidebar'
+
+            .row
+              .small-12.large-8.columns
+                = render 'comments/section', o: blog

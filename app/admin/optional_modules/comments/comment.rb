@@ -22,6 +22,16 @@ ActiveAdmin.register Comment, as: 'PostComment' do
   config.clear_sidebar_sections!
   actions :all, except: [:new]
 
+  # Toggle comment validation on show view
+  action_item :toggle_validated, only: [:show] do
+    link_to I18n.t('active_admin.batch_actions.labels.toggle_validated'), toggle_validated_admin_post_comment_path(resource), method: :put, data: { confirm: I18n.t('active_admin.toggle_validated.confirm', verb: resource.validated? ? 'invalider' : 'valider', object_kind: I18n.t('activerecord.models.comment.one').downcase) }
+  end
+
+  member_action :toggle_validated, method: :put do
+    resource.toggle! :validated
+    redirect_to :back, notice: t('active_admin.toggle_validated.flash', verb: resource.validated? ? 'validé' : 'invalidé')
+  end
+
   batch_action :toggle_validated, if: proc { can? :toggle_validated, Comment } do |ids|
     Comment.find(ids).each do |comment|
       comment.toggle! :validated
@@ -39,6 +49,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
     selectable_column
     column :author_with_avatar
     column :email_registered_or_guest
+    column :preview_content
     column :lang if locales.length > 1
     bool_column :validated
     bool_column :signalled if comment_setting.should_signal?
@@ -50,15 +61,24 @@ ActiveAdmin.register Comment, as: 'PostComment' do
 
   show do
     arbre_cache(self, resource.cache_key) do
-      attributes_table do
-        row :author_with_avatar
-        row :email_registered_or_guest
-        row :content
-        row :lang if locales.length > 1
-        bool_row :validated
-        bool_row :signalled if comment_setting.should_signal?
-        row :link_and_image_source
-        row :created_at
+      columns do
+        column do
+          attributes_table do
+            row :author_with_avatar
+            row :email_registered_or_guest
+            row :content
+          end
+        end
+
+        column do
+          attributes_table do
+            row :lang if locales.length > 1
+            bool_row :validated
+            bool_row :signalled if comment_setting.should_signal?
+            row :link_and_image_source
+            row :created_at
+          end
+        end
       end
     end
   end

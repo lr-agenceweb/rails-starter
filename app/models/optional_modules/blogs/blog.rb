@@ -30,6 +30,7 @@ class Blog < ActiveRecord::Base
   include Scopable
   include Core::Userable
   include Core::Referenceable
+  include Core::FriendlyGlobalizeSluggable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::Audioable
   include OptionalModules::Assets::VideoUploadable
@@ -39,12 +40,6 @@ class Blog < ActiveRecord::Base
   include PrevNextable
 
   after_update :update_counter_cache, if: proc { online_changed? }
-
-  translates :title, :slug, :content, fallbacks_for_empty_translations: true
-  active_admin_translates :title, :slug, :content
-
-  extend FriendlyId
-  friendly_id :title, use: [:slugged, :history, :globalize, :finders]
 
   belongs_to :blog_category, inverse_of: :blogs, counter_cache: true
 

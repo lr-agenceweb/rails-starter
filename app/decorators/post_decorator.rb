@@ -39,7 +39,7 @@ class PostDecorator < ApplicationDecorator
 
   def custom_cover
     if model.pictures?
-      retina_image_tag(first_pictures, :image, :small)
+      retina_image_tag(first_pictures, :image, :medium)
     elsif model.video_uploads?
       retina_image_tag(model.video_upload, :video_file, :preview)
     elsif model.video_platforms?

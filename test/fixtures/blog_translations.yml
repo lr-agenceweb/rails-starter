@@ -32,3 +32,18 @@ blog_offline_en:
   locale: en
   title: Blog article offline
   slug: blog-article-offline
+
+# Blog naked
+naked_fr:
+  <<: *DEFAULTS
+  blog_id: <%= ActiveRecord::FixtureSet.identify(:naked) %>
+  locale: fr
+  title: Article de blog naked
+  slug: article-de-blog-naked
+
+naked_en:
+  <<: *DEFAULTS
+  blog_id: <%= ActiveRecord::FixtureSet.identify(:naked) %>
+  locale: en
+  title: Blog article naked
+  slug: blog-article-naked

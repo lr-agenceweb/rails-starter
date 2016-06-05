@@ -61,6 +61,7 @@
 #= require plugins/mediaelement
 
 #= require modules/scroll_infinite
+#= require modules/sticky_sidebar
 
 #= require plugins/devkit
 
@@ -70,3 +71,8 @@ $(document).on 'ready page:load page:restore', ->
   $('form[data-validate]').validate()
 
   friendly_date()
+  comment_reply_loader()
+
+comment_reply_loader = ->
+  $('.comment-reply').on 'click', (e) ->
+    $(this).find('.spinner').removeClass('hide')

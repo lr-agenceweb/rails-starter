@@ -15,20 +15,24 @@ class EventTest < ActiveSupport::TestCase
 
   test 'should return true if dates are corrects' do
     attrs = {
+      id: SecureRandom.random_number(1_000),
       start_date: Time.zone.now,
       end_date: Time.zone.now + 1.day.to_i
     }
-    event = Event.new attrs
+    event = set_event_record(attrs)
     assert event.calendar_date_correct?
+    event.delete
   end
 
   test 'should return false if dates are not corrects' do
     attrs = {
+      id: SecureRandom.random_number(1_000),
       start_date: Time.zone.now + 1.day.to_i,
       end_date: Time.zone.now
     }
-    event = Event.new attrs
+    event = set_event_record(attrs)
     assert_equal [I18n.t('form.errors.end_date')], event.calendar_date_correct?
+    event.delete
   end
 
   test 'should return only current or coming events' do
@@ -93,28 +97,94 @@ class EventTest < ActiveSupport::TestCase
   #
   # == Validation rules
   #
+  test 'should not be valid if title is not filled' do
+    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true }
+    event = Event.new attrs
+
+    refute event.valid?, 'should not be valid if title is not set'
+    assert_equal [:"translations.title"], event.errors.keys
+    event.delete
+  end
+
   test 'should not be valid if start_date is not present' do
-    event = Event.new all_day: true
+    attrs = { id: SecureRandom.random_number(1_000), all_day: true }
+    event = set_event_record(attrs)
+
     assert_not event.valid?
     assert_equal [:start_date], event.errors.keys
+    event.delete
   end
 
   test 'should not be valid if start_date finish after end_date' do
-    event = Event.new start_date: Time.zone.now + 1.day, end_date: Time.zone.now
+    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, end_date: Time.zone.now }
+    event = set_event_record(attrs)
+
     assert_not event.valid?
     assert_equal [:start_date, :end_date], event.errors.keys
+    event.delete
   end
 
   test 'should not create event if link is not correct' do
-    event = Event.new link_attributes: { url: 'bad-link' }, start_date: Time.zone.now, all_day: true
+    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'bad-link' }, start_date: Time.zone.now, all_day: true }
+    event = set_event_record(attrs)
+
     assert_not event.valid?
     assert_equal [:'link.url'], event.errors.keys
   end
 
   test 'should create event if link is correct' do
-    event = Event.new link_attributes: { url: 'http://test.com' }, start_date: Time.zone.now, all_day: true
+    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'http://test.com' }, start_date: Time.zone.now, all_day: true }
+    event = set_event_record(attrs)
+
     assert event.valid?
     assert_empty event.errors.keys
+    event.delete
+  end
+
+  #
+  # == Slug
+  #
+  test 'should be valid if title is set properly' do
+    event = Event.new(id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true)
+    event.set_translations(
+      fr: { title: 'Mon événement' },
+      en: { title: 'My event' }
+    )
+
+    assert event.valid?, 'should be valid if title is set properly'
+    assert_empty event.errors.keys
+
+    I18n.with_locale('fr') do
+      assert_equal 'Mon événement', event.title
+      assert_equal 'mon-evenement', event.slug
+    end
+    I18n.with_locale('en') do
+      assert_equal 'My event', event.title
+      assert_equal 'my-event', event.slug
+    end
+
+    event.delete
+  end
+
+  test 'should add id to slug if slug already exists' do
+    event = Event.new(id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true)
+    event.set_translations(
+      fr: { title: 'Evénement 1' },
+      en: { title: 'Event 1' }
+    )
+
+    assert event.valid?, 'should be valid'
+    assert_empty event.errors.keys
+    assert_empty event.errors.messages
+
+    I18n.with_locale('fr') do
+      assert_equal 'evenement-1-2', event.slug
+    end
+    I18n.with_locale('en') do
+      assert_equal 'event-1-2', event.slug
+    end
+
+    event.delete
   end
 
   private
@@ -127,5 +197,14 @@ class EventTest < ActiveSupport::TestCase
     @event_order_coc = event_orders(:one)
     @event_order_all = event_orders(:two)
     @event_setting = event_settings(:one)
+  end
+
+  def set_event_record(attrs)
+    event = Event.new attrs
+    event.set_translations(
+      fr: { title: 'BarFoo' },
+      en: { title: 'FooBar' }
+    )
+    event
   end
 end

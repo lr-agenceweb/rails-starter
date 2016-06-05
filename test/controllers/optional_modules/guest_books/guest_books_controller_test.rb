@@ -174,6 +174,7 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should not appears if should_validate is true' do
+    @guest_book_setting.update_attribute(:should_validate, true)
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }

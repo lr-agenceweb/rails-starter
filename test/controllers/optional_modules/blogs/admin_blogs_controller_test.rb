@@ -32,7 +32,9 @@ module Admin
     end
 
     test 'should create blog if logged in' do
-      post :create, blog: { title: 'blog edit', content: 'content edit', blog_category_id: @blog_category.id }
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert flash[:notice].blank?
       assert_equal @administrator.id, assigns(:blog).user_id
@@ -65,23 +67,46 @@ module Admin
     end
 
     #
+    # == Nested resources
+    #
+    test 'should be able to update naked blog without any errors' do
+      patch :update, id: @blog_naked, blog: {}
+
+      assert assigns(:blog).valid?
+      assert_empty assigns(:blog).errors.keys
+      assert assigns(:blog).video_upload.blank?
+      assert assigns(:blog).audio.blank?
+      assert assigns(:blog).video_platform.blank?
+      assert_nil flash[:notice]
+    end
+
+    #
     # == VideoUpload
     #
-    test 'should be able to update video_upload attributes from blog' do
-      patch :update, id: @blog, blog: { video_upload_attributes: { online: false } }
+    test 'should be able to update video_upload attributes from naked blog' do
+      video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
+      patch :update, id: @blog_naked, blog: { video_upload_attributes: { video_file: video, online: false } }
       assert_not assigns(:blog).video_upload.blank?
       assert_not assigns(:blog).video_upload.online?
     end
 
     test 'should not be able to create blank video_upload attributes from blog' do
-      post :create, blog: { video_upload_attributes: { video_file: '' }, blog_category_id: @blog_category.id }
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
+      attrs.merge!(video_upload_attributes: { video_file: '' })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert assigns(:blog).video_upload.blank?
     end
 
     test 'should be able to create video_upload attributes when creating blog' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      post :create, blog: { video_upload_attributes: { video_file: video }, blog_category_id: @blog_category.id }
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
+      attrs.merge!(video_upload_attributes: { video_file: video })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert_not assigns(:blog).video_upload.blank?
     end
@@ -89,20 +114,28 @@ module Admin
     #
     # == VideoPlatform
     #
-    test 'should be able to update video_platform attributes from blog' do
-      patch :update, id: @blog, blog: { video_platform_attributes: { online: false } }
+    test 'should be able to update naked video_platform attributes from blog' do
+      patch :update, id: @blog_naked, blog: { video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3', online: false } }
       assert_not assigns(:blog).video_platform.blank?
       assert_not assigns(:blog).video_platform.online?
     end
 
     test 'should not be able to create blank video_platform attributes from blog' do
-      post :create, blog: { video_platform_attributes: { url: '' }, blog_category_id: @blog_category.id }
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
+      attrs.merge!(video_platform_attributes: { url: '' })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert assigns(:blog).video_platform.blank?
     end
 
     test 'should be able to create video_platform attributes when creating blog' do
-      post :create, blog: { video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3' }, blog_category_id: @blog_category.id }
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
+      attrs.merge!(video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3' })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert_not assigns(:blog).video_platform.blank?
     end
@@ -111,20 +144,29 @@ module Admin
     # == Audio
     #
     test 'should be able to update audio attributes from blog' do
-      patch :update, id: @blog, blog: { audio_attributes: { online: false } }
+      audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
+      patch :update, id: @blog_naked, blog: { audio_attributes: { audio: audio, online: false } }
       assert_not assigns(:blog).audio.blank?
       assert_not assigns(:blog).audio.online?
     end
 
     test 'should not be able to create blank audio attributes from blog' do
-      post :create, blog: { audio_attributes: { audio: '' }, blog_category_id: @blog_category.id }
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
+      attrs.merge!(audio_attributes: { audio: '' })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert assigns(:blog).audio.blank?
     end
 
     test 'should be able to create audio attributes when creating blog' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
-      post :create, blog: { audio_attributes: { audio: audio }, blog_category_id: @blog_category.id }
+      attrs = set_default_record_attrs
+      attrs.merge!(blog_category_id: @blog_category.id)
+      attrs.merge!(audio_attributes: { audio: audio })
+
+      post :create, blog: attrs
       assert assigns(:blog).valid?
       assert_not assigns(:blog).audio.blank?
     end
@@ -302,8 +344,10 @@ module Admin
 
       @blog = blogs(:blog_online)
       @blog_not_validate = blogs(:blog_offline)
-      @blog_module = optional_modules(:blog)
+      @blog_naked = blogs(:naked)
       @blog_category = blog_categories(:one)
+
+      @blog_module = optional_modules(:blog)
       @comment_module = optional_modules(:comment)
       @audio_module = optional_modules(:audio)
 

@@ -33,7 +33,8 @@ module Admin
 
     test 'should create connection if logged in' do
       assert_difference 'Connection.count' do
-        post :create, connection: {}
+        attrs = set_default_record_attrs
+        post :create, connection: attrs
         assert_equal 'Connection', assigns(:connection).type
         assert_equal @administrator.id, assigns(:connection).user_id
         assert_redirected_to admin_connection_path(assigns(:connection))

@@ -33,7 +33,8 @@ module Admin
 
     test 'should create legal_notice if logged in' do
       assert_difference 'LegalNotice.count' do
-        post :create, legal_notice: {}
+        attrs = set_default_record_attrs
+        post :create, legal_notice: attrs
         assert_equal 'LegalNotice', assigns(:legal_notice).type
         assert_equal @administrator.id, assigns(:legal_notice).user_id
         assert_redirected_to admin_legal_notice_path(assigns(:legal_notice))

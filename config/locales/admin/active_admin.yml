@@ -13,6 +13,9 @@ fr:
     destroy:
       label: Supprimer
       confirm: "Êtes-vous sûr de vouloir supprimer ce %{object_kind} ?"
+    toggle_validated:
+      confirm: "Êtes-vous sûr de vouloir %{verb} ce %{object_kind} ?"
+      flash: "Le commentaire a bien été %{verb}"
     batch_actions:
       labels:
         toggle_online: Mettre en ligne / hors ligne

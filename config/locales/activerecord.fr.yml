@@ -383,6 +383,7 @@ fr:
         mail: Email
         email_registered_or_guest: Email
         content: Commentaire
+        preview_content: Commentaire
         lang: Langue
         link_source: Article concerné
         link_and_image_source: Article concerné
@@ -394,6 +395,7 @@ fr:
         should_validate: Valider les commentaires ?
         should_signal: Signaler les commentaires ?
         send_email: Envoyer mail après signalement ?
+        allow_reply: Réponse aux commentaires ?
       optional_module:
         name: Nom
         enabled: Activé ?
@@ -511,6 +513,6 @@ fr:
   enumerize:
     setting:
       date_format:
-        date: "30/04/2016"
-        date_with_time: "30/04/2016 15:32"
+        with_time: "30/04/2016 15:32"
+        without_time: "30/04/2016"
         ago: "Il y a 10 minutes"

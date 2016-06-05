@@ -4,14 +4,15 @@
 # == About article
 #
 puts 'Creating About article'
-about = Post.create!(
-  type: 'About',
+about = About.new(
   title: 'Hébergement et réalisation',
   slug: 'hebergement-et-realisation',
   content: '<p>Le site a été développé par Anthony ROBIN</p>',
   online: true,
   user_id: @super_administrator.id
 )
+about.save(validate: false)
+
 referencement = Referencement.create!(
   attachable_id: about.id,
   attachable_type: 'Post',
@@ -21,13 +22,15 @@ referencement = Referencement.create!(
 )
 
 if @locales.include?(:en)
-  Post::Translation.create!(
+  at = About::Translation.create!(
     post_id: about.id,
     locale: 'en',
     title: 'Hosting and realisation',
     slug: 'hosting-and-realisation',
     content: '<p>This website has been developed by Anthony ROBIN</p>'
   )
+  at.save(validate: false)
+
   Referencement::Translation.create!(
     referencement_id: referencement.id,
     locale: 'en',

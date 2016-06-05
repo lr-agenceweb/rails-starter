@@ -44,7 +44,7 @@ gem 'enumerize'
 # == Html
 #
 gem 'slim-rails' # slim file
-gem 'kaminari', '~> 0.16.1' # Pagination
+gem 'kaminari', '~> 0.17.0' # Pagination
 gem 'gretel', github: 'LoveMondays/gretel', branch: 'fix-semantic-breadcrumb-current-item' # Breadcrumb
 gem 'rails_autolink'
 gem 'truncate_html', github: 'AlexGunslinger/truncate_html'
@@ -98,6 +98,7 @@ gem 'gmaps-autocomplete-rails'
 # == SEO
 #
 gem 'friendly_id', '~> 5.1'
+gem 'friendly_id-globalize'
 gem 'sitemap_generator'
 gem 'meta-tags'
 

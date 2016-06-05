@@ -124,27 +124,6 @@ module Admin
       assert ability.can?(:destroy, @string_box), 'should be able to destroy'
     end
 
-    #
-    # == Optional Modules disabled
-    #
-    test 'should not be able to manage with newsletter disabled' do
-      disable_optional_module @super_administrator, @newsletter_module, 'Newsletter' # in test_helper.rb
-      sign_in @administrator
-      ability = Ability.new(@administrator)
-      assert ability.cannot?(:read, @string_box_newsletter), 'should not be able to read'
-      assert ability.cannot?(:update, @string_box_newsletter), 'should not be able to update'
-      assert ability.cannot?(:destroy, @string_box_newsletter), 'should not be able to destroy'
-    end
-
-    test 'should not be able to manage with adult disabled' do
-      disable_optional_module @super_administrator, @adult_module, 'Adult' # in test_helper.rb
-      sign_in @administrator
-      ability = Ability.new(@administrator)
-      assert ability.cannot?(:read, @string_box_adult), 'should not be able to read'
-      assert ability.cannot?(:update, @string_box_adult), 'should not be able to update'
-      assert ability.cannot?(:destroy, @string_box_adult), 'should not be able to destroy'
-    end
-
     private
 
     def initialize_test

@@ -47,7 +47,7 @@ event_images = [
 event_videos = [nil, 'http://www.dailymotion.com/video/x38cajc']
 
 event_title_fr.each_with_index do |_element, index|
-  event = Event.create!(
+  event = Event.new(
     title: event_title_fr[index],
     slug: event_slug_fr[index],
     content: event_content_fr[index],
@@ -55,6 +55,8 @@ event_title_fr.each_with_index do |_element, index|
     end_date: event_end_date[index],
     online: true
   )
+  event.save(validate: false)
+
   referencement = Referencement.create!(
     attachable_id: event.id,
     attachable_type: 'Event',
@@ -64,13 +66,15 @@ event_title_fr.each_with_index do |_element, index|
   )
 
   if @locales.include?(:en)
-    Event::Translation.create!(
+    et = Event::Translation.create!(
       event_id: event.id,
       locale: 'en',
       title: event_title_en[index],
       slug: event_slug_en[index],
       content: event_content_en[index]
     )
+    et.save(validate: false)
+
     Referencement::Translation.create!(
       referencement_id: referencement.id,
       locale: 'en',

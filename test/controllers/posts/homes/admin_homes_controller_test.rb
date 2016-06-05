@@ -33,7 +33,8 @@ module Admin
 
     test 'should create if logged in' do
       assert_difference 'Home.count' do
-        post :create, home: {}
+        attrs = set_default_record_attrs
+        post :create, home: attrs
         assert_equal 'Home', assigns(:home).type
         assert_equal @administrator.id, assigns(:home).user_id
         assert_redirected_to admin_home_path(assigns(:home))
