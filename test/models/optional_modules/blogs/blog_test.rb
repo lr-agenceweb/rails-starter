@@ -110,7 +110,7 @@ class BlogTest < ActiveSupport::TestCase
     blog.save
     @blog_category.reload
 
-    assert_equal 3, @blog_category.blogs.size
+    assert_equal 4, @blog_category.blogs.size
     blog.delete
   end
 
@@ -126,25 +126,14 @@ class BlogTest < ActiveSupport::TestCase
     reset_counter_cache
     @blog.update_attribute(:online, false)
     @blog_category.reload
-    assert_equal 1, @blog_category.blogs.size
+    assert_equal 2, @blog_category.blogs.size
   end
 
   test 'should increase counter cache when object is set to online' do
     reset_counter_cache
     @blog_offline.update_attribute(:online, true)
     @blog_category.reload
-    assert_equal 3, @blog_category.blogs.size
-  end
-
-  #
-  # == Count
-  #
-  test 'should return correct count for blogs posts' do
-    assert_equal 3, Blog.count
-  end
-
-  test 'should fetch only online blog posts' do
-    assert_equal 2, Blog.online.count
+    assert_equal 4, @blog_category.blogs.size
   end
 
   #
@@ -152,10 +141,12 @@ class BlogTest < ActiveSupport::TestCase
   #
   test 'should have a next record' do
     assert @blog.next?, 'should have a next record'
+    assert @blog_third.next?, 'should have a next record'
   end
 
   test 'should have a prev record' do
     assert @blog_third.prev?, 'should have a prev record'
+    assert @blog_naked.prev?, 'should have a prev record'
   end
 
   test 'should not have a prev record' do
@@ -163,7 +154,7 @@ class BlogTest < ActiveSupport::TestCase
   end
 
   test 'should not have a next record' do
-    assert_not @blog_third.next?, 'should not have a next record'
+    assert_not @blog_naked.next?, 'should not have a next record'
   end
 
   #
@@ -213,6 +204,7 @@ class BlogTest < ActiveSupport::TestCase
     @blog = blogs(:blog_online)
     @blog_offline = blogs(:blog_offline)
     @blog_third = blogs(:blog_third)
+    @blog_naked = blogs(:naked)
 
     @blog_category = blog_categories(:one)
     @blog_category_2 = blog_categories(:two)
@@ -226,7 +218,7 @@ class BlogTest < ActiveSupport::TestCase
 
     @blog_category.reload
     @blog_category_2.reload
-    assert_equal 2, @blog_category.blogs.size
+    assert_equal 3, @blog_category.blogs.size
     assert_equal 1, @blog_category_2.blogs.size
   end
 
