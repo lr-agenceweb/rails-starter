@@ -8,26 +8,26 @@
   div.form-left-column
     - item.input :online,
                  as: :boolean,
-                 hint: I18n.t('form.hint.video.online')
+                 hint: raw(I18n.t('form.hint.video.online'))
 
     - item.input :video_autoplay,
                  as: :boolean,
-                 hint: I18n.t('form.hint.video.autoplay')
+                 hint: raw(I18n.t('form.hint.video.autoplay'))
 
     - item.input :video_loop,
                  as: :boolean,
-                 hint: I18n.t('form.hint.video.loop')
+                 hint: raw(I18n.t('form.hint.video.loop'))
 
     - item.input :video_controls,
                  as: :boolean,
-                 hint: I18n.t('form.hint.video.controls')
+                 hint: raw(I18n.t('form.hint.video.controls'))
 
     - item.input :video_mute,
                  as: :boolean,
-                 hint: I18n.t('form.hint.video.mute')
+                 hint: raw(I18n.t('form.hint.video.mute'))
     - item.input :online,
                  as: :boolean,
-                 hint: I18n.t('form.hint.video.online')
+                 hint: raw(I18n.t('form.hint.video.online'))
 
   div.form-right-column
     = render 'admin/subtitles/form', f: item
