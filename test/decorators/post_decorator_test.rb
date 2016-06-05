@@ -83,7 +83,7 @@ class PostDecoratorTest < Draper::TestCase
     assert_not @blog_decorated.video_uploads?
     assert_not @blog_decorated.video_platforms?
 
-    assert_equal "<img width=\"50\" height=\"90\" src=\"#{@blog_decorated.picture.image.url(:small)}\" alt=\"Small bart\" />", @blog_decorated.custom_cover
+    assert_equal "<img width=\"125\" height=\"223\" src=\"#{@blog_decorated.picture.image.url(:medium)}\" alt=\"Medium bart\" />", @blog_decorated.custom_cover
   end
 
   test 'should return video_upload cover if any and no picture' do
