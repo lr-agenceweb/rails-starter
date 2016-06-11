@@ -85,6 +85,22 @@ module Admin
       assert_redirected_to admin_mailing_messages_path
     end
 
+    test 'should destroy nested picture if destroy is check' do
+      picture_attrs = {
+        id: @mailing_message.picture.id,
+        _destroy: 'true'
+      }
+      assert @mailing_message.picture.present?
+      assert_difference ['Picture.count'], -1 do
+        patch :update, id: @mailing_message, mailing_message: { picture_attributes: picture_attrs }
+        assert assigns(:mailing_message).valid?
+        @mailing_message.reload
+        assigns(:mailing_message).reload
+
+        assert assigns(:mailing_message).picture.blank?
+        assert @mailing_message.picture.blank?
+      end
+    end
     #
     # == Subscriber
     #
