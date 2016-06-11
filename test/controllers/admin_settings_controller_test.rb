@@ -50,6 +50,26 @@ module Admin
     end
 
     #
+    # == Nested attributes
+    #
+    test 'should destroy location if destroy is check' do
+      location_attrs = {
+        id: @setting.location.id,
+        _destroy: 'true'
+      }
+      assert @setting.location.present?
+      assert_difference ['Location.count'], -1 do
+        patch :update, id: @setting, setting: { location_attributes: location_attrs }
+        assert assigns(:setting).valid?
+        @setting.reload
+        assigns(:setting).reload
+
+        assert assigns(:setting).location.blank?
+        assert @setting.location.blank?
+      end
+    end
+
+    #
     # == Maintenance
     #
     test 'should still access admin page if maintenance is true' do
@@ -59,9 +79,6 @@ module Admin
       assert_redirected_to admin_setting_path(@setting)
     end
 
-    #
-    # == Maintenance
-    #
     test 'should not render maintenance even if enabled and SA' do
       sign_in @super_administrator
       assert_no_maintenance_backend(:show, 1)
