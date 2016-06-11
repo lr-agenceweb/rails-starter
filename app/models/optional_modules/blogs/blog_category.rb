@@ -21,9 +21,6 @@ class BlogCategory < ActiveRecord::Base
     validates :name,
               uniqueness: true,
               presence: true
-    validates :slug,
-              uniqueness: true,
-              presence: true
   end
 
   extend FriendlyId
