@@ -1,3 +1,13 @@
+<% if fetch(:stage) == :production %>
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name  <%= fetch(:domain_name).sub(/www\./, '') %>;
+  return       301 http://<%= fetch(:domain_name) %>$request_uri;
+}
+<% end %>
+
 server {
   listen 80;
   listen [::]:80;
