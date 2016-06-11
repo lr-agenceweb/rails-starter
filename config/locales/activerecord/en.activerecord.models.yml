@@ -1,0 +1,36 @@
+# English
+en:
+  activerecord:
+    models:
+      #
+      # == Core
+      #
+      category:
+        one: Page
+        other: Pages
+      string_box:
+        one: Custom content
+        other: Custom contents
+
+      #
+      # == Post
+      #
+      home:
+        one: Home
+        other: Homes
+
+      #
+      # == OptionalModule
+      #
+      post_comment:
+        one: Comment
+        other: Comments
+      comment:
+        one: Comment
+        other: Comments
+      guest_book:
+        one: Guest Book
+        other: Guest Book
+      blog:
+        one: Blog article
+        other: Blog articles

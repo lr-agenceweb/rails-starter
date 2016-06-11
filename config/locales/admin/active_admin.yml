@@ -41,6 +41,16 @@ fr:
         title: Inscription
         submit: S'inscrire
 
+  formtastic:
+    create: 'Créer %{model}'
+    update: 'Mettre à jour %{model}'
+    labels:
+      category:
+        title: Titre
+      setting:
+        title: Titre
+        subtitle: Sous-titre
+
 # English
 en:
   active_admin:

@@ -1,0 +1,17 @@
+# English
+en:
+  activerecord:
+    attributes:
+      adult:
+        adult_validated: I attest to be an adult
+      comment:
+        username: Username
+        mail: Email
+        comment: Message
+        message: Comment
+        lang: Lang
+        link_source: Link source
+        link_and_image_source: Article source
+        status: Status
+        created_at: Created at
+        destroy: Destroy
