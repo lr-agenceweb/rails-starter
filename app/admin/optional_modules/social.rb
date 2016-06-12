@@ -8,8 +8,7 @@ ActiveAdmin.register Social do
               :enabled,
               :ikon,
               :delete_ikon,
-              :font_ikon
-             ]
+              :font_ikon]
 
     params.push :title, :kind if current_user.super_administrator?
     params

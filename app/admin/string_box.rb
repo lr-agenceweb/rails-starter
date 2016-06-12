@@ -8,8 +8,8 @@ ActiveAdmin.register StringBox do
               :key,
               translations_attributes: [
                 :id, :locale, :title, :content
-              ]
-             ]
+              ]]
+
     params.push :optional_module_id if current_user.super_administrator?
     params
   end

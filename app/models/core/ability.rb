@@ -289,8 +289,7 @@ class Ability
     if @mailing_module.enabled?
       can [:crud,
            :send_mailing_message,
-           :preview
-          ], MailingMessage
+           :preview], MailingMessage
       can [:crud], MailingUser
       can [:read, :update], [MailingSetting]
       cannot [:create, :destroy], [MailingSetting]

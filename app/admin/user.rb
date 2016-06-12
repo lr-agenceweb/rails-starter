@@ -10,8 +10,8 @@ ActiveAdmin.register User do
               :password,
               :avatar,
               :delete_avatar,
-              :password_confirmation
-             ]
+              :password_confirmation]
+
     params.push :role_id unless current_user.subscriber?
     params
   end

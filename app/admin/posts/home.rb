@@ -31,8 +31,7 @@ ActiveAdmin.register Home do
                 translations_attributes: [
                   :id, :locale, :title, :description, :keywords
                 ]
-              ]
-             ]
+              ]]
 
     params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
     params.push :allow_comments if @comment_module.enabled?

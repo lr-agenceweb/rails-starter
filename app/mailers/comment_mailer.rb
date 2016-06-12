@@ -12,7 +12,7 @@ class CommentMailer < ApplicationMailer
   # Email sent when comment is being created
   def comment_created(comment)
     I18n.with_locale(comment.lang) do
-      set_comment_variables(comment)
+      define_comment_variables(comment)
       @comment.subject = I18n.t('comment.created.email.subject', site: @setting.title)
       @content = I18n.t('comment.created.email.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :blank), link_admin: link_to(@link, admin_post_comment_url(@comment), target: :blank))
     end
@@ -32,7 +32,7 @@ class CommentMailer < ApplicationMailer
   # Email sent when comment is being validated
   def comment_validated(comment)
     I18n.with_locale(comment.lang) do
-      set_comment_variables(comment)
+      define_comment_variables(comment)
     end
     admin_to_user
   end
@@ -41,10 +41,10 @@ class CommentMailer < ApplicationMailer
 
   def set_link
     anchor = "comment-#{@comment.id}"
-    @link = @comment.commentable_type == 'Blog' ? blog_category_blog_url(@commentable.blog_category, @commentable, anchor: anchor) : polymorphic_url(@commentable, anchor: "#{anchor}")
+    @link = @comment.commentable_type == 'Blog' ? blog_category_blog_url(@commentable.blog_category, @commentable, anchor: anchor) : polymorphic_url(@commentable, anchor: anchor)
   end
 
-  def set_comment_variables(comment)
+  def define_comment_variables(comment)
     @comment = Comment.find(comment.id).decorate
     @commentable = @comment.commentable
     set_link

@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
-# Module contains helpers that normalize text meta tag values.
+#
+# == MetaTags module
+#
 module MetaTags
+  #
+  # == Module contains helpers that normalize text meta tag values.
+  #
   module TextNormalizer
     def self.strip_tags(string)
       ERB::Util.html_escape helpers.sanitize(string)

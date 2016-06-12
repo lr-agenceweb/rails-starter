@@ -7,8 +7,7 @@ ActiveAdmin.register BlogCategory do
     params = [:id,
               translations_attributes: [
                 :id, :locale, :name, :slug
-              ]
-             ]
+              ]]
     params
   end
 

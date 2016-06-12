@@ -5,8 +5,7 @@ ActiveAdmin.register EventSetting do
   permit_params do
     params = [:id,
               :prev_next,
-              :event_order_id
-             ]
+              :event_order_id]
 
     params.push :show_map if @map_module.enabled?
     params

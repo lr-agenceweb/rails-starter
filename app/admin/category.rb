@@ -21,8 +21,8 @@ ActiveAdmin.register Category do
                 translations_attributes: [
                   :id, :locale, :content
                 ]
-              ]
-             ]
+              ]]
+
     if current_user.super_administrator?
       params.push :optional, :menu_id, :optional_module_id
     end
