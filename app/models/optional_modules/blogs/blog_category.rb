@@ -19,7 +19,6 @@ class BlogCategory < ActiveRecord::Base
   translates :name, :slug
   active_admin_translates :name, :slug do
     validates :name,
-              uniqueness: true,
               presence: true
   end
 
@@ -31,10 +30,11 @@ class BlogCategory < ActiveRecord::Base
   private
 
   def slug_candidates
-    [:name, [:name, :deduced_id]]
+    [[:name, :deduced_id]]
   end
 
   def deduced_id
-    self.class.where(name: name).count + 1
+    record_id = self.class.where(name: name).count
+    return record_id + 1 unless record_id == 0
   end
 end
