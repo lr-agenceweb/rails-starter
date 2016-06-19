@@ -49,11 +49,14 @@ class Setting < ActiveRecord::Base
     validates :title, presence: true
   end
 
+  # Model relations
   has_one :location, as: :locationable, dependent: :destroy
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
+  # Delegate
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
+  # Enum
   enumerize :date_format,
             in: {
               with_time: 0,
@@ -66,6 +69,7 @@ class Setting < ActiveRecord::Base
     [1, 2, 3, 5, 10, 15, 20, 0]
   end
 
+  # Paperclip attributes
   retina!
   handle_attachment :logo,
                     styles: {
@@ -89,12 +93,19 @@ class Setting < ActiveRecord::Base
                        content_type: { content_type: %r{\Aimage\/.*\Z} },
                        size: { less_than: 2.megabyte }
 
+  # Validation rules
   validates :name,  presence: true
   validates :email, presence: true, email_format: true
+
   validates :per_page,
             presence: true,
             allow_blank: false,
             inclusion: per_page_values
+
+  validates :date_format,
+            presence: true,
+            allow_blank: false,
+            inclusion: date_format.values
 
   include Assets::DeletableAttachment
 
