@@ -6,7 +6,7 @@
       - if !!link == link && link
         = link_to img_version, resource.picture.self_image_url_by_size(version), title: resource.picture.title, class: 'magnific-popup'
       - elsif link.is_a?(String) && !link.blank?
-        = link_to img_version, link, title: link, target: :blank
+        = link_to img_version, link, title: link, target: :_blank
       - else
         = img_version
     - else

@@ -17,7 +17,7 @@ class ConnectionDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct content for link method' do
-    assert_equal '<a target="blank" href="http://www.google.com">http://www.google.com</a>', @connection_decorated.link_with_link
+    assert_equal '<a target="_blank" href="http://www.google.com">http://www.google.com</a>', @connection_decorated.link_with_link
   end
 
   private

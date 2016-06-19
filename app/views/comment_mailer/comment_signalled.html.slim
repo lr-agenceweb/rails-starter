@@ -13,7 +13,7 @@ p.text-center
       <w:anchorlock/>
       <center>
     <![endif]-->
-        = link_to I18n.t('comment.signalled.email.link'), admin_post_comment_url(@comment), target: :blank, style: 'background-color:#0c708d;', class: 'btn-style weight-500'
+        = link_to I18n.t('comment.signalled.email.link'), admin_post_comment_url(@comment), target: :_blank, style: 'background-color:#0c708d;', class: 'btn-style weight-500'
         </a>
     <!--[if mso]>
       </center>
@@ -32,7 +32,7 @@ p.text-center
       <w:anchorlock/>
       <center>
     <![endif]-->
-        = link_to I18n.t('comment.signalled.email.all'), admin_post_comments_url(scope: 'signales'), target: :blank, style: 'background-color:#ee732a; width: 240px', class: 'btn-style weight-500'
+        = link_to I18n.t('comment.signalled.email.all'), admin_post_comments_url(scope: 'signales'), target: :_blank, style: 'background-color:#ee732a; width: 240px', class: 'btn-style weight-500'
         </a>
     <!--[if mso]>
       </center>

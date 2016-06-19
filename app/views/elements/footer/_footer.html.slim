@@ -10,7 +10,7 @@ footer.footer-container#footer
             - if setting.show_social? && @social_module.enabled?
               h4.social-header-title = I18n.t('social.follow')
               ul.inline-list
-                li = link_to fa_icon('rss'), posts_rss_path(format: :atom), target: :blank if @rss_module.enabled?
+                li = link_to fa_icon('rss'), posts_rss_path(format: :atom), target: :_blank if @rss_module.enabled?
 
                 - unless @socials_follow.nil?
                   - @socials_follow.each do |social_follow|

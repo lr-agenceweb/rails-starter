@@ -12,7 +12,7 @@ class EventDecoratorTest < Draper::TestCase
   # == Event URL
   #
   test 'should have a link for the event' do
-    assert_match '<a target="blank" href="http://www.google.com">http://www.google.com</a>', @event_decorated.link_with_link
+    assert_match '<a target="_blank" href="http://www.google.com">http://www.google.com</a>', @event_decorated.link_with_link
   end
 
   test 'should not have a link for the event' do

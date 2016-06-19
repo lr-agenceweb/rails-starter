@@ -14,7 +14,7 @@ class CommentMailer < ApplicationMailer
     I18n.with_locale(comment.lang) do
       define_comment_variables(comment)
       @comment.subject = I18n.t('comment.created.email.subject', site: @setting.title)
-      @content = I18n.t('comment.created.email.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :blank), link_admin: link_to(@link, admin_post_comment_url(@comment), target: :blank))
+      @content = I18n.t('comment.created.email.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :_blank), link_admin: link_to(@link, admin_post_comment_url(@comment), target: :_blank))
     end
 
     user_to_admin 'comment_validated'
@@ -50,7 +50,7 @@ class CommentMailer < ApplicationMailer
     set_link
     @comment.subject = I18n.t('comment.validated.email.subject', site: @setting.title)
     @greeting = I18n.t('comment.email.greeting', author: @comment.pseudo_registered_or_guest)
-    @content = I18n.t('comment.validated.email.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :blank))
+    @content = I18n.t('comment.validated.email.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :_blank))
   end
 
   def admin_to_user

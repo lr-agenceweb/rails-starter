@@ -10,7 +10,7 @@
         p Après avoir envoyé votre vidéo, vous avez la possibilité d'ajouter un titre et une description. Pour cela, rendez-vous dans 'assets > Vidéos internes' et modifier les paramètres de votre vidéo.
     - else
       li
-        p = link_to 'Ajouter un titre et une description', edit_admin_video_upload_path(item.object), class: 'button success', target: :blank
+        p = link_to 'Ajouter un titre et une description', edit_admin_video_upload_path(item.object), class: 'button success', target: :_blank
 
 
     = item.inputs 'Configurations des vidéos'

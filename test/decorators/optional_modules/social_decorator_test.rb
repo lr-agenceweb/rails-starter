@@ -50,7 +50,7 @@ class SocialDecoratorTest < Draper::TestCase
   # == Link
   #
   test 'should return correct value for link if link?' do
-    assert_equal '<a target="blank" href="http://facebook.com">http://facebook.com</a>', @facebook_follow_decorated.link
+    assert_equal '<a target="_blank" href="http://facebook.com">http://facebook.com</a>', @facebook_follow_decorated.link
   end
 
   test 'should return correct value for link if no link?' do

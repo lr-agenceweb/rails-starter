@@ -7,7 +7,7 @@ article.post-article class="#{params[:action]}"
         h3.post-title
           = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
           - if can? :update, blog
-            span.frontend-actions =< link_to t('active_admin.edit'), edit_admin_blog_path(blog), target: :blank, class: 'button tiny ffab after fa-pencil'
+            span.frontend-actions =< link_to t('active_admin.edit'), edit_admin_blog_path(blog), target: :_blank, class: 'button tiny ffab after fa-pencil'
 
         p.post-meta-title
           span.post-created-at

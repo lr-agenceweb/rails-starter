@@ -26,7 +26,7 @@ html
                               tr
                                 td.twelve.sub-columns
                                   p.preview-link
-                                    == I18n.t('mailing.preview_in_browser', link: link_to(I18n.t('mailing.click_here_link'), preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token), target: :blank))
+                                    == I18n.t('mailing.preview_in_browser', link: link_to(I18n.t('mailing.click_here_link'), preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token), target: :_blank))
                                 td.expander
 
 
@@ -95,5 +95,5 @@ html
                               tr
                                 td.twelve.sub-columns
                                   p
-                                    == I18n.t('mailing.footer_unsubscribe', owner: @setting.title, link: link_to(I18n.t('mailing.unsubscribe_link'), unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :blank))
+                                    == I18n.t('mailing.footer_unsubscribe', owner: @setting.title, link: link_to(I18n.t('mailing.unsubscribe_link'), unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token), target: :_blank))
                                   p = I18n.t('mailing.no_reply')
