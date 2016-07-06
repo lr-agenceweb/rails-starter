@@ -72,10 +72,10 @@ ActiveAdmin.register Newsletter do
     def preview
       I18n.with_locale(params[:locale]) do
         @newsletter = Newsletter.find(params[:id])
-        @title = @newsletter.title
         @content = @newsletter.content
         @newsletter_user = NewsletterUser.find_by(lang: params[:locale])
-        render 'newsletter_mailer/send_newsletter', layout: 'newsletter'
+
+        render 'newsletter_mailer/send_newsletter', layout: 'mailers/newsletter'
       end
     end
 
