@@ -59,3 +59,12 @@ fr:
             message:
               blank: N'oubliez pas de renseigner votre message ;)
               invalid: Veuillez renseigner un email valide ;)
+        location:
+          attributes:
+            address:
+              blank: N'oubliez pas de renseigner votre addresse ;)
+            city:
+              blank: N'oubliez pas de renseigner votre ville ;)
+            postcode:
+              blank: N'oubliez pas de renseigner votre code postal ;)
+              not_a_number: Votre code postal n'est pas valide. Il doit être composé uniquement de chiffres.
