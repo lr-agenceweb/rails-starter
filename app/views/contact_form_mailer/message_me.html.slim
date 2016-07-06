@@ -1,5 +1,8 @@
-.message
-  p = @message.message
+row
+  columns
+    .message
+      p = I18n.t('newsletter.hello', subscriber: @setting.name)
+      p = @message.message
 
-p.sent-from
-  == mail_to @message.email, @message.name
+    p.sent-from
+      == mail_to @message.email, @message.extract_name_from_email

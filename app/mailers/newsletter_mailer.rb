@@ -5,7 +5,7 @@
 #
 class NewsletterMailer < ApplicationMailer
   add_template_helper(HtmlHelper)
-  layout 'newsletter'
+  layout 'mailers/newsletter'
 
   before_action :set_newsletter_settings
 

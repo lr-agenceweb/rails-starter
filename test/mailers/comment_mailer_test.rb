@@ -19,7 +19,7 @@ class CommentMailerTest < ActionMailer::TestCase
     assert_equal I18n.t('comment_mailer.comment_created.subject', site: @setting.title, locale: I18n.default_locale), email.subject
 
     assert_template :comment_validated
-    assert_template layout: [:comment]
+    assert_template layout: 'mailers/comment'
   end
 
   # Email sent when comment is being signalled
@@ -32,7 +32,7 @@ class CommentMailerTest < ActionMailer::TestCase
     assert_equal I18n.t('comment_mailer.comment_signalled.subject', site: @setting.title, locale: I18n.default_locale), email.subject
 
     assert_template :comment_signalled
-    assert_template layout: [:comment]
+    assert_template layout: 'mailers/comment'
   end
 
   # Email sent when comment is being validated
@@ -45,7 +45,7 @@ class CommentMailerTest < ActionMailer::TestCase
     assert_equal I18n.t('comment_mailer.comment_validated.subject', site: @setting.title, locale: I18n.default_locale), email.subject
 
     assert_template :comment_validated
-    assert_template layout: [:comment]
+    assert_template layout: 'mailers/comment'
   end
 
   private

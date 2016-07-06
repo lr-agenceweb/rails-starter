@@ -7,7 +7,7 @@ class CommentMailer < ApplicationMailer
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::UrlHelper
 
-  layout 'comment'
+  layout 'mailers/contact'
 
   # Email sent when comment is being created
   def comment_created(comment)

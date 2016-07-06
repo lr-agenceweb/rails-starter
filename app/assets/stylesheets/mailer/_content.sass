@@ -1,48 +1,38 @@
-.content-container
-  .about-content
-    background-color: $white
-    p
-      color: $white
-      line-height: 21px
-      text-align: center
-    .about-content-left
+.blocks-container
+  .block
+    padding-bottom: 0
+    .callout
+      margin-bottom: 0
+    .callout-inner
+      border: none
+      p
+        color: $white
+    .first-part
+      font-size: 12px
+  .block-left
+    .callout-inner
       background-color: $secondary-color
-      padding: 26px 23px
-    .about-content-right
+  .block-right
+    .callout-inner
       background-color: $primary-color
-      padding: 26px
-    .about-content-left, .about-content-right
 
-    .fix-padding-block-left
-      padding: 0 20px 0px 0px !important
-    .fix-padding-block-right
-      padding: 0 0 20px 0px !important
 
-  .main-content
-    background-color: $white
+// Email signature
+.signature
+  margin: 1rem 0
 
-  .signature
-    margin: 10px 0
 
-.btn-style
-  border-radius: 3px
-  display: inline-block
-  font-family: 'Ubuntu', 'Arial', sans-serif
-  font-size: 11px
-  line-height: 40px
-  text-align: center
-  text-decoration: none
-  width: 150px
-  -webkit-text-size-adjust: none
-
-  &:link, &:visited, &:hover, &:active
-    color: $white
+.sent-from
+  a:link, a:visited, a:hover, a:active
+    color: $oil
+    font-weight: 700
 
 
 // Visual style
 .visual
   float: none
   margin: 0 auto
+  max-width: 100%
 
 // Newsletter style
 .newsletter-template
@@ -53,3 +43,18 @@
 
     a
       color: $white
+
+.content-container
+  .about-content
+    .fix-padding-block-left
+      padding: 0 20px 0 0 !important
+    .fix-padding-block-right
+      padding: 0 0 20px 0 !important
+
+@media only screen and (max-width: 600px)
+  .content-container
+    .about-content
+      .fix-padding-block-left
+        padding: 0 !important
+      .fix-padding-block-right
+        padding: 0 !important

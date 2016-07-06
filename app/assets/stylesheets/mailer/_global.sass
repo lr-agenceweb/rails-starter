@@ -1,8 +1,4 @@
-$logo-bg-color: #f6d935
 $bg-email: #e6e6e6
-$link-color: #F2471A
-$title-font-size: 20px
-$subtitle-font-size: 12px
 
 body, .body
   background-color: $bg-email
@@ -16,14 +12,31 @@ body, .body
 .no-padding-top
   padding-top: 0 !important
 
-.text-center
-  text-align: center
-
-.text-right
-  text-align: right
-
 .weight-500
   font-weight: 700
 
-a
-  color: $secondary-color
+table
+  width: 100%
+
+// Mailer blocks button
+.btn-style
+  border-radius: 3px
+  display: inline-block
+  font-family: 'Lato', 'Arial', sans-serif
+  font-size: 11px
+  line-height: 40px
+  text-align: center
+  text-decoration: none
+  width: 150px
+  -webkit-text-size-adjust: none
+
+  &.inline-version
+    width: 70px
+    line-height: 25px
+    font-size: 10px
+
+    &.increase-width
+      width: 90px
+
+  &:link, &:visited, &:hover, &:active
+    color: $white

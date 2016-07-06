@@ -5,7 +5,7 @@
 #
 class MailingMessageMailer < ApplicationMailer
   add_template_helper(HtmlHelper)
-  layout 'mailing'
+  layout 'mailers/mailing'
 
   before_action :set_variables
 

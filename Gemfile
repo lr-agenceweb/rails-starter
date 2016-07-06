@@ -127,6 +127,7 @@ gem 'delayed_job_active_record'
 # == Email
 #
 gem 'dkim' # authenticate emails
+gem 'inky-rb', require: 'inky' # inky Foundation
 gem 'premailer-rails'
 gem 'nokogiri'
 
