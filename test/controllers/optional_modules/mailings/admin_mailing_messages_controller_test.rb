@@ -101,6 +101,7 @@ module Admin
         assert @mailing_message.picture.blank?
       end
     end
+
     #
     # == Subscriber
     #
