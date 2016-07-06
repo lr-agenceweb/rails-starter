@@ -4,7 +4,7 @@
 # == ContactForm Mailer
 #
 class ContactFormMailer < ApplicationMailer
-  layout 'mailers/contact'
+  layout 'mailers/default'
 
   # Customer => Administrator
   def message_me(message)

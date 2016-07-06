@@ -5,7 +5,9 @@ require 'test_helper'
 # == ContactForm Mailer test class
 #
 class ContactFormMailerTest < ActionMailer::TestCase
+  include ActionController::TemplateAssertions
   include ActionDispatch::TestProcess
+
   setup :initialize_test
 
   #
@@ -18,6 +20,9 @@ class ContactFormMailerTest < ActionMailer::TestCase
     assert_equal ['demo@rails-starter.com'], email.to
     assert_equal ['cristiano@ronaldo.pt'], email.from
     assert_equal I18n.t('contact_form_mailer.message_me.subject', site: @setting.title), email.subject
+
+    assert_template :message_me
+    assert_template layout: 'mailers/default'
   end
 
   test 'should send copy of email contact to sender' do
@@ -27,6 +32,9 @@ class ContactFormMailerTest < ActionMailer::TestCase
     assert_equal ['cristiano@ronaldo.pt'], email.to
     assert_equal ['demo@rails-starter.com'], email.from
     assert_equal I18n.t('contact_form_mailer.send_copy.subject', site: @setting.title), email.subject
+
+    assert_template :message_me
+    assert_template layout: 'mailers/default'
   end
 
   #
@@ -60,5 +68,9 @@ class ContactFormMailerTest < ActionMailer::TestCase
       email: 'cristiano@ronaldo.pt',
       message: 'Hello from the internet'
     )
+  end
+
+  def response
+    @response = ActionController::TestRequest.new(host: 'http://test.host')
   end
 end
