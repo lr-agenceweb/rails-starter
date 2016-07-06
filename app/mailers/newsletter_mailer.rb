@@ -14,12 +14,10 @@ class NewsletterMailer < ApplicationMailer
     @newsletter_user = newsletter_user
     @newsletter_user.name = @newsletter_user.extract_name_from_email
     I18n.with_locale(@newsletter_user.lang) do
-      welcome_newsletter = NewsletterSetting.first
-      @title = welcome_newsletter.title_subscriber
-      @content = welcome_newsletter.content_subscriber
+      wn = NewsletterSetting.first
+      @content = wn.content_subscriber
       @is_welcome_user = true
-      @hide_preview_link = false
-      process_email
+      process_email(wn.title_subscriber)
     end
   end
 
@@ -28,10 +26,8 @@ class NewsletterMailer < ApplicationMailer
     @newsletter_user = newsletter_user
     I18n.with_locale(@newsletter_user.lang) do
       @newsletter = Newsletter.find(newsletter.id)
-      @title = @newsletter.title
       @content = @newsletter.content
-      @hide_preview_link = false
-      process_email
+      process_email(@newsletter.title)
     end
   end
 
@@ -39,14 +35,13 @@ class NewsletterMailer < ApplicationMailer
 
   def set_newsletter_settings
     @is_welcome_user = false
+    @hide_preview_link = false
   end
 
-  def process_email
-    mail(
-      from: Setting.first.try(:email),
-      to: @newsletter_user.email,
-      subject: @title
-    ) do |format|
+  def process_email(title)
+    mail from: @setting.email,
+         to: @newsletter_user.email,
+         subject: default_i18n_subject(title: title) do |format|
       format.html
       format.text
     end

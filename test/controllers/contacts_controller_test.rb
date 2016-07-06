@@ -74,7 +74,7 @@ class ContactsControllerTest < ActionController::TestCase
         assert_redirected_to new_contact_path
         last_email = ActionMailer::Base.deliveries.last
 
-        assert_equal 'Message envoyé par le site Rails Starter', I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
+        assert_equal I18n.t('contact_form_mailer.message_me.subject', site: @setting.title, locale: I18n.default_locale), last_email.subject
         assert_equal 'demo@rails-starter.com', last_email.to[0]
         assert_equal 'cristiano@ronaldo.pt', last_email.from[0]
         assert_match(/Hi/, last_email.text_part.body.to_s)
@@ -103,16 +103,14 @@ class ContactsControllerTest < ActionController::TestCase
         cc_email = ActionMailer::Base.deliveries.last
 
         # Contact to admin
-        assert_equal 'Message envoyé par le site Rails Starter', I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
+        assert_equal I18n.t('contact_form_mailer.message_me.subject', site: @setting.title, locale: I18n.default_locale), contact_email.subject
         assert_equal 'demo@rails-starter.com', contact_email.to[0]
         assert_equal 'cristiano@ronaldo.pt', contact_email.from[0]
         assert_match(/Hi/, contact_email.text_part.body.to_s)
         assert_match(/Hi/, contact_email.html_part.body.to_s)
 
         # Carbon Copy
-        subject_cc = 'Copie de votre message de contact envoyé à Rails Starter' if locale.to_s == 'fr'
-        subject_cc = 'Copy of your contact message sent to Rails Starter website' if locale.to_s == 'en'
-        assert_equal subject_cc, I18n.t('contact.email.subject_cc', site: @setting.title)
+        assert_equal I18n.t('contact_form_mailer.send_copy.subject', site: @setting.title, locale: I18n.default_locale), cc_email.subject
         assert_equal 'demo@rails-starter.com', cc_email.from[0]
         assert_equal 'cristiano@ronaldo.pt', cc_email.to[0]
         assert_match(/Hi/, cc_email.text_part.body.to_s)

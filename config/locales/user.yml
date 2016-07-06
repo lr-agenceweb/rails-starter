@@ -3,10 +3,6 @@ fr:
   user:
     registration:
       not_activated: Votre compte a bien été créé, vous recevrez un email lorsque l'administrateur l'aura activé
-    email:
-      account_validated:
-        subject: Activation de votre compte sur le site %{site}
-        content: Votre compte a été validé par l'administrateur du site %{site}. Vous pouvez maintenant vous connecter avec vos identifiants définis lors de votre inscription
 
   role:
     super_administrator: Super administrateur

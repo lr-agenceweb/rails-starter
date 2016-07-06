@@ -7,7 +7,7 @@ class ContactForm
   include ActiveModel::Model
   include Mailable
 
-  attr_accessor :name, :email, :message, :send_copy, :subject, :attachment, :nickname
+  attr_accessor :name, :email, :message, :send_copy, :attachment, :nickname
 
   validates :name,
             presence: true
