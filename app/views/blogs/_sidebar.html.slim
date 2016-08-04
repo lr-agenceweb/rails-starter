@@ -38,4 +38,5 @@ aside#blog_sidebar.blog_sidebar
               span<> -
               span.commentable< = link_to comment.commentable.title, blog_category_blog_path(comment.commentable.blog_category, comment.commentable, anchor: "comment-#{comment.id}")
 
-  = link_to t('link.back_to', page: 'Blog'), blogs_path, class: 'button ffab before fa-arrow-left' if params[:controller] == 'blog_categories'
+  br
+  p = link_to t('link.back_to', page: 'Blog'), blogs_path, class: 'button ffab before fa-arrow-left' if params[:controller] == 'blog_categories'
