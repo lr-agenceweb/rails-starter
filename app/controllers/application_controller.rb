@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   # Misc
   before_action :set_host_name
-  before_action :set_froala_key
+  before_action :set_froala_key, if: :user_signed_in?
 
   decorates_assigned :setting, :category, :menu
 
