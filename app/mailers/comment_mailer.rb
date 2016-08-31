@@ -14,6 +14,7 @@ class CommentMailer < ApplicationMailer
     I18n.with_locale(comment.lang) do
       define_comment_variables(comment)
       @content = I18n.t('comment_mailer.comment_created.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :_blank), link_admin: link_to(@link, admin_post_comment_url(@comment), target: :_blank))
+      @greeting = I18n.t('comment.email.greeting', author: @setting.name) # Overwrite @greeting
     end
 
     user_to_admin 'comment_validated'
