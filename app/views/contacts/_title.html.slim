@@ -2,5 +2,5 @@
   .small-12.columns
     - misc = nil
     - if Rails.env.development?
-      - misc = link_to 'Mail dev', 'http://localhost:1080', target: :_blank, class: 'button success tiny button-title'
+      - misc = { title: link_to('Mail dev', 'http://localhost:1080', target: :_blank, class: 'button success tiny button-title') }
     = title_for_category(category, misc)
