@@ -1,0 +1,20 @@
+- require 'devise/version'
+
+row
+  columns
+    p = t('.greeting', recipient: @resource.email)
+    p = t('.instruction')
+
+    p
+      <!--[if mso]>
+        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{confirmation_url(@resource, confirmation_token: (Devise::VERSION.start_with?('3.') ? @token : @resource.confirmation_token))}" style="height:25px;v-text-anchor:middle;" arcsize="8%" stroke="f" fillcolor="#0c708d">
+          <w:anchorlock/>
+          <center>
+        <![endif]-->
+            <a href="#{confirmation_url(@resource, confirmation_token: (Devise::VERSION.start_with?('3.') ? @token : @resource.confirmation_token))}" target="_blank" style="background-color:#0c708d;" class="btn-style increase-width weight-500">
+              = t('.action')
+            </a>
+        <!--[if mso]>
+          </center>
+        </v:roundrect>
+      <![endif]-->

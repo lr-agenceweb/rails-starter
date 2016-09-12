@@ -55,5 +55,10 @@ module Starter
 
     # Silent deprecation warnings
     ActiveSupport::Deprecation.silenced = true
+
+    # Set Devise email layout
+    config.to_prepare do
+      Devise::Mailer.layout 'mailers/default' # default.html.inky
+    end
   end
 end
