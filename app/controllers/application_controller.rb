@@ -16,9 +16,6 @@ class ApplicationController < ActionController::Base
   before_action :set_setting_or_maintenance
   before_action :set_legal_notices
 
-  # Users
-  include Users::Activable
-
   # Core
   include Core::Languageable
   include Core::Menuable
