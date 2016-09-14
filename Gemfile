@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 #
 # == Rails
 #
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7.1'
 # gem 'sprockets'
 
 #
@@ -28,7 +28,7 @@ gem 'omniauth-google-oauth2', '~> 0.4.1'
 #
 # == Administration
 #
-gem 'activeadmin', '~> 1.0.0.pre2'
+gem 'activeadmin', '1.0.0.pre2'
 gem 'activeadmin_addons'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
@@ -45,7 +45,7 @@ gem 'enumerize'
 #
 gem 'slim-rails' # slim file
 gem 'kaminari', '~> 0.17.0' # Pagination
-gem 'gretel', github: 'LoveMondays/gretel', branch: 'fix-semantic-breadcrumb-current-item' # Breadcrumb
+gem 'gretel' # Breadcrumb
 gem 'rails_autolink'
 gem 'truncate_html', github: 'AlexGunslinger/truncate_html'
 gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
@@ -86,7 +86,7 @@ gem 'route_translator'
 gem 'globalize', '~> 5.0.0'
 gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize', branch: 'master'
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x'
-gem 'i18n-js', '>= 3.0.0.rc12'
+gem 'i18n-js', '>= 3.0.0.rc14'
 
 #
 # == Map
