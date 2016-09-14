@@ -6,3 +6,4 @@ languages:
 
 exclude_paths:
 - "config/application.rb"
+- "lib/mailer_previews"
