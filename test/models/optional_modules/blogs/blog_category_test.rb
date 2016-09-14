@@ -28,16 +28,6 @@ class BlogCategoryTest < ActiveSupport::TestCase
     assert_equal [:'translations.name'], blog_category.errors.keys
   end
 
-  test 'should not be valid if name is already taken' do
-    blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
-    blog_category.set_translations(
-      fr: { name: 'foo' },
-      en: { name: 'bar' }
-    )
-    refute blog_category.valid?, 'should not be valid if name is already taken'
-    assert_equal [:'translations.name', :'translations.slug'], blog_category.errors.keys
-  end
-
   test 'should be valid if name is set properly but same for both locales' do
     blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
     blog_category.set_translations(
@@ -56,6 +46,27 @@ class BlogCategoryTest < ActiveSupport::TestCase
       assert_equal 'Foo Foo', blog_category.name
       assert_equal 'foo-foo', blog_category.slug
     end
+  end
+
+  test 'should add id to slug if slug already exists' do
+    blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
+    blog_category.set_translations(
+      fr: { name: 'Foo' },
+      en: { name: 'Bar' }
+    )
+
+    assert blog_category.valid?, 'should be valid'
+    assert_empty blog_category.errors.keys
+    assert_empty blog_category.errors.messages
+
+    I18n.with_locale('fr') do
+      assert_equal 'foo-2', blog_category.slug
+    end
+    I18n.with_locale('en') do
+      assert_equal 'bar-2', blog_category.slug
+    end
+
+    blog_category.delete
   end
 
   test 'should be valid if name is set properly' do

@@ -18,19 +18,6 @@ fr:
       already_signalled: Commentaire déjà signalé
       not_signalled: Signaler ce commentaire ?
       success: Merci, le commentaire a bien été signalé à l'administrateur
-      email:
-        subject: Un commentaire a été signalé sur le site %{site}
-        content: Un commentaire écrit par <strong>%{user}</strong> a été signalé comme non approprié sur le site.
-        link: Modérer le commentaire
-        all: Voir tous les commentaires à modérer
-    validated:
-      email:
-        subject: Votre commentaire posté sur le site "%{site}" a été validé par l'administrateur !
-        content: "Le commentaire que vous avez posté le <strong>%{date}</strong> sur l'article <strong>%{article}</strong> a été validé par l'administrateur ! <br /> Vous pouvez le visualiser à travers ce lien: <br /> %{link}."
-    created:
-      email:
-        subject: Un commentaire vient d'être ajouté sur le site "%{site}"
-        content: "Un commentaire vient d'être posté sur l'article <strong>%{article}</strong> le <strong>%{date}</strong> <br /><br /> Pour le visualiser: %{link} <br /> Pour le modérer: %{link_admin}."
     destroy:
       success: Le commentaire a été supprimé.
       error: Une erreur s'est produite au moment de supprimé le commentaire

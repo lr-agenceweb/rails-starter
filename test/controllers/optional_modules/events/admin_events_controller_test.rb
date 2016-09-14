@@ -216,7 +216,8 @@ module Admin
     test 'should save event if dates are corrects' do
       assert_difference ['Event.count'] do
         attrs = set_default_record_attrs
-        attrs.merge!(start_date: '2015-07-19 09:00:00', end_date: '2015-07-22 09:00:00')
+        attrs[:start_date] = '2015-07-19 09:00:00'
+        attrs[:end_date] = '2015-07-22 09:00:00'
 
         post :create, event: attrs
       end
@@ -226,7 +227,8 @@ module Admin
     test 'should save event if dates are equals but hours corrects' do
       assert_difference ['Event.count'] do
         attrs = set_default_record_attrs
-        attrs.merge!(start_date: '2015-07-19 09:00:00', end_date: '2015-07-19 10:00:00')
+        attrs[:start_date] = '2015-07-19 09:00:00'
+        attrs[:end_date] = '2015-07-19 10:00:00'
 
         post :create, event: attrs
       end
@@ -236,7 +238,8 @@ module Admin
     test 'should not save event if dates are not corrects' do
       assert_no_difference ['Event.count'] do
         attrs = set_default_record_attrs
-        attrs.merge!(start_date: '2015-07-22 09:00:00', end_date: '2015-07-19 09:00:00')
+        attrs[:start_date] = '2015-07-22 09:00:00'
+        attrs[:end_date] = '2015-07-19 09:00:00'
 
         post :create, event: attrs
       end

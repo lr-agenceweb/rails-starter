@@ -19,7 +19,7 @@ class EventTest < ActiveSupport::TestCase
       start_date: Time.zone.now,
       end_date: Time.zone.now + 1.day.to_i
     }
-    event = set_event_record(attrs)
+    event = define_event_record(attrs)
     assert event.calendar_date_correct?
     event.delete
   end
@@ -30,7 +30,7 @@ class EventTest < ActiveSupport::TestCase
       start_date: Time.zone.now + 1.day.to_i,
       end_date: Time.zone.now
     }
-    event = set_event_record(attrs)
+    event = define_event_record(attrs)
     assert_equal [I18n.t('form.errors.end_date')], event.calendar_date_correct?
     event.delete
   end
@@ -108,7 +108,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'should not be valid if start_date is not present' do
     attrs = { id: SecureRandom.random_number(1_000), all_day: true }
-    event = set_event_record(attrs)
+    event = define_event_record(attrs)
 
     assert_not event.valid?
     assert_equal [:start_date], event.errors.keys
@@ -117,7 +117,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'should not be valid if start_date finish after end_date' do
     attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, end_date: Time.zone.now }
-    event = set_event_record(attrs)
+    event = define_event_record(attrs)
 
     assert_not event.valid?
     assert_equal [:start_date, :end_date], event.errors.keys
@@ -126,7 +126,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'should not create event if link is not correct' do
     attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'bad-link' }, start_date: Time.zone.now, all_day: true }
-    event = set_event_record(attrs)
+    event = define_event_record(attrs)
 
     assert_not event.valid?
     assert_equal [:'link.url'], event.errors.keys
@@ -134,7 +134,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'should create event if link is correct' do
     attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'http://test.com' }, start_date: Time.zone.now, all_day: true }
-    event = set_event_record(attrs)
+    event = define_event_record(attrs)
 
     assert event.valid?
     assert_empty event.errors.keys
@@ -199,7 +199,7 @@ class EventTest < ActiveSupport::TestCase
     @event_setting = event_settings(:one)
   end
 
-  def set_event_record(attrs)
+  def define_event_record(attrs)
     event = Event.new attrs
     event.set_translations(
       fr: { title: 'BarFoo' },

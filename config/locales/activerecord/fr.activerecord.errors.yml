@@ -1,0 +1,70 @@
+# French
+fr:
+  errors:
+    messages:
+      email_format: Veuillez renseigner un email valide ;)
+      in_between: doit être entre %{min} et %{max}
+
+    attributes:
+      email:
+        blank: N'oubliez pas de renseigner votre email ;)
+        taken: Cet email n'est pas disponible :(
+        email: n'est pas valide
+      name:
+        blank: N'oubliez pas de renseigner votre nom ;)
+      username:
+        blank: N'oubliez pas de renseigner votre pseudo ;)
+      content:
+        blank: N'oubliez pas de saisir votre commentaire ;)
+      message:
+        blank: N'oubliez pas de renseigner votre message ;)
+      comment:
+        blank: N'oubliez pas de saisir votre commentaire ;)
+
+  activemodel: &errors
+    errors:
+      messages:
+        invalid_email_address: n'est pas une adresse email valide
+        email_address_not_routable: n'est pas routable
+
+
+  activerecord:
+    errors:
+      models:
+        newsletter_user:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              taken: Cet email n'est pas disponible :(
+        mailing_user:
+          attributes:
+            email:
+              email: n'est pas valide
+        guest_book:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              taken: Cet email n'est pas disponible :(
+        user:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+              email: ''
+        contact_form:
+          attributes:
+            email:
+              blank: N'oubliez pas de renseigner votre email ;)
+            name:
+              blank: N'oubliez pas de renseigner votre nom ;)
+            message:
+              blank: N'oubliez pas de renseigner votre message ;)
+              invalid: Veuillez renseigner un email valide ;)
+        location:
+          attributes:
+            address:
+              blank: N'oubliez pas de renseigner votre addresse ;)
+            city:
+              blank: N'oubliez pas de renseigner votre ville ;)
+            postcode:
+              blank: N'oubliez pas de renseigner votre code postal ;)
+              not_a_number: Votre code postal n'est pas valide. Il doit être composé uniquement de chiffres.

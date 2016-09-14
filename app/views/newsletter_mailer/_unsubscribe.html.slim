@@ -1,5 +1,0 @@
-- I18n.with_locale(newsletter_user.lang)
-  p
-    = I18n.t('newsletter.footer_message')
-    | &nbsp; - &nbsp;
-    == link_to I18n.t('newsletter.unsubscribe.link'), unsubscribe_url(newsletter_user.id, newsletter_user.token), target: :blank, onclick: "return confirm(\"#{I18n.t('newsletter.unsubscribe.alert')} \")"

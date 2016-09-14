@@ -33,11 +33,10 @@ ActiveAdmin.register Blog do
                 translations_attributes: [
                   :id, :locale, :title, :description, :keywords
                 ]
-              ]
-             ]
+              ]]
 
     params.push video_platform_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
-    params.push audio_attributes: [:id, :audio, :online, :_destroy] if @audio_module.enabled?
+    params.push audio_attributes: [:id, :audio, :online, :audio_autoplay, :_destroy] if @audio_module.enabled?
     params.push :allow_comments if @comment_module.enabled?
     params
   end

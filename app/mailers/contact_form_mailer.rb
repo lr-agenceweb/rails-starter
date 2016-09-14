@@ -4,14 +4,11 @@
 # == ContactForm Mailer
 #
 class ContactFormMailer < ApplicationMailer
-  default to: Setting.first.try(:email)
-  layout 'contact'
+  layout 'mailers/default'
 
-  before_action :set_contact_settings
-
+  # Customer => Administrator
   def message_me(message)
     @message = message
-    @message.subject = I18n.t('contact.email.subject', site: @setting.title, locale: I18n.default_locale)
 
     if message.attachment && @setting.show_file_upload?
       attachment_name = message.attachment.original_filename
@@ -20,20 +17,21 @@ class ContactFormMailer < ApplicationMailer
 
     mail from: @message.email,
          to: @setting.email,
-         subject: @message.subject,
+         subject: default_i18n_subject(site: @setting.title, locale: I18n.default_locale),
          body: @message.message do |format|
       format.html
       format.text
     end
   end
 
+  # Administrator => Customer
   def send_copy(message)
     @message = message
     @copy_to_sender = true
-    @message.subject = I18n.t('contact.email.subject_cc', site: @setting.title, locale: I18n.default_locale)
+
     mail from: @setting.email,
          to: @message.email,
-         subject: @message.subject,
+         subject: default_i18n_subject(site: @setting.title, locale: I18n.default_locale),
          body: @message.message do |format|
       format.html { render :message_me }
       format.text { render :message_me }

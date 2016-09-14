@@ -22,7 +22,7 @@ $.fn.formBackup = ->
 
   forms.on 'click', (e) ->
     $submit = $(@).find('button[type="submit"]')
-    window.ClientSideValidations.callbacks.form.pass = ($element, callback) ->
+    window.ClientSideValidations.callbacks.form.pass = (form, eventData) ->
       $submit.prev().fadeIn()
       localStorage.removeItem 'formBackup'
       forms.resetClientSideValidations()

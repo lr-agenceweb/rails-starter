@@ -1,0 +1,173 @@
+# French
+fr:
+  activerecord:
+    models:
+      #
+      # == Core
+      #
+      category:
+        one: Page
+        other: Pages
+      menu:
+        one: Menu
+        other: Menus
+      setting:
+        one: Paramètre
+        other: Paramètres
+      referencement:
+        one: Référencement
+        other: Référencements
+      string_box:
+        one: Contenu personnalisé
+        other: Contenus personalisés
+
+      #
+      # == User
+      #
+      user:
+        one: Utilisateur
+        other: Utilisateurs
+      role:
+        one: Rôle
+        other: Rôles
+
+      #
+      # == Post
+      #
+      post:
+        one: Article
+        other: Articles
+      home:
+        one: Accueil
+        other: Accueil
+      about:
+        one: À propos
+        other: À propos
+      legal_notice:
+        one: Mention Légale
+        other: Mentions Légales
+      contact:
+        one: Contact
+        other: Contacts
+      connection:
+        one: Lien
+        other: Liens
+
+      #
+      # == Assets (media)
+      #
+      picture:
+        one: Image
+        other: Images
+      video:
+        one: Vidéo
+        other: Vidéos
+      video_setting:
+        one: Vidéo configuration
+        other: Vidéos configuration
+      video_upload:
+        one: Vidéo interne
+        other: Vidéos internes
+      video_platform:
+        one: Vidéo externe
+        other: Vidéos externes
+      video_subtitle:
+        one: Sous-titres
+        other: Sous-titres
+      video_background:
+        one: Vidéo d'arrière-plan
+        other: Vidéos d'arrière-plan
+      audio:
+        one: Fichier Audio
+        other: Fichiers Audio
+      background:
+        one: Arrière-plan
+        other: Arrière-plans
+      slider:
+        one: Slider
+        other: Sliders
+      slide:
+        one: Slide
+        other: Slides
+
+      #
+      # == OptionalModule
+      #
+      optional_module:
+        one: Module Optionnel
+        other: Modules Optionnels
+      guest_book:
+        one: Livre d'Or
+        other: Livre d'Or
+      guest_book_setting:
+        one: Livre d'Or configuration
+        other: Livre d'Or configuration
+      comment:
+        one: Commentaire
+        other: Commentaires
+      comment_setting:
+        one: Commentaire configuration
+        other: Commentaires configuration
+      post_comment:
+        one: Commentaire
+        other: Commentaires
+      newsletter_user:
+        one: Newsletter Utilisateur
+        other: Newsletter Utilisateurs
+      newsletter:
+        one: Newsletter
+        other: Newsletters
+      newsletter_setting:
+        one: Newsletter configuration
+        other: Newsletter configuration
+      newsletter_user_role:
+        one: Newsletter rôle utilisateur
+        other: Newsletter rôles utilisateur
+      adult_setting:
+        one: Adulte configuration
+        other: Adulte configuration
+      blog:
+        one: Article de Blog
+        other: Articles de Blog
+      blog_category:
+        one: Blog catégorie
+        other: Blog catégories
+      blog_setting:
+        one: Blog configuration
+        other: Blog configuration
+      event:
+        one: Événement
+        other: Événements
+      event_setting:
+        one: Événement configuration
+        other: Événements configuration
+      map:
+        one: Carte
+        other: Cartes
+      map_setting:
+        one: Carte configuration
+        other: Cartes configuration
+      location:
+        one: Position géographique
+        other: Positions géographique
+      social:
+        one: Réseau Social
+        other: Réseaux Sociaux
+      social_connect_setting:
+        one: Connexion social configuration
+        other: Connexion social configuration
+      social_provider:
+        one: Réseau Social
+        other: Réseaux Sociaux
+      search:
+        one: Recherche
+        other: Recherches
+      mailing_user:
+        one: Mailing Utilisateur
+        other: Mailing Utilisateurs
+      mailing_setting:
+        one: Mailing configuration
+        other: Mailing configuration
+      mailing_message:
+        one: Mailing Message
+        other: Mailing Messages

@@ -11,6 +11,11 @@ module OptionalModules
     extend ActiveSupport::Concern
 
     included do
+      devise :omniauthable,
+             omniauth_providers: [
+               :facebook, :twitter, :google_oauth2
+             ]
+
       def self.find_by_provider_and_uid(auth)
         formatted_provider = SocialProvider.format_provider_by_name(auth.provider)
         find_by(provider: formatted_provider, uid: auth.uid)

@@ -6,9 +6,8 @@ ActiveAdmin.register BlogCategory do
   permit_params do
     params = [:id,
               translations_attributes: [
-                :id, :locale, :name, :slug
-              ]
-             ]
+                :id, :locale, :name
+              ]]
     params
   end
 
@@ -35,8 +34,6 @@ ActiveAdmin.register BlogCategory do
         t.input :name,
                 hint: t('form.hint.blog_category.name'),
                 label: t('activerecord.attributes.post.title')
-        t.input :slug,
-                as: :hidden
       end
     end
 

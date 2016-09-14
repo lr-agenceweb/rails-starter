@@ -28,6 +28,7 @@ Rails.application.configure do
     address: 'localhost',
     port: 1025
   }
+  config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

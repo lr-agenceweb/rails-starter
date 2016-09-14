@@ -21,7 +21,7 @@ class ActiveUserMailerTest < ActionMailer::TestCase
     refute ActionMailer::Base.deliveries.empty?
     assert_equal [@setting.email], email.from
     assert_equal [@user.email], email.to
-    assert_equal I18n.t('user.email.account_validated.subject', site: @setting.title, locale: I18n.default_locale), email.subject
+    assert_equal I18n.t('active_user_mailer.send_email.subject', site: @setting.title, locale: I18n.default_locale), email.subject
   end
 
   private

@@ -6,12 +6,11 @@
 class ActiveUserMailer < ApplicationMailer
   def send_email(user)
     @user = user
-    @subject = I18n.t('user.email.account_validated.subject', site: @setting.title, locale: I18n.default_locale)
-    @content = I18n.t('user.email.account_validated.content', site: @setting.title, locale: I18n.default_locale)
+    @content = I18n.t('active_user_mailer.send_email.content', site: @setting.title)
 
     mail from: @setting.email,
          to: @user.email,
-         subject: @subject do |format|
+         subject: default_i18n_subject(site: @setting.title) do |format|
       format.html
       format.text
     end

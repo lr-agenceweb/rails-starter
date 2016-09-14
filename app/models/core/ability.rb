@@ -64,6 +64,7 @@ class Ability
     cannot [:read, :update, :destroy], [About, LegalNotice]
     can :manage, [About, LegalNotice], user_id: @user.id
     can [:read, :update], StringBox
+    can :manage, Connection
 
     admin_batch_actions # Batch actions
     optional_modules_check # Optional modules
@@ -289,8 +290,7 @@ class Ability
     if @mailing_module.enabled?
       can [:crud,
            :send_mailing_message,
-           :preview
-          ], MailingMessage
+           :preview], MailingMessage
       can [:crud], MailingUser
       can [:read, :update], [MailingSetting]
       cannot [:create, :destroy], [MailingSetting]

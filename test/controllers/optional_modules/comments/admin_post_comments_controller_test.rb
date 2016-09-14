@@ -151,6 +151,14 @@ module Admin
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
 
+    test 'should destroy only allowed comments in batch actions' do
+      assert_difference ['Comment.count'], -1 do
+        post :batch_action, batch_action: 'destroy', collection_selection: [@comment.id, @comment_subscriber.id]
+        assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
+        assert_redirected_to admin_comments_path
+      end
+    end
+
     #
     # == Member actions
     #

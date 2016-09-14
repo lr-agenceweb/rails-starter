@@ -11,4 +11,4 @@
         == video_info.embed_code
 
       figcaption: div == video.description if video.description? && !video.native_informations?
-      figcaption: div == auto_link(video_info.description, html: { target: :blank }) if video.native_informations?
+      figcaption: div == auto_link(video_info.description, html: { target: '_blank' }) if video.native_informations?

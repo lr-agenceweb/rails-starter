@@ -54,7 +54,7 @@ class SettingDecoratorTest < Draper::TestCase
 
   test 'should have correct admin_link value if administrator' do
     sign_in @administrator
-    assert_equal ' - <a target="blank" href="/admin"> administration</a>', @setting_decorated.admin_link
+    assert_equal ' - <a target="_blank" href="/admin"> administration</a>', @setting_decorated.admin_link
   end
 
   test 'should have correct admin_link value if not logged_in' do

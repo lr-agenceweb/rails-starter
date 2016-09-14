@@ -1,5 +1,10 @@
-p = I18n.t('newsletter.hello', subscriber: @newsletter_user.name, locale: @newsletter_user.lang)
-== @content
+row
+  columns
+    p = I18n.t('newsletter.hello', subscriber: @newsletter_user.name, locale: @newsletter_user.lang)
 
-p.sent-from
-  == @setting.name
+    == @content
+
+    br
+
+    p.sent-from
+      == h(@setting.name)

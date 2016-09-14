@@ -68,7 +68,7 @@ class SettingDecorator < ApplicationDecorator
   end
 
   def admin_link
-    ' - ' + (link_to ' administration', admin_root_path, target: :blank) if current_user_and_administrator?
+    ' - ' + (link_to ' administration', admin_root_path, target: :_blank) if current_user_and_administrator?
   end
 
   private

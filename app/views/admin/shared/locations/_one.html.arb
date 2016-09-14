@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 f.inputs (defined?(title_inputs) ? title_inputs : t('activerecord.models.location.one')), for: [:location, f.object.location || Location.new] do |location|
   location.input :address
   location.input :postcode
@@ -23,7 +25,7 @@ f.inputs (defined?(title_inputs) ? title_inputs : t('activerecord.models.locatio
                    as: :boolean,
                    required: false,
                    label: 'Supprimer ?',
-                   hint: 'Si coché, la position sera suprrimée après mise à jour des paramètres'
+                   hint: 'Si coché, la position sera supprimée après mise à jour des paramètres'
 
   end
 end

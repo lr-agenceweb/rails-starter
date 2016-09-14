@@ -6,8 +6,8 @@ ActiveAdmin.register VideoSetting do
     params = [:id,
               :video_platform,
               :video_upload,
-              :turn_off_the_light
-             ]
+              :turn_off_the_light]
+
     params.push :video_background if current_user.super_administrator?
     params
   end

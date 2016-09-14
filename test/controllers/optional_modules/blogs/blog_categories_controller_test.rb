@@ -19,6 +19,7 @@ class BlogCategoriesControllerTest < ActionController::TestCase
         get :show, locale: locale.to_s, id: @blog_category
         assert_response :success
         assert_not_nil assigns(:blogs)
+        assert_template :show
       end
     end
   end
@@ -29,6 +30,7 @@ class BlogCategoriesControllerTest < ActionController::TestCase
         xhr :get, :show, locale: locale.to_s, id: @blog_category
         assert_response :success
         assert_not_nil assigns(:blogs)
+        assert_template 'blogs/index'
       end
     end
   end

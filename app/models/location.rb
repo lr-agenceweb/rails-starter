@@ -25,9 +25,14 @@
 # == Location Model
 #
 class Location < ActiveRecord::Base
+  # Model relations
   belongs_to :locationable, polymorphic: true, touch: true
 
+  # Validation rules
+  validates :address, presence: true
+  validates :city, presence: true
+
   validates :postcode,
-            allow_blank: true,
+            presence: true,
             numericality: { only_integer: true }
 end

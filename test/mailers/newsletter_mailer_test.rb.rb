@@ -12,13 +12,13 @@ class NewsletterMailerTest < ActionMailer::TestCase
   test 'should use correct template and layout for welcome_user' do
     NewsletterMailer.welcome_user(@newsletter_user).deliver_now
     assert_template :welcome_user
-    assert_template layout: 'newsletter'
+    assert_template layout: 'mailers/newsletter'
   end
 
   test 'should use correct template and layout for send_newsletter' do
     NewsletterMailer.send_newsletter(@newsletter_user, @newsletter).deliver_now
     assert_template :send_newsletter
-    assert_template layout: 'newsletter'
+    assert_template layout: 'mailers/newsletter'
   end
 
   test 'should send welcome newsletter with default headers' do

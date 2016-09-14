@@ -13,7 +13,7 @@ class VideoPlatformDecorator < VideoDecorator
   end
 
   def video_link
-    link_to model.url, model.url, target: :blank
+    link_to model.url, model.url, target: :_blank
   end
 
   def title_d

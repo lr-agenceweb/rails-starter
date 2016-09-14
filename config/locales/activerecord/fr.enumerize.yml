@@ -1,0 +1,8 @@
+# French
+fr:
+  enumerize:
+    setting:
+      date_format:
+        with_time: "30/04/2016 15:32"
+        without_time: "30/04/2016"
+        ago: "Il y a 10 minutes"

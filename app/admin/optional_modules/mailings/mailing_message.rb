@@ -94,10 +94,10 @@ ActiveAdmin.register MailingMessage do
     end
 
     def preview
-      @title = @mailing_message.title
       @content = @mailing_message.content
       @mailing_user = MailingUser.new(id: current_user.id, email: current_user.email, fullname: current_user.username.capitalize, token: Digest::MD5.hexdigest(current_user.email))
-      render 'mailing_message_mailer/send_email', layout: 'mailing'
+
+      render 'mailing_message_mailer/send_email', layout: 'mailers/mailing'
     end
 
     private

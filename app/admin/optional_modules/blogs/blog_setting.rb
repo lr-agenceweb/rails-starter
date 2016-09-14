@@ -6,8 +6,7 @@ ActiveAdmin.register BlogSetting do
     params = [:id,
               :prev_next,
               :show_last_posts,
-              :show_categories
-             ]
+              :show_categories]
 
     params.push :show_last_comments if @comment_module.enabled?
     params

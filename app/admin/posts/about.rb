@@ -32,8 +32,7 @@ ActiveAdmin.register About do
                 translations_attributes: [
                   :id, :locale, :title, :description, :keywords
                 ]
-              ]
-             ]
+              ]]
 
     params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
     params.push :allow_comments if @comment_module.enabled?
@@ -52,7 +51,7 @@ ActiveAdmin.register About do
   end
 
   action_item :show_article, only: [:show] do
-    link_to I18n.t('active_admin.action_item.see_article_in_frontend'), about_path(resource), target: :blank
+    link_to I18n.t('active_admin.action_item.see_article_in_frontend'), about_path(resource), target: :_blank
   end
 
   batch_action :toggle_online, if: proc { can? :toggle_online, About } do |ids|

@@ -8,6 +8,7 @@ class HumansController < ApplicationController
   layout false
 
   before_action :last_deploy
+  skip_before_action :set_froala_key
 
   def index
   end

@@ -15,7 +15,7 @@ class SocialDecorator < ApplicationDecorator
   end
 
   def link
-    link_to model.link, model.link, target: :blank if link?
+    link_to model.link, model.link, target: :_blank if link?
   end
 
   #

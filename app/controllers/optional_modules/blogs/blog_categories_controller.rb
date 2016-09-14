@@ -13,6 +13,11 @@ class BlogCategoriesController < ApplicationController
     per_p = @setting.per_page == 0 ? @blogs.count : @setting.per_page
     @blogs = BlogDecorator.decorate_collection(@blogs.page(params[:page]).per(per_p))
     seo_tag_index category
+
+    respond_to do |format|
+      format.html {}
+      format.js { render 'blogs/index' }
+    end
   end
 
   private

@@ -12,7 +12,7 @@ class MailingMessageMailerTest < ActionMailer::TestCase
   test 'should use correct template and layout' do
     MailingMessageMailer.send_email(@mailing_user, @mailing_message).deliver_now
     assert_template :send_email
-    assert_template layout: 'mailing'
+    assert_template layout: 'mailers/mailing'
   end
 
   test 'should send email with default headers' do

@@ -8,7 +8,7 @@ class VideoPlatformDecoratorTest < Draper::TestCase
   setup :initialize_test
 
   test 'should get correct video link' do
-    assert_equal '<a target="blank" href="http://www.dailymotion.com/video/x2z92v3">http://www.dailymotion.com/video/x2z92v3</a>', @video_platform_decorated.video_link
+    assert_equal '<a target="_blank" href="http://www.dailymotion.com/video/x2z92v3">http://www.dailymotion.com/video/x2z92v3</a>', @video_platform_decorated.video_link
   end
 
   test 'should get correct title' do
