@@ -6,13 +6,7 @@
 #
 class ContactFormMailerPreview < ActionMailer::Preview
   def message_me_preview
-    attrs = {
-      name: 'cristiano',
-      email: 'cristiano@ronaldo.pt',
-      message: 'Hi, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos minus atque accusantium quos perspiciatis dolor itaque dicta nulla architecto ut quaerat sequi nostrum, earum magni doloribus maxime tempore quam sapiente.'
-    }
-
-    @message = ContactForm.new attrs
+    @message = ContactForm.new default_attrs('cristiano', 'cristiano@ronaldo.pt')
 
     I18n.with_locale(:fr) do
       ContactFormMailer.message_me(@message)
@@ -20,16 +14,20 @@ class ContactFormMailerPreview < ActionMailer::Preview
   end
 
   def send_copy_preview
-    attrs = {
-      name: 'Karim',
-      email: 'karim@benzema.fr',
-      message: 'Hi, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos minus atque accusantium quos perspiciatis dolor itaque dicta nulla architecto ut quaerat sequi nostrum, earum magni doloribus maxime tempore quam sapiente.'
-    }
-
-    @message = ContactForm.new attrs
+    @message = ContactForm.new default_attrs('Karim', 'karim@benzema.fr')
 
     I18n.with_locale(:fr) do
       ContactFormMailer.send_copy(@message)
     end
+  end
+
+  private
+
+  def default_attrs(name, email)
+    attrs = {
+      name: name,
+      email: email,
+      message: 'Hi, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos minus atque accusantium quos perspiciatis dolor itaque dicta nulla architecto ut quaerat sequi nostrum, earum magni doloribus maxime tempore quam sapiente.'
+    }
   end
 end
