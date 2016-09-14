@@ -55,6 +55,7 @@ database.example.yml export-ignore
 database.travis.yml export-ignore
 
 .codeclimate.yml export-ignore
+.csscomb.json export-ignore
 .editorconfig export-ignore
 .env.example export-ignore
 .powrc export-ignore
