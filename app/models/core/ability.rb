@@ -50,9 +50,10 @@ class Ability
     can :update, [Setting]
 
     # Menu / Category
-    cannot :manage, [Menu, Category], optional_module: { enabled: false }
-    can [:update], [Menu, Category], optional_module: { enabled: true }
-    can [:update], [Menu, Category], optional_module: nil
+    cannot [:create, :destroy, :read], [Menu, Category], optional_module: { enabled: false }
+    can [:update, :read], [Menu, Category], optional_module: { enabled: true }
+    can [:update, :read], [Category], optional_module: nil
+    can [:update, :read], [Menu], category: { optional_module_id: nil }
 
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
     cannot [:create, :unlink], User
