@@ -130,7 +130,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    acts_as_list (0.7.4)
+    acts_as_list (0.8.1)
       activerecord (>= 3.0)
     addressable (2.4.0)
     airbrussh (1.0.1)
@@ -146,7 +146,7 @@ GEM
       activesupport (>= 3.0.0)
     arel (6.0.3)
     ast (2.2.0)
-    autoprefixer-rails (6.4.0.3)
+    autoprefixer-rails (6.4.1.1)
       execjs
     av (0.9.0)
       cocaine (~> 0.5.3)
@@ -172,7 +172,7 @@ GEM
       uniform_notifier (~> 1.10.0)
     byebug (9.0.5)
     callsite (0.0.11)
-    cancancan (1.14.0)
+    cancancan (1.15.0)
     capistrano (3.5.0)
       airbrussh (>= 1.0.0)
       capistrano-harrow
@@ -220,7 +220,7 @@ GEM
     concurrent-ruby (1.0.2)
     css_parser (1.4.5)
       addressable
-    daemons (1.2.3)
+    daemons (1.2.4)
     dalli (2.7.6)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
