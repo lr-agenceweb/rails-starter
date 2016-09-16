@@ -20,7 +20,7 @@ gem 'database_cleaner'
 # == Authentication
 #
 gem 'devise', '~> 3.5.9'
-gem 'devise-i18n-views'
+gem 'devise-i18n'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2', '~> 0.4.1'

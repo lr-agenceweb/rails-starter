@@ -241,7 +241,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    devise-i18n-views (0.3.7)
+    devise-i18n (1.1.0)
     dkim (1.0.0)
     docile (1.1.5)
     draper (2.1.0)
@@ -681,7 +681,7 @@ DEPENDENCIES
   delayed_job_active_record
   delayed_paperclip
   devise (~> 3.5.9)
-  devise-i18n-views
+  devise-i18n
   dkim
   draper
   draper-cancancan
