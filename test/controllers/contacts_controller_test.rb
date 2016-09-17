@@ -121,6 +121,24 @@ class ContactsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should deliver successfully a message with answering phone' do
+    @setting.update_attribute(:answering_machine, true)
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        assert_difference 'ActionMailer::Base.deliveries.size', 2 do
+          post :create, locale: locale.to_s, contact_form: {
+            name: 'cristiano',
+            email: 'cristiano@ronaldo.pt',
+            message: 'Hi',
+            send_copy: '0'
+          }
+        end
+
+        ActionMailer::Base.deliveries.clear
+      end
+    end
+  end
+
   test 'should not send a contact message if fields are empty' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do

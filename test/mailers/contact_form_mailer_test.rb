@@ -37,6 +37,18 @@ class ContactFormMailerTest < ActionMailer::TestCase
     assert_template layout: 'mailers/default'
   end
 
+  test 'should send answering machine email to sender' do
+    email = ContactFormMailer.answering_machine('karim@benzema.fr').deliver_now
+
+    refute ActionMailer::Base.deliveries.empty?
+    assert_equal ['demo@rails-starter.com'], email.from
+    assert_equal ['karim@benzema.fr'], email.to
+    assert_equal I18n.t('contact_form_mailer.answering_machine.subject', site: @setting.title), email.subject
+
+    assert_template :answering_machine
+    assert_template layout: 'mailers/default'
+  end
+
   #
   # == Attachment
   #

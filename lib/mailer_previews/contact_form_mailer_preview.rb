@@ -21,6 +21,12 @@ class ContactFormMailerPreview < ActionMailer::Preview
     end
   end
 
+  def answering_machine_preview
+    I18n.with_locale(:fr) do
+      ContactFormMailer.answering_machine('karim@benzema.fr')
+    end
+  end
+
   private
 
   def default_attrs(name, email)

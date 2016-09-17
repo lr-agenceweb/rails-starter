@@ -4,6 +4,8 @@
 # == Application Mailer
 #
 class ApplicationMailer < ActionMailer::Base
+  helper :html # HtmlHelper
+
   before_action :set_setting
   before_action :set_contact_settings
 
