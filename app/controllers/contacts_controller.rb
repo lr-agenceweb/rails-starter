@@ -27,7 +27,7 @@ class ContactsController < ApplicationController
     if @contact_form.valid?
       ContactFormMailer.message_me(@contact_form).deliver_now
       ContactFormMailer.send_copy(@contact_form).deliver_now if @contact_form.send_copy == '1'
-      ContactFormMailer.answering_machine(@contact_form.email).deliver_now if @setting.answering_machine?
+      ContactFormMailer.answering_machine(@contact_form.email, @locale).deliver_now if @setting.answering_machine?
       respond_action :create
     else
       render :new

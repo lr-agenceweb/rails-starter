@@ -46,6 +46,9 @@ en:
     send_copy:
       subject: Copy of your contact message sent to %{site} website
       message_cc: Here is a copy of the email received by %{name}
+    answering_machine:
+      subject: Automatic answering machine by the %{site} site
+      content: "<p> The contact form has been configured as \"automatic answering machine\" mode. This mean the administrator is not available for now and will answer when he will be back. <br /><br /> See you soon </p>"
 
   newsletter_mailer:
     welcome_user:

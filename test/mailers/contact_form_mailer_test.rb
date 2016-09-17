@@ -43,10 +43,28 @@ class ContactFormMailerTest < ActionMailer::TestCase
     refute ActionMailer::Base.deliveries.empty?
     assert_equal ['demo@rails-starter.com'], email.from
     assert_equal ['karim@benzema.fr'], email.to
-    assert_equal I18n.t('contact_form_mailer.answering_machine.subject', site: @setting.title), email.subject
 
     assert_template :answering_machine
     assert_template layout: 'mailers/default'
+  end
+
+  test 'should use correct string box answering machine content if defined' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        email = ContactFormMailer.answering_machine('karim@benzema.fr', locale).deliver_now
+        assert_equal @answering_machine.title, email.subject
+      end
+    end
+  end
+
+  test 'should use default answering machine content if string box not defined' do
+    @answering_machine.destroy
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        email = ContactFormMailer.answering_machine('karim@benzema.fr', locale).deliver_now
+        assert_equal I18n.t('contact_form_mailer.answering_machine.subject', site: @setting.title, locale: locale), email.subject
+      end
+    end
   end
 
   #
@@ -75,11 +93,14 @@ class ContactFormMailerTest < ActionMailer::TestCase
 
   def initialize_test
     @setting = settings(:one)
+    @locales = I18n.available_locales
+
     @message = ContactForm.new(
       name: 'cristiano',
       email: 'cristiano@ronaldo.pt',
       message: 'Hello from the internet'
     )
+    @answering_machine = string_boxes(:answering_machine)
   end
 
   def response

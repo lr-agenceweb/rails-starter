@@ -33,14 +33,5 @@ error_500:
 success_contact_form:
   key: success_contact_form
 
-adult_not_validated_popup_content:
-  key: adult_not_validated_popup_content
-  title: ~
-  content: Pour pouvoir accéder au site, vous devez avoir plus de 18 ans.
-  optional_module: adult
-
-welcome_newsletter:
-  key: welcome_newsletter
-  title: Bienvenue !
-  content: Vous êtes maintenant inscrit à la newsletter !
-  optional_module: newsletter
+answering_machine:
+  key: answering_machine

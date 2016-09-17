@@ -4,8 +4,6 @@
 # == ContactForm Mailer
 #
 class ContactFormMailer < ApplicationMailer
-  before_action :set_answering_machine
-
   layout 'mailers/default'
 
   # Customer => Administrator
@@ -28,14 +26,17 @@ class ContactFormMailer < ApplicationMailer
   end
 
   # Administrator => Customer
-  def answering_machine(message_email)
-    mail_method(@setting.email, message_email, @message, :answering_machine)
+  def answering_machine(message_email, locale = I18n.default_locale)
+    I18n.with_locale(locale) do
+      sb_answering_machine
+      mail_method(@setting.email, message_email, @message, :answering_machine, locale)
+    end
   end
 
   private
 
-  def mail_method(from, to, body = @message.message, template = :message_me)
-    subject = try(:@subject) || default_i18n_subject(site: @setting.title, locale: I18n.default_locale)
+  def mail_method(from, to, body = @message.message, template = :message_me, locale = I18n.default_locale)
+    subject = @subject || default_i18n_subject(site: @setting.title, locale: locale)
 
     mail from: from,
          to: to,
@@ -46,7 +47,7 @@ class ContactFormMailer < ApplicationMailer
     end
   end
 
-  def set_answering_machine
+  def sb_answering_machine
     sb = StringBox.includes(:translations).find_by(key: 'answering_machine')
     @subject = sb.title
     @message = sb.content
