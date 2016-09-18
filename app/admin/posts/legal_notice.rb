@@ -77,7 +77,6 @@ ActiveAdmin.register LegalNotice do
   #
   controller do
     include ActiveAdmin::Postable
-
-    cache_sweeper :legal_notice_sweeper
+    include ActiveAdmin::Cachable
   end
 end

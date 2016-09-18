@@ -73,10 +73,9 @@ ActiveAdmin.register Blog do
   #
   controller do
     include Skippable
+    include ActiveAdmin::Cachable
     include OptionalModules::Videoable
     include OptionalModules::Audioable
-
-    cache_sweeper :blog_sweeper
 
     before_create do |blog|
       blog.user_id = current_user.id

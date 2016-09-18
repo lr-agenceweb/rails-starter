@@ -89,8 +89,7 @@ ActiveAdmin.register About do
   #
   controller do
     include ActiveAdmin::Postable
+    include ActiveAdmin::Cachable
     include OptionalModules::Videoable
-
-    cache_sweeper :about_sweeper
   end
 end

@@ -78,8 +78,7 @@ ActiveAdmin.register Slide do
   #
   controller do
     include Skippable
-
-    cache_sweeper :slide_sweeper
+    include ActiveAdmin::Cachable
 
     def scoped_collection
       super.includes attachable: [category: [menu: [:translations]]]

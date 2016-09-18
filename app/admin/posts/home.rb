@@ -81,8 +81,7 @@ ActiveAdmin.register Home do
   controller do
     include Skippable
     include ActiveAdmin::Postable
+    include ActiveAdmin::Cachable
     include OptionalModules::Videoable
-
-    cache_sweeper :home_sweeper
   end
 end
