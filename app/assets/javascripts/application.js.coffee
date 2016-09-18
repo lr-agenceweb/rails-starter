@@ -9,8 +9,6 @@
 #= require base/flash
 
 #= require turbolinks
-#= require nprogress
-#= require nprogress-turbolinks
 #= require plugins/nprogress
 
 #= require rails.validations

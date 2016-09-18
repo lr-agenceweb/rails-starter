@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160603211052) do
+ActiveRecord::Schema.define(version: 20160917134146) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -118,7 +118,6 @@ ActiveRecord::Schema.define(version: 20160603211052) do
   end
 
   add_index "blogs", ["blog_category_id"], name: "index_blogs_on_blog_category_id", using: :btree
-  add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
@@ -599,6 +598,7 @@ ActiveRecord::Schema.define(version: 20160603211052) do
     t.boolean  "show_map",                               default: false
     t.boolean  "show_admin_bar",                         default: true
     t.boolean  "show_file_upload",                       default: false
+    t.boolean  "answering_machine",                      default: false
     t.integer  "date_format",              limit: 4,     default: 0
     t.boolean  "maintenance",                            default: false
     t.datetime "logo_updated_at"

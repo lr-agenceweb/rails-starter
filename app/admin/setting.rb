@@ -12,6 +12,7 @@ ActiveAdmin.register Setting do
               :maintenance,
               :show_admin_bar,
               :show_file_upload,
+              :answering_machine,
               :date_format,
               :logo,
               :logo_footer,

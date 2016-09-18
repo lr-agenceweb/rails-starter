@@ -72,6 +72,12 @@ mapbox_access_token: ~
 
 
 #
+# == Google Map [Autocomplete address]
+#
+gmaps_api_key: ~
+
+
+#
 # == Google and Bing
 #
 production:

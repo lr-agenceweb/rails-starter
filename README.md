@@ -73,7 +73,7 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
 ![Deploy](https://img.shields.io/badge/Deploy-Capistrano-5aaed7.svg?style=flat-square) | `Capistrano` is used for an easy deploy to a private VPS
 
 ### Tasks
-#### Rails 
+#### Rails
 
 * Color Routes: colored version of rake routes (run `rake color_routes`)
 * Dump SQL: make a quick save of your Database (run `rake db:backup`)

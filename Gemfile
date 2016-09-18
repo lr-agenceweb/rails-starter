@@ -20,7 +20,7 @@ gem 'database_cleaner'
 # == Authentication
 #
 gem 'devise', '~> 3.5.9'
-gem 'devise-i18n-views'
+gem 'devise-i18n'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
@@ -63,7 +63,7 @@ gem 'timecop'
 #
 # == Media upload
 #
-gem 'paperclip', '~> 4.3'
+gem 'paperclip', '5.0'
 gem 'retina_rails', '~> 2.0.0'
 gem 'paperclip-av-transcoder'
 gem 'delayed_paperclip'
@@ -139,7 +139,7 @@ gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-ui-rails'
-gem 'turbolinks'
+gem 'turbolinks', '~> 2.5.3'
 gem 'nprogress-rails'
 gem 'foundation-rails', '~> 6.2.0'
 gem 'font-awesome-rails'

@@ -124,7 +124,6 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   test 'AJAX :: should return correct flash if not found' do
     xhr :delete, :unsubscribe, locale: 'fr', newsletter_user_id: -9, token: @newsletter_user.token
     assert_equal I18n.t('newsletter.unsubscribe.invalid'), flash[:error]
-    assert_redirected_to root_url
   end
 
   #

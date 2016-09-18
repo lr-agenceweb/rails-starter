@@ -15,26 +15,43 @@ class ContactFormMailer < ApplicationMailer
       attachments[attachment_name] = message.attachment.read
     end
 
-    mail from: @message.email,
-         to: @setting.email,
-         subject: default_i18n_subject(site: @setting.title, locale: I18n.default_locale),
-         body: @message.message do |format|
-      format.html
-      format.text
-    end
+    mail_method(@message.email, @setting.email)
   end
 
   # Administrator => Customer
   def send_copy(message)
     @message = message
     @copy_to_sender = true
+    mail_method(@setting.email, @message.email)
+  end
 
-    mail from: @setting.email,
-         to: @message.email,
-         subject: default_i18n_subject(site: @setting.title, locale: I18n.default_locale),
-         body: @message.message do |format|
-      format.html { render :message_me }
-      format.text { render :message_me }
+  # Administrator => Customer
+  def answering_machine(message_email, locale = I18n.default_locale)
+    I18n.with_locale(locale) do
+      sb_answering_machine
+      mail_method(@setting.email, message_email, @message, :answering_machine, locale)
     end
+  end
+
+  private
+
+  def mail_method(from, to, body = @message.message, template = :message_me, locale = I18n.default_locale)
+    subject = @subject || default_i18n_subject(site: @setting.title, locale: locale)
+
+    mail from: from,
+         to: to,
+         subject: subject,
+         body: body do |format|
+      format.html { render template }
+      format.text { render template }
+    end
+  end
+
+  def sb_answering_machine
+    sb = StringBox.includes(:translations).find_by(key: 'answering_machine')
+    @subject = sb.title.blank? ? nil : sb.title
+    @message = sb.content.blank? ? t('contact_form_mailer.answering_machine.content') : sb.content
+  rescue
+    @message = t('contact_form_mailer.answering_machine.content')
   end
 end

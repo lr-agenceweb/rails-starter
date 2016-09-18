@@ -167,7 +167,7 @@ ActiveAdmin.setup do |config|
   # To load a javascript file:
   config.register_javascript '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js'
   config.register_javascript '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js'
-  config.register_javascript '//maps.googleapis.com/maps/api/js?sensor=false'
+  config.register_javascript "//maps.googleapis.com/maps/api/js?key=#{Figaro.env.gmaps_api_key}&sensor=false"
   config.register_javascript '//www.google.com/jsapi'
   config.register_javascript 'chartkick'
 

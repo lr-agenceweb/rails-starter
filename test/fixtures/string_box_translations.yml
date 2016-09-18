@@ -29,3 +29,17 @@ success_contact_form_en:
   locale: en
   title: Message sent with success
   content: Your message has been properly sent. Thank you :)
+
+answering_machine_fr:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:answering_machine) %>
+  locale: fr
+  title: Répondeur automatique
+  content: Ceci est un message du répondeur automatique
+
+answering_machine_en:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:answering_machine) %>
+  locale: en
+  title: Automatic answering machine
+  content: This is a message from the answering machine

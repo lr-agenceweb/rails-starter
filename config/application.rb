@@ -19,7 +19,7 @@ module Starter
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Paris'
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
@@ -49,16 +49,17 @@ module Starter
 
     # Mailer
     config.active_job.queue_adapter = :delayed_job
+    config.action_mailer.default charset: 'utf-8'
+
+    # Set Devise email layout
+    config.to_prepare do
+      Devise::Mailer.layout 'mailers/default' # default.html.inky
+    end
 
     # Override default errors
     config.exceptions_app = routes
 
     # Silent deprecation warnings
     ActiveSupport::Deprecation.silenced = true
-
-    # Set Devise email layout
-    config.to_prepare do
-      Devise::Mailer.layout 'mailers/default' # default.html.inky
-    end
   end
 end

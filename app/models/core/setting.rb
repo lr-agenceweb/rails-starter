@@ -18,6 +18,7 @@
 #  show_map                 :boolean          default(FALSE)
 #  show_admin_bar           :boolean          default(TRUE)
 #  show_file_upload         :boolean          default(FALSE)
+#  answering_machine        :boolean          default(FALSE)
 #  date_format              :integer          default(0)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
