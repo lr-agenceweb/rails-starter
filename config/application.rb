@@ -49,16 +49,17 @@ module Starter
 
     # Mailer
     config.active_job.queue_adapter = :delayed_job
+    config.action_mailer.default charset: 'utf-8'
+
+    # Set Devise email layout
+    config.to_prepare do
+      Devise::Mailer.layout 'mailers/default' # default.html.inky
+    end
 
     # Override default errors
     config.exceptions_app = routes
 
     # Silent deprecation warnings
     ActiveSupport::Deprecation.silenced = true
-
-    # Set Devise email layout
-    config.to_prepare do
-      Devise::Mailer.layout 'mailers/default' # default.html.inky
-    end
   end
 end
