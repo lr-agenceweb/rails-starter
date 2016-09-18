@@ -80,13 +80,9 @@ ActiveAdmin.register Home do
   #
   controller do
     include Skippable
+    include ActiveAdmin::Postable
     include OptionalModules::Videoable
 
     cache_sweeper :home_sweeper
-
-    before_create do |post|
-      post.type = post.object.class.name
-      post.user_id = current_user.id
-    end
   end
 end

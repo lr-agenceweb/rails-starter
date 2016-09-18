@@ -96,11 +96,8 @@ ActiveAdmin.register Connection do
   # == Controller
   #
   controller do
-    cache_sweeper :legal_notice_sweeper
+    include ActiveAdmin::Postable
 
-    before_create do |post|
-      post.type = post.object.class.name
-      post.user_id = current_user.id
-    end
+    cache_sweeper :legal_notice_sweeper
   end
 end
