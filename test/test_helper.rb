@@ -11,7 +11,9 @@ SimpleCov.formatters = [
   SimpleCov::Formatter::HTMLFormatter,
   CodeClimate::TestReporter::Formatter
 ]
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_filter 'lib/mailer_previews'
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
