@@ -22,7 +22,6 @@ error_404:
 
 error_422:
   key: error_422
-  title: Erreur 422
   content: erreur 422
 
 error_500:

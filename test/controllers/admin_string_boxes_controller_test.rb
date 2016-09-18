@@ -143,8 +143,6 @@ module Admin
     def initialize_test
       @setting = settings(:one)
       @string_box = string_boxes(:error_404)
-      @string_box_newsletter = string_boxes(:welcome_newsletter)
-      @string_box_adult = string_boxes(:adult_not_validated_popup_content)
       @newsletter_module = optional_modules(:newsletter)
       @adult_module = optional_modules(:adult)
 

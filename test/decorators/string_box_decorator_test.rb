@@ -24,13 +24,13 @@ class StringBoxDecoratorTest < Draper::TestCase
   test 'should return title by key if no one is set' do
     string_box_decorated = StringBoxDecorator.new(@string_box_without_title)
     assert_not string_box_decorated.title?
-    assert_equal 'Adult Not Validated Popup Content', string_box_decorated.title_aa_show
+    assert_equal 'Error 422', string_box_decorated.title_aa_show
   end
 
   private
 
   def initialize_test
     @string_box = string_boxes(:error_404)
-    @string_box_without_title = string_boxes(:adult_not_validated_popup_content)
+    @string_box_without_title = string_boxes(:error_422)
   end
 end

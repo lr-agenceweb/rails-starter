@@ -49,8 +49,8 @@ class ContactFormMailer < ApplicationMailer
 
   def sb_answering_machine
     sb = StringBox.includes(:translations).find_by(key: 'answering_machine')
-    @subject = sb.title
-    @message = sb.content
+    @subject = sb.title.blank? ? nil : sb.title
+    @message = sb.content.blank? ? t('contact_form_mailer.answering_machine.content') : sb.content
   rescue
     @message = t('contact_form_mailer.answering_machine.content')
   end

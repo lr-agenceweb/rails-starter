@@ -5,6 +5,7 @@ require 'test_helper'
 # == ContactForm Mailer test class
 #
 class ContactFormMailerTest < ActionMailer::TestCase
+  include HtmlHelper
   include ActionController::TemplateAssertions
   include ActionDispatch::TestProcess
 
@@ -37,6 +38,9 @@ class ContactFormMailerTest < ActionMailer::TestCase
     assert_template layout: 'mailers/default'
   end
 
+  #
+  # == AnsweringMachine
+  #
   test 'should send answering machine email to sender' do
     email = ContactFormMailer.answering_machine('karim@benzema.fr').deliver_now
 
@@ -52,17 +56,60 @@ class ContactFormMailerTest < ActionMailer::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale) do
         email = ContactFormMailer.answering_machine('karim@benzema.fr', locale).deliver_now
+        last_email = ActionMailer::Base.deliveries.last
+
         assert_equal @answering_machine.title, email.subject
+        content = sanitize_string(@answering_machine.content)
+        assert_match(/#{content}/, CGI.unescape_html(last_email.text_part.body.to_s))
+        assert_match(/#{content}/, sanitize_string(last_email.html_part.body.to_s))
+
+        ActionMailer::Base.deliveries.clear
       end
     end
   end
 
-  test 'should use default answering machine content if string box not defined' do
+  test 'should use default answering machine title and content if string box not defined' do
     @answering_machine.destroy
     @locales.each do |locale|
       I18n.with_locale(locale) do
         email = ContactFormMailer.answering_machine('karim@benzema.fr', locale).deliver_now
+        last_email = ActionMailer::Base.deliveries.last
+
         assert_equal I18n.t('contact_form_mailer.answering_machine.subject', site: @setting.title, locale: locale), email.subject
+        content = sanitize_string(I18n.t('contact_form_mailer.answering_machine.content'))
+        assert_match(/#{content}/, CGI.unescape_html(last_email.text_part.body.to_s))
+        assert_match(/#{content}/, sanitize_string(last_email.html_part.body.to_s))
+
+        ActionMailer::Base.deliveries.clear
+      end
+    end
+  end
+
+  test 'should use default answering machine subject if string box defined but with empty title' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        @answering_machine.update_attribute(:title, '')
+        email = ContactFormMailer.answering_machine('karim@benzema.fr', locale).deliver_now
+
+        assert_equal I18n.t('contact_form_mailer.answering_machine.subject', site: @setting.title, locale: locale), email.subject
+
+        ActionMailer::Base.deliveries.clear
+      end
+    end
+  end
+
+  test 'should use default answering machine content if string box defined but with empty content' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        @answering_machine.update_attribute(:content, '')
+        ContactFormMailer.answering_machine('karim@benzema.fr', locale).deliver_now
+        last_email = ActionMailer::Base.deliveries.last
+
+        content = sanitize_string(I18n.t('contact_form_mailer.answering_machine.content'))
+        assert_match(/#{content}/, CGI.unescape_html(last_email.text_part.body.to_s))
+        assert_match(/#{content}/, sanitize_string(last_email.html_part.body.to_s))
+
+        ActionMailer::Base.deliveries.clear
       end
     end
   end
