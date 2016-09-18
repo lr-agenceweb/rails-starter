@@ -42,6 +42,7 @@ columns do
     panel t('active_admin.details', model: t('contact.title')) do
       attributes_table_for setting.decorate do
         bool_row :show_file_upload
+        bool_row :answering_machine
       end
     end
   end

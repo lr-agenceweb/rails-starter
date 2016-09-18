@@ -46,6 +46,20 @@ module Admin
     #
     # == Crud actions
     #
+    test 'should be able to access new page if super administrator' do
+      sign_in @super_administrator
+      get :new
+      assert_response :success
+    end
+
+    test 'should be able to create if super administrator' do
+      sign_in @super_administrator
+      assert_difference 'StringBox.count' do
+        post :create, string_box: {}
+      end
+      assert_redirected_to admin_string_box_path(assigns(:string_box))
+    end
+
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
       assert_crud_actions(@string_box, new_user_session_path, model_name)
@@ -129,8 +143,6 @@ module Admin
     def initialize_test
       @setting = settings(:one)
       @string_box = string_boxes(:error_404)
-      @string_box_newsletter = string_boxes(:welcome_newsletter)
-      @string_box_adult = string_boxes(:adult_not_validated_popup_content)
       @newsletter_module = optional_modules(:newsletter)
       @adult_module = optional_modules(:adult)
 

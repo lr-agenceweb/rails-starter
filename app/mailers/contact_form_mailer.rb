@@ -25,15 +25,33 @@ class ContactFormMailer < ApplicationMailer
     mail_method(@setting.email, @message.email)
   end
 
+  # Administrator => Customer
+  def answering_machine(message_email, locale = I18n.default_locale)
+    I18n.with_locale(locale) do
+      sb_answering_machine
+      mail_method(@setting.email, message_email, @message, :answering_machine, locale)
+    end
+  end
+
   private
 
-  def mail_method(from, to, template = :message_me)
+  def mail_method(from, to, body = @message.message, template = :message_me, locale = I18n.default_locale)
+    subject = @subject || default_i18n_subject(site: @setting.title, locale: locale)
+
     mail from: from,
          to: to,
-         subject: default_i18n_subject(site: @setting.title, locale: I18n.default_locale),
-         body: @message.message do |format|
+         subject: subject,
+         body: body do |format|
       format.html { render template }
       format.text { render template }
     end
+  end
+
+  def sb_answering_machine
+    sb = StringBox.includes(:translations).find_by(key: 'answering_machine')
+    @subject = sb.title.blank? ? nil : sb.title
+    @message = sb.content.blank? ? t('contact_form_mailer.answering_machine.content') : sb.content
+  rescue
+    @message = t('contact_form_mailer.answering_machine.content')
   end
 end

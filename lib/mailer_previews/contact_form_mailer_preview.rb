@@ -21,6 +21,10 @@ class ContactFormMailerPreview < ActionMailer::Preview
     end
   end
 
+  def answering_machine_preview
+    ContactFormMailer.answering_machine('karim@benzema.fr', :fr)
+  end
+
   private
 
   def default_attrs(name, email)

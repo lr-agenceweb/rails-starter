@@ -156,9 +156,18 @@ form fieldset.inputs.locale
 
 
 // Misc
-p.inline-hints
-  font-size: 1.3em !important
-  color: #007637 !important
+form fieldset > ol li:not(.file)
+  p.inline-hints
+    font-size: 0.95em
+    font-style: italic
+    color: $steel
+    font-size: 1.3em !important
+    background-color: $info-color !important
+    padding: 4px
+    &:before
+      content: '\f05a'
+      font-family: FontAwesome
+      margin-right: 5px
 
 .attributes_table table th
   vertical-align: middle
@@ -166,17 +175,15 @@ p.inline-hints
 li.boolean label input
   margin: 0 0.5em 0 0.2em !important
 
-form fieldset.inputs ol > li.boolean label
-  width: 98%
-  padding-left: 2%
-
-form fieldset > ol > li.boolean
+form fieldset > ol li.boolean
   label
-    margin-bottom: 5px !important
+    margin-bottom: 0 !important
+    width: 98%
+    padding-left: 0
 
   p.inline-hints
-    padding-left: 2% !important
     margin-left: 0 !important
+    margin-top: 1.5rem !important
 
 form.formtastic fieldset > ol li p.inline-errors
   display: none

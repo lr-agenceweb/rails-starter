@@ -6,6 +6,9 @@ fr:
     send_copy:
       subject: Copie de votre message de contact envoyé à %{site}
       message_cc: Voici une copie de l'email reçu par %{name}
+    answering_machine:
+      subject: Répondeur de contact automatique par le site %{site}
+      content: "<p> Le formulaire de contact a été configuré en mode \"répondeur automatique\". Cela signifie que l'admininstrateur n'est pas disponible pour vous répondre maintenant mais qu'il le fera dès son retour. <br /><br /> A bientôt </p>"
 
   newsletter_mailer:
     welcome_user:
@@ -43,6 +46,9 @@ en:
     send_copy:
       subject: Copy of your contact message sent to %{site} website
       message_cc: Here is a copy of the email received by %{name}
+    answering_machine:
+      subject: Automatic answering machine by the %{site} site
+      content: "<p> The contact form has been configured as \"automatic answering machine\" mode. This mean the administrator is not available for now and will answer when he will be back. <br /><br /> See you soon </p>"
 
   newsletter_mailer:
     welcome_user:

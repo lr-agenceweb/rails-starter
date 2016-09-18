@@ -23,7 +23,7 @@
 # == StringBox Model
 #
 class StringBox < ActiveRecord::Base
-  translates :title, :content, fallbacks_for_empty_translations: true
+  translates :title, :content
   active_admin_translates :title, :content
 
   belongs_to :optional_module

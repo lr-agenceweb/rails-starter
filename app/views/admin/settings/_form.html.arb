@@ -59,6 +59,8 @@ f.columns do
     f.inputs 'Paramètres du formulaire de contact' do
       f.input :show_file_upload,
               hint: 'Si coché, un champ permettant à l\'internaute d\'envoyer une pièce jointe sera ajouté au formulaire de contact'
+      f.input :answering_machine,
+              hint: "Si coché, un mail de réponse automatique sera envoyé à l'internaute lui indiquant votre indisponibilité lorsque qu'il tentera de vous envoyer un mail par le formulaire de contact. <br /> Vous pouvez personnaliser le contenu du mail en vous rendant sur la page \"#{t('activerecord.models.string_box.other')}\" de l'administration".html_safe
     end
   end
 end

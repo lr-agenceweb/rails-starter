@@ -52,6 +52,7 @@ fr:
         show_map: Afficher la carte sur la page contact ?
         show_admin_bar: Afficher la barre d'administration ?
         show_file_upload: Autoriser pièce jointe ?
+        answering_machine: Répondeur automatique ?
         map: Carte
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
