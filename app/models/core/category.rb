@@ -23,6 +23,7 @@
 # == Category Model
 #
 class Category < ActiveRecord::Base
+  include Core::Headingable
   include Core::Referenceable
   include OptionalModules::Assets::Backgroundable
   include OptionalModules::Assets::VideoUploadable
@@ -30,9 +31,6 @@ class Category < ActiveRecord::Base
   belongs_to :optional_module
   belongs_to :menu
   has_one :slider, dependent: :destroy
-
-  has_one :heading, as: :headingable, dependent: :destroy
-  accepts_nested_attributes_for :heading, reject_if: :all_blank, allow_destroy: true
 
   delegate :enabled, to: :optional_module, prefix: true, allow_nil: true
   delegate :title, :position, :online, to: :menu, prefix: true, allow_nil: true
