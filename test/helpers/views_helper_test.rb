@@ -16,7 +16,8 @@ module ActiveAdmin
     test 'should return correct edit page title' do
       @controller = ContactsController.new
       @controller.request = ActionController::TestRequest.new(host: 'http://test.host')
-      assert_equal "<a href=\"/admin/categories/#{@category_contact.id}/edit\">Modifier l'entête de la page #{@category_contact.menu_title}</a>", edit_heading_page_aa
+      expected = "<a target=\"_blank\" href=\"/admin/categories/#{@category_contact.id}/edit?section=heading#heading\">#{I18n.t('active_admin.action_item.edit_heading_page', page: 'Contact')}</a>"
+      assert_equal expected, action_item_page
     end
 
     private

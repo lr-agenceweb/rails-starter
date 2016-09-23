@@ -43,7 +43,7 @@ ActiveAdmin.register About do
   config.clear_sidebar_sections!
 
   action_item :edit_heading_page do
-    edit_heading_page_aa
+    action_item_page
   end
 
   action_item :new_article, only: [:show] do
