@@ -42,7 +42,7 @@ ActiveAdmin.register Home do
   config.clear_sidebar_sections!
 
   action_item :edit_heading_page do
-    edit_heading_page_aa
+    action_item_page
   end
 
   batch_action :toggle_online, if: proc { can? :toggle_online, Home } do |ids|
