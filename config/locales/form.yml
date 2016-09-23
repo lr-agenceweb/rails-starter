@@ -176,7 +176,7 @@ fr:
 
 
       picture:
-        show_as_gallery: Afficher les images sous forme de galerie ? (Cette option est efficace lorsqu'il s'agit d'afficher plusieurs images)
+        show_as_gallery: Afficher les images sous forme de galerie ? <br /> (Cette option est efficace lorsqu'il s'agit d'afficher plusieurs images)
 
       video:
         url: "Lien de la vidéo que vous souhaitez afficher sur votre site <br /> (Attention, seuls les vidéos provenant de Youtube, Dailymotion et Viméo peuvent être affichées).
@@ -212,6 +212,12 @@ fr:
       blog_category:
         name: Nom de la catégorie à créer
         slug: Nom de la catégorie à afficher dans l'url
+
+      publication_date:
+        published_later: Si coché, l'article ne sera mis en ligne sur le site qu'à partir de la date que vous aurez spécifié dans le champs suivant
+        expired_prematurely: Si coché, l'article sera retiré du site à compter de la date que vous aurez spécifié dans le champs suivant
+        published_at: Date à laquelle l'article sera publié sur le site
+        expired_at: Date à laquelle l'article n'apparaitra plus sur le site
 
     placeholder:
       froala: Contenu de l'article ici :)

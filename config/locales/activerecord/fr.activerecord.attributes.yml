@@ -33,6 +33,11 @@ fr:
         show_last_posts: Afficher derniers articles crées ?
         show_categories: Afficher lien des différentes catégories ?
         show_last_comments: Afficher derniers commentaires ?
+      publication_date:
+        published_later: Publier dans le futur ?
+        published_at: Publié le
+        expired_prematurely: Expire prématurement ?
+        expired_at: Expire le
       setting:
         title: Titre
         subtitle: Sous-titre

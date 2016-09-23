@@ -13,6 +13,9 @@ ActiveAdmin.register Blog do
               translations_attributes: [
                 :id, :locale, :title, :slug, :content
               ],
+              publication_date_attributes: [
+                :id, :published_later, :expired_prematurely, :published_at, :expired_at
+              ],
               pictures_attributes: [
                 :id, :locale, :image, :online, :position, :_destroy
               ],

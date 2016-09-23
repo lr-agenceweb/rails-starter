@@ -138,6 +138,9 @@ fr:
       blog_setting:
         one: Blog configuration
         other: Blog configuration
+      publication_date:
+        one: Date de publication
+        other: Dates de publication
       event:
         one: Événement
         other: Événements
