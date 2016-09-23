@@ -20,6 +20,9 @@ fr:
       string_box:
         one: Contenu personnalisé
         other: Contenus personalisés
+      heading:
+        one: En-tête
+        other: En-tête
 
       #
       # == User

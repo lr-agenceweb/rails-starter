@@ -103,12 +103,12 @@ ActiveAdmin.register Category do
                   ]
         end
 
-        render 'admin/shared/referencement/form', f: f
+        render 'admin/shared/referencement/form', f: f, klass: params[:section] == 'referencement' ? 'highlight-referencement' : ''
         render 'admin/shared/video_uploads/one', f: f if video_module.enabled? && video_settings.video_upload? && video_settings.video_background?
       end
 
       column do
-        render 'admin/shared/heading/form', f: f
+        render 'admin/shared/heading/form', f: f, klass: params[:section] == 'heading' ? 'highlight-heading' : ''
         render 'admin/shared/backgrounds/form', f: f if background_module.enabled?
       end
     end

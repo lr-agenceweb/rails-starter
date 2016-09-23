@@ -41,8 +41,12 @@ ActiveAdmin.register Home do
   decorate_with HomeDecorator
   config.clear_sidebar_sections!
 
-  action_item :edit_heading_page do
+  action_item :edit_heading do
     action_item_page
+  end
+
+  action_item :edit_referencement do
+    action_item_page(nil, 'referencement')
   end
 
   batch_action :toggle_online, if: proc { can? :toggle_online, Home } do |ids|

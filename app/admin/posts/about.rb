@@ -42,8 +42,12 @@ ActiveAdmin.register About do
   decorate_with AboutDecorator
   config.clear_sidebar_sections!
 
-  action_item :edit_heading_page do
+  action_item :edit_heading do
     action_item_page
+  end
+
+  action_item :edit_referencement do
+    action_item_page(nil, 'referencement')
   end
 
   action_item :new_article, only: [:show] do

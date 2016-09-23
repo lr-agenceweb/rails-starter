@@ -1,4 +1,4 @@
-- f.inputs t('activerecord.models.referencement.one'), id: 'referencement', for: [:referencement, f.object.referencement || Referencement.new] do |item|
+- f.inputs t('activerecord.models.referencement.one'), id: 'referencement', class: "inputs #{defined?(klass) ? klass : ''}", for: [:referencement, f.object.referencement || Referencement.new] do |item|
 
   - item.translated_inputs 'Translated fields', switch_locale: true do |t|
     li

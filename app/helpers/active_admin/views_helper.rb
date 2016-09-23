@@ -11,7 +11,7 @@ module ActiveAdmin
     def action_item_page(name = '', title = 'heading')
       query = name.blank? ? controller_name.classify : name
       category = Category.includes(menu: [:translations]).find_by(name: query)
-      link_to t("active_admin.action_item.edit_#{title}_page", page: category.menu_title).html_safe, edit_admin_category_path(category, section: title, anchor: title), target: :_blank
+      link_to t("active_admin.action_item.edit_#{title}", page: category.menu_title).html_safe, edit_admin_category_path(category, section: title, anchor: title), target: :_blank
     end
 
     # Method used to allow caching show action
