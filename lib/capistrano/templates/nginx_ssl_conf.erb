@@ -26,13 +26,14 @@ server {
   index index.html index.htm;
 
   # Logs
+  access_log on;
   error_log /var/log/nginx/<%= fetch(:application) %>.<%= fetch(:stage) %>.log notice;
-  # access_log off;
 
   # Passenger
   passenger_enabled on;
   passenger_app_env <%= fetch(:stage) %>;
   passenger_friendly_error_pages on;
+  passenger_ruby ~/.rvm/gems/ruby-<%= fetch(:rvm_ruby_version) %>/wrappers/ruby
 
   # SSL
   ssl on;
