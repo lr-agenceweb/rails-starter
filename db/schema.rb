@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160917134146) do
+ActiveRecord::Schema.define(version: 20160923205213) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -540,6 +540,19 @@ ActiveRecord::Schema.define(version: 20160917134146) do
 
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "publication_dates", force: :cascade do |t|
+    t.integer  "publishable_id",      limit: 4
+    t.string   "publishable_type",    limit: 255
+    t.boolean  "published_later",                 default: false
+    t.boolean  "expired_prematurely",             default: false
+    t.datetime "published_at"
+    t.datetime "expired_at"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "publication_dates", ["publishable_type", "publishable_id"], name: "index_publication_dates_on_publishable_type_and_publishable_id", using: :btree
 
   create_table "referencement_translations", force: :cascade do |t|
     t.integer  "referencement_id", limit: 4,     null: false
