@@ -7,7 +7,7 @@ f.inputs t('activerecord.models.publication_date.one'), for: [:publication_date,
   item.input :published_at,
              as: :date_time_picker,
              picker_options: {
-               dayOfWeekStart: 1
+               inline: false
              },
              hint: t('form.hint.publication_date.published_at')
 
@@ -17,7 +17,7 @@ f.inputs t('activerecord.models.publication_date.one'), for: [:publication_date,
   item.input :expired_at,
              as: :date_time_picker,
              picker_options: {
-               dayOfWeekStart: 1
+               inline: false
              },
              hint: t('form.hint.publication_date.expired_at')
 end

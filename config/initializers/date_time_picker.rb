@@ -10,7 +10,8 @@ datetime_picker_input.default_datetime_picker_options = {
   lang: 'fr',
   scrollMonth: false,
   scrollTime: false,
-  dayOfWeekStart: 1
+  dayOfWeekStart: 1,
+  minDate: 0
 }
 
 # This if for backend (Ruby)
