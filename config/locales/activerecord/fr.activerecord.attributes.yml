@@ -35,9 +35,9 @@ fr:
         show_last_comments: Afficher derniers commentaires ?
       publication_date:
         published_later: Publier dans le futur ?
-        published_at: Publié le
-        expired_prematurely: Expire prématurement ?
-        expired_at: Expire le
+        published_at: Date de publication
+        expired_prematurely: Expirer prématurement ?
+        expired_at: Date d'expiration
       setting:
         title: Titre
         subtitle: Sous-titre
