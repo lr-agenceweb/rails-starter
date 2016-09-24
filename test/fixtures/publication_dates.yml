@@ -17,18 +17,19 @@
 #  index_publication_dates_on_publishable_type_and_publishable_id  (publishable_type,publishable_id)
 #
 
-one:
-  publishable_id:
-  publishable_type: Publishable
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
   published_later: false
   expired_prematurely: false
-  published_at: 2016-09-23 22:52:13
-  expired_at: 2016-09-23 22:52:13
+  published_at: ~
+  expired_at: ~
 
-two:
-  publishable_id:
-  publishable_type: Publishable
-  published_later: false
-  expired_prematurely: false
-  published_at: 2016-09-23 22:52:13
-  expired_at: 2016-09-23 22:52:13
+# Published later / Expire prematurely
+one:
+  <<: *DEFAULTS
+  publishable: blog_online (Blog)
+  published_later: true
+  expired_prematurely: true
+  published_at: 2028-03-11 09:00:00
+  expired_at: 2028-12-27 21:00:00

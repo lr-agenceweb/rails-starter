@@ -23,5 +23,20 @@
 # == PublicationDate Model
 #
 class PublicationDate < ActiveRecord::Base
+  # Callbacks
+  before_save :reset_published_at, unless: :published_later?
+  before_save :reset_expired_at, unless: :expired_prematurely?
+
+  # Model relations
   belongs_to :publishable, polymorphic: true, touch: true
+
+  private
+
+  def reset_published_at
+    self.published_at = nil
+  end
+
+  def reset_expired_at
+    self.expired_at = nil
+  end
 end
