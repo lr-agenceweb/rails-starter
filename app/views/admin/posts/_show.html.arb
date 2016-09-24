@@ -34,6 +34,9 @@ columns do
       end
     end
 
+    # If Blog resource
+    render 'admin/publication_dates/show', resource: resource
+
     render 'admin/shared/pictures/show', resource: resource
     render 'admin/shared/videos/show', video_platforms: resource.video_platforms, video_uploads: resource.video_uploads if video_module.enabled?
     render 'admin/shared/audios/show', resource: resource.audio if audio_module.enabled? && resource.is_a?(Blog)

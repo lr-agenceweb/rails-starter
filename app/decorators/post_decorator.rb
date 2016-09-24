@@ -102,6 +102,14 @@ class PostDecorator < ApplicationDecorator
     html.html_safe
   end
 
+  def published_at
+    l(model.published_at, format: :without_time) if model.published_later?
+  end
+
+  def expired_at
+    l(model.expired_at, format: :without_time) if model.expired_prematurely?
+  end
+
   #
   # == Link (linkable polymorphic)
   #

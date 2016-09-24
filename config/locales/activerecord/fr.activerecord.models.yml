@@ -139,8 +139,8 @@ fr:
         one: Blog configuration
         other: Blog configuration
       publication_date:
-        one: Date de publication
-        other: Dates de publication
+        one: Publication différée
+        other: Publications différées
       event:
         one: Événement
         other: Événements

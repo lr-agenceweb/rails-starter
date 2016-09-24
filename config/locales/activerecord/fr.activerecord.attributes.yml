@@ -27,6 +27,8 @@ fr:
         blog_category: Catégorie de l'article
         custom_cover: Couverture
         publication: Publication / Expiration
+        published_at: Date de publication
+        expired_at: Date d'expiration
       blog_category:
         name: Nom
       blog_setting:
@@ -36,8 +38,8 @@ fr:
         show_last_comments: Afficher derniers commentaires ?
       publication_date:
         published_later: Publier dans le futur ?
-        published_at: Date de publication
         expired_prematurely: Expirer prématurement ?
+        published_at: Date de publication
         expired_at: Date d'expiration
       setting:
         title: Titre
