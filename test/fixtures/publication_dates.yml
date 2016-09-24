@@ -18,8 +18,8 @@
 #
 
 DEFAULTS: &DEFAULTS
-  created_at: <%= 1.weeks.ago.to_s(:db) %>
-  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  created_at: <%= 1.week.ago.to_s(:db) %>
+  updated_at: <%= 1.week.ago.to_s(:db) %>
   published_later: false
   expired_prematurely: false
   published_at: ~

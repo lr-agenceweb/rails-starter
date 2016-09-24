@@ -30,6 +30,22 @@ class PublicationDate < ActiveRecord::Base
   # Model relations
   belongs_to :publishable, polymorphic: true, touch: true
 
+  # Validation rules
+  validates :published_at,
+            presence: true,
+            allow_blank: false,
+            if: :published_later?
+  validates :expired_at,
+            presence: true,
+            allow_blank: false,
+            if: :expired_prematurely?
+  validate :publication_dates,
+           if: :validate_publication_dates?
+  validate :no_past_publication,
+           if: proc { |rec| rec.new_record? || rec.published_at_changed? }
+  validate :no_past_expiration,
+           if: proc { |rec| rec.new_record? || rec.expired_at_changed? }
+
   private
 
   def reset_published_at
@@ -38,5 +54,30 @@ class PublicationDate < ActiveRecord::Base
 
   def reset_expired_at
     self.expired_at = nil
+  end
+
+  def no_past_publication
+    error_for_past_dates('published_at', 'publication')
+  end
+
+  def no_past_expiration
+    error_for_past_dates('expired_at', 'expiration')
+  end
+
+  def publication_dates
+    return true unless expired_at <= published_at
+    scope = 'form.errors.publication_date'
+    errors.add :published_at, I18n.t('published_at', scope: scope)
+    errors.add :expired_at, I18n.t('expired_at', scope: scope)
+  end
+
+  def validate_publication_dates?
+    !(published_at.blank? || expired_at.blank?)
+  end
+
+  def error_for_past_dates(key, i18n)
+    today = DateTime.current
+    scope = 'form.errors.publication_date'
+    errors.add key.to_sym, I18n.t("no_past_#{i18n}", scope: scope) if send(key) && send(key) < today
   end
 end
