@@ -131,7 +131,7 @@ class PostDecoratorTest < Draper::TestCase
   # ActiveAdmin
   #
   test 'should return correct AA show page title' do
-    assert_equal 'Article lié à la page "Accueil"', @post_decorated.title_aa_show
+    assert_equal 'Accueil: "Article d\'accueil"', @post_decorated.title_aa_show
   end
 
   test 'should return correct admin_link for article' do
