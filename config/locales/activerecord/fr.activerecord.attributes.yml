@@ -26,6 +26,7 @@ fr:
         show_as_gallery: Galerie d'images
         blog_category: Catégorie de l'article
         custom_cover: Couverture
+        publication: Publication / Expiration
       blog_category:
         name: Nom
       blog_setting:

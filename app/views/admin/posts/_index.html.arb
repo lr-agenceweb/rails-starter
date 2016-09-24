@@ -14,6 +14,7 @@ object.column :title
 object.column :blog_category if defined?(show_blog_category)
 object.bool_column :allow_comments if comment_module.enabled? && !defined?(hide_comments_column)
 object.bool_column :online
+object.column :publication if params[:controller] == 'admin/blogs'
 object.translation_status
 object.column :author_with_avatar unless defined?(hide_author_column)
 
