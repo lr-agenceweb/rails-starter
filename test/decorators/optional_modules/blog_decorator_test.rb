@@ -20,7 +20,8 @@ class BlogDecoratorTest < Draper::TestCase
   # == ActiveAdmin
   #
   test 'should return correct AA show page title' do
-    assert_equal "Article lié à la page \"Articles de Blog\"", @blog_decorated.title_aa_show
+    expected = I18n.t('post.title_aa_show', page: I18n.t('activerecord.models.blog.one'), title: @blog_decorated.title)
+    assert_equal expected, @blog_decorated.title_aa_show
   end
 
   private

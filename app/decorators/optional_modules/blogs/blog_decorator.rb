@@ -8,6 +8,6 @@ class BlogDecorator < PostDecorator
   delegate_all
 
   def title_aa_show
-    I18n.t('post.title_aa_show', page: I18n.t('activerecord.models.blog.other'))
+    I18n.t('post.title_aa_show', page: I18n.t('activerecord.models.blog.one'), title: model.title)
   end
 end
