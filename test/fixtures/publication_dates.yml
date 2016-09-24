@@ -33,3 +33,7 @@ one:
   expired_prematurely: true
   published_at: 2028-03-11 09:00:00
   expired_at: 2028-12-27 21:00:00
+
+two:
+  <<: *DEFAULTS
+  publishable: naked (Blog)

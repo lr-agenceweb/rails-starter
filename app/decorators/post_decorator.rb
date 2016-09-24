@@ -97,8 +97,8 @@ class PostDecorator < ApplicationDecorator
   def publication
     return '/' unless model.published_later? || model.expired_prematurely?
     html = ''
-    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.published_at')}: #{l(model.published_at, format: :without_time)}") if model.published_later?
-    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.expirexpired_at')}: #{l(model.expired_at, format: :without_time)}") if model.expired_prematurely?
+    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.published_at')}: #{l(model.published_at, format: :without_time)}".html_safe) if model.published_later?
+    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.expired_at')}: #{l(model.expired_at, format: :without_time)}".html_safe) if model.expired_prematurely?
     html.html_safe
   end
 
