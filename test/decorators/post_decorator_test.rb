@@ -148,6 +148,14 @@ class PostDecoratorTest < Draper::TestCase
     assert_equal '<p><span class="bool-value true-value">✔</span><span>Publié</span></p>', @blog_naked_decorated.publication
   end
 
+  test 'should return content for add_bool_value' do
+    expected = '<p><span class="bool-value false-value">✗</span><span>Non publié</span></p>'
+    assert_equal expected, @blog_decorated.send(:add_bool_value)
+
+    expected = '<p><span class="bool-value true-value">✔</span><span>Publié</span></p>'
+    assert_equal expected, @blog_naked_decorated.send(:add_bool_value)
+  end
+
   #
   # ActiveAdmin
   #
