@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+if resource.is_a?(Blog)
+  panel t('activerecord.models.publication_date.one') do
+    attributes_table_for resource do
+      row :published_at
+      row :expired_at
+      bool_row :published?
+    end
+  end
+end

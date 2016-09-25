@@ -107,6 +107,7 @@ froala_key: ~
 capistrano_repo_url: ~
 capistrano_deploy_user: ~
 capistrano_server_ip: ~
+capistrano_rvm_ruby_version: '2.3.0-preview1' # 2.2.2
 
 staging:
   capistrano_deploy_to: ~

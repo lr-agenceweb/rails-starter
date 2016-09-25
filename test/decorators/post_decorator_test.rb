@@ -128,10 +128,39 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   #
+  # == PublicationDate (publishable polymorphic)
+  #
+  test 'should return correct published_at content' do
+    expected = '11/03/2028'
+    assert_equal expected, @blog_decorated.published_at
+    assert_nil @blog_naked_decorated.published_at
+  end
+
+  test 'should return correct expired_at content' do
+    expected = '27/12/2028'
+    assert_equal expected, @blog_decorated.expired_at
+    assert_nil @blog_naked_decorated.expired_at
+  end
+
+  test 'should return content for publication' do
+    expected = '<p><span class="bool-value false-value">✗</span><span>Non publié</span></p><p>Date de publication: 11/03/2028</p><p>Date d\'expiration: 27/12/2028</p>'
+    assert_equal expected, @blog_decorated.publication
+    assert_equal '<p><span class="bool-value true-value">✔</span><span>Publié</span></p>', @blog_naked_decorated.publication
+  end
+
+  test 'should return content for add_bool_value' do
+    expected = '<p><span class="bool-value false-value">✗</span><span>Non publié</span></p>'
+    assert_equal expected, @blog_decorated.send(:add_bool_value)
+
+    expected = '<p><span class="bool-value true-value">✔</span><span>Publié</span></p>'
+    assert_equal expected, @blog_naked_decorated.send(:add_bool_value)
+  end
+
+  #
   # ActiveAdmin
   #
   test 'should return correct AA show page title' do
-    assert_equal 'Article lié à la page "Accueil"', @post_decorated.title_aa_show
+    assert_equal 'Accueil: "Article d\'accueil"', @post_decorated.title_aa_show
   end
 
   test 'should return correct admin_link for article' do
@@ -145,9 +174,11 @@ class PostDecoratorTest < Draper::TestCase
     @post_about = posts(:about)
     @post_about_2 = posts(:about_2)
     @blog = blogs(:blog_online)
+    @blog_naked = blogs(:naked)
 
     @post_decorated = PostDecorator.new(@post)
     @post_about_decorated = PostDecorator.new(@post_about)
     @blog_decorated = PostDecorator.new(@blog)
+    @blog_naked_decorated = PostDecorator.new(@blog_naked)
   end
 end

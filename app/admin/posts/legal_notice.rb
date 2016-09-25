@@ -76,11 +76,7 @@ ActiveAdmin.register LegalNotice do
   # == Controller
   #
   controller do
-    cache_sweeper :legal_notice_sweeper
-
-    before_create do |post|
-      post.type = post.object.class.name
-      post.user_id = current_user.id
-    end
+    include ActiveAdmin::Postable
+    include ActiveAdmin::Cachable
   end
 end

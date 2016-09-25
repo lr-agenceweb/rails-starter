@@ -22,6 +22,7 @@ module Core
 
       private
 
+      # FIXME: issue with PostgreSQL and SQLite
       def slug_candidates
         [[:title, :deduced_id]]
       end

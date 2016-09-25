@@ -1,0 +1,45 @@
+# == Schema Information
+#
+# Table name: publication_dates
+#
+#  id                  :integer          not null, primary key
+#  publishable_id      :integer
+#  publishable_type    :string(255)
+#  published_later     :boolean          default(FALSE)
+#  expired_prematurely :boolean          default(FALSE)
+#  published_at        :datetime
+#  expired_at          :datetime
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+# Indexes
+#
+#  index_publication_dates_on_publishable_type_and_publishable_id  (publishable_type,publishable_id)
+#
+
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.week.ago.to_s(:db) %>
+  updated_at: <%= 1.week.ago.to_s(:db) %>
+  published_later: false
+  expired_prematurely: false
+  published_at: ~
+  expired_at: ~
+
+# Published later / Expire prematurely
+one:
+  <<: *DEFAULTS
+  publishable: blog_online (Blog)
+  published_later: true
+  expired_prematurely: true
+  published_at: 2028-03-11 09:00:00
+  expired_at: 2028-12-27 21:00:00
+
+two:
+  <<: *DEFAULTS
+  publishable: naked (Blog)
+
+three:
+  <<: *DEFAULTS
+  publishable: blog_offline (Blog)
+  published_later: true
+  published_at: 2028-01-27 14:00:00

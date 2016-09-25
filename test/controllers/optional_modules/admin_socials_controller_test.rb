@@ -69,8 +69,8 @@ module Admin
     test 'should remove forbidden key from object if administrator' do
       patch :update, id: @social, social: { title: 'Google+', kind: 'share' }
       assert_equal 'Facebook', assigns(:social).title
-      assert_equal 'follow', assigns(:social).object.kind
-      assert_equal I18n.t('social.follow'), assigns(:social).kind
+      assert_equal 'follow', assigns(:social).kind
+      assert_equal I18n.t('social.follow'), assigns(:social).decorate.kind
     end
 
     test 'should not save if title is not allowed' do

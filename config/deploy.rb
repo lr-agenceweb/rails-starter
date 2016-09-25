@@ -7,8 +7,8 @@ lock '3.5.0'
 
 set :application, Figaro.env.application_name
 set :repo_url, Figaro.env.capistrano_repo_url
-
 set :deploy_user, Figaro.env.capistrano_deploy_user
+set :rvm_ruby_version, Figaro.env.capistrano_rvm_ruby_version || 'default'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

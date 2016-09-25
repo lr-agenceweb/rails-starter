@@ -170,9 +170,8 @@ ActiveAdmin.register Event do
   #
   controller do
     include Skippable
+    include ActiveAdmin::Cachable
     include OptionalModules::Videoable
-
-    cache_sweeper :event_sweeper
 
     def scoped_collection
       super.includes :translations, :location, :picture

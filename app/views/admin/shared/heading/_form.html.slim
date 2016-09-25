@@ -1,4 +1,4 @@
-- f.inputs 'En-tête', for: [:heading, f.object.heading || Heading.new] do |item|
+- f.inputs t('activerecord.models.heading.one'), id: 'heading', class: "inputs #{defined?(klass) ? klass : ''}", for: [:heading, f.object.heading || Heading.new] do |item|
   - item.translated_inputs 'Translated fields', switch_locale: true do |t|
     - t.input :content,
               hint: I18n.t('form.hint.heading'),

@@ -26,6 +26,10 @@ fr:
         show_as_gallery: Galerie d'images
         blog_category: Catégorie de l'article
         custom_cover: Couverture
+        publication: Publication / Expiration
+        published_at: Date de publication
+        expired_at: Date d'expiration
+        published?: Publié ?
       blog_category:
         name: Nom
       blog_setting:
@@ -33,6 +37,13 @@ fr:
         show_last_posts: Afficher derniers articles crées ?
         show_categories: Afficher lien des différentes catégories ?
         show_last_comments: Afficher derniers commentaires ?
+      publication_date:
+        published_later: Publier dans le futur ?
+        expired_prematurely: Expirer prématurement ?
+        published_at: Date de publication
+        expired_at: Date d'expiration
+        published: Publié
+        unpublished: Non publié
       setting:
         title: Titre
         subtitle: Sous-titre

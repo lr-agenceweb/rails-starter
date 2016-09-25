@@ -28,7 +28,7 @@ gem 'omniauth-google-oauth2', '~> 0.4.1'
 #
 # == Administration
 #
-gem 'activeadmin', '1.0.0.pre2'
+gem 'activeadmin', '1.0.0.pre4'
 gem 'activeadmin_addons'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'

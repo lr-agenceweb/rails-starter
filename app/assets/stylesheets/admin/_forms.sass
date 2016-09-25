@@ -1,209 +1,235 @@
-#active_admin_content
+.active_admin #active_admin_content
   form li.input, fieldset:not(.actions) ol li
-    clear: both
+    clear: none
 
   form fieldset > ol > li fieldset:not(.has_many_fields) ol li:not(.hidden)
     padding: 10px !important
 
+  form fieldset > ol li p.inline-errors
+    display: none
 
-form fieldset > ol > li.boolean
-  height: auto
+  form fieldset.inputs
+    padding: 0
+    padding-top: 34px
+    > ol > li.boolean
+      height: auto
 
-.active_admin .activeadmin-translations
-  margin-left: 30px
-  margin-right: 30px
+  form fieldset > ol > li fieldset:not(.has_many_fields) ol
+    padding-left: 0
 
-form.slider fieldset > ol > li p.inline-hints
-  margin-left: 0
+  form fieldset > ol >
+    li.select, li.file
+      p.inline-hints
+        margin-left: 0
+        margin-top: 10px
 
-#active_admin_content form.slider fieldset > ol li fieldset.inputs.has_many_fields > ol > li.input
-  float: left
-  clear: none
-  width: 47%
+  //
+  // Slider
+  // ======
+  form.slider fieldset > ol li
+    p.inline-hints
+      margin-left: 0
+    fieldset.inputs.has_many_fields > ol > li.input
+      float: left
+      clear: none
+      width: 47%
 
-  &:nth-child(2)
-    float: right
+      &:nth-child(2)
+        float: right
 
-  &:not(.input)
-    clear: both
+      &:not(.input)
+        clear: both
 
-form fieldset > ol > li fieldset:not(.has_many_fields) ol
-  padding-left: 0
+  //
+  // Setting
+  // =======
+  // Logo footer site (Setting#form)
+  #logos-container
+    padding: 0 15px
 
-#active_admin_content form li.input, #active_admin_content fieldset:not(.actions) ol li
-  clear: none
+  .logo-footer
+    background-color: rgba(0, 0, 0, .2)
+    padding: 5px
 
-form fieldset#referencement legend span
-  font-size: 2em
+  //
+  // Newsletter
+  // ==========
+  form fieldset ol > li.newsletter_user_roles
+    &>fieldset.has_many_fields
+      width: 47%
+      float: left
+      margin-left: 1%
 
-form fieldset > ol > li.select p.inline-hints
-  margin-left: 0
-  margin-top: 10px
-
-
-// Logo footer site
-#logos-container
-  padding: 0 15px
-
-.logo-footer
-  background-color: rgba(0, 0, 0, .2)
-  padding: 5px
-
-form fieldset ol > li.newsletter_user_roles
-  &>fieldset.has_many_fields
-    width: 47%
-    float: left
-    margin-left: 1%
-
-form
-  fieldset.inputs
-    padding-top: 0
-
+  //
+  // Legend
+  // ======
+  form fieldset.inputs
     legend
       border-bottom: 0
       width: 100%
+    &:not(.locale)
+      legend
+        span
+          position: relative
+          background-color: $formLegendHeading
+          color: $white
 
-// Translations
-.activeadmin-translations
-  margin-top: 10px
+  //
+  // VideoUpload
+  // ===========
+  li.has_many_container.video_uploads
+    fieldset
+      background: repeating-linear-gradient(45deg, #abb4ed, #abb4ed 10px, #bfbfbf 10px, #bfbfbf 20px )
 
-// Legend
-form fieldset.inputs:not(.locale)
-  // border: none
-  legend
-    position: relative
-    span
-      position: relative
-      background-color: $formLegendHeading
-      color: $white
+      fieldset.inputs
+        background: rgba(255, 255, 255, .65)
 
-// VideoUpload
-li.has_many_container.video_uploads
-  fieldset
-    background: repeating-linear-gradient(45deg, #abb4ed, #abb4ed 10px, #bfbfbf 10px, #bfbfbf 20px )
+    // Delete checkbox for has_many
+    li.boolean.has_many_delete label
+      color: $warning-color
+      font-weight: bold
 
-    fieldset.inputs
-      background: rgba(255, 255, 255, .65)
+    .has_many_fields
+      & > ol
+        & > li.input:not(.file):not(.has_many_delete)
+          float: left
+          width: 48%
 
-  li.boolean.has_many_delete label
-    color: rgb(255, 92, 92)
-
-  .has_many_fields
-    &>ol
-      &>li.input:not(.file):not(.has_many_delete)
-        float: left
-        width: 48%
-
-
-// Buttons for select / deselect all mailing users
-.formtastic.mailing_message
-  ol.choices-group
-    column-count: 2
-    column-gap: 4
-    width: 100%
-
-    li.choice
-      float: left
+  //
+  // MailingMessage
+  // =================
+  // Buttons for select / deselect all mailing users
+  .formtastic.mailing_message
+    ol.choices-group
+      column-count: 2
+      column-gap: 4
       width: 100%
-      padding-bottom: 0 !important
-      padding-top: 0 !important
 
-      small
-        font-size: 11px
-        color: rgba(#5e6469,.83)
-  div.actions-customers
-    margin-bottom: 10px
-    .select-btn-container
-      text-align: center
-    a.button
-      cursor: pointer
+      li.choice
+        float: left
+        width: 100%
+        padding-bottom: 0 !important
+        padding-top: 0 !important
 
+        small
+          font-size: 11px
+          color: rgba(#5e6469,.83)
+    div.actions-customers
+      margin-bottom: 10px
+      .select-btn-container
+        text-align: center
+      a.button
+        cursor: pointer
 
-// Radio buttons
-.radio
-  .choices-group
-    margin-top: 15px !important
-    .choice
-      float: left
-      margin-right: 15px
-      label
-        font-weight: normal
-        input
-          margin-right: 10px
-  p.inline-hints
-    margin-left: 0
+  //
+  // Translations
+  // =============
+  // Globalize locales
+  form fieldset.inputs.locale
+    border: 3px solid $primary-color
+    padding-top: 0
 
+  .activeadmin-translations
+    padding: 10px 30px 20px 30px
+    margin: 0
+    > ul > li >
+      a
+        box-shadow: none !important
+        @include rounded(0 !important)
+        background: lighten( $secondary-color, 30% ) !important
+        color: $white !important
+        border: none !important
+        text-shadow: none !important
+        padding: 11px 20px !important
+        &:hover
+          background: $secondary-color !important
 
-// Globalize locales
-form fieldset.inputs.locale
-  border: 3px solid $primary-color
-.active_admin #active_admin_content .activeadmin-translations > ul > li >
-  a
-    box-shadow: none !important
-    @include rounded(0 !important)
-    background: lighten( $secondary-color, 30% ) !important
-    color: $white !important
-    border: none !important
-    text-shadow: none !important
-    padding: 11px 20px !important
-    &:hover
-      background: $secondary-color !important
+        &.active
+          background: $primary-color !important
+          &:hover
+            background: lighten( $primary-color, 10% ) !important
 
-    &.active
-      background: $primary-color !important
-      &:hover
-        background: lighten( $primary-color, 10% ) !important
+  //
+  // Froala
+  // ======
+  .fr-box
+    margin-bottom: .5rem
 
+  //
+  // Misc
+  // ====
+  .attributes_table table th
+    vertical-align: middle
 
-// Misc
-form fieldset > ol li:not(.file)
-  p.inline-hints
-    font-size: 0.95em
-    font-style: italic
-    color: $steel
-    font-size: 1.3em !important
-    background-color: $info-color !important
-    padding: 4px
-    &:before
-      content: '\f05a'
-      font-family: FontAwesome
-      margin-right: 5px
-
-.attributes_table table th
-  vertical-align: middle
-
-li.boolean label input
-  margin: 0 0.5em 0 0.2em !important
-
-form fieldset > ol li.boolean
-  label
-    margin-bottom: 0 !important
-    width: 98%
-    padding-left: 0
-
-  p.inline-hints
-    margin-left: 0 !important
-    margin-top: 1.5rem !important
-
-form.formtastic fieldset > ol li p.inline-errors
-  display: none
-
-// Manual columns on AA form
-.form-left-column, .form-right-column
-  width: 50%
-  li
-    margin-bottom: 1rem
-    .inline-hints
-      margin-top: 5px
+  form fieldset > ol li:not(.file)
+    p.inline-hints
+      font-size: 0.95em
       font-style: italic
+      color: $steel
+      font-size: 1.3em !important
+      background-color: $info-color !important
+      padding: 4px
+      clear: both
+      &:before
+        content: '\f05a'
+        font-family: FontAwesome
+        margin-right: 5px
 
-.form-left-column
-  float: left
-  li
-    margin-left: 2rem
-    margin-right: 1rem
+  // Boolean
+  form fieldset > ol li.boolean
+    label
+      margin-bottom: 0 !important
+      width: 98%
+      padding-left: 0
+      input
+        margin: 0 0.5em 0 0.2em !important
 
-.form-right-column
-  float: right
-  li
-    margin-right: 2rem
+    p.inline-hints
+      margin-left: 0 !important
+      margin-top: .5rem !important
+
+  // Radio buttons
+  .radio
+    .choices-group
+      margin-top: 15px !important
+      .choice
+        float: left
+        margin-right: 15px
+        label
+          font-weight: normal
+          input
+            margin-right: 10px
+    p.inline-hints
+      margin-left: 0
+
+
+  //
+  // Manual columns on AA form
+  //
+  .form-left-column, .form-right-column
+    width: 50%
+    li
+      margin-bottom: 1rem
+      .inline-hints
+        margin-top: 5px
+        font-style: italic
+
+  .form-left-column
+    float: left
+    li
+      margin-left: 2rem
+      margin-right: 1rem
+
+  .form-right-column
+    float: right
+    li
+      margin-right: 2rem
+
+  //
+  // Highlight current section
+  //
+  form fieldset.inputs
+    &.highlight-referencement, &.highlight-heading
+      border: 1px dotted $success-color
+      > legend > span
+        background-color: $success-color

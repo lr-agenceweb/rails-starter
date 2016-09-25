@@ -42,8 +42,12 @@ ActiveAdmin.register About do
   decorate_with AboutDecorator
   config.clear_sidebar_sections!
 
-  action_item :edit_heading_page do
-    edit_heading_page_aa
+  action_item :edit_heading do
+    action_item_page
+  end
+
+  action_item :edit_referencement do
+    action_item_page(nil, 'referencement')
   end
 
   action_item :new_article, only: [:show] do
@@ -88,13 +92,8 @@ ActiveAdmin.register About do
   # == Controller
   #
   controller do
+    include ActiveAdmin::Postable
+    include ActiveAdmin::Cachable
     include OptionalModules::Videoable
-
-    cache_sweeper :about_sweeper
-
-    before_create do |post|
-      post.type = post.object.class.name
-      post.user_id = current_user.id
-    end
   end
 end

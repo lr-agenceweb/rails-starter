@@ -11,7 +11,9 @@ SimpleCov.formatters = [
   SimpleCov::Formatter::HTMLFormatter,
   CodeClimate::TestReporter::Formatter
 ]
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_filter 'lib/mailer_previews'
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -47,7 +49,7 @@ module ActiveSupport
       sign_in user
       @controller = Admin::OptionalModulesController.new
       patch :update, id: optional_module, optional_module: { enabled: '0' }
-      assert_equal name, assigns(:optional_module).object.name
+      assert_equal name, assigns(:optional_module).name
       assert_not assigns(:optional_module).enabled, 'Module should be disabled'
       assert_redirected_to admin_optional_module_path(assigns(:optional_module))
       sign_out user
@@ -160,7 +162,13 @@ module ActiveSupport
 
     # Default record attrs
     def set_default_record_attrs
-      { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+      attrs = { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+
+      if @controller.class.name == 'Admin::BlogsController'
+        attrs[:publication_date_attributes] = {}
+      end
+
+      attrs
     end
   end # TestCase
 end

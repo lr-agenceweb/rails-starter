@@ -21,9 +21,14 @@ server {
   # Passenger
   passenger_enabled on;
   passenger_app_env <%= fetch(:stage) %>;
+  <% if fetch(:stage) == :staging %>
   passenger_friendly_error_pages on;
+  <% else %>
+  passenger_friendly_error_pages off;
+  <% end %>
+  passenger_ruby ~/.rvm/gems/ruby-<%= fetch(:rvm_ruby_version) %>/wrappers/ruby;
 
   # Logs
+  access_log on;
   error_log /var/log/nginx/<%= fetch(:application) %>.<%= fetch(:stage) %>.log notice;
-  # access_log off;
 }

@@ -21,39 +21,30 @@
 #
 
 DEFAULTS: &DEFAULTS
-  created_at: <%= 1.weeks.ago.to_s(:db) %>
-  updated_at: <%= 1.weeks.ago.to_s(:db) %>
-  online: true
-  user: bob
-  allow_comments: true
-
-blog_online:
-  <<: *DEFAULTS
   title: ~
   slug: ~
   content: ~
+  online: true
+  user: bob
+  allow_comments: true
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+blog_online:
+  <<: *DEFAULTS
   created_at: 2016-02-01 12:32:10
   updated_at: 2016-02-01 12:32:10
   blog_category: one
 
 blog_offline:
   <<: *DEFAULTS
-  title: Article de blog hors ligne
-  slug: article-de-blog-hors-ligne
-  content: Premier article de blog
   online: false
   blog_category: one
 
 blog_third:
   <<: *DEFAULTS
-  title: ~
-  slug: ~
-  content: ~
   blog_category: two
 
 naked:
   <<: *DEFAULTS
-  title: ~
-  slug: ~
-  content: ~
   blog_category: one

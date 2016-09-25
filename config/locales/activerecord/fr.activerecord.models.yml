@@ -20,6 +20,9 @@ fr:
       string_box:
         one: Contenu personnalisé
         other: Contenus personalisés
+      heading:
+        one: En-tête
+        other: En-tête
 
       #
       # == User
@@ -135,6 +138,9 @@ fr:
       blog_setting:
         one: Blog configuration
         other: Blog configuration
+      publication_date:
+        one: Publication différée
+        other: Publications différées
       event:
         one: Événement
         other: Événements

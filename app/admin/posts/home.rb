@@ -41,8 +41,12 @@ ActiveAdmin.register Home do
   decorate_with HomeDecorator
   config.clear_sidebar_sections!
 
-  action_item :edit_heading_page do
-    edit_heading_page_aa
+  action_item :edit_heading do
+    action_item_page
+  end
+
+  action_item :edit_referencement do
+    action_item_page(nil, 'referencement')
   end
 
   batch_action :toggle_online, if: proc { can? :toggle_online, Home } do |ids|
@@ -80,13 +84,8 @@ ActiveAdmin.register Home do
   #
   controller do
     include Skippable
+    include ActiveAdmin::Postable
+    include ActiveAdmin::Cachable
     include OptionalModules::Videoable
-
-    cache_sweeper :home_sweeper
-
-    before_create do |post|
-      post.type = post.object.class.name
-      post.user_id = current_user.id
-    end
   end
 end
