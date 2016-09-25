@@ -29,6 +29,7 @@ fr:
         publication: Publication / Expiration
         published_at: Date de publication
         expired_at: Date d'expiration
+        published?: Publié ?
       blog_category:
         name: Nom
       blog_setting:
@@ -41,6 +42,8 @@ fr:
         expired_prematurely: Expirer prématurement ?
         published_at: Date de publication
         expired_at: Date d'expiration
+        published: Publié
+        unpublished: Non publié
       setting:
         title: Titre
         subtitle: Sous-titre

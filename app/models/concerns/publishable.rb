@@ -16,5 +16,21 @@ module Publishable
              :expired_prematurely, :expired_at,
              :published_later?, :expired_prematurely?,
              to: :publication_date, prefix: false, allow_nil: true
+
+    def published?
+      today = Time.zone.today
+
+      # Published_at and Expired_at blank
+      return true if published_at.blank? && expired_at.blank?
+
+      # Published_at and Expired_at present
+      return today.between?(published_at, expired_at) if published_at.present? && expired_at.present?
+
+      # Published_at only
+      return published_at <= today if published_at.present?
+
+      # Expired_at only
+      return expired_at >= today if expired_at.present?
+    end
   end
 end

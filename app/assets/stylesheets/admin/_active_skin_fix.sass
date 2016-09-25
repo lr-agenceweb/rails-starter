@@ -92,12 +92,20 @@ body.logged_out, body.logged_in
 //
 // AA Index view
 // =============
-.col.col-custom_cover
-  img
-    max-width: 200px
+.col
+  &.col-custom_cover
+    img
+      max-width: 200px
+  &.col-publication
+    .bool-value
+      display: inline-block
+      margin: 0 8px 0 0
+    p
+      &:first-child
+        margin-bottom: 1rem
 
 table.index_table td a.button
-  color: #fff
+  color: $white
 
   &.success
     background-color: #007637

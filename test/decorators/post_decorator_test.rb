@@ -143,9 +143,9 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   test 'should return content for publication' do
-    expected = '<p>Date de publication: 11/03/2028</p><p>Date d\'expiration: 27/12/2028</p>'
+    expected = '<p><span class="bool-value false-value">✗</span><span>Non publié</span></p><p>Date de publication: 11/03/2028</p><p>Date d\'expiration: 27/12/2028</p>'
     assert_equal expected, @blog_decorated.publication
-    assert_equal '/', @blog_naked_decorated.publication
+    assert_equal '<p><span class="bool-value true-value">✔</span><span>Publié</span></p>', @blog_naked_decorated.publication
   end
 
   #
