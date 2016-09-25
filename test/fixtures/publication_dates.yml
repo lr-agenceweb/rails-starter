@@ -37,3 +37,9 @@ one:
 two:
   <<: *DEFAULTS
   publishable: naked (Blog)
+
+three:
+  <<: *DEFAULTS
+  publishable: blog_offline (Blog)
+  published_later: true
+  published_at: 2028-01-27 14:00:00

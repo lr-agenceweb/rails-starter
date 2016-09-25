@@ -100,10 +100,81 @@ class PublicationDateTest < ActiveSupport::TestCase
     assert_equal expected, @published_later.errors.messages
   end
 
+  #
+  # Scope
+  # =====
+  test 'should return correct collection for "published" scope on collection' do
+    # Before
+    Timecop.freeze(Time.zone.local(2025, 07, 16, 14, 50, 0)) do
+      blogs = Blog.published
+      expected = ['Article de blog naked']
+      not_expected = ['Article de blog en ligne', 'Article de blog hors ligne']
+
+      expected_in_collection(expected, blogs)
+      not_expected_in_collection(not_expected, blogs)
+    end
+
+    # Between
+    Timecop.freeze(Time.zone.local(2028, 07, 16, 14, 50, 0)) do
+      blogs = Blog.published
+      expected = ['Article de blog naked', 'Article de blog en ligne']
+      not_expected = ['Article de blog hors ligne']
+
+      expected_in_collection(expected, blogs)
+      not_expected_in_collection(not_expected, blogs)
+    end
+
+    # After
+    Timecop.freeze(Time.zone.local(2032, 07, 16, 14, 50, 0)) do
+      blogs = Blog.published
+      expected = ['Article de blog naked']
+      not_expected = ['Article de blog en ligne', 'Article de blog hors ligne']
+
+      expected_in_collection(expected, blogs)
+      not_expected_in_collection(not_expected, blogs)
+    end
+
+    @blog_offline.update_attribute(:online, true)
+
+    # Between (and online)
+    Timecop.freeze(Time.zone.local(2028, 07, 16, 14, 50, 0)) do
+      blogs = Blog.published
+      expected = ['Article de blog naked', 'Article de blog en ligne', 'Article de blog hors ligne']
+      not_expected = []
+
+      expected_in_collection(expected, blogs)
+      not_expected_in_collection(not_expected, blogs)
+    end
+
+    # After (and online)
+    Timecop.freeze(Time.zone.local(2032, 07, 16, 14, 50, 0)) do
+      blogs = Blog.published
+      expected = ['Article de blog naked', 'Article de blog hors ligne']
+      not_expected = ['Article de blog en ligne']
+
+      expected_in_collection(expected, blogs)
+      not_expected_in_collection(not_expected, blogs)
+    end
+  end
+
   private
 
   def initialize_test
-    @published_later = publication_dates(:one)
     @i18n_scope = 'form.errors.publication_date'
+    @published_later = publication_dates(:one)
+
+    @blog_offline = blogs(:blog_offline)
+  end
+
+  def expected_in_collection(expected, collection_items)
+    expected.each do |item|
+      assert collection_items.map(&:title).include?(item), "\"#{item}\" should be included in collection"
+    end
+  end
+
+  def not_expected_in_collection(not_expected, collection_items)
+    not_expected.each do |item|
+      assert_not collection_items.map(&:title).include?(item), "\"#{item}\" should not be included in collection"
+    end
   end
 end

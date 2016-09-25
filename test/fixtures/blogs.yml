@@ -38,9 +38,6 @@ blog_online:
 
 blog_offline:
   <<: *DEFAULTS
-  title: Article de blog hors ligne
-  slug: article-de-blog-hors-ligne
-  content: Premier article de blog
   online: false
   blog_category: one
 

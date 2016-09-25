@@ -17,6 +17,9 @@ module Publishable
              :published_later?, :expired_prematurely?,
              to: :publication_date, prefix: false, allow_nil: true
 
+    # Scopes
+    scope :published, -> { joins(:publication_date).online.where('(publication_dates.published_at IS NULL AND publication_dates.expired_at IS NULL) OR (publication_dates.published_at <= ? AND publication_dates.expired_at > ?) OR (publication_dates.published_at <= ? AND publication_dates.expired_at IS NULL) OR (publication_dates.published_at IS NULL AND publication_dates.expired_at > ?)', Time.zone.today, Time.zone.today, Time.zone.today, Time.zone.today) }
+
     def published?
       today = Time.zone.today
 
