@@ -45,7 +45,7 @@ class BlogsControllerTest < ActionController::TestCase
   test 'should get show page with all locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @blog, blog_category_id: @blog.blog_category
+        get :show, locale: locale.to_s, id: @blog_naked, blog_category_id: @blog_naked.blog_category
         assert_response :success
       end
     end
@@ -54,7 +54,7 @@ class BlogsControllerTest < ActionController::TestCase
   test 'AJAX :: should get show' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        xhr :get, :show, locale: locale.to_s, id: @blog, blog_category_id: @blog.blog_category
+        xhr :get, :show, locale: locale.to_s, id: @blog_naked, blog_category_id: @blog_naked.blog_category
         assert_response :success
       end
     end
@@ -63,8 +63,8 @@ class BlogsControllerTest < ActionController::TestCase
   test 'assert integrity of request for each locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @blog, blog_category_id: @blog.blog_category
-        assert_equal request.path_parameters[:id], @blog.slug
+        get :show, locale: locale.to_s, id: @blog_naked, blog_category_id: @blog_naked.blog_category
+        assert_equal request.path_parameters[:id], @blog_naked.slug
         assert_equal request.path_parameters[:locale], locale.to_s
       end
     end
@@ -145,6 +145,7 @@ class BlogsControllerTest < ActionController::TestCase
   def initialize_test
     @blog = blogs(:blog_online)
     @blog_offline = blogs(:blog_offline)
+    @blog_naked = blogs(:naked)
     @blog_module = optional_modules(:blog)
 
     @locales = I18n.available_locales
