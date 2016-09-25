@@ -198,6 +198,29 @@ class BlogTest < ActiveSupport::TestCase
     assert_equal I18n.t('audio.flash.upload_in_progress'), @blog.audio_flash_notice
   end
 
+  #
+  # == PublicationDate
+  #
+  test 'should return correct boolean for published?' do
+    # Before
+    Timecop.freeze(Time.zone.local(2025, 07, 16, 14, 50, 0)) do
+      assert_not @blog.published?
+      assert @blog_naked.published?
+    end
+
+    # Between
+    Timecop.freeze(Time.zone.local(2028, 07, 16, 14, 50, 0)) do
+      assert @blog.published?
+      assert @blog_naked.published?
+    end
+
+    # After
+    Timecop.freeze(Time.zone.local(2032, 07, 16, 14, 50, 0)) do
+      assert_not @blog.published?
+      assert @blog_naked.published?
+    end
+  end
+
   private
 
   def initialize_test

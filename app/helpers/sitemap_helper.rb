@@ -14,7 +14,7 @@ module SitemapHelper
   [Blog, Event].each do |mod|
     define_method "#{mod.to_s.underscore}_module" do
       add send("#{mod.to_s.underscore.pluralize}_path"), priority: 0.7, changefreq: 'monthly'
-      mod.online.find_each do |resource|
+      mod.published.find_each do |resource|
         if resource.is_a?(Blog)
           add blog_category_blog_path(resource.blog_category, resource)
         else

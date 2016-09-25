@@ -44,6 +44,7 @@ class Event < ActiveRecord::Base
   delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
+  scope :published, -> { online }
   scope :current_or_coming, -> { where('(start_date >= ?) OR (start_date <= ? AND end_date >= ?) OR (start_date = ? AND all_day = ?)', Time.zone.now, Time.zone.now, Time.zone.now, Time.zone.today, true) }
 
   def calendar_date_correct?

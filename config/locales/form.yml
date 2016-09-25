@@ -176,7 +176,7 @@ fr:
 
 
       picture:
-        show_as_gallery: Afficher les images sous forme de galerie ? (Cette option est efficace lorsqu'il s'agit d'afficher plusieurs images)
+        show_as_gallery: Afficher les images sous forme de galerie ? <br /> (Cette option est efficace lorsqu'il s'agit d'afficher plusieurs images)
 
       video:
         url: "Lien de la vidéo que vous souhaitez afficher sur votre site <br /> (Attention, seuls les vidéos provenant de Youtube, Dailymotion et Viméo peuvent être affichées).
@@ -213,14 +213,29 @@ fr:
         name: Nom de la catégorie à créer
         slug: Nom de la catégorie à afficher dans l'url
 
+      publication_date:
+        published_later: Si coché, l'article ne sera mis en ligne sur le site qu'à partir de la date que vous aurez spécifié dans le champs suivant
+        expired_prematurely: Si coché, l'article sera retiré du site à compter de la date que vous aurez spécifié dans le champs suivant
+        published_at: Date à laquelle l'article sera publié sur le site
+        expired_at: Date à laquelle l'article n'apparaitra plus sur le site
+
     placeholder:
       froala: Contenu de l'article ici :)
 
     errors:
       start_date: L'événement ne peut pas commencer après la fin présumée de celui-ci
-      end_date: L'événement ne peut pas terminer après la début présumé de celui-ci
+      end_date: L'événement ne peut pas terminer avant le début présumé de celui-ci
       max_row: Vous ne pouvez pas créer plus de resource de ce type
 
       contact_form:
         size: L'attachment doit faire moins de %{size}MB
         type: L'attachment doit être une image ou un PDF
+
+      publication_date:
+        # Past from Today
+        no_past_publication: Vous ne pouvez pas choisir de date de publication dans le passé
+        no_past_expiration: Vous ne pouvez pas choisir de date d'expiration dans le passé
+
+        # Before / After publication
+        published_at: La publication de l'article ne peut pas commencer après son expiration présumée
+        expired_at: L'expiration ne peut pas avoir lieu avant la publication présumée

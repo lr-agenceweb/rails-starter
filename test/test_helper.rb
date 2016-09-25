@@ -162,7 +162,13 @@ module ActiveSupport
 
     # Default record attrs
     def set_default_record_attrs
-      { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+      attrs = { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+
+      if @controller.class.name == 'Admin::BlogsController'
+        attrs[:publication_date_attributes] = {}
+      end
+
+      attrs
     end
   end # TestCase
 end

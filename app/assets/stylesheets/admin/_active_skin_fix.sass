@@ -1,53 +1,47 @@
+//
 // Login view
+// ==========
 body.logged_out, body.logged_in
   .flash.flash_error, .flash.flash_alert
-    background-image: linear-gradient(180deg, #f5e4e4, #f1dcdc)
-    border-bottom: 1px solid #e0c2c0
     color: #b33c33
+    border-bottom: 1px solid #e0c2c0
+    background-image: linear-gradient(180deg, #f5e4e4, #f1dcdc)
 
-.omniauth-connect
-  margin-top: 30px
-
+//
+// Title bar
+// =========
 #title_bar
   .action_items
     span.action_item > a, span.action_item > .dropdown_menu > a
-      @include rounded(0)
-      background: $skinActiveColor
-      color: #fff
-      @include no-shadow()
-      text-shadow: none
-      border: none
       padding: 17px
+      color: $white
+      border: none
+      background: $skinActiveColor
+      text-shadow: none
       font-size: 14px
+      @include no-shadow()
+      @include rounded(0)
+
       &:hover
         background: lighten( $skinActiveColor, 10% ) !important
 
-.active_admin
-  .status_tag
-    &.blue
-      background: #63B8FF
-    &.date
-      background: $primary-color
-    &.date_with_time
-      background: $secondary-color
-    &.ago
-      background: $tercery-color
-
-
-table.index_table td a.button
-  color: #fff
-
-  &.success
-    background-color: #007637
-
-    &:hover
-      background-color: lighten(#007637, 10%) !important
+// Breadcrumb
+#titlebar_left
+  .breadcrumb
+    a
+      @include link-colors($white, $white, $white, $white, $white)
+    .breadcrumb_sep
+      color: $white
+    &:before
+      margin-right: 6px
+      content: 'Vous êtes ici: '
+      color: $white
 
 // Site title
 #header h1.site_title
-  background: #FFF
   padding: 0
   text-indent: 0
+  background: #fff
 
   a
     padding: 10px 15px
@@ -57,32 +51,8 @@ table.index_table td a.button
 
     &:after
       margin-left: 6px
+      content: '\f015'
       font-family: FontAwesome
-      content: "\f015"
-
-// Breadcrumb
-#titlebar_left
-  .breadcrumb
-    a
-      @include link-colors(#FFF, #FFF, #FFF, #FFF, #FFF)
-    .breadcrumb_sep
-      color: #FFF
-    &:before
-      content: "Vous êtes ici: "
-      color: #FFF
-      margin-right: 6px
-
-// Action items
-#title_bar .action_items span.action_item > a, #title_bar .action_items span.action_item > .dropdown_menu > a
-  font-size: 11px
-  padding: 12px
-  font-weight: normal
-
-// Status tag
-body.active_admin .index_as_sortable ol li .item
-  .status_tag
-    font-size: 0.5em !important
-    margin-left: 10px
 
 // Submenu hover background
 #header ul.tabs > li.has_nested ul li a:hover
@@ -91,24 +61,81 @@ body.active_admin .index_as_sortable ol li .item
   margin-top: 9px
   padding: 0
 
+//
+// Action items
+// ============
+#title_bar .action_items span.action_item
+  > a, .dropdown_menu > a
+    padding: 12px
+    font-size: 11px
+    font-weight: normal
+
+//
+// Status Tag
+// ==========
+.active_admin
+  .status_tag
+    &.blue
+      background: #63b8ff
+    &.date
+      background: $primary-color
+    &.date_with_time
+      background: $secondary-color
+    &.ago
+      background: $tercery-color
+
+  .index_as_sortable ol li .item
+    .status_tag
+      margin-left: 10px
+      font-size: .5em !important
+
+//
+// AA Index view
+// =============
+.col
+  &.col-custom_cover
+    img
+      max-width: 200px
+  &.col-publication
+    .bool-value
+      display: inline-block
+      margin: 0 8px 0 0
+    p
+      &:first-child
+        margin-bottom: 1rem
+
+table.index_table td a.button
+  color: $white
+
+  &.success
+    background-color: #007637
+
+    &:hover
+      background-color: lighten(#007637, 10%) !important
+
 .index_as_table
   display: flex
   flex-direction: column-reverse
 
-// Delete checkbox for has_many
-form fieldset.inputs ol > li.boolean.has_many_delete label
-  font-weight: bold
-  color: $warning-color
-
-// panel show view
+//
+// AA Show view
+// =============
 .panel
-  &>h3
-    background-color: $formLegendHeading
+  & > h3
     color: $white
+    background-color: $formLegendHeading
+
+//
+// Misc
+// ====
+.omniauth-connect
+  margin-top: 30px
 
 .attributes_table table th
   padding-right: 15px
 
+//
 // Footer
+// ======
 #footer
   z-index: 9999

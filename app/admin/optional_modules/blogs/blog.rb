@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 ActiveAdmin.register Blog do
   menu parent: I18n.t('admin_menu.modules')
-  includes :translations, blog_category: [:translations]
+  includes :translations, :video_upload, :publication_date, blog_category: [:translations]
 
   permit_params do
     params = [:id,
@@ -12,6 +12,9 @@ ActiveAdmin.register Blog do
               :blog_category_id,
               translations_attributes: [
                 :id, :locale, :title, :slug, :content
+              ],
+              publication_date_attributes: [
+                :id, :published_later, :expired_prematurely, :published_at, :expired_at
               ],
               pictures_attributes: [
                 :id, :locale, :image, :online, :position, :_destroy

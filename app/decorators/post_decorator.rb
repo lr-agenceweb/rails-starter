@@ -81,7 +81,7 @@ class PostDecorator < ApplicationDecorator
   # == ActiveAdmin
   #
   def title_aa_show
-    I18n.t('post.title_aa_show', page: type_title)
+    I18n.t('post.title_aa_show', page: type_title, title: model.title)
   end
 
   #
@@ -92,6 +92,25 @@ class PostDecorator < ApplicationDecorator
   end
 
   #
+  # == PublicationDate (publishable polymorphic)
+  #
+  def publication
+    html = ''
+    html += add_bool_value
+    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.published_at')}: #{l(model.published_at, format: :without_time)}".html_safe) if model.published_later?
+    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.expired_at')}: #{l(model.expired_at, format: :without_time)}".html_safe) if model.expired_prematurely?
+    html.html_safe
+  end
+
+  def published_at
+    l(model.published_at, format: :without_time) if model.published_later?
+  end
+
+  def expired_at
+    l(model.expired_at, format: :without_time) if model.expired_prematurely?
+  end
+
+  #
   # == Link (linkable polymorphic)
   #
   def link_with_link
@@ -99,6 +118,18 @@ class PostDecorator < ApplicationDecorator
   end
 
   private
+
+  def add_bool_value
+    content_tag(:p) do
+      if published?
+        concat(content_tag(:span, '✔', class: 'bool-value true-value'))
+        concat(content_tag(:span, t('activerecord.attributes.publication_date.published')))
+      else
+        concat(content_tag(:span, '✗', class: 'bool-value false-value'))
+        concat(content_tag(:span, t('activerecord.attributes.publication_date.unpublished')))
+      end
+    end
+  end
 
   def link?
     model.link.try(:url).present?

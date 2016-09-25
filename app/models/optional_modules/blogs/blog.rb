@@ -27,6 +27,8 @@
 #
 class Blog < ActiveRecord::Base
   include Scopable
+  include PrevNextable
+  include Publishable
   include Core::Userable
   include Core::Referenceable
   include Core::FriendlyGlobalizeSluggable
@@ -36,7 +38,6 @@ class Blog < ActiveRecord::Base
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Commentable
   include OptionalModules::Searchable
-  include PrevNextable
 
   after_update :update_counter_cache, if: proc { online_changed? }
 
