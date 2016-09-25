@@ -9,7 +9,7 @@ module Publishable
   included do
     # Model relations
     has_one :publication_date, as: :publishable, dependent: :destroy
-    accepts_nested_attributes_for :publication_date, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :publication_date, allow_destroy: false
 
     # Delegates
     delegate :published_later, :published_at,
@@ -20,6 +20,7 @@ module Publishable
     # Scopes
     scope :published, -> { joins(:publication_date).online.where('(publication_dates.published_at IS NULL AND publication_dates.expired_at IS NULL) OR (publication_dates.published_at <= ? AND publication_dates.expired_at > ?) OR (publication_dates.published_at <= ? AND publication_dates.expired_at IS NULL) OR (publication_dates.published_at IS NULL AND publication_dates.expired_at > ?)', Time.zone.today, Time.zone.today, Time.zone.today, Time.zone.today) }
 
+    # TODO: Cleanup this code
     def published?
       today = Time.zone.today
 

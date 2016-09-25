@@ -34,10 +34,12 @@ module Admin
     test 'should create blog if logged in' do
       attrs = set_default_record_attrs
       attrs[:blog_category_id] = @blog_category.id
+
       post :create, blog: attrs
-      assert assigns(:blog).valid?
+      blog = assigns(:blog)
+      assert blog.valid?
       assert flash[:notice].blank?
-      assert_equal @administrator.id, assigns(:blog).user_id
+      assert_equal @administrator.id, blog.user_id
     end
 
     test 'should update blog if logged in' do
@@ -63,6 +65,29 @@ module Admin
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
       assert_enqueued_jobs 1 do
         patch :update, id: @blog, blog: { audio_attributes: { audio: audio } }
+      end
+    end
+
+    #
+    # == PublicationDate
+    #
+    test 'should create nested publication_date' do
+      attrs = set_default_record_attrs
+      attrs[:blog_category_id] = @blog_category.id
+
+      post :create, blog: attrs
+      blog = assigns(:blog)
+      assert blog.publication_date.present?
+      assert blog.published_at.nil?
+      assert blog.expired_at.nil?
+    end
+
+    test 'should update blog even when publication_at is current' do
+      Timecop.freeze(Time.zone.local(2028, 07, 16, 14, 50, 0)) do
+        patch :update, id: @blog, blog: { online: false }
+        blog = assigns(:blog)
+        assert blog.valid?
+        assert_redirected_to admin_blog_path(blog)
       end
     end
 
