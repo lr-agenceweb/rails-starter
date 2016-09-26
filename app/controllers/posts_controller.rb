@@ -22,10 +22,12 @@ class PostsController < ApplicationController
   end
 
   def blog
+    @extra_title = t('activerecord.models.blog.other')
     feed_respond 'blogs'
   end
 
   def event
+    @extra_title = t('activerecord.models.event.other')
     feed_respond 'events'
   end
 
