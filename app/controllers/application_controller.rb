@@ -11,8 +11,6 @@ class ApplicationController < ActionController::Base
   include AdminBarHelper
 
   protect_from_forgery with: :exception
-  analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? }
-
   before_action :set_setting_or_maintenance
 
   # Core
@@ -21,8 +19,9 @@ class ApplicationController < ActionController::Base
 
   # Optional modules
   include OptionalModules::OptionalModulable
-  include OptionalModules::Adultable
   include OptionalModules::AdminBarable
+  include OptionalModules::Analyticable
+  include OptionalModules::Adultable
   include OptionalModules::Socialable
   include OptionalModules::Backgroundable
   include OptionalModules::Mappable
@@ -39,16 +38,6 @@ class ApplicationController < ActionController::Base
   before_action :set_legal_notices
 
   decorates_assigned :setting, :category, :menu
-
-  def analytical_modules?
-    value = !Rails.env.production? || Figaro.env.google_analytics_key.nil? || cookies[:cookie_cnil_cancel] == '1' || request.headers['HTTP_DNT'] == '1' || !@analytics_module.enabled?
-    gon.push(disable_cookie_message: value)
-    value
-  end
-
-  def cookie_cnil_check?
-    !cookies[:cookiebar_cnil].nil?
-  end
 
   def not_found
     raise ActionController::RoutingError, 'Not Found'
