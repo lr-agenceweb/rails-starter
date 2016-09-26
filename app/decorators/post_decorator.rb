@@ -98,8 +98,8 @@ class PostDecorator < ApplicationDecorator
   def publication
     html = ''
     html += add_bool_value
-    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.published_at')}: #{l(model.published_at, format: :without_time)}".html_safe) if model.published_later?
-    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.expired_at')}: #{l(model.expired_at, format: :without_time)}".html_safe) if model.expired_prematurely?
+    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.published_at')}: #{l(model.published_at, format: :without_time)}".html_safe) if model.published_at && model.published_later?
+    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.expired_at')}: #{l(model.expired_at, format: :without_time)}".html_safe) if model.expired_at && model.expired_prematurely?
     html.html_safe
   end
 

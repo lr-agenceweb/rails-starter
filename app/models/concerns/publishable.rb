@@ -9,7 +9,7 @@ module Publishable
   included do
     # Model relations
     has_one :publication_date, as: :publishable, dependent: :destroy
-    accepts_nested_attributes_for :publication_date, allow_destroy: false
+    accepts_nested_attributes_for :publication_date, reject_if: :reject_publication_date?, allow_destroy: false
 
     # Delegates
     delegate :published_later, :published_at,
@@ -35,6 +35,12 @@ module Publishable
 
       # Expired_at only
       return expired_at > today if expired_at.present?
+    end
+
+    private
+
+    def reject_publication_date?(attributes)
+      attributes['published_at'].blank? && attributes['expired_at'].blank?
     end
   end
 end

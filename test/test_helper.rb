@@ -165,10 +165,19 @@ module ActiveSupport
       attrs = { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
 
       if @controller.class.name == 'Admin::BlogsController'
-        attrs[:publication_date_attributes] = {}
+        attrs[:publication_date_attributes] = default_publication_date
       end
 
       attrs
+    end
+
+    def default_publication_date(published_later = '0', expired_prematurely = '0', published_at = nil, expired_at = nil)
+      {
+        published_later: published_later,
+        expired_prematurely: expired_prematurely,
+        published_at: published_at,
+        expired_at: expired_at
+      }
     end
   end # TestCase
 end

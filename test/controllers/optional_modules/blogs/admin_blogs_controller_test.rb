@@ -71,14 +71,30 @@ module Admin
     #
     # == PublicationDate
     #
-    test 'should create nested publication_date' do
+    test 'should not create nested publication_date if blank attributes' do
       attrs = set_default_record_attrs
       attrs[:blog_category_id] = @blog_category.id
 
       post :create, blog: attrs
       blog = assigns(:blog)
-      assert blog.publication_date.present?
+      assert_not blog.publication_date.present?
       assert blog.published_at.nil?
+      assert blog.expired_at.nil?
+
+      get :index
+      assert_response :success
+    end
+
+    test 'should create nested publication_date if attributes filled' do
+      published_at = '2029-12-30 12:00:00'.to_datetime
+      attrs = set_default_record_attrs
+      attrs[:blog_category_id] = @blog_category.id
+      attrs[:publication_date_attributes] = default_publication_date('1', '0', published_at)
+
+      post :create, blog: attrs
+      blog = assigns(:blog)
+      assert blog.publication_date.present?
+      assert_equal published_at, blog.published_at
       assert blog.expired_at.nil?
     end
 
