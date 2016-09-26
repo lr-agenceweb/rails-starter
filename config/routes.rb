@@ -62,6 +62,8 @@ Rails.application.routes.draw do
 
     # RSS
     get 'feed', to: 'posts#feed', as: :posts_rss
+    get 'blog_feed', to: 'posts#blog', as: :blogs_rss
+    get 'event_feed', to: 'posts#event', as: :events_rss
 
     # Mailings (users)
     resources :mailing_users do

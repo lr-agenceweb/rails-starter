@@ -3,7 +3,8 @@
 # encoding: UTF-8
 
 atom_feed language: @language do |feed|
-  feed.title @setting.title
+  extra = @extra_title.blank? ? '' : " (#{@extra_title})"
+  feed.title @setting.title + extra
   feed.updated @updated
 
   @posts.each do |item|
