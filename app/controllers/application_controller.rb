@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? }
 
   before_action :set_setting_or_maintenance
-  before_action :set_legal_notices
 
   # Core
   include Core::Languageable
@@ -37,6 +36,7 @@ class ApplicationController < ActionController::Base
   # Misc
   before_action :set_host_name
   before_action :set_froala_key, if: :user_signed_in?
+  before_action :set_legal_notices
 
   decorates_assigned :setting, :category, :menu
 
@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_legal_notices
-    @legal_notice_category = Category.includes(menu: [:translations]).find_by(name: 'LegalNotice')
+    @legal_notice_category = @categories.find_by(name: 'LegalNotice')
   end
 
   def set_host_name
