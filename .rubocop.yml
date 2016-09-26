@@ -9,6 +9,7 @@ AllCops:
     - 'lib/**/*'
     - 'bin/**/*'
     - 'node_modules/**/*'
+    - 'test/test_helper.rb'
 Metrics/ClassLength:
   CountComments: false
   Max: 99999
@@ -19,3 +20,5 @@ Metrics/LineLength:
   Max: 99999
 Metrics/AbcSize:
   Max: 99999
+Metrics/CyclomaticComplexity:
+  Max: 7
