@@ -34,7 +34,7 @@ module Publishable
       return published_at <= today if published_at.present?
 
       # Expired_at only
-      return expired_at >= today if expired_at.present?
+      return expired_at > today if expired_at.present?
     end
   end
 end

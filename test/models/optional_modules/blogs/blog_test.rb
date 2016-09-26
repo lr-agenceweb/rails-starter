@@ -206,18 +206,21 @@ class BlogTest < ActiveSupport::TestCase
     Timecop.freeze(Time.zone.local(2025, 07, 16, 14, 50, 0)) do
       assert_not @blog.published?
       assert @blog_naked.published?
+      assert @blog_third.published?
     end
 
     # Between
     Timecop.freeze(Time.zone.local(2028, 07, 16, 14, 50, 0)) do
       assert @blog.published?
       assert @blog_naked.published?
+      assert_not @blog_third.published?
     end
 
     # After
     Timecop.freeze(Time.zone.local(2032, 07, 16, 14, 50, 0)) do
       assert_not @blog.published?
       assert @blog_naked.published?
+      assert_not @blog_third.published?
     end
   end
 

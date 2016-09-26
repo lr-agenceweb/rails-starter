@@ -94,6 +94,7 @@ class PostDecorator < ApplicationDecorator
   #
   # == PublicationDate (publishable polymorphic)
   #
+  # TODO: Refactor duplicated code
   def publication
     html = ''
     html += add_bool_value
