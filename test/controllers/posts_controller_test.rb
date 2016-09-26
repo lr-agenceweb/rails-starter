@@ -10,30 +10,64 @@ class PostsControllerTest < ActionController::TestCase
 
   setup :initialize_test
 
-  test 'should get atom page' do
+  #
+  # == Global
+  #
+  test 'Global :: should get atom page' do
     @locales.each do |locale|
       get :feed, format: :atom, locale: locale.to_s
       assert_response :success
     end
   end
 
-  test 'should use feed template' do
+  test 'Global :: should use feed template' do
     @locales.each do |locale|
       get :feed, format: :atom, locale: locale.to_s
       assert_template :feed, layout: false
     end
   end
 
-  test 'should target controller and action for feed url' do
+  test 'Global :: should target controller and action for feed url' do
     assert_routing '/feed.atom', controller: 'posts', action: 'feed', locale: 'fr', format: 'atom' if @locales.include?(:fr)
     assert_routing '/en/feed.atom', controller: 'posts', action: 'feed', locale: 'en', format: 'atom' if @locales.include?(:en)
   end
 
-  test 'should redirect to correct atom version by locale' do
+  test 'Global :: should redirect to correct atom version by locale' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
         get :feed, format: :rss, locale: locale.to_s
         assert_redirected_to action: :feed, format: :atom, locale: locale.to_s
+      end
+    end
+  end
+
+  #
+  # == Blogs
+  #
+  test 'Blog :: should get atom page' do
+    @locales.each do |locale|
+      get :blog, format: :atom, locale: locale.to_s
+      assert_response :success
+    end
+  end
+
+  test 'Blog :: should use feed template' do
+    @locales.each do |locale|
+      get :blog, format: :atom, locale: locale.to_s
+      assert_template :feed, layout: false
+    end
+  end
+
+  test 'Blog :: should target controller and action for feed url' do
+    assert_routing '/blog_feed.atom', controller: 'posts', action: 'blog', locale: 'fr', format: 'atom' if @locales.include?(:fr)
+    assert_routing '/en/blog_feed.atom', controller: 'posts', action: 'blog', locale: 'en', format: 'atom' if @locales.include?(:en)
+  end
+
+  test 'Blog :: should redirect to correct atom version by locale' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        get :blog, format: :rss, locale: locale.to_s
+        assert_redirected_to action: :blog, format: :atom, locale: locale.to_s
       end
     end
   end
