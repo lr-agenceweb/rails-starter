@@ -73,6 +73,37 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   #
+  # == Events
+  #
+  test 'Event :: should get atom page' do
+    @locales.each do |locale|
+      get :event, format: :atom, locale: locale.to_s
+      assert_response :success
+    end
+  end
+
+  test 'Event :: should use feed template' do
+    @locales.each do |locale|
+      get :event, format: :atom, locale: locale.to_s
+      assert_template :feed, layout: false
+    end
+  end
+
+  test 'Event :: should target controller and action for feed url' do
+    assert_routing '/event_feed.atom', controller: 'posts', action: 'event', locale: 'fr', format: 'atom' if @locales.include?(:fr)
+    assert_routing '/en/event_feed.atom', controller: 'posts', action: 'event', locale: 'en', format: 'atom' if @locales.include?(:en)
+  end
+
+  test 'Event :: should redirect to correct atom version by locale' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        get :event, format: :rss, locale: locale.to_s
+        assert_redirected_to action: :event, format: :atom, locale: locale.to_s
+      end
+    end
+  end
+
+  #
   # == Abilities
   #
   test 'should test abilities for subscriber' do

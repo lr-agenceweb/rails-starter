@@ -5,17 +5,17 @@
 #
 class PostsController < ApplicationController
   before_action :redirect_to_home,
-                only: [:feed, :blog],
+                only: [:feed, :blog, :event],
                 unless: proc { @rss_module.enabled? }
-  before_action :set_default_posts, only: [:feed, :blog]
+  before_action :set_default_posts, only: [:feed, :blog, :event]
   before_action :add_posts_to_feed, only: [:feed]
   before_action :add_blogs_to_feed,
                 only: [:feed, :blog],
                 if: proc { @blog_module.enabled? }
   before_action :add_events_to_feed,
-                only: [:feed],
+                only: [:feed, :event],
                 if: proc { @event_module.enabled? }
-  before_action :sort_feed, only: [:feed, :blog]
+  before_action :sort_feed, only: [:feed, :blog, :event]
 
   def feed
     feed_respond
@@ -23,6 +23,10 @@ class PostsController < ApplicationController
 
   def blog
     feed_respond 'blogs'
+  end
+
+  def event
+    feed_respond 'events'
   end
 
   private

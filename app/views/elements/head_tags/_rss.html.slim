@@ -1,2 +1,3 @@
 = auto_discovery_link_tag(:atom, posts_rss_path(:atom))
 = auto_discovery_link_tag(:atom, blogs_rss_path(:atom)) if @blog_module.enabled?
+= auto_discovery_link_tag(:atom, events_rss_path(:atom)) if @event_module.enabled?
