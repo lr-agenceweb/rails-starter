@@ -23,7 +23,8 @@ description = [
   'Module qui gère la visualisation de vidéos sur le site',
   'Module qui gère l\'envoie de mails en masse',
   'Module qui gère la connexion par réseaux sociaux',
-  'Module qui autorise l\'upload de fichiers audios'
+  'Module qui autorise l\'upload de fichiers audios',
+  'Module qui gère les statistiques de visites sur le site',
 ]
 OptionalModule.list.each_with_index do |element, index|
   optional_module = OptionalModule.create!(

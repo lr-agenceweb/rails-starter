@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   decorates_assigned :setting, :category, :menu
 
   def analytical_modules?
-    value = !Rails.env.production? || Figaro.env.google_analytics_key.nil? || cookies[:cookie_cnil_cancel] == '1' || request.headers['HTTP_DNT'] == '1'
+    value = !Rails.env.production? || Figaro.env.google_analytics_key.nil? || cookies[:cookie_cnil_cancel] == '1' || request.headers['HTTP_DNT'] == '1' || !@analytics_module.enabled?
     gon.push(disable_cookie_message: value)
     value
   end
