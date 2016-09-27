@@ -11,10 +11,7 @@ class ApplicationController < ActionController::Base
   include AdminBarHelper
 
   protect_from_forgery with: :exception
-  analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? }
-
   before_action :set_setting_or_maintenance
-  before_action :set_legal_notices
 
   # Core
   include Core::Languageable
@@ -22,8 +19,9 @@ class ApplicationController < ActionController::Base
 
   # Optional modules
   include OptionalModules::OptionalModulable
-  include OptionalModules::Adultable
   include OptionalModules::AdminBarable
+  include OptionalModules::Analyticable
+  include OptionalModules::Adultable
   include OptionalModules::Socialable
   include OptionalModules::Backgroundable
   include OptionalModules::Mappable
@@ -37,18 +35,9 @@ class ApplicationController < ActionController::Base
   # Misc
   before_action :set_host_name
   before_action :set_froala_key, if: :user_signed_in?
+  before_action :set_legal_notices
 
   decorates_assigned :setting, :category, :menu
-
-  def analytical_modules?
-    value = !Rails.env.production? || Figaro.env.google_analytics_key.nil? || cookies[:cookie_cnil_cancel] == '1' || request.headers['HTTP_DNT'] == '1'
-    gon.push(disable_cookie_message: value)
-    value
-  end
-
-  def cookie_cnil_check?
-    !cookies[:cookiebar_cnil].nil?
-  end
 
   def not_found
     raise ActionController::RoutingError, 'Not Found'
@@ -68,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_legal_notices
-    @legal_notice_category = Category.includes(menu: [:translations]).find_by(name: 'LegalNotice')
+    @legal_notice_category = @categories.find_by(name: 'LegalNotice')
   end
 
   def set_host_name
