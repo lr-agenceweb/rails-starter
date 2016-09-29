@@ -1,7 +1,7 @@
-$('#contact_form_name').val('')
-$('#contact_form_email').val('')
-$('#contact_form_message').val('')
+// Reset inputs fields
+$('#contact_form_name').val('');
+$('#contact_form_email').val('');
+$('#contact_form_message').val('');
 
-$('form.new_comment .submit-loader').fadeOut();
-
-<%= render 'elements/alert' %>
+// Add success state to submit button
+submit_btn_state('new_contact_form', "<%= flash[:success].html_safe %>");

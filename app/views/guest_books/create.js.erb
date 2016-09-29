@@ -4,9 +4,7 @@ $('#guest_book_email').val('');
 $('#guest_book_content').val('');
 
 // Add success state to submit button
-$submit = $('#new_guest_book button[type="submit"]');
-$submit.addClass('success fa-check').removeClass('warning pulse fa-spinner');
-$submit.text("<%= flash[:success].html_safe %>");
+submit_btn_state('new_guest_book', "<%= flash[:success].html_safe %>");
 
 // Display guest book post
 <% unless @guest_book_setting.should_validate %>

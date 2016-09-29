@@ -56,7 +56,7 @@ class ContactsController < ApplicationController
 
   def respond_action(template)
     @success_contact_form = StringBox.includes(:translations).find_by(key: 'success_contact_form')
-    flash.now[:success] = @success_contact_form.content
+    flash.now[:success] = sanitize_string(@success_contact_form.content)
     respond_to do |format|
       format.html { redirect_to new_contact_path, notice: @success_contact_form.content }
       format.js { render template }

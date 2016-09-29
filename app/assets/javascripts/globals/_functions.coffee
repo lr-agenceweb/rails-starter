@@ -48,3 +48,9 @@
         created_at = that.attr('datetime')
         that.text(moment(created_at).fromNow())
         that.addClass('is-ago')
+
+# Set 'success' state for submit button (from js.erb)
+@submit_btn_state = (id, label) ->
+  $submit = $("##{id} button[type='submit']")
+  $submit.addClass('success fa-check').removeClass('warning pulse fa-spinner')
+  $submit.text(label)
