@@ -7,6 +7,7 @@
 
 #= require globals/_functions
 #= require base/flash
+#= require base/button_states
 
 #= require turbolinks
 #= require plugins/nprogress
@@ -17,6 +18,7 @@
 
 #= require i18n
 #= require i18n/translations
+#= require base/i18n_settings
 
 #= require magnific-popup
 #= require modules/magnific_popup

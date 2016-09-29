@@ -19,10 +19,3 @@ $.fn.formBackup = ->
   forms.find('input, textarea').keyup (e) ->
     datas[$(@).attr('id')] = $(@).val()
     localStorage.setItem 'formBackup', JSON.stringify(datas)
-
-  forms.on 'click', (e) ->
-    $submit = $(@).find('button[type="submit"]')
-    window.ClientSideValidations.callbacks.form.pass = (form, eventData) ->
-      $submit.prev().fadeIn()
-      localStorage.removeItem 'formBackup'
-      forms.resetClientSideValidations()

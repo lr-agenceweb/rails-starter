@@ -3,7 +3,7 @@
 - if category.video?
   = render 'assets/videos/video_background', video_background: category.video_upload.decorate
 
-section.guest_books-section.page-section#guest_books
+section.guest_books-section.page-section#guest_books_container
   .row
     .small-12.columns
       = title_for_category(category)
@@ -14,7 +14,7 @@ section.guest_books-section.page-section#guest_books
         = render 'form'
 
   .row.align-center
-    .small-12.medium-9.columns
+    .small-12.medium-9.columns#guest_books
       - if @guest_books.blank?
         p = t('guest_book.no_results')
       - else

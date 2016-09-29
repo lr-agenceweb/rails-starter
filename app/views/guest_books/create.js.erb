@@ -1,13 +1,14 @@
-<% if @guest_book_setting.should_validate %>
-  <%= render 'elements/alert' %>
-<% else %>
-  $('#guest_books').prepend("<%= j render partial: 'guest_books/guest_book', locals: { guest_book: @guest_book } %>")
-<% end %>
-
-$('form.new_guest_book .submit-loader').fadeOut();
-
+// Reset inputs fields
 $('#guest_book_username').val('');
 $('#guest_book_email').val('');
 $('#guest_book_content').val('');
 
-NProgress.done();
+// Add success state to submit button
+$submit = $('#new_guest_book button[type="submit"]');
+$submit.addClass('success fa-check').removeClass('warning pulse fa-spinner');
+$submit.text("<%= flash[:success].html_safe %>");
+
+// Display guest book post
+<% unless @guest_book_setting.should_validate %>
+  $('#guest_books').prepend("<%= j render partial: 'guest_books/guest_book', locals: { guest_book: @guest_book } %>")
+<% end %>
