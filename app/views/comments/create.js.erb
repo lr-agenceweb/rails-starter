@@ -12,8 +12,6 @@ function reset_form() {
   <% end %>
 <% end %>
 
-<%= render 'elements/alert' %>
-
 // Update number of comments for a post
 if ($('#comment-count').length > 0){
   $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
@@ -25,7 +23,7 @@ if ($('.comments form.new_comment').length > 0){
   $('.comments form.new_comment').hide();
 }
 
-$('form.new_comment .submit-loader').fadeOut();
-reset_form();
+// Add success state to submit button
+submit_btn_state('new_comment', "<%= flash[:success].html_safe %>");
 
-NProgress.done();
+reset_form();

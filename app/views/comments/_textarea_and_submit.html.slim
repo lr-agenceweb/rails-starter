@@ -12,8 +12,5 @@
                    label: false,
                    class: 'hide'
 
-.submit-and-loader
-  = image_tag image_path('loader-dark.gif'), class: 'submit-loader'
-  = button_tag(class: 'button ffab after fa-arrow-right') do
-    = t('comment.submit.button') unless params[:action] == 'reply'
-    = t('comment.reply.button') if params[:action] == 'reply'
+- label = params[:action] == 'reply' ? t('comment.reply.button') : t('comment.submit.button')
+= render 'elements/submit_with_states', label: label
