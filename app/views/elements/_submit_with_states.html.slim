@@ -1,5 +1,5 @@
 = button_tag class: 'button small ffab after fa-paper-plane button-state' do
-  - label_button = defined?(label) ? label : I18n.t('contact.send.button')
+  - label_button = defined?(custom_label) ? custom_label : I18n.t('contact.send.button')
   = label_button
 
 .clearfix
