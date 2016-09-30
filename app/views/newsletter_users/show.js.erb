@@ -1,4 +1,4 @@
-var message = I18n.t('newsletter.subscribe_success', { email: "<%= @newsletter_user.email %>", locale: gon.language })
+var message = I18n.t('newsletter.subscribe_success', { email: "<%= @newsletter_user.email %>" })
 
 $('#newsletter_user_email').val('');
 $('#feedback').find('span.success').html(message)
