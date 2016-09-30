@@ -1,4 +1,7 @@
 $(document).on 'ready page:load page:restore', ->
+  buttons_state_listener()
+
+@buttons_state_listener = ->
   if $('button[type="submit"]').length > 0
     $('form').on 'click', (e) ->
       $this = $(@)

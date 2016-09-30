@@ -1,3 +1,4 @@
+// Variables
 is_reply = $('form.reply').length > 0;
 prefix = is_reply ? '.reply' : '.new_comment';
 inputs = [
@@ -6,25 +7,32 @@ inputs = [
   prefix + ' #comment_comment'
 ];
 
+reset_form(inputs);
+
+// Hide and reset reply form if any
+if (is_reply){
+  $('form.reply').next('script').remove();
+  $('form.reply').remove();
+}
+else {
+  submit_btn_state('#new_comment.new_comment', "<%= flash[:success].html_safe %>");
+}
+
+// Inject comment to list
 <% if !@comment_setting.should_validate? || current_user_and_administrator?(current_user) %>
   <% if comment.parent_id.nil? %>
     $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
   <% else %>
-    $("#comment-<%= comment.parent_id %>").after("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
+    if($("#comment-<%= comment.parent_id %>").next().is('.nested_messages')) {
+      $("#comment-<%= comment.parent_id %>").next().append("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
+    }
+    else {
+      $("#comment-<%= comment.parent_id %>").after("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
+    }
   <% end %>
 <% end %>
 
 // Update number of comments for a post
 if ($('#comment-count').length > 0){
   $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
-}
-
-reset_form(inputs);
-
-// Hide and reset reply form if any
-if (is_reply){
-  $('form.reply').hide();
-}
-else {
-  submit_btn_state('#new_comment.new_comment', "<%= flash[:success].html_safe %>");
 }
