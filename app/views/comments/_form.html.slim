@@ -1,4 +1,4 @@
-= simple_form_for [@commentable, @comment], validate: true, remote: true, authenticity_token: true, method: :post do |f|
+= simple_form_for [@commentable, @comment], validate: true, remote: true, authenticity_token: true, method: :post, html: { class: params[:reply] ? 'reply' : 'new_comment' } do |f|
 
   - if user_signed_in?
     .row

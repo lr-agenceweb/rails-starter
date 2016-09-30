@@ -3,7 +3,7 @@ inputs = ['#guest_book_username', '#guest_book_email', '#guest_book_content']
 reset_form(inputs);
 
 // Add success state to submit button
-submit_btn_state('new_guest_book', "<%= flash[:success].html_safe %>");
+submit_btn_state('#new_guest_book', "<%= flash[:success].html_safe %>");
 
 // Display guest book post
 <% unless @guest_book_setting.should_validate %>

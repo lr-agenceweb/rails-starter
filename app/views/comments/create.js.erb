@@ -1,4 +1,10 @@
-inputs = ['#comment_username', '#comment_email', '#comment_comment']
+is_reply = $('form.reply').length > 0;
+prefix = is_reply ? '.reply' : '.new_comment';
+inputs = [
+  prefix + ' #comment_username',
+  prefix + ' #comment_email',
+  prefix + ' #comment_comment'
+];
 
 <% if !@comment_setting.should_validate? || current_user_and_administrator?(current_user) %>
   <% if comment.parent_id.nil? %>
@@ -13,13 +19,12 @@ if ($('#comment-count').length > 0){
   $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
 }
 
-// Hide and reset reply form if any
-if ($('.comments form.new_comment').length > 0){
-  reset_form(inputs);
-  $('.comments form.new_comment').hide();
-}
-
-// Add success state to submit button
-submit_btn_state('new_comment', "<%= flash[:success].html_safe %>");
-
 reset_form(inputs);
+
+// Hide and reset reply form if any
+if (is_reply){
+  $('form.reply').hide();
+}
+else {
+  submit_btn_state('#new_comment.new_comment', "<%= flash[:success].html_safe %>");
+}
