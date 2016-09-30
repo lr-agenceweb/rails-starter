@@ -1,5 +1,4 @@
 $(document).on 'ready page:load page:restore', ->
-  I18n.fallbacks = true
   if Cookies.get('cookiebar_cnil') is undefined and !gon.disable_cookie_message
     $('body').append(
       "<div class='cookie_cnil' id='cookie_cnil'>
