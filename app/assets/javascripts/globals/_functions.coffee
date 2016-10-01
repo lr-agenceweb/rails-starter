@@ -50,14 +50,8 @@
         that.addClass('is-ago')
 
 #
-# Button States
-# =============
-# Set 'success' state for submit button (from js.erb)
-@submit_btn_state = (id, label) ->
-  $submit = $("#{id} button[type='submit']")
-  $submit.addClass('success fa-check').removeClass('warning pulse fa-spinner')
-  $submit.text(label)
-
+# Forms
+# =====
 @reset_form = (inputs) ->
   for input in inputs
     $(input).val ''

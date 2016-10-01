@@ -1,6 +1,10 @@
+#
+# Button States
+# =============
 $(document).on 'ready page:load page:restore', ->
   buttons_state_listener()
 
+# Set button state depending on form callback
 @buttons_state_listener = ->
   if $('button[type="submit"]').length > 0
     $('form').on 'click', (e) ->
@@ -26,3 +30,10 @@ $(document).on 'ready page:load page:restore', ->
         if $submit.hasClass 'button-state'
           $submit.addClass(error_classes).removeClass(base_classes).removeClass(pending_classes)
           $submit.text I18n.t('button_states.error')
+
+
+# Set 'success' state for submit button (from js.erb)
+@submit_btn_state = (id, label) ->
+  $submit = $("#{id} button[type='submit']")
+  $submit.addClass('success fa-check').removeClass('warning pulse fa-spinner')
+  $submit.text(label)
