@@ -32,16 +32,8 @@ else {
 <% end %>
 
 <% unless @comment_setting.should_validate? %>
-  // Update number of comments for a post
-  new_count = "<%= @commentable.comments.validated.by_locale(@language).count %>"
-  if($('#comment-count').length > 0) {
-    $('#comment-count').text(new_count);
-  }
-
-  $count = $("#comment-count-<%= @commentable.id %>")
-  if($count.length > 0) {
-    $count.text(new_count);
-  }
+  // Update number of comments for a Blog post
+  <%= render 'blogs/sidebar/comment_count' %>
 
   // Prepend new added comment to 'Last comments' sidebar section
   $last_comments = $('#last-comments-container')
