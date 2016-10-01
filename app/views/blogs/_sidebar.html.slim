@@ -31,14 +31,9 @@ aside#blog_sidebar.blog_sidebar
       - if @last_comments.blank?
         = I18n.t('comment.no_last_comments')
       - else
-        - @last_comments.each do |comment|
-          .row
-            .small-2.columns
-              span.avatar = comment.avatar
-            .small-10.columns
-              span.pseudo< = comment.pseudo_registered_or_guest
-              span<> -
-              span.commentable< = link_to comment.commentable.title, blog_category_blog_path(comment.commentable.blog_category, comment.commentable, anchor: "comment-#{comment.id}")
+        #last-comments-container
+          - @last_comments.each do |comment|
+            = render 'blogs/sidebar/last_comments/row', comment: comment
 
   br
   p = link_to t('link.back_to', page: 'Blog'), blogs_path, class: 'button ffab before fa-arrow-left' if params[:controller] == 'blog_categories'
