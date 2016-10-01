@@ -3,11 +3,11 @@ $('.comments form.reply').remove();
 $('.comment-reply .spinner').addClass('hide');
 
 // Inject reply form after comment
-$("#comment-<%= @parent_comment.id %>").after("<%= j render 'comments/form' %>");
+$("#comment-<%= @parent_comment.id %>").after("<div class='reply-form'><%= j render 'comments/form' %></div>");
 
 // Enable formBackup and frontend validations
-$('form.reply').formBackup();
-$('form.reply').enableClientSideValidations();
+$('.reply-form form').formBackup();
+$('.reply-form form').enableClientSideValidations();
 
 // Set button states
 buttons_state_listener();

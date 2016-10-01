@@ -1,6 +1,6 @@
 // Variables
-is_reply = $('form.reply').length > 0;
-prefix = is_reply ? '.reply' : '.new_comment';
+is_reply = $('.reply-form').length > 0;
+prefix = is_reply ? '.reply-form' : '.new_comment';
 inputs = [
   prefix + ' #comment_username',
   prefix + ' #comment_email',
@@ -11,8 +11,7 @@ reset_form(inputs);
 
 // Hide and reset reply form if any
 if (is_reply){
-  $('form.reply').next('script').remove();
-  $('form.reply').remove();
+  $('.comments .reply-form').remove();
 }
 else {
   submit_btn_state('#new_comment.new_comment', "<%= flash[:success].html_safe %>");
