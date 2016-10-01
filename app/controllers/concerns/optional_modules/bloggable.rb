@@ -30,7 +30,7 @@ module OptionalModules
       end
 
       def set_last_blogs
-        @last_blogs = Blog.select(:id, :title, :blog_category_id, :updated_at).includes(:comments, :translations, blog_category: [:translations]).online.order('created_at DESC').last(5)
+        @last_blogs = Blog.select(:id, :title, :blog_category_id, :updated_at).includes(:comments, :translations, blog_category: [:translations]).online.order('created_at DESC').first(5)
       end
 
       def set_last_comments
