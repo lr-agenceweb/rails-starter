@@ -1,9 +1,15 @@
+//
+// Comment
+// =======
+.comments-container
+  margin-bottom: 2rem
+
 .comment
-  background-color: $white-smoke
+  margin-top: 2rem
+  padding: 10px
   border: 1px solid $smoke
   border-radius: 3px
-  padding: 10px
-  margin-bottom: 2rem
+  background-color: $white-smoke
 
   .comment-avatar
     img
@@ -14,7 +20,7 @@
     padding: 3px
     border-radius: 50%
     background-color: $white
-    box-shadow: 0 1px 9px #e0e0e0,inset 0 0 2px rgba(215,215,215,0.75)
+    box-shadow: 0 1px 9px #e0e0e0,inset 0 0 2px rgba(215,215,215,.75)
 
 .comment-author
   opacity: .8
@@ -53,3 +59,21 @@
 
 .nested_messages .nested_messages .nested_messages
   margin-left: 0
+
+//
+// Reply
+// =====
+.reply-form
+  position: relative
+  margin-top: 1rem
+  padding-top: .5rem
+  &-close
+    position: absolute
+    top: 0
+    right: 0
+    cursor: pointer
+    &:before
+      content: '\f00d'
+      color: $alert-color
+      font-family: FontAwesome
+      font-size: 1.3rem

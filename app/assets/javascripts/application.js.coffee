@@ -52,6 +52,7 @@
 
 #= require modules/responsive_menu
 #= require modules/autocomplete_search
+#= require modules/comment
 
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
@@ -71,8 +72,3 @@ $(document).on 'ready page:load page:restore', ->
   $('form[data-validate]').validate()
 
   friendly_date()
-  comment_reply_loader()
-
-comment_reply_loader = ->
-  $('.comment-reply').on 'click', (e) ->
-    $(this).find('.spinner').removeClass('hide')

@@ -47,6 +47,7 @@ fr:
   next: Suivant
   no_js: "%{site} fonctionne mieux avec JavaScript activé ;)"
   in: dans
+  close: Fermer
 
   # has_many button label
   add:
@@ -108,6 +109,7 @@ en:
   next: Next
   no_js: "%{site} works better with JavaScript enabled ;)"
   in: in
+  close: Close
 
   scroll_infinite:
     fetch_nexts: Loading ...
