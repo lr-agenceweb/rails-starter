@@ -1,11 +1,5 @@
 $("#comment-<%= @comment.id %>").slideUp();
 
-// Remove comment from 'Last comments' sidebar section
-$comment_to_remove = $("#last-comment-<%= @comment.id %>");
-if($comment_to_remove.length > 0) {
-  $comment_to_remove.slideUp();
-}
-
 <%= render 'elements/alert' %>
 
 <% if @redirect_to_back %>
@@ -19,6 +13,27 @@ if($comment_to_remove.length > 0) {
     <% end %>
   <% end %>
 <% end %>
+
+//
+// Sidebar
+// =======
+$comment_to_remove = $("#last-comment-<%= @comment.id %>");
+
+// Remove comment from 'Last comments' sidebar section
+if($comment_to_remove.length > 0) {
+  $comment_to_remove.slideUp(200, function() {
+    $(this).remove();
+  });
+}
+
+// Last comments xx => 0
+setTimeout(function() {
+  $last_comments = $('#last-comments-container').find('.last-comment');
+
+  if($last_comments.length == 0) {
+    $('#last-comments-container').append("<span id='last_comments_nil'>" + I18n.t('comment.no_last_comments') + "</span>");
+  }
+}, 250)
 
 // Update number of comments for a Blog post
 <%= render 'blogs/sidebar/comment_count' %>
