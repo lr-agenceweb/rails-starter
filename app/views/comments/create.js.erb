@@ -41,13 +41,22 @@ else {
   // Prepend new added comment to 'Last comments' sidebar section
   $last_comments = $('#last-comments-container')
   lc_count = $last_comments.find('.last-comment').length;
+
   if($last_comments.length > 0) {
-    // If last comments max size
+
+    // If last comments == 0
+    if(lc_count == 0) {
+      $('#last_comments_nil').slideUp(100, function() {
+        $(this).remove(); // remove default I18n sentence
+      })
+    }
+
+    // If last comments == max size, remove last child
     if(lc_count >= gon.last_comments_count) {
       $last_comments.find('.last-comment:last-child').remove();
     }
 
-    // Insert new last comment
+    // Insert new last comment at first position
     $last_comments.prepend("<%= j render partial: 'blogs/sidebar/last_comments/row', locals: { comment: comment } %>");
   }
 <% end %>
