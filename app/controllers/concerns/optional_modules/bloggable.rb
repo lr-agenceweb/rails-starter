@@ -18,6 +18,7 @@ module OptionalModules
       before_action :set_last_comments, only: [:index, :show], if: proc { @comment_module.enabled? }
 
       LAST_COMMENTS_COUNT = 5
+      LAST_BLOGS_COUNT = 5
 
       def blog_module_enabled?
         not_found unless @blog_module.enabled?
@@ -32,7 +33,7 @@ module OptionalModules
       end
 
       def set_last_blogs
-        @last_blogs = Blog.select(:id, :title, :blog_category_id, :updated_at).includes(:comments, :translations, blog_category: [:translations]).online.order('created_at DESC').first(5)
+        @last_blogs = Blog.select(:id, :title, :blog_category_id, :updated_at).includes(:comments, :translations, blog_category: [:translations]).online.order('created_at DESC').first(LAST_BLOGS_COUNT)
       end
 
       def set_last_comments
