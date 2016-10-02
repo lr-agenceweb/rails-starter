@@ -62,7 +62,6 @@
 #= require plugins/mediaelement
 
 #= require modules/scroll_infinite
-#= require modules/sticky_sidebar
 
 #= require plugins/devkit
 

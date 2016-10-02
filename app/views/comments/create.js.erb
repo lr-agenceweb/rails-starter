@@ -41,3 +41,6 @@ else {
     $last_comments.prepend("<%= j render partial: 'blogs/sidebar/last_comments/row', locals: { comment: comment } %>");
   }
 <% end %>
+
+// Recalculates scrolling points after adding Ajax content
+<%= render 'blogs/sidebar/sticky_fix' %>

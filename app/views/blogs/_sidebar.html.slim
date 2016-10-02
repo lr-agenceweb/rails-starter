@@ -1,4 +1,4 @@
-aside#blog_sidebar.blog_sidebar
+aside#blog_sidebar.blog_sidebar data-sticky='' data-anchor='sidebar_referer' data-btm-anchor='sidebar_referer:bottom'
   - if @blog_settings.show_last_posts?
     section.last-blogs
       h4.last-blogs-title = I18n.t('blog.last_articles')
