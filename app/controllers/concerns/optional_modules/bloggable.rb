@@ -17,6 +17,8 @@ module OptionalModules
       before_action :set_last_blogs, only: [:index, :show]
       before_action :set_last_comments, only: [:index, :show], if: proc { @comment_module.enabled? }
 
+      LAST_COMMENTS_COUNT = 5
+
       def blog_module_enabled?
         not_found unless @blog_module.enabled?
       end
@@ -34,8 +36,9 @@ module OptionalModules
       end
 
       def set_last_comments
-        last_comments = Comment.includes(:user, :commentable).only_blogs.by_locale(@language).validated.last(5).reject { |r| !r.commentable.online? }
+        last_comments = Comment.includes(:user, :commentable).only_blogs.by_locale(@language).validated.first(LAST_COMMENTS_COUNT).reject { |r| !r.commentable.online? }
         @last_comments = CommentDecorator.decorate_collection(last_comments)
+        gon.push(last_comments_count: LAST_COMMENTS_COUNT)
       end
     end
   end

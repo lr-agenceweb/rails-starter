@@ -31,13 +31,23 @@ else {
   <% end %>
 <% end %>
 
+//
+// Sidebar
+// =======
 <% unless @comment_setting.should_validate? %>
   // Update number of comments for a Blog post
   <%= render 'blogs/sidebar/comment_count' %>
 
   // Prepend new added comment to 'Last comments' sidebar section
   $last_comments = $('#last-comments-container')
+  lc_count = $last_comments.find('.last-comment').length;
   if($last_comments.length > 0) {
+    // If last comments max size
+    if(lc_count >= gon.last_comments_count) {
+      $last_comments.find('.last-comment:last-child').remove();
+    }
+
+    // Insert new last comment
     $last_comments.prepend("<%= j render partial: 'blogs/sidebar/last_comments/row', locals: { comment: comment } %>");
   }
 <% end %>
