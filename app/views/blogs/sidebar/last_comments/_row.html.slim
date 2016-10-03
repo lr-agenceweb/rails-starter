@@ -4,4 +4,5 @@
   .small-10.columns
     span.pseudo< = comment.pseudo_registered_or_guest
     span<> -
-    span.commentable< = link_to comment.commentable.title, blog_category_blog_path(comment.commentable.blog_category, comment.commentable, anchor: "comment-#{comment.id}")
+    span.commentable<
+      = link_to comment.commentable_title, comment.commentable_path

@@ -63,8 +63,13 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Link and Image for Commentable
+  # == Commentable
   #
+  test 'should return correct commentable_path' do
+    assert_equal '/a-propos/article-2-a-propos', @comment_decorated.commentable_path
+    assert_equal '/blogs/foo/article-de-blog-en-ligne', @blog_comment_decorated.commentable_path
+  end
+
   test 'should return correct commentable link for regular articles' do
     assert_equal "<a target=\"_blank\" class=\"button\" href=\"/a-propos/article-2-a-propos\">Article 2 A Propos <br /> (#{I18n.t('comment.admin.go_to_source')})</a>", @comment_decorated.link_source
   end
