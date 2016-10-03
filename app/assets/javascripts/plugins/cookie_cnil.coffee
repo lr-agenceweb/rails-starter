@@ -7,6 +7,7 @@ $(document).on 'ready page:load page:restore', ->
       e.preventDefault()
       $('#cookie_cnil').fadeOut()
       Cookies.set('cookiebar_cnil', 'viewed', { expires: 30 * 13 })
+      Turbolinks.visit(window.location.href)
 
     # Cancel cookies
     $('#cookie_cancel').on 'click', (e) ->
