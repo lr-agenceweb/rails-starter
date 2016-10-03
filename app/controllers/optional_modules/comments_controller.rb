@@ -28,15 +28,13 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user_id = current_user.id if user_signed_in?
-    @comment.parent_id = nil unless can? :reply, @comment
-    if @comment.save
+    if can?(:reply, @comment) && @comment.save
       @success_comment = true
       flash.now[:success] = I18n.t('comment.create_success')
       flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate? && !current_user_and_administrator?(User.current_user)
       respond_action 'create'
-    else # Render view user come from instead of the comments default view
-      instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
-      render "#{@commentable.class.name.underscore.pluralize}/show"
+    else
+      respond_action 'forbidden'
     end
   end
 
@@ -54,6 +52,8 @@ class CommentsController < ApplicationController
 
   def reply
     raise ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token] || cannot?(:reply, @comment)
+    return if @comment.max_depth?
+
     @parent_comment = @comment
     @comment = @commentable.comments.new(parent_id: params[:id])
     @asocial = true

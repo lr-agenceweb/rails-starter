@@ -41,6 +41,13 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal [:email], comment.errors.keys
   end
 
+  test 'should not be able to create reply if max_depth' do
+    comment = Comment.new(comment: 'youpi', username: 'leila', email: 'leila@skywalker.fr', lang: 'fr', parent_id: @max_depth.id)
+    assert_not comment.valid?
+    assert_equal [:max_depth], comment.errors.keys
+    assert_equal({ max_depth: [I18n.t('max_depth', scope: @i18n_scope)] }, comment.errors.messages)
+  end
+
   test 'should have validated column to 1 if option disabled' do
     assert @comment_setting.should_validate?
     @comment_setting.update_attribute(:should_validate, false)
@@ -68,6 +75,9 @@ class CommentTest < ActiveSupport::TestCase
 
     @comment_anthony = comments(:one)
     @comment_bob = comments(:two)
+    @max_depth = comments(:depth_2)
+
     @comment_setting = comment_settings(:one)
+    @i18n_scope = 'activerecord.errors.models.comment.attributes'
   end
 end

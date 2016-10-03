@@ -175,6 +175,7 @@ class Ability
       cannot [:signal], Comment
       can [:signal], Comment if @comment_setting.should_signal?
       can [:reply], Comment if @comment_setting.allow_reply?
+      cannot [:reply], Comment, &:max_depth?
     else
       cannot :manage, Comment
     end

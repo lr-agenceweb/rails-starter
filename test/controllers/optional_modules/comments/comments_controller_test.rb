@@ -678,6 +678,26 @@ class CommentsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should not be able to create reply to comment if depth is already max' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_no_difference 'Comment.count' do
+          post :create, blog_id: @blog.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s, parent_id: @max_depth.id }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
+  test 'AJAX :: should not be able to create reply to comment if depth is already max' do
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        assert_no_difference 'Comment.count' do
+          xhr :post, :create, blog_id: @blog.id, comment: { comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: locale.to_s, parent_id: @max_depth.id }, locale: locale.to_s
+        end
+      end
+    end
+  end
+
   #
   # == Conditionals
   #
@@ -717,6 +737,7 @@ class CommentsControllerTest < ActionController::TestCase
     ability = Ability.new(@subscriber)
     assert ability.can?(:signal, @comment_bob), 'should be able to signal'
     assert ability.can?(:reply, @comment_bob), 'should be able to reply'
+    assert ability.cannot?(:reply, @max_depth), 'should not be able to reply'
 
     @comment_setting.update_attribute(:should_signal, false)
     ability = Ability.new(@subscriber)
@@ -733,6 +754,7 @@ class CommentsControllerTest < ActionController::TestCase
     ability = Ability.new(@administrator)
     assert ability.can?(:signal, @comment_bob), 'should be able to signal'
     assert ability.can?(:reply, @comment_bob), 'should be able to reply'
+    assert ability.cannot?(:reply, @max_depth), 'should not be able to reply'
 
     @comment_setting.update_attribute(:should_signal, false)
     ability = Ability.new(@administrator)
@@ -754,6 +776,7 @@ class CommentsControllerTest < ActionController::TestCase
     ability = Ability.new(@super_administrator)
     assert ability.can?(:signal, @comment_bob), 'should be able to signal'
     assert ability.can?(:reply, @comment_bob), 'should be able to reply'
+    assert ability.cannot?(:reply, @max_depth), 'should not be able to reply'
 
     @comment_setting.update_attribute(:should_signal, false)
     ability = Ability.new(@super_administrator)
@@ -789,6 +812,9 @@ class CommentsControllerTest < ActionController::TestCase
     @comment_lana = comments(:four)
     @comment_luke = comments(:five)
     @comment_blog = comments(:blog)
+    @max_depth = comments(:depth_2)
+
+    @i18n_scope = 'activerecord.errors.models.comment.attributes'
   end
 
   def comment_config

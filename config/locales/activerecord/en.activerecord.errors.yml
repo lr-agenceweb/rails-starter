@@ -17,3 +17,10 @@ en:
         blank: Don't forget to add your comment ;)
       message:
         blank: Don't forget to add your message ;)
+
+  activerecord:
+    errors:
+      models:
+        comment:
+          attributes:
+            max_depth: You cannot reply to this comment anymore

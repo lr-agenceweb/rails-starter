@@ -31,6 +31,16 @@ DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
 
+MAX_DEPTH: &MAX_DEPTH
+  commentable: blog_online (Blog)
+  username: luke
+  email: luke@skywalker.sw
+  user_id: null
+  lang: fr
+  validated: false
+  token: <%= SecureRandom.urlsafe_base64(nil, false) %>
+
+
 one:
   <<: *DEFAULTS
   commentable: about_2 (Post)
@@ -77,10 +87,14 @@ five:
 
 blog:
   <<: *DEFAULTS
-  commentable: blog_online (Blog)
-  username: luke
-  email: luke@skywalker.sw
-  user_id: null
-  lang: fr
-  validated: false
-  token: <%= SecureRandom.urlsafe_base64(nil, false) %>
+  <<: *MAX_DEPTH
+
+depth_1:
+  <<: *DEFAULTS
+  <<: *MAX_DEPTH
+  ancestry: <%= ActiveRecord::FixtureSet.identify(:blog) %>
+
+depth_2:
+  <<: *DEFAULTS
+  <<: *MAX_DEPTH
+  ancestry: <%= ActiveRecord::FixtureSet.identify(:blog) %>/<%= ActiveRecord::FixtureSet.identify(:depth_1) %>

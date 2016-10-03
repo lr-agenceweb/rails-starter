@@ -41,12 +41,19 @@ class Comment < ActiveRecord::Base
   attr_accessor :nickname, :children_ids
   alias_attribute :content, :comment
 
-  before_destroy :set_descendants
+  MAX_COMMENTS_DEPTH ||= 2
+  I18N_ERRORS_SCOPE ||= 'activerecord.errors.models.comment.attributes'
 
   has_ancestry
+  paginates_per 15
 
+  # Callbacks
+  before_destroy :set_descendants
+
+  # Model associations
   belongs_to :commentable, polymorphic: true, touch: true
 
+  # Validation rules
   validates :username,
             allow_blank: true,
             presence: true
@@ -61,13 +68,24 @@ class Comment < ActiveRecord::Base
             inclusion: { in: I18n.available_locales.map(&:to_s) }
   validates :nickname,
             absence: true
+  validate :max_depth, if: :max_depth?
 
+  # Scopes
   default_scope { order('created_at DESC') }
   scope :by_user, -> (user_id) { where(user_id: user_id) }
   scope :signalled, -> { where(signalled: true) }
   scope :only_blogs, -> { where(commentable_type: 'Blog') }
 
-  paginates_per 15
+  # Delegate
+  delegate :title, to: :commentable, prefix: true, allow_nil: true
+
+  def max_depth
+    errors[:max_depth] = I18n.t('max_depth', scope: I18N_ERRORS_SCOPE)
+  end
+
+  def max_depth?
+    depth >= MAX_COMMENTS_DEPTH
+  end
 
   private
 
