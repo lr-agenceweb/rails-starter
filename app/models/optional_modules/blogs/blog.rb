@@ -39,18 +39,27 @@ class Blog < ActiveRecord::Base
   include OptionalModules::Commentable
   include OptionalModules::Searchable
 
+  # Callbacks
   after_update :update_counter_cache, if: proc { online_changed? }
 
+  # Models relation
   belongs_to :blog_category, inverse_of: :blogs, counter_cache: true
 
-  delegate :name, to: :blog_category, prefix: true, allow_nil: true
-
+  # Validation rules
   validates :blog_category, presence: true
+
+  # Scopes
+  scope :online, -> { where(online: true) }
+  scope :by_category, -> (category) { where(blog_category_id: category) }
+
+  # Delegates
+  delegate :name, to: :blog_category, prefix: true, allow_nil: true
 
   paginates_per 10
 
-  scope :online, -> { where(online: true) }
-  scope :by_category, -> (category) { where(blog_category_id: category) }
+  def self.includes_collection
+    includes(:translations, :user, :picture, :video_upload, :video_uploads, :video_platforms, blog_category: [:translations], referencement: [:translations])
+  end
 
   private
 
