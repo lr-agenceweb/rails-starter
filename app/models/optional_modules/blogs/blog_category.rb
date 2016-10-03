@@ -16,6 +16,8 @@
 # == BlogCategory Model
 #
 class BlogCategory < ActiveRecord::Base
+  include Includes::BlogIncludable
+
   translates :name, :slug
   active_admin_translates :name, :slug do
     validates :name,
@@ -25,6 +27,7 @@ class BlogCategory < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :history, :globalize, :finders]
 
+  # Models relations
   has_many :blogs, dependent: :destroy, inverse_of: :blog_category
 
   private

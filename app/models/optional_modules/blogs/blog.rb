@@ -32,6 +32,7 @@ class Blog < ActiveRecord::Base
   include Core::Userable
   include Core::Referenceable
   include Core::FriendlyGlobalizeSluggable
+  include Includes::BlogIncludable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::Audioable
   include OptionalModules::Assets::VideoUploadable
@@ -56,10 +57,6 @@ class Blog < ActiveRecord::Base
   delegate :name, to: :blog_category, prefix: true, allow_nil: true
 
   paginates_per 10
-
-  def self.includes_collection
-    includes(:translations, :user, :picture, :video_upload, :video_uploads, :video_platforms, blog_category: [:translations], referencement: [:translations])
-  end
 
   private
 
