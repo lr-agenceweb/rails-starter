@@ -1,10 +1,20 @@
 $(document).on 'ready page:load page:restore', ->
   if Cookies.get('cookiebar_cnil') is undefined and !gon.disable_cookie_message
     $('body').append(
-      "<div class='cookie_cnil' id='cookie_cnil'>
-        #{I18n.t('cookie_cnil.content')}
-        <div class='cookie_btn' id='cookie_accept'>#{I18n.t('cookie_cnil.accept')}</div>
-        <div class='cookie_btn cookie_btn-error' id='cookie_cancel'>#{I18n.t('cookie_cnil.cancel')}</div>
+      "<div class='callout cookie_cnil' id='cookie_cnil' data-closable>
+        <p>#{I18n.t('cookie_cnil.content')}</p>
+
+        <p class='cookie_choices'>
+          <a href='#'>#{I18n.t('cookie_cnil.more_info')}</a>
+
+          <span class='button cookie_btn' id='cookie_accept'>
+            #{I18n.t('cookie_cnil.accept')}
+          </span>
+        </p>
+
+        <button class='close-button' id='cookie_cancel' aria-label='#{I18n.t('close')} / #{I18n.t('cookie_cnil.cancel')}' type='button' data-close>
+          <span aria-hidden='true'>&times;</span>
+        </button>
       </div>"
     )
 
