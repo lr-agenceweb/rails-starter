@@ -17,8 +17,8 @@ module OptionalModules
       before_action :set_last_blogs, only: [:index, :show]
       before_action :set_last_comments, only: [:index, :show], if: proc { @comment_module.enabled? }
 
-      LAST_COMMENTS_COUNT = 5
       LAST_BLOGS_COUNT = 5
+      LAST_COMMENTS_COUNT = 5
 
       def blog_module_enabled?
         not_found unless @blog_module.enabled?
