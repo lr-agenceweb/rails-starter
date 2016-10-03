@@ -2,7 +2,7 @@ div class='callout cookie_cnil' id='cookie_cnil' data-closable=''
   p = I18n.t('cookie_cnil.content')
 
   p class='cookie_choices'
-    = link_to I18n.t('cookie_cnil.more_info'), legal_notices_path
+    = link_to I18n.t('cookie_cnil.more_info'), legal_notices_path(anchor: 'cookie_post', highlight: 'highlight-post')
 
     span class='button cookie_btn' id='cookie_accept'
       = I18n.t('cookie_cnil.accept')

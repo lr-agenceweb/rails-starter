@@ -1,9 +1,9 @@
 // Action on text selection
 *
+  outline: none
   &::selection
     color: $white
     background-color: $link-color
-  outline: none
 
 body.is-homepage
   background-color: rgba($black, .55)
@@ -38,22 +38,33 @@ a
 
 // Maildev
 .button-title
-  margin-left: 1rem
   margin-bottom: 0
+  margin-left: 1rem
   vertical-align: middle
 
 // Overlay on video play
 #shadow
   &.night
     position: absolute
+    z-index: 2
     top: 0
-    left: 0
     right: 0
     bottom: 0
-    z-index: 2
+    left: 0
     opacity: .8
-    background-color: #000
+    background-color: $black
 .mejs-container
   z-index: 3
 
-+broken-pictures
+// Highlight post on page
+.highlight-post
+  animation: highlight-post 1.5s
+
+@keyframes highlight-post
+  0%
+    background: $warning-color
+  100%
+    background: none
+
+// Style for broken pictures
++ broken-pictures

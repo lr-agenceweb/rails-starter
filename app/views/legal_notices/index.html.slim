@@ -5,4 +5,16 @@ section.legal_notices-section.page-section#legal_notices
     .small-12.columns
       = title_for_category(category)
 
-  = render 'legal_notices'
+  .row.align-center
+    .small-10.medium-12.columns
+      .legal_notices-container
+        .row.small-up-1.medium-up-2 data-equalizer='' data-equalize-by-row="true"
+          - @legal_notices.each_with_index do |legal_notice, index|
+            - next if legal_notice == @legal_notices.last
+            = cache legal_notice do |_|
+              .column.legal_notices-container
+                = render 'legal_notices/legal_notice', legal_notice: legal_notice
+
+        #cookie_post class="#{params[:highlight].blank? ? '' : params[:highlight]}"
+          = render 'legal_notices/legal_notice', legal_notice: @legal_notices.last
+
