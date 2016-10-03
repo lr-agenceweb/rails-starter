@@ -14,6 +14,8 @@ en:
       contact_form:
         size: Attachment should be less than %{size}MB
         type: Attachment should be a picture or a PDF file
+    placeholder:
+      froala: Post content here :)
 
 # French
 fr:

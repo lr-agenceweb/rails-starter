@@ -17,7 +17,7 @@
 #= require plugins/inline_style.min.js
 #= require languages/fr.js
 
-$ ->
+$(document).on 'ready page:load page:restore', ->
   if $('.froala').length
     $.FroalaEditor.DEFAULTS.key = gon.froala_key
     froala_init()
@@ -53,5 +53,5 @@ froala_init = ->
       '#FFFFFF', 'REMOVE'
     ]
     heightMin: 300
-    language: 'fr'
+    language: gon.language
     placeholderText: I18n.t('form.placeholder.froala')
