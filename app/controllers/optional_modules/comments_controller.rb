@@ -29,7 +29,6 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params)
     @comment.user_id = current_user.id if user_signed_in?
     if @comment.save
-      @success_comment = true
       flash.now[:success] = I18n.t('comment.create_success')
       flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate? && !current_user_and_administrator?(User.current_user)
       respond_action 'create'
@@ -130,7 +129,7 @@ class CommentsController < ApplicationController
   def email_comment_created?
     @comment_setting.send_email? &&
       !current_user_and_administrator? &&
-      @success_comment
+      @comment.persisted?
   end
 
   def email_comment_signalled?
