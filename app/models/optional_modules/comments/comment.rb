@@ -83,12 +83,12 @@ class Comment < ActiveRecord::Base
     errors[:max_depth] = I18n.t('max_depth', scope: I18N_ERRORS_SCOPE)
   end
 
-  def max_depth?
-    depth >= MAX_COMMENTS_DEPTH
+  def max_depth?(op = '>=')
+    depth.send(op, MAX_COMMENTS_DEPTH)
   end
 
   def strict_max_depth?
-    depth > MAX_COMMENTS_DEPTH
+    max_depth?('>')
   end
 
   private
