@@ -7,7 +7,7 @@
           label: false,
           input_html: { class: 'hide' }
 
-- if can?(:reply, comment) && params[:action] == 'reply'
+- if params[:action] == 'reply'
   = f.hidden_field :parent_id,
                    label: false,
                    class: 'hide'

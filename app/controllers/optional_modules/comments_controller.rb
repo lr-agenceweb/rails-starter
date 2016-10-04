@@ -28,12 +28,13 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user_id = current_user.id if user_signed_in?
-    if can?(:reply, @comment) && @comment.save
+    if @comment.save
       @success_comment = true
       flash.now[:success] = I18n.t('comment.create_success')
       flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate? && !current_user_and_administrator?(User.current_user)
       respond_action 'create'
     else
+      flash.now[:error] = I18n.t('comment.create_error')
       respond_action 'forbidden'
     end
   end

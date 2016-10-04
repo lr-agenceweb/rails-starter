@@ -68,7 +68,7 @@ class Comment < ActiveRecord::Base
             inclusion: { in: I18n.available_locales.map(&:to_s) }
   validates :nickname,
             absence: true
-  validate :max_depth, if: :max_depth?
+  validate :max_depth, if: :strict_max_depth?
 
   # Scopes
   default_scope { order('created_at DESC') }
@@ -85,6 +85,10 @@ class Comment < ActiveRecord::Base
 
   def max_depth?
     depth >= MAX_COMMENTS_DEPTH
+  end
+
+  def strict_max_depth?
+    depth > MAX_COMMENTS_DEPTH
   end
 
   private

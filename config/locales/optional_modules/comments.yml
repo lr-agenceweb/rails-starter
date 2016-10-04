@@ -4,6 +4,7 @@ fr:
     disabled: Les commentaires sont désactivés pour cet article
     create_success: Votre commentaire a bien été ajouté.
     create_success_with_validate: Votre commentaire sera visible dès que l'administrateur l'aura validé
+    create_error: Une erreur s'est produite lors de l'ajout de votre commentaire
     captcha: Attrapé par le captcha !
     submit:
       button: Ajouter votre commentaire
@@ -20,7 +21,7 @@ fr:
       success: Merci, le commentaire a bien été signalé à l'administrateur
     destroy:
       success: Le commentaire a été supprimé.
-      error: Une erreur s'est produite au moment de supprimé le commentaire
+      error: Une erreur s'est produite au moment de supprimer le commentaire
       not_allowed: Vous n'êtes pas autorisé à supprimer ce commentaire
     seo:
       title: Réponse à un commentaire sur l'article "%{article}"
@@ -42,6 +43,7 @@ en:
     disabled: Comments are disabled for this article
     create_success: Your comment was successfully created.
     create_success_with_validate: Your comment was successfully created. It will appear on website after moderation.
+    create_error: An error occurred when adding your comment
     captcha: Captcha caught you !
     submit:
       button: Add your comment

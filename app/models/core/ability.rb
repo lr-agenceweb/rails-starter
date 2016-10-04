@@ -172,7 +172,7 @@ class Ability
   def comment_frontend
     @comment_setting = CommentSetting.first
     if @comment_module.enabled?
-      cannot [:signal], Comment
+      cannot [:signal, :reply], Comment
       can [:signal], Comment if @comment_setting.should_signal?
       can [:reply], Comment if @comment_setting.allow_reply?
       cannot [:reply], Comment, &:max_depth?
