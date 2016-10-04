@@ -80,7 +80,7 @@ class Comment < ActiveRecord::Base
   delegate :title, to: :commentable, prefix: true, allow_nil: true
 
   def max_depth
-    errors[:max_depth] = I18n.t('max_depth', scope: I18N_ERRORS_SCOPE)
+    errors[:parent_id] = I18n.t('max_depth', scope: I18N_ERRORS_SCOPE)
   end
 
   def max_depth?(op = '>=')

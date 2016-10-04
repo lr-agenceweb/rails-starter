@@ -71,8 +71,8 @@ class CommentTest < ActiveSupport::TestCase
   test 'should not be able to create reply if max_depth' do
     comment = Comment.new(comment: 'youpi', username: 'leila', email: 'leila@skywalker.fr', lang: 'fr', parent_id: @max_depth.id)
     assert_not comment.valid?
-    assert_equal [:max_depth], comment.errors.keys
-    assert_equal({ max_depth: [I18n.t('max_depth', scope: @i18n_scope)] }, comment.errors.messages)
+    assert_equal [:parent_id], comment.errors.keys
+    assert_equal({ parent_id: [I18n.t('max_depth', scope: @i18n_scope)] }, comment.errors.messages)
   end
 
   private
