@@ -75,6 +75,18 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal({ parent_id: [I18n.t('max_depth', scope: @i18n_scope)] }, comment.errors.messages)
   end
 
+  test 'should return correct boolean value for max_depth?' do
+    assert @max_depth.max_depth?
+    assert_not @comment_bob.max_depth?
+    assert_not @comment_anthony.max_depth?
+  end
+
+  test 'should return correct boolean value for strict_max_depth?' do
+    assert @max_depth.max_depth?
+    assert_not @comment_bob.max_depth?
+    assert_not @comment_anthony.max_depth?
+  end
+
   private
 
   def initialize_test
