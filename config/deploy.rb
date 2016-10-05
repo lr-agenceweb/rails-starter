@@ -3,7 +3,7 @@ require File.expand_path('../environment', __FILE__)
 require 'figaro'
 
 # config valid only for current version of Capistrano
-lock '3.5.0'
+lock '3.6.1'
 
 set :application, Figaro.env.application_name
 set :repo_url, Figaro.env.capistrano_repo_url
@@ -12,6 +12,8 @@ set :rvm_ruby_version, Figaro.env.capistrano_rvm_ruby_version || 'default'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, `git rev-parse --abbrev-ref HEAD`
+set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/var/www/my_app_name'
@@ -45,12 +47,5 @@ set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
 set :backup_name, Figaro.env.application_name.underscore
 
 namespace :deploy do
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
+  after 'deploy:publishing', 'deploy:restart'
 end
