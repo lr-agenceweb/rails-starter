@@ -28,6 +28,17 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_not maintenance?(@request), 'should not be in maintenance'
   end
 
+  #
+  # == Git
+  #
+  test 'should return correct branch name by environment' do
+    Rails.env = 'staging'
+    assert_equal 'BranchName', branch_name
+    Rails.env = 'development'
+    assert_equal `git rev-parse --abbrev-ref HEAD`, branch_name
+    Rails.env = 'test'
+  end
+
   private
 
   def initialize_test

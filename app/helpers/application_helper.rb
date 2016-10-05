@@ -52,4 +52,11 @@ module ApplicationHelper
   def maintenance?(req = request)
     @setting.maintenance? && (!req.path.include?('/admin') || !self.class.name.to_s.split('::').first == 'ActiveAdmin')
   end
+
+  #
+  # == Git
+  #
+  def branch_name
+    Rails.env.staging? ? 'BranchName' : `git rev-parse --abbrev-ref HEAD`
+  end
 end
