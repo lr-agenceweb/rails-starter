@@ -16,7 +16,10 @@ server Figaro.env.capistrano_server_ip, user: fetch(:deploy_user).to_s, roles: %
 # Callbacks
 # =========
 namespace :deploy do
-  after 'deploy:publishing', :update_branch do
-    run "cd #{current_release}; sed -i 's/BranchName/#{fetch(:branch)}/g' app/helpers/application_helper.rb"
+  # Update deployed branch name in ribbon
+  after 'deploy:published', :update_branch do
+    on roles(:web) do
+      execute "cd #{current_path}; sed -i 's/BranchName/#{fetch(:branch)}/g' app/helpers/application_helper.rb"
+    end
   end
 end

@@ -12,8 +12,8 @@ set :rvm_ruby_version, Figaro.env.capistrano_rvm_ruby_version || 'default'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-set :branch, `git rev-parse --abbrev-ref HEAD`
-set :branch, ENV['BRANCH'] if ENV['BRANCH']
+current_branch = `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, ENV['branch'] || current_branch
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/var/www/my_app_name'
@@ -46,6 +46,15 @@ set :keep_releases, 5
 set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
 set :backup_name, Figaro.env.application_name.underscore
 
+# Callbacks
+# =========
 namespace :deploy do
-  after 'deploy:publishing', 'deploy:restart'
+  # Restart passenger after finishing deployment
+  after :finishing, :restart_passenger do
+    on roles(:web) do
+      within release_path do
+        execute :touch, 'tmp/restart.txt'
+      end
+    end
+  end
 end
