@@ -26,7 +26,6 @@ module OptionalModules
 
       def set_map_setting
         @map_setting = MapSetting.first
-        mapbox_gon_params
       end
 
       def set_map?
