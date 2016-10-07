@@ -54,7 +54,7 @@ ActiveAdmin.register LegalNotice do
     f.inputs 'Général' do
       f.input :online,
               label: I18n.t('form.label.online'),
-              hint: I18n.t('form.hint.online')
+              hint: raw(I18n.t('form.hint.online'))
     end
 
     f.inputs 'Contenu de l\'article' do
