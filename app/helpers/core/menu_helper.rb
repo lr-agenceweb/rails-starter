@@ -9,7 +9,7 @@ module Core
   #
   module MenuHelper
     def set_active_class(controller, action = false)
-      'active' if (action == false && controller?(controller)) || (controller?(controller) && action?(action))
+      'menu__item__active' if (action == false && controller?(controller)) || (controller?(controller) && action?(action))
     end
 
     def even_or_odd_menu_item(items)

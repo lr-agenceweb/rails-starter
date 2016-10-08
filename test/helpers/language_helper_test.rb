@@ -31,7 +31,7 @@ module Core
 
     test 'should correctly format in html link language' do
       params[:locale] = :fr
-      assert_equal '<a class="l-nav-item-link" href="#">Français <i class="fa fa-check"></i></a>', current_link_language('check', I18n.t("active_admin.globalize.language.#{params[:locale]}"))
+      assert_equal '<a class="menu__item__link" href="#">Français <i class="fa fa-check"></i></a>', current_link_language('check', I18n.t("active_admin.globalize.language.#{params[:locale]}"))
     end
 
     test 'should return correct slug article by locale' do

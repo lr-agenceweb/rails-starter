@@ -21,12 +21,12 @@ module Core
         link = link_to_unless(current_locale?(locale),
                               I18n.t("active_admin.globalize.language.#{locale}"),
                               params.merge(params_language),
-                              class: 'l-nav-item-link') do |item|
+                              class: 'menu__item__link') do |item|
           current_link_language('check', item)
         end
 
         # wrap link in li tag
-        language_menu_html += content_tag(:li, link, class: "#{active_language(locale)} l-nav-item")
+        language_menu_html += content_tag(:li, link, class: "menu__item #{active_language(locale)}")
       end
       raw language_menu_html
     end
@@ -63,11 +63,11 @@ module Core
     end
 
     def current_link_language(icon, text)
-      link_to fa_icon(icon, text: text, right: true), '#', class: 'l-nav-item-link'
+      link_to fa_icon(icon, text: text, right: true), '#', class: 'menu__item__link'
     end
 
     def active_language(locale)
-      'active' if current_locale?(locale)
+      'menu__item__active' if current_locale?(locale)
     end
   end
 end

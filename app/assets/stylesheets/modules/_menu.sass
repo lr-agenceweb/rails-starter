@@ -1,9 +1,7 @@
-.l-nav-item .l-nav-item-link
-  @include link-colors($menu-font-color, $white)
-.active .l-nav-item-link
-  @include link-colors($white)
-
-.l-nav-container
+//
+// Menu [Header]
+// =============
+.menu__nav
   position: relative
   width: 100%
   height: 40px
@@ -14,7 +12,7 @@
     margin: 1rem auto
     padding: 0
 
-  .l-nav-item
+  .menu__item
     display: inline
     float: left
     margin-left: 0
@@ -22,11 +20,11 @@
     font-size: 13px
 
     &:last-child
-      .l-nav-item-link
+      .menu__item__link
         padding-right: 0
         border-right: none
 
-    .l-nav-item-link
+    .menu__item__link
       display: inline-block
       padding: 0 5px
       text-decoration: none
@@ -47,28 +45,6 @@
 @media screen and (max-width: $menu-breakpoint-one)
   .columns-for-logo, .columns-for-menu
     margin-left: 0 !important
-  // .menu-site, .title-site
-  //   float: none
-  //   width: 100%
-
-  // .l-header-site .menu-site.v-bottom
-  //   margin-top: 20px
-
-  // .title-site
-  //   text-align: center
-
-  // .l-nav-container
-  //   ul
-  //     float: none
-  //     width: 70%
-
-  //   .l-nav-item
-  //     &.show-for-breakpoint-one
-  //       display: block
-
-  //   .hide-for-breakpoint-one
-  //     display: none
-
 
 // Version sur deux colonnes
 @media screen and (max-width: $menu-breakpoint-two)
@@ -79,7 +55,7 @@
   .menu-site
     padding: 0 !important
 
-  .l-nav-container
+  .menu__nav
     max-width: initial
     height: auto
     margin-left: 0
@@ -94,7 +70,7 @@
 
       // Even menu items number
       &.even
-        .l-nav-item
+        .menu__item
           &:nth-child(odd)
             border-right: 1px solid $border-color
           &:first-child
@@ -102,14 +78,14 @@
 
       // Odd menu items number
       &.odd
-        .l-nav-item
+        .menu__item
           &:first-child
             float: none
             width: 100%
           &:not(:first-child):nth-child(even)
             border-right: 1px solid $border-color
 
-    .l-nav-item
+    .menu__item
       position: relative
       display: block
       float: left
@@ -119,15 +95,15 @@
       &:not(:last-child)
         margin-right: 0
 
-      .l-nav-item-link
+      .menu__item__link
         width: 100%
         padding: 8px 0
         text-align: center
         @include link-colors($white, $menu-font-color)
 
 
-      &.active
-        .l-nav-item-link
+      &.menu__item__active
+        .menu__item__link
           color: $link-active-color
 
       &:after
@@ -136,7 +112,7 @@
 
 // Menu déroulant sur une colonne
 @media only screen and (max-width : $menu-breakpoint-three)
-  .l-nav-container
+  .menu__nav
     margin-top: 1rem
     border: none
 
@@ -145,7 +121,7 @@
       float: none
       height: auto
 
-    .l-nav-item
+    .menu__item
       display: block
       float: none
       width: 100% !important
@@ -175,3 +151,12 @@
       &:hover
         &:after
           box-shadow: 0 10px 0 1px $border-color, 0 16px 0 1px $border-color, 0 22px 0 1px $border-color
+
+
+// Active menu item
+.menu__item
+  .menu__item__link
+    @include link-colors($menu-font-color, $white)
+  &.menu__item__active
+    .menu__item__link
+      @include link-colors($white)
