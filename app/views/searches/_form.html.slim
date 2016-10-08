@@ -1,5 +1,11 @@
-.search-form-header
-  = simple_form_for :search, url: autocomplete_searches_path, method: :get, remote: true, html: { itemscope: '', itemprop: 'potentialAction', itemtype: 'http://schema.org/SearchAction', id: 'search_form' } do |f|
-      = text_field_tag :term, params[:term], placeholder: I18n.t('search.search'), class: 'autocomplete', data: { controller: params[:controller] }, itemprop: 'query'
-      = button_tag class: 'button postfix expand', name: nil do
-        - fa_icon 'search'
+- html_attributes = { itemscope: '', itemprop: 'potentialAction', itemtype: 'http://schema.org/SearchAction', id: 'search_form' }
+
+.search-form
+  = simple_form_for :search, url: autocomplete_searches_path, method: :get, remote: true, html: html_attributes do |f|
+
+    div class="input-group search-form__group"
+      = text_field_tag :term, params[:term], placeholder: I18n.t('search.search'), class: 'autocomplete input-group-field search-form__input', data: { controller: params[:controller] }, itemprop: 'query'
+
+      div class="input-group-button"
+        = button_tag class: 'button small search-form__button', name: nil do
+          - fa_icon 'search'

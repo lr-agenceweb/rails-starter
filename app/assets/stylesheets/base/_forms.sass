@@ -11,17 +11,17 @@
   textarea
     margin-bottom: 0
   .submit-and-loader
-    margin-top: 1rem
     float: right
+    margin-top: 1rem
     .submit-loader
-      margin-right: 10px
-      max-height: 34px
       display: none
+      max-height: 34px
+      margin-right: 10px
 
 textarea
   min-height: 200px
-  transition: height .3s ease-in
   resize: vertical
+  transition: height .3s ease-in
 
   &.tiny
     min-height: 0
@@ -34,25 +34,37 @@ textarea
 form
   span.error, span.success
     display: block
-    padding: 0.375rem 0.5625rem 0.5625rem
     margin-bottom: 1rem
-    font-size: 0.75rem
+    padding: .375rem .5625rem .5625rem
+    padding-left: 0
+    font-size: .75rem
     font-weight: normal
     font-style: italic
-    padding-left: 0
     .hide
       display: none !important
 
   span.error
-    background: transparent
     color: $warning-color
+    background: transparent
 
   span.success
+    color: $white
     background: $success-color
-    color: #FFFFFF
 
   input.string + span.error
     margin-top: -1rem
 
   textarea.text + span.error
     margin-bottom: 0
+
+//
+// Placeholder
+// ===========
+input::-webkit-input-placeholder
+  color: $monsoon
+input:-moz-placeholder
+  color: $monsoon
+input::-moz-placeholder
+  color: $monsoon
+input:-ms-input-placeholder
+  color: $monsoon
