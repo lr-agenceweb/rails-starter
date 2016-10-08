@@ -1,73 +1,33 @@
-// Logo
-.logo-container
-  .logo
+//
+// Logo [header]
+// =============
+.logo
+  display: table
+  &__link
+    display: table
+    text-indent: 14px
+    &:hover
+      .logo__picture
+        filter: none
+
+  &__picture
+    display: table-cell
     max-width: $logo_width
-    max-height: $logo_height
-    height: $logo_height
-    background-repeat: no-repeat
-    background-position: left center
-    font-size: 13px
+    filter: brightness(0) invert(.8)
+    transition: filter .6s ease-in
 
-.is-homepage
-  .logo-container
-    .logo
-      opacity: .8
-  .header-title-link
-    @include link-colors($menu-font-color, $white)
-
-// Mapbox popup
-.logo-link
-  img
-    display: block
-    margin: 0 auto
-
-.header-title-link
-  display: block
-  @include link-colors(rgba($black, .4), $black)
-  transition: color .3s ease-in
-
-  .header-title
-    display: block
-    text-transform: uppercase
-    text-align: center
-    font-weight: 700
-    text-indent: 77px
-    color: inherit
-
-    span
+  &__heading
+    display: table-cell
+    vertical-align: bottom
+    &__title
+      margin-bottom: 0
+    &__subtitle
       display: block
-      padding-top: 5px
-      font-size: 1rem
-    // position: absolute
-    // top: 0
-    // left: 0
-    // right: 0
-    // bottom: 0
-    // letter-spacing: 3px
+    &__title, &__subtitle
+      text-transform: uppercase
+      color: $white
+      font-size: rem-calc(13)
 
-    .header-subtitle
-      text-transform: none
-      font-weight: 300
-      font-size: .8rem
-      display: block
-      letter-spacing: normal
-      padding-top: 7px
-      color: inherit
-    //   position: absolute
-    //   bottom: 13px
-    //   text-align: center
-    //   width: $logo_width
-
-@if variable-exists(small-only)
-  @media #{$small-only}
-    .logo-container
-      position: static
-      margin: 0 auto
-      trnasform: scale(.7)
-
-
-// Version sur deux colonnes
-@media screen and (max-width: $menu-breakpoint-two)
-  .header-title-link
-    .header-title
-      margin: 0 auto
+//
+// Logo [Mapbox]
+// =============
