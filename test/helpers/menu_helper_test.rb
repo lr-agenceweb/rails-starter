@@ -15,23 +15,23 @@ module Core
     # == Active menu element
     #
     test 'should return active class for home' do
-      assert_equal set_active_class('homes', 'index'), 'active'
+      assert active_class?('homes', 'index')
     end
 
     test 'should not return active class if is show for home' do
-      assert_nil set_active_class('homes', 'show')
+      assert_not active_class?('homes', 'show')
     end
 
     test 'should return active class if is false for home' do
-      assert_equal set_active_class('homes'), 'active'
+      assert active_class?('homes')
     end
 
     test 'should not return active class for contact' do
-      assert_nil set_active_class('contacts', 'new')
+      assert_not active_class?('contacts', 'new')
     end
 
     test 'should not return active class if is false for contact' do
-      assert_nil set_active_class('contacts')
+      assert_not active_class?('contacts')
     end
 
     #
