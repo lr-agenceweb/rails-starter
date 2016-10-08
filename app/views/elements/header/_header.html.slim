@@ -1,21 +1,22 @@
 = render 'elements/ribbon' if Rails.env.development? || Rails.env.staging?
 
-- if @search_module.enabled? || I18n.available_locales.length > 1
-  .upper-header
-    .row
-      .small-12.medium-4.medium-offset-4.large-3.large-offset-6.columns.search-container
-        - if @search_module.enabled?
-          = render 'searches/form'
-      .small-12.medium-4.large-3.end.columns
-        - if I18n.available_locales.length > 1
-          = render 'elements/header/language'
+header.header-site
+  - if @search_module.enabled? || I18n.available_locales.length > 1
+    .upper-header
+      .row
+        .small-12.medium-4.medium-offset-4.large-3.large-offset-6.columns.search-container
+          - if @search_module.enabled?
+            = render 'searches/form'
+        .small-12.medium-4.large-3.end.columns
+          - if I18n.available_locales.length > 1
+            = render 'elements/header/language'
 
-header.l-header-site
-  .row
-    .small-12.medium-3.medium-offset-1.columns.columns-for-logo
-      = render 'elements/header/logo', show_metadata: false
-    .small-12.medium-8.columns.columns.columns-for-menu
-      = render 'elements/menu/no_dropdown'
+  .lower-header
+    .row
+      .small-12.medium-3.medium-offset-1.columns.columns-for-logo
+        = render 'elements/header/logo', show_metadata: false
+      .small-12.medium-8.columns.columns.columns-for-menu
+        = render 'elements/menu/no_dropdown'
 
 .clearfix
 

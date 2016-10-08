@@ -5,17 +5,20 @@
   display: table
   &__link
     display: table
-    text-indent: 14px
+    text-indent: 7px
     &:hover
       .logo__picture
         filter: none
+        background-color: $white
+      .logo__heading__title, .logo__heading__subtitle
+        color: $white
 
   &__picture
     display: table-cell
-    max-width: $logo_width
+    max-width: $logo_width + 10px
+    padding: 5px
     filter: brightness(0) invert(.8)
-    transition: filter .6s ease-in
-
+    transition: filter .6s, background-color .6s
   &__heading
     display: table-cell
     vertical-align: bottom
@@ -24,8 +27,8 @@
     &__subtitle
       display: block
     &__title, &__subtitle
-      text-transform: uppercase
-      color: $white
+      transition: color .6s
+      color: $menu-font-color
       font-size: rem-calc(13)
 
 //

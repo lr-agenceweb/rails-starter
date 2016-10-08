@@ -1,34 +1,25 @@
 .l-nav-item .l-nav-item-link
-  @include link-colors(rgba($black, .4), $black)
-  text-decoration: none
+  @include link-colors($menu-font-color, $white)
 .active .l-nav-item-link
-  @include link-colors($link-active-color)
-
-.is-homepage
-  .l-nav-item .l-nav-item-link
-    @include link-colors($menu-font-color, $white)
-  .active .l-nav-item-link
-    @include link-colors($link-active-color)
+  @include link-colors($white)
 
 .l-nav-container
   position: relative
-  height: 40px
   width: 100%
+  height: 40px
   font-weight: 400
-  margin-top: 15px
 
   ul
-    padding: 0
-    margin: 0 auto
-    height: 40px
     float: right
+    margin: 1rem auto
+    padding: 0
 
   .l-nav-item
     display: inline
     float: left
-    font-size: 13px
     margin-left: 0
     text-transform: uppercase
+    font-size: 13px
 
     &:last-child
       .l-nav-item-link
@@ -36,10 +27,10 @@
         border-right: none
 
     .l-nav-item-link
-      font-size: 13px
       display: inline-block
-      text-decoration: none
       padding: 0 5px
+      text-decoration: none
+      font-size: 13px
 
     &:not(:last-child)
       margin-right: 1.5rem
@@ -89,15 +80,15 @@
     padding: 0 !important
 
   .l-nav-container
+    max-width: initial
     height: auto
     margin-left: 0
-    max-width: initial
     border: 1px solid $border-color
     border-bottom: none
 
     ul
-      width: 100%
       display: block
+      width: 100%
       height: auto
       padding: 0
 
@@ -119,19 +110,19 @@
             border-right: 1px solid $border-color
 
     .l-nav-item
-      width: 50%
-      float: left
       position: relative
-      background-color: $menu-bg-color
-      border-bottom: 1px solid $border-color
       display: block
+      float: left
+      width: 50%
+      border-bottom: 1px solid $border-color
+      background-color: $menu-bg-color
       &:not(:last-child)
         margin-right: 0
 
       .l-nav-item-link
-        text-align: center
-        padding: 8px 0
         width: 100%
+        padding: 8px 0
+        text-align: center
         @include link-colors($white, $menu-font-color)
 
 
@@ -151,15 +142,15 @@
 
     ul
       display: none
-      height: auto
       float: none
+      height: auto
 
     .l-nav-item
       display: block
       float: none
       width: 100% !important
-      border-bottom: 1px solid $border-color
       border-right: none !important
+      border-bottom: 1px solid $border-color
 
     a#pull
       position: relative
@@ -167,18 +158,18 @@
       width: 100%
       // border-bottom: 1px solid $link-active-color
       padding: 10px
-      background-color: $menu-bg-color
       color: $white
+      background-color: $menu-bg-color
 
       // /* L'icône hamburger, en utilisant le box-shadow */
       &:after
-        content: ''
         position: absolute
         top: 5px
         right: 15px
         display: inline-block
         width: 1rem
         height: 0
+        content: ''
         box-shadow: 0 10px 0 1px $border-color, 0 16px 0 1px $border-color, 0 22px 0 1px $border-color
 
       &:hover
