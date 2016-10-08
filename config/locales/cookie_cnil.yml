@@ -1,15 +1,15 @@
 # English
 en:
   cookie_cnil:
-    content: By continuing your visit to this site, you agree to use Cookies to make anonymous visits statistics.
-    accept: Accept cookies
+    content: By browsing our site you agree to the use of cookies that allow us to make anonymous visits statistics.
     cancel: Decline cookies
-    more_info: Learn more about use of cookies
+    close: Close
+    more_info: Learn more
 
 # French
 fr:
   cookie_cnil:
-    content: En poursuivant votre navigation sur ce site, vous acceptez l'utilisation de Cookies pour réaliser des statistiques de visites anonymes.
-    accept: Accepter les cookies
+    content: En naviguant sur notre site, vous acceptez l’utilisation de cookies qui nous permettront de réaliser des statistiques de visites anonymes.
     cancel: Refuser les cookies
-    more_info: En savoir plus sur l'utilisation des cookies
+    close: Fermer
+    more_info: En savoir plus

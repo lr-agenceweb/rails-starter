@@ -6,30 +6,33 @@
   margin-bottom: 0
   padding: 20px
   padding-right: 38px
-  color: $steel
+  color: $tuatara
+  background-color: rgba($white, .95)
   font-size: .9em
 
-  .cookie_choices
+  p
     margin-bottom: 0
-    .cookie_btn
-      display: block
-      margin-bottom: 0
-    a
-      display: block
-      margin-bottom: 1rem
-      text-decoration: underline
-      &:hover
-        text-decoration: none
 
-      .cookie_btn
-        display: block
+  .cookie_btn
+    display: block
+    margin-bottom: 0
+    padding: .3rem
+    cursor: pointer
+    background-color: darken($white, 10%)
+
+  a
+    display: inline-block
+    margin-bottom: 1rem
+    text-decoration: underline
+    color: $tuatara
+    &:hover
+      text-decoration: none
 
 
 @media #{$large-up}
   .cookie_cnil
-    .cookie_choices
-      .cookie_btn
-        display: inline-block
-        margin-left: 1rem
-      a
-        display: inline
+    .cookie_btn, a
+      display: inline-block
+      margin-left: 1rem
+    a
+      display: inline
