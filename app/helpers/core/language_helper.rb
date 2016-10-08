@@ -26,7 +26,7 @@ module Core
         end
 
         # wrap link in li tag
-        language_menu_html += content_tag(:li, link, class: "menu__item #{active_language(locale)}")
+        language_menu_html += content_tag(:li, link, class: "menu__item #{'menu__item__active' if current_locale?(locale)}")
       end
       raw language_menu_html
     end
@@ -64,10 +64,6 @@ module Core
 
     def current_link_language(icon, text)
       link_to fa_icon(icon, text: text, right: true), '#', class: 'menu__item__link'
-    end
-
-    def active_language(locale)
-      'menu__item__active' if current_locale?(locale)
     end
   end
 end
