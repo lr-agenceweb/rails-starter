@@ -11,6 +11,16 @@
     padding: 1rem 10px 15px 10px
     background-color: rgba($topbar-background, .9)
 
+    .contact-informations
+      &__body
+        text-align: center
+      &__phone, &__email, &__address
+        display: block
+        .fa
+          margin-right: .3rem
+      .phone__link, .email__link
+        @include link-colors($menu-font-color, $white)
+
   // Lower Footer (made with love by ...)
   .lower-footer
     padding: 15px

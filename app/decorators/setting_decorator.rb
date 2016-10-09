@@ -43,19 +43,29 @@ class SettingDecorator < ApplicationDecorator
   end
 
   #
-  # == Other
+  # == Contact informations
   #
-  def credentials
-    "#{CGI.escapeHTML(setting.name)} - #{copyright} - Copyright &copy; #{current_year}"
+  def phone
+    return unless phone?
+    link_phone = link_to(model.phone, "tel:#{phone_w3c}", class: 'phone__link')
+    h.fa_icon('phone', text: link_phone)
   end
 
   def phone_w3c
     model.phone.delete(' ').remove('(0)') if phone?
   end
 
+  def email
+    h.fa_icon('envelope', text: mail_to(model.email, model.email, class: 'email__link'))
+  end
+
   #
-  # == Modules
+  # == Other
   #
+  def credentials
+    "#{CGI.escapeHTML(setting.name)} - #{copyright} - Copyright &copy; #{current_year}"
+  end
+
   def about
     link_to I18n.t('main_menu.about'), abouts_path
   end
@@ -79,7 +89,7 @@ class SettingDecorator < ApplicationDecorator
   end
 
   def phone?
-    !model.phone.blank?
+    model.phone.present?
   end
 
   def copyright

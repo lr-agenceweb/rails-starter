@@ -129,10 +129,10 @@ class EventDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct html for full address' do
-    assert_equal '<span>4 avenue de la chouette, 77700 - Gotham</span>', @event_decorated.full_address_inline
+    assert_equal '<span>4 avenue de la chouette, 77700 - Gotham</span>', @event_decorated.full_address
     @event.location.update_attributes(address: '')
-    assert_equal '<span>77700 - Gotham</span>', @event_decorated.full_address_inline
-    assert_nil @event_two_decorated.full_address_inline
+    assert_equal '<span>77700 - Gotham</span>', @event_decorated.full_address
+    assert_nil @event_two_decorated.full_address
   end
 
   private

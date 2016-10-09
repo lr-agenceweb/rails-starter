@@ -42,14 +42,25 @@ class SettingDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Other
+  # == Contact informations
   #
-  test 'should return correct credentials' do
-    assert_equal "Rails Starter - Tous droits réservés - Copyright &copy; #{current_year}", @setting_decorated.credentials
+  test 'should return correct value for phone method' do
+    assert_equal '<i class="fa fa-phone"></i> <a class="phone__link" href="tel:+33102030405">+33 (0)1 02 03 04 05</a>', @setting_decorated.phone
   end
 
   test 'should have correct phone value adapted for w3c' do
     assert_equal '+33102030405', @setting_decorated.phone_w3c
+  end
+
+  test 'should return correct value for email method' do
+    assert_equal '<i class="fa fa-envelope"></i> <a class="email__link" href="mailto:demo@rails-starter.com">demo@rails-starter.com</a>', @setting_decorated.email
+  end
+
+  #
+  # == Other
+  #
+  test 'should return correct credentials' do
+    assert_equal "Rails Starter - Tous droits réservés - Copyright &copy; #{current_year}", @setting_decorated.credentials
   end
 
   test 'should have correct admin_link value if administrator' do

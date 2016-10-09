@@ -7,9 +7,9 @@ class LocationDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
-  def full_address_inline
+  def full_address(inline = true)
     content_tag(:span) do
-      concat(model.address + ', ') if address?
+      concat(raw(model.address + (inline ? ', ' : '<br />')).to_s) if address?
       concat(model.postcode + ' - ') if postcode?
       concat(model.city) if city?
     end
@@ -32,7 +32,7 @@ class LocationDecorator < ApplicationDecorator
 
   def address_popup
     h.content_tag(:div) do
-      concat(h.content_tag(:p, full_address_inline))
+      concat(h.content_tag(:p, full_address))
     end
   end
 

@@ -261,7 +261,7 @@ fr:
         all_day: Toute la journée ?
         start_date: Date de début
         end_date: Date de fin
-        full_address_inline: Adresse
+        full_address: Adresse
         duration: Durée
         prev_next: Liens précédent / suivant ?
         show_as_gallery: Galerie d'images ?
@@ -272,7 +272,7 @@ fr:
         show_map: Afficher carte ?
         event_order: Ordre des événements
       map_setting:
-        full_address_inline: Adresse de votre organisation
+        full_address: Adresse de votre organisation
         marker_icon: Icône du marqueur
         marker_color: Couleur du marqueur
         marker_color_d: Couleur du marqueur

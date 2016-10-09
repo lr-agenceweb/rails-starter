@@ -4,7 +4,10 @@ footer.footer-site#footer
       .small-12.large-4.columns
         = render 'elements/footer/newsletter_form', newsletter_user: newsletter_user if @newsletter_module.enabled?
 
-      .small-12.large-6.large-offset-2.columns.socials
+      .small-12.large-4.columns.contact-informations
+        = render 'elements/footer/contact_informations'
+
+      .small-12.large-4.columns.socials
         = render 'elements/footer/socials' if @social_module.enabled? || @rss_module.enabled?
 
   .lower-footer

@@ -91,7 +91,7 @@ ActiveAdmin.register Event do
             row :start_date
             row :end_date
             row :duration
-            row :full_address_inline
+            row :full_address
             row :link_with_link
             bool_row :show_as_gallery
             bool_row :show_calendar if calendar_module.enabled?
