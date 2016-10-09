@@ -4,11 +4,15 @@ footer.footer-site#footer
       .small-12.large-4.columns
         = render 'elements/footer/newsletter_form', newsletter_user: newsletter_user if @newsletter_module.enabled?
 
-      .small-12.large-4.columns.contact-informations
+      .small-12.large-3.columns.contact-informations
         = render 'elements/footer/contact_informations'
 
-      .small-12.large-4.columns.socials
+      .small-12.large-3.columns.socials
         = render 'elements/footer/socials' if @social_module.enabled? || @rss_module.enabled?
+
+      .small-12.large-2.columns
+        - if setting.logo_footer?
+          p.logo-up == link_to retina_image_tag(setting, :logo_footer, :medium), '#wrapper', class: 'anchor'
 
   .lower-footer
     .row
