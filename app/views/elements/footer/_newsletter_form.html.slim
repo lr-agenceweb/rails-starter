@@ -4,15 +4,24 @@
       = I18n.t('newsletter.header')
 
   .newsletter-form__body
-    .row
-      .small-10.small-centered.columns
+    .row.align-center
+      .small-10.columns
         = simple_form_for newsletter_user, remote: true, validate: true, authenticity_token: true do |f|
-          .input-wrapper
-            = f.input :email, as: :email, label: false, placeholder: I18n.t('newsletter.placeholder'), required: true
+
+          div class="input-group newsletter-form__group"
+            = f.input :email,
+                      as: :email,
+                      required: true,
+                      label: false,
+                      placeholder: I18n.t('newsletter.placeholder'),
+                      input_html: { class: 'input-group-field newsletter-form__input' }
             = f.hidden_field :nickname
             = f.hidden_field :lang, value: @language
-            = f.button :button, class: 'submit-with-icon tiny' do
-              = fa_icon('envelope')
 
-          #feedback.hide
-            span.success
+            div class="input-group-button"
+              = button_tag class: 'button small newsletter-form__button', data: { icon: 'fa-envelope' }, name: nil do
+                - fa_icon 'envelope'
+
+          #newsletter-form__feedback.newsletter-form__feedback
+            span.form--success.newsletter-form__feedback--success.hide
+            span.form--error.newsletter-form__feedback--error.hide

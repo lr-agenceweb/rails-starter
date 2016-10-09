@@ -32,27 +32,20 @@ textarea
     margin-bottom: 0
 
 form
-  span.error, span.success
+  span.error, .form--error, .form--success
     display: block
     margin-bottom: 1rem
-    padding: .375rem .5625rem .5625rem
-    padding-left: 0
+    padding: .5rem
+    color: $white
+    background-color: $warning-color
     font-size: .75rem
     font-weight: normal
     font-style: italic
     .hide
       display: none !important
 
-  span.error
-    color: $warning-color
-    background: transparent
-
-  span.success
-    color: $white
-    background: $success-color
-
-  input.string + span.error
-    margin-top: -1rem
+  .form--success
+    background-color: $success-color
 
   textarea.text + span.error
     margin-bottom: 0

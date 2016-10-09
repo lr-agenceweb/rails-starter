@@ -20,6 +20,8 @@
 #= require i18n/translations
 #= require base/i18n_settings
 
+#= require plugins/newsletter_user_form
+
 #= require magnific-popup
 #= require modules/magnific_popup
 

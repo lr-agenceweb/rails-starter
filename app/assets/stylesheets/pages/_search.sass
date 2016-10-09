@@ -3,21 +3,10 @@
 // ===================
 .search-form
   float: right
-  max-width: $search_bar_width
   margin-right: 2rem
 
-  &__group
-    margin-bottom: 0
-
   &__input
-    color: $monsoon
-    border: none
-    &:focus
-      border: none
-      box-shadow: none
+    width: $search_bar_width + $submit_width
 
-  &__input, &__input:focus
-    background-color: $menu-font-color
-
-  &__input, &__button
-    height: 2rem
+// => Look at modules/widgets/form_submit_state
+// to customize input and submit button
