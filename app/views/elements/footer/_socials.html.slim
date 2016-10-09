@@ -17,10 +17,10 @@
             = I18n.t('social.follow')
 
         .socials__body
-          ul.inline-list
+          ul.inline-list.socials-list
             li = link_to fa_icon('rss'), posts_rss_path(format: :atom), class: 'social__link', target: :_blank if @rss_module.enabled?
 
             - unless @socials_follow.nil?
               - @socials_follow.each do |social_follow|
-                li
-                  = link_to social_follow.decorate.ikon_deco, social_follow.link, class: 'social__link', target: :_blank
+                li.social__icon
+                  = link_to social_follow.decorate.ikon_deco, social_follow.link, class: 'social__icon__link', target: :_blank

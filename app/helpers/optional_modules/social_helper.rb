@@ -105,7 +105,7 @@ module OptionalModules
     def awesome_share_buttons(title = '', opts = {})
       rel = opts[:rel]
       html = []
-      html << "<div class='awesome-share-buttons' data-title='#{h title}' data-img='#{opts[:image]}' "
+      html << "<ul class='awesome-share-buttons' data-title='#{h title}' data-img='#{opts[:image]}' "
       html << "data-url='#{opts[:url]}' data-desc='#{opts[:desc]}' data-popup='#{opts[:popup]}' data-via='#{opts[:via]}'>"
 
       @socials_share.each do |social|
@@ -114,13 +114,15 @@ module OptionalModules
         ikon = fa_icon social.font_ikon if social.decorate.font_ikon?
         ikon = retina_image_tag(social, :ikon, :small) if social.decorate.ikon?
 
-        html << link_to(ikon, '#',
-                        rel: ['nofollow', rel],
-                        'data-site': social.title.downcase,
-                        onclick: 'return SocialShareClass.share(this);',
-                        title: h(link_title))
+        link = link_to(ikon, '#',
+                       rel: ['nofollow', rel],
+                       'data-site': social.title.downcase,
+                       onclick: 'return SocialShareClass.share(this);',
+                       title: h(link_title),
+                       class: 'social__icon__link')
+        html << content_tag(:li, link, class: 'social__icon')
       end
-      html << '</div>'
+      html << '</ul>'
       raw html.join("\n")
     end
 
