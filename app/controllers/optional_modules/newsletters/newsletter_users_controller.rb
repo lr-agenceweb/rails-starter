@@ -7,20 +7,20 @@ class NewsletterUsersController < ApplicationController
   include ModuleSettingable
   include NewsletterUserable
 
-  after_action :send_welcome_newsletter, only: [:create], if: proc { @newsletter_setting.send_welcome_email? && @newsletter_user.valid? }
+  after_action :send_welcome_newsletter, only: [:create], if: proc { @newsletter_setting.send_welcome_email? && @newsletter_user.persisted? }
 
   def create
     @newsletter_user = NewsletterUser.new(newsletter_user_params)
     @newsletter_user.newsletter_user_role_id = NewsletterUserRole.find_by(kind: 'subscriber').id
     respond_to do |format|
       if @newsletter_user.save
-        flash[:success] = I18n.t('newsletter.subscribe_success', email: @newsletter_user.email)
+        flash[:success] = I18n.t('newsletter.subscribe_success')
         format.html { redirect_to :back }
-        format.js { render :show, status: :created }
+        format.js { render :create, status: :created }
       else
         flash[:error] = I18n.t('newsletter.subscribe_error')
         format.html { redirect_to :back }
-        format.js { render 'errors', status: :unprocessable_entity }
+        format.js { render :errors, status: :unprocessable_entity }
       end
     end
   end
