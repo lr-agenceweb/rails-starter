@@ -3,13 +3,19 @@
 // =====================
 .ui-autocomplete
   width: $search_bar_width !important
+  border: none
+  background: $white
 
   &.ui-menu
     .ui-menu-item
       padding: 10px
       list-style-image: none
       &:nth-child(odd)
+        background-color: $white-smoke
+      &.ui-state-focus
+        border: 1px solid transparent // fix
         background-color: $smoke
+        background-image: none
 
   .autocomplete__picture
     width: 50px
@@ -23,13 +29,3 @@
     font-size: 10px
     p
       margin-bottom: 0
-
-  &.ui-widget-content, .ui-state-focus
-    border: 1px solid transparent
-    background-color: $silver
-    background-image: none
-
-    .ui-state-focus
-      border: 1px solid transparent
-      background-color: $gainsboro
-      background-image: none
