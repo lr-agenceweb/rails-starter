@@ -8,5 +8,9 @@
   &__input
     width: $search_bar_width + $submit_width
 
+@media #{$small-only}
+  .search-form
+    margin-top: rem-calc(12)
+
 // => Look at modules/widgets/form_submit_state
 // to customize input and submit button

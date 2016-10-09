@@ -9,7 +9,7 @@
 
   ul
     float: right
-    margin: 1rem auto
+    margin: 0
     padding: 0
 
   .menu__item
@@ -39,7 +39,6 @@
   a#pull
     display: none
     text-align: center
-
 
 
 @media screen and (max-width: $menu-breakpoint-one)
@@ -101,7 +100,6 @@
         text-align: center
         @include link-colors($white, $menu-font-color)
 
-
       &.menu__item__active
         .menu__item__link
           color: $link-active-color
@@ -112,7 +110,13 @@
 
 // Menu déroulant sur une colonne
 @media only screen and (max-width : $menu-breakpoint-three)
+  .columns-for-menu
+    position: relative
+    margin-bottom: 1rem
+
   .menu__nav
+    position: absolute
+    z-index: 2
     margin-top: 1rem
     border: none
 
@@ -135,7 +139,7 @@
       // border-bottom: 1px solid $link-active-color
       padding: 10px
       color: $white
-      background-color: $menu-bg-color
+      background-color: $primary-color
 
       // /* L'icône hamburger, en utilisant le box-shadow */
       &:after
@@ -160,3 +164,9 @@
   &.menu__item__active
     .menu__item__link
       @include link-colors($white)
+
+
+@media #{$medium-up}
+  .menu__nav
+    ul
+      margin: 1rem auto

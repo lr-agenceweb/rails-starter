@@ -9,7 +9,7 @@ header.header-site
           = render 'searches/form' if @search_module.enabled?
 
   .lower-header
-    .row
+    .row.small-collapse.large-uncollapse
       .small-12.medium-3.medium-offset-1.columns.columns-for-logo
         = render 'elements/header/logo', show_metadata: false
       .small-12.medium-8.columns.columns.columns-for-menu
