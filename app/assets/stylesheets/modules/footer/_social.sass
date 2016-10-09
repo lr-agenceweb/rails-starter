@@ -6,12 +6,15 @@
     color: $white
     font-size: map-get($header-sizes, h6)
 
+  .social__item
+    &:not(:last-child)
+      margin-bottom: .75rem
   .socials__body
     text-align: center
   .awesome-share-buttons, .socials-list
     display: inline-table
     overflow: auto
-    margin-left: 0
+    margin: 0
     list-style-type: none
   .social__icon
     display: inline

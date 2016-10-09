@@ -14,6 +14,7 @@
     // Contact informations
     .contact-informations
       &__body
+        margin-bottom: 0
         text-align: center
       &__phone, &__email, &__address
         display: block
@@ -38,6 +39,10 @@
 
     .credentials
       text-align: left
+
+@media #{$small-only}
+  .socials, .newsletter-form, .contact-informations
+    margin-bottom: 1.5rem
 
 // Newsletter form
 @import modules/footer/newsletter_user
