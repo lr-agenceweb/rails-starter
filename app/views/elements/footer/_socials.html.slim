@@ -1,26 +1,23 @@
 .socials
-  .row
-    .small-12.large-4.columns
+  / Share
+  - if !@socials_share.nil? && !@asocial
+    header.socials__header
+      span.socials__header__title
+        = I18n.t('social.share')
+    .socials__body
+      = social_share_buttons
 
-      / Share
-      - if !@socials_share.nil? && !@asocial
-        header.socials__header
-          span.socials__header__title
-            = I18n.t('social.share')
-        .socials__body
-          = social_share_buttons
+  / Follow
+  - if setting.show_social? || @rss_module.enabled?
+    header.socials__header
+      span.socials__header__title
+        = I18n.t('social.follow')
 
-      / Follow
-      - if setting.show_social? || @rss_module.enabled?
-        header.socials__header
-          span.socials__header__title
-            = I18n.t('social.follow')
+    .socials__body
+      ul.inline-list.socials-list
+        li = link_to fa_icon('rss'), posts_rss_path(format: :atom), class: 'social__link', target: :_blank if @rss_module.enabled?
 
-        .socials__body
-          ul.inline-list.socials-list
-            li = link_to fa_icon('rss'), posts_rss_path(format: :atom), class: 'social__link', target: :_blank if @rss_module.enabled?
-
-            - unless @socials_follow.nil?
-              - @socials_follow.each do |social_follow|
-                li.social__icon
-                  = link_to social_follow.decorate.ikon_deco, social_follow.link, class: 'social__icon__link', target: :_blank
+        - unless @socials_follow.nil?
+          - @socials_follow.each do |social_follow|
+            li.social__icon
+              = link_to social_follow.decorate.ikon_deco, social_follow.link, class: 'social__icon__link', target: :_blank
