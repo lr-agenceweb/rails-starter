@@ -56,13 +56,6 @@ class SettingDecorator < ApplicationDecorator
   #
   # == Modules
   #
-  def newsletter(newsletter_user)
-    content_tag(:div, class: 'newsletter-form') do
-      concat(content_tag(:span, I18n.t('newsletter.header'), class: 'newsletter-form-header'))
-      concat(render('elements/footer/newsletter_form', newsletter_user: newsletter_user))
-    end
-  end
-
   def about
     link_to I18n.t('main_menu.about'), abouts_path
   end
