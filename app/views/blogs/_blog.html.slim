@@ -41,8 +41,8 @@ article.blog class="#{params[:action]}" data-equalizer-watch=''
             - if @comment_module.enabled? && blog.allow_comments?
               - list_comments = blog.comments.validated.by_locale(@language)
               .small-6.columns
-                span#blog__comment__count.blog__comment__count<
-                  = fa_icon 'comments', text: list_comments.count
+                .blog__comment__count
+                  = fa_icon 'comments', text: content_tag(:span, list_comments.count, id: 'blog__comment__count')
 
         - if @social_module.enabled?
           .blog__lower-footer
