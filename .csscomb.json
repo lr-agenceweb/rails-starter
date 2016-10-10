@@ -288,6 +288,7 @@
     "-moz-box-shadow",
     "box-shadow",
     "object-fit",
+    "object-position",
     "filter:progid:DXImageTransform.Microsoft.gradient",
     "-ms-filter:\\'progid:DXImageTransform.Microsoft.gradient",
     "text-shadow",
