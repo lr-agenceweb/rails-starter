@@ -1,4 +1,75 @@
 // Blogs
+.blogs
+  background-color: rgba($white, .95)
+
+.blog
+  position: relative
+  margin-bottom: 2rem
+  background-color: $white
+
+  &__update
+    position: absolute
+    z-index: 1
+    top: 0
+    right: 0
+
+  &__header, &__body, &__footer
+    padding: 0 .9375rem
+
+  &__cover
+    position: relative
+    img
+      max-height: 250px
+      object-fit: cover
+      object-position: top center
+      font-family: 'object-fit: cover;'
+    &__video__icon
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translateX(-50%) translateY(-50%)
+      font-size: 6rem
+      &__link
+        @include link-colors($white, $warning-color)
+
+  &__header
+    margin-top: 1rem
+    &__title, &__timestamps
+      text-transform: uppercase
+      color: $charcoal
+    &__timestamps
+      display: block
+      margin-bottom: .5rem
+      font-size: rem-calc(15)
+    &__title
+      font-size: 1rem
+      font-weight: bold
+    &__category
+      display: block
+      color: $rss
+      font-weight: normal
+      line-height: inherit
+      &__link
+        @include link-colors($rss, $rss, $rss, $rss)
+      &:before
+        content: '('
+      &:after
+        content: ')'
+
+  &__footer
+    .blog__upper-footer
+      .blog_author
+      .blog__comment__count
+        float: right
+
+    .blog__lower-footer
+      overflow: auto
+      margin-top: 1rem
+      .blog__socials
+        float: right
+        .social__icon
+          &__link
+            color: $body-font-color
 
 // Sidebar
 @import modules/blog/sidebar

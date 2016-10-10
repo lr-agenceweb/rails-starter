@@ -1,7 +1,7 @@
 - if resource.pictures?
   div
     - version = defined?(size) ? size.to_sym : :large
-    - img_version = retina_image_tag(resource.first_pictures, :image, version, data: { interchange: "[#{resource.first_picture_image_url_by_size(:small)}, small], [#{resource.first_picture_image_url_by_size(:medium)}, medium], [#{resource.first_picture_image_url_by_size(:large)}, large]" })
+    - img_version = retina_image_tag(resource.first_pictures, :image, version, class: 'polyfill', data: { interchange: "[#{resource.first_picture_image_url_by_size(:medium)}, small], [#{resource.first_picture_image_url_by_size(:medium)}, medium], [#{resource.first_picture_image_url_by_size(:large)}, large]" })
     - if defined?(link)
       - if !!link == link && link
         = link_to img_version, resource.picture.self_image_url_by_size(version), title: resource.picture.title, class: 'magnific-popup'

@@ -1,42 +1,23 @@
-article.post-article class="#{params[:action]}"
+article.blog class="#{params[:action]}" data-equalizer-watch=''
   = render 'posts/microdatas', resource: blog, kind: 'BlogPosting'
+
+  - if can? :update, blog
+    span.blog__update =< link_to fa_icon('pencil'), edit_admin_blog_path(blog), target: :_blank, class: 'button small warning'
 
   .row
     .small-12.columns
-      header.post-header
-        h3.post-title
+
+      = render 'blogs/cover', blog: blog
+
+      header.blog__header
+        span.blog__header__timestamps
+          = blog.pretty_created_at(setting.date_format)
+
+        h3.blog__header__title
           = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
-          - if can? :update, blog
-            span.frontend-actions =< link_to t('active_admin.edit'), edit_admin_blog_path(blog), target: :_blank, class: 'button tiny ffab after fa-pencil'
+          small.blog__header__category = link_to blog.blog_category_name, blog_category_path(blog.blog_category), class: 'blog__header__category__link'
 
-        p.post-meta-title
-          span.post-created-at
-            = blog.pretty_created_at(setting.date_format)
-
-          span.post-category<
-            == t('blog.in_category', category: link_to(blog.blog_category_name, blog_category_path(blog.blog_category)))
-
-      - if blog.pictures? || blog.video_uploads? || blog.video_platforms?
-        .pictures-container
-          - if index_page?
-            - if blog.pictures?
-              = render 'elements/pictures/has_many_get_first', resource: blog, link: false
-            - elsif blog.video_uploads?
-              = retina_image_tag blog.video_upload, :video_file, :preview
-              .video-icon = link_to fa_icon('play-circle'), blog_category_blog_path(blog.blog_category, blog)
-            - elsif blog.video_platforms?
-              - begin
-                = blog.video_platform.decorate.preview
-                .video-icon = link_to fa_icon('play-circle'), blog_category_blog_path(blog.blog_category, blog)
-              - rescue
-
-          - if show_page?
-            - if blog.show_as_gallery?
-              = render 'elements/pictures/has_many_as_gallery', resource: blog
-            - else
-              = render 'elements/pictures/has_many', resource: blog, link: true
-
-      .post-content
+      .blog__body
         - if index_page?
           - link = blog_category_blog_path(blog.blog_category, blog)
           == truncate_read_more(blog.content, link, 300)
@@ -51,44 +32,29 @@ article.post-article class="#{params[:action]}"
           .audios-container
             = render '/assets/audios/index', audios: blog.audios
 
-      footer.post-footer
-        .upper-footer
-          .row.align-middle
-            .small-12.medium-6.columns
-              ul.inline-list
-                li
-                  span = I18n.t('activerecord.attributes.post.author_with_avatar')
-                  |:
-                  span.author< = blog.author
+      footer.blog__footer
+        .blog__upper-footer
+          .row
+            .small-6.columns
+              span.blog__author< = fa_icon 'user', text: blog.author
 
-                - if @comment_module.enabled? && blog.allow_comments?
-                  li
-                    - list_comments = blog.comments.validated.by_locale(@language)
-                    = I18n.t('activerecord.models.comment.one').pluralize(list_comments.count)
-                    |:
-                    span#comment-count.comment-count< = list_comments.count
+            - if @comment_module.enabled? && blog.allow_comments?
+              - list_comments = blog.comments.validated.by_locale(@language)
+              .small-6.columns
+                span#blog__comment__count.blog__comment__count<
+                  = fa_icon 'comments', text: list_comments.count
 
-            .small-12.medium-6.columns
-              .social-share
-                = awesome_share_buttons(blog.title,
-                                  desc: html_escape_once(blog.referencement_description),
-                                  image: image_for_object(blog),
-                                  via: @setting.try(:twitter_username),
-                                  url: blog_category_blog_url(blog.blog_category, blog),
-                                  popup: true)
+        - if @social_module.enabled?
+          .blog__lower-footer
+            .socials.blog__socials
+              = awesome_share_buttons(blog.title,
+                                desc: html_escape_once(blog.referencement_description),
+                                image: image_for_object(blog),
+                                via: @setting.try(:twitter_username),
+                                url: blog_category_blog_url(blog.blog_category, blog),
+                                popup: true)
 
-            - if index_page? && @comment_module.enabled? && blog.allow_comments?
-              .small-12.columns.last-comment
-                - comment_sentence = t('comment.be_the_first')
-                - if !list_comments.empty?
-                  - comment_sentence = t('comment.add_your_own')
-                  .last-comment-title = t('blog.last_comment')
-                  blockquote
-                    - last_comment = list_comments.first
-                    = last_comment.content
-                    cite = last_comment.decorate.pseudo_registered_or_guest
 
-                = link_to raw("#{fa_icon 'comment', text: comment_sentence}"), blog_category_blog_path(blog.blog_category, blog, anchor: 'new_comment')
 
         - if show_page?
           - if @blog_settings.prev_next? && (blog.prev? || blog.next?)

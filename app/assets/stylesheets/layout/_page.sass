@@ -1,52 +1,59 @@
-.l-page-title
-  margin-top: 15px
-  text-align: center
+//
+// Page layout
+// ===========
+.page-section
+  .page__header
 
-  .l-page-title-link
-    @include link-colors($secondary-color)
+// .l-page-title
+//   margin-top: 15px
+//   text-align: center
+//
+//   .l-page-title-link
+//     @include link-colors($secondary-color)
+//
+// .article-container
+//   margin-top: 90px
+//
+//   .pictures.pictures-container
+//     margin-bottom: 25px
+//     background-color: $secondary-color
+//
+//
+// .post-article
+//   position: relative
+//   margin: 2.5rem 0 3rem 0
+//   &-title
+//     margin-bottom: 1rem
+//     color: $primary-color
+//
+//   .post-title
+//     display: inline
+//   .frontend-actions
+//     &:before
+//       position: relative
+//       content: ' - '
+//
+//   footer
+//     padding: 1rem
+//     border: 1px solid $primary-color
+//
+//     .inline-list
+//       margin-bottom: 0
+//
+// #cookie_post
+//   .page-section
+//     margin-top: 0
+//     padding: 1rem
+//
+// .pictures-container
+//   margin-bottom: 1rem
+//   img
+//     width: 100%
 
-.article-container
-  margin-top: 90px
-
-  .pictures.pictures-container
-    margin-bottom: 25px
-    background-color: $secondary-color
-
-
-.post-article
-  position: relative
-  margin: 2.5rem 0 3rem 0
-  &-title
-    margin-bottom: 1rem
-    color: $primary-color
-
-  .post-title
-    display: inline
-  .frontend-actions
-    &:before
-      position: relative
-      content: ' - '
-
-  footer
-    padding: 1rem
-    border: 1px solid $primary-color
-
-    .inline-list
-      margin-bottom: 0
-
-#cookie_post
-  .page-section
-    margin-top: 0
-    padding: 1rem
-
-.pictures-container
-  margin-bottom: 1rem
-  img
-    width: 100%
 
 @media #{$small-only}
   .page-section
-    margin-top: 2.9rem
+    margin-top: rem-calc(43)
     padding: 1.5rem 0
   .post-article
     margin: 0

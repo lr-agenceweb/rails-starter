@@ -1,9 +1,9 @@
 new_count = "<%= @commentable.comments.validated.by_locale(@language).count %>"
-if($('#comment-count').length > 0) {
-  $('#comment-count').text(new_count);
+if($('#blog__comment__count').length > 0) {
+  $('#blog__comment__count').text(new_count);
 }
 
-$count = $("#comment-count-<%= @commentable.id %>")
+$count = $("#blog__comment__count-<%= @commentable.id %>")
 if($count.length > 0) {
   $count.text(new_count);
 }

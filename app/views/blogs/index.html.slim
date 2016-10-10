@@ -1,27 +1,33 @@
 - breadcrumb :blogs
 
-/= render 'assets/sliders/show', slider: @category.slider, force: false unless @category.slider.nil?
+- if category.video?
+  = render 'assets/videos/video_background', video_background: category.video_upload.decorate
+- else
+  - if category.background? && @background_module.enabled? && !@background.nil?
+    - cache category.background do
+      = render 'assets/backgrounds/background', background: category.background
+  - else
+    = render 'assets/sliders/show', slider: slider, force: false
 
-.row.align-center
+section.page-section.blogs.row.align-center#blogs
   .small-12.columns
-    section.blogs-section.page-section#blogs
+    header.page__header
+      = title_for_category(category, defined?(opts) ? opts : {})
+
+  .small-11.columns#sidebar_referer
+    - if @blogs.blank?
+      p = t('blog.no_results')
+    - else
       .row
-        .small-12.columns
-          = title_for_category(category, defined?(opts) ? opts : {})
+        .small-12.large-9.columns
+          #blogs-container
+            .row.small-up-1.large-up-2 data-equalizer='' data-equalize-by-row="true"
+              - @blogs.each do |blog|
+                - cache ['list', blog]
+                  .column
+                    = render 'blogs/blog', blog: blog
 
-      .row.align-center
-        .small-11.columns#sidebar_referer
-          - if @blogs.blank?
-            p = t('blog.no_results')
-          - else
-            .row
-              .small-12.large-8.columns
-                #blogs-container
-                  - @blogs.each do |blog|
-                    - cache ['list', blog]
-                      = render 'blogs/blog', blog: blog
+          = paginate @blogs
 
-                = paginate @blogs
-
-              .large-4.columns.show-for-large data-sticky-container=''
-                = render 'blogs/sidebar'
+        .large-3.columns.show-for-large data-sticky-container=''
+          = render 'blogs/sidebar'
