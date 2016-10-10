@@ -39,4 +39,4 @@ $(document).on 'ready page:load page:restore', ->
 
 @reset_local_storage = (form) ->
   localStorage.removeItem 'formBackup'
-  $this.resetClientSideValidations()
+  form.resetClientSideValidations()
