@@ -2,15 +2,20 @@
 // Search bar [Header]
 // ===================
 .search-form
-  float: right
-  margin-right: 2rem
+  display: block
+  width: $search_bar_width + $submit_width + 2px
 
   &__input
     width: $search_bar_width + $submit_width
 
 @media #{$small-only}
   .search-form
-    margin-top: rem-calc(12)
+    margin: 2.75rem auto 0 auto
+
+@media #{$medium-up}
+  .search-form
+    float: right
+    margin-right: 2rem
 
 // => Look at modules/widgets/form_submit_state
 // to customize input and submit button

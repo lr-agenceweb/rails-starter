@@ -41,6 +41,11 @@
     text-align: center
 
 
+@media screen and (min-width: $menu-breakpoint-two)
+  .menu__nav
+    ul
+      margin: 1rem auto
+
 @media screen and (max-width: $menu-breakpoint-one)
   .columns-for-logo, .columns-for-menu
     margin-left: 0 !important
@@ -112,12 +117,10 @@
 @media only screen and (max-width : $menu-breakpoint-three)
   .columns-for-menu
     position: relative
-    margin-bottom: 1rem
 
   .menu__nav
     position: absolute
     z-index: 2
-    margin-top: 1rem
     border: none
 
     ul
@@ -164,9 +167,3 @@
   &.menu__item__active
     .menu__item__link
       @include link-colors($white)
-
-
-@media #{$medium-up}
-  .menu__nav
-    ul
-      margin: 1rem auto
