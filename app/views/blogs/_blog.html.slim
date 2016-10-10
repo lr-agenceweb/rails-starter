@@ -35,25 +35,28 @@ article.blog class="#{params[:action]}" data-equalizer-watch=''
       footer.blog__footer
         .blog__upper-footer
           .row
-            .small-6.columns
-              span.blog__author< = fa_icon 'user', text: blog.author
+            .small-12.columns.blog__upper-footer__item class="medium-#{params[:action] == 'index' ? '6' : '4'}"
+              p.blog__author
+                span.blog__author__icon.blog__footer__icon = fa_icon 'user'
+                span.blog__author__name.blog__footer__name = blog.author
 
             - if @comment_module.enabled? && blog.allow_comments?
               - list_comments = blog.comments.validated.by_locale(@language)
-              .small-6.columns
-                .blog__comment__count
-                  = fa_icon 'comments', text: content_tag(:span, list_comments.count, id: 'blog__comment__count')
+              .small-12.columns.blog__upper-footer__item class="medium-#{params[:action] == 'index' ? '6' : '4'}"
+                p.blog__comment__count
+                  span.blog__comment__count__icon.blog__footer__icon = fa_icon 'comments'
+                  span.blog__comment__count__name.blog__footer__name#blog__comment__count = list_comments.count
 
-        - if @social_module.enabled?
-          .blog__lower-footer
-            .socials.blog__socials
-              = awesome_share_buttons(blog.title,
-                                desc: html_escape_once(blog.referencement_description),
-                                image: image_for_object(blog),
-                                via: @setting.try(:twitter_username),
-                                url: blog_category_blog_url(blog.blog_category, blog),
-                                popup: true)
-
+            - if @social_module.enabled?
+              .small-12.columns.blog__upper-footer__item class="medium-#{params[:action] == 'index' ? '12' : '4'}"
+                .socials.blog__socials
+                  = awesome_share_buttons(blog.title,
+                                    desc: html_escape_once(blog.referencement_description),
+                                    image: image_for_object(blog),
+                                    via: @setting.try(:twitter_username),
+                                    url: blog_category_blog_url(blog.blog_category, blog),
+                                    popup: true)
+                  span.blog__social__name = I18n.t('social.share_article')
 
 // Prev/Next and Back to links
 - if show_page?

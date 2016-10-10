@@ -64,18 +64,26 @@
 
   &__footer
     .blog__upper-footer
-      .blog_author
-      .blog__comment__count
-        float: right
-
-    .blog__lower-footer
-      overflow: auto
-      margin-top: 1rem
-      .blog__socials
-        float: right
-        .social__icon
-          &__link
-            color: $body-font-color
+      &__item
+        padding-top: .5rem
+        padding-bottom: .5rem
+        color: $white
+        background-color: $primary-color
+        &:nth-child(even)
+          background-color: $secondary-color
+        &:last-child
+          background-color: $tercery-color
+      .blog__author, .blog__comment__count, .blog__socials
+        margin-bottom: 0
+        text-align: center
+        &__icon
+          display: block
+        &__name
+          display: block
+          margin: 0 auto
+        .awesome-share-buttons
+          display: block
+          text-align: center
 
 .blog__back-links
   margin-bottom: 1rem
