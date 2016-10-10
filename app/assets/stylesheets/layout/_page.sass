@@ -12,7 +12,6 @@
 
 @media #{$small-only}
   .page-section
-    margin-top: rem-calc(43)
     padding: 1.5rem 0
   .post-article
     margin: 0
@@ -22,3 +21,7 @@
     .page__header
       &__title
         font-size: 3rem
+
+@media only screen and (max-width : $menu-breakpoint-three)
+  .page-section
+    margin-top: rem-calc(43)
