@@ -70,8 +70,6 @@
   &__footer
     .blog__upper-footer
       &__item
-        padding-top: .5rem
-        padding-bottom: .5rem
         color: $white
         background-color: $primary-color
         &:nth-child(even)
@@ -80,6 +78,8 @@
           background-color: $tercery-color
       .blog__author, .blog__comment__count, .blog__socials
         margin-bottom: 0
+        padding-top: .5rem
+        padding-bottom: .5rem
         text-align: center
         &__icon
           display: block
@@ -89,6 +89,13 @@
         .awesome-share-buttons
           display: block
           text-align: center
+      .blog__comment__count
+        padding: 0
+        &__link
+          display: block
+          padding-top: .5rem
+          padding-bottom: .5rem
+          color: $white
 
 .blog__back-links
   margin-bottom: 1rem
