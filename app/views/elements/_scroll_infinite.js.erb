@@ -5,8 +5,19 @@
   <% object_to_append = render object %>
 <% end %>
 
-$('<%= selector %>').append('<%= j object_to_append %>');
+// Append content
+$html = $('<div/>').html('<%= j object_to_append %>').contents();
+$('<%= selector %>').append($html);
 
+// Wrap with html tag if defined
+<% if defined?(wrap_with) %>
+wrap_with = "<%= j wrap_with %>";
+$.each($html, function(i, item) {
+  $(item).wrap(wrap_with);
+});
+<% end %>
+
+// Pagination
 <% if object.next_page %>
   $('.pagination').replaceWith('<%= j paginate(object) %>');
 <% else %>
@@ -20,3 +31,8 @@ $('<%= selector %>').append('<%= j object_to_append %>');
 
   $('.pagination').text(text);
 <% end %>
+
+// Reload Equalizer for new added items
+if(!isSmall() && $('[data-equalizer]').length > 0) {
+  Foundation.reInit('equalizer');
+}
