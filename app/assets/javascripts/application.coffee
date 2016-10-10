@@ -66,8 +66,12 @@
 #= require modules/scroll_infinite
 
 #= require plugins/devkit
+#= require polyfills/object-fit-images.js
 
 $(document).on 'ready page:load page:restore', ->
+  # Object fit polyfill
+  objectFitImages('img.polyfill', { watchMQ: true })
+
   # Save form inputs in LocalStorage
   $('form').formBackup()
   $('form[data-validate]').validate()
