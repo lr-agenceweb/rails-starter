@@ -1,3 +1,4 @@
 $(document).on 'ready page:load page:restore', ->
-  $('#masonry-container').masonry
-    itemSelector: '.masonry-item'
+  if $('#masonry-container').length > 0 && !isSmall()
+    $('#masonry-container').masonry
+      itemSelector: '.masonry-item'

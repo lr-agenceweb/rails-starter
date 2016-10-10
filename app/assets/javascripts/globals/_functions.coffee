@@ -3,6 +3,11 @@
   if typeof Foundation != 'undefined'
     Foundation.MediaQuery.current == 'small'
 
+# is this a medium screen?
+@isMedium = ->
+  if typeof Foundation != 'undefined'
+    Foundation.MediaQuery.current == 'medium'
+
 @isSmallBreakOne = ->
   matchMedia('(max-width: 949px)').matches
 
