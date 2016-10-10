@@ -41,9 +41,12 @@
     .credentials
       text-align: left
 
-@media #{$small-only}
   .socials, .newsletter-form, .contact-informations
     margin-bottom: 1.5rem
+
+@media #{$large-up}
+  .socials, .newsletter-form, .contact-informations
+    margin-bottom: 0
 
 // Newsletter form
 @import modules/footer/newsletter_user
