@@ -1,15 +1,7 @@
 - breadcrumb :blogs
+= render 'elements/background_page_cover', category: category
 
-- if category.video?
-  = render 'assets/videos/video_background', video_background: category.video_upload.decorate
-- else
-  - if category.background? && @background_module.enabled? && !@background.nil?
-    - cache category.background do
-      = render 'assets/backgrounds/background', background: category.background
-  - else
-    = render 'assets/sliders/show', slider: slider, force: false
-
-section.page-section.blogs.row.align-center#blogs
+section.page-section.blogs.row.align-center#blogs class="#{params[:action]}"
   .small-12.columns
     header.page__header
       = title_for_category(category, defined?(opts) ? opts : {})
@@ -19,7 +11,7 @@ section.page-section.blogs.row.align-center#blogs
       p = t('blog.no_results')
     - else
       .row
-        .small-12.large-9.columns
+        .small-12.large-8.columns
           #blogs-container
             .row.small-up-1.large-up-2.block-grid data-equalizer='' data-equalize-by-row="true"
               - @blogs.each do |blog|
@@ -29,5 +21,5 @@ section.page-section.blogs.row.align-center#blogs
 
           = paginate @blogs
 
-        .large-3.columns.show-for-large data-sticky-container=''
+        .large-4.columns.show-for-large data-sticky-container=''
           = render 'blogs/sidebar'
