@@ -45,6 +45,8 @@ fr:
   general: Informations générales
   prev: Précédent
   next: Suivant
+  prev_article: '%{article} précédent'
+  next_article: '%{article} suivant'
   no_js: "%{site} fonctionne mieux avec JavaScript activé ;)"
   in: dans
   close: Fermer
@@ -107,6 +109,8 @@ en:
   general: General information
   prev: Previous
   next: Next
+  prev_article: Prev %{article}
+  next_article: Next %{article}
   no_js: "%{site} works better with JavaScript enabled ;)"
   in: in
   close: Close

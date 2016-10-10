@@ -1,8 +1,11 @@
 - if element.prev?
-  .prev_button.hide-for-small-only
-    span data-tooltip="" aria-haspopup="true" class="has-tip" title="#{element.fetch_prev_title}"
-      = link_to fa_icon('chevron-circle-left 4x'), element.prev_post
+  .prev__button
+    - l1 = fa_icon 'arrow-left', text: I18n.t('prev_article', article: I18n.t("activerecord.models.#{controller_name.classify.underscore.downcase}.one"))
+    h4.prev__button__title
+      = link_to "#{content_tag(:span, l1, class: 'line-one')} #{element.fetch_prev_title}".html_safe, element.prev_post
+
 - if element.next?
-  .next_button.hide-for-small-only
-    span data-tooltip="" aria-haspopup="true" class="has-tip" title="#{element.fetch_next_title}"
-      = link_to fa_icon('chevron-circle-right 4x'), element.next_post
+  .next__button
+    - l1 = fa_icon 'arrow-right', right: true, text: I18n.t('next_article', article: I18n.t("activerecord.models.#{controller_name.classify.underscore.downcase}.one"))
+    h4.next__button__title
+      = link_to "#{content_tag(:span, l1, class: 'line-one')} #{element.fetch_next_title}".html_safe, element.next_post

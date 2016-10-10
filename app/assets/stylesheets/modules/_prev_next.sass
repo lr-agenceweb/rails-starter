@@ -1,11 +1,27 @@
-.prev_button
-  position: absolute
-  top: 50%
-  left: -80px
-  a
-    @include link-colors($tercery-color, $primary-color)
+//
+// Prev/Next button [Blog/Event]
+// =============================
+.prev-next__buttons
+  overflow: auto
+  margin-bottom: 1rem
+  padding: 1rem
+  background-color: $white
 
-.next_button
-  @extend .prev_button
-  left: initial
-  right: -80px
+  .prev__button
+    float: left
+    text-align: left
+    a
+      @include link-colors($primary-color, lighten($primary-color, 10%))
+
+  .next__button
+    float: right
+    text-align: right
+    @extend .prev__button
+
+  .prev__button__title, .next__button__title
+    margin-bottom: 0
+    font-size: 1rem
+
+    .line-one
+      display: block
+      color: $body-font-color
