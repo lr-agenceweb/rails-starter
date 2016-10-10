@@ -44,7 +44,8 @@ article.blog class="#{params[:action]}"
               - list_comments = blog.comments.validated.by_locale(@language)
               .small-12.columns.blog__upper-footer__item class="medium-#{params[:action] == 'index' ? '6' : '4'}"
                 p.blog__comment__count
-                  a href="#{blog_category_blog_path(blog.blog_category, blog, anchor: 'new_comment')}" class="blog__comment__count__link"
+                  - link = params[:action] == 'show' ? '#new_comment' : blog_category_blog_path(blog.blog_category, blog, anchor: 'new_comment')
+                  a href="#{link}" class="blog__comment__count__link"
                     span.blog__comment__count__icon.blog__footer__icon = fa_icon 'comments'
                     span.blog__comment__count__name.blog__footer__name#blog__comment__count = list_comments.count
 
