@@ -25,12 +25,12 @@ article.blog class="#{params[:action]}"
           == blog.content
 
       - if show_page?
-        .blog__videos
-          = render '/assets/videos/index', resource: blog
-
         - if @audio_module.enabled? && blog.audios?
           .blog__audios
             = render '/assets/audios/index', audios: blog.audios
+
+        .blog__videos
+          = render '/assets/videos/index', resource: blog
 
       footer.blog__footer
         .blog__upper-footer
