@@ -61,7 +61,7 @@ fr:
 
   scroll_infinite:
     fetch_nexts: Chargement en cours ...
-    fetch_end: Il n'a plus de %{resource} à afficher :(
+    fetch_end: Il n'y a plus d'articles à afficher
 
   admin_bar:
     go_to_admin: Voir l'administration
@@ -113,7 +113,7 @@ en:
 
   scroll_infinite:
     fetch_nexts: Loading ...
-    fetch_end: There is no more %{resource} to show :(
+    fetch_end: There is no more posts to show
 
   admin_bar:
     go_to_admin: Go to the administration

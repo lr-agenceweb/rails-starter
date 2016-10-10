@@ -27,7 +27,7 @@ $.each($html, function(i, item) {
     resource = I18n.t("activerecord.models.<%= controller_name.classify.underscore.downcase %>.one")
   <% end %>
 
-  text = I18n.t('scroll_infinite.fetch_end', { resource: resource })
+  text = I18n.t('scroll_infinite.fetch_end')
 
   $('.pagination').text(text);
 <% end %>
