@@ -13,10 +13,10 @@ section.page-section.blogs.row.align-center#blogs class="#{params[:action]}"
       .row
         .small-12.large-8.columns
           #blogs-container
-            .row.small-up-1.large-up-2.block-grid data-equalizer='' data-equalize-by-row="true"
+            .row.small-up-1.large-up-2.block-grid#masonry-container
               - @blogs.each do |blog|
                 - cache ['list', blog]
-                  .column
+                  .column.masonry-item
                     = render 'blogs/blog', blog: blog
 
           = paginate @blogs

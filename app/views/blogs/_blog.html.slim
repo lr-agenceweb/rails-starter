@@ -1,4 +1,4 @@
-article.blog class="#{params[:action]}" data-equalizer-watch=''
+article.blog class="#{params[:action]}"
   = render 'posts/microdatas', resource: blog, kind: 'BlogPosting'
 
   - if can? :update, blog
