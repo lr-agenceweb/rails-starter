@@ -38,7 +38,7 @@ html lang="#{@language}" class='no-js'
       = render 'elements/flash' unless flash.nil?
       = render 'elements/header/header', show_metadata: true
 
-      .l-container
+      .body-site
         == yield
       .push
 
