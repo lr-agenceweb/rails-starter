@@ -71,13 +71,13 @@ module Admin
     #
     # == PublicationDate
     #
-    test 'should not create nested publication_date if blank attributes' do
+    test 'should create nested publication_date if blank attributes' do
       attrs = set_default_record_attrs
       attrs[:blog_category_id] = @blog_category.id
 
       post :create, blog: attrs
       blog = assigns(:blog)
-      assert_not blog.publication_date.present?
+      assert blog.publication_date.present?
       assert blog.published_at.nil?
       assert blog.expired_at.nil?
 
