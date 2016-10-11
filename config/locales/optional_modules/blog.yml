@@ -7,6 +7,8 @@ en:
     last_comments: Last comments
     last_comment: Last comment
     in_category: in %{category} category
+    destroy:
+      confirm: Are you sure you want to remove this article ?
 
 # French
 fr:
@@ -17,3 +19,5 @@ fr:
     last_comments: Derniers commentaires
     last_comment: Dernier commentaire
     in_category: dans la catégorie %{category}
+    destroy:
+      confirm: Êtes-vous sûr de vouloir supprimer cet article ?

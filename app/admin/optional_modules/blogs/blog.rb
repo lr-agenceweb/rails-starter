@@ -87,5 +87,11 @@ ActiveAdmin.register Blog do
     def scoped_collection
       super.includes :picture, :user
     end
+
+    def destroy
+      super do |format|
+        format.js { render 'active_admin/blogs/destroy' }
+      end
+    end
   end
 end

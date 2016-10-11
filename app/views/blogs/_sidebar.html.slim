@@ -5,7 +5,7 @@ aside#blog__sidebar.blog__sidebar data-sticky='' data-anchor='sidebar_referer' d
       ul
         - @last_blogs.each do |blog|
           - cache ['sidebar', blog] do |_|
-            li
+            li id="blog-#{blog.id}__sidebar"
               == link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
               - if @comment_module.enabled?
                 - number = blog.comments.by_locale(@language).validated.count

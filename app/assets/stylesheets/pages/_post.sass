@@ -14,11 +14,17 @@
   margin-bottom: 2rem
   background-color: $white
 
-  &__update
+  &__admin-actions
     position: absolute
     z-index: 1
     top: 0
     right: 0
+    &__update, &__destroy
+      display: block
+      margin-bottom: 0
+      &__link
+        width: 36px
+        margin-bottom: 0
 
   &__header, &__body, &__footer
     padding: 0 .9375rem
