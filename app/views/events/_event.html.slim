@@ -9,7 +9,7 @@ article.post.event class="#{params[:action]}"
 
       header.post__header.event__header
         span.post__header__timestamps.event__header__timestamps
-          == event.from_to_date
+          == fa_icon 'calendar', text: event.from_to_date.html_safe
 
         h3.post__header__title.event__header__title
           = link_to event.title, event_path(event)

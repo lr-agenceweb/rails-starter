@@ -9,7 +9,7 @@ article.post.blog class="#{params[:action]}" id="blog-#{blog.id}"
 
       header.post__header.blog__header
         span.post__header__timestamps.blog__header__timestamps
-          = blog.pretty_created_at(setting.date_format)
+          = fa_icon 'clock-o', text: blog.pretty_created_at(setting.date_format)
 
         h3.post__header__title.blog__header__title
           = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
