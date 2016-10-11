@@ -1,11 +1,11 @@
 - breadcrumb event
+= render 'elements/background_page_cover', category: category
 
-- cache event do |_|
-  .row
-    .small-12.columns
+section.page-section.posts.events.row.align-center#events class="#{params[:action]}"
+  .small-12.columns
+    header.page__header
+      = title_for_category(category, defined?(opts) ? opts : {})
+
+  .small-12.medium-9.columns
+    - cache event do |_|
       = render 'events/event', event: event
-
-- if show_page?
-  .row.align-center
-    .small-12.medium-9.columns
-        p.text-right = link_to t('link.back_to', page: @category.menu_title), events_path
