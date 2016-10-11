@@ -28,6 +28,7 @@
 class Event < ActiveRecord::Base
   include Core::Referenceable
   include Core::FriendlyGlobalizeSluggable
+  include Includes::EventIncludable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
