@@ -1,3 +1,4 @@
 nav.language
   ul.menu.simple
-    = language_menu(instance_variable_get("@#{controller_name.underscore.singularize}"))
+   - resource = instance_variable_get("@#{controller_name.underscore.singularize}")
+    = language_menu(resource)

@@ -115,7 +115,7 @@ class PostDecorator < ApplicationDecorator
   # == Link (linkable polymorphic)
   #
   def link_with_link
-    link_to model.link.url, model.link.url, target: :_blank if link?
+    link_to model.link_url, model.link_url, target: :_blank if link?
   end
 
   #

@@ -7,7 +7,7 @@
 
         header
           h3
-            - link = @commentable.is_a?(Blog) ? blog_category_blog_path(@commentable.blog_category, @commentable) : send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
+            - link = @commentable.decorate.show_page_link
             = link_to @commentable.decorate.title, link
             small<: em
               = "(#{@commentable.decorate.created_at})"

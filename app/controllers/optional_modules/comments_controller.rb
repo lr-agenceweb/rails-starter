@@ -94,7 +94,7 @@ class CommentsController < ApplicationController
 
   def respond_action(template)
     respond_to do |format|
-      format.html { redirect_to source }
+      format.html { redirect_to @commentable.decorate.show_post_link }
       format.js { render template }
     end
   end
@@ -117,10 +117,6 @@ class CommentsController < ApplicationController
 
   def set_current_user
     User.current_user = try(:current_user)
-  end
-
-  def source
-    @commentable.is_a?(Blog) ? blog_category_blog_path(@commentable.blog_category, @commentable) : @commentable
   end
 
   #
