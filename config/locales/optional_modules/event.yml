@@ -3,9 +3,13 @@ en:
   event:
     no_results: No events incoming
     from_to_date: From %{start_date} to %{end_date}
+    destroy:
+      confirm: Are you sure you want to remove this event ?
 
 # French
 fr:
   event:
     no_results: Il n'y a aucun événement à venir
     from_to_date: Du %{start_date} au %{end_date}
+    destroy:
+      confirm: Êtes-vous sûr de vouloir supprimer cet événement ?

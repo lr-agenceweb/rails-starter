@@ -1,12 +1,6 @@
 article.post.blog class="#{params[:action]}" id="blog-#{blog.id}"
   = render 'posts/microdatas', resource: blog, kind: 'BlogPosting'
-
-  .post__admin-actions
-    - if can? :update, blog
-      span.post__admin-actions__update.blog__admin-actions__update =< link_to fa_icon('pencil'), edit_admin_blog_path(blog), target: :_blank, class: 'button small warning post__admin-actions__update__link'
-    - if can? :destroy, blog
-      span.post__admin-actions__destroy.blog__admin-actions__destroy<
-        = link_to fa_icon('trash'), admin_blog_path(blog), target: :_blank, class: 'button small alert post__admin-actions__destroy__link', method: :delete, remote: true, data: { confirm: t('blog.destroy.confirm') }
+  = render 'posts/admin_actions', resource: blog
 
   .row
     .small-12.columns

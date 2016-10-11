@@ -1,8 +1,6 @@
 article.post.event class="#{params[:action]}"
   = render 'events/microdatas', resource: event
-
-  - if can? :update, event
-    span.post__update.event__update =< link_to fa_icon('pencil'), edit_admin_event_path(event), target: :_blank, class: 'button small warning'
+  = render 'posts/admin_actions', resource: event
 
   .row
     .small-12.columns
