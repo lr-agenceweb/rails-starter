@@ -5,10 +5,14 @@ fr:
     "no": 'Non'
     required:
       text: 'requis'
-      mark: '*'
+      mark: '(*)'
     error_notification:
       default_message: "Merci de vérifier les erreurs ci-dessous:"
-
+    placeholders:
+      defaults:
+        username: Votre nom d'utilisateur (*)
+        email: Votre email (*)
+        content: Votre message (*)
 
 # English
 en:
@@ -17,28 +21,11 @@ en:
     "no": 'No'
     required:
       text: 'required'
-      mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
+      mark: '(*)'
     error_notification:
       default_message: "Please review the problems below:"
-    # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
-    # include_blanks:
-    #   defaults:
-    #     age: 'Rather not say'
-    # prompts:
-    #   defaults:
-    #     age: 'Select your age'
+    placeholders:
+      defaults:
+        username: Your username (*)
+        email: Your email (*)
+        content: Your message (*)
