@@ -10,7 +10,7 @@ atom_feed language: @language do |feed|
   @posts.each do |item|
     next if item.updated_at.blank?
 
-    url = item.is_a?(Blog) ? blog_category_blog_url(item.blog_category, item) : send("#{item.class.to_s.underscore}_url", item)
+    url = item.decorate.show_post_link('url')
 
     feed.entry(item, url: url) do |entry|
       entry.url item.decorate.show_page_link(true)

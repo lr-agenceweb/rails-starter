@@ -121,8 +121,8 @@ class PostDecorator < ApplicationDecorator
   #
   # == Post link (regular post or Blog)
   #
-  def show_post_link
-    model.is_a?(Blog) ? blog_category_blog_path(model.blog_category, model) : send("#{model.class.name.underscore}_path", model)
+  def show_post_link(suffix = 'path')
+    model.is_a?(Blog) ? send("blog_category_blog_#{suffix}", model.blog_category, model) : send("#{model.class.name.underscore}_#{suffix}", model)
   end
 
   private

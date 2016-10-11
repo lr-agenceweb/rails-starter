@@ -45,8 +45,14 @@ class PostDecoratorTest < Draper::TestCase
     expected = blog_category_blog_path(@blog.blog_category, @blog)
     assert_equal expected, @blog_decorated.show_post_link
 
+    expected = blog_category_blog_url(@blog.blog_category, @blog)
+    assert_equal expected, @blog_decorated.show_post_link('url')
+
     expected = about_path(@post_about)
     assert_equal expected, @post_about_decorated.show_post_link
+
+    expected = about_url(@post_about)
+    assert_equal expected, @post_about_decorated.show_post_link('url')
   end
 
   #
