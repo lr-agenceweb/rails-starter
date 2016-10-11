@@ -1,0 +1,17 @@
+- if show_page?
+  - resource_setting = instance_variable_get(:"@#{resource.object.class.name.underscore}_settings")
+  - if resource_setting.prev_next? && (resource.prev? || resource.next?)
+    .row
+      .small-12.columns
+        .prev-next__buttons
+          - if resource.prev?
+            .prev__button
+              - l1 = fa_icon 'arrow-left', text: I18n.t('prev_article', article: I18n.t("activerecord.models.#{controller_name.classify.underscore.downcase}.one"))
+              h4.prev__button__title
+                = link_to "#{content_tag(:span, l1, class: 'line-one')} #{resource.fetch_prev_title}".html_safe, resource.prev_post
+
+          - if resource.next?
+            .next__button
+              - l1 = fa_icon 'arrow-right', right: true, text: I18n.t('next_article', article: I18n.t("activerecord.models.#{controller_name.classify.underscore.downcase}.one"))
+              h4.next__button__title
+                = link_to "#{content_tag(:span, l1, class: 'line-one')} #{resource.fetch_next_title}".html_safe, resource.next_post

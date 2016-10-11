@@ -38,3 +38,6 @@ article.post.event class="#{params[:action]}"
                                     url: event_url(event),
                                     popup: true)
                   span.post__social__name.event__social__name = I18n.t('social.share_article')
+
+// Prev/Next links
+= render 'posts/prev_next', resource: event
