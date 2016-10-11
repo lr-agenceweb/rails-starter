@@ -39,6 +39,17 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Post link
+  #
+  test 'should return correct show_post_link content' do
+    expected = blog_category_blog_path(@blog.blog_category, @blog)
+    assert_equal expected, @blog_decorated.show_post_link
+
+    expected = about_path(@post_about)
+    assert_equal expected, @post_about_decorated.show_post_link
+  end
+
+  #
   # == User
   #
   test 'should return correct author_avatar value' do

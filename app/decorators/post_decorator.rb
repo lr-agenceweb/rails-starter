@@ -118,6 +118,13 @@ class PostDecorator < ApplicationDecorator
     link_to model.link.url, model.link.url, target: :_blank if link?
   end
 
+  #
+  # == Post link (regular post or Blog)
+  #
+  def show_post_link
+    model.is_a?(Blog) ? blog_category_blog_path(model.blog_category, model) : send("#{model.class.name.underscore}_path", model)
+  end
+
   private
 
   def add_bool_value

@@ -1,8 +1,2 @@
 .post__cover__video__icon
-  - if resource.is_a?(Blog)
-    - link = blog_category_blog_path(resource.blog_category, resource)
-  - else
-    - resource_string = resource.object.class.name.underscore.to_s
-    - link = send("#{resource_string}_path", resource)
-
-  = link_to fa_icon('play-circle'), link, class: 'post__cover__video__icon__link'
+  = link_to fa_icon('play-circle'), resource.show_post_link, class: 'post__cover__video__icon__link'
