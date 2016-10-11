@@ -4,7 +4,8 @@
               send_admin_mailing_message_path(resource.id, token: resource.token, option: 'checked'),
               data: { vex_alert: t('mailing.send') },
               class: 'button alert vex-alert mailing-message'
-  p == resource.mailing_users.map(&:name).join('<br />') unless params[:action] == 'index'
+  - unless index_page?
+    p == resource.mailing_users.map(&:name).join('<br />')
 - else
   p Oup's... Il semblerait que vous n'ayez pas sélectionné d'utilisateurs à qui envoyer le mail
 
@@ -19,6 +20,7 @@ br
               send_admin_mailing_message_path(resource.id, token: resource.token, option: 'all'),
               data: { vex_alert: t('mailing.send') },
               class: 'button alert vex-alert mailing-message button-secondary'
-  p == mu.map(&:name).join('<br />') unless params[:action] == 'index'
+  - unless index_page?
+    p == mu.map(&:name).join('<br />')
 - else
   p Oup's... Il n'y a aucun utilisateur enregistré sur le site. Ajoutez-en un avant de pouvoir envoyer un email par cette option.

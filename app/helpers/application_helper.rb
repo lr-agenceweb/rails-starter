@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   #
-  # == Blog pages
+  # == Pages actions
   #
   def index_page?
     params[:action] == 'index' || (params[:controller] == 'blog_categories' && params[:action] == 'show')

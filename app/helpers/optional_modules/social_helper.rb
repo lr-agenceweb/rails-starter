@@ -155,7 +155,7 @@ module OptionalModules
     end
 
     def element_by_action
-      params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' || (params[:controller] == 'blog_categories' && params[:action] == 'show') ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
+      index_page? || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
     end
   end
 end

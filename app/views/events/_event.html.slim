@@ -9,15 +9,15 @@ article.post-article
   .row
     .small-12.medium-10.medium-centered.columns
       .pictures-container
-        - if params[:action] == 'index'
+        - if index_page?
           = render 'elements/pictures/has_many_get_first', resource: event, link: true
-        - elsif event.show_as_gallery? && params[:action] == 'show'
+        - elsif event.show_as_gallery? && show_page?
           = render 'elements/pictures/has_many_as_gallery', resource: event
         - else
           = render 'elements/pictures/has_many', resource: event, link: true
 
   .post-body
-    - if params[:action] == 'index'
+    - if index_page?
       == truncate_read_more(event.content, event_path(event), 300)
     - else
       == event.content
@@ -25,7 +25,7 @@ article.post-article
   .row
     .small-12.medium-9.medium-centered.columns
       .videos-container
-        = render '/assets/videos/index', resource: event if params[:action] == 'show'
+        = render '/assets/videos/index', resource: event if show_page?
 
-  - if params[:action] == 'show'
+  - if show_page?
     = render 'elements/prev_next', element: event if @event_settings.prev_next?

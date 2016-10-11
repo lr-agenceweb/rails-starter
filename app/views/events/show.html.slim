@@ -5,7 +5,7 @@
     .small-12.columns
       = render 'events/event', event: event
 
-- if params[:action] == 'show'
+- if show_page?
   .row.align-center
     .small-12.medium-9.columns
         p.text-right = link_to t('link.back_to', page: @category.menu_title), events_path
