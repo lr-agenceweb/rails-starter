@@ -1,6 +1,6 @@
 - audios.not_processing.online.each do |audio|
-  figure.blog__audio__figure
+  figure.post__audio__figure
     audio.mediaelement data-autoplay="#{audio.audio_autoplay?}"
       source src="#{audio.audio.url(:oggaudio)}" type="audio/ogg"
       source src="#{audio.audio.url(:mp3audio)}" type="audio/mpeg"
-    figcaption.blog__audio__figure__title = audio.decorate.file_name_without_extension
+    figcaption.post__audio__figure__title = audio.decorate.file_name_without_extension

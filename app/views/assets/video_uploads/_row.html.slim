@@ -1,7 +1,7 @@
 .small-12.columns
   - if video.title?
-    h3.blog__video__title = video.title
-  figure.blog__video__figure.flex-video.widescreen
+    h3.post__video__title = video.title
+  figure.post__video__figure.flex-video.widescreen
     video.mediaelement id="video_#{index}" data-autoplay="#{video.video_autoplay?}" data-mute="#{video.video_mute?}" data-controls="#{video.video_controls?}" data-loop="#{video.video_loop?}" poster="#{video.video_file.url(:preview)}" style="width: 100%; height: 100%"
       source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
       source src="#{video.video_file.url(:webmvideo)}" type='video/webm'

@@ -5,7 +5,7 @@ article.post.blog class="#{params[:action]}" id="blog-#{blog.id}"
   .row
     .small-12.columns
 
-      = render 'blogs/cover', blog: blog
+      = render 'posts/pictures/cover', resource: blog
 
       header.post__header.blog__header
         span.post__header__timestamps.blog__header__timestamps
