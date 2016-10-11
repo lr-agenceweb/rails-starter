@@ -1,23 +1,23 @@
-article.blog class="#{params[:action]}"
+article.post.blog class="#{params[:action]}"
   = render 'posts/microdatas', resource: blog, kind: 'BlogPosting'
 
   - if can? :update, blog
-    span.blog__update =< link_to fa_icon('pencil'), edit_admin_blog_path(blog), target: :_blank, class: 'button small warning'
+    span.post__update.blog__update =< link_to fa_icon('pencil'), edit_admin_blog_path(blog), target: :_blank, class: 'button small warning'
 
   .row
     .small-12.columns
 
       = render 'blogs/cover', blog: blog
 
-      header.blog__header
-        span.blog__header__timestamps
+      header.post__header.blog__header
+        span.post__header__timestamps.blog__header__timestamps
           = blog.pretty_created_at(setting.date_format)
 
-        h3.blog__header__title
+        h3.post__header__title.blog__header__title
           = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
-          small.blog__header__category = link_to blog.blog_category_name, blog_category_path(blog.blog_category), class: 'blog__header__category__link'
+          small.post__header__category.blog__header__category = link_to blog.blog_category_name, blog_category_path(blog.blog_category), class: 'post__header__category__link blog__header__category__link'
 
-      .blog__body
+      .post__body.blog__body
         - if index_page?
           - link = blog_category_blog_path(blog.blog_category, blog)
           == truncate_read_more(blog.content, link, 300)
@@ -26,39 +26,39 @@ article.blog class="#{params[:action]}"
 
       - if show_page?
         - if @audio_module.enabled? && blog.audios?
-          .blog__audios
+          .post__audios.blog__audios
             = render '/assets/audios/index', audios: blog.audios
 
-        .blog__videos
+        .post__videos.blog__videos
           = render '/assets/videos/index', resource: blog
 
-      footer.blog__footer
-        .blog__upper-footer
+      footer.post__footer.blog__footer
+        .post__upper-footer.blog__upper-footer
           .row.small-collapse
-            .small-12.columns.blog__upper-footer__item class="medium-#{index_page? ? '6' : '4'}"
-              p.blog__author
-                span.blog__author__icon.blog__footer__icon = fa_icon 'user'
-                span.blog__author__name.blog__footer__name = blog.author
+            .small-12.columns.post__upper-footer__item.blog__upper-footer__item class="medium-#{index_page? ? '6' : '4'}"
+              p.post__author.blog__author
+                span.post__author__icon.blog__author__icon.blog__footer__icon = fa_icon 'user'
+                span.post__author__name.blog__author__name.blog__footer__name = blog.author
 
             - if @comment_module.enabled? && blog.allow_comments?
               - list_comments = blog.comments.validated.by_locale(@language)
-              .small-12.columns.blog__upper-footer__item class="medium-#{index_page? ? '6' : '4'}"
-                p.blog__comment__count
+              .small-12.columns.post__upper-footer__item.blog__upper-footer__item class="medium-#{index_page? ? '6' : '4'}"
+                p.post__comment__count.blog__comment__count
                   - link = show_page? ? '#new_comment' : blog_category_blog_path(blog.blog_category, blog, anchor: 'new_comment')
-                  a href="#{link}" class="blog__comment__count__link"
-                    span.blog__comment__count__icon.blog__footer__icon = fa_icon 'comments'
-                    span.blog__comment__count__name.blog__footer__name#blog__comment__count = list_comments.count
+                  a href="#{link}" class="post__comment__count__link blog__comment__count__link"
+                    span.post__comment__count__icon.blog__comment__count__icon.blog__footer__icon = fa_icon 'comments'
+                    span.post__comment__count__name.blog__comment__count__name.blog__footer__name#blog__comment__count = list_comments.count
 
             - if @social_module.enabled?
-              .small-12.columns.blog__upper-footer__item class="medium-#{index_page? ? '12' : '4'}"
-                .socials.blog__socials
+              .small-12.columns.post__upper-footer__item.blog__upper-footer__item class="medium-#{index_page? ? '12' : '4'}"
+                .socials.post__socials.blog__socials
                   = awesome_share_buttons(blog.title,
                                     desc: html_escape_once(blog.referencement_description),
                                     image: image_for_object(blog),
                                     via: @setting.try(:twitter_username),
                                     url: blog_category_blog_url(blog.blog_category, blog),
                                     popup: true)
-                  span.blog__social__name = I18n.t('social.share_article')
+                  span.post__social__name.blog__social__name = I18n.t('social.share_article')
 
 // Prev/Next and Back to links
 - if show_page?
@@ -69,8 +69,8 @@ article.blog class="#{params[:action]}"
 
   .row
     .small-12.columns
-      .blog__back-links
-        p.blog__back-links__back-to
+      .post__back-links.blog__back-links
+        p.post__back-links__back-to.blog__back-links__back-to
           = link_to t('link.back_to', page: @category.menu_title), blogs_path
           br
           = link_to t('link.blog_category.back_to', category: blog.blog_category_name), blog_category_path(blog.blog_category)

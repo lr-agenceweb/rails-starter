@@ -1,7 +1,7 @@
 - breadcrumb blog
 = render 'elements/background_page_cover', category: category
 
-section.page-section.blogs.row.align-center#blogs class="#{params[:action]}"
+section.page-section.posts.blogs.row.align-center#blogs class="#{params[:action]}"
   .small-12.columns
     header.page__header
       = title_for_category(category, defined?(opts) ? opts : {})

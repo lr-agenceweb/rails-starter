@@ -1,31 +1,42 @@
-article.post-article
+article.post.event class="#{params[:action]}"
   = render 'events/microdatas', resource: event
 
-  header.post-header
-    h3.post-article-title
-      = link_to event.title, event_path(event)
-      small< == event.from_to_date
+  - if can? :update, event
+    span.post__update.event__update =< link_to fa_icon('pencil'), edit_admin_event_path(event), target: :_blank, class: 'button small warning'
 
   .row
-    .small-12.medium-10.medium-centered.columns
-      .pictures-container
+    .small-12.columns
+
+      = render 'blogs/cover', blog: event
+
+      header.post__header.event__header
+        span.post__header__timestamps.event__header__timestamps
+          = event.pretty_created_at(setting.date_format)
+
+        h3.post__header__title.event__header__title
+          = link_to event.title, event_path(event)
+
+      .post__body.event__body
         - if index_page?
-          = render 'elements/pictures/has_many_get_first', resource: event, link: true
-        - elsif event.show_as_gallery? && show_page?
-          = render 'elements/pictures/has_many_as_gallery', resource: event
+          - link = event_path(event)
+          == truncate_read_more(event.content, link, 300)
         - else
-          = render 'elements/pictures/has_many', resource: event, link: true
+          == event.content
 
-  .post-body
-    - if index_page?
-      == truncate_read_more(event.content, event_path(event), 300)
-    - else
-      == event.content
+      - if show_page?
+        .post__videos.event__videos
+          = render '/assets/videos/index', resource: event
 
-  .row
-    .small-12.medium-9.medium-centered.columns
-      .videos-container
-        = render '/assets/videos/index', resource: event if show_page?
-
-  - if show_page?
-    = render 'elements/prev_next', element: event if @event_settings.prev_next?
+      - if @social_module.enabled?
+        footer.post__footer.event__footer
+          .post__upper-footer.event__upper-footer
+            .row.small-collapse
+              .small-12.columns.post__upper-footer__item.event__upper-footer__item
+                .socials.post__socials.event__socials
+                  = awesome_share_buttons(event.title,
+                                    desc: html_escape_once(event.referencement_description),
+                                    image: image_for_object(event),
+                                    via: @setting.try(:twitter_username),
+                                    url: event_url(event),
+                                    popup: true)
+                  span.post__social__name.event__social__name = I18n.t('social.share_article')
