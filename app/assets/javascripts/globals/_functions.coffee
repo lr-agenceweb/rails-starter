@@ -60,3 +60,12 @@
 @reset_form = (inputs) ->
   for input in inputs
     $(input).val ''
+
+#
+# Masonry
+# =======
+# Reload Masonry position for new added items
+@reload_masonry = ->
+  $container = $('#masonry-container')
+  if $container.length > 0 && !isSmall()
+    $container.masonry('reloadItems').masonry()

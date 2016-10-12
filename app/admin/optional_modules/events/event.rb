@@ -189,6 +189,12 @@ ActiveAdmin.register Event do
       super
     end
 
+    def destroy
+      super do |format|
+        format.js { render 'active_admin/events/destroy' }
+      end
+    end
+
     private
 
     def reset_end_date

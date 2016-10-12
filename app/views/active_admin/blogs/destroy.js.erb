@@ -15,13 +15,5 @@ if(index) {
   // Recalculates scrolling points after adding Ajax content
   <%= render 'blogs/sidebar/sticky_fix' %>
 } else {
-  Turbolinks.visit('/blogs');
-}
-
-// Reload Masonry position for new added items
-function reload_masonry() {
-  var $container = $('#masonry-container');
-  if($container.length > 0 && !isSmall()) {
-    $container.masonry('reloadItems').masonry();
-  }
+  Turbolinks.visit("<%= blogs_path(locale: @language) %>");
 }

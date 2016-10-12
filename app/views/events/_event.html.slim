@@ -1,4 +1,4 @@
-article.post.event class="#{params[:action]}"
+article.post.event class="#{params[:action]}" id="event-#{event.id}"
   = render 'events/microdatas', resource: event
   = render 'posts/admin_actions', resource: event
 
