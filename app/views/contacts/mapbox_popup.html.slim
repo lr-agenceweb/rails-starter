@@ -1,3 +1,5 @@
-header.popup.text-center
-  = location.title_popup setting
-= location.address_popup
+.mapbox__popup
+  = render 'elements/header/logo', primary: false
+
+  .mapbox__popup__address
+    = location.full_address(false)

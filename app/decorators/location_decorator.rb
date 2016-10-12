@@ -18,18 +18,6 @@ class LocationDecorator < ApplicationDecorator
   #
   # == Popup
   #
-  def title_popup(setting)
-    content_tag(:a, href: root_path, class: 'logo-link') do
-      concat(setting.logo_deco)
-      concat(content_tag(:h3, class: 'marker-title popup-title text-center') do
-        concat(setting.title)
-        concat(content_tag(:span, class: 'popup-subtitle') do
-          concat(setting.subtitle)
-        end)
-      end)
-    end
-  end
-
   def address_popup
     h.content_tag(:div) do
       concat(h.content_tag(:p, full_address))

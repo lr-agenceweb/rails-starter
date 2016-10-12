@@ -16,14 +16,6 @@ class SettingDecorator < ApplicationDecorator
     content_tag(:span, model.title)
   end
 
-  def title_subtitle(header = :h1, link = root_path, klass = '')
-    content_tag(:a, href: link, class: "l-header-site-title-link #{klass}") do
-      concat(content_tag(header, class: 'l-header-site-title') do
-        concat(title) + ' ' + concat(small_subtitle)
-      end)
-    end
-  end
-
   def title_subtitle_inline
     "#{setting.title} #{setting.subtitle.downcase if subtitle?}"
   end

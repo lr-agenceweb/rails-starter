@@ -22,10 +22,6 @@ class SettingDecoratorTest < Draper::TestCase
     assert_equal 'Rails Starter démarre rapidement', @setting_decorated.title_subtitle_inline
   end
 
-  test 'should return correct title/subtitle formatted with html' do
-    assert_match '<a href="/" class="l-header-site-title-link "><h1 class="l-header-site-title"><span>Rails Starter</span><small class="l-header-site-subtitle">Démarre rapidement</small></h1></a>', @setting_decorated.title_subtitle
-  end
-
   test 'should return correct small subtitle formatted with html' do
     assert_match "<small class=\"l-header-site-subtitle\">Démarre rapidement</small>", @setting_decorated.send(:small_subtitle)
   end
