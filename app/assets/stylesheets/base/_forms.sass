@@ -7,30 +7,6 @@
   font-weight: 300
   font-size: 12px
 
-.comments-container, .guest-books-form, .new_contact_form
-  textarea
-    margin-bottom: 0
-  .submit-and-loader
-    float: right
-    margin-top: 1rem
-    .submit-loader
-      display: none
-      max-height: 34px
-      margin-right: 10px
-
-textarea
-  min-height: 200px
-  resize: vertical
-  transition: height .3s ease-in
-
-  &.tiny
-    min-height: 0
-    height: 100px !important
-
-  &.contact-form
-    min-height: 198px
-    margin-bottom: 0
-
 form
   span.error, .form--error, .form--success
     display: block
@@ -49,6 +25,31 @@ form
 
   textarea.text + span.error
     margin-bottom: 0
+
+
+//
+// Textarea
+// ========
+textarea
+  min-height: 200px
+  resize: vertical
+  transition: height .3s ease-in
+  &.tiny
+    min-height: 0
+    height: 100px !important
+
+.form--contact
+  textarea
+    min-height: 198px
+    margin-bottom: 0
+
+
+//
+// Default flat form style
+// =======================
+.form--flat
+  +flat_form
+
 
 //
 // Placeholder

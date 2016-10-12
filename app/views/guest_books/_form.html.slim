@@ -1,4 +1,4 @@
-= simple_form_for @guest_book, method: :post, remote: true, validate: true, authenticity_token: true do |f|
+= simple_form_for @guest_book, html: { class: 'form--flat' }, method: :post, remote: true, validate: true, authenticity_token: true do |f|
   - i18n_scope = 'activerecord.attributes.guest_book'
   .row
     .small-12.medium-6.large-7.columns

@@ -71,3 +71,9 @@ fr:
         comment:
           attributes:
             max_depth: Vous ne pouvez plus répondre à cet commentaire
+
+        contact_form:
+          attributes:
+            attachment:
+              size: L'attachment doit faire moins de %{size}MB
+              type: L'attachment doit être une image ou un PDF

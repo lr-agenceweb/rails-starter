@@ -8,11 +8,19 @@ fr:
       mark: '(*)'
     error_notification:
       default_message: "Merci de vérifier les erreurs ci-dessous:"
+    labels:
+      contact_form:
+        send_copy: Recevoir une copie de ce message sur ma boîte email
+    hints:
+      contact_form:
+        attachment: Pièce jointe
     placeholders:
       defaults:
         username: Votre nom d'utilisateur (*)
         email: Votre email (*)
         content: Votre message (*)
+        message: Votre message (*)
+        name: Votre prénom et nom (*)
 
 # English
 en:
@@ -24,8 +32,15 @@ en:
       mark: '(*)'
     error_notification:
       default_message: "Please review the problems below:"
+    labels:
+      contact_form:
+        send_copy: Receive a copy of this message on my mailbox
+    hints:
+      contact_form:
+        attachment: Attachment
     placeholders:
       defaults:
         username: Your username (*)
         email: Your email (*)
         content: Your message (*)
+        name: Your first and lastname (*)
