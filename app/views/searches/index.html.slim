@@ -1,16 +1,24 @@
 - breadcrumb :searches
+= render 'elements/background_page_cover', category: category
 
-- if category.video?
-  = render 'assets/videos/video_background', video_background: category.video_upload.decorate
+section.page-section.searches.row.align-center#searches
+  .small-12.columns
+    header.page__header
+      = title_for_category(category, defined?(opts) ? opts : {})
 
-section.searches-section.page-section#searches
-  .row
-    .small-12.columns
-      = title_for_category(category)
+  .small-12.columns
+    .row.align-center
+      .small-12.medium-6.large-4.columns
+        = render 'form'
 
-  .row
-    .small-12.columns
-      = render 'form' unless params[:controller] == 'searches'
+  .small-12.columns
+    .row.align-center
+      .small-12.medium-6.columns
+        #searches-container
+          - if @searches.empty?
+            p = t('search.no_results')
+          - else
+            - @searches.each do |search|
+              = render 'search', search: search
 
-      #search_container
-        = render 'search'
+            = paginate @searches, custom_klass: 'no-scroll-infinite'

@@ -21,6 +21,7 @@ fr:
         content: Votre message (*)
         message: Votre message (*)
         name: Votre prénom et nom (*)
+        term: Rechercher
 
 # English
 en:
@@ -44,3 +45,4 @@ en:
         email: Your email (*)
         content: Your message (*)
         name: Your first and lastname (*)
+        term: Search

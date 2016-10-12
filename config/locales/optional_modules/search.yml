@@ -1,11 +1,11 @@
 # English
 en:
   search:
-    search: Search
+    current_search: "Current search:"
     no_results: No results to show for this request
 
 # French
 fr:
   search:
-    search: Rechercher
+    current_search: "Recherche actuelle:"
     no_results: Il n'y a aucun résultat pour cette recherche

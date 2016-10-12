@@ -6,7 +6,7 @@ header.header-site
       .row
         .small-12.columns
           = render 'elements/header/language' if I18n.available_locales.length > 1
-          = render 'searches/form' if @search_module.enabled?
+          = render 'searches/form' if @search_module.enabled? && params[:controller] != 'searches'
 
   .lower-header
     .row.small-collapse.large-uncollapse

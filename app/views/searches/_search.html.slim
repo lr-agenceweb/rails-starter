@@ -1,11 +1,14 @@
-.row
-  .small-12.columns
-    - if @searches.empty?
-      p = t('search.no_results')
-    - else
-      ul
-        - @searches.each do |search|
-          = render 'row', search: search
+article.post.search
+  .row
+    .small-12.columns
+      = render 'posts/pictures/cover', resource: search
 
-      .row
-        = paginate @searches
+      header.post__header
+        h3.post__header__title
+          = link_to highlight(search.title, params[:term]), search.decorate.show_page_link, class: 'search__title__link'
+
+      .post__body
+        - text = excerpt(search.content, params[:term], radius: 100)
+        - highlight = text.blank? ? search.content : highlight(text, params[:term])
+
+        = truncate_read_more(highlight, search.decorate.show_page_link)

@@ -37,4 +37,4 @@
             span.comment-destroy<>
               = link_to I18n.t('activerecord.attributes.guest_book.destroy'), guest_book_path(comment), method: :delete, remote: true, data: { confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.guest_book.one')) }
 
-      div = comment.content
+      div = simple_format(comment.content)

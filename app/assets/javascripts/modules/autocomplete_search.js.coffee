@@ -2,7 +2,7 @@ $(document).on 'ready page:load page:restore', ->
   $submit = $('.search-form .search-form__button')
   $fa = $submit.find('.fa')
 
-  $('#term.autocomplete').autocomplete(
+  $('#search_term.autocomplete').autocomplete(
     source: $('#search_form').attr('action')
     minLength: 3
     search: (event, ui) ->
@@ -10,7 +10,7 @@ $(document).on 'ready page:load page:restore', ->
       return
 
     select: (event, ui) ->
-      $('#term.autocomplete').val ui.item.title
+      $('#seach_term.autocomplete').val ui.item.title
       search_loading($submit, $fa)
       Turbolinks.visit(ui.item.url)
       return

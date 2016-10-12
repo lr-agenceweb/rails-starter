@@ -8,7 +8,7 @@
 
 == paginator.render do
   nav.pagination-centered
-    ul.pagination role="menubar" aria-label="Pagination"
+    ul.pagination role="menubar" aria-label="Pagination" class="#{defined?(custom_klass) ? custom_klass : ''}"
       == first_page_tag unless current_page.first?
       == prev_page_tag unless current_page.first?
       - each_page do |page|
