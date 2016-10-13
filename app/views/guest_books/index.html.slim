@@ -3,8 +3,14 @@
 
 section.page-section.guest_books.row.align-center#guest_books
   .small-12.columns
-    header.page__header
-      = title_for_category(category, defined?(opts) ? opts : {})
+    .row.align-center
+      .small-12.medium-6.columns
+        header.page__header
+          = title_for_category(category, defined?(opts) ? opts : {})
+
+          - if category.heading?
+            .page__header__heading
+              == category.heading_content
 
   .small-12.medium-8.columns
     #guest_books__form.guest_books__form

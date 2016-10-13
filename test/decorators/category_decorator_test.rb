@@ -20,6 +20,14 @@ class CategoryDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Heading
+  #
+  test 'should return correct boolean value for heading?' do
+    assert @category_blog_decorated.heading?
+    assert_not @category_decorated.heading?
+  end
+
+  #
   # ActiveAdmin
   #
   test 'should return correct AA show page title' do
