@@ -8,10 +8,13 @@ fr:
     see_page: Voir la page %{page}
     go_to: Aller sur le site
     back_to_wine: Retour au vin référent
-
     blog_category:
       back_to: "Voir tous les articles de la catégorie \"%{category}\""
-
+  tooltip:
+    edit_page: Modifier les informations de cette page (entête, référencement, ...)
+    post:
+      edit: Modifier cet article
+      destroy: Supprimer cet article
 
 # English
 en:
