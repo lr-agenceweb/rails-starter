@@ -13,7 +13,7 @@ fr:
         send_copy: Recevoir une copie de ce message sur ma boîte email
     hints:
       contact_form:
-        attachment: Pièce jointe
+        attachment: Vous pouvez joindre une image ou un document PDF à votre message
     placeholders:
       defaults:
         username: Votre nom d'utilisateur (*)
@@ -38,7 +38,7 @@ en:
         send_copy: Receive a copy of this message on my mailbox
     hints:
       contact_form:
-        attachment: Attachment
+        attachment: You can join a picture or a PDF document to your message
     placeholders:
       defaults:
         username: Your username (*)

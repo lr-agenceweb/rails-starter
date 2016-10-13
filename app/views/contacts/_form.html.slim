@@ -32,11 +32,14 @@
                     input_html: { class: 'autosize' }
 
           - if @setting.show_file_upload?
-            = f.file_field :attachment,
-                           class: 'contact_form_attachment'
+            .contact_form_attachment
+              = f.file_field :attachment
 
-            - unless @contact_form.errors[:attachment].blank?
-              small.error = @contact_form.errors[:attachment].join(', ')
+              small.hint
+                = t('simple_form.hints.contact_form.attachment')
+
+              - unless @contact_form.errors[:attachment].blank?
+                small.error = @contact_form.errors[:attachment].join(', ')
 
           = f.input :send_copy,
                     as: :boolean,
