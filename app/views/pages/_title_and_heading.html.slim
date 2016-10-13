@@ -1,7 +1,12 @@
 .row.align-center
   .small-12.medium-6.columns
     header.page__header
-      = title_for_page(category, defined?(opts) ? opts : {})
+      - opts = {}
+      - if can? :update,
+        - link = edit_admin_category_path(category)
+        - opts[:extra] = link_to fa_icon('pencil'), link, target: :_blank, class: 'button tiny page__header__update show-for-large'
+
+      = title_for_page(category, opts)
 
       - if category.heading?
         .page__header__heading
