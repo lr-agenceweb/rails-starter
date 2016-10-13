@@ -8,11 +8,15 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
       = render 'posts/pictures/cover', resource: event
 
       header.post__header.event__header
+        h3.post__header__title.event__header__title
+          = link_to event.title, event_path(event)
+
         span.post__header__timestamps.event__header__timestamps
           == fa_icon 'calendar', text: event.from_to_date.html_safe
 
-        h3.post__header__title.event__header__title
-          = link_to event.title, event_path(event)
+        - if event.location?
+          span.post__header__location.event__header__location
+            == fa_icon 'globe', text: event.full_address
 
       .post__body.event__body
         - if index_page?

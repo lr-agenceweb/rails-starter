@@ -31,7 +31,7 @@ ActiveAdmin.register Event do
                 ]
               ],
               location_attributes: [
-                :id, :address, :city, :postcode
+                :id, :address, :city, :postcode, :geocode_address, :latitude, :longitude, :_destroy
               ],
               referencement_attributes: [
                 :id,
@@ -142,7 +142,7 @@ ActiveAdmin.register Event do
         end
 
         render 'admin/shared/links/one', f: f
-        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
+        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: true
       end
     end
 
