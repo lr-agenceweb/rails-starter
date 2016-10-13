@@ -35,4 +35,8 @@ class Location < ActiveRecord::Base
   validates :postcode,
             presence: true,
             numericality: { only_integer: true }
+
+  def latlon?
+    latitude.present? && longitude.present?
+  end
 end

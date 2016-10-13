@@ -27,10 +27,6 @@ class LocationDecorator < ApplicationDecorator
   #
   # == Boolean
   #
-  def latlon?
-    !model.latitude.nil? && !model.longitude.nil?
-  end
-
   def address?
     !model.address.blank?
   end

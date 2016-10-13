@@ -15,8 +15,13 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
           == fa_icon 'calendar', text: event.from_to_date.html_safe
 
         - if event.location?
-          span.post__header__location.event__header__location
-            == fa_icon 'globe', text: event.full_address
+          span.post__header__location.event__header__location data-open="map__modal"
+            - span_location = fa_icon 'globe', text: event.full_address
+            - if event.location_latlon? && show_page?
+              = link_to span_location, '#', class: 'has-tip', data: { tooltip: '', disable_hover: 'false' }, tabindex: '1', title: t('tooltip.map.modal', locale: I18n.default_locale), aria_haspopup: 'true'
+            - else
+             == span_location
+
 
       .post__body.event__body
         - if index_page?
@@ -45,3 +50,11 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
 
 // Prev/Next links
 = render 'posts/prev_next', resource: event
+
+/ Map (modal)
+- if event.location_latlon? && show_page?
+  .reveal#map__modal.map__modal data-reveal='' data-close-on-click="true"
+    #map.map.map__modal__map data-latitude=event.location_latitude data-longitude=event.location_longitude data-symbol="marker" data-popup="false"
+
+    button.close-button data-close='' aria-label="#{t('close')} modal" type="button"
+      span aria-hidden="true" &times;

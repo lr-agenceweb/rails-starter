@@ -42,7 +42,9 @@ class Event < ActiveRecord::Base
   validates :start_date, presence: true
   validate :calendar_date_correct?, if: :should_validate_calendar_dates?
 
-  delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
+  delegate :address, :postcode, :city,
+           :latitude, :longitude, :latlon?,
+           to: :location, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
   scope :published, -> { online }
