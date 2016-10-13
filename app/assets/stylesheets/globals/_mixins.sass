@@ -62,8 +62,10 @@
 =flat_form
   .input
     margin-bottom: 1rem
-  input, textarea,
-  input:focus, textarea:focus
+  input:not([type="file"]),
+  textarea,
+  input:focus,
+  textarea:focus
     border: none
     box-shadow: none
     margin-bottom: 0

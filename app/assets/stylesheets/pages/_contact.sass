@@ -1,3 +1,30 @@
 //
 // Contacts
 // ========
+.contacts
+  .contact
+    &__qrcode
+      max-width: 150px
+      max-height: 150px
+      margin: 0 auto 1.5rem auto
+    &-informations
+      padding: 1rem 0
+      background-color: $white
+      .phone__link, .email__link
+        +link-colors($primary-color, $secondary-color)
+
+    &_form_attachment
+      margin-bottom: 1rem
+    &_form_send_copy
+      text-align: right
+
+.contact-informations
+  &__body
+    margin-bottom: 0
+    text-align: center
+  &__phone, &__email, &__address
+    display: block
+    .fa
+      margin-right: .3rem
+  .phone__link, .email__link
+    +link-colors($menu-font-color, $white)

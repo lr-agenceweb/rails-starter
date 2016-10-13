@@ -1,5 +1,12 @@
 .row
-  .small-12.medium-8.columns
+  .small-12.large-4.columns.small-order-2.large-order-1
+    - if @qrcode_module.enabled? && setting.show_qrcode?
+      .contact__qrcode.show-for-large
+        = qrcode_image_tag
+
+    = render 'elements/footer/contact_informations'
+
+  .small-12.large-8.columns.small-order-1.large-order-2
     = simple_form_for @contact_form, html: { class: 'form--flat form--contact' }, validate: true, remote: true, authenticity_token: true do |f|
       .row
         .small-12.medium-6.columns
@@ -25,7 +32,8 @@
                     input_html: { class: 'autosize' }
 
           - if @setting.show_file_upload?
-            = f.file_field :attachment
+            = f.file_field :attachment,
+                           class: 'contact_form_attachment'
 
             - unless @contact_form.errors[:attachment].blank?
               small.error = @contact_form.errors[:attachment].join(', ')
@@ -39,9 +47,3 @@
       .row
         .small-12.columns
           = render 'elements/submit_with_states'
-
-
-  .small-12.medium-4.columns
-    - if @qrcode_module.enabled? && setting.show_qrcode?
-      .text-right
-        = qrcode_image_tag
