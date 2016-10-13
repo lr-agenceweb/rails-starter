@@ -8,7 +8,7 @@ module ApplicationHelper
     Time.zone.now.year
   end
 
-  def title_for_category(category, opts = {})
+  def title_for_page(category, opts = {})
     extra_title = defined?(opts[:title]) ? opts[:title] : ''
     page_title = category.menu_title
     page_title << " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
