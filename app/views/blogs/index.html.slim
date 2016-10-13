@@ -3,8 +3,7 @@
 
 section.page-section.posts.blogs.row.align-center#blogs class="#{params[:action]}"
   .small-12.columns
-    header.page__header
-      = title_for_category(category, defined?(opts) ? opts : {})
+    = render 'pages/title_and_heading'
 
   .small-11.columns#sidebar_referer
     - if @blogs.blank?

@@ -1,0 +1,8 @@
+.row.align-center
+  .small-12.medium-6.columns
+    header.page__header
+      = title_for_category(category, defined?(opts) ? opts : {})
+
+      - if category.heading?
+        .page__header__heading
+          == category.heading_content

@@ -3,8 +3,7 @@
 
 section.page-section.contacts.row.align-center#contacts
   .small-12.columns
-    header.page__header
-      = title_for_category(category, defined?(opts) ? opts : {})
+    = render 'pages/title_and_heading'
 
   .small-12.medium-8.columns
     #contacts__form.contacts__form
