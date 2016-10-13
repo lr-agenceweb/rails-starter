@@ -3,8 +3,7 @@
 
 section.page-section.posts.events.row.align-center#events class="#{params[:action]}"
   .small-12.columns
-    header.page__header
-      = title_for_category(category, defined?(opts) ? opts : {})
+    = render 'pages/title_and_heading'
 
   .small-12.medium-9.columns
     - cache event do |_|

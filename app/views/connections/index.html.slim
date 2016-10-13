@@ -1,14 +1,10 @@
 - breadcrumb :connections
-
-- if category.background? && @background_module.enabled? && !@background.nil?
-  - cache category.background do
-    = render 'assets/backgrounds/background', background: category.background
-/ = render 'assets/sliders/show', slider: @category.slider, force: false unless @category.slider.nil?
+= render 'elements/background_page_cover', category: category
 
 section.connections-section.page-section
   .row
     .small-12.columns
-      = title_for_category(category)
+      = render 'pages/title_and_heading'
 
   .row.align-center
     - if @connections.blank?

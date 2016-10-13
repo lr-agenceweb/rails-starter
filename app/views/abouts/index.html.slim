@@ -3,6 +3,6 @@
 section.abouts-section.page-section#abouts
   .row
     .small-12.columns
-      = title_for_category(category)
+      = render 'pages/title_and_heading'
 
   = render 'abouts/abouts', abouts: @abouts
