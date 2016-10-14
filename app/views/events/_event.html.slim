@@ -59,6 +59,7 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
 
 // Prev/Next links
 = render 'posts/prev_next', resource: event
+= render 'posts/back_to', resource: event
 
 / Map (modal)
 - if event.location_latlon? && show_page?

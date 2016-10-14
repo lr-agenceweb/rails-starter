@@ -60,12 +60,4 @@ article.post.blog class="#{params[:action]}" id="blog-#{blog.id}"
 
 // Prev/Next and Back to links
 = render 'posts/prev_next', resource: blog
-
-- if show_page?
-  .row
-    .small-12.columns
-      .post__back-links.blog__back-links
-        p.post__back-links__back-to.blog__back-links__back-to
-          = link_to t('link.back_to', page: @category.menu_title), blogs_path
-          br
-          = link_to t('link.blog_category.back_to', category: blog.blog_category_name), blog_category_path(blog.blog_category)
+= render 'posts/back_to', resource: blog

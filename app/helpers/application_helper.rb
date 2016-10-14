@@ -11,7 +11,7 @@ module ApplicationHelper
   def title_for_page(category, opts = {})
     extra_title = defined?(opts[:extra]) ? opts[:extra] : ''
     page_title = category.menu_title
-    page_title << " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
+    page_title += " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
     link = link_to raw(page_title), category.menu_link(category.name), class: 'page__header__title__link'
     content_tag(:h2, link, class: 'page__header__title', id: category.name.downcase)
   end
