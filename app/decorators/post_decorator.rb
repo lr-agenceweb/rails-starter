@@ -114,6 +114,10 @@ class PostDecorator < ApplicationDecorator
   #
   # == Link (linkable polymorphic)
   #
+  def link?
+    model.link.try(:url).present?
+  end
+
   def link_with_link
     link_to model.link_url, model.link_url, target: :_blank if link?
   end
@@ -137,9 +141,5 @@ class PostDecorator < ApplicationDecorator
         concat(content_tag(:span, t('activerecord.attributes.publication_date.unpublished')))
       end
     end
-  end
-
-  def link?
-    model.link.try(:url).present?
   end
 end

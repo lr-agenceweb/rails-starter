@@ -46,15 +46,21 @@
         @include link-colors($white, $warning-color)
 
   &__header
-    margin-top: 1rem
+    margin: 1rem 0
     &__title, &__timestamps
       text-transform: uppercase
       color: $charcoal
-    &__timestamps, &__location
+    &__timestamps, &__location, &__url
       display: block
-      margin-bottom: .5rem
+      margin-bottom: .2rem
       font-size: rem-calc(15)
+    &__timestamps
+      cursor: default
+    &__url
+      &__link
+        border-bottom: 1px solid $primary-color
     &__title
+      margin-bottom: .7rem
       font-size: 1rem
       font-weight: bold
     &__category
@@ -111,3 +117,11 @@
   &__back-to
     margin-bottom: 0
     text-align: right
+
+@media #{$large-up}
+  .post
+    &__header
+      &__timestamps, &__location, &__url
+        display: inline-block
+        &:not(:last-child)
+          margin-right: 1rem
