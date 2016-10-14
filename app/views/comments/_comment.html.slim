@@ -1,9 +1,9 @@
-.comment id="comment-#{comment.id}" class="#{params[:action] == 'reply' && comment.id.to_s == params[:id] ? 'comment-highlight' : ''}"
+.comment id="comment-#{comment.id}" class="#{comment.object.class.name == 'Comment' && comment.try(:user).try(:role_name) == 'administrator' ? 'comment--highlight' : ''}"
   = render 'comments/microdatas', resource: comment
 
   .row
     .small-3.medium-2.columns
-      span.comment-avatar = comment.avatar
+      .comment__author__avatar = comment.avatar
 
     .small-9.medium-10.columns
       p
@@ -14,27 +14,27 @@
           - if can? :signal, comment
             | -
             - if comment.signalled?
-              span.comment-signalled<>
+              span.comment--signalled<>
                 = I18n.t('comment.signalled.already_signalled')
             - else
-              span.comment-not-signalled<> class="number-#{comment.id}"
+              span.comment--not-signalled<> class="number-#{comment.id}"
                 = link_to I18n.t('comment.signalled.not_signalled'), send("signal_#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment, token: comment.token), method: :get, remote: true, data: { confirm: I18n.t('comment.signalled.alert') }
 
           - if can? :reply, comment
             | -
-            span.comment-reply<>
+            span.comment--reply<>
               = link_to I18n.t('comment.reply.label'), send("reply_#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment, token: comment.token), remote: true
               = image_tag image_path('loader-dark.gif'), class: 'spinner hide'
 
           - if can? :destroy, comment
             | -
-            span.comment-destroy<>
+            span.comment--destroy<>
               = link_to I18n.t('activerecord.attributes.comment.destroy'), send("#{@commentable.class.name.underscore.singularize}_comment_path", @commentable, comment, current_comment_id: params[:id], current_comment_action: params[:action]), method: :delete, remote: true, data: { confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.comment.one')) }
 
         - else
           - if can? :destroy, comment
             | -
-            span.comment-destroy<>
+            span.comment--destroy<>
               = link_to I18n.t('activerecord.attributes.guest_book.destroy'), guest_book_path(comment), method: :delete, remote: true, data: { confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.guest_book.one')) }
 
       div = simple_format(comment.content)

@@ -65,6 +65,6 @@ class CommentDecorator < ApplicationDecorator
 
   def pseudo(name = nil)
     name = pseudo_registered_or_guest if name.nil?
-    content_tag(:strong, name, class: 'comment-author')
+    content_tag(:strong, name, class: 'comment__author__name')
   end
 end

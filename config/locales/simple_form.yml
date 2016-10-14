@@ -17,10 +17,11 @@ fr:
     placeholders:
       defaults:
         username: Votre nom d'utilisateur (*)
+        name: Votre prénom et nom (*)
         email: Votre email (*)
         content: Votre message (*)
         message: Votre message (*)
-        name: Votre prénom et nom (*)
+        comment: Votre commentaire (*)
         term: Rechercher
 
 # English

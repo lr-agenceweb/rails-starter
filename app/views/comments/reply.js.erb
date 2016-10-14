@@ -1,9 +1,9 @@
 // Remove all previous opened reply forms
 $('.reply-form').remove();
-$('.comment-reply .spinner').addClass('hide');
+$('.comment--reply .spinner').addClass('hide');
 
 // Inject reply form after comment
-$("#comment-<%= @parent_comment.id %>").after("<div class='reply-form'><div class='reply-form-close' aria-label='" + I18n.t('close') + "'></div><%= j render 'comments/form' %></div>");
+$("#comment-<%= @parent_comment.id %>").after("<div class='reply-form'><div class='reply-form--close' aria-label='" + I18n.t('close') + "'></div><%= j render 'comments/form' %></div>");
 
 // Enable formBackup and frontend validations
 $('.reply-form form').formBackup();

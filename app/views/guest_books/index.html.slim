@@ -9,14 +9,14 @@ section.page-section.guest_books.row.align-center#guest_books
     #guest_books__form.guest_books__form
       = render 'form'
 
-  .small-11.columns
+  .small-12.medium-8.columns
     - if @guest_books.blank?
       p = t('guest_book.no_results')
     - else
       .row.align-center
-        .small-12.medium-11.columns
+        .small-12.columns
           #guest_books-container
             - @guest_books.each do |guest_book|
               = render 'guest_book', guest_book: guest_book
 
-          = paginate @guest_books
+          = paginate @guest_books, custom_klass: 'no-scroll-infinite'
