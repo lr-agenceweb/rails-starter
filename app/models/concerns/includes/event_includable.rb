@@ -12,7 +12,7 @@ module Includes
 
     included do
       def self.includes_collection
-        includes(:translations, :picture, :video_upload, :video_uploads, :video_platform, :video_platforms, :location, referencement: [:translations])
+        includes(:translations, :picture, :video_upload, :video_uploads, :video_platform, :video_platforms, :location, :link, referencement: [:translations])
       end
     end
   end
