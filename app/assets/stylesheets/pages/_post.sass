@@ -13,18 +13,6 @@
   margin-bottom: 2rem
   background-color: $white
 
-  &__admin-actions
-    position: absolute
-    z-index: 1
-    top: 0
-    right: 0
-    &__update, &__destroy
-      display: inline-block
-      margin-bottom: 0
-      &__link
-        width: 36px
-        margin-bottom: 0
-
   &__header, &__body, &__footer
     padding: 0 .9375rem
 
@@ -117,6 +105,20 @@
   &__back-to
     margin-bottom: 0
     text-align: right
+
+// Admin actions
+.post, .comment
+  &__admin-actions
+    position: absolute
+    z-index: 1
+    top: 0
+    right: 0
+    &__update, &__destroy
+      display: inline-block
+      margin-bottom: 0
+      &__link
+        width: 36px
+        margin-bottom: 0
 
 @media #{$large-up}
   .post

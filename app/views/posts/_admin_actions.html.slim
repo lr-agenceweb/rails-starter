@@ -1,11 +1,11 @@
-.post__admin-actions
+.post__admin-actions.comment__admin-actions
   - resource_string = resource.object.class.name.underscore.to_s
   - if can? :update, resource
-    span.post__admin-actions__update
+    span.post__admin-actions__update.comment__admin-actions__update
       - link = send("edit_admin_#{resource_string}_path", resource)
-      =< link_to fa_icon('pencil'), link, target: :_blank, class: 'button small warning post__admin-actions__update__link has-tip', data: { tooltip: '', disable_hover: 'false' }, tabindex: '1', title: t('tooltip.post.edit', locale: I18n.default_locale), aria_haspopup: 'true'
+      =< link_to fa_icon('pencil'), link, target: :_blank, class: 'button small warning post__admin-actions__update__link has-tip', data: { tooltip: '', template_classes: 'warning' }, tabindex: '1', title: t("tooltip.#{resource_string}.edit", locale: I18n.default_locale), aria_haspopup: 'true'
 
   - if can? :destroy, resource
-    span.post__admin-actions__destroy
+    span.post__admin-actions__destroy.comment__admin-actions__update
       - link = send("admin_#{resource_string}_path", resource)
-      = link_to fa_icon('trash'), link, target: :_blank, class: 'button small alert post__admin-actions__destroy__link has-tip', method: :delete, remote: true, data: { confirm: t("#{resource_string}.destroy.confirm"), tooltip: '', disable_hover: 'false' }, tabindex: '1', title: t('tooltip.post.destroy', locale: I18n.default_locale), aria_haspopup: 'true'
+      = link_to fa_icon('trash'), link, target: :_blank, class: 'button small alert post__admin-actions__destroy__link has-tip', method: :delete, remote: true, data: { confirm: t("#{resource_string}.destroy.confirm"), tooltip: '', template_classes: 'alert' }, tabindex: '1', title: t("tooltip.#{resource_string}.destroy", locale: I18n.default_locale), aria_haspopup: 'true'

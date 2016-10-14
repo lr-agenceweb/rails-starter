@@ -8,13 +8,11 @@ class GuestBooksController < ApplicationController
 
   before_action :guest_book_module_enabled?
   before_action :set_guest_books
-  before_action :set_guest_book, only: :destroy
-
-  include DeletableCommentable
 
   # GET /livre-d-or
   # GET /livre-d-or.json
   def index
+    @guest_book = GuestBook.new
     seo_tag_index category
   end
 
@@ -38,12 +36,7 @@ class GuestBooksController < ApplicationController
     params.require(:guest_book).permit(:username, :email, :lang, :content, :nickname)
   end
 
-  def set_guest_book
-    @guest_book = GuestBook.find(params[:id])
-  end
-
   def set_guest_books
-    @guest_book = GuestBook.new
     guest_books = GuestBook.validated.by_locale(@language)
     @guest_books = CommentDecorator.decorate_collection(guest_books.page(params[:page]))
   end

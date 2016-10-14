@@ -23,7 +23,7 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct html_tag for user' do
-    assert_equal '<strong class="comment-author">Anthony</strong>', @comment_decorated.pseudo
+    assert_equal '<strong class="comment__author__name">Anthony</strong>', @comment_decorated.pseudo
   end
 
   test 'should return correct email if user is connected' do

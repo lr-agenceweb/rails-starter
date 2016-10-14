@@ -11,9 +11,14 @@ fr:
       back_to: "Voir tous les articles de la catégorie \"%{category}\""
   tooltip:
     edit_page: Modifier les informations de cette page (entête, référencement, ...)
-    post:
-      edit: Modifier cet article
-      destroy: Supprimer cet article
+    blog:
+      edit: Modifier cet article de blog
+      destroy: Supprimer cet article de blog
+    event:
+      edit: Modifier cet événement
+      destroy: Supprimer cet événement
+    guest_book:
+      destroy: Supprimer ce message du Livre d'or
     event:
       calendar: Date de l'événement
     map:

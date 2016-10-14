@@ -13,14 +13,14 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
         h3.post__header__title.event__header__title
           = link_to event.title, event_path(event)
 
-        span.post__header__timestamps.event__header__timestamps class="has-tip" data={ tooltip: '', disable_hover: 'false' } tabindex='1' title=t('tooltip.event.calendar') aria_haspopup='true'
+        span.post__header__timestamps.event__header__timestamps class="has-tip" data={ tooltip: '' } tabindex='1' title=t('tooltip.event.calendar') aria_haspopup='true'
           == fa_icon 'calendar', text: event.from_to_date.html_safe
 
         - if event.location? && show_page?
           span.post__header__location.event__header__location data-open="map__modal"
             - span_location = fa_icon 'globe', text: event.full_address
             - if event.location_latlon? && show_page?
-              = link_to span_location, '#', class: 'has-tip', data: { tooltip: '', disable_hover: 'false' }, tabindex: '1', title: t('tooltip.map.modal'), aria_haspopup: 'true'
+              = link_to span_location, '#', class: 'has-tip', data: { tooltip: '' }, tabindex: '1', title: t('tooltip.map.modal'), aria_haspopup: 'true'
             - else
              == span_location
 

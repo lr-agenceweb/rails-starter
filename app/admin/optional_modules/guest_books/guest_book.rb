@@ -50,5 +50,11 @@ ActiveAdmin.register GuestBook do
   #
   controller do
     include Skippable
+
+    def destroy
+      super do |format|
+        format.js { render 'active_admin/guest_books/destroy' }
+      end
+    end
   end
 end

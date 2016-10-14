@@ -4,7 +4,7 @@
       - opts = {}
       - if can? :update,
         - link = edit_admin_category_path(category)
-        - opts[:extra] = link_to fa_icon('pencil'), link, target: :_blank, class: 'button tiny page__header__update show-for-large has-tip', data: { tooltip: '', disable_hover: 'false' }, tabindex: '1', title: t('tooltip.edit_page', locale: I18n.default_locale), aria_haspopup: 'true'
+        - opts[:extra] = link_to fa_icon('pencil'), link, target: :_blank, class: 'button tiny page__header__update show-for-large has-tip', data: { tooltip: '' }, tabindex: '1', title: t('tooltip.edit_page', locale: I18n.default_locale), aria_haspopup: 'true'
 
       = title_for_page(category, opts)
 

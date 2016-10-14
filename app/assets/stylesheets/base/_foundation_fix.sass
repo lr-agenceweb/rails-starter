@@ -3,5 +3,14 @@
 // ========
 .tooltip
   text-align: $tooltip-align
+  &.alert
+    background-color: $alert-color
+  &.alert:before
+    @include css-triangle($tooltip-pip-width, $alert-color, up)
+  &.warning
+    background-color: $warning-color
+  &.warning:before
+    @include css-triangle($tooltip-pip-width, $warning-color, up)
+
 .has-tip
   cursor: $tooltip-cursor
