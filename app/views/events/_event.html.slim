@@ -54,7 +54,7 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
 / Map (modal)
 - if event.location_latlon? && show_page?
   .reveal#map__modal.map__modal data-reveal='' data-close-on-click="true"
-    #map.map.map__modal__map data-latitude=event.location_latitude data-longitude=event.location_longitude data-symbol="marker" data-popup="false"
+    #map.map.map__modal__map data-latitude=event.location_latitude data-longitude=event.location_longitude data-symbol="marker" data-popup="true" data-popup_content=event.full_address(false)
 
     button.close-button data-close='' aria-label="#{t('close')} modal" type="button"
       span aria-hidden="true" &times;

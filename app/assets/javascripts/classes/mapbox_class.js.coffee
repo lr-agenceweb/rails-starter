@@ -12,7 +12,7 @@ class @MapBoxSingleton
     set_view: (latitude, longitude) ->
       @map.setView([latitude, longitude], 12)
 
-    set_marker: (latitude, longitude, symbol, popup) ->
+    set_marker: (latitude, longitude, symbol, popup, popup_content) ->
       @featureLayer = L.mapbox.featureLayer(
         type: 'FeatureCollection'
         features: [ {
@@ -31,14 +31,18 @@ class @MapBoxSingleton
 
       if popup
         @featureLayer.eachLayer (layer) ->
-          $.ajax
-            url: $('#map').data 'url-popup'
-            success: (data) ->
-              layer.bindPopup data, {}
-              layer.openPopup()
-            error: (jqXHR, textStatus, errorThrown) ->
-              console.log "Error :: #{errorThrown}"
-          return
+          if popup_content
+            layer.bindPopup popup_content, {}
+            layer.openPopup()
+          else
+            $.ajax
+              url: $('#map').data 'url-popup'
+              success: (data) ->
+                layer.bindPopup data, {}
+                layer.openPopup()
+              error: (jqXHR, textStatus, errorThrown) ->
+                console.log "Error :: #{errorThrown}"
+            return
 
     remove_existing_layers: ->
       m = @map
