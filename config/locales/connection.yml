@@ -1,11 +1,9 @@
 # English
 en:
   connection:
-    no_results: No links to show
     last_articles: Last links
 
 # French
 fr:
   connection:
-    no_results: Il n'y a aucun liens à montrer
     last_articles: Derniers liens

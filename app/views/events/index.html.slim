@@ -7,7 +7,7 @@ section.page-section.posts.events.row.align-center#events class="#{params[:actio
 
   .small-11.columns
     - if @events.blank?
-      p = t('event.no_results')
+      p = t('posts.events.empty')
     - else
       .row.align-center
         .small-12.medium-11.columns

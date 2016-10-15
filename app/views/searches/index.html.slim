@@ -15,7 +15,7 @@ section.page-section.searches.row.align-center#searches
       .small-12.medium-6.columns
         #searches-container
           - if @searches.empty?
-            p = t('search.no_results')
+            p = t('posts.search.empty')
           - else
             - @searches.each do |search|
               = render 'search', search: search

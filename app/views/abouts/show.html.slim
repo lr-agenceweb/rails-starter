@@ -1,31 +1,13 @@
 - breadcrumb about
+= render 'elements/background_page_cover', category: category
 
-- cache about do |_|
-  .row
-    .small-12.medium-8.medium-centered.columns
+section.page-section.posts.abouts.row.align-center#abouts class="#{params[:action]}"
+  .small-12.columns
+    = render 'pages/title_and_heading'
 
-      article.article-container
-        = render 'posts/microdatas', resource: about.decorate
-
-        header
-          h2 = about.title
-
-        div == about.content
-
-        .pictures.pictures-container
-          - if about.show_as_gallery?
-            .small-12.medium-6.medium-centered.columns
-              .fotorama data-nav="false" data-loop="true" data-autoplay="4000" data-keyboard="true" data-shuffle="true" data-transition="crossfade" data-transitionduration="1200" data-stopautoplayontouch="true" data-arrows="true"
-                - about.pictures_online.each_with_index do |image, index|
-                  = link_to retina_image_tag(image, :image, :large), image.self_image_url_by_size(:medium), data: { caption: html_escape_once(image.decorate.title) }
-          - else
-            ul.small-block-grid-1.medium-block-grid-3.large-block-grid-6
-              - about.pictures_online.each do |picture|
-                li
-                  = link_to retina_image_tag(picture, :image, :medium, class: 'th'), picture.image.url(:large), title: picture.title, class: 'magnific-popup'
-
-  .row
-    .small-12.medium-9.medium-centered.columns
-      - if show_page?
-        p.text-right = link_to t('link.back_to', page: @category.menu_title), abouts_path
-        = render 'comments/section', o: @about
+  .small-11.columns
+    .row.align-center
+      / Blogs posts
+      .small-12.large-8.columns
+        - cache about do |_|
+          = render 'abouts/about', about: about

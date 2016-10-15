@@ -14,6 +14,9 @@ fr:
     legal_notice:
       edit: Modifier cet article des Mentions Légales
       destroy: Supprimer cet article des Mentions Légales
+    about:
+      edit: Modifier article "à propos"
+      destroy: Supprimer article "à propos"
     map:
       modal: Cliquer pour afficher la carte
 

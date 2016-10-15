@@ -11,7 +11,7 @@ section.page-section.guest_books.row.align-center#guest_books
 
   .small-12.medium-8.columns
     - if @guest_books.blank?
-      p = t('guest_book.no_results')
+      p = t('posts.guest_books.empty')
     - else
       .row.align-center
         .small-12.columns

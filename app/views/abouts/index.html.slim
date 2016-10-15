@@ -1,8 +1,21 @@
 - breadcrumb :abouts
+= render 'elements/background_page_cover', category: category
 
-section.abouts-section.page-section#abouts
-  .row
-    .small-12.columns
-      = render 'pages/title_and_heading'
+section.page-section.posts.abouts.row.align-center#abouts
+  .small-12.columns
+    = render 'pages/title_and_heading'
 
-  = render 'abouts/abouts', abouts: @abouts
+  .small-11.columns
+    - if @abouts.blank?
+      p = t('posts.empty')
+    - else
+      .row
+        .small-12.large-8.columns
+          #abouts-container
+            .row.small-up-1.large-up-2.block-grid#masonry-container
+              - @abouts.each do |about|
+                - cache ['list', about]
+                  .column.masonry-item
+                    = render 'abouts/about', about: about
+
+          = paginate @abouts

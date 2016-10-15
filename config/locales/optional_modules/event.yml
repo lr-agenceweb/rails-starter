@@ -1,7 +1,6 @@
 # English
 en:
   event:
-    no_results: No events incoming
     from_to_date: From %{start_date} to %{end_date}
     know_more: Know more about this event
     destroy:
@@ -10,7 +9,6 @@ en:
 # French
 fr:
   event:
-    no_results: Il n'y a aucun événement à venir
     from_to_date: Du %{start_date} au %{end_date}
     know_more: En savoir plus sur cet événement
     destroy:

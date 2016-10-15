@@ -9,7 +9,7 @@ section.connections-section.page-section
   .row.align-center
     - if @connections.blank?
       .small-12.columns
-        p = t('connection.no_results')
+        p = t('posts.empty')
     - else
       .small-12.medium-8.columns
         = render 'connections'

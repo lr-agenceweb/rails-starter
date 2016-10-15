@@ -7,7 +7,7 @@ section.page-section.posts.blogs.row.align-center#blogs class="#{params[:action]
 
   .small-11.columns#sidebar_referer
     - if @blogs.blank?
-      p = t('blog.no_results')
+      p = t('posts.empty')
     - else
       .row
         .small-12.large-8.columns

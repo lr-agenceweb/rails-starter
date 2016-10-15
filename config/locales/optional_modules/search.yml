@@ -2,10 +2,8 @@
 en:
   search:
     current_search: "Current search:"
-    no_results: No results to show for this request
 
 # French
 fr:
   search:
     current_search: "Recherche actuelle:"
-    no_results: Il n'y a aucun résultat pour cette recherche

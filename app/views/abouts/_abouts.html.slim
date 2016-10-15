@@ -1,5 +1,0 @@
-.row
-  - abouts.each do |about|
-    .small-12.columns
-      - cache ['list', about] do
-        = render 'abouts/about', about: about

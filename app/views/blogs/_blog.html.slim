@@ -4,9 +4,10 @@ article.post.blog class="#{params[:action]}" id="blog-#{blog.id}"
 
   .row
     .small-12.columns
-
       = render 'posts/pictures/cover', resource: blog
 
+      / Header
+      / ======
       header.post__header.blog__header
         span.post__header__timestamps.blog__header__timestamps
           = fa_icon 'clock-o', text: blog.pretty_created_at(setting.date_format)
@@ -15,6 +16,9 @@ article.post.blog class="#{params[:action]}" id="blog-#{blog.id}"
           = link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
           small.post__header__category.blog__header__category = link_to blog.blog_category_name, blog_category_path(blog.blog_category), class: 'post__header__category__link blog__header__category__link'
 
+
+      / Body
+      / ====
       .post__body.blog__body
         - if index_page?
           - link = blog_category_blog_path(blog.blog_category, blog)
@@ -30,6 +34,8 @@ article.post.blog class="#{params[:action]}" id="blog-#{blog.id}"
         .post__videos.blog__videos
           = render '/assets/videos/index', resource: blog
 
+      / Footer
+      / ======
       footer.post__footer.blog__footer
         .post__upper-footer.blog__upper-footer
           .row.small-collapse
