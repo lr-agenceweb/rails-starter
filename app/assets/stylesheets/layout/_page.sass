@@ -6,14 +6,11 @@
   &:not(.homes)
     background-color: rgba($white, .93)
   .page__header
-    margin-bottom: 2.5rem
+    margin-bottom: 1.5rem
     &__title
       margin-bottom: 0
       text-align: center
-      &:before, &:after
-        display: block
-        content: ''
-        border-bottom: 1px solid $primary-color
+      font-size: 2rem
       &__link
     &__heading
       margin-top: 1.3rem
@@ -30,3 +27,7 @@
     .page__header
       &__title
         font-size: 3rem
+        &:before, &:after
+          display: block
+          content: ''
+          border-bottom: 1px solid $primary-color
