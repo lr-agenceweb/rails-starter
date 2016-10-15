@@ -24,13 +24,15 @@ f.columns do
   end
 end
 
+# Pictures
 f.columns do
   f.column do
     render 'admin/shared/pictures/many', f: f
   end
 end
 
-if video_module.enabled?
+# Videos
+if video_module.enabled? && !f.object.is_a?(About)
   if video_settings.video_platform?
     if defined?(has_one_relation) && has_one_relation
       render 'admin/shared/video_platforms/one', f: f
@@ -48,6 +50,7 @@ if video_module.enabled?
   end
 end
 
+# Audios
 render 'admin/shared/audios/one', f: f if f.object.is_a?(Blog) && audio_module.enabled?
 
 f.actions

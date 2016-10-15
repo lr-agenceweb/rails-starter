@@ -28,9 +28,11 @@ columns do
   end
 
   column do
-    panel t('active_admin.details', model: t('activerecord.models.user.one')) do
-      attributes_table_for resource do
-        row :author_with_avatar
+    unless resource.is_a?(About)
+      panel t('active_admin.details', model: t('activerecord.models.user.one')) do
+        attributes_table_for resource do
+          row :author_with_avatar
+        end
       end
     end
 
@@ -38,7 +40,10 @@ columns do
     render 'admin/publication_dates/show', resource: resource
 
     render 'admin/shared/pictures/show', resource: resource
-    render 'admin/shared/videos/show', video_platforms: resource.video_platforms, video_uploads: resource.video_uploads if video_module.enabled?
-    render 'admin/shared/audios/show', resource: resource.audio if audio_module.enabled? && resource.is_a?(Blog)
+
+    unless resource.is_a?(About)
+      render 'admin/shared/videos/show', video_platforms: resource.video_platforms, video_uploads: resource.video_uploads if video_module.enabled?
+      render 'admin/shared/audios/show', resource: resource.audio if audio_module.enabled? && resource.is_a?(Blog)
+    end
   end
 end

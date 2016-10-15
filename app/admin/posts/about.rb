@@ -15,18 +15,6 @@ ActiveAdmin.register About do
               pictures_attributes: [
                 :id, :locale, :image, :online, :position, :_destroy
               ],
-              video_uploads_attributes: [
-                :id, :online, :position,
-                :video_file,
-                :video_autoplay,
-                :video_loop,
-                :video_controls,
-                :video_mute,
-                :_destroy,
-                video_subtitle_attributes: [
-                  :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
-                ]
-              ],
               referencement_attributes: [
                 :id,
                 translations_attributes: [
@@ -34,8 +22,6 @@ ActiveAdmin.register About do
                 ]
               ]]
 
-    params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
-    params.push :allow_comments if @comment_module.enabled?
     params
   end
 
