@@ -16,6 +16,4 @@ header.header-site
       .small-12.medium-8.columns.columns.columns-for-menu
         = render 'elements/menu/no_dropdown'
 
-.clearfix
-
 == breadcrumbs pretext: t('breadcrumb.here'), separator: '', style: :ol, semantic: true if @breadcrumb_module.enabled? && setting.show_breadcrumb?
