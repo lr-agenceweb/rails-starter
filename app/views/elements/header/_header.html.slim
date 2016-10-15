@@ -16,4 +16,7 @@ header.header-site
       .small-12.medium-8.columns.columns.columns-for-menu
         = render 'elements/menu/no_dropdown'
 
-== breadcrumbs pretext: t('breadcrumb.here'), separator: '', style: :ol, semantic: true if @breadcrumb_module.enabled? && setting.show_breadcrumb?
+- if @breadcrumb_module.enabled? && setting.show_breadcrumb?
+  .clearfix
+  nav aria-label="#{t('breadcrumb.here')}" role="navigation"
+    == breadcrumbs pretext: t('breadcrumb.here'), separator: '', semantic: true, style: :foundation5
