@@ -102,6 +102,10 @@
     ul
       float: right
       height: $menu-large-height
+      &.odd
+        .menu__item
+          &:first-child
+            float: left
       .menu__item
         display: inline
         width: auto !important
