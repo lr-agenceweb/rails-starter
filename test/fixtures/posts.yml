@@ -47,29 +47,10 @@ about:
   online: true
   user: anthony
 
-about_2:
-  <<: *DEFAULTS
-  type: About
-  title: About article 2 !
-  online: true
-
 about_offline:
   <<: *DEFAULTS
   type: About
   title: About article offline !
-  online: false
-
-# For test
-about_test:
-  <<: *DEFAULTS
-  type: About
-  title: Ruby on Rails website
-  online: true
-
-about_test_offline:
-  <<: *DEFAULTS
-  type: About
-  title: Ruby on Rails website
   online: false
 
 # Legal notices posts

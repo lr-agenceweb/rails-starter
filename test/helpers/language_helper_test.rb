@@ -30,8 +30,8 @@ module Core
 
     test 'should return correct slug article by locale' do
       params[:locale] = :fr
-      assert_equal 'developpement-hebergement', slug_for_locale(posts(:about), :fr)
-      assert_equal 'site-hosting', slug_for_locale(posts(:about), :en)
+      assert_equal 'developpement-hebergement-avec-ruby', slug_for_locale(posts(:about), :fr)
+      assert_equal 'site-hosting-with-ruby', slug_for_locale(posts(:about), :en)
     end
 
     private

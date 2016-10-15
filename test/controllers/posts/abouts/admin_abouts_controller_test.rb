@@ -57,9 +57,10 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
+      assert_not @about.online?
       post :batch_action, batch_action: 'toggle_online', collection_selection: [@about.id]
       [@about].each(&:reload)
-      assert_not @about.online?
+      assert @about.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
@@ -168,9 +169,8 @@ module Admin
       @setting = settings(:one)
       @request.env['HTTP_REFERER'] = admin_abouts_path
 
-      @about = posts(:about_2)
+      @about = posts(:about_offline)
       @about_super_administrator = posts(:about)
-      @comment_module = optional_modules(:comment)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

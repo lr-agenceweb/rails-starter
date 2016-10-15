@@ -34,9 +34,16 @@ two:
   description: Description pour article À Propos
   keywords: "Mots-clés, pour, article, à propos"
 
-about_2:
+three:
   <<: *DEFAULTS
-  attachable: about_2 (Post)
+  attachable: about_offline (Post)
+  title: Lorem Ipsum
+  description: lorem ipsum
+  keywords: "lorem, ipsum"
+
+blog_mc:
+  <<: *DEFAULTS
+  attachable: many_comments (Blog)
 
 category_home:
   <<: *DEFAULTS

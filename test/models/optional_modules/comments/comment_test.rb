@@ -90,8 +90,6 @@ class CommentTest < ActiveSupport::TestCase
   private
 
   def initialize_test
-    @about = posts(:about_2)
-
     @comment_anthony = comments(:one)
     @comment_bob = comments(:two)
     @max_depth = comments(:depth_2)

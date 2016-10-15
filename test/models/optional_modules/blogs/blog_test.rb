@@ -245,7 +245,7 @@ class BlogTest < ActiveSupport::TestCase
     @blog_category.reload
     @blog_category_2.reload
     assert_equal 3, @blog_category.blogs.size
-    assert_equal 1, @blog_category_2.blogs.size
+    assert_equal 2, @blog_category_2.blogs.size
   end
 
   def set_blog_record

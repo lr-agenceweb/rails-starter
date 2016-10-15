@@ -42,18 +42,18 @@ module OptionalModules
       seo_tag_show(@about.decorate)
 
       # Basics
-      assert_equal 'Développement et Hébergement', meta_tags[:title]
+      assert_equal 'Développement et Hébergement avec Ruby', meta_tags[:title]
       assert_equal 'Description pour article À Propos', meta_tags[:description]
       assert_equal 'Mots-clés, pour, article, à propos', meta_tags[:keywords]
 
       # Facebook
-      assert_equal 'Développement et Hébergement | Rails Starter, Démarre rapidement', meta_tags[:og][:title]
+      assert_equal 'Développement et Hébergement avec Ruby | Rails Starter, Démarre rapidement', meta_tags[:og][:title]
       assert_equal 'Description pour article À Propos', meta_tags[:og][:description]
       assert_equal about_url(@about), meta_tags[:og][:url]
       assert_nil meta_tags[:og][:image]
 
       # Twitter
-      assert_equal 'Développement et Hébergement | Rails Starter, Démarre rapidement', meta_tags[:twitter][:title]
+      assert_equal 'Développement et Hébergement avec Ruby | Rails Starter, Démarre rapidement', meta_tags[:twitter][:title]
       assert_equal 'Description pour article À Propos', meta_tags[:twitter][:description]
       assert_equal about_url(@about), meta_tags[:twitter][:url]
       assert_nil meta_tags[:twitter][:image]
