@@ -41,6 +41,7 @@ ActiveAdmin.register Event do
               ]]
     params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
     params.push :show_calendar if @calendar_module.enabled?
+    params.push :show_map if @map_module.enabled?
     params
   end
 
@@ -72,6 +73,7 @@ ActiveAdmin.register Event do
     column :start_date
     column :end_date
     bool_column :show_calendar if calendar_module.enabled?
+    bool_column :show_map if map_module.enabled?
     bool_column :online
 
     translation_status
@@ -95,6 +97,7 @@ ActiveAdmin.register Event do
             row :link_with_link
             bool_row :show_as_gallery
             bool_row :show_calendar if calendar_module.enabled?
+            bool_row :show_map if map_module.enabled?
             bool_row :online
           end
         end
@@ -118,6 +121,11 @@ ActiveAdmin.register Event do
           if calendar_module.enabled?
             f.input :show_calendar,
                     hint: I18n.t('form.hint.event.show_calendar')
+          end
+
+          if map_module.enabled?
+            f.input :show_map,
+                    hint: I18n.t('form.hint.event.show_map')
           end
 
           f.input :online, hint: I18n.t('form.hint.event.online')

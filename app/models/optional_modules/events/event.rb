@@ -13,6 +13,7 @@
 #  end_date        :datetime
 #  show_as_gallery :boolean          default(FALSE)
 #  show_calendar   :boolean          default(FALSE)
+#  show_map        :boolean          default(FALSE)
 #  online          :boolean          default(TRUE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
