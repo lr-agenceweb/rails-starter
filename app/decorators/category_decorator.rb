@@ -23,7 +23,7 @@ class CategoryDecorator < ApplicationDecorator
   # == Heading
   #
   def heading?
-    heading.present?
+    heading.present? && heading.content.present?
   end
 
   #
