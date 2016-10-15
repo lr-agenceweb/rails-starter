@@ -25,7 +25,7 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
 
         - if event.link? && show_page?
           span.post__header__url.event__header__url
-            = link_to fa_icon('link', text: t('event.know_more')), event.link_url, class: 'post__header__url__link'
+            = link_to fa_icon('link', text: t('event.know_more')), event.link_url, class: 'post__header__url__link', target: :_blank
 
       / Body
       / ====
