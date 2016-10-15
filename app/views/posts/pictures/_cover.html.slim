@@ -15,7 +15,14 @@
         - rescue
 
     - if show_page?
-      - if resource.show_as_gallery?
-        = render 'elements/pictures/has_many_as_gallery', resource: resource
-      - else
-        = render 'elements/pictures/has_many', resource: resource, link: true
+      - if resource.pictures?
+        - if resource.show_as_gallery?
+          = render 'elements/pictures/has_many_as_gallery', resource: resource
+        - else
+          = render 'elements/pictures/has_many', resource: resource, link: true
+      - elsif resource.video_uploads?
+        = retina_image_tag resource.video_upload, :video_file, :preview
+      - elsif resource.video_platforms?
+        - begin
+          = resource.video_platform.decorate.preview
+        - rescue
