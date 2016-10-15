@@ -2,8 +2,12 @@
 en:
   connection:
     last_articles: Last links
+    destroy:
+      confirm: Are you sure you want to remove this "Link" article ?
 
 # French
 fr:
   connection:
     last_articles: Derniers liens
+    destroy:
+      confirm: Êtes-vous sûr de vouloir supprimer cet article "Lien" ?

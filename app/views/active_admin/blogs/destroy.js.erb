@@ -1,11 +1,13 @@
 // Variables
 $post = $("#blog-<%= resource.id %>");
+$parent = $post.parent();
 $sidebar = $('#blog__sidebar');
 index = $('.posts.index').length > 0 ? true : false
 
 if(index) {
   // SlideUp destroyed article
-  $post.parent().slideUp(300, function() {
+  $parent.slideUp(300, function() {
+    $parent.remove();
     reload_masonry();
   });
 

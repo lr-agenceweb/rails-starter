@@ -1,0 +1,9 @@
+// Variables
+$post = $("#connection-<%= resource.id %>");
+$parent = $post.parent();
+
+// SlideUp destroyed article
+$parent.slideUp(300, function() {
+  $parent.remove();
+  reload_masonry();
+});

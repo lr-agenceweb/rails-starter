@@ -17,6 +17,9 @@ fr:
     about:
       edit: Modifier article "à propos"
       destroy: Supprimer article "à propos"
+    connection:
+      edit: Modifier article "Lien"
+      destroy: Supprimer article "Lien"
     map:
       modal: Cliquer pour afficher la carte
 

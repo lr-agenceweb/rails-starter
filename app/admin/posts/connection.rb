@@ -42,7 +42,6 @@ ActiveAdmin.register Connection do
 
   show title: :title_aa_show do
     arbre_cache(self, resource.cache_key) do
-      h3 resource.title
       columns do
         column do
           panel t('active_admin.details', model: active_admin_config.resource_label) do
@@ -99,5 +98,11 @@ ActiveAdmin.register Connection do
     include ActiveAdmin::Postable
 
     cache_sweeper :legal_notice_sweeper
+
+    def destroy
+      super do |format|
+        format.js { render 'active_admin/connections/destroy' }
+      end
+    end
   end
 end

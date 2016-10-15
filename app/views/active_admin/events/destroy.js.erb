@@ -1,10 +1,12 @@
 // Variables
 $post = $("#event-<%= resource.id %>");
+$parent = $post.parent();
 index = $('.posts.index').length > 0 ? true : false
 
 // SlideUp destroyed article
-$post.parent().slideUp(300, function() {
+$parent.slideUp(300, function() {
   if(index) {
+    $parent.remove();
     reload_masonry();
   } else {
     Turbolinks.visit("<%= events_path(locale: @language) %>");
