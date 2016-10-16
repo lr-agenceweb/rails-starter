@@ -91,7 +91,7 @@ class EventTest < ActiveSupport::TestCase
       end_date: Time.zone.now + 1.day.to_i
     }
     event = define_event_record(attrs)
-    assert event.calendar_date_correct?
+    assert event.send(:calendar_dates)
     event.delete
   end
 
@@ -102,7 +102,7 @@ class EventTest < ActiveSupport::TestCase
       end_date: Time.zone.now
     }
     event = define_event_record(attrs)
-    assert_equal [I18n.t('form.errors.end_date')], event.calendar_date_correct?
+    assert_equal [I18n.t('form.errors.end_date')], event.send(:calendar_dates)
     event.delete
   end
 
