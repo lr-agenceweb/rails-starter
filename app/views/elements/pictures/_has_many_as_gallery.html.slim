@@ -1,3 +1,4 @@
-.fotorama data-nav="thumbs" data-loop="true" data-autoplay="4000" data-keyboard="true" data-shuffle="false" data-transition="crossfade" data-transitionduration="1200" data-stopautoplayontouch="true" data-arrows="true" data-width="100%"
-  - resource.pictures_online.each_with_index do |image, index|
-    = link_to retina_image_tag(image, :image, :large), image.self_image_url_by_size(:medium), data: { caption: html_escape_once(image.decorate.title) }
+- if resource.pictures?
+  .fotorama data-nav="thumbs" data-loop="true" data-autoplay="4000" data-keyboard="true" data-shuffle="false" data-transition="crossfade" data-transitionduration="1200" data-stopautoplayontouch="true" data-arrows="true" data-width="100%" data-fit="cover"
+    - resource.pictures_online.each_with_index do |image, index|
+      = link_to retina_image_tag(image, :image, :large), image.self_image_url_by_size(:medium), data: { caption: html_escape_once(image.decorate.title) }

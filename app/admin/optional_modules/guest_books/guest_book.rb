@@ -50,5 +50,6 @@ ActiveAdmin.register GuestBook do
   #
   controller do
     include Skippable
+    include ActiveAdmin::AjaxDestroyable
   end
 end

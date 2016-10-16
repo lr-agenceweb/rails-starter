@@ -3,7 +3,7 @@
             label: I18n.t('form.label.online'),
             hint: I18n.t('form.hint.online')
 
-  - if @comment_module.enabled?
+  - if @comment_module.enabled? && f.object.is_a?(Blog)
     - f.input :allow_comments,
               hint: I18n.t('form.hint.allow_comments')
 

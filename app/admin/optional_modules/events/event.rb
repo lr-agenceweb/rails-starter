@@ -31,7 +31,7 @@ ActiveAdmin.register Event do
                 ]
               ],
               location_attributes: [
-                :id, :address, :city, :postcode
+                :id, :address, :city, :postcode, :geocode_address, :latitude, :longitude, :_destroy
               ],
               referencement_attributes: [
                 :id,
@@ -41,6 +41,7 @@ ActiveAdmin.register Event do
               ]]
     params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
     params.push :show_calendar if @calendar_module.enabled?
+    params.push :show_map if @map_module.enabled?
     params
   end
 
@@ -72,6 +73,7 @@ ActiveAdmin.register Event do
     column :start_date
     column :end_date
     bool_column :show_calendar if calendar_module.enabled?
+    bool_column :show_map if map_module.enabled?
     bool_column :online
 
     translation_status
@@ -91,10 +93,11 @@ ActiveAdmin.register Event do
             row :start_date
             row :end_date
             row :duration
-            row :full_address_inline
+            row :full_address
             row :link_with_link
             bool_row :show_as_gallery
             bool_row :show_calendar if calendar_module.enabled?
+            bool_row :show_map if map_module.enabled?
             bool_row :online
           end
         end
@@ -120,6 +123,11 @@ ActiveAdmin.register Event do
                     hint: I18n.t('form.hint.event.show_calendar')
           end
 
+          if map_module.enabled?
+            f.input :show_map,
+                    hint: I18n.t('form.hint.event.show_map')
+          end
+
           f.input :online, hint: I18n.t('form.hint.event.online')
         end
 
@@ -142,7 +150,7 @@ ActiveAdmin.register Event do
         end
 
         render 'admin/shared/links/one', f: f
-        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
+        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: true
       end
     end
 
@@ -171,6 +179,7 @@ ActiveAdmin.register Event do
   controller do
     include Skippable
     include ActiveAdmin::Cachable
+    include ActiveAdmin::AjaxDestroyable
     include OptionalModules::Videoable
 
     def scoped_collection

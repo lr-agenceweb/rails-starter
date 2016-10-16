@@ -8,12 +8,12 @@ module ApplicationHelper
     Time.zone.now.year
   end
 
-  def title_for_category(category, opts = {})
-    extra_title = defined?(opts[:title]) ? opts[:title] : ''
+  def title_for_page(category, opts = {})
+    extra_title = defined?(opts[:extra]) ? opts[:extra] : ''
     page_title = category.menu_title
-    page_title << " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
-    link = link_to raw(page_title), category.menu_link(category.name), class: 'page-title-link'
-    content_tag(:h2, link, class: 'page-title', id: category.name.downcase)
+    page_title += " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
+    link = link_to raw(page_title), category.menu_link(category.name), class: 'page__header__title__link'
+    content_tag(:h2, link, class: 'page__header__title', id: category.name.downcase)
   end
 
   def background_from_color_picker(category)
@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   #
-  # == Blog pages
+  # == Pages actions
   #
   def index_page?
     params[:action] == 'index' || (params[:controller] == 'blog_categories' && params[:action] == 'show')

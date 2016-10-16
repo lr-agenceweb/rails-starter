@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.with_conditions.online.includes(:translations, :location, :picture, :video_uploads, :video_platforms, :link)
+    @events = Event.includes_collection.with_conditions.online
     per_p = @setting.per_page == 0 ? @events.count : @setting.per_page
     @events = EventDecorator.decorate_collection(@events.page(params[:page]).per(per_p))
     seo_tag_index category
@@ -29,7 +29,7 @@ class EventsController < ApplicationController
   private
 
   def set_event
-    @event = Event.online.includes(pictures: [:translations], referencement: [:translations]).friendly.find(params[:id])
+    @event = Event.includes_collection.online.friendly.find(params[:id])
   end
 
   def event_module_enabled?

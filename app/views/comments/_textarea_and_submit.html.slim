@@ -1,11 +1,14 @@
-= f.hidden_field :lang,
-                 value: params[:locale]
 = f.input :comment,
           as: :text,
+          required: true,
+          label: false,
           input_html: { class: 'autosize', style: 'height: 120px' }
 = f.input :nickname,
           label: false,
+          wrapper: false,
           input_html: { class: 'hide' }
+= f.hidden_field :lang,
+                 value: params[:locale]
 
 - if params[:action] == 'reply'
   = f.hidden_field :parent_id,

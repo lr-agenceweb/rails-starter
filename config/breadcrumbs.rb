@@ -40,9 +40,14 @@ crumb :blogs do
   link Category.includes(menu: [:translations]).title_by_category('Blog'), blogs_path
 end
 
-crumb :blog do |blog|
-  link blog.title, blog_path(blog)
+crumb :blog_category do |blog_category|
+  link blog_category.name, blog_category_path(blog_category)
   parent :blogs
+end
+
+crumb :blog do |blog|
+  link blog.title, blog_category_blog_path(blog.blog_category, blog)
+  parent blog.blog_category
 end
 
 #

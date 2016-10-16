@@ -13,6 +13,7 @@
 #  end_date        :datetime
 #  show_as_gallery :boolean          default(FALSE)
 #  show_calendar   :boolean          default(FALSE)
+#  show_map        :boolean          default(FALSE)
 #  online          :boolean          default(TRUE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -28,6 +29,7 @@
 class Event < ActiveRecord::Base
   include Core::Referenceable
   include Core::FriendlyGlobalizeSluggable
+  include Includes::EventIncludable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
@@ -41,7 +43,9 @@ class Event < ActiveRecord::Base
   validates :start_date, presence: true
   validate :calendar_date_correct?, if: :should_validate_calendar_dates?
 
-  delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
+  delegate :address, :postcode, :city,
+           :latitude, :longitude, :latlon?,
+           to: :location, prefix: true, allow_nil: true
 
   scope :online, -> { where(online: true) }
   scope :published, -> { online }

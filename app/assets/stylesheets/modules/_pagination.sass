@@ -1,9 +1,17 @@
 // Pagination
 ul.pagination
-  transition: color .3s ease-in
+  text-align: center
+  margin-bottom: 0
+  li
+    a, button
+      transition: background-color .3s, color .3s
+    &.current
+      a, button
+        color: $white
 
 ul.pagination li:hover a,
 ul.pagination li a:focus,
 ul.pagination li:hover button,
 ul.pagination li button:focus
+  background-color: $primary-color
   color: $white

@@ -25,46 +25,31 @@ about_fr:
   <<: *DEFAULTS
   post_id: <%= ActiveRecord::FixtureSet.identify(:about) %>
   locale: fr
-  title: Développement et Hébergement
-  slug: developpement-hebergement
+  title: Développement et Hébergement avec Ruby
+  slug: developpement-hebergement-avec-ruby
+  content: 'Ruby' # Important for search
 
 about_en:
   <<: *DEFAULTS
   post_id: <%= ActiveRecord::FixtureSet.identify(:about) %>
   locale: en
-  title: Site Hosting
-  slug: site-hosting
+  title: Site Hosting with Ruby
+  slug: site-hosting-with-ruby
+  content: 'Ruby' # Important for search
 
-about_2_fr:
+about_offline_fr:
   <<: *DEFAULTS
-  post_id: <%= ActiveRecord::FixtureSet.identify(:about_2) %>
+  post_id: <%= ActiveRecord::FixtureSet.identify(:about_offline) %>
   locale: fr
-  title: Article 2 A Propos
-  slug: article-2-a-propos
+  title: Développement et Hébergement offline
+  slug: developpement-hebergement-offline
 
-about_2_en:
+about_offline_en:
   <<: *DEFAULTS
-  post_id: <%= ActiveRecord::FixtureSet.identify(:about_2) %>
+  post_id: <%= ActiveRecord::FixtureSet.identify(:about_offline) %>
   locale: en
-  title: About article 2 !
-  slug: about-article-2
-
-# Tests
-about_test_fr:
-  <<: *DEFAULTS
-  post_id: <%= ActiveRecord::FixtureSet.identify(:about_test) %>
-  locale: fr
-  title: Ruby on Rails
-  slug: ruby-on-rails
-  content: 'Ruby'
-
-about_test_en:
-  <<: *DEFAULTS
-  post_id: <%= ActiveRecord::FixtureSet.identify(:about_test) %>
-  locale: en
-  title: Ruby on Rails
-  slug: ruby-on-rails
-  content: 'Ruby'
+  title: Site Hosting offline
+  slug: site-hosting-offline
 
 # Legal notices
 legal_notice_super_admin_fr:

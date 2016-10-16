@@ -1,19 +1,31 @@
-input.ui-autocomplete-loading, input.ui-autocomplete-loading:focus
-  background: transparent url('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/images/ui-anim_basic_16x16.gif') no-repeat left center
-  transition: none
+//
+// Autocomplete [search header]
+// =====================
+.ui-autocomplete
+  width: $search_bar_width + $submit_width !important
+  border: none
+  background: $white
 
-.autocomplete-content
-  padding-left: 5px
-  font-size: 10px
+  &.ui-menu
+    .ui-menu-item
+      padding: 10px
+      list-style-image: none
+      &:nth-child(odd)
+        background-color: $white-smoke
+      &.ui-state-focus
+        border: 1px solid transparent // fix
+        background-color: $smoke
+        background-image: none
 
-.ui-menu .ui-menu-item
-  padding-left: 3px
-  list-style-image: none
-.ui-menu-item
-  line-height: 44px
+  .autocomplete__picture
+    width: 50px
+    max-width: none
+    height: 50px
+    object-fit: cover
+    font-family: 'object-fit: cover;'
 
-.ui-state-focus, .ui-widget-content .ui-state-focus
-  background-image: none
-  border: 1px solid transparent
-.ui-widget-content
-  border: 1px solid transparent
+  .autocomplete__content
+    padding-left: 5px
+    font-size: 10px
+    p
+      margin-bottom: 0

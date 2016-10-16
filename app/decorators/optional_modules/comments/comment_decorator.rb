@@ -48,7 +48,7 @@ class CommentDecorator < ApplicationDecorator
   # == Commentable
   #
   def commentable_path
-    commentable.is_a?(Blog) ? blog_category_blog_path(commentable.blog_category, commentable) : polymorphic_path(commentable)
+    commentable.decorate.show_post_link
   end
 
   def link_source
@@ -65,6 +65,6 @@ class CommentDecorator < ApplicationDecorator
 
   def pseudo(name = nil)
     name = pseudo_registered_or_guest if name.nil?
-    content_tag(:strong, name, class: 'comment-author')
+    content_tag(:strong, name, class: 'comment__author__name')
   end
 end

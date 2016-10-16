@@ -10,6 +10,31 @@ class ApplicationHelperTest < ActionView::TestCase
   setup :initialize_test
 
   #
+  # == Pages actions
+  #
+  test 'should return correct value for index_page?' do
+    params[:action] = 'index'
+    assert index_page?
+    params[:action] = 'new'
+    assert_not index_page?
+
+    params[:controller] = 'blog_categories'
+    params[:action] = 'show'
+    assert index_page?
+  end
+
+  test 'should return correct value for show_page?' do
+    params[:action] = 'new'
+    assert_not show_page?
+    params[:action] = 'show'
+    assert show_page?
+
+    params[:controller] = 'blog_categories'
+    params[:action] = 'show'
+    assert_not show_page?
+  end
+
+  #
   # == DateTime
   #
   test 'should return current year' do

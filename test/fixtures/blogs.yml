@@ -48,3 +48,7 @@ blog_third:
 naked:
   <<: *DEFAULTS
   blog_category: one
+
+many_comments:
+  <<: *DEFAULTS
+  blog_category: two

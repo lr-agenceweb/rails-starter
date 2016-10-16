@@ -1,1 +1,2 @@
-= render template: 'blogs/index', locals: { opts: { title: "(#{@blog_category.name})" } }
+- breadcrumb @blog_category
+= render template: 'blogs/index', locals: { opts: { title: "(#{@blog_category.name})" }, blog_category: true }

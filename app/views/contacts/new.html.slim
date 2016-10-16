@@ -1,19 +1,14 @@
 - breadcrumb :contact
+= render 'elements/background_page_cover', category: category
 
-section.contacts-section.page-section#contacts
+section.page-section.contacts.row.align-center#contacts
+  .small-12.columns
+    = render 'pages/title_and_heading'
 
-  - if category.slider?
-    .row
-      .small-12.columns
-        = render 'assets/sliders/show', slider: slider, force: false
+  .small-12.medium-8.columns
+    #contacts__form.contacts__form
+      = render 'contacts/form'
 
-  - if category.background? && @background_module.enabled? && !@background.nil?
-    = render 'assets/backgrounds/background', background: category.background, content: (render('contacts/title', category: category) + render('contacts/form')), klass: 'background-contact'
-
-  - else
-    = render 'contacts/title', category: category
-    = render 'contacts/form'
-
-  / Mapbox
-  - unless @location.nil?
-    = render 'elements/map'
+/ Mapbox
+- unless @location.nil?
+  = render 'elements/map'

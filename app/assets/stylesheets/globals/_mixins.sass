@@ -28,14 +28,14 @@
 // Add overlay color in top of background pictures
 =overlay-video
   &:after
-    content: ''
     position: fixed
+    z-index: 3
     top: 0
-    left: 0
     right: 0
     bottom: 0
+    left: 0
+    content: ''
     background-color: rgba($black, .6)
-    z-index: -1
 
 // Improve default style for broken images
 =broken-pictures
@@ -43,17 +43,55 @@
     position: relative
 
     &:after
-      content: "\f1c5" " " attr(alt)
-
-      font-size: 1rem
-      font-family: FontAwesome
-      color: rgb(100, 100, 100)
-
-      display: block
       position: absolute
       z-index: 2
       top: 0
       left: 0
+
+      display: block
       width: 100%
       height: 100%
+      content: '\f1c5' ' ' attr(alt)
+      color: rgb(100, 100, 100)
       background-color: $white
+      font-family: FontAwesome
+
+      font-size: 1rem
+
+// Flat form design
+=flat_form
+  .input
+    margin-bottom: 1rem
+  input:not([type="file"]),
+  textarea,
+  input:focus,
+  textarea:focus
+    border: none
+    box-shadow: none
+    margin-bottom: 0
+    color: $body-font-color
+    background-color: $white
+  input::-webkit-input-placeholder
+    color: #C7C7CD
+  input:-moz-placeholder
+    color: #C7C7CD
+  input::-moz-placeholder
+    color: #C7C7CD
+  input:-ms-input-placeholder
+    color: #C7C7CD
+
+// Hamburger menu icon
+=hamburger_menu
+  &:after
+    position: absolute
+    top: 5px
+    right: 15px
+    display: inline-block
+    width: 1rem
+    height: 0
+    content: ''
+    box-shadow: 0 10px 0 1px $border-color, 0 16px 0 1px $border-color, 0 22px 0 1px $border-color
+
+  &:hover
+    &:after
+      box-shadow: 0 10px 0 1px $border-color, 0 16px 0 1px $border-color, 0 22px 0 1px $border-color

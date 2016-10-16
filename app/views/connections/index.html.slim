@@ -1,19 +1,22 @@
 - breadcrumb :connections
+= render 'elements/background_page_cover', category: category
 
-- if category.background? && @background_module.enabled? && !@background.nil?
-  - cache category.background do
-    = render 'assets/backgrounds/background', background: category.background
-/ = render 'assets/sliders/show', slider: @category.slider, force: false unless @category.slider.nil?
+section.page-section.posts.connections.row.align-center#connections
+  .small-12.columns
+    = render 'pages/title_and_heading'
 
-section.connections-section.page-section
-  .row
-    .small-12.columns
-      = title_for_category(category)
 
-  .row.align-center
+  .small-11.columns
     - if @connections.blank?
-      .small-12.columns
-        p = t('connection.no_results')
+      p = t('posts.empty')
     - else
-      .small-12.medium-8.columns
-        = render 'connections'
+      .row.align-center
+        .small-12.medium-11.columns
+          #connections-container
+            .row.small-up-1.medium-up-2.block-grid#masonry-container
+              - @connections.each do |connection|
+                - cache ['list', connection]
+                  .column.masonry-item
+                    = render 'connection', connection: connection
+
+          = paginate @connections

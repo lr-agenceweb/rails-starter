@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 require 'test_helper'
 
@@ -48,19 +49,6 @@ module Admin
       assert flash[:notice].blank?
     end
 
-    test 'should destroy blog' do
-      assert_difference ['Blog.count'], -1 do
-        delete :destroy, id: @blog
-      end
-      assert_redirected_to admin_blogs_path
-    end
-
-    test 'should destroy nested audio with blog' do
-      assert_difference ['Audio.count'], -1 do
-        delete :destroy, id: @blog
-      end
-    end
-
     test 'should update nested audio and enqueued it' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
       assert_enqueued_jobs 1 do
@@ -69,15 +57,33 @@ module Admin
     end
 
     #
+    # == Destroy
+    #
+    test 'should destroy blog' do
+      assert_difference ['Blog.count', 'Audio.count'], -1 do
+        delete :destroy, id: @blog
+        assert_redirected_to admin_blogs_path
+      end
+    end
+
+    test 'AJAX :: should destroy blog' do
+      assert_difference ['Blog.count', 'Audio.count'], -1 do
+        xhr :delete, :destroy, id: @blog
+        assert_response :success
+        assert_template 'active_admin/blogs/destroy'
+      end
+    end
+
+    #
     # == PublicationDate
     #
-    test 'should not create nested publication_date if blank attributes' do
+    test 'should create nested publication_date if blank attributes' do
       attrs = set_default_record_attrs
       attrs[:blog_category_id] = @blog_category.id
 
       post :create, blog: attrs
       blog = assigns(:blog)
-      assert_not blog.publication_date.present?
+      assert blog.publication_date.present?
       assert blog.published_at.nil?
       assert blog.expired_at.nil?
 

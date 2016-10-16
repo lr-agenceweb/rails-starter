@@ -1,13 +1,23 @@
-article.post-article
+article.connection id="connection-#{connection.id}"
   = render 'posts/microdatas', resource: connection
+  = render 'posts/admin_actions', resource: connection
 
-  header.post-header
-    h3.post-article-title = connection.title
+  - if connection.picture?
+    / Left
+    .connection__picture
+      - connection_picture = retina_image_tag connection.picture, :image, :small, class: 'connection__picture__image'
+      - if connection.link?
+        = link_to connection_picture, connection.link_url, target: :_blank, class: 'connection__picture__link'
+      - else
+        = connection_picture
 
-  .post-body
-    .row
-      .small-12.medium-6.columns
-        == connection.content
-        = connection.link_with_link
-      .small-12.medium-6.columns
-        = render 'elements/pictures/has_many_get_first', resource: connection, link: connection.link_url
+    / Right
+    .connection__body
+      header.connection__header
+        h3.connection__header__title
+          - if connection.link?
+            = link_to connection.title, connection.link_url
+          - else
+            = connection.title
+
+      == connection.content

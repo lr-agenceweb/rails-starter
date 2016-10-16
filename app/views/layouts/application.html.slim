@@ -31,14 +31,14 @@ html lang="#{@language}" class='no-js'
     = render 'elements/banner_maintenance' if maintenance?
     = render 'elements/admin_bar' if current_user_and_administrator? && @setting.show_admin_bar?
 
-    = render 'elements/microdatas', resource: setting
+    = render 'elements/microdatas/activity', resource: setting
 
     main#wrapper.wrapper
       = render 'elements/no_js', setting: @setting
       = render 'elements/flash' unless flash.nil?
       = render 'elements/header/header', show_metadata: true
 
-      .l-container
+      .body-site
         == yield
       .push
 

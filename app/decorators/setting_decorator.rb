@@ -16,14 +16,6 @@ class SettingDecorator < ApplicationDecorator
     content_tag(:span, model.title)
   end
 
-  def title_subtitle(header = :h1, link = root_path, klass = '')
-    content_tag(:a, href: link, class: "l-header-site-title-link #{klass}") do
-      concat(content_tag(header, class: 'l-header-site-title') do
-        concat(title) + ' ' + concat(small_subtitle)
-      end)
-    end
-  end
-
   def title_subtitle_inline
     "#{setting.title} #{setting.subtitle.downcase if subtitle?}"
   end
@@ -43,24 +35,27 @@ class SettingDecorator < ApplicationDecorator
   end
 
   #
-  # == Other
+  # == Contact informations
   #
-  def credentials
-    "#{CGI.escapeHTML(setting.name)} - #{copyright} - Copyright &copy; #{current_year}"
+  def phone
+    return unless phone?
+    link_phone = link_to(model.phone, "tel:#{phone_w3c}", class: 'phone__link')
+    h.fa_icon('phone', text: link_phone)
   end
 
   def phone_w3c
     model.phone.delete(' ').remove('(0)') if phone?
   end
 
+  def email
+    h.fa_icon('envelope', text: mail_to(model.email, model.email, class: 'email__link'))
+  end
+
   #
-  # == Modules
+  # == Other
   #
-  def newsletter(newsletter_user)
-    content_tag(:div, class: 'newsletter-form') do
-      concat(content_tag(:span, I18n.t('newsletter.header'), class: 'newsletter-form-header'))
-      concat(render('elements/footer/newsletter_form', newsletter_user: newsletter_user))
-    end
+  def credentials
+    "#{CGI.escapeHTML(setting.name)} - #{copyright} - Copyright &copy; #{current_year}"
   end
 
   def about
@@ -86,7 +81,7 @@ class SettingDecorator < ApplicationDecorator
   end
 
   def phone?
-    !model.phone.blank?
+    model.phone.present?
   end
 
   def copyright

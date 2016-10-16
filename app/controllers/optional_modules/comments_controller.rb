@@ -8,6 +8,8 @@ class CommentsController < ApplicationController
   include ModuleSettingable
 
   before_action :comment_module_enabled?
+  before_action :set_category, only: [:reply]
+  before_action :set_background, only: [:reply]
   before_action :load_commentable
   before_action :set_comment, only: [:reply, :signal, :destroy]
   before_action :set_comments, only: [:create]
@@ -21,7 +23,7 @@ class CommentsController < ApplicationController
 
   include DeletableCommentable
 
-  decorates_assigned :comment, :about, :blog
+  decorates_assigned :comment, :about, :blog, :category
 
   # POST /comments
   # POST /comments.json
@@ -94,7 +96,7 @@ class CommentsController < ApplicationController
 
   def respond_action(template)
     respond_to do |format|
-      format.html { redirect_to source }
+      format.html { redirect_to @commentable.decorate.show_post_link }
       format.js { render template }
     end
   end
@@ -119,8 +121,8 @@ class CommentsController < ApplicationController
     User.current_user = try(:current_user)
   end
 
-  def source
-    @commentable.is_a?(Blog) ? blog_category_blog_path(@commentable.blog_category, @commentable) : @commentable
+  def set_category
+    @category = Category.find_by(name: 'Blog')
   end
 
   #

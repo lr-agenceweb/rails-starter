@@ -7,5 +7,5 @@ submit_btn_state('#new_guest_book', "<%= flash[:success].html_safe %>");
 
 // Display guest book post
 <% unless @guest_book_setting.should_validate %>
-  $('#guest_books').prepend("<%= j render partial: 'guest_books/guest_book', locals: { guest_book: @guest_book } %>")
+  $('#guest_books-container').prepend("<%= j render @guest_book %>")
 <% end %>

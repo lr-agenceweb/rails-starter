@@ -1,11 +1,13 @@
 # English
 en:
   connection:
-    no_results: No links to show
     last_articles: Last links
+    destroy:
+      confirm: Are you sure you want to remove this "Link" article ?
 
 # French
 fr:
   connection:
-    no_results: Il n'y a aucun liens à montrer
     last_articles: Derniers liens
+    destroy:
+      confirm: Êtes-vous sûr de vouloir supprimer cet article "Lien" ?

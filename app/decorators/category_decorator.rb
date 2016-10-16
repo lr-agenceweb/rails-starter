@@ -20,6 +20,13 @@ class CategoryDecorator < ApplicationDecorator
   end
 
   #
+  # == Heading
+  #
+  def heading?
+    heading.present? && heading.content.present?
+  end
+
+  #
   # == ActiveAdmin
   #
   def title_aa_show

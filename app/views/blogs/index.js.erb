@@ -1,4 +1,10 @@
-<%= render 'elements/scroll_infinite', object: @blogs, selector: '#blogs-container' %>
+<%= render 'elements/scroll_infinite', object: @blogs, selector: '#blogs-container .block-grid', wrap_with: '<div class="column masonry-item" />'.html_safe %>
+
+// Reload Masonry position for new added items
+var $container = $('#masonry-container');
+if($container.length > 0 && !isSmall()) {
+  $container.masonry('reloadItems').masonry();
+}
 
 // Recalculates scrolling points after adding Ajax content
 <%= render 'blogs/sidebar/sticky_fix' %>

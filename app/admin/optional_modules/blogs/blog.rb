@@ -77,6 +77,7 @@ ActiveAdmin.register Blog do
   controller do
     include Skippable
     include ActiveAdmin::Cachable
+    include ActiveAdmin::AjaxDestroyable
     include OptionalModules::Videoable
     include OptionalModules::Audioable
 

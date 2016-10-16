@@ -9,6 +9,10 @@ class ContactForm
 
   attr_accessor :name, :email, :message, :send_copy, :attachment, :nickname
 
+  I18N_SCOPE = 'activerecord.errors.models.contact_form.attributes.attachment'
+  ATTACHMENT_MAX_SIZE = 3
+  ATTACHMENT_TYPES = ['application/pdf', 'image/jpeg', 'image/png', 'text/plain'].freeze
+
   validates :name,
             presence: true
   validates :email,
@@ -24,12 +28,10 @@ class ContactForm
            unless: proc { attachment.blank? }
 
   def attachment_size
-    max_size = 3
-    errors[:attachment] << I18n.t('form.errors.contact_form.size', size: max_size) if attachment.size > max_size.megabytes
+    errors[:attachment] << I18n.t('size', size: ATTACHMENT_MAX_SIZE, scope: I18N_SCOPE) if attachment.size > ATTACHMENT_MAX_SIZE.megabytes
   end
 
   def attachment_type
-    acceptable_types = ['application/pdf', 'image/jpeg', 'image/png', 'text/plain']
-    errors[:attachment] << I18n.t('form.errors.contact_form.type') unless acceptable_types.include? attachment.content_type.chomp
+    errors[:attachment] << I18n.t('type', scope: I18N_SCOPE) unless ATTACHMENT_TYPES.include? attachment.content_type.chomp
   end
 end

@@ -5,10 +5,24 @@ fr:
     "no": 'Non'
     required:
       text: 'requis'
-      mark: '*'
+      mark: '(*)'
     error_notification:
       default_message: "Merci de vérifier les erreurs ci-dessous:"
-
+    labels:
+      contact_form:
+        send_copy: Recevoir une copie de ce message sur ma boîte email
+    hints:
+      contact_form:
+        attachment: Vous pouvez joindre une image ou un document PDF à votre message
+    placeholders:
+      defaults:
+        username: Votre nom d'utilisateur (*)
+        name: Votre prénom et nom (*)
+        email: Votre email (*)
+        content: Votre message (*)
+        message: Votre message (*)
+        comment: Votre commentaire (*)
+        term: Rechercher
 
 # English
 en:
@@ -17,28 +31,19 @@ en:
     "no": 'No'
     required:
       text: 'required'
-      mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
+      mark: '(*)'
     error_notification:
       default_message: "Please review the problems below:"
-    # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
-    # include_blanks:
-    #   defaults:
-    #     age: 'Rather not say'
-    # prompts:
-    #   defaults:
-    #     age: 'Select your age'
+    labels:
+      contact_form:
+        send_copy: Receive a copy of this message on my mailbox
+    hints:
+      contact_form:
+        attachment: You can join a picture or a PDF document to your message
+    placeholders:
+      defaults:
+        username: Your username (*)
+        email: Your email (*)
+        content: Your message (*)
+        name: Your first and lastname (*)
+        term: Search

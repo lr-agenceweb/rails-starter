@@ -1,7 +1,21 @@
-article.post-article
-  = render 'posts/microdatas', resource: about.decorate
+article.post.about class="#{params[:action]}"
+  = render 'posts/microdatas', resource: about
+  = render 'posts/admin_actions', resource: about
 
-  header.post-header
-    h2 = link_to about.title, about_path(about)
+  .row
+    .small-12.columns
+      = render 'posts/pictures/cover', resource: about
 
-  .post-body == truncate_read_more(about.content, about_path(about))
+      / Header
+      / ======
+      header.post__header
+        h3.post__header__title
+          = link_to about.title, about, class: 'post__header__title__link'
+
+      / Body
+      / ====
+      .post__body
+        == truncate_read_more(about.content, about_path(about))
+
+// BackTo link
+= render 'posts/back_to', resource: about

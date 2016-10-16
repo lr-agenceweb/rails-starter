@@ -2,13 +2,53 @@
 @import globals/mixins
 @import globals/settings
 
+// AdminBar
 #admin_bar
   display: none
 
-// Menu déroulant sur une colonne
-@media only screen and (max-width : $menu-breakpoint-three)
-  .l-nav-container
-    ul
+// Socials
+.post__socials
+  display: none
+
+// Admin Actions
+.post__admin-actions__destroy
+  display: none
+
+// AlertBox
+.alert-box
+  position: relative
+  z-index: 0
+  top: inherit
+  right: inherit
+  text-align: right
+  &.callout
+    border: none
+  .close-button
+    display: none
+
+// Assets
+.post__videos, .post__audios
+  display: none
+.post__cover
+  .fotorama
+    a
+      display: inherit !important
+
+// Comments
+.reply
+  .post__comments
+    &__form
+      margin-top: 2rem
+
+@media only screen and (min-width: $menu-small) and (max-width: $menu-medium)
+  // Header
+  .header-site
+    margin-bottom: 0
+
+  // Menu
+  .menu__nav
+    position: relative
+    .menu__nav__ul
       display: block
 
     a#pull

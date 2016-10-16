@@ -1,7 +1,8 @@
-article.post-article
+article.home
   = render 'posts/microdatas', resource: home
 
-  header
-    h2.article-title = home.title
+  header.home__header
+    h2.home__header__title = home.title
 
-  .post-body == home.content
+  .home__body
+    == home.content

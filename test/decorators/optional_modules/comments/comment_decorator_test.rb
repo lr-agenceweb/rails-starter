@@ -23,7 +23,7 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct html_tag for user' do
-    assert_equal '<strong class="comment-author">Anthony</strong>', @comment_decorated.pseudo
+    assert_equal '<strong class="comment__author__name">Anthony</strong>', @comment_decorated.pseudo
   end
 
   test 'should return correct email if user is connected' do
@@ -66,12 +66,12 @@ class CommentDecoratorTest < Draper::TestCase
   # == Commentable
   #
   test 'should return correct commentable_path' do
-    assert_equal '/a-propos/article-2-a-propos', @comment_decorated.commentable_path
+    assert_equal '/blogs/bar/article-de-blog-avec-beaucoup-de-commentaires', @comment_decorated.commentable_path
     assert_equal '/blogs/foo/article-de-blog-en-ligne', @blog_comment_decorated.commentable_path
   end
 
   test 'should return correct commentable link for regular articles' do
-    assert_equal "<a target=\"_blank\" class=\"button\" href=\"/a-propos/article-2-a-propos\">Article 2 A Propos <br /> (#{I18n.t('comment.admin.go_to_source')})</a>", @comment_decorated.link_source
+    assert_equal "<a target=\"_blank\" class=\"button\" href=\"/blogs/bar/article-de-blog-avec-beaucoup-de-commentaires\">Article de blog avec beaucoup de commentaires <br /> (#{I18n.t('comment.admin.go_to_source')})</a>", @comment_decorated.link_source
   end
 
   test 'should return correct commentable link for blog articles' do

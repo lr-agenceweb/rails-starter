@@ -20,6 +20,11 @@
 #= require i18n/translations
 #= require base/i18n_settings
 
+#= require masonry.pkgd.min.js
+#= require plugins/masonry
+
+#= require plugins/newsletter_user_form
+
 #= require magnific-popup
 #= require modules/magnific_popup
 
@@ -64,10 +69,15 @@
 #= require modules/scroll_infinite
 
 #= require plugins/devkit
+#= require polyfills/object-fit-images.js
 
 $(document).on 'ready page:load page:restore', ->
+  # Object fit polyfill
+  objectFitImages('img.polyfill', { watchMQ: true })
+
   # Save form inputs in LocalStorage
   $('form').formBackup()
   $('form[data-validate]').validate()
 
+  # Display date and time in a friendly way
   friendly_date()

@@ -24,3 +24,9 @@ en:
         comment:
           attributes:
             max_depth: You cannot reply to this comment anymore
+
+        contact_form:
+          attributes:
+            attachment:
+              size: Attachment should be less than %{size}MB
+              type: Attachment should be a picture or a PDF file

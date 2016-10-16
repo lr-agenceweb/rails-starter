@@ -8,8 +8,8 @@ module Core
   # == MenuHelper
   #
   module MenuHelper
-    def set_active_class(controller, action = false)
-      'active' if (action == false && controller?(controller)) || (controller?(controller) && action?(action))
+    def active_class?(controller, action = false)
+      true if (action == false && controller?(controller)) || (controller?(controller) && action?(action))
     end
 
     def even_or_odd_menu_item(items)

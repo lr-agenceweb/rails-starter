@@ -1,15 +1,6 @@
-- breadcrumb :root
+= render 'elements/background_page_cover', category: category
 
-- if category.video?
-  = render 'assets/videos/video_background', video_background: category.video_upload.decorate
-- else
-  - if category.background? && @background_module.enabled? && !@background.nil?
-    - cache category.background do
-      = render 'assets/backgrounds/background', background: category.background
-  - else
-    = render 'assets/sliders/show', slider: slider, force: false
-
-section.homepage-content.page-section#homes
+section.homes.page-section#homes
   .row.align-center.text-center
     - @homes.each do |home|
       - cache home do |_|
@@ -17,5 +8,5 @@ section.homepage-content.page-section#homes
           = render 'homes/home', home: home
 
   .row.align-center.text-center
-    .small-12.medium-4.columns
+    .small-5.medium-3.large-2.columns
       .button-discover = link_to t('demo.discover_demo_site'), blogs_path

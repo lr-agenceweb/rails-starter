@@ -1,68 +1,43 @@
-.footer-container
-  color: $white
+//
+// Footer
+// ======
+.footer-site
   position: relative
   width: 100%
+  color: $white
 
   // Upper Footer
   .upper-footer
     padding: 1rem 10px 15px 10px
     background-color: $topbar-background
 
-    .newsletter-form
-      .newsletter-form-header
-        display: block
-        text-align: center
-
-      .input-wrapper
-        position: relative
-
-        .newsletter_user_email
-          input
-            width: 100%
-            height: auto
-            padding: 5px
-            padding-right: 37px
-
-            &:focus
-              outline: none !important
-
-        .submit-with-icon
-          background: none
-          position: absolute
-          top: 1px
-          right: 3px
-
-          margin: 0
-          padding: 0
-          border: 0
-          outline: none
-          box-shadow: none
-
-          color: #000
-          cursor: pointer
-
-          i
-            font-size: 25px
-            margin-right: 1px
-
-    .socials
-      .social-header-title, a
-        color: $white
-        font-size: map-get($header-sizes, h6)
+    // Logo up
+    .logo-up
+      text-align: center
 
   // Lower Footer (made with love by ...)
   .lower-footer
     padding: 15px
-    background-color: #333132
+    background-color: $jet
     p
-      font-size: 12px
       margin-bottom: 0
-
+      font-size: 12px
     a
       color: $secondary-color
 
     .credentials
       text-align: left
 
+  .socials, .newsletter-form, .contact-informations
+    margin-bottom: 1.5rem
+
+@media #{$large-up}
+  .socials, .newsletter-form, .contact-informations
+    margin-bottom: 0
+
+// Newsletter form
+@import modules/footer/newsletter_user
+// Social icons
+@import modules/footer/social
 // LR credentials
-@import modules/lr_credentials
+@import modules/footer/lr_credentials

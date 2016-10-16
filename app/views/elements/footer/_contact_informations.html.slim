@@ -1,0 +1,6 @@
+.contact-informations
+  p.contact-informations__body
+    span.contact-informations__phone = setting.phone
+    span.contact-informations__email = setting.email
+    span.contact-informations__address
+      == setting.location.decorate.full_address(false)

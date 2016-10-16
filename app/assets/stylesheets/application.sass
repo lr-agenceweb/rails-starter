@@ -1,4 +1,5 @@
 // Library
+@import url('//fonts.googleapis.com/css?family=Josefin+Sans:400,700,400italic')
 @import normalize
 @import foundation/foundation_and_overrides
 @import foundation/font-awesome-buttons
@@ -26,15 +27,20 @@
 // Base
 @import base/base
 @import base/forms
+@import base/foundation_fix
 
 // Layout
 @import layout/page
 
 // Pages
+@import pages/post
 @import pages/homepage
 @import pages/contact
 @import pages/blog
+@import pages/event
 @import pages/search
+@import pages/guest_book
+@import pages/connection
 
 // Modules
 @import modules/header
@@ -43,7 +49,8 @@
 @import modules/menu
 @import modules/adminbar
 @import modules/ribbon
-// @import modules/breadcrumb
+@import modules/pagination
+@import modules/breadcrumb
 @import modules/background
 @import modules/comment
 @import modules/social
@@ -51,6 +58,10 @@
 @import modules/footer
 @import modules/sticky_footer
 @import modules/404
+
+// Widgets
+@import modules/widgets/form_submit_state
+@import modules/widgets/footer_heading
 
 // custom_Plugins
 // @import custom_plugins/devkit
@@ -62,3 +73,6 @@
 @import custom_plugins/mediaelement
 @import custom_plugins/cookie_cnil
 @import custom_plugins/maintenance
+
+// Fix
+@import modules/vex_fix

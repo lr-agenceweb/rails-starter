@@ -3,6 +3,11 @@
   if typeof Foundation != 'undefined'
     Foundation.MediaQuery.current == 'small'
 
+# is this a medium screen?
+@isMedium = ->
+  if typeof Foundation != 'undefined'
+    Foundation.MediaQuery.current == 'medium'
+
 @isSmallBreakOne = ->
   matchMedia('(max-width: 949px)').matches
 
@@ -55,3 +60,12 @@
 @reset_form = (inputs) ->
   for input in inputs
     $(input).val ''
+
+#
+# Masonry
+# =======
+# Reload Masonry position for new added items
+@reload_masonry = ->
+  $container = $('#masonry-container')
+  if $container.length > 0 && !isSmall()
+    $container.masonry('reloadItems').masonry()

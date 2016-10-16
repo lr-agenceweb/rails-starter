@@ -2,12 +2,6 @@
 fr:
   contact:
     title: Formulaire de Contact
-    label:
-      message: Message
-    placeholder:
-      email: Écrivez votre email ici
-      message: Écrivez votre message ici
-      name: Écrivez votre prénom et nom ici
     required: Tous les champs suffixés d'un astérisque (*) sont obligatoires
     send:
       button: Envoyer votre message
@@ -30,12 +24,6 @@ fr:
 en:
   contact:
     title: Contact Form
-    label:
-      message: Message
-    placeholder:
-      email: Write your email here
-      message: Write your message here
-      name: Write your name here
     required: All fields suffixed with an asterisk (*) are required
     send:
       button: Send your message

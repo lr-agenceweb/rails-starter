@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     resources :connections, only: [:index]
 
     # GuestBook
-    resources :guest_books, only: [:index, :create, :destroy], concerns: :paginatable
+    resources :guest_books, only: [:index, :create], concerns: :paginatable
 
     # Blog
     resources :blogs, only: [:index], concerns: [:paginatable, :commentable]

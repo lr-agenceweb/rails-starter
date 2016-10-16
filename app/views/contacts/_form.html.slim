@@ -1,31 +1,51 @@
 .row
-  .small-12.medium-4.columns
+  .small-12.large-4.columns.small-order-2.large-order-1
     - if @qrcode_module.enabled? && setting.show_qrcode?
-      .text-right
+      .contact__qrcode.show-for-large
         = qrcode_image_tag
 
-  .small-12.medium-8.columns
-    = simple_form_for @contact_form, validate: true, remote: true, authenticity_token: true do |f|
+    = render 'elements/footer/contact_informations'
+
+  .small-12.large-8.columns.small-order-1.large-order-2
+    = simple_form_for @contact_form, html: { class: 'form--flat form--contact' }, validate: true, remote: true, authenticity_token: true do |f|
       .row
         .small-12.medium-6.columns
-          = f.input :name, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.name')}"
-        .small-12.medium-6.columns
-            = f.input :email, as: :email, required: true, label: false, placeholder: "* #{I18n.t('contact.placeholder.email')}"
-            = f.input :nickname, input_html: { class: 'hide', style: 'display: none' }, label: false
+          = f.input :name,
+                    required: true,
+                    label: false
 
+        .small-12.medium-6.columns
+            = f.input :email,
+                      as: :email,
+                      required: true,
+                      label: false
+            = f.input :nickname,
+                      label: false,
+                      input_html: { style: 'display: none' }
 
       .row
         .small-12.columns
-          = f.input :message, as: :text, required: true, input_html: { class: 'autosize contact-form' }, placeholder: "* #{I18n.t('contact.placeholder.message')}", label: false
+          = f.input :message,
+                    as: :text,
+                    required: true,
+                    label: false,
+                    input_html: { class: 'autosize' }
 
           - if @setting.show_file_upload?
-            = f.file_field :attachment,
-                           label: 'Attachment'
-            - unless @contact_form.errors[:attachment].blank?
-              small.error = @contact_form.errors[:attachment].join(', ')
+            .contact_form_attachment
+              = f.file_field :attachment
 
-          = f.input :send_copy, inline_label: I18n.t('form.label.send_copy'), as: :boolean, required: false, input_html: { checked: true }
+              small.hint
+                = t('simple_form.hints.contact_form.attachment')
 
+              - unless @contact_form.errors[:attachment].blank?
+                small.error = @contact_form.errors[:attachment].join(', ')
+
+          = f.input :send_copy,
+                    as: :boolean,
+                    required: false,
+                    inline_label: true,
+                    input_html: { checked: true }
 
       .row
         .small-12.columns

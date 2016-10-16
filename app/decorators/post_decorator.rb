@@ -114,8 +114,19 @@ class PostDecorator < ApplicationDecorator
   #
   # == Link (linkable polymorphic)
   #
+  def link?
+    model.link.try(:url).present?
+  end
+
   def link_with_link
-    link_to model.link.url, model.link.url, target: :_blank if link?
+    link_to model.link_url, model.link_url, target: :_blank if link?
+  end
+
+  #
+  # == Post link (regular post or Blog)
+  #
+  def show_post_link(suffix = 'path')
+    model.is_a?(Blog) ? send("blog_category_blog_#{suffix}", model.blog_category, model) : send("#{model.class.name.underscore}_#{suffix}", model)
   end
 
   private
@@ -130,9 +141,5 @@ class PostDecorator < ApplicationDecorator
         concat(content_tag(:span, t('activerecord.attributes.publication_date.unpublished')))
       end
     end
-  end
-
-  def link?
-    model.link.try(:url).present?
   end
 end

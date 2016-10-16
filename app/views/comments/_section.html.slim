@@ -1,12 +1,15 @@
-- if @comment_module.enabled?
-  section.row
-    .small-12.columns
-      - if o.allow_comments?
-        .comments-container
-          h3 = I18n.t('activerecord.models.comment.other')
-          = render 'comments/form'
-          = render 'comments/comments'
+- if o.allow_comments?
+  .post__comments
+    header.post__comments__header
+      h3.post__comments__header__title
+        = I18n.t('activerecord.models.comment.other')
 
-      - else
-        .panel.callout
-          p = fa_icon 'ban', text: I18n.t('comment.disabled')
+    .post__comments__form
+      = render 'comments/form'
+
+    .post__comments__comments
+      = render 'comments/comments'
+
+- else
+  .panel.callout
+    p = fa_icon 'ban', text: I18n.t('comment.disabled')

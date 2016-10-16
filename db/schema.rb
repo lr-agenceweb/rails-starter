@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923205213) do
+ActiveRecord::Schema.define(version: 20161015221048) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -223,6 +223,7 @@ ActiveRecord::Schema.define(version: 20160923205213) do
     t.datetime "end_date"
     t.boolean  "show_as_gallery",               default: false
     t.boolean  "show_calendar",                 default: false
+    t.boolean  "show_map",                      default: false
     t.boolean  "online",                        default: true
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false

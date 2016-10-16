@@ -6,10 +6,10 @@ div itemscope='' itemtype='http://schema.org/ProfessionalService'
     div itemprop='logo' itemscope='' itemtype='http://schema.org/ImageObject'
       meta itemprop='url' content="#{attachment_url(resource.logo, :small)}"
       meta itemprop='width' content="#{resource.retina_dimensions[:logo][:small][:width]}"
-      meta itemprop='height' content="#{resource.retina_dimensions[:logo][:small][:width]}"
+      meta itemprop='height' content="#{resource.retina_dimensions[:logo][:small][:height]}"
 
   meta itemprop='url' content="#{root_url}"
-  meta itemprop='telephone' content="#{resource.phone}"
+  meta itemprop='telephone' content="#{resource.object.phone}"
   meta itemprop='name legalName' content="#{resource.title_subtitle_inline}"
 
   - if resource.location?

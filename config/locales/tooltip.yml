@@ -1,0 +1,32 @@
+# French
+fr:
+  tooltip:
+    edit_page: Modifier les informations de cette page (entête, référencement, ...)
+    blog:
+      edit: Modifier cet article de blog
+      destroy: Supprimer cet article de blog
+    event:
+      edit: Modifier cet événement
+      destroy: Supprimer cet événement
+      calendar: Date de l'événement
+    guest_book:
+      destroy: Supprimer ce message du Livre d'or
+    legal_notice:
+      edit: Modifier cet article des Mentions Légales
+      destroy: Supprimer cet article des Mentions Légales
+    about:
+      edit: Modifier article "à propos"
+      destroy: Supprimer article "à propos"
+    connection:
+      edit: Modifier article "Lien"
+      destroy: Supprimer article "Lien"
+    map:
+      modal: Cliquer pour afficher la carte
+
+# English
+en:
+  tooltip:
+    event:
+      calendar: Event date
+    map:
+      modal: Click to display map

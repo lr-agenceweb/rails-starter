@@ -10,7 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.11.1",
-    "gulp": "^3.8.11",
+    "gulp": "^3.9.1",
     "coffee-script": "^1.8.0",
     "gulp-load-plugins": "^0.8.0",
     "gulp-watch": "^3.0.0",

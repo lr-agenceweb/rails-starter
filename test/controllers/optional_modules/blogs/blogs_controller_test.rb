@@ -89,6 +89,41 @@ class BlogsControllerTest < ActionController::TestCase
   end
 
   #
+  # == Comments
+  #
+  test 'should get three comments for blog article in french side' do
+    I18n.with_locale(:fr) do
+      assert_equal @blog_mc.comments.by_locale(:fr).count, 3
+    end
+  end
+
+  if I18n.available_locales.include?(:en)
+    test 'should get two comments for blog article in english side' do
+      I18n.with_locale(:en) do
+        assert_equal @blog_mc.comments.by_locale(:en).count, 2
+      end
+    end
+  end
+
+  test 'should get one comments for blog article in french side and validated' do
+    I18n.with_locale(:fr) do
+      assert_equal @blog_mc.comments.by_locale(:fr).validated.count, 1
+    end
+  end
+
+  if I18n.available_locales.include?(:en)
+    test 'should get one comments for blog article in english side and validated' do
+      I18n.with_locale(:en) do
+        assert_equal @blog_mc.comments.by_locale(:fr).validated.count, 1
+      end
+    end
+  end
+
+  test 'should get alice as comments author' do
+    assert_equal @comment.user_username, 'alice'
+  end
+
+  #
   # == Menu offline
   #
   test 'should render 404 if menu item is offline' do
@@ -144,9 +179,12 @@ class BlogsControllerTest < ActionController::TestCase
 
   def initialize_test
     @blog = blogs(:blog_online)
+    @blog_mc = blogs(:many_comments)
     @blog_offline = blogs(:blog_offline)
     @blog_naked = blogs(:naked)
     @blog_module = optional_modules(:blog)
+
+    @comment = comments(:three)
 
     @locales = I18n.available_locales
     @setting = settings(:one)

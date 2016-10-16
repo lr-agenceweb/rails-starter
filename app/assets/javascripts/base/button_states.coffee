@@ -7,7 +7,7 @@ $(document).on 'ready page:load page:restore', ->
 # Set button state depending on form callback
 @buttons_state_listener = ->
   if $('button[type="submit"]').length > 0
-    $('form').on 'click', (e) ->
+    $('.button-state').parents('form').on 'click', (e) ->
       $this = $(@)
       $submit = $this.find('button[type="submit"]')
       base_classes = 'fa-paper-plane'
@@ -22,8 +22,7 @@ $(document).on 'ready page:load page:restore', ->
         else
           $submit.prev().fadeIn()
 
-        localStorage.removeItem 'formBackup'
-        $this.resetClientSideValidations()
+        reset_local_storage($this)
 
       # Fail
       window.ClientSideValidations.callbacks.form.fail = (form, eventData) ->
@@ -37,3 +36,7 @@ $(document).on 'ready page:load page:restore', ->
   $submit = $("#{id} button[type='submit']")
   $submit.addClass('success fa-check').removeClass('warning pulse fa-spinner')
   $submit.text(label)
+
+@reset_local_storage = (form) ->
+  localStorage.removeItem 'formBackup'
+  form.resetClientSideValidations()

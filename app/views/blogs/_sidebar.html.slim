@@ -1,16 +1,16 @@
-aside#blog_sidebar.blog_sidebar data-sticky='' data-anchor='sidebar_referer' data-btm-anchor='sidebar_referer:bottom'
+aside#blog__sidebar.blog__sidebar data-sticky='' data-anchor='sidebar_referer' data-btm-anchor='sidebar_referer:bottom'
   - if @blog_settings.show_last_posts?
     section.last-blogs
       h4.last-blogs-title = I18n.t('blog.last_articles')
       ul
         - @last_blogs.each do |blog|
           - cache ['sidebar', blog] do |_|
-            li
+            li id="blog-#{blog.id}__sidebar"
               == link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
               - if @comment_module.enabled?
                 - number = blog.comments.by_locale(@language).validated.count
                 =< '('
-                span id="comment-count-#{blog.id}" = number
+                span id="blog__comment__count-#{blog.id}" = number
                 =< I18n.t("activerecord.models.comment.#{number > 1 ? 'other' : 'one'}").downcase
                 = ')'
 

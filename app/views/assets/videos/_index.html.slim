@@ -1,11 +1,10 @@
 - if @video_module.enabled?
   - if @video_settings.video_platform?
-    .row
-      - VideoPlatformDecorator.decorate_collection(resource.video_platforms_online).each do |video|
+    - VideoPlatformDecorator.decorate_collection(resource.video_platforms_online).each do |video|
+      .row
         = render 'assets/video_platforms/row', video: video
 
-
   - if @video_settings.video_upload?
-    .row
-      - VideoUploadDecorator.decorate_collection(resource.video_uploads_online.not_processing.includes(:video_subtitle)).each_with_index do |video, index|
+    - VideoUploadDecorator.decorate_collection(resource.video_uploads_online.not_processing.includes(:video_subtitle)).each_with_index do |video, index|
+      .row
         = render 'assets/video_uploads/row', video: video, index: index
