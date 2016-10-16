@@ -9,6 +9,77 @@ class EventTest < ActiveSupport::TestCase
 
   setup :initialize_test
 
+  #
+  # == Validation rules
+  #
+  test 'should not be valid if title is not filled' do
+    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true }
+    event = Event.new attrs
+
+    refute event.valid?, 'should not be valid if title is not set'
+    assert_equal [:"translations.title"], event.errors.keys
+    event.delete
+  end
+
+  test 'should not be valid if start_date is not present' do
+    attrs = { id: SecureRandom.random_number(1_000), all_day: true }
+    event = define_event_record(attrs)
+
+    assert_not event.valid?
+    assert_equal [:start_date], event.errors.keys
+    event.delete
+  end
+
+  test 'should not be valid if start_date finish after end_date' do
+    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, end_date: Time.zone.now }
+    event = define_event_record(attrs)
+
+    assert_not event.valid?
+    assert_equal [:start_date, :end_date], event.errors.keys
+    event.delete
+  end
+
+  test 'should not create event if link is not correct' do
+    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'bad-link' }, start_date: Time.zone.now, all_day: true }
+    event = define_event_record(attrs)
+
+    assert_not event.valid?
+    assert_equal [:'link.url'], event.errors.keys
+  end
+
+  test 'should create event if link is correct' do
+    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'http://test.com' }, start_date: Time.zone.now, all_day: true }
+    event = define_event_record(attrs)
+
+    assert event.valid?
+    assert_empty event.errors.keys
+    event.delete
+  end
+
+  #
+  # == Callback
+  #
+  test 'should reset end_date if all_day is checked' do
+    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now, end_date: 2.days.from_now, all_day: true }
+    event = define_event_record(attrs)
+
+    assert event.valid?
+    assert event.all_day?
+    assert_nil event.end_date
+  end
+
+  test 'should check all_day if end_date is nil' do
+    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now }
+    event = define_event_record(attrs)
+
+    assert event.valid?
+    assert event.all_day?
+    assert_nil event.end_date
+  end
+
+  #
+  # == Misc
+  #
   test 'should return correct duration for event' do
     assert_equal '6 jours', @event.decorate.duration
   end
@@ -92,53 +163,6 @@ class EventTest < ActiveSupport::TestCase
     @event.update_attributes(video_uploads_attributes: [{ video_file: video }, { video_file: video }])
     @event.save!
     assert_equal I18n.t('video_upload.flash.upload_in_progress'), @event.video_upload_flash_notice
-  end
-
-  #
-  # == Validation rules
-  #
-  test 'should not be valid if title is not filled' do
-    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true }
-    event = Event.new attrs
-
-    refute event.valid?, 'should not be valid if title is not set'
-    assert_equal [:"translations.title"], event.errors.keys
-    event.delete
-  end
-
-  test 'should not be valid if start_date is not present' do
-    attrs = { id: SecureRandom.random_number(1_000), all_day: true }
-    event = define_event_record(attrs)
-
-    assert_not event.valid?
-    assert_equal [:start_date], event.errors.keys
-    event.delete
-  end
-
-  test 'should not be valid if start_date finish after end_date' do
-    attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, end_date: Time.zone.now }
-    event = define_event_record(attrs)
-
-    assert_not event.valid?
-    assert_equal [:start_date, :end_date], event.errors.keys
-    event.delete
-  end
-
-  test 'should not create event if link is not correct' do
-    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'bad-link' }, start_date: Time.zone.now, all_day: true }
-    event = define_event_record(attrs)
-
-    assert_not event.valid?
-    assert_equal [:'link.url'], event.errors.keys
-  end
-
-  test 'should create event if link is correct' do
-    attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'http://test.com' }, start_date: Time.zone.now, all_day: true }
-    event = define_event_record(attrs)
-
-    assert event.valid?
-    assert_empty event.errors.keys
-    event.delete
   end
 
   #

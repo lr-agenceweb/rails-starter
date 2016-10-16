@@ -37,6 +37,11 @@ class Event < ActiveRecord::Base
   include PrevNextable
   include Linkable
 
+  before_validation :reset_end_date,
+                    if: proc { all_day? && start_date.present? }
+  before_validation :check_all_day,
+                    if: proc { end_date.blank? }
+
   has_one :location, as: :locationable, dependent: :destroy
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
 
@@ -69,5 +74,14 @@ class Event < ActiveRecord::Base
     !all_day? ||
       (has_attribute?(end_date) &&
         !start_date.blank? && !end_date.blank?)
+  end
+
+  def reset_end_date
+    self.start_date = start_date.to_datetime.change(hour: 0, min: 0, sec: 0)
+    self.end_date = nil
+  end
+
+  def check_all_day
+    self.all_day = true
   end
 end

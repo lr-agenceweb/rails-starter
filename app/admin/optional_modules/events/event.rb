@@ -185,36 +185,5 @@ ActiveAdmin.register Event do
     def scoped_collection
       super.includes :translations, :location, :picture
     end
-
-    def create
-      reset_end_date if lasts_all_day?
-      check_all_day if empty_end_date?
-      super
-    end
-
-    def update
-      reset_end_date if lasts_all_day?
-      check_all_day if empty_end_date?
-      super
-    end
-
-    private
-
-    def reset_end_date
-      params[:event][:start_date] = params[:event][:start_date].to_datetime.change(hour: 0, min: 0, sec: 0)
-      params[:event][:end_date] = nil
-    end
-
-    def check_all_day
-      params[:event][:all_day] = true
-    end
-
-    def lasts_all_day?
-      params[:event][:all_day] == true
-    end
-
-    def empty_end_date?
-      params[:event][:end_date].blank?
-    end
   end
 end
