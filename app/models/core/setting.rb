@@ -42,6 +42,7 @@ class Setting < ActiveRecord::Base
   extend Enumerize
   include MaxRowable
   include Assets::Settings::Paperclipable
+  include OptionalModules::Locationable
 
   # Callbacks
   after_validation :clean_paperclip_errors
@@ -51,13 +52,6 @@ class Setting < ActiveRecord::Base
   active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true
   end
-
-  # Model relations
-  has_one :location, as: :locationable, dependent: :destroy
-  accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
-
-  # Delegate
-  delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
 
   # Enum
   enumerize :date_format,

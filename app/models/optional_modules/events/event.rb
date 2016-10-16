@@ -33,25 +33,22 @@ class Event < ActiveRecord::Base
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
+  include OptionalModules::Locationable
   include OptionalModules::Searchable
   include PrevNextable
   include Linkable
 
+  # Callbacks
   before_validation :reset_end_date,
                     if: proc { all_day? && start_date.present? }
   before_validation :check_all_day,
                     if: proc { end_date.blank? }
 
-  has_one :location, as: :locationable, dependent: :destroy
-  accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
-
+  # Validation rules
   validates :start_date, presence: true
   validate :calendar_date_correct?, if: :should_validate_calendar_dates?
 
-  delegate :address, :postcode, :city,
-           :latitude, :longitude, :latlon?,
-           to: :location, prefix: true, allow_nil: true
-
+  # Scopes
   scope :online, -> { where(online: true) }
   scope :published, -> { online }
   scope :current_or_coming, -> { where('(start_date >= ?) OR (start_date <= ? AND end_date >= ?) OR (start_date = ? AND all_day = ?)', Time.zone.now, Time.zone.now, Time.zone.now, Time.zone.today, true) }
