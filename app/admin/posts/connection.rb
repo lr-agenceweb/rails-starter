@@ -96,13 +96,8 @@ ActiveAdmin.register Connection do
   #
   controller do
     include ActiveAdmin::Postable
+    include ActiveAdmin::AjaxDestroyable
 
     cache_sweeper :legal_notice_sweeper
-
-    def destroy
-      super do |format|
-        format.js { render 'active_admin/connections/destroy' }
-      end
-    end
   end
 end

@@ -77,6 +77,7 @@ ActiveAdmin.register Blog do
   controller do
     include Skippable
     include ActiveAdmin::Cachable
+    include ActiveAdmin::AjaxDestroyable
     include OptionalModules::Videoable
     include OptionalModules::Audioable
 
@@ -86,12 +87,6 @@ ActiveAdmin.register Blog do
 
     def scoped_collection
       super.includes :picture, :user
-    end
-
-    def destroy
-      super do |format|
-        format.js { render 'active_admin/blogs/destroy' }
-      end
     end
   end
 end

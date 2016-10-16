@@ -179,6 +179,7 @@ ActiveAdmin.register Event do
   controller do
     include Skippable
     include ActiveAdmin::Cachable
+    include ActiveAdmin::AjaxDestroyable
     include OptionalModules::Videoable
 
     def scoped_collection
@@ -195,12 +196,6 @@ ActiveAdmin.register Event do
       reset_end_date if lasts_all_day?
       check_all_day if empty_end_date?
       super
-    end
-
-    def destroy
-      super do |format|
-        format.js { render 'active_admin/events/destroy' }
-      end
     end
 
     private
