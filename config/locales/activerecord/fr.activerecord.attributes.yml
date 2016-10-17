@@ -41,7 +41,7 @@ fr:
     validated: Validé ? (en ligne)
     signalled: Signalé ?
     created_at: Ajouté le
-    _destroy: Supprimer
+    destroy: Supprimer
 
   assets_attributes: &assets_attributes
     title: Titre
