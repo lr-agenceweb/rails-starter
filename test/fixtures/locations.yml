@@ -37,3 +37,10 @@ two:
   longitude: 1.5
   locationable_id: 1
   locationable_type: Event
+
+three:
+  address: '23 rue du crime'
+  postcode: '12000'
+  city: Metropolis
+  locationable_id: 2
+  locationable_type: Event

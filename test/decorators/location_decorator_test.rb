@@ -26,7 +26,7 @@ class LocationDecoratorTest < Draper::TestCase
   end
 
   test 'should return false as boolean for latlon?' do
-    location = LocationDecorator.new(@location_two)
+    location = LocationDecorator.new(@location_three)
     assert_not location.latlon?
   end
 
@@ -35,6 +35,7 @@ class LocationDecoratorTest < Draper::TestCase
   def initialize_test
     @location_one = locations(:one)
     @location_two = locations(:two)
+    @location_three = locations(:three)
     @location = LocationDecorator.new(@location_one)
   end
 end
