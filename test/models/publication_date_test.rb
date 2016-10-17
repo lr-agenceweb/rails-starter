@@ -63,24 +63,41 @@ class PublicationDateTest < ActiveSupport::TestCase
     publication = PublicationDate.new(published_later: true, published_at: 1.week.ago.to_s(:db))
     assert_not publication.valid?
     assert_equal [:published_at], publication.errors.keys
+
+    messages = { published_at: [I18n.t('past_publication', scope: @i18n_scope)] }
+    assert_equal messages, publication.errors.messages
   end
 
   test 'should not be valid if expired_at is BEFORE now (on create)' do
     publication = PublicationDate.new(expired_prematurely: true, expired_at: 1.week.ago.to_s(:db))
     assert_not publication.valid?
     assert_equal [:expired_at], publication.errors.keys
+
+    messages = { expired_at: [I18n.t('past_expiration', scope: @i18n_scope)] }
+    assert_equal messages, publication.errors.messages
   end
 
   test 'should not be valid if published_at is BEFORE now' do
     @published_later.update_attributes(published_at:  1.week.ago.to_s(:db))
     assert_not @published_later.valid?
     assert_equal [:published_at], @published_later.errors.keys
+
+    messages = { published_at: [I18n.t('past_publication', scope: @i18n_scope)] }
+    assert_equal messages, @published_later.errors.messages
   end
 
   test 'should not be valid if expired_at is BEFORE now' do
     @published_later.update_attributes(expired_at: 1.week.ago.to_s(:db))
     assert_not @published_later.valid?
     assert_equal [:published_at, :expired_at], @published_later.errors.keys
+
+    messages = {
+      published_at: [I18n.t('published_at', scope: @i18n_scope)],
+      expired_at: [
+        I18n.t('expired_at', scope: @i18n_scope), I18n.t('past_expiration', scope: @i18n_scope)
+      ]
+    }
+    assert_equal messages, @published_later.errors.messages
   end
 
   # Before / After
@@ -96,8 +113,8 @@ class PublicationDateTest < ActiveSupport::TestCase
     assert_not @published_later.valid?
     assert_equal [:published_at, :expired_at], @published_later.errors.keys
 
-    expected = { published_at: [I18n.t('published_at', scope: @i18n_scope)], expired_at: [I18n.t('expired_at', scope: @i18n_scope)] }
-    assert_equal expected, @published_later.errors.messages
+    messages = { published_at: [I18n.t('published_at', scope: @i18n_scope)], expired_at: [I18n.t('expired_at', scope: @i18n_scope)] }
+    assert_equal messages, @published_later.errors.messages
   end
 
   #

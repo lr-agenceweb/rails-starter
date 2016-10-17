@@ -79,6 +79,6 @@ class PublicationDate < ActiveRecord::Base
 
   def error_for_past_dates(key, i18n)
     today = DateTime.current
-    errors.add key.to_sym, I18n.t("no_past_#{i18n}", scope: I18N_SCOPE) if send(key) && send(key) < today
+    errors.add key.to_sym, I18n.t("past_#{i18n}", scope: I18N_SCOPE) if send(key) && send(key) < today
   end
 end

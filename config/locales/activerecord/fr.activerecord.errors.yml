@@ -84,8 +84,8 @@ fr:
         publication_date:
           attributes:
             # Past from Today
-            no_past_publication: Vous ne pouvez pas choisir de date de publication dans le passé
-            no_past_expiration: Vous ne pouvez pas choisir de date d'expiration dans le passé
+            past_publication: Vous ne pouvez pas choisir de date de publication dans le passé
+            past_expiration: Vous ne pouvez pas choisir de date d'expiration dans le passé
 
             # Before / After publication
             published_at: La publication de l'article ne peut pas commencer après son expiration présumée
