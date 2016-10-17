@@ -45,8 +45,8 @@ class SearchesController < ApplicationController
     term = params[:term]
     return if term.blank?
 
-    @searches += Post.search(term, params[:locale])
-    @searches += Blog.search(term, params[:locale]) if @blog_module.enabled?
-    @searches += Event.search(term, params[:locale]) if @event_module.enabled?
+    @searches += Post.online.search(term, params[:locale])
+    @searches += Blog.published.search(term, params[:locale]) if @blog_module.enabled?
+    @searches += Event.online.search(term, params[:locale]) if @event_module.enabled?
   end
 end
