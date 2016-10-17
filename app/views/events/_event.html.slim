@@ -18,7 +18,7 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
         - if show_page? && event.location?
           span.post__header__location.event__header__location data-open="map__modal"
             - span_location = fa_icon 'globe', text: event.full_address
-            - if event.location_latlon? && event.show_map?
+            - if event.all_conditions_to_show_map?(@map_module)
               = link_to span_location, '#', class: 'has-tip', data: { tooltip: '' }, tabindex: '1', title: t('tooltip.map.modal'), aria_haspopup: 'true'
             - else
              == span_location
@@ -61,7 +61,7 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
 = render 'posts/back_to', resource: event
 
 / Map (modal)
-- if show_page? && event.location_latlon? && event.show_map?
+- if show_page? && event.all_conditions_to_show_map?(@map_module)
   .reveal#map__modal.map__modal data-reveal='' data-close-on-click="true"
     #map.map.map__modal__map data-latitude=event.location_latitude data-longitude=event.location_longitude data-symbol="marker" data-popup="true" data-popup_content=event.full_address(false)
 

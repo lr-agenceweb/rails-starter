@@ -41,7 +41,7 @@ ActiveAdmin.register Event do
               ]]
     params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
     params.push :show_calendar if @calendar_module.enabled?
-    params.push :show_map if @map_module.enabled?
+    params.push :show_map if @map_module.enabled? && @event_settings.show_map?
     params
   end
 
@@ -73,7 +73,7 @@ ActiveAdmin.register Event do
     column :start_date
     column :end_date
     bool_column :show_calendar if calendar_module.enabled?
-    bool_column :show_map if map_module.enabled?
+    bool_column :show_map if map_module.enabled? && event_settings.show_map?
     bool_column :online
 
     translation_status
@@ -97,7 +97,7 @@ ActiveAdmin.register Event do
             row :link_with_link
             bool_row :show_as_gallery
             bool_row :show_calendar if calendar_module.enabled?
-            bool_row :show_map if map_module.enabled?
+            bool_row :show_map if map_module.enabled? && event.show_map?
             bool_row :online
           end
         end
@@ -118,7 +118,7 @@ ActiveAdmin.register Event do
           f.input :online
           f.input :show_as_gallery
           f.input :show_calendar if calendar_module.enabled?
-          f.input :show_map if map_module.enabled?
+          f.input :show_map if map_module.enabled? && event_settings.show_map?
         end
 
         render 'admin/shared/form_translation', f: f
@@ -165,8 +165,17 @@ ActiveAdmin.register Event do
     include ActiveAdmin::AjaxDestroyable
     include OptionalModules::Videoable
 
+    # Callback
+    before_action :set_event_setting
+
     def scoped_collection
       super.includes :translations, :location, :picture
+    end
+
+    private
+
+    def set_event_setting
+      @event_settings = EventSetting.first
     end
   end
 end

@@ -121,6 +121,26 @@ class EventDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Map
+  #
+  test 'should return correct boolean value if show map' do
+    # Map module enabled
+    assert_not @event_decorated.all_conditions_to_show_map?(@map_module)
+
+    # EventSetting show_map enabled
+    @event_settings.update_attributes(show_map: true)
+    assert_not @event_decorated.all_conditions_to_show_map?(@map_module)
+
+    # Event show_map? enabled
+    @event.update_attributes(show_map: true)
+    assert @event_decorated.all_conditions_to_show_map?(@map_module)
+
+    # Map module disabled
+    @map_module.update_attributes(enabled: false)
+    assert_not @event_decorated.all_conditions_to_show_map?(@map_module)
+  end
+
+  #
   # == Location
   #
   test 'should return correct boolean for location?' do
@@ -141,6 +161,9 @@ class EventDecoratorTest < Draper::TestCase
     @event = events(:event_online)
     @event_two = events(:event_third)
     @event_all_day = events(:all_day)
+    @event_settings = event_settings(:one)
+
+    @map_module = optional_modules(:map)
     @calendar_module = optional_modules(:calendar)
 
     @link = links(:event)

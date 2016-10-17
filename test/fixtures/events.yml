@@ -35,6 +35,7 @@ event_online:
   end_date: '2015-07-28 18:00:00'
   online: true
   show_calendar: false
+  show_map: false
 
 event_offline:
   <<: *DEFAULTS

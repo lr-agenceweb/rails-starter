@@ -44,6 +44,13 @@ class EventDecorator < PostDecorator
   end
 
   #
+  # == Map
+  #
+  def all_conditions_to_show_map?(map_module)
+    map_module.enabled? && model.show_map? && model.location_latlon? && EventSetting.first.show_map?
+  end
+
+  #
   # == Location
   #
   def full_address(inline = true)
