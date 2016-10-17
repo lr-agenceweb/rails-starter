@@ -38,6 +38,21 @@ class CategoryDecorator < ApplicationDecorator
   end
 
   #
+  # == Cover
+  #
+  def cover_preview
+    return video_preview if video?
+    background_preview if background?
+  end
+
+  #
+  # == Background
+  #
+  def background_preview
+    h.retina_image_tag model.background, :image, :medium
+  end
+
+  #
   # == Videos
   #
   def video_preview

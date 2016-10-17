@@ -41,6 +41,21 @@ class CategoryDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Cover
+  #
+  test 'should return correct cover_preview' do
+    assert @category.background?
+    assert_equal retina_image_tag(@category.background, :image, :medium), @category_decorated.cover_preview
+  end
+
+  #
+  # == Background
+  #
+  test 'should return background preview' do
+    assert_equal retina_image_tag(@category_decorated.background, :image, :medium), @category_decorated.background_preview
+  end
+
+  #
   # == Videos
   #
   test 'should return video preview' do

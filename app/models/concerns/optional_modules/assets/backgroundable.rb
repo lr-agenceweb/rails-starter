@@ -24,7 +24,7 @@ module OptionalModules
       # == Background
       #
       def background?
-        background.present? && background.image.exists?
+        background.present? # && background.image.exists?
       end
     end
   end

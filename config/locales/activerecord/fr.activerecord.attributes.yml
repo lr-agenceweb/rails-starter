@@ -93,6 +93,7 @@ fr:
         title: Titre
         title_d: Titre
         name: Nom de la catégorie
+        cover_preview: Illustration
         background: Arrière-plan
         position: Position
         color: Couleur

@@ -43,9 +43,7 @@ ActiveAdmin.register Category do
 
   index do
     selectable_column
-    image_column :image, style: :small do |r|
-      r.background.image if r.background?
-    end if background_module.enabled?
+    column :cover_preview
     column :title_d
     column :div_color
     column :slider if slider_module.enabled?
@@ -60,9 +58,7 @@ ActiveAdmin.register Category do
       columns do
         column do
           attributes_table do
-            image_row :image, style: :medium do |r|
-              r.background.image if r.background?
-            end if background_module.enabled?
+            row :cover_preview
             row :div_color
             row :slider if slider_module.enabled?
             row :module if current_user.super_administrator?

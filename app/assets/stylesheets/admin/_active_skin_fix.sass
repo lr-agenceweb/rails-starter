@@ -93,9 +93,11 @@ body.logged_out, body.logged_in
 // AA Index view
 // =============
 .col
-  &.col-custom_cover
+  &.col-custom_cover, &.col-cover_preview
     img
-      max-width: 200px
+      max-width: 300px
+      max-height: 200px
+      object-fit: cover
   &.col-publication
     .bool-value
       display: inline-block
