@@ -160,7 +160,7 @@ class PublicationDateTest < ActiveSupport::TestCase
   private
 
   def initialize_test
-    @i18n_scope = 'form.errors.publication_date'
+    @i18n_scope = 'activerecord.errors.models.publication_date.attributes'
     @published_later = publication_dates(:one)
 
     @blog_offline = blogs(:blog_offline)

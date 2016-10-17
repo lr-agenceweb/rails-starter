@@ -28,13 +28,16 @@ class Category < ActiveRecord::Base
   include OptionalModules::Assets::Backgroundable
   include OptionalModules::Assets::VideoUploadable
 
+  # Model relations
   belongs_to :optional_module
   belongs_to :menu
   has_one :slider, dependent: :destroy
 
+  # Delegate
   delegate :enabled, to: :optional_module, prefix: true, allow_nil: true
   delegate :title, :position, :online, to: :menu, prefix: true, allow_nil: true
 
+  # Scopes
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 
   def self.title_by_category(category)

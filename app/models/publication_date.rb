@@ -30,6 +30,9 @@ class PublicationDate < ActiveRecord::Base
   # Model relations
   belongs_to :publishable, polymorphic: true, touch: true
 
+  # Constantes
+  I18N_SCOPE = 'activerecord.errors.models.publication_date.attributes'
+
   # Validation rules
   validates :published_at,
             presence: true,
@@ -66,9 +69,8 @@ class PublicationDate < ActiveRecord::Base
 
   def publication_dates
     return true unless expired_at <= published_at
-    scope = 'form.errors.publication_date'
-    errors.add :published_at, I18n.t('published_at', scope: scope)
-    errors.add :expired_at, I18n.t('expired_at', scope: scope)
+    errors.add :published_at, I18n.t('published_at', scope: I18N_SCOPE)
+    errors.add :expired_at, I18n.t('expired_at', scope: I18N_SCOPE)
   end
 
   def validate_publication_dates?
@@ -77,7 +79,6 @@ class PublicationDate < ActiveRecord::Base
 
   def error_for_past_dates(key, i18n)
     today = DateTime.current
-    scope = 'form.errors.publication_date'
-    errors.add key.to_sym, I18n.t("no_past_#{i18n}", scope: scope) if send(key) && send(key) < today
+    errors.add key.to_sym, I18n.t("no_past_#{i18n}", scope: I18N_SCOPE) if send(key) && send(key) < today
   end
 end

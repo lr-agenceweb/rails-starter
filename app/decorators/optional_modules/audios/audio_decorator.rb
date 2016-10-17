@@ -15,6 +15,8 @@ class AudioDecorator < ApplicationDecorator
   end
 
   def hint_for_file
-    model.audio? ? "Fichier actuel: <strong>#{model.audio_file_name.humanize}</strong> <br />" : ''
+    html = t('formtastic.hints.audio.audio_file')
+    html += model.audio? ? '<br />' + t('formtastic.hints.audio.actual_file', file: "<strong>#{model.audio_file_name.humanize}</strong>") : ''
+    html
   end
 end

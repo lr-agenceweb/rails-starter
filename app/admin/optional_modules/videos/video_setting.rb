@@ -35,19 +35,11 @@ ActiveAdmin.register VideoSetting do
 
     columns do
       column do
-        f.inputs t('general') do
-          f.input :video_platform,
-                  hint: I18n.t('form.hint.video.video_platform')
-          f.input :video_upload,
-                  hint: I18n.t('form.hint.video.video_upload')
-
-          if current_user.super_administrator?
-            f.input :video_background,
-                    hint: I18n.t('form.hint.video.video_background')
-          end
-
-          f.input :turn_off_the_light,
-                  hint: I18n.t('form.hint.video.turn_off_the_light')
+        f.inputs t('formtastic.titles.video_setting_details') do
+          f.input :video_platform
+          f.input :video_upload
+          f.input :video_background if current_user.super_administrator?
+          f.input :turn_off_the_light
         end
       end
     end

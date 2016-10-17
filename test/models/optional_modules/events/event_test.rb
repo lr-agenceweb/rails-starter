@@ -101,8 +101,9 @@ class EventTest < ActiveSupport::TestCase
       start_date: Time.zone.now + 1.day.to_i,
       end_date: Time.zone.now
     }
+    scope = 'activerecord.errors.models.event.attributes'
     event = define_event_record(attrs)
-    assert_equal [I18n.t('form.errors.end_date')], event.send(:calendar_dates)
+    assert_equal [I18n.t('end_date', scope: scope)], event.send(:calendar_dates)
     event.delete
   end
 

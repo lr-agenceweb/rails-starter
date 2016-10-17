@@ -28,7 +28,7 @@ columns do
   end
 
   column do
-    unless resource.is_a?(About)
+    if resource.is_a?(Blog)
       panel t('active_admin.details', model: t('activerecord.models.user.one')) do
         attributes_table_for resource do
           row :author_with_avatar

@@ -48,24 +48,19 @@ ActiveAdmin.register Menu do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs 'Configuration du menu' do
+    f.inputs t('formtastic.titles.menu_details') do
       columns do
         column do
           f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :title,
-                    label: I18n.t('activerecord.attributes.post.title'),
-                    hint: I18n.t('form.hint.menu.title')
+            t.input :title
           end
         end
 
         column do
           f.inputs heading: false do
-            f.input :show_in_header,
-                    hint: I18n.t('form.hint.menu.show_in_header')
-            f.input :show_in_footer,
-                    hint: I18n.t('form.hint.menu.show_in_header')
-            f.input :online,
-                    hint: I18n.t('form.hint.menu.online')
+            f.input :show_in_header
+            f.input :show_in_footer
+            f.input :online
           end
         end
       end

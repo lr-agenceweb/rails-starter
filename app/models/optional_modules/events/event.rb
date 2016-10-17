@@ -38,6 +38,9 @@ class Event < ActiveRecord::Base
   include PrevNextable
   include Linkable
 
+  # Constantes
+  I18N_SCOPE = 'activerecord.errors.models.event.attributes'
+
   # Callbacks
   before_validation :reset_end_date,
                     if: proc { all_day? && start_date.present? }
@@ -63,8 +66,8 @@ class Event < ActiveRecord::Base
 
   def calendar_dates
     return true unless end_date <= start_date
-    errors.add :start_date, I18n.t('form.errors.start_date')
-    errors.add :end_date, I18n.t('form.errors.end_date')
+    errors.add :start_date, I18n.t('start_date', scope: I18N_SCOPE)
+    errors.add :end_date, I18n.t('end_date', scope: I18N_SCOPE)
   end
 
   def calendar_dates?

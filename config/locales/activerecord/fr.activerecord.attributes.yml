@@ -15,7 +15,7 @@ fr:
         author_with_avatar: Auteur
         status: Statut
         allow_comments: Commentaires ?
-        show_as_gallery: Galerie d'images
+        show_as_gallery: Galerie d'images ?
       blog:
         title: Titre
         content: Contenu
@@ -23,7 +23,7 @@ fr:
         online: En ligne ?
         prev_next: Liens précédent / suivant ?
         allow_comments: Commentaires ?
-        show_as_gallery: Galerie d'images
+        show_as_gallery: Galerie d'images ?
         blog_category: Catégorie de l'article
         custom_cover: Couverture
         publication: Publication / Expiration

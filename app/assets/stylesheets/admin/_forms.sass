@@ -10,7 +10,6 @@
 
   form fieldset.inputs
     padding: 0
-    padding-top: 34px
     > ol > li.boolean
       height: auto
 
@@ -27,8 +26,6 @@
   // Slider
   // ======
   form.slider fieldset > ol li
-    p.inline-hints
-      margin-left: 0
     fieldset.inputs.has_many_fields > ol > li.input
       float: left
       clear: none
@@ -69,6 +66,7 @@
       width: 100%
     &:not(.locale)
       legend
+        position: relative
         span
           position: relative
           background-color: $formLegendHeading
@@ -161,19 +159,36 @@
   .attributes_table table th
     vertical-align: middle
 
-  form fieldset > ol li:not(.file)
-    p.inline-hints
-      font-size: 0.95em
-      font-style: italic
-      color: $steel
-      font-size: 1.3em !important
-      background-color: $info-color !important
-      padding: 4px
-      clear: both
-      &:before
-        content: '\f05a'
-        font-family: FontAwesome
-        margin-right: 5px
+  form fieldset > ol
+    li
+      p.inline-hints
+        display: inline-block
+        font-size: 0.95em
+        font-style: italic
+        color: $white-smoke
+        background-color: rgba(74, 67, 49, 0.56) !important
+        padding: 4px
+        clear: both
+        &:before
+          content: '\f05a'
+          font-family: FontAwesome
+          margin-right: 5px
+        img
+          object-fit: cover
+          width: 100%
+      &.file
+        input[type="file"]
+          display: block
+      &.select
+        p.inline-hints
+          margin-left: 20%
+      .date-time-picker, .colorpicker,
+        display: block
+      .palette-color-picker-button
+        display: table-cell
+    #map_setting_marker_color_input
+      .inline-hints
+        margin-left: 0
 
   // Boolean
   form fieldset > ol li.boolean
@@ -206,6 +221,9 @@
   //
   // Manual columns on AA form
   //
+  form .form-columns
+    padding-top: 25px !important
+    overflow: auto
   .form-left-column, .form-right-column
     width: 50%
     li
@@ -224,6 +242,15 @@
     float: right
     li
       margin-right: 2rem
+
+  // Reset margin for translations locales
+  .form-left-column, .form-right-column
+    ul.available-locales
+      li
+        margin-bottom: 0
+        margin-right: 0
+
+
 
   //
   // Highlight current section

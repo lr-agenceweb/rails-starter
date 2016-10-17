@@ -1,6 +1,5 @@
-- f.inputs t('activerecord.models.heading.one'), id: 'heading', class: "inputs #{defined?(klass) ? klass : ''}", for: [:heading, f.object.heading || Heading.new] do |item|
+- f.inputs t('formtastic.titles.heading_details'), id: 'heading', class: "inputs #{defined?(klass) ? klass : ''}", for: [:heading, f.object.heading || Heading.new] do |item|
   - item.translated_inputs 'Translated fields', switch_locale: true do |t|
     - t.input :content,
-              hint: I18n.t('form.hint.heading'),
-              input_html: { class: 'froala small-height' },
-              label: I18n.t('activerecord.attributes.heading.content')
+              hint: t('formtastic.hints.heading.content'),
+              input_html: { class: 'froala small-height' }

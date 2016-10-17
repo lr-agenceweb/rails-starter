@@ -1,35 +1,6 @@
-- f.inputs t('activerecord.models.video_upload.one'), for: [:video_upload, f.object.video_upload || VideoUpload.new], allow_destroy: true do |item|
+- f.inputs t('formtastic.titles.video_upload_details'), for: [:video_upload, f.object.video_upload || VideoUpload.new], allow_destroy: true, class: 'inputs form-columns' do |item|
 
-  - item.input :video_file,
-               as: :file,
-               label: I18n.t('form.label.video'),
-               hint: raw("#{retina_image_tag(item.object, :video_file, :preview) unless item.object.new_record?}") + I18n.t('form.hint.video_upload.video_file') + (raw('<br /><br/>' + I18n.t('video_upload.flash.upload_in_progress')) if !item.object.new_record? && item.object.video_file_processing?)
-
-  div.form-left-column
-    - item.input :video_autoplay,
-                 as: :boolean,
-                 hint: raw(I18n.t('form.hint.video.autoplay'))
-
-    - item.input :video_loop,
-                 as: :boolean,
-                 hint: raw(I18n.t('form.hint.video.loop'))
-
-    - item.input :video_controls,
-                 as: :boolean,
-                 hint: raw(I18n.t('form.hint.video.controls'))
-
-    - item.input :video_mute,
-                 as: :boolean,
-                 hint: raw(I18n.t('form.hint.video.mute'))
-    - item.input :online,
-                 as: :boolean,
-                 hint: raw(I18n.t('form.hint.video.online'))
-
-  div.form-right-column
-    = render 'admin/subtitles/form', f: item
-
+  = render 'admin/shared/video_uploads/inputs', item: item
   - if item.object.video_file.exists?
-    - item.input :_destroy,
-                 as: :boolean,
-                 label: I18n.t('activerecord.attributes.category.delete_video_file'),
-                 hint: 'Si coché, la vidéo sera supprimée après mise à jour'
+    - item.input :_destroy, as: :boolean,
+                 hint: t('formtastic.hints.video_upload._destroy')

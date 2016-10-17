@@ -58,13 +58,11 @@ ActiveAdmin.register VideoUpload do
 
     columns do
       column do
-        f.inputs t('general') do
+        f.inputs t('formtastic.titles.video_upload_details') do
           f.input :video_file,
                   as: :file,
-                  label: I18n.t('form.label.video'),
-                  hint: raw(f.object.decorate.preview) unless f.object.new_record?
-          f.input :online,
-                  hint: I18n.t('form.hint.video.online')
+                  hint: "#{t('formtastic.hints.video_upload.video_file')} <br /><br />#{f.object.decorate.preview}"
+          f.input :online
         end
       end
 
@@ -74,12 +72,10 @@ ActiveAdmin.register VideoUpload do
     end
 
     unless f.object.decorate.category?
-      f.inputs 'Contenu de la vidéo' do
+      f.inputs t('formtastic.titles.video_content_details') do
         f.translated_inputs 'Translated fields', switch_locale: true do |t|
-          t.input :title,
-                  label: I18n.t('activerecord.attributes.video_upload.title')
+          t.input :title
           t.input :description,
-                  label: I18n.t('activerecord.attributes.video_upload.description'),
                   input_html: { class: 'froala' }
         end
       end

@@ -10,7 +10,7 @@ f.columns do
 
   f.column do
     if f.object.is_a?(Blog)
-      f.inputs t('activerecord.models.blog_category.one') do
+      f.inputs t('formtastic.titles.blog_category') do
         f.input :blog_category,
                 as: :select,
                 include_blank: false,

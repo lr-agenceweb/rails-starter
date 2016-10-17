@@ -1,7 +1,7 @@
-- f.inputs t('activerecord.models.role.one')
+- f.inputs t('formtastic.titles.user_role_details')
   - f.input :role_id,
             as: :select,
             collection: Role.allowed_roles_for_user_role(current_user),
             include_blank: false,
-            hint: raw(I18n.t('form.hint.role_name')),
+            hint: true,
             selected: f.object.new_record? ? '3' : f.object.role.id

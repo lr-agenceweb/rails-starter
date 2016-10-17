@@ -30,14 +30,12 @@ ActiveAdmin.register MapSetting do
 
     f.columns id: 'map-columns' do
       f.column do
-        f.inputs 'Paramètre de la carte', class: 'map-settings' do
+        f.inputs t('formtastic.titles.map_setting_details'), class: 'map-settings' do
           f.input :marker_icon,
                   as: :select,
-                  collection: MapSetting.allowed_markers,
-                  hint: I18n.t('form.hint.map.marker_icon')
+                  collection: MapSetting.allowed_markers
 
           f.input :marker_color,
-                  hint: I18n.t('form.hint.map.marker_color'),
                   input_html: {
                     class: 'colorpicker',
                     value: f.object.marker_color.blank? ? '' : f.object.marker_color

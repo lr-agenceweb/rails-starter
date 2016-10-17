@@ -12,6 +12,7 @@ en:
     email: Email
   social:
     follow: Follow me
+    share: Share
     share_website: Share my website
     share_article: Share article
 
@@ -29,5 +30,6 @@ fr:
     email: Email
   social:
     follow: Me suivre
+    share: Partage
     share_website: Partager mon site
     share_article: Partager l'article

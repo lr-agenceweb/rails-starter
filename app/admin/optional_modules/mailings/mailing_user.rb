@@ -43,18 +43,13 @@ ActiveAdmin.register MailingUser do
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
-    f.inputs I18n.t('mailing.people') do
-      f.input :fullname,
-              hint: I18n.t('form.hint.mailing_user.fullname')
-      f.input :email,
-              hint: I18n.t('form.hint.mailing_user.email')
+    f.inputs I18n.t('formtastic.titles.mailing_user_details') do
+      f.input :fullname
+      f.input :email
       f.input :lang,
               collection: I18n.available_locales.map { |i| [i.to_s] },
-              include_blank: false,
-              hint: I18n.t('form.hint.mailing_user.lang')
-      f.input :archive,
-              as: :boolean,
-              hint: I18n.t('form.hint.mailing_user.archive')
+              include_blank: false
+      f.input :archive
     end
 
     f.actions

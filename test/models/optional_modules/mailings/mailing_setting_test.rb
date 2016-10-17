@@ -42,7 +42,7 @@ class MailingSettingTest < ActiveSupport::TestCase
     mailing_setting = MailingSetting.new
     assert_not mailing_setting.valid?
     assert_equal [:max_row], mailing_setting.errors.keys
-    assert_equal [I18n.t('form.errors.max_row')], mailing_setting.errors[:max_row]
+    assert_equal [I18n.t('errors.messages.max_row')], mailing_setting.errors[:max_row]
   end
 
   private

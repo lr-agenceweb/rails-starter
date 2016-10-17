@@ -114,21 +114,11 @@ ActiveAdmin.register Event do
 
     columns do
       column do
-        f.inputs t('general') do
-          f.input :show_as_gallery,
-                  hint: I18n.t('form.hint.picture.show_as_gallery')
-
-          if calendar_module.enabled?
-            f.input :show_calendar,
-                    hint: I18n.t('form.hint.event.show_calendar')
-          end
-
-          if map_module.enabled?
-            f.input :show_map,
-                    hint: I18n.t('form.hint.event.show_map')
-          end
-
-          f.input :online, hint: I18n.t('form.hint.event.online')
+        f.inputs t('formtastic.titles.post_generals') do
+          f.input :online
+          f.input :show_as_gallery
+          f.input :show_calendar if calendar_module.enabled?
+          f.input :show_map if map_module.enabled?
         end
 
         render 'admin/shared/form_translation', f: f
@@ -136,21 +126,14 @@ ActiveAdmin.register Event do
       end
 
       column do
-        f.inputs t('activerecord.models.event.one') do
-          f.input :all_day,
-                  hint: I18n.t('form.hint.event.all_day')
-
-          f.input :start_date,
-                  as: :date_time_picker,
-                  hint: I18n.t('form.hint.event.start_date')
-
-          f.input :end_date,
-                  as: :date_time_picker,
-                  hint: I18n.t('form.hint.event.end_date')
+        f.inputs t('formtastic.titles.event_date_details') do
+          f.input :all_day
+          f.input :start_date, as: :date_time_picker
+          f.input :end_date, as: :date_time_picker
         end
 
         render 'admin/shared/links/one', f: f
-        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: true
+        render 'admin/shared/locations/one', f: f, full: true
       end
     end
 

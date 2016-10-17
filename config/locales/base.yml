@@ -41,8 +41,6 @@ fr:
     'true': Sous-titres présents
     'false': Sous-titres absents
   all: Tous
-  additional: Informations complémentaires
-  general: Informations générales
   prev: Précédent
   next: Suivant
   prev_article: '%{article} précédent'
@@ -105,8 +103,6 @@ en:
   allow_comments:
     'true': Comments allowed
     'false': Comments not allowed
-  additional: Additional information
-  general: General information
   prev: Previous
   next: Next
   prev_article: Prev %{article}

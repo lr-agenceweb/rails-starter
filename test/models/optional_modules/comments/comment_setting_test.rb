@@ -12,6 +12,6 @@ class CommentSettingTest < ActiveSupport::TestCase
     comment_setting = CommentSetting.new
     assert_not comment_setting.valid?
     assert_equal [:max_row], comment_setting.errors.keys
-    assert_equal [I18n.t('form.errors.max_row')], comment_setting.errors[:max_row]
+    assert_equal [I18n.t('errors.messages.max_row')], comment_setting.errors[:max_row]
   end
 end

@@ -23,6 +23,6 @@ class MapSettingTest < ActiveSupport::TestCase
     map_setting = MapSetting.new
     assert_not map_setting.valid?
     assert_equal [:max_row], map_setting.errors.keys
-    assert_equal [I18n.t('form.errors.max_row')], map_setting.errors[:max_row]
+    assert_equal [I18n.t('errors.messages.max_row')], map_setting.errors[:max_row]
   end
 end

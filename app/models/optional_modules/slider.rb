@@ -28,19 +28,23 @@
 class Slider < ActiveRecord::Base
   include OptionalModules::Assets::Slideable
 
+  # Alias
+  alias_attribute :looper, :loop
+
+  # Models associations
+  belongs_to :category
   has_many :slides, -> { order(:position) }, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :slides, reject_if: :all_blank, allow_destroy: true
 
-  belongs_to :category
-
+  # Delegates
   delegate :online, to: :slides, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true
 
-  alias_attribute :looper, :loop
-
+  # Scopes
   scope :online, -> { where(online: true) }
   scope :by_page, -> (page) { joins(:category).where('categories.name = ?', page) }
 
+  # Validation rules
   validates :time_to_show, presence: true
   validates :category, presence: true
   validates :animate,

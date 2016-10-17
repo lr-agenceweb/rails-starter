@@ -27,19 +27,11 @@ ActiveAdmin.register CommentSetting do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs I18n.t('activerecord.models.comment_setting.one') do
-      f.input :should_validate,
-              as: :boolean,
-              hint: I18n.t('form.hint.comment_setting.should_validate')
-      f.input :should_signal,
-              as: :boolean,
-              hint: I18n.t('form.hint.comment_setting.should_signal')
-      f.input :send_email,
-              as: :boolean,
-              hint: I18n.t('form.hint.comment_setting.send_email')
-      f.input :allow_reply,
-              as: :boolean,
-              hint: I18n.t('form.hint.comment_setting.allow_reply')
+    f.inputs t('formtastic.titles.comment_setting_details') do
+      f.input :should_validate
+      f.input :should_signal
+      f.input :send_email
+      f.input :allow_reply
     end
 
     f.actions

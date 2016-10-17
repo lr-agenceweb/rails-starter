@@ -1,7 +1,6 @@
-- f.inputs 'Optional Modules'
-  - f.input :optional
+- f.inputs t('formtastic.titles.optional_module_details')
   - f.input :optional_module_id,
             as: :select,
             collection: OptionalModule.all,
-            include_blank: true,
-            hint: I18n.t('form.hint.optional_module')
+            include_blank: t('form.select.include_blank'),
+            hint: true

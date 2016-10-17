@@ -19,10 +19,8 @@ ActiveAdmin.register GuestBookSetting do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs I18n.t('activerecord.models.guest_book_setting.one') do
-      f.input :should_validate,
-              as: :boolean,
-              hint: I18n.t('form.hint.guest_book_setting.should_validate')
+    f.inputs t('formtastic.titles.guest_book_setting_details') do
+      f.input :should_validate
     end
 
     f.actions

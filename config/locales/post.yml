@@ -1,6 +1,7 @@
 # French
 fr:
   post:
+    no_cover: Pas d'image
     no_results: "Il n'y a aucun %{category} à montrer"
     title_aa_show: "%{page}: \"%{title}\""
   posts:
@@ -15,6 +16,7 @@ fr:
 # English
 en:
   post:
+    no_cover: No picture cover
     no_results: "No %{category} to show"
     title_aa_show: "%{page}: \"%{title}\""
   posts:

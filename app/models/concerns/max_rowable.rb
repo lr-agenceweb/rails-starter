@@ -12,7 +12,7 @@ module MaxRowable
     private
 
     def validate_max_row_allowed
-      errors.add :max_row, I18n.t('form.errors.max_row') if self.class.count >= 1 && new_record?
+      errors.add :max_row, I18n.t('errors.messages.max_row') if self.class.count >= 1 && new_record?
     end
   end
 end

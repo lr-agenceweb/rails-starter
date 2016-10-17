@@ -45,7 +45,7 @@ ActiveAdmin.register StringBox do
 
     f.columns do
       f.column do
-        f.inputs t('general') do
+        f.inputs do
           if f.object.new_record?
             f.input :key
           else
@@ -54,7 +54,6 @@ ActiveAdmin.register StringBox do
 
           f.input :optional_module_id,
                   as: :select,
-                  label: I18n.t('activerecord.attributes.string_box.optional_module'),
                   collection: OptionalModule.all.map { |m| [m.decorate.name, m.id] },
                   include_blank: true
         end
@@ -67,18 +66,14 @@ ActiveAdmin.register StringBox do
           "<li><p>#{f.object.description}</p></li>".html_safe
         end
       end
-    end
+    end if f.object.description?
 
     f.columns do
       f.column do
-        f.inputs t('activerecord.models.string_box.one') do
+        f.inputs t('formtastic.titles.string_box_details') do
           f.translated_inputs 'Translated fields', switch_locale: false do |t|
-            t.input :title,
-                    hint: I18n.t('form.hint.string_box.title'),
-                    label: I18n.t('activerecord.attributes.post.title')
+            t.input :title
             t.input :content,
-                    hint: I18n.t('form.hint.string_box.content'),
-                    label: I18n.t('activerecord.attributes.post.content'),
                     input_html: { class: 'froala' }
           end
         end

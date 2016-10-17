@@ -26,7 +26,7 @@ ActiveAdmin.register Background do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
+    f.inputs t('formtastic.titles.background_details') do
       f.input :attachable_id,
               as: :select,
               collection: Category.handle_pages_for_background(f.object),
@@ -38,7 +38,6 @@ ActiveAdmin.register Background do
 
       f.input :image,
               as: :file,
-              label: I18n.t('form.label.background'),
               hint: retina_image_tag(f.object, :image, :medium)
     end
 

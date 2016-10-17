@@ -1,27 +1,19 @@
-- f.inputs t('activerecord.models.slide.other')
-  - f.has_many :slides, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.slide.one')), sortable: :position do |item|
-    = item.inputs 'Image du slider' do
+.form-columns
+  .form-left-column
+    = item.inputs t('formtastic.titles.slide_picture') do
+      - hint = "#{t('formtastic.hints.slide.size')} <br /><br /> #{retina_image_tag(item.object, :image, :small)}".html_safe
       - item.input :image,
                    as: :file,
-                   label: I18n.t('form.label.slide'),
-                   hint: "#{retina_image_tag(item.object, :image, :small)} <br/> #{I18n.t('form.hint.slide.size')}".html_safe
+                   hint: hint
 
-      - item.input :online,
-                   as: :boolean,
-                   hint: I18n.t('form.hint.slide.online')
+      - item.input :online
+      - item.input :_destroy, as: :boolean if item.object.self_image?
 
-      - if item.object.self_image?
-        - item.input :_destroy,
-                     as: :boolean,
-                     hint: I18n.t('form.hint.slide.destroy')
-
-    = item.inputs 'Titre et description de la Slide' do
+  .form-right-column
+    = item.inputs t('formtastic.titles.slide_content') do
       - item.translated_inputs 'Translated fields', switch_locale: true do |t|
-        - t.input :title,
-                  label: I18n.t('activerecord.attributes.slide.title'),
-                  hint: I18n.t('form.hint.slide.title')
-
+        - t.input :title
         - t.input :description,
-                  label: I18n.t('activerecord.attributes.slide.description'),
-                  hint: I18n.t('form.hint.slide.description'),
                   input_html: { class: 'small-height' }
+
+  .clearfix

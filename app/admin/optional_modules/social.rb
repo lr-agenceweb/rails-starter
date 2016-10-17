@@ -54,51 +54,41 @@ ActiveAdmin.register Social do
 
     f.columns do
       f.column do
-        f.inputs 'Paramètres du Réseau Social' do
+        f.inputs t('formtastic.titles.social_details') do
           f.input :title,
                   collection: Social.allowed_title_social_network,
                   include_blank: false,
-                  hint: I18n.t('form.hint.social.title'),
                   input_html: {
                     disabled: current_user.super_administrator? ? false : :disbaled
                   }
 
           f.input :kind,
                   collection: Social.allowed_kind_social_network,
-                  hint: I18n.t('form.hint.social.kind'),
                   input_html: {
                     disabled: current_user.super_administrator? ? false : :disbaled
                   }
 
-          if f.object.kind != 'share'
-            f.input :link,
-                    hint: I18n.t('form.hint.social.link')
-          end
-          f.input :enabled,
-                  hint: I18n.t('form.hint.social.enabled')
+          f.input :link if f.object.kind != 'share'
+          f.input :enabled
         end
       end
 
       f.column do
-        f.inputs 'Icône du Réseau Social' do
+        f.inputs t('formtastic.titles.social_icon_details') do
           f.input :ikon,
                   hint: f.object.decorate.ikon? ? f.object.decorate.ikon_deco : ''
 
-          if f.object.decorate.ikon?
-            f.input :delete_ikon,
-                    as: :boolean,
-                    hint: I18n.t('form.hint.social.delete_ikon')
-          end
-
           f.input :font_ikon,
                   collection: Social.allowed_font_awesome_ikons,
-                  include_blank: I18n.t('form.hint.social.font_ikon_blank'),
+                  include_blank: I18n.t('formtastic.hints.social.font_ikon_blank'),
                   allow_blank: true,
                   hint: f.object.decorate.hint_by_ikon,
                   input_html: {
                     disabled: f.object.decorate.ikon? ? :disabled : false,
-                    data: { placeholder: I18n.t('form.placeholder.social.font_ikon') }
+                    data: { placeholder: true }
                   }
+
+          f.input :delete_ikon if f.object.decorate.ikon?
         end
       end
     end

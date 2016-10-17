@@ -17,8 +17,6 @@ object.bool_column :online
 object.column :publication if params[:controller] == 'admin/blogs'
 object.translation_status
 
-unless params[:controller] == 'admin/abouts'
-  object.column :author_with_avatar unless defined?(hide_author_column)
-end
+object.column :author_with_avatar if params[:controller] == 'admin/blogs'
 
 object.actions

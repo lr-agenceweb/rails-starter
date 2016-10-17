@@ -33,20 +33,13 @@ ActiveAdmin.register EventSetting do
 
     columns do
       column do
-        f.inputs t('general') do
-          f.input :prev_next,
-                  hint: I18n.t('form.hint.post.prev_next')
-
-          if map_module.enabled?
-            f.input :show_map,
-                    hint: I18n.t('form.hint.event.show_map')
-          end
-
+        f.inputs t('formtastic.titles.event_setting_details') do
+          f.input :prev_next
+          f.input :show_map if map_module.enabled?
           f.input :event_order,
                   as: :select,
                   collection: EventOrder.all,
-                  include_blank: false,
-                  hint: I18n.t('form.hint.event.event_order')
+                  include_blank: false
         end
       end
     end

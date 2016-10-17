@@ -12,6 +12,6 @@ class BlogSettingTest < ActiveSupport::TestCase
     blog_setting = BlogSetting.new
     assert_not blog_setting.valid?
     assert_equal [:max_row], blog_setting.errors.keys
-    assert_equal [I18n.t('form.errors.max_row')], blog_setting.errors[:max_row]
+    assert_equal [I18n.t('errors.messages.max_row')], blog_setting.errors[:max_row]
   end
 end

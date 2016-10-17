@@ -34,7 +34,7 @@ class PostDecorator < ApplicationDecorator
   # == Picture
   #
   def image
-    pictures? ? retina_image_tag(first_pictures, :image, :small) : 'Pas d\'image'
+    pictures? ? retina_image_tag(first_pictures, :image, :small) : t('post.no_cover')
   end
 
   def custom_cover

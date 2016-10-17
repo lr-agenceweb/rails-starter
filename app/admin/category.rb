@@ -82,15 +82,14 @@ ActiveAdmin.register Category do
 
     columns do
       column do
-        f.inputs t('general') do
+        f.inputs t('formtastic.titles.category_details') do
           f.input :menu_id,
                   as: :select,
                   collection: nested_dropdown(Menu.self_or_available(f.object)),
                   include_blank: false,
                   input_html: {
                     disabled: current_user.super_administrator? ? false : :disbaled
-                  },
-                  hint: I18n.t('form.hint.category.menu_id')
+                  }
 
           f.input :color,
                   as: :color_picker,
@@ -100,16 +99,22 @@ ActiveAdmin.register Category do
                     SharedColoredVariables::TERCERY_COLOR,
                     '#FFFFFF',
                     '#000000'
-                  ]
+                  ],
+                  hint: true
         end
 
         render 'admin/shared/referencement/form', f: f, klass: params[:section] == 'referencement' ? 'highlight-referencement' : ''
-        render 'admin/shared/video_uploads/one', f: f if video_module.enabled? && video_settings.video_upload? && video_settings.video_background?
       end
 
       column do
         render 'admin/shared/heading/form', f: f, klass: params[:section] == 'heading' ? 'highlight-heading' : ''
         render 'admin/shared/backgrounds/form', f: f if background_module.enabled?
+      end
+    end
+
+    columns do
+      column do
+        render 'admin/shared/video_uploads/one', f: f if video_module.enabled? && video_settings.video_upload? && video_settings.video_background?
       end
     end
 

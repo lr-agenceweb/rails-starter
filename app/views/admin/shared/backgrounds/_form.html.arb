@@ -1,12 +1,10 @@
-f.inputs t('activerecord.models.background.one'), for: [:background, f.object.background || Background.new] do |item|
+# frozen_string_literal: true
+
+f.inputs t('formtastic.titles.background_details'), for: [:background, f.object.background || Background.new] do |item|
   item.input :image,
              as: :file,
-             label: I18n.t('form.label.background'),
+             label: true,
              hint: retina_image_tag(item.object, :image, :small)
 
-  if f.object.background?
-    item.input :_destroy,
-               as: :boolean,
-               hint: I18n.t('form.hint.background.destroy')
-  end
+  item.input :_destroy, as: :boolean if f.object.background?
 end

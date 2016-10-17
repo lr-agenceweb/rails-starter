@@ -1,0 +1,389 @@
+# French
+fr:
+  formtastic:
+
+    #
+    # Titles
+    # ======
+    titles:
+      # General
+      post_generals: Configuration générale
+      post_translations: Contenu de l'article
+
+      # Menu
+      menu_details: Gestion de la configuration du Menu
+
+      # Category
+      category_details: Configuration de la page
+
+      # OptionalModule
+      optional_module_details: Configuration des modules optionels
+
+      # Heading
+      heading_details: Configuration de l'entête de la page
+
+      # Blog
+      blog_category: Catégorie de l'article de Blog
+      publication_date: Date de publication / expiration de l'article
+      blog_setting_details: Gestion des paramètres du module "Blog"
+
+      # Event
+      event_date_details: Gestion de la date de l'événement
+      event_setting_details: Gestion de la configuration des événements
+
+      # Location
+      location_details: Gestion de la localisation
+
+      # Link
+      link_details: Gestion du lien externe
+
+      # Referencement
+      referencement: Référencement de l'article
+
+      # Assets
+      picture_details: Gestion des images
+      picture_content_details: Titre et description de l'image
+      background_details: Gestion des images d'arrière plan
+      audio_details: Gestion des fichiers audios
+      video_platform_details: Gestion des vidéos externes (Youtube, Dailymotion, ...)
+      video_content_details: Gestion du contenu lié à la vidéo (titre, description)
+      video_upload_details: Gestion des vidéos internes
+      video_upload_config_details: Gestion de la configuration des vidéos
+      video_subtitle_details: Gestion des sous-titres des vidéos internes
+      video_setting_details: Gestion des paramètres du module "Vidéo"
+
+      # Slider / Slide
+      slider_details: Gestion de la configuration du Slider
+      slider_category_details: Page sur laquelle sera affichée le slider
+      slide_details: Gestion des images du slider
+      slide_picture: Gestion de l'image
+      slide_content: Gestion de la légende
+
+      # Comment
+      comment_setting_details: Gestion des paramètres du module "Commentaire"
+
+      # GuestBookSetting
+      guest_book_setting_details: Gestion des paramètres du module "Livre d'Or"
+
+      # Map
+      map_setting_details: Gestion des paramètres du module "Carte"
+
+      # Social
+      social_details: Gestion du Réseau Social
+      social_icon_details: Icône du Réseau Social
+      social_connect_setting_details: Gestion globale de la connexion par réseau social
+      social_provider_details: Gestion de la connexion par réseau social
+
+      # AdultSetting
+      adult_setting_details: Gestion des paramètres du module "Majeur"
+
+      # Mailing
+      mailing_user_details: Gestion de l'utilisateur du Mailing
+      mailing_setting_details: Configuration des paramètres du Mailing
+      mailing_setting_signature: Gestion de la signature des Mailing
+      mailing_setting_unsubscribe: Gestion du contenu de la page de désinscription
+      mailing_message_user: Choix des Mailings utilisateurs
+      mailing_message_preview: Prévisualisation du Mailing message
+      mailing_message_content: Contenu du Mailing message
+
+      # Newsletter
+      newsletter_details: Configuration de la Newsletter
+      newsletter_setting_details: Gestion des paramètres du module "Newsletter"
+      newsletter_user_roles: Gestion des rôles utilisateurs de la Newsletter
+      newsletter_setting_content: Gestion du contenu du mail reçu par le nouvel abonné à la Newsletter
+
+      # StringBox
+      string_box_details: Configuration du contenu personnalisé
+
+      # User
+      user_details: Gestion de l'utilisateur
+      user_role_details: Gestion des rôles utilisateurs
+      user_avatar_details: Gestion de l'avatar
+
+    #
+    # Labels
+    # ======
+    labels:
+      # Post
+      title: Titre
+      name: Nom
+      content: Contenu
+      description: Description
+      keywords: Mots-clés
+      online: Mettre en ligne ?
+      _destroy: Supprimer ?
+
+      # Mailing
+      title_subscriber: Titre
+      content_subscriber: Contenu
+
+      # Assets
+      image: Image
+      video: Vidéo
+      video_file: Fichier Vidéo
+      subtitle: Sous-titres de la vidéo
+      slide: Image du slider
+      background: Image d'arrière-plan
+
+    #
+    # Hints
+    # =====
+    hints:
+      # General
+      online: Seuls les éléments 'En ligne' apparaîtront sur le site
+      _destroy: Supprimer cet élément
+
+      # Posts
+      title: Titre de l'article (avoir un bon titre est important pour le référencement)
+      content: Contenu de l'article, visible sur le site
+      prev_next: Si coché, un lien permettant d'accéder à l'article précédent et suivant sera ajouté sur le site
+      show_map: Afficher la carte géographique situant le lieu de l'événement pour les internautes (Attention, les paramètres de Localisation doivent être renseignés)
+
+      # BlogCategory
+      blog_category:
+        name: Nom de la catégorie à créer
+
+      # BlogSetting
+      blog_setting:
+        show_last_posts: Si coché, une liste des derniers articles de blog crées sera affichée sur la page Blog et permettra de naviguer plus facilement entre eux.
+        show_categories: Si coché, une liste affichera les différentes catégories existantes dans lesquelles des articles de blog ont été crées. Cela permet de filtrer les différents articles par catégorie.
+        show_last_comments: Si coché, une liste des derniers commentaires sera affichée sur la page Blog.
+
+      # EventSetting
+      event_setting:
+        event_order: Choisissez la manière dont vous souhaitez que les événements apparaissent
+
+      # Event
+      event:
+        online: En cochant la case en ligne, vous choisissez d'afficher l'événement sur le site
+        show_calendar: Afficher un calendrier de l'événement sur le site ? (Attention, le calendrier ne sera visible que si les options "date de début" et "date de fin" de l'événement sont spécifiées)
+
+        # Dates
+        all_day: Cocher cette case si l'événement ne dure qu'une seule journée
+        start_date: Date de début
+        end_date: Date de fin
+
+      # Assets
+      image: Accepte les fichiers JPG, JPEG, PNG et GIF inférieurs à 3 mo.
+
+      # Comments
+      allow_comments: Autoriser les commentaires sur cet article ?
+      show_as_gallery: Afficher les images sous forme de galerie ? <br /> (Cette option est efficace lorsqu'il s'agit d'afficher plusieurs images)
+
+      # PublicationDate
+      published_later: Si coché, l'article ne sera mis en ligne sur le site qu'à partir de la date que vous aurez spécifié dans le champs suivant
+      expired_prematurely: Si coché, l'article sera retiré du site à compter de la date que vous aurez spécifié dans le champs suivant
+      published_at: Date à laquelle l'article sera publié sur le site
+      expired_at: Date à laquelle l'article n'apparaitra plus sur le site
+
+      # Referencement
+      description: "Résumé du contenu: utile pour le référencement (environ 150 caractères). Attention: ce contenu est affiché en tant que description lorsque les gens partagent sur Facebook, Twitter et Google Plus"
+      keywords: Peut-être utile pour le référencement mais pas obligatoire (20 mots maximum séparés par des virgules)
+
+      # Assets
+      picture:
+        title: Titre de l'image
+        description: Description de l'image
+        online: Si coché, cette image sera affichée sur le site
+        _destroy: Si coché, l'image sera supprimée lors de la mise à jour de l'article
+
+      video_platform:
+        url: "Lien de la vidéo que vous souhaitez afficher sur votre site <br /> (Attention, seuls les vidéos provenant de Youtube, Dailymotion et Viméo peuvent être affichées).
+        <br />
+        Dailymotion: <strong>http://www.dailymotion.com/video/xxxxxxx</strong>
+        <br />
+        Youtube: <strong>https://www.youtube.com/watch?v=xxxxxxxx</strong>
+        "
+        add_description: Après avoir envoyé votre vidéo, vous avez la possibilité d'ajouter un titre et une description. Pour cela, rendez-vous dans 'Assets > Vidéos externes' et modifier les paramètres de votre vidéo.
+        set_description: Ajouter un titre et une description
+        title: Titre de la vidéo externe
+        description: Description de la vidéo externe
+        online: Si coché, la vidéo sera visible sur le site
+        _destroy: Si coché, la vidéo sera supprimée lors de la mise à jour de l'article
+      video_upload:
+        video_file: Accepte les fichiers MP4, AVI, ... inférieurs à 40 mo
+        video_autoplay: Si coché la vidéo démarrera automatiquement au chargement de la page. <br /> Attention ! La majorité des internautes n'apprécient pas ce comportement par défaut. Si vous décidez quand même de l'activer, assurez vous de désactiver le son de cette vidéo (option ci-dessous).
+        video_loop: Si coché la vidéo redémarrera automatiquement au début à la fin de la lecture.
+        video_controls: Si coché la barre de lecture sera toujours visible sur la vidéo (play/pause, volume, plein écran, ...). Autrement, elle n'apparaît qu'au survol de la vidéo.
+        video_mute: Si coché, le son de la vidéo sera désactivé par défaut (l'utilisateur pourra l'activer à condition que les contrôles soient activés). <br /> Il est recommendé d'activer cette option surtout si vous avez coché le démarrage automatique de la vidéo.
+        native_informations: Si coché, le titre et la description de la vidéo venant de la platforme seront utilisés.
+        online: Si coché, la vidéo sera visible sur le site
+        add_description: Après avoir envoyé votre vidéo, vous avez la possibilité d'ajouter un titre et une description. Pour cela, rendez-vous dans 'Assets > Vidéos internes' et modifier les paramètres de votre vidéo.
+        set_description: Ajouter un titre et une description
+        title: Titre de la vidéo interne
+        description: Description de la vidéo interne
+        _destroy: Si coché, cette vidéo interne sera supprimée après mise à jour des paramètres
+      video_subtitle:
+        subtitle_fr: Sous titres au format SRT pour langue française
+        subtitle_en: Sous titres au format SRT pour langue anglaise
+        online: Si coché, les sous titres seront visible lors de la lecture de la vidéo sur le site
+        delete_subtitle_fr: Si coché, les sous-titres français seront supprimés
+        delete_subtitle_en: Si coché, les sous-titres anglais seront supprimés
+      video_setting:
+        video_platform: Si coché, l'administrateur aura le droit d'insérer des vidéos provenant de Youtube, Dailymotion ou Viméo sur le site
+        video_upload: Si coché, l'administrateur aura le droit de mettre en ligne ses propres vidéos par l'intermédiaire du site
+        video_background: Si coché, l'administrateur pourra utiliser les vidéos envoyées en tant que arrière plan des différentes pages.
+        turn_off_the_light: Si coché, l'arrière-plan de la page s'assombriera afin de mettre en valeur la vidéo en cours de lecture
+      audio:
+        audio_file: Fichier audio à uploader sur le site. Accepte les formats MP3 et OGG
+        audio_autoplay: Si coché le son audio démarrera automatiquement au chargement de la page. <br /> Attention !!! La majorité des internautes n'apprécient pas ce comportement par défaut.
+        actual_file: "Fichier actuel: %{file}"
+        online: Si coché, le son audio sera visible sur le site
+        _destroy: Si coché, le fichier audio sera supprimé après mise à jour de l'article
+
+      # Social
+      social:
+        title: Titre du réseaux social
+        kind: S'agit-il de votre page personnelle ou de partager sur les réseaux sociaux ?
+        link: Lien du réseau social
+        enabled: Si coché, ce réseau social sera activé sur le site
+        font_ikon_blank: Je ne souhaite pas utiliser d'icône
+        delete_ikon: Si coché, l'icône du réseau social sera supprimée après mise à jour de l'élément
+        already_picture: Ce champs est désactivé car vous avez choisi d'utiliser une image en guise d'icône
+        default_hint: "Si vous ne choisissez aucune image ou icône (%{list}), le titre du réseau social sera utilisé."
+      social_connect_setting:
+        enabled: Si coché, vous serez en mesure de lier votre compte et de vous connecter à travers les réseaux sociaux.
+      social_provider:
+        name: Nom du réseau social autorisé pour se connecter
+        enabled: Activer ou non ce réseau social pour autoriser la connexion
+
+      # Adult
+      adult_setting:
+        title: Titre du message d'accueil dans la popup
+        content: Contenu du message d'accueil dans la popup
+        enabled: Activer / Désactiver le popup de validation de l'âge
+        redirect_link: "Lien de redirection dans le cas où l'utilisateur refuse de valider le message (ex: http://google.com).<br /> Si aucun lien n'est renseigné, l'utilisateur sera redirigé sur le site de L&R Agence web"
+
+      # CommentSetting
+      comment_setting:
+        should_validate: Si coché, les commentaires ne seront pas affichés sur le site tant que vous ne les aurez pas validés
+        should_signal: Si coché, un lien permettant de signaler les commentaires sera affiché sur chaque commentaire
+        send_email: Si coché, un email sera envoyé à l'administrateur lorsqu'un nouveau commentaire sera créé ou lorsqu'un commentaire déjà existant sera signalé par un internaute.
+        allow_reply: Si coché, un lien sera affiché à côté de chaque commentaire permettant aux internautes d'y répondre
+
+      # GuestBookSetting
+      guest_book_setting:
+        should_validate: Si coché, les message ne seront pas affichés sur le site tant que vous ne les aurez pas validés
+
+      # Location
+      location:
+        geocode_address: Ce champs est utilisé pour récupérer les coordonnées latitude / longitude de la position et centrer la carte (n'est pas affichée)
+        _destroy: Si coché, la position géographique sera supprimée après mise à jour des paramètres
+
+      # Link
+      link:
+        url: Lien externe à ajouter à l'article
+        _destroy: Si coché, le lien externe sera supprimé après mise à jour des paramètres
+
+      # MailingUser
+      mailing_user:
+        fullname: Nom complet de l'utilisateur à qui sera envoyé l'email
+        email: Email de l'utilisateur à qui seront envoyés les mailing messages.
+        archive: Si coché, l'utilisateur sera considéré comme archivé
+        lang: Langue de l'utilisateur
+
+      # MailingMessage
+      mailing_message:
+        title: Sujet de l'email à envoyer
+        content: Contenu de l'email à envoyer
+        show_signature: Si coché, votre signature personnelle, définie dans les paramètres du mailing, sera ajoutée à la fin du mail.
+
+      # MailingSetting
+      mailing_setting:
+        name: Saisissez le nom que vous souhaitez faire apparaitre en tant qu'expéditeur du mail. Si le champs est vide, le nom spécifé dans les paramètres généraux du site sera utilisé.
+        email: Saisissez l'email d'où seront envoyés les emails. Si le champs est vide, l'email spécifé dans les paramètres généraux du site sera utilisé.
+        signature: Saisissez ici la signature que vous souhaitez afficher dans chacun des mails que vous enverrez à partir du site.
+        unsubscribe_title: Titre du message à afficher sur la page qui confirme que l'utilisateur s'est bien désinscrit des mailings
+        unsubscribe_content: Contenu du message à afficher sur la page qui confirme que l'utilisateur s'est bien désinscrit des mailings
+
+      # Newsletter
+      newsletter:
+        title: Titre de la newsletter
+        content: Contenu de la newsletter
+
+
+      # NewsletterSetting
+      newsletter_setting:
+        send_welcome_email: Si coché, le nouvel abonné à la newsletter recevra un email de bienvenue
+        title_subscriber: Titre / Sujet du mail reçu par le nouvel abonné
+        content_subscriber: Contenu du mail reçu par le nouvel abonné
+
+      # NewsletterUserRole
+      newsletter_user_role:
+        title: Rôle de l'inscrit à la newsletter
+
+      # MapSetting
+      map_setting:
+        marker_icon: Choisissez une icône à afficher pour le marqueur de la carte
+        marker_color: Choisissez une couleur de fonds pour le marqueur de la carte
+
+      # StringBox
+      string_box:
+        title: Titre du message personnalisé à afficher sur le site
+        content: Contenu du message personnalisé à afficher sur le site
+
+      # User
+      user:
+        delete_avatar: Si coché, l'avatar sera supprimé après mise à jour du profil et l'image de gravatar sera utilisée
+        role_id: Modification du rôle de l'utilisateur. <br /> Le rôle "administrateur" permet à l'utilisateur d'accéder à une grande partie des contenus et de la configuration du site. <br /> Le rôle "abonné" restreint grandement les droits octroyés et l'utilisateur ne pourra modifier que les contenus qui lui sont propres et non la configuration du site. <br /> Ne modifiez ce champs que si vous savez ce que vous faîtes !
+
+      # Background
+      background:
+        _destroy: Suppression de l'image d'arrière-plan associée à cette page
+
+      # Slider
+      slider:
+        autoplay: Si coché, le slider démarrera automatiquement au chargement de la page
+        hover_pause: Si coché, le slider sera mis en pause tant que la souris de l'internaute survolera l'image (le slidera redémarrera automatiquement après)
+        loop: Si coché, le slider affichera de nouveau la première image après être arrivé à la dernière
+        navigation: Si coché, les flèches précedentes et suivantes seront affichées sur le slider
+        bullet: Si coché, des ronds de navigations seront affichés sous le slider
+        time_to_show: Intervalle de temps dans lequel sera affichée une image du slider avant de passer à la suivante (en milli secondes)
+        animate: Effet de transition entre chaque slide
+
+      # Slide
+      slide:
+        title: Titre de la slide
+        description: Description de la slide (une phrase maximum)
+        online: Montrer cette image dans le slider ?
+        destroy: Supprimer cette image du slider ?
+        size: Afin d'avoir un affichage optimale des slides sur le site, veuillez envoyer des images avec une largeur minimale de 2000px.
+
+      # Menu
+      menu:
+        title: Titre de l'élément de menu
+        parent_id: Choisissez le parent de cet élément si désiré. Il deviendra alors un sous élément de ce parent.
+        show_in_header: Montrer cet élément dans le menu principal ?
+        show_in_footer: Montrer cet élément dans le menu du pied de page ?
+        online: Activer cet élément ? Si désactivé, il ne sera alors visible ni dans le menu principal ni dans le pied de page.
+
+      # Category
+      category:
+        menu_id: Élément de menu lié à cette page
+        color: Couleur de fond de page personnalisée
+        optional_module_id: Choisir quel est le module optionel lié à cette catégorie
+
+      # Heading
+      heading:
+        content: En-tête du contenu
+
+      # OptionalModule
+      optional_module:
+
+    #
+    # Placeholder
+    # =====
+    placeholders:
+      froala: Contenu de l'article ici :)
+      social:
+        font_ikon: Sélectionnez une valeur
+
+
+# English
+en:
+  formtastic:
+    #
+    # Placeholder
+    # =====
+    placeholders:
+      froala: Post content here :)

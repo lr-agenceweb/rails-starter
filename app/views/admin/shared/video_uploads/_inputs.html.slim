@@ -1,0 +1,27 @@
+- hint = t('formtastic.hints.video_upload.video_file')
+- hint += raw("<br/> #{t('video_upload.flash.upload_in_progress')}") if !item.object.new_record? && item.object.video_file_processing?
+- hint += raw("<br /> #{retina_image_tag(item.object, :video_file, :preview)}") unless item.object.new_record?
+
+.form-left-column
+  = item.inputs t('formtastic.titles.video_upload_config_details')
+    - item.input :video_file,
+                 as: :file,
+                 hint: hint
+
+    - item.input :video_autoplay
+    - item.input :video_loop
+    - item.input :video_controls
+    - item.input :video_mute
+    - item.input :online
+
+.form-right-column
+  = render 'admin/subtitles/form', f: item
+
+.clearfix
+
+li
+  p
+    - if item.object.new_record?
+      = t('formtastic.hints.video_upload.add_description')
+    - else
+      = link_to t('formtastic.hints.video_upload.set_description'), edit_admin_video_upload_path(item.object), class: 'button success', target: :_blank

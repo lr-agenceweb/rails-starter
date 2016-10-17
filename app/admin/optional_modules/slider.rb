@@ -84,29 +84,23 @@ ActiveAdmin.register Slider do
 
     columns do
       column do
-        f.inputs "Paramètres du #{t('activerecord.models.slider.one')}" do
-          f.input :autoplay,
-                  hint: I18n.t('form.hint.slider.autoplay')
-          f.input :hover_pause,
-                  hint: I18n.t('form.hint.slider.hover_pause')
+        f.inputs t('formtastic.titles.slider_details') do
+          f.input :autoplay
+          f.input :hover_pause
           f.input :looper,
                   as: :boolean,
-                  hint: I18n.t('form.hint.slider.loop')
-          f.input :navigation,
-                  hint: I18n.t('form.hint.slider.navigation')
-          f.input :bullet,
-                  hint: I18n.t('form.hint.slider.bullet')
-          f.input :time_to_show,
-                  hint: I18n.t('form.hint.slider.time_to_show')
+                  hint: t('formtastic.hints.slider.loop')
+          f.input :navigation
+          f.input :bullet
+          f.input :time_to_show
           f.input :animate,
                   collection: %w( crossfade slide dissolve ),
-                  include_blank: false,
-                  hint: I18n.t('form.hint.slider.animate')
+                  include_blank: false
         end
       end
 
       column do
-        f.inputs t('additional') do
+        f.inputs t('formtastic.titles.slider_category_details') do
           f.input :category_id,
                   as: :select,
                   collection: Category.except_already_slider(f.object.category),
@@ -116,7 +110,11 @@ ActiveAdmin.register Slider do
       end
     end
 
-    render 'admin/slides/many', f: f
+    f.inputs t('formtastic.titles.slide_details') do
+      f.has_many :slides, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.slide.one')), sortable: :position do |item|
+        render 'admin/slides/many', item: item
+      end
+    end
 
     f.actions
   end
@@ -126,7 +124,6 @@ ActiveAdmin.register Slider do
   #
   controller do
     include Skippable
-    # before_action :set_optional_modules
 
     def scoped_collection
       super.includes slides: [:translations]

@@ -62,10 +62,8 @@ ActiveAdmin.register Connection do
   form do |f|
     columns do
       column do
-        f.inputs 'Général' do
-          f.input :online,
-                  label: I18n.t('form.label.online'),
-                  hint: I18n.t('form.hint.online')
+        f.inputs t('formtastic.titles.post_generals') do
+          f.input :online
         end
       end
 
@@ -76,14 +74,10 @@ ActiveAdmin.register Connection do
 
     render 'admin/shared/pictures/one', f: f
 
-    f.inputs 'Contenu de l\'article' do
+    f.inputs t('formtastic.titles.post_translations') do
       f.translated_inputs 'Translated fields', switch_locale: true do |t|
-        t.input :title,
-                label: I18n.t('activerecord.attributes.post.title'),
-                hint: I18n.t('form.hint.title')
+        t.input :title
         t.input :content,
-                label: I18n.t('activerecord.attributes.post.content'),
-                hint: I18n.t('form.hint.content'),
                 input_html: { class: 'froala' }
       end
     end

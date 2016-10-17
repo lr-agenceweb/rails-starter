@@ -15,8 +15,9 @@ class AudioDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct hint for file' do
-    assert_equal 'Fichier actuel: <strong>Foo bar 2016.mp3</strong> <br />', @audio_decorated.hint_for_file
-    assert_equal '', Audio.new.decorate.hint_for_file
+    default_hint = I18n.t('formtastic.hints.audio.audio_file')
+    assert_equal "#{default_hint}<br />#{I18n.t('formtastic.hints.audio.actual_file', file: '<strong>Foo bar 2016.mp3</strong>')}", @audio_decorated.hint_for_file
+    assert_equal default_hint, Audio.new.decorate.hint_for_file
   end
 
   private

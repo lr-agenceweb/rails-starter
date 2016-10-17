@@ -74,7 +74,7 @@ class PostDecoratorTest < Draper::TestCase
     @post_decorated.picture.update_attributes(image: attachment)
 
     assert_equal "<img width=\"90\" height=\"50\" src=\"#{@post_decorated.picture.image.url(:small)}\" alt=\"Small background paris\" />", @post_decorated.image
-    assert_equal 'Pas d\'image', @about_decorated.image
+    assert_equal I18n.t('post.no_cover'), @about_decorated.image
   end
 
   test 'should return correct content for image_and_content' do
