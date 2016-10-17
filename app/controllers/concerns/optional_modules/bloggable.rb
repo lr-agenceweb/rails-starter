@@ -33,11 +33,11 @@ module OptionalModules
       end
 
       def set_last_blogs
-        @last_blogs = Blog.select(:id, :title, :blog_category_id, :updated_at).includes(:comments, :translations, blog_category: [:translations]).online.order('created_at DESC').first(LAST_BLOGS_COUNT)
+        @last_blogs = Blog.select(:id, :title, :blog_category_id, :updated_at).includes(:comments, :translations, blog_category: [:translations]).published.order('blogs.created_at DESC').first(LAST_BLOGS_COUNT)
       end
 
       def set_last_comments
-        last_comments = Comment.includes(:user, :commentable).only_blogs.by_locale(@language).validated.first(LAST_COMMENTS_COUNT).reject { |r| !r.commentable.online? }
+        last_comments = Comment.includes(:user, :commentable).only_blogs.by_locale(@language).validated.first(LAST_COMMENTS_COUNT).reject { |r| !r.commentable.published? }
         @last_comments = CommentDecorator.decorate_collection(last_comments)
         gon.push(last_comments_count: LAST_COMMENTS_COUNT)
       end

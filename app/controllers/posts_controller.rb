@@ -53,7 +53,7 @@ class PostsController < ApplicationController
   end
 
   def add_blogs_to_feed
-    @posts += Blog.includes(:translations, blog_category: [:translations]).online
+    @posts += Blog.includes(:translations, blog_category: [:translations]).published
   end
 
   def add_events_to_feed
