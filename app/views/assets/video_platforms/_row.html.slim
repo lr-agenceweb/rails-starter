@@ -1,14 +1,15 @@
 - video_info = VideoInfo.new(video.url)
 - if video_info.available?
-  .small-12.columns
-    figure.post__video__figure.flex-video.widescreen
-      == video_info.embed_code
+  .post__video__figcaption
+    / Title
+    - if video.title? && !video.native_informations?
+      h3.post__video__title = video.title
+    - elsif video.native_informations?
+      h3.post__video__title = link_to video_info.title, video_info.embed_url, target: :_blank
 
-      figcaption: div
-        - if video.title? && !video.native_informations?
-          h3.post__video__title = video.title
-        - elsif video.native_informations?
-          h3.post__video__title = video_info.title
+    / Description
+    == video.description if video.description? && !video.native_informations?
+    == simple_format(auto_link(video_info.description, html: { target: '_blank' })) if video.native_informations?
 
-        == video.description if video.description? && !video.native_informations?
-        == auto_link(video_info.description, html: { target: '_blank' }) if video.native_informations?
+  .post__video__figure.flex-video.widescreen
+    == video_info.embed_code

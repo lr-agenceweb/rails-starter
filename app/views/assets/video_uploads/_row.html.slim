@@ -1,14 +1,15 @@
-.small-12.columns
-  - if video.title?
-    h3.post__video__title = video.title
-  figure.post__video__figure.flex-video.widescreen
-    video.mediaelement id="video_#{index}" data-autoplay="#{video.video_autoplay?}" data-mute="#{video.video_mute?}" data-controls="#{video.video_controls?}" data-loop="#{video.video_loop?}" poster="#{video.video_file.url(:preview)}" style="width: 100%; height: 100%"
-      source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
-      source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
-      source src="#{video.video_file.url(:oggvideo)}" type='video/ogv'
-      - if video.try(:video_subtitle).try(:subtitle_fr).try(:exists?)
-        track kind='subtitles' src="#{video.video_subtitle.subtitle_fr.url}" srclang='fr' label='Français'
-      - if video.try(:video_subtitle).try(:subtitle_en).try(:exists?)
-        track kind='subtitles' src="#{video.video_subtitle.subtitle_en.url}" srclang='en' label='English' default='default'
-      = t('video.no_html5')
-    figcaption: div == video.description if video.description?
+- if video.title? || video.description?
+  .post__video__figcaption
+    h3.post__video__title = video.title if video.title?
+    == video.description if video.description?
+
+.post__video__figure.flex-video.widescreen
+  video.mediaelement id="video_#{index}" data-autoplay="#{video.video_autoplay?}" data-mute="#{video.video_mute?}" data-controls="#{video.video_controls?}" data-loop="#{video.video_loop?}" poster="#{video.video_file.url(:preview)}" style="width: 100%; height: 100%"
+    source src="#{video.video_file.url(:mp4video)}" type='video/mp4'
+    source src="#{video.video_file.url(:webmvideo)}" type='video/webm'
+    source src="#{video.video_file.url(:oggvideo)}" type='video/ogv'
+    - if video.try(:video_subtitle).try(:subtitle_fr).try(:exists?)
+      track kind='subtitles' src="#{video.video_subtitle.subtitle_fr.url}" srclang='fr' label='Français'
+    - if video.try(:video_subtitle).try(:subtitle_en).try(:exists?)
+      track kind='subtitles' src="#{video.video_subtitle.subtitle_en.url}" srclang='en' label='English' default='default'
+    = t('video.no_html5')
