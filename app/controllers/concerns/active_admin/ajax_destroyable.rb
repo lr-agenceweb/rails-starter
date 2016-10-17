@@ -13,7 +13,7 @@ module ActiveAdmin
     included do
       def destroy
         super do |format|
-          format.js { render "active_admin/#{controller_name}/destroy" }
+          format.js {}
         end
       end
     end

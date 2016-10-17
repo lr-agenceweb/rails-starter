@@ -50,7 +50,7 @@ module Admin
       assert_difference ['GuestBook.count'], -1 do
         xhr :delete, :destroy, id: @guest_book
         assert_response :success
-        assert_template 'active_admin/guest_books/destroy'
+        assert_template :destroy
       end
     end
 

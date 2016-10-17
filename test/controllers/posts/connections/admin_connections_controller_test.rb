@@ -60,7 +60,7 @@ module Admin
       assert_difference ['Connection.count', 'Link.count'], -1 do
         xhr :delete, :destroy, id: @connection
         assert_response :success
-        assert_template 'active_admin/connections/destroy'
+        assert_template :destroy
       end
     end
 

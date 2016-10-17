@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 require 'test_helper'
 
@@ -70,7 +69,7 @@ module Admin
       assert_difference ['Blog.count', 'Audio.count'], -1 do
         xhr :delete, :destroy, id: @blog
         assert_response :success
-        assert_template 'active_admin/blogs/destroy'
+        assert_template :destroy
       end
     end
 

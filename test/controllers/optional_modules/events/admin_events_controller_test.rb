@@ -116,7 +116,7 @@ module Admin
       assert_difference ['Event.count', 'Link.count'], -1 do
         xhr :delete, :destroy, id: @event
         assert_response :success
-        assert_template 'active_admin/events/destroy'
+        assert_template :destroy
       end
     end
 
