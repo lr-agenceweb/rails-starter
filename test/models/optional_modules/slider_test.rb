@@ -8,6 +8,17 @@ class SliderTest < ActiveSupport::TestCase
   setup :initialize_test
 
   #
+  # == Validation rules
+  #
+  test 'should return list of allowed map markers' do
+    allowed_animations = Slider.allowed_animations
+    assert_includes allowed_animations, 'crossfade'
+    assert_includes allowed_animations, 'slide'
+    assert_includes allowed_animations, 'dissolve'
+    assert_not_includes allowed_animations, 'popup'
+  end
+
+  #
   # == Count
   #
   test 'should only fetch one slider online' do

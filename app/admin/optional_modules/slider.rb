@@ -94,7 +94,7 @@ ActiveAdmin.register Slider do
           f.input :bullet
           f.input :time_to_show
           f.input :animate,
-                  collection: %w( crossfade slide dissolve ),
+                  collection: Slider.allowed_animations,
                   include_blank: false
         end
       end

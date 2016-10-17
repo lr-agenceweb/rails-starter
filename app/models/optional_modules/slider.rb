@@ -28,6 +28,10 @@
 class Slider < ActiveRecord::Base
   include OptionalModules::Assets::Slideable
 
+  def self.allowed_animations
+    %w( crossfade slide dissolve )
+  end
+
   # Alias
   alias_attribute :looper, :loop
 
@@ -49,5 +53,5 @@ class Slider < ActiveRecord::Base
   validates :category, presence: true
   validates :animate,
             presence: true,
-            inclusion: %w( crossfade slide dissolve )
+            inclusion: { in: allowed_animations }
 end
