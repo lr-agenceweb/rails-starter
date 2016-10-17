@@ -22,7 +22,7 @@ ActiveAdmin.register Slide do
     selectable_column
     image_column :image, style: :crop_thumb
     column :title
-    column :description_deco
+    column :description_d
     column :attachable
     bool_column :online
     actions
@@ -33,7 +33,7 @@ ActiveAdmin.register Slide do
       attributes_table do
         image_row :image, style: :small
         row :title
-        row :description_deco
+        row :description_d
         bool_row :online
       end
     end

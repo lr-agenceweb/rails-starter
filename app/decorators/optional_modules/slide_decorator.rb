@@ -10,7 +10,7 @@ class SlideDecorator < PictureDecorator
   #
   # == Slide
   #
-  def description_deco
+  def description_d
     raw(model.description) if description?
   end
 
