@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+div.panel t('post.heading.title') do
+  if heading.try(:content?)
+    attributes_table_for heading do
+      row(:content) { |heading| heading.content.html_safe }
+    end
+  else
+    span t('post.heading.empty')
+  end
+end

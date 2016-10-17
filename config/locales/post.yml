@@ -4,6 +4,13 @@ fr:
     no_cover: Pas d'image
     no_results: "Il n'y a aucun %{category} à montrer"
     title_aa_show: "%{page}: \"%{title}\""
+    referencement:
+      title: Référencement
+      empty: Le référencement n'a pas été renseigné
+    heading:
+      title: En-tête
+      empty: Cette page ne dispose pas d'un en-tête
+
   posts:
     empty: Il n'y a pas d'article à afficher
     events:

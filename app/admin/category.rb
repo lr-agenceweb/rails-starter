@@ -71,6 +71,8 @@ ActiveAdmin.register Category do
         end
 
         column do
+          render 'heading', heading: resource.heading
+
           render 'admin/shared/referencement/show', referencement: resource.referencement
         end
       end

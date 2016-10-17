@@ -1,6 +1,8 @@
-div.panel 'Référencement' do
+# frozen_string_literal: true
+
+div.panel t('post.referencement.title') do
   if referencement.description.blank?
-    span 'Le référencement n\'a pas été renseigné'
+    span t('post.referencement.empty')
   else
     attributes_table_for referencement do
       row :description
