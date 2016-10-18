@@ -18,14 +18,18 @@
 class BlogCategory < ActiveRecord::Base
   include Includes::BlogIncludable
 
-  translates :name, :slug
-  active_admin_translates :name, :slug do
+  translates :name, :slug, fallbacks_for_empty_translations: true
+  active_admin_translates :name, :slug, fallbacks_for_empty_translations: true do
     validates :name,
               presence: true
   end
 
   extend FriendlyId
-  friendly_id :slug_candidates, use: [:slugged, :history, :globalize, :finders]
+  friendly_id :slug_candidates,
+              use: [:slugged,
+                    :history,
+                    :globalize,
+                    :finders]
 
   # Models relations
   has_many :blogs, dependent: :destroy, inverse_of: :blog_category
@@ -37,7 +41,11 @@ class BlogCategory < ActiveRecord::Base
   end
 
   def deduced_id
-    record_id = self.class.where(name: name).count
+    record_id = BlogCategory.where(name: name).count
     return record_id + 1 unless record_id == 0
+  end
+
+  def should_generate_new_friendly_id?
+    new_record? || name_changed?
   end
 end

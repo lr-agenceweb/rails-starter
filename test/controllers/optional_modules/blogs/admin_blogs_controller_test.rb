@@ -74,6 +74,27 @@ module Admin
     end
 
     #
+    # == Slug
+    #
+    test 'should update slug if title changed' do
+      attrs = {
+        translations_attributes: {
+          '1': { title: 'Lorem', locale: 'fr' },
+          '0': { title: 'Ipsum', locale: 'en' }
+        }
+      }
+      patch :update, id: @blog, blog: attrs
+
+      I18n.with_locale(:fr) do
+        assert_equal 'lorem', assigns(:blog).slug
+      end
+
+      I18n.with_locale(:en) do
+        assert_equal 'ipsum', assigns(:blog).slug
+      end
+    end
+
+    #
     # == PublicationDate
     #
     test 'should create nested publication_date if blank attributes' do

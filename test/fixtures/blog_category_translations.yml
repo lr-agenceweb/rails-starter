@@ -6,12 +6,26 @@ one_fr:
   <<: *DEFAULTS
   blog_category_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
   locale: fr
-  name: foo
+  name: Foo
   slug: foo
 
 one_en:
   <<: *DEFAULTS
   blog_category_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
   locale: en
-  name: bar
+  name: Bar
   slug: bar
+
+two_fr:
+  <<: *DEFAULTS
+  blog_category_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  locale: fr
+  name: Lorem
+  slug: lorem
+
+two_en:
+  <<: *DEFAULTS
+  blog_category_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  locale: en
+  name: Ipsum
+  slug: ipsum

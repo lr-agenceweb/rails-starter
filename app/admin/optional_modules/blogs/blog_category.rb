@@ -6,7 +6,7 @@ ActiveAdmin.register BlogCategory do
   permit_params do
     params = [:id,
               translations_attributes: [
-                :id, :locale, :name
+                :id, :locale, :name, :slug
               ]]
     params
   end
