@@ -1,5 +1,5 @@
 aside#blog__sidebar.blog__sidebar data-sticky='' data-anchor='sidebar_referer' data-btm-anchor='sidebar_referer:bottom'
-  - if @blog_settings.show_last_posts?
+  - if @blog_setting.show_last_posts?
     section.last-blogs
       h4.last-blogs-title = I18n.t('blog.last_articles')
       ul
@@ -14,7 +14,7 @@ aside#blog__sidebar.blog__sidebar data-sticky='' data-anchor='sidebar_referer' d
                 =< I18n.t("activerecord.models.comment.#{number > 1 ? 'other' : 'one'}").downcase
                 = ')'
 
-  - if @blog_settings.show_categories?
+  - if @blog_setting.show_categories?
     section.blog-categories
       h4.blog-categories-title = I18n.t('blog.blog_categories')
       ul
@@ -25,7 +25,7 @@ aside#blog__sidebar.blog__sidebar data-sticky='' data-anchor='sidebar_referer' d
             = pluralize blog_category.blogs.size, 'article'
             span = ')'
 
-  - if @comment_module.enabled? && @blog_settings.show_last_comments?
+  - if @comment_module.enabled? && @blog_setting.show_last_comments?
     section.last-comments
       h4.last-comments-title = I18n.t('blog.last_comments')
       #last-comments-container

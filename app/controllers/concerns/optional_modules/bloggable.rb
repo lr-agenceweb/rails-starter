@@ -12,7 +12,7 @@ module OptionalModules
 
     included do
       before_action :blog_module_enabled?
-      before_action :set_blog_settings, only: [:index, :show]
+      include ModuleSettingable
       before_action :set_blog_categories, only: [:index, :show]
       before_action :set_last_blogs, only: [:index, :show]
       before_action :set_last_comments, only: [:index, :show], if: proc { @comment_module.enabled? }
@@ -22,10 +22,6 @@ module OptionalModules
 
       def blog_module_enabled?
         not_found unless @blog_module.enabled?
-      end
-
-      def set_blog_settings
-        @blog_settings = BlogSetting.first
       end
 
       def set_blog_categories
