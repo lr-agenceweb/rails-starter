@@ -122,7 +122,6 @@ ActiveAdmin.register Event do
         end
 
         render 'admin/shared/form_translation', f: f
-        render 'admin/shared/referencement/form', f: f
       end
 
       column do
@@ -134,6 +133,7 @@ ActiveAdmin.register Event do
 
         render 'admin/shared/links/one', f: f
         render 'admin/shared/locations/one', f: f, full: true
+        render 'admin/shared/referencement/form', f: f
       end
     end
 
