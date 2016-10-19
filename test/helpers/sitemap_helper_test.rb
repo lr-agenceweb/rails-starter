@@ -7,7 +7,5 @@ require 'test_helper'
 class SitemapHelperTest < ActionView::TestCase
   include Rails.application.routes.url_helpers
 
-  test 'should return correct rss_module content' do
-    skip 'Add method is not understood by the test'
-  end
+  # TODO: Set tests
 end
