@@ -13,16 +13,8 @@ module ModuleSettingable
     private
 
     def set_model_value
-      case controller_name.classify
-      when 'NewsletterUser'
-        @model_value = 'Newsletter'
-      when 'MailingUser', 'MailingMessage'
-        @model_value = 'Mailing'
-      when 'BlogCategory'
-        @model_value = 'Blog'
-      else
-        @model_value = controller_name.classify
-      end
+      ctrl = controller_name.classify
+      @model_value = ctrl.gsub(/User|Message|Category/, '')
     end
 
     def set_module_setting
