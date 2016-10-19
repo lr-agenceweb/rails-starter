@@ -3,43 +3,16 @@ ActiveAdmin.register Event do
   menu parent: I18n.t('admin_menu.modules')
 
   permit_params do
-    params = [:id,
-              :all_day,
-              :start_date,
-              :end_date,
-              :show_as_gallery,
-              :online,
-              link_attributes: [
-                :id, :url, :_destroy
-              ],
-              translations_attributes: [
-                :id, :locale, :title, :slug, :content
-              ],
-              pictures_attributes: [
-                :id, :image, :online, :position, :_destroy
-              ],
-              video_uploads_attributes: [
-                :id, :online, :position,
-                :video_file,
-                :video_autoplay,
-                :video_loop,
-                :video_controls,
-                :video_mute,
-                :_destroy,
-                video_subtitle_attributes: [
-                  :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
-                ]
-              ],
-              location_attributes: [
-                :id, :address, :city, :postcode, :geocode_address, :latitude, :longitude, :_destroy
-              ],
-              referencement_attributes: [
-                :id,
-                translations_attributes: [
-                  :id, :locale, :title, :description, :keywords
-                ]
-              ]]
-    params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
+    params = [:all_day, :start_date, :end_date]
+
+    params.push(*general_attributes)
+    params.push(*post_attributes)
+    params.push(*referencement_attributes)
+    params.push(*link_attributes)
+    params.push(*location_attributes)
+    params.push(*picture_attributes(true))
+    params.push(*video_upload_attributes(true)) if @video_module.enabled?
+    params.push(*video_platform_attributes(true)) if @video_module.enabled?
     params.push :show_calendar if @calendar_module.enabled?
     params.push :show_map if @map_module.enabled? && @event_setting.show_map?
     params
@@ -160,6 +133,7 @@ ActiveAdmin.register Event do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include Skippable
     include ModuleSettingable
     include ActiveAdmin::Cachable

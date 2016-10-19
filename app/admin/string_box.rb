@@ -4,12 +4,8 @@ ActiveAdmin.register StringBox do
   includes :translations, :optional_module
 
   permit_params do
-    params = [:id,
-              :key,
-              translations_attributes: [
-                :id, :locale, :title, :content
-              ]]
-
+    params = [:id, :key]
+    params.push(*post_attributes)
     params.push :optional_module_id if current_user.super_administrator?
     params
   end

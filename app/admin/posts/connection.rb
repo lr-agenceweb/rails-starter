@@ -3,19 +3,15 @@ ActiveAdmin.register Connection do
   menu parent: I18n.t('admin_menu.posts')
   includes :translations, :user, :picture
 
-  permit_params :id,
-                :type,
-                :online,
-                :user_id,
-                picture_attributes: [
-                  :id, :image, :online, :_destroy
-                ],
-                link_attributes: [
-                  :id, :url, :_destroy
-                ],
-                translations_attributes: [
-                  :id, :locale, :title, :content
-                ]
+  permit_params do
+    params = [:type, :user_id]
+
+    params.push(*general_attributes)
+    params.push(*post_attributes)
+    params.push(*picture_attributes(true))
+    params.push(*link_attributes)
+    params
+  end
 
   decorate_with ConnectionDecorator
   config.clear_sidebar_sections!
@@ -89,6 +85,7 @@ ActiveAdmin.register Connection do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include ActiveAdmin::Postable
     include ActiveAdmin::AjaxDestroyable
 

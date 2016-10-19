@@ -2,11 +2,11 @@
 ActiveAdmin.register Newsletter do
   menu parent: I18n.t('admin_menu.modules')
 
-  permit_params :id,
-                :sent_at,
-                translations_attributes: [
-                  :id, :locale, :title, :content
-                ]
+  permit_params do
+    params = [:id, :sent_at]
+    params.push(*post_attributes)
+    params
+  end
 
   decorate_with NewsletterDecorator
   config.clear_sidebar_sections!
@@ -50,6 +50,7 @@ ActiveAdmin.register Newsletter do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include Skippable
     include Newsletterable
     include OptionalModules::NewsletterHelper

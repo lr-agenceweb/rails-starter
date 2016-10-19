@@ -2,17 +2,13 @@
 ActiveAdmin.register MailingMessage do
   menu parent: I18n.t('admin_menu.modules')
 
-  permit_params :id,
-                :token,
-                :sent_at,
-                :show_signature,
-                mailing_user_ids: [],
-                translations_attributes: [
-                  :id, :locale, :title, :content
-                ],
-                picture_attributes: [
-                  :id, :image, :online, :_destroy
-                ]
+  permit_params do
+    params = [:id, :token, :sent_at,
+              :show_signature, mailing_user_ids: []]
+    params.push(*post_attributes)
+    params.push(*picture_attributes)
+    params
+  end
 
   scope I18n.t('all'), :all, default: true
   scope I18n.t('sent.true'), :sent
@@ -60,6 +56,7 @@ ActiveAdmin.register MailingMessage do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include Skippable
     include ModuleSettingable
     include Mailingable

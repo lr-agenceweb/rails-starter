@@ -3,13 +3,12 @@ ActiveAdmin.register LegalNotice do
   menu parent: I18n.t('admin_menu.posts')
   includes :translations, :user, :picture
 
-  permit_params :id,
-                :type,
-                :online,
-                :user_id,
-                translations_attributes: [
-                  :id, :locale, :title, :content
-                ]
+  permit_params do
+    params = [:type, :user_id]
+    params.push(*general_attributes)
+    params.push(*post_attributes)
+    params
+  end
 
   decorate_with LegalNoticeDecorator
   config.clear_sidebar_sections!
@@ -70,6 +69,7 @@ ActiveAdmin.register LegalNotice do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include ActiveAdmin::Postable
     include ActiveAdmin::Cachable
   end

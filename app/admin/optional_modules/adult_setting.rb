@@ -2,12 +2,11 @@
 ActiveAdmin.register AdultSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
-  permit_params :id,
-                :enabled,
-                :redirect_link,
-                translations_attributes: [
-                  :id, :locale, :title, :content
-                ]
+  permit_params do
+    params = [:id, :enabled, :redirect_link]
+    params.push(*post_attributes)
+    params
+  end
 
   decorate_with AdultSettingDecorator
   config.clear_sidebar_sections!
@@ -58,6 +57,7 @@ ActiveAdmin.register AdultSetting do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? && @adult_module.enabled? }
 
     private

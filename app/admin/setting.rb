@@ -21,11 +21,9 @@ ActiveAdmin.register Setting do
               :twitter_username,
               translations_attributes: [
                 :id, :locale, :title, :subtitle
-              ],
-              location_attributes: [
-                :id, :address, :city, :postcode, :geocode_address, :latitude, :longitude, :_destroy
               ]]
 
+    params.push(*location_attributes)
     params.push :show_social if @social_module.enabled?
     params.push :show_qrcode if @qrcode_module.enabled?
     params.push :show_breadcrumb if @breadcrumb_module.enabled?

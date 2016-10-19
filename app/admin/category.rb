@@ -1,34 +1,15 @@
 # frozen_string_literal: true
-include Core::MenuHelper
-include AssetsHelper
-
 ActiveAdmin.register Category do
   menu parent: I18n.t('admin_menu.config')
   includes :background, :slider, :optional_module, :menu, menu: [:translations]
 
   permit_params do
-    params = [:id,
-              :name,
-              :color,
-              referencement_attributes: [
-                :id,
-                translations_attributes: [
-                  :id, :locale, :title, :description, :keywords
-                ]
-              ],
-              heading_attributes: [
-                :id,
-                translations_attributes: [
-                  :id, :locale, :content
-                ]
-              ]]
-
-    if current_user.super_administrator?
-      params.push :optional, :menu_id, :optional_module_id
-    end
-    params.push background_attributes: [:id, :image, :_destroy] if @background_module.enabled?
-    params.push video_upload_attributes: [:id, :video_file, :online, :position, :_destroy] if show_video_background?(@video_settings, @video_module)
-
+    params = [:id, :name, :color]
+    params.push :optional, :menu_id, :optional_module_id if current_user.super_administrator?
+    params.push(*referencement_attributes)
+    params.push(*heading_attributes)
+    params.push(*background_attributes) if @background_module.enabled?
+    params.push(*video_upload_attributes) if show_video_background?(@video_settings, @video_module)
     params
   end
 
@@ -125,6 +106,9 @@ ActiveAdmin.register Category do
   # == Controller
   #
   controller do
+    include AssetsHelper
+    include Core::MenuHelper
+    include ActiveAdmin::ParamsHelper
     include Skippable
     include OptionalModules::Videoable
 
