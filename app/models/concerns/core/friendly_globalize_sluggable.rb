@@ -11,8 +11,10 @@ module Core
     extend ActiveSupport::Concern
 
     included do
-      translates :title, :slug, :content, fallbacks_for_empty_translations: true
-      active_admin_translates :title, :slug, :content, fallbacks_for_empty_translations: true do
+      TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
+      translates(*TRANSLATED_FIELDS,
+                 fallbacks_for_empty_translations: true)
+      active_admin_translates(*TRANSLATED_FIELDS, fallbacks_for_empty_translations: true) do
         validates :title,
                   presence: true
       end
