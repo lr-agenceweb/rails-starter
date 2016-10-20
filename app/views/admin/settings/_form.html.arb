@@ -1,15 +1,13 @@
-f.semantic_errors(*f.object.errors.keys)
+# frozen_string_literal: true
 
 f.columns do
   f.column do
-    f.inputs 'Paramètres du site' do
+    f.inputs t('formtastic.titles.setting_general_details') do
       f.columns do
         f.column do
           f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :title,
-                    hint: 'Titre du site'
-            t.input :subtitle,
-                    hint: 'Sous-titre du site'
+            t.input :title
+            t.input :subtitle
           end
         end
       end
@@ -17,69 +15,57 @@ f.columns do
       f.columns id: 'logos-container' do
         f.column do
           f.input :logo, hint: raw("<p class='paperclip-preview'>#{retina_image_tag(f.object, :logo, :small)}</p>")
-          if f.object.logo?
-            f.input :delete_logo,
-                    as: :boolean,
-                    hint: 'Si coché, le logo sera supprimé après mise à jour des paramètres'
-          end
+          f.input :delete_logo, as: :boolean if f.object.logo?
         end
 
         f.column do
           f.input :logo_footer, hint: f.object.logo_footer? ? raw("<p class='paperclip-preview logo-footer'>#{retina_image_tag(f.object, :logo_footer, :small)}</p>") : ''
-          if f.object.logo_footer?
-            f.input :delete_logo_footer,
-                    as: :boolean,
-                    hint: 'Si coché, le logo du pied de page sera supprimé après mise à jour des paramètres'
-          end
+          f.input :delete_logo_footer, as: :boolean if f.object.logo_footer?
         end
       end
 
-      f.input :maintenance, hint: 'Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet'
+      f.input :maintenance
     end
 
-    f.inputs 'Paramètres des modules' do
-      f.input :show_map, hint: 'Afficher ou non la carte positionnant votre activité sur la page contact' if map_module.enabled?
-      f.input :show_breadcrumb, hint: 'Afficher ou non le fil d\'ariane sur le site' if breadcrumb_module.enabled?
-      f.input :show_social, hint: 'Afficher ou non les icônes de partage social sur le site' if social_module.enabled?
-      f.input :show_qrcode, hint: 'Afficher ou non le qrcode (sur la page contact) ajoutant vos informations de contact sur le smartphone des internautes ' if qrcode_module.enabled?
-      f.input :twitter_username, hint: 'Si vous disposez d\'un compte sur Twitter, vous pouvez indiquer votre nom d\'utilisateur. Cela permet aux personnes partageant votre site de vous identitfier sur Twitter'
+    f.inputs t('formtastic.titles.setting_module_details') do
+      f.input :show_map if map_module.enabled?
+      f.input :show_breadcrumb if breadcrumb_module.enabled?
+      f.input :show_social if social_module.enabled?
+      f.input :show_qrcode if qrcode_module.enabled?
+      f.input :twitter_username
     end
   end
 
   f.column do
-    f.inputs 'Paramètres de l\'administrateur' do
-      f.input :name, hint: 'Nom du propriétaire du site'
-      f.input :email, hint: 'Email d\'où seront reçus les messages de contact'
-      f.input :phone, as: :phone, hint: 'Numéro de téléphone à afficher sur le site pour vous joindre'
-      f.input :phone_secondary, as: :phone, hint: 'Numéro de téléphone secondaire. Laissez vide si ce champs ne vous sert pas'
+    f.inputs t('formtastic.titles.setting_user_details') do
+      f.input :name
+      f.input :email
+      f.input :phone, as: :phone
+      f.input :phone_secondary, as: :phone
     end
 
-    render 'admin/shared/locations/one', f: f, full: true
+    render 'admin/locations/form', f: f, full: true
 
-    f.inputs 'Paramètres du formulaire de contact' do
-      f.input :show_file_upload,
-              hint: 'Si coché, un champ permettant à l\'internaute d\'envoyer une pièce jointe sera ajouté au formulaire de contact'
-      f.input :answering_machine,
-              hint: "Si coché, un mail de réponse automatique sera envoyé à l'internaute lui indiquant votre indisponibilité lorsque qu'il tentera de vous envoyer un mail par le formulaire de contact. <br /> Vous pouvez personnaliser le contenu du mail en vous rendant sur la page \"#{t('activerecord.models.string_box.other')}\" de l'administration".html_safe
+    f.inputs t('formtastic.titles.setting_contact_details') do
+      f.input :show_file_upload
+      f.input :answering_machine
     end
   end
 end
 
 f.columns do
   f.column do
-    f.inputs 'Paramètres généraux' do
-      f.input :show_admin_bar,
-              hint: 'Si coché, un bandeau sera présent en haut du site (partie publique), donnant accès à quelques raccourcis de l\'administration. <br /> Ce bandeau n\'est visible que par l\'administrateur du site, les internautes ne le verront pas.'.html_safe
+    f.inputs t('formtastic.titles.setting_misc_details') do
+      f.input :show_admin_bar
+
       f.input :per_page,
               as: :select,
               collection: Setting.per_page_values,
-              include_blank: false,
-              hint: 'Choisissez le nombre d\'articles à afficher avant la pagination (concerne les article de blogs, événements et les liens partenaires). <br /> Si vous souhaitez afficher tous les articles sur une seule page, sélectionnez la valeur 0'.html_safe
+              include_blank: false
 
       f.input :date_format,
               as: :radio,
-              collection: Setting.date_format.options,
-              hint: 'Choisissez le format de la date à afficher (<strong>date seulement</strong>, <strong>date + heure</strong> ou sous la forme "<strong>Il y a 10 minutes</strong>)"'.html_safe
+              collection: Setting.date_format.options
     end
   end
 end

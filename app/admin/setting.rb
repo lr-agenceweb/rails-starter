@@ -42,6 +42,7 @@ ActiveAdmin.register Setting do
   end
 
   form do |f|
+    f.semantic_errors(*f.object.errors.keys)
     render 'form', f: f
   end
 

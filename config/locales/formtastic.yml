@@ -10,6 +10,13 @@ fr:
       post_generals: Configuration générale
       post_translations: Contenu de l'article
 
+      # Setting
+      setting_general_details: Paramètres du site
+      setting_module_details: Paramètres des modules
+      setting_user_details: Paramètres de l'administrateur
+      setting_contact_details: Paramètres du formulaire de contact
+      setting_misc_details: Paramètres divers
+
       # Menu
       menu_details: Gestion de la configuration du Menu
 
@@ -138,6 +145,28 @@ fr:
       content: Contenu de l'article, visible sur le site
       prev_next: Si coché, un lien permettant d'accéder à l'article précédent et suivant sera ajouté sur le site
       show_map: Afficher la carte géographique situant le lieu de l'événement pour les internautes (Attention, les paramètres de Localisation doivent être renseignés)
+
+      # Setting
+      setting:
+        title: Titre du site
+        subtitle: Sous-titre du site
+        delete_logo: Si coché, le logo sera supprimé après mise à jour des paramètres
+        delete_logo_footer: Si coché, le logo du pied de page sera supprimé après mise à jour des paramètres
+        maintenance: Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet
+        show_map: Afficher ou non la carte positionnant votre activité sur la page contact
+        show_breadcrumb: Afficher ou non le fil d'ariane sur le site
+        show_social: Afficher ou non les icônes de partage social sur le site
+        show_qrcode: Afficher ou non le Qrcode (sur la page contact) ajoutant vos informations de contact sur le smartphone des internautes
+        twitter_username: Si vous disposez d'un compte sur Twitter, vous pouvez indiquer votre nom d'utilisateur. Cela permet aux personnes partageant votre site de vous identitfier sur Twitter
+        name: Nom du propriétaire du site
+        email: Email d'où seront reçus les messages de contact
+        phone: Numéro de téléphone à afficher sur le site pour vous joindre
+        phone_secondary: Numéro de téléphone secondaire. Laissez vide si ce champs ne vous sert pas
+        show_file_upload: Si coché, un champ permettant à l'internaute d'envoyer une pièce jointe sera ajouté au formulaire de contact
+        answering_machine: Si coché, un mail de réponse automatique sera envoyé à l'internaute lui indiquant votre indisponibilité lorsque qu'il tentera de vous envoyer un mail par le formulaire de contact. <br /> Vous pouvez personnaliser le contenu du mail en vous rendant sur la page "Contenus personalisés" de l'administration
+        show_admin_bar: Si coché, un bandeau sera présent en haut du site (partie publique), donnant accès à quelques raccourcis de l'administration. <br /> Ce bandeau n'est visible que par l'administrateur du site, les internautes ne le verront pas.
+        per_page: Choisissez le nombre d'articles à afficher avant la pagination (concerne les article de blogs, événements et les liens partenaires). <br /> Si vous souhaitez afficher tous les articles sur une seule page, sélectionnez la valeur 0
+        date_format: Choisissez le format de la date à afficher (<strong>date seulement</strong>, <strong>date + heure</strong> ou sous la forme "<strong>Il y a 10 minutes</strong>)"
 
       # BlogCategory
       blog_category:
