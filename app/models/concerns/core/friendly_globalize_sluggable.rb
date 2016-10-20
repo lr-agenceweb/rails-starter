@@ -11,11 +11,13 @@ module Core
     extend ActiveSupport::Concern
 
     included do
+      ATTRIBUTE ||= :title
       TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
+
       translates(*TRANSLATED_FIELDS,
                  fallbacks_for_empty_translations: true)
       active_admin_translates(*TRANSLATED_FIELDS, fallbacks_for_empty_translations: true) do
-        validates :title,
+        validates ATTRIBUTE,
                   presence: true
       end
 
@@ -29,16 +31,16 @@ module Core
       private
 
       def slug_candidates
-        [[:title, :deduced_id]]
+        [[ATTRIBUTE, :deduced_id]]
       end
 
       def deduced_id
-        record_id = self.class.where(title: title).count
+        record_id = self.class.where("#{ATTRIBUTE}": send(ATTRIBUTE)).count
         return record_id + 1 unless record_id == 0
       end
 
       def should_generate_new_friendly_id?
-        new_record? || title_changed? || super
+        new_record? || send("#{ATTRIBUTE}_changed?") || super
       end
     end
   end
