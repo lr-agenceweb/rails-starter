@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+include Core::MenuHelper
+
 ActiveAdmin.register Category do
   menu parent: I18n.t('admin_menu.config')
   includes :background, :slider, :optional_module, :menu, menu: [:translations]
@@ -107,7 +109,6 @@ ActiveAdmin.register Category do
   #
   controller do
     include AssetsHelper
-    include Core::MenuHelper
     include ActiveAdmin::ParamsHelper
     include Skippable
     include OptionalModules::Videoable

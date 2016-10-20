@@ -83,6 +83,7 @@ ActiveAdmin.register StringBox do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include Skippable
   end
 end
