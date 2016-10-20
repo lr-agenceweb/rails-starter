@@ -86,6 +86,20 @@ module ActiveAdmin
       ]]
     end
 
+    def slider_attributes
+      [:animate, :autoplay, :time_to_show,
+      :hover_pause, :looper, :navigation, :bullet]
+    end
+
+    def slides_attributes
+      [slides_attributes: [
+        :id, :image, :online, :position, :_destroy,
+        translations_attributes: [
+          :id, :locale, :title, :description
+        ]
+      ]]
+    end
+
     # Misc
     def link_attributes
       [link_attributes: [

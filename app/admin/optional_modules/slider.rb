@@ -3,22 +3,12 @@ ActiveAdmin.register Slider do
   menu parent: I18n.t('admin_menu.modules')
   includes :category
 
-  permit_params :id,
-                :animate,
-                :autoplay,
-                :time_to_show,
-                :hover_pause,
-                :looper,
-                :navigation,
-                :bullet,
-                :online,
-                :category_id,
-                slides_attributes: [
-                  :id, :image, :online, :position, :_destroy,
-                  translations_attributes: [
-                    :id, :locale, :title, :description
-                  ]
-                ]
+  permit_params do
+    params = [:id, :online, :category_id]
+    params.push(*slider_attributes)
+    params.push(*slides_attributes)
+    params
+  end
 
   decorate_with SliderDecorator
   config.clear_sidebar_sections!
@@ -123,6 +113,7 @@ ActiveAdmin.register Slider do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include Skippable
 
     def scoped_collection

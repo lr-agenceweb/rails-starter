@@ -124,6 +124,22 @@ module ActiveAdmin
       assert_equal expected, audio_attributes
     end
 
+    test 'should return correct params for slider' do
+      expected = [:animate, :autoplay, :time_to_show,
+      :hover_pause, :looper, :navigation, :bullet]
+      assert_equal expected, slider_attributes
+    end
+
+    test 'should return correct params for slides' do
+      expected = [slides_attributes: [
+        :id, :image, :online, :position, :_destroy,
+        translations_attributes: [
+          :id, :locale, :title, :description
+        ]
+      ]]
+      assert_equal expected, slides_attributes
+    end
+
     test 'should return correct params for link' do
       expected = [link_attributes: [
         :id, :url, :_destroy
