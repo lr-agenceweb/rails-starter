@@ -38,70 +38,13 @@ ActiveAdmin.register Category do
 
   show title: :title_aa_show do
     arbre_cache(self, resource.cache_key) do
-      columns do
-        column do
-          attributes_table do
-            row :cover_preview
-            row :div_color
-            row :slider if slider_module.enabled?
-            row :module if current_user.super_administrator?
-            row :video_preview if show_video_background?(video_settings, video_module) && resource.video?
-          end
-        end
-
-        column do
-          render 'heading', heading: resource.heading
-
-          render 'admin/shared/referencement/show', referencement: resource.referencement
-        end
-      end
+      render 'show', resource: resource
     end
   end
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
-
-    columns do
-      column do
-        f.inputs t('formtastic.titles.category_details') do
-          f.input :menu_id,
-                  as: :select,
-                  collection: nested_dropdown(Menu.self_or_available(f.object)),
-                  include_blank: false,
-                  input_html: {
-                    disabled: current_user.super_administrator? ? false : :disbaled
-                  }
-
-          f.input :color,
-                  as: :color_picker,
-                  palette: [
-                    SharedColoredVariables::PRIMARY_COLOR,
-                    SharedColoredVariables::SECONDARY_COLOR,
-                    SharedColoredVariables::TERCERY_COLOR,
-                    '#FFFFFF',
-                    '#000000'
-                  ],
-                  hint: true
-        end
-
-        render 'admin/shared/referencement/form', f: f, klass: params[:section] == 'referencement' ? 'highlight-referencement' : ''
-      end
-
-      column do
-        render 'admin/shared/heading/form', f: f, klass: params[:section] == 'heading' ? 'highlight-heading' : ''
-        render 'admin/shared/backgrounds/form', f: f if background_module.enabled?
-      end
-    end
-
-    columns do
-      column do
-        render 'admin/shared/video_uploads/one', f: f if video_module.enabled? && video_settings.video_upload? && video_settings.video_background?
-      end
-    end
-
-    render 'admin/shared/optional_modules/form', f: f if current_user.super_administrator?
-
-    f.actions
+    render 'form', f: f
   end
 
   #

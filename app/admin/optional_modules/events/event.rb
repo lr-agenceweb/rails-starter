@@ -55,78 +55,13 @@ ActiveAdmin.register Event do
 
   show do
     arbre_cache(self, resource.cache_key) do
-      columns do
-        column do
-          attributes_table do
-            image_row :image, style: :medium do |r|
-              r.picture.image
-            end if resource.picture?
-            row :content
-            bool_row :all_day
-            row :start_date
-            row :end_date
-            row :duration
-            row :full_address
-            row :link_with_link
-            bool_row :show_as_gallery
-            bool_row :show_calendar if calendar_module.enabled?
-            bool_row :show_map if map_module.enabled? && event.show_map?
-            bool_row :online
-          end
-        end
-
-        column do
-          render 'admin/shared/referencement/show', referencement: resource.referencement
-        end
-      end
+      render 'show', resource: resource
     end
   end
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
-
-    columns do
-      column do
-        f.inputs t('formtastic.titles.post_generals') do
-          f.input :online
-          f.input :show_as_gallery
-          f.input :show_calendar if calendar_module.enabled?
-          f.input :show_map if map_module.enabled? && event_setting.show_map?
-        end
-
-        render 'admin/shared/form_translation', f: f
-      end
-
-      column do
-        f.inputs t('formtastic.titles.event_date_details') do
-          f.input :all_day
-          f.input :start_date, as: :date_time_picker
-          f.input :end_date, as: :date_time_picker
-        end
-
-        render 'admin/shared/links/one', f: f
-        render 'admin/shared/locations/one', f: f, full: true
-        render 'admin/shared/referencement/form', f: f
-      end
-    end
-
-    columns do
-      column do
-        render 'admin/shared/pictures/many', f: f
-      end
-
-      column do
-        render 'admin/shared/video_platforms/many', f: f
-      end if video_settings.video_platform?
-    end
-
-    columns do
-      column do
-        render 'admin/shared/video_uploads/many', f: f
-      end if video_settings.video_upload?
-    end if video_module.enabled?
-
-    f.actions
+    render 'form', f: f
   end
 
   #

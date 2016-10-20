@@ -102,7 +102,7 @@ ActiveAdmin.register User do
 
     columns do
       column do
-        render 'admin/shared/roles/form', f: f
+        render 'admin/roles/form', f: f
       end
     end if current_user_and_administrator?
 

@@ -138,11 +138,11 @@ fr:
 
       # Referencement
       referencement:
-        <<: *mailer_attributes
+        <<: *post_attributes
 
       # Heading
       heading:
-        <<: *mailer_attributes
+        <<: *post_attributes
 
       # Blog
       blog:

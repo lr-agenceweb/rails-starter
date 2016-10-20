@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+div.panel t('activerecord.models.video.other') do
+  if video_platforms.blank? && video_uploads.blank?
+    span t('post.video.empty')
+  else
+    video_platforms.find_each do |video|
+      video_info = VideoInfo.new(video.url)
+      div raw(video_info.embed_code)
+      strong video_info.title
+    end if video_settings.video_platform?
+
+    video_uploads.find_each do |video|
+      div image_tag(video.video_file.url(:preview))
+      strong video.decorate.file_name_without_extension
+    end if video_settings.video_upload?
+  end
+end

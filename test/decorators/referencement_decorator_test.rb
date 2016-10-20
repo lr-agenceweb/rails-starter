@@ -6,5 +6,4 @@ require 'test_helper'
 #
 class ReferencementDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
-  delegate_all
 end

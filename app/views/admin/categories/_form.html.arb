@@ -1,0 +1,43 @@
+# frozen_string_literal: true
+
+f.columns do
+  f.column do
+    f.inputs t('formtastic.titles.category_details') do
+      f.input :menu_id,
+              as: :select,
+              collection: nested_dropdown(Menu.self_or_available(f.object)),
+              include_blank: false,
+              input_html: {
+                disabled: current_user.super_administrator? ? false : :disbaled
+              }
+
+      f.input :color,
+              as: :color_picker,
+              palette: [
+                SharedColoredVariables::PRIMARY_COLOR,
+                SharedColoredVariables::SECONDARY_COLOR,
+                SharedColoredVariables::TERCERY_COLOR,
+                '#FFFFFF',
+                '#000000'
+              ],
+              hint: true
+    end
+
+    render 'admin/referencement/form', f: f, klass: params[:section] == 'referencement' ? 'highlight-referencement' : ''
+  end
+
+  f.column do
+    render 'admin/headings/form', f: f, klass: params[:section] == 'heading' ? 'highlight-heading' : ''
+    render 'admin/assets/backgrounds/form', f: f if background_module.enabled?
+  end
+end
+
+f.columns do
+  f.column do
+    render 'admin/assets/video_uploads/forms/one', f: f if video_module.enabled? && video_settings.video_upload? && video_settings.video_background?
+  end
+end
+
+render 'admin/optional_modules/form', f: f if current_user.super_administrator?
+
+f.actions

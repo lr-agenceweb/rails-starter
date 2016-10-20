@@ -32,7 +32,7 @@ f.columns do
 
   f.column do
     render '/admin/mailings/preview', f: f
-    render 'admin/shared/pictures/one', f: f
+    render 'admin/assets/pictures/forms/one', f: f
   end
 end
 

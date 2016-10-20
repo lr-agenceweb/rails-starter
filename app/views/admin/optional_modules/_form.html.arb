@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+f.inputs t('formtastic.titles.optional_module_details') do
+  f.input :optional_module_id,
+          as: :select,
+          collection: OptionalModule.all,
+          include_blank: t('form.select.include_blank'),
+          hint: true
+end

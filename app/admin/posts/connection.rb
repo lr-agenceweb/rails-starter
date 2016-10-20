@@ -64,11 +64,11 @@ ActiveAdmin.register Connection do
       end
 
       column do
-        render 'admin/shared/links/one', f: f
+        render 'admin/links/form', f: f
       end
     end
 
-    render 'admin/shared/pictures/one', f: f
+    render 'admin/assets/pictures/forms/one', f: f
 
     f.inputs t('formtastic.titles.post_translations') do
       f.translated_inputs 'Translated fields', switch_locale: true do |t|

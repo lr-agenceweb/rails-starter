@@ -1,6 +1,0 @@
-- f.inputs t('formtastic.titles.post_generals') do
-  - f.input :online
-  - f.input :show_as_gallery
-
-  - if @comment_module.enabled? && f.object.is_a?(Blog)
-    - f.input :allow_comments

@@ -1,9 +1,0 @@
-- f.inputs 'Contenu clé' do
-  - f.input :category,
-            collection: Background.child_classes,
-            include_blank: false
-  - f.input :tag,
-            input_html: { disabled: params[:action] == 'edit' ? :disabled : false }
-  = f.translated_inputs 'Translated fields', switch_locale: false do |t|
-    - t.input :title
-    - t.input :content, input_html: { class: 'froala' }

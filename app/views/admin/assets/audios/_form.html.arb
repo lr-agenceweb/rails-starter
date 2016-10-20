@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+f.inputs t('formtastic.titles.audio_details'),
+         for: [:audio, f.object.audio || Audio.new] do |item|
+  hint = raw("#{t('formtastic.hints.audio.audio_file')} <br /> #{item.object.decorate.hint_for_file}")
+
+  item.input :audio, as: :file, hint: hint
+  item.input :audio_autoplay,
+             hint: t('formtastic.hints.audio.audio_autoplay')
+  item.input :online
+  item.input :_destroy, as: :boolean if item.object.audio?
+end
