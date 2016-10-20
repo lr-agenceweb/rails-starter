@@ -1,19 +1,6 @@
 - f.inputs t('formtastic.titles.video_platform_details'), for: [:video_platform, f.object.video_platform || VideoPlatform.new] do |item|
 
-  - begin
-    - video_info = VideoInfo.new(item.object.url) unless item.object.new_record?
-    - item.input :url,
-    hint: raw("#{t('formtastic.hints.video_platform.url')} <br /><br /> #{image_tag video_info.thumbnail_medium if !video_info.nil? && video_info.available?}")
-  - rescue
-
-  - item.input :online
-
-  - if item.object.new_record?
-    li
-      p = t('formtastic.hints.video_platform.add_description')
-  - else
-    li
-      p = link_to t('formtastic.hints.video_platform.set_description'), edit_admin_video_platform_path(item.object), class: 'button success', target: :_blank
+  = render 'admin/assets/video_platforms/forms/inputs', item: item
 
   - if item.object.url?
     - item.input :_destroy,
