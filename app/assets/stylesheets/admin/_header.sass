@@ -1,11 +1,30 @@
 #utility_nav
   position: relative
 
-  #current_user
+  li#current_user
+    display: inline-block
+    vertical-align: middle
     a
-      // display: inline-block
+      display: table
+      padding: 0
+      color: $white
+      border-radius: 0
+      background-color: $secondary-color
+      &:hover
+        color: $white
+        background: lighten($secondary-color, 10%)
 
       img
+        display: table-cell
         width: auto
-        max-height: 30px
-        margin-right: 5px
+        max-height: 40px
+        vertical-align: middle
+
+      span
+        display: table-cell
+        padding-left: 5px
+        text-align: left
+        vertical-align: middle
+
+  #logout
+    vertical-align: middle

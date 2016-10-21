@@ -30,6 +30,14 @@ class UserDecoratorTest < Draper::TestCase
     assert_match '<a href="/admin/users/bob">Voir</a>', user_decorated.admin_link
   end
 
+  test 'should return correct connected_from value' do
+    expected = t('user.connected_from', from: 'site')
+    assert_equal expected, UserDecorator.new(@administrator).connected_from
+
+    expected = t('user.connected_from', from: 'facebook')
+    assert_equal expected, UserDecorator.new(@facebook_user).connected_from
+  end
+
   #
   # == Omniauth
   #
