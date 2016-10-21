@@ -1,0 +1,37 @@
+# frozen_string_literal: true
+
+f.columns do
+  f.column do
+    f.inputs t('formtastic.titles.slider_details') do
+      f.input :autoplay
+      f.input :hover_pause
+      f.input :looper,
+              as: :boolean,
+              hint: t('formtastic.hints.slider.loop')
+      f.input :navigation
+      f.input :bullet
+      f.input :time_to_show
+      f.input :animate,
+              collection: Slider.allowed_animations,
+              include_blank: false
+    end
+  end
+
+  f.column do
+    f.inputs t('formtastic.titles.slider_category_details') do
+      f.input :category_id,
+              as: :select,
+              collection: Category.except_already_slider(f.object.category),
+              include_blank: false
+      f.input :online
+    end
+  end
+end
+
+f.columns do
+  f.column do
+    render 'admin/assets/slides/form', f: f
+  end
+end
+
+f.actions

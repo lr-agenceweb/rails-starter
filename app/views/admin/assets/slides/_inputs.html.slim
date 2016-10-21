@@ -7,13 +7,19 @@
                    hint: hint
 
       - item.input :online
-      - item.input :_destroy, as: :boolean if item.object.self_image?
+
+      - if item.object.self_image?
+        - item.input :_destroy,
+                     as: :boolean,
+                     hint: t('formtastic.hints.slide.destroy')
 
   .form-right-column
     = item.inputs t('formtastic.titles.slide_content') do
       - item.translated_inputs 'Translated fields', switch_locale: true do |t|
-        - t.input :title
+        - t.input :title,
+                  hint: t('formtastic.hints.slide.title')
         - t.input :description,
+                  hint: t('formtastic.hints.slide.description'),
                   input_html: { class: 'small-height' }
 
   .clearfix

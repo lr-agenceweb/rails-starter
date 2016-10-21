@@ -43,6 +43,10 @@ ActiveAdmin.register Slider do
   end
 
   show title: :title_aa_show do
+    panel 'Slider prévisualisation' do
+      render 'assets/sliders/show', slider: resource, force: true
+    end
+
     arbre_cache(self, resource.cache_key) do
       columns do
         column do
@@ -63,50 +67,11 @@ ActiveAdmin.register Slider do
         end
       end
     end
-
-    panel 'Slider prévisualisation' do
-      render 'assets/sliders/show', slider: resource, force: true
-    end
   end
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
-
-    columns do
-      column do
-        f.inputs t('formtastic.titles.slider_details') do
-          f.input :autoplay
-          f.input :hover_pause
-          f.input :looper,
-                  as: :boolean,
-                  hint: t('formtastic.hints.slider.loop')
-          f.input :navigation
-          f.input :bullet
-          f.input :time_to_show
-          f.input :animate,
-                  collection: Slider.allowed_animations,
-                  include_blank: false
-        end
-      end
-
-      column do
-        f.inputs t('formtastic.titles.slider_category_details') do
-          f.input :category_id,
-                  as: :select,
-                  collection: Category.except_already_slider(f.object.category),
-                  include_blank: false
-          f.input :online
-        end
-      end
-    end
-
-    f.inputs t('formtastic.titles.slide_details') do
-      f.has_many :slides, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.slide.one')), sortable: :position do |item|
-        render 'admin/slides/many', item: item
-      end
-    end
-
-    f.actions
+    render 'form', f: f
   end
 
   #

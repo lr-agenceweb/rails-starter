@@ -3,9 +3,7 @@ ActiveAdmin.register Slide do
   menu parent: I18n.t('admin_menu.assets')
   includes :translations, :attachable
 
-  permit_params :id,
-                :image,
-                :online,
+  permit_params :id, :image, :online,
                 translations_attributes: [
                   :id, :locale, :title, :description
                 ]
@@ -41,7 +39,29 @@ ActiveAdmin.register Slide do
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
-    render 'admin/slides/many', item: f
+
+    columns do
+      column do
+        f.inputs t('formtastic.titles.slide_picture') do
+          hint = "#{t('formtastic.hints.slide.size')} <br /><br /> #{retina_image_tag(f.object, :image, :small)}".html_safe
+          f.input :image,
+                  as: :file,
+                  hint: hint
+
+          f.input :online
+        end
+      end
+
+      column do
+        f.inputs t('formtastic.titles.slide_content') do
+          f.translated_inputs 'Translated fields', switch_locale: true do |t|
+            t.input :title
+            t.input :description,
+                    input_html: { class: 'small-height' }
+          end
+        end
+      end
+    end
 
     f.actions
   end
