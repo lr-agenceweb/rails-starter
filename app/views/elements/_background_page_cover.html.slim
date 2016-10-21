@@ -4,5 +4,6 @@
   - if category.background? && @background_module.enabled? && !@background.nil?
     - cache category.background do
       = render 'assets/backgrounds/background', background: category.background
-  - elsif !slider.nil?
-    = render 'assets/sliders/show', slider: slider, force: false
+
+- if !slider.nil?
+  = render 'assets/sliders/show', slider: slider, force: false

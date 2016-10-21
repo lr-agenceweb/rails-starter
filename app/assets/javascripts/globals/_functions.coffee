@@ -69,3 +69,11 @@
   $container = $('#masonry-container')
   if $container.length > 0 && !isSmall()
     $container.masonry('reloadItems').masonry()
+
+#
+# Foundation Fix
+# ==============
+# Sticky sidebar
+@sticky_sidebar_fix = ->
+  if $('[data-sticky]').length > 0
+    $('[data-sticky]').foundation '_calc', true
