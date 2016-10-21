@@ -20,7 +20,6 @@
 #= require i18n/translations
 #= require base/i18n_settings
 
-#= require masonry.pkgd.min.js
 #= require plugins/masonry
 
 #= require plugins/newsletter_user_form

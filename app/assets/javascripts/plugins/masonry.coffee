@@ -1,4 +1,5 @@
+#= require masonry/masonry.imagesLoaded.min.js
+#= require masonry/masonry.pkgd.min.js
+
 $(document).on 'ready page:load page:restore', ->
-  if $('#masonry-container').length > 0 && !isSmall()
-    $('#masonry-container').masonry
-      itemSelector: '.masonry-item'
+  reload_masonry(true)

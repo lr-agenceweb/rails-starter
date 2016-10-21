@@ -65,10 +65,16 @@
 # Masonry
 # =======
 # Reload Masonry position for new added items
-@reload_masonry = ->
+@reload_masonry = (init = false, callback = ->) ->
   $container = $('#masonry-container')
   if $container.length > 0 && !isSmall()
-    $container.masonry('reloadItems').masonry()
+    $container.imagesLoaded ->
+      if init
+        $container.masonry
+          itemSelector: '.masonry-item'
+      else
+        $container.masonry('reloadItems').masonry()
+      callback()
 
 #
 # Foundation Fix
