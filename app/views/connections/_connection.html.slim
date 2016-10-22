@@ -16,7 +16,7 @@ article.connection id="connection-#{connection.id}"
       header.connection__header
         h3.connection__header__title
           - if connection.link?
-            = link_to connection.title, connection.link_url
+            = link_to connection.title, connection.link_url, target: :_blank
           - else
             = connection.title
 

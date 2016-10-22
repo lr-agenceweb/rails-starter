@@ -5,37 +5,21 @@
 #
 puts 'Creating Home article'
 home = Home.new(
-  title: 'Bienvenue sur le site !',
-  slug: 'bienvenue-sur-le-site',
-  content: '<p>Merci de visiter mon site</p>',
+  title: set_title,
+  content: set_content,
   online: true,
   user_id: @administrator.id
 )
 home.save(validate: false)
 
-referencement = Referencement.create!(
-  attachable_id: home.id,
-  attachable_type: 'Post',
-  title: '',
-  description: '',
-  keywords: ''
-)
-
 if @locales.include?(:en)
-  ht = Home::Translation.new(
+  Home::Translation.create!(
     post_id: home.id,
     locale: 'en',
-    title: 'Welcome to my site',
-    slug: 'welcome-to-my-site',
-    content: '<p>Thanks to visit my site</p>'
-  )
-  ht.save(validate: false)
-
-  Referencement::Translation.create!(
-    referencement_id: referencement.id,
-    locale: 'en',
-    title: '',
-    description: '',
-    keywords: ''
+    title: set_title,
+    content: set_content
   )
 end
+
+# Referencement
+set_referencement(home, 'Post')

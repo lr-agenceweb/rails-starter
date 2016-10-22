@@ -5,11 +5,11 @@
 #
 puts 'Creating GuestBook'
 15.times do
-  GuestBook.create(
+  g = GuestBook.create!(
     username: Faker::Name.name,
     email: Faker::Internet.email,
     content: Faker::Lorem.paragraph(3, true),
-    lang: @locales.include?(:en) ? %w(fr en).sample : 'fr',
-    validated: true
+    lang: I18n.available_locales.sample,
   )
+  g.update_attribute(:validated, true)
 end

@@ -11,7 +11,13 @@ puts 'Creating site Setting'
   phone: '+33 (0)1 02 03 04 05',
   email: 'demo@starter.fr',
   logo: File.new("#{Rails.root}/db/seeds/logo/logo.png"),
-  logo_footer: File.new("#{Rails.root}/db/seeds/logo/logo-lr-agenceweb.png")
+  logo_footer: File.new("#{Rails.root}/db/seeds/logo/logo-lr-agenceweb.png"),
+  per_page: 5,
+  show_map: true,
+  show_qrcode: true,
+  show_breadcrumb: true,
+  show_file_upload: true,
+  answering_machine: true
 )
 
 if @locales.include?(:en)

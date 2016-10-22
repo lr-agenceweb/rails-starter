@@ -3,7 +3,7 @@
 #
 # == Categories
 #
-puts 'Creating pages'
+puts 'Creating Pages'
 description_en = [
   'Homepage description',
   'Search description',
@@ -60,23 +60,27 @@ keywords_fr = [
     menu_id: instance_variable_get("@menu_#{element.underscore}").id
   )
 
-  referencement = Referencement.create!(
-    attachable_id: category.id,
-    attachable_type: 'Category',
-    title: @title_fr[index],
-    description: description_fr[index],
-    keywords: keywords_fr[index]
-  )
+  # Background
+  set_background(category, 'Category')
 
-  if @locales.include?(:en)
-    Referencement::Translation.create!(
-      referencement_id: referencement.id,
-      locale: 'en',
-      title: @title_en[index],
-      description: description_en[index],
-      keywords: keywords_en[index]
+  # Heading
+  if [true, false].sample
+    heading = Heading.create!(
+      headingable_id: category.id,
+      headingable_type: 'Category',
+      content: "<p>#{Faker::Lorem.paragraph(2, true, 4)}</p>",
     )
+    if @locales.include?(:en)
+      Heading::Translation.create!(
+        heading_id: heading.id,
+        locale: 'en',
+        content: "<p>#{Faker::Lorem.paragraph(2, true, 4)}</p>",
+      )
+    end
   end
+
+  # Referencement
+  set_referencement(category, 'Category')
 
   instance_variable_set("@category_#{element.to_s.underscore}", category)
 end
@@ -86,11 +90,4 @@ video_background = VideoUpload.create!(
   videoable_id: @category_home.id,
   videoable_type: 'Category',
   video_file: File.new("#{Rails.root}/db/seeds/videos/background_homepage.mp4")
-)
-
-puts 'Uploading background image for event page'
-Background.create!(
-  attachable_id: @category_event.id,
-  attachable_type: 'Category',
-  image: File.new("#{Rails.root}/db/seeds/backgrounds/background_event.jpg")
 )

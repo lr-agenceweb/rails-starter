@@ -33,7 +33,7 @@ module OptionalModules
       end
 
       def set_last_comments
-        last_comments = Comment.includes(:user, :commentable).only_blogs.by_locale(@language).validated.first(LAST_COMMENTS_COUNT).reject { |r| !r.commentable.published? }
+        last_comments = Comment.includes(:user, commentable: [:blog_category, :publication_date, :translations]).only_blogs.by_locale(@language).validated.first(LAST_COMMENTS_COUNT).reject { |r| !r.commentable.published? }
         @last_comments = CommentDecorator.decorate_collection(last_comments)
         gon.push(last_comments_count: LAST_COMMENTS_COUNT)
       end

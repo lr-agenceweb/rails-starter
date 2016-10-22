@@ -3,55 +3,51 @@
 #
 # == Blog article
 #
-puts 'Creating Blog article'
-@blog = Blog.new(
-  title: 'Fonds marins',
-  slug: 'fonds-marins',
-  content: '<p>Voici ce qu\'il se passe sous l\'eau</p>',
-  online: true,
-  blog_category_id: @blog_category.id,
-  user_id: @administrator.id
-)
-@blog.save(validate: false)
-
-referencement = Referencement.create!(
-  attachable_id: @blog.id,
-  attachable_type: 'Blog',
-  title: '',
-  description: '',
-  keywords: ''
-)
-
-puts 'Uploading video background for blog'
-video_blog = VideoUpload.create!(
-  videoable_id: @blog.id,
-  videoable_type: 'Blog',
-  video_file: File.new("#{Rails.root}/db/seeds/videos/bubbles.mp4")
-)
-
-puts 'Uploading video subtitles for blog'
-VideoSubtitle.create!(
-  subtitleable_id: video_blog.id,
-  subtitleable_type: 'VideoUpload',
-  subtitle_fr: File.new("#{Rails.root}/db/seeds/subtitles/bubbles_fr.srt"),
-  subtitle_en: File.new("#{Rails.root}/db/seeds/subtitles/bubbles_en.srt")
-)
-
-if @locales.include?(:en)
-  bt = Blog::Translation.create!(
-    blog_id: @blog.id,
-    locale: 'en',
-    title: 'Underwater',
-    slug: 'underwater',
-    content: '<p>This is what happend underwater</p>'
+puts 'Creating Blog articles'
+10.times do |i|
+  blog = Blog.new(
+    title: set_title,
+    content: set_content,
+    online: true,
+    blog_category_id: BlogCategory.all.map(&:id).sample,
+    user_id: @administrator.id
   )
-  bt.save(validate: false)
+  blog.save(validate: false)
 
-  Referencement::Translation.create!(
-    referencement_id: referencement.id,
-    locale: 'en',
-    title: '',
-    description: '',
-    keywords: ''
+  if @locales.include?(:en)
+    Blog::Translation.create!(
+      blog_id: blog.id,
+      locale: 'en',
+      title: set_title,
+      content: set_content
+    )
+  end
+
+  # Picture
+  set_picture(blog, 'Blog')
+
+  # Referencement
+  set_referencement(blog, 'Blog')
+
+  # PublicationDate
+  publication_date = PublicationDate.create!(
+    publishable_id: blog.id,
+    publishable_type: 'Blog'
   )
+
+  # VideoUpload
+  if i == 9
+    # Audio
+    set_audio(blog, 'Blog', 'http://www.worldnationalanthem.com/wp-content/uploads/2015/05/National-Anthem-Of-France.mp3')
+
+    # VideoUpload
+    vu = set_video_upload(blog, 'Blog', 'http://www.w3schools.com/html/mov_bbb.mp4')
+
+    VideoSubtitle.create!(
+      subtitleable_id: vu.id,
+      subtitleable_type: 'VideoUpload',
+      subtitle_fr: File.new("#{Rails.root}/db/seeds/subtitles/big_buck_bunny.fr.srt"),
+      subtitle_en: File.new("#{Rails.root}/db/seeds/subtitles/big_buck_bunny.en.srt")
+    )
+  end
 end

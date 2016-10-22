@@ -33,7 +33,7 @@ show_in_header = [
   true,
   true,
   true,
-  false,
+  true,
   true,
   false,
   true
