@@ -30,6 +30,7 @@
 /public/sitemap*
 /public/shared*
 /public/system/*
+/public/tmp*
 !public/system/default
 !public/system/seeds
 /db/backups/
