@@ -71,7 +71,7 @@ fr:
               not_a_number: Votre code postal n'est pas valide. Il doit être composé uniquement de chiffres.
         comment:
           attributes:
-            max_depth: Vous ne pouvez plus répondre à cet commentaire
+            max_depth: Vous ne pouvez plus répondre à ce commentaire
         contact_form:
           attributes:
             attachment:
