@@ -37,6 +37,17 @@
   <img src="https://img.shields.io/badge/Rails-4.2.6-5aaed7.svg?style=flat-square" alt="Rails version" />
 </p>
 
+- [Requirements](#requirements)
+- [Usage](#usage)
+- [Stack](#stack)
+- [Tasks](#tasks)
+  - [Rails](#rails)
+  - [Capistrano](#capistrano)
+- [Modules](#modules)
+- [Screenshot](#screenshot)
+- [Thanks](#thanks)
+- [Contributing](#contributing)
+
 ### Requirements
 Install [Foreman](https://github.com/ddollar/foreman)  
 Install [Maildev](https://github.com/djfarrelly/MailDev)  
@@ -131,7 +142,7 @@ Name                | Description
 **Audio**           | Upload audio files and play them in an HTML5 player.
 
 
-### Screenshots
+### Screenshot
 ![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
 
 ### Thanks
