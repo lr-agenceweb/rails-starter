@@ -66,7 +66,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def admin_link
-    link = send("admin_#{model.type.singularize.underscore.downcase}_path", model)
+    link = send("admin_#{model.class.name.underscore}_path", model)
     link_to I18n.t('active_admin.show'), link
   end
 
