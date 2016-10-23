@@ -34,7 +34,7 @@
 <p align='center'>
   <img src="https://img.shields.io/badge/Rails%20starter-v0.0.4-blue.svg?style=flat-square" alt="Rails starter version" />
   <img src="https://img.shields.io/badge/Ruby-2.3.0-5aaed7.svg?style=flat-square" alt="Ruby version" />
-  <img src="https://img.shields.io/badge/Rails-4.2.6-5aaed7.svg?style=flat-square" alt="Rails version" />
+  <img src="https://img.shields.io/badge/Rails-4.2.7.1-5aaed7.svg?style=flat-square" alt="Rails version" />
 </p>
 
 - [Demo](#demo)
@@ -51,7 +51,7 @@
 
 ### Demo
 A demonstration can be found at [https://demo.lr-agenceweb.fr](https://demo.lr-agenceweb.fr)
-```
+```yaml
 # htpassword protection
 Login: demo
 Password: 6c40a98438
