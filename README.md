@@ -37,6 +37,7 @@
   <img src="https://img.shields.io/badge/Rails-4.2.6-5aaed7.svg?style=flat-square" alt="Rails version" />
 </p>
 
+- [Demo](#demo)
 - [Requirements](#requirements)
 - [Usage](#usage)
 - [Stack](#stack)
@@ -47,6 +48,14 @@
 - [Screenshot](#screenshot)
 - [Thanks](#thanks)
 - [Contributing](#contributing)
+
+### Demo
+A demonstration can be found at [https://demo.lr-agenceweb.fr](https://demo.lr-agenceweb.fr)
+```
+# htpassword protection
+Login: demo
+Password: 6c40a98438
+```
 
 ### Requirements
 Install [Foreman](https://github.com/ddollar/foreman)  
