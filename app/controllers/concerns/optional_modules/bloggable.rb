@@ -25,7 +25,7 @@ module OptionalModules
       end
 
       def set_blog_categories
-        @blog_categories = BlogCategory.includes(:translations).all
+        @blog_categories = BlogCategory.select(:id, :name).includes(:translations).all
       end
 
       def set_last_blogs
@@ -33,7 +33,7 @@ module OptionalModules
       end
 
       def set_last_comments
-        last_comments = Comment.includes(:user, commentable: [:blog_category, :publication_date, :translations]).only_blogs.by_locale(@language).validated.first(LAST_COMMENTS_COUNT).reject { |r| !r.commentable.published? }
+        last_comments = Comment.select(:id, :username, :email, :user_id, :commentable_type, :commentable_id).includes(:user, commentable: [:blog_category, :publication_date, :translations]).only_blogs.by_locale(@language).validated.first(LAST_COMMENTS_COUNT).reject { |r| !r.commentable.published? }
         @last_comments = CommentDecorator.decorate_collection(last_comments)
         gon.push(last_comments_count: LAST_COMMENTS_COUNT)
       end
