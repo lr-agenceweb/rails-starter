@@ -1,16 +1,16 @@
 #admin_bar
-  background-color: $jet
   padding: 10px
   color: $gainsboro
+  background-color: $jet
 
   a
     color: $white
 
   .menu.simple
-    font-size: .8rem
     margin-bottom: 0
+    font-size: .8rem
 
-    &> li > *
+    & > li > *
       display: inline-block
 
   .fa
@@ -21,20 +21,20 @@
 
   .admin_bar-bubble
     display: inline-block
-    vertical-align: middle
-    border-radius: 50%
     width: 25px
     height: 25px
-    text-align: center
     margin-left: 10px
+    text-align: center
+    vertical-align: middle
+    border-radius: 50%
 
     .has-tip
       display: block
       width: 25px
       height: 25px
-      line-height: 25px
-      color: $gainsboro
       cursor: pointer
+      color: $gainsboro
+      line-height: 25px
 
   .admin_bar
     &-comments-tovalidate-link
@@ -46,8 +46,8 @@
     margin-right: 3px
 
   .divider
-    border-right: 1px solid $gainsboro
     height: 25px
+    border-right: 1px solid $gainsboro
 
   .dropdown.menu
     font-size: .8rem
@@ -55,12 +55,12 @@
     img
       min-width: 24px
       max-width: 24px
-      margin-left: 0.25rem
+      margin-left: .25rem
 
     > li > a
       padding-top: 0
-      padding-left: 0
       padding-bottom: 0
+      padding-left: 0
 
     li
       display: block
@@ -68,3 +68,6 @@
     li.is-submenu-item
       &:hover
         background-color: $aluminum
+
+    .is-dropdown-submenu
+      z-index: $dropdownmenu-zindex
