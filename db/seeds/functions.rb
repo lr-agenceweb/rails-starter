@@ -37,7 +37,7 @@ end
 
 # Background
 def set_background(resource, type)
-  download = open('http://lorempixel.com/1900/1200/nature/')
+  download = open('https://unsplash.it/1900/1200/?random')
   file_path = "#{@tmp_path}/image.jpg"
   IO.copy_stream(download, file_path)
 
