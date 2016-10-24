@@ -31,7 +31,7 @@ $(document).on 'ready page:load page:restore', ->
     ul.data 'ui-autocomplete-item', item
     image = if item.hasOwnProperty('picture') then '<div class="dtcell"><img src="' + item.picture + '" class="autocomplete__picture polyfill" /></div>' else ''
     $('<li>').data('ui-autocomplete-item', item)
-      .append('<div class="dtable">' + image + '<div class="dtcell autocomplete__content"><p>' + item.title + '</p></div></div>').addClass('ui-menu-item').appendTo ul
+      .append("<div class='dtable'>#{image}<div class='dtcell autocomplete__content'><p> #{item.title} <span class='autocomplete__page'> (#{item.page}) </span></p></div></div>").addClass('ui-menu-item').appendTo ul
 
 search_loading = ($submit, $fa) ->
   $submit.addClass('warning').removeClass('alert')

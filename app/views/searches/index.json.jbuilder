@@ -3,4 +3,5 @@ json.array! @not_paginated_searches do |search|
   json.title search.title
   json.url search.decorate.show_page_link
   json.picture search.pictures.first.image.url(:thumb) if search.pictures?
+  json.page t("activerecord.models.#{search.object.class.name.underscore}.other")
 end
