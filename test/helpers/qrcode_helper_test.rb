@@ -42,11 +42,11 @@ module OptionalModules
     end
 
     test 'should return correct value for qrcode_base_url' do
-      assert_equal "//chart.apis.google.com/chart?chs=200x200&cht=qr&chl=#{u @vcard_string}", qrcode_base_url(200)
+      assert_equal "http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=#{u @vcard_string}", qrcode_base_url(200)
     end
 
     test 'should return correct value for qrcode_image_tag' do
-      assert_equal "<img alt=\"QrCode\" src=\"//chart.apis.google.com/chart?chs=100x100&amp;cht=qr&amp;chl=#{u @vcard_string}\" />", qrcode_image_tag(100)
+      assert_equal "<img alt=\"QrCode\" src=\"http://chart.apis.google.com/chart?chs=100x100&amp;cht=qr&amp;chl=#{u @vcard_string}\" />", qrcode_image_tag(100)
     end
 
     private

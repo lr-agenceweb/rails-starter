@@ -26,7 +26,7 @@ server {
   <% else %>
   passenger_friendly_error_pages off;
   <% end %>
-  passenger_ruby ~/.rvm/gems/ruby-<%= fetch(:rvm_ruby_version) %>/wrappers/ruby;
+  passenger_ruby /home/<%= fetch(:deploy_user) %>/.rvm/gems/ruby-<%= fetch(:rvm_ruby_version) %>/wrappers/ruby;
 
   # Logs
   access_log on;

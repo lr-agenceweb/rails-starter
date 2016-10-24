@@ -33,7 +33,7 @@ server {
   passenger_enabled on;
   passenger_app_env <%= fetch(:stage) %>;
   passenger_friendly_error_pages on;
-  passenger_ruby ~/.rvm/gems/ruby-<%= fetch(:rvm_ruby_version) %>/wrappers/ruby
+  passenger_ruby /home/<%= fetch(:deploy_user) %>/.rvm/gems/ruby-<%= fetch(:rvm_ruby_version) %>/wrappers/ruby;
 
   # SSL
   ssl on;
