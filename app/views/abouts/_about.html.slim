@@ -15,7 +15,10 @@ article.post.about class="#{params[:action]}"
       / Body
       / ====
       .post__body
-        == truncate_read_more(about.content, about_path(about))
+        - if index_page?
+          == truncate_read_more(about.content, about_path(about))
+        - else
+          == about.content
 
 // BackTo link
 = render 'posts/back_to', resource: about
