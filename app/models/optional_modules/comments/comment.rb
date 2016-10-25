@@ -5,7 +5,6 @@
 # Table name: comments
 #
 #  id               :integer          not null, primary key
-#  title            :string(50)       default("")
 #  username         :string(255)
 #  email            :string(255)
 #  comment          :text(65535)
@@ -17,7 +16,6 @@
 #  commentable_id   :integer
 #  commentable_type :string(255)
 #  user_id          :integer
-#  role             :string(255)      default("comments")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
