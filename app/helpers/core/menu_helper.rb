@@ -19,7 +19,8 @@ module Core
     private
 
     def controller?(*controller)
-      controller.include?(params[:controller])
+      controller.include?(params[:controller]) ||
+        (controller.include?('blogs') && params[:controller] == 'blog_categories')
     end
 
     def action?(*action)

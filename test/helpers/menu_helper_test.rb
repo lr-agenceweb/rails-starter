@@ -34,6 +34,12 @@ module Core
       assert_not active_class?('contacts')
     end
 
+    test 'should return active class for blog when blog_categories' do
+      params[:controller] = 'blog_categories'
+      params[:action] = 'show'
+      assert active_class?('blogs')
+    end
+
     #
     # == Class name
     #
@@ -62,6 +68,12 @@ module Core
 
     test 'should return false if not current action' do
       assert_not send(:action?, 'new')
+    end
+
+    test 'should return true if blog_categories page' do
+      params[:controller] = 'blog_categories'
+      params[:action] = 'show'
+      assert send(:controller?, 'blogs')
     end
 
     private
