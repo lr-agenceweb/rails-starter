@@ -8,6 +8,10 @@
   if typeof Foundation != 'undefined'
     Foundation.MediaQuery.current == 'medium'
 
+@isLargeUp = ->
+  if typeof Foundation != 'undefined'
+    Foundation.MediaQuery.atLeast('large')
+
 @isSmallBreakOne = ->
   matchMedia('(max-width: 949px)').matches
 

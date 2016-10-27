@@ -1,3 +1,6 @@
+.mediaelement
+  width: 100%
+
 .mejs-controls .mejs-captions-button .mejs-captions-selector
   width: 100px
 
@@ -39,3 +42,41 @@
     display: block
     width: 20px
     height: 20px
+
+//
+// Picture in Picture players mode
+// ===================
+.picture_in_picture
+  width: 444px
+  position: fixed
+  bottom: 1rem
+  right: 1rem
+  z-index: 2
+  background-color: $primary-color
+  box-shadow: 1px 1px 5px $primary-color
+  color: $white
+  .post__audio__figure,
+  .post__video__figure
+    margin: 0
+
+  .mejs-controls
+    .mejs-mute,
+    .mejs-logo-button,
+    .mejs-captions-button,
+    .mejs-fullscreen-button
+      display: none
+
+  .mejs-time-rail
+    width: 340px !important
+  .mejs-time-total
+    width: 330px !important
+
+  // Audio
+  .mejs-audio
+
+  // Viddeo
+  .mejs-video
+    width: 100% !important
+    height: 250px !important
+    .mejs-overlay
+      transform: scale(.6)
