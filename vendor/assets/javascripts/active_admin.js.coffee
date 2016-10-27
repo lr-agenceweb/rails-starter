@@ -32,6 +32,8 @@
 
 #= require fotorama
 
+#= require plugins/emoticonize
+
 $ ->
   $.datetimepicker.setLocale('fr')
 

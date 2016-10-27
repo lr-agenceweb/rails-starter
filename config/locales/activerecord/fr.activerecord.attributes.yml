@@ -262,6 +262,7 @@ fr:
         should_signal: Signaler les commentaires ?
         send_email: Envoyer mail après signalement ?
         allow_reply: Réponse aux commentaires ?
+        emoticons: Convertir en émoticônes ?
 
       # GuestBook
       guest_book:

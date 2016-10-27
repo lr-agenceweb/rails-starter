@@ -18,8 +18,17 @@ span.css-emoticon {
   height: 1.54em; /* so, relative to containing text, width and height are 0.9 x 1.6 = 1.44em */
   padding: 0;
   -webkit-transition-timing-function: linear, ease-in;
+     -moz-transition-timing-function: linear, ease-in;
+       -o-transition-timing-function: linear, ease-in;
+          transition-timing-function: linear, ease-in;
   -webkit-transition-duration: 1s, 1s;
+     -moz-transition-duration: 1s, 1s;
+       -o-transition-duration: 1s, 1s;
+          transition-duration: 1s, 1s;
   -webkit-transition-property: color, background, transform;
+     -moz-transition-property: color, background, transform;
+       -o-transition-property: color, background, transform;
+          transition-property: color, background, transform;
   -webkit-transform: rotate(90deg);
      -moz-transform: rotate(90deg);
        -o-transform: rotate(90deg);

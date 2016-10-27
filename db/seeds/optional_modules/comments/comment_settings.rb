@@ -4,4 +4,6 @@
 # == Comment Setting
 #
 puts 'Creating CommentSetting'
-CommentSetting.create!
+CommentSetting.create!(
+  emoticons: true
+)

@@ -6,8 +6,8 @@
     model_name: I18n.t('activerecord.models.comment.other').downcase
 %>
 
-// Reload Masonry position for new added items
-reload_masonry(false, function() {
-  // Recalculates scrolling points after adding Ajax content
-  sticky_sidebar_fix();
-});
+// Emoticonize new added comments
+if(gon.emoticons) { emoticonize_me(); }
+
+// Recalculates scrolling points after adding Ajax content
+sticky_sidebar_fix();
