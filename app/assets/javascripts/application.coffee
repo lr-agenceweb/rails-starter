@@ -61,6 +61,8 @@
 #= require outdatedbrowser/outdatedBrowser
 #= require outdated_browser
 
+#= require plugins/emoticonize
+
 #= require mediaelement_rails
 #= require mediaelement/mejs-feature-logo.min
 #= require plugins/mediaelement

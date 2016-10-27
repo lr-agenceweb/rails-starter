@@ -29,6 +29,9 @@ else {
       $("#comment-<%= comment.parent_id %>").after("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
     }
   <% end %>
+
+  // Reflow emoticons
+  emoticonize_me()
 <% end %>
 
 //
