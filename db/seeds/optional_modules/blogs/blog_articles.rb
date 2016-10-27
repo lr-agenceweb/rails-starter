@@ -38,7 +38,7 @@ puts 'Creating Blog articles'
   # VideoUpload
   if i == 9
     # Audio
-    set_audio(blog, 'Blog', 'http://www.worldnationalanthem.com/wp-content/uploads/2015/05/National-Anthem-Of-France.mp3')
+    set_audio(blog, 'Blog', 'http://www.worldnationalanthem.com/wp-content/uploads/2015/05/National-Anthem-Of-France.mp3', 'la_marseillaise')
 
     # VideoUpload
     vu = set_video_upload(blog, 'Blog', 'http://www.w3schools.com/html/mov_bbb.mp4')

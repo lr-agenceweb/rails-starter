@@ -19,7 +19,11 @@ def set_title
 end
 
 def set_content(size = 10)
-  "<p>#{Faker::Hipster.paragraph(size, true, 4)}</p>"
+  html = ''
+  10.times do |i|
+    html += "<p>#{Faker::Hipster.paragraph(size, true, 4)}</p>"
+  end
+  html
 end
 
 # Picture
@@ -49,9 +53,9 @@ def set_background(resource, type)
 end
 
 # Audio
-def set_audio(resource, type, url)
+def set_audio(resource, type, url, name = 'audio')
   download = open(url)
-  file_path = "#{@tmp_path}/audio.mp3"
+  file_path = "#{@tmp_path}/#{name}.mp3"
   IO.copy_stream(download, file_path)
 
   Audio.create!(
