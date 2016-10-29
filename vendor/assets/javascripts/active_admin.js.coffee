@@ -37,6 +37,8 @@
 $ ->
   $.datetimepicker.setLocale('fr')
 
+  emoticonize_me()
+
   if $('#newsletter_setting_send_welcome_email').length
     $this = $('#newsletter_setting_send_welcome_email')
     $('#newsletter_config_form').hide() unless $this.is(':checked')
