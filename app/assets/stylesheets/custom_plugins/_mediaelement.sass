@@ -1,35 +1,34 @@
+//
+// MediaElement
+// ============
 .mediaelement
   width: 100%
 
-.mejs-controls .mejs-captions-button .mejs-captions-selector
-  width: 100px
+// Base style fix
+.mejs-container
+  .mejs-controls
+    background: rgba($black, .6)
 
-  ul li
-    input[type='radio'] + label
-      width: initial
-      margin-right: 0
-      margin-left: 3px
-      color: $white
+    .mejs-button
+      button
+        &:focus
+          outline: none
 
-// Background video for pages
-.heading-site
-  position: relative
-  width: 100%
-  height: 100%
+    .mejs-time-rail
+      .mejs-time-loaded
+        background: $secondary-color
+      .mejs-time-total
+        background: rgba($steel, .9)
 
-  @include overlay-video
-  &:after
-    z-index: -1
+    .mejs-captions-button .mejs-captions-selector
+      width: 100px
 
-  .heading-video
-    position: fixed
-    z-index: -100
-    top: 50%
-    left: 50%
-    min-width: 100%
-    min-height: 100%
-    transform: translate(-50%, -50%)
-
+      ul li
+        input[type='radio'] + label
+          width: initial
+          margin-right: 0
+          margin-left: 3px
+          color: $white
 
 // Logo
 .mejs-container .mejs-controls .mejs-logo-button
@@ -47,23 +46,20 @@
 // Picture in Picture players mode
 // ===================
 .picture_in_picture
-  width: 444px
   position: fixed
-  bottom: 1rem
-  right: 1rem
   z-index: 2
+  right: 1rem
+  bottom: 1rem
+  width: 444px
+  color: $white
   background-color: $primary-color
   box-shadow: 1px 1px 5px $primary-color
-  color: $white
   .post__audio__figure,
   .post__video__figure
     margin: 0
 
   .mejs-controls
-    .mejs-mute,
-    .mejs-logo-button,
-    .mejs-captions-button,
-    .mejs-fullscreen-button
+    .mejs-mute, .mejs-logo-button, .mejs-captions-button, .mejs-fullscreen-button
       display: none
 
   .mejs-time-rail
@@ -80,3 +76,24 @@
     height: 250px !important
     .mejs-overlay
       transform: scale(.6)
+
+//
+// Background video for pages
+//
+.heading-site
+  position: relative
+  width: 100%
+  height: 100%
+  @include overlay-video
+
+  &:after
+    z-index: -1
+
+  .heading-video
+    position: fixed
+    z-index: -100
+    top: 50%
+    left: 50%
+    min-width: 100%
+    min-height: 100%
+    transform: translate(-50%, -50%)
