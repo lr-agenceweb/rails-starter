@@ -20,16 +20,16 @@ $(document).on 'ready page:load page:restore', ->
           link: gon.root_url
         success: (mediaelement, domObject, player) ->
           # Variables
-          @pip = false
-          pipc = new PictureInPicture(mediaelement, player)
-          setTimeout ->
-            pipc.set_me_player_offset()
-          , pipc.time_to_wait
+          pipc = new PictureInPicture(mediaelement, player, $('.post__audios'))
+          pipc.set_offset()
 
           # Listener
           if isLargeUp()
             mediaelement.addEventListener 'playing', (e) ->
-              picture_in_picture(pipc, $('.post__audios'))
+              picture_in_picture(pipc)
+
+          mediaelement.addEventListener 'ended', (e) ->
+            pipc.undo()
 
   #
   # Video
@@ -53,47 +53,44 @@ $(document).on 'ready page:load page:restore', ->
           link: gon.root_url
         success: (mediaelement, domObject, player) ->
           # Variables
-          @pip = false
-          pipc = new PictureInPicture(mediaelement, player)
-          setTimeout ->
-            pipc.set_me_player_offset()
-          , pipc.time_to_wait
+          pipc = new PictureInPicture(mediaelement, player, $('.post__videos'))
+          pipc.set_offset()
 
           # Listeners
           if isLargeUp()
             mediaelement.addEventListener 'playing', (e) ->
-              picture_in_picture(pipc, $('.post__videos'))
+              picture_in_picture(pipc)
 
           mediaelement.addEventListener 'ended', (e) ->
             remove_darkness() if turn_off_the_light
+            pipc.undo()
 
           mediaelement.addEventListener 'pause', (e) ->
             remove_darkness() if turn_off_the_light
 
           mediaelement.addEventListener 'play', (e) ->
-            create_darkness() if turn_off_the_light && !$('#shadow').hasClass('night') && !@pip && $('#picture_in_picture .mejs-video').length == 0
+            create_darkness() if turn_off_the_light && !$('#shadow').hasClass('night') && !pipc.is_pip() && $('#picture_in_picture .mejs-video').length == 0
 
 # Pip <audio> or <video> in bottom right of page
-picture_in_picture = (pipc, $container) ->
+picture_in_picture = (pipc) ->
   pipc.set_container() unless pipc.has_pip_dom()
   mediaelement = pipc.get_media_element()
-  offset = pipc.get_me_player_offset()
+  offset = pipc.get_offset()
 
   $(window).on 'scroll', throttle(( ->
     # Variables
+    is_pip = pipc.is_pip()
     is_paused = mediaelement.paused
     should_pip = $(window).scrollTop() >= offset
 
-    if should_pip && !@pip && !is_paused
-      pipc.append_media_to_pip()
+    if should_pip && !is_pip && !is_paused
+      pipc.append_media()
       mediaelement.play()
-      sticky_sidebar_fix()
-      @pip = true
-    else if !should_pip && @pip
-      pipc.remove_media_from_pip($container)
+      pipc.set_pip(true)
+    else if !should_pip && is_pip
+      pipc.undo()
       mediaelement.play() unless is_paused
-      sticky_sidebar_fix()
-      @pip = false
+      pipc.set_pip(false)
   ), 500)
 
 # Set dark background

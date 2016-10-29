@@ -3,35 +3,61 @@
 # ================
 class @PictureInPicture
   offset: 0
-  time_to_wait: 1000
+  pip: false
+  custom_margin_top: 40
 
-  constructor: (@mediaelement, @player) ->
+  constructor: (@mediaelement, @player, @container) ->
 
+  #
+  # DOM
+  # ===
   set_container: ->
     $('body').append($('<div id="picture_in_picture" class="picture_in_picture" />'))
 
   has_pip_dom: ->
     return $('#picture_in_picture').length > 0
 
-  append_media_to_pip: ->
+  append_media: ->
     $('#picture_in_picture').append(@.get_me_player_container())
+    sticky_sidebar_fix()
 
-  remove_media_from_pip: ($container) ->
-    $container.append(@.get_me_player_container())
-
+  #
+  # MediaElement player
+  # ===================
   get_media_element: ->
     return @mediaelement
-
-  # MediaElement player
-  get_me_player_container: ->
-    return @.get_me_player().parent()
 
   get_me_player: ->
     return $(@player.container[0])
 
-  # Offset
-  set_me_player_offset: ->
-    @offset = @.get_me_player().offset().top - 40
+  get_me_player_container: ->
+    return @.get_me_player().parent()
 
-  get_me_player_offset: ->
+  #
+  # PiP
+  # ===
+  set_pip: (pip) ->
+    @pip = pip
+
+  is_pip: ->
+    return @pip
+
+  undo: ->
+    @container.append(@.get_me_player_container())
+    sticky_sidebar_fix()
+
+  #
+  # Offset
+  # ======
+  set_offset: ->
+    if $('.fotorama').length > 0
+      $('.fotorama').on 'fotorama:ready', (e, fotorama) =>
+        @offset = @.calcul_offset()
+    else
+      @offset = @.calcul_offset()
+
+  get_offset: ->
     return @offset
+
+  calcul_offset: ->
+    return @.get_me_player().offset().top - @custom_margin_top
