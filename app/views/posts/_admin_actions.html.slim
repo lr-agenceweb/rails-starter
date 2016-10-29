@@ -1,5 +1,5 @@
 - if can?(:update, resource) || can?(:destroy, resource)
-  - cache [resource, current_user] do
+  - cache [resource, current_user.id] do
     .post__admin-actions.comment__admin-actions.show-for-large
       - resource_string = resource.object.class.name.underscore.to_s
       - if can? :update, resource
