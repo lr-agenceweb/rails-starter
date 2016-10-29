@@ -6,6 +6,7 @@
 
 // Base style fix
 .mejs-container
+  z-index: 3
   .mejs-controls
     background: rgba($black, .6)
 
@@ -42,12 +43,24 @@
     width: 20px
     height: 20px
 
+// Overlay on video play
+#shadow
+  &.night
+    position: absolute
+    z-index: 2
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    opacity: .8
+    background-color: $black
+
 //
 // Picture in Picture players mode
 // ===================
 .picture_in_picture
   position: fixed
-  z-index: 2
+  z-index: 999
   right: 1rem
   bottom: 1rem
   width: 444px

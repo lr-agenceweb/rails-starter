@@ -22,7 +22,9 @@ $(document).on 'ready page:load page:restore', ->
           # Variables
           @pip = false
           pipc = new PictureInPicture(mediaelement, player)
-          pipc.set_me_player_offset()
+          setTimeout ->
+            pipc.set_me_player_offset()
+          , pipc.time_to_wait
 
           # Listener
           if isLargeUp()
@@ -53,7 +55,9 @@ $(document).on 'ready page:load page:restore', ->
           # Variables
           @pip = false
           pipc = new PictureInPicture(mediaelement, player)
-          pipc.set_me_player_offset()
+          setTimeout ->
+            pipc.set_me_player_offset()
+          , pipc.time_to_wait
 
           # Listeners
           if isLargeUp()
@@ -90,7 +94,7 @@ picture_in_picture = (pipc, $container) ->
       mediaelement.play() unless is_paused
       sticky_sidebar_fix()
       @pip = false
-  ), 1000)
+  ), 500)
 
 # Set dark background
 create_darkness = (sel=$('#shadow'), klass='night') ->
