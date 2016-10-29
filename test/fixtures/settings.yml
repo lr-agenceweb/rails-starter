@@ -17,6 +17,7 @@
 #  show_admin_bar           :boolean          default(TRUE)
 #  show_file_upload         :boolean          default(FALSE)
 #  answering_machine        :boolean          default(FALSE)
+#  picture_in_picture       :boolean          default(TRUE)
 #  date_format              :integer          default(0)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
@@ -43,6 +44,7 @@ DEFAULTS: &DEFAULTS
   show_map: false
   show_breadcrumb: false
   show_file_upload: false
+  picture_in_picture: true
   maintenance: false
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>

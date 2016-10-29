@@ -164,6 +164,7 @@ fr:
         phone_secondary: Numéro de téléphone secondaire. Laissez vide si ce champs ne vous sert pas
         show_file_upload: Si coché, un champ permettant à l'internaute d'envoyer une pièce jointe sera ajouté au formulaire de contact
         answering_machine: Si coché, un mail de réponse automatique sera envoyé à l'internaute lui indiquant votre indisponibilité lorsque qu'il tentera de vous envoyer un mail par le formulaire de contact. <br /> Vous pouvez personnaliser le contenu du mail en vous rendant sur la page "Contenus personalisés" de l'administration
+        picture_in_picture: Si coché, le player Audio ou Vidéo sera fixé en bas à droite de la page lorsque le player est en fonctionnement et que vous scrollez dans la page. Cela permet de conserver le player et ses contrôles à portée de vue
         show_admin_bar: Si coché, un bandeau sera présent en haut du site (partie publique), donnant accès à quelques raccourcis de l'administration. <br /> Ce bandeau n'est visible que par l'administrateur du site, les internautes ne le verront pas.
         per_page: Choisissez le nombre d'articles à afficher avant la pagination (concerne les article de blogs, événements et les liens partenaires). <br /> Si vous souhaitez afficher tous les articles sur une seule page, sélectionnez la valeur 0
         date_format: Choisissez le format de la date à afficher (<strong>date seulement</strong>, <strong>date + heure</strong> ou sous la forme "<strong>Il y a 10 minutes</strong>)"

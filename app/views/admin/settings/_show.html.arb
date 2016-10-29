@@ -16,6 +16,7 @@ columns do
         bool_row :show_breadcrumb if breadcrumb_module.enabled?
         bool_row :show_qrcode if qrcode_module.enabled?
         bool_row :show_social if social_module.enabled?
+        bool_row :picture_in_picture if audio_module.enabled? || video_module.enabled?
         row :twitter_username
       end
     end

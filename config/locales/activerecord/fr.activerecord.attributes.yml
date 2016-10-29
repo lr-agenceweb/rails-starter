@@ -85,6 +85,7 @@ fr:
         show_admin_bar: Afficher la barre d'administration ?
         show_file_upload: Autoriser pièce jointe ?
         answering_machine: Répondeur automatique ?
+        picture_in_picture: Media "collant" ?
         map: Carte
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux

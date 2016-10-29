@@ -141,6 +141,15 @@ module Admin
       assert_not assigns(:setting).show_qrcode?
     end
 
+    test 'should not update picture_in_picture param if audio or video module is disabled' do
+      assert @setting.picture_in_picture?
+      disable_optional_module @super_administrator, @audio_module, 'Audio' # in test_helper.rb
+      disable_optional_module @super_administrator, @video_module, 'Video' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @setting, setting: { picture_in_picture: '0' }
+      assert assigns(:setting).picture_in_picture?
+    end
+
     #
     # == Abilities
     #
@@ -192,6 +201,8 @@ module Admin
       @comment_module = optional_modules(:comment)
       @breadcrumb_module = optional_modules(:breadcrumb)
       @qrcode_module = optional_modules(:qrcode)
+      @audio_module = optional_modules(:audio)
+      @video_module = optional_modules(:video)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

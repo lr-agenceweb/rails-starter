@@ -20,16 +20,17 @@ $(document).on 'ready page:load page:restore', ->
           link: gon.root_url
         success: (mediaelement, domObject, player) ->
           # Variables
-          pipc = new PictureInPicture(mediaelement, player, $('.post__audios'))
-          pipc.set_offset()
+          if gon.picture_in_picture
+            pipc = new PictureInPicture(mediaelement, player, $('.post__audios'))
+            pipc.set_offset()
 
-          # Listener
-          if isLargeUp()
-            mediaelement.addEventListener 'playing', (e) ->
-              picture_in_picture(pipc)
+            # Listener
+            if isLargeUp()
+              mediaelement.addEventListener 'playing', (e) ->
+                picture_in_picture(pipc)
 
-          mediaelement.addEventListener 'ended', (e) ->
-            pipc.undo()
+            mediaelement.addEventListener 'ended', (e) ->
+              pipc.undo()
 
   #
   # Video
@@ -53,23 +54,24 @@ $(document).on 'ready page:load page:restore', ->
           link: gon.root_url
         success: (mediaelement, domObject, player) ->
           # Variables
-          pipc = new PictureInPicture(mediaelement, player, $('.post__videos'))
-          pipc.set_offset()
+          if gon.picture_in_picture
+            pipc = new PictureInPicture(mediaelement, player, $('.post__videos'))
+            pipc.set_offset()
 
-          # Listeners
-          if isLargeUp()
-            mediaelement.addEventListener 'playing', (e) ->
-              picture_in_picture(pipc)
+            # Listeners
+            if isLargeUp()
+              mediaelement.addEventListener 'playing', (e) ->
+                picture_in_picture(pipc)
 
           mediaelement.addEventListener 'ended', (e) ->
             remove_darkness() if turn_off_the_light
-            pipc.undo()
+            pipc.undo() if gon.picture_in_picture
 
           mediaelement.addEventListener 'pause', (e) ->
             remove_darkness() if turn_off_the_light
 
           mediaelement.addEventListener 'play', (e) ->
-            create_darkness() if turn_off_the_light && !$('#shadow').hasClass('night') && !pipc.is_pip() && $('#picture_in_picture .mejs-video').length == 0
+            create_darkness() if turn_off_the_light && !$('#shadow').hasClass('night') || (gon.picture_in_picture && !pipc.is_pip() && $('#picture_in_picture .mejs-video').length == 0)
 
 # Pip <audio> or <video> in bottom right of page
 picture_in_picture = (pipc) ->

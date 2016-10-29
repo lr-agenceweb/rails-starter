@@ -19,6 +19,7 @@
 #  show_admin_bar           :boolean          default(TRUE)
 #  show_file_upload         :boolean          default(FALSE)
 #  answering_machine        :boolean          default(FALSE)
+#  picture_in_picture       :boolean          default(TRUE)
 #  date_format              :integer          default(0)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime

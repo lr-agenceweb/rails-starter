@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027191738) do
+ActiveRecord::Schema.define(version: 20161029223219) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -612,6 +612,7 @@ ActiveRecord::Schema.define(version: 20161027191738) do
     t.boolean  "show_admin_bar",                         default: true
     t.boolean  "show_file_upload",                       default: false
     t.boolean  "answering_machine",                      default: false
+    t.boolean  "picture_in_picture",                     default: true
     t.integer  "date_format",              limit: 4,     default: 0
     t.boolean  "maintenance",                            default: false
     t.datetime "logo_updated_at"

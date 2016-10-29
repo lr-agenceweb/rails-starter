@@ -32,6 +32,7 @@ f.columns do
       f.input :show_breadcrumb if breadcrumb_module.enabled?
       f.input :show_social if social_module.enabled?
       f.input :show_qrcode if qrcode_module.enabled?
+      f.input :picture_in_picture if audio_module.enabled? || video_module.enabled?
       f.input :twitter_username
     end
   end
