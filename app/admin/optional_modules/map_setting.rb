@@ -34,6 +34,11 @@ ActiveAdmin.register MapSetting do
           end
         end # column
       end # columns
+
+      columns do
+        # Mapbox
+        panel('Mapbox') { render 'elements/map' } if show_map_contact
+      end
     end
   end
 

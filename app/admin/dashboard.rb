@@ -62,7 +62,7 @@ ActiveAdmin.register_page 'Dashboard' do
           render 'user', panel: panel, query: query
 
           # Mapbox
-          panel('Mapbox') { render 'elements/map' } unless location.nil?
+          panel('Mapbox') { render 'elements/map' } if show_map_contact
         end
       end # columns
 
@@ -73,14 +73,4 @@ ActiveAdmin.register_page 'Dashboard' do
       end # columns
     end # if / else
   end # content
-
-  controller do
-    before_action :set_setting
-
-    private
-
-    def set_setting
-      @setting = Setting.first
-    end
-  end
 end
