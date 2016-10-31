@@ -153,7 +153,6 @@ fr:
         delete_logo: Si coché, le logo sera supprimé après mise à jour des paramètres
         delete_logo_footer: Si coché, le logo du pied de page sera supprimé après mise à jour des paramètres
         maintenance: Mettre le site en maintenance a pour effet de rendre le contenu inaccessible sur internet
-        show_map: Afficher ou non la carte positionnant votre activité sur la page contact
         show_breadcrumb: Afficher ou non le fil d'ariane sur le site
         show_social: Afficher ou non les icônes de partage social sur le site
         show_qrcode: Afficher ou non le Qrcode (sur la page contact) ajoutant vos informations de contact sur le smartphone des internautes
@@ -347,6 +346,7 @@ fr:
       map_setting:
         marker_icon: Choisissez une icône à afficher pour le marqueur de la carte
         marker_color: Choisissez une couleur de fonds pour le marqueur de la carte
+        show_map: Afficher ou non la carte positionnant votre activité sur la page contact
 
       # StringBox
       string_box:

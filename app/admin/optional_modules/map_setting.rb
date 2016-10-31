@@ -2,10 +2,7 @@
 ActiveAdmin.register MapSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
-  permit_params :id,
-                :marker_icon,
-                :marker_color,
-                :show_map
+  permit_params :id, :marker_icon, :marker_color, :show_map
 
   decorate_with MapSettingDecorator
   config.clear_sidebar_sections!
@@ -17,7 +14,8 @@ ActiveAdmin.register MapSetting do
           panel t('active_admin.details', model: t('activerecord.models.map.one')) do
             attributes_table_for resource.decorate do
               row :marker_icon
-              row :marker_color_d
+              row :marker_color_preview
+              bool_row :show_map
             end
           end
         end
@@ -40,6 +38,8 @@ ActiveAdmin.register MapSetting do
                     class: 'colorpicker',
                     value: f.object.marker_color.blank? ? '' : f.object.marker_color
                   }
+
+          f.input :show_map
         end
       end
     end

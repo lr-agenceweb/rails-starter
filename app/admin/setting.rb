@@ -27,7 +27,6 @@ ActiveAdmin.register Setting do
     params.push :show_social if @social_module.enabled?
     params.push :show_qrcode if @qrcode_module.enabled?
     params.push :show_breadcrumb if @breadcrumb_module.enabled?
-    params.push :show_map if @map_module.enabled?
     params.push :picture_in_picture if @audio_module.enabled? || @video_module.enabled?
     params
   end

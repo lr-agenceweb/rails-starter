@@ -15,7 +15,6 @@
 #  show_breadcrumb          :boolean          default(FALSE)
 #  show_social              :boolean          default(TRUE)
 #  show_qrcode              :boolean          default(FALSE)
-#  show_map                 :boolean          default(FALSE)
 #  show_admin_bar           :boolean          default(TRUE)
 #  show_file_upload         :boolean          default(FALSE)
 #  answering_machine        :boolean          default(FALSE)

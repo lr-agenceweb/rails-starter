@@ -7,6 +7,7 @@
 #  id           :integer          not null, primary key
 #  marker_icon  :string(255)
 #  marker_color :string(255)
+#  show_map     :boolean          default(FALSE)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

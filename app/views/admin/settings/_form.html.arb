@@ -28,7 +28,6 @@ f.columns do
     end
 
     f.inputs t('formtastic.titles.setting_module_details') do
-      f.input :show_map if map_module.enabled?
       f.input :show_breadcrumb if breadcrumb_module.enabled?
       f.input :show_social if social_module.enabled?
       f.input :show_qrcode if qrcode_module.enabled?

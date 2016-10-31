@@ -81,7 +81,6 @@ fr:
         show_breadcrumb: Afficher le fil d'ariane ?
         show_social: Afficher le partage sur les réseaux sociaux ?
         show_qrcode: Afficher le QrCode sur la page contact ?
-        show_map: Afficher la carte sur la page contact ?
         show_admin_bar: Afficher la barre d'administration ?
         show_file_upload: Autoriser pièce jointe ?
         answering_machine: Répondeur automatique ?
@@ -359,7 +358,8 @@ fr:
         full_address: Adresse de votre organisation
         marker_icon: Icône du marqueur
         marker_color: Couleur du marqueur
-        marker_color_d: Couleur du marqueur
+        marker_color_preview: Couleur du marqueur
+        show_map: Afficher la carte sur la page contact ?
 
       # Location
       location:

@@ -13,7 +13,7 @@ module OptionalModules
     included do
       include OptionalModules::MapHelper
 
-      before_action :set_map_setting,
+      before_action :set_gon_map_setting,
                     if: proc { map_contact? || map_event? }
       before_action :set_map_contact, if: :map_contact?
 
@@ -21,7 +21,7 @@ module OptionalModules
 
       private
 
-      def set_map_setting
+      def set_gon_map_setting
         gon_mapbox_params
       end
 
@@ -33,7 +33,7 @@ module OptionalModules
 
       def map_contact?
         @map_module.enabled? &&
-          setting.show_map? &&
+          MapSetting.first.show_map? &&
           setting.location? &&
           setting.location.decorate.latlon?
       end
