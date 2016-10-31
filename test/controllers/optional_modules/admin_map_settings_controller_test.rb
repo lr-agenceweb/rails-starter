@@ -47,6 +47,26 @@ module Admin
     end
 
     #
+    # == Nested attributes
+    #
+    test 'should destroy location if destroy is check' do
+      location_attrs = {
+        id: @map_setting.location.id,
+        _destroy: 'true'
+      }
+      assert @map_setting.location.present?
+      assert_difference ['Location.count'], -1 do
+        patch :update, id: @map_setting, map_setting: { location_attributes: location_attrs }
+        assert assigns(:map_setting).valid?
+        @map_setting.reload
+        assigns(:map_setting).reload
+
+        assert assigns(:map_setting).location.blank?
+        assert @map_setting.location.blank?
+      end
+    end
+
+    #
     # == Maintenance
     #
     test 'should not render maintenance even if enabled and SA' do

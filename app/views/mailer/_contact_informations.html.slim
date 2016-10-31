@@ -13,7 +13,7 @@ tr
       = link_to setting.phone, "tel:#{setting.decorate.phone_w3c}"
     p
       strong> = I18n.t('contact.informations.address', locale: locale) + ':'
-      - if setting.decorate.location? && setting.location.decorate.latlon?
+      - if map_setting.decorate.location? && map_setting.location.decorate.latlon?
         br
-        = setting.location.decorate.full_address
+        = map_setting.location.decorate.full_address
   td.expander

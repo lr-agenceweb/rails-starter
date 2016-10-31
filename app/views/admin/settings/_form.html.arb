@@ -44,8 +44,6 @@ f.columns do
       f.input :phone_secondary, as: :phone
     end
 
-    render 'admin/locations/form', f: f, full: true
-
     f.inputs t('formtastic.titles.setting_contact_details') do
       f.input :show_file_upload
       f.input :answering_machine

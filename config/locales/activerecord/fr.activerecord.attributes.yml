@@ -89,9 +89,6 @@ fr:
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
         twitter_username: Nom d'utilisateur sur Twitter
-        location_postcode: Code Postal
-        location_address: Adresse
-        location_city: Ville
         date_format: Formatage de la date
 
       # Category
@@ -360,6 +357,9 @@ fr:
         marker_color: Couleur du marqueur
         marker_color_preview: Couleur du marqueur
         show_map: Afficher la carte sur la page contact ?
+        location_postcode: Code Postal
+        location_address: Adresse
+        location_city: Ville
 
       # Location
       location:

@@ -2,7 +2,11 @@
 ActiveAdmin.register MapSetting do
   menu parent: I18n.t('admin_menu.modules_config')
 
-  permit_params :id, :marker_icon, :marker_color, :show_map
+  permit_params do
+    params = [:id, :marker_icon, :marker_color, :show_map]
+    params.push(*location_attributes)
+    params
+  end
 
   decorate_with MapSettingDecorator
   config.clear_sidebar_sections!
@@ -13,13 +17,23 @@ ActiveAdmin.register MapSetting do
         column do
           panel t('active_admin.details', model: t('activerecord.models.map.one')) do
             attributes_table_for resource.decorate do
+              bool_row :show_map
               row :marker_icon
               row :marker_color_preview
-              bool_row :show_map
             end
           end
         end
-      end
+
+        column do
+          panel I18n.t('activerecord.models.location.one') do
+            attributes_table_for resource.decorate do
+              row :location_address
+              row :location_postcode
+              row :location_city
+            end
+          end
+        end # column
+      end # columns
     end
   end
 
@@ -29,6 +43,8 @@ ActiveAdmin.register MapSetting do
     f.columns id: 'map-columns' do
       f.column do
         f.inputs t('formtastic.titles.map_setting_details'), class: 'map-settings' do
+          f.input :show_map
+
           f.input :marker_icon,
                   as: :select,
                   collection: MapSetting.allowed_markers
@@ -38,9 +54,9 @@ ActiveAdmin.register MapSetting do
                     class: 'colorpicker',
                     value: f.object.marker_color.blank? ? '' : f.object.marker_color
                   }
-
-          f.input :show_map
         end
+
+        render 'admin/locations/form', f: f, full: true
       end
     end
 
@@ -51,6 +67,7 @@ ActiveAdmin.register MapSetting do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include OptionalModules::Mappable
 
     before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? && current_user_and_administrator? }

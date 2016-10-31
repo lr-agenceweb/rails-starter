@@ -6,8 +6,16 @@
 class ContactsController < ApplicationController
   include OptionalModules::QrcodeHelper
 
-  skip_before_action :allow_cors
-  skip_before_action :set_menu_elements, :set_adult_validation, :set_background, :set_newsletter_user, :set_search_autocomplete, :set_slider, :set_social_network, :set_froala_key, only: :mapbox_popup
+  skip_before_action :allow_cors,
+                     :set_menu_elements,
+                     :set_adult_validation,
+                     :set_background,
+                     :set_newsletter_user,
+                     :set_search_autocomplete,
+                     :set_slider,
+                     :set_social_network,
+                     :set_froala_key,
+                     only: :mapbox_popup
 
   # GET /contact
   # GET /contact.json
@@ -36,10 +44,10 @@ class ContactsController < ApplicationController
 
   def mapbox_popup
     if request.xhr?
-      if @location.nil?
-        render nothing: true
-      else
+      if @show_map_contact
         render layout: false
+      else
+        render nothing: true
       end
     else
       redirect_to contacts_path

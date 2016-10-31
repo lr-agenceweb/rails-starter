@@ -2,4 +2,4 @@
   = render 'elements/header/logo', primary: false
 
   .mapbox__popup__address
-    = location.full_address(false)
+    = map_setting.location.decorate.full_address(false)

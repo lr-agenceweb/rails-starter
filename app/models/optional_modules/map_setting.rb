@@ -17,6 +17,7 @@
 #
 class MapSetting < ActiveRecord::Base
   include MaxRowable
+  include OptionalModules::Locationable
 
   def self.allowed_markers
     %w( camera building park car bus college gift )

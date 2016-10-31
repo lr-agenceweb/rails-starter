@@ -31,14 +31,6 @@ columns do
       end
     end
 
-    panel I18n.t('activerecord.models.location.one') do
-      attributes_table_for setting.decorate do
-        row :location_address
-        row :location_postcode
-        row :location_city
-      end
-    end
-
     panel t('active_admin.details', model: t('contact.title')) do
       attributes_table_for setting.decorate do
         bool_row :show_file_upload

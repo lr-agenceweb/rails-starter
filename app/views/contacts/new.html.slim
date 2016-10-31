@@ -10,5 +10,4 @@ section.page-section.contacts.row.align-center#contacts
       = render 'contacts/form'
 
 / Mapbox
-- unless @location.nil?
-  = render 'elements/map'
+= render 'elements/map' if @show_map_contact

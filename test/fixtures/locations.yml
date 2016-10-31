@@ -26,8 +26,7 @@ one:
   city: Auckland
   latitude: 1.5
   longitude: 1.5
-  locationable_id: 1
-  locationable_type: Setting
+  locationable: one (MapSetting)
 
 two:
   address: '4 avenue de la chouette'

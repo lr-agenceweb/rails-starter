@@ -23,7 +23,6 @@ ActiveAdmin.register Setting do
                 :id, :locale, :title, :subtitle
               ]]
 
-    params.push(*location_attributes)
     params.push :show_social if @social_module.enabled?
     params.push :show_qrcode if @qrcode_module.enabled?
     params.push :show_breadcrumb if @breadcrumb_module.enabled?
@@ -50,7 +49,6 @@ ActiveAdmin.register Setting do
   # == Controller
   #
   controller do
-    include ActiveAdmin::ParamsHelper
     before_action :redirect_to_dashboard, unless: proc { current_user_and_administrator? }
     before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? }
 

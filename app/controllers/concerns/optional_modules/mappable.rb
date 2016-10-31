@@ -17,7 +17,7 @@ module OptionalModules
                     if: proc { map_contact? || map_event? }
       before_action :set_map_contact, if: :map_contact?
 
-      decorates_assigned :location
+      decorates_assigned :location, :map_setting
 
       private
 
@@ -26,16 +26,16 @@ module OptionalModules
       end
 
       def set_map_contact
-        @map_setting = MapSetting.first
-        @location = setting.location
+        @show_map_contact = true
         gon_location_params
       end
 
       def map_contact?
+        @map_setting = MapSetting.first
         @map_module.enabled? &&
-          MapSetting.first.show_map? &&
-          setting.location? &&
-          setting.location.decorate.latlon?
+          map_setting.show_map? &&
+          map_setting.location? &&
+          map_setting.location.decorate.latlon?
       end
 
       def map_event?

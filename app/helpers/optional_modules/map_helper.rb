@@ -18,8 +18,8 @@ module OptionalModules
 
     def gon_location_params
       gon.push(
-        latitude: @location.try(:latitude),
-        longitude: @location.try(:longitude),
+        latitude: @map_setting.location_latitude,
+        longitude: @map_setting.location_longitude,
         marker_icon: @map_setting.marker_icon,
         marker_color: @map_setting.marker_color,
         root_url: I18n.with_locale(@language) { root_path }

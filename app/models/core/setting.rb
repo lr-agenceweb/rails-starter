@@ -42,7 +42,6 @@ class Setting < ActiveRecord::Base
   extend Enumerize
   include MaxRowable
   include Assets::Settings::Paperclipable
-  include OptionalModules::Locationable
 
   # Callbacks
   after_validation :clean_paperclip_errors
