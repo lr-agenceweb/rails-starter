@@ -13,3 +13,4 @@
 one:
   marker_icon: park
   marker_color: '#EE903E'
+  show_map: true

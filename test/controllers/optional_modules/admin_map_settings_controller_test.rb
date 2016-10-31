@@ -46,6 +46,13 @@ module Admin
       assert_not assigns(:map_setting).valid?
     end
 
+    test 'should not update if postcode is not numeric' do
+      params = { location_attributes: { postcode: 'bad_value' } }
+      patch :update, id: @map_setting, map_setting: params
+      assert_not assigns(:map_setting).valid?
+      assert assigns(:map_setting).errors.keys.include?('location.postcode'.to_sym)
+    end
+
     #
     # == Nested attributes
     #

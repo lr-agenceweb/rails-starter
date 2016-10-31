@@ -94,12 +94,6 @@ module Admin
       assert_not @setting.update(title: nil)
     end
 
-    test 'should not update if postcode is not numeric' do
-      patch :update, id: @setting, setting: { location_attributes: { postcode: 'bad_value' } }
-      assert_not assigns(:setting).valid?
-      assert assigns(:setting).errors.keys.include?('location.postcode'.to_sym)
-    end
-
     test 'should not update social param if module is disabled' do
       disable_optional_module @super_administrator, @social_module, 'Social' # in test_helper.rb
       sign_in @administrator

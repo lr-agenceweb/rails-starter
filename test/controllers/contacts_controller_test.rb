@@ -212,7 +212,7 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should use correct action and no layout for popup' do
-    @setting.update_attribute(:show_map, true)
+    @map_setting.update_attribute(:show_map, true)
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :get, :mapbox_popup, locale: locale.to_s
@@ -223,6 +223,7 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   test 'AJAX :: should not render popup if location not set' do
+    @map_setting.location.destroy
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         xhr :get, :mapbox_popup, locale: locale.to_s
@@ -307,8 +308,10 @@ class ContactsControllerTest < ActionController::TestCase
   def initialize_test
     @locales = I18n.available_locales
     @setting = settings(:one)
+
     @menu = menus(:contact)
     @string_box_success = string_boxes(:success_contact_form)
+    @map_setting = map_settings(:one)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

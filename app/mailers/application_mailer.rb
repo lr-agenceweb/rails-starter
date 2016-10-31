@@ -10,8 +10,6 @@ class ApplicationMailer < ActionMailer::Base
   before_action :set_map_setting
   before_action :set_contact_settings
 
-  decorates_assigned :map_setting
-
   private
 
   def set_setting
@@ -19,7 +17,7 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def set_map_setting
-    @map_setting = MapSetting.first
+    @map_setting = MapSetting.first.decorate
   end
 
   def set_contact_settings

@@ -37,7 +37,7 @@ ActiveAdmin.register MapSetting do
 
       columns do
         # Mapbox
-        panel('Mapbox') { render 'elements/map' } if show_map_contact
+        panel('Mapbox') { render 'elements/map' } if @show_map_contact
       end
     end
   end
@@ -75,7 +75,11 @@ ActiveAdmin.register MapSetting do
     include ActiveAdmin::ParamsHelper
     include OptionalModules::Mappable
 
-    before_action :redirect_to_show, only: [:index], if: proc { @map_module.enabled? && current_user_and_administrator? }
+    skip_before_action :set_gon_map_setting,
+                       :set_map_contact
+    before_action :redirect_to_show,
+                  only: [:index],
+                  if: proc { @map_module.enabled? && current_user_and_administrator? }
 
     private
 

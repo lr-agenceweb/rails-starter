@@ -28,8 +28,8 @@ module OptionalModules
 
     test 'should return correct gon map location params' do
       params = {
-        latitude: nil,
-        longitude: nil,
+        latitude: 1.5,
+        longitude: 1.5,
         marker_icon: 'park',
         marker_color: '#EE903E',
         root_url: '/'
@@ -40,8 +40,8 @@ module OptionalModules
     test 'should return correct gon map location if marker changed' do
       @map_setting.update_attributes(marker_icon: 'car', marker_color: '#FFF000')
       params = {
-        latitude: nil,
-        longitude: nil,
+        latitude: 1.5,
+        longitude: 1.5,
         marker_icon: 'car',
         marker_color: '#FFF000',
         root_url: '/'

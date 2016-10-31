@@ -15,7 +15,7 @@ class AdultSettingDecoratorTest < Draper::TestCase
   test 'should return default value for redirect_link if not set' do
     @adult_setting.update_attributes(redirect_link: '')
     adult_setting_decorated = AdultSettingDecorator.new(@adult_setting)
-    assert_equal 'http://www.lr-agenceweb.fr', adult_setting_decorated.redirect_link
+    assert_equal Figaro.env.adult_not_validated_popup_redirect_link, adult_setting_decorated.redirect_link
   end
 
   test 'should return correct title' do
