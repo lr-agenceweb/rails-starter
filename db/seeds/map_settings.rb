@@ -4,7 +4,12 @@
 # == Map Setting
 #
 puts 'Creating MapSetting'
-MapSetting.create!(
+map_setting = MapSetting.new(
   marker_icon: 'park',
-  marker_color: '#EE903E'
+  marker_color: '#ee3e3e',
+  show_map: true
 )
+map_setting.save
+
+# Location
+set_location(map_setting, 'MapSetting')

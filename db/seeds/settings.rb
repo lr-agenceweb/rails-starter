@@ -28,6 +28,3 @@ if @locales.include?(:en)
     subtitle: 'Demo website'
   )
 end
-
-# Location
-set_location(@setting_site, 'Setting')
