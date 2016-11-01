@@ -14,32 +14,16 @@
 span.css-emoticon {
   display: inline-block;
   overflow: hidden;
-  width: 1.54em; /* note that this is a multiple of this span's font-size, not containing text font-size */
-  height: 1.54em; /* so, relative to containing text, width and height are 0.9 x 1.6 = 1.44em */
+  width: 1.84em; /* note that this is a multiple of this span's font-size, not containing text font-size */
+  height: 1.84em; /* so, relative to containing text, width and height are 0.9 x 1.6 = 1.44em */
   padding: 0;
-  -webkit-transition-timing-function: linear, ease-in;
-     -moz-transition-timing-function: linear, ease-in;
-       -o-transition-timing-function: linear, ease-in;
-          transition-timing-function: linear, ease-in;
-  -webkit-transition-duration: 1s, 1s;
-     -moz-transition-duration: 1s, 1s;
-       -o-transition-duration: 1s, 1s;
-          transition-duration: 1s, 1s;
-  -webkit-transition-property: color, background, transform;
-     -moz-transition-property: color, background, transform;
-       -o-transition-property: color, background, transform;
-          transition-property: color, background, transform;
-  -webkit-transform: rotate(90deg);
-     -moz-transform: rotate(90deg);
-       -o-transform: rotate(90deg);
-          transform: rotate(90deg);
+  transition: color 1s ease-in, background 1s ease-in, transform 1s ease-in;
+  transform: rotate(90deg);
   text-align: center;
   vertical-align: middle;
   color: #000;
   border: 1px solid rgba(0,0,0,.25);
-  -webkit-border-radius: 1.54em;
-     -moz-border-radius: 1.54em;
-          border-radius: 1.54em;
+  border-radius: 1.54em;
   background-color: #fc0;
   background-image: -webkit-gradient(
     linear,
@@ -55,37 +39,33 @@ span.css-emoticon {
     rgb(255,221,85) 56%,
     rgb(255,238,170) 100%
   );
-  -webkit-box-shadow: 1px -1px 2px rgba(0,0,0,.5);
-     -moz-box-shadow: 1px -1px 2px rgba(0,0,0,.5);
-          box-shadow: 1px -1px 2px rgba(0,0,0,.5);
+  box-shadow: 1px -1px 2px rgba(0,0,0,.5);
   font-family: 'Trebuchet MS'; /* seems to give the best and most consistent emoticon appearance */
   font-size: .65em;
   font-weight: bold;
-  line-height: 1.34em;
+  line-height: 1.44em;
 }
 
 /* Styles for two-character emoticons that need more letter-spacing for proportionality */
 span.css-emoticon.spaced-emoticon {
-  width: 1.34em;
+  /*width: 1.34em;*/
   padding-left: .2em;
   letter-spacing: .2em;
 }
 
 /* This is a dirty dirty hack, because webkit doesn't properly do the padding+width=total-width as it should
    I think the width of the border may be throwing things off, because it's more noticable for small icons */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
+/*@media screen and (-webkit-min-device-pixel-ratio:0) {
   span.css-emoticon.spaced-emoticon {
     width: 1.4em;
   }
-}
+}*/
 
 /* Styles for emoticons that need to have smaller characters to fit inside the circle */
 span.css-emoticon.small-emoticon {
   width: 1.82em;
   height: 1.82em;
-  -webkit-border-radius: 1.82em;
-     -moz-border-radius: 1.82em;
-          border-radius: 1.82em;
+  border-radius: 1.82em;
   font-size: .55em;
   line-height: 1.72em;
 }
@@ -137,13 +117,8 @@ span.css-emoticon.pink-emoticon {
 span.css-emoticon.no-rotate {
   width: 2.2em;
   height: 2.2em;
-  -webkit-transform: rotate(0deg);
-     -moz-transform: rotate(0deg);
-       -o-transform: rotate(0deg);
-          transform: rotate(0deg);
-  -webkit-border-radius: 2.2em;
-     -moz-border-radius: 2.2em;
-          border-radius: 2.2em;
+  transform: rotate(0deg);
+  border-radius: 2.2em;
   background-image: -webkit-gradient(
     linear,
     right bottom,
@@ -158,9 +133,7 @@ span.css-emoticon.no-rotate {
     rgb(255,221,85) 56%,
     rgb(255,238,170) 100%
   );
-  -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.5);
-     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.5);
-          box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+  box-shadow: 1px 1px 2px rgba(0,0,0,.5);
   font-size: .45em;
   line-height: 1.9em;
 }
@@ -201,10 +174,7 @@ span.css-emoticon.no-rotate.pink-emoticon {
 
 /* Styles for emoticons that need to be rotated counter-clockwise, like <3 */
 span.css-emoticon.counter-rotated {
-  -webkit-transform: rotate(-90deg);
-     -moz-transform: rotate(-90deg);
-       -o-transform: rotate(-90deg);
-          transform: rotate(-90deg);
+  transform: rotate(-90deg);
   background-image: -webkit-gradient(
     linear,
     left top,
@@ -219,9 +189,7 @@ span.css-emoticon.counter-rotated {
     rgb(255,221,85) 56%,
     rgb(255,238,170) 100%
   );
-  -webkit-box-shadow: -1px 1px 2px rgba(0,0,0,.5);
-     -moz-box-shadow: -1px 1px 2px rgba(0,0,0,.5);
-          box-shadow: -1px 1px 2px rgba(0,0,0,.5);
+  box-shadow: -1px 1px 2px rgba(0,0,0,.5);
 }
 
 span.css-emoticon.counter-rotated.red-emoticon {
@@ -261,10 +229,7 @@ span.css-emoticon.counter-rotated.pink-emoticon {
 /* Styles for animated states */
 span.css-emoticon.un-transformed-emoticon, span.css-emoticon.animated-emoticon:hover {
     overflow: visible;
-    -webkit-transform: rotate(0deg);
-       -moz-transform: rotate(0deg);
-         -o-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
     /* font-size: inherit;
     font-weight: inherit;
     vertical-align: inherit;
@@ -275,18 +240,14 @@ span.css-emoticon.un-transformed-emoticon, span.css-emoticon.animated-emoticon:h
     border-color: transparent;
     background: none;
     background-image: none;
-    -webkit-box-shadow: none;
-       -moz-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
 }
 
 span.css-emoticon.nintendo-controller {
   width: 2.7em;
   height: 1.2em;
   vertical-align: bottom;
-  -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   background: -webkit-gradient(
       linear,
       left bottom,
