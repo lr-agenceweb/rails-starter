@@ -15,21 +15,57 @@
         &:focus
           outline: none
 
+    // Progress bar
     .mejs-time-rail
       .mejs-time-loaded
         background: $secondary-color
       .mejs-time-total
         background: rgba($steel, .9)
 
-    .mejs-captions-button .mejs-captions-selector
-      width: 100px
+    // Volume
+    .mejs-horizontal-volume-slider, .mejs-volume-slider
+      .mejs-horizontal-volume-current, .mejs-volume-current, .mejs-volume-handle
+        background: $secondary-color
+      .mejs-horizontal-volume-total
+        background: rgba($steel, .9)
 
-      ul li
-        input[type='radio'] + label
-          width: initial
-          margin-right: 0
-          margin-left: 3px
-          color: $white
+    // Caption
+    .mejs-captions-button
+      .mejs-captions-selector
+        width: 100px
+
+        ul li
+          input[type='radio']
+            width: 10px
+            height: 10px
+            border: 1px solid $white
+            border-radius: 50%
+            -webkit-appearance: none
+
+            &:before
+              display: block
+              width: 90%
+              height: 90%
+              margin: 8% auto
+              content: ''
+              transition: background .3s ease-in
+              border-radius: 50%
+
+            & + label
+              width: initial
+              margin-right: 0
+              margin-left: 3px
+              padding: 0
+              transition: border-bottom .3s ease-in
+              color: $white
+              border-bottom: 2px solid transparent
+
+            &:checked
+              &:before
+                background: $secondary-color
+              & + label
+                border-bottom: 2px solid $secondary-color
+
 
 // Logo
 .mejs-container .mejs-controls .mejs-logo-button

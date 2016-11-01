@@ -292,6 +292,7 @@
     "filter:progid:DXImageTransform.Microsoft.gradient",
     "-ms-filter:\\'progid:DXImageTransform.Microsoft.gradient",
     "text-shadow",
+    "-webkit-appearance",
     "font",
     "font-family",
     "font-size",
