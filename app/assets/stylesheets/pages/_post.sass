@@ -14,7 +14,7 @@
   background-color: $white
 
   &__header, &__body, &__footer
-    padding: 0 .9375rem
+    padding: 0 .6375rem
 
   &__cover
     position: relative
@@ -131,6 +131,11 @@
       &__link
         width: 36px
         margin-bottom: 0
+
+@media #{$medium-up}
+  .post
+    &__header, &__body, &__footer
+      padding: 0 .9375rem
 
 @media #{$large-up}
   .post
