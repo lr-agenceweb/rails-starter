@@ -33,10 +33,9 @@
 #= require fotorama
 
 #= require plugins/emoticonize
+#= require plugins/datetimepicker
 
 $ ->
-  $.datetimepicker.setLocale('fr')
-
   emoticonize_me()
 
   if $('#newsletter_setting_send_welcome_email').length

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 datetime_picker_input = Formtastic::Inputs::StringInput::DateTimePickerInput
 
-# This if for front-end javascript side
+# This is for front-end (JavaScript)
 datetime_picker_input.default_datetime_picker_options = {
-  format: 'Y-m-d H:i:s',
+  format: 'Y-m-d H:i',
   defaultTime: '12:00',
-  inline: true,
-  timepicker: true,
+  inline: false,
+  timepicker: false,
   lang: 'fr',
   scrollMonth: false,
   scrollTime: false,
@@ -14,5 +14,5 @@ datetime_picker_input.default_datetime_picker_options = {
   minDate: 0
 }
 
-# This if for backend (Ruby)
-datetime_picker_input.format = '%Y-%m-%d %H:%i:%s'
+# This is for backend (Ruby)
+datetime_picker_input.format = '%Y-%m-%d %H:%M'
