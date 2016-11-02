@@ -99,6 +99,29 @@ class EventsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should render filled json array if calendar module is enabled' do
+    @event_setting.update_attribute(:show_calendar, true)
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s, format: :json
+        assert_response :success
+        assert_not assigns(:calendar_events).blank?
+      end
+    end
+  end
+
+  test 'should render empty json array if calendar module is disabled' do
+    @event_setting.update_attribute(:show_calendar, true)
+    disable_optional_module @super_administrator, @calendar_module, 'Calendar' # in test_helper.rb
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s, format: :json
+        assert_response :success
+        assert assigns(:calendar_events).blank?
+      end
+    end
+  end
+
   #
   # == Maintenance
   #
@@ -126,7 +149,10 @@ class EventsControllerTest < ActionController::TestCase
   def initialize_test
     @event = events(:event_online)
     @event_offline = events(:event_offline)
+    @event_setting = event_settings(:one)
+
     @event_module = optional_modules(:event)
+    @calendar_module = optional_modules(:calendar)
 
     @locales = I18n.available_locales
     @setting = settings(:one)

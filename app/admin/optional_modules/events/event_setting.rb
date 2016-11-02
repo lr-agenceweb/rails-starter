@@ -7,6 +7,7 @@ ActiveAdmin.register EventSetting do
               :prev_next,
               :event_order_id]
 
+    params.push :show_calendar if @calendar_module.enabled?
     params.push :show_map if @map_module.enabled?
     params
   end
@@ -20,6 +21,7 @@ ActiveAdmin.register EventSetting do
         column do
           attributes_table do
             bool_row :prev_next
+            bool_row :show_calendar if calendar_module.enabled?
             bool_row :show_map if map_module.enabled?
             row :event_order
           end
@@ -35,6 +37,7 @@ ActiveAdmin.register EventSetting do
       column do
         f.inputs t('formtastic.titles.event_setting_details') do
           f.input :prev_next
+          f.input :show_calendar if calendar_module.enabled?
           f.input :show_map if map_module.enabled?
           f.input :event_order,
                   as: :select,

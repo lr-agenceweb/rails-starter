@@ -77,6 +77,26 @@ module Admin
     end
 
     #
+    # == Calendar module
+    #
+    test 'should not update show_calendar setting if calendar module is disabled' do
+      disable_optional_module @super_administrator, @calendar_module, 'Calendar' # in test_helper.rb
+      sign_in @administrator
+
+      assert_not @event_settings.show_calendar?
+      patch :update, id: @event_settings, event_setting: { show_calendar: true }
+      assert assigns(:event_setting).valid?
+      assert_not assigns(:event_setting).show_calendar?, 'calendar should not change of status'
+    end
+
+    test 'should update show_calendar setting if calendar module is enabled' do
+      assert_not @event_settings.show_calendar?
+      patch :update, id: @event_settings, event_setting: { show_calendar: true }
+      assert assigns(:event_setting).valid?
+      assert assigns(:event_setting).show_calendar?, 'calendar should have changed of status'
+    end
+
+    #
     # == Module disabled
     #
     test 'should not access page if event module is disabled' do
@@ -148,8 +168,10 @@ module Admin
     def initialize_test
       @setting = settings(:one)
       @event_settings = event_settings(:one)
+
       @event_module = optional_modules(:event)
       @map_module = optional_modules(:map)
+      @calendar_module = optional_modules(:calendar)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

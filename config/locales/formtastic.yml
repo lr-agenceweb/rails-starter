@@ -181,6 +181,7 @@ fr:
       # EventSetting
       event_setting:
         event_order: Choisissez la manière dont vous souhaitez que les événements apparaissent
+        show_calendar: Si coché, un calendrier affichant la liste de tous les événements sera présent sur la page des événements
 
       # Event
       event:

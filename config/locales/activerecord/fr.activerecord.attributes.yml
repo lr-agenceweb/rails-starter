@@ -173,6 +173,7 @@ fr:
       event_setting:
         prev_next: Liens précédent / suivant ?
         show_map: Afficher carte ?
+        show_calendar: Afficher calendrier ?
         event_order: Ordre des événements
 
       #

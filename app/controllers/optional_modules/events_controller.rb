@@ -5,9 +5,15 @@
 #
 class EventsController < ApplicationController
   include ModuleSettingable
+
+  # Callbacks
   before_action :event_module_enabled?
-  before_action :set_calendar_events, only: [:index]
   before_action :set_event, only: [:show]
+  before_action :set_calendar_events,
+                only: [:index],
+                if: proc {
+                  @calendar_module.enabled? && @event_setting.show_calendar?
+                }
 
   decorates_assigned :event, :comment
 
