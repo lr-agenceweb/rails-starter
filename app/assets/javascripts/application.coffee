@@ -48,10 +48,6 @@
 #= require fotorama
 #= require plugins/fotorama
 
-#= require moment
-#= require moment/en-gb
-#= require fullcalendar
-#= require fullcalendar/lang/fr
 #= require plugins/fullcalendar
 
 #= require modules/responsive_menu

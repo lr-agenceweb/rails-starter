@@ -2,7 +2,7 @@
 
 @import 'settings';
 @import 'foundation';
-// @import 'motion-ui/motion-ui';
+@import 'motion-ui/motion-ui';
 
 @include foundation-global-styles;
 
@@ -38,12 +38,12 @@
 @include foundation-sticky;
 @include foundation-reveal;
 @include foundation-switch;
-@include foundation-table;
+// @include foundation-table;
 @include foundation-tabs;
 @include foundation-thumbnail;
 @include foundation-title-bar;
 @include foundation-tooltip;
 @include foundation-top-bar;
 
-// @include motion-ui-transitions;
+@include motion-ui-transitions;
 // @include motion-ui-animations;

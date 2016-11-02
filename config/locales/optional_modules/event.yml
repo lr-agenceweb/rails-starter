@@ -1,6 +1,8 @@
 # English
 en:
   event:
+    all_day: All day
+    show_calendar: Display calendar events
     from_to_date: From %{start_date} to %{end_date}
     know_more: Know more about this event
     destroy:
@@ -9,6 +11,8 @@ en:
 # French
 fr:
   event:
+    all_day: Toute la journée
+    show_calendar: Afficher le calendrier des événements
     from_to_date: Du %{start_date} au %{end_date}
     know_more: En savoir plus sur cet événement
     destroy:

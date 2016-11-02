@@ -6,6 +6,7 @@
 class EventsController < ApplicationController
   include ModuleSettingable
   before_action :event_module_enabled?
+  before_action :set_calendar_events, only: [:index]
   before_action :set_event, only: [:show]
 
   decorates_assigned :event, :comment
@@ -16,6 +17,7 @@ class EventsController < ApplicationController
     @events = Event.includes_collection.with_conditions.online
     per_p = @setting.per_page == 0 ? @events.count : @setting.per_page
     @events = EventDecorator.decorate_collection(@events.page(params[:page]).per(per_p))
+    gon.push(events: events_path(format: :json))
     seo_tag_index category
   end
 
@@ -23,7 +25,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     redirect_to @event, status: :moved_permanently if request.path != event_path(@event)
-    gon.push(event_path: event_path(format: :json))
+    gon.push(events: event_path(format: :json))
     seo_tag_show event
   end
 
@@ -31,6 +33,10 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.includes_collection.online.friendly.find(params[:id])
+  end
+
+  def set_calendar_events
+    @calendar_events = Event.includes_collection.online
   end
 
   def event_module_enabled?
