@@ -28,6 +28,10 @@ $(document).on 'ready page:load page:restore', ->
       eventAfterAllRender: (view) ->
         disable_calendar_navigation(view) if gon.single_event
 
+      viewRender: (view, element) ->
+        setTimeout ->
+          highlight_current_day()
+        , 2000
 
     # Refresh calendar when opening Foundation modal box
     $('#fullcalendar__modal').on 'open.zf.reveal', ->
@@ -37,6 +41,14 @@ $(document).on 'ready page:load page:restore', ->
         $calendar.fullCalendar('gotoDate', gon.start_event) if gon.single_event
       , 300
 
+
+# Highlight current panel day
+highlight_current_day = ->
+  $('.fc-list-heading').each (index) ->
+    $this = $(@)
+    if $this.attr('data-date') == moment().format('YYYY-MM-DD')
+      $this.find('.fc-widget-header').addClass('current-day')
+    return
 
 # Disable prev / next Fullcalendar navigation
 disable_calendar_navigation = (view) ->
