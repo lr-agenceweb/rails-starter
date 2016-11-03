@@ -21,7 +21,7 @@ end
 def set_content(size = 10)
   html = ''
   10.times do |i|
-    html += "<p>#{Faker::Hipster.paragraph(size, true, 4)}</p>"
+    html += "<p>#{Faker::Hipster.paragraph(size, true, 1)}</p>"
   end
   html
 end

@@ -6,7 +6,7 @@
 puts 'Creating Home article'
 home = Home.new(
   title: set_title,
-  content: set_content,
+  content: set_content(1),
   online: true,
   user_id: @administrator.id
 )
@@ -17,7 +17,7 @@ if @locales.include?(:en)
     post_id: home.id,
     locale: 'en',
     title: set_title,
-    content: set_content
+    content: set_content(1)
   )
 end
 
