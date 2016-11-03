@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   before_action :set_calendar_events,
                 only: [:index],
                 if: proc {
-                  @calendar_module.enabled? && @event_setting.show_calendar?
+                  @calendar_module.enabled? && @event_setting.show_calendar? && json_request?
                 }
 
   decorates_assigned :event
@@ -20,14 +20,11 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.includes_collection.with_conditions.online
-    per_p = @setting.per_page == 0 ? @events.count : @setting.per_page
-    @events = EventDecorator.decorate_collection(@events.page(params[:page]).per(per_p))
-    gon.push(
-      events: events_path(format: :json),
-      single_event: false
-    )
-    seo_tag_index category
+    respond_to do |format|
+      format.html { set_events }
+      format.js { set_events }
+      format.json {}
+    end
   end
 
   # GET /events/1
@@ -45,6 +42,19 @@ class EventsController < ApplicationController
 
   private
 
+  def set_events
+    @events = Event.includes_collection.with_conditions.online
+    per_p = @setting.per_page == 0 ? @events.count : @setting.per_page
+    @events = EventDecorator.decorate_collection(@events.page(params[:page]).per(per_p))
+
+    gon.push(
+      events: events_path(format: :json),
+      single_event: false
+    )
+
+    seo_tag_index category
+  end
+
   def set_event
     @event = Event.includes_collection.online.friendly.find(params[:id])
   end
@@ -55,5 +65,9 @@ class EventsController < ApplicationController
 
   def event_module_enabled?
     not_found unless @event_module.enabled?
+  end
+
+  def json_request?
+    request.format.symbol == :json
   end
 end
