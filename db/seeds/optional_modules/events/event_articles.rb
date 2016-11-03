@@ -10,6 +10,7 @@ puts 'Creating Event articles'
     content: set_content,
     show_as_gallery: true,
     show_map: true,
+    show_calendar: true,
     online: true,
     start_date: Faker::Date.backward(rand(5..20)),
     end_date: Faker::Date.forward(rand(20..30))

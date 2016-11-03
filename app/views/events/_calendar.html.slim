@@ -1,7 +1,12 @@
-.row.align-center
-  .small-12.medium-11.columns
-    p: a data-open="fullcalendar__modal"
-      = fa_icon 'calendar-check-o', text: t('event.show_calendar')
+- if show_page?
+  span.post__header__timestamps.event__header__timestamps class="has-tip" data={ tooltip: '' } tabindex='1' title=t('tooltip.event.fullcalendar') aria_haspopup='true'
+    a data-open="fullcalendar__modal"
+      = fa_icon 'calendar-check-o', text: text
+
+- else
+  span: a data-open="fullcalendar__modal" class="posts__header__calendar"
+    = fa_icon 'calendar-check-o', text: t('event.show_calendar')
+
 
 / Modal
 .small.reveal#fullcalendar__modal.fullcalendar__modal data-reveal='' data-close-on-click="true" data-animation-in="fade-in" data-animation-out="fade-out" aria-labelledby="fullcalendar__modal"

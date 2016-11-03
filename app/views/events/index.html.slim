@@ -8,8 +8,12 @@ section.page-section.posts.events.row.align-center#events class="#{params[:actio
   .small-11.columns
     - if @events.blank?
       p = t('posts.events.empty')
+
     - else
-      = render 'events/calendar' if @calendar_module.enabled? && @event_setting.show_calendar?
+      - if @calendar_module.enabled? && @event_setting.show_calendar?
+        .row.align-center
+          .small-12.medium-11.columns
+            = render 'events/calendar'
 
       .row.align-center
         .small-12.medium-11.columns

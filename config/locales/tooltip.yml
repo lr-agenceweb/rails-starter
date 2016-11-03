@@ -9,6 +9,7 @@ fr:
       edit: Modifier cet événement
       destroy: Supprimer cet événement
       calendar: Date de l'événement
+      fullcalendar: Afficher l'événement sur le calendrier
     guest_book:
       destroy: Supprimer ce message du Livre d'or
     legal_notice:
@@ -28,5 +29,6 @@ en:
   tooltip:
     event:
       calendar: Event date
+      fullcalendar: Display calendar event
     map:
       modal: Click to display map

@@ -24,8 +24,38 @@ $(document).on 'ready page:load page:restore', ->
       contentHeight: 'auto'
       allDayHtml: I18n.t('event.all_day')
 
+      # Callbacks
+      eventAfterAllRender: (view) ->
+        disable_calendar_navigation(view) if gon.single_event
+
+
     # Refresh calendar when opening Foundation modal box
     $('#fullcalendar__modal').on 'open.zf.reveal', ->
       setTimeout ->
-        $('#calendar').fullCalendar 'render'
+        $calendar = $('#calendar')
+        $calendar.fullCalendar 'render'
+        $calendar.fullCalendar('gotoDate', gon.start_event) if gon.single_event
       , 300
+
+
+# Disable prev / next Fullcalendar navigation
+disable_calendar_navigation = (view) ->
+  minDate = moment(gon.start_event)
+  maxDate = moment(gon.end_event)
+
+  # Past
+  if minDate >= view.start and minDate <= view.end
+    $('.fc-prev-button').prop 'disabled', true
+    $('.fc-prev-button').addClass 'fc-state-disabled'
+  else
+    $('.fc-prev-button').removeClass 'fc-state-disabled'
+    $('.fc-prev-button').prop 'disabled', false
+
+  # Future
+  if maxDate >= view.start and maxDate <= view.end
+    $('.fc-next-button').prop 'disabled', true
+    $('.fc-next-button').addClass 'fc-state-disabled'
+  else
+    $('.fc-next-button').removeClass 'fc-state-disabled'
+    $('.fc-next-button').prop 'disabled', false
+  return

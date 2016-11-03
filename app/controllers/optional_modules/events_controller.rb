@@ -15,7 +15,7 @@ class EventsController < ApplicationController
                   @calendar_module.enabled? && @event_setting.show_calendar?
                 }
 
-  decorates_assigned :event, :comment
+  decorates_assigned :event
 
   # GET /events
   # GET /events.json
@@ -23,7 +23,10 @@ class EventsController < ApplicationController
     @events = Event.includes_collection.with_conditions.online
     per_p = @setting.per_page == 0 ? @events.count : @setting.per_page
     @events = EventDecorator.decorate_collection(@events.page(params[:page]).per(per_p))
-    gon.push(events: events_path(format: :json))
+    gon.push(
+      events: events_path(format: :json),
+      single_event: false
+    )
     seo_tag_index category
   end
 
@@ -31,7 +34,12 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     redirect_to @event, status: :moved_permanently if request.path != event_path(@event)
-    gon.push(events: event_path(format: :json))
+    gon.push(
+      events: event_path(format: :json),
+      single_event: true,
+      start_event: @event.start_date,
+      end_event: @event.end_date
+    )
     seo_tag_show event
   end
 

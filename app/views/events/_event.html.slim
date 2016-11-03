@@ -12,9 +12,14 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
         h3.post__header__title.event__header__title
           = link_to event.title, event_path(event)
 
-        span.post__header__timestamps.event__header__timestamps class="has-tip" data={ tooltip: '' } tabindex='1' title=t('tooltip.event.calendar') aria_haspopup='true'
-          == fa_icon 'calendar', text: event.from_to_date.html_safe
+        / Timestamps / Calendar
+        - if show_page? && event.show_calendar? && @calendar_module.enabled?
+          = render 'events/calendar', text: event.from_to_date.html_safe
+        - else
+          span.post__header__timestamps.event__header__timestamps class="has-tip" data={ tooltip: '' } tabindex='1' title=t('tooltip.event.calendar') aria_haspopup='true'
+            == fa_icon 'calendar', text: event.from_to_date.html_safe
 
+        / Location / Map
         - if show_page? && event.location?
           span.post__header__location.event__header__location data-open="map__modal"
             - span_location = fa_icon 'globe', text: event.full_address
@@ -23,6 +28,7 @@ article.post.event class="#{params[:action]}" id="event-#{event.id}"
             - else
              == span_location
 
+        / Event link
         - if event.link? && show_page?
           span.post__header__url.event__header__url
             = link_to fa_icon('link', text: t('event.know_more')), event.link_url, class: 'post__header__url__link', target: :_blank
