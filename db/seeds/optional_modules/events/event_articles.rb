@@ -12,8 +12,8 @@ puts 'Creating Event articles'
     show_map: true,
     show_calendar: true,
     online: true,
-    start_date: Faker::Date.backward(rand(5..20)),
-    end_date: Faker::Date.forward(rand(20..30))
+    start_date: Faker::Time.between(10.days.ago, DateTime.now + 10.days, :afternoon),
+    end_date: Faker::Time.between(DateTime.now + 10.days, DateTime.now + 30.days, :afternoon)
   )
   event.save(validate: false)
 

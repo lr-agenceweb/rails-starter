@@ -3,15 +3,21 @@ datetime_picker_input = Formtastic::Inputs::StringInput::DateTimePickerInput
 
 # This is for front-end (JavaScript)
 datetime_picker_input.default_datetime_picker_options = {
-  format: 'Y-m-d H:i',
-  defaultTime: '12:00',
-  inline: false,
-  timepicker: false,
+  # Core
   lang: 'fr',
+  inline: false,
   scrollMonth: false,
   scrollTime: false,
+
+  # Date
+  minDate: 0,
   dayOfWeekStart: 1,
-  minDate: 0
+  format: 'Y-m-d H:i',
+
+  # Time
+  timepicker: false,
+  defaultTime: '10:00',
+  allowTimes: [*9..18].map { |i| "#{i}:00" }
 }
 
 # This is for backend (Ruby)
