@@ -144,7 +144,7 @@ fr:
       title: Titre de l'article (avoir un bon titre est important pour le référencement)
       content: Contenu de l'article, visible sur le site
       prev_next: Si coché, un lien permettant d'accéder à l'article précédent et suivant sera ajouté sur le site
-      show_map: Afficher la carte géographique situant le lieu de l'événement pour les internautes (Attention, les paramètres de Localisation doivent être renseignés)
+      show_map: Afficher la carte géographique situant le lieu de l'événement pour les internautes <br /> (Attention, les paramètres de Localisation doivent être renseignés)
 
       # Setting
       setting:
@@ -186,7 +186,7 @@ fr:
       # Event
       event:
         online: En cochant la case en ligne, vous choisissez d'afficher l'événement sur le site
-        show_calendar: Afficher un calendrier de l'événement sur le site ? (Attention, le calendrier ne sera visible que si les options "date de début" et "date de fin" de l'événement sont spécifiées)
+        show_calendar: Afficher un calendrier de l'événement sur le site ? <br /> (Attention, le calendrier ne sera visible que si ses dates sont spécifiées)
 
         # Dates
         all_day: Cocher cette case si l'événement ne dure qu'une seule journée
