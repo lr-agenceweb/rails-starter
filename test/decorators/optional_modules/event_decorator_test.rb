@@ -71,10 +71,6 @@ class EventDecoratorTest < Draper::TestCase
     assert_equal '<time datetime="2016-05-23T02:00:00+02:00">23/05/2016</time>', @event_all_day_decorated.from_to_date
   end
 
-  test 'should not return from_to_date if start or end not set' do
-    assert_nil @event_two_decorated.from_to_date
-  end
-
   test 'should return correct value for current_event? with all_day?' do
     local_time_1 = Time.zone.local(2016, 5, 23, 14, 0, 0)
     local_time_2 = Time.zone.local(2016, 5, 20, 14, 0, 0)

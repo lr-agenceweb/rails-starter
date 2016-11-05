@@ -7,5 +7,5 @@ require 'test_helper'
 class SitemapHelperTest < ActionView::TestCase
   include Rails.application.routes.url_helpers
 
-  # TODO: Set tests
+  # TESTME: Set tests for this helper
 end
