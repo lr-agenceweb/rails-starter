@@ -37,10 +37,17 @@ class VideoUpload < ActiveRecord::Base
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
-  belongs_to :videoable, polymorphic: true, touch: true
+  # Constants
+  MAX_FILE_SIZE = 40 # megabytes
 
-  has_one :video_subtitle, as: :subtitleable, dependent: :destroy
-  accepts_nested_attributes_for :video_subtitle, reject_if: :all_blank, allow_destroy: true
+  # Model relations
+  belongs_to :videoable, polymorphic: true, touch: true
+  has_one :video_subtitle,
+          as: :subtitleable,
+          dependent: :destroy
+  accepts_nested_attributes_for :video_subtitle,
+                                reject_if: :all_blank,
+                                allow_destroy: true
 
   handle_attachment :video_file,
                     styles: {
@@ -70,11 +77,13 @@ class VideoUpload < ActiveRecord::Base
                     processors: [:transcoder]
 
   validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
-  validates_attachment_size :video_file, in: 0.megabytes..40.megabytes
+  validates_attachment_size :video_file, in: 0.megabytes..MAX_FILE_SIZE.megabytes
   process_in_background :video_file, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
+  # Delegates
   delegate :online, to: :video_subtitle, prefix: true, allow_nil: true
 
+  # Scopes
   scope :online, -> { where(online: true) }
   scope :not_processing, -> { where.not(video_file_processing: true) }
 end
