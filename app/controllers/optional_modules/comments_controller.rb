@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   include ModuleSettingable
 
   before_action :comment_module_enabled?
-  before_action :set_category, only: [:reply]
+  before_action :set_page, only: [:reply]
   before_action :set_background, only: [:reply]
   before_action :load_commentable
   before_action :set_comment, only: [:reply, :signal, :destroy]
@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
 
   include DeletableCommentable
 
-  decorates_assigned :comment, :about, :blog, :category
+  decorates_assigned :comment, :about, :blog, :page
 
   # POST /comments
   # POST /comments.json
@@ -84,7 +84,7 @@ class CommentsController < ApplicationController
   def load_commentable
     klass = [About, Blog].detect { |c| params["#{c.name.underscore}_id"] }
     @commentable = klass.find(params["#{klass.name.underscore}_id"])
-    @category = @categories.find_by(name: klass.model_name.to_s)
+    @page = @pages.find_by(name: klass.model_name.to_s)
     @controller_name = klass.name.underscore.pluralize
     redirect_to root_path unless @commentable.allow_comments?
   end
@@ -121,8 +121,8 @@ class CommentsController < ApplicationController
     User.current_user = try(:current_user)
   end
 
-  def set_category
-    @category = Category.find_by(name: 'Blog')
+  def set_page
+    @page = Page.find_by(name: 'Blog')
   end
 
   #

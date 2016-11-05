@@ -31,7 +31,7 @@ module Admin
       assert_response :success
     end
 
-    test 'should update category if logged in' do
+    test 'should update page if logged in' do
       patch :update, id: @background, background: {}
       assert_redirected_to admin_background_path(@background)
     end
@@ -165,8 +165,7 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
-      @category = categories(:home)
-      @category_about = categories(:about)
+
       @background = backgrounds(:home)
       @background_module = optional_modules(:background)
 

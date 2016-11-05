@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102220328) do
+ActiveRecord::Schema.define(version: 20161105165643) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -119,19 +119,6 @@ ActiveRecord::Schema.define(version: 20161102220328) do
 
   add_index "blogs", ["blog_category_id"], name: "index_blogs_on_blog_category_id", using: :btree
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
-
-  create_table "categories", force: :cascade do |t|
-    t.string   "name",               limit: 255
-    t.string   "color",              limit: 255
-    t.boolean  "optional",                       default: false
-    t.integer  "optional_module_id", limit: 4
-    t.integer  "menu_id",            limit: 4
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-  end
-
-  add_index "categories", ["menu_id"], name: "index_categories_on_menu_id", using: :btree
-  add_index "categories", ["optional_module_id"], name: "index_categories_on_optional_module_id", using: :btree
 
   create_table "comment_settings", force: :cascade do |t|
     t.boolean  "should_signal",   default: true
@@ -482,6 +469,19 @@ ActiveRecord::Schema.define(version: 20161102220328) do
     t.datetime "updated_at",                                null: false
   end
 
+  create_table "pages", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.string   "color",              limit: 255
+    t.boolean  "optional",                       default: false
+    t.integer  "optional_module_id", limit: 4
+    t.integer  "menu_id",            limit: 4
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  add_index "pages", ["menu_id"], name: "index_pages_on_menu_id", using: :btree
+  add_index "pages", ["optional_module_id"], name: "index_pages_on_optional_module_id", using: :btree
+
   create_table "picture_translations", force: :cascade do |t|
     t.integer  "picture_id",  limit: 4,     null: false
     t.string   "locale",      limit: 255,   null: false
@@ -651,12 +651,12 @@ ActiveRecord::Schema.define(version: 20161102220328) do
     t.boolean  "navigation",               default: false
     t.boolean  "bullet",                   default: false
     t.boolean  "online",                   default: true
-    t.integer  "category_id",  limit: 4
+    t.integer  "page_id",      limit: 4
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end
 
-  add_index "sliders", ["category_id"], name: "index_sliders_on_category_id", using: :btree
+  add_index "sliders", ["page_id"], name: "index_sliders_on_page_id", using: :btree
 
   create_table "slides", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4

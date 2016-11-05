@@ -1,9 +1,9 @@
-- if category.video?
-  = render 'assets/videos/video_background', video_background: category.video_upload.decorate
+- if page.video?
+  = render 'assets/videos/video_background', video_background: page.video_upload.decorate
 - else
-  - if category.background? && @background_module.enabled? && !@background.nil?
-    - cache category.background do
-      = render 'assets/backgrounds/background', background: category.background
+  - if page.background? && @background_module.enabled? && !@background.nil?
+    - cache page.background do
+      = render 'assets/backgrounds/background', background: page.background
 
 - if !slider.nil?
   = render 'assets/sliders/show', slider: slider, force: false

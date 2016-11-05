@@ -91,8 +91,8 @@ fr:
         twitter_username: Nom d'utilisateur sur Twitter
         date_format: Formatage de la date
 
-      # Category
-      category:
+      # Page
+      page:
         title: Titre
         title_d: Titre
         name: Nom de la catégorie
@@ -286,7 +286,7 @@ fr:
         image: Image
         attachable_id: Page
         attachable_type: Page associée
-        category_name: Page associée
+        page_name: Page associée
 
       # VideoPlatform
       video_platform:
@@ -338,7 +338,7 @@ fr:
         bullet: Ronds de navigation ?
         time_to_show: Temps entre chaque image
         animate: Effet d'animation
-        category_id: Page
+        page_id: Page
 
       # Slide
       slide:

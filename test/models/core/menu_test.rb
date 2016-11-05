@@ -34,7 +34,7 @@ class MenuTest < ActiveSupport::TestCase
     not_expected_in_menu(not_expected, menu_items)
   end
 
-  test 'should return only online menu items with category linked' do
+  test 'should return only online menu items with page linked' do
     menu_items = Menu.online.with_page
     expected = ['Accueil', 'Recherche', 'Livre d\'or', 'Blog', 'Evénements', 'Contact', 'A propos']
     not_expected = ['Test en-ligne', 'Test hors-ligne']
@@ -102,7 +102,7 @@ class MenuTest < ActiveSupport::TestCase
     not_expected_in_menu(not_expected, menu_items)
   end
 
-  test 'should return correct menu items to link page to category (current nil)' do
+  test 'should return correct menu items to link page to page (current nil)' do
     menu_items = Menu.self_or_available
     expected = ['Test en-ligne', 'Test hors-ligne']
     not_expected = ['Blog', 'Evénements', 'Contact', 'Recherche', 'Livre d\'or', 'A propos']
@@ -111,8 +111,8 @@ class MenuTest < ActiveSupport::TestCase
     not_expected_in_menu(not_expected, menu_items)
   end
 
-  test 'should return correct menu items to link page to category (current not nil)' do
-    menu_items = Menu.self_or_available(@menu_home.category)
+  test 'should return correct menu items to link page to page (current not nil)' do
+    menu_items = Menu.self_or_available(@menu_home.page)
     expected = ['Accueil', 'Test en-ligne', 'Test hors-ligne']
     not_expected = ['Blog', 'Evénements', 'Contact', 'Recherche', 'Livre d\'or', 'A propos']
 

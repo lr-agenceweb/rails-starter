@@ -3,7 +3,7 @@
     .small-12.columns
       .post__back-links
         p.post__back-links__back-to
-          = link_to t('link.back_to', page: @category.menu_title), resource.object.class.name.constantize
+          = link_to t('link.back_to', page: @page.menu_title), resource.object.class.name.constantize
 
           - if resource.is_a?(Blog)
             br

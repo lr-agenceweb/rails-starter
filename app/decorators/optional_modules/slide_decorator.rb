@@ -15,7 +15,7 @@ class SlideDecorator < PictureDecorator
   end
 
   def slider_page_name
-    model.attachable.category.menu_title
+    model.attachable.page.menu_title
   end
 
   def self_image_has_one_by_size(size = :slide)

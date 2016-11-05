@@ -18,7 +18,7 @@ module OptionalModules
     setup :initialize_test
 
     test 'sould return correct SEO for index page' do
-      seo_tag_index(@category.decorate)
+      seo_tag_index(@page_home.decorate)
 
       # Basics
       assert_equal 'Accueil', meta_tags[:title]
@@ -63,7 +63,7 @@ module OptionalModules
 
     def initialize_test
       @setting = settings(:one)
-      @category = categories(:home)
+      @page_home = pages(:home)
       @about = posts(:about)
     end
   end

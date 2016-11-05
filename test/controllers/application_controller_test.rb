@@ -38,8 +38,8 @@ class ApplicationControllerTest < ActionController::TestCase
 
   test 'should not have nil legal_notice content' do
     make_get_index(assertions) do
-      assert_not assigns(:legal_notice_category).nil?
-      assert_equal 'LegalNotice', assigns(:legal_notice_category).name
+      assert_not assigns(:page_legal_notice).nil?
+      assert_equal 'LegalNotice', assigns(:page_legal_notice).name
     end
   end
 

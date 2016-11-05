@@ -16,7 +16,7 @@
 # == OptionalModule Model
 #
 class OptionalModule < ActiveRecord::Base
-  has_one :category, dependent: :destroy
+  has_one :page, dependent: :destroy
   has_many :string_boxes, dependent: :destroy
 
   def self.list

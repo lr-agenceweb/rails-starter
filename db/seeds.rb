@@ -22,7 +22,7 @@ require_relative 'seeds/settings'
 # Menu items and pages
 require_relative 'seeds/optional_modules'
 require_relative 'seeds/core/menus'
-require_relative 'seeds/core/categories'
+require_relative 'seeds/core/pages'
 
 # Posts
 require_relative 'seeds/posts/legal_notices'

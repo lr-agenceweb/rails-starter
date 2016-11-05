@@ -52,7 +52,7 @@ class EventsController < ApplicationController
       single_event: false
     )
 
-    seo_tag_index category
+    seo_tag_index page
   end
 
   def set_event

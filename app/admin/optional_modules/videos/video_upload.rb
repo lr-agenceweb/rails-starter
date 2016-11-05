@@ -48,7 +48,7 @@ ActiveAdmin.register VideoUpload do
             row :title
             row :description_d
           end
-        end unless resource.category?
+        end unless resource.page?
       end
     end
   end
@@ -68,10 +68,10 @@ ActiveAdmin.register VideoUpload do
 
       column do
         render 'admin/assets/video_uploads/subtitles', f: f
-      end unless f.object.decorate.category?
+      end unless f.object.decorate.page?
     end
 
-    unless f.object.decorate.category?
+    unless f.object.decorate.page?
       f.inputs t('formtastic.titles.video_content_details') do
         f.translated_inputs 'Translated fields', switch_locale: true do |t|
           t.input :title

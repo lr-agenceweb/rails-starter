@@ -24,7 +24,7 @@ html lang="#{@language}" class='no-js'
     = csrf_meta_tag
     = raw analytical.head_append_javascript
 
-  body style="#{background_from_color_picker(category)}" itemscope='' itemtype='http://schema.org/WebPage' class="#{current_page?(root_url) ? 'is-homepage' : ''}"
+  body style="#{background_from_color_picker(page)}" itemscope='' itemtype='http://schema.org/WebPage' class="#{current_page?(root_url) ? 'is-homepage' : ''}"
     = raw analytical.body_prepend_javascript
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'

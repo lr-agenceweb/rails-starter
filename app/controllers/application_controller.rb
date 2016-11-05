@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   before_action :set_froala_key, if: :user_signed_in?
   before_action :set_legal_notices
 
-  decorates_assigned :setting, :category, :menu
+  decorates_assigned :setting, :page, :menu
 
   def not_found
     raise ActionController::RoutingError, 'Not Found'
@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_legal_notices
-    @legal_notice_category = @categories.find_by(name: 'LegalNotice')
+    @page_legal_notice = @pages.find_by(name: 'LegalNotice')
   end
 
   def set_host_name

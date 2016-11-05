@@ -20,8 +20,8 @@ fr:
       # Menu
       menu_details: Gestion de la configuration du Menu
 
-      # Category
-      category_details: Configuration de la page
+      # Page
+      page_details: Configuration de la page
 
       # OptionalModule
       optional_module_details: Configuration des modules optionels
@@ -61,7 +61,7 @@ fr:
 
       # Slider / Slide
       slider_details: Gestion de la configuration du Slider
-      slider_category_details: Page sur laquelle sera affichée le slider
+      slider_page_details: Page sur laquelle sera affichée le slider
       slide_details: Gestion des images du slider
       slide_picture: Gestion de l'image
       slide_content: Gestion de la légende
@@ -389,8 +389,8 @@ fr:
         show_in_footer: Montrer cet élément dans le menu du pied de page ?
         online: Activer cet élément ? Si désactivé, il ne sera alors visible ni dans le menu principal ni dans le pied de page.
 
-      # Category
-      category:
+      # Page
+      page:
         menu_id: Élément de menu lié à cette page
         color: Couleur de fond de page personnalisée
         optional_module_id: Choisir quel est le module optionel lié à cette catégorie

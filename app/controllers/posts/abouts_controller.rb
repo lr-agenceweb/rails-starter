@@ -12,7 +12,7 @@ class AboutsController < PostsController
   def index
     @abouts = About.includes(:translations).online.by_position
     @abouts = AboutDecorator.decorate_collection(@abouts.page(params[:page]))
-    seo_tag_index category
+    seo_tag_index page
   end
 
   # GET /a-propos/1

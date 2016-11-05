@@ -11,13 +11,13 @@
 #  navigation   :boolean          default(FALSE)
 #  bullet       :boolean          default(FALSE)
 #  online       :boolean          default(TRUE)
-#  category_id  :integer
+#  page_id      :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
 # Indexes
 #
-#  index_sliders_on_category_id  (category_id)
+#  index_sliders_on_page_id  (page_id)
 #
 
 DEFAULTS: &DEFAULTS
@@ -29,7 +29,7 @@ DEFAULTS: &DEFAULTS
   navigation: true
   bullet: true
   online: true
-  category: home
+  page: home
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
 
@@ -39,4 +39,4 @@ online:
 offline:
   <<: *DEFAULTS
   online: false
-  category: blog
+  page: blog

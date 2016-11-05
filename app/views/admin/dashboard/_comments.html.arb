@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 panel.panel t('activerecord.models.comment.other') do
   panel.table_for CommentDecorator.decorate_collection(query) do |p|
     if query.empty?
-      p.span t('post.no_results', category: t('activerecord.models.comment.one'))
+      p.span t('post.no_results', page: t('activerecord.models.comment.one'))
     else
       p.column t('activerecord.attributes.comment.link_source'), :link_source
       p.column t('activerecord.attributes.comment.message') do |resource|

@@ -10,14 +10,14 @@ ActiveAdmin.register Background do
   index do
     selectable_column
     image_column :image, style: :small
-    column :category_name
+    column :page_name
     actions
   end
 
   show title: :title_aa_show do
     arbre_cache(self, resource.cache_key) do
       attributes_table do
-        row :category_name
+        row :page_name
         image_row :image, style: :medium
       end
     end
@@ -29,12 +29,12 @@ ActiveAdmin.register Background do
     f.inputs t('formtastic.titles.background_details') do
       f.input :attachable_id,
               as: :select,
-              collection: Category.handle_pages_for_background(f.object),
+              collection: Page.handle_pages_for_background(f.object),
               include_blank: false
 
       f.input :attachable_type,
               as: :hidden,
-              input_html: { value: 'Category' }
+              input_html: { value: 'Page' }
 
       f.input :image,
               as: :file,

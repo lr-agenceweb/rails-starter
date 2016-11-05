@@ -13,7 +13,7 @@ class GuestBooksController < ApplicationController
   # GET /livre-d-or.json
   def index
     @guest_book = GuestBook.new
-    seo_tag_index category
+    seo_tag_index page
   end
 
   # POST /livre-d-or

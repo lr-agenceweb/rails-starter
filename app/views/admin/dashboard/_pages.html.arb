@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+panel.panel t('activerecord.models.page.other') do
+  panel.table_for PageDecorator.decorate_collection(query) do |p|
+    p.column t('activerecord.attributes.page.cover_preview'), :cover_preview
+    p.column t('activerecord.attributes.page.title'), :title_d
+  end
+end

@@ -3,7 +3,7 @@
 panel.panel t('activerecord.models.post.other') do
   panel.table_for PostDecorator.decorate_collection(query) do |p|
     if query.empty?
-      p.span t('post.no_results', category: t('activerecord.models.post.one'))
+      p.span t('post.no_results', page: t('activerecord.models.post.one'))
     else
       p.column t('activerecord.attributes.shared.image'), :image
       p.column t('activerecord.attributes.post.title'), :title_front_link

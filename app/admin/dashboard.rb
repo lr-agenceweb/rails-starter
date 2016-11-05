@@ -45,7 +45,7 @@ ActiveAdmin.register_page 'Dashboard' do
           render 'posts', panel: panel, query: @posts
 
           # Pages
-          render 'categories', panel: panel, query: Category.includes(:background, menu: [:translations]) if current_user.super_administrator?
+          render 'pages', panel: panel, query: Page.includes(:background, menu: [:translations]) if current_user.super_administrator?
         end # column
 
         # Right

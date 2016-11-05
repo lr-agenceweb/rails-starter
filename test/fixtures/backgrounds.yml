@@ -19,11 +19,11 @@
 #
 
 home:
-  attachable: home (Category)
+  attachable: home (Page)
   image_file_name: background-homepage.jpg
 
 blog:
-  attachable: blog (Category)
+  attachable: blog (Page)
 
 contact:
-  attachable: contact (Category)
+  attachable: contact (Page)

@@ -40,7 +40,7 @@ class ApplicationDecorator < Draper::Decorator
   #
   def social_share(element)
     if params[:action] == 'index' || params[:action] == 'new'
-      awesome_share_buttons(@category.title, popup: true)
+      awesome_share_buttons(@page.title, popup: true)
     else
       awesome_share_buttons(element.title, popup: true)
     end

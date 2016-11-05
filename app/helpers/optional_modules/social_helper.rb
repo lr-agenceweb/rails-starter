@@ -14,21 +14,21 @@ module OptionalModules
     # SEO Meta tags for index pages (include Facebook and Twitter)
     #
     # * *Args*    :
-    #   - +category+ -> category corresponding to the page
-    #   - +background+ -> background picture for category
+    #   - +page+ -> page corresponding to the page
+    #   - +background+ -> background picture for page
     #
-    def seo_tag_index(category, background = nil)
-      return false if category.nil?
+    def seo_tag_index(page, background = nil)
+      return false if page.nil?
       img = background.nil? ? nil : attachment_url(background.image, :medium)
-      title_seo = title_seo_structure(category.menu_title)
-      set_meta_tags title: category.menu_title,
-                    description: sanitize_and_truncate(category.referencement_description),
-                    keywords: category.referencement_keywords,
+      title_seo = title_seo_structure(page.menu_title)
+      set_meta_tags title: page.menu_title,
+                    description: sanitize_and_truncate(page.referencement_description),
+                    keywords: page.referencement_keywords,
                     og: {
                       title: title_seo,
-                      description: sanitize_and_truncate(category.referencement_description),
+                      description: sanitize_and_truncate(page.referencement_description),
                       type: 'article',
-                      url: category.menu_link(category.name, true),
+                      url: page.menu_link(page.name, true),
                       image: img
                     },
                     twitter: {
@@ -36,8 +36,8 @@ module OptionalModules
                       site: @setting.try(:twitter_username),
                       creator: @setting.try(:twitter_username),
                       title: title_seo,
-                      description: sanitize_and_truncate(category.referencement_description),
-                      url: category.menu_link(category.name, true),
+                      description: sanitize_and_truncate(page.referencement_description),
+                      url: page.menu_link(page.name, true),
                       image: img
                     }
     end
@@ -155,7 +155,7 @@ module OptionalModules
     end
 
     def element_by_action
-      index_page? || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' ? @category : instance_variable_get("@#{controller_name.underscore.singularize}")
+      index_page? || params[:action] == 'new' || params[:action] == 'create' || params[:action] == 'autocomplete' ? @page : instance_variable_get("@#{controller_name.underscore.singularize}")
     end
   end
 end

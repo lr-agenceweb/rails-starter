@@ -74,7 +74,7 @@ class PostDecorator < ApplicationDecorator
   # == Type of Post
   #
   def type_title
-    Category.title_by_category(type)
+    Page.title_by_page(type)
   end
 
   #

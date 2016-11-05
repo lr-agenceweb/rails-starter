@@ -74,7 +74,7 @@ ActiveAdmin.register Slide do
     include ActiveAdmin::Cachable
 
     def scoped_collection
-      super.includes attachable: [category: [menu: [:translations]]]
+      super.includes attachable: [page: [menu: [:translations]]]
     end
 
     def edit

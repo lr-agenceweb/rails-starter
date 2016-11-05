@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: categories
+# Table name: pages
 #
 #  id                 :integer          not null, primary key
 #  name               :string(255)
@@ -15,14 +15,14 @@
 #
 # Indexes
 #
-#  index_categories_on_menu_id             (menu_id)
-#  index_categories_on_optional_module_id  (optional_module_id)
+#  index_pages_on_menu_id             (menu_id)
+#  index_pages_on_optional_module_id  (optional_module_id)
 #
 
 #
-# == Category Model
+# == Page Model
 #
-class Category < ActiveRecord::Base
+class Page < ActiveRecord::Base
   include Core::Headingable
   include Core::Referenceable
   include OptionalModules::Assets::Backgroundable
@@ -40,13 +40,13 @@ class Category < ActiveRecord::Base
   # Scopes
   scope :with_allowed_module, -> { eager_load(:optional_module).where('(optional=? AND optional_module_id IS NULL) OR (optional=? AND optional_modules.enabled=?)', false, true, true) }
 
-  def self.title_by_category(category)
-    Category.includes(menu: [:translations]).find_by(name: category).menu_title
+  def self.title_by_page(page)
+    Page.includes(menu: [:translations]).find_by(name: page).menu_title
   end
 
   def self.handle_pages_for_background(current_background)
-    categories = Category.except_already_background(current_background.attachable)
-    categories.collect { |c| [c.menu_title, c.id] }
+    pages = Page.except_already_background(current_background.attachable)
+    pages.collect { |c| [c.menu_title, c.id] }
   end
 
   def slider?
@@ -54,19 +54,19 @@ class Category < ActiveRecord::Base
   end
 
   def self.except_already_background(myself = nil)
-    categories = []
-    Category.includes(:background).with_allowed_module.each do |category|
-      categories << category if category.background.nil? || category == myself
+    pages = []
+    Page.includes(:background).with_allowed_module.each do |page|
+      pages << page if page.background.nil? || page == myself
     end
-    categories
+    pages
   end
 
   def self.except_already_slider(myself = nil)
-    categories = []
-    Category.includes(:slider).with_allowed_module.each do |category|
-      categories << category if category.slider.nil? || category == myself
+    pages = []
+    Page.includes(:slider).with_allowed_module.each do |page|
+      pages << page if page.slider.nil? || page == myself
     end
-    categories
+    pages
   end
 
   # validates :menu_id,

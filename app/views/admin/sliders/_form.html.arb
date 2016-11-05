@@ -18,10 +18,10 @@ f.columns do
   end
 
   f.column do
-    f.inputs t('formtastic.titles.slider_category_details') do
-      f.input :category_id,
+    f.inputs t('formtastic.titles.slider_page_details') do
+      f.input :page_id,
               as: :select,
-              collection: Category.except_already_slider(f.object.category),
+              collection: Page.except_already_slider(f.object.page),
               include_blank: false
       f.input :online
     end

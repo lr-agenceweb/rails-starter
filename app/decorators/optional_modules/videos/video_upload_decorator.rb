@@ -19,8 +19,8 @@ class VideoUploadDecorator < VideoDecorator
     h.retina_image_tag model, :video_file, :preview
   end
 
-  def category?
-    videoable_type == 'Category'
+  def page?
+    videoable_type == 'Page'
   end
 
   #

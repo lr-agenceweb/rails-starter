@@ -6,9 +6,9 @@
 module SitemapHelper
   def classic_links
     add root_path
-    add abouts_path, priority: 0.7, changefreq: 'monthly' if Category.find_by(name: 'About').menu_online
-    add new_contact_path, priority: 0.7, changefreq: 'monthly' if Category.find_by(name: 'Contact').menu_online
-    add legal_notices_path, priority: 0.7, changefreq: 'monthly' if Category.find_by(name: 'LegalNotice').menu_online
+    add abouts_path, priority: 0.7, changefreq: 'monthly' if Page.find_by(name: 'About').menu_online
+    add new_contact_path, priority: 0.7, changefreq: 'monthly' if Page.find_by(name: 'Contact').menu_online
+    add legal_notices_path, priority: 0.7, changefreq: 'monthly' if Page.find_by(name: 'LegalNotice').menu_online
   end
 
   [Blog, Event].each do |mod|

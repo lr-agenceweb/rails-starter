@@ -12,8 +12,8 @@ module Skippable
                        # Core
                        :set_menu_elements,
                        :set_controller_name,
-                       :set_categories,
-                       :set_current_category,
+                       :set_pages,
+                       :set_current_page,
 
                        # OptionalModules
                        :set_background,

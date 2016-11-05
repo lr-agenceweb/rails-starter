@@ -4,14 +4,14 @@
 # == Homepage [Post]
 #
 crumb :root do
-  link Category.includes(menu: [:translations]).title_by_category('Home'), root_path
+  link Page.includes(menu: [:translations]).title_by_page('Home'), root_path
 end
 
 #
 # == About [Post]
 #
 crumb :abouts do
-  link Category.includes(menu: [:translations]).title_by_category('About'), abouts_path
+  link Page.includes(menu: [:translations]).title_by_page('About'), abouts_path
 end
 
 crumb :about do |about|
@@ -23,21 +23,21 @@ end
 # == LegalNotice [Post]
 #
 crumb :legal_notices do
-  link Category.includes(menu: [:translations]).title_by_category('LegalNotice'), legal_notices_path
+  link Page.includes(menu: [:translations]).title_by_page('LegalNotice'), legal_notices_path
 end
 
 #
 # == Connection [Post]
 #
 crumb :connections do
-  link Category.includes(menu: [:translations]).title_by_category('Connection'), connections_path
+  link Page.includes(menu: [:translations]).title_by_page('Connection'), connections_path
 end
 
 #
 # == Blog [OptionalModule]
 #
 crumb :blogs do
-  link Category.includes(menu: [:translations]).title_by_category('Blog'), blogs_path
+  link Page.includes(menu: [:translations]).title_by_page('Blog'), blogs_path
 end
 
 crumb :blog_category do |blog_category|
@@ -54,21 +54,21 @@ end
 # == GuestBook [OptionalModule]
 #
 crumb :guest_books do
-  link Category.includes(menu: [:translations]).title_by_category('Guestbook'), guest_books_path
+  link Page.includes(menu: [:translations]).title_by_page('Guestbook'), guest_books_path
 end
 
 #
 # == Searches [OptionalModule]
 #
 crumb :searches do
-  link Category.includes(menu: [:translations]).title_by_category('Search'), searches_path
+  link Page.includes(menu: [:translations]).title_by_page('Search'), searches_path
 end
 
 #
 # == Event [OptionalModule]
 #
 crumb :events do
-  link Category.includes(menu: [:translations]).title_by_category('Event'), events_path
+  link Page.includes(menu: [:translations]).title_by_page('Event'), events_path
 end
 
 crumb :event do |event|
@@ -80,5 +80,5 @@ end
 # == Contact
 #
 crumb :contact do
-  link Category.includes(menu: [:translations]).title_by_category('Contact'), new_contact_path
+  link Page.includes(menu: [:translations]).title_by_page('Contact'), new_contact_path
 end

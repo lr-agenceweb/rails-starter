@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 #
-# == CategoryDecorator
+# == PageDecorator
 #
-class CategoryDecorator < ApplicationDecorator
+class PageDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
@@ -83,6 +83,6 @@ class CategoryDecorator < ApplicationDecorator
   private
 
   def aa_page_name
-    "#{I18n.t('activerecord.models.category.one').downcase} \"#{model.decorate.menu_title}\""
+    "#{I18n.t('activerecord.models.page.one').downcase} \"#{model.decorate.menu_title}\""
   end
 end

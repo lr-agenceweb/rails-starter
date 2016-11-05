@@ -32,7 +32,7 @@ class SearchesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        seo_tag_index category
+        seo_tag_index page
         render :index
       end
       format.js { render :index, locals: { redirect: redirect } }

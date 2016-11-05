@@ -2,7 +2,7 @@
 
 f.columns do
   f.column do
-    f.inputs t('formtastic.titles.category_details') do
+    f.inputs t('formtastic.titles.page_details') do
       f.input :menu_id,
               as: :select,
               collection: nested_dropdown(Menu.self_or_available(f.object)),

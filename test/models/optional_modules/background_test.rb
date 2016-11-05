@@ -47,24 +47,24 @@ class BackgroundTest < ActiveSupport::TestCase
     end
   end
 
-  test 'should return categories except when backgroud setted' do
-    category_dropdown_items = Category.except_already_background
+  test 'should return pages except when backgroud setted' do
+    page_dropdown_items = Page.except_already_background
     expected = %w(Search GuestBook Event Test)
     not_expected = %w(Home Contact Blog)
 
-    expected_in_category_dropdown(expected, category_dropdown_items)
-    not_expected_in_category_dropdown(not_expected, category_dropdown_items)
+    expected_in_pages_dropdown(expected, page_dropdown_items)
+    not_expected_in_pages_dropdown(not_expected, page_dropdown_items)
   end
 
   test 'should return menu_title for pages without background' do
-    category_dropdown_items = Category.handle_pages_for_background(@background_home)
-    assert_includes category_dropdown_items, ['Accueil', categories(:home).id]
-    assert_includes category_dropdown_items, ['A propos', categories(:about).id]
-    assert_includes category_dropdown_items, ['Recherche', categories(:search).id]
-    assert_includes category_dropdown_items, ['Livre d\'or', categories(:guest_book).id]
-    assert_includes category_dropdown_items, ['Evénements', categories(:event).id]
-    assert_not category_dropdown_items.include?(['Contact', categories(:contact).id])
-    assert_not category_dropdown_items.include?(['Blog', categories(:blog).id])
+    page_dropdown_items = Page.handle_pages_for_background(@background_home)
+    assert_includes page_dropdown_items, ['Accueil', pages(:home).id]
+    assert_includes page_dropdown_items, ['A propos', pages(:about).id]
+    assert_includes page_dropdown_items, ['Recherche', pages(:search).id]
+    assert_includes page_dropdown_items, ['Livre d\'or', pages(:guest_book).id]
+    assert_includes page_dropdown_items, ['Evénements', pages(:event).id]
+    assert_not page_dropdown_items.include?(['Contact', pages(:contact).id])
+    assert_not page_dropdown_items.include?(['Blog', pages(:blog).id])
   end
 
   private
@@ -74,15 +74,15 @@ class BackgroundTest < ActiveSupport::TestCase
     @background_home = backgrounds(:home)
   end
 
-  def expected_in_category_dropdown(expected, category_dropdown_items)
+  def expected_in_pages_dropdown(expected, page_dropdown_items)
     expected.each do |item|
-      assert category_dropdown_items.map(&:name).include?(item), "\"#{item}\" should be included in dropdown"
+      assert page_dropdown_items.map(&:name).include?(item), "\"#{item}\" should be included in dropdown"
     end
   end
 
-  def not_expected_in_category_dropdown(not_expected, category_dropdown_items)
+  def not_expected_in_pages_dropdown(not_expected, page_dropdown_items)
     not_expected.each do |item|
-      assert_not category_dropdown_items.map(&:name).include?(item), "\"#{item}\" should not be included in dropdown"
+      assert_not page_dropdown_items.map(&:name).include?(item), "\"#{item}\" should not be included in dropdown"
     end
   end
 end

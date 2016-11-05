@@ -27,7 +27,7 @@ class ContactsController < ApplicationController
   # GET /contact/formulaire.json
   def new
     @contact_form = ContactForm.new
-    seo_tag_index category
+    seo_tag_index page
   end
 
   def create

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-# == Categories
+# == Pages
 #
 puts 'Creating Pages'
 description_en = [
@@ -53,7 +53,7 @@ keywords_fr = [
   element = element.to_s
   optional_module = instance_variable_get("@optional_module_#{element.to_s.underscore}")
 
-  category = Category.create!(
+  page = Page.create!(
     name: element,
     optional: optional_module.nil? ? false : true,
     optional_module_id: optional_module.try(:id),
@@ -61,13 +61,13 @@ keywords_fr = [
   )
 
   # Background
-  set_background(category, 'Category')
+  set_background(page, 'Page')
 
   # Heading
   if [true, false].sample
     heading = Heading.create!(
-      headingable_id: category.id,
-      headingable_type: 'Category',
+      headingable_id: page.id,
+      headingable_type: 'Page',
       content: "<p>#{Faker::Lorem.paragraph(2, true, 4)}</p>",
     )
     if @locales.include?(:en)
@@ -80,7 +80,7 @@ keywords_fr = [
   end
 
   # Referencement
-  set_referencement(category, 'Category')
+  set_referencement(page, 'Page')
 
   if index == 0
     vb_name = 'The-Fountain'
@@ -88,11 +88,11 @@ keywords_fr = [
 
     puts 'Uploading video background for homepage'
     video_background = VideoUpload.create!(
-      videoable_id: category.id,
-      videoable_type: 'Category',
+      videoable_id: page.id,
+      videoable_type: 'Page',
       video_file: File.new(path)
     )
   end
 
-  instance_variable_set("@category_#{element.to_s.underscore}", category)
+  instance_variable_set("@page_#{element.to_s.underscore}", page)
 end

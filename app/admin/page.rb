@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 include Core::MenuHelper
 
-ActiveAdmin.register Category do
+ActiveAdmin.register Page do
   menu parent: I18n.t('admin_menu.config')
   includes :background, :slider, :optional_module, :menu, menu: [:translations]
 
@@ -15,12 +15,12 @@ ActiveAdmin.register Category do
     params
   end
 
-  decorate_with CategoryDecorator
+  decorate_with PageDecorator
   config.clear_sidebar_sections!
   config.sort_order = 'menus.position asc'
 
-  batch_action :reset_cache, if: proc { can? :reset_cache, Category } do |ids|
-    Category.find(ids).each(&:touch)
+  batch_action :reset_cache, if: proc { can? :reset_cache, Page } do |ids|
+    Page.find(ids).each(&:touch)
     redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
   end
 

@@ -22,8 +22,8 @@ switch_locale = (element) ->
 
 
 slugify = ->
-  categories = ['home', 'about', 'content', 'blog', 'event', 'blog_category']
-  $.each categories, (i, val) ->
+  pages = ['home', 'about', 'content', 'blog', 'event', 'blog_category']
+  $.each pages, (i, val) ->
     column = if val == 'blog_category' then 'name' else 'title'
     j = 0
     while j < 2

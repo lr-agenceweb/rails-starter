@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: categories
+# Table name: pages
 #
 #  id                 :integer          not null, primary key
 #  name               :string(255)
@@ -13,8 +13,8 @@
 #
 # Indexes
 #
-#  index_categories_on_menu_id             (menu_id)
-#  index_categories_on_optional_module_id  (optional_module_id)
+#  index_pages_on_menu_id             (menu_id)
+#  index_pages_on_optional_module_id  (optional_module_id)
 #
 
 DEFAULTS: &DEFAULTS

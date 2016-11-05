@@ -27,7 +27,7 @@ class SliderTest < ActiveSupport::TestCase
   test 'should not be valid if all empty' do
     slider = Slider.new {}
     assert_not slider.valid?
-    assert_equal [:category, :animate], slider.errors.keys
+    assert_equal [:page, :animate], slider.errors.keys
   end
 
   test 'should not be valid if time_to_show is not empty' do
@@ -39,13 +39,13 @@ class SliderTest < ActiveSupport::TestCase
     assert_equal [:time_to_show], slider.errors.keys
   end
 
-  test 'should not be valid if category is not present' do
+  test 'should not be valid if page is not present' do
     attrs = sliders_attrs
-    attrs[:category] = nil
+    attrs[:page] = nil
 
     slider = Slider.new attrs
     assert_not slider.valid?
-    assert_equal [:category], slider.errors.keys
+    assert_equal [:page], slider.errors.keys
   end
 
   test 'should not be valid if animations is not allowed' do
@@ -77,7 +77,7 @@ class SliderTest < ActiveSupport::TestCase
   def sliders_attrs
     {
       time_to_show: 3000,
-      category: categories(:blog),
+      page: pages(:blog),
       animate: 'crossfade'
     }
   end

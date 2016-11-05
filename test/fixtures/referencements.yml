@@ -47,7 +47,7 @@ blog_mc:
 
 category_home:
   <<: *DEFAULTS
-  attachable: home (Category)
+  attachable: home (Page)
   title: Référencement pour catégorie home
   description: Description pour catégorie home
   keywords: "Mots-clés, pour, catégorie, home"

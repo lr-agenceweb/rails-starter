@@ -7,7 +7,7 @@ puts 'Creating Slider'
 slider = Slider.create!(
   animate: 'crossfade',
   navigation: true,
-  category_id: @category_blog.id
+  page_id: @page_blog.id
 )
 
 puts 'Uploading slides image for slider'
