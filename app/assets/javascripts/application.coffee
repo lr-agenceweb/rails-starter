@@ -2,8 +2,7 @@
 #= require jquery_ujs
 #= require jquery-ui/autocomplete
 
-#= require foundation
-#= require plugins/foundation_init
+#= require plugins/foundation
 
 #= require globals/_functions
 #= require base/flash

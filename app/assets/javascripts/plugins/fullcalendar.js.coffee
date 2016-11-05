@@ -1,8 +1,9 @@
 #= require moment
 #= require moment/en-gb
-#= require fullcalendar.3.0.1.min
+#= require temporary_workaround/fullcalendar.3.0.1.min
 #= require fullcalendar/lang/fr
 
+# UPGRADEME: Use official Fullcalendar gem version when 3.0.1 will be released
 $(document).on 'ready page:load page:restore', ->
   if $('#calendar').length
     $('#calendar').fullCalendar
@@ -25,13 +26,23 @@ $(document).on 'ready page:load page:restore', ->
       allDayHtml: I18n.t('event.all_day')
 
       # Callbacks
-      eventAfterAllRender: (view) ->
-        disable_calendar_navigation(view) if gon.single_event
-
       viewRender: (view, element) ->
         setTimeout ->
           highlight_current_day()
         , 2000
+
+      eventAfterAllRender: (view) ->
+        disable_calendar_navigation(view) if gon.single_event
+
+      eventRender: (event, element, view) ->
+        $title = $(element).find('.fc-list-item-title a')
+        opts = {
+          tipText: event.cover,
+          templateClasses: 'custom',
+          allowHtml: true
+        }
+        new Foundation.Tooltip($title, opts)
+        return element
 
     # Refresh calendar when opening Foundation modal box
     $('#fullcalendar__modal').on 'open.zf.reveal', ->
@@ -54,6 +65,7 @@ highlight_current_day = ->
 disable_calendar_navigation = (view) ->
   minDate = moment(gon.start_event)
   maxDate = moment(gon.end_event)
+  maxDate = minDate unless maxDate.isValid()
 
   # Past
   if minDate >= view.start and minDate <= view.end

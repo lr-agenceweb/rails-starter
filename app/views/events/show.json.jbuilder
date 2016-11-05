@@ -1,6 +1,3 @@
 # frozen_string_literal: true
-json.array! [@event] do
-  json.title @event.title
-  json.start @event.start_date
-  json.end @event.end_date
-end
+
+json.array! [event], partial: 'events/event', as: :event

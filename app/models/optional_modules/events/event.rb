@@ -39,6 +39,8 @@ class Event < ActiveRecord::Base
   include Linkable
 
   # Constantes
+  EVENT_START = 9 # 9:00
+  EVENT_END = 18 # 18:00
   I18N_SCOPE = 'activerecord.errors.models.event.attributes'
 
   # Callbacks
@@ -77,7 +79,6 @@ class Event < ActiveRecord::Base
   end
 
   def reset_end_date
-    self.start_date = start_date.to_datetime.change(hour: 0, min: 0, sec: 0)
     self.end_date = nil
   end
 

@@ -60,7 +60,8 @@ class EventsController < ApplicationController
   end
 
   def set_calendar_events
-    @calendar_events = Event.includes_collection.online
+    events = Event.includes_collection.online
+    @calendar_events = EventDecorator.decorate_collection(events)
   end
 
   def event_module_enabled?

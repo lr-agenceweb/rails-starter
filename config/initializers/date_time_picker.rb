@@ -15,9 +15,9 @@ datetime_picker_input.default_datetime_picker_options = {
   format: 'Y-m-d H:i',
 
   # Time
-  timepicker: false,
+  timepicker: true,
   defaultTime: '10:00',
-  allowTimes: [*9..18].map { |i| "#{i}:00" }
+  allowTimes: [*Event::EVENT_START..Event::EVENT_END].map { |i| "#{i}:00" }
 }
 
 # This is for backend (Ruby)
