@@ -13,7 +13,6 @@ puts 'Creating site Setting'
   logo: File.new("#{Rails.root}/db/seeds/fixtures/logo/logo.png"),
   logo_footer: File.new("#{Rails.root}/db/seeds/fixtures/logo/logo-lr-agenceweb.png"),
   per_page: 5,
-  show_map: true,
   show_qrcode: true,
   show_breadcrumb: true,
   show_file_upload: true,
