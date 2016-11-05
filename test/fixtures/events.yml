@@ -48,8 +48,9 @@ event_third:
   <<: *DEFAULTS
   id: 3
   start_date: '2015-08-15 09:00:00'
-  online: true
+  all_day: true
   show_calendar: true
+  online: true
 
 event_four:
   <<: *DEFAULTS
