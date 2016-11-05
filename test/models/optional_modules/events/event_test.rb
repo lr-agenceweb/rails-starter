@@ -10,8 +10,8 @@ class EventTest < ActiveSupport::TestCase
   setup :initialize_test
 
   #
-  # == Validation rules
-  #
+  # Validation rules
+  # ===================
   test 'should not be valid if title is not filled' do
     attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true }
     event = Event.new attrs
@@ -56,9 +56,17 @@ class EventTest < ActiveSupport::TestCase
     event.delete
   end
 
+  test 'should return correct columns name for event' do
+    expected = {
+      start_attr: 'start_date',
+      end_attr: 'end_date'
+    }
+    assert_equal expected, Event.new.send(:klass_attrs)
+  end
+
   #
-  # == Callback
-  #
+  # Callback
+  # ===========
   test 'should reset end_date if all_day is checked' do
     attrs = { id: SecureRandom.random_number(1_000), start_date: Time.zone.now, end_date: 2.days.from_now, all_day: true }
     event = define_event_record(attrs)
@@ -78,8 +86,8 @@ class EventTest < ActiveSupport::TestCase
   end
 
   #
-  # == Misc
-  #
+  # Misc
+  # ============
   test 'should return correct duration for event' do
     assert_equal '6 jours', @event.decorate.duration
   end
@@ -91,7 +99,7 @@ class EventTest < ActiveSupport::TestCase
       end_date: Time.zone.now + 1.day.to_i
     }
     event = define_event_record(attrs)
-    assert event.send(:calendar_dates)
+    assert event.send(:date_constraints)
     event.delete
   end
 
@@ -103,7 +111,7 @@ class EventTest < ActiveSupport::TestCase
     }
     scope = 'activerecord.errors.models.event.attributes'
     event = define_event_record(attrs)
-    assert_equal [I18n.t('end_date', scope: scope)], event.send(:calendar_dates)
+    assert_equal [I18n.t('end_date', scope: scope)], event.send(:date_constraints)
     event.delete
   end
 
@@ -119,8 +127,8 @@ class EventTest < ActiveSupport::TestCase
   end
 
   #
-  # == EventOrder
-  #
+  # EventOrder
+  # ===================
   test 'should return correct order if current_or_coming' do
     assert_equal 'Evénement 4', Event.with_conditions.first.title
   end
@@ -131,8 +139,8 @@ class EventTest < ActiveSupport::TestCase
   end
 
   #
-  # == Prev / Next
-  #
+  # Prev / Next
+  # ===================
   test 'should have a next record' do
     assert @event.next?, 'should have a next record'
     assert_equal @event.fetch_next.title, 'Evénement 3'
@@ -152,8 +160,8 @@ class EventTest < ActiveSupport::TestCase
   end
 
   #
-  # == Flash content
-  #
+  # Flash content
+  # ===================
   test 'should not have flash content if no video are uploaded' do
     @event.save!
     assert @event.video_upload_flash_notice.blank?
@@ -167,8 +175,8 @@ class EventTest < ActiveSupport::TestCase
   end
 
   #
-  # == Slug
-  #
+  # Slug
+  # ==========
   test 'should be valid if title is set properly' do
     event = Event.new(id: SecureRandom.random_number(1_000), start_date: Time.zone.now + 1.day, all_day: true)
     event.set_translations(

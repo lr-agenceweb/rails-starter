@@ -28,6 +28,7 @@
 #
 class Event < ActiveRecord::Base
   include Core::Referenceable
+  include Core::DateConstraintable
   include Core::FriendlyGlobalizeSluggable
   include Includes::EventIncludable
   include OptionalModules::Assets::Imageable
@@ -51,7 +52,7 @@ class Event < ActiveRecord::Base
 
   # Validation rules
   validates :start_date, presence: true
-  validate :calendar_dates, if: :calendar_dates?
+  validate :date_constraints, if: :calendar_dates?
 
   # Scopes
   scope :online, -> { where(online: true) }
@@ -65,18 +66,6 @@ class Event < ActiveRecord::Base
   end
 
   private
-
-  def calendar_dates
-    return true unless end_date <= start_date
-    errors.add :start_date, I18n.t('start_date', scope: I18N_SCOPE)
-    errors.add :end_date, I18n.t('end_date', scope: I18N_SCOPE)
-  end
-
-  def calendar_dates?
-    !all_day? ||
-      (has_attribute?(end_date) &&
-        !start_date.blank? && !end_date.blank?)
-  end
 
   def reset_end_date
     self.end_date = nil
