@@ -88,26 +88,6 @@ class GuestBooksControllerTest < ActionController::TestCase
   end
 
   #
-  # == Destroy
-  #
-  test 'should destroy guest_book if >= admin' do
-    sign_in @administrator
-    assert_difference ['GuestBook.count'], -1 do
-      delete :destroy, locale: 'fr', id: @guest_book
-      assert_equal I18n.t('comment.destroy.success'), flash[:success]
-      assert_redirected_to guest_books_path
-    end
-  end
-
-  test 'should not destroy guest_book if < admin' do
-    assert_no_difference ['GuestBook.count'] do
-      delete :destroy, locale: 'fr', id: @guest_book
-      assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
-      assert_redirected_to guest_books_path
-    end
-  end
-
-  #
   # == Template
   #
   test 'should use index template' do
@@ -180,26 +160,6 @@ class GuestBooksControllerTest < ActionController::TestCase
         xhr :post, :create, format: :js, locale: locale.to_s, guest_book: { username: 'Lucas', email: 'lucas@test.com', content: 'Merci !', lang: locale.to_s }
         assert_not assigns(:guest_book).validated
       end
-    end
-  end
-
-  #
-  # == Destroy
-  #
-  test 'AJAX :: should destroy guest_book if administrator' do
-    sign_in @administrator
-    assert_difference ['GuestBook.count'], -1 do
-      xhr :delete, :destroy, format: :js, locale: 'fr', id: @guest_book
-      assert_equal I18n.t('comment.destroy.success'), flash[:success]
-      assert_template :destroy
-    end
-  end
-
-  test 'AJAX :: should not destroy guest_book if < admin' do
-    assert_no_difference ['GuestBook.count'] do
-      xhr :delete, :destroy, format: :js, locale: 'fr', id: @guest_book
-      assert_equal I18n.t('comment.destroy.not_allowed'), flash[:error]
-      assert_template :forbidden
     end
   end
 

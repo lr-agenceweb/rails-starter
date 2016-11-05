@@ -11,19 +11,19 @@ class BlogsController < ApplicationController
 
   decorates_assigned :blog, :comment
 
-  # GET /blog
-  # GET /blog.json
+  # GET /blogs
+  # GET /blogs.json
   def index
-    @blogs = Blog.includes(:translations, :user, :picture, :video_uploads, :video_platforms, blog_category: [:translations]).published.order(created_at: :desc)
+    @blogs = Blog.includes_collection.published.order(created_at: :desc)
     per_p = @setting.per_page == 0 ? @blogs.count : @setting.per_page
     @blogs = BlogDecorator.decorate_collection(@blogs.page(params[:page]).per(per_p))
-    seo_tag_index category
+    seo_tag_index page
   end
 
-  # GET /blog/1
-  # GET /blog/1.json
+  # GET /blogs/1
+  # GET /blogs/1.json
   def show
-    redirect_to blog_category_path(@blog.blog_category, @blog), status: :moved_permanently if request.path_parameters[:id] != @blog.slug
+    redirect_to blog_category_blog_path(@blog.blog_category, @blog), status: :moved_permanently if request.path_parameters[:id] != @blog.slug
     seo_tag_show blog
   end
 

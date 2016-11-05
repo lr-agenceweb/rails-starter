@@ -18,7 +18,7 @@ class SettingTest < ActiveSupport::TestCase
     setting = Setting.new default_attrs
     assert_not setting.valid?
     assert_equal [:max_row], setting.errors.keys
-    assert_equal [I18n.t('form.errors.max_row')], setting.errors[:max_row]
+    assert_equal [I18n.t('errors.messages.max_row')], setting.errors[:max_row]
   end
 
   test 'should not update if name is empty' do

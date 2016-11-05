@@ -41,7 +41,7 @@ class PictureDecorator < ApplicationDecorator
   end
 
   def source_picture_title
-    return source_picture.menu_title if model.attachable_type == 'Category'
+    return source_picture.menu_title if model.attachable_type == 'Page'
     raw(source_picture.title)
   end
 

@@ -4,6 +4,10 @@
 
 #= require jquery-ui
 
+#= require i18n
+#= require i18n/translations
+#= require base/i18n_settings
+
 #= require modules/password_strength
 
 #= require globals/_functions
@@ -26,13 +30,13 @@
 #= require vex.combined.min.js
 #= require plugins/vex_config
 
-#= require i18n
-#= require i18n/translations
-
 #= require fotorama
 
+#= require plugins/emoticonize
+#= require plugins/datetimepicker
+
 $ ->
-  $.datetimepicker.setLocale('fr')
+  emoticonize_me()
 
   if $('#newsletter_setting_send_welcome_email').length
     $this = $('#newsletter_setting_send_welcome_email')

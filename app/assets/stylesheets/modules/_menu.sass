@@ -1,86 +1,52 @@
-.l-nav-item .l-nav-item-link
-  @include link-colors(rgba($black, .4), $black)
-  text-decoration: none
-.active .l-nav-item-link
-  @include link-colors($link-active-color)
+//
+// Menu [Header]
+// =============
 
-.is-homepage
-  .l-nav-item .l-nav-item-link
+// Active menu item
+.menu__item
+  .menu__item__link
     @include link-colors($menu-font-color, $white)
-  .active .l-nav-item-link
-    @include link-colors($link-active-color)
-
-.l-nav-container
-  position: relative
-  height: 40px
-  width: 100%
-  font-weight: 400
-  margin-top: 15px
-
-  ul
-    padding: 0
-    margin: 0 auto
-    height: 40px
-    float: right
-
-  .l-nav-item
-    display: inline
-    float: left
-    font-size: 13px
-    margin-left: 0
-    text-transform: uppercase
-
-    &:last-child
-      .l-nav-item-link
-        padding-right: 0
-        border-right: none
-
-    .l-nav-item-link
-      font-size: 13px
-      display: inline-block
-      text-decoration: none
-      padding: 0 5px
-
-    &:not(:last-child)
-      margin-right: 1.5rem
-    // &:not(:last-child):after
-    //   content: ''
-    //   color: $menu-font-color
-
-  a#pull
-    display: none
-    text-align: center
+  &.menu__item__active
+    .menu__item__link
+      @include link-colors($white)
 
 
+// One column menu (hidden)
+@media only screen and (min-width: 0)
+  .menu__nav
+    position: absolute
+    z-index: 2
+    width: 100%
 
-@media screen and (max-width: $menu-breakpoint-one)
-  .columns-for-logo, .columns-for-menu
-    margin-left: 0 !important
-  // .menu-site, .title-site
-  //   float: none
-  //   width: 100%
+    ul
+      display: none
+      height: auto
+      margin: 0
+      padding: 0
 
-  // .l-header-site .menu-site.v-bottom
-  //   margin-top: 20px
+    .menu__item
+      list-style-type: none
+      text-align: center
+      border-bottom: 1px solid $border-color
+      &__link
+        display: block
+        padding: 8px 0
+        background-color: $primary-color
 
-  // .title-site
-  //   text-align: center
-
-  // .l-nav-container
-  //   ul
-  //     float: none
-  //     width: 70%
-
-  //   .l-nav-item
-  //     &.show-for-breakpoint-one
-  //       display: block
-
-  //   .hide-for-breakpoint-one
-  //     display: none
+    // Menu block visible
+    a#pull
+      position: relative
+      display: block
+      width: 100%
+      padding: 10px
+      text-align: center
+      color: $white
+      background-color: $primary-color
+      +hamburger_menu
 
 
-// Version sur deux colonnes
-@media screen and (max-width: $menu-breakpoint-two)
+// Two columns menu (visible)
+@media only screen and (min-width: $menu-medium)
   .columns-for-logo, .columns-for-menu
     float: none
     width: 100%
@@ -88,22 +54,18 @@
   .menu-site
     padding: 0 !important
 
-  .l-nav-container
-    height: auto
-    margin-left: 0
+  .menu__nav
+    position: relative
     max-width: initial
     border: 1px solid $border-color
     border-bottom: none
 
     ul
-      width: 100%
-      display: block
-      height: auto
-      padding: 0
+      display: inherit
 
       // Even menu items number
       &.even
-        .l-nav-item
+        .menu__item
           &:nth-child(odd)
             border-right: 1px solid $border-color
           &:first-child
@@ -111,76 +73,48 @@
 
       // Odd menu items number
       &.odd
-        .l-nav-item
+        .menu__item
           &:first-child
             float: none
             width: 100%
           &:not(:first-child):nth-child(even)
             border-right: 1px solid $border-color
 
-    .l-nav-item
-      width: 50%
+    .menu__item
       float: left
-      position: relative
-      background-color: $menu-bg-color
-      border-bottom: 1px solid $border-color
-      display: block
+      width: 50%
       &:not(:last-child)
         margin-right: 0
-
-      .l-nav-item-link
-        text-align: center
-        padding: 8px 0
-        width: 100%
-        @include link-colors($white, $menu-font-color)
-
-
-      &.active
-        .l-nav-item-link
-          color: $link-active-color
 
       &:after
         content: none !important
 
-
-// Menu déroulant sur une colonne
-@media only screen and (max-width : $menu-breakpoint-three)
-  .l-nav-container
-    margin-top: 1rem
-    border: none
-
-    ul
-      display: none
-      height: auto
-      float: none
-
-    .l-nav-item
-      display: block
-      float: none
-      width: 100% !important
-      border-bottom: 1px solid $border-color
-      border-right: none !important
-
     a#pull
-      position: relative
-      display: block
-      width: 100%
-      // border-bottom: 1px solid $link-active-color
-      padding: 10px
-      background-color: $menu-bg-color
-      color: $white
+      display: none
 
-      // /* L'icône hamburger, en utilisant le box-shadow */
-      &:after
-        content: ''
-        position: absolute
-        top: 5px
-        right: 15px
-        display: inline-block
-        width: 1rem
-        height: 0
-        box-shadow: 0 10px 0 1px $border-color, 0 16px 0 1px $border-color, 0 22px 0 1px $border-color
+// Regular menu (large version)
+@media only screen and (min-width: $menu-large)
+  .columns-for-logo
+    margin-left: 8.33333%
 
-      &:hover
-        &:after
-          box-shadow: 0 10px 0 1px $border-color, 0 16px 0 1px $border-color, 0 22px 0 1px $border-color
+  .menu__nav
+    border: none
+    ul
+      float: right
+      height: $menu-large-height
+      &.odd
+        .menu__item
+          &:first-child
+            float: left
+      .menu__item
+        display: inline
+        width: auto !important
+        text-transform: uppercase
+        border: none !important
+        font-size: 13px
+        line-height: $menu-large-height
+        &__link
+          padding: 0
+          background: none
+        &:not(:last-child)
+          margin-right: 1.5rem

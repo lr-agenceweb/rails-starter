@@ -71,7 +71,7 @@ module Admin
 
     test 'should delete menu if super_administrator' do
       sign_in @super_administrator
-      @category = @menu_blog.category
+      @page = @menu_blog.page
       assert_difference ['Menu.count'], -1 do
         delete :destroy, id: @menu_blog
       end

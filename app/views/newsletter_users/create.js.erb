@@ -1,0 +1,15 @@
+// Reset input field
+$('#newsletter_user_email').val('');
+
+// Set success content
+$('#newsletter-form__feedback .form--success').html("<%= flash[:success] %>").removeClass('hide');
+
+// Hide success message
+setTimeout(function() {
+  $('#newsletter-form__feedback').fadeOut(300, function() {
+    $(this).find('.form--success').html('');
+  });
+}, 8000);
+
+// Reset LocalStorage
+reset_local_storage($('#new_newsletter_user'));

@@ -1,18 +1,20 @@
-aside#blog_sidebar.blog_sidebar
-  - if @blog_settings.show_last_posts?
+aside#blog__sidebar.blog__sidebar data-sticky='' data-anchor='sidebar_referer' data-btm-anchor='sidebar_referer:bottom'
+  - if @blog_setting.show_last_posts?
     section.last-blogs
       h4.last-blogs-title = I18n.t('blog.last_articles')
       ul
         - @last_blogs.each do |blog|
           - cache ['sidebar', blog] do |_|
-            li
+            li id="blog-#{blog.id}__sidebar"
               == link_to blog.title, blog_category_blog_path(blog.blog_category, blog)
               - if @comment_module.enabled?
-                span< = '('
-                = pluralize blog.comments.by_locale(@language).validated.count, I18n.t('activerecord.models.comment.one').downcase
-                span = ')'
+                - number = blog.comments.by_locale(@language).validated.count
+                =< '('
+                span id="blog__comment__count-#{blog.id}" = number
+                =< I18n.t("activerecord.models.comment.#{number > 1 ? 'other' : 'one'}").downcase
+                = ')'
 
-  - if @blog_settings.show_categories?
+  - if @blog_setting.show_categories?
     section.blog-categories
       h4.blog-categories-title = I18n.t('blog.blog_categories')
       ul
@@ -23,20 +25,17 @@ aside#blog_sidebar.blog_sidebar
             = pluralize blog_category.blogs.size, 'article'
             span = ')'
 
-  - if @comment_module.enabled? && @blog_settings.show_last_comments?
+  - if @comment_module.enabled? && @blog_setting.show_last_comments?
     section.last-comments
       h4.last-comments-title = I18n.t('blog.last_comments')
-      - if @last_comments.blank?
-        = I18n.t('comment.no_last_comments')
-      - else
-        - @last_comments.each do |comment|
-          .row
-            .small-2.columns
-              span.avatar = comment.avatar
-            .small-10.columns
-              span.pseudo< = comment.pseudo_registered_or_guest
-              span<> -
-              span.commentable< = link_to comment.commentable.title, blog_category_blog_path(comment.commentable.blog_category, comment.commentable, anchor: "comment-#{comment.id}")
+      #last-comments-container
+        - if @last_comments.blank?
+          span#last_comments_nil = I18n.t('comment.no_last_comments')
+        - else
+          - @last_comments.each do |comment|
+            = render 'blogs/sidebar/last_comments/row', comment: comment
 
-  br
-  p = link_to t('link.back_to', page: 'Blog'), blogs_path, class: 'button ffab before fa-arrow-left' if params[:controller] == 'blog_categories'
+  // BlogCategory
+  - if params[:controller] == 'blog_categories'
+    br
+    p = link_to t('link.back_to', page: 'Blog'), blogs_path, class: 'button ffab before fa-arrow-left'

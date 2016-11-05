@@ -13,6 +13,7 @@
 #  end_date        :datetime
 #  show_as_gallery :boolean          default(FALSE)
 #  show_calendar   :boolean          default(FALSE)
+#  show_map        :boolean          default(FALSE)
 #  online          :boolean          default(TRUE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -28,30 +29,34 @@
 class Event < ActiveRecord::Base
   include Core::Referenceable
   include Core::FriendlyGlobalizeSluggable
+  include Includes::EventIncludable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::VideoPlatformable
   include OptionalModules::Assets::VideoUploadable
+  include OptionalModules::Locationable
   include OptionalModules::Searchable
   include PrevNextable
   include Linkable
 
-  has_one :location, as: :locationable, dependent: :destroy
-  accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
+  # Constantes
+  EVENT_START = 9 # 9:00
+  EVENT_END = 18 # 18:00
+  I18N_SCOPE = 'activerecord.errors.models.event.attributes'
 
+  # Callbacks
+  before_validation :reset_end_date,
+                    if: proc { all_day? && start_date.present? }
+  before_validation :check_all_day,
+                    if: proc { end_date.blank? }
+
+  # Validation rules
   validates :start_date, presence: true
-  validate :calendar_date_correct?, if: :should_validate_calendar_dates?
+  validate :calendar_dates, if: :calendar_dates?
 
-  delegate :address, :postcode, :city, to: :location, prefix: true, allow_nil: true
-
+  # Scopes
   scope :online, -> { where(online: true) }
   scope :published, -> { online }
   scope :current_or_coming, -> { where('(start_date >= ?) OR (start_date <= ? AND end_date >= ?) OR (start_date = ? AND all_day = ?)', Time.zone.now, Time.zone.now, Time.zone.now, Time.zone.today, true) }
-
-  def calendar_date_correct?
-    return true unless end_date <= start_date
-    errors.add :start_date, I18n.t('form.errors.start_date')
-    errors.add :end_date, I18n.t('form.errors.end_date')
-  end
 
   def self.with_conditions
     event_order = EventSetting.first.event_order
@@ -61,9 +66,23 @@ class Event < ActiveRecord::Base
 
   private
 
-  def should_validate_calendar_dates?
+  def calendar_dates
+    return true unless end_date <= start_date
+    errors.add :start_date, I18n.t('start_date', scope: I18N_SCOPE)
+    errors.add :end_date, I18n.t('end_date', scope: I18N_SCOPE)
+  end
+
+  def calendar_dates?
     !all_day? ||
       (has_attribute?(end_date) &&
         !start_date.blank? && !end_date.blank?)
+  end
+
+  def reset_end_date
+    self.end_date = nil
+  end
+
+  def check_all_day
+    self.all_day = true
   end
 end

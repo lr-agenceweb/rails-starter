@@ -34,8 +34,25 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct title link for about (show action)' do
-    @post_about_decorated = PostDecorator.new(@post_about)
-    assert_equal '<a target="_blank" href="/a-propos/developpement-hebergement">Développement et Hébergement</a>', @post_about_decorated.title_front_link
+    @about_decorated = PostDecorator.new(@about)
+    assert_equal '<a target="_blank" href="/a-propos/developpement-hebergement-avec-ruby">Développement et Hébergement avec Ruby</a>', @about_decorated.title_front_link
+  end
+
+  #
+  # == Post link
+  #
+  test 'should return correct show_post_link content' do
+    expected = blog_category_blog_path(@blog.blog_category, @blog)
+    assert_equal expected, @blog_decorated.show_post_link
+
+    expected = blog_category_blog_url(@blog.blog_category, @blog)
+    assert_equal expected, @blog_decorated.show_post_link('url')
+
+    expected = about_path(@about)
+    assert_equal expected, @about_decorated.show_post_link
+
+    expected = about_url(@about)
+    assert_equal expected, @about_decorated.show_post_link('url')
   end
 
   #
@@ -57,7 +74,7 @@ class PostDecoratorTest < Draper::TestCase
     @post_decorated.picture.update_attributes(image: attachment)
 
     assert_equal "<img width=\"90\" height=\"50\" src=\"#{@post_decorated.picture.image.url(:small)}\" alt=\"Small background paris\" />", @post_decorated.image
-    assert_equal 'Pas d\'image', @post_about_decorated.image
+    assert_equal I18n.t('post.no_cover'), @about_decorated.image
   end
 
   test 'should return correct content for image_and_content' do
@@ -65,7 +82,7 @@ class PostDecoratorTest < Draper::TestCase
     @post_decorated.picture.update_attributes(image: attachment)
 
     assert_equal "<p>Premier article d'accueil</p><img src=\"#{attachment_url(@post_decorated.picture.image, :medium)}\" alt=\"Medium background paris\" />", @post_decorated.image_and_content
-    assert @post_about_decorated.image_and_content.blank?
+    assert_equal 'Ruby', @about_decorated.image_and_content
   end
 
   #
@@ -120,14 +137,6 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Comment
-  #
-  test 'should return correct comments count by article' do
-    @post_about_decorated = PostDecorator.new(@post_about_2)
-    assert_equal 2, @post_about_decorated.comments_count
-  end
-
-  #
   # == PublicationDate (publishable polymorphic)
   #
   test 'should return correct published_at content' do
@@ -164,20 +173,19 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct admin_link for article' do
-    assert_equal '<a href="/admin/abouts/developpement-hebergement">Voir</a>', @post_about_decorated.admin_link
+    assert_equal '<a href="/admin/abouts/developpement-hebergement-avec-ruby">Voir</a>', @about_decorated.admin_link
   end
 
   private
 
   def initialize_test
     @post = posts(:home)
-    @post_about = posts(:about)
-    @post_about_2 = posts(:about_2)
+    @about = posts(:about)
     @blog = blogs(:blog_online)
     @blog_naked = blogs(:naked)
 
     @post_decorated = PostDecorator.new(@post)
-    @post_about_decorated = PostDecorator.new(@post_about)
+    @about_decorated = PostDecorator.new(@about)
     @blog_decorated = PostDecorator.new(@blog)
     @blog_naked_decorated = PostDecorator.new(@blog_naked)
   end

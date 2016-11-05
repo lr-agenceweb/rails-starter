@@ -38,8 +38,8 @@ class ApplicationControllerTest < ActionController::TestCase
 
   test 'should not have nil legal_notice content' do
     make_get_index(assertions) do
-      assert_not assigns(:legal_notice_category).nil?
-      assert_equal 'LegalNotice', assigns(:legal_notice_category).name
+      assert_not assigns(:page_legal_notice).nil?
+      assert_equal 'LegalNotice', assigns(:page_legal_notice).name
     end
   end
 
@@ -118,11 +118,20 @@ class ApplicationControllerTest < ActionController::TestCase
     reset_analytical_conditions
   end
 
+  test 'should be false for analytical_modules? if Analytics module is disabled' do
+    good_analytical_conditions
+    @analytics_module.update_attribute(:enabled, false)
+    assert_not @analytics_module.enabled?
+    assert @controller.send(:analytical_modules?), 'analytical should be disabled'
+    reset_analytical_conditions
+  end
+
   private
 
   def initialize_test
     @locales = I18n.available_locales
     @setting = settings(:one)
+    @analytics_module = optional_modules(:analytics)
   end
 
   def make_get_index(assertions, loc = I18n.default_locale)
@@ -137,6 +146,8 @@ class ApplicationControllerTest < ActionController::TestCase
   def good_analytical_conditions
     Rails.env = 'production'
     assert Rails.env.production?
+
+    @controller.instance_variable_set(:@analytics_module, @analytics_module)
 
     @request.env['HTTP_DNT'] = '0'
     assert_equal '0', @request.headers['HTTP_DNT']

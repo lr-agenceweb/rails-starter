@@ -26,13 +26,6 @@ module Admin
       assert_response :success
     end
 
-    test 'should destroy guest_book' do
-      assert_difference ['GuestBook.count'], -1 do
-        delete :destroy, id: @guest_book
-      end
-      assert_redirected_to admin_guest_books_path
-    end
-
     test 'should not access new guest_book page' do
       get :new
       assert_redirected_to admin_dashboard_path
@@ -41,6 +34,24 @@ module Admin
     test 'should not access edit guest_book page' do
       get :edit, id: @guest_book
       assert_redirected_to admin_dashboard_path
+    end
+
+    #
+    # == Destroy
+    #
+    test 'should destroy guest_book' do
+      assert_difference ['GuestBook.count'], -1 do
+        delete :destroy, id: @guest_book
+      end
+      assert_redirected_to admin_guest_books_path
+    end
+
+    test 'AJAX :: should destroy guest_book' do
+      assert_difference ['GuestBook.count'], -1 do
+        xhr :delete, :destroy, id: @guest_book
+        assert_response :success
+        assert_template :destroy
+      end
     end
 
     #

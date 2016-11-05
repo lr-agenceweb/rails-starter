@@ -40,7 +40,7 @@ class ApplicationDecorator < Draper::Decorator
   #
   def social_share(element)
     if params[:action] == 'index' || params[:action] == 'new'
-      awesome_share_buttons(@category.title, popup: true)
+      awesome_share_buttons(@page.title, popup: true)
     else
       awesome_share_buttons(element.title, popup: true)
     end
@@ -90,13 +90,13 @@ class ApplicationDecorator < Draper::Decorator
   # == Prev / Next
   #
   def prev_post
-    prev_blog = model.fetch_prev
-    model.is_a?(Blog) ? blog_category_blog_path(prev_blog.blog_category, prev_blog) : prev_blog
+    previous_post = model.fetch_prev
+    previous_post.decorate.show_page_link
   end
 
   def next_post
-    next_blog = model.fetch_next
-    model.is_a?(Blog) ? blog_category_blog_path(next_blog.blog_category, next_blog) : next_blog
+    nextous_post = model.fetch_next
+    nextous_post.decorate.show_page_link
   end
 
   #

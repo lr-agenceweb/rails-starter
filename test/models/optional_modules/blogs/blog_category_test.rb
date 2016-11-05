@@ -49,7 +49,8 @@ class BlogCategoryTest < ActiveSupport::TestCase
   end
 
   test 'should add id to slug if slug already exists' do
-    blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
+    attrs = { id: SecureRandom.random_number(1_000) }
+    blog_category = BlogCategory.new attrs
     blog_category.set_translations(
       fr: { name: 'Foo' },
       en: { name: 'Bar' }

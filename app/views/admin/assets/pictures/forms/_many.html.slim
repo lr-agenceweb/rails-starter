@@ -1,0 +1,8 @@
+- f.inputs t('formtastic.titles.picture_details')
+  - f.has_many :pictures, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.picture.one')), sortable: :position do |item|
+    - item.input :image,
+                 as: :file,
+                 hint: "#{t('formtastic.hints.image')}<br />#{retina_image_tag(item.object, :image, :medium)}".html_safe
+
+    - item.input :online, as: :boolean
+    - item.input :_destroy, as: :boolean if item.object.self_image?

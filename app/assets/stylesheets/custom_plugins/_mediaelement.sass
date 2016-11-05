@@ -1,45 +1,148 @@
-.mejs-controls .mejs-captions-button .mejs-captions-selector
-  width: 100px
-
-  ul li
-    input[type="radio"] + label
-      margin-left: 3px
-      margin-right: 0
-      width: initial
-      color: $white
-
-// Background video for pages
-.heading-site
-  position: relative
+//
+// MediaElement
+// ============
+.mediaelement
   width: 100%
-  height: 100%
 
-  @include overlay-video
+// Base style fix
+.mejs-container
+  z-index: 3
+  .mejs-controls
+    background: rgba($black, .6)
 
-  .heading-video
-    position: fixed
-    min-width: 100%
-    min-height: 100%
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
-    z-index: -100
+    .mejs-button
+      button
+        &:focus
+          outline: none
+
+    // Progress bar
+    .mejs-time-rail
+      .mejs-time-loaded
+        background: $secondary-color
+      .mejs-time-total
+        background: rgba($steel, .9)
+
+    // Volume
+    .mejs-horizontal-volume-slider, .mejs-volume-slider
+      .mejs-horizontal-volume-current, .mejs-volume-current, .mejs-volume-handle
+        background: $secondary-color
+      .mejs-horizontal-volume-total
+        background: rgba($steel, .9)
+
+    // Caption
+    .mejs-captions-button
+      .mejs-captions-selector
+        width: 100px
+
+        ul li
+          input[type='radio']
+            width: 10px
+            height: 10px
+            border: 1px solid $white
+            border-radius: 50%
+            -webkit-appearance: none
+
+            &:before
+              display: block
+              width: 90%
+              height: 90%
+              margin: 8% auto
+              content: ''
+              transition: background .3s ease-in
+              border-radius: 50%
+
+            & + label
+              width: initial
+              margin-right: 0
+              margin-left: 3px
+              padding: 0
+              transition: border-bottom .3s ease-in
+              color: $white
+              border-bottom: 2px solid transparent
+
+            &:checked
+              &:before
+                background: $secondary-color
+              & + label
+                border-bottom: 2px solid $secondary-color
 
 
 // Logo
 .mejs-container .mejs-controls .mejs-logo-button
-  text-indent: 100%
-  white-space: nowrap
   overflow: hidden
   cursor: pointer
+  white-space: nowrap
+  text-indent: 100%
 
   span
     display: block
     width: 20px
     height: 20px
 
-.post-article
-  video
-    width: 100%
-    max-width: 100%
-    height: auto
+// Overlay on video play
+#shadow
+  &.night
+    position: absolute
+    z-index: 2
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    opacity: .8
+    background-color: $black
+
+//
+// Picture in Picture players mode
+// ===================
+.picture_in_picture
+  position: fixed
+  z-index: 999
+  right: 1rem
+  bottom: 1rem
+  width: 444px
+  color: $white
+  background-color: $primary-color
+  box-shadow: 1px 1px 5px $primary-color
+  .post__audio__figure,
+  .post__video__figure
+    margin: 0
+
+  .mejs-controls
+    .mejs-mute, .mejs-logo-button, .mejs-captions-button, .mejs-fullscreen-button
+      display: none
+
+  .mejs-time-rail
+    width: 340px !important
+  .mejs-time-total
+    width: 330px !important
+
+  // Audio
+  .mejs-audio
+
+  // Viddeo
+  .mejs-video
+    width: 100% !important
+    height: 250px !important
+    .mejs-overlay
+      transform: scale(.6)
+
+//
+// Background video for pages
+//
+.heading-site
+  position: relative
+  width: 100%
+  height: 100%
+  @include overlay-video
+
+  &:after
+    z-index: -1
+
+  .heading-video
+    position: fixed
+    z-index: -100
+    top: 50%
+    left: 50%
+    min-width: 100%
+    min-height: 100%
+    transform: translate(-50%, -50%)

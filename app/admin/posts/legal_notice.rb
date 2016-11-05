@@ -3,13 +3,12 @@ ActiveAdmin.register LegalNotice do
   menu parent: I18n.t('admin_menu.posts')
   includes :translations, :user, :picture
 
-  permit_params :id,
-                :type,
-                :online,
-                :user_id,
-                translations_attributes: [
-                  :id, :locale, :title, :content
-                ]
+  permit_params do
+    params = [:type, :user_id]
+    params.push(*general_attributes)
+    params.push(*post_attributes)
+    params
+  end
 
   decorate_with LegalNoticeDecorator
   config.clear_sidebar_sections!
@@ -51,20 +50,14 @@ ActiveAdmin.register LegalNotice do
   end
 
   form do |f|
-    f.inputs 'Général' do
-      f.input :online,
-              label: I18n.t('form.label.online'),
-              hint: I18n.t('form.hint.online')
+    f.inputs t('formtastic.titles.post_generals') do
+      f.input :online
     end
 
-    f.inputs 'Contenu de l\'article' do
+    f.inputs t('formtastic.titles.post_translations') do
       f.translated_inputs 'Translated fields', switch_locale: true do |t|
-        t.input :title,
-                label: I18n.t('activerecord.attributes.post.title'),
-                hint: I18n.t('form.hint.title')
+        t.input :title
         t.input :content,
-                label: I18n.t('activerecord.attributes.post.content'),
-                hint: I18n.t('form.hint.content'),
                 input_html: { class: 'froala' }
       end
     end
@@ -76,6 +69,7 @@ ActiveAdmin.register LegalNotice do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include ActiveAdmin::Postable
     include ActiveAdmin::Cachable
   end

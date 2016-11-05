@@ -42,17 +42,19 @@ module OptionalModules
     end
 
     test 'should return correct value for qrcode_base_url' do
-      assert_equal "//chart.apis.google.com/chart?chs=200x200&cht=qr&chl=#{u @vcard_string}", qrcode_base_url(200)
+      assert_equal "http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl=#{u @vcard_string}", qrcode_base_url(200)
     end
 
     test 'should return correct value for qrcode_image_tag' do
-      assert_equal "<img alt=\"QrCode\" src=\"//chart.apis.google.com/chart?chs=100x100&amp;cht=qr&amp;chl=#{u @vcard_string}\" />", qrcode_image_tag(100)
+      assert_equal "<img alt=\"QrCode\" src=\"http://chart.apis.google.com/chart?chs=100x100&amp;cht=qr&amp;chl=#{u @vcard_string}\" />", qrcode_image_tag(100)
     end
 
     private
 
     def initialize_test
       @setting = settings(:one)
+      @map_setting = map_settings(:one)
+
       @vcard_string = "BEGIN:VCARD\nVERSION:3.0\nN:Rails Starter\nFN:Rails Starter\nTEL;WORK:+33 (0)1 02 03 04 05\nADR;WORK:;;1 Main Street;Auckland;;06001;France\nORG:Rails Starter démarre rapidement\nEMAIL:demo@rails-starter.com\nURL:http://test.host/\nEND:VCARD"
     end
   end

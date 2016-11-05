@@ -35,18 +35,11 @@ ActiveAdmin.register BlogSetting do
 
     columns do
       column do
-        f.inputs t('general') do
-          f.input :prev_next,
-                  hint: I18n.t('form.hint.post.prev_next')
-          f.input :show_last_posts,
-                  hint: I18n.t('form.hint.post.show_last_posts')
-          f.input :show_categories,
-                  hint: I18n.t('form.hint.post.show_categories')
-
-          if comment_module.enabled?
-            f.input :show_last_comments,
-                    hint: I18n.t('form.hint.post.show_last_comments')
-          end
+        f.inputs t('formtastic.titles.blog_setting_details') do
+          f.input :prev_next
+          f.input :show_last_posts
+          f.input :show_categories
+          f.input :show_last_comments if comment_module.enabled?
         end
       end
     end

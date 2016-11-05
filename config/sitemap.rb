@@ -19,9 +19,9 @@ SitemapGenerator::Sitemap.create do
       I18n.with_locale(locale) do
         classic_links
 
-        blog_module if OptionalModule.by_name('Blog').enabled? && Category.find_by(name: 'Blog').menu_online
-        event_module if OptionalModule.by_name('Event').enabled? && Category.find_by(name: 'Event').menu_online
-        guest_book_module if OptionalModule.by_name('GuestBook').enabled? && Category.find_by(name: 'GuestBook').menu_online
+        blog_module if OptionalModule.by_name('Blog').enabled? && Page.find_by(name: 'Blog').menu_online
+        event_module if OptionalModule.by_name('Event').enabled? && Page.find_by(name: 'Event').menu_online
+        guest_book_module if OptionalModule.by_name('GuestBook').enabled? && Page.find_by(name: 'GuestBook').menu_online
         rss_module if OptionalModule.by_name('RSS').enabled?
       end
     end

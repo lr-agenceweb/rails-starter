@@ -12,7 +12,7 @@ class @MapBoxSingleton
     set_view: (latitude, longitude) ->
       @map.setView([latitude, longitude], 12)
 
-    set_marker: (latitude, longitude) ->
+    set_marker: (latitude, longitude, symbol, popup, popup_content) ->
       @featureLayer = L.mapbox.featureLayer(
         type: 'FeatureCollection'
         features: [ {
@@ -20,7 +20,7 @@ class @MapBoxSingleton
           properties:
             'marker-color': gon.marker_color
             'marker-size': 'medium'
-            'marker-symbol': gon.marker_icon
+            'marker-symbol': symbol
           geometry:
             type: 'Point'
             coordinates: [
@@ -29,15 +29,20 @@ class @MapBoxSingleton
             ]
         } ]).addTo(@map)
 
-      @featureLayer.eachLayer (layer) ->
-        $.ajax
-          url: $('#map').data 'url-popup'
-          success: (data) ->
-            layer.bindPopup data, {}
+      if popup
+        @featureLayer.eachLayer (layer) ->
+          if popup_content
+            layer.bindPopup popup_content, {}
             layer.openPopup()
-          error: (jqXHR, textStatus, errorThrown) ->
-            console.log "Error :: #{errorThrown}"
-        return
+          else
+            $.ajax
+              url: $('#map').data 'url-popup'
+              success: (data) ->
+                layer.bindPopup data, {}
+                layer.openPopup()
+              error: (jqXHR, textStatus, errorThrown) ->
+                console.log "Error :: #{errorThrown}"
+            return
 
     remove_existing_layers: ->
       m = @map
@@ -63,6 +68,10 @@ class @MapBoxSingleton
         @map.dragging.disable()
         if @map.tap
           @map.tap.disable()
+
+    destroy_map: ->
+      @map.off()
+      @map.remove()
 
   @get: (accessToken, username, key, force = false) ->
     if force

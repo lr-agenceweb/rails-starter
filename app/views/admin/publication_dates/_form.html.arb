@@ -1,23 +1,17 @@
 # frozen_string_literal: true
 
-f.inputs t('activerecord.models.publication_date.one'), for: [:publication_date, f.object.publication_date || PublicationDate.new] do |item|
-  item.input :published_later,
-             hint: t('form.hint.publication_date.published_later')
-
+f.inputs t('formtastic.titles.publication_date'), for: [:publication_date, f.object.publication_date || PublicationDate.new] do |item|
+  item.input :published_later
   item.input :published_at,
              as: :date_time_picker,
              picker_options: {
                inline: false
-             },
-             hint: t('form.hint.publication_date.published_at')
+             }
 
-  item.input :expired_prematurely,
-             hint: t('form.hint.publication_date.expired_prematurely')
-
+  item.input :expired_prematurely
   item.input :expired_at,
              as: :date_time_picker,
              picker_options: {
                inline: false
-             },
-             hint: t('form.hint.publication_date.expired_at')
+             }
 end

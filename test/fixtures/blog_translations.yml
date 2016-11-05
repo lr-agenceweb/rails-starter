@@ -47,3 +47,18 @@ naked_en:
   locale: en
   title: Blog article naked
   slug: blog-article-naked
+
+# Many comments
+many_comments_fr:
+  <<: *DEFAULTS
+  blog_id: <%= ActiveRecord::FixtureSet.identify(:many_comments) %>
+  locale: fr
+  title: Article de blog avec beaucoup de commentaires
+  slug: article-de-blog-avec-beaucoup-de-commentaires
+
+many_comments_en:
+  <<: *DEFAULTS
+  blog_id: <%= ActiveRecord::FixtureSet.identify(:many_comments) %>
+  locale: en
+  title: Blog article with many comments
+  slug: blog-article-with-many-comments

@@ -1,19 +1,27 @@
 - breadcrumb :events
+= render 'elements/background_page_cover', page: page
 
-- if category.background? && @background_module.enabled? && !@background.nil?
-  - cache category.background do
-    = render 'assets/backgrounds/background', background: category.background
-/ = render 'assets/sliders/show', slider: @category.slider, force: false unless @category.slider.nil?
+section.page-section.posts.events.row.align-center#events class="#{params[:action]}"
+  .small-12.columns
+    = render 'pages/title_and_heading'
 
-section.events-section.page-section#events
-  .row
-    .small-12.columns
-      = title_for_category(category)
-
-  .row.align-center
+  .small-11.columns
     - if @events.blank?
-      .small-12.columns
-        p = t('event.no_results')
+      p = t('posts.events.empty')
+
     - else
-      .small-12.medium-8.columns
-        = render 'events'
+      - if @calendar_module.enabled? && @event_setting.show_calendar?
+        .row.align-center
+          .small-12.medium-11.columns
+            = render 'events/calendar'
+
+      .row.align-center
+        .small-12.medium-11.columns
+          #events-container
+            .row.small-up-1.medium-up-2.large-up-3.block-grid#masonry-container
+              - @events.each do |event|
+                - cache ['list', event]
+                  .column.masonry-item
+                    = render 'events/event', event: event
+
+          = paginate @events

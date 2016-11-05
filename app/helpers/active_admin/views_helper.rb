@@ -10,8 +10,8 @@ module ActiveAdmin
   module ViewsHelper
     def action_item_page(name = '', title = 'heading')
       query = name.blank? ? controller_name.classify : name
-      category = Category.includes(menu: [:translations]).find_by(name: query)
-      link_to t("active_admin.action_item.edit_#{title}", page: category.menu_title).html_safe, edit_admin_category_path(category, section: title, anchor: title), target: :_blank
+      page = ::Page.includes(menu: [:translations]).find_by(name: query)
+      link_to t("active_admin.action_item.edit_#{title}", page: page.menu_title).html_safe, edit_admin_page_path(page, section: title, anchor: title), target: :_blank
     end
 
     # Method used to allow caching show action

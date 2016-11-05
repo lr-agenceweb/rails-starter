@@ -1,0 +1,9 @@
+.row.align-center
+  .small-3.medium-2.columns
+    .form-comment__author.comment__author
+      .form-comment__author__avatar.comment__author__avatar
+        = retina_thumb_square(current_user)
+      = comment.pseudo(current_user.username)
+
+  .small-12.medium-10.columns
+    = render 'comments/textarea_and_submit', f: f

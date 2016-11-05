@@ -80,7 +80,7 @@ class ApplicationDecoratorTest < Draper::TestCase
 
   def initialize_test
     @setting = settings(:one)
-    @contact = categories(:contact)
+    @contact = pages(:contact)
     @comment = comments(:one)
     @blog_setting = blog_settings(:one)
     @blog_article = blogs(:blog_online)

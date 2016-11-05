@@ -46,11 +46,22 @@ module Admin
       assert_redirected_to admin_connection_path(@connection)
     end
 
-    test 'should destroy connection article' do
+    #
+    # == Destroy
+    #
+    test 'should destroy connection' do
       assert_difference ['Connection.count', 'Link.count'], -1 do
         delete :destroy, id: @connection
+        assert_redirected_to admin_connections_path
       end
-      assert_redirected_to admin_connections_path
+    end
+
+    test 'AJAX :: should destroy blog' do
+      assert_difference ['Connection.count', 'Link.count'], -1 do
+        xhr :delete, :destroy, id: @connection
+        assert_response :success
+        assert_template :destroy
+      end
     end
 
     #

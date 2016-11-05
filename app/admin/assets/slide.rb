@@ -3,9 +3,7 @@ ActiveAdmin.register Slide do
   menu parent: I18n.t('admin_menu.assets')
   includes :translations, :attachable
 
-  permit_params :id,
-                :image,
-                :online,
+  permit_params :id, :image, :online,
                 translations_attributes: [
                   :id, :locale, :title, :description
                 ]
@@ -22,7 +20,7 @@ ActiveAdmin.register Slide do
     selectable_column
     image_column :image, style: :crop_thumb
     column :title
-    column :description_deco
+    column :description_d
     column :attachable
     bool_column :online
     actions
@@ -33,7 +31,7 @@ ActiveAdmin.register Slide do
       attributes_table do
         image_row :image, style: :small
         row :title
-        row :description_deco
+        row :description_d
         bool_row :online
       end
     end
@@ -44,28 +42,23 @@ ActiveAdmin.register Slide do
 
     columns do
       column do
-        f.inputs 'Contenu de la slide' do
-          f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :title,
-                    label: I18n.t('activerecord.attributes.slide.title'),
-                    hint: I18n.t('form.hint.slide.title')
-            t.input :description,
-                    label: I18n.t('activerecord.attributes.slide.description'),
-                    hint: I18n.t('form.hint.slide.description'),
-                    input_html: { class: '' }
-          end
+        f.inputs t('formtastic.titles.slide_picture') do
+          hint = "#{t('formtastic.hints.slide.size')} <br /><br /> #{retina_image_tag(f.object, :image, :small)}".html_safe
+          f.input :image,
+                  as: :file,
+                  hint: hint
+
+          f.input :online
         end
       end
 
       column do
-        f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
-          f.input :image,
-                  as: :file,
-                  label: I18n.t('form.label.slide'),
-                  hint: "#{retina_image_tag(f.object, :image, :small)} <br/> #{I18n.t('form.hint.slide.size')}".html_safe
-          f.input :online,
-                  label: I18n.t('form.label.online'),
-                  hint: I18n.t('form.hint.online')
+        f.inputs t('formtastic.titles.slide_content') do
+          f.translated_inputs 'Translated fields', switch_locale: true do |t|
+            t.input :title
+            t.input :description,
+                    input_html: { class: 'small-height' }
+          end
         end
       end
     end
@@ -81,7 +74,7 @@ ActiveAdmin.register Slide do
     include ActiveAdmin::Cachable
 
     def scoped_collection
-      super.includes attachable: [category: [menu: [:translations]]]
+      super.includes attachable: [page: [menu: [:translations]]]
     end
 
     def edit

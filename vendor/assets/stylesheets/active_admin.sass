@@ -5,6 +5,7 @@
 @import active_skin
 @import activeadmin-sortable
 @import activeadmin_addons/all
+
 @import globals/mixins
 @import globals/settings
 // @import foundation/foundation_and_overrides
@@ -34,6 +35,7 @@
 @import vex
 @import vex-theme-plain
 @import fotorama
+@import jquery.cssemoticons
 
 @import admin/base
 @import modules/logo
@@ -44,5 +46,9 @@
 @import admin/header
 @import admin/newsletter
 @import admin/active_skin_fix
-@import admin/vex_fix
 @import admin/slick_carousel_fix
+
+// Fix
+$large-up: 'screen and (min-width: 64em)'
+@import modules/vex_fix
+@import custom_plugins/fotorama

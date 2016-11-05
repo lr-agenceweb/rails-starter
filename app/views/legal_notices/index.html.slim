@@ -1,8 +1,17 @@
 - breadcrumb :legal_notices
+= render 'elements/background_page_cover', page: page
 
-section.legal_notices-section.page-section#legal_notices
-  .row
-    .small-12.columns
-      = title_for_category(category)
+section.page-section.posts.legal_notices.row.align-center#legal_notices
+  .small-12.columns
+    = render 'pages/title_and_heading'
 
-  = render 'legal_notices'
+  .small-11.columns
+    .row.small-up-1.medium-up-2 data-equalizer='' data-equalize-by-row="true"
+      - @legal_notices.each_with_index do |legal_notice, index|
+        - next if legal_notice == @legal_notices.last
+        = cache legal_notice do |_|
+          .column
+            = render 'legal_notices/legal_notice', legal_notice: legal_notice
+
+    #cookie_post class="#{params[:highlight].blank? ? '' : params[:highlight]}"
+      = render 'legal_notices/legal_notice', legal_notice: @legal_notices.last

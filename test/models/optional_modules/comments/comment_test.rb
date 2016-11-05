@@ -61,13 +61,40 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal 1, @comment_anthony.children.length
   end
 
+  test 'should be able to reply if not max_depth' do
+    comment = Comment.new(comment: 'youpi', username: 'leila', email: 'leila@skywalker.fr', lang: 'fr', parent_id: @comment_bob.id)
+    assert comment.valid?
+    assert comment.errors.keys.empty?
+    assert comment.errors.messages.empty?
+  end
+
+  test 'should not be able to create reply if max_depth' do
+    comment = Comment.new(comment: 'youpi', username: 'leila', email: 'leila@skywalker.fr', lang: 'fr', parent_id: @max_depth.id)
+    assert_not comment.valid?
+    assert_equal [:parent_id], comment.errors.keys
+    assert_equal({ parent_id: [I18n.t('max_depth', scope: @i18n_scope)] }, comment.errors.messages)
+  end
+
+  test 'should return correct boolean value for max_depth?' do
+    assert @max_depth.max_depth?
+    assert_not @comment_bob.max_depth?
+    assert_not @comment_anthony.max_depth?
+  end
+
+  test 'should return correct boolean value for strict_max_depth?' do
+    assert @max_depth.max_depth?
+    assert_not @comment_bob.max_depth?
+    assert_not @comment_anthony.max_depth?
+  end
+
   private
 
   def initialize_test
-    @about = posts(:about_2)
-
     @comment_anthony = comments(:one)
     @comment_bob = comments(:two)
+    @max_depth = comments(:depth_2)
+
     @comment_setting = comment_settings(:one)
+    @i18n_scope = 'activerecord.errors.models.comment.attributes'
   end
 end

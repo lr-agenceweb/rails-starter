@@ -13,7 +13,7 @@ class BackgroundDecoratorTest < Draper::TestCase
   # == Background
   #
   test 'should return page title for background image' do
-    assert_equal 'Accueil', @background_decorated.category_name
+    assert_equal 'Accueil', @background_decorated.page_name
   end
 
   #

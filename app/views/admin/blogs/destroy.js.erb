@@ -1,0 +1,23 @@
+// Variables
+$post = $("#blog-<%= resource.id %>");
+$parent = $post.parent();
+$sidebar = $('#blog__sidebar');
+index = $('.posts.index').length > 0 ? true : false
+
+if(index) {
+  // SlideUp destroyed article
+  $parent.slideUp(300, function() {
+    $parent.remove();
+
+    // Reload Masonry position for new added items
+    reload_masonry(false, function() {
+      // SlideUp article from 'last blogs' section
+      $sidebar.find(".last-blogs #blog-<%= resource.id %>__sidebar").slideUp();
+
+      // Recalculates scrolling points after adding Ajax content
+      sticky_sidebar_fix();
+    });
+  });
+} else {
+  Turbolinks.visit("<%= blogs_path(locale: @language) %>");
+}

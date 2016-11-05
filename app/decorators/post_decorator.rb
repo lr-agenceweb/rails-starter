@@ -34,7 +34,7 @@ class PostDecorator < ApplicationDecorator
   # == Picture
   #
   def image
-    pictures? ? retina_image_tag(first_pictures, :image, :small) : 'Pas d\'image'
+    pictures? ? retina_image_tag(first_pictures, :image, :small) : t('post.no_cover')
   end
 
   def custom_cover
@@ -66,7 +66,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def admin_link
-    link = send("admin_#{model.type.singularize.underscore.downcase}_path", model)
+    link = send("admin_#{model.class.name.underscore}_path", model)
     link_to I18n.t('active_admin.show'), link
   end
 
@@ -74,7 +74,7 @@ class PostDecorator < ApplicationDecorator
   # == Type of Post
   #
   def type_title
-    Category.title_by_category(type)
+    Page.title_by_page(type)
   end
 
   #
@@ -94,11 +94,12 @@ class PostDecorator < ApplicationDecorator
   #
   # == PublicationDate (publishable polymorphic)
   #
+  # TODO: Refactor duplicated code
   def publication
     html = ''
     html += add_bool_value
-    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.published_at')}: #{l(model.published_at, format: :without_time)}".html_safe) if model.published_later?
-    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.expired_at')}: #{l(model.expired_at, format: :without_time)}".html_safe) if model.expired_prematurely?
+    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.published_at')}: #{l(model.published_at, format: :without_time)}".html_safe) if model.published_at && model.published_later?
+    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.expired_at')}: #{l(model.expired_at, format: :without_time)}".html_safe) if model.expired_at && model.expired_prematurely?
     html.html_safe
   end
 
@@ -113,8 +114,19 @@ class PostDecorator < ApplicationDecorator
   #
   # == Link (linkable polymorphic)
   #
+  def link?
+    model.link.try(:url).present?
+  end
+
   def link_with_link
-    link_to model.link.url, model.link.url, target: :_blank if link?
+    link_to model.link_url, model.link_url, target: :_blank if link?
+  end
+
+  #
+  # == Post link (regular post or Blog)
+  #
+  def show_post_link(suffix = 'path')
+    model.is_a?(Blog) ? send("blog_category_blog_#{suffix}", model.blog_category, model) : send("#{model.class.name.underscore}_#{suffix}", model)
   end
 
   private
@@ -129,9 +141,5 @@ class PostDecorator < ApplicationDecorator
         concat(content_tag(:span, t('activerecord.attributes.publication_date.unpublished')))
       end
     end
-  end
-
-  def link?
-    model.link.try(:url).present?
   end
 end

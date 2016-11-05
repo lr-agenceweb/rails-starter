@@ -1,24 +1,14 @@
 # frozen_string_literal: true
 ActiveAdmin.register Slider do
   menu parent: I18n.t('admin_menu.modules')
-  includes :category
+  includes :page
 
-  permit_params :id,
-                :animate,
-                :autoplay,
-                :time_to_show,
-                :hover_pause,
-                :looper,
-                :navigation,
-                :bullet,
-                :online,
-                :category_id,
-                slides_attributes: [
-                  :id, :image, :online, :position, :_destroy,
-                  translations_attributes: [
-                    :id, :locale, :title, :description
-                  ]
-                ]
+  permit_params do
+    params = [:id, :online, :page_id]
+    params.push(*slider_attributes)
+    params.push(*slides_attributes)
+    params
+  end
 
   decorate_with SliderDecorator
   config.clear_sidebar_sections!
@@ -53,6 +43,10 @@ ActiveAdmin.register Slider do
   end
 
   show title: :title_aa_show do
+    panel 'Slider prévisualisation' do
+      render 'assets/sliders/show', slider: resource, force: true
+    end
+
     arbre_cache(self, resource.cache_key) do
       columns do
         column do
@@ -73,60 +67,19 @@ ActiveAdmin.register Slider do
         end
       end
     end
-
-    panel 'Slider prévisualisation' do
-      render 'assets/sliders/show', slider: resource, force: true
-    end
   end
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
-
-    columns do
-      column do
-        f.inputs "Paramètres du #{t('activerecord.models.slider.one')}" do
-          f.input :autoplay,
-                  hint: I18n.t('form.hint.slider.autoplay')
-          f.input :hover_pause,
-                  hint: I18n.t('form.hint.slider.hover_pause')
-          f.input :looper,
-                  as: :boolean,
-                  hint: I18n.t('form.hint.slider.loop')
-          f.input :navigation,
-                  hint: I18n.t('form.hint.slider.navigation')
-          f.input :bullet,
-                  hint: I18n.t('form.hint.slider.bullet')
-          f.input :time_to_show,
-                  hint: I18n.t('form.hint.slider.time_to_show')
-          f.input :animate,
-                  collection: %w( crossfade slide dissolve ),
-                  include_blank: false,
-                  hint: I18n.t('form.hint.slider.animate')
-        end
-      end
-
-      column do
-        f.inputs t('additional') do
-          f.input :category_id,
-                  as: :select,
-                  collection: Category.except_already_slider(f.object.category),
-                  include_blank: false
-          f.input :online
-        end
-      end
-    end
-
-    render 'admin/slides/many', f: f
-
-    f.actions
+    render 'form', f: f
   end
 
   #
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include Skippable
-    # before_action :set_optional_modules
 
     def scoped_collection
       super.includes slides: [:translations]

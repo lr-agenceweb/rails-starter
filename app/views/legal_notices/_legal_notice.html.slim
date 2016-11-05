@@ -1,8 +1,11 @@
-article.post-article
-  = render 'posts/microdatas', resource: legal_notice.decorate
+article.post.legal_notice
+  = render 'posts/microdatas', resource: legal_notice
+  = render 'posts/admin_actions', resource: legal_notice
 
-  header
-    h3.post-article-title = legal_notice.title
+  .row
+    .small-12.columns
+      header.post__header
+        h3.post__header__title = legal_notice.title
 
-  .post-body
-    == legal_notice.content
+      .post__body data-equalizer-watch=''
+        == legal_notice.content

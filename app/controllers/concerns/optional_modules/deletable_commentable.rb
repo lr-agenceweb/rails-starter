@@ -7,7 +7,6 @@ module DeletableCommentable
   extend ActiveSupport::Concern
 
   included do
-    before_action :reset_flash_alert, only: [:destroy]
     before_action :set_object_variable, only: [:destroy]
 
     # DELETE /comments/1 || livre-d-or/1
@@ -32,11 +31,6 @@ module DeletableCommentable
     def set_object_variable
       model_value = controller_name.classify
       @object_variable = instance_variable_get(:"@#{model_value.underscore}")
-    end
-
-    def reset_flash_alert
-      flash.now[:success] = nil
-      flash.now[:error] = nil
     end
   end
 end

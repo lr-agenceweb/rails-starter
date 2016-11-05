@@ -1,0 +1,44 @@
+# frozen_string_literal: true
+
+f.columns do
+  f.column do
+    f.inputs t('formtastic.titles.post_generals') do
+      f.input :online
+      f.input :show_as_gallery
+      f.input :show_calendar if calendar_module.enabled?
+      f.input :show_map if map_module.enabled? && event_setting.show_map?
+    end
+
+    render 'admin/posts/forms/translation', f: f
+  end
+
+  f.column do
+    f.inputs t('formtastic.titles.event_date_details') do
+      f.input :all_day
+      f.input :start_date, as: :date_time_picker
+      f.input :end_date, as: :date_time_picker
+    end
+
+    render 'admin/links/form', f: f
+    render 'admin/locations/form', f: f, full: true
+    render 'admin/referencement/form', f: f
+  end
+end
+
+f.columns do
+  f.column do
+    render 'admin/assets/pictures/forms/many', f: f
+  end
+
+  f.column do
+    render 'admin/assets/video_platforms/forms/many', f: f
+  end if video_settings.video_platform?
+end
+
+f.columns do
+  f.column do
+    render 'admin/assets/video_uploads/forms/many', f: f
+  end if video_settings.video_upload?
+end if video_module.enabled?
+
+f.actions

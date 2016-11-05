@@ -37,8 +37,8 @@ home_two:
 home_three:
   attachable: home (Post)
 
-about_2:
-  attachable: about_2 (Post)
+blog_mc:
+  attachable: many_comments (Blog)
   image_file_name: my-picture-3.jpg
 
 mailing_message:

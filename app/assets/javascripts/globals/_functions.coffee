@@ -3,6 +3,15 @@
   if typeof Foundation != 'undefined'
     Foundation.MediaQuery.current == 'small'
 
+# is this a medium screen?
+@isMedium = ->
+  if typeof Foundation != 'undefined'
+    Foundation.MediaQuery.current == 'medium'
+
+@isLargeUp = ->
+  if typeof Foundation != 'undefined'
+    Foundation.MediaQuery.atLeast('large')
+
 @isSmallBreakOne = ->
   matchMedia('(max-width: 949px)').matches
 
@@ -48,3 +57,33 @@
         created_at = that.attr('datetime')
         that.text(moment(created_at).fromNow())
         that.addClass('is-ago')
+
+#
+# Forms
+# =====
+@reset_form = (inputs) ->
+  for input in inputs
+    $(input).val ''
+
+#
+# Masonry
+# =======
+# Reload Masonry position for new added items
+@reload_masonry = (init = false, callback = ->) ->
+  $container = $('#masonry-container')
+  if $container.length > 0 && !isSmall()
+    $container.imagesLoaded ->
+      if init
+        $container.masonry
+          itemSelector: '.masonry-item'
+      else
+        $container.masonry('reloadItems').masonry()
+      callback()
+
+#
+# Foundation Fix
+# ==============
+# Sticky sidebar
+@sticky_sidebar_fix = ->
+  if $('[data-sticky]').length > 0
+    $('[data-sticky]').foundation '_calc', true

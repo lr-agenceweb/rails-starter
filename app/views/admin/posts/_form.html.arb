@@ -4,50 +4,53 @@ f.semantic_errors(*f.object.errors.keys)
 
 f.columns do
   f.column do
-    render 'admin/shared/form_general', f: f
-    render 'admin/shared/form_translation', f: f
+    render 'admin/posts/forms/general', f: f
+    render 'admin/posts/forms/translation', f: f
   end
 
   f.column do
     if f.object.is_a?(Blog)
-      f.inputs t('activerecord.models.blog_category.one') do
+      f.inputs t('formtastic.titles.blog_category') do
         f.input :blog_category,
                 as: :select,
                 include_blank: false,
-                collection: BlogCategory.all
+                collection: BlogCategory.includes(:translations).all
       end
 
       render 'admin/publication_dates/form', f: f
     end
 
-    render 'admin/shared/referencement/form', f: f
+    render 'admin/referencement/form', f: f
   end
 end
 
+# Pictures
 f.columns do
   f.column do
-    render 'admin/shared/pictures/many', f: f
+    render 'admin/assets/pictures/forms/many', f: f
   end
 end
 
-if video_module.enabled?
+# Videos
+if video_module.enabled? && !f.object.is_a?(About)
   if video_settings.video_platform?
     if defined?(has_one_relation) && has_one_relation
-      render 'admin/shared/video_platforms/one', f: f
+      render 'admin/assets/video_platforms/forms/one', f: f
     else
-      render 'admin/shared/video_platforms/many', f: f
+      render 'admin/assets/video_platforms/forms/many', f: f
     end
   end
 
   if video_settings.video_upload?
     if defined?(has_one_relation) && has_one_relation
-      render 'admin/shared/video_uploads/one', f: f
+      render 'admin/assets/video_uploads/forms/one', f: f
     else
-      render 'admin/shared/video_uploads/many', f: f
+      render 'admin/assets/video_uploads/forms/many', f: f
     end
   end
 end
 
-render 'admin/shared/audios/one', f: f if f.object.is_a?(Blog) && audio_module.enabled?
+# Audios
+render 'admin/assets/audios/form', f: f if f.object.is_a?(Blog) && audio_module.enabled?
 
 f.actions

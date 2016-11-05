@@ -1,0 +1,3 @@
+- f.inputs t('formtastic.titles.slide_details') do
+  - f.has_many :slides, heading: false, new_record: t('add.feminin', klass: t('activerecord.models.slide.one')), sortable: :position do |item|
+    = render 'admin/assets/slides/inputs', item: item

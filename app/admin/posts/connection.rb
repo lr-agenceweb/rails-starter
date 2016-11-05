@@ -3,19 +3,15 @@ ActiveAdmin.register Connection do
   menu parent: I18n.t('admin_menu.posts')
   includes :translations, :user, :picture
 
-  permit_params :id,
-                :type,
-                :online,
-                :user_id,
-                picture_attributes: [
-                  :id, :image, :online, :_destroy
-                ],
-                link_attributes: [
-                  :id, :url, :_destroy
-                ],
-                translations_attributes: [
-                  :id, :locale, :title, :content
-                ]
+  permit_params do
+    params = [:type, :user_id]
+
+    params.push(*general_attributes)
+    params.push(*post_attributes)
+    params.push(*picture_attributes(true))
+    params.push(*link_attributes)
+    params
+  end
 
   decorate_with ConnectionDecorator
   config.clear_sidebar_sections!
@@ -42,7 +38,6 @@ ActiveAdmin.register Connection do
 
   show title: :title_aa_show do
     arbre_cache(self, resource.cache_key) do
-      h3 resource.title
       columns do
         column do
           panel t('active_admin.details', model: active_admin_config.resource_label) do
@@ -63,28 +58,22 @@ ActiveAdmin.register Connection do
   form do |f|
     columns do
       column do
-        f.inputs 'Général' do
-          f.input :online,
-                  label: I18n.t('form.label.online'),
-                  hint: I18n.t('form.hint.online')
+        f.inputs t('formtastic.titles.post_generals') do
+          f.input :online
         end
       end
 
       column do
-        render 'admin/shared/links/one', f: f
+        render 'admin/links/form', f: f
       end
     end
 
-    render 'admin/shared/pictures/one', f: f
+    render 'admin/assets/pictures/forms/one', f: f
 
-    f.inputs 'Contenu de l\'article' do
+    f.inputs t('formtastic.titles.post_translations') do
       f.translated_inputs 'Translated fields', switch_locale: true do |t|
-        t.input :title,
-                label: I18n.t('activerecord.attributes.post.title'),
-                hint: I18n.t('form.hint.title')
+        t.input :title
         t.input :content,
-                label: I18n.t('activerecord.attributes.post.content'),
-                hint: I18n.t('form.hint.content'),
                 input_html: { class: 'froala' }
       end
     end
@@ -96,7 +85,9 @@ ActiveAdmin.register Connection do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include ActiveAdmin::Postable
+    include ActiveAdmin::AjaxDestroyable
 
     cache_sweeper :legal_notice_sweeper
   end

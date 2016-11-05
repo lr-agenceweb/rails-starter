@@ -1,29 +1,149 @@
 # French
 fr:
+  # Variables
+  post_attributes: &post_attributes
+    title: Titre
+    excerpt: Extrait
+    content: Contenu
+    description: Description
+    keywords: Mot-clés
+    online: En ligne ?
+    prev_next: Liens précédent / suivant ?
+    link: Lien
+    link_with_link: Lien
+    type_title: Page
+    author_with_avatar: Auteur
+    status: Statut
+    allow_comments: Commentaires ?
+    show_as_gallery: Galerie d'images ?
+
+  mailer_attributes: &mailer_attributes
+    title: Titre
+    preview: Prévisualisation
+    status: Envoyé ?
+    sent_at: Envoyé le
+    send_link: Envoyer
+    live_preview: Prévisualisation en direct
+
+  user_attributes: &user_attributes
+    mail: Email
+    email: Email
+    username: Pseudo
+    email_registered_or_guest: Email
+    author_with_avatar: Auteur
+    avatar: Avatar
+    image_avatar: Avatar
+    delete_avatar: Supprimer avatar
+
+  comment_attributes: &comment_attributes
+    content: Commentaire
+    lang: Langue
+    validated: Validé ? (en ligne)
+    signalled: Signalé ?
+    created_at: Ajouté le
+    destroy: Supprimer
+
+  assets_attributes: &assets_attributes
+    title: Titre
+    title_d: Titre
+    description: Description
+    description_d: Description
+    preview: Prévisualisation
+    from_article: Lié à
+    online: En ligne ?
+    _destroy: Supprimer ?
+
+  activable_attributes: &activable_attributes
+    enabled: Activé ?
+    status: Activé ?
+
+
+  # --------------------- #
   activerecord:
     attributes:
+      #
+      # Core
+      # ====
+      # Setting
+      setting:
+        title: Titre
+        subtitle: Sous-titre
+        logo: Logo
+        logo_deco: Logo
+        logo_footer: Logo du pied de page
+        logo_file_size: Le poids du logo
+        delete_logo: Supprimer le logo
+        delete_logo_footer: Supprimer le logo du pied de page
+        name: Nom
+        phone: Téléphone
+        phone_secondary: Téléphone secondaire
+        per_page: Articles par page
+        show_breadcrumb: Afficher le fil d'ariane ?
+        show_social: Afficher le partage sur les réseaux sociaux ?
+        show_qrcode: Afficher le QrCode sur la page contact ?
+        show_admin_bar: Afficher la barre d'administration ?
+        show_file_upload: Autoriser pièce jointe ?
+        answering_machine: Répondeur automatique ?
+        picture_in_picture: Media "collant" ?
+        map: Carte
+        breadcrumb: Fil d'ariane
+        social: Réseaux sociaux
+        twitter_username: Nom d'utilisateur sur Twitter
+        date_format: Formatage de la date
+
+      # Page
+      page:
+        title: Titre
+        title_d: Titre
+        name: Nom de la catégorie
+        cover_preview: Illustration
+        background: Arrière-plan
+        position: Position
+        color: Couleur
+        div_color: Couleur de fond de site
+        video_preview: Vidéo
+        video_upload: Vidéo d'arrière plan
+        delete_video_file: Supprimer vidéo d'arrière plan ?
+
+      # Menu
+      menu:
+        title: Titre
+        parent_id: Menu parent
+        children_list: Sous-menu(s)
+        online: En ligne ?
+        show_in_footer: Dans le footer ?
+        show_in_header: Dans le menu principal ?
+
+      # OptionalModule
+      optional_module:
+        <<: *activable_attributes
+        name: Nom
+
+
+      #
+      # Post
+      # ====
+      # Post
       post:
-        title: Titre
-        excerpt: Extrait
-        content: Contenu
-        keywords: Mot-clés
-        online: En ligne ?
-        prev_next: Liens précédent / suivant ?
-        link: Lien
-        link_with_link: Lien
-        type_title: Page
-        author_with_avatar: Auteur
-        status: Statut
-        allow_comments: Commentaires ?
-        show_as_gallery: Galerie d'images
+        <<: *post_attributes
+
+      # StringBox
+      string_box:
+        <<: *post_attributes
+        key: Clé
+        optional_module: Module Optionnel
+
+      # Referencement
+      referencement:
+        <<: *post_attributes
+
+      # Heading
+      heading:
+        <<: *post_attributes
+
+      # Blog
       blog:
-        title: Titre
-        content: Contenu
-        author_with_avatar: Auteur
-        online: En ligne ?
-        prev_next: Liens précédent / suivant ?
-        allow_comments: Commentaires ?
-        show_as_gallery: Galerie d'images
+        <<: *post_attributes
         blog_category: Catégorie de l'article
         custom_cover: Couverture
         publication: Publication / Expiration
@@ -37,43 +157,30 @@ fr:
         show_last_posts: Afficher derniers articles crées ?
         show_categories: Afficher lien des différentes catégories ?
         show_last_comments: Afficher derniers commentaires ?
-      publication_date:
-        published_later: Publier dans le futur ?
-        expired_prematurely: Expirer prématurement ?
-        published_at: Date de publication
-        expired_at: Date d'expiration
-        published: Publié
-        unpublished: Non publié
-      setting:
-        title: Titre
-        subtitle: Sous-titre
-        logo: Logo
-        logo_footer: Logo du pied de page
-        logo_deco: Logo
-        logo_file_size: Le poids du logo
-        delete_logo: Supprimer le logo
-        delete_logo_footer: Supprimer le logo du pied de page
-        name: Nom
-        phone: Téléphone
-        phone_secondary: Téléphone secondaire
-        per_page: Articles par page
-        show_breadcrumb: Afficher le fil d'ariane ?
-        show_social: Afficher le partage sur les réseaux sociaux ?
-        show_qrcode: Afficher le QrCode sur la page contact ?
-        show_map: Afficher la carte sur la page contact ?
-        show_admin_bar: Afficher la barre d'administration ?
-        show_file_upload: Autoriser pièce jointe ?
-        answering_machine: Répondeur automatique ?
-        map: Carte
-        breadcrumb: Fil d'ariane
-        social: Réseaux sociaux
-        twitter_username: Nom d'utilisateur sur Twitter
-        location_postcode: Code Postal
-        location_address: Adresse
-        location_city: Ville
-        date_format: Formatage de la date
+
+      # Event
+      event:
+        <<: *post_attributes
+        all_day: Toute la journée ?
+        start_date: Date de début
+        end_date: Date de fin
+        full_address: Adresse
+        duration: Durée
+        prev_next: Liens précédent / suivant ?
+        show_as_gallery: Galerie d'images ?
+        show_calendar: Calendrier ?
+        show_map: Carte ?
+      event_setting:
+        prev_next: Liens précédent / suivant ?
+        show_map: Afficher carte ?
+        show_calendar: Afficher calendrier ?
+        event_order: Ordre des événements
+
+      #
+      # User
+      # ====
       user:
-        email: Email
+        <<: *user_attributes
         username: Nom d'utilisateur
         password: Mot de passe
         password_confirmation: Confirmation du mot de passe
@@ -81,44 +188,27 @@ fr:
         current_sign_in_at: Connecté depuis
         last_sign_in_at: Dernière connexion
         created_at: Inscrit depuis
-        avatar: Avatar
-        image_avatar: Avatar
-        delete_avatar: Supprimer avatar
         status: Rôle
         account_active: Compte validé ?
         link_to_facebook: Compte Facebook
         link_to_twitter: Compte Twitter
         link_to_google: Compte Google
-      category:
-        title: Titre
-        title_d: Titre
-        name: Nom de la catégorie
-        background: Arrière-plan
-        position: Position
-        color: Couleur
-        div_color: Couleur de fond de site
-        video_preview: Vidéo
-        video_upload: Vidéo d'arrière plan
-        delete_video_file: Supprimer vidéo d'arrière plan ?
-      menu:
-        title: Titre
-        parent_id: Menu parent
-        children_list: Sous-menu(s)
-        online: En ligne ?
-        show_in_footer: Dans le footer ?
-        show_in_header: Dans le menu principal ?
-      referencement:
-        description: Description
-        keywords: Mots-clés
-      heading:
-        content: Contenu
+
+      # PublicationDate
+      publication_date:
+        published_later: Publier dans le futur ?
+        expired_prematurely: Expirer prématurement ?
+        published_at: Date de publication
+        expired_at: Date d'expiration
+        published: Publié
+        unpublished: Non publié
+
+      #
+      # Mailer
+      # ======
+      # Newsletter
       newsletter:
-        title: Titre
-        preview: Prévisualisation
-        status: Envoyé ?
-        sent_at: Envoyé le
-        send_link: Envoyer
-        live_preview: Prévisualisation en direct
+        <<: *mailer_attributes
         list_subscribers: Abonnés
       newsletter_user:
         email: Email
@@ -135,177 +225,11 @@ fr:
         newsletter_user_roles_list: Rôles utilisateur
       newsletter_user_role:
         title: Rôle
-      adult_setting:
-        redirect_link: Lien de redirection
-        title: Titre
-        content: Contenu
-        enabled: Activé ?
-      string_box:
-        title: Titre
-        description: Description
-        content: Contenu
-        key: Clé
-        optional_module: Module Optionnel
-      background:
-        attachable_type: Page associée
-        image: Image
-        category_name: Page associée
-        attachable_id: Page
-        _destroy: Supprimer ?
-      picture:
-        type: Catégorie
-        picture: Image
-        source_picture_title_link: Article associé
-        _destroy: Supprimer ?
-        online: En ligne ?
-      video_platform:
-        preview: Prévisualisation
-        video_link: Lien de la vidéo
-        title: Titre
-        title_d: Titre
-        description: Description
-        description_d: Description
-        from_article: Lié à
-        url: Lien de la vidéo
-        _destroy: Supprimer ?
-        native_informations: Informations natives ?
-        online: En ligne ?
-      video_upload:
-        preview: Prévisualisation
-        video_file: Prévisualisation
-        from_article: Lié à
-        subtitles: Sous-titres ?
-        video_autoplay: Démarrage automatique
-        video_loop: Répéter la vidéo
-        video_controls: Contrôles de la vidéo
-        video_mute: Désactiver le son
-        title: Titre
-        description: Description
-        description_d: Description
-        _destroy: Supprimer ?
-        online: En ligne ?
-      video_setting:
-        video_platform: Vidéos depuis platformes en ligne
-        video_upload: Vidéos mises en ligne depuis le site
-        video_background: Vidéos d'arrière plan
-        turn_off_the_light: Assombrir l'arrière-plan ?
-      video_subtitle:
-        subtitle_fr: Sous-titres français
-        subtitle_en: Sous-titres anglais
-        delete_subtitle_fr: Supprimer sous-titres français ?
-        delete_subtitle_en: Supprimer sous-titres anglais ?
-        online: En ligne ?
-      audio:
-        audioable: Article lié
-        audio: Fichier audio
-        audio_autoplay: Démarrage automatique ?
-        online: En ligne ?
-        _destroy: Supprimer ?
-      slide:
-        slide: Image
-        attachable: Slide liée à la page
-        slider_page_name: Slide liée à la page
-        status: État
-        title: Titre
-        description: Description
-        description_deco: Description
-        _destroy: Supprimer ?
-        online: En ligne ?
-      comment:
-        author_with_avatar: Auteur
-        username: Pseudo
-        mail: Email
-        email_registered_or_guest: Email
-        content: Commentaire
-        preview_content: Commentaire
-        lang: Langue
-        link_source: Article concerné
-        link_and_image_source: Article concerné
-        validated: Validé ? (en ligne)
-        signalled: Signalé ?
-        created_at: Ajouté le
-        destroy: Supprimer
-      comment_setting:
-        should_validate: Valider les commentaires ?
-        should_signal: Signaler les commentaires ?
-        send_email: Envoyer mail après signalement ?
-        allow_reply: Réponse aux commentaires ?
-      optional_module:
-        name: Nom
-        enabled: Activé ?
-      guest_book:
-        username: Nom d'utilisateur
-        content: Message
-        lang: Langue
-        validated: Validé ? (en ligne)
-        created_at: Ajouté le
-        destroy: Supprimer
-      guest_book_setting:
-        should_validate: Valider les messages ?
-      slider:
-        autoplay: Démarrage automatique ?
-        hover_pause: Pause au survol ?
-        loop: En boucle ?
-        looper: En boucle ?
-        navigation: Flèches Précédent / Suivant ?
-        bullet: Ronds de navigation ?
-        time_to_show: Temps entre chaque image
-        animate: Effet d'animation
-        online: En ligne ?
-        category_id: Page
-      event:
-        title: Titre
-        content: Contenu
-        link: Lien
-        link_with_link: Lien
-        all_day: Toute la journée ?
-        start_date: Date de début
-        end_date: Date de fin
-        full_address_inline: Adresse
-        duration: Durée
-        prev_next: Liens précédent / suivant ?
-        show_as_gallery: Galerie d'images ?
-        show_calendar: Calendrier ?
-        online: En ligne ?
-      event_setting:
-        prev_next: Liens précédent / suivant ?
-        show_map: Afficher carte ?
-        event_order: Ordre des événements
-      map_setting:
-        full_address_inline: Adresse de votre organisation
-        marker_icon: Icône du marqueur
-        marker_color: Couleur du marqueur
-        marker_color_d: Couleur du marqueur
-      location:
-        postcode: Code Postal
-        address: Adresse
-        city: Ville
-        geocode_address: Adresse avec géolocalisation
-        latlon: Latitude / Longitude
-        full_address: Adresse complète
-      link:
-        url: Lien
 
-      social:
-        title: Titre
-        link: Lien
-        kind: Type
-        ikon: Image
-        ikon_deco: Icône
-        font_ikon: Icône
-        enabled: Activé ?
-        delete_ikon: Supprimer l'icône
-
-      social_connect_setting:
-        enabled: Activé ?
-      social_provider:
-        name: Nom
-        enabled: Activé ?
-        status: Activé ?
-        social_facebook: Social Facebook
-        social_twitter: Social Twitter
-        social_google_oauth2: Social Google
-
+      # Mailing
+      mailing_message:
+        <<: *mailer_attributes
+        show_signature: Afficher votre signature personnelle ?
       mailing_user:
         fullname: Nom complet
         archive: Archivé ?
@@ -320,15 +244,174 @@ fr:
         signature_d: Signature
         unsubscribe_title: Titre de la page de désinscription
         unsubscribe_content: Contenu de la page de désinscription
-      mailing_message:
-        title: Sujet
-        preview: Prévisualisation
-        status: Envoyé ?
-        sent_at: Envoyé le
-        send_link: Envoyer
-        live_preview: Prévisualisation en direct
-        show_signature: Afficher votre signature personnelle ?
 
+      #
+      # Comment
+      # =======
+      # Comment
+      comment:
+        <<: *user_attributes
+        <<: *comment_attributes
+        preview_content: Commentaire
+        link_source: Article concerné
+        link_and_image_source: Article concerné
+      comment_setting:
+        should_validate: Valider les commentaires ?
+        should_signal: Signaler les commentaires ?
+        send_email: Envoyer mail après signalement ?
+        allow_reply: Réponse aux commentaires ?
+        emoticons: Convertir en émoticônes ?
+
+      # GuestBook
+      guest_book:
+        <<: *user_attributes
+        <<: *comment_attributes
+        content: Message
+      guest_book_setting:
+        should_validate: Valider les messages ?
+
+      #
+      # Assets
+      # ======
+      # Picture
+      picture:
+        <<: *assets_attributes
+        type: Catégorie
+        picture: Image
+        source_picture_title_link: Article associé
+
+      # Background
+      background:
+        <<: *assets_attributes
+        image: Image
+        attachable_id: Page
+        attachable_type: Page associée
+        page_name: Page associée
+
+      # VideoPlatform
+      video_platform:
+        <<: *assets_attributes
+        url: Lien de la vidéo
+        video_link: Lien de la vidéo
+        native_informations: Informations natives ?
+
+      # VideoUpload
+      video_upload:
+        <<: *assets_attributes
+        video_file: Prévisualisation
+        video_autoplay: Démarrage automatique
+        video_loop: Répéter la vidéo
+        video_controls: Contrôles de la vidéo
+        video_mute: Désactiver le son
+        subtitles: Sous-titres ?
+
+      # VideoSetting
+      video_setting:
+        video_platform: Vidéos depuis platformes en ligne
+        video_upload: Vidéos mises en ligne depuis le site
+        video_background: Vidéos d'arrière plan
+        turn_off_the_light: Assombrir l'arrière-plan ?
+
+      # VideoSubtitle
+      video_subtitle:
+        <<: *assets_attributes
+        subtitle_fr: Sous-titres français
+        subtitle_en: Sous-titres anglais
+        delete_subtitle_fr: Supprimer sous-titres français ?
+        delete_subtitle_en: Supprimer sous-titres anglais ?
+
+      # Audio
+      audio:
+        <<: *assets_attributes
+        audioable: Article lié
+        audio: Fichier audio
+        audio_autoplay: Démarrage automatique ?
+
+      # Slider
+      slider:
+        <<: *assets_attributes
+        autoplay: Démarrage automatique ?
+        hover_pause: Pause au survol ?
+        loop: En boucle ?
+        looper: En boucle ?
+        navigation: Flèches Précédent / Suivant ?
+        bullet: Ronds de navigation ?
+        time_to_show: Temps entre chaque image
+        animate: Effet d'animation
+        page_id: Page
+
+      # Slide
+      slide:
+        <<: *assets_attributes
+        status: État
+        slide: Image
+        attachable: Slide liée à la page
+        slider_page_name: Slide liée à la page
+
+      #
+      # Map
+      # ===
+      # MapSetting
+      map_setting:
+        full_address: Adresse de votre organisation
+        marker_icon: Icône du marqueur
+        marker_color: Couleur du marqueur
+        marker_color_preview: Couleur du marqueur
+        show_map: Afficher la carte sur la page contact ?
+        location_postcode: Code Postal
+        location_address: Adresse
+        location_city: Ville
+
+      # Location
+      location:
+        postcode: Code Postal
+        address: Adresse
+        city: Ville
+        geocode_address: Adresse avec géolocalisation
+        latlon: Latitude / Longitude
+        full_address: Adresse complète
+
+      #
+      # Social
+      # ======
+      # Social
+      social:
+        <<: *activable_attributes
+        title: Titre
+        link: Lien
+        kind: Type
+        ikon: Image
+        ikon_deco: Icône
+        font_ikon: Icône
+        delete_ikon: Supprimer l'icône
+
+      # SocialConnectSetting
+      social_connect_setting:
+        <<: *activable_attributes
+
+      # SocialProvider
+      social_provider:
+        <<: *activable_attributes
+        name: Nom
+        social_facebook: Social Facebook
+        social_twitter: Social Twitter
+        social_google_oauth2: Social Google
+
+      #
+      # Misc
+      # ====
+      # AdultSetting
+      adult_setting:
+        <<: *post_attributes
+        <<: *activable_attributes
+        redirect_link: Lien de redirection
+      # Link
+      link:
+        url: Lien
+
+      #
+      # Shared
+      # ======
       shared:
         created_at: Créé le
         status: État

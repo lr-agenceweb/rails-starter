@@ -1,6 +1,0 @@
-li
-  h3 = link_to highlight(search.title, params[:term]), search.decorate.show_page_link
-
-  - text = excerpt(search.content, params[:term], radius: 200)
-  - highlight = text.blank? ? search.content : highlight(text, params[:term])
-  div = truncate_read_more(highlight, search.decorate.show_page_link)

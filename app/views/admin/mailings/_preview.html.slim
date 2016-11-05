@@ -1,5 +1,4 @@
 - html = "<div id='mailing_message_preview'>"
-
 - html << "<p style='text-align: center; margin: 20px 0'>"
 
 - I18n.available_locales.each do |locale|
@@ -17,8 +16,7 @@
 
 - iframe = f.object.new_record? ? '' : render('/admin/mailings/iframe_preview', resource: f.object)
 - html << iframe
-
 - html << "</div>"
 
-- f.inputs t('activerecord.attributes.newsletter.preview') do
+- f.inputs t('formtastic.titles.mailing_message_preview') do
   = html.html_safe

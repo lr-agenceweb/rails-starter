@@ -105,11 +105,19 @@ module Admin
     #
     # == Destroy
     #
-    test 'should destroy event' do
+    test 'should destroy blog' do
       assert_difference ['Event.count', 'Link.count'], -1 do
         delete :destroy, id: @event
+        assert_redirected_to admin_events_path
       end
-      assert_redirected_to admin_events_path
+    end
+
+    test 'AJAX :: should destroy blog' do
+      assert_difference ['Event.count', 'Link.count'], -1 do
+        xhr :delete, :destroy, id: @event
+        assert_response :success
+        assert_template :destroy
+      end
     end
 
     #

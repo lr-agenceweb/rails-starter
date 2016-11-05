@@ -22,7 +22,7 @@ ActiveAdmin.register SocialConnectSetting do
           attributes_table do
             bool_row :enabled
             resource.social_providers.each do |provider|
-              row "social_#{provider.name}".to_sym
+              bool_row "social_#{provider.name}".to_sym
             end
           end
         end
@@ -35,29 +35,24 @@ ActiveAdmin.register SocialConnectSetting do
 
     columns do
       column do
-        f.inputs t('general') do
-          f.input :enabled,
-                  as: :boolean,
-                  hint: I18n.t('form.hint.social_connect_setting.enabled')
+        f.inputs t('formtastic.titles.social_connect_setting_details') do
+          f.input :enabled
         end
       end
     end
 
     columns do
       column do
-        f.inputs t('activerecord.models.social_provider.other') do
+        f.inputs t('formtastic.titles.social_provider_details') do
           f.has_many :social_providers, heading: false, new_record: resource.social_providers.count >= 3 ? false : true do |item|
             item.input :name,
                        collection: SocialProvider.allowed_social_providers,
                        include_blank: false,
-                       hint: I18n.t('form.hint.social_provider.name'),
                        input_html: {
                          disabled: item.object.new_record? ? false : :disbaled
                        }
 
-            item.input :enabled,
-                       as: :boolean,
-                       hint: I18n.t('form.hint.social_provider.enabled')
+            item.input :enabled
           end
         end
       end

@@ -33,9 +33,9 @@ class SocialDecorator < ApplicationDecorator
 
   def hint_by_ikon
     if ikon?
-      t('form.hint.social.already_picture')
+      t('formtastic.hints.social.already_picture')
     else
-      raw(t('form.hint.social.default_hint', list: font_ikon_list))
+      raw(t('formtastic.hints.social.default_hint', list: font_ikon_list))
     end
   end
 

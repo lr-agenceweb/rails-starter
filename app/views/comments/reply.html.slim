@@ -1,28 +1,22 @@
+- breadcrumb @commentable
+= render 'elements/background_page_cover', page: page
+
 - if @comment_module.enabled?
-  section.row
-    .small-12.medium-8.medium-centered.columns
+  section.page-section.reply.row.align-center#reply
+    .small-12.columns
+      header.page__header
+        h2.page__header__title
+          = I18n.t('comment.seo.title', article: @commentable.title)
 
-      article.post-article
-        = render 'posts/microdatas', resource: @commentable.decorate
+    .small-11.large-8.columns
+      .row.align-center
+        .small-12.large-8.columns
+          = render 'blogs/blog', blog: @commentable.decorate
 
-        header
-          h3
-            - link = @commentable.is_a?(Blog) ? blog_category_blog_path(@commentable.blog_category, @commentable) : send("#{@commentable.class.name.underscore.singularize}_path", @commentable)
-            = link_to @commentable.decorate.title, link
-            small<: em
-              = "(#{@commentable.decorate.created_at})"
-
-        div == @commentable.decorate.content
-
-      p.text-right
-        = link_to I18n.t('link.back_to_article', article: @commentable.title), link
-
-
-  section.row
-    .small-12.medium-9.medium-centered.columns
       - if @commentable.allow_comments?
-        .comments-container
-          .comments
+        .post__comments
+          .post__comments__comments
             = nested_messages @comment.ancestors.arrange(order: :created_at)
 
-          = render 'comments/form'
+          .post__comments__form
+            = render 'comments/form'

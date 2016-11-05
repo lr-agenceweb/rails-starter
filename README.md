@@ -34,8 +34,28 @@
 <p align='center'>
   <img src="https://img.shields.io/badge/Rails%20starter-v0.0.4-blue.svg?style=flat-square" alt="Rails starter version" />
   <img src="https://img.shields.io/badge/Ruby-2.3.0-5aaed7.svg?style=flat-square" alt="Ruby version" />
-  <img src="https://img.shields.io/badge/Rails-4.2.6-5aaed7.svg?style=flat-square" alt="Rails version" />
+  <img src="https://img.shields.io/badge/Rails-4.2.7.1-5aaed7.svg?style=flat-square" alt="Rails version" />
 </p>
+
+- [Demo](#demo)
+- [Requirements](#requirements)
+- [Usage](#usage)
+- [Stack](#stack)
+- [Tasks](#tasks)
+  - [Rails](#rails)
+  - [Capistrano](#capistrano)
+- [Modules](#modules)
+- [Screenshot](#screenshot)
+- [Thanks](#thanks)
+- [Contributing](#contributing)
+
+### Demo
+A demonstration can be found at [https://demo.lr-agenceweb.fr](https://demo.lr-agenceweb.fr)
+```yaml
+# htpassword protection
+Login: demo
+Password: 6c40a98438
+```
 
 ### Requirements
 Install [Foreman](https://github.com/ddollar/foreman)  
@@ -85,7 +105,6 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
   * `cap <env> upload:yml` : Upload yml configuration files such as application, database, secrets, ...
   * `cap <env> upload:dkim` : Upload DKIM private key
   * `cap <env> upload:missing` : Upload default pictures when missing or unavailable paperclip model objects
-  * `cap <env> upload:seeds` : Upload seeds fixtures files before in order to seed database
   * `cap <env> upload:all` : Execute all previous commands in one task
 
 * **Database backup**  
@@ -97,6 +116,7 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
 * **Nginx**  
   * `cap <env> nginx:upload:vhost` : Upload vhost config file to remote server (create file in conf.d)
   * `cap <env> nginx:upload:vhost_ssl` : Same as above with SSL configuration for vhost (Let's Encrypt)
+  * `cap <env> nginx:vhost:symlink` : Symlink application path to /var/www
   * `cap <env> nginx:vhost:disable` : Disable vhost (rename extension to .disabled)
   * `cap <env> nginx:vhost:enable` : Enable vhost (rename extension to .conf)
   * `cap <env> nginx:vhost:remove` : Remove uploaded vhost to conf.d folder
@@ -131,7 +151,7 @@ Name                | Description
 **Audio**           | Upload audio files and play them in an HTML5 player.
 
 
-### Screenshots
+### Screenshot
 ![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
 
 ### Thanks

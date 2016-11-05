@@ -17,3 +17,16 @@ en:
         blank: Don't forget to add your comment ;)
       message:
         blank: Don't forget to add your message ;)
+
+  activerecord:
+    errors:
+      models:
+        comment:
+          attributes:
+            max_depth: You cannot reply to this comment anymore
+
+        contact_form:
+          attributes:
+            attachment:
+              size: Attachment should be less than %{size}MB
+              type: Attachment should be a picture or a PDF file

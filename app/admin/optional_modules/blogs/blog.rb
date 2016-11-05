@@ -4,42 +4,16 @@ ActiveAdmin.register Blog do
   includes :translations, :video_upload, :publication_date, blog_category: [:translations]
 
   permit_params do
-    params = [:id,
-              :type,
-              :show_as_gallery,
-              :online,
-              :user_id,
-              :blog_category_id,
-              translations_attributes: [
-                :id, :locale, :title, :slug, :content
-              ],
-              publication_date_attributes: [
-                :id, :published_later, :expired_prematurely, :published_at, :expired_at
-              ],
-              pictures_attributes: [
-                :id, :locale, :image, :online, :position, :_destroy
-              ],
-              video_upload_attributes: [
-                :id, :online, :position,
-                :video_file,
-                :video_autoplay,
-                :video_loop,
-                :video_controls,
-                :video_mute,
-                :_destroy,
-                video_subtitle_attributes: [
-                  :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
-                ]
-              ],
-              referencement_attributes: [
-                :id,
-                translations_attributes: [
-                  :id, :locale, :title, :description, :keywords
-                ]
-              ]]
+    params = [:type, :user_id, :blog_category_id]
 
-    params.push video_platform_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
-    params.push audio_attributes: [:id, :audio, :online, :audio_autoplay, :_destroy] if @audio_module.enabled?
+    params.push(*general_attributes)
+    params.push(*post_attributes)
+    params.push(*referencement_attributes)
+    params.push(*publication_date_attributes)
+    params.push(*picture_attributes(true))
+    params.push(*video_upload_attributes) if @video_module.enabled?
+    params.push(*video_platform_attributes) if @video_module.enabled?
+    params.push(*audio_attributes) if @audio_module.enabled?
     params.push :allow_comments if @comment_module.enabled?
     params
   end
@@ -75,8 +49,10 @@ ActiveAdmin.register Blog do
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include Skippable
     include ActiveAdmin::Cachable
+    include ActiveAdmin::AjaxDestroyable
     include OptionalModules::Videoable
     include OptionalModules::Audioable
 

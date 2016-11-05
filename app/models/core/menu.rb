@@ -25,18 +25,18 @@ class Menu < ActiveRecord::Base
   active_admin_translates :title
 
   has_ancestry
-  has_one :category, dependent: :nullify
-  has_one :optional_module, through: :category
+  has_one :page, dependent: :nullify
+  has_one :optional_module, through: :page
 
-  delegate :name, to: :category, prefix: true, allow_nil: true
-  delegate :optional, to: :category, prefix: true, allow_nil: true
+  delegate :name, to: :page, prefix: true, allow_nil: true
+  delegate :optional, to: :page, prefix: true, allow_nil: true
 
   scope :only_parents, -> { where(ancestry: nil) }
-  scope :with_page, -> { joins(:category).where.not('categories.menu_id': nil) }
+  scope :with_page, -> { joins(:page).where.not('pages.menu_id': nil) }
   scope :visible_header, -> { where(show_in_header: true) }
   scope :visible_footer, -> { where(show_in_footer: true) }
   scope :online, -> { where(online: true) }
-  scope :with_allowed_modules, -> { eager_load(:category, :optional_module).where('categories.optional=? OR (categories.optional=? AND optional_modules.enabled=?)', false, true, true) }
+  scope :with_allowed_modules, -> { eager_load(:page, :optional_module).where('pages.optional=? OR (pages.optional=? AND optional_modules.enabled=?)', false, true, true) }
 
   def self.except_current_and_submenus(myself = nil)
     menus = []
@@ -52,8 +52,8 @@ class Menu < ActiveRecord::Base
 
   def self.self_or_available(myself = nil)
     menu = []
-    Menu.includes(:translations, :category).each do |item|
-      menu << item if item.category.nil? || item.try(:category) == myself
+    Menu.includes(:translations, :page).each do |item|
+      menu << item if item.page.nil? || item.try(:page) == myself
     end
     menu
   end

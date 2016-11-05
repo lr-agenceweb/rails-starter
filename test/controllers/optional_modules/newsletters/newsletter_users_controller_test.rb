@@ -76,7 +76,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   # Create
   test 'should have correct flash if create' do
     post :create, newsletter_user: { email: @email, lang: @lang }
-    assert_equal I18n.t('newsletter.subscribe_success', email: @email), flash[:success]
+    assert_equal I18n.t('newsletter.subscribe_success'), flash[:success]
   end
 
   test 'should have correct flash if error' do
@@ -86,7 +86,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
   test 'AJAX :: should have correct flash if create' do
     xhr :post, :create, newsletter_user: { email: @email, lang: @lang }
-    assert_equal I18n.t('newsletter.subscribe_success', email: @email), flash[:success]
+    assert_equal I18n.t('newsletter.subscribe_success'), flash[:success]
   end
 
   test 'AJAX :: should have correct flash if error' do
@@ -136,7 +136,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
   test 'AJAX :: should render show template if created' do
     xhr :post, :create, format: :js, newsletter_user: { email: @email, lang: @lang }
-    assert_template :show
+    assert_template :create
   end
 
   test 'AJAX :: should not create if email is wrong' do

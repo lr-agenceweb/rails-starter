@@ -3,13 +3,14 @@
 # encoding: UTF-8
 
 atom_feed language: @language do |feed|
-  feed.title @setting.title
+  extra = @extra_title.blank? ? '' : " (#{@extra_title})"
+  feed.title @setting.title + extra
   feed.updated @updated
 
   @posts.each do |item|
     next if item.updated_at.blank?
 
-    url = item.is_a?(Blog) ? blog_category_blog_url(item.blog_category, item) : send("#{item.class.to_s.underscore}_url", item)
+    url = item.decorate.show_post_link('url')
 
     feed.entry(item, url: url) do |entry|
       entry.url item.decorate.show_page_link(true)

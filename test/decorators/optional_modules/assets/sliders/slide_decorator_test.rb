@@ -21,7 +21,7 @@ class SlideDecoratorTest < Draper::TestCase
   end
 
   test 'should return description for slide image' do
-    assert_equal 'Description for slide one', @slide_decorated.description_deco
+    assert_equal 'Description for slide one', @slide_decorated.description_d
   end
 
   test 'should return correct value for caption?' do

@@ -8,8 +8,10 @@ module Publishable
 
   included do
     # Model relations
-    has_one :publication_date, as: :publishable, dependent: :destroy
-    accepts_nested_attributes_for :publication_date, allow_destroy: false
+    has_one :publication_date, as: :publishable,
+                               dependent: :destroy
+    accepts_nested_attributes_for :publication_date,
+                                  allow_destroy: false
 
     # Delegates
     delegate :published_later, :published_at,
@@ -34,7 +36,7 @@ module Publishable
       return published_at <= today if published_at.present?
 
       # Expired_at only
-      return expired_at >= today if expired_at.present?
+      return expired_at > today if expired_at.present?
     end
   end
 end

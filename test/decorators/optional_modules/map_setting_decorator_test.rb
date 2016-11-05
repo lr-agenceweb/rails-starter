@@ -11,7 +11,7 @@ class MapDecoratorTest < Draper::TestCase
 
   test 'should return correct value for marker_color' do
     map_setting_decorated = MapSettingDecorator.new(@map_setting)
-    assert_equal "<div style=\"background-color: #{@map_setting.marker_color}; width: 35px; height: 20px;\"></div>", map_setting_decorated.marker_color_d
+    assert_equal "<div style=\"background-color: #{@map_setting.marker_color}; width: 35px; height: 20px;\"></div>", map_setting_decorated.marker_color_preview
   end
 
   private

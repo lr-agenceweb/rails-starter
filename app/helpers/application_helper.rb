@@ -8,20 +8,20 @@ module ApplicationHelper
     Time.zone.now.year
   end
 
-  def title_for_category(category, opts = {})
-    extra_title = defined?(opts[:title]) ? opts[:title] : ''
-    page_title = category.menu_title
-    page_title << " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
-    link = link_to raw(page_title), category.menu_link(category.name), class: 'page-title-link'
-    content_tag(:h2, link, class: 'page-title', id: category.name.downcase)
+  def title_for_page(page, opts = {})
+    extra_title = defined?(opts[:extra]) ? opts[:extra] : ''
+    page_title = page.menu_title
+    page_title += " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
+    link = link_to raw(page_title), page.menu_link(page.name), class: 'page__header__title__link'
+    content_tag(:h2, link, class: 'page__header__title', id: page.name.downcase)
   end
 
-  def background_from_color_picker(category)
-    "background-color: #{category.color}" unless category.nil? || category.color.blank?
+  def background_from_color_picker(page)
+    "background-color: #{page.color}" unless page.nil? || page.color.blank?
   end
 
   #
-  # == Blog pages
+  # == Pages actions
   #
   def index_page?
     params[:action] == 'index' || (params[:controller] == 'blog_categories' && params[:action] == 'show')
@@ -51,5 +51,12 @@ module ApplicationHelper
   #
   def maintenance?(req = request)
     @setting.maintenance? && (!req.path.include?('/admin') || !self.class.name.to_s.split('::').first == 'ActiveAdmin')
+  end
+
+  #
+  # == Git
+  #
+  def branch_name
+    Rails.env.staging? ? 'BranchName' : `git rev-parse --abbrev-ref HEAD`
   end
 end

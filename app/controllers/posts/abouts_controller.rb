@@ -7,13 +7,12 @@ class AboutsController < PostsController
   before_action :set_about, only: [:show]
   decorates_assigned :about, :comment
 
-  include OptionalModules::Commentsable
-
   # GET /a-propos
   # GET /a-propos.json
   def index
-    @abouts = AboutDecorator.decorate_collection(About.online.by_position.includes(:translations))
-    seo_tag_index category
+    @abouts = About.includes(:translations).online.by_position
+    @abouts = AboutDecorator.decorate_collection(@abouts.page(params[:page]))
+    seo_tag_index page
   end
 
   # GET /a-propos/1

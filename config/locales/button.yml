@@ -1,0 +1,12 @@
+# French
+fr:
+  button_states:
+    pending: Votre message est en cours d'envoi
+    error: Une erreur s'est produite
+
+
+# English
+en:
+  button_states:
+    pending: Your message is being saved
+    error: An error happend

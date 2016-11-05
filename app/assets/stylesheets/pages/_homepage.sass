@@ -1,35 +1,47 @@
-// Homepage article
-.homepage-content
-  margin: 100px 0
+//
+// Homepage
+// ========
+body.is-homepage
+  background-color: rgba($black, .55)
+
+.homes
   text-align: center
+  padding: 3rem 0 2rem 0
 
-  .article-title
-    font-size: 3rem
-    margin-bottom: 2rem
+  .home
+    &__header
+      margin-bottom: 1rem
+      &__title
+        font-size: 1.5rem
 
-    &:after
-      content: ''
-      display: block
-      margin: 0 auto
-      width: 50%
-      border-bottom: 1px solid $white
+        &:after
+          display: block
+          width: 25%
+          margin: .5rem auto 0 auto
+          content: ''
+          border-bottom: 1px solid $white
 
-  .post-body, .article-title, .button-discover
+    &__body, &__header__title .button-discover
     color: $white
 
   .button-discover
     a
       display: block
-      text-align: center
-      border: 1px solid $white
       padding: 10px
-      border-radius: 3px
+      transition: background-color .3s ease-in, border-color .3s ease-in
+      text-align: center
       color: $white
-      transition: background-color .3s ease-in
+      border: 1px solid $white
 
       &:hover
+        border-color: $tercery-color
         background-color: $tercery-color
 
-@media screen and (max-width: $menu-breakpoint-two)
-  .homepage-content
-    margin: 0
+@media #{$medium-up}
+  .homes
+    .home
+      &__header
+        margin-bottom: 2rem
+        &__title
+          font-size: 2.5rem
+          line-height: .6

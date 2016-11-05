@@ -7,11 +7,8 @@ fr:
     back_to_article: "Retour à l'article \"%{article}\""
     see_page: Voir la page %{page}
     go_to: Aller sur le site
-    back_to_wine: Retour au vin référent
-
     blog_category:
       back_to: "Voir tous les articles de la catégorie \"%{category}\""
-
 
 # English
 en:
@@ -22,7 +19,6 @@ en:
     back_to_article: "Back to the \"%{article}\" article"
     see_page: See the page %{page}
     go_to: Go on the website
-    back_to_wine: Back to referent wine
 
     blog_category:
       back_to: "See all articles from the \"%{category}\" category"

@@ -5,7 +5,7 @@ en:
       #
       # == Core
       #
-      category:
+      page:
         one: Page
         other: Pages
       string_box:

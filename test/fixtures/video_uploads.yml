@@ -37,7 +37,7 @@ one:
 
 two:
   <<: *DEFAULTS
-  videoable: home (Category)
+  videoable: home (Page)
   video_file_file_name: 'landscape.mp4'
   video_file_processing: false
   online: true

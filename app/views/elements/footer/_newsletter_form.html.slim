@@ -1,12 +1,27 @@
-.row
-  .small-10.small-centered.columns
-    = simple_form_for newsletter_user, remote: true, validate: true, authenticity_token: true do |f|
-      .input-wrapper
-        = f.input :email, as: :email, label: false, placeholder: I18n.t('newsletter.placeholder'), required: true
-        = f.hidden_field :nickname
-        = f.hidden_field :lang, value: @language
-        = f.button :button, class: 'submit-with-icon tiny' do
-          = fa_icon('envelope')
+.newsletter-form
+  header.newsletter-form__header
+    span.newsletter-form__header__title
+      = I18n.t('newsletter.header')
 
-      #feedback.hide
-        span.success
+  .newsletter-form__body
+    .row.align-center
+      .small-8.medium-5.large-10.columns
+        = simple_form_for newsletter_user, remote: true, validate: true, authenticity_token: true do |f|
+
+          div class="input-group newsletter-form__group"
+            = f.input :email,
+                      as: :email,
+                      required: true,
+                      label: false,
+                      placeholder: I18n.t('newsletter.placeholder'),
+                      input_html: { class: 'input-group-field newsletter-form__input' }
+            = f.hidden_field :nickname
+            = f.hidden_field :lang, value: @language
+
+            div class="input-group-button"
+              = button_tag class: 'button small newsletter-form__button', data: { icon: 'fa-envelope' }, name: nil do
+                - fa_icon 'envelope'
+
+          #newsletter-form__feedback.newsletter-form__feedback
+            span.form--success.newsletter-form__feedback--success.hide
+            span.form--error.newsletter-form__feedback--error.hide

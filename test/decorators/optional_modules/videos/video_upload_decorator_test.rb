@@ -23,12 +23,12 @@ class VideoUploadDecoratorTest < Draper::TestCase
     assert_equal '<img src="/system/test/video_uploads/980190962/preview-landscape.jpg" alt="Preview landscape" />', @video_upload_decorated.preview
   end
 
-  test 'should not be linked to a category' do
-    assert_not @video_upload_decorated.category?
+  test 'should not be linked to a page' do
+    assert_not @video_upload_decorated.page?
   end
 
-  test 'should be linked to a category' do
-    assert @video_upload_two_decorated.category?
+  test 'should be linked to a page' do
+    assert @video_upload_two_decorated.page?
   end
 
   #

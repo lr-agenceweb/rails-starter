@@ -5,6 +5,8 @@ require 'test_helper'
 # == ContactForm model test
 #
 class ContactFormTest < ActiveSupport::TestCase
+  setup :initialize_test
+
   test 'should responds to name, email, message, send_copy' do
     msg = ContactForm.new
     [:name, :email, :message, :send_copy, :nickname].each do |attr|
@@ -70,6 +72,10 @@ class ContactFormTest < ActiveSupport::TestCase
     file.stubs(:size).returns(1.megabytes)
     file.stubs(:content_type).returns('images/psd')
 
+    error_i18n_type = {
+      attachment: [I18n.t('type', scope: @error_scope)]
+    }
+
     attrs = {
       name: 'maria',
       email: 'maria@example.com',
@@ -80,6 +86,7 @@ class ContactFormTest < ActiveSupport::TestCase
     msg = ContactForm.new attrs
     assert_not msg.valid?
     assert_equal [:attachment], msg.errors.keys
+    assert_equal error_i18n_type, msg.errors.messages
   end
 
   test 'should not be valid if attachment size is too heavy' do
@@ -87,6 +94,10 @@ class ContactFormTest < ActiveSupport::TestCase
     file.stubs(:size).returns(6.megabytes)
     file.stubs(:content_type).returns('text/plain')
 
+    error_i18n_size = {
+      attachment: [I18n.t('size', size: ContactForm::ATTACHMENT_MAX_SIZE, scope: @error_scope)]
+    }
+
     attrs = {
       name: 'maria',
       email: 'maria@example.com',
@@ -97,5 +108,10 @@ class ContactFormTest < ActiveSupport::TestCase
     msg = ContactForm.new attrs
     assert_not msg.valid?
     assert_equal [:attachment], msg.errors.keys
+    assert_equal error_i18n_size, msg.errors.messages
+  end
+
+  def initialize_test
+    @error_scope = ContactForm::I18N_SCOPE
   end
 end

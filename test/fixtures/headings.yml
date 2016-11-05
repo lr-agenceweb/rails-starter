@@ -14,8 +14,6 @@
 #  index_headings_on_headingable_type_and_headingable_id  (headingable_type,headingable_id)
 #
 
-one:
-  content: MyText
-
-two:
-  content: MyText
+blog:
+  headingable: blog (Page)
+  content: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

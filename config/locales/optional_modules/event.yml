@@ -1,11 +1,19 @@
 # English
 en:
   event:
-    no_results: No events incoming
+    all_day: All day
+    show_calendar: Display calendar events
     from_to_date: From %{start_date} to %{end_date}
+    know_more: Know more about this event
+    destroy:
+      confirm: Are you sure you want to remove this event ?
 
 # French
 fr:
   event:
-    no_results: Il n'y a aucun événement à venir
+    all_day: Toute la journée
+    show_calendar: Afficher le calendrier des événements
     from_to_date: Du %{start_date} au %{end_date}
+    know_more: En savoir plus sur cet événement
+    destroy:
+      confirm: Êtes-vous sûr de vouloir supprimer cet événement ?

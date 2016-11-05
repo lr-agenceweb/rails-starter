@@ -46,7 +46,7 @@ fr:
     create: 'Créer %{model}'
     update: 'Mettre à jour %{model}'
     labels:
-      category:
+      page:
         title: Titre
       setting:
         title: Titre

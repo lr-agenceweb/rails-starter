@@ -1,0 +1,8 @@
+- f.inputs t('formtastic.titles.video_platform_details'), for: [:video_platform, f.object.video_platform || VideoPlatform.new] do |item|
+
+  = render 'admin/assets/video_platforms/forms/inputs', item: item
+
+  - if item.object.url?
+    - item.input :_destroy,
+                 as: :boolean,
+                 required: false

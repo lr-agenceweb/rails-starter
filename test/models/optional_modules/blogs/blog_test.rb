@@ -206,18 +206,21 @@ class BlogTest < ActiveSupport::TestCase
     Timecop.freeze(Time.zone.local(2025, 07, 16, 14, 50, 0)) do
       assert_not @blog.published?
       assert @blog_naked.published?
+      assert @blog_third.published?
     end
 
     # Between
     Timecop.freeze(Time.zone.local(2028, 07, 16, 14, 50, 0)) do
       assert @blog.published?
       assert @blog_naked.published?
+      assert_not @blog_third.published?
     end
 
     # After
     Timecop.freeze(Time.zone.local(2032, 07, 16, 14, 50, 0)) do
       assert_not @blog.published?
       assert @blog_naked.published?
+      assert_not @blog_third.published?
     end
   end
 
@@ -242,7 +245,7 @@ class BlogTest < ActiveSupport::TestCase
     @blog_category.reload
     @blog_category_2.reload
     assert_equal 3, @blog_category.blogs.size
-    assert_equal 1, @blog_category_2.blogs.size
+    assert_equal 2, @blog_category_2.blogs.size
   end
 
   def set_blog_record

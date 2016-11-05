@@ -1,4 +1,5 @@
 $("#comment-<%= @comment.id %>").slideUp();
+
 <%= render 'elements/alert' %>
 
 <% if @redirect_to_back %>
@@ -8,10 +9,31 @@ $("#comment-<%= @comment.id %>").slideUp();
   <% unless @comment.children_ids.empty? %>
     <% @comment.children_ids.each do |comment_child_id| %>
       $("#comment-<%= comment_child_id %>").slideUp();
+      $("#last-comment-<%= comment_child_id %>").slideUp();
     <% end %>
   <% end %>
 <% end %>
 
-if ($('#comment-count').length > 0){
-  $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
+//
+// Sidebar
+// =======
+$comment_to_remove = $("#last-comment-<%= @comment.id %>");
+
+// Remove comment from 'Last comments' sidebar section
+if($comment_to_remove.length > 0) {
+  $comment_to_remove.slideUp(200, function() {
+    $(this).remove();
+  });
 }
+
+// Last comments xx => 0
+setTimeout(function() {
+  $last_comments = $('#last-comments-container').find('.last-comment');
+
+  if($last_comments.length == 0) {
+    $('#last-comments-container').append("<span id='last_comments_nil'>" + I18n.t('comment.no_last_comments') + "</span>");
+  }
+}, 220)
+
+// Update number of comments for a Blog post
+<%= render 'blogs/sidebar/comment_count' %>

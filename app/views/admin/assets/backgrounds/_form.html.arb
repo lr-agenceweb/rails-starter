@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+f.inputs t('formtastic.titles.background_details'),
+         for: [:background, f.object.background || Background.new] do |item|
+  item.input :image,
+             as: :file,
+             label: true,
+             hint: retina_image_tag(item.object, :image, :small)
+
+  item.input :_destroy, as: :boolean if f.object.background?
+end

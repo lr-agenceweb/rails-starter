@@ -1,2 +1,27 @@
+//
+// Breadcrumbs
+// ===========
 .breadcrumbs
   margin-bottom: 0
+  padding: .4rem 0
+  background-color: $primary-color
+  .pretext
+    float: left
+    margin-right: .8rem
+    color: $breadcrumbs-item-color-current
+  li
+    margin-top: 5px
+    a
+      transition: color .3s ease-in !important
+      text-decoration: none !important
+      &:hover
+        color: $breadcrumbs-item-color-current
+
+@media only screen and (min-width: $menu-small) and (max-width: $menu-large)
+  .breadcrumbs
+    padding-left: .4rem
+    border-top: 1px solid $breadcrumbs-item-color-current
+
+@media only screen and (min-width: $menu-large)
+  .breadcrumbs
+    padding-left: 8.33333%

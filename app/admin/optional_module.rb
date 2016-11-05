@@ -17,9 +17,9 @@ ActiveAdmin.register OptionalModule do
 
   index do
     selectable_column
+    bool_column :enabled
     column :name
     column :description
-    bool_column :enabled
 
     actions
   end

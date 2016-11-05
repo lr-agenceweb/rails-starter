@@ -34,36 +34,24 @@ ActiveAdmin.register MailingSetting do
 
     columns do
       column do
-        f.inputs t('general') do
-          f.input :name,
-                  hint: I18n.t('form.hint.mailing_setting.name')
-          f.input :email,
-                  hint: I18n.t('form.hint.mailing_setting.email')
+        f.inputs t('formtastic.titles.mailing_setting_details') do
+          f.input :name
+          f.input :email
         end
-      end
 
-      column do
-        f.inputs 'Signature' do
+        f.inputs t('formtastic.titles.mailing_setting_signature') do
           f.translated_inputs 'Translated fields', switch_locale: true do |t|
             t.input :signature,
-                    hint: I18n.t('form.hint.mailing_setting.signature'),
                     input_html: { class: 'froala small-height' }
           end
         end
       end
-    end
 
-    columns do
       column do
-        f.inputs t('mailing.setting.unsubscribe') do
+        f.inputs t('formtastic.titles.mailing_setting_unsubscribe') do
           f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :unsubscribe_title,
-                    label: I18n.t('activerecord.attributes.mailing_setting.unsubscribe_title'),
-                    hint: I18n.t('form.hint.mailing_setting.unsubscribe_title')
-
+            t.input :unsubscribe_title
             t.input :unsubscribe_content,
-                    label: I18n.t('activerecord.attributes.mailing_setting.unsubscribe_content'),
-                    hint: I18n.t('form.hint.mailing_setting.unsubscribe_content'),
                     input_html: { class: 'froala' }
           end
         end

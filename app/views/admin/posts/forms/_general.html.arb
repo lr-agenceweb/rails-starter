@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+f.inputs t('formtastic.titles.post_generals') do
+  f.input :online
+  f.input :show_as_gallery
+  f.input :allow_comments if comment_module.enabled? && f.object.is_a?(Blog)
+end

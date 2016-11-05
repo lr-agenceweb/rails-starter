@@ -5,3 +5,9 @@
     object_to_append: nested_messages(@comments.arrange(order: :created_at).sort_by{ |key, value| key[:created_at] }.reverse),
     model_name: I18n.t('activerecord.models.comment.other').downcase
 %>
+
+// Emoticonize new added comments
+if(gon.emoticons) { emoticonize_me(); }
+
+// Recalculates scrolling points after adding Ajax content
+sticky_sidebar_fix();

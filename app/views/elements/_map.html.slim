@@ -1,4 +1,5 @@
-#map.map.dark data-url-popup="#{mapbox_popup_contacts_path}"
+#map.map.mapbox.dark data-url-popup="#{mapbox_popup_contacts_path}"
 
 noscript
-  p.text-center = I18n.t('map.no_js')
+  .alert-box.callout.alert
+    p.text-center = I18n.t('map.no_js')

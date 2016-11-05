@@ -114,3 +114,8 @@ audio:
   <<: *DEFAULTS
   name: Audio
   enabled: true
+
+analytics:
+  <<: *DEFAULTS
+  name: Analytics
+  enabled: true

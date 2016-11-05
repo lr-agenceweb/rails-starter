@@ -113,7 +113,7 @@ class SearchesControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         get :index, locale: locale.to_s
-        assert_equal assigns(:category).color, '#F00'
+        assert_equal assigns(:page).color, '#F00'
       end
     end
   end
@@ -189,12 +189,10 @@ class SearchesControllerTest < ActionController::TestCase
   private
 
   def initialize_test
-    @category = categories(:search)
-    @search_module = optional_modules(:search)
-
     @locales = I18n.available_locales
     @setting = settings(:one)
     @menu = menus(:search)
+    @search_module = optional_modules(:search)
 
     @subscriber = users(:alice)
     @administrator = users(:bob)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923205213) do
+ActiveRecord::Schema.define(version: 20161105165643) do
 
   create_table "adult_setting_translations", force: :cascade do |t|
     t.integer  "adult_setting_id", limit: 4,     null: false
@@ -120,30 +120,17 @@ ActiveRecord::Schema.define(version: 20160923205213) do
   add_index "blogs", ["blog_category_id"], name: "index_blogs_on_blog_category_id", using: :btree
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
-  create_table "categories", force: :cascade do |t|
-    t.string   "name",               limit: 255
-    t.string   "color",              limit: 255
-    t.boolean  "optional",                       default: false
-    t.integer  "optional_module_id", limit: 4
-    t.integer  "menu_id",            limit: 4
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-  end
-
-  add_index "categories", ["menu_id"], name: "index_categories_on_menu_id", using: :btree
-  add_index "categories", ["optional_module_id"], name: "index_categories_on_optional_module_id", using: :btree
-
   create_table "comment_settings", force: :cascade do |t|
     t.boolean  "should_signal",   default: true
     t.boolean  "send_email",      default: false
     t.boolean  "should_validate", default: true
     t.boolean  "allow_reply",     default: true
+    t.boolean  "emoticons",       default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string   "title",            limit: 50,    default: ""
     t.string   "username",         limit: 255
     t.string   "email",            limit: 255
     t.text     "comment",          limit: 65535
@@ -155,9 +142,8 @@ ActiveRecord::Schema.define(version: 20160923205213) do
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
     t.integer  "user_id",          limit: 4
-    t.string   "role",             limit: 255,   default: "comments"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
@@ -194,6 +180,7 @@ ActiveRecord::Schema.define(version: 20160923205213) do
   create_table "event_settings", force: :cascade do |t|
     t.integer  "event_order_id", limit: 4
     t.boolean  "prev_next",                default: false
+    t.boolean  "show_calendar",            default: false
     t.boolean  "show_map",                 default: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
@@ -223,6 +210,7 @@ ActiveRecord::Schema.define(version: 20160923205213) do
     t.datetime "end_date"
     t.boolean  "show_as_gallery",               default: false
     t.boolean  "show_calendar",                 default: false
+    t.boolean  "show_map",                      default: false
     t.boolean  "online",                        default: true
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
@@ -371,8 +359,9 @@ ActiveRecord::Schema.define(version: 20160923205213) do
   create_table "map_settings", force: :cascade do |t|
     t.string   "marker_icon",  limit: 255
     t.string   "marker_color", limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.boolean  "show_map",                 default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "menu_translations", force: :cascade do |t|
@@ -479,6 +468,19 @@ ActiveRecord::Schema.define(version: 20160923205213) do
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
   end
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.string   "color",              limit: 255
+    t.boolean  "optional",                       default: false
+    t.integer  "optional_module_id", limit: 4
+    t.integer  "menu_id",            limit: 4
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  add_index "pages", ["menu_id"], name: "index_pages_on_menu_id", using: :btree
+  add_index "pages", ["optional_module_id"], name: "index_pages_on_optional_module_id", using: :btree
 
   create_table "picture_translations", force: :cascade do |t|
     t.integer  "picture_id",  limit: 4,     null: false
@@ -608,10 +610,10 @@ ActiveRecord::Schema.define(version: 20160923205213) do
     t.boolean  "show_breadcrumb",                        default: false
     t.boolean  "show_social",                            default: true
     t.boolean  "show_qrcode",                            default: false
-    t.boolean  "show_map",                               default: false
     t.boolean  "show_admin_bar",                         default: true
     t.boolean  "show_file_upload",                       default: false
     t.boolean  "answering_machine",                      default: false
+    t.boolean  "picture_in_picture",                     default: true
     t.integer  "date_format",              limit: 4,     default: 0
     t.boolean  "maintenance",                            default: false
     t.datetime "logo_updated_at"
@@ -649,12 +651,12 @@ ActiveRecord::Schema.define(version: 20160923205213) do
     t.boolean  "navigation",               default: false
     t.boolean  "bullet",                   default: false
     t.boolean  "online",                   default: true
-    t.integer  "category_id",  limit: 4
+    t.integer  "page_id",      limit: 4
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end
 
-  add_index "sliders", ["category_id"], name: "index_sliders_on_category_id", using: :btree
+  add_index "sliders", ["page_id"], name: "index_sliders_on_page_id", using: :btree
 
   create_table "slides", force: :cascade do |t|
     t.integer  "attachable_id",      limit: 4

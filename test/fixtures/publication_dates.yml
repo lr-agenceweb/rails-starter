@@ -43,3 +43,9 @@ three:
   publishable: blog_offline (Blog)
   published_later: true
   published_at: 2028-01-27 14:00:00
+
+four:
+  <<: *DEFAULTS
+  publishable: blog_third (Blog)
+  expired_prematurely: true
+  expired_at: 2028-01-27 14:00:00

@@ -1,40 +1,34 @@
-.l-page-title
-  margin-top: 15px
-  text-align: center
-
-  .l-page-title-link
-    @include link-colors($secondary-color)
-
-.article-container
-  margin-top: 90px
-
-  .pictures.pictures-container
-    background-color: $secondary-color
-    margin-bottom: 25px
-
-
-.post-article
-  position: relative
-  margin: 1.5rem 0 3rem 0
-  &-title
-    margin-bottom: 1rem
-    color: $primary-color
-
-  .post-title
-    display: inline
-  .frontend-actions
-    &:before
-      content: ' - '
-      position: relative
-
-  footer
-    border: 1px solid $primary-color
-    padding: 1rem
-
-    .inline-list
+//
+// Page layout
+// ===========
+.page-section
+  &:not(.homes)
+    padding: 2rem 0
+    background-color: rgba($white, .93)
+  .page__header
+    margin-bottom: 1.5rem
+    &__title
       margin-bottom: 0
+      text-align: center
+      color: $primary-color
+      font-size: 2rem
+      &__link
+    &__heading
+      margin-top: 1.3rem
+    &__update
+      margin: 0
+      font-size: .7rem
 
-.pictures-container
-  margin-bottom: 1rem
-  img
-    width: 100%
+@media #{$small-only}
+  .page-section
+    padding: 1.5rem 0
+
+@media #{$medium-up}
+  .page-section
+    .page__header
+      &__title
+        font-size: 3rem
+        &:before, &:after
+          display: block
+          content: ''
+          border-bottom: 1px solid $primary-color

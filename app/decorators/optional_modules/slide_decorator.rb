@@ -10,12 +10,12 @@ class SlideDecorator < PictureDecorator
   #
   # == Slide
   #
-  def description_deco
+  def description_d
     raw(model.description) if description?
   end
 
   def slider_page_name
-    model.attachable.category.menu_title
+    model.attachable.page.menu_title
   end
 
   def self_image_has_one_by_size(size = :slide)

@@ -49,11 +49,10 @@ namespace :upload do
     end
   end
 
-  desc 'Upload all yml, dkim, missing and seeds in one time'
+  desc 'Upload all yml, dkim, missing in one time'
   task :all do
     invoke 'upload:yml'
     invoke 'upload:dkim'
     invoke 'upload:missing'
-    invoke 'upload:seeds'
   end
 end

@@ -1,21 +1,22 @@
 - breadcrumb :guest_books
+= render 'elements/background_page_cover', page: page
 
-- if category.video?
-  = render 'assets/videos/video_background', video_background: category.video_upload.decorate
+section.page-section.guest_books.row.align-center#guest_books
+  .small-12.columns
+    = render 'pages/title_and_heading'
 
-section.guest_books-section.page-section#guest_books
-  .row
-    .small-12.columns
-      = title_for_category(category)
+  .small-12.medium-8.columns
+    #guest_books__form.guest_books__form
+      = render 'form'
 
-  .row.align-center
-    .small-12.medium-8.columns
-      .guest-books-form
-        = render 'form'
+  .small-12.medium-8.columns
+    - if @guest_books.blank?
+      p = t('posts.guest_books.empty')
+    - else
+      .row.align-center
+        .small-12.columns
+          #guest_books-container
+            - @guest_books.each do |guest_book|
+              = render 'guest_book', guest_book: guest_book
 
-  .row.align-center
-    .small-12.medium-9.columns
-      - if @guest_books.blank?
-        p = t('guest_book.no_results')
-      - else
-        = render 'guest_books'
+          = paginate @guest_books, custom_klass: 'no-scroll-infinite'

@@ -26,6 +26,12 @@ gulp.task 'init', ->
     open: false
     notify: false
     ui: false
+    snippetOptions:
+      rule:
+        match: /<\/head>/i,
+        fn:  (snippet, match) ->
+          return snippet + match
+
   setupWatchers()
   return
 

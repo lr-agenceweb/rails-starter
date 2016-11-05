@@ -49,11 +49,11 @@ class Ability
     can [:crud], [Post]
     can :update, [Setting]
 
-    # Menu / Category
-    cannot [:create, :destroy, :read], [Menu, Category], optional_module: { enabled: false }
-    can [:update, :read], [Menu, Category], optional_module: { enabled: true }
-    can [:update, :read], [Category], optional_module: nil
-    can [:update, :read], [Menu], category: { optional_module_id: nil }
+    # Menu / Page
+    cannot [:create, :destroy, :read], [Menu, Page], optional_module: { enabled: false }
+    can [:update, :read], [Menu, Page], optional_module: { enabled: true }
+    can [:update, :read], [Page], optional_module: nil
+    can [:update, :read], [Menu], page: { optional_module_id: nil }
 
     can [:read, :destroy, :update], User, role_name: %w( subscriber )
     cannot [:create, :unlink], User
@@ -172,9 +172,10 @@ class Ability
   def comment_frontend
     @comment_setting = CommentSetting.first
     if @comment_module.enabled?
-      cannot [:signal], Comment
+      cannot [:signal, :reply], Comment
       can [:signal], Comment if @comment_setting.should_signal?
       can [:reply], Comment if @comment_setting.allow_reply?
+      cannot [:reply], Comment, &:max_depth?
     else
       cannot :manage, Comment
     end

@@ -3,44 +3,18 @@ ActiveAdmin.register Event do
   menu parent: I18n.t('admin_menu.modules')
 
   permit_params do
-    params = [:id,
-              :all_day,
-              :start_date,
-              :end_date,
-              :show_as_gallery,
-              :online,
-              link_attributes: [
-                :id, :url, :_destroy
-              ],
-              translations_attributes: [
-                :id, :locale, :title, :slug, :content
-              ],
-              pictures_attributes: [
-                :id, :image, :online, :position, :_destroy
-              ],
-              video_uploads_attributes: [
-                :id, :online, :position,
-                :video_file,
-                :video_autoplay,
-                :video_loop,
-                :video_controls,
-                :video_mute,
-                :_destroy,
-                video_subtitle_attributes: [
-                  :id, :subtitle_fr, :subtitle_en, :online, :delete_subtitle_fr, :delete_subtitle_en
-                ]
-              ],
-              location_attributes: [
-                :id, :address, :city, :postcode
-              ],
-              referencement_attributes: [
-                :id,
-                translations_attributes: [
-                  :id, :locale, :title, :description, :keywords
-                ]
-              ]]
-    params.push video_platforms_attributes: [:id, :url, :online, :position, :_destroy] if @video_module.enabled?
+    params = [:all_day, :start_date, :end_date]
+
+    params.push(*general_attributes)
+    params.push(*post_attributes)
+    params.push(*referencement_attributes)
+    params.push(*link_attributes)
+    params.push(*location_attributes)
+    params.push(*picture_attributes(true))
+    params.push(*video_upload_attributes(true)) if @video_module.enabled?
+    params.push(*video_platform_attributes(true)) if @video_module.enabled?
     params.push :show_calendar if @calendar_module.enabled?
+    params.push :show_map if @map_module.enabled? && @event_setting.show_map?
     params
   end
 
@@ -72,6 +46,7 @@ ActiveAdmin.register Event do
     column :start_date
     column :end_date
     bool_column :show_calendar if calendar_module.enabled?
+    bool_column :show_map if map_module.enabled? && event_setting.show_map?
     bool_column :online
 
     translation_status
@@ -80,132 +55,28 @@ ActiveAdmin.register Event do
 
   show do
     arbre_cache(self, resource.cache_key) do
-      columns do
-        column do
-          attributes_table do
-            image_row :image, style: :medium do |r|
-              r.picture.image
-            end if resource.picture?
-            row :content
-            bool_row :all_day
-            row :start_date
-            row :end_date
-            row :duration
-            row :full_address_inline
-            row :link_with_link
-            bool_row :show_as_gallery
-            bool_row :show_calendar if calendar_module.enabled?
-            bool_row :online
-          end
-        end
-
-        column do
-          render 'admin/shared/referencement/show', referencement: resource.referencement
-        end
-      end
+      render 'show', resource: resource
     end
   end
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
-
-    columns do
-      column do
-        f.inputs t('general') do
-          f.input :show_as_gallery,
-                  hint: I18n.t('form.hint.picture.show_as_gallery')
-
-          if calendar_module.enabled?
-            f.input :show_calendar,
-                    hint: I18n.t('form.hint.event.show_calendar')
-          end
-
-          f.input :online, hint: I18n.t('form.hint.event.online')
-        end
-
-        render 'admin/shared/form_translation', f: f
-        render 'admin/shared/referencement/form', f: f
-      end
-
-      column do
-        f.inputs t('activerecord.models.event.one') do
-          f.input :all_day,
-                  hint: I18n.t('form.hint.event.all_day')
-
-          f.input :start_date,
-                  as: :date_time_picker,
-                  hint: I18n.t('form.hint.event.start_date')
-
-          f.input :end_date,
-                  as: :date_time_picker,
-                  hint: I18n.t('form.hint.event.end_date')
-        end
-
-        render 'admin/shared/links/one', f: f
-        render 'admin/shared/locations/one', f: f, title: t('location.event.title'), full: false
-      end
-    end
-
-    columns do
-      column do
-        render 'admin/shared/pictures/many', f: f
-      end
-
-      column do
-        render 'admin/shared/video_platforms/many', f: f
-      end if video_settings.video_platform?
-    end
-
-    columns do
-      column do
-        render 'admin/shared/video_uploads/many', f: f
-      end if video_settings.video_upload?
-    end if video_module.enabled?
-
-    f.actions
+    render 'form', f: f
   end
 
   #
   # == Controller
   #
   controller do
+    include ActiveAdmin::ParamsHelper
     include Skippable
+    include ModuleSettingable
     include ActiveAdmin::Cachable
+    include ActiveAdmin::AjaxDestroyable
     include OptionalModules::Videoable
 
     def scoped_collection
       super.includes :translations, :location, :picture
-    end
-
-    def create
-      reset_end_date if lasts_all_day?
-      check_all_day if empty_end_date?
-      super
-    end
-
-    def update
-      reset_end_date if lasts_all_day?
-      check_all_day if empty_end_date?
-      super
-    end
-
-    private
-
-    def reset_end_date
-      params[:event][:start_date] = params[:event][:start_date].to_datetime.change(hour: 0, min: 0, sec: 0)
-      params[:event][:end_date] = nil
-    end
-
-    def check_all_day
-      params[:event][:all_day] = true
-    end
-
-    def lasts_all_day?
-      params[:event][:all_day] == true
-    end
-
-    def empty_end_date?
-      params[:event][:end_date].blank?
     end
   end
 end

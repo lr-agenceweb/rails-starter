@@ -1,31 +1,68 @@
-function reset_form() {
-  $('#comment_username').val('');
-  $('#comment_email').val('');
-  $('#comment_comment').val('');
+// Variables
+is_reply = $('.reply-form').length > 0;
+prefix = is_reply ? '.reply-form' : '.new_comment';
+inputs = [
+  prefix + ' #comment_username',
+  prefix + ' #comment_email',
+  prefix + ' #comment_comment'
+];
+
+reset_form(inputs);
+
+// Hide and reset reply form if any
+if (is_reply){
+  $('.comments .reply-form').remove();
+}
+else {
+  submit_btn_state('#new_comment.new_comment', "<%= flash[:success].html_safe %>");
 }
 
+// Inject comment to list
 <% if !@comment_setting.should_validate? || current_user_and_administrator?(current_user) %>
   <% if comment.parent_id.nil? %>
     $('.comments').prepend("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
   <% else %>
-    $("#comment-<%= comment.parent_id %>").after("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
+    if($("#comment-<%= comment.parent_id %>").next().is('.nested_messages')) {
+      $("#comment-<%= comment.parent_id %>").next().append("<%= j render partial: 'comments/comment', locals: { comment: comment } %>");
+    }
+    else {
+      $("#comment-<%= comment.parent_id %>").after("<div class='nested_messages'><%= j render partial: 'comments/comment', locals: { comment: comment } %></div>");
+    }
   <% end %>
+
+  // Emoticonize new added comments
+  if(gon.emoticons) { emoticonize_me(); }
 <% end %>
 
-<%= render 'elements/alert' %>
+//
+// Sidebar
+// =======
+<% unless @comment_setting.should_validate? %>
+  // Update number of comments for a Blog post
+  <%= render 'blogs/sidebar/comment_count' %>
 
-// Update number of comments for a post
-if ($('#comment-count').length > 0){
-  $('#comment-count').html("<%= @commentable.comments.validated.by_locale(@language).count %>")
-}
+  // Prepend new added comment to 'Last comments' sidebar section
+  $last_comments = $('#last-comments-container')
+  lc_count = $last_comments.find('.last-comment').length;
 
-// Hide and reset reply form if any
-if ($('.comments form.new_comment').length > 0){
-  reset_form();
-  $('.comments form.new_comment').hide();
-}
+  if($last_comments.length > 0) {
 
-$('form.new_comment .submit-loader').fadeOut();
-reset_form();
+    // If last comments == 0
+    if(lc_count == 0) {
+      $('#last_comments_nil').slideUp(100, function() {
+        $(this).remove(); // remove default I18n sentence
+      })
+    }
 
-NProgress.done();
+    // If last comments == max size, remove last child
+    if(lc_count >= gon.last_comments_count) {
+      $last_comments.find('.last-comment:last-child').remove();
+    }
+
+    // Insert new last comment at first position
+    $last_comments.prepend("<%= j render partial: 'blogs/sidebar/last_comments/row', locals: { comment: comment } %>");
+  }
+<% end %>
+
+// Recalculates scrolling points after adding Ajax content
+sticky_sidebar_fix();

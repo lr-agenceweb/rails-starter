@@ -26,12 +26,20 @@ one:
   city: Auckland
   latitude: 1.5
   longitude: 1.5
-  locationable_id: 1
-  locationable_type: Setting
+  locationable: one (MapSetting)
 
 two:
   address: '4 avenue de la chouette'
   postcode: '77700'
   city: Gotham
+  latitude: 1.5
+  longitude: 1.5
   locationable_id: 1
+  locationable_type: Event
+
+three:
+  address: '23 rue du crime'
+  postcode: '12000'
+  city: Metropolis
+  locationable_id: 2
   locationable_type: Event

@@ -41,12 +41,13 @@ fr:
     'true': Sous-titres présents
     'false': Sous-titres absents
   all: Tous
-  additional: Informations complémentaires
-  general: Informations générales
   prev: Précédent
   next: Suivant
+  prev_article: '%{article} précédent'
+  next_article: '%{article} suivant'
   no_js: "%{site} fonctionne mieux avec JavaScript activé ;)"
   in: dans
+  close: Fermer
 
   # has_many button label
   add:
@@ -60,7 +61,7 @@ fr:
 
   scroll_infinite:
     fetch_nexts: Chargement en cours ...
-    fetch_end: Il n'a plus de %{resource} à afficher :(
+    fetch_end: Il n'y a plus d'articles à afficher
 
   admin_bar:
     go_to_admin: Voir l'administration
@@ -102,16 +103,17 @@ en:
   allow_comments:
     'true': Comments allowed
     'false': Comments not allowed
-  additional: Additional information
-  general: General information
   prev: Previous
   next: Next
+  prev_article: Prev %{article}
+  next_article: Next %{article}
   no_js: "%{site} works better with JavaScript enabled ;)"
   in: in
+  close: Close
 
   scroll_infinite:
     fetch_nexts: Loading ...
-    fetch_end: There is no more %{resource} to show :(
+    fetch_end: There is no more posts to show
 
   admin_bar:
     go_to_admin: Go to the administration

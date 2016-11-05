@@ -79,7 +79,7 @@ ActiveAdmin.register User do
 
     columns do
       column do
-        f.inputs t('active_admin.details', model: I18n.t('activerecord.models.user.one')) do
+        f.inputs t('formtastic.titles.user_details') do
           f.input :username
           f.input :email
           unless f.object.from_omniauth?
@@ -90,27 +90,21 @@ ActiveAdmin.register User do
       end
 
       column do
-        f.inputs 'Avatar' do
+        f.inputs t('formtastic.titles.user_avatar_details') do
           f.input :avatar,
                   as: :file,
                   hint: f.object.avatar.exists? ? retina_image_tag(f.object, :avatar, :small) : gravatar_image_tag(f.object.email, alt: f.object.username, gravatar: { secure: true })
 
-          if f.object.avatar?
-            f.input :delete_avatar,
-                    as: :boolean,
-                    hint: 'Si coché, l\'avatar sera supprimé après mise à jour du profil et l\'image de gravatar sera utilisée'
-          end
+          f.input :delete_avatar if f.object.avatar?
         end
       end unless f.object.from_omniauth?
     end
 
-    if current_user_and_administrator?
-      columns do
-        column do
-          render 'admin/shared/roles/form', f: f
-        end
+    columns do
+      column do
+        render 'admin/roles/form', f: f
       end
-    end # if
+    end if current_user_and_administrator?
 
     f.actions
   end

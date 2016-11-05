@@ -16,6 +16,7 @@ object.bool_column :allow_comments if comment_module.enabled? && !defined?(hide_
 object.bool_column :online
 object.column :publication if params[:controller] == 'admin/blogs'
 object.translation_status
-object.column :author_with_avatar unless defined?(hide_author_column)
+
+object.column :author_with_avatar if params[:controller] == 'admin/blogs'
 
 object.actions

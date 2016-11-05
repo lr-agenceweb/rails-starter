@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+div.panel t('post.referencement.title') do
+  if referencement.description.blank?
+    span t('post.referencement.empty')
+  else
+    attributes_table_for referencement do
+      row :description
+      row :keywords
+    end
+  end
+end

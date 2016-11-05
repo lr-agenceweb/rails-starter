@@ -1,6 +1,7 @@
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  content: ~
 
 event_online_fr:
   <<: *DEFAULTS
@@ -18,13 +19,26 @@ event_online_en:
   slug: event-1
   content: Come and discover sausages flavours
 
+event_offline_fr:
+  <<: *DEFAULTS
+  event_id: 2
+  locale: fr
+  title: Evénement 2
+  slug: evenement-2
+
+event_offline_en:
+  <<: *DEFAULTS
+  event_id: 2
+  locale: en
+  title: Event 2
+  slug: event-2
+
 event_third_fr:
   <<: *DEFAULTS
   event_id: 3
   locale: fr
   title: Evénement 3
   slug: evenement-3
-  content: ~
 
 event_third_en:
   <<: *DEFAULTS
@@ -32,7 +46,6 @@ event_third_en:
   locale: en
   title: Event 3
   slug: event-3
-  content: ~
 
 event_four_fr:
   <<: *DEFAULTS
@@ -40,7 +53,6 @@ event_four_fr:
   locale: fr
   title: Evénement 4
   slug: evenement-4
-  content: ~
 
 event_four_en:
   <<: *DEFAULTS
@@ -48,7 +60,6 @@ event_four_en:
   locale: en
   title: Event 4
   slug: event-4
-  content: ~
 
 event_five_fr:
   <<: *DEFAULTS
@@ -56,7 +67,6 @@ event_five_fr:
   locale: fr
   title: Evénement 5
   slug: evenement-5
-  content: ~
 
 event_five_en:
   <<: *DEFAULTS
@@ -64,7 +74,6 @@ event_five_en:
   locale: en
   title: Event 5
   slug: event-5
-  content: ~
 
 all_day_fr:
   <<: *DEFAULTS
@@ -72,12 +81,10 @@ all_day_fr:
   locale: fr
   title: Evénement toute la journée
   slug: evenement-toute-la-journee
-  content: ~
 
 all_day_en:
   <<: *DEFAULTS
   event_id: 6
   locale: en
   title: Event all day
-  slug: event all day
-  content: ~
+  slug: event-all-day

@@ -57,9 +57,10 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
+      assert_not @about.online?
       post :batch_action, batch_action: 'toggle_online', collection_selection: [@about.id]
       [@about].each(&:reload)
-      assert_not @about.online?
+      assert @about.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
@@ -72,31 +73,6 @@ module Admin
       post :batch_action, batch_action: 'reset_cache', collection_selection: [@about.id]
       assert_redirected_to admin_abouts_path
       assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
-    end
-
-    #
-    # == Comments
-    #
-    test 'should destroy comments with post' do
-      assert_equal 5, @about.comments.size
-      delete :destroy, id: @about
-      assert_equal 0, @about.comments.size
-      assert @about.comments.empty?
-    end
-
-    #
-    # == Validations
-    #
-    test 'should not save allow_comments params if module is disabled' do
-      disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
-      sign_in @administrator
-      patch :update, id: @about, about: { allow_comments: false }
-      assert assigns(:about).allow_comments?
-    end
-
-    test 'should save allow_comments params if module is enabled' do
-      patch :update, id: @about, about: { allow_comments: false }
-      assert_not assigns(:about).allow_comments?
     end
 
     #
@@ -193,9 +169,8 @@ module Admin
       @setting = settings(:one)
       @request.env['HTTP_REFERER'] = admin_abouts_path
 
-      @about = posts(:about_2)
+      @about = posts(:about_offline)
       @about_super_administrator = posts(:about)
-      @comment_module = optional_modules(:comment)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

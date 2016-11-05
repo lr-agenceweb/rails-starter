@@ -48,19 +48,6 @@ module Admin
       assert flash[:notice].blank?
     end
 
-    test 'should destroy blog' do
-      assert_difference ['Blog.count'], -1 do
-        delete :destroy, id: @blog
-      end
-      assert_redirected_to admin_blogs_path
-    end
-
-    test 'should destroy nested audio with blog' do
-      assert_difference ['Audio.count'], -1 do
-        delete :destroy, id: @blog
-      end
-    end
-
     test 'should update nested audio and enqueued it' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
       assert_enqueued_jobs 1 do
@@ -69,9 +56,50 @@ module Admin
     end
 
     #
+    # == Destroy
+    #
+    test 'should destroy blog' do
+      assert_difference ['Blog.count', 'Audio.count'], -1 do
+        delete :destroy, id: @blog
+        assert_redirected_to admin_blogs_path
+      end
+    end
+
+    test 'AJAX :: should destroy blog' do
+      assert_difference ['Blog.count', 'Audio.count'], -1 do
+        xhr :delete, :destroy, id: @blog
+        assert_response :success
+        assert_template :destroy
+      end
+    end
+
+    #
+    # == Slug
+    #
+    # FIXME: Fix this when FriendlyIdGlobalize will be fixed
+    test 'should update slug if title changed' do
+      skip 'Fix this when FriendlyIdGlobalize will be fixed'
+      attrs = {
+        translations_attributes: {
+          '1': { title: 'Lorem', locale: 'fr' },
+          '0': { title: 'Ipsum', locale: 'en' }
+        }
+      }
+      patch :update, id: @blog, blog: attrs
+
+      I18n.with_locale(:fr) do
+        assert_equal 'lorem', assigns(:blog).slug
+      end
+
+      I18n.with_locale(:en) do
+        assert_equal 'ipsum', assigns(:blog).slug
+      end
+    end
+
+    #
     # == PublicationDate
     #
-    test 'should create nested publication_date' do
+    test 'should create nested publication_date if blank attributes' do
       attrs = set_default_record_attrs
       attrs[:blog_category_id] = @blog_category.id
 
@@ -79,6 +107,22 @@ module Admin
       blog = assigns(:blog)
       assert blog.publication_date.present?
       assert blog.published_at.nil?
+      assert blog.expired_at.nil?
+
+      get :index
+      assert_response :success
+    end
+
+    test 'should create nested publication_date if attributes filled' do
+      published_at = '2029-12-30 12:00:00'.to_datetime
+      attrs = set_default_record_attrs
+      attrs[:blog_category_id] = @blog_category.id
+      attrs[:publication_date_attributes] = default_publication_date('1', '0', published_at)
+
+      post :create, blog: attrs
+      blog = assigns(:blog)
+      assert blog.publication_date.present?
+      assert_equal published_at, blog.published_at
       assert blog.expired_at.nil?
     end
 

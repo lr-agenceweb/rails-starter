@@ -15,7 +15,7 @@ class SliderDecorator < ApplicationDecorator
   end
 
   def page
-    I18n.t("activerecord.models.#{model.category_name.downcase}.one")
+    I18n.t("activerecord.models.#{model.page_name.downcase}.one")
   end
 
   def time_to_show

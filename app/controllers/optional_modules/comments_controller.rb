@@ -8,6 +8,8 @@ class CommentsController < ApplicationController
   include ModuleSettingable
 
   before_action :comment_module_enabled?
+  before_action :set_page, only: [:reply]
+  before_action :set_background, only: [:reply]
   before_action :load_commentable
   before_action :set_comment, only: [:reply, :signal, :destroy]
   before_action :set_comments, only: [:create]
@@ -21,22 +23,20 @@ class CommentsController < ApplicationController
 
   include DeletableCommentable
 
-  decorates_assigned :comment, :about, :blog
+  decorates_assigned :comment, :about, :blog, :page
 
   # POST /comments
   # POST /comments.json
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user_id = current_user.id if user_signed_in?
-    @comment.parent_id = nil unless can? :reply, @comment
     if @comment.save
-      @success_comment = true
       flash.now[:success] = I18n.t('comment.create_success')
       flash.now[:success] = I18n.t('comment.create_success_with_validate') if @comment_setting.should_validate? && !current_user_and_administrator?(User.current_user)
       respond_action 'create'
-    else # Render view user come from instead of the comments default view
-      instance_variable_set("@#{@commentable.class.name.underscore}", @commentable)
-      render "#{@commentable.class.name.underscore.pluralize}/show"
+    else
+      flash.now[:error] = I18n.t('comment.create_error')
+      respond_action 'forbidden'
     end
   end
 
@@ -54,6 +54,8 @@ class CommentsController < ApplicationController
 
   def reply
     raise ActionController::RoutingError, 'Not Found' if !params[:token] || @comment.try(:token) != params[:token] || cannot?(:reply, @comment)
+    return if @comment.max_depth?
+
     @parent_comment = @comment
     @comment = @commentable.comments.new(parent_id: params[:id])
     @asocial = true
@@ -82,7 +84,7 @@ class CommentsController < ApplicationController
   def load_commentable
     klass = [About, Blog].detect { |c| params["#{c.name.underscore}_id"] }
     @commentable = klass.find(params["#{klass.name.underscore}_id"])
-    @category = Category.find_by(name: klass.model_name.to_s)
+    @page = @pages.find_by(name: klass.model_name.to_s)
     @controller_name = klass.name.underscore.pluralize
     redirect_to root_path unless @commentable.allow_comments?
   end
@@ -94,7 +96,7 @@ class CommentsController < ApplicationController
 
   def respond_action(template)
     respond_to do |format|
-      format.html { redirect_to source }
+      format.html { redirect_to @commentable.decorate.show_post_link }
       format.js { render template }
     end
   end
@@ -119,8 +121,8 @@ class CommentsController < ApplicationController
     User.current_user = try(:current_user)
   end
 
-  def source
-    @commentable.is_a?(Blog) ? blog_category_blog_path(@commentable.blog_category, @commentable) : @commentable
+  def set_page
+    @page = Page.find_by(name: 'Blog')
   end
 
   #
@@ -129,7 +131,7 @@ class CommentsController < ApplicationController
   def email_comment_created?
     @comment_setting.send_email? &&
       !current_user_and_administrator? &&
-      @success_comment
+      @comment.persisted?
   end
 
   def email_comment_signalled?

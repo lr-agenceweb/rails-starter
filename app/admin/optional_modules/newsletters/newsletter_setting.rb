@@ -43,25 +43,8 @@ ActiveAdmin.register NewsletterSetting do
 
     columns do
       column do
-        f.inputs t('general') do
-          f.input :send_welcome_email,
-                  hint: I18n.t('form.hint.newsletter.send_welcome_email')
-        end
-      end
-    end
-
-    columns id: 'newsletter_config_form' do
-      column do
-        f.inputs t('newsletter.active_admin.welcome_panel_title') do
-          f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :title_subscriber,
-                    label: I18n.t('activerecord.attributes.newsletter_setting.title_subscriber'),
-                    hint: I18n.t('form.hint.newsletter.title_subscriber')
-            t.input :content_subscriber,
-                    label: I18n.t('activerecord.attributes.newsletter_setting.content_subscriber'),
-                    hint: I18n.t('form.hint.newsletter.content_subscriber'),
-                    input_html: { class: 'froala' }
-          end
+        f.inputs t('formtastic.titles.newsletter_setting_details') do
+          f.input :send_welcome_email
         end
       end
     end
@@ -69,6 +52,18 @@ ActiveAdmin.register NewsletterSetting do
     columns do
       column do
         render 'admin/newsletter_user_roles/form', f: f
+      end
+    end
+
+    columns id: 'newsletter_config_form' do
+      column do
+        f.inputs t('formtastic.titles.newsletter_setting_content') do
+          f.translated_inputs 'Translated fields', switch_locale: true do |t|
+            t.input :title_subscriber, label: true
+            t.input :content_subscriber,
+                    input_html: { class: 'froala' }
+          end
+        end
       end
     end
 

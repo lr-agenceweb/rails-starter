@@ -1,0 +1,13 @@
+.row.align-center
+  .small-12.medium-6.columns
+    header.page__header
+      - opts = {}
+      - if can? :update, page
+        - link = edit_admin_page_path(page)
+        - opts[:extra] = link_to fa_icon('pencil'), link, target: :_blank, class: 'button tiny page__header__update show-for-large has-tip', data: { tooltip: '' }, tabindex: '1', title: t('tooltip.edit_page', locale: I18n.default_locale), aria_haspopup: 'true'
+
+      = title_for_page(page, opts)
+
+      - if page.heading?
+        .page__header__heading
+          == page.heading_content

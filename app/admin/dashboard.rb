@@ -1,84 +1,76 @@
 # frozen_string_literal: true
 ActiveAdmin.register_page 'Dashboard' do
-  menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
+  menu priority: 1,
+       label: proc {
+         I18n.t('active_admin.dashboard')
+       }
 
   content title: proc { I18n.t('active_admin.dashboard') } do
+    # Variables
+    # TODO: Find a way to clean this (use before_action or setup concern) => same code as RSS
+    @posts = []
+    @posts += Post.includes(:translations).order(id: :desc).allowed_for_rss.last(3)
+    @posts += Blog.includes(:translations, blog_category: [:translations]).published.last(3) if OptionalModule.find_by(name: 'Blog').enabled?
+    @posts += Event.includes(:translations).online.last(3) if OptionalModule.find_by(name: 'Event').enabled?
+    @posts.sort_by!(&:updated_at).reverse
+
     # Subscriber
     if current_user.subscriber?
       columns do
         column do |panel|
-          render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.includes(:translations).by_user(current_user.id).order(id: :desc).last(5)
+          render 'posts', panel: panel, query: @posts
         end
       end # columns
 
       if OptionalModule.find_by(name: 'Comment').enabled?
         columns do
           column do |panel|
-            render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.includes(:commentable).by_user(current_user.id).last(5)
+            render 'comments', panel: panel, query: Comment.includes(:commentable).by_user(current_user.id).last(5)
           end
         end # columns
       end
 
       columns do
         column do |panel|
-          render 'admin/dashboard/subscribers/user', panel: panel, query: [User.includes(:role).find(current_user.id)]
+          render 'user', panel: panel, query: [User.includes(:role).find(current_user.id)]
         end
       end # columns
 
     # Admin / SuperAdmin
     else
       columns do
+        # Left
         column do |panel|
-          render 'admin/dashboard/subscribers/posts', panel: panel, query: Post.includes(:translations).order(id: :desc).last(5)
+          # Posts
+          render 'posts', panel: panel, query: @posts
+
+          # Pages
+          render 'pages', panel: panel, query: Page.includes(:background, menu: [:translations]) if current_user.super_administrator?
         end # column
-      end # columns
 
-      columns do
-        if OptionalModule.find_by(name: 'Comment').enabled?
-          column do |panel|
-            render 'admin/dashboard/subscribers/comments', panel: panel, query: Comment.includes(:commentable).order(id: :desc).last(5)
-          end
-        end
-      end # columns
-
-      columns do
-        if current_user.super_administrator?
-          column do |panel|
-            render 'admin/dashboard/categories', panel: panel, query: Category.includes(:background, menu: [:translations])
-          end
-        end
-
+        # Right
         column do |panel|
+          # Comments
+          render 'comments', panel: panel, query: Comment.includes(:commentable).order(id: :desc).last(5) if OptionalModule.find_by(name: 'Comment').enabled?
+
+          # Settings
+          render 'settings', panel: panel, query: Setting.first
+
+          # Users
           query = User.includes(:role).order(id: :desc).last(5) unless current_user.administrator?
           query = User.includes(:role).except_super_administrator.order(id: :desc).last(5) if current_user.administrator?
-          render 'admin/dashboard/subscribers/user', panel: panel, query: query
+          render 'user', panel: panel, query: query
+
+          # Mapbox
+          panel('Mapbox') { render 'elements/map' } if @show_map_contact
         end
-      end
+      end # columns
 
       columns do
         column do |panel|
-          render 'admin/dashboard/settings', panel: panel, query: Setting.first
-          render 'admin/dashboard/super_administrator/optional_modules', panel: panel, query: OptionalModule.all
+          render 'optional_modules', panel: panel, query: OptionalModule.all
         end # column
-
-        unless location.nil?
-          column do
-            panel 'Mapbox' do
-              render 'elements/map'
-            end
-          end # column
-        end # if / else
       end # columns
     end # if / else
   end # content
-
-  controller do
-    before_action :set_setting
-
-    private
-
-    def set_setting
-      @setting = Setting.first
-    end
-  end
 end

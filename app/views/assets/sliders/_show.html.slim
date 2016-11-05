@@ -1,5 +1,5 @@
 - if (@slider_module.enabled? && !slider.nil? && slider.slides? && slider.online?) || force
-  .fotorama data-nav="#{slider.bullet}" data-loop="#{slider.loop}" data-autoplay="#{slider.autoplay == false ? slider.autoplay : slider.time_to_show}" data-keyboard="true" data-shuffle="false" data-transition="#{slider.animate}" data-clicktransition="#{slider.animate}" data-transitionduration="1300" data-stopautoplayontouch="#{slider.hover_pause}" data-arrows="#{slider.navigation}" data-fit='cover'
+  .fotorama data-nav="#{slider.bullet ? 'thumbs' : false}" data-loop="#{slider.loop}" data-autoplay="#{slider.autoplay == false ? slider.autoplay : slider.time_to_show}" data-keyboard="true" data-shuffle="false" data-transition="#{slider.animate}" data-clicktransition="#{slider.animate}" data-transitionduration="1300" data-stopautoplayontouch="#{slider.hover_pause}" data-arrows="#{slider.navigation}" data-fit='cover'
 
     - slider.slides_online.each_with_index do |slide, index|
       - cache [slider, slide] do

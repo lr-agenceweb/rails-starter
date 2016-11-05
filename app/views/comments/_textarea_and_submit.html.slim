@@ -1,19 +1,19 @@
-= f.hidden_field :lang,
-                 value: params[:locale]
 = f.input :comment,
           as: :text,
+          required: true,
+          label: false,
           input_html: { class: 'autosize', style: 'height: 120px' }
 = f.input :nickname,
           label: false,
+          wrapper: false,
           input_html: { class: 'hide' }
+= f.hidden_field :lang,
+                 value: params[:locale]
 
-- if can?(:reply, comment) && params[:action] == 'reply'
+- if params[:action] == 'reply'
   = f.hidden_field :parent_id,
                    label: false,
                    class: 'hide'
 
-.submit-and-loader
-  = image_tag image_path('loader-dark.gif'), class: 'submit-loader'
-  = button_tag(class: 'button ffab after fa-arrow-right') do
-    = t('comment.submit.button') unless params[:action] == 'reply'
-    = t('comment.reply.button') if params[:action] == 'reply'
+- custom_label = params[:action] == 'reply' ? t('comment.reply.button') : t('comment.submit.button')
+= render 'elements/submit_with_states', custom_label: custom_label

@@ -1,6 +1,7 @@
 # French
 fr:
   user:
+    connected_from: Depuis %{from}
     registration:
       not_activated: Votre compte a bien été créé, vous recevrez un email lorsque l'administrateur l'aura activé
 

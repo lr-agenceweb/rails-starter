@@ -18,6 +18,10 @@ class UserDecorator < ApplicationDecorator
     link_to I18n.t('active_admin.show'), admin_user_path(model)
   end
 
+  def connected_from
+    t('user.connected_from', from: provider.blank? ? 'site' : provider)
+  end
+
   #
   # == Omniauth
   #

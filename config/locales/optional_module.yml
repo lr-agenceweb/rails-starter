@@ -15,7 +15,9 @@ en:
       map: Map
       event: Events
       calendar: Calendar
-      video: Vidéo
+      video: Video
+      audio: Audio
+      analytics: Analytics
 
 # French
 fr:
@@ -35,3 +37,5 @@ fr:
       event: Événements
       calendar: Calendrier
       video: Video
+      audio: Audio
+      analytics: Analytics

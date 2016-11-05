@@ -7,14 +7,22 @@ module Skippable
   extend ActiveSupport::Concern
 
   included do
-    skip_before_action :set_adult_validation,
+    skip_before_action :set_host_name,
+
+                       # Core
                        :set_menu_elements,
+                       :set_controller_name,
+                       :set_pages,
+                       :set_current_page,
+
+                       # OptionalModules
                        :set_background,
-                       :set_host_name,
                        :set_newsletter_user,
                        :set_slider,
                        :set_socials_network,
                        :set_map,
+                       :set_adult_validation,
+                       :set_legal_notices,
 
                        # AdminBar
                        :admin_bar_enabled?,

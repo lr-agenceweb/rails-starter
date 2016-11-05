@@ -1,0 +1,17 @@
+= f.inputs t('formtastic.titles.video_subtitle_details'), for: [:video_subtitle, f.object.video_subtitle || VideoSubtitle.new] do |subtitle|
+
+  li
+    p == I18n.t('video_upload.subtitle.explanation', site: 'https://www.amara.org')
+
+  - subtitle.input :subtitle_fr,
+                   as: :file,
+                   hint: raw("#{t('formtastic.hints.video_subtitle.subtitle_fr')} <br /> #{subtitle.object.subtitle_fr_file_name + ' le ' if subtitle.object.subtitle_fr.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_fr.exists?}")
+  - subtitle.input :delete_subtitle_fr, as: :boolean if subtitle.object.subtitle_fr.exists?
+
+  - if I18n.available_locales.include?(:en)
+    - subtitle.input :subtitle_en,
+                     as: :file,
+                     hint: raw("#{t('formtastic.hints.video_subtitle.subtitle_en')} <br /> #{subtitle.object.subtitle_en_file_name + ' le ' if subtitle.object.subtitle_en.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_en.exists?}")
+    - subtitle.input :delete_subtitle_en, as: :boolean if subtitle.object.subtitle_en.exists?
+
+  - subtitle.input :online

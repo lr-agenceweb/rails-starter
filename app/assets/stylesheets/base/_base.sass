@@ -1,12 +1,9 @@
 // Action on text selection
 *
+  outline: none
   &::selection
     color: $white
     background-color: $link-color
-  outline: none
-
-body.is-homepage
-  background-color: rgba($black, .55)
 
 // Links
 a
@@ -24,9 +21,6 @@ a
 .no-margin
   margin: 0 auto
 
-.video-figure
-  margin: 0 auto 3rem auto
-
 .dtable
   display: table
   .dtrow
@@ -36,24 +30,30 @@ a
     display: table-cell
     vertical-align: middle
 
+// Search mark
+mark
+  color: $white
+  background-color: $warning-color
+
 // Maildev
 .button-title
-  margin-left: 1rem
   margin-bottom: 0
+  margin-left: 1rem
   vertical-align: middle
 
-// Overlay on video play
-#shadow
-  &.night
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    z-index: 2
-    opacity: .8
-    background-color: #000
-.mejs-container
-  z-index: 3
+// Highlight post on page
+.highlight-post
+  animation: highlight-post 1.5s
 
-+broken-pictures
+@keyframes highlight-post
+  0%
+    background: $warning-color
+  100%
+    background: none
+
+// Style for broken pictures
++ broken-pictures
+
+// Masonry
+.masonry-item
+  width: 100%

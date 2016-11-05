@@ -32,6 +32,7 @@ class Blog < ActiveRecord::Base
   include Core::Userable
   include Core::Referenceable
   include Core::FriendlyGlobalizeSluggable
+  include Includes::BlogIncludable
   include OptionalModules::Assets::Imageable
   include OptionalModules::Assets::Audioable
   include OptionalModules::Assets::VideoUploadable
@@ -39,18 +40,23 @@ class Blog < ActiveRecord::Base
   include OptionalModules::Commentable
   include OptionalModules::Searchable
 
+  # Callbacks
   after_update :update_counter_cache, if: proc { online_changed? }
 
+  # Models relation
   belongs_to :blog_category, inverse_of: :blogs, counter_cache: true
 
-  delegate :name, to: :blog_category, prefix: true, allow_nil: true
-
+  # Validation rules
   validates :blog_category, presence: true
 
-  paginates_per 10
-
+  # Scopes
   scope :online, -> { where(online: true) }
   scope :by_category, -> (category) { where(blog_category_id: category) }
+
+  # Delegates
+  delegate :name, to: :blog_category, prefix: true, allow_nil: true
+
+  paginates_per 10
 
   private
 

@@ -44,21 +44,21 @@ ActiveAdmin.register Picture do
 
     columns do
       column do
-        f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
+        f.inputs t('formtastic.titles.picture_details') do
           f.input :image,
                   as: :file,
-                  hint: retina_image_tag(f.object, :image, :medium)
-          f.input :online,
-                  label: I18n.t('form.label.online'),
-                  hint: I18n.t('form.hint.online')
+                  hint: "#{t('formtastic.hints.image')} <br /><br />#{retina_image_tag(f.object, :image, :medium)}"
+          f.input :online
         end
       end
 
       column do
-        f.inputs t('additional') do
+        f.inputs t('formtastic.titles.picture_content_details') do
           f.translated_inputs 'Translated fields', switch_locale: true do |t|
-            t.input :title
+            t.input :title,
+                    hint: t('formtastic.hints.picture.title')
             t.input :description,
+                    hint: t('formtastic.hints.picture.description'),
                     input_html: { class: 'froala' }
           end
         end

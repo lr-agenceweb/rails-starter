@@ -43,7 +43,7 @@ class Background < ActiveRecord::Base
   validates :attachable_type,
             presence: true,
             allow_blank: false,
-            inclusion: %w( Category )
+            inclusion: %w( Page )
 
   @child_classes = [:Contact]
 

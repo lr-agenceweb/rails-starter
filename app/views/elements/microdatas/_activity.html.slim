@@ -1,0 +1,24 @@
+/
+/ == Microdatas
+/
+div itemscope='' itemtype='http://schema.org/ProfessionalService'
+  - if resource.logo?
+    div itemprop='logo' itemscope='' itemtype='http://schema.org/ImageObject'
+      meta itemprop='url' content="#{attachment_url(resource.logo, :small)}"
+      meta itemprop='width' content="#{resource.retina_dimensions[:logo][:small][:width]}"
+      meta itemprop='height' content="#{resource.retina_dimensions[:logo][:small][:height]}"
+
+  meta itemprop='url' content="#{root_url}"
+  meta itemprop='telephone' content="#{resource.object.phone}"
+  meta itemprop='name legalName' content="#{resource.title_subtitle_inline}"
+
+  - if map_setting.location?
+    div itemprop='location' itemscope='' itemtype='http://schema.org/Place'
+      meta itemprop='name' content="#{resource.title_subtitle_inline}"
+      div itemprop='address' itemscope='' itemtype='http://schema.org/PostalAddress'
+        - if map_setting.location.address?
+          meta itemprop='streetAddress' content="#{map_setting.location_address}"
+        - if map_setting.location.postcode?
+          meta itemprop='postalCode' content="#{map_setting.location_postcode}"
+        - if map_setting.location.city?
+          meta itemprop='addressLocality' content="#{map_setting.location_city}"

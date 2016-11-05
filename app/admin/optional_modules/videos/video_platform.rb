@@ -57,27 +57,23 @@ ActiveAdmin.register VideoPlatform do
 
     columns do
       column do
-        f.inputs t('general') do
+        f.inputs t('formtastic.titles.video_platform_details') do
           f.input :url,
-                  hint: raw("#{t('form.hint.video.url')} <br /><br /> #{f.object.decorate.preview}")
+                  hint: "#{t('formtastic.hints.video_platform.url')} <br /><br /> #{f.object.decorate.preview}"
 
-          f.input :online,
-                  as: :boolean,
-                  hint: t('form.hint.video.online')
+          f.input :online
         end
       end
 
       column do
-        f.inputs 'Contenu de la vidéo' do
-          f.input :native_informations,
-                  as: :boolean,
-                  hint: t('form.hint.video.native_informations')
+        f.inputs t('formtastic.titles.video_content_details') do
+          f.input :native_informations
 
-          f.translated_inputs 'Translated fields', switch_locale: true, class: 'aazazaz' do |t|
+          f.translated_inputs 'Translated fields', switch_locale: true do |t|
             t.input :title,
-                    label: I18n.t('activerecord.attributes.video_upload.title')
+                    hint: I18n.t('formtastic.hints.video_platform.title')
             t.input :description,
-                    label: I18n.t('activerecord.attributes.video_upload.description'),
+                    hint: I18n.t('formtastic.hints.video_platform.description'),
                     input_html: { class: 'froala' }
           end
         end

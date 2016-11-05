@@ -1,3 +1,4 @@
+# English
 en:
   awesome_share_buttons:
     share_to: "Share with my %{name} account"
@@ -10,9 +11,12 @@ en:
     pinterest: Pinterest
     email: Email
   social:
-    follow: follow
-    share: share
+    follow: Follow me
+    share: Share
+    share_website: Share my website
+    share_article: Share article
 
+# French
 fr:
   awesome_share_buttons:
     share_to: "Partager avec mon compte %{name}"
@@ -25,5 +29,7 @@ fr:
     pinterest: Pinterest
     email: Email
   social:
-    follow: Page personnelle
-    share: Partager sur les réseaux sociaux
+    follow: Me suivre
+    share: Partage
+    share_website: Partager mon site
+    share_article: Partager l'article

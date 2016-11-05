@@ -66,6 +66,7 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+
       @subscriber = users(:alice)
       @administrator = users(:bob)
       @super_administrator = users(:anthony)

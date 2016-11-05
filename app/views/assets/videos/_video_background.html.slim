@@ -1,6 +1,6 @@
 - if show_video_background?(@video_settings, @video_module) && !video_background.video_file_processing?
 
-  section.l-section.heading-site
+  section.heading-site
     video.heading-video preload='auto' autoplay='true' loop='true' muted='true'
       source type='video/mp4' src="#{video_background.video_file.url(:mp4video)}"
       source type='video/webm' src="#{video_background.video_file.url(:webmvideo)}"

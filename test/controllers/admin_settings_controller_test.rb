@@ -50,26 +50,6 @@ module Admin
     end
 
     #
-    # == Nested attributes
-    #
-    test 'should destroy location if destroy is check' do
-      location_attrs = {
-        id: @setting.location.id,
-        _destroy: 'true'
-      }
-      assert @setting.location.present?
-      assert_difference ['Location.count'], -1 do
-        patch :update, id: @setting, setting: { location_attributes: location_attrs }
-        assert assigns(:setting).valid?
-        @setting.reload
-        assigns(:setting).reload
-
-        assert assigns(:setting).location.blank?
-        assert @setting.location.blank?
-      end
-    end
-
-    #
     # == Maintenance
     #
     test 'should still access admin page if maintenance is true' do
@@ -114,12 +94,6 @@ module Admin
       assert_not @setting.update(title: nil)
     end
 
-    test 'should not update if postcode is not numeric' do
-      patch :update, id: @setting, setting: { location_attributes: { postcode: 'bad_value' } }
-      assert_not assigns(:setting).valid?
-      assert assigns(:setting).errors.keys.include?('location.postcode'.to_sym)
-    end
-
     test 'should not update social param if module is disabled' do
       disable_optional_module @super_administrator, @social_module, 'Social' # in test_helper.rb
       sign_in @administrator
@@ -139,6 +113,15 @@ module Admin
       sign_in @administrator
       patch :update, id: @setting, setting: { show_qrcode: '1' }
       assert_not assigns(:setting).show_qrcode?
+    end
+
+    test 'should not update picture_in_picture param if audio or video module is disabled' do
+      assert @setting.picture_in_picture?
+      disable_optional_module @super_administrator, @audio_module, 'Audio' # in test_helper.rb
+      disable_optional_module @super_administrator, @video_module, 'Video' # in test_helper.rb
+      sign_in @administrator
+      patch :update, id: @setting, setting: { picture_in_picture: '0' }
+      assert assigns(:setting).picture_in_picture?
     end
 
     #
@@ -192,6 +175,8 @@ module Admin
       @comment_module = optional_modules(:comment)
       @breadcrumb_module = optional_modules(:breadcrumb)
       @qrcode_module = optional_modules(:qrcode)
+      @audio_module = optional_modules(:audio)
+      @video_module = optional_modules(:video)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

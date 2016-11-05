@@ -7,7 +7,8 @@ ActiveAdmin.register CommentSetting do
                 :should_signal,
                 :send_email,
                 :should_validate,
-                :allow_reply
+                :allow_reply,
+                :emoticons
 
   decorate_with CommentSettingDecorator
   config.clear_sidebar_sections!
@@ -20,6 +21,7 @@ ActiveAdmin.register CommentSetting do
         bool_row :should_signal
         bool_row :send_email if resource.should_signal?
         bool_row :allow_reply
+        bool_row :emoticons
       end
     end
   end
@@ -27,19 +29,12 @@ ActiveAdmin.register CommentSetting do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.inputs I18n.t('activerecord.models.comment_setting.one') do
-      f.input :should_validate,
-              as: :boolean,
-              hint: I18n.t('form.hint.comment_setting.should_validate')
-      f.input :should_signal,
-              as: :boolean,
-              hint: I18n.t('form.hint.comment_setting.should_signal')
-      f.input :send_email,
-              as: :boolean,
-              hint: I18n.t('form.hint.comment_setting.send_email')
-      f.input :allow_reply,
-              as: :boolean,
-              hint: I18n.t('form.hint.comment_setting.allow_reply')
+    f.inputs t('formtastic.titles.comment_setting_details') do
+      f.input :should_validate
+      f.input :should_signal
+      f.input :send_email
+      f.input :allow_reply
+      f.input :emoticons
     end
 
     f.actions

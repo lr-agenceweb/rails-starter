@@ -6,9 +6,9 @@ require 'test_helper'
 #
 module Admin
   #
-  # == CategoriesController test
+  # == PagesController test
   #
-  class CategoriesControllerTest < ActionController::TestCase
+  class PagesControllerTest < ActionController::TestCase
     include Devise::TestHelpers
     include ActionView::Helpers::AssetTagHelper
 
@@ -23,18 +23,18 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @category
+      get :show, id: @page
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @category
+      get :edit, id: @page
       assert_response :success
     end
 
-    test 'should update category if logged in' do
-      patch :update, id: @category, category: { menu_id: @category.menu_id }
-      assert_redirected_to admin_category_path(@category)
+    test 'should update page if logged in' do
+      patch :update, id: @page, page: { menu_id: @page.menu_id }
+      assert_redirected_to admin_page_path(@page)
       assert flash[:notice].blank?
     end
 
@@ -42,8 +42,8 @@ module Admin
     # == Batch actions
     #
     test 'should redirect to back and have correct flash notice for reset_cache batch action' do
-      post :batch_action, batch_action: 'reset_cache', collection_selection: [@category.id]
-      assert_redirected_to admin_categories_path
+      post :batch_action, batch_action: 'reset_cache', collection_selection: [@page.id]
+      assert_redirected_to admin_pages_path
       assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
     end
 
@@ -52,95 +52,95 @@ module Admin
     #
     test 'should return correct flash content after updating a video' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      patch :update, id: @category, category: { video_upload_attributes: { video_file: video } }
-      assert assigns(:category).video_upload.video_file_processing?, 'should be processing video task'
+      patch :update, id: @page, page: { video_upload_attributes: { video_file: video } }
+      assert assigns(:page).video_upload.video_file_processing?, 'should be processing video task'
       assert_equal [I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
     end
 
     #
     # == User role
     #
-    test 'should not create category if administrator' do
-      assert_no_difference ['Category.count'] do
-        post :create, category: {}
+    test 'should not create page if administrator' do
+      assert_no_difference ['Page.count'] do
+        post :create, page: {}
       end
       assert_redirected_to admin_dashboard_path
     end
 
-    test 'should not delete category if administrator' do
-      assert_no_difference ['Category.count'] do
-        delete :destroy, id: @category
+    test 'should not delete page if administrator' do
+      assert_no_difference ['Page.count'] do
+        delete :destroy, id: @page
       end
-      assert_not_nil @category.background
+      assert_not_nil @page.background
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not delete optional_modules params if administrator' do
-      patch :update, id: @category_search, category: { optional: false, optional_module_id: @category_blog.id }
-      assert assigns(:category).optional
-      assert_equal @category_search.id, assigns(:category).optional_module_id
+      patch :update, id: @page_search, page: { optional: false, optional_module_id: @page_blog.id }
+      assert assigns(:page).optional
+      assert_equal @page_search.id, assigns(:page).optional_module_id
     end
 
     test 'should not update optional_modules params if administrator' do
       sign_in @super_administrator
-      patch :update, id: @category_search, category: { optional: false, optional_module_id: @category_blog.id }
-      assert_not assigns(:category).optional
-      assert_equal @category_blog.id, assigns(:category).optional_module_id
+      patch :update, id: @page_search, page: { optional: false, optional_module_id: @page_blog.id }
+      assert_not assigns(:page).optional
+      assert_equal @page_blog.id, assigns(:page).optional_module_id
     end
 
     #
     # == Menu
     #
     test 'should not update menu param if administrator' do
-      patch :update, id: @category, category: { menu_id: 8 }
-      assert_equal @category.menu_id, assigns(:category).menu_id
+      patch :update, id: @page, page: { menu_id: 8 }
+      assert_equal @page.menu_id, assigns(:page).menu_id
     end
 
     # test 'should not update menu param if menu_id is not present' do
-    #   patch :update, id: @category, category: { menu_id: nil }
-    #   assert_not assigns(:category).valid?
+    #   patch :update, id: @page, page: { menu_id: nil }
+    #   assert_not assigns(:page).valid?
     # end
 
     #
     # == Backgrounds
     #
     test 'should have a background associated' do
-      assert_not_nil @category.background
+      assert_not_nil @page.background
     end
 
     test 'should not have a background associated' do
-      assert_nil @category_about.background
+      assert_nil @page_about.background
     end
 
-    test 'should destroy background linked to category if SA' do
+    test 'should destroy background linked to page if SA' do
       sign_in @super_administrator
-      assert_difference ['Category.count', 'Background.count'], -1 do
-        delete :destroy, id: @category
+      assert_difference ['Page.count', 'Background.count'], -1 do
+        delete :destroy, id: @page
       end
-      assert_redirected_to admin_categories_path
+      assert_redirected_to admin_pages_path
     end
 
     test 'should remove background parameter if module is disabled' do
       disable_optional_module @super_administrator, @background_module, 'Background' # in test_helper.rb
       sign_in @administrator
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @category, category: { background_attributes: { image: attachment } }
-      assert_equal 'background-homepage.jpg', assigns(:category).background.image_file_name
+      patch :update, id: @page, page: { background_attributes: { image: attachment } }
+      assert_equal 'background-homepage.jpg', assigns(:page).background.image_file_name
     end
 
     test 'should not destroy background if module is disabled' do
       disable_optional_module @super_administrator, @background_module, 'Background' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @category, category: { background_attributes: { _destroy: true } }
-      assert_equal 'background-homepage.jpg', assigns(:category).background.image_file_name
+      patch :update, id: @page, page: { background_attributes: { _destroy: true } }
+      assert_equal 'background-homepage.jpg', assigns(:page).background.image_file_name
     end
 
     #
     # == Color
     #
     test 'should update color' do
-      patch :update, id: @category, category: { color: '#F0F' }
-      assert_equal '#F0F', assigns(:category).color
+      patch :update, id: @page, page: { color: '#F0F' }
+      assert_equal '#F0F', assigns(:page).color
     end
 
     #
@@ -149,9 +149,9 @@ module Admin
     test 'should destroy slider' do
       sign_in @super_administrator
       assert_difference ['Slider.count'], -1 do
-        delete :destroy, id: @category
+        delete :destroy, id: @page
       end
-      assert_redirected_to admin_categories_path
+      assert_redirected_to admin_pages_path
     end
 
     #
@@ -185,38 +185,38 @@ module Admin
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
-      assert ability.cannot?(:create, Category.new), 'should not be able to create'
-      assert ability.cannot?(:read, @category), 'should not be able to read'
-      assert ability.cannot?(:update, @category), 'should not be able to update'
-      assert ability.cannot?(:destroy, @category), 'should not be able to destroy'
+      assert ability.cannot?(:create, Page.new), 'should not be able to create'
+      assert ability.cannot?(:read, @page), 'should not be able to read'
+      assert ability.cannot?(:update, @page), 'should not be able to update'
+      assert ability.cannot?(:destroy, @page), 'should not be able to destroy'
 
-      assert ability.cannot?(:reset_cache, @category), 'should be able to reset_cache'
+      assert ability.cannot?(:reset_cache, @page), 'should be able to reset_cache'
     end
 
     test 'should test abilities for administrator' do
       ability = Ability.new(@administrator)
-      assert ability.cannot?(:create, Category.new), 'should not be able to create'
-      assert ability.can?(:read, @category), 'should be able to read'
-      assert ability.can?(:update, @category), 'should be able to update'
-      assert ability.cannot?(:destroy, @category), 'should not be able to destroy'
+      assert ability.cannot?(:create, Page.new), 'should not be able to create'
+      assert ability.can?(:read, @page), 'should be able to read'
+      assert ability.can?(:update, @page), 'should be able to update'
+      assert ability.cannot?(:destroy, @page), 'should not be able to destroy'
 
-      assert ability.can?(:reset_cache, @category), 'should be able to reset_cache'
+      assert ability.can?(:reset_cache, @page), 'should be able to reset_cache'
 
       # OptionalModule disabled
       disable_optional_module @super_administrator, @guest_book_module, 'GuestBook' # in test_helper.rb
-      assert ability.cannot?(:read, @category_guest_book), 'should not be able to read'
-      assert ability.cannot?(:update, @category_guest_book), 'should not be able to update'
+      assert ability.cannot?(:read, @page_guest_book), 'should not be able to read'
+      assert ability.cannot?(:update, @page_guest_book), 'should not be able to update'
     end
 
     test 'should test abilities for super_administrator' do
       sign_in @super_administrator
       ability = Ability.new(@super_administrator)
-      assert ability.can?(:create, Category.new), 'should be able to create'
-      assert ability.can?(:read, @category), 'should be able to read'
-      assert ability.can?(:update, @category), 'should be able to update'
-      assert ability.can?(:destroy, @category), 'should be able to destroy'
+      assert ability.can?(:create, Page.new), 'should be able to create'
+      assert ability.can?(:read, @page), 'should be able to read'
+      assert ability.can?(:update, @page), 'should be able to update'
+      assert ability.can?(:destroy, @page), 'should be able to destroy'
 
-      assert ability.can?(:reset_cache, @category), 'should be able to reset_cache'
+      assert ability.can?(:reset_cache, @page), 'should be able to reset_cache'
     end
 
     #
@@ -224,25 +224,25 @@ module Admin
     #
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
-      assert_crud_actions(@category, new_user_session_path, model_name)
+      assert_crud_actions(@page, new_user_session_path, model_name)
     end
 
     test 'should redirect to dashboard if subscriber' do
       sign_in @subscriber
-      assert_crud_actions(@category, admin_dashboard_path, model_name)
+      assert_crud_actions(@page, admin_dashboard_path, model_name)
     end
 
     private
 
     def initialize_test
       @setting = settings(:one)
-      @request.env['HTTP_REFERER'] = admin_categories_path
+      @request.env['HTTP_REFERER'] = admin_pages_path
 
-      @category = categories(:home)
-      @category_about = categories(:about)
-      @category_search = categories(:search)
-      @category_blog = categories(:blog)
-      @category_guest_book = categories(:guest_book)
+      @page = pages(:home)
+      @page_about = pages(:about)
+      @page_search = pages(:search)
+      @page_blog = pages(:blog)
+      @page_guest_book = pages(:guest_book)
       @background_module = optional_modules(:background)
       @guest_book_module = optional_modules(:guest_book)
 

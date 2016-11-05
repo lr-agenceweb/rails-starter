@@ -1,27 +1,27 @@
 .error-template, .maintenance-template
-  .l-container
-    width: 100%
+  .body-site
     position: fixed
     top: 50%
     left: 50%
+    width: 100%
     transform: translate(-50%, -50%)
 
   .error-container, .success-container
-    background-color: $secondary-color
     padding: 25px
     text-align: center
     color: $white
+    background-color: $secondary-color
 
     .title
       color: $white
     .content
       font-size: 1.25rem
     .link
-      font-size: 0.8rem
+      font-size: .8rem
 
     a
-      @include link-colors($white, $link-color)
       text-decoration: underline
+      @include link-colors($white, $link-color)
 
   .success-container
     background-color: $success-color

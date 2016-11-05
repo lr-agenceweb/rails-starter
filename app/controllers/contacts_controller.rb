@@ -6,8 +6,16 @@
 class ContactsController < ApplicationController
   include OptionalModules::QrcodeHelper
 
-  skip_before_action :allow_cors
-  skip_before_action :set_menu_elements, :set_adult_validation, :set_background, :set_newsletter_user, :set_search_autocomplete, :set_slider, :set_social_network, :set_froala_key, only: :mapbox_popup
+  skip_before_action :allow_cors,
+                     :set_menu_elements,
+                     :set_adult_validation,
+                     :set_background,
+                     :set_newsletter_user,
+                     :set_search_autocomplete,
+                     :set_slider,
+                     :set_social_network,
+                     :set_froala_key,
+                     only: :mapbox_popup
 
   # GET /contact
   # GET /contact.json
@@ -19,7 +27,7 @@ class ContactsController < ApplicationController
   # GET /contact/formulaire.json
   def new
     @contact_form = ContactForm.new
-    seo_tag_index category
+    seo_tag_index page
   end
 
   def create
@@ -36,10 +44,10 @@ class ContactsController < ApplicationController
 
   def mapbox_popup
     if request.xhr?
-      if @location.nil?
-        render nothing: true
-      else
+      if @show_map_contact
         render layout: false
+      else
+        render nothing: true
       end
     else
       redirect_to contacts_path
@@ -56,7 +64,7 @@ class ContactsController < ApplicationController
 
   def respond_action(template)
     @success_contact_form = StringBox.includes(:translations).find_by(key: 'success_contact_form')
-    flash.now[:success] = @success_contact_form.content
+    flash.now[:success] = sanitize_string(@success_contact_form.content)
     respond_to do |format|
       format.html { redirect_to new_contact_path, notice: @success_contact_form.content }
       format.js { render template }

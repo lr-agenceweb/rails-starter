@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 f.semantic_errors(*f.object.errors.keys)
 
 f.columns do
   f.column do
-    f.inputs t('activerecord.models.mailing_user.other') do
-      if MailingUser.all.length > 0
+    f.inputs t('formtastic.titles.mailing_message_user') do
+      if MailingUser.all.empty?
+        "<li><p>#{t('mailing.no_mailing_users')}</p></li>".html_safe
+      else
         f.input :mailing_users,
                 as: :check_boxes,
                 collection: MailingUser.all,
                 label: false
-      else
-        "<li><p>#{I18n.t('mailing.no_mailing_users')}</p></li>".html_safe
       end
     end
   end
@@ -17,33 +19,20 @@ end
 
 f.columns do
   f.column do
-    f.inputs t('additional') do
-      f.input :show_signature,
-              as: :boolean,
-              hint: I18n.t('form.hint.mailing_message.signature')
-    end
-  end
-end
+    f.inputs t('formtastic.titles.mailing_message_content') do
+      f.input :show_signature, hint: true
 
-f.columns do
-  f.column do
-    f.inputs t('activerecord.models.mailing_message.one') do
       f.translated_inputs 'Translated fields', switch_locale: true do |t|
-        t.input :title,
-                hint: I18n.t('form.hint.mailing_message.title'),
-                label: I18n.t('activerecord.attributes.mailing_message.title')
+        t.input :title
         t.input :content,
-                hint: I18n.t('form.hint.mailing_message.content'),
-                label: I18n.t('activerecord.attributes.post.content'),
                 input_html: { class: 'froala' }
       end
     end
-
-    render 'admin/shared/pictures/one', f: f
   end
 
   f.column do
     render '/admin/mailings/preview', f: f
+    render 'admin/assets/pictures/forms/one', f: f
   end
 end
 

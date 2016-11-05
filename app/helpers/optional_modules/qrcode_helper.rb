@@ -1,4 +1,5 @@
 # frozen_string_literal: false
+
 #
 # == OptionalModules namespace
 #
@@ -16,7 +17,7 @@ module OptionalModules
     private
 
     def qrcode_base_url(size)
-      "//chart.apis.google.com/chart?chs=#{size}x#{size}&cht=qr&chl=#{u vcard}"
+      "http://chart.apis.google.com/chart?chs=#{size}x#{size}&cht=qr&chl=#{u vcard}"
     end
 
     def vcard
@@ -36,7 +37,7 @@ module OptionalModules
     end
 
     def set_address
-      location = @setting.location.try(:decorate)
+      location = @map_setting.location.try(:decorate)
       return '' if location.nil?
       "ADR;WORK:;;#{location.address};#{location.city};;#{location.postcode};France\n"
     end

@@ -1,2 +1,5 @@
-$('#feedback span.success').addClass('hide').html('');
-$('#feedback span.error').removeClass('hide').html("<%= @newsletter_user.errors.values.join(', ') %>");
+// Reset success message if any
+$('#newsletter-form__feedback .form--success').html('').addClass('hide');
+
+// Set error message
+$('#newsletter-form__feedback .form--error').removeClass('hide').html("<%= @newsletter_user.errors.values.join(', ') %>");

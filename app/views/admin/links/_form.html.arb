@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+f.inputs t('formtastic.titles.link_details'),
+         for: [:link, f.object.link || Link.new] do |link|
+  link.input :url
+
+  if f.object.link.present?
+    link.input :_destroy,
+               as: :boolean,
+               required: false
+  end
+end

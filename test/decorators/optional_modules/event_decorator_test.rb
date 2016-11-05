@@ -71,10 +71,6 @@ class EventDecoratorTest < Draper::TestCase
     assert_equal '<time datetime="2016-05-23T02:00:00+02:00">23/05/2016</time>', @event_all_day_decorated.from_to_date
   end
 
-  test 'should not return from_to_date if start or end not set' do
-    assert_nil @event_two_decorated.from_to_date
-  end
-
   test 'should return correct value for current_event? with all_day?' do
     local_time_1 = Time.zone.local(2016, 5, 23, 14, 0, 0)
     local_time_2 = Time.zone.local(2016, 5, 20, 14, 0, 0)
@@ -121,6 +117,26 @@ class EventDecoratorTest < Draper::TestCase
   end
 
   #
+  # == Map
+  #
+  test 'should return correct boolean value if show map' do
+    # Map module enabled
+    assert_not @event_decorated.all_conditions_to_show_map?(@map_module)
+
+    # EventSetting show_map enabled
+    @event_settings.update_attributes(show_map: true)
+    assert_not @event_decorated.all_conditions_to_show_map?(@map_module)
+
+    # Event show_map? enabled
+    @event.update_attributes(show_map: true)
+    assert @event_decorated.all_conditions_to_show_map?(@map_module)
+
+    # Map module disabled
+    @map_module.update_attributes(enabled: false)
+    assert_not @event_decorated.all_conditions_to_show_map?(@map_module)
+  end
+
+  #
   # == Location
   #
   test 'should return correct boolean for location?' do
@@ -129,10 +145,10 @@ class EventDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct html for full address' do
-    assert_equal '<span>4 avenue de la chouette, 77700 - Gotham</span>', @event_decorated.full_address_inline
+    assert_equal '<span>4 avenue de la chouette, 77700 - Gotham</span>', @event_decorated.full_address
     @event.location.update_attributes(address: '')
-    assert_equal '<span>77700 - Gotham</span>', @event_decorated.full_address_inline
-    assert_nil @event_two_decorated.full_address_inline
+    assert_equal '<span>77700 - Gotham</span>', @event_decorated.full_address
+    assert_nil @event_two_decorated.full_address
   end
 
   private
@@ -141,6 +157,9 @@ class EventDecoratorTest < Draper::TestCase
     @event = events(:event_online)
     @event_two = events(:event_third)
     @event_all_day = events(:all_day)
+    @event_settings = event_settings(:one)
+
+    @map_module = optional_modules(:map)
     @calendar_module = optional_modules(:calendar)
 
     @link = links(:event)

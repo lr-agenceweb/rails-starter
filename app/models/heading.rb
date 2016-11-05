@@ -22,4 +22,6 @@
 class Heading < ActiveRecord::Base
   translates :content, fallbacks_for_empty_translations: true
   active_admin_translates :content
+
+  belongs_to :headingable, polymorphic: true, touch: true
 end

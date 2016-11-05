@@ -41,15 +41,12 @@ ActiveAdmin.register Audio do
 
     columns do
       column do
-        f.inputs t('active_admin.details', model: active_admin_config.resource_label) do
+        f.inputs t('formtastic.titles.audio_details') do
           f.input :audio,
                   as: :file,
-                  hint: raw(f.object.decorate.hint_for_file) + raw(I18n.t('form.hint.audio.audio_file'))
-          f.input :audio_autoplay,
-                  hint: raw(I18n.t('form.hint.audio.autoplay'))
-          f.input :online,
-                  label: I18n.t('form.label.online'),
-                  hint: I18n.t('form.hint.online')
+                  hint: raw(f.object.decorate.hint_for_file)
+          f.input :audio_autoplay
+          f.input :online
         end
       end
     end

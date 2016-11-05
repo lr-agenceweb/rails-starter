@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+f.inputs t('formtastic.titles.user_role_details') do
+  f.input :role_id,
+          as: :select,
+          collection: Role.allowed_roles_for_user_role(current_user),
+          include_blank: false,
+          hint: true,
+          selected: f.object.new_record? ? '3' : f.object.role.id
+end

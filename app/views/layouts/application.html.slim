@@ -16,29 +16,29 @@ html lang="#{@language}" class='no-js'
     / JS
     = render 'elements/head_tags/async_javascript', path: 'application'
 
+    / RSS
+    = render 'elements/head_tags/rss' if @rss_module.enabled?
+
     link type='text/plain' rel='author' href='/humans.txt'
     = favicon_link_tag '/favicon.ico'
     = csrf_meta_tag
-    - if @rss_module.enabled?
-      = auto_discovery_link_tag(:atom, posts_rss_path(:atom))
-      = auto_discovery_link_tag(:rss, posts_rss_path(:rss))
     = raw analytical.head_append_javascript
 
-  body style="#{background_from_color_picker(category)}" itemscope='' itemtype='http://schema.org/WebPage' class="#{current_page?(root_url) ? 'is-homepage' : ''}"
+  body style="#{background_from_color_picker(page)}" itemscope='' itemtype='http://schema.org/WebPage' class="#{current_page?(root_url) ? 'is-homepage' : ''}"
     = raw analytical.body_prepend_javascript
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'
     = render 'elements/banner_maintenance' if maintenance?
     = render 'elements/admin_bar' if current_user_and_administrator? && @setting.show_admin_bar?
 
-    = render 'elements/microdatas', resource: setting
+    = render 'elements/microdatas/activity', resource: setting
 
     main#wrapper.wrapper
       = render 'elements/no_js', setting: @setting
       = render 'elements/flash' unless flash.nil?
       = render 'elements/header/header', show_metadata: true
 
-      .l-container
+      .body-site
         == yield
       .push
 

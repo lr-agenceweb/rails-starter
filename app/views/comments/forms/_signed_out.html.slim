@@ -1,0 +1,13 @@
+.row
+  .small-12.medium-6.columns
+    = f.input :username,
+              label: false
+
+  .small-12.medium-6.columns
+    = f.input :email,
+              as: :email,
+              label: false
+
+.row
+  .small-12.columns
+    = render 'comments/textarea_and_submit', f: f

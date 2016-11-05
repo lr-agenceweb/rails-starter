@@ -18,7 +18,7 @@ namespace :nginx do
         erb = File.read 'lib/capistrano/templates/nginx_ssl_conf.erb'
         config_file = "/tmp/nginx_#{fetch(:application)}.#{fetch(:stage)}"
         upload! StringIO.new(ERB.new(erb).result(binding)), config_file
-        sudo :mv, config_file, "/etc/nginx/conf.d/#{fetch(:application)}.#{fetch(:stage)}/conf"
+        sudo :mv, config_file, "/etc/nginx/conf.d/#{fetch(:application)}.#{fetch(:stage)}.conf"
         sudo :service, :nginx, :restart
       end
     end
