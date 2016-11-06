@@ -20,8 +20,8 @@
 #
 
 #
-# == Page Model
-#
+# Page Model
+# ==============
 class Page < ActiveRecord::Base
   include Core::Headingable
   include Core::Referenceable
@@ -32,6 +32,12 @@ class Page < ActiveRecord::Base
   belongs_to :optional_module
   belongs_to :menu
   has_one :slider, dependent: :destroy
+
+  # Validation rules
+  # validates :menu_id,
+  #           presence: true,
+  #           allow_blank: false,
+  #           inclusion: { in: Menu.self_or_available(id).map { |menu| [menu.title, menu.id] } }
 
   # Delegate
   delegate :enabled, to: :optional_module, prefix: true, allow_nil: true
@@ -53,24 +59,15 @@ class Page < ActiveRecord::Base
     !slider.nil?
   end
 
-  def self.except_already_background(myself = nil)
-    pages = []
-    Page.includes(:background).with_allowed_module.each do |page|
-      pages << page if page.background.nil? || page == myself
+  # self.except_already_background
+  # self.except_already_slider
+  %w( background slider ).each do |o_module|
+    define_singleton_method "except_already_#{o_module}" do |myself = nil|
+      pages = []
+      Page.includes(o_module.to_sym).with_allowed_module.each do |page|
+        pages << page if page.send(o_module).nil? || page == myself
+      end
+      pages
     end
-    pages
   end
-
-  def self.except_already_slider(myself = nil)
-    pages = []
-    Page.includes(:slider).with_allowed_module.each do |page|
-      pages << page if page.slider.nil? || page == myself
-    end
-    pages
-  end
-
-  # validates :menu_id,
-  #           presence: true,
-  #           allow_blank: false,
-  #           inclusion: { in: Menu.self_or_available(id).map { |menu| [menu.title, menu.id] } }
 end

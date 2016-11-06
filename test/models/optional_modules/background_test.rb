@@ -2,16 +2,16 @@
 require 'test_helper'
 
 #
-# == Background Model test
-#
+# Background Model test
+# =========================
 class BackgroundTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
 
   #
-  # == Background
-  #
+  # Background
+  # ==============
   test 'should have correct child_classes' do
     child_classes = Background.child_classes
     assert_includes child_classes, :Home
