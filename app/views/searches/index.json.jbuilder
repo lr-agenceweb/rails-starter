@@ -1,7 +1,11 @@
 # frozen_string_literal: true
-json.array! @not_paginated_searches do |search|
+
+json.array! @searches do |search|
+  # Core
   json.title search.title
   json.url search.decorate.show_page_link
-  json.picture search.pictures.first.image.url(:thumb) if search.pictures?
   json.page t("activerecord.models.#{search.object.class.name.underscore}.other")
+
+  # Assets
+  json.picture search.picture.image.url(:thumb) if search.pictures?
 end
