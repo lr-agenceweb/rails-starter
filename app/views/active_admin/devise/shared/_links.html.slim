@@ -18,5 +18,5 @@
   - if devise_mapping.omniauthable? && SocialProvider.allowed_to_use?
     - SocialProvider.enabled.each do |provider|
       - if SocialProvider.allowed_social_providers.include?(provider.name)
-        = link_to t('devise.shared.links.sign_in_with_provider', :provider => provider.name.titleize, default: "Sign in with #{provider.name.to_s.titleize}"), omniauth_authorize_path(resource_name, SocialProvider.revert_format_provider_by_name(provider.name))
+        = link_to t('devise.shared.links.sign_in_with_provider', provider: provider.name.titleize, default: "Sign in with #{provider.name.to_s.titleize}"), omniauth_authorize_path(resource_name, SocialProvider.revert_format_provider_by_name(provider.name))
         br

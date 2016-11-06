@@ -2,14 +2,13 @@
 source 'https://rubygems.org'
 
 #
-# == Rails
-#
+# Rails
+# =====================
 gem 'rails', '4.2.7.1'
-# gem 'sprockets'
 
 #
-# == Database
-#
+# Database
+# =====================
 gem 'mysql2'
 gem 'pg'
 gem 'sqlite3'
@@ -17,17 +16,17 @@ gem 'ancestry'
 gem 'database_cleaner'
 
 #
-# == Authentication
-#
-gem 'devise', '~> 3.5.9'
+# Authentication
+# =====================
+gem 'devise', '~> 4.2.0'
 gem 'devise-i18n'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
 
 #
-# == Administration
-#
+# Administration
+# =====================
 gem 'activeadmin', '1.0.0.pre4'
 gem 'activeadmin_addons'
 gem 'acts_as_list'
@@ -35,14 +34,14 @@ gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
 gem 'active_skin'
 
 #
-# == Core enhancement
-#
+# Core enhancement
+# =====================
 gem 'draper'
 gem 'enumerize'
 
 #
-# == Html
-#
+# Html
+# =====================
 gem 'slim-rails' # slim file
 gem 'kaminari', '~> 0.17.0' # Pagination
 gem 'gretel' # Breadcrumb
@@ -54,23 +53,23 @@ gem 'js_cookie_rails'
 gem 'fotoramajs'
 
 #
-# == Calendar
-#
+# Calendar
+# =====================
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'timecop'
 
 #
-# == Media upload
-#
+# Media upload
+# =====================
 gem 'paperclip', '5.0'
 gem 'retina_rails', '~> 2.0.0'
 gem 'paperclip-av-transcoder'
 gem 'delayed_paperclip'
 
 #
-# == Forms and WYSIWYG
-#
+# Forms and WYSIWYG
+# =====================
 gem 'simple_form'
 gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
@@ -80,31 +79,35 @@ gem 'valid_url'
 gem 'actionmailer-with-request'
 
 #
-# == Translation
-#
+# Translation
+# =====================
 gem 'route_translator'
 gem 'globalize', '~> 5.0.0'
-gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize', branch: 'master'
-gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x'
+gem 'activeadmin-globalize',
+    github: 'anthony-robin/activeadmin-globalize',
+    branch: 'master'
+gem 'rails-i18n',
+    github: 'svenfuchs/rails-i18n',
+    branch: 'rails-4-x'
 gem 'i18n-js', '>= 3.0.0.rc14'
 
 #
-# == Map
-#
+# Map
+# =====================
 gem 'mapbox-rails', github: 'anthony-robin/mapbox-rails'
 gem 'gmaps-autocomplete-rails'
 
 #
-# == SEO
-#
+# SEO
+# =====================
 gem 'friendly_id', '~> 5.1'
 gem 'friendly_id-globalize'
 gem 'sitemap_generator'
 gem 'meta-tags'
 
 #
-# == Security
-#
+# Security
+# =====================
 gem 'figaro'
 gem 'cancancan', '~> 1.10'
 gem 'draper-cancancan'
@@ -112,28 +115,28 @@ gem 'secure_headers', '~> 3.0'
 gem 'open_uri_redirections' # HTTP(S) redirections
 
 #
-# == Analytics
-#
+# Analytics
+# =====================
 gem 'analytical'
 
 #
-# == Background Tasks
-#
+# Background Tasks
+# =====================
 gem 'whenever', require: false # Cron tasks
 gem 'daemons'
 gem 'delayed_job_active_record'
 
 #
-# == Email
-#
+# Email
+# =====================
 gem 'dkim' # authenticate emails
 gem 'inky-rb', require: 'inky' # inky Foundation
 gem 'premailer-rails'
 gem 'nokogiri'
 
 #
-# == Assets
-#
+# Assets
+# =====================
 gem 'sassc-rails'
 gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
@@ -151,19 +154,19 @@ gem 'chartkick'
 gem 'faker'
 
 #
-# == Video
-#
+# Video
+# =====================
 gem 'mediaelement_rails' # HTML5 video player
 gem 'video_info'
 
 #
-# == Logs
-#
+# Logs
+# =====================
 gem 'lograge' # cleaner logs
 
 #
-# == Cache
-#
+# Cache
+# =====================
 gem 'rails-observers'
 gem 'dalli'
 
@@ -176,17 +179,20 @@ group :development do
   gem 'shut_up_assets'
   gem 'annotate'
 
-  # == Server
+  # Server
+  # =====================
   gem 'unicorn-rails'
 
-  # == Debug Rails request in Chrome DevTools
+  # Debug Rails request in Chrome DevTools
+  # =====================
   gem 'meta_request'
 
   gem 'bullet' # display N+1 db queries
   gem 'shog' # colorize logs
   gem 'brakeman', require: false # check for security vulnerabilities
 
-  # == Deploy
+  # Deploy
+  # =====================
   gem 'capistrano', '~> 3.1'
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rvm'

@@ -40,9 +40,10 @@ class UserDecorator < ApplicationDecorator
           }
         )
       else
+        provider_name = provider == 'google' ? 'google_oauth2' : provider
         link_to(
           h.fa_icon(provider, text: I18n.t('omniauth.link.button', provider: provider.capitalize)),
-          user_omniauth_authorize_path(provider: provider == 'google' ? 'google_oauth2' : provider),
+          send("user_#{provider_name}_omniauth_authorize_path"),
           class: "button omniauth #{provider}",
           id: "omniauth_#{provider}",
           data: {
