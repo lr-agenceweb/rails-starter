@@ -23,6 +23,8 @@
 # == PublicationDate Model
 #
 class PublicationDate < ActiveRecord::Base
+  include Core::DateConstraintable
+
   # Callbacks
   before_save :reset_published_at, unless: :published_later?
   before_save :reset_expired_at, unless: :expired_prematurely?
@@ -42,8 +44,8 @@ class PublicationDate < ActiveRecord::Base
             presence: true,
             allow_blank: false,
             if: :expired_prematurely?
-  validate :publication_dates,
-           if: :validate_publication_dates?
+  validate :date_constraints,
+           if: :publication_dates?
   validate :no_past_publication,
            if: proc { |rec| rec.new_record? || rec.published_at_changed? }
   validate :no_past_expiration,
@@ -65,16 +67,6 @@ class PublicationDate < ActiveRecord::Base
 
   def no_past_expiration
     error_for_past_dates('expired_at', 'expiration')
-  end
-
-  def publication_dates
-    return true unless expired_at <= published_at
-    errors.add :published_at, I18n.t('published_at', scope: I18N_SCOPE)
-    errors.add :expired_at, I18n.t('expired_at', scope: I18N_SCOPE)
-  end
-
-  def validate_publication_dates?
-    !(published_at.blank? || expired_at.blank?)
   end
 
   def error_for_past_dates(key, i18n)

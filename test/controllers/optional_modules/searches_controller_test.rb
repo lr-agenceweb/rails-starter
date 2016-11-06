@@ -10,9 +10,10 @@ class SearchesControllerTest < ActionController::TestCase
   setup :initialize_test
 
   #
-  # == Routes / Templates / Responses
-  #
-  test 'should get index' do
+  # Routes / Templates / Responses
+  # =====================================
+  # index
+  test 'Index :: should get index' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         get :index, locale: locale.to_s
@@ -21,7 +22,7 @@ class SearchesControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should use index template' do
+  test 'Index :: should use index template' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         get :index, locale: locale.to_s
@@ -30,14 +31,38 @@ class SearchesControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should get search page by url' do
+  test 'Index :: should get search page by url' do
     assert_routing '/rechercher', controller: 'searches', action: 'index', locale: 'fr' if @locales.include?(:fr)
     assert_routing '/en/search', controller: 'searches', action: 'index', locale: 'en' if @locales.include?(:en)
   end
 
+  # autocomplete
+  test 'Autocomplete :: should get autocomplete' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :autocomplete, locale: locale.to_s
+        assert_response :success
+      end
+    end
+  end
+
+  test 'Autocomplete :: should use autocomplete template' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :autocomplete, locale: locale.to_s
+        assert_template :index
+      end
+    end
+  end
+
+  test 'Autocomplete :: should get search page by url' do
+    assert_routing '/rechercher/autocomplete', controller: 'searches', action: 'autocomplete', locale: 'fr' if @locales.include?(:fr)
+    assert_routing '/en/search/autocomplete', controller: 'searches', action: 'autocomplete', locale: 'en' if @locales.include?(:en)
+  end
+
   #
-  # == Search params
-  #
+  # Search params
+  # ==================
   test 'should return empty object if term is not set' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -107,8 +132,185 @@ class SearchesControllerTest < ActionController::TestCase
   end
 
   #
-  # == Diverse
+  # Ajax
+  # =======
+  test 'AJAX :: should execute term in ajax' do
+    term = 'Ruby'
+    xhr :get, :index, format: :js, term: term, locale: 'fr'
+    assert_response :success
+  end
+
+  test 'AJAX :: should not be empty in ajax' do
+    term = 'Hébergement'
+    xhr :get, :index, format: :js, term: term, locale: 'fr'
+    assert_not_empty assigns(:searches)
+    assert assigns(:searches).count, 1
+  end
+
   #
+  # JSON
+  # =======
+  # index
+  test 'JSON/index :: should use index template and success response' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s, format: :json
+        assert_template :index
+        assert_response :success
+      end
+    end
+  end
+
+  test 'JSON/index :: should return empty object if term is not set' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s, format: :json
+        assert_empty assigns(:searches)
+      end
+    end
+  end
+
+  test 'JSON/index :: should return empty object if term is empty' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s, format: :json, term: ''
+        assert_empty assigns(:searches)
+      end
+    end
+  end
+
+  test 'JSON/index :: should return empty object if term not in post articles' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s, format: :json, term: 'Unitary tests'
+        assert_empty assigns(:searches)
+      end
+    end
+  end
+
+  test 'JSON/index :: should return full object if term in post articles' do
+    term = 'Ruby'
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s, format: :json, term: term
+        searches = assigns(:searches)
+        assert_not_empty searches
+        assert_match(/#{term}/, searches.first.title)
+        assert_match(/#{term}/, searches.first.content)
+      end
+    end
+  end
+
+  test 'JSON/index :: should not take care of offline post in search results' do
+    term = 'Ruby'
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :index, locale: locale.to_s, format: :json, term: term
+        searches = assigns(:searches)
+        assert_equal 1, searches.count
+      end
+    end
+  end
+
+  test 'JSON/index :: should return different result by locale' do
+    term = 'Hébergement'
+    I18n.with_locale(:fr) do
+      get :index, locale: 'fr', format: :json, term: term
+      searches = assigns(:searches)
+      assert_not_empty searches
+      assert_match(/#{term}/, searches.first.title)
+    end
+
+    if @locales.include?(:en)
+      I18n.with_locale(:en) do
+        get :index, locale: 'en', format: :json, term: term
+        assert_empty assigns(:searches)
+      end
+    end
+  end
+
+  # autocomplete
+  test 'JSON/autocomplete :: should use index template and success response' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :autocomplete, locale: locale.to_s, format: :json
+        assert_template :index
+        assert_response :success
+      end
+    end
+  end
+
+  test 'JSON/autocomplete :: should return empty object if term is not set' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :autocomplete, locale: locale.to_s, format: :json
+        assert_empty assigns(:searches)
+      end
+    end
+  end
+
+  test 'JSON/autocomplete :: should return empty object if term is empty' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :autocomplete, locale: locale.to_s, format: :json, term: ''
+        assert_empty assigns(:searches)
+      end
+    end
+  end
+
+  test 'JSON/autocomplete :: should return empty object if term not in post articles' do
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :autocomplete, locale: locale.to_s, format: :json, term: 'Unitary tests'
+        assert_empty assigns(:searches)
+      end
+    end
+  end
+
+  test 'JSON/autocomplete :: should return full object if term in post articles' do
+    term = 'Ruby'
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :autocomplete, locale: locale.to_s, format: :json, term: term
+        searches = assigns(:searches)
+        assert_not_empty searches
+        assert_match(/#{term}/, searches.first.title)
+        assert_match(/#{term}/, searches.first.content)
+      end
+    end
+  end
+
+  test 'JSON/autocomplete :: should not take care of offline post in search results' do
+    term = 'Ruby'
+    @locales.each do |locale|
+      I18n.with_locale(locale.to_s) do
+        get :autocomplete, locale: locale.to_s, format: :json, term: term
+        searches = assigns(:searches)
+        assert_equal 1, searches.count
+      end
+    end
+  end
+
+  test 'JSON/autocomplete :: should return different result by locale' do
+    term = 'Hébergement'
+    I18n.with_locale(:fr) do
+      get :autocomplete, locale: 'fr', format: :json, term: term
+      searches = assigns(:searches)
+      assert_not_empty searches
+      assert_match(/#{term}/, searches.first.title)
+    end
+
+    if @locales.include?(:en)
+      I18n.with_locale(:en) do
+        get :autocomplete, locale: 'en', format: :json, term: term
+        assert_empty assigns(:searches)
+      end
+    end
+  end
+
+  #
+  # Diverse
+  # ==========
   test 'should have a background color associated' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -119,24 +321,8 @@ class SearchesControllerTest < ActionController::TestCase
   end
 
   #
-  # == Ajax
-  #
-  test 'should execute term in ajax' do
-    term = 'Ruby'
-    xhr :get, :index, format: :js, term: term, locale: 'fr'
-    assert_response :success
-  end
-
-  test 'should not be empty in ajax' do
-    term = 'Hébergement'
-    xhr :get, :index, format: :js, term: term, locale: 'fr'
-    assert_not_empty assigns(:searches)
-    assert assigns(:searches).count, 1
-  end
-
-  #
-  # == Module disabled
-  #
+  # Module disabled
+  # ==================
   test 'should render 404 if module is disabled' do
     disable_optional_module @super_administrator, @search_module, 'Search' # in test_helper.rb
     @locales.each do |locale|
@@ -149,8 +335,8 @@ class SearchesControllerTest < ActionController::TestCase
   end
 
   #
-  # == Menu offline
-  #
+  # Menu offline
+  # =================
   test 'should render 404 if menu item is offline' do
     @menu.update_attribute(:online, false)
     assert_not @menu.online, 'menu item should be offline'
@@ -165,8 +351,8 @@ class SearchesControllerTest < ActionController::TestCase
   end
 
   #
-  # == Maintenance
-  #
+  # Maintenance
+  # ===============
   test 'should render maintenance if enabled and not connected' do
     assert_maintenance_frontend
   end

@@ -1,22 +1,23 @@
 # frozen_string_literal: true
 
 #
-# == SearchesController
-#
+# SearchesController
+# ======================
 class SearchesController < ApplicationController
   before_action :search_module_enabled?
-  before_action :set_searches
+  before_action :set_searches_array_and_term
+  before_action :set_searches,
+                unless: proc { @term.blank? }
+  before_action :search_action
 
   # GET /rechercher
   # GET /rechercher.json
   def index
-    search_action
   end
 
   # GET /rechercher/autocomplete
   # GET /rechercher/autocomplete.json
   def autocomplete
-    search_action(true)
   end
 
   private
@@ -25,8 +26,18 @@ class SearchesController < ApplicationController
     not_found unless @search_module.enabled?
   end
 
-  def search_action(redirect = false)
-    @not_paginated_searches = @searches
+  def set_searches_array_and_term
+    @searches = []
+    @term = params[:term]
+  end
+
+  def set_searches
+    @searches += Post.includes(:picture).online.search(@term, params[:locale])
+    @searches += Event.includes(:picture).online.search(@term, params[:locale]) if @event_module.enabled?
+    @searches += Blog.includes(:picture, blog_category: [:translations]).published.search(@term, params[:locale]) if @blog_module.enabled?
+  end
+
+  def search_action
     @searches.map!(&:decorate)
     @searches = Kaminari.paginate_array(@searches).page(params[:page]).per(5)
 
@@ -35,18 +46,8 @@ class SearchesController < ApplicationController
         seo_tag_index page
         render :index
       end
-      format.js { render :index, locals: { redirect: redirect } }
+      format.js { render :index, locals: { redirect: params[:action] == 'index' ? false : true } }
       format.json { render :index }
     end
-  end
-
-  def set_searches
-    @searches = []
-    term = params[:term]
-    return if term.blank?
-
-    @searches += Post.online.search(term, params[:locale])
-    @searches += Blog.published.search(term, params[:locale]) if @blog_module.enabled?
-    @searches += Event.online.search(term, params[:locale]) if @event_module.enabled?
   end
 end

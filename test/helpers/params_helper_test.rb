@@ -125,8 +125,7 @@ module ActiveAdmin
     end
 
     test 'should return correct params for slider' do
-      expected = [:animate, :autoplay, :time_to_show,
-      :hover_pause, :looper, :navigation, :bullet]
+      expected = [:animate, :autoplay, :time_to_show, :hover_pause, :looper, :navigation, :bullet]
       assert_equal expected, slider_attributes
     end
 

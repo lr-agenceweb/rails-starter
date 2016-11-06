@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == Page model test
-#
+# Page model test
+# ==================
 class PageTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
@@ -18,8 +18,8 @@ class PageTest < ActiveSupport::TestCase
   end
 
   #
-  # == Flash content
-  #
+  # Flash content
+  # ================
   test 'should not have flash content if no video are uploaded' do
     @page_home.save!
     assert @page_home.video_upload.video_upload_flash_notice.blank?
@@ -33,8 +33,8 @@ class PageTest < ActiveSupport::TestCase
   end
 
   #
-  # == Slider
-  #
+  # Slider
+  # =========
   test 'should have a slider linked for home page' do
     assert @page_home.slider?
   end

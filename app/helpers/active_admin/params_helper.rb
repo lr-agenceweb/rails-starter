@@ -87,8 +87,7 @@ module ActiveAdmin
     end
 
     def slider_attributes
-      [:animate, :autoplay, :time_to_show,
-      :hover_pause, :looper, :navigation, :bullet]
+      [:animate, :autoplay, :time_to_show, :hover_pause, :looper, :navigation, :bullet]
     end
 
     def slides_attributes

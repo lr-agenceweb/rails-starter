@@ -117,6 +117,14 @@ class PublicationDateTest < ActiveSupport::TestCase
     assert_equal messages, @published_later.errors.messages
   end
 
+  test 'should return correct columns name for event' do
+    expected = {
+      start_attr: 'published_at',
+      end_attr: 'expired_at'
+    }
+    assert_equal expected, PublicationDate.new.send(:klass_attrs)
+  end
+
   #
   # Scope
   # =====

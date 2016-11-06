@@ -14,13 +14,9 @@ class NewsletterUsersController < ApplicationController
     @newsletter_user.newsletter_user_role_id = NewsletterUserRole.find_by(kind: 'subscriber').id
     respond_to do |format|
       if @newsletter_user.save
-        flash[:success] = I18n.t('newsletter.subscribe_success')
-        format.html { redirect_to :back }
-        format.js { render :create, status: :created }
+        respond_action format, :create, :created
       else
-        flash[:error] = I18n.t('newsletter.subscribe_error')
-        format.html { redirect_to :back }
-        format.js { render :errors, status: :unprocessable_entity }
+        respond_action format, :errors, :unprocessable_entity, 'error'
       end
     end
   end
@@ -41,6 +37,12 @@ class NewsletterUsersController < ApplicationController
 
   def newsletter_user_params
     params.require(:newsletter_user).permit(:email, :lang, :nickname)
+  end
+
+  def respond_action(format, template, status, type = 'success')
+    flash[type] = I18n.t("newsletter.subscribe_#{type}")
+    format.html { redirect_to :back }
+    format.js { render template, status: status }
   end
 
   # Sends email to user when subscription.
