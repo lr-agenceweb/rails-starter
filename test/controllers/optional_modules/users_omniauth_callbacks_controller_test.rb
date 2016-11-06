@@ -75,7 +75,7 @@ module Users
       get :facebook
       assert_equal 'Raf Nadal', assigns(:user).username
       assert_equal 'raf-nadal', assigns(:user).slug
-      assert_equal '00000000000000000000000000000000', assigns(:user).avatar_file_name
+      assert_equal '00000000000000000000000000000000.jpg', assigns(:user).avatar_file_name
     end
 
     #

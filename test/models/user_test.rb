@@ -154,7 +154,7 @@ class UserTest < ActiveSupport::TestCase
     @facebook_user.update_infos_since_last_connection(@request.env['omniauth.auth'])
     assert_equal 'Rafael Nadal', @facebook_user.username
     assert_equal 'rafael-nadal', @facebook_user.slug
-    assert_equal '00000000000000000000000000000000', @facebook_user.avatar_file_name
+    assert_equal '00000000000000000000000000000000.jpg', @facebook_user.avatar_file_name
   end
 
   private
