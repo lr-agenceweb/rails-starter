@@ -37,7 +37,7 @@ gem 'active_skin'
 # Core enhancement
 # =====================
 gem 'draper'
-gem 'enumerize'
+gem 'enumerize', '~> 1.1.1'
 
 #
 # Html
@@ -62,7 +62,7 @@ gem 'timecop'
 #
 # Media upload
 # =====================
-gem 'paperclip', '5.0'
+gem 'paperclip', '~> 5.0'
 gem 'retina_rails', '~> 2.0.0'
 gem 'paperclip-av-transcoder'
 gem 'delayed_paperclip'
@@ -140,7 +140,7 @@ gem 'nokogiri'
 gem 'sassc-rails'
 gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.0'
 gem 'jquery-ui-rails'
 gem 'turbolinks', '~> 2.5.3'
 gem 'nprogress-rails'
@@ -189,7 +189,6 @@ group :development do
 
   gem 'bullet' # display N+1 db queries
   gem 'shog' # colorize logs
-  gem 'brakeman', require: false # check for security vulnerabilities
 
   # Deploy
   # =====================
