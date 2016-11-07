@@ -381,7 +381,6 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.10.0)
     lograge (0.4.1)
       actionpack (>= 4, < 5.1)
       activesupport (>= 4, < 5.1)
@@ -484,6 +483,7 @@ GEM
       actionmailer (>= 3, < 6)
       premailer (~> 1.7, >= 1.7.9)
     public_suffix (2.0.4)
+    puma (3.6.0)
     rack (2.0.1)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
@@ -522,7 +522,6 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.17.0)
     rake (11.3.0)
     ransack (1.8.2)
       actionpack (>= 3.0)
@@ -627,12 +626,6 @@ GEM
     uglifier (3.0.3)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.1.1)
-    unicorn (5.2.0)
-      kgio (~> 2.6)
-      raindrops (~> 0.7)
-    unicorn-rails (2.2.1)
-      rack
-      unicorn
     uniform_notifier (1.10.0)
     useragent (0.16.8)
     valid_url (0.0.4)
@@ -750,6 +743,7 @@ DEPENDENCIES
   paperclip-av-transcoder
   pg
   premailer-rails
+  puma
   railroady
   rails (= 5.0.0.1)
   rails-controller-testing
@@ -776,7 +770,6 @@ DEPENDENCIES
   truncate_html!
   turbolinks (~> 2.5.3)
   uglifier (>= 1.3.0)
-  unicorn-rails
   valid_url
   vex_rails!
   video_info
