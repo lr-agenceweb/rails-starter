@@ -23,6 +23,7 @@
 # StringBox Model
 # ===================
 class StringBox < ApplicationRecord
+  # Translations
   translates :title, :content
   active_admin_translates :title, :content
 

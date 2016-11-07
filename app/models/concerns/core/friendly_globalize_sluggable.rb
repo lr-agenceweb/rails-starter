@@ -14,6 +14,7 @@ module Core
       ATTRIBUTE ||= :title
       TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
 
+      # Translations
       translates(*TRANSLATED_FIELDS,
                  fallbacks_for_empty_translations: true)
       active_admin_translates(*TRANSLATED_FIELDS, fallbacks_for_empty_translations: true) do

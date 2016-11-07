@@ -46,7 +46,7 @@ class Setting < ApplicationRecord
   # Callbacks
   after_validation :clean_paperclip_errors
 
-  # Globalize
+  # Translations
   translates :title, :subtitle, fallbacks_for_empty_translations: true
   active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true

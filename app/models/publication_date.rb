@@ -32,7 +32,7 @@ class PublicationDate < ApplicationRecord
   # Model relations
   belongs_to :publishable, polymorphic: true, touch: true
 
-  # Constantes
+  # Constants
   I18N_SCOPE = 'activerecord.errors.models.publication_date.attributes'
 
   # Validation rules

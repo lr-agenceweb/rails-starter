@@ -17,6 +17,7 @@
 class AdultSetting < ApplicationRecord
   include MaxRowable
 
+  # Translations
   translates :title, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :content
 

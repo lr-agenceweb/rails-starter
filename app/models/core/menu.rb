@@ -21,16 +21,21 @@
 class Menu < ApplicationRecord
   include Positionable
 
+  # Translations
   translates :title, fallbacks_for_empty_translations: true
   active_admin_translates :title
 
   has_ancestry
+
+  # Model relations
   has_one :page, dependent: :nullify
   has_one :optional_module, through: :page
 
+  # Delegates
   delegate :name, to: :page, prefix: true, allow_nil: true
   delegate :optional, to: :page, prefix: true, allow_nil: true
 
+  # Scopes
   scope :only_parents, -> { where(ancestry: nil) }
   scope :with_page, -> { joins(:page).where.not('pages.menu_id': nil) }
   scope :visible_header, -> { where(show_in_header: true) }

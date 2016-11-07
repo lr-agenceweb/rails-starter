@@ -23,12 +23,19 @@
 # VideoPlatform Model
 # ======================
 class VideoPlatform < ApplicationRecord
+  # Translations
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
+  # Model relations
   belongs_to :videoable, polymorphic: true, touch: true
 
-  validates :url, allow_blank: false, presence: true, url: true
+  # Validation rules
+  validates :url,
+            allow_blank: false,
+            presence: true,
+            url: true
 
+  # Scopes
   scope :online, -> { where(online: true) }
 end

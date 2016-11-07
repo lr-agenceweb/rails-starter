@@ -32,9 +32,11 @@ class Slide < ApplicationRecord
   include Assets::Attachable
   include Assets::SelfImageable
 
+  # Translations
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
+  # Model relations
   belongs_to :attachable, polymorphic: true, touch: true
 
   retina!
@@ -48,5 +50,6 @@ class Slide < ApplicationRecord
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
+  # Scopes
   scope :online, -> { where(online: true) }
 end

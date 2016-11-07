@@ -22,6 +22,7 @@ class MailingMessage < ApplicationRecord
   include Mailable
   include OptionalModules::Assets::Imageable
 
+  # Translations
   translates :title, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :content
 

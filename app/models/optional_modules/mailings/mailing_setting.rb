@@ -20,6 +20,7 @@
 class MailingSetting < ApplicationRecord
   include MaxRowable
 
+  # Translations
   translates :signature, :unsubscribe_title, :unsubscribe_content,
              fallbacks_for_empty_translations: true
   active_admin_translates :signature, :unsubscribe_title, :unsubscribe_content,
