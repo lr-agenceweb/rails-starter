@@ -14,9 +14,20 @@ Rails.application.configure do
   config.lograge.enabled = true
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = true
-  config.cache_store = :dalli_store, { namespace: Figaro.env.application_name, compress: true }
+  config.consider_all_requests_local = true
+
+  # Enable/disable caching. By default caching is disabled.
+  if Rails.root.join('tmp/caching-dev.txt').exist?
+    config.action_controller.perform_caching = true
+
+    config.cache_store = :dalli_store, { namespace: Figaro.env.application_name, compress: true }
+    config.public_file_server.headers = {
+      'Cache-Control' => 'public, max-age=172800'
+    }
+  else
+    config.action_controller.perform_caching = false
+    config.cache_store = :null_store
+  end
 
   # Mailer (Maildev)
   config.action_mailer.default_url_options = { host: Figaro.env.application_domain_name }
@@ -56,6 +67,11 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  # Use an evented file watcher to asynchronously detect changes in source code,
+  # routes, locales, etc. This feature depends on the listen gem.
+  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Bullet gem
   config.after_initialize do
     Bullet.enable = true
     Bullet.alert = false

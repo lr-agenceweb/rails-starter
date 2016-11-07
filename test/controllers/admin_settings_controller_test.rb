@@ -84,14 +84,14 @@ module Admin
     #
     # == Form validations
     #
-    test 'should not update article without name' do
-      patch :update, id: @setting
-      assert_not @setting.update(name: nil)
+    test 'should not update setting without name' do
+      patch :update, id: @setting, setting: { name: nil }
+      assert_not assigns(:setting).valid?
     end
 
-    test 'should not update article without title' do
-      patch :update, id: @setting
-      assert_not @setting.update(title: nil)
+    test 'should not update setting without title' do
+      patch :update, id: @setting, setting: { title: nil }
+      assert_not assigns(:setting).valid?
     end
 
     test 'should not update social param if module is disabled' do

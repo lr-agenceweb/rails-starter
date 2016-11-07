@@ -1,16 +1,14 @@
 # frozen_string_literal: true
-require 'codeclimate-test-reporter'
 require 'simplecov'
 require 'simplecov-json'
 
-# Start reporters
-CodeClimate::TestReporter.start
-
+# Reporter options
 SimpleCov.formatters = [
   SimpleCov::Formatter::JSONFormatter,
-  SimpleCov::Formatter::HTMLFormatter,
-  CodeClimate::TestReporter::Formatter
+  SimpleCov::Formatter::HTMLFormatter
 ]
+
+# Start reporters
 SimpleCov.start 'rails' do
   add_filter 'lib/mailer_previews'
 end
@@ -33,7 +31,6 @@ module ActiveSupport
 
     ActiveRecord::Migration.check_pending!
     Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
-    # Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all

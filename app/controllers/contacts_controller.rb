@@ -15,7 +15,10 @@ class ContactsController < ApplicationController
                      :set_slider,
                      :set_social_network,
                      :set_froala_key,
-                     only: :mapbox_popup
+                     only: :mapbox_popup,
+
+                     # Rails 5 fix
+                     raise: false
 
   # GET /contact
   # GET /contact.json

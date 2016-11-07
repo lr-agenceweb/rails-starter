@@ -16,9 +16,11 @@ Rails.application.configure do
   # Log
   config.log_level = :warn
 
-  # Configure static file server for tests with Cache-Control for performance.
-  config.serve_static_files   = true
-  config.static_cache_control = 'public, max-age=3600'
+  # Configure public file server for tests with Cache-Control for performance.
+  config.public_file_server.enabled = true
+  config.public_file_server.headers = {
+    'Cache-Control': 'public, max-age=3600'
+  }
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -38,7 +40,8 @@ Rails.application.configure do
   Rails.application.routes.default_url_options = { host: 'localhost:3000' }
 
   # Randomize the order test cases are executed.
-  config.active_support.test_order = :random
+  # :random or :sorted
+  config.active_support.test_order = :sorted
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

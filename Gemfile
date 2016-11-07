@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 #
 # Rails
 # =====================
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.0.0.1'
 
 #
 # Database
@@ -28,6 +28,8 @@ gem 'omniauth-google-oauth2', '~> 0.4.1'
 # Administration
 # =====================
 gem 'activeadmin', '1.0.0.pre4'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources' # Rails 5 fix
+
 gem 'activeadmin_addons'
 gem 'acts_as_list'
 gem 'activeadmin-sortable', github: 'mvdstam/activeadmin-sortable'
@@ -71,8 +73,12 @@ gem 'delayed_paperclip'
 # Forms and WYSIWYG
 # =====================
 gem 'simple_form'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
+gem 'client_side_validations',
+    github: 'DavyJonesLocker/client_side_validations',
+    branch: 'rails5' # Rails 5 fix
+gem 'client_side_validations-simple_form',
+    github: 'DavyJonesLocker/client_side_validations-simple_form',
+    branch: 'rails5' # Rails 5 fix
 gem 'rails_autosize_jquery', github: 'lr-agenceweb/rails_autosize_jquery'
 gem 'wysiwyg-rails' # Froala editor
 gem 'valid_url'
@@ -82,13 +88,12 @@ gem 'actionmailer-with-request'
 # Translation
 # =====================
 gem 'route_translator'
-gem 'globalize', '~> 5.0.0'
+gem 'globalize', github: 'globalize/globalize' # Rails 5 fix
+gem 'activemodel-serializers-xml' # Rails 5 fix
 gem 'activeadmin-globalize',
     github: 'anthony-robin/activeadmin-globalize',
     branch: 'master'
-gem 'rails-i18n',
-    github: 'svenfuchs/rails-i18n',
-    branch: 'rails-4-x'
+gem 'rails-i18n', '~> 5.0.0' # Rails 5 fix
 gem 'i18n-js', '>= 3.0.0.rc14'
 
 #
@@ -167,7 +172,7 @@ gem 'lograge' # cleaner logs
 #
 # Cache
 # =====================
-gem 'rails-observers'
+gem 'rails-observers', github: 'rails/rails-observers' # Rails 5 fix
 gem 'dalli'
 
 group :development do
@@ -176,7 +181,7 @@ group :development do
   gem 'irbtools', require: 'irbtools/binding'
   gem 'binding_of_caller'
   gem 'railroady' # graph of models
-  gem 'shut_up_assets'
+  # gem 'shut_up_assets'
   gem 'annotate'
 
   # Server
@@ -210,10 +215,12 @@ group :test do
   gem 'minitest'
   gem 'minitest-reporters', require: false
   gem 'mocha'
-  gem 'codeclimate-test-reporter', require: nil
+  gem 'rails-controller-testing'
+
+  # Coverage
   gem 'simplecov', require: false
   gem 'simplecov-json', require: false
-  gem 'test_after_commit'
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :production, :staging, :backup do

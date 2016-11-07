@@ -26,7 +26,7 @@
 #
 # == Post Model
 #
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   include Core::Userable
   include Core::Referenceable
   include Core::FriendlyGlobalizeSluggable
