@@ -14,8 +14,8 @@ module Admin
     setup :initialize_test
 
     #
-    # == Routing
-    #
+    # Routing
+    # =========
     test 'should redirect index to show if logged in' do
       get :index
       assert_response 301
@@ -50,8 +50,8 @@ module Admin
     end
 
     #
-    # == Maintenance
-    #
+    # Maintenance
+    # ===============
     test 'should still access admin page if maintenance is true' do
       @setting.update_attribute(:maintenance, true)
       get :index
@@ -82,16 +82,20 @@ module Admin
     end
 
     #
-    # == Form validations
-    #
-    test 'should not update article without name' do
-      patch :update, id: @setting
-      assert_not @setting.update(name: nil)
+    # Form validations
+    # ===================
+    test 'should not update setting without name' do
+      patch :update, id: @setting, setting: { name: nil }
+      assert_not assigns(:setting).valid?
+      assert_equal [:name], assigns(:setting).errors.keys
     end
 
-    test 'should not update article without title' do
-      patch :update, id: @setting
-      assert_not @setting.update(title: nil)
+    test 'should not update setting without title' do
+      attrs = { translations_attributes: { '1': { title: nil, locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+
+      patch :update, id: @setting, setting: attrs
+      assert_not assigns(:setting).valid?
+      assert_equal [:'translations.title'], assigns(:setting).errors.keys
     end
 
     test 'should not update social param if module is disabled' do
@@ -125,8 +129,8 @@ module Admin
     end
 
     #
-    # == Abilities
-    #
+    # Abilities
+    # ============
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
@@ -154,8 +158,8 @@ module Admin
     end
 
     #
-    # == Crud actions
-    #
+    # Crud actions
+    # ===============
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
       assert_crud_actions(@setting, new_user_session_path, model_name, no_delete: true)
@@ -170,6 +174,7 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+
       @social_module = optional_modules(:social)
       @guest_book_module = optional_modules(:guest_book)
       @comment_module = optional_modules(:comment)
