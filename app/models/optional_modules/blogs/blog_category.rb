@@ -13,11 +13,12 @@
 #
 
 #
-# == BlogCategory Model
-#
-class BlogCategory < ActiveRecord::Base
+# BlogCategory Model
+# ======================
+class BlogCategory < ApplicationRecord
   include Includes::BlogIncludable
 
+  # Translations
   translates :name, :slug, fallbacks_for_empty_translations: true
   active_admin_translates :name, :slug, fallbacks_for_empty_translations: true do
     validates :name,

@@ -12,8 +12,9 @@
 #
 
 #
-# == EventOrder Model
-#
-class EventOrder < ActiveRecord::Base
+# EventOrder Model
+# ====================
+class EventOrder < ApplicationRecord
+  # Model relations
   has_one :event_setting
 end

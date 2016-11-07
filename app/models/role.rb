@@ -11,12 +11,13 @@
 #
 
 #
-# == UserRole Model
-# - Handle role for a user (admin, ...)
-#
-class Role < ActiveRecord::Base
+# UserRole Model
+# ===================
+class Role < ApplicationRecord
+  # Model relations
   has_many :users
 
+  # Scope
   scope :except_super_adminstrator, -> { where.not(name: 'super_administrator') }
 
   def self.allowed_roles_for_user_role(user)

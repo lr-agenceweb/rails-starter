@@ -18,14 +18,16 @@
 #
 
 #
-# == NewsletterUserRole Model
-#
-class NewsletterUserRole < ActiveRecord::Base
+# NewsletterUserRole Model
+# =============================
+class NewsletterUserRole < ApplicationRecord
+  # Translations
   translates :title, fallbacks_for_empty_translations: true
   active_admin_translates :title do
     validates :title, presence: true
   end
 
+  # Model relations
   belongs_to :rollable, polymorphic: true
   has_many :newsletter_users
 
@@ -33,6 +35,7 @@ class NewsletterUserRole < ActiveRecord::Base
     %w( subscriber tester )
   end
 
+  # Validation rules
   validates :kind,
             presence: true,
             allow_blank: false,

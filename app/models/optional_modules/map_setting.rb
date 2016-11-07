@@ -13,9 +13,9 @@
 #
 
 #
-# == MapSetting Model
-#
-class MapSetting < ActiveRecord::Base
+# MapSetting Model
+# ====================
+class MapSetting < ApplicationRecord
   include MaxRowable
   include OptionalModules::Locationable
 
@@ -23,6 +23,7 @@ class MapSetting < ActiveRecord::Base
     %w( camera building park car bus college gift )
   end
 
+  # Validation rules
   validates :marker_icon,
             presence: false,
             allow_blank: true,

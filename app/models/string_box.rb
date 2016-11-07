@@ -20,11 +20,13 @@
 #
 
 #
-# == StringBox Model
-#
-class StringBox < ActiveRecord::Base
+# StringBox Model
+# ===================
+class StringBox < ApplicationRecord
+  # Translations
   translates :title, :content
   active_admin_translates :title, :content
 
+  # Model relations
   belongs_to :optional_module
 end

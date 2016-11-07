@@ -17,9 +17,10 @@
 #
 
 #
-# == SocialProvider Model
-#
-class SocialProvider < ActiveRecord::Base
+# SocialProvider Model
+# ========================
+class SocialProvider < ApplicationRecord
+  # Model relations
   belongs_to :social_connect_setting
 
   def self.format_provider_by_name(name)
@@ -49,6 +50,7 @@ class SocialProvider < ActiveRecord::Base
     providers
   end
 
+  # Validation rules
   validates :name,
             presence: true,
             allow_blank: false,
@@ -57,6 +59,7 @@ class SocialProvider < ActiveRecord::Base
             },
             inclusion: { in: allowed_social_providers }
 
+  # Scopes
   scope :enabled, -> { where(enabled: true) }
 
   def self.provider_by_name(name)

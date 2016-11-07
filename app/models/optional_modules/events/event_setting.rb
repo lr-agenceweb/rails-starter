@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: event_settings
@@ -17,10 +18,11 @@
 #
 
 #
-# == EventSetting Model
-#
-class EventSetting < ActiveRecord::Base
+# EventSetting Model
+# ======================
+class EventSetting < ApplicationRecord
   include MaxRowable
 
+  # Model relations
   belongs_to :event_order
 end

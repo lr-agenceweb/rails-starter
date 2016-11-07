@@ -28,12 +28,13 @@
 #
 
 #
-# == VideoUpload Model
-#
-class VideoUpload < ActiveRecord::Base
+# VideoUpload Model
+# =====================
+class VideoUpload < ApplicationRecord
   include Assets::Attachable
   include OptionalModules::Assets::FlashNotifiable
 
+  # Translations
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 

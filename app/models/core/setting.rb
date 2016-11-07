@@ -36,9 +36,9 @@
 #
 
 #
-# == Setting Model
-#
-class Setting < ActiveRecord::Base
+# Setting Model
+# =================
+class Setting < ApplicationRecord
   extend Enumerize
   include MaxRowable
   include Assets::Settings::Paperclipable
@@ -46,7 +46,7 @@ class Setting < ActiveRecord::Base
   # Callbacks
   after_validation :clean_paperclip_errors
 
-  # Globalize
+  # Translations
   translates :title, :subtitle, fallbacks_for_empty_translations: true
   active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
     validates :title, presence: true

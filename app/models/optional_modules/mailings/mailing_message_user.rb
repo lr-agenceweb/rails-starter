@@ -15,9 +15,10 @@
 #
 
 #
-# == MailingMessageUser Model
-#
-class MailingMessageUser < ActiveRecord::Base
+# MailingMessageUser Model
+# ============================
+class MailingMessageUser < ApplicationRecord
+  # Model relations
   belongs_to :mailing_user
   belongs_to :mailing_message
 end

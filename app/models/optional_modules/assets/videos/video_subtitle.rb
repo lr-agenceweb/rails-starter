@@ -25,11 +25,12 @@
 #
 
 #
-# == VideoSubtitleModel
-#
-class VideoSubtitle < ActiveRecord::Base
+# VideoSubtitle Model
+# =======================
+class VideoSubtitle < ApplicationRecord
   include Assets::Attachable
 
+  # Model relations
   belongs_to :subtitleable, polymorphic: true, touch: true
 
   handle_attachment :subtitle_fr
@@ -40,5 +41,6 @@ class VideoSubtitle < ActiveRecord::Base
 
   include Assets::DeletableAttachment
 
+  # Scopes
   scope :online, -> { where(online: true) }
 end

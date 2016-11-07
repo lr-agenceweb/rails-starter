@@ -15,18 +15,17 @@
 #
 
 #
-# == MailingUser Model
-#
-class MailingUser < ActiveRecord::Base
+# MailingUser Model
+# ====================
+class MailingUser < ApplicationRecord
   include Tokenable
   include Mailable
 
+  # Model relations
   has_many :mailing_messages, through: :mailing_message_users
   has_many :mailing_message_users, dependent: :destroy
 
-  scope :archive, -> { where(archive: true) }
-  scope :not_archive, -> { where.not(archive: true) }
-
+  # Validation rules
   validates :email,
             presence: true,
             uniqueness: true,
@@ -36,6 +35,10 @@ class MailingUser < ActiveRecord::Base
             presence: true,
             allow_blank: false,
             inclusion: I18n.available_locales.map(&:to_s)
+
+  # Scopes
+  scope :archive, -> { where(archive: true) }
+  scope :not_archive, -> { where.not(archive: true) }
 
   def name
     "#{email} <small>(#{fullname}) #{decorate.lang} #{decorate.archive_status}</small>".html_safe

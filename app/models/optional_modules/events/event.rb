@@ -24,9 +24,9 @@
 #
 
 #
-# == Event model
-#
-class Event < ActiveRecord::Base
+# Event Model
+# ===============
+class Event < ApplicationRecord
   include Core::Referenceable
   include Core::DateConstraintable
   include Core::FriendlyGlobalizeSluggable
@@ -39,7 +39,7 @@ class Event < ActiveRecord::Base
   include PrevNextable
   include Linkable
 
-  # Constantes
+  # Constants
   EVENT_START = 9 # 9:00
   EVENT_END = 18 # 18:00
   I18N_SCOPE = 'activerecord.errors.models.event.attributes'

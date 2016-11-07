@@ -24,7 +24,7 @@
 #
 
 #
-# == LegalNotice Model
-#
+# LegalNotice Model
+# =====================
 class LegalNotice < Post
 end

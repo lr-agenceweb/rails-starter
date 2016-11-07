@@ -26,15 +26,17 @@
 #
 
 #
-# == Picture Model
-#
-class Picture < ActiveRecord::Base
+# Picture Model
+# ==================
+class Picture < ApplicationRecord
   include Assets::Attachable
   include Assets::SelfImageable
 
+  # Translations
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
+  # Model relations
   belongs_to :attachable, polymorphic: true, touch: true
 
   retina!
@@ -57,5 +59,6 @@ class Picture < ActiveRecord::Base
                        },
                        size: { less_than: 3.megabytes }
 
+  # Scopes
   scope :online, -> { where(online: true) }
 end
