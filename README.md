@@ -82,7 +82,7 @@ That's it !
 
  Technology                                                                        | Description
 ---------------------------------------------------------------------------------- | -----------
-![Server](https://img.shields.io/badge/Server-Unicorn-5aaed7.svg?style=flat-square)| This project use unicorn in local development. <br /> The server is launched using `foreman start`
+![Server](https://img.shields.io/badge/Server-Puma-5aaed7.svg?style=flat-square)| This project use puma in local development. <br /> The server is launched using `foreman start`
 ![SGBD](https://img.shields.io/badge/Database-MySQL%20%7C%20MariaDB-5aaed7.svg?style=flat-square) <br /> ![SGBD](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20SQLite-5aaed7.svg?style=flat-square) | It use `MySQL2` but you can choose to use `PostgreSQL`, `SQlite` or `MariaDB`. <br /> To create a dump of your database, run `rake db:backup`
 ![Template](https://img.shields.io/badge/Template-Slim-5aaed7.svg?style=flat-square) | It use [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
 ![Assets](https://img.shields.io/badge/Assets-Sass%20%7C%20Coffeescript-5aaed7.svg?style=flat-square) | Style is writting in `scss` and `sass` (using libsass) <br /> Scripts are created in `coffeescript`

@@ -181,7 +181,7 @@ group :development do
 
   # Server
   # =====================
-  gem 'unicorn-rails'
+  gem 'puma'
 
   # Debug Rails request in Chrome DevTools
   # =====================
