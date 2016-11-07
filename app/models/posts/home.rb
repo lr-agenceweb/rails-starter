@@ -24,7 +24,7 @@
 #
 
 #
-# == Home Model
-#
+# Home Model
+# ==============
 class Home < Post
 end

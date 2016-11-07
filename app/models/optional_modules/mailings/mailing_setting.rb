@@ -15,9 +15,9 @@
 #
 
 #
-# == MailingSetting Model
-#
-class MailingSetting < ActiveRecord::Base
+# MailingSetting Model
+# ========================
+class MailingSetting < ApplicationRecord
   include MaxRowable
 
   translates :signature, :unsubscribe_title, :unsubscribe_content,
@@ -25,6 +25,7 @@ class MailingSetting < ActiveRecord::Base
   active_admin_translates :signature, :unsubscribe_title, :unsubscribe_content,
                           fallbacks_for_empty_translations: true
 
+  # Validation rules
   validates :email,
             allow_blank: true,
             email_format: true

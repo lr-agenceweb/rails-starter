@@ -12,14 +12,15 @@
 #
 
 #
-# == AdultSetting Model
-#
-class AdultSetting < ActiveRecord::Base
+# AdultSetting Model
+# =====================
+class AdultSetting < ApplicationRecord
   include MaxRowable
 
   translates :title, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :content
 
+  # Validation rules
   validates :redirect_link,
             allow_blank: true,
             url: true

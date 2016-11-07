@@ -23,9 +23,9 @@
 #
 
 #
-# == Blog Model
-#
-class Blog < ActiveRecord::Base
+# Blog Model
+# ==============
+class Blog < ApplicationRecord
   include Scopable
   include PrevNextable
   include Publishable
@@ -43,7 +43,7 @@ class Blog < ActiveRecord::Base
   # Callbacks
   after_update :update_counter_cache, if: proc { online_changed? }
 
-  # Models relation
+  # Model relations
   belongs_to :blog_category, inverse_of: :blogs, counter_cache: true
 
   # Validation rules

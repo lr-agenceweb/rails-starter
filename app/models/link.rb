@@ -17,9 +17,9 @@
 #
 
 #
-# == Link model
-#
-class Link < ActiveRecord::Base
+# Link Model
+# ==============
+class Link < ApplicationRecord
   belongs_to :linkable,
              polymorphic: true,
              touch: true

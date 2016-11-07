@@ -14,9 +14,9 @@
 #
 
 #
-# == Newsletter Model
-#
-class Newsletter < ActiveRecord::Base
+# Newsletter Model
+# ====================
+class Newsletter < ApplicationRecord
   include Mailable
 
   translates :title, :content, fallbacks_for_empty_translations: true

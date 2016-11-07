@@ -23,12 +23,13 @@
 #
 
 #
-# == Audio Model
-#
-class Audio < ActiveRecord::Base
+# Audio Model
+# ===============
+class Audio < ApplicationRecord
   include Assets::Attachable
   include OptionalModules::Assets::FlashNotifiable
 
+  # Model relations
   belongs_to :audioable, polymorphic: true, touch: true
 
   handle_attachment :audio,
@@ -55,6 +56,7 @@ class Audio < ActiveRecord::Base
 
   process_in_background :audio, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
+  # Scopes
   scope :online, -> { where(online: true) }
   scope :not_processing, -> { where.not(audio_processing: true) }
 end

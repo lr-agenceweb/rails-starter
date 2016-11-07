@@ -24,9 +24,9 @@
 #
 
 #
-# == Post Model
-#
-class Post < ActiveRecord::Base
+# Post Model
+# ==============
+class Post < ApplicationRecord
   include Core::Userable
   include Core::Referenceable
   include Core::FriendlyGlobalizeSluggable
@@ -38,6 +38,7 @@ class Post < ActiveRecord::Base
   include Positionable
   include PrevNextable
 
+  # Scopes
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }
   scope :about, -> { where(type: 'About') }

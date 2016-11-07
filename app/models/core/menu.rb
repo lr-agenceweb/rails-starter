@@ -16,9 +16,9 @@
 #
 
 #
-# == Menu Model
-#
-class Menu < ActiveRecord::Base
+# Menu Model
+# =============
+class Menu < ApplicationRecord
   include Positionable
 
   translates :title, fallbacks_for_empty_translations: true

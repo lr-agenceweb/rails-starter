@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == ContactForm Model
-#
+# ContactForm Model
+# =======================
 class ContactForm
   include ActiveModel::Model
   include Mailable

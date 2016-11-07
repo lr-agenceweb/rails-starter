@@ -26,9 +26,9 @@
 #
 
 #
-# == Slide Model
-#
-class Slide < ActiveRecord::Base
+# Slide Model
+# =================
+class Slide < ApplicationRecord
   include Assets::Attachable
   include Assets::SelfImageable
 

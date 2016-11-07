@@ -19,18 +19,21 @@
 #
 
 #
-# == NewsletterUser Model
-#
-class NewsletterUser < ActiveRecord::Base
+# NewsletterUser Model
+# =========================
+class NewsletterUser < ApplicationRecord
   include Tokenable
   include Scopable
   include Mailable
 
+  # Model relations
   belongs_to :newsletter_user_role
 
+  # Accessors
   attr_accessor :nickname # captcha
   attr_accessor :name # name extracted from email
 
+  # Validation rules
   validates :email,
             presence: true,
             uniqueness: true,
@@ -48,9 +51,11 @@ class NewsletterUser < ActiveRecord::Base
             presence: true,
             inclusion: { in: proc { NewsletterUserRole.all.map(&:id) } }
 
+  # Scopes
   scope :testers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'tester') }
   scope :subscribers, -> { joins(:newsletter_user_role).where('newsletter_user_roles.kind = ?', 'subscriber') }
 
+  # Delegates
   delegate :title, :kind, to: :newsletter_user_role, prefix: true, allow_nil: true
 
   def self.testers?

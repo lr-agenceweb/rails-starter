@@ -21,9 +21,9 @@
 #
 
 #
-# == Background Model
-#
-class Background < ActiveRecord::Base
+# Background Model
+# ====================
+class Background < ApplicationRecord
   include Assets::Attachable
   include Assets::SelfImageable
 

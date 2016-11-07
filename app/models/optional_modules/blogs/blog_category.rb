@@ -13,9 +13,9 @@
 #
 
 #
-# == BlogCategory Model
-#
-class BlogCategory < ActiveRecord::Base
+# BlogCategory Model
+# ======================
+class BlogCategory < ApplicationRecord
   include Includes::BlogIncludable
 
   translates :name, :slug, fallbacks_for_empty_translations: true

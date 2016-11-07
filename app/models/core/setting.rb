@@ -36,9 +36,9 @@
 #
 
 #
-# == Setting Model
-#
-class Setting < ActiveRecord::Base
+# Setting Model
+# =================
+class Setting < ApplicationRecord
   extend Enumerize
   include MaxRowable
   include Assets::Settings::Paperclipable

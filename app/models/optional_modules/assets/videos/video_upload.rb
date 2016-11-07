@@ -28,9 +28,9 @@
 #
 
 #
-# == VideoUpload Model
-#
-class VideoUpload < ActiveRecord::Base
+# VideoUpload Model
+# =====================
+class VideoUpload < ApplicationRecord
   include Assets::Attachable
   include OptionalModules::Assets::FlashNotifiable
 

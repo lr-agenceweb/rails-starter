@@ -14,7 +14,7 @@
 #
 
 #
-# == VideoSetting Model
-#
-class VideoSetting < ActiveRecord::Base
+# VideoSetting Model
+# ======================
+class VideoSetting < ApplicationRecord
 end

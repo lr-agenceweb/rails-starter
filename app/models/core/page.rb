@@ -22,7 +22,7 @@
 #
 # Page Model
 # ==============
-class Page < ActiveRecord::Base
+class Page < ApplicationRecord
   include Core::Headingable
   include Core::Referenceable
   include OptionalModules::Assets::Backgroundable

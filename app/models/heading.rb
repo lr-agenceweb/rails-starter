@@ -17,9 +17,9 @@
 #
 
 #
-# == Heading Model
-#
-class Heading < ActiveRecord::Base
+# Heading Model
+# =================
+class Heading < ApplicationRecord
   translates :content, fallbacks_for_empty_translations: true
   active_admin_translates :content
 

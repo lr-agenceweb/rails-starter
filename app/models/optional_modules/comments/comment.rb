@@ -28,17 +28,19 @@
 #
 
 #
-# == Comment Model
-#
-class Comment < ActiveRecord::Base
+# Comment Model
+# ================
+class Comment < ApplicationRecord
   include Core::Userable
   include Tokenable
   include Scopable
   include Validatable
 
+  # Accessors
   attr_accessor :nickname, :children_ids
   alias_attribute :content, :comment
 
+  # Constants
   MAX_COMMENTS_DEPTH ||= 2
   I18N_ERRORS_SCOPE ||= 'activerecord.errors.models.comment.attributes'
 

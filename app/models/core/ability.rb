@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == Ability Class
-#
+# Ability Class
+# =================
 class Ability
   include CanCan::Ability
   prepend Draper::CanCanCan

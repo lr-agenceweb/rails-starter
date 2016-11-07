@@ -15,14 +15,17 @@
 #
 
 #
-# == GuestBook model
-#
-class GuestBook < ActiveRecord::Base
+# GuestBook Model
+# ===================
+class GuestBook < ApplicationRecord
   include Scopable
   include Validatable
 
+  # Accessors
   attr_accessor :nickname
+  alias_attribute :comment, :content
 
+  # Validation rules
   validates :username,
             allow_blank: false,
             presence: true
@@ -39,9 +42,8 @@ class GuestBook < ActiveRecord::Base
   validates :nickname,
             absence: true
 
+  # Scopes
   default_scope { order('created_at DESC') }
 
   paginates_per 3
-
-  alias_attribute :comment, :content
 end

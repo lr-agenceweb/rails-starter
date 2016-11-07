@@ -15,9 +15,9 @@
 #
 
 #
-# == MailingMessage Model
-#
-class MailingMessage < ActiveRecord::Base
+# MailingMessage Model
+# ========================
+class MailingMessage < ApplicationRecord
   include Tokenable
   include Mailable
   include OptionalModules::Assets::Imageable
@@ -25,10 +25,14 @@ class MailingMessage < ActiveRecord::Base
   translates :title, :content, fallbacks_for_empty_translations: true
   active_admin_translates :title, :content
 
+  # Accessors
   attr_accessor :should_redirect
+
+  # Callbacks
   before_save :redirect_to_form?, if: proc { |r| r.picture.try(:new_record?) || r.picture.try(:changed?) }
   after_save :redirect_to_form?, if: proc { |r| r.picture.try(:destroyed?) }
 
+  # Model relations
   has_many :mailing_users, through: :mailing_message_users
   has_many :mailing_message_users, dependent: :destroy
 

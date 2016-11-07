@@ -20,9 +20,9 @@
 #
 
 #
-# == VideoPlatform Model
-#
-class VideoPlatform < ActiveRecord::Base
+# VideoPlatform Model
+# ======================
+class VideoPlatform < ApplicationRecord
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
