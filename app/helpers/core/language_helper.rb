@@ -20,7 +20,7 @@ module Core
         # create link
         link = link_to_unless(current_locale?(locale),
                               I18n.t("active_admin.globalize.language.#{locale}"),
-                              params.merge(params_language),
+                              params_language,
                               class: 'menu__item__link') do |item|
           current_link_language('check', item)
         end

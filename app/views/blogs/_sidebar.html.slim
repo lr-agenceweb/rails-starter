@@ -22,7 +22,7 @@ aside#blog__sidebar.blog__sidebar data-sticky='' data-anchor='sidebar_referer' d
           li
             == link_to blog_category.name, blog_category_path(blog_category)
             span< = '('
-            = pluralize blog_category.blogs.size, 'article'
+            = pluralize blog_category.blogs.count, 'article'
             span = ')'
 
   - if @comment_module.enabled? && @blog_setting.show_last_comments?
