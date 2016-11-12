@@ -206,8 +206,6 @@ class EventTest < ActiveSupport::TestCase
       en: { title: 'Event 1' }
     )
 
-    puts "=== === ==== #{event.title_changed?}"
-
     assert event.valid?, 'should be valid'
     assert_empty event.errors.keys
     assert_empty event.errors.messages
