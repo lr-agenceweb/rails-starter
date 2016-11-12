@@ -5,7 +5,7 @@ require 'test_helper'
 # == Comment Mailer test class
 #
 class CommentMailerTest < ActionMailer::TestCase
-  include ActionController::TemplateAssertions
+  include Rails::Controller::Testing::TemplateAssertions
 
   setup :initialize_test
 

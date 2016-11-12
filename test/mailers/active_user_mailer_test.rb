@@ -5,14 +5,14 @@ require 'test_helper'
 # == ActiveUser Mailer test class
 #
 class ActiveUserMailerTest < ActionMailer::TestCase
-  include ActionController::TemplateAssertions
+  include Rails::Controller::Testing::TemplateAssertions
 
   setup :initialize_test
 
   test 'should use correct template and layout' do
     ActiveUserMailer.send_email(@user).deliver_now
     assert_template :send_email
-    assert_template layout: []
+    assert_template layout: nil
   end
 
   test 'should send email' do

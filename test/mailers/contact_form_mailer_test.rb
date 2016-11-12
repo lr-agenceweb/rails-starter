@@ -6,8 +6,8 @@ require 'test_helper'
 #
 class ContactFormMailerTest < ActionMailer::TestCase
   include HtmlHelper
-  include ActionController::TemplateAssertions
   include ActionDispatch::TestProcess
+  include Rails::Controller::Testing::TemplateAssertions
 
   setup :initialize_test
 
