@@ -38,7 +38,7 @@ gem 'active_skin'
 #
 # Core enhancement
 # =====================
-gem 'draper'
+gem 'draper', '3.0.0.pre1'
 gem 'enumerize', '~> 1.1.1'
 
 #

@@ -22,12 +22,12 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @connection
+      get :show, id: @connection.id
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @connection
+      get :edit, id: @connection.id
       assert_response :success
     end
 
@@ -42,7 +42,7 @@ module Admin
     end
 
     test 'should update connection if logged in' do
-      patch :update, id: @connection, connection: {}
+      patch :update, id: @connection.id, connection: {}
       assert_redirected_to admin_connection_path(@connection)
     end
 
@@ -51,14 +51,14 @@ module Admin
     #
     test 'should destroy connection' do
       assert_difference ['Connection.count', 'Link.count'], -1 do
-        delete :destroy, id: @connection
+        delete :destroy, id: @connection.id
         assert_redirected_to admin_connections_path
       end
     end
 
     test 'AJAX :: should destroy blog' do
       assert_difference ['Connection.count', 'Link.count'], -1 do
-        xhr :delete, :destroy, id: @connection
+        xhr :delete, :destroy, id: @connection.id
         assert_response :success
         assert_template :destroy
       end

@@ -22,12 +22,12 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @legal_notice_admin
+      get :show, id: @legal_notice_admin.id
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @legal_notice_admin
+      get :edit, id: @legal_notice_admin.id
       assert_response :success
     end
 
@@ -42,20 +42,20 @@ module Admin
     end
 
     test 'should update legal_notice if logged in' do
-      patch :update, id: @legal_notice_admin, legal_notice: {}
+      patch :update, id: @legal_notice_admin.id, legal_notice: {}
       assert_redirected_to admin_legal_notice_path(@legal_notice_admin)
     end
 
     test 'should destroy own legal_notice article' do
       assert_difference 'LegalNotice.count', -1 do
-        delete :destroy, id: @legal_notice_admin
+        delete :destroy, id: @legal_notice_admin.id
       end
       assert_redirected_to admin_legal_notices_path
     end
 
     test 'should not destroy legal_notice for SA' do
       assert_no_difference 'LegalNotice.count' do
-        delete :destroy, id: @legal_notice_super_admin
+        delete :destroy, id: @legal_notice_super_admin.id
       end
       assert_redirected_to admin_dashboard_path
     end

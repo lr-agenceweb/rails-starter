@@ -270,10 +270,11 @@ GEM
     devise-i18n (1.1.1)
     dkim (1.0.0)
     docile (1.1.5)
-    draper (2.1.0)
-      actionpack (>= 3.0)
-      activemodel (>= 3.0)
-      activesupport (>= 3.0)
+    draper (3.0.0.pre1)
+      actionpack (~> 5.0)
+      activemodel (~> 5.0)
+      activemodel-serializers-xml (~> 1.0)
+      activesupport (~> 5.0)
       request_store (~> 1.0)
     draper-cancancan (1.1.1)
     enumerize (1.1.1)
@@ -696,7 +697,7 @@ DEPENDENCIES
   devise (~> 4.2.0)
   devise-i18n
   dkim
-  draper
+  draper (= 3.0.0.pre1)
   draper-cancancan
   enumerize (~> 1.1.1)
   exception_notification

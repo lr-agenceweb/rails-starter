@@ -3,15 +3,15 @@ require 'simplecov'
 require 'simplecov-json'
 
 # Reporter options
-SimpleCov.formatters = [
-  SimpleCov::Formatter::JSONFormatter,
-  SimpleCov::Formatter::HTMLFormatter
-]
+# SimpleCov.formatters = [
+#   SimpleCov::Formatter::JSONFormatter,
+#   SimpleCov::Formatter::HTMLFormatter
+# ]
 
 # Start reporters
-SimpleCov.start 'rails' do
-  add_filter 'lib/mailer_previews'
-end
+# SimpleCov.start 'rails' do
+#   add_filter 'lib/mailer_previews'
+# end
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -74,18 +74,18 @@ module ActiveSupport
       end
 
       unless check.key?(:no_show) && check[:no_show]
-        get :show, id: obj
+        get :show, id: obj.id
         assert_redirected_to url
       end
-      get :edit, id: obj
+      get :edit, id: obj.id
       assert_redirected_to url
       post :create, "#{attributes.to_sym}": {}
       assert_redirected_to url
-      patch :update, id: obj, "#{attributes.to_sym}": {}
+      patch :update, id: obj.id, "#{attributes.to_sym}": {}
       assert_redirected_to url
 
       return if check.key?(:no_delete) && check[:no_delete]
-      delete :destroy, id: obj
+      delete :destroy, id: obj.id
       assert_redirected_to url
     end
 

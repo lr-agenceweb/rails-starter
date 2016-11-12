@@ -171,7 +171,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def set_base_request_for_omniauth(id, name, email, provider = 'facebook')
-    @request = ActionController::TestRequest.new
+    @request = ActionController::TestRequest.create
     OmniAuth.config.test_mode = true
 
     OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(

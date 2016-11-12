@@ -22,12 +22,12 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @home
+      get :show, id: @home.id
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @home
+      get :edit, id: @home.id
       assert_response :success
     end
 
@@ -42,13 +42,13 @@ module Admin
     end
 
     test 'should update home if logged in' do
-      patch :update, id: @home, home: {}
+      patch :update, id: @home.id, home: {}
       assert_redirected_to admin_home_path(@home)
     end
 
     test 'should destroy home' do
       assert_difference ['Home.count', 'Referencement.count'], -1 do
-        delete :destroy, id: @home
+        delete :destroy, id: @home.id
       end
       assert_redirected_to admin_homes_path
     end

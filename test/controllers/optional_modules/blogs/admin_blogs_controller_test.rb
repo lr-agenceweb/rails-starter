@@ -14,8 +14,8 @@ module Admin
     setup :initialize_test
 
     #
-    # == Routes / Templates / Responses
-    #
+    # Routes / Templates / Responses
+    # ===================================
     test 'should get index page if logged in' do
       get :index
       assert_response :success
@@ -27,7 +27,7 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @blog
+      get :show, id: @blog.id
       assert_response :success
     end
 
@@ -35,15 +35,17 @@ module Admin
       attrs = set_default_record_attrs
       attrs[:blog_category_id] = @blog_category.id
 
-      post :create, blog: attrs
-      blog = assigns(:blog)
-      assert blog.valid?
-      assert flash[:notice].blank?
-      assert_equal @administrator.id, blog.user_id
+      assert_difference 'Blog.count' do
+        post :create, blog: attrs
+        blog = assigns(:blog)
+        assert blog.valid?
+        assert flash[:notice].blank?
+        assert_equal @administrator.id, blog.user_id
+      end
     end
 
     test 'should update blog if logged in' do
-      patch :update, id: @blog, blog: { title: 'blog edit', content: 'content edit' }
+      patch :update, id: @blog.id, blog: { title: 'blog edit', content: 'content edit' }
       assert_redirected_to admin_blog_path(assigns(:blog))
       assert flash[:notice].blank?
     end
@@ -51,31 +53,31 @@ module Admin
     test 'should update nested audio and enqueued it' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
       assert_enqueued_jobs 1 do
-        patch :update, id: @blog, blog: { audio_attributes: { audio: audio } }
+        patch :update, id: @blog.id, blog: { audio_attributes: { audio: audio } }
       end
     end
 
     #
-    # == Destroy
-    #
+    # Destroy
+    # ==========
     test 'should destroy blog' do
       assert_difference ['Blog.count', 'Audio.count'], -1 do
-        delete :destroy, id: @blog
+        delete :destroy, id: @blog.id
         assert_redirected_to admin_blogs_path
       end
     end
 
     test 'AJAX :: should destroy blog' do
       assert_difference ['Blog.count', 'Audio.count'], -1 do
-        xhr :delete, :destroy, id: @blog
+        xhr :delete, :destroy, id: @blog.id
         assert_response :success
         assert_template :destroy
       end
     end
 
     #
-    # == Slug
-    #
+    # Slug
+    # =======
     # FIXME: Fix this when FriendlyIdGlobalize will be fixed
     test 'should update slug if title changed' do
       skip 'Fix this when FriendlyIdGlobalize will be fixed'
@@ -85,7 +87,7 @@ module Admin
           '0': { title: 'Ipsum', locale: 'en' }
         }
       }
-      patch :update, id: @blog, blog: attrs
+      patch :update, id: @blog.id, blog: attrs
 
       I18n.with_locale(:fr) do
         assert_equal 'lorem', assigns(:blog).slug
@@ -97,8 +99,8 @@ module Admin
     end
 
     #
-    # == PublicationDate
-    #
+    # PublicationDate
+    # ====================
     test 'should create nested publication_date if blank attributes' do
       attrs = set_default_record_attrs
       attrs[:blog_category_id] = @blog_category.id
@@ -128,7 +130,7 @@ module Admin
 
     test 'should update blog even when publication_at is current' do
       Timecop.freeze(Time.zone.local(2028, 07, 16, 14, 50, 0)) do
-        patch :update, id: @blog, blog: { online: false }
+        patch :update, id: @blog.id, blog: { online: false }
         blog = assigns(:blog)
         assert blog.valid?
         assert_redirected_to admin_blog_path(blog)
@@ -136,10 +138,10 @@ module Admin
     end
 
     #
-    # == Nested resources
-    #
+    # Nested resources
+    # =====================
     test 'should be able to update naked blog without any errors' do
-      patch :update, id: @blog_naked, blog: {}
+      patch :update, id: @blog_naked.id, blog: {}
 
       assert assigns(:blog).valid?
       assert_empty assigns(:blog).errors.keys
@@ -150,11 +152,11 @@ module Admin
     end
 
     #
-    # == VideoUpload
-    #
+    # VideoUpload
+    # =================
     test 'should be able to update video_upload attributes from naked blog' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      patch :update, id: @blog_naked, blog: { video_upload_attributes: { video_file: video, online: false } }
+      patch :update, id: @blog_naked.id, blog: { video_upload_attributes: { video_file: video, online: false } }
       assert_not assigns(:blog).video_upload.blank?
       assert_not assigns(:blog).video_upload.online?
     end
@@ -181,10 +183,10 @@ module Admin
     end
 
     #
-    # == VideoPlatform
-    #
+    # VideoPlatform
+    # =================
     test 'should be able to update naked video_platform attributes from blog' do
-      patch :update, id: @blog_naked, blog: { video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3', online: false } }
+      patch :update, id: @blog_naked.id, blog: { video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3', online: false } }
       assert_not assigns(:blog).video_platform.blank?
       assert_not assigns(:blog).video_platform.online?
     end
@@ -210,11 +212,11 @@ module Admin
     end
 
     #
-    # == Audio
-    #
+    # Audio
+    # ==========
     test 'should be able to update audio attributes from blog' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
-      patch :update, id: @blog_naked, blog: { audio_attributes: { audio: audio, online: false } }
+      patch :update, id: @blog_naked.id, blog: { audio_attributes: { audio: audio, online: false } }
       assert_not assigns(:blog).audio.blank?
       assert_not assigns(:blog).audio.online?
     end
@@ -241,8 +243,8 @@ module Admin
     end
 
     #
-    # == Batch actions
-    #
+    # Batch actions
+    # =================
     test 'should return correct value for toggle_online batch action' do
       post :batch_action, batch_action: 'toggle_online', collection_selection: [@blog.id]
       [@blog].each(&:reload)
@@ -262,23 +264,23 @@ module Admin
     end
 
     #
-    # == Flash content
-    #
+    # Flash content
+    # ==================
     test 'should return empty flash notice if no update' do
-      patch :update, id: @blog, blog: {}
+      patch :update, id: @blog.id, blog: {}
       assert flash[:notice].blank?
     end
 
     test 'should return correct flash content after updating a video' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      patch :update, id: @blog, blog: { video_upload_attributes: { video_file: video } }
+      patch :update, id: @blog.id, blog: { video_upload_attributes: { video_file: video } }
       assert assigns(:blog).video_upload.video_file_processing?, 'should be processing video task'
       assert_equal [I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
     end
 
     test 'should return correct flash content after updating an audio file' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
-      patch :update, id: @blog, blog: { audio_attributes: { audio: audio } }
+      patch :update, id: @blog.id, blog: { audio_attributes: { audio: audio } }
       assert assigns(:blog).audio.audio_processing?, 'should be processing audio task'
       assert_equal [I18n.t('audio.flash.upload_in_progress')], flash[:notice]
     end
@@ -286,30 +288,30 @@ module Admin
     test 'should return correct both flash content after updating audio and video files' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      patch :update, id: @blog, blog: { audio_attributes: { audio: audio }, video_upload_attributes: { video_file: video } }
+      patch :update, id: @blog.id, blog: { audio_attributes: { audio: audio }, video_upload_attributes: { video_file: video } }
       assert assigns(:blog).audio.audio_processing?, 'should be processing audio task'
       assert assigns(:blog).video_upload.video_file_processing?, 'should be processing video task'
       assert_equal [I18n.t('audio.flash.upload_in_progress'), I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
     end
 
     #
-    # == Validations
-    #
+    # Validations
+    # ===============
     test 'should not save allow_comments params if module is disabled' do
       disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @blog, blog: { allow_comments: false }
+      patch :update, id: @blog.id, blog: { allow_comments: false }
       assert assigns(:blog).allow_comments?
     end
 
     test 'should save allow_comments params if module is enabled' do
-      patch :update, id: @blog, blog: { allow_comments: false }
+      patch :update, id: @blog.id, blog: { allow_comments: false }
       assert_not assigns(:blog).allow_comments?
     end
 
     #
-    # == Maintenance
-    #
+    # Maintenance
+    # ===============
     test 'should not render maintenance even if enabled and SA' do
       sign_in @super_administrator
       assert_no_maintenance_backend
@@ -333,8 +335,8 @@ module Admin
     end
 
     #
-    # == Abilities
-    #
+    # Abilities
+    # =============
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
@@ -371,8 +373,8 @@ module Admin
     end
 
     #
-    # == Subscriber
-    #
+    # Subscriber
+    # ==============
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
       assert_crud_actions(@blog, new_user_session_path, model_name)
@@ -384,8 +386,8 @@ module Admin
     end
 
     #
-    # == Module disabled
-    #
+    # Module disabled
+    # ====================
     test 'should not access page if blog module is disabled' do
       disable_optional_module @super_administrator, @blog_module, 'Blog' # in test_helper.rb
       sign_in @super_administrator
@@ -401,7 +403,7 @@ module Admin
       sign_in @administrator
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
       assert @blog_not_validate.audio.blank?
-      patch :update, id: @blog_not_validate, blog: { audio_attributes: { audio: audio } }
+      patch :update, id: @blog_not_validate.id, blog: { audio_attributes: { audio: audio } }
       assert assigns(:blog).audio.blank?
     end
 

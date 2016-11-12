@@ -183,6 +183,6 @@ class ContactFormMailerTest < ActionMailer::TestCase
   end
 
   def response
-    @response = ActionController::TestRequest.new(host: 'http://test.host')
+    @response = ActionController::TestRequest.create
   end
 end

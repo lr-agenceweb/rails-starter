@@ -24,9 +24,6 @@
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
-  title: ~
-  slug: ~
-  content: ~
 
 event_online:
   <<: *DEFAULTS

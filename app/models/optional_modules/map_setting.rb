@@ -27,4 +27,8 @@ class MapSetting < ActiveRecord::Base
             presence: false,
             allow_blank: true,
             inclusion: { in: allowed_markers }
+
+  def marker_color?
+    marker_color.present?
+  end
 end

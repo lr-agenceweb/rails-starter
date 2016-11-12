@@ -26,8 +26,10 @@ class MailingMessage < ActiveRecord::Base
   active_admin_translates :title, :content
 
   attr_accessor :should_redirect
-  before_save :redirect_to_form?, if: proc { |r| r.picture.try(:new_record?) || r.picture.try(:changed?) }
-  after_save :redirect_to_form?, if: proc { |r| r.picture.try(:destroyed?) }
+  before_save :redirect_to_form?,
+              if: proc { |r| r.picture.try(:new_record?) || r.picture.try(:changed?) }
+  after_save :redirect_to_form?,
+             if: proc { |r| r.picture.try(:destroyed?) }
 
   has_many :mailing_users, through: :mailing_message_users
   has_many :mailing_message_users, dependent: :destroy

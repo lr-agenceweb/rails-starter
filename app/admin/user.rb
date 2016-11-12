@@ -131,9 +131,9 @@ ActiveAdmin.register User do
       super { admin_user_path(@user) }
     end
 
-    def update_resource(object, attributes)
+    def update_resource(resource, attributes)
       update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
-      object.send(update_method, *attributes)
+      resource.send(update_method, *attributes)
     end
 
     private

@@ -22,12 +22,12 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @about
+      get :show, id: @about.id
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @about
+      get :edit, id: @about.id
       assert_response :success
     end
 
@@ -42,13 +42,13 @@ module Admin
     end
 
     test 'should update about if logged in' do
-      patch :update, id: @about, about: {}
+      patch :update, id: @about.id, about: {}
       assert_redirected_to admin_about_path(@about)
     end
 
     test 'should destroy about' do
       assert_difference ['About.count', 'Referencement.count'], -1 do
-        delete :destroy, id: @about
+        delete :destroy, id: @about.id
       end
       assert_redirected_to admin_abouts_path
     end
