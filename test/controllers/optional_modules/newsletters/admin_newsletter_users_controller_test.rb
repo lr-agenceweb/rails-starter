@@ -9,7 +9,7 @@ module Admin
   # == NewsletterUsersController test
   #
   class NewsletterUsersControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 

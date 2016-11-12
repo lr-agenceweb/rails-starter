@@ -4,9 +4,7 @@
 #
 #  id              :integer          not null, primary key
 #  type            :string(255)
-#  title           :string(255)
 #  slug            :string(255)
-#  content         :text(65535)
 #  show_as_gallery :boolean          default(FALSE)
 #  allow_comments  :boolean          default(TRUE)
 #  online          :boolean          default(TRUE)
@@ -24,7 +22,6 @@
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
-  content: ''
   user: bob
   allow_comments: true
 
@@ -37,7 +34,6 @@ home:
 home_offline:
   <<: *DEFAULTS
   type: Home
-  title: Home article !
   online: false
 
 # About posts
@@ -50,7 +46,6 @@ about:
 about_offline:
   <<: *DEFAULTS
   type: About
-  title: About article offline !
   online: false
 
 # Legal notices posts
@@ -63,7 +58,6 @@ legal_notice_super_admin:
 legal_notice_admin:
   <<: *DEFAULTS
   type: LegalNotice
-  title: My Legal notices
   online: true
 
 # Connection posts

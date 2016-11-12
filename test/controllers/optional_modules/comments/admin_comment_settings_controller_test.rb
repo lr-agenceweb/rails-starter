@@ -9,7 +9,7 @@ module Admin
   # == CommentSettingsController test
   #
   class CommentSettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 

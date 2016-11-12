@@ -9,7 +9,7 @@ module Admin
   # == MapSettingsController test
   #
   class MapSettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
     include Rails.application.routes.url_helpers
 
     setup :initialize_test

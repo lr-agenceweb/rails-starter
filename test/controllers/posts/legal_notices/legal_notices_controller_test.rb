@@ -5,7 +5,7 @@ require 'test_helper'
 # == LegalNoticesController Test
 #
 class LegalNoticesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
 
   setup :initialize_test

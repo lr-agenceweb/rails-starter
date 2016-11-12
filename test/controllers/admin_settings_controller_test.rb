@@ -9,7 +9,7 @@ module Admin
   # == SettingsController test
   #
   class SettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 

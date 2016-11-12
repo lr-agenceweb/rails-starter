@@ -1,12 +1,9 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: mailing_messages
 #
 #  id             :integer          not null, primary key
-#  title          :string(255)
-#  content        :text(65535)
 #  show_signature :boolean          default(TRUE)
 #  sent_at        :datetime
 #  token          :string(255)

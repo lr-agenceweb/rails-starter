@@ -9,7 +9,7 @@ module Admin
   # == MenusController test
   #
   class MenusControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
     include ActionView::Helpers::AssetTagHelper
 
     setup :initialize_test

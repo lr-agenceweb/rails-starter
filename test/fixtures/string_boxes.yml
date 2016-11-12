@@ -5,8 +5,6 @@
 #  id                 :integer          not null, primary key
 #  key                :string(255)
 #  description        :text(65535)
-#  title              :string(255)
-#  content            :text(65535)
 #  optional_module_id :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -22,12 +20,9 @@ error_404:
 
 error_422:
   key: error_422
-  content: erreur 422
 
 error_500:
   key: error_500
-  title: Erreur 500
-  content: erreur 500
 
 success_contact_form:
   key: success_contact_form

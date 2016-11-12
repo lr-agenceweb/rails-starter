@@ -45,7 +45,7 @@ module ActiveSupport
       old_controller = @controller
       sign_in user
       @controller = Admin::OptionalModulesController.new
-      patch :update, id: optional_module, optional_module: { enabled: '0' }
+      patch :update, params: { id: optional_module, optional_module: { enabled: '0' } }
       assert_equal name, assigns(:optional_module).name
       assert_not assigns(:optional_module).enabled, 'Module should be disabled'
       assert_redirected_to admin_optional_module_path(assigns(:optional_module))
@@ -74,18 +74,18 @@ module ActiveSupport
       end
 
       unless check.key?(:no_show) && check[:no_show]
-        get :show, id: obj.id
+        get :show, params: { id: obj.id }
         assert_redirected_to url
       end
-      get :edit, id: obj.id
+      get :edit, params: { id: obj.id }
       assert_redirected_to url
-      post :create, "#{attributes.to_sym}": {}
+      post :create, params: { "#{attributes.to_sym}": {} }
       assert_redirected_to url
-      patch :update, id: obj.id, "#{attributes.to_sym}": {}
+      patch :update, params: { id: obj.id, "#{attributes.to_sym}": {} }
       assert_redirected_to url
 
       return if check.key?(:no_delete) && check[:no_delete]
-      delete :destroy, id: obj.id
+      delete :destroy, params: { id: obj.id }
       assert_redirected_to url
     end
 
@@ -98,9 +98,9 @@ module ActiveSupport
       @locales.each do |locale|
         I18n.with_locale(locale) do
           if id.nil?
-            get page, locale: locale.to_s
+            get page, params: { locale: locale.to_s }
           else
-            get page, id: id, locale: locale.to_s
+            get page, params: { id: id, locale: locale.to_s }
           end
           assert_maintenance
         end
@@ -112,9 +112,9 @@ module ActiveSupport
       @locales.each do |locale|
         I18n.with_locale(locale) do
           if id.nil?
-            get page, locale: locale.to_s
+            get page, params: { locale: locale.to_s }
           else
-            get page, id: id, locale: locale.to_s
+            get page, params: { id: id, locale: locale.to_s }
           end
           assert_response :success
           assert_template layout: :application
@@ -128,7 +128,7 @@ module ActiveSupport
       if id.nil?
         get page
       else
-        get page, id: id
+        get page, params: { id: id }
       end
       assert_response :success
     end
@@ -138,7 +138,7 @@ module ActiveSupport
       if id.nil?
         get page
       else
-        get page, id: id
+        get page, params: { id: id }
       end
     end
 

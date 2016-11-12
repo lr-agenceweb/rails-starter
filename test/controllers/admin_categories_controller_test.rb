@@ -9,7 +9,7 @@ module Admin
   # == PagesController test
   #
   class PagesControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
     include ActionView::Helpers::AssetTagHelper
 
     setup :initialize_test

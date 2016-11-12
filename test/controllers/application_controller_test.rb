@@ -5,7 +5,7 @@ require 'test_helper'
 # == ApplicationController Test
 #
 class ApplicationControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup :initialize_test
 

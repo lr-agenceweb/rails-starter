@@ -25,11 +25,11 @@ module OptionalModules
       end
 
       def set_blog_categories
-        @blog_categories = BlogCategory.select(:id, :name).includes(:translations).all
+        @blog_categories = BlogCategory.select(:id).includes(:translations).all
       end
 
       def set_last_blogs
-        @last_blogs = Blog.select(:id, :title, :blog_category_id, :updated_at).includes(:comments, :translations, blog_category: [:translations]).published.order('blogs.created_at DESC').first(LAST_BLOGS_COUNT)
+        @last_blogs = Blog.select(:id, :blog_category_id, :updated_at).includes(:comments, :translations, blog_category: [:translations]).published.order('blogs.created_at DESC').first(LAST_BLOGS_COUNT)
       end
 
       def set_last_comments

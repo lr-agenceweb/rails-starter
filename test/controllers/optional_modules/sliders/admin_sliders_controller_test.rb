@@ -9,7 +9,7 @@ module Admin
   # == SlidersController test
   #
   class SlidersControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
     include Rails.application.routes.url_helpers
 
     setup :initialize_test

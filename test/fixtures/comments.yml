@@ -3,6 +3,8 @@
 # Table name: comments
 #
 #  id               :integer          not null, primary key
+#  commentable_type :string(255)
+#  commentable_id   :integer
 #  username         :string(255)
 #  email            :string(255)
 #  comment          :text(65535)
@@ -11,18 +13,15 @@
 #  validated        :boolean          default(FALSE)
 #  signalled        :boolean          default(FALSE)
 #  ancestry         :string(255)
-#  commentable_id   :integer
-#  commentable_type :string(255)
 #  user_id          :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
 # Indexes
 #
-#  index_comments_on_ancestry          (ancestry)
-#  index_comments_on_commentable_id    (commentable_id)
-#  index_comments_on_commentable_type  (commentable_type)
-#  index_comments_on_user_id           (user_id)
+#  index_comments_on_ancestry                             (ancestry)
+#  index_comments_on_commentable_type_and_commentable_id  (commentable_type,commentable_id)
+#  index_comments_on_user_id                              (user_id)
 #
 
 DEFAULTS: &DEFAULTS

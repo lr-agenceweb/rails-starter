@@ -9,7 +9,7 @@ module Admin
   # == VideoSettingsController test
   #
   class VideoSettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 

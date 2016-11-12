@@ -1,13 +1,11 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: newsletter_user_roles
 #
 #  id            :integer          not null, primary key
-#  rollable_id   :integer
 #  rollable_type :string(255)
-#  title         :string(255)
+#  rollable_id   :integer
 #  kind          :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

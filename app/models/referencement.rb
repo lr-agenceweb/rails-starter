@@ -1,15 +1,11 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: referencements
 #
 #  id              :integer          not null, primary key
-#  attachable_id   :integer
 #  attachable_type :string(255)
-#  title           :string(255)
-#  description     :text(65535)
-#  keywords        :string(255)
+#  attachable_id   :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

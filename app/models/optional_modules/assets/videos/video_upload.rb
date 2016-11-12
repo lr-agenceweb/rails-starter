@@ -1,26 +1,25 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: video_uploads
 #
 #  id                      :integer          not null, primary key
-#  videoable_id            :integer
 #  videoable_type          :string(255)
+#  videoable_id            :integer
 #  online                  :boolean          default(TRUE)
+#  video_autoplay          :boolean          default(FALSE)
+#  video_loop              :boolean          default(FALSE)
+#  video_controls          :boolean          default(TRUE)
+#  video_mute              :boolean          default(FALSE)
 #  position                :integer
+#  video_file_processing   :boolean          default(TRUE)
+#  retina_dimensions       :text(65535)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  video_file_file_name    :string(255)
 #  video_file_content_type :string(255)
 #  video_file_file_size    :integer
 #  video_file_updated_at   :datetime
-#  video_file_processing   :boolean
-#  retina_dimensions       :text(65535)
-#  video_autoplay          :boolean          default(FALSE)
-#  video_loop              :boolean          default(FALSE)
-#  video_controls          :boolean          default(TRUE)
-#  video_mute              :boolean          default(FALSE)
 #
 # Indexes
 #

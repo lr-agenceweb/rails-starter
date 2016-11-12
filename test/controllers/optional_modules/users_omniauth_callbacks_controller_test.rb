@@ -9,7 +9,7 @@ module Users
   # == OmniauthCallbacksController Test
   #
   class OmniauthCallbacksControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 

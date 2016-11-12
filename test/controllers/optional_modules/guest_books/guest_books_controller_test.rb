@@ -5,7 +5,7 @@ require 'test_helper'
 # == GuestBooksController Test
 #
 class GuestBooksControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
 
   setup :initialize_test

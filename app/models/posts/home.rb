@@ -1,14 +1,11 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: posts
 #
 #  id              :integer          not null, primary key
 #  type            :string(255)
-#  title           :string(255)
 #  slug            :string(255)
-#  content         :text(65535)
 #  show_as_gallery :boolean          default(FALSE)
 #  allow_comments  :boolean          default(TRUE)
 #  online          :boolean          default(TRUE)

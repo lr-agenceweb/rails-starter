@@ -6,7 +6,7 @@ require 'test_helper'
 #
 class ContactsControllerTest < ActionController::TestCase
   include UserHelper
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
 
   setup :initialize_test

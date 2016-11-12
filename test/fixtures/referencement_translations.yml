@@ -1,0 +1,106 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  title: ~
+  description: ~
+  keywords: ~
+
+# One
+one_fr:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: fr
+
+one_en:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: en
+
+# Two
+two_fr:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  locale: fr
+  title: Développement et Hébergement
+  description: Description pour article À Propos
+  keywords: "Mots-clés, pour, article, à propos"
+
+two_en:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  locale: en
+
+# Three
+three_fr:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:three) %>
+  locale: fr
+  title: Lorem Ipsum
+  description: lorem ipsum
+  keywords: "lorem, ipsum"
+
+three_en:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:three) %>
+  locale: en
+  title: Lorem Ipsum
+  description: lorem ipsum
+  keywords: "lorem, ipsum"
+
+# BlogMC
+blog_mc_fr:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:blog_mc) %>
+  locale: fr
+
+blog_mc_en:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:blog_mc) %>
+  locale: en
+
+# Category Home
+category_home_fr:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:category_home) %>
+  locale: fr
+  title: Référencement pour catégorie home
+  description: Description pour catégorie home
+  keywords: "Mots-clés, pour, catégorie, home"
+
+category_home_en:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:category_home) %>
+  locale: en
+
+# Blog Online
+blog_online_fr:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:blog_online) %>
+  locale: fr
+
+blog_online_en:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:blog_online) %>
+  locale: en
+
+# Blog Offline
+blog_offline_fr:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:blog_offline) %>
+  locale: fr
+
+blog_offline_en:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:blog_offline) %>
+  locale: en
+
+# Event Online
+event_online_fr:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
+  locale: fr
+
+event_online_en:
+  <<: *DEFAULTS
+  referencement_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
+  locale: en

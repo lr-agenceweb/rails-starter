@@ -3,11 +3,8 @@
 # Table name: referencements
 #
 #  id              :integer          not null, primary key
-#  attachable_id   :integer
 #  attachable_type :string(255)
-#  title           :string(255)
-#  description     :text(65535)
-#  keywords        :string(255)
+#  attachable_id   :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -17,9 +14,6 @@
 #
 
 DEFAULTS: &DEFAULTS
-  title: ~
-  description: ~
-  keywords: ~
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
 
@@ -30,16 +24,10 @@ one:
 two:
   <<: *DEFAULTS
   attachable: about (Post)
-  title: Développement et Hébergement
-  description: Description pour article À Propos
-  keywords: "Mots-clés, pour, article, à propos"
 
 three:
   <<: *DEFAULTS
   attachable: about_offline (Post)
-  title: Lorem Ipsum
-  description: lorem ipsum
-  keywords: "lorem, ipsum"
 
 blog_mc:
   <<: *DEFAULTS
@@ -48,9 +36,6 @@ blog_mc:
 category_home:
   <<: *DEFAULTS
   attachable: home (Page)
-  title: Référencement pour catégorie home
-  description: Description pour catégorie home
-  keywords: "Mots-clés, pour, catégorie, home"
 
 blog_online:
   <<: *DEFAULTS

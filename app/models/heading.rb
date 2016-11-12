@@ -1,13 +1,11 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: headings
 #
 #  id               :integer          not null, primary key
-#  content          :text(65535)
-#  headingable_id   :integer
 #  headingable_type :string(255)
+#  headingable_id   :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

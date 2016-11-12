@@ -1,12 +1,10 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: blog_categories
 #
 #  id          :integer          not null, primary key
-#  name        :string(255)      default("")
-#  slug        :string(255)      default("")
+#  slug        :string(255)
 #  blogs_count :integer          default(0), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

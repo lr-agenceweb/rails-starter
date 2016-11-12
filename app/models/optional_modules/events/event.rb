@@ -1,13 +1,10 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: events
 #
 #  id              :integer          not null, primary key
-#  title           :string(255)
 #  slug            :string(255)
-#  content         :text(65535)
 #  all_day         :boolean          default(FALSE)
 #  start_date      :datetime
 #  end_date        :datetime

@@ -9,7 +9,7 @@ module Admin
   # == BackgroundsController test
   #
   class BackgroundsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 

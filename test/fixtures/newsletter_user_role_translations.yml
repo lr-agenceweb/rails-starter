@@ -1,0 +1,29 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+# Subscriber
+subscriber_fr:
+  <<: *DEFAULTS
+  newsletter_user_role_id: <%= ActiveRecord::FixtureSet.identify(:subscriber) %>
+  locale: fr
+  title: Abonné
+
+subscriber_en:
+  <<: *DEFAULTS
+  newsletter_user_role_id: <%= ActiveRecord::FixtureSet.identify(:subscriber) %>
+  locale: en
+  title: Subscriber
+
+# Tester
+tester_fr:
+  <<: *DEFAULTS
+  newsletter_user_role_id: <%= ActiveRecord::FixtureSet.identify(:tester) %>
+  locale: fr
+  title: Testeur
+
+tester_en:
+  <<: *DEFAULTS
+  newsletter_user_role_id: <%= ActiveRecord::FixtureSet.identify(:tester) %>
+  locale: en
+  title: Tester

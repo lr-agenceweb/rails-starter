@@ -9,7 +9,7 @@ module Admin
   # == PicturesController test
   #
   class PicturesControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
