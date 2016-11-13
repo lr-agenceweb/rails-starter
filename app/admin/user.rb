@@ -89,22 +89,26 @@ ActiveAdmin.register User do
         end
       end
 
-      column do
-        f.inputs t('formtastic.titles.user_avatar_details') do
-          f.input :avatar,
-                  as: :file,
-                  hint: f.object.avatar.exists? ? retina_image_tag(f.object, :avatar, :small) : gravatar_image_tag(f.object.email, alt: f.object.username, gravatar: { secure: true })
+      unless f.object.from_omniauth?
+        column do
+          f.inputs t('formtastic.titles.user_avatar_details') do
+            f.input :avatar,
+                    as: :file,
+                    hint: f.object.avatar.exists? ? retina_image_tag(f.object, :avatar, :small) : gravatar_image_tag(f.object.email, alt: f.object.username, gravatar: { secure: true })
 
-          f.input :delete_avatar if f.object.avatar?
-        end
-      end unless f.object.from_omniauth?
-    end
+            f.input :delete_avatar if f.object.avatar?
+          end
+        end # column
+      end # unless
+    end # columns
 
-    columns do
-      column do
-        render 'admin/roles/form', f: f
-      end
-    end if current_user_and_administrator?
+    if current_user_and_administrator?
+      columns do
+        column do
+          render 'admin/roles/form', f: f
+        end # column
+      end # columns
+    end # if
 
     f.actions
   end
@@ -120,13 +124,15 @@ ActiveAdmin.register User do
     end
 
     def update
-      params_user_role_id = params[:user][:role_id]
+      if params[:user].present?
+        params_user_role_id = params[:user][:role_id]
 
-      if current_user.administrator? && (params_user_role_id.to_i == Role.find_by(name: 'super_administrator').id)
-        params[:user][:role_id] = current_user.role_id
+        if current_user.administrator? && (params_user_role_id.to_i == Role.find_by(name: 'super_administrator').id)
+          params[:user][:role_id] = current_user.role_id
+        end
+
+        params[:user][:role_id] = current_user.role_id unless Role.exists?(params_user_role_id)
       end
-
-      params[:user][:role_id] = current_user.role_id unless Role.exists?(params_user_role_id)
 
       super { admin_user_path(@user) }
     end

@@ -43,7 +43,7 @@ puts 'Creating Event articles'
   set_location(event, 'Event')
 
   # VideoPlatform
-  if i == 0
+  if i.zero?
     VideoPlatform.create!(
       videoable_id: event.id,
       videoable_type: 'Event',

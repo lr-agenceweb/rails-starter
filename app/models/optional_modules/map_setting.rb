@@ -20,7 +20,7 @@ class MapSetting < ActiveRecord::Base
   include OptionalModules::Locationable
 
   def self.allowed_markers
-    %w( camera building park car bus college gift )
+    %w(camera building park car bus college gift)
   end
 
   validates :marker_icon,

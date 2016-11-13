@@ -61,7 +61,7 @@ class Page < ActiveRecord::Base
 
   # self.except_already_background
   # self.except_already_slider
-  %w( background slider ).each do |o_module|
+  %w(background slider).each do |o_module|
     define_singleton_method "except_already_#{o_module}" do |myself = nil|
       pages = []
       Page.includes(o_module.to_sym).with_allowed_module.each do |page|

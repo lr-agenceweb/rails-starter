@@ -49,7 +49,7 @@ class Blog < ActiveRecord::Base
 
   # Scopes
   scope :online, -> { where(online: true) }
-  scope :by_category, -> (category) { where(blog_category_id: category) }
+  scope :by_category, ->(category) { where(blog_category_id: category) }
 
   # Delegates
   delegate :name, to: :blog_category, prefix: true, allow_nil: true

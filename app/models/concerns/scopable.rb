@@ -7,7 +7,7 @@ module Scopable
   extend ActiveSupport::Concern
 
   included do
-    scope :by_locale, -> (locale) { where(lang: locale) }
+    scope :by_locale, ->(locale) { where(lang: locale) }
 
     scope :french, -> { where(lang: 'fr') }
     scope :english, -> { where(lang: 'en') }

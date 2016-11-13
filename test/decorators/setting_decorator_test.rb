@@ -23,7 +23,7 @@ class SettingDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct small subtitle formatted with html' do
-    assert_match "<small class=\"l-header-site-subtitle\">Démarre rapidement</small>", @setting_decorated.send(:small_subtitle)
+    assert_match '<small class="l-header-site-subtitle">Démarre rapidement</small>', @setting_decorated.send(:small_subtitle)
   end
 
   test 'should return true if subtitle not blank' do

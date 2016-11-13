@@ -141,7 +141,7 @@ module Admin
     # Nested resources
     # =====================
     test 'should be able to update naked blog without any errors' do
-      patch :update, params: { id: @blog_naked.id, blog: {} }
+      patch :update, params: { id: @blog_naked, blog: {} }
 
       assert assigns(:blog).valid?
       assert_empty assigns(:blog).errors.keys
@@ -156,7 +156,7 @@ module Admin
     # =================
     test 'should be able to update video_upload attributes from naked blog' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      patch :update, params: { id: @blog_naked.id, blog: { video_upload_attributes: { video_file: video, online: false } } }
+      patch :update, params: { id: @blog_naked, blog: { video_upload_attributes: { video_file: video, online: false } } }
       assert_not assigns(:blog).video_upload.blank?
       assert_not assigns(:blog).video_upload.online?
     end
@@ -186,7 +186,7 @@ module Admin
     # VideoPlatform
     # =================
     test 'should be able to update naked video_platform attributes from blog' do
-      patch :update, params: { id: @blog_naked.id, blog: { video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3', online: false } } }
+      patch :update, params: { id: @blog_naked, blog: { video_platform_attributes: { url: 'http://www.dailymotion.com/video/x2z92v3', online: false } } }
       assert_not assigns(:blog).video_platform.blank?
       assert_not assigns(:blog).video_platform.online?
     end
@@ -216,7 +216,7 @@ module Admin
     # ==========
     test 'should be able to update audio attributes from blog' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
-      patch :update, params: { id: @blog_naked.id, blog: { audio_attributes: { audio: audio, online: false } } }
+      patch :update, params: { id: @blog_naked, blog: { audio_attributes: { audio: audio, online: false } } }
       assert_not assigns(:blog).audio.blank?
       assert_not assigns(:blog).audio.online?
     end
@@ -267,7 +267,7 @@ module Admin
     # Flash content
     # ==================
     test 'should return empty flash notice if no update' do
-      patch :update, params: { id: @blog, blog: {} }
+      patch :update, params: { id: @blog, blog: {} }
       assert flash[:notice].blank?
     end
 

@@ -15,13 +15,13 @@ class ErrorsController < ApplicationController
 
   private
 
-  def status_code
-    params[:code] || 500
-  end
-
   def set_error_message
     @locale = request.original_url.split('/')[3]
     @locale = I18n.default_locale if @locale.nil? || !I18n.available_locales.include?(@locale.to_sym)
     @status_code = status_code
+  end
+
+  def status_code
+    params[:code] || 500
   end
 end

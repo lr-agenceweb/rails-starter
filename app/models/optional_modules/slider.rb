@@ -28,7 +28,7 @@ class Slider < ActiveRecord::Base
   include OptionalModules::Assets::Slideable
 
   def self.allowed_animations
-    %w( crossfade slide dissolve )
+    %w(crossfade slide dissolve)
   end
 
   # Alias
@@ -45,7 +45,7 @@ class Slider < ActiveRecord::Base
 
   # Scopes
   scope :online, -> { where(online: true) }
-  scope :by_page, -> (page) { joins(:page).where('pages.name = ?', page) }
+  scope :by_page, ->(page) { joins(:page).where('pages.name = ?', page) }
 
   # Validation rules
   validates :time_to_show, presence: true

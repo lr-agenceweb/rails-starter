@@ -9,5 +9,5 @@ event_order_name = ['Courant et à venir (avec le plus récent en premier)', 'To
 
 event_order_name.each_with_index do |order, index|
   eo = EventOrder.create!(key: event_order_key[index], name: order)
-  @event_order = eo if index == 0
+  @event_order = eo if index.zero?
 end

@@ -26,7 +26,7 @@ class Social < ActiveRecord::Base
   include Assets::Attachable
 
   def self.allowed_title_social_network
-    %w( Facebook Twitter Google+ Email )
+    %w(Facebook Twitter Google+ Email)
   end
 
   def self.allowed_kind_social_network
@@ -34,7 +34,7 @@ class Social < ActiveRecord::Base
   end
 
   def self.allowed_font_awesome_ikons
-    %w( facebook twitter google envelope )
+    %w(facebook twitter google envelope)
   end
 
   retina!

@@ -26,12 +26,12 @@ class MailingUserDecoratorTest < Draper::TestCase
   test 'should return correct status_tag if archived' do
     @mailing_user.update_attribute(:archive, true)
     mailing_user_decorated = MailingUserDecorator.new(@mailing_user)
-    assert_match "<span class=\"status_tag archivé blue\">Archivé</span>", mailing_user_decorated.archive_status
+    assert_match '<span class="status_tag archivé blue">Archivé</span>', mailing_user_decorated.archive_status
   end
 
   test 'should return correct status_tag if not archived' do
     mailing_user_decorated = MailingUserDecorator.new(@mailing_user)
-    assert_match "<span class=\"status_tag non_archivé warning\">Non Archivé</span>", mailing_user_decorated.archive_status
+    assert_match '<span class="status_tag non_archivé warning">Non Archivé</span>', mailing_user_decorated.archive_status
   end
 
   private

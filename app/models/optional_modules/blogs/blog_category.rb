@@ -40,7 +40,7 @@ class BlogCategory < ActiveRecord::Base
 
   def deduced_id
     record_id = BlogCategory.where(name: name).count
-    return record_id + 1 unless record_id == 0
+    return record_id + 1 unless record_id.zero?
   end
 
   def should_generate_new_friendly_id?

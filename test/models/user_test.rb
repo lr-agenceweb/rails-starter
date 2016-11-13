@@ -78,14 +78,14 @@ class UserTest < ActiveSupport::TestCase
   test 'should return nil if omniauth user doesn\'t exist' do
     set_base_request_for_omniauth(987_654_321, 'rafael', 'rafael.nadal@test.com')
 
-    user = User.find_by_provider_and_uid(@request.env['omniauth.auth'])
+    user = User.get_by_provider_and_uid(@request.env['omniauth.auth'])
     assert user.nil?
   end
 
   test 'should return user if facebook omniauth exists' do
     set_base_request_for_omniauth(123_456_789, 'rafa', 'rafa@nadal.es')
 
-    user = User.find_by_provider_and_uid(@request.env['omniauth.auth'])
+    user = User.get_by_provider_and_uid(@request.env['omniauth.auth'])
     assert_equal 'rafa', user.username
     assert_equal 'rafa', user.slug
     assert_equal 'rafa@nadal.es', user.email

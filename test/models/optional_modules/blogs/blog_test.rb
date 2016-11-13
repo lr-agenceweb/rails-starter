@@ -233,7 +233,7 @@ class BlogTest < ActiveSupport::TestCase
     @blog_naked = blogs(:naked)
 
     @blog_category = blog_categories(:one)
-    @blog_category_2 = blog_categories(:two)
+    @blog_category_two = blog_categories(:two)
   end
 
   def reset_counter_cache
@@ -243,9 +243,9 @@ class BlogTest < ActiveSupport::TestCase
     end
 
     @blog_category.reload
-    @blog_category_2.reload
+    @blog_category_two.reload
     assert_equal 3, @blog_category.blogs.size
-    assert_equal 2, @blog_category_2.blogs.size
+    assert_equal 2, @blog_category_two.blogs.size
   end
 
   def set_blog_record

@@ -38,7 +38,7 @@ class Post < ApplicationRecord
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }
   scope :about, -> { where(type: 'About') }
-  scope :by_user, -> (user_id) { where(user_id: user_id) }
+  scope :by_user, ->(user_id) { where(user_id: user_id) }
   scope :allowed_for_rss, -> { where.not(type: 'Home').where.not(type: 'About').where.not(type: 'LegalNotice').where.not(type: 'Connection') }
 
   self.inheritance_column = :type

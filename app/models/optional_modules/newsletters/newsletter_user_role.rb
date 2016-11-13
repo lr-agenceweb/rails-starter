@@ -28,7 +28,7 @@ class NewsletterUserRole < ActiveRecord::Base
   has_many :newsletter_users
 
   def self.allowed_newsletter_user_roles
-    %w( subscriber tester )
+    %w(subscriber tester)
   end
 
   validates :kind,

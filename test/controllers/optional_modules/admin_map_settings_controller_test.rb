@@ -132,7 +132,7 @@ module Admin
     #
     test 'should not destroy map' do
       assert_no_difference ['MapSetting.count', 'Location.count'] do
-        delete :destroy, params: { id: @map_setting }
+        delete :destroy, params: { id: @map_setting }
       end
       assert_redirected_to admin_dashboard_path
     end

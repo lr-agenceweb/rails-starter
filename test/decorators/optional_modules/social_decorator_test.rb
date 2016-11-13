@@ -15,7 +15,7 @@ class SocialDecoratorTest < Draper::TestCase
   #
   test 'should return correct font_ikons list' do
     allowed_fonts = Social.allowed_font_awesome_ikons
-    %w( facebook twitter google envelope ).each do |ikon|
+    %w(facebook twitter google envelope).each do |ikon|
       assert allowed_fonts.include?(ikon), "\"#{ikon}\" should be included in list"
     end
     assert_not allowed_fonts.include?('car'), 'car should not be included in list'

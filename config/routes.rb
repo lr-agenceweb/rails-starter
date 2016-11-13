@@ -97,10 +97,10 @@ Rails.application.routes.draw do
     end
 
     # Errors
-    %w( 404 422 500 ).each do |code|
-      get "/#{code}", to: 'errors#show', code: code, as: "error_#{code}".to_sym
+    %w(404 422 500).each do |code|
+      get '/:code', to: 'errors#show', as: "error_#{code}".to_sym
     end
-  end
+  end # localized
 
   # Robots and humans
   get 'robots.:format', to: 'robots#index'

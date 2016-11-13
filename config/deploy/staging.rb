@@ -11,7 +11,7 @@ set :host_name, -> { Figaro.env.application_host_staging }
 
 # server-based syntax
 # ======================
-server Figaro.env.capistrano_server_ip, user: fetch(:deploy_user).to_s, roles: %w( web app db )
+server Figaro.env.capistrano_server_ip, user: fetch(:deploy_user).to_s, roles: %w(web app db)
 
 # Callbacks
 # =========

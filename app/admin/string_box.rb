@@ -39,30 +39,34 @@ ActiveAdmin.register StringBox do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.columns do
-      f.column do
-        f.inputs do
-          if f.object.new_record?
-            f.input :key
-          else
-            f.input :key, input_html: { disabled: :disabled }
+    if current_user.super_administrator?
+      f.columns do
+        f.column do
+          f.inputs do
+            if f.object.new_record?
+              f.input :key
+            else
+              f.input :key, input_html: { disabled: :disabled }
+            end
+
+            f.input :optional_module_id,
+                    as: :select,
+                    collection: OptionalModule.all.map { |m| [m.decorate.name, m.id] },
+                    include_blank: true
           end
+        end # column
+      end # columns
+    end # if
 
-          f.input :optional_module_id,
-                  as: :select,
-                  collection: OptionalModule.all.map { |m| [m.decorate.name, m.id] },
-                  include_blank: true
-        end
-      end
-    end if current_user.super_administrator?
-
-    f.columns do
-      f.column do
-        f.inputs t('activerecord.attributes.string_box.description') do
-          "<li><p>#{f.object.description}</p></li>".html_safe
-        end
-      end
-    end if f.object.description?
+    if f.object.description?
+      f.columns do
+        f.column do
+          f.inputs t('activerecord.attributes.string_box.description') do
+            "<li><p>#{f.object.description}</p></li>".html_safe
+          end
+        end # column
+      end # columns
+    end # if
 
     f.columns do
       f.column do

@@ -266,7 +266,7 @@ module Admin
       upload_paperclip_attachment
       user = assigns(:user)
 
-      delete :destroy, params: {  id: user }
+      delete :destroy, params: { id: user }
       assert_not user.avatar?
       assert user.avatar_file_name.blank?
       assert user.avatar_content_type.blank?

@@ -17,7 +17,7 @@ class MailingMessageDecoratorTest < Draper::TestCase
   # == Status tag
   #
   test 'should return correct status_tag for sent attribute' do
-    assert_match "<span class=\"status_tag envoyé red\">Envoyé</span>", @mailing_message_decorated.status
+    assert_match '<span class="status_tag envoyé red">Envoyé</span>', @mailing_message_decorated.status
   end
 
   private
