@@ -1,2 +1,4 @@
 # frozen_string_literal: true
-BetterErrors.editor = :sublime if defined?(BetterErrors)
+
+# Other preset values are [:mvim, :macvim, :textmate, :txmt, :tm, :sublime, :subl, :st]
+BetterErrors.editor = 'atm://open?url=file://%{file}&line=%{line}' if defined?(BetterErrors)
