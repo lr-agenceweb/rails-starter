@@ -22,23 +22,23 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @string_box
+      get :show, params: { id: @string_box }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @string_box
+      get :edit, params: { id: @string_box }
       assert_response :success
     end
 
     test 'should update category if logged in' do
-      patch :update, id: @string_box, string_box: {}
+      patch :update, params: { id: @string_box, string_box: {} }
       assert_redirected_to admin_string_box_path(@string_box)
     end
 
     test 'should not destroy string_box' do
       assert_no_difference 'StringBox.count' do
-        delete :destroy, id: @string_box
+        delete :destroy, params: { id: @string_box }
       end
       assert_redirected_to admin_dashboard_path
     end
@@ -55,7 +55,7 @@ module Admin
     test 'should be able to create if super administrator' do
       sign_in @super_administrator
       assert_difference 'StringBox.count' do
-        post :create, string_box: {}
+        post :create, params: { string_box: {} }
       end
       assert_redirected_to admin_string_box_path(assigns(:string_box))
     end
@@ -74,13 +74,13 @@ module Admin
     # == User roles
     #
     test 'should not save optional_module params if administrator' do
-      patch :update, id: @string_box, string_box: { optional_module_id: @adult_module.id }
+      patch :update, params: { id: @string_box, string_box: { optional_module_id: @adult_module.id } }
       assert_nil assigns(:string_box).optional_module_id
     end
 
     test 'should save optional_module params if super_administrator' do
       sign_in @super_administrator
-      patch :update, id: @string_box, string_box: { optional_module_id: @adult_module.id }
+      patch :update, params: { id: @string_box, string_box: { optional_module_id: @adult_module.id } }
       assert_equal @adult_module.id, assigns(:string_box).optional_module_id
     end
 

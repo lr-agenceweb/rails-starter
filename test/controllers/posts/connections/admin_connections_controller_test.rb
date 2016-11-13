@@ -22,19 +22,19 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @connection.id
+      get :show, params: { id: @connection }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @connection.id
+      get :edit, params: { id: @connection }
       assert_response :success
     end
 
     test 'should create connection if logged in' do
       assert_difference 'Connection.count' do
         attrs = set_default_record_attrs
-        post :create, connection: attrs
+        post :create, params: { connection: attrs }
         assert_equal 'Connection', assigns(:connection).type
         assert_equal @administrator.id, assigns(:connection).user_id
         assert_redirected_to admin_connection_path(assigns(:connection))
@@ -42,7 +42,7 @@ module Admin
     end
 
     test 'should update connection if logged in' do
-      patch :update, id: @connection.id, connection: {}
+      patch :update, params: { id: @connection, connection: {} }
       assert_redirected_to admin_connection_path(@connection)
     end
 
@@ -51,14 +51,14 @@ module Admin
     #
     test 'should destroy connection' do
       assert_difference ['Connection.count', 'Link.count'], -1 do
-        delete :destroy, id: @connection.id
+        delete :destroy, params: { id: @connection }
         assert_redirected_to admin_connections_path
       end
     end
 
     test 'AJAX :: should destroy blog' do
       assert_difference ['Connection.count', 'Link.count'], -1 do
-        xhr :delete, :destroy, id: @connection.id
+        delete :destroy, params: { id: @connection }, xhr: true
         assert_response :success
         assert_template :destroy
       end
@@ -68,19 +68,19 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@connection.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@connection.id] }
       [@connection].each(&:reload)
       assert_not @connection.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@connection.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@connection.id] }
       assert_redirected_to admin_connections_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
 
     test 'should redirect to back and have correct flash notice for reset_cache batch action' do
-      post :batch_action, batch_action: 'reset_cache', collection_selection: [@connection.id]
+      post :batch_action, params: { batch_action: 'reset_cache', collection_selection: [@connection.id] }
       assert_redirected_to admin_connections_path
       assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
     end

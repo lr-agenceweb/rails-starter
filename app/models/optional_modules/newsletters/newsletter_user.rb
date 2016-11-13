@@ -27,6 +27,7 @@ class NewsletterUser < ActiveRecord::Base
   include Mailable
 
   belongs_to :newsletter_user_role
+  before_update :delete_email_key
 
   attr_accessor :nickname # captcha
   attr_accessor :name # name extracted from email
@@ -55,5 +56,12 @@ class NewsletterUser < ActiveRecord::Base
 
   def self.testers?
     !testers.empty?
+  end
+
+  private
+
+  # TESTME
+  def delete_email_key
+    self.email = nil
   end
 end

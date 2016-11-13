@@ -22,29 +22,29 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @blog_category
+      get :show, params: { id: @blog_category }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @blog_category
+      get :edit, params: { id: @blog_category }
       assert_response :success
     end
 
     test 'should update blog_category if logged in' do
-      patch :update, id: @blog_category, blog_category: {}
+      patch :update, params: { id: @blog_category, blog_category: {} }
       assert_redirected_to admin_blog_category_path(@blog_category)
     end
 
     test 'should destroy blog category' do
       assert_difference 'BlogCategory.count', -1 do
-        delete :destroy, id: @blog_category
+        delete :destroy, params: { id: @blog_category }
       end
     end
 
     test 'should destroy blogs posts linked to category' do
       assert_difference 'Blog.count', -3 do
-        delete :destroy, id: @blog_category
+        delete :destroy, params: { id: @blog_category }
       end
     end
 

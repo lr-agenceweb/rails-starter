@@ -277,7 +277,7 @@ GEM
       activesupport (~> 5.0)
       request_store (~> 1.0)
     draper-cancancan (1.1.1)
-    enumerize (1.1.1)
+    enumerize (2.0.1)
       activesupport (>= 3.2)
     erubis (2.7.0)
     every_day_irb (2.0.0)
@@ -699,14 +699,14 @@ DEPENDENCIES
   dkim
   draper (= 3.0.0.pre1)
   draper-cancancan
-  enumerize (~> 1.1.1)
+  enumerize (~> 2.0.1)
   exception_notification
   faker
   figaro
   font-awesome-rails
   fotoramajs
   foundation-rails (~> 6.2.0)
-  friendly_id (~> 5.1)
+  friendly_id
   friendly_id-globalize
   fullcalendar-rails
   globalize!

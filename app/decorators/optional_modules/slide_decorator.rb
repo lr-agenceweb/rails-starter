@@ -34,6 +34,6 @@ class SlideDecorator < PictureDecorator
   end
 
   def caption?
-    slide.title? || slide.description?
+    title? || description?
   end
 end

@@ -23,17 +23,17 @@ module Admin
     end
 
     test 'should show show page if logged in' do
-      get :show, id: @setting
+      get :show, params: { id: @setting }
       assert_response :success
     end
 
     test 'should show edit page if logged in' do
-      get :edit, id: @setting
+      get :edit, params: { id: @setting }
       assert_response :success
     end
 
     test 'should update setting if logged in' do
-      patch :update, id: @setting, setting: {}
+      patch :update, params: { id: @setting, setting: {} }
       assert_redirected_to admin_setting_path(@setting)
     end
 
@@ -85,33 +85,33 @@ module Admin
     # == Form validations
     #
     test 'should not update setting without name' do
-      patch :update, id: @setting, setting: { name: nil }
+      patch :update, params: { id: @setting, setting: { name: nil } }
       assert_not assigns(:setting).valid?
     end
 
     test 'should not update setting without title' do
-      patch :update, id: @setting, setting: { title: nil }
+      patch :update, params: { id: @setting, setting: { title: nil } }
       assert_not assigns(:setting).valid?
     end
 
     test 'should not update social param if module is disabled' do
       disable_optional_module @super_administrator, @social_module, 'Social' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @setting, setting: { show_social: '1' }
+      patch :update, params: { id: @setting, setting: { show_social: '1' } }
       assert_not assigns(:setting).show_social?
     end
 
     test 'should not update breadcrumb param if module is disabled' do
       disable_optional_module @super_administrator, @breadcrumb_module, 'Breadcrumb' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @setting, setting: { show_breadcrumb: '1' }
+      patch :update, params: { id: @setting, setting: { show_breadcrumb: '1' } }
       assert_not assigns(:setting).show_breadcrumb?
     end
 
     test 'should not update qrcode param if module is disabled' do
       disable_optional_module @super_administrator, @qrcode_module, 'Qrcode' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @setting, setting: { show_qrcode: '1' }
+      patch :update, params: { id: @setting, setting: { show_qrcode: '1' } }
       assert_not assigns(:setting).show_qrcode?
     end
 
@@ -120,7 +120,7 @@ module Admin
       disable_optional_module @super_administrator, @audio_module, 'Audio' # in test_helper.rb
       disable_optional_module @super_administrator, @video_module, 'Video' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @setting, setting: { picture_in_picture: '0' }
+      patch :update, params: { id: @setting, setting: { picture_in_picture: '0' } }
       assert assigns(:setting).picture_in_picture?
     end
 

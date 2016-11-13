@@ -23,17 +23,17 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @menu
+      get :show, params: { id: @menu }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @menu
+      get :edit, params: { id: @menu }
       assert_response :success
     end
 
     test 'should update menu if logged in' do
-      patch :update, id: @menu, menu: {}
+      patch :update, params: { id: @menu, menu: {} }
       assert_redirected_to admin_menu_path(@menu)
     end
 
@@ -41,13 +41,13 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@menu.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@menu.id] }
       [@menu].each(&:reload)
       assert_not @menu.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@menu.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@menu.id] }
       assert_redirected_to admin_menus_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
@@ -57,14 +57,14 @@ module Admin
     #
     test 'should not create menu if administrator' do
       assert_no_difference ['Menu.count'] do
-        post :create, menu: {}
+        post :create, params: { menu: {} }
       end
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not delete menu if administrator' do
       assert_no_difference ['Menu.count'] do
-        delete :destroy, id: @menu
+        delete :destroy, params: { id: @menu }
       end
       assert_redirected_to admin_dashboard_path
     end
@@ -73,7 +73,7 @@ module Admin
       sign_in @super_administrator
       @page = @menu_blog.page
       assert_difference ['Menu.count'], -1 do
-        delete :destroy, id: @menu_blog
+        delete :destroy, params: { id: @menu_blog }
       end
       assert_redirected_to admin_menus_path
     end

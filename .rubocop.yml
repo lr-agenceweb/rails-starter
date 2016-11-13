@@ -18,6 +18,8 @@ Metrics/MethodLength:
   Max: 99999
 Metrics/LineLength:
   Max: 99999
+Metrics/BlockLength:
+  Max: 99999
 Metrics/AbcSize:
   Max: 99999
 Metrics/CyclomaticComplexity:

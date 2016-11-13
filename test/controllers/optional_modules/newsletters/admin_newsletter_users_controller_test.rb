@@ -22,7 +22,7 @@ module Admin
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @newsletter_user
+      get :edit, params: { id: @newsletter_user }
       assert_response :success
     end
 
@@ -34,39 +34,39 @@ module Admin
 
     # Valid params
     test 'should update newsletter_user if logged in' do
-      patch :update, id: @newsletter_user, newsletter_user: {}
+      patch :update, params: { id: @newsletter_user, newsletter_user: {} }
       assert_redirected_to admin_newsletter_users_path
     end
 
     test 'should update newsletter_user role' do
-      patch :update, id: @newsletter_user, newsletter_user: { newsletter_user_role_id: @newsletter_user_role_tester.id }
+      patch :update, params: { id: @newsletter_user, newsletter_user: { newsletter_user_role_id: @newsletter_user_role_tester.id } }
       assert assigns(:newsletter_user).valid?, 'record should be valid'
       assert_equal 'testeur', assigns(:newsletter_user).newsletter_user_role_title
     end
 
     # Invalid params
     test 'should not update if lang params is not allowed' do
-      patch :update, id: @newsletter_user, newsletter_user: { lang: 'de' }
+      patch :update, params: { id: @newsletter_user, newsletter_user: { lang: 'de' } }
       assert_not assigns(:newsletter_user).valid?
     end
 
     test 'should not update if role params is not allowed' do
-      patch :update, id: @newsletter_user, newsletter_user: { newsletter_user_role_id: 9999 }
+      patch :update, params: { id: @newsletter_user, newsletter_user: { newsletter_user_role_id: 9999 } }
       assert_not assigns(:newsletter_user).valid?
     end
 
     test 'should not update if email params is changed' do
-      patch :update, id: @newsletter_user, newsletter_user: { email: 'test@test.com' }
+      patch :update, params: { id: @newsletter_user, newsletter_user: { email: 'test@test.com' } }
       assert_equal @newsletter_user.email, assigns(:newsletter_user).email
     end
 
     test 'should render edit template if lang is not allowed' do
-      patch :update, id: @newsletter_user, newsletter_user: { lang: 'de' }
+      patch :update, params: { id: @newsletter_user, newsletter_user: { lang: 'de' } }
       assert_template :edit
     end
 
     test 'should render edit template if role is not allowed' do
-      patch :update, id: @newsletter_user, newsletter_user: { newsletter_user_role_id: 9999 }
+      patch :update, params: { id: @newsletter_user, newsletter_user: { newsletter_user_role_id: 9999 } }
       assert_template :edit
     end
 
@@ -76,18 +76,18 @@ module Admin
     test 'should not destroy user if logged in as subscriber' do
       sign_in @subscriber
       assert_no_difference 'NewsletterUser.count' do
-        delete :destroy, id: @newsletter_user
+        delete :destroy, params: { id: @newsletter_user }
       end
     end
 
     test 'should destroy newsletter if logged in as administrator' do
       assert_difference 'NewsletterUser.count', -1 do
-        delete :destroy, id: @newsletter_user
+        delete :destroy, params: { id: @newsletter_user }
       end
     end
 
     test 'should redirect to newsletter users path after destroy' do
-      delete :destroy, id: @newsletter_user
+      delete :destroy, params: { id: @newsletter_user }
       assert_redirected_to admin_newsletter_users_path
     end
 

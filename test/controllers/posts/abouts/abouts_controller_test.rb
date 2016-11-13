@@ -16,7 +16,7 @@ class AboutsControllerTest < ActionController::TestCase
   test 'should get index' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :index, locale: locale.to_s
+        get :index, params: { locale: locale.to_s }
         assert_response :success
         assert_not_nil assigns(:abouts)
       end
@@ -26,7 +26,7 @@ class AboutsControllerTest < ActionController::TestCase
   test 'should use index template' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :index, locale: locale.to_s
+        get :index, params: { locale: locale.to_s }
         assert_template :index
       end
     end
@@ -47,7 +47,7 @@ class AboutsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
-          get :index, locale: locale.to_s
+          get :index, params: { locale: locale.to_s }
         end
       end
     end
@@ -59,7 +59,7 @@ class AboutsControllerTest < ActionController::TestCase
   test 'should get show page with all locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @about
+        get :show, params: { locale: locale.to_s, id: @about }
         assert_response :success
         assert_not_nil @about
       end
@@ -69,7 +69,7 @@ class AboutsControllerTest < ActionController::TestCase
   test 'assert integrity of request for each locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @about
+        get :show, params: { locale: locale.to_s, id: @about }
         assert_equal request.path_parameters[:id], @about.slug
         assert_equal request.path_parameters[:locale], locale.to_s
       end
@@ -88,7 +88,7 @@ class AboutsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActiveRecord::RecordNotFound) do
-          get :show, locale: locale.to_s, id: @about_offline
+          get :show, params: { locale: locale.to_s, id: @about_offline }
         end
       end
     end

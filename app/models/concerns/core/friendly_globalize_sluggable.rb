@@ -40,7 +40,7 @@ module Core
       end
 
       def should_generate_new_friendly_id?
-        new_record? || send("#{ATTRIBUTE}_changed?") || super
+        new_record? || attribute_changed?(ATTRIBUTE) || super
       end
     end
   end

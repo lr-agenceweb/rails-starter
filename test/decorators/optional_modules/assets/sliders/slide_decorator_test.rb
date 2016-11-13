@@ -17,11 +17,11 @@ class SlideDecoratorTest < Draper::TestCase
   end
 
   test 'should return title for slide image' do
-    assert_equal 'Title for slide one', @slide_decorated.title
+    assert_equal 'Titre slide 1', @slide_decorated.title
   end
 
   test 'should return description for slide image' do
-    assert_equal 'Description for slide one', @slide_decorated.description_d
+    assert_equal 'Description slide 1', @slide_decorated.description_d
   end
 
   test 'should return correct value for caption?' do

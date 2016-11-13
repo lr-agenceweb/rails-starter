@@ -44,6 +44,6 @@ class BlogCategory < ActiveRecord::Base
   end
 
   def should_generate_new_friendly_id?
-    new_record? || name_changed?
+    new_record? || attribute_changed?(:name)
   end
 end

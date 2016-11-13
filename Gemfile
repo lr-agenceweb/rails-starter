@@ -39,7 +39,7 @@ gem 'active_skin'
 # Core enhancement
 # =====================
 gem 'draper', '3.0.0.pre1'
-gem 'enumerize', '~> 1.1.1'
+gem 'enumerize', '~> 2.0.1'
 
 #
 # Html
@@ -105,7 +105,7 @@ gem 'gmaps-autocomplete-rails'
 #
 # SEO
 # =====================
-gem 'friendly_id', '~> 5.1'
+gem 'friendly_id'
 gem 'friendly_id-globalize'
 gem 'sitemap_generator'
 gem 'meta-tags'

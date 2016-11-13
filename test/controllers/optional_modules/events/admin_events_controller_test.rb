@@ -22,17 +22,17 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @event
+      get :show, params: { id: @event }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @event
+      get :edit, params: { id: @event }
       assert_response :success
     end
 
     test 'should update event if logged in' do
-      patch :update, id: @event, event: { title: 'event edit', content: 'content edit' }
+      patch :update, params: { id: @event, event: { title: 'event edit', content: 'content edit' } }
       assert_redirected_to admin_event_path(assigns(:event))
       assert flash[:notice].blank?
     end
@@ -41,31 +41,31 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@event.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@event.id] }
       [@event].each(&:reload)
       assert_not @event.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@event.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@event.id] }
       assert_redirected_to admin_events_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
 
     test 'should return correct value for toggle_show_calendar batch action' do
-      post :batch_action, batch_action: 'toggle_show_calendar', collection_selection: [@event.id]
+      post :batch_action, params: { batch_action: 'toggle_show_calendar', collection_selection: [@event.id] }
       [@event].each(&:reload)
       assert @event.show_calendar?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_show_calendar batch action' do
-      post :batch_action, batch_action: 'toggle_show_calendar', collection_selection: [@event.id]
+      post :batch_action, params: { batch_action: 'toggle_show_calendar', collection_selection: [@event.id] }
       assert_redirected_to admin_events_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
 
     test 'should redirect to back and have correct flash notice for reset_cache batch action' do
-      post :batch_action, batch_action: 'reset_cache', collection_selection: [@event.id]
+      post :batch_action, params: { batch_action: 'reset_cache', collection_selection: [@event.id] }
       assert_redirected_to admin_events_path
       assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
     end
@@ -75,14 +75,14 @@ module Admin
     #
     test 'should not save end_date if all_day param is checked' do
       assert_not @event.end_date.nil?
-      patch :update, id: @event, event: { all_day: true, start_date: '2015-07-22 09:00:00', end_date: '2015-07-28 18:00:00' }
+      patch :update, params: { id: @event, event: { all_day: true, start_date: '2015-07-22 09:00:00', end_date: '2015-07-28 18:00:00' } }
       assert_nil assigns(:event).end_date
       assert assigns(:event).all_day?
     end
 
     test 'should save end_date if all_day param is not checked' do
       assert @event_all_day.end_date.nil?
-      patch :update, id: @event_all_day, event: { all_day: false, end_date: '2016-05-23 19:08:43' }
+      patch :update, params: { id: @event_all_day, event: { all_day: false, end_date: '2016-05-23 19:08:43' } }
       assert_not assigns(:event).end_date.nil?
       assert_not assigns(:event).all_day?
     end
@@ -91,13 +91,13 @@ module Admin
     # == Flash content
     #
     test 'should return empty flash notice if no update' do
-      patch :update, id: @event, event: {}
+      patch :update, params: { id: @event, event: {} }
       assert flash[:notice].blank?
     end
 
     test 'should return correct flash content after updating a video' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      patch :update, id: @event, event: { video_uploads_attributes: [{ video_file: video }] }
+      patch :update, params: { id: @event, event: { video_uploads_attributes: [{ video_file: video }] } }
       assert assigns(:event).video_upload.video_file_processing?, 'should be processing video task'
       assert_equal [I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
     end
@@ -107,14 +107,14 @@ module Admin
     #
     test 'should destroy blog' do
       assert_difference ['Event.count', 'Link.count'], -1 do
-        delete :destroy, id: @event
+        delete :destroy, params: { id: @event }
         assert_redirected_to admin_events_path
       end
     end
 
-    test 'AJAX :: should destroy blog' do
+    test 'AJAX :: should destroy event' do
       assert_difference ['Event.count', 'Link.count'], -1 do
-        xhr :delete, :destroy, id: @event
+        delete :destroy, params: { id: @event }, xhr: true
         assert_response :success
         assert_template :destroy
       end
@@ -206,7 +206,7 @@ module Admin
       assert_difference ['Event.count', 'Link.count'] do
         attrs = set_default_record_attrs
         attrs.merge!(link_attributes: { url: 'http://google.com' }, start_date: Time.zone.now, end_date: Time.zone.now + 1.day)
-        post :create, event: attrs
+        post :create, params: { event: attrs }
       end
       assert assigns(:event).valid?
     end
@@ -216,7 +216,7 @@ module Admin
         attrs = set_default_record_attrs
         attrs.merge!(link_attributes: { url: 'fake.url' }, start_date: Time.zone.now, end_date: Time.zone.now + 1.day)
 
-        post :create, event: attrs
+        post :create, params: { event: attrs }
       end
       assert_not assigns(:event).valid?
     end
@@ -227,7 +227,7 @@ module Admin
         attrs[:start_date] = '2015-07-19 09:00:00'
         attrs[:end_date] = '2015-07-22 09:00:00'
 
-        post :create, event: attrs
+        post :create, params: { event: attrs }
       end
       assert assigns(:event).valid?
     end
@@ -238,7 +238,7 @@ module Admin
         attrs[:start_date] = '2015-07-19 09:00:00'
         attrs[:end_date] = '2015-07-19 10:00:00'
 
-        post :create, event: attrs
+        post :create, params: { event: attrs }
       end
       assert assigns(:event).valid?
     end
@@ -249,7 +249,7 @@ module Admin
         attrs[:start_date] = '2015-07-22 09:00:00'
         attrs[:end_date] = '2015-07-19 09:00:00'
 
-        post :create, event: attrs
+        post :create, params: { event: attrs }
       end
       assert_not assigns(:event).valid?
     end
@@ -273,24 +273,24 @@ module Admin
     test 'should not create calendar if calendar module is disabled' do
       disable_optional_module @super_administrator, @calendar_module, 'Calendar' # in test_helper.rb
       sign_in @administrator
-      post :create, event: { show_calendar: true }
+      post :create, params: { event: { show_calendar: true } }
       assert_not assigns(:event).show_calendar
     end
 
     test 'should create calendar if calendar module is enabled' do
-      post :create, event: { show_calendar: true }
+      post :create, params: { event: { show_calendar: true } }
       assert assigns(:event).show_calendar
     end
 
     test 'should not update calendar if calendar module is disabled' do
       disable_optional_module @super_administrator, @calendar_module, 'Calendar' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @event, event: { show_calendar: true }
+      patch :update, params: { id: @event, event: { show_calendar: true } }
       assert_not assigns(:event).show_calendar
     end
 
     test 'should update calendar if calendar module is enabled' do
-      patch :update, id: @event, event: { show_calendar: true }
+      patch :update, params: { id: @event, event: { show_calendar: true } }
       assert assigns(:event).show_calendar
     end
 

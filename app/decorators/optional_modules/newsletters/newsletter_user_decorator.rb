@@ -19,10 +19,10 @@ class NewsletterUserDecorator < ApplicationDecorator
   end
 
   def tester?
-    model.newsletter_user_role_title == 'testeur'
+    model.newsletter_user_role_title.casecmp('testeur') == 0
   end
 
   def subscriber?
-    model.newsletter_user_role_title == 'abonné'
+    model.newsletter_user_role_title.casecmp('abonné') == 0
   end
 end

@@ -22,19 +22,19 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @about.id
+      get :show, params: { id: @about }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @about.id
+      get :edit, params: { id: @about }
       assert_response :success
     end
 
     test 'should create if logged in' do
       assert_difference 'About.count' do
         attrs = set_default_record_attrs
-        post :create, about: attrs
+        post :create, params: { about: attrs }
         assert_equal 'About', assigns(:about).type
         assert_equal @administrator.id, assigns(:about).user_id
         assert_redirected_to admin_about_path(assigns(:about))
@@ -42,13 +42,13 @@ module Admin
     end
 
     test 'should update about if logged in' do
-      patch :update, id: @about.id, about: {}
+      patch :update, params: { id: @about, about: {} }
       assert_redirected_to admin_about_path(@about)
     end
 
     test 'should destroy about' do
       assert_difference ['About.count', 'Referencement.count'], -1 do
-        delete :destroy, id: @about.id
+        delete :destroy, params: { id: @about }
       end
       assert_redirected_to admin_abouts_path
     end
@@ -58,19 +58,19 @@ module Admin
     #
     test 'should return correct value for toggle_online batch action' do
       assert_not @about.online?
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@about.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@about.id] }
       [@about].each(&:reload)
       assert @about.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@about.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@about.id] }
       assert_redirected_to admin_abouts_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
 
     test 'should redirect to back and have correct flash notice for reset_cache batch action' do
-      post :batch_action, batch_action: 'reset_cache', collection_selection: [@about.id]
+      post :batch_action, params: { batch_action: 'reset_cache', collection_selection: [@about.id] }
       assert_redirected_to admin_abouts_path
       assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
     end

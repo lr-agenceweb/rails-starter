@@ -23,17 +23,17 @@ ActiveAdmin.register Event do
 
   batch_action :toggle_online, if: proc { can? :reset_cache, Event } do |ids|
     Event.find(ids).each { |item| item.toggle! :online }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   batch_action :toggle_show_calendar, if: proc { can?(:reset_cache, Event) && @calendar_module.enabled? } do |ids|
     Event.find(ids).each { |event| event.toggle! :show_calendar }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   batch_action :reset_cache, if: proc { can? :reset_cache, Event } do |ids|
     Event.find(ids).each(&:touch)
-    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.reset_cache'))
   end
 
   index do
@@ -76,7 +76,7 @@ ActiveAdmin.register Event do
     include OptionalModules::Videoable
 
     def scoped_collection
-      super.includes :translations, :location, :picture
+      super.includes :location, :picture
     end
   end
 end

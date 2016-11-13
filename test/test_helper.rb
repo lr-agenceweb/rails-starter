@@ -159,7 +159,10 @@ module ActiveSupport
 
     # Default record attrs
     def set_default_record_attrs
-      attrs = { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+      attrs = { translations_attributes: {
+        '1': { title: 'foo', locale: 'fr' },
+        '0': { title: 'bar', locale: 'en' }
+      } }
 
       if @controller.class.name == 'Admin::BlogsController'
         attrs[:publication_date_attributes] = default_publication_date

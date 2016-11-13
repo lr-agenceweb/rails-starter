@@ -272,3 +272,12 @@ module ActiveAdmin
     end
   end
 end
+
+# FriendlyId Rails 5 fix
+ActiveAdmin::ResourceController.class_eval do
+  def find_resource
+    return scoped_collection.friendly.find(params[:id]) if resource_class.is_a?(FriendlyId)
+
+    scoped_collection.find(params[:id])
+  end
+end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == BlogCategoriesController
-#
+# BlogCategoriesController
+# ============================
 class BlogCategoriesController < ApplicationController
   include OptionalModules::Bloggable
 
@@ -23,6 +23,6 @@ class BlogCategoriesController < ApplicationController
   private
 
   def set_blog_category
-    @blog_category = BlogCategory.find(params[:id]) || not_found
+    @blog_category = BlogCategory.friendly.find(params[:id]) || not_found
   end
 end

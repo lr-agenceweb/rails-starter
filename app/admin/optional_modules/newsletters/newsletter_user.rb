@@ -75,7 +75,6 @@ ActiveAdmin.register NewsletterUser do
     end
 
     def update
-      params[:newsletter_user].delete(:email)
       super { admin_newsletter_users_path }
     end
   end

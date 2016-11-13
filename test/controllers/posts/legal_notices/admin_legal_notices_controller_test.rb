@@ -22,19 +22,19 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @legal_notice_admin.id
+      get :show, params: { id: @legal_notice_admin.id }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @legal_notice_admin.id
+      get :edit, params: { id: @legal_notice_admin.id }
       assert_response :success
     end
 
     test 'should create legal_notice if logged in' do
       assert_difference 'LegalNotice.count' do
         attrs = set_default_record_attrs
-        post :create, legal_notice: attrs
+        post :create, params: { legal_notice: attrs }
         assert_equal 'LegalNotice', assigns(:legal_notice).type
         assert_equal @administrator.id, assigns(:legal_notice).user_id
         assert_redirected_to admin_legal_notice_path(assigns(:legal_notice))
@@ -42,20 +42,20 @@ module Admin
     end
 
     test 'should update legal_notice if logged in' do
-      patch :update, id: @legal_notice_admin.id, legal_notice: {}
+      patch :update, params: { id: @legal_notice_admin.id, legal_notice: {} }
       assert_redirected_to admin_legal_notice_path(@legal_notice_admin)
     end
 
     test 'should destroy own legal_notice article' do
       assert_difference 'LegalNotice.count', -1 do
-        delete :destroy, id: @legal_notice_admin.id
+        delete :destroy, params: { id: @legal_notice_admin.id }
       end
       assert_redirected_to admin_legal_notices_path
     end
 
     test 'should not destroy legal_notice for SA' do
       assert_no_difference 'LegalNotice.count' do
-        delete :destroy, id: @legal_notice_super_admin.id
+        delete :destroy, params: { id: @legal_notice_super_admin.id }
       end
       assert_redirected_to admin_dashboard_path
     end
@@ -64,20 +64,20 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@legal_notice_super_admin.id, @legal_notice_admin.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@legal_notice_super_admin.id, @legal_notice_admin.id] }
       [@legal_notice_super_admin, @legal_notice_admin].each(&:reload)
       assert_not @legal_notice_super_admin.online?
       assert_not @legal_notice_admin.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@legal_notice_admin.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@legal_notice_admin.id] }
       assert_redirected_to admin_legal_notices_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
 
     test 'should redirect to back and have correct flash notice for reset_cache batch action' do
-      post :batch_action, batch_action: 'reset_cache', collection_selection: [@legal_notice_admin.id]
+      post :batch_action, params: { batch_action: 'reset_cache', collection_selection: [@legal_notice_admin.id] }
       assert_redirected_to admin_legal_notices_path
       assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
     end
