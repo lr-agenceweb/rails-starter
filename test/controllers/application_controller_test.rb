@@ -137,7 +137,7 @@ class ApplicationControllerTest < ActionController::TestCase
   def make_get_index(assertions, loc = I18n.default_locale)
     old_controller = @controller
     @controller = HomesController.new
-    get :index, locale: loc
+    get :index, params: { locale: loc }
     yield(assertions)
   ensure
     @controller = old_controller

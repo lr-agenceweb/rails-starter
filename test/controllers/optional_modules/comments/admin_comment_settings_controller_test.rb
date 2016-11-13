@@ -23,12 +23,12 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @comment_setting
+      get :show, params: { id: @comment_setting }
       assert_response :success
     end
 
     test 'should be able to edit' do
-      get :edit, id: @comment_setting
+      get :edit, params: { id: @comment_setting }
       assert_response :success
     end
 
@@ -41,14 +41,14 @@ module Admin
     test 'should not be able to destroy comment setting if subscriber' do
       sign_in @subscriber
       assert_no_difference ['CommentSetting.count'] do
-        delete :destroy, id: @comment_setting
+        delete :destroy, params: { id: @comment_setting }
       end
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to destroy comment setting if admin' do
       assert_no_difference ['CommentSetting.count'] do
-        delete :destroy, id: @comment_setting
+        delete :destroy, params: { id: @comment_setting }
       end
       assert_redirected_to admin_dashboard_path
     end

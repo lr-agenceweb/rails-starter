@@ -33,12 +33,12 @@ ActiveAdmin.register About do
 
   batch_action :toggle_online, if: proc { can? :toggle_online, About } do |ids|
     About.find(ids).each { |item| item.toggle! :online }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   batch_action :reset_cache, if: proc { can? :reset_cache, About } do |ids|
     About.find(ids).each(&:touch)
-    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.reset_cache'))
   end
 
   # Sortable

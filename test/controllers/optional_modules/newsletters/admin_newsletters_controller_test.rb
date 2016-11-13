@@ -27,7 +27,7 @@ module Admin
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @newsletter
+      get :edit, params: { id: @newsletter }
       assert_response :success
     end
 
@@ -37,19 +37,19 @@ module Admin
     test 'should not destroy newsletter if logged in as subscriber' do
       sign_in @subscriber
       assert_no_difference 'Newsletter.count' do
-        delete :destroy, id: @newsletter
+        delete :destroy, params: { id: @newsletter }
       end
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should destroy newsletter if logged in as administrator' do
       assert_difference 'Newsletter.count', -1 do
-        delete :destroy, id: @newsletter
+        delete :destroy, params: { id: @newsletter }
       end
     end
 
     test 'should redirect to newsletter path after destroy' do
-      delete :destroy, id: @newsletter
+      delete :destroy, params: { id: @newsletter }
       assert_redirected_to admin_newsletters_path
     end
 
@@ -59,7 +59,7 @@ module Admin
     test 'should render preview template and newsletter layout' do
       I18n.available_locales.each do |locale|
         I18n.with_locale(locale) do
-          get :preview, locale: locale.to_s, id: @newsletter
+          get :preview, locale: locale.to_s, params: { id: @newsletter }
           assert_response :success
           assert_template 'newsletter_mailer/send_newsletter', layout: 'newsletter'
         end
@@ -75,7 +75,7 @@ module Admin
       assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 2 do
-        get :send_newsletter, id: @newsletter_not_sent.id, option: 'subscribers'
+        get :send_newsletter, params: { id: @newsletter_not_sent.id, option: 'subscribers' }
         assert_not assigns(:newsletter).sent_at.nil?
         assert_equal 'La newsletter est en train d\'être envoyée à 2 personnes', flash[:notice]
         assert_redirected_to admin_newsletters_path
@@ -88,7 +88,7 @@ module Admin
       assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 1 do
-        get :send_newsletter, id: @newsletter_not_sent.id, option: 'testers'
+        get :send_newsletter, params: { id: @newsletter_not_sent.id, option: 'testers' }
         assert assigns(:newsletter).sent_at.nil?
         assert_equal 'La newsletter est en train d\'être envoyée à 1 personne', flash[:notice]
         assert_redirected_to admin_newsletters_path

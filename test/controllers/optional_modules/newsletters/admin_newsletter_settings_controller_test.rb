@@ -22,13 +22,13 @@ module Admin
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @newsletter_setting
+      get :edit, params: { id: @newsletter_setting }
       assert_response :success
     end
 
     # Valid params
     test 'should update newsletter_setting if logged in' do
-      patch :update, id: @newsletter_setting, newsletter_setting: {}
+      patch :update, params: { id: @newsletter_setting, newsletter_setting: {} }
       assert_redirected_to admin_newsletter_setting_path
     end
 
@@ -37,7 +37,7 @@ module Admin
     #
     test 'should not destroy user if logged in as subscriber' do
       assert_no_difference 'NewsletterSetting.count' do
-        delete :destroy, id: @newsletter_setting
+        delete :destroy, params: { id: @newsletter_setting }
       end
     end
 

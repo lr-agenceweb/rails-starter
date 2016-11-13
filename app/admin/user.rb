@@ -21,7 +21,7 @@ ActiveAdmin.register User do
 
   batch_action :reset_cache, if: proc { can? :reset_cache, User } do |ids|
     User.find(ids).each(&:touch)
-    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.reset_cache'))
   end
 
   batch_action :toggle_active, if: proc { can? :toggle_active, User } do |ids|
@@ -144,7 +144,7 @@ ActiveAdmin.register User do
         user.toggle! :account_active
         ActiveUserJob.set(wait: 3.seconds).perform_later(user) if user.account_active?
       end
-      redirect_to :back, notice: t('active_admin.batch_actions.toggle_active')
+      redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.toggle_active'))
     end
   end
 end

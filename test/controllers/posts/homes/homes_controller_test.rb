@@ -16,7 +16,7 @@ class HomesControllerTest < ActionController::TestCase
   test 'should get index' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :index, params: { locale: locale.to_s }
+        get :index, params: { locale: locale.to_s }
         assert_response :success
         assert_not_nil assigns(:homes)
       end

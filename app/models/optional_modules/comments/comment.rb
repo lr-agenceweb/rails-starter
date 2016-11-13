@@ -68,7 +68,7 @@ class Comment < ActiveRecord::Base
 
   # Scopes
   default_scope { order('created_at DESC') }
-  scope :by_user, -> (user_id) { where(user_id: user_id) }
+  scope :by_user, ->(user_id) { where(user_id: user_id) }
   scope :signalled, -> { where(signalled: true) }
   scope :only_blogs, -> { where(commentable_type: 'Blog') }
 
@@ -76,7 +76,7 @@ class Comment < ActiveRecord::Base
   delegate :title, to: :commentable, prefix: true, allow_nil: true
 
   def max_depth
-    errors[:parent_id] = I18n.t('max_depth', scope: I18N_ERRORS_SCOPE)
+    errors.add(:parent_id, I18n.t('max_depth', scope: I18N_ERRORS_SCOPE))
   end
 
   def max_depth?(op = '>=')

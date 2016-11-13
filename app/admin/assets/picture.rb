@@ -15,7 +15,7 @@ ActiveAdmin.register Picture do
 
   batch_action :toggle_online, if: proc { can? :toggle_online, Picture } do |ids|
     Picture.find(ids).each { |item| item.toggle! :online }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do

@@ -24,17 +24,17 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @map_setting
+      get :show, params: { id: @map_setting }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @map_setting
+      get :edit, params: { id: @map_setting }
       assert_response :success
     end
 
     test 'should update map_setting if logged in' do
-      patch :update, id: @map_setting
+      patch :update, params: { id: @map_setting }
       assert_redirected_to admin_map_setting_path(assigns(:map_setting))
     end
 
@@ -42,13 +42,13 @@ module Admin
     # == Validation
     #
     test 'should not update if marker_icon is not allowed' do
-      patch :update, id: @map_setting, map_setting: { marker_icon: 'bad_value' }
+      patch :update, params: { id: @map_setting, map_setting: { marker_icon: 'bad_value' } }
       assert_not assigns(:map_setting).valid?
     end
 
     test 'should not update if postcode is not numeric' do
       params = { location_attributes: { postcode: 'bad_value' } }
-      patch :update, id: @map_setting, map_setting: params
+      patch :update, params: { id: @map_setting, map_setting: params }
       assert_not assigns(:map_setting).valid?
       assert assigns(:map_setting).errors.keys.include?('location.postcode'.to_sym)
     end
@@ -63,7 +63,7 @@ module Admin
       }
       assert @map_setting.location.present?
       assert_difference ['Location.count'], -1 do
-        patch :update, id: @map_setting, map_setting: { location_attributes: location_attrs }
+        patch :update, params: { id: @map_setting, map_setting: { location_attributes: location_attrs } }
         assert assigns(:map_setting).valid?
         @map_setting.reload
         assigns(:map_setting).reload
@@ -132,7 +132,7 @@ module Admin
     #
     test 'should not destroy map' do
       assert_no_difference ['MapSetting.count', 'Location.count'] do
-        delete :destroy, id: @map_setting
+        delete :destroy, params: { id: @map_setting }
       end
       assert_redirected_to admin_dashboard_path
     end

@@ -23,23 +23,23 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @video_settings
+      get :show, params: { id: @video_settings }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @video_settings
+      get :edit, params: { id: @video_settings }
       assert_response :success
     end
 
     test 'should update category if logged in' do
-      patch :update, id: @video_settings, video_setting: {}
+      patch :update, params: { id: @video_settings, video_setting: {} }
       assert_redirected_to admin_video_setting_path(@video_settings)
     end
 
     test 'should not destroy background' do
       assert_no_difference 'VideoSetting.count' do
-        delete :destroy, id: @video_settings
+        delete :destroy, params: { id: @video_settings }
       end
     end
 
@@ -73,13 +73,13 @@ module Admin
     # == VideoBackground
     #
     test 'should remove video_background boolean if administrator' do
-      patch :update, id: @video_settings, video_setting: { video_background: '0' }
+      patch :update, params: { id: @video_settings, video_setting: { video_background: '0' } }
       assert assigns(:video_setting).video_background?
     end
 
     test 'should keep video_background boolean if super_administrator' do
       sign_in @super_administrator
-      patch :update, id: @video_settings, video_setting: { video_background: '0' }
+      patch :update, params: { id: @video_settings, video_setting: { video_background: '0' } }
       assert_not assigns(:video_setting).video_background?
     end
 

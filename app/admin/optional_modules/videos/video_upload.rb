@@ -18,7 +18,7 @@ ActiveAdmin.register VideoUpload do
 
   batch_action :toggle_online, if: proc { can? :toggle_online, VideoUpload } do |ids|
     VideoUpload.find(ids).each { |item| item.toggle! :online }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do

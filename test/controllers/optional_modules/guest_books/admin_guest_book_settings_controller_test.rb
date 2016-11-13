@@ -23,12 +23,12 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @guest_book_setting
+      get :show, params: { id: @guest_book_setting }
       assert_response :success
     end
 
     test 'should be able to edit' do
-      get :edit, id: @guest_book_setting
+      get :edit, params: { id: @guest_book_setting }
       assert_response :success
     end
 
@@ -41,14 +41,14 @@ module Admin
     test 'should not be able to destroy guest_book setting if subscriber' do
       sign_in @subscriber
       assert_no_difference ['GuestBookSetting.count'] do
-        delete :destroy, id: @guest_book_setting
+        delete :destroy, params: { id: @guest_book_setting }
       end
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to destroy guest_book setting if admin' do
       assert_no_difference ['GuestBookSetting.count'] do
-        delete :destroy, id: @guest_book_setting
+        delete :destroy, params: { id: @guest_book_setting }
       end
       assert_redirected_to admin_dashboard_path
     end

@@ -16,7 +16,7 @@ class EventsControllerTest < ActionController::TestCase
   test 'should get index' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :index, locale: locale.to_s
+        get :index, params: { locale: locale.to_s }
         assert_response :success
         assert_not_nil assigns(:events)
       end
@@ -26,7 +26,7 @@ class EventsControllerTest < ActionController::TestCase
   test 'should use index template' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :index, locale: locale.to_s
+        get :index, params: { locale: locale.to_s }
         assert_template :index
       end
     end
@@ -37,7 +37,7 @@ class EventsControllerTest < ActionController::TestCase
     skip 'Fix this when FriendlyIdGlobalize will be fixed'
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @event
+        get :show, params: { locale: locale.to_s, id: @event }
         assert_response :success
       end
     end
@@ -46,7 +46,7 @@ class EventsControllerTest < ActionController::TestCase
   test 'assert integrity of request for each locales' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :show, locale: locale.to_s, id: @event
+        get :show, params: { locale: locale.to_s, id: @event }
         assert_equal request.path_parameters[:id], @event.slug
         assert_equal request.path_parameters[:locale], locale.to_s
       end
@@ -65,7 +65,7 @@ class EventsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActiveRecord::RecordNotFound) do
-          get :show, locale: locale.to_s, id: @event_offline
+          get :show, params: { locale: locale.to_s, id: @event_offline }
         end
       end
     end
@@ -81,7 +81,7 @@ class EventsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
-          get :index, locale: locale.to_s
+          get :index, params: { locale: locale.to_s }
         end
       end
     end
@@ -95,7 +95,7 @@ class EventsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
-          get :index, locale: locale.to_s
+          get :index, params: { locale: locale.to_s }
         end
       end
     end
@@ -105,7 +105,7 @@ class EventsControllerTest < ActionController::TestCase
     @event_setting.update_attribute(:show_calendar, true)
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        get :index, locale: locale.to_s, format: :json
+        get :index, params: { locale: locale.to_s, format: :json }
         assert_response :success
         assert_not assigns(:calendar_events).blank?
       end
@@ -117,7 +117,7 @@ class EventsControllerTest < ActionController::TestCase
     disable_optional_module @super_administrator, @calendar_module, 'Calendar' # in test_helper.rb
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        get :index, locale: locale.to_s, format: :json
+        get :index, params: { locale: locale.to_s, format: :json }
         assert_response :success
         assert assigns(:calendar_events).blank?
       end

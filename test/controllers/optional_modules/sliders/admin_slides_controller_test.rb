@@ -22,23 +22,23 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @slide
+      get :show, params: { id: @slide }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @slide
+      get :edit, params: { id: @slide }
       assert_response :success
     end
 
     test 'should update slide if logged in' do
-      patch :update, id: @slide, slide: {}
+      patch :update, params: { id: @slide, slide: {} }
       assert_redirected_to admin_slide_path(@slide)
     end
 
     test 'should destroy slide' do
       assert_difference 'Slide.count', -1 do
-        delete :destroy, id: @slide
+        delete :destroy, params: { id: @slide }
       end
       assert_redirected_to admin_slides_path
     end
@@ -47,13 +47,13 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slide.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@slide.id] }
       [@slide].each(&:reload)
       assert_not @slide.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slide.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@slide.id] }
       assert_redirected_to admin_slides_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
@@ -123,16 +123,16 @@ module Admin
     #
     test 'should update slide if new picture is sent' do
       attachment = fixture_file_upload 'images/slide.jpg', 'image/jpeg'
-      patch :update, id: @slide, slide: { image: attachment }
+      patch :update, params: { id: @slide, slide: { image: attachment } }
       slide = assigns(:slide)
       assert_equal slide.image_file_name, 'slide.jpg'
       assert_equal slide.image_content_type, 'image/jpeg'
-      delete :destroy, id: slide.id
+      delete :destroy, params: { id: slide.id }
     end
 
     test 'should destroy all attachments when destroying slide' do
       attachment = fixture_file_upload 'images/slide.jpg', 'image/jpeg'
-      patch :update, id: @slide, slide: { image: attachment }
+      patch :update, params: { id: @slide, slide: { image: attachment } }
 
       slide = assigns(:slide)
       existing_styles = []
@@ -142,7 +142,7 @@ module Admin
         existing_styles << f
       end
 
-      delete :destroy, id: slide.id
+      delete :destroy, params: { id: slide.id }
       existing_styles.each do |f|
         assert_not File.exist?(f), "File #{f} should not exist"
       end

@@ -22,29 +22,29 @@ module Admin
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @mailing_user
+      get :edit, params: { id: @mailing_user }
       assert_response :success
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @mailing_user
+      get :show, params: { id: @mailing_user }
       assert_response :success
     end
 
     # Valid params
     test 'should update mailing_user if logged in' do
-      patch :update, id: @mailing_user, mailing_user: {}
+      patch :update, params: { id: @mailing_user, mailing_user: {} }
       assert_redirected_to admin_mailing_user_path(@mailing_user)
     end
 
     # Invalid params
     test 'should not update if lang params is not allowed' do
-      patch :update, id: @mailing_user, mailing_user: { lang: 'de' }
+      patch :update, params: { id: @mailing_user, mailing_user: { lang: 'de' } }
       assert_not assigns(:mailing_user).valid?
     end
 
     test 'should render edit template if lang is not allowed' do
-      patch :update, id: @mailing_user, mailing_user: { lang: 'de' }
+      patch :update, params: { id: @mailing_user, mailing_user: { lang: 'de' } }
       assert_template :edit
     end
 
@@ -54,18 +54,18 @@ module Admin
     test 'should not destroy user if logged in as subscriber' do
       sign_in @subscriber
       assert_no_difference 'MailingUser.count' do
-        delete :destroy, id: @mailing_user
+        delete :destroy, params: { id: @mailing_user }
       end
     end
 
     test 'should destroy mailing user if logged in as administrator' do
       assert_difference 'MailingUser.count', -1 do
-        delete :destroy, id: @mailing_user
+        delete :destroy, params: { id: @mailing_user }
       end
     end
 
     test 'should redirect to mailing users path after destroy' do
-      delete :destroy, id: @mailing_user
+      delete :destroy, params: { id: @mailing_user }
       assert_redirected_to admin_mailing_users_path
     end
 
@@ -73,13 +73,13 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_archive_customer batch action' do
-      post :batch_action, batch_action: 'toggle_archive_customer', collection_selection: [@mailing_user.id]
+      post :batch_action, params: { batch_action: 'toggle_archive_customer', collection_selection: [@mailing_user.id] }
       [@mailing_user].each(&:reload)
       assert @mailing_user.archive?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_archive_customer batch action' do
-      post :batch_action, batch_action: 'toggle_archive_customer', collection_selection: [@mailing_user.id]
+      post :batch_action, params: { batch_action: 'toggle_archive_customer', collection_selection: [@mailing_user.id] }
       assert_redirected_to admin_mailing_users_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end

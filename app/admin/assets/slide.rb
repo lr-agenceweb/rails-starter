@@ -13,7 +13,7 @@ ActiveAdmin.register Slide do
 
   batch_action :toggle_online, if: proc { can? :toggle_online, Slide } do |ids|
     Slide.find(ids).each { |item| item.toggle! :online }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do

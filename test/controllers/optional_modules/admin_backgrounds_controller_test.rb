@@ -22,23 +22,23 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @background
+      get :show, params: { id: @background }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @background
+      get :edit, params: { id: @background }
       assert_response :success
     end
 
     test 'should update page if logged in' do
-      patch :update, id: @background, background: {}
+      patch :update, params: { id: @background, background: {} }
       assert_redirected_to admin_background_path(@background)
     end
 
     test 'should destroy background' do
       assert_difference 'Background.count', -1 do
-        delete :destroy, id: @background
+        delete :destroy, params: { id: @background }
       end
       assert_redirected_to admin_backgrounds_path
     end
@@ -47,7 +47,7 @@ module Admin
     # == Form validations
     #
     test 'should save background after switching page' do
-      patch :update, id: @background, background: { attachable_id: 4 }
+      patch :update, params: { id: @background, background: { attachable_id: 4 } }
       assert_equal 4, assigns(:background).attachable_id
     end
 
@@ -136,16 +136,16 @@ module Admin
     #
     test 'should update background if new picture is sent' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @background, background: { image: attachment }
+      patch :update, params: { id: @background, background: { image: attachment } }
       background = assigns(:background)
       assert_equal background.image_file_name, 'background-paris.jpg'
       assert_equal background.image_content_type, 'image/jpeg'
-      delete :destroy, id: background.id
+      delete :destroy, params: { id: background.id }
     end
 
     test 'should destroy all attachments when destroying background' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @background, background: { image: attachment }
+      patch :update, params: { id: @background, background: { image: attachment } }
 
       background = assigns(:background)
       existing_styles = []
@@ -155,7 +155,7 @@ module Admin
         existing_styles << f
       end
 
-      delete :destroy, id: background.id
+      delete :destroy, params: { id: background.id }
       existing_styles.each do |f|
         assert_not File.exist?(f), "File #{f} should not exist"
       end

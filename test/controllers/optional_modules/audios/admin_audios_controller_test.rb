@@ -22,30 +22,30 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @audio
+      get :show, params: { id: @audio }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @audio
+      get :edit, params: { id: @audio }
       assert_response :success
     end
 
     test 'should update category if logged in' do
-      patch :update, id: @audio, audio: {}
+      patch :update, params: { id: @audio, audio: {} }
       assert_redirected_to admin_audio_path(@audio)
     end
 
     test 'should update audio and enqueued it' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
       assert_enqueued_jobs 1 do
-        patch :update, id: @audio, audio: { audio: audio }
+        patch :update, params: { id: @audio, audio: { audio: audio } }
       end
     end
 
     test 'should destroy Audio' do
       assert_difference 'Audio.count', -1 do
-        delete :destroy, id: @audio
+        delete :destroy, params: { id: @audio }
       end
       assert_redirected_to admin_audios_path
     end
@@ -54,13 +54,13 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@audio.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@audio.id] }
       [@audio].each(&:reload)
       assert_not @audio.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@audio.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@audio.id] }
       assert_redirected_to admin_audios_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
@@ -69,18 +69,18 @@ module Admin
     # == Flash content
     #
     test 'should return empty flash notice if no update' do
-      patch :update, id: @audio, audio: {}
+      patch :update, params: { id: @audio, audio: {} }
       assert flash[:notice].blank?
     end
 
     test 'should return empty flash notice if destroy' do
-      delete :destroy, id: @audio
+      delete :destroy, params: { id: @audio }
       assert flash[:notice].blank?
     end
 
     test 'should return correct flash content after updating an audio file' do
       audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
-      patch :update, id: @audio, audio: { audio: audio }
+      patch :update, params: { id: @audio, audio: { audio: audio } }
       assert_equal [I18n.t('audio.flash.upload_in_progress')], flash[:notice]
     end
 

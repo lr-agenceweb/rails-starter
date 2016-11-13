@@ -22,7 +22,7 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @guest_book
+      get :show, params: { id: @guest_book }
       assert_response :success
     end
 
@@ -32,7 +32,7 @@ module Admin
     end
 
     test 'should not access edit guest_book page' do
-      get :edit, id: @guest_book
+      get :edit, params: { id: @guest_book }
       assert_redirected_to admin_dashboard_path
     end
 
@@ -41,14 +41,14 @@ module Admin
     #
     test 'should destroy guest_book' do
       assert_difference ['GuestBook.count'], -1 do
-        delete :destroy, id: @guest_book
+        delete :destroy, params: { id: @guest_book }
       end
       assert_redirected_to admin_guest_books_path
     end
 
     test 'AJAX :: should destroy guest_book' do
       assert_difference ['GuestBook.count'], -1 do
-        xhr :delete, :destroy, id: @guest_book
+        delete :destroy, params: { id: @guest_book }, xhr: true
         assert_response :success
         assert_template :destroy
       end
@@ -58,13 +58,13 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_validated batch action' do
-      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@guest_book.id]
+      post :batch_action, params: { batch_action: 'toggle_validated', collection_selection: [@guest_book.id] }
       [@guest_book].each(&:reload)
       assert_not @guest_book.validated?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_validated batch action' do
-      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@guest_book.id]
+      post :batch_action, params: { batch_action: 'toggle_validated', collection_selection: [@guest_book.id] }
       assert_redirected_to admin_guest_books_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end

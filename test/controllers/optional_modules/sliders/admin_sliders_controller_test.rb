@@ -23,17 +23,17 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @slider
+      get :show, params: { id: @slider }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @slider
+      get :edit, params: { id: @slider }
       assert_response :success
     end
 
     test 'should update slider if logged in' do
-      patch :update, id: @slider, slider: { time_to_show: 2000, cateogry: 5, animate: 'crossfade' }
+      patch :update, params: { id: @slider, slider: { time_to_show: 2000, cateogry: 5, animate: 'crossfade' } }
       assert_redirected_to admin_slider_path(assigns(:slider))
     end
 
@@ -42,14 +42,14 @@ module Admin
     #
     test 'should destroy slider' do
       assert_difference ['Slider.count'], -1 do
-        delete :destroy, id: @slider
+        delete :destroy, params: { id: @slider }
       end
       assert_redirected_to admin_sliders_path
     end
 
     test 'should destroy slides with slider' do
       assert_difference ['Slide.count'], -3 do
-        delete :destroy, id: @slider
+        delete :destroy, params: { id: @slider }
       end
       assert_redirected_to admin_sliders_path
     end
@@ -58,19 +58,19 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slider.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@slider.id] }
       [@slider].each(&:reload)
       assert_not @slider.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@slider.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@slider.id] }
       assert_redirected_to admin_sliders_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
 
     test 'should redirect to back and have correct flash notice for reset_cache batch action' do
-      post :batch_action, batch_action: 'reset_cache', collection_selection: [@slider.id]
+      post :batch_action, params: { batch_action: 'reset_cache', collection_selection: [@slider.id] }
       assert_redirected_to admin_sliders_path
       assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
     end

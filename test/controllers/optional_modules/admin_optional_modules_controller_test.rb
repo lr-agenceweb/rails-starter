@@ -18,14 +18,14 @@ module Admin
     #
     test 'should return correct value for toggle_enabled batch action' do
       sign_in @super_administrator
-      post :batch_action, batch_action: 'toggle_enabled', collection_selection: [@optional_module.id]
+      post :batch_action, params: { batch_action: 'toggle_enabled', collection_selection: [@optional_module.id] }
       [@optional_module].each(&:reload)
       assert_not @optional_module.enabled?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_enabled batch action' do
       sign_in @super_administrator
-      post :batch_action, batch_action: 'toggle_enabled', collection_selection: [@optional_module.id]
+      post :batch_action, params: { batch_action: 'toggle_enabled', collection_selection: [@optional_module.id] }
       assert_redirected_to admin_optional_modules_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
@@ -51,15 +51,15 @@ module Admin
       sign_in @super_administrator
       get :index
       assert :success
-      get :show, id: @optional_module
+      get :show, params: { id: @optional_module }
       assert :success
-      get :edit, id: @optional_module
+      get :edit, params: { id: @optional_module }
       assert :success
-      post :create, optional_module: {}
+      post :create, params: { optional_module: {} }
       assert :success
-      patch :update, id: @optional_module, optional_module: {}
+      patch :update, params: { id: @optional_module, optional_module: {} }
       assert :success
-      delete :destroy, id: @optional_module
+      delete :destroy, params: { id: @optional_module }
       assert :success
     end
 

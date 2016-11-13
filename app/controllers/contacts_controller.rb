@@ -50,7 +50,7 @@ class ContactsController < ApplicationController
       if @show_map_contact
         render layout: false
       else
-        render nothing: true
+        head :ok
       end
     else
       redirect_to contacts_path
