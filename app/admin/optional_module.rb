@@ -62,7 +62,7 @@ ActiveAdmin.register OptionalModule do
     private
 
     def delete_adult_cookie
-      cookies.delete :adult if params[:optional_module][:name] == 'Adult' && params[:optional_module][:enabled] == '0'
+      cookies.delete :adult if params[:optional_module] && params[:optional_module][:name] == 'Adult' && params[:optional_module][:enabled] == '0'
     end
   end
 end

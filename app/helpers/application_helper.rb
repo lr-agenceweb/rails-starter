@@ -8,14 +8,21 @@ module ApplicationHelper
     Time.zone.now.year
   end
 
+  # TESTME
   def title_for_page(page, opts = {})
     extra_title = defined?(opts[:extra]) ? opts[:extra] : ''
-    page_title = page.menu_title
-    page_title += " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
-    link = link_to raw(page_title), page.menu_link(page.name), class: 'page__header__title__link'
-    content_tag(:h2, link, class: 'page__header__title', id: page.name.downcase)
+    html = []
+    html << page.menu_title
+    html << content_tag(:span, extra_title, class: 'page__header__title__extra') unless extra_title.blank?
+
+    html = content_tag(:h2, nil, class: 'page__header__title', id: page.name.downcase) do
+      concat link_to(safe_join([html]), page.menu_link(page.name), class: 'page__header__title__link')
+    end
+
+    safe_join [html]
   end
 
+  # TESTME
   def background_from_color_picker(page)
     "background-color: #{page.color}" unless page.nil? || page.color.blank?
   end

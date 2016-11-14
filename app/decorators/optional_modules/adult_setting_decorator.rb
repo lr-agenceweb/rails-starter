@@ -12,7 +12,7 @@ class AdultSettingDecorator < ApplicationDecorator
   end
 
   def content
-    raw(model.content) if content?
+    safe_join [raw(model.content)] if content?
   end
 
   def redirect_link

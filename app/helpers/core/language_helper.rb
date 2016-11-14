@@ -28,7 +28,7 @@ module Core
         # wrap link in li tag
         language_menu_html += content_tag(:li, link, class: "menu__item #{'menu__item__active' if current_locale?(locale)}")
       end
-      raw language_menu_html
+      safe_join [raw(language_menu_html)]
     end
 
     private

@@ -9,6 +9,6 @@ class GuestBookDecorator < ApplicationDecorator
   delegate_all
 
   def content
-    model.content.html_safe if content?
+    safe_join [raw(model.content)] if content?
   end
 end

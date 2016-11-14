@@ -11,9 +11,13 @@ class ApplicationDecorator < Draper::Decorator
   # == Avatar
   #
   def author_with_avatar_html(avatar, pseudo)
-    content_tag(:div, nil, class: 'author-with-avatar') do
-      concat("#{avatar} <br /> #{pseudo}".html_safe)
+    html = []
+    html << content_tag(:div) do
+      concat avatar
+      concat tag(:br)
+      concat pseudo
     end
+    safe_join [html]
   end
 
   #

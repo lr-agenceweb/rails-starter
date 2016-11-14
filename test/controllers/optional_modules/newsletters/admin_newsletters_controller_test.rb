@@ -59,7 +59,7 @@ module Admin
     test 'should render preview template and newsletter layout' do
       I18n.available_locales.each do |locale|
         I18n.with_locale(locale) do
-          get :preview, locale: locale.to_s, params: { id: @newsletter }
+          get :preview, params: { locale: locale.to_s, id: @newsletter }
           assert_response :success
           assert_template 'newsletter_mailer/send_newsletter', layout: 'newsletter'
         end

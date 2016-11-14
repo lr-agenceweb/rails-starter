@@ -26,7 +26,7 @@ class VideoPlatformDecorator < VideoDecorator
     video_info = VideoInfo.new(model.url)
     desc = video_info.description if model.native_informations? && video_platform_available?(video_info)
     desc = model.description if description? && !model.native_informations?
-    raw(desc)
+    safe_join [raw(desc)]
   end
 
   private

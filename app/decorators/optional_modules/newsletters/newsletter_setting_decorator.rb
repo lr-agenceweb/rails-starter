@@ -11,11 +11,11 @@ class NewsletterSettingDecorator < ApplicationDecorator
   # == Content
   #
   def title_subscriber
-    raw(model.title_subscriber)
+    safe_join [raw(model.title_subscriber)]
   end
 
   def content_subscriber
-    raw(model.content_subscriber)
+    safe_join [raw(model.content_subscriber)]
   end
 
   def newsletter_user_roles_list

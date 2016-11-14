@@ -11,7 +11,7 @@ class SlideDecorator < PictureDecorator
   # == Slide
   #
   def description_d
-    raw(model.description) if description?
+    safe_join [raw(model.description)] if description?
   end
 
   def slider_page_name

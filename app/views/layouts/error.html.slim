@@ -13,13 +13,13 @@ html lang="#{@language}"
     = csrf_meta_tag
 
   body
-    = render 'elements/admin_bar' if current_user_and_administrator? && @setting.show_admin_bar?
+    / = render 'elements/admin_bar' if current_user_and_administrator? && @setting.show_admin_bar?
 
     main#wrapper.wrapper.error-template
-      = render 'elements/header/header', show_metadata: false
+      / = render 'elements/header/header', show_metadata: false
 
       .body-site
         == yield
       .push
 
-    = render 'elements/footer/footer', newsletter_user: @newsletter_user
+    / = render 'elements/footer/footer', newsletter_user: @newsletter_user

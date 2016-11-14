@@ -23,7 +23,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def author_avatar
-    user.image_avatar.html_safe
+    safe_join [user.image_avatar.html_safe]
   end
 
   def author_with_avatar
@@ -55,14 +55,19 @@ class PostDecorator < ApplicationDecorator
   end
 
   #
-  # == Post
-  #
+  # Post
+  # =========
+  # Fix escaped symbols
+  def title
+    safe_join [raw(model.title)]
+  end
+
   def content
-    model.content.html_safe if content?
+    safe_join [model.content.html_safe] if content?
   end
 
   def title_front_link
-    link_to raw(model.title), show_page_link, target: :_blank
+    link_to title, show_page_link, target: :_blank
   end
 
   def admin_link
@@ -81,7 +86,7 @@ class PostDecorator < ApplicationDecorator
   # == ActiveAdmin
   #
   def title_aa_show
-    I18n.t('post.title_aa_show', page: type_title, title: model.title)
+    I18n.t('post.title_aa_show', page: type_title, title: title)
   end
 
   #
@@ -96,11 +101,11 @@ class PostDecorator < ApplicationDecorator
   #
   # TODO: Refactor duplicated code
   def publication
-    html = ''
-    html += add_bool_value
-    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.published_at')}: #{l(model.published_at, format: :without_time)}".html_safe) if model.published_at && model.published_later?
-    html += content_tag(:p, "#{t('activerecord.attributes.publication_date.expired_at')}: #{l(model.expired_at, format: :without_time)}".html_safe) if model.expired_at && model.expired_prematurely?
-    html.html_safe
+    html = []
+    html << add_bool_value
+    html << content_tag(:p, safe_join([raw("#{t('activerecord.attributes.publication_date.published_at')}: #{l(model.published_at, format: :without_time)}")])) if model.published_at && model.published_later?
+    html << content_tag(:p, safe_join([raw("#{t('activerecord.attributes.publication_date.expired_at')}: #{l(model.expired_at, format: :without_time)}")])) if model.expired_at && model.expired_prematurely?
+    safe_join [html]
   end
 
   def published_at

@@ -123,7 +123,7 @@ module OptionalModules
         html << content_tag(:li, link, class: 'social__icon')
       end
       html << '</ul>'
-      raw html.join("\n")
+      safe_join [raw(html.join("\n"))]
     end
 
     # Get image for an object

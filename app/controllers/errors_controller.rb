@@ -4,6 +4,8 @@
 # == Errors Controller
 #
 class ErrorsController < ApplicationController
+  include Skippable
+
   before_action :set_error_message
   decorates_assigned :error
 

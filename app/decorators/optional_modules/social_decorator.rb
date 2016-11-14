@@ -35,7 +35,7 @@ class SocialDecorator < ApplicationDecorator
     if ikon?
       t('formtastic.hints.social.already_picture')
     else
-      raw(t('formtastic.hints.social.default_hint', list: font_ikon_list))
+      safe_join [raw(t('formtastic.hints.social.default_hint', list: font_ikon_list))]
     end
   end
 

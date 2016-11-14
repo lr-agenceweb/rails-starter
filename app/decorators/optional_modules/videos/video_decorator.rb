@@ -12,6 +12,6 @@ class VideoDecorator < ApplicationDecorator
   end
 
   def description_d
-    raw(model.description)
+    safe_join [raw(model.description)]
   end
 end

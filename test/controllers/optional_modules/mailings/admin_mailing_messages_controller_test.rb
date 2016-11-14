@@ -121,7 +121,7 @@ module Admin
     test 'should render mailing message preview' do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview, params: { locale: locale.to_s, params: { id: @mailing_message.id } }
+          get :preview, params: { locale: locale.to_s, id: @mailing_message }
           assert_response :success
         end
       end
