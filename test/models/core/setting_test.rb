@@ -68,11 +68,11 @@ class SettingTest < ActiveSupport::TestCase
   # == Methods
   #
   test 'should return title and subtitle if subtitle is not blank' do
-    assert_equal @setting.title_and_subtitle, 'Rails Starter, Démarre rapidement'
+    assert_equal 'Rails Starter, Démarre rapidement', @setting.title_and_subtitle
   end
 
   test 'should return only title if subtitle is blank' do
-    assert_equal @setting_without_subtitle.title_and_subtitle, 'Rails Starter'
+    assert_equal 'Rails Starter', @setting_without_subtitle.title_and_subtitle
   end
 
   #

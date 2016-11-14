@@ -1,17 +1,29 @@
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  title: Rails Starter
+  subtitle: ~
 
+# With subtitle
 one_fr:
   <<: *DEFAULTS
   setting_id: 1
   locale: fr
-  title: Rails Starter
   subtitle: Démarre rapidement
 
 one_en:
   <<: *DEFAULTS
   setting_id: 1
   locale: en
-  title: Rails Starter
   subtitle: Quick start
+
+# Without subtitle
+two_fr:
+  <<: *DEFAULTS
+  setting_id: 2
+  locale: fr
+
+two_en:
+  <<: *DEFAULTS
+  setting_id: 2
+  locale: en

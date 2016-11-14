@@ -90,7 +90,8 @@ module Admin
     end
 
     test 'should not update setting without title' do
-      patch :update, params: { id: @setting, setting: { title: nil } }
+      attrs = { translations_attributes: { '1': { title: nil } } }
+      patch :update, params: { id: @setting, setting: attrs }
       assert_not assigns(:setting).valid?
     end
 
