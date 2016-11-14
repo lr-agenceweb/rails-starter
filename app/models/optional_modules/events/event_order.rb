@@ -14,6 +14,6 @@
 #
 # == EventOrder Model
 #
-class EventOrder < ActiveRecord::Base
+class EventOrder < ApplicationRecord
   has_one :event_setting
 end

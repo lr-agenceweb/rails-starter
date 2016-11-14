@@ -12,7 +12,7 @@
 #
 # == NewsletterSetting Model
 #
-class NewsletterSetting < ActiveRecord::Base
+class NewsletterSetting < ApplicationRecord
   include MaxRowable
 
   translates :title_subscriber, :content_subscriber, fallbacks_for_empty_translations: true

@@ -19,7 +19,7 @@
 #
 # == StringBox Model
 #
-class StringBox < ActiveRecord::Base
+class StringBox < ApplicationRecord
   translates :title, :content
   active_admin_translates :title, :content
 

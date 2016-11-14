@@ -25,7 +25,7 @@
 #
 # == Audio Model
 #
-class Audio < ActiveRecord::Base
+class Audio < ApplicationRecord
   include Assets::Attachable
   include OptionalModules::Assets::FlashNotifiable
 

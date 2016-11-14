@@ -23,7 +23,7 @@
 #
 # == Event model
 #
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   include Core::Referenceable
   include Core::DateConstraintable
   include Core::FriendlyGlobalizeSluggable

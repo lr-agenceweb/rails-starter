@@ -18,7 +18,7 @@
 #
 # == NewsletterUserRole Model
 #
-class NewsletterUserRole < ActiveRecord::Base
+class NewsletterUserRole < ApplicationRecord
   translates :title, fallbacks_for_empty_translations: true
   active_admin_translates :title do
     validates :title, presence: true

@@ -10,6 +10,7 @@ module OptionalModules
   #
   class SocialHelperTest < ActionView::TestCase
     include ApplicationHelper
+    include Core::PageHelper
     include AssetsHelper
     include HtmlHelper
     include MetaTags::ViewHelper

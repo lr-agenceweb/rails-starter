@@ -5,40 +5,6 @@
 # ====================
 module ApplicationHelper
   #
-  # Page title
-  # =============
-  def title_for_page(page, opts = {})
-    extra_title = defined?(opts[:extra]) ? opts[:extra] : ''
-    html = []
-    html << page.menu_title
-    html << content_tag(:span, extra_title, class: 'page__header__title__extra') unless extra_title.blank?
-
-    html = content_tag(:h2, nil, class: 'page__header__title', id: page.name.downcase) do
-      concat link_to(safe_join([html]), page.menu_link(page.name), class: 'page__header__title__link')
-    end
-
-    safe_join [html]
-  end
-
-  #
-  # Page Background
-  # =================
-  def background_from_color_picker(page)
-    "background-color: #{page.color}" unless page.nil? || page.color.blank?
-  end
-
-  #
-  # Pages actions
-  # ================
-  def index_page?
-    params[:action] == 'index' || (params[:controller] == 'blog_categories' && params[:action] == 'show')
-  end
-
-  def show_page?
-    params[:action] == 'show' && params[:controller] != 'blog_categories'
-  end
-
-  #
   # DateTime
   # ==========
   def current_year

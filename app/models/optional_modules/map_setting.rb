@@ -15,7 +15,7 @@
 #
 # == MapSetting Model
 #
-class MapSetting < ActiveRecord::Base
+class MapSetting < ApplicationRecord
   include MaxRowable
   include OptionalModules::Locationable
 

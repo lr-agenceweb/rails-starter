@@ -13,7 +13,7 @@
 #
 # == SocialConnectSetting Model
 #
-class SocialConnectSetting < ActiveRecord::Base
+class SocialConnectSetting < ApplicationRecord
   include MaxRowable
 
   has_many :social_providers

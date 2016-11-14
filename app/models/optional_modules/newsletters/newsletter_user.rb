@@ -21,7 +21,7 @@
 #
 # == NewsletterUser Model
 #
-class NewsletterUser < ActiveRecord::Base
+class NewsletterUser < ApplicationRecord
   include Tokenable
   include Scopable
   include Mailable

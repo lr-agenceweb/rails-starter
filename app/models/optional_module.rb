@@ -15,7 +15,7 @@
 #
 # == OptionalModule Model
 #
-class OptionalModule < ActiveRecord::Base
+class OptionalModule < ApplicationRecord
   has_one :page, dependent: :destroy
   has_many :string_boxes, dependent: :destroy
 

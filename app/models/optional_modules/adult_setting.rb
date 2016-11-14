@@ -14,7 +14,7 @@
 #
 # == AdultSetting Model
 #
-class AdultSetting < ActiveRecord::Base
+class AdultSetting < ApplicationRecord
   include MaxRowable
 
   translates :title, :content, fallbacks_for_empty_translations: true

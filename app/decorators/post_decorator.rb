@@ -67,7 +67,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def title_front_link
-    link_to title, show_page_link, target: :_blank
+    link_to title, resource_route_show(model), target: :_blank
   end
 
   def admin_link

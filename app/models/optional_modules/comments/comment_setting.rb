@@ -16,6 +16,6 @@
 #
 # == CommentSetting Model
 #
-class CommentSetting < ActiveRecord::Base
+class CommentSetting < ApplicationRecord
   include MaxRowable
 end

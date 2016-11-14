@@ -23,7 +23,7 @@
 #
 # == Blog Model
 #
-class Blog < ActiveRecord::Base
+class Blog < ApplicationRecord
   include Scopable
   include PrevNextable
   include Publishable

@@ -22,7 +22,7 @@
 #
 # == PublicationDate Model
 #
-class PublicationDate < ActiveRecord::Base
+class PublicationDate < ApplicationRecord
   include Core::DateConstraintable
 
   # Callbacks

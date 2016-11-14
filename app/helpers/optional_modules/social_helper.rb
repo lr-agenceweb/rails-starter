@@ -8,6 +8,7 @@ module OptionalModules
   # == SocialHelper
   #
   module SocialHelper
+    include Core::PageHelper
     include AssetsHelper
     include ERB::Util
 
@@ -28,7 +29,7 @@ module OptionalModules
                       title: title_seo,
                       description: sanitize_and_truncate(page.referencement_description),
                       type: 'article',
-                      url: page.menu_link(page.name, true),
+                      url: resource_route_index(page.name, true),
                       image: img
                     },
                     twitter: {
@@ -37,7 +38,7 @@ module OptionalModules
                       creator: @setting.try(:twitter_username),
                       title: title_seo,
                       description: sanitize_and_truncate(page.referencement_description),
-                      url: page.menu_link(page.name, true),
+                      url: resource_route_index(page.name, true),
                       image: img
                     }
     end
@@ -50,7 +51,7 @@ module OptionalModules
     def seo_tag_show(element)
       img = image_for_object(element)
       title_seo = title_seo_structure(element.title)
-      url = element.decorate.show_page_link(true)
+      url = resource_route_show(element.object, true)
       desc = html_escape_once(sanitize_and_truncate(element.referencement_description))
 
       set_meta_tags title: element.title,

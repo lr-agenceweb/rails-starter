@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 #
-# == ApplicationDecorator
-#
+# ApplicationDecorator
+# =======================
 class ApplicationDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
 
   #
-  # == Avatar
-  #
+  # Avatar
+  # ========
   def author_with_avatar_html(avatar, pseudo)
     html = []
     html << content_tag(:div) do
@@ -21,27 +21,8 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
-  # == Dynamic menu link
-  #
-  def menu_link(model_name, absolute = false)
-    suffix = absolute ? 'url' : 'path'
-    return send("root_#{suffix}") if model_name == 'Home'
-    send("#{model_name.underscore.downcase.pluralize}_#{suffix}")
-  end
-
-  def show_page_link(absolute = false)
-    suffix = absolute ? 'url' : 'path'
-    model_name = model.class.to_s
-    return send("root_#{suffix}") if model_name == 'Home'
-    return send("legal_notices_#{suffix}") if model_name == 'LegalNotice'
-    return send("connections_#{suffix}") if model_name == 'Connection'
-    return send("blog_category_blog_#{suffix}", model.blog_category, model) if model_name == 'Blog'
-    send("#{model_name.underscore.singularize}_#{suffix}", model)
-  end
-
-  #
-  # == Social
-  #
+  # Social
+  # ========
   def social_share(element)
     if params[:action] == 'index' || params[:action] == 'new'
       awesome_share_buttons(@page.title, popup: true)
@@ -51,15 +32,15 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
-  # == Methods used in all decorators
-  #
+  # Methods used in all decorators
+  # =================================
   def self.collection_decorator_class
     PaginatingDecorator
   end
 
   #
-  # == ActiveAdmin views
-  #
+  # ActiveAdmin views
+  # ===================
   def arbre_context
     @arbre_context ||= Arbre::Context.new({}, self)
     @arbre_context.dup
@@ -70,8 +51,8 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
-  # == DateTime
-  #
+  # DateTime
+  # ==========
   def created_at(format = :short)
     I18n.l(model.created_at, format: format)
   end
@@ -83,29 +64,29 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
-  # == Files
-  #
+  # Files
+  # =======
   def file_name_without_extension(assets)
     file = model.send("#{assets}_file_name")
     File.basename(file, File.extname(file)).humanize
   end
 
   #
-  # == Prev / Next
-  #
+  # Prev / Next
+  # =============
   def prev_post
     previous_post = model.fetch_prev
-    previous_post.decorate.show_page_link
+    resource_route_show(previous_post)
   end
 
   def next_post
     nextous_post = model.fetch_next
-    nextous_post.decorate.show_page_link
+    resource_route_show(nextous_post)
   end
 
   #
-  # == Status tag
-  #
+  # Status tag
+  # ============
   def status_tag_deco(value, color)
     arbre do
       status_tag(value, color)
@@ -119,8 +100,8 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
-  # == Boolean
-  #
+  # Boolean
+  # =========
   def content?
     !model.content.blank?
   end

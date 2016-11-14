@@ -24,7 +24,7 @@
 #
 # == Slider Model
 #
-class Slider < ActiveRecord::Base
+class Slider < ApplicationRecord
   include OptionalModules::Assets::Slideable
 
   def self.allowed_animations

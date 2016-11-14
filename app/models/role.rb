@@ -14,7 +14,7 @@
 # == UserRole Model
 # - Handle role for a user (admin, ...)
 #
-class Role < ActiveRecord::Base
+class Role < ApplicationRecord
   has_many :users
 
   scope :except_super_adminstrator, -> { where.not(name: 'super_administrator') }

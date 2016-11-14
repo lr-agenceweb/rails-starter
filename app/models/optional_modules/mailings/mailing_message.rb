@@ -14,7 +14,7 @@
 #
 # == MailingMessage Model
 #
-class MailingMessage < ActiveRecord::Base
+class MailingMessage < ApplicationRecord
   include Tokenable
   include Mailable
   include OptionalModules::Assets::Imageable

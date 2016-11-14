@@ -17,7 +17,7 @@
 #
 # == Referencement Model
 #
-class Referencement < ActiveRecord::Base
+class Referencement < ApplicationRecord
   translates :title, :description, :keywords, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description, :keywords, fallbacks_for_empty_translations: true
 

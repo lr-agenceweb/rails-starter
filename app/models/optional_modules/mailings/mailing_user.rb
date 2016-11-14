@@ -17,7 +17,7 @@
 #
 # == MailingUser Model
 #
-class MailingUser < ActiveRecord::Base
+class MailingUser < ApplicationRecord
   include Tokenable
   include Mailable
 

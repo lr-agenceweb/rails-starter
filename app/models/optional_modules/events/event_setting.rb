@@ -19,7 +19,7 @@
 #
 # == EventSetting Model
 #
-class EventSetting < ActiveRecord::Base
+class EventSetting < ApplicationRecord
   include MaxRowable
 
   belongs_to :event_order

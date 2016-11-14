@@ -17,7 +17,7 @@
 #
 # == MailingMessageUser Model
 #
-class MailingMessageUser < ActiveRecord::Base
+class MailingMessageUser < ApplicationRecord
   belongs_to :mailing_user
   belongs_to :mailing_message
 end

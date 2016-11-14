@@ -2,6 +2,6 @@ nav.clearfix.menu__nav aria-label='navigation' itemscope='' itemtype='http://sch
   ul class="clearfix menu__nav__ul #{even_or_odd_menu_item(@menu_elements_header)}"
     - @menu_elements_header.each do |element|
       li class="menu__item #{'menu__item__active' if active_class?(element.page_name.tableize)}"
-        = link_to element.title, element.decorate.menu_link(element.page_name), class: 'menu__item__link', itemprop: 'url'
+        = link_to element.title, resource_route_index(element.page_name), class: 'menu__item__link', itemprop: 'url'
 
   = link_to 'Menu', '#', id: 'pull', class: 'menu__item__link header__icon'

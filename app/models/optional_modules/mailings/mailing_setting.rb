@@ -13,7 +13,7 @@
 #
 # == MailingSetting Model
 #
-class MailingSetting < ActiveRecord::Base
+class MailingSetting < ApplicationRecord
   include MaxRowable
 
   translates :signature, :unsubscribe_title, :unsubscribe_content,

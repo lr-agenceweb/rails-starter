@@ -22,7 +22,7 @@
 #
 # == Social Model
 #
-class Social < ActiveRecord::Base
+class Social < ApplicationRecord
   include Assets::Attachable
 
   def self.allowed_title_social_network

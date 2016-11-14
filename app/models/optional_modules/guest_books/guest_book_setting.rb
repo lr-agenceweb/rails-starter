@@ -13,6 +13,6 @@
 #
 # == GuestBookSetting model
 #
-class GuestBookSetting < ActiveRecord::Base
+class GuestBookSetting < ApplicationRecord
   include MaxRowable
 end

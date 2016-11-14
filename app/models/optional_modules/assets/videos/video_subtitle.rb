@@ -27,7 +27,7 @@
 #
 # == VideoSubtitleModel
 #
-class VideoSubtitle < ActiveRecord::Base
+class VideoSubtitle < ApplicationRecord
   include Assets::Attachable
 
   belongs_to :subtitleable, polymorphic: true, touch: true

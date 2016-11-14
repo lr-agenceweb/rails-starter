@@ -17,7 +17,7 @@
 #
 # == GuestBook model
 #
-class GuestBook < ActiveRecord::Base
+class GuestBook < ApplicationRecord
   include Scopable
   include Validatable
 

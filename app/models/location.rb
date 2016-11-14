@@ -24,7 +24,7 @@
 #
 # == Location Model
 #
-class Location < ActiveRecord::Base
+class Location < ApplicationRecord
   # Model relations
   belongs_to :locationable, polymorphic: true, touch: true
 

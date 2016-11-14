@@ -10,13 +10,6 @@ class BlogDecoratorTest < Draper::TestCase
   setup :initialize_test
 
   #
-  # == URL
-  #
-  test 'should return show_page_link' do
-    assert_equal blog_category_blog_path(@blog.blog_category, @blog), @blog_decorated.show_page_link
-  end
-
-  #
   # == ActiveAdmin
   #
   test 'should return correct AA show page title' do

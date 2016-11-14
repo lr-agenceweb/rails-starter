@@ -40,7 +40,7 @@
 #
 # == User Model
 #
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   extend FriendlyId
   friendly_id :username, use: [:slugged, :finders]
 

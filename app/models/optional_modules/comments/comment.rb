@@ -28,7 +28,7 @@
 #
 # == Comment Model
 #
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   include Core::Userable
   include Tokenable
   include Scopable

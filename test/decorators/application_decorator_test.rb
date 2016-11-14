@@ -10,16 +10,6 @@ class ApplicationDecoratorTest < Draper::TestCase
   setup :initialize_test
 
   #
-  # == Dynamic menu link
-  #
-  test 'should return correct menu link for pages' do
-    assert_equal '/contact', @contact_decorated.menu_link('Contact')
-    assert_equal 'http://test.host/contact', @contact_decorated.menu_link('Contact', true)
-    assert_equal '/', @contact_decorated.menu_link('Home')
-    assert_equal 'http://test.host/', @contact_decorated.menu_link('Home', true)
-  end
-
-  #
   # == DateTime
   #
   test 'should return correct created_at format' do

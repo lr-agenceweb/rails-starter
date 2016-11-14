@@ -19,7 +19,7 @@
 #
 # == SocialProvider Model
 #
-class SocialProvider < ActiveRecord::Base
+class SocialProvider < ApplicationRecord
   belongs_to :social_connect_setting
 
   def self.format_provider_by_name(name)

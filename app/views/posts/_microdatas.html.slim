@@ -5,7 +5,7 @@ div itemscope='' itemtype="http://schema.org/#{defined?(kind) ? kind : 'Article'
   meta itemprop='name headline' content="#{resource.title}"
   - if resource.content?
     meta itemprop='text' content="#{sanitize_string(resource.content)}"
-  meta itemprop='url mainEntityOfPage' content="#{resource.show_page_link(true)}"
+  meta itemprop='url mainEntityOfPage' content="#{resource_route_show(resource.object, true)}"
   meta itemprop='creator' content="#{resource.user_username}"
   meta itemprop='datePublished' content="#{resource.created_at.to_datetime}"
   meta itemprop='dateModified' content="#{resource.updated_at.to_datetime}"

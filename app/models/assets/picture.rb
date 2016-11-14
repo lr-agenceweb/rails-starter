@@ -25,7 +25,7 @@
 #
 # == Picture Model
 #
-class Picture < ActiveRecord::Base
+class Picture < ApplicationRecord
   include Assets::Attachable
   include Assets::SelfImageable
 
