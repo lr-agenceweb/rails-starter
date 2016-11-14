@@ -57,15 +57,6 @@ class PostDecorator < ApplicationDecorator
   #
   # Post
   # =========
-  # Fix escaped symbols
-  def title
-    safe_join [raw(model.title)]
-  end
-
-  def content
-    safe_join [model.content.html_safe] if content?
-  end
-
   def title_front_link
     link_to title, resource_route_show(model), target: :_blank
   end

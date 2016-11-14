@@ -10,10 +10,6 @@ class NewsletterDecorator < ApplicationDecorator
   #
   # == Content
   #
-  def title
-    model.title if title?
-  end
-
   def sent_at
     model.sent_at_message
   end

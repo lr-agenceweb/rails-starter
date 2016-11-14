@@ -6,6 +6,7 @@ require 'test_helper'
 #
 class BlogTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
+  include Rails.application.routes.url_helpers
 
   setup :initialize_test
 
@@ -139,6 +140,14 @@ class BlogTest < ActiveSupport::TestCase
   #
   # == Prev / Next
   #
+  test 'should return correct prev blog' do
+    assert_equal blog_category_blog_path(@blog.blog_category, @blog), @blog_third.prev_post
+  end
+
+  test 'should return correct next blog' do
+    assert_equal blog_category_blog_path(@blog_third.blog_category, @blog_third), @blog.next_post
+  end
+
   test 'should have a next record' do
     assert @blog.next?, 'should have a next record'
     assert @blog_third.next?, 'should have a next record'

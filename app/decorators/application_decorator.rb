@@ -8,6 +8,22 @@ class ApplicationDecorator < Draper::Decorator
   delegate_all
 
   #
+  # Columns
+  # =========
+  def title
+    # Fixes: escaped symbols && AA form page breadcrumb
+    safe_join [raw(model.title)] if title?
+  end
+
+  def content
+    safe_join [raw(model.content)] if content?
+  end
+
+  def description
+    safe_join [raw(model.description)] if description?
+  end
+
+  #
   # Avatar
   # ========
   def author_with_avatar_html(avatar, pseudo)
@@ -72,19 +88,6 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   #
-  # Prev / Next
-  # =============
-  def prev_post
-    previous_post = model.fetch_prev
-    resource_route_show(previous_post)
-  end
-
-  def next_post
-    nextous_post = model.fetch_next
-    resource_route_show(nextous_post)
-  end
-
-  #
   # Status tag
   # ============
   def status_tag_deco(value, color)
@@ -97,24 +100,5 @@ class ApplicationDecorator < Draper::Decorator
     color = 'blue' if model.lang == 'fr'
     color = 'red' if model.lang == 'en'
     status_tag_deco I18n.t("active_admin.globalize.language.#{model.lang}"), color
-  end
-
-  #
-  # Boolean
-  # =========
-  def content?
-    !model.content.blank?
-  end
-
-  def title?
-    !model.title.blank?
-  end
-
-  def description?
-    !model.description.blank?
-  end
-
-  def location?
-    !model.location.blank?
   end
 end

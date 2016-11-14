@@ -37,17 +37,6 @@ class ApplicationDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Prev / Next
-  #
-  test 'should return correct prev blog' do
-    assert_equal blog_category_blog_path(@blog_article.blog_category, @blog_article), @blog_article_two_decorated.prev_post
-  end
-
-  test 'should return correct next blog' do
-    assert_equal blog_category_blog_path(@blog_article_two.blog_category, @blog_article_two), @blog_article_decorated.next_post
-  end
-
-  #
   # == Paginator
   #
   test 'should return correct decorator class' do
@@ -74,13 +63,11 @@ class ApplicationDecoratorTest < Draper::TestCase
     @comment = comments(:one)
     @blog_setting = blog_settings(:one)
     @blog_article = blogs(:blog_online)
-    @blog_article_two = blogs(:blog_third)
     @newsletter_user = newsletter_users(:newsletter_user_fr)
 
     @comment_decorated = ApplicationDecorator.new(@comment)
     @blog_setting_decorated = ApplicationDecorator.new(@blog_setting)
     @blog_article_decorated = ApplicationDecorator.new(@blog_article)
-    @blog_article_two_decorated = ApplicationDecorator.new(@blog_article_two)
     @contact_decorated = ApplicationDecorator.new(@contact)
     @newsletter_user_decorated = ApplicationDecorator.new(@newsletter_user)
   end

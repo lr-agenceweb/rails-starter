@@ -7,14 +7,6 @@ class PictureDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
-  def title
-    model.title if title?
-  end
-
-  def description
-    safe_join [raw(model.description)] if description?
-  end
-
   def source_picture_title_link
     klass = source_picture.class.name.underscore.singularize.downcase
     link_to source_picture_title, send("admin_#{klass}_path", source_picture)
