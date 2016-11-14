@@ -8,6 +8,10 @@ class ContactsController < ApplicationController
 
   skip_before_action :allow_cors,
                      :set_menu_elements,
+                     :set_controller_name,
+                     :set_pages,
+                     :set_current_page,
+                     :set_legal_notices,
                      :set_adult_validation,
                      :set_background,
                      :set_newsletter_user,
