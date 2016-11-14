@@ -27,7 +27,7 @@ class NewsletterUser < ApplicationRecord
   include Mailable
 
   belongs_to :newsletter_user_role
-  before_update :delete_email_key
+  before_update :prevent_email
 
   attr_accessor :nickname # captcha
   attr_accessor :name # name extracted from email
@@ -60,8 +60,7 @@ class NewsletterUser < ApplicationRecord
 
   private
 
-  # TESTME
-  def delete_email_key
-    self.email = nil
+  def prevent_email
+    self.email = email_was if email_changed?
   end
 end

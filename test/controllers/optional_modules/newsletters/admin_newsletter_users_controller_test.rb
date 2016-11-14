@@ -41,7 +41,7 @@ module Admin
     test 'should update newsletter_user role' do
       patch :update, params: { id: @newsletter_user, newsletter_user: { newsletter_user_role_id: @newsletter_user_role_tester.id } }
       assert assigns(:newsletter_user).valid?, 'record should be valid'
-      assert_equal 'testeur', assigns(:newsletter_user).newsletter_user_role_title
+      assert_equal 'Testeur', assigns(:newsletter_user).newsletter_user_role_title
     end
 
     # Invalid params
