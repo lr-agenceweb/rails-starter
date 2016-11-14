@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 #
-# == ApplicationHelper
-#
+# ApplicationHelper
+# ====================
 module ApplicationHelper
-  def current_year
-    Time.zone.now.year
-  end
-
-  # TESTME
+  #
+  # Page title
+  # =============
   def title_for_page(page, opts = {})
     extra_title = defined?(opts[:extra]) ? opts[:extra] : ''
     html = []
@@ -22,14 +20,16 @@ module ApplicationHelper
     safe_join [html]
   end
 
-  # TESTME
+  #
+  # Page Background
+  # =================
   def background_from_color_picker(page)
     "background-color: #{page.color}" unless page.nil? || page.color.blank?
   end
 
   #
-  # == Pages actions
-  #
+  # Pages actions
+  # ================
   def index_page?
     params[:action] == 'index' || (params[:controller] == 'blog_categories' && params[:action] == 'show')
   end
@@ -39,8 +39,15 @@ module ApplicationHelper
   end
 
   #
-  # == Site validation
+  # DateTime
+  # ==========
+  def current_year
+    Time.zone.now.year
+  end
+
   #
+  # Site validation
+  # ==================
   def google_bing_site_verification
     "#{google_site_verification} #{bing_site_verification}"
   end
@@ -54,15 +61,15 @@ module ApplicationHelper
   end
 
   #
-  # == Maintenance
-  #
+  # Maintenance
+  # =============
   def maintenance?(req = request)
     @setting.maintenance? && (!req.path.include?('/admin') || !self.class.name.to_s.split('::').first == 'ActiveAdmin')
   end
 
   #
-  # == Git
-  #
+  # Git
+  # ============
   def branch_name
     Rails.env.staging? ? 'BranchName' : `git rev-parse --abbrev-ref HEAD`
   end
