@@ -62,7 +62,7 @@ module Admin
     # == Flash content
     #
     test 'should return empty flash notice if no update' do
-      patch :update, params: { id: @video_upload, video_upload: {} }
+      patch :update, params: { id: @video_upload_two, video_upload: {} }
       assert flash[:notice].blank?
     end
 
@@ -191,6 +191,7 @@ module Admin
       @video_settings = video_settings(:one)
       @video_module = optional_modules(:video)
       @video_upload = video_uploads(:one)
+      @video_upload_two = video_uploads(:two)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

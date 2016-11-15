@@ -100,18 +100,24 @@ class EventTest < ActiveSupport::TestCase
     }
     event = define_event_record(attrs)
     assert event.send(:date_constraints)
+    assert_empty event.errors.keys
     event.delete
   end
 
-  test 'should return false if dates are not corrects' do
+  test 'should return errors if dates are not corrects' do
+    scope = 'activerecord.errors.models.event.attributes'
     attrs = {
       id: SecureRandom.random_number(1_000),
       start_date: Time.zone.now + 1.day.to_i,
       end_date: Time.zone.now
     }
-    scope = 'activerecord.errors.models.event.attributes'
+    expected = {
+      start_date: [I18n.t('start_date', scope: scope)],
+      end_date: [I18n.t('end_date', scope: scope)]
+    }
+
     event = define_event_record(attrs)
-    assert_equal [I18n.t('end_date', scope: scope)], event.send(:date_constraints)
+    assert_equal expected, event.errors.messages
     event.delete
   end
 
