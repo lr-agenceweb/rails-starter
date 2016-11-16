@@ -210,7 +210,7 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'spring', '~> 1.7.0'
+  gem 'spring'
 end
 
 group :test do
