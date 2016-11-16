@@ -17,6 +17,9 @@ module Assets
       included do
         include Assets::Attachable
 
+        ATTACHMENT_MAX_SIZE = 2 # megabytes
+        ATTACHMENT_TYPES = %r{\Aimage\/.*\Z}
+
         retina!
 
         # Paperclip attributes
@@ -37,11 +40,11 @@ module Assets
 
         # Paperclip validation rules
         validates_attachment :logo,
-                             content_type: { content_type: %r{\Aimage\/.*\Z} },
-                             size: { less_than: 2.megabyte }
+                             content_type: { content_type: ATTACHMENT_TYPES },
+                             size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
         validates_attachment :logo_footer,
-                             content_type: { content_type: %r{\Aimage\/.*\Z} },
-                             size: { less_than: 2.megabyte }
+                             content_type: { content_type: ATTACHMENT_TYPES },
+                             size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
 
         include Assets::DeletableAttachment
       end

@@ -51,11 +51,11 @@ class Comment < ApplicationRecord
 
   # Validation rules
   validates :username,
-            allow_blank: true,
-            presence: true
-  validates :email,
-            allow_blank: true,
             presence: true,
+            allow_blank: true
+  validates :email,
+            presence: true,
+            allow_blank: true,
             email_format: true
   validates :comment,
             presence: true

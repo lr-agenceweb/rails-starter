@@ -25,6 +25,9 @@
 class Social < ApplicationRecord
   include Assets::Attachable
 
+  ATTACHMENT_MAX_SIZE = 2 # megabytes
+  ATTACHMENT_TYPES = %r{\Aimage\/.*\Z}
+
   def self.allowed_title_social_network
     %w(Facebook Twitter Google+ Email)
   end
@@ -45,7 +48,10 @@ class Social < ApplicationRecord
                       small: '32x32>',
                       thumb: '16x16>'
                     }
-  validates_attachment_content_type :ikon, content_type: %r{\Aimage\/.*\Z}
+
+  validates_attachment :ikon,
+                       content_type: { content_type: ATTACHMENT_TYPES },
+                       size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
 
   include Assets::DeletableAttachment
 

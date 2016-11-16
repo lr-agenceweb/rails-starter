@@ -2,10 +2,27 @@
 require 'test_helper'
 
 #
-# NewsletterUser model test
+# NewsletterUser Model test
 # ===========================
 class NewsletterUserTest < ActiveSupport::TestCase
   setup :initialize_test
+
+  #
+  # Shoulda
+  # =========
+  should belong_to(:newsletter_user_role)
+
+  should validate_presence_of(:email)
+  should validate_presence_of(:lang)
+  should validate_presence_of(:newsletter_user_role_id)
+
+  should validate_inclusion_of(:lang)
+    .in_array(I18n.available_locales.map(&:to_s))
+  should validate_inclusion_of(:newsletter_user_role_id)
+    .in_array(NewsletterUserRole.all.map(&:id))
+
+  should validate_uniqueness_of(:email)
+  should validate_absence_of(:nickname)
 
   #
   # Validation rules

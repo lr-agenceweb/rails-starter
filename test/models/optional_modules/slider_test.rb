@@ -2,14 +2,31 @@
 require 'test_helper'
 
 #
-# == Slider model test
-#
+# Slider Model test
+# ===================
 class SliderTest < ActiveSupport::TestCase
   setup :initialize_test
 
   #
-  # == Validation rules
+  # Shoulda
+  # =========
+  should belong_to(:page)
+  should have_one(:slide)
+  should have_many(:slides)
+
+  should accept_nested_attributes_for(:slide)
+  should accept_nested_attributes_for(:slides)
+
+  should validate_presence_of(:page)
+  should validate_presence_of(:time_to_show)
+  should validate_presence_of(:animate)
+
+  should validate_inclusion_of(:animate)
+    .in_array(Slider.allowed_animations)
+
   #
+  # Validation rules
+  # ==================
   test 'should return list of allowed map markers' do
     allowed_animations = Slider.allowed_animations
     assert_includes allowed_animations, 'crossfade'
@@ -58,8 +75,8 @@ class SliderTest < ActiveSupport::TestCase
   end
 
   #
-  # == Count
-  #
+  # Count
+  # =======
   test 'should only fetch one slider online' do
     assert_equal 1, Slider.online.length
   end

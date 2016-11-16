@@ -2,10 +2,16 @@
 require 'test_helper'
 
 #
-# == OptionalModule Model test
-#
+# OptionalModule Model test
+# ===========================
 class OptionalModuleTest < ActiveSupport::TestCase
   setup :initialize_test
+
+  #
+  # Shoulda
+  # =========
+  should have_one(:page)
+  should have_many(:string_boxes)
 
   test 'should return list of optional modules name in string' do
     list_modules = OptionalModule.list

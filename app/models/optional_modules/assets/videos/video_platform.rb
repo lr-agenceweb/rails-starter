@@ -28,7 +28,10 @@ class VideoPlatform < ApplicationRecord
 
   belongs_to :videoable, polymorphic: true, touch: true
 
-  validates :url, allow_blank: false, presence: true, url: true
+  validates :url,
+            presence: true,
+            allow_blank: false,
+            url: true
 
   scope :online, -> { where(online: true) }
 end

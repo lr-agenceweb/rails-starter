@@ -32,6 +32,11 @@ class Picture < ApplicationRecord
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
+  ATTACHMENT_MAX_SIZE = 3 # megabytes
+  ATTACHMENT_TYPES = [
+    'image/jpeg', 'image/png', 'image/gif'
+  ].freeze
+
   belongs_to :attachable, polymorphic: true, touch: true
 
   retina!
@@ -46,13 +51,9 @@ class Picture < ApplicationRecord
 
   validates_attachment :image,
                        content_type: {
-                         content_type: [
-                           'image/jpeg',
-                           'image/png',
-                           'image/gif'
-                         ]
+                         content_type: ATTACHMENT_TYPES
                        },
-                       size: { less_than: 3.megabytes }
+                       size: { less_than: ATTACHMENT_MAX_SIZE.megabytes }
 
   scope :online, -> { where(online: true) }
 end

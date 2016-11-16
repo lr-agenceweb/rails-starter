@@ -2,12 +2,17 @@
 require 'test_helper'
 
 #
-# == BlogCategory test
-#
+# BlogCategory Model test
+# =========================
 class BlogCategoryTest < ActiveSupport::TestCase
   #
-  # == Validation rules
+  # Shoulda
+  # =========
+  should have_many(:blogs)
+
   #
+  # Validation rules
+  # ==================
   test 'should not be valid if name is not set' do
     blog_category = BlogCategory.new(id: SecureRandom.random_number(1_000))
     blog_category.set_translations(

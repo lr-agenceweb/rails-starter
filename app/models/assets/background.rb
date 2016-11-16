@@ -27,6 +27,9 @@ class Background < ApplicationRecord
   include Assets::Attachable
   include Assets::SelfImageable
 
+  ATTACHMENT_MAX_SIZE = 5 # megabytes
+  ATTACHMENT_TYPES = %r{\Aimage\/.*\Z}
+
   belongs_to :attachable, polymorphic: true, touch: true
 
   retina!
@@ -38,7 +41,9 @@ class Background < ApplicationRecord
                       small:      '150x150>'
                     }
 
-  validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
+  validates_attachment :image,
+                       content_type: { content_type: ATTACHMENT_TYPES },
+                       size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
 
   validates :attachable_type,
             presence: true,

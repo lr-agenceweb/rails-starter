@@ -214,15 +214,15 @@ group :development, :test do
 end
 
 group :test do
-  gem 'minitest'
-  gem 'minitest-reporters', require: false
-  gem 'mocha'
+  gem 'minitest-rails'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
   gem 'rails-controller-testing'
 
   # Coverage
   gem 'simplecov', require: false
   gem 'simplecov-json', require: false
-  gem 'codeclimate-test-reporter', require: nil
+  gem 'codeclimate-test-reporter', require: false
 end
 
 group :production, :staging, :backup do

@@ -2,16 +2,34 @@
 require 'test_helper'
 
 #
-# == VideoUpload model test
-#
+# VideoUpload Model test
+# ========================
 class VideoUploadTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
 
+  # Constants
+  SIZE_PLUS_1 = VideoUpload::ATTACHMENT_MAX_SIZE + 1
+
   #
-  # == Flash content
+  # Shoulda
+  # =========
+  should belong_to(:videoable)
+  should have_one(:video_subtitle)
+  should accept_nested_attributes_for(:video_subtitle)
+
+  should have_attached_file(:video_file)
+  should_not validate_attachment_presence(:video_file)
+  should validate_attachment_content_type(:video_file)
+    .allowing('video/mp4', 'video/ogv', 'video/webm')
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:video_file)
+    .less_than((SIZE_PLUS_1 - 1).megabytes)
+
   #
+  # Flash content
+  # ===============
   test 'should not have flash content if no video is uploaded' do
     @video_upload.save!
     assert @video_upload.valid?, 'should be valid'

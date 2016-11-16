@@ -2,12 +2,17 @@
 require 'test_helper'
 
 #
-# == EventSetting test
-#
+# EventSetting Model test
+# =========================
 class EventSettingTest < ActiveSupport::TestCase
   #
-  # == Validation
+  # Shoulda
+  # =========
+  should belong_to(:event_order)
+
   #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     event_setting = EventSetting.new
     assert_not event_setting.valid?

@@ -2,16 +2,41 @@
 require 'test_helper'
 
 #
-# == User model test
-#
+# User Model test
+# =================
 class UserTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
 
+  # Constants
+  SIZE_PLUS_1 = User::ATTACHMENT_MAX_SIZE + 1
+
   #
-  # == Roles
+  # Shoulda
+  # =========
+  should belong_to(:role)
+  should have_many(:posts)
+  should have_many(:blogs)
+
+  should validate_presence_of(:username)
+  should validate_presence_of(:email)
+  should validate_uniqueness_of(:username)
+  should validate_uniqueness_of(:email)
+
+  should accept_nested_attributes_for(:role)
+
+  should have_attached_file(:avatar)
+  should_not validate_attachment_presence(:avatar)
+  should validate_attachment_content_type(:avatar)
+    .allowing('image/jpg', 'image/png')
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:avatar)
+    .less_than((SIZE_PLUS_1 - 1).megabytes)
+
   #
+  # Roles
+  # =======
   test 'should be true if user is super_administrator' do
     assert @super_administrator.super_administrator?
   end
@@ -25,11 +50,13 @@ class UserTest < ActiveSupport::TestCase
   end
 
   #
-  # == Avatar
-  #
+  # Avatar
+  # ========
   test 'should be true if user avatar is present with file' do
+    avatar = fixture_file_upload 'images/bart.png'
+    @subscriber.update_attribute(:avatar, avatar)
+    assert @subscriber.avatar?
     assert_equal 'bart.png', @subscriber.avatar_file_name
-    # assert @subscriber.avatar? # Not working with travis
   end
 
   test 'should be false if user avatar is present without file' do
@@ -68,8 +95,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   #
-  # == Omniauth
-  #
+  # Omniauth
+  # ==========
   test 'should return correct from_omniauth? value' do
     assert @facebook_user.from_omniauth?
     assert_not @super_administrator.from_omniauth?

@@ -9,38 +9,56 @@ class AudioTest < ActiveSupport::TestCase
 
   setup :initialize_test
 
+  # Constants
+  SIZE_PLUS_1 = Audio::ATTACHMENT_MAX_SIZE + 1
+
+  #
+  # Shoulda
+  # =========
+  should belong_to(:audioable)
+
+  should have_attached_file(:audio)
+  should_not validate_attachment_presence(:audio)
+  should validate_attachment_content_type(:audio)
+    .allowing(Audio::ATTACHMENT_TYPES)
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:audio)
+    .less_than((SIZE_PLUS_1 - 1).megabytes)
+
   #
   # == Validation rules
   #
   test 'should upload audio if all validations matched' do
-    @file.stubs(:size).returns(1.megabytes)
-    @file.stubs(:content_type).returns('audio/mp3')
-
-    audio = Audio.new @attrs
+    file = fixture_file_upload('audios/test.mp3', 'audio/mpeg')
+    audio = Audio.new default_attrs(file)
     assert audio.errors.keys.empty?
     assert audio.valid?, 'should be valid'
   end
 
   # FIXME: http://stackoverflow.com/questions/37081211/trouble-trying-to-test-paperclip-file-size-with-mocha
   test 'should not upload audio if file size is too heavy' do
-    skip 'Don\'t know how to stub paperclip file size'
-    @file.stubs(:size).returns(50.megabytes)
-    @file.stubs(:content_type).returns('audio/mpeg')
+    skip 'Find a way to test stubbed file size'
+    file = fixture_file_upload('audios/test.mp3', 'audio/mpeg')
 
-    audio = Audio.new @attrs
-    assert_not audio.valid?, 'should not be valid'
-    assert_equal [:audio_size], audio.errors.keys
+    file.stub(:size, SIZE_PLUS_1.megabytes) do
+      audio = Audio.new default_attrs(file)
+      assert_equal SIZE_PLUS_1.megabytes, file.size, "file size should be #{SIZE_PLUS_1} megabytes"
+      assert_not audio.valid?, 'should not be valid'
+      assert_equal [:audio_size], audio.errors.keys
+    end
   end
 
   # FIXME: http://stackoverflow.com/questions/37081211/trouble-trying-to-test-paperclip-file-size-with-mocha
   test 'should not upload audio if content_type is not allowed' do
-    skip 'Don\'t know how to stub paperclip content type'
-    @file.stubs(:size).returns(1.megabytes)
-    @file.stubs(:content_type).returns('video/mp4')
+    skip 'Find a way to test stubbed file content type'
+    file = fixture_file_upload('audios/test.mp3', 'audio/mpeg')
 
-    audio = Audio.new @attrs
-    assert_not audio.valid?, 'should not be valid'
-    assert_equal [:audio_content_type, :audio], audio.errors.keys
+    file.stub(:content_type, 'video/mp4') do
+      audio = Audio.new default_attrs(file)
+      assert_equal 'video/mp4', file.content_type, 'file content_type should be video/mp4'
+      assert_not audio.valid?, 'should not be valid'
+      assert_equal [:audio_content_type], audio.errors.keys
+    end
   end
 
   #
@@ -60,10 +78,10 @@ class AudioTest < ActiveSupport::TestCase
 
   test 'should return correct flash content after updating an audio file' do
     audio = fixture_file_upload 'audios/test.mp3', 'audio/mpeg'
-    @audio.update_attribute(:audio, audio)
-    assert @audio.valid?, 'should be valid'
-    assert_empty @audio.errors.keys
-    assert_equal I18n.t('audio.flash.upload_in_progress'), @audio.audio_flash_notice
+    @audio_two.update_attribute(:audio, audio)
+    assert @audio_two.valid?, 'should be valid'
+    assert_empty @audio_two.errors.keys
+    assert_equal I18n.t('audio.flash.upload_in_progress'), @audio_two.audio_flash_notice
   end
 
   private
@@ -71,15 +89,14 @@ class AudioTest < ActiveSupport::TestCase
   def initialize_test
     @blog = blogs(:blog_online)
     @audio = audios(:one)
-    @file = fixture_file_upload('audios/test.mp3', 'audio/mpeg')
-    set_attrs
+    @audio_two = audios(:two)
   end
 
-  def set_attrs
-    @attrs = {
+  def default_attrs(file)
+    {
       audioable_id: @blog.id,
       audioable_type: @blog.class.to_s,
-      audio: @file
+      audio: file
     }
   end
 end

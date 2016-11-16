@@ -14,6 +14,9 @@ module Assets
     included do
       include Assets::Attachable
 
+      ATTACHMENT_MAX_SIZE = 2 # megabytes
+      ATTACHMENT_TYPES = %r{\Aimage\/.*\Z}
+
       retina!
       handle_attachment :avatar,
                         styles: {
@@ -24,8 +27,8 @@ module Assets
                         }
 
       validates_attachment :avatar,
-                           content_type: { content_type: %r{\Aimage\/.*\Z} },
-                           size: { less_than: 2.megabyte }
+                           content_type: { content_type: ATTACHMENT_TYPES },
+                           size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
 
       include Assets::DeletableAttachment
 

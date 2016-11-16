@@ -36,8 +36,6 @@ class Slider < ApplicationRecord
 
   # Models associations
   belongs_to :page
-  has_many :slides, -> { order(:position) }, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :slides, reject_if: :all_blank, allow_destroy: true
 
   # Delegates
   delegate :online, to: :slides, prefix: true, allow_nil: true
@@ -48,8 +46,8 @@ class Slider < ApplicationRecord
   scope :by_page, ->(page) { joins(:page).where('pages.name = ?', page) }
 
   # Validation rules
-  validates :time_to_show, presence: true
   validates :page, presence: true
+  validates :time_to_show, presence: true
   validates :animate,
             presence: true,
             inclusion: { in: allowed_animations }

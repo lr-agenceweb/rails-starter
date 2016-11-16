@@ -22,13 +22,14 @@ class GuestBook < ApplicationRecord
   include Validatable
 
   attr_accessor :nickname
+  alias_attribute :comment, :content
 
   validates :username,
-            allow_blank: false,
-            presence: true
-  validates :email,
-            allow_blank: false,
             presence: true,
+            allow_blank: false
+  validates :email,
+            presence: true,
+            allow_blank: false,
             email_format: true
 
   validates :content, presence: true
@@ -42,6 +43,4 @@ class GuestBook < ApplicationRecord
   default_scope { order('created_at DESC') }
 
   paginates_per 3
-
-  alias_attribute :comment, :content
 end

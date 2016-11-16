@@ -9,6 +9,26 @@ class BackgroundTest < ActiveSupport::TestCase
 
   setup :initialize_test
 
+  # Constants
+  SIZE_PLUS_1 = Background::ATTACHMENT_MAX_SIZE + 1
+
+  #
+  # Shoulda
+  # =========
+  should belong_to(:attachable)
+  should validate_presence_of(:attachable_type)
+
+  should validate_inclusion_of(:attachable_type)
+    .in_array(%w(Page))
+
+  should have_attached_file(:image)
+  should_not validate_attachment_presence(:image)
+  should validate_attachment_content_type(:image)
+    .allowing('image/jpg', 'image/png')
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:image)
+    .less_than((SIZE_PLUS_1 - 1).megabytes)
+
   #
   # Background
   # ==============

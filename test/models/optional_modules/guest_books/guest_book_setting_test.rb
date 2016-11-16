@@ -2,12 +2,12 @@
 require 'test_helper'
 
 #
-# == GuestBookSetting test
-#
+# GuestBookSetting Model test
+# =============================
 class GuestBookSettingTest < ActiveSupport::TestCase
   #
-  # == Validation
-  #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     guest_book_setting = GuestBookSetting.new
     assert_not guest_book_setting.valid?

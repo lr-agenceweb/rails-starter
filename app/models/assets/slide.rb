@@ -29,6 +29,9 @@ class Slide < ApplicationRecord
   include Assets::Attachable
   include Assets::SelfImageable
 
+  ATTACHMENT_MAX_SIZE = 4 # megabytes
+  ATTACHMENT_TYPES = %r{\Aimage\/.*\Z}
+
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
@@ -43,7 +46,9 @@ class Slide < ApplicationRecord
                       crop_thumb: '100x100#'
                     }
 
-  validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
+  validates_attachment :image,
+                       content_type: { content_type: ATTACHMENT_TYPES },
+                       size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
 
   scope :online, -> { where(online: true) }
 end

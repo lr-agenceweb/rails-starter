@@ -2,12 +2,12 @@
 require 'test_helper'
 
 #
-# == BlogSetting test
-#
+# BlogSetting Model test
+# ========================
 class BlogSettingTest < ActiveSupport::TestCase
   #
-  # == Validation
-  #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     blog_setting = BlogSetting.new
     assert_not blog_setting.valid?

@@ -2,10 +2,11 @@
 require 'test_helper'
 
 #
-# == EventOrder model test
-#
+# EventOrder Model test
+# =======================
 class EventOrderTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  #
+  # Shoulda
+  # =========
+  should have_one(:event_setting)
 end

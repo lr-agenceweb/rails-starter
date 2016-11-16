@@ -2,12 +2,35 @@
 require 'test_helper'
 
 #
-# == Event model test
-#
+# Event Model test
+# ==================
 class EventTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
+
+  #
+  # Shoulda
+  # =========
+  should have_one(:link)
+  should have_one(:location)
+  should have_one(:picture)
+  should have_many(:pictures)
+  should have_one(:video_upload)
+  should have_many(:video_uploads)
+  should have_one(:video_platform)
+  should have_many(:video_platforms)
+  should have_one(:referencement)
+
+  should accept_nested_attributes_for(:link)
+  should accept_nested_attributes_for(:location)
+  should accept_nested_attributes_for(:picture)
+  should accept_nested_attributes_for(:pictures)
+  should accept_nested_attributes_for(:video_upload)
+  should accept_nested_attributes_for(:video_uploads)
+  should accept_nested_attributes_for(:video_platform)
+  should accept_nested_attributes_for(:video_platforms)
+  should accept_nested_attributes_for(:referencement)
 
   #
   # Validation rules

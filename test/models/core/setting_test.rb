@@ -2,12 +2,47 @@
 require 'test_helper'
 
 #
-# == Setting model test
-#
+# Setting Model test
+# ====================
 class SettingTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
+
+  # Constants
+  SIZE_PLUS_1 = Setting::ATTACHMENT_MAX_SIZE + 1
+
+  #
+  # Shoulda
+  # =========
+  should validate_presence_of(:name)
+  should validate_presence_of(:email)
+  should validate_presence_of(:per_page)
+  should validate_presence_of(:date_format)
+
+  should allow_value('lorem@ipsum.com').for(:email)
+  should_not allow_value('loremipsum.com').for(:email)
+
+  should validate_inclusion_of(:per_page)
+    .in_array(Setting.per_page_values)
+  should validate_inclusion_of(:date_format)
+    .in_array(Setting.date_format.values)
+
+  should have_attached_file(:logo)
+  should_not validate_attachment_presence(:logo)
+  should validate_attachment_content_type(:logo)
+    .allowing('image/jpg', 'image/png')
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:logo)
+    .less_than((SIZE_PLUS_1 - 1).megabytes)
+
+  should have_attached_file(:logo_footer)
+  should_not validate_attachment_presence(:logo_footer)
+  should validate_attachment_content_type(:logo_footer)
+    .allowing('image/jpg', 'image/png')
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:logo_footer)
+    .less_than((SIZE_PLUS_1 - 1).megabytes)
 
   #
   # == Validation rules

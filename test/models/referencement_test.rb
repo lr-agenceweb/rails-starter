@@ -2,10 +2,11 @@
 require 'test_helper'
 
 #
-# == Referencement model test
-#
+# Referencement Model test
+# ==========================
 class ReferencementTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  #
+  # Shoulda
+  # =========
+  should belong_to(:attachable)
 end

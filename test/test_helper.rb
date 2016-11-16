@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-require 'simplecov'
-require 'simplecov-json'
+# require 'simplecov'
+# require 'simplecov-json'
 
 # Reporter options
 # SimpleCov.formatters = [
@@ -16,8 +16,12 @@ require 'simplecov-json'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'minitest/reporters'
-require 'mocha/mini_test'
+require 'minitest/mock'
+require 'paperclip/matchers'
+
+# To add Capybara feature tests add `gem ' minitest-rails-capybara'`
+# to the test group in the Gemfile and uncomment the following:
+# require 'minitest/rails/capybara'
 
 #
 # == ActiveSupport namespace
@@ -27,10 +31,10 @@ module ActiveSupport
   # == TestCase class
   #
   class TestCase
+    extend Paperclip::Shoulda::Matchers
     include ActiveJob::TestHelper
 
     ActiveRecord::Migration.check_pending!
-    Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
