@@ -30,6 +30,10 @@
 class VideoSubtitle < ApplicationRecord
   include Assets::Attachable
 
+  # Constants
+  ATTACHMENT_MAX_SIZE = 3 # megabytes
+  ATTACHMENT_TYPES = [].freeze
+
   belongs_to :subtitleable, polymorphic: true, touch: true
 
   handle_attachment :subtitle_fr

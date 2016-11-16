@@ -49,10 +49,6 @@ class Social < ApplicationRecord
                       thumb: '16x16>'
                     }
 
-  validates_attachment :ikon,
-                       content_type: { content_type: ATTACHMENT_TYPES },
-                       size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
-
   include Assets::DeletableAttachment
 
   validates :title,

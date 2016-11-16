@@ -41,10 +41,6 @@ class Background < ApplicationRecord
                       small:      '150x150>'
                     }
 
-  validates_attachment :image,
-                       content_type: { content_type: ATTACHMENT_TYPES },
-                       size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
-
   validates :attachable_type,
             presence: true,
             allow_blank: false,

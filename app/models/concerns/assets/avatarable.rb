@@ -26,10 +26,6 @@ module Assets
                           thumb:  '32x32#'
                         }
 
-      validates_attachment :avatar,
-                           content_type: { content_type: ATTACHMENT_TYPES },
-                           size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
-
       include Assets::DeletableAttachment
 
       def avatar?

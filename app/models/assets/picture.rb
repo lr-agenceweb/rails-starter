@@ -49,11 +49,5 @@ class Picture < ApplicationRecord
                       thumb:  '30x30>'
                     }
 
-  validates_attachment :image,
-                       content_type: {
-                         content_type: ATTACHMENT_TYPES
-                       },
-                       size: { less_than: ATTACHMENT_MAX_SIZE.megabytes }
-
   scope :online, -> { where(online: true) }
 end

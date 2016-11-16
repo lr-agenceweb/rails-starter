@@ -38,14 +38,6 @@ module Assets
                             thumb: '32x32>'
                           }
 
-        # Paperclip validation rules
-        validates_attachment :logo,
-                             content_type: { content_type: ATTACHMENT_TYPES },
-                             size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
-        validates_attachment :logo_footer,
-                             content_type: { content_type: ATTACHMENT_TYPES },
-                             size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
-
         include Assets::DeletableAttachment
       end
     end

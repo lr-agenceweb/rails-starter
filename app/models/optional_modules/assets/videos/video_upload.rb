@@ -76,12 +76,6 @@ class VideoUpload < ApplicationRecord
                     },
                     processors: [:transcoder]
 
-  validates_attachment :video_file,
-                       content_type: {
-                         content_type: ATTACHMENT_TYPES
-                       },
-                       size: { less_than: ATTACHMENT_MAX_SIZE.megabytes }
-
   process_in_background :video_file, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
   # Delegates

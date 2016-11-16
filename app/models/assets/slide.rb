@@ -46,9 +46,5 @@ class Slide < ApplicationRecord
                       crop_thumb: '100x100#'
                     }
 
-  validates_attachment :image,
-                       content_type: { content_type: ATTACHMENT_TYPES },
-                       size: { less_than: ATTACHMENT_MAX_SIZE.megabyte }
-
   scope :online, -> { where(online: true) }
 end

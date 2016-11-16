@@ -50,12 +50,6 @@ class Audio < ApplicationRecord
                     },
                     processors: [:transcoder]
 
-  validates_attachment :audio,
-                       content_type: {
-                         content_type: ATTACHMENT_TYPES
-                       },
-                       size: { less_than: ATTACHMENT_MAX_SIZE.megabytes }
-
   process_in_background :audio, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
   scope :online, -> { where(online: true) }
