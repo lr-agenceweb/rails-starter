@@ -16,10 +16,13 @@ class Event < ApplicationRecord
   include PrevNextable
   include Linkable
 
-  # Constantes
+  # Constants
   EVENT_START = 9 # 9:00
   EVENT_END = 18 # 18:00
   I18N_SCOPE = 'activerecord.errors.models.event.attributes'
+  ATTRIBUTE ||= :title
+  TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
+  friendlyze_me # in FriendlyGlobalizeSluggable concern
 
   # Callbacks
   before_validation :reset_end_date,

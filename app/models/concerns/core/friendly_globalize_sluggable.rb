@@ -11,41 +11,50 @@ module Core
     extend ActiveSupport::Concern
 
     included do
-      ATTRIBUTE ||= :title
-      TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
-
-      translates(*TRANSLATED_FIELDS,
-                 fallbacks_for_empty_translations: true)
-      active_admin_translates(*TRANSLATED_FIELDS, fallbacks_for_empty_translations: true) do
-        validates ATTRIBUTE,
-                  presence: true
-      end
-
-      extend FriendlyId
-      friendly_id :slug_candidates,
-                  use: [:slugged,
-                        :globalize,
-                        # :history,
-                        :finders]
-
-      private
-
-      def slug_candidates
-        [
-          ATTRIBUTE,
-          [ATTRIBUTE, resource_id]
-        ]
-      end
-
-      def resource_id
-        id = self.class.where("#{ATTRIBUTE}": send(ATTRIBUTE)).count
-        return id unless id.zero?
-      end
-
       # FIXME: title_changed? or attribute_changed? seems to be broken
       def should_generate_new_friendly_id?
-        new_record? || attribute_changed?(ATTRIBUTE) || super
+        model_name = self.class.name.classify.constantize
+        new_record? || attribute_changed?(model_name::ATTRIBUTE) || super
       end
     end
-  end
-end
+
+    #
+    # ClassMethod
+    # =============
+    module ClassMethods
+      def friendlyze_me
+        model_name = table_name.classify.constantize
+
+        translates(*model_name::TRANSLATED_FIELDS,
+        fallbacks_for_empty_translations: true)
+        active_admin_translates(*model_name::TRANSLATED_FIELDS, fallbacks_for_empty_translations: true) do
+          validates model_name::ATTRIBUTE,
+                    presence: true
+        end
+
+        extend FriendlyId
+        friendly_id :slug_candidates,
+                    use: [:slugged,
+                          :globalize,
+                          # :history,
+                          :finders]
+      end
+    end # ClassMethod
+
+    private
+
+    def slug_candidates
+      model_name = self.class.name.classify.constantize
+      [
+        model_name::ATTRIBUTE,
+        [model_name::ATTRIBUTE, resource_id]
+      ]
+    end
+
+    def resource_id
+      model_name = self.class.name.classify.constantize
+      id = model_name.where("#{model_name::ATTRIBUTE}": send(model_name::ATTRIBUTE)).count
+      return id unless id.zero?
+    end
+  end # FriendlyGlobalizeSluggable
+end # Core

@@ -15,6 +15,11 @@ class Post < ApplicationRecord
   include Positionable
   include PrevNextable
 
+  # Constants
+  ATTRIBUTE ||= :title
+  TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
+  friendlyze_me # in FriendlyGlobalizeSluggable concern
+
   scope :online, -> { where(online: true) }
   scope :home, -> { where(type: 'Home') }
   scope :about, -> { where(type: 'About') }

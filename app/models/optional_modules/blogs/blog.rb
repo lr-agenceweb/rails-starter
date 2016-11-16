@@ -18,6 +18,11 @@ class Blog < ApplicationRecord
   include OptionalModules::Commentable
   include OptionalModules::Searchable
 
+  # Constants
+  ATTRIBUTE ||= :title
+  TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
+  friendlyze_me # in FriendlyGlobalizeSluggable concern
+
   # Callbacks
   after_update :update_counter_cache, if: proc { online_changed? }
 
