@@ -10,11 +10,11 @@ div itemscope='' itemtype='http://schema.org/ProfessionalService'
 
   meta itemprop='url' content="#{root_url}"
   meta itemprop='telephone' content="#{resource.object.phone}"
-  meta itemprop='name legalName' content="#{resource.title_subtitle_inline}"
+  meta itemprop='name legalName' content="#{resource.title_and_subtitle}"
 
   - if map_setting.location?
     div itemprop='location' itemscope='' itemtype='http://schema.org/Place'
-      meta itemprop='name' content="#{resource.title_subtitle_inline}"
+      meta itemprop='name' content="#{resource.title_and_subtitle}"
       div itemprop='address' itemscope='' itemtype='http://schema.org/PostalAddress'
         - if map_setting.location.address?
           meta itemprop='streetAddress' content="#{map_setting.location_address}"

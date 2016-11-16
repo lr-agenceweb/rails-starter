@@ -76,14 +76,23 @@ class Setting < ApplicationRecord
             allow_blank: false,
             inclusion: date_format.values
 
-  def title_and_subtitle
-    return "#{title}, #{subtitle}" if subtitle?
-    title
+  def subtitle?
+    subtitle.present?
   end
 
-  def subtitle?
-    !subtitle.blank?
+  def phone?
+    phone.present?
   end
+
+  def logo?
+    logo.exists?
+  end
+
+  def logo_footer?
+    logo_footer.exists?
+  end
+
+  private
 
   def clean_paperclip_errors
     errors.delete(:logo)

@@ -43,7 +43,7 @@ module OptionalModules
     end
 
     def set_organization
-      "ORG:#{@setting.decorate.title_subtitle_inline}\n"
+      "ORG:#{@setting.decorate.title_and_subtitle}\n"
     end
 
     def set_email

@@ -45,8 +45,15 @@ class SettingTest < ActiveSupport::TestCase
     .less_than((SIZE_PLUS_1 - 1).megabytes)
 
   #
-  # == Validation rules
+  # Columns
+  # =========
+  test 'should return true if subtitle not blank' do
+    assert @setting.send(:subtitle?)
+  end
+
   #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     @setting_without_subtitle.destroy
 
@@ -100,19 +107,8 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   #
-  # == Methods
-  #
-  test 'should return title and subtitle if subtitle is not blank' do
-    assert_equal 'Rails Starter, Démarre rapidement', @setting.title_and_subtitle
-  end
-
-  test 'should return only title if subtitle is blank' do
-    assert_equal 'Rails Starter', @setting_without_subtitle.title_and_subtitle
-  end
-
-  #
-  # == Logo
-  #
+  # Logo
+  # ======
   test 'should not upload logo if mime type is not allowed' do
     [:original, :large, :medium, :small, :thumb].each do |size|
       assert_nil @setting.logo.path(size)
@@ -165,8 +161,8 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   #
-  # == Logo footer
-  #
+  # Logo footer
+  # =============
   test 'should not upload logo_footer if mime type is not allowed' do
     [:original, :large, :medium, :small, :thumb].each do |size|
       assert_nil @setting.logo_footer.path(size)

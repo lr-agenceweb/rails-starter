@@ -148,7 +148,7 @@ module OptionalModules
     #   - the formatted title for SEO
     #
     def title_seo_structure(element_title)
-      "#{element_title} | #{@setting.title_and_subtitle}"
+      "#{element_title} | #{@setting.decorate.title_and_subtitle}"
     end
 
     def return_nil_for_social_share?

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == Setting Decorator
-#
+# Setting Decorator
+# ===================
 class SettingDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   include AssetsHelper
@@ -10,19 +10,22 @@ class SettingDecorator < ApplicationDecorator
   delegate_all
 
   #
-  # == Title / Subtitle
-  #
+  # Title / Subtitle
+  # ==================
   def title
-    content_tag(:span, model.title)
+    safe_join [raw(model.title)]
   end
 
-  def title_subtitle_inline
-    "#{setting.title} #{setting.subtitle.downcase if subtitle?}"
+  def title_and_subtitle
+    html = []
+    html << title
+    html << subtitle if subtitle?
+    safe_join [html], ', '
   end
 
   #
-  # == Logo
-  #
+  # Logo
+  # ======
   def logo_deco
     # Website logo present
     retina_image_tag(model, :logo, :medium, class: 'text-center') if logo?
@@ -35,8 +38,12 @@ class SettingDecorator < ApplicationDecorator
   end
 
   #
-  # == Contact informations
-  #
+  # Contact informations
+  # ======================
+  def email
+    h.fa_icon('envelope', text: mail_to(model.email, model.email, class: 'email__link'))
+  end
+
   def phone
     return unless phone?
     link_phone = link_to(model.phone, "tel:#{phone_w3c}", class: 'phone__link')
@@ -47,48 +54,25 @@ class SettingDecorator < ApplicationDecorator
     model.phone.delete(' ').remove('(0)') if phone?
   end
 
-  def email
-    h.fa_icon('envelope', text: mail_to(model.email, model.email, class: 'email__link'))
-  end
-
   #
-  # == Other
-  #
-  def credentials
-    "#{CGI.escapeHTML(setting.name)} - #{copyright} - Copyright &copy; #{current_year}"
-  end
-
+  # Other
+  # =======
   def about
     link_to I18n.t('main_menu.about'), abouts_path
   end
 
+  def credentials
+    html = []
+    html << setting.name
+    html << I18n.t('footer.copyright')
+    html << "Copyright \u00A9 #{current_year}" # \u00A9 => &copy;
+    safe_join [html], ' - '
+  end
+
   def admin_link
-    ' - ' + (link_to ' administration', admin_root_path, target: :_blank) if current_user_and_administrator?
-  end
-
-  private
-
-  def logo?
-    model.logo.exists?
-  end
-
-  def logo_footer?
-    model.logo_footer.exists?
-  end
-
-  def subtitle?
-    !model.subtitle.blank?
-  end
-
-  def phone?
-    model.phone.present?
-  end
-
-  def copyright
-    I18n.t('footer.copyright')
-  end
-
-  def small_subtitle
-    content_tag(:small, model.subtitle, class: 'l-header-site-subtitle')
+    html = []
+    html << ' -'
+    html << link_to('administration', admin_root_path, target: :_blank)
+    safe_join [html], ' ' if current_user_and_administrator?
   end
 end
