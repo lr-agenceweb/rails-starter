@@ -1,4 +1,12 @@
 # frozen_string_literal: true
+
+#
+# == LegalNotice Model
+#
+class Connection < Post
+  include Linkable
+end
+
 # == Schema Information
 #
 # Table name: posts
@@ -19,10 +27,3 @@
 #  index_posts_on_slug     (slug) UNIQUE
 #  index_posts_on_user_id  (user_id)
 #
-
-#
-# == LegalNotice Model
-#
-class Connection < Post
-  include Linkable
-end

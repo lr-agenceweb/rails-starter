@@ -1,3 +1,8 @@
+one:
+  should_validate: true
+  should_signal: true
+  send_email: true
+
 # == Schema Information
 #
 # Table name: comment_settings
@@ -11,8 +16,3 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-
-one:
-  should_validate: true
-  should_signal: true
-  send_email: true

@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+#
+# == GuestBookSetting model
+#
+class GuestBookSetting < ApplicationRecord
+  include MaxRowable
+end
+
 # == Schema Information
 #
 # Table name: guest_book_settings
@@ -9,10 +16,3 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-
-#
-# == GuestBookSetting model
-#
-class GuestBookSetting < ApplicationRecord
-  include MaxRowable
-end

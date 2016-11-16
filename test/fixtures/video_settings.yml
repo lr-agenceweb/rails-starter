@@ -1,3 +1,8 @@
+one:
+  video_platform: true
+  video_upload: true
+  video_background: true
+
 # == Schema Information
 #
 # Table name: video_settings
@@ -10,8 +15,3 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
-
-one:
-  video_platform: true
-  video_upload: true
-  video_background: true

@@ -1,3 +1,27 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+one:
+  <<: *DEFAULTS
+  videoable: home (Post)
+  video_file_file_name: 'landscape.mp4'
+  online: true
+
+two:
+  <<: *DEFAULTS
+  videoable: home (Page)
+  video_file_file_name: 'landscape.mp4'
+  video_file_processing: false
+  online: true
+
+three:
+  <<: *DEFAULTS
+  videoable: blog_online (Blog)
+  video_file_file_name: 'landscape.mp4'
+  video_file_processing: false
+  online: true
+
 # == Schema Information
 #
 # Table name: video_uploads
@@ -24,27 +48,3 @@
 #
 #  index_video_uploads_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
 #
-
-DEFAULTS: &DEFAULTS
-  created_at: <%= 1.weeks.ago.to_s(:db) %>
-  updated_at: <%= 1.weeks.ago.to_s(:db) %>
-
-one:
-  <<: *DEFAULTS
-  videoable: home (Post)
-  video_file_file_name: 'landscape.mp4'
-  online: true
-
-two:
-  <<: *DEFAULTS
-  videoable: home (Page)
-  video_file_file_name: 'landscape.mp4'
-  video_file_processing: false
-  online: true
-
-three:
-  <<: *DEFAULTS
-  videoable: blog_online (Blog)
-  video_file_file_name: 'landscape.mp4'
-  video_file_processing: false
-  online: true

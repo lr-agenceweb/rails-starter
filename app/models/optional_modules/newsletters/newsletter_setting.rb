@@ -1,13 +1,4 @@
 # frozen_string_literal: true
-# == Schema Information
-#
-# Table name: newsletter_settings
-#
-#  id                 :integer          not null, primary key
-#  send_welcome_email :boolean          default(TRUE)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#
 
 #
 # == NewsletterSetting Model
@@ -23,3 +14,13 @@ class NewsletterSetting < ApplicationRecord
 
   validates_associated :newsletter_user_roles
 end
+
+# == Schema Information
+#
+# Table name: newsletter_settings
+#
+#  id                 :integer          not null, primary key
+#  send_welcome_email :boolean          default(TRUE)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#

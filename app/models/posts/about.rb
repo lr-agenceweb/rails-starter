@@ -1,4 +1,11 @@
 # frozen_string_literal: true
+
+#
+# == About Model
+#
+class About < Post
+end
+
 # == Schema Information
 #
 # Table name: posts
@@ -19,9 +26,3 @@
 #  index_posts_on_slug     (slug) UNIQUE
 #  index_posts_on_user_id  (user_id)
 #
-
-#
-# == About Model
-#
-class About < Post
-end

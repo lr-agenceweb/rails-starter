@@ -1,19 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: guest_books
-#
-#  id         :integer          not null, primary key
-#  username   :string(255)      not null
-#  email      :string(255)      not null
-#  content    :text(65535)      not null
-#  lang       :string(255)      not null
-#  validated  :boolean          default(FALSE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 #
 # == GuestBook model
 #
@@ -44,3 +30,17 @@ class GuestBook < ApplicationRecord
 
   paginates_per 3
 end
+
+# == Schema Information
+#
+# Table name: guest_books
+#
+#  id         :integer          not null, primary key
+#  username   :string(255)      not null
+#  email      :string(255)      not null
+#  content    :text(65535)      not null
+#  lang       :string(255)      not null
+#  validated  :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#

@@ -1,4 +1,15 @@
 # frozen_string_literal: true
+
+#
+# == StringBox Model
+#
+class StringBox < ApplicationRecord
+  translates :title, :content
+  active_admin_translates :title, :content
+
+  belongs_to :optional_module
+end
+
 # == Schema Information
 #
 # Table name: string_boxes
@@ -15,13 +26,3 @@
 #  index_string_boxes_on_key                 (key)
 #  index_string_boxes_on_optional_module_id  (optional_module_id)
 #
-
-#
-# == StringBox Model
-#
-class StringBox < ApplicationRecord
-  translates :title, :content
-  active_admin_translates :title, :content
-
-  belongs_to :optional_module
-end

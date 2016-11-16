@@ -1,36 +1,4 @@
 # frozen_string_literal: true
-# == Schema Information
-#
-# Table name: settings
-#
-#  id                       :integer          not null, primary key
-#  name                     :string(255)
-#  phone                    :string(255)
-#  phone_secondary          :string(255)
-#  email                    :string(255)
-#  per_page                 :integer          default(3)
-#  show_breadcrumb          :boolean          default(FALSE)
-#  show_social              :boolean          default(TRUE)
-#  show_qrcode              :boolean          default(FALSE)
-#  show_admin_bar           :boolean          default(TRUE)
-#  show_file_upload         :boolean          default(FALSE)
-#  answering_machine        :boolean          default(FALSE)
-#  picture_in_picture       :boolean          default(TRUE)
-#  date_format              :integer
-#  maintenance              :boolean          default(FALSE)
-#  logo_updated_at          :datetime
-#  logo_file_size           :integer
-#  logo_content_type        :string(255)
-#  logo_file_name           :string(255)
-#  logo_footer_updated_at   :datetime
-#  logo_footer_file_size    :integer
-#  logo_footer_content_type :string(255)
-#  logo_footer_file_name    :string(255)
-#  retina_dimensions        :text(65535)
-#  twitter_username         :string(255)
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
-#
 
 #
 # == Setting Model
@@ -98,3 +66,36 @@ class Setting < ApplicationRecord
     errors.delete(:logo)
   end
 end
+
+# == Schema Information
+#
+# Table name: settings
+#
+#  id                       :integer          not null, primary key
+#  name                     :string(255)
+#  phone                    :string(255)
+#  phone_secondary          :string(255)
+#  email                    :string(255)
+#  per_page                 :integer          default(3)
+#  show_breadcrumb          :boolean          default(FALSE)
+#  show_social              :boolean          default(TRUE)
+#  show_qrcode              :boolean          default(FALSE)
+#  show_admin_bar           :boolean          default(TRUE)
+#  show_file_upload         :boolean          default(FALSE)
+#  answering_machine        :boolean          default(FALSE)
+#  picture_in_picture       :boolean          default(TRUE)
+#  date_format              :integer
+#  maintenance              :boolean          default(FALSE)
+#  logo_updated_at          :datetime
+#  logo_file_size           :integer
+#  logo_content_type        :string(255)
+#  logo_file_name           :string(255)
+#  logo_footer_updated_at   :datetime
+#  logo_footer_file_size    :integer
+#  logo_footer_content_type :string(255)
+#  logo_footer_file_name    :string(255)
+#  retina_dimensions        :text(65535)
+#  twitter_username         :string(255)
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#

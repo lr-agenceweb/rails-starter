@@ -1,4 +1,15 @@
 # frozen_string_literal: true
+
+#
+# == Heading Model
+#
+class Heading < ApplicationRecord
+  translates :content, fallbacks_for_empty_translations: true
+  active_admin_translates :content
+
+  belongs_to :headingable, polymorphic: true, touch: true
+end
+
 # == Schema Information
 #
 # Table name: headings
@@ -13,13 +24,3 @@
 #
 #  index_headings_on_headingable_type_and_headingable_id  (headingable_type,headingable_id)
 #
-
-#
-# == Heading Model
-#
-class Heading < ApplicationRecord
-  translates :content, fallbacks_for_empty_translations: true
-  active_admin_translates :content
-
-  belongs_to :headingable, polymorphic: true, touch: true
-end

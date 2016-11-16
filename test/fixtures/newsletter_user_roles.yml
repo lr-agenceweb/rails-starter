@@ -1,3 +1,11 @@
+subscriber:
+  kind: subscriber
+  rollable: one (NewsletterSetting)
+
+tester:
+  kind: tester
+  rollable: one (NewsletterSetting)
+
 # == Schema Information
 #
 # Table name: newsletter_user_roles
@@ -13,11 +21,3 @@
 #
 #  index_newsletter_user_roles_on_rollable_type_and_rollable_id  (rollable_type,rollable_id)
 #
-
-subscriber:
-  kind: subscriber
-  rollable: one (NewsletterSetting)
-
-tester:
-  kind: tester
-  rollable: one (NewsletterSetting)

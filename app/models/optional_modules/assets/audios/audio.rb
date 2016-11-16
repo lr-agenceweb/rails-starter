@@ -1,27 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: audios
-#
-#  id                 :integer          not null, primary key
-#  audioable_id       :integer
-#  audioable_type     :string(255)
-#  audio_file_name    :string(255)
-#  audio_content_type :string(255)
-#  audio_file_size    :integer
-#  audio_updated_at   :datetime
-#  audio_autoplay     :boolean          default(FALSE)
-#  online             :boolean          default(TRUE)
-#  audio_processing   :boolean          default(TRUE)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#
-# Indexes
-#
-#  index_audios_on_audioable_type_and_audioable_id  (audioable_type,audioable_id)
-#
-
 #
 # == Audio Model
 #
@@ -55,3 +33,25 @@ class Audio < ApplicationRecord
   scope :online, -> { where(online: true) }
   scope :not_processing, -> { where.not(audio_processing: true) }
 end
+
+# == Schema Information
+#
+# Table name: audios
+#
+#  id                 :integer          not null, primary key
+#  audioable_type     :string(255)
+#  audioable_id       :integer
+#  audio_file_name    :string(255)
+#  audio_content_type :string(255)
+#  audio_file_size    :integer
+#  audio_updated_at   :datetime
+#  audio_autoplay     :boolean          default(FALSE)
+#  online             :boolean          default(TRUE)
+#  audio_processing   :boolean          default(TRUE)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_audios_on_audioable_type_and_audioable_id  (audioable_type,audioable_id)
+#

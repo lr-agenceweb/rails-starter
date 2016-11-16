@@ -1,3 +1,6 @@
+blog:
+  headingable: blog (Page)
+
 # == Schema Information
 #
 # Table name: headings
@@ -12,6 +15,3 @@
 #
 #  index_headings_on_headingable_type_and_headingable_id  (headingable_type,headingable_id)
 #
-
-blog:
-  headingable: blog (Page)

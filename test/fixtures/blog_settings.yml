@@ -1,3 +1,6 @@
+one:
+  prev_next: false
+
 # == Schema Information
 #
 # Table name: blog_settings
@@ -10,6 +13,3 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
-
-one:
-  prev_next: false

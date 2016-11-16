@@ -1,17 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: map_settings
-#
-#  id           :integer          not null, primary key
-#  marker_icon  :string(255)
-#  marker_color :string(255)
-#  show_map     :boolean          default(FALSE)
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#
-
 #
 # == MapSetting Model
 #
@@ -32,3 +20,15 @@ class MapSetting < ApplicationRecord
     marker_color.present?
   end
 end
+
+# == Schema Information
+#
+# Table name: map_settings
+#
+#  id           :integer          not null, primary key
+#  marker_icon  :string(255)
+#  marker_color :string(255)
+#  show_map     :boolean          default(FALSE)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#

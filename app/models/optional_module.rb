@@ -1,17 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: optional_modules
-#
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  description :text(65535)
-#  enabled     :boolean          default(FALSE)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#
-
 #
 # == OptionalModule Model
 #
@@ -27,3 +15,15 @@ class OptionalModule < ApplicationRecord
     find_by(name: name)
   end
 end
+
+# == Schema Information
+#
+# Table name: optional_modules
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text(65535)
+#  enabled     :boolean          default(FALSE)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#

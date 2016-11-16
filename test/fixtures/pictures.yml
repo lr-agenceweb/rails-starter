@@ -1,3 +1,25 @@
+DEFAULTS: &DEFAULTS
+  online: true
+
+home:
+  attachable: home (Post)
+  image_file_name: my-picture.jpg
+
+home_two:
+  attachable: home (Post)
+  image_file_name: my-picture-2.jpg
+
+home_three:
+  attachable: home (Post)
+
+blog_mc:
+  attachable: many_comments (Blog)
+  image_file_name: my-picture-3.jpg
+
+mailing_message:
+  attachable: one (MailingMessage)
+  image_file_name: merry-christmas.jpg
+
 # == Schema Information
 #
 # Table name: pictures
@@ -20,25 +42,3 @@
 #
 #  index_pictures_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
 #
-
-DEFAULTS: &DEFAULTS
-  online: true
-
-home:
-  attachable: home (Post)
-  image_file_name: my-picture.jpg
-
-home_two:
-  attachable: home (Post)
-  image_file_name: my-picture-2.jpg
-
-home_three:
-  attachable: home (Post)
-
-blog_mc:
-  attachable: many_comments (Blog)
-  image_file_name: my-picture-3.jpg
-
-mailing_message:
-  attachable: one (MailingMessage)
-  image_file_name: merry-christmas.jpg

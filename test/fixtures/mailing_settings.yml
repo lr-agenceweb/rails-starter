@@ -1,3 +1,6 @@
+one:
+  email: ~
+
 # == Schema Information
 #
 # Table name: mailing_settings
@@ -8,6 +11,3 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-one:
-  email: ~

@@ -1,24 +1,4 @@
 # frozen_string_literal: true
-# == Schema Information
-#
-# Table name: blogs
-#
-#  id               :integer          not null, primary key
-#  slug             :string(255)
-#  show_as_gallery  :boolean          default(FALSE)
-#  allow_comments   :boolean          default(TRUE)
-#  online           :boolean          default(TRUE)
-#  user_id          :integer
-#  blog_category_id :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#
-# Indexes
-#
-#  index_blogs_on_blog_category_id  (blog_category_id)
-#  index_blogs_on_slug              (slug)
-#  index_blogs_on_user_id           (user_id)
-#
 
 #
 # == Blog Model
@@ -63,3 +43,24 @@ class Blog < ApplicationRecord
     BlogCategory.decrement_counter(:blogs_count, blog_category.id) unless online?
   end
 end
+
+# == Schema Information
+#
+# Table name: blogs
+#
+#  id               :integer          not null, primary key
+#  slug             :string(255)
+#  show_as_gallery  :boolean          default(FALSE)
+#  allow_comments   :boolean          default(TRUE)
+#  online           :boolean          default(TRUE)
+#  user_id          :integer
+#  blog_category_id :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_blogs_on_blog_category_id  (blog_category_id)
+#  index_blogs_on_slug              (slug)
+#  index_blogs_on_user_id           (user_id)
+#

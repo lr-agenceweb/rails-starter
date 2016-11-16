@@ -1,30 +1,4 @@
 # frozen_string_literal: true
-# == Schema Information
-#
-# Table name: video_uploads
-#
-#  id                      :integer          not null, primary key
-#  videoable_type          :string(255)
-#  videoable_id            :integer
-#  online                  :boolean          default(TRUE)
-#  video_autoplay          :boolean          default(FALSE)
-#  video_loop              :boolean          default(FALSE)
-#  video_controls          :boolean          default(TRUE)
-#  video_mute              :boolean          default(FALSE)
-#  position                :integer
-#  video_file_processing   :boolean          default(TRUE)
-#  retina_dimensions       :text(65535)
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  video_file_file_name    :string(255)
-#  video_file_content_type :string(255)
-#  video_file_file_size    :integer
-#  video_file_updated_at   :datetime
-#
-# Indexes
-#
-#  index_video_uploads_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
-#
 
 #
 # == VideoUpload Model
@@ -85,3 +59,30 @@ class VideoUpload < ApplicationRecord
   scope :online, -> { where(online: true) }
   scope :not_processing, -> { where.not(video_file_processing: true) }
 end
+
+# == Schema Information
+#
+# Table name: video_uploads
+#
+#  id                      :integer          not null, primary key
+#  videoable_type          :string(255)
+#  videoable_id            :integer
+#  online                  :boolean          default(TRUE)
+#  video_autoplay          :boolean          default(FALSE)
+#  video_loop              :boolean          default(FALSE)
+#  video_controls          :boolean          default(TRUE)
+#  video_mute              :boolean          default(FALSE)
+#  position                :integer
+#  video_file_processing   :boolean          default(TRUE)
+#  retina_dimensions       :text(65535)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  video_file_file_name    :string(255)
+#  video_file_content_type :string(255)
+#  video_file_file_size    :integer
+#  video_file_updated_at   :datetime
+#
+# Indexes
+#
+#  index_video_uploads_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
+#

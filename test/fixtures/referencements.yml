@@ -1,18 +1,3 @@
-# == Schema Information
-#
-# Table name: referencements
-#
-#  id              :integer          not null, primary key
-#  attachable_type :string(255)
-#  attachable_id   :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#
-# Indexes
-#
-#  index_referencements_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
-#
-
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
@@ -49,3 +34,18 @@ event_online:
   <<: *DEFAULTS
   attachable_id: 1
   attachable_type: Event
+
+# == Schema Information
+#
+# Table name: referencements
+#
+#  id              :integer          not null, primary key
+#  attachable_type :string(255)
+#  attachable_id   :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_referencements_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
+#

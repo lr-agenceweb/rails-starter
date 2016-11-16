@@ -1,3 +1,18 @@
+error_404:
+  key: error_404
+
+error_422:
+  key: error_422
+
+error_500:
+  key: error_500
+
+success_contact_form:
+  key: success_contact_form
+
+answering_machine:
+  key: answering_machine
+
 # == Schema Information
 #
 # Table name: string_boxes
@@ -14,18 +29,3 @@
 #  index_string_boxes_on_key                 (key)
 #  index_string_boxes_on_optional_module_id  (optional_module_id)
 #
-
-error_404:
-  key: error_404
-
-error_422:
-  key: error_422
-
-error_500:
-  key: error_500
-
-success_contact_form:
-  key: success_contact_form
-
-answering_machine:
-  key: answering_machine

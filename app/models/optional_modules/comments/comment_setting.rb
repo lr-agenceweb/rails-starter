@@ -1,4 +1,12 @@
 # frozen_string_literal: true
+
+#
+# == CommentSetting Model
+#
+class CommentSetting < ApplicationRecord
+  include MaxRowable
+end
+
 # == Schema Information
 #
 # Table name: comment_settings
@@ -12,10 +20,3 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-
-#
-# == CommentSetting Model
-#
-class CommentSetting < ApplicationRecord
-  include MaxRowable
-end

@@ -1,25 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: backgrounds
-#
-#  id                 :integer          not null, primary key
-#  attachable_id      :integer
-#  attachable_type    :string(255)
-#  image_file_name    :string(255)
-#  image_content_type :string(255)
-#  image_file_size    :integer
-#  image_updated_at   :datetime
-#  retina_dimensions  :text(65535)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#
-# Indexes
-#
-#  index_backgrounds_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
-#
-
 #
 # == Background Model
 #
@@ -56,3 +36,23 @@ class Background < ApplicationRecord
     @child_classes
   end
 end
+
+# == Schema Information
+#
+# Table name: backgrounds
+#
+#  id                 :integer          not null, primary key
+#  attachable_type    :string(255)
+#  attachable_id      :integer
+#  image_file_name    :string(255)
+#  image_content_type :string(255)
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  retina_dimensions  :text(65535)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_backgrounds_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
+#

@@ -8,7 +8,6 @@ class RemoveUselessColumnsFromPost < ActiveRecord::Migration[5.0]
     # Posts
     [:posts, :events, :blogs].each do |table|
       remove_column table, :title, :string
-      # remove_column table, :slug, :string
       remove_column table, :content, :text
     end
 
@@ -28,7 +27,6 @@ class RemoveUselessColumnsFromPost < ActiveRecord::Migration[5.0]
 
     # Modules
     remove_column :blog_categories, :name, :string
-    # remove_column :blog_categories, :slug, :string
 
     [:newsletters, :mailing_messages, :string_boxes].each do |table|
       remove_column table, :title, :string

@@ -1,15 +1,4 @@
 # frozen_string_literal: true
-# == Schema Information
-#
-# Table name: mailing_messages
-#
-#  id             :integer          not null, primary key
-#  show_signature :boolean          default(TRUE)
-#  sent_at        :datetime
-#  token          :string(255)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#
 
 #
 # == MailingMessage Model
@@ -37,3 +26,15 @@ class MailingMessage < ApplicationRecord
     self.should_redirect = true
   end
 end
+
+# == Schema Information
+#
+# Table name: mailing_messages
+#
+#  id             :integer          not null, primary key
+#  show_signature :boolean          default(TRUE)
+#  sent_at        :datetime
+#  token          :string(255)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#

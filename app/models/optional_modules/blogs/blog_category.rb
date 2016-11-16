@@ -1,14 +1,4 @@
 # frozen_string_literal: true
-# == Schema Information
-#
-# Table name: blog_categories
-#
-#  id          :integer          not null, primary key
-#  slug        :string(255)
-#  blogs_count :integer          default(0), not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#
 
 #
 # == BlogCategory Model
@@ -54,3 +44,14 @@ class BlogCategory < ApplicationRecord
     new_record? || attribute_changed?(ATTRIBUTE) || super
   end
 end
+
+# == Schema Information
+#
+# Table name: blog_categories
+#
+#  id          :integer          not null, primary key
+#  slug        :string(255)
+#  blogs_count :integer          default(0), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
