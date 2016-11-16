@@ -221,8 +221,7 @@ group :test do
 
   # Coverage
   gem 'simplecov', require: false
-  gem 'simplecov-json', require: false
-  gem 'codeclimate-test-reporter', require: false
+  gem 'codeclimate-test-reporter', '~> 1.0.0', require: false
 end
 
 group :production, :staging, :backup do

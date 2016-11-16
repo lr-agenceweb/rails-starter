@@ -1,17 +1,10 @@
 # frozen_string_literal: true
-# require 'simplecov'
-# require 'simplecov-json'
-
-# Reporter options
-# SimpleCov.formatters = [
-#   SimpleCov::Formatter::JSONFormatter,
-#   SimpleCov::Formatter::HTMLFormatter
-# ]
+require 'simplecov'
 
 # Start reporters
-# SimpleCov.start 'rails' do
-#   add_filter 'lib/mailer_previews'
-# end
+SimpleCov.start 'rails' do
+  add_filter 'lib/mailer_previews'
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)

@@ -592,9 +592,6 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    simplecov-json (0.2)
-      json
-      simplecov
     sitemap_generator (5.2.0)
       builder (~> 3.0)
     slack-notifier (1.5.1)
@@ -694,7 +691,7 @@ DEPENDENCIES
   chartkick
   client_side_validations!
   client_side_validations-simple_form!
-  codeclimate-test-reporter
+  codeclimate-test-reporter (~> 1.0.0)
   coffee-rails (~> 4.2.0)
   daemons
   dalli
@@ -768,7 +765,6 @@ DEPENDENCIES
   shoulda-matchers (~> 2.0)
   simple_form
   simplecov
-  simplecov-json
   sitemap_generator
   slack-notifier
   slim-rails
