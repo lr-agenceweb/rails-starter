@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 require 'simplecov'
 
-# Start reporters
-SimpleCov.start 'rails' do
-  add_filter 'lib/mailer_previews'
-end
-
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/mock'
 require 'paperclip/matchers'
-
 # To add Capybara feature tests add `gem ' minitest-rails-capybara'`
 # to the test group in the Gemfile and uncomment the following:
 # require 'minitest/rails/capybara'

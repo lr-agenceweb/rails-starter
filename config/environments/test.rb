@@ -40,7 +40,7 @@ Rails.application.configure do
   Rails.application.routes.default_url_options = { host: 'test.host' }
 
   # Randomize the order test cases are executed.
-  # :random or :sorted
+  # :random / :parallel / :sorted / :alpha
   config.active_support.test_order = :sorted
 
   # Print deprecation notices to the stderr.
