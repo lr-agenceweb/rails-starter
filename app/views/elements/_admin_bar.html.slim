@@ -31,7 +31,7 @@
                 span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('comment.admin_bar.signalled')}" = @comments_signalled_count
 
   .float-right
-    ul.dropdown.menu data-dropdown-menu=''
+    ul.dropdown.menu data-dropdown-menu='' data-hover-delay='0' data-closing-time='0'
       li
         a href="#"
           == "#{morning_or_evening} #{current_user.username} "
