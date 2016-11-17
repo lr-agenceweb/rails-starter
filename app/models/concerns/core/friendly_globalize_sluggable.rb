@@ -25,8 +25,7 @@ module Core
       def friendlyze_me
         model_name = table_name.classify.constantize
 
-        translates(*model_name::TRANSLATED_FIELDS,
-        fallbacks_for_empty_translations: true)
+        translates(*model_name::TRANSLATED_FIELDS, fallbacks_for_empty_translations: true)
         active_admin_translates(*model_name::TRANSLATED_FIELDS, fallbacks_for_empty_translations: true) do
           validates model_name::CANDIDATE,
                     presence: true
