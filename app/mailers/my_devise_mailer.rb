@@ -1,15 +1,10 @@
 # frozen_string_literal: true
 
 #
-# == MyDevise Mailer
-#
+# MyDevise Mailer
+# =================
 class MyDeviseMailer < Devise::Mailer
   before_action :set_setting
-
-  def confirmation_instructions(record, token, opts = {})
-    fix_headers(opts)
-    super
-  end
 
   def password_change(record, opts = {})
     fix_headers(opts)
@@ -21,10 +16,15 @@ class MyDeviseMailer < Devise::Mailer
     super
   end
 
-  def unlock_instructions(record, token, opts = {})
-    fix_headers(opts)
-    super
-  end
+  # def confirmation_instructions(record, token, opts = {})
+  #   fix_headers(opts)
+  #   super
+  # end
+  #
+  # def unlock_instructions(record, token, opts = {})
+  #   fix_headers(opts)
+  #   super
+  # end
 
   private
 

@@ -112,8 +112,6 @@ GEM
       activejob (= 5.0.0.1)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionmailer-with-request (0.4.0)
-      rails (>= 3)
     actionpack (5.0.0.1)
       actionview (= 5.0.0.1)
       activesupport (= 5.0.0.1)
@@ -665,7 +663,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionmailer-with-request
   active_skin
   activeadmin (= 1.0.0.pre4)
   activeadmin-globalize!

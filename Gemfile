@@ -82,7 +82,6 @@ gem 'client_side_validations-simple_form',
 gem 'rails_autosize_jquery', github: 'lr-agenceweb/rails_autosize_jquery'
 gem 'wysiwyg-rails' # Froala editor
 gem 'valid_url'
-gem 'actionmailer-with-request'
 
 #
 # Translation
