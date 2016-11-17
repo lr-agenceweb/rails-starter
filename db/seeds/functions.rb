@@ -37,6 +37,8 @@ def set_picture(resource, type, url = false)
     attachable_type: type,
     image: File.new(file_path)
   )
+rescue
+  puts 'ALERT :: Error while downloading picture'
 end
 
 # Background
@@ -50,6 +52,8 @@ def set_background(resource, type)
     attachable_type: type,
     image: File.new(file_path)
   )
+rescue
+  puts 'ALERT :: Error while downloading background picture'
 end
 
 # Audio
@@ -63,8 +67,11 @@ def set_audio(resource, type, url, name = 'audio')
     audioable_type: type,
     audio: File.new(file_path)
   )
+rescue
+  puts 'ALERT :: Error while downloading audio file'
 end
 
+# VideoUpload
 def set_video_upload(resource, type, url)
   download = open(url)
   file_path = "#{@tmp_path}/video.mp4"
@@ -77,6 +84,8 @@ def set_video_upload(resource, type, url)
   )
   video_upload.save
   video_upload
+rescue
+  puts 'ALERT :: Error while downloading video_upload'
 end
 
 # Referencement
