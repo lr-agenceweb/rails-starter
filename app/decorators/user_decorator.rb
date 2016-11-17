@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == UserDecorator
-#
+# UserDecorator
+# ===============
 class UserDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   include AssetsHelper
@@ -18,13 +18,28 @@ class UserDecorator < ApplicationDecorator
     link_to I18n.t('active_admin.show'), admin_user_path(model)
   end
 
+  #
+  # ActiveAdmin
+  # =============
+  def active_admin_header_user_profile
+    html = []
+    html << retina_thumb_square(model)
+    html << content_tag(:span) do
+      concat model.username.capitalize
+      concat " (#{I18n.t('role.' + model.role_name)})"
+      concat tag(:br)
+      concat connected_from
+    end
+    safe_join [html], ' '
+  end
+
   def connected_from
     t('user.connected_from', from: provider.blank? ? 'site' : provider)
   end
 
   #
-  # == Omniauth
-  #
+  # Omniauth
+  # ===========
   %w(facebook twitter google).each do |provider|
     define_method "link_to_#{provider}" do
       if user.from_omniauth? provider
@@ -56,8 +71,8 @@ class UserDecorator < ApplicationDecorator
   end
 
   #
-  # == Status tag
-  #
+  # Status tag
+  # ============
   def status
     color = 'green'
     color = 'red' if model.administrator?
