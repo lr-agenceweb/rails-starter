@@ -16,7 +16,7 @@ class Post < ApplicationRecord
   include PrevNextable
 
   # Constants
-  ATTRIBUTE ||= :title
+  CANDIDATE ||= :title
   TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
   friendlyze_me # in FriendlyGlobalizeSluggable concern
 

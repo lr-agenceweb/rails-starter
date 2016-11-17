@@ -7,7 +7,8 @@ class BlogCategory < ApplicationRecord
   include Includes::BlogIncludable
   include Core::FriendlyGlobalizeSluggable
 
-  ATTRIBUTE ||= :name
+  # Constants
+  CANDIDATE ||= :name
   TRANSLATED_FIELDS ||= [:name, :slug].freeze
   friendlyze_me # in FriendlyGlobalizeSluggable concern
 

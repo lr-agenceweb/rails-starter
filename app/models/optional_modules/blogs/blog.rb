@@ -19,7 +19,7 @@ class Blog < ApplicationRecord
   include OptionalModules::Searchable
 
   # Constants
-  ATTRIBUTE ||= :title
+  CANDIDATE ||= :title
   TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
   friendlyze_me # in FriendlyGlobalizeSluggable concern
 

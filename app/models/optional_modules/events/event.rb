@@ -20,7 +20,7 @@ class Event < ApplicationRecord
   EVENT_START = 9 # 9:00
   EVENT_END = 18 # 18:00
   I18N_SCOPE = 'activerecord.errors.models.event.attributes'
-  ATTRIBUTE ||= :title
+  CANDIDATE ||= :title
   TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
   friendlyze_me # in FriendlyGlobalizeSluggable concern
 
