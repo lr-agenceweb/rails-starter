@@ -1,11 +1,12 @@
-- if resource.mailing_users.count > 0
+- mu = MailingUserDecorator.decorate_collection(resource.mailing_users)
+- if mu.count > 0
   p
-    = link_to "Envoyer le mail uniquement aux #{resource.mailing_users.count} personne(s) cochée(s) lors de la création du mail",
+    = link_to "Envoyer le mail uniquement aux #{mu.count} personne(s) cochée(s) lors de la création du mail",
               send_admin_mailing_message_path(resource.id, token: resource.token, option: 'checked'),
               data: { vex_alert: t('mailing.send') },
               class: 'button alert vex-alert mailing-message'
   - unless index_page?
-    p == resource.mailing_users.map(&:name).join('<br />')
+    p == mu.map(&:name).join('<br />')
 - else
   p Oup's... Il semblerait que vous n'ayez pas sélectionné d'utilisateurs à qui envoyer le mail
 
@@ -13,7 +14,7 @@
 br
 
 
-- mu = MailingUser.all
+- mu = MailingUserDecorator.decorate_collection(MailingUser.all)
 - if mu.count > 0
   p
     = link_to 'Forcer l\'envoie du mail à TOUS les utilisateurs',
