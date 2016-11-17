@@ -13,7 +13,7 @@ slider = Slider.create!(
 puts 'Uploading slides image for slider'
 4.times do |i|
   boolean = [true, false].sample
-  download = open('https://unsplash.it/1920/900/?random')
+  download = open('http://lorempixel.com/1920/900')
   file_path = "#{@tmp_path}/image.jpg"
   IO.copy_stream(download, file_path)
 

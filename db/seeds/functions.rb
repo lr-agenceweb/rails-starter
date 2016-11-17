@@ -15,20 +15,28 @@ end
 
 # Post
 def set_title
-  Faker::Hipster.sentence(3, false, 1)
+  Faker::Hipster.sentence(3, false, 1).gsub('.', '')
 end
 
-def set_content(size = 10)
-  html = ''
-  10.times do |i|
-    html += "<p>#{Faker::Hipster.paragraph(size, true, 1)}</p>"
+def set_content(size: 10, paragraph: 5)
+  html = []
+  paragraph.times do |i|
+    html << ActionView::Helpers::TagHelper.content_tag(:p, Faker::Hipster.paragraph(size, true, 1))
   end
-  html
+  safe_join [html]
+end
+
+# Avatar
+def set_avatar(slug: 'lorem-ipsum')
+  download = open(Faker::Avatar.image(slug))
+  file_path = "#{@tmp_path}/image.jpg"
+  IO.copy_stream(download, file_path)
+  File.new(file_path)
 end
 
 # Picture
 def set_picture(resource, type, url = false)
-  download = url == false ? open('https://unsplash.it/1000/600/?random') : open(url)
+  download = url == false ? open('http://lorempixel.com/1000/600/') : open(url)
   file_path = "#{@tmp_path}/image.jpg"
   IO.copy_stream(download, file_path)
 
@@ -43,7 +51,7 @@ end
 
 # Background
 def set_background(resource, type)
-  download = open('https://unsplash.it/1900/1200/?random')
+  download = open('http://lorempixel.com/1900/1200/')
   file_path = "#{@tmp_path}/image.jpg"
   IO.copy_stream(download, file_path)
 
