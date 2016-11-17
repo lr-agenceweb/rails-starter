@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 #
-# == Core namespace
-#
+# Core namespace
+# ================
 module Core
   #
-  # == LanguageHelper
-  #
+  # LanguageHelper
+  # ================
   module LanguageHelper
     def language_menu(element)
-      language_menu_html = ''
+      html = []
 
       I18n.available_locales.each do |locale|
         locale = locale.to_s
@@ -26,9 +26,9 @@ module Core
         end
 
         # wrap link in li tag
-        language_menu_html += content_tag(:li, link, class: "menu__item #{'menu__item__active' if current_locale?(locale)}")
+        html << content_tag(:li, link, class: "menu__item #{'menu__item__active' if current_locale?(locale)}")
       end
-      safe_join [raw(language_menu_html)]
+      safe_join [html]
     end
 
     private
