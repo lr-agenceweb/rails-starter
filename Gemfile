@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 # Rails
 # =====================
 gem 'rails', '5.0.0.1'
+gem 'rails-observers', github: 'rails/rails-observers' # Rails 5 fix
 
 #
 # Database
@@ -49,8 +50,6 @@ gem 'kaminari', '~> 0.17.0' # Pagination
 gem 'gretel' # Breadcrumb
 gem 'rails_autolink'
 gem 'truncate_html', github: 'AlexGunslinger/truncate_html'
-gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
-gem 'vex_rails', github: 'anthony-robin/vex_rails'
 gem 'js_cookie_rails'
 gem 'fotoramajs'
 
@@ -89,16 +88,13 @@ gem 'valid_url'
 gem 'route_translator'
 gem 'globalize', github: 'globalize/globalize' # Rails 5 fix
 gem 'activemodel-serializers-xml' # Rails 5 fix
-gem 'activeadmin-globalize',
-    github: 'anthony-robin/activeadmin-globalize',
-    branch: 'master'
 gem 'rails-i18n', '~> 5.0.0' # Rails 5 fix
 gem 'i18n-js', '>= 3.0.0.rc14'
 
 #
 # Map
 # =====================
-gem 'mapbox-rails', github: 'anthony-robin/mapbox-rails'
+gem 'mapbox-rails', github: 'aai/mapbox-rails'
 gem 'gmaps-autocomplete-rails'
 
 #
@@ -173,30 +169,33 @@ gem 'lograge' # cleaner logs
 #
 # Cache
 # =====================
-gem 'rails-observers', github: 'rails/rails-observers' # Rails 5 fix
 gem 'dalli'
+
+#
+# Own gems fixes (https://github.com/gemsfix)
+# ================
+gem 'vex_rails', github: 'anthony-robin/vex_rails'
+gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize'
+gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
 
 group :development do
   gem 'better_errors'
+  gem 'web-console', '~> 3.0'
+
   gem 'rb-fsevent', require: false
   gem 'irbtools', require: 'irbtools/binding'
+
   gem 'binding_of_caller'
-  gem 'railroady' # graph of models
-  # gem 'shut_up_assets'
-  gem 'annotate'
+  gem 'railroady' # Graph of models
+  gem 'annotate' # Annotate table structure in models
+  gem 'shut_up_assets'
 
-  # Server
-  # =====================
-  gem 'puma'
+  gem 'puma' # Server
+  gem 'shog' # Colorize logs
+  gem 'bullet' # Display N+1 db queries
+  gem 'meta_request' # Debug Rails request in Chrome DevTools
 
-  # Debug Rails request in Chrome DevTools
-  # =====================
-  gem 'meta_request'
-
-  gem 'bullet' # display N+1 db queries
-  gem 'shog' # colorize logs
-
-  # Deploy
+  # Deployment
   # =====================
   gem 'capistrano', '~> 3.1'
   gem 'capistrano-rails', '~> 1.1'
@@ -204,7 +203,6 @@ group :development do
   gem 'capistrano-rails-collection'
   gem 'capistrano-passenger'
   gem 'capistrano3-delayed-job', '~> 1.0'
-  gem 'web-console', '~> 3.0'
 end
 
 group :development, :test do
@@ -224,8 +222,8 @@ group :test do
 end
 
 group :production, :staging, :backup do
-  gem 'exception_notification' # Notify when exceptions raised
   gem 'slack-notifier' # Use slack as Notifier
+  gem 'exception_notification' # Notify when exceptions raised
 end
 
 group :doc do
