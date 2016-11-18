@@ -171,6 +171,10 @@ gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize'
 gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
 
 group :development do
+  gem 'spring'
+  gem 'listen', '~> 3.0.5'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+
   gem 'better_errors'
   gem 'web-console', '~> 3.0'
 
@@ -180,7 +184,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'railroady' # Graph of models
   gem 'annotate' # Annotate table structure in models
-  gem 'shut_up_assets'
 
   gem 'puma' # Server
   gem 'shog' # Colorize logs
@@ -199,7 +202,6 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'spring'
 end
 
 group :test do
