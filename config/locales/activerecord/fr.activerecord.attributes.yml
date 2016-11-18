@@ -89,7 +89,8 @@ fr:
         breadcrumb: Fil d'ariane
         social: Réseaux sociaux
         twitter_username: Nom d'utilisateur sur Twitter
-        date_format: Formatage de la date
+        date_format: Format de la date
+        date_format_i18n: Format de la date
 
       # Page
       page:

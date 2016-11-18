@@ -1,8 +1,8 @@
 # English
 en:
-  enumerize:
+  enum:
     setting:
-      date_format:
+      date_formats:
         with_time: "30/04/2016 15:32"
         without_time: "30/04/2016"
         ago: "10 minutes ago"

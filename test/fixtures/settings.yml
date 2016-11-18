@@ -8,6 +8,7 @@ DEFAULTS: &DEFAULTS
   show_breadcrumb: false
   show_file_upload: false
   picture_in_picture: true
+  date_format: 0
   maintenance: false
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>

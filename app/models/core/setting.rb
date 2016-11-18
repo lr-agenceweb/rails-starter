@@ -4,7 +4,6 @@
 # == Setting Model
 #
 class Setting < ApplicationRecord
-  extend Enumerize
   include MaxRowable
   include Assets::Settings::Paperclipable
 
@@ -18,13 +17,11 @@ class Setting < ApplicationRecord
   end
 
   # Enum
-  enumerize :date_format,
-            in: {
-              with_time: 0,
-              without_time: 1,
-              ago: 2
-            },
-            default: :with_time
+  enum date_format: {
+    with_time: 0,
+    without_time: 1,
+    ago: 2
+  }
 
   def self.per_page_values
     [1, 2, 3, 5, 10, 15, 20, 0]
@@ -42,7 +39,15 @@ class Setting < ApplicationRecord
   validates :date_format,
             presence: true,
             allow_blank: false,
-            inclusion: date_format.values
+            inclusion: {
+              in: Setting.date_formats.keys
+            }
+
+  def self.date_format_attributes_for_form
+    date_formats.map do |date_format, _|
+      [I18n.t("enum.#{model_name.i18n_key}.date_formats.#{date_format}"), date_format]
+    end
+  end
 
   def subtitle?
     subtitle.present?
@@ -84,7 +89,7 @@ end
 #  show_file_upload         :boolean          default(FALSE)
 #  answering_machine        :boolean          default(FALSE)
 #  picture_in_picture       :boolean          default(TRUE)
-#  date_format              :integer
+#  date_format              :integer          default(0)
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer

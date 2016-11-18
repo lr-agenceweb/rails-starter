@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112185339) do
+ActiveRecord::Schema.define(version: 20161118125419) do
 
   create_table "adult_setting_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "adult_setting_id",               null: false
@@ -553,7 +553,7 @@ ActiveRecord::Schema.define(version: 20161112185339) do
     t.boolean  "show_file_upload",                       default: false
     t.boolean  "answering_machine",                      default: false
     t.boolean  "picture_in_picture",                     default: true
-    t.integer  "date_format"
+    t.integer  "date_format",                            default: 0
     t.boolean  "maintenance",                            default: false
     t.datetime "logo_updated_at"
     t.integer  "logo_file_size"

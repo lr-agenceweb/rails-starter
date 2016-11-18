@@ -40,25 +40,14 @@ gem 'active_skin'
 # Core enhancement
 # =====================
 gem 'draper', '3.0.0.pre1'
-gem 'enumerize', '~> 2.0.1'
-
-#
-# Html
-# =====================
 gem 'slim-rails' # slim file
-gem 'kaminari', '~> 0.17.0' # Pagination
-gem 'gretel' # Breadcrumb
-gem 'rails_autolink'
-gem 'truncate_html', github: 'AlexGunslinger/truncate_html'
-gem 'js_cookie_rails'
-gem 'fotoramajs'
-
-#
-# Calendar
-# =====================
-gem 'fullcalendar-rails'
-gem 'momentjs-rails'
-gem 'timecop'
+gem 'sassc-rails'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.2.0'
+gem 'turbolinks',
+    github: 'dobtco/turbolinks-classic',
+    branch: 'fix-deprecations' # Rails 5 fix (deprecations)
+gem 'jbuilder', '~> 2.0'
 
 #
 # Media upload
@@ -79,7 +68,6 @@ gem 'client_side_validations-simple_form',
     github: 'DavyJonesLocker/client_side_validations-simple_form',
     branch: 'rails5' # Rails 5 fix
 gem 'rails_autosize_jquery', github: 'lr-agenceweb/rails_autosize_jquery'
-gem 'wysiwyg-rails' # Froala editor
 gem 'valid_url'
 
 #
@@ -90,12 +78,6 @@ gem 'globalize', github: 'globalize/globalize' # Rails 5 fix
 gem 'activemodel-serializers-xml' # Rails 5 fix
 gem 'rails-i18n', '~> 5.0.0' # Rails 5 fix
 gem 'i18n-js', '>= 3.0.0.rc14'
-
-#
-# Map
-# =====================
-gem 'mapbox-rails', github: 'aai/mapbox-rails'
-gem 'gmaps-autocomplete-rails'
 
 #
 # SEO
@@ -134,26 +116,36 @@ gem 'inky-rb', require: 'inky' # inky Foundation
 gem 'premailer-rails'
 gem 'nokogiri'
 
+
 #
-# Assets
-# =====================
-gem 'sassc-rails'
-gem 'autoprefixer-rails'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2.0'
-gem 'jquery-ui-rails'
-gem 'turbolinks',
-    github: 'dobtco/turbolinks-classic',
-    branch: 'fix-deprecations' # Rails 5 fix (deprecations)
-gem 'nprogress-rails'
+# Frontend libraries
+# ====================
 gem 'foundation-rails', '~> 6.2.0'
+gem 'fotoramajs' # Slider
+gem 'fullcalendar-rails' # Calendar
+gem 'momentjs-rails'
+gem 'wysiwyg-rails' # Froala editor
+gem 'mapbox-rails', github: 'aai/mapbox-rails'
+gem 'kaminari', '~> 0.17.0' # Pagination
+gem 'gretel' # Breadcrumb
+gem 'js_cookie_rails'
+gem 'autoprefixer-rails'
+gem 'jquery-ui-rails'
+gem 'nprogress-rails'
 gem 'font-awesome-rails'
-gem 'jbuilder', '~> 2.0'
 gem 'gon'
 gem 'gravatar_image_tag'
 gem 'magnific-popup-rails', '~> 1.1.0'
 gem 'chartkick'
+
+#
+# Backend libraries
+# ===================
 gem 'faker'
+gem 'timecop'
+gem 'rails_autolink'
+gem 'truncate_html', github: 'AlexGunslinger/truncate_html'
+gem 'gmaps-autocomplete-rails'
 
 #
 # Video

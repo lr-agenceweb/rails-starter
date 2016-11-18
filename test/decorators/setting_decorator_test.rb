@@ -49,6 +49,14 @@ class SettingDecoratorTest < Draper::TestCase
   end
 
   #
+  # Date format
+  # =============
+  test 'should return correct I18n date_format for enum' do
+    expected = '<span class="status_tag with_time">30/04/2016 15:32</span>'
+    assert_equal expected, @setting_decorated.date_format_i18n
+  end
+
+  #
   # Other
   # =======
   test 'should return correct credentials' do

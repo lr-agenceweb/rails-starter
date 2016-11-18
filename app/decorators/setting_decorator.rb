@@ -55,6 +55,13 @@ class SettingDecorator < ApplicationDecorator
   end
 
   #
+  # Date format
+  # =============
+  def date_format_i18n
+    content_tag(:span, t("enum.setting.date_formats.#{model.date_format}"), class: "status_tag #{model.date_format}")
+  end
+
+  #
   # Other
   # =======
   def about

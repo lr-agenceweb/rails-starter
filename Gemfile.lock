@@ -282,8 +282,6 @@ GEM
       activesupport (~> 5.0)
       request_store (~> 1.0)
     draper-cancancan (1.1.1)
-    enumerize (2.0.1)
-      activesupport (>= 3.2)
     erubis (2.7.0)
     every_day_irb (2.0.0)
       cd (~> 1.0)
@@ -701,7 +699,6 @@ DEPENDENCIES
   dkim
   draper (= 3.0.0.pre1)
   draper-cancancan
-  enumerize (~> 2.0.1)
   exception_notification
   faker
   figaro
