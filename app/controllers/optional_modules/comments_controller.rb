@@ -17,6 +17,11 @@ class CommentsController < ApplicationController
   before_action :set_current_user, only: [:create]
   before_action :set_commentable_show_page, only: [:destroy], if: proc { @redirect_to_back }
 
+  # WebSockets
+  after_action :broadcast_comment,
+               only: :create,
+               if: proc { @comment.persisted? }
+
   # Mailer
   after_action :comment_created, only: [:create], if: :email_comment_created?
   after_action :comment_signalled, only: [:signal], if: :email_comment_signalled?
@@ -83,7 +88,7 @@ class CommentsController < ApplicationController
 
   def load_commentable
     klass = [About, Blog].detect { |c| params["#{c.name.underscore}_id"] }
-    @commentable = klass.find(params["#{klass.name.underscore}_id"])
+    @commentable = klass.friendly.find(params["#{klass.name.underscore}_id"])
     @page = @pages.find_by(name: klass.model_name.to_s)
     @controller_name = klass.name.underscore.pluralize
     redirect_to root_path unless @commentable.allow_comments?
@@ -123,6 +128,13 @@ class CommentsController < ApplicationController
 
   def set_page
     @page = Page.find_by(name: 'Blog')
+  end
+
+  #
+  # WebSockets
+  # ============
+  def broadcast_comment
+    ActionCable.server.broadcast('comment', comment: comment)
   end
 
   #
