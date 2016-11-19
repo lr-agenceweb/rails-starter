@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  # Devise
   devise_config = ActiveAdmin::Devise.config
   devise_config[:controllers][:omniauth_callbacks] = 'users/omniauth_callbacks'
   devise_for :users, devise_config
 
+  # ActiveAdmin
   ActiveAdmin.routes(self)
 
+  # Delayed web
+  authenticated :user, ->(user) { user.admin_or_super? } do
+    mount Delayed::Web::Engine, at: 'admin/jobs'
+  end
+
+  # Concerns
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end

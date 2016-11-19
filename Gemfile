@@ -104,9 +104,10 @@ gem 'analytical'
 #
 # Background Tasks
 # =====================
-gem 'whenever', require: false # Cron tasks
 gem 'daemons'
+gem 'delayed-web'
 gem 'delayed_job_active_record'
+gem 'whenever', require: false # Cron tasks
 
 #
 # Email
@@ -115,7 +116,6 @@ gem 'dkim' # authenticate emails
 gem 'inky-rb', require: 'inky' # inky Foundation
 gem 'premailer-rails'
 gem 'nokogiri'
-
 
 #
 # Frontend libraries

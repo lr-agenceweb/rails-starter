@@ -28,6 +28,7 @@ fr:
     posts: Articles
     config: Site Configuration
     modules_config: Modules configuration
+    jobs_web: Delayed Jobs
 
   menu:
     title_aa_show: "Élément de menu \"%{menu_item}\""

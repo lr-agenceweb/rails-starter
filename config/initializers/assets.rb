@@ -17,3 +17,6 @@ Rails.application.config.assets.precompile += %w(email.css newsletter.css mainte
 
 # ActiveAdmin Addons (paperclip attachment)
 Rails.application.config.assets.precompile += %w(fileicons/*.png)
+
+# DelayedJob (web interface)
+Rails.application.config.assets.precompile += %w(delayed/web/application.css)
