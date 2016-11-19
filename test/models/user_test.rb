@@ -20,9 +20,18 @@ class UserTest < ActiveSupport::TestCase
   should have_many(:blogs)
 
   should validate_presence_of(:username)
+    .with_message(I18n.t('errors.attributes.username.blank'))
   should validate_presence_of(:email)
+    .with_message(I18n.t('errors.attributes.email.blank'))
+
   should validate_uniqueness_of(:username)
+    .with_message(I18n.t('errors.messages.taken'))
   should validate_uniqueness_of(:email)
+    .with_message(I18n.t('errors.attributes.email.taken'))
+
+  should allow_value('lorem@ipsum.com').for(:email)
+  should_not allow_value('loremipsum.com').for(:email)
+    .with_message(I18n.t('errors.attributes.email.email'))
 
   should accept_nested_attributes_for(:role)
 
