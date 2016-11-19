@@ -2,12 +2,12 @@
 require 'test_helper'
 
 #
-# == ActiveAdmin namespace
-#
+# ActiveAdmin namespace
+# =======================
 module ActiveAdmin
   #
-  # == ViewsHelper Test
-  #
+  # ViewsHelper Test
+  # ==================
   class ViewsHelperTest < ActionView::TestCase
     include Rails.application.routes.url_helpers
 

@@ -43,10 +43,9 @@ ActiveAdmin.register Slide do
     columns do
       column do
         f.inputs t('formtastic.titles.slide_picture') do
-          hint = "#{t('formtastic.hints.slide.size')} <br /><br /> #{retina_image_tag(f.object, :image, :small)}".html_safe
           f.input :image,
                   as: :file,
-                  hint: hint
+                  hint: f.object.decorate.hint_for_paperclip
 
           f.input :online
         end

@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 #
-# == SliderDecorator
-#
+# SliderDecorator
+# =================
 class SliderDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
   #
-  # == ActiveAdmin
-  #
+  # ActiveAdmin
+  # =============
   def title_aa_show
     "#{I18n.t('activerecord.models.slider.one')} page #{page}"
   end

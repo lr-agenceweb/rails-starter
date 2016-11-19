@@ -10,7 +10,7 @@ string_box_descriptions = [
   'Message à afficher en cas d\'erreur 422 (page indisponible ponctuellement)',
   'Message à afficher en cas d\'erreur 500 (erreur du serveur)',
   'Message de succès à afficher lorsque le formulaire de contact a bien envoyé le mail à l\'administrateur',
-  'Message automatique envoyé aux internautes lorsqu\'il essaye de vous contacter'
+  'Message automatique envoyé aux internautes qui vous contacte'
 ]
 string_box_title_fr = [
   '404',
