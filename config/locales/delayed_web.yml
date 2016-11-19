@@ -1,0 +1,11 @@
+# French
+fr:
+  delayed/web:
+    flashes:
+      jobs:
+        queued:
+          alert: Job ne peut pas être mis en file d'attente car il est déjà %{status}
+          notice: Job placé en file d'attente
+        destroyed:
+          alert: Job ne peut pas être supprimé car il est déjà %{status}
+          notice: Job supprimé
