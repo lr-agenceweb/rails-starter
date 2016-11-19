@@ -8,6 +8,18 @@ class ApplicationHelperTest < ActionView::TestCase
   setup :initialize_test
 
   #
+  # DelayedJob
+  # ============
+  test 'should return correct value for delayed_job_enabled?' do
+    assert delayed_job_enabled?
+
+    %w(Video Audio Comment Newsletter Mailing).each do |om|
+      optional_modules(:"#{om.underscore}").update_attribute(:enabled, false)
+    end
+    assert_not delayed_job_enabled?
+  end
+
+  #
   # DateTime
   # ==========
   test 'should return current year' do

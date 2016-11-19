@@ -5,6 +5,19 @@
 # ====================
 module ApplicationHelper
   #
+  # DelayedJob
+  # ============
+  def delayed_job_enabled?
+    candidates = []
+    concerned = %w(Video Audio Comment Newsletter Mailing)
+
+    OptionalModule.find_each do |om|
+      candidates << om.enabled? if concerned.include?(om.name)
+    end
+    candidates.include?(true)
+  end
+
+  #
   # DateTime
   # ==========
   def current_year

@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   # Delayed web
-  authenticated :user, ->(user) { user.admin_or_super? } do
+  help = ApplicationController.helpers
+  authenticate :user, lambda { |user|
+    help.current_user_and_administrator?(user) &&
+      help.delayed_job_enabled?
+  } do
     mount Delayed::Web::Engine, at: 'admin/jobs'
   end
 

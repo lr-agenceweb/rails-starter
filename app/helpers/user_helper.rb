@@ -5,6 +5,6 @@
 #
 module UserHelper
   def current_user_and_administrator?(user = current_user)
-    user && user.admin_or_super?
+    user && (user.super_administrator? || user.administrator?)
   end
 end

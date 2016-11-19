@@ -202,16 +202,17 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
-      menu.add id: 'site_configuration',
-               label: I18n.t('admin_menu.config'),
+      menu.add label: I18n.t('admin_menu.config'),
+               id: 'site_configuration',
                priority: 100
-      menu.add id: 'jobs_web',
-               label: I18n.t('admin_menu.jobs_web'),
+      menu.add label: I18n.t('admin_menu.jobs_web'),
+               id: 'jobs_web',
                url: proc { delayed_web_path },
                parent: 'site_configuration',
                html_options: {
                  target: :_blank
-               }
+               },
+               if: proc { delayed_job_enabled? }
     end
 
     admin.build_menu :utility_navigation do |menu|

@@ -52,11 +52,6 @@ class User < ApplicationRecord
     end
   end
 
-  # TESTME: add test for this new method
-  def admin_or_super?
-    administrator? || super_administrator?
-  end
-
   def should_generate_new_friendly_id?
     username_changed? || super
   end
