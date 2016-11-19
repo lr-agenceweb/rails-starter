@@ -67,7 +67,6 @@ gem 'client_side_validations',
 gem 'client_side_validations-simple_form',
     github: 'DavyJonesLocker/client_side_validations-simple_form',
     branch: 'rails5' # Rails 5 fix
-gem 'rails_autosize_jquery', github: 'lr-agenceweb/rails_autosize_jquery'
 gem 'valid_url'
 
 #
@@ -169,6 +168,7 @@ gem 'dalli'
 gem 'vex_rails', github: 'anthony-robin/vex_rails'
 gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize'
 gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
+gem 'rails_autosize_jquery', github: 'lr-agenceweb/rails_autosize_jquery'
 
 group :development do
   gem 'spring'
