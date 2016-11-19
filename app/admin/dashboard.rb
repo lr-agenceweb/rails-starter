@@ -62,14 +62,8 @@ ActiveAdmin.register_page 'Dashboard' do
           render 'user', panel: panel, query: query
 
           # Mapbox
-          panel('Mapbox') { render 'elements/map' } if @show_map_contact
+          panel('Mapbox') { render 'elements/map' } if show_map_contact
         end
-      end # columns
-
-      columns do
-        column do |panel|
-          render 'optional_modules', panel: panel, query: OptionalModule.all
-        end # column
       end # columns
     end # if / else
   end # content
