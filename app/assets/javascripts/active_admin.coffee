@@ -23,15 +23,11 @@
 #= require admin/counter_letters
 
 #= require gmaps.js
-#= require mapbox
 #= require plugins/mapbox
 #= require admin/map
 
-#= require vex.combined.min.js
-#= require plugins/vex_config
-
 #= require fotorama
-
+#= require plugins/vex_config
 #= require plugins/emoticonize
 #= require plugins/datetimepicker
 

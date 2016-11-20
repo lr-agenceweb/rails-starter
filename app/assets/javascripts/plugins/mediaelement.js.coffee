@@ -1,3 +1,5 @@
+#= require mediaelement_rails
+#= require mediaelement/mejs-feature-logo.min
 #= require classes/picture_in_picture_class
 
 $(document).on 'ready page:load page:restore', ->
