@@ -4,8 +4,8 @@
 # == Comment Mailer
 #
 class CommentMailer < ApplicationMailer
-  include Rails.application.routes.url_helpers
   include ActionView::Helpers::UrlHelper
+  include Rails.application.routes.url_helpers
 
   layout 'mailers/default'
 
@@ -13,18 +13,16 @@ class CommentMailer < ApplicationMailer
   def comment_created(comment)
     I18n.with_locale(comment.lang) do
       define_comment_variables(comment)
-      @content = I18n.t('comment_mailer.comment_created.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :_blank), link_admin: link_to(@link, admin_post_comment_url(@comment), target: :_blank))
-      @greeting = I18n.t('comment.email.greeting', author: @setting.name) # Overwrite @greeting
     end
 
-    user_to_admin 'comment_validated'
+    user_to_admin 'comment_created'
   end
 
   # Email sent when comment is being signalled
   def comment_signalled(comment)
-    @comment = comment
-    @content = I18n.t('comment_mailer.comment_signalled.content', user: @comment.decorate.pseudo_registered_or_guest, locale: I18n.default_locale)
-
+    I18n.with_locale(comment.lang) do
+      define_comment_variables(comment)
+    end
     user_to_admin 'comment_signalled'
   end
 
@@ -38,17 +36,15 @@ class CommentMailer < ApplicationMailer
 
   private
 
-  def set_link
-    anchor = "comment-#{@comment.id}"
-    @link = @comment.commentable_type == 'Blog' ? blog_category_blog_url(@commentable.blog_category, @commentable, anchor: anchor) : polymorphic_url(@commentable, anchor: anchor)
-  end
-
   def define_comment_variables(comment)
     @comment = Comment.find(comment.id).decorate
     @commentable = @comment.commentable
     set_link
-    @greeting = I18n.t('comment.email.greeting', author: @comment.pseudo_registered_or_guest)
-    @content = I18n.t('comment.validated.email.content', date: @comment.decorate.created_at(:long), article: @commentable.title, link: link_to(@link, @link, target: :_blank))
+  end
+
+  def set_link
+    anchor = "comment-#{@comment.id}"
+    @link = @comment.commentable_type == 'Blog' ? blog_category_blog_url(@commentable.blog_category, @commentable, anchor: anchor) : polymorphic_url(@commentable, anchor: anchor)
   end
 
   def admin_to_user

@@ -1,4 +1,19 @@
 row
   columns
-    p = @greeting
-    p == @content
+    p = I18n.t('comment.email.greeting', author: @comment.pseudo_registered_or_guest)
+
+    p == I18n.t('comment_mailer.comment_validated.content', date: @comment.created_at(:long), article: @commentable.title)
+
+    p.text-center
+      br
+      / Frontend link
+      <!--[if mso]>
+        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{@link}" style="height:40px;v-text-anchor:middle;width:170px;" arcsize="8%" stroke="f" fillcolor="#0c708d">
+          <w:anchorlock/>
+          <center>
+        <![endif]-->
+            = link_to I18n.t('comment_mailer.comment_validated.link_frontend'), @link, target: :_blank, style: 'background-color:#0c708d;', class: 'btn-style weight-500'
+        <!--[if mso]>
+          </center>
+        </v:roundrect>
+      <![endif]-->

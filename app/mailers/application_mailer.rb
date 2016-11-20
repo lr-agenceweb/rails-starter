@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == Application Mailer
-#
+# Application Mailer
+# ====================
 class ApplicationMailer < ActionMailer::Base
   helper :html # HtmlHelper
 
