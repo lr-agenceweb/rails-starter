@@ -85,6 +85,12 @@ GIT
     rails_autosize_jquery (3.0.15)
 
 GIT
+  remote: git://github.com/markmcconachie/normalize-rails.git
+  revision: ce91e1557f5fb4588a17c70551a50376e8750bdf
+  specs:
+    normalize-rails (5.0.0)
+
+GIT
   remote: git://github.com/mvdstam/activeadmin-sortable.git
   revision: be5806ee5e1dc94da9331c9527f64e0f894a0b87
   specs:
@@ -741,6 +747,7 @@ DEPENDENCIES
   momentjs-rails
   mysql2
   nokogiri
+  normalize-rails!
   nprogress-rails
   omniauth-facebook
   omniauth-google-oauth2 (~> 0.4.1)

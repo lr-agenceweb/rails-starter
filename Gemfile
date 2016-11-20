@@ -119,6 +119,7 @@ gem 'nokogiri'
 #
 # Frontend libraries
 # ====================
+gem 'normalize-rails', github: 'markmcconachie/normalize-rails'
 gem 'foundation-rails', '~> 6.2.0'
 gem 'fotoramajs' # Slider
 gem 'fullcalendar-rails' # Calendar
