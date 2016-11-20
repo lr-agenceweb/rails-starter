@@ -20,7 +20,7 @@
 
             <!-- Lower Header -->
             <container>
-              <%= raw(render 'mailer/header') %>
+              <%= raw(render 'mailers/header') %>
             </container>
 
             <!-- Content -->
@@ -31,12 +31,12 @@
 
             <!-- Blocks -->
             <container>
-              <%= raw(render 'mailer/blocks') %>
+              <%= raw(render 'mailers/blocks') %>
             </container>
 
             <!-- Footer -->
             <container>
-              <%= raw(render 'mailer/footer') %>
+              <%= raw(render 'mailers/footer') %>
             </container>
 
             <!-- Lower Footer -->

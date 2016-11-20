@@ -29,7 +29,7 @@ fr:
       all: Voir tous les commentaires à modérer
     comment_validated:
       subject: Votre commentaire posté sur le site "%{site}" a été validé par l'administrateur !
-      content: Le commentaire que vous avez posté le <strong>%{date}</strong> sur l'article " <strong>%{article}</strong>" a été validé par l'administrateur.
+      content: Le commentaire que vous avez posté le <strong>%{date}</strong> sur l'article "<strong>%{article}</strong>" a été validé par l'administrateur.
       link_frontend: Vous pouvez le visualiser ici
 
   mailing_message_mailer:

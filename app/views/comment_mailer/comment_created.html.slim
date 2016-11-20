@@ -1,34 +1,25 @@
 row
   columns
-    p = I18n.t('comment.email.greeting', author: @setting.name)
-    p == I18n.t('comment_mailer.comment_created.content', date: @comment.created_at(:long), article: @commentable.title)
+    p = t('comment.email.greeting', author: @setting.name)
+    p == t('comment_mailer.comment_created.content', date: @comment.created_at(:long), article: @commentable.title)
 
     p.text-center
       br
       - if @comment.validated?
         / Frontend link
-        <!--[if mso]>
-          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{@link}" style="height:40px;v-text-anchor:middle;width:170px;" arcsize="8%" stroke="f" fillcolor="#0c708d">
-            <w:anchorlock/>
-            <center>
-          <![endif]-->
-              = link_to "#{I18n.t('comment_mailer.comment_created.link_frontend')} #{I18n.t('mailing.click_here_link')}", @link, target: :_blank, style: 'background-color:#0c708d;', class: 'btn-style weight-500'
-          <!--[if mso]>
-            </center>
-          </v:roundrect>
-        <![endif]-->
+        = render 'mailers/button',
+            label: "#{t('comment_mailer.comment_created.link_frontend')} #{t('mailing.click_here_link')}",
+            link: @link,
+            width: 170,
+            color: SharedColoredVariables::PRIMARY_COLOR,
+            klass: ''
 
-        br
-        br
+        br: br
 
       / Admin link
-      <!--[if mso]>
-        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{admin_post_comment_url(@comment)}" style="height:40px;v-text-anchor:middle;width:170px;" arcsize="8%" stroke="f" fillcolor="#ee732a">
-          <w:anchorlock/>
-          <center>
-        <![endif]-->
-            = link_to "#{I18n.t('comment_mailer.comment_created.link_backend')} #{I18n.t('mailing.click_here_link')}", admin_post_comment_url(@comment), target: :_blank, style: 'background-color:#ee732a', class: 'btn-style weight-500'
-        <!--[if mso]>
-          </center>
-        </v:roundrect>
-      <![endif]-->
+      = render 'mailers/button',
+          label: "#{t('comment_mailer.comment_created.link_backend')} #{t('mailing.click_here_link')}",
+          link: admin_post_comment_url(@comment),
+          width: 170,
+          color: SharedColoredVariables::SECONDARY_COLOR,
+          klass: ''
