@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 # =====================
 gem 'rails', '5.0.0.1'
 gem 'rails-observers', github: 'rails/rails-observers' # Rails 5 fix
+gem 'puma' # Server
 
 #
 # Database
@@ -186,7 +187,6 @@ group :development do
   gem 'railroady' # Graph of models
   gem 'annotate' # Annotate table structure in models
 
-  gem 'puma' # Server
   gem 'shog' # Colorize logs
   gem 'bullet' # Display N+1 db queries
   gem 'meta_request' # Debug Rails request in Chrome DevTools
@@ -197,7 +197,8 @@ group :development do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rvm'
   gem 'capistrano-rails-collection'
-  gem 'capistrano-passenger'
+  gem 'capistrano3-puma'
+  # gem 'capistrano-passenger'
   gem 'capistrano3-delayed-job', '~> 1.0'
 end
 
