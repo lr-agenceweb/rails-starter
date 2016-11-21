@@ -198,7 +198,6 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-rails-collection'
   gem 'capistrano3-puma'
-  # gem 'capistrano-passenger'
   gem 'capistrano3-delayed-job', '~> 1.0'
 end
 

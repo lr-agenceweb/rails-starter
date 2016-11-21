@@ -20,7 +20,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -55,14 +55,16 @@ Rails.application.configure do
   # Use a different cache store in production.
   config.cache_store = :dalli_store, { namespace: "#{Figaro.env.application_name}_#{Rails.env}", compress: true }
 
+  # ActionCable (WebSockets)
+  config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = 'http://assets.example.com'
+  config.action_controller.asset_host = Figaro.env.application_host_production
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: Figaro.env.application_domain_name_production }
-  config.action_controller.asset_host = Figaro.env.application_host_production
   config.action_mailer.asset_host = Figaro.env.application_host_production
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
