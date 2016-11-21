@@ -56,6 +56,7 @@ Rails.application.configure do
   config.cache_store = :dalli_store, { namespace: "#{Figaro.env.application_name}_#{Rails.env}", compress: true }
 
   # ActionCable (WebSockets)
+  config.action_cable.url = 'ws://localhost:3000/cable'
   config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.

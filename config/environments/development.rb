@@ -43,6 +43,7 @@ Rails.application.configure do
   config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
 
   # ActionCable (WebSockets)
+  config.action_cable.url = 'ws://localhost:3000/cable'
   config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
 
   # Print deprecation notices to the Rails logger.
