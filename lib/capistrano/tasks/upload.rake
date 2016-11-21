@@ -8,6 +8,7 @@ namespace :upload do
       upload! StringIO.new(File.read('config/application.yml')), "#{shared_path}/config/application.yml"
       upload! StringIO.new(File.read('config/database.yml')), "#{shared_path}/config/database.yml"
       upload! StringIO.new(File.read('config/secrets.yml')), "#{shared_path}/config/secrets.yml"
+      upload! StringIO.new(File.read('config/cable.yml')), "#{shared_path}/config/cable.yml"
       upload! StringIO.new(File.read('config/analytical.example.yml')), "#{shared_path}/config/analytical.yml"
       upload! StringIO.new(File.read('public/sitemap.xml')), "#{shared_path}/public/sitemap.xml"
       sudo :chmod, '644', "#{shared_path}/public/sitemap.xml"
