@@ -4,7 +4,7 @@ namespace :nginx do
     desc 'Upload the nginx vhost configuration file'
     task :vhost do
       on roles(:web) do
-        erb = File.read 'lib/capistrano/templates/nginx_conf.erb'
+        erb = File.read 'lib/capistrano/templates/nginx_conf_passenger.erb'
         config_file = "/tmp/nginx_#{fetch(:application)}.#{fetch(:stage)}"
         upload! StringIO.new(ERB.new(erb).result(binding)), config_file
         sudo :mv, config_file, "/etc/nginx/conf.d/#{fetch(:application)}.#{fetch(:stage)}.conf"
@@ -15,7 +15,7 @@ namespace :nginx do
     desc 'Upload the nginx vhost SSL configuration file'
     task :vhost_ssl do
       on roles(:web) do
-        erb = File.read 'lib/capistrano/templates/nginx_ssl_conf.erb'
+        erb = File.read 'lib/capistrano/templates/nginx_ssl_conf_passenger.erb'
         config_file = "/tmp/nginx_#{fetch(:application)}.#{fetch(:stage)}"
         upload! StringIO.new(ERB.new(erb).result(binding)), config_file
         sudo :mv, config_file, "/etc/nginx/conf.d/#{fetch(:application)}.#{fetch(:stage)}.conf"
