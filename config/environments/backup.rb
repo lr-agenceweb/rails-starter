@@ -4,9 +4,13 @@
 require_relative './production'
 
 Rails.application.configure do
+  # Mailer
   config.action_mailer.default_url_options = {
     host: Figaro.env.application_domain_name_backup
   }
+
+  # ActionCable (WebSockets)
+  config.action_cable.url = "ws://#{Figaro.env.application_host_backup}/cable"
 end
 
 # Set host to links in backup environment
