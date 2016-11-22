@@ -14,7 +14,7 @@ Rails.application.configure do
   config.action_mailer.asset_host = Figaro.env.application_host_staging
 
   # ActionCable (WebSockets)
-  config.action_cable.url = "ws://#{Figaro.env.application_host_staging}/cable"
+  config.action_cable.url = "ws://#{Figaro.env.application_domain_name_staging}/cable"
 
   # Restrict access to the staging environment
   config.middleware.insert_before(::Rack::Runtime, '::Rack::Auth::Basic', 'Staging environment') do |u, p|

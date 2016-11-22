@@ -10,7 +10,7 @@ Rails.application.configure do
   }
 
   # ActionCable (WebSockets)
-  config.action_cable.url = "ws://#{Figaro.env.application_host_backup}/cable"
+  config.action_cable.url = "ws://#{Figaro.env.application_domain_name_backup}/cable"
 end
 
 # Set host to links in backup environment
