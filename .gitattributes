@@ -36,8 +36,8 @@
 
 
 #
-# == Ignore while exporting
-#
+# Ignore while exporting
+# ========================
 
 # Folders
 /bin/procfile export-ignore
@@ -60,6 +60,7 @@ database.travis.yml export-ignore
 .env.example export-ignore
 .powrc export-ignore
 .rubocop.yml export-ignore
+.simplecov export-ignore
 .travis.yml export-ignore
 .travis_mariadb.sh export-ignore
 autoprefixer.yml export-ignore
@@ -67,8 +68,9 @@ circle.yml export-ignore
 coffeelint.json export-ignore
 gulpfile.coffee export-ignore
 gulpfile.js export-ignore
-LICENSE export-ignore
 package.json export-ignore
+Capfile
 Procfile export-ignore
 README.html export-ignore
 README.md export-ignore
+LICENSE export-ignore
