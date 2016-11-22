@@ -93,15 +93,6 @@ production:
 
 
 #
-# Mail server
-# =============
-mailer_address: ~
-mailer_port: ~
-mailer_user_name: ~
-mailer_password: ~
-
-
-#
 # Froala [ActiveAdmin wysiwyg editor]
 # =====================================
 froala_key: ~
