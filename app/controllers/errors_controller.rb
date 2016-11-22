@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == Errors Controller
-#
+# Errors Controller
+# ===================
 class ErrorsController < ApplicationController
   include Skippable
 
