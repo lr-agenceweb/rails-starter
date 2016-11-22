@@ -34,7 +34,7 @@ class HomesControllerTest < ActionController::TestCase
 
   test 'should fetch only online posts' do
     @homes = Home.online
-    assert_equal @homes.length, 1
+    assert_equal 1, @homes.length
   end
 
   test 'should get hompepage targetting home controller' do
