@@ -4,7 +4,7 @@
 # == StringBox
 #
 puts 'Creating StringBox'
-string_box_keys = %w(error_404 error_422 error_500 success_contact_form, answering_machine)
+string_box_keys = %w(error_404 error_422 error_500 success_contact_form answering_machine)
 string_box_descriptions = [
   'Message à afficher en cas d\'erreur 404 (page introuvable)',
   'Message à afficher en cas d\'erreur 422 (page indisponible ponctuellement)',

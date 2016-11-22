@@ -16,7 +16,7 @@ puts 'Creating site Setting'
   show_qrcode: true,
   show_breadcrumb: true,
   show_file_upload: true,
-  answering_machine: true
+  answering_machine: false
 )
 
 if @locales.include?(:en)
