@@ -18,7 +18,7 @@ Rails.application.configure do
   end
 end
 
-# Set host to links in staging
+# Set host to links in staging environment
 Rails.application.routes.default_url_options = {
   host: Figaro.env.application_host_staging
 }

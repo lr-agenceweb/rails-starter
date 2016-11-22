@@ -9,7 +9,7 @@ Rails.application.configure do
   }
 end
 
-# Set host to links in staging
+# Set host to links in backup environment
 Rails.application.routes.default_url_options = {
   host: Figaro.env.application_host_backup
 }
