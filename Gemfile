@@ -116,7 +116,6 @@ gem 'dkim' # authenticate emails
 gem 'inky-rb', require: 'inky' # inky Foundation
 gem 'premailer-rails'
 gem 'nokogiri'
-gem 'actionmailer-with-request', github: 'weppos/actionmailer_with_request'
 
 #
 # Frontend libraries

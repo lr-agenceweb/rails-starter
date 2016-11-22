@@ -107,3 +107,8 @@ Rails.application.configure do
     channel: Figaro.env.exception_notification_slack_channel
   }
 end
+
+# Set host to links in staging
+Rails.application.routes.default_url_options = {
+  host: Figaro.env.application_host_production
+}

@@ -17,3 +17,8 @@ Rails.application.configure do
       (u == Figaro.env.guest_username && p == Figaro.env.guest_password)
   end
 end
+
+# Set host to links in staging
+Rails.application.routes.default_url_options = {
+  host: Figaro.env.application_host_staging
+}

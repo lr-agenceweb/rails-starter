@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Staging configuration is identical to production, with some overrides
+# Backup configuration is identical to production, with some overrides
 require_relative './production'
 
 Rails.application.configure do
@@ -8,3 +8,8 @@ Rails.application.configure do
     host: Figaro.env.application_domain_name_backup
   }
 end
+
+# Set host to links in staging
+Rails.application.routes.default_url_options = {
+  host: Figaro.env.application_host_backup
+}
