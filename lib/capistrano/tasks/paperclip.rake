@@ -2,7 +2,7 @@
 namespace :paperclip do
   namespace :refresh do
     desc 'Refresh All Paperclip Styles (Must Specify \'CLASS\' parameter)'
-    task :all do
+    task :all do # cap <env> paperclip:refresh:all
       if ENV['CLASS']
         on roles(:app) do
           within release_path do
@@ -18,7 +18,7 @@ namespace :paperclip do
     end
 
     desc 'Refresh Missing Paperclip Styles'
-    task :missing do
+    task :missing do # cap <env> paperclip:refresh:missing
       on roles(:app) do
         within release_path do
           with rails_env: fetch(:rails_env) do

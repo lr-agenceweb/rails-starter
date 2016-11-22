@@ -109,8 +109,9 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
   * `cap <env> upload:all` : Execute all previous commands in one task
 
 * **Database backup** (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)  
-  * `cap <env> backup:upload_config` : Upload backup parent config file
-  * `cap <env> backup:upload_model` : Upload model file corresponding to a database
+  * `cap <env> backup:upload:config` : Upload backup parent config file
+  * `cap <env> backup:upload:model` : Upload model file corresponding to a database
+  * `cap <env> backup:upload:all` : Upload both config and model files
 
 * **Logrotate**  
   * `cap <env> logrotate:upload` : Upload logrotate config file

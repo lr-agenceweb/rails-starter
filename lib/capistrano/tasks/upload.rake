@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 namespace :upload do
   desc 'Symlink shared directories and files'
-  task :yml do
+  task :yml do # cap <env> upload:yml
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config"
       execute "mkdir -p #{shared_path}/public"
@@ -16,7 +16,7 @@ namespace :upload do
   end
 
   desc 'Upload DKIM private key'
-  task :dkim do
+  task :dkim do # cap <env> upload:dkim
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config/dkim"
       upload! StringIO.new(File.read('config/dkim/dkim.private.key')), "#{shared_path}/config/dkim/dkim.private.key"
@@ -25,7 +25,7 @@ namespace :upload do
   end
 
   desc 'Upload default missing pictures'
-  task :missing do
+  task :missing do # cap <env> upload:missing
     on roles(:app) do
       remote_public_folder = "#{shared_path}/public"
       execute "mkdir -p #{shared_path}/public"
@@ -38,7 +38,7 @@ namespace :upload do
   end
 
   desc 'Upload seeds pictures'
-  task :seeds do
+  task :seeds do # cap <env> upload:seeds
     on roles(:app) do
       remote_db_folder = "#{shared_path}/db"
       execute "mkdir -p #{shared_path}/db/seeds"
@@ -51,7 +51,7 @@ namespace :upload do
   end
 
   desc 'Upload all yml, dkim, missing in one time'
-  task :all do
+  task :all do # cap <env> upload:all
     invoke 'upload:yml'
     invoke 'upload:dkim'
     invoke 'upload:missing'
