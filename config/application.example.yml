@@ -23,8 +23,8 @@ application_base_secret_key: ~
 #
 # Server [Puma]
 # ===============
-puma_workers: 2
-nginx_use_ssl: false
+puma_workers: '2'
+nginx_use_ssl: 'false'
 
 
 #
