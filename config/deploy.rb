@@ -48,4 +48,5 @@ set :backup_name, fetch(:application_name)
 
 # Puma configuration
 set :nginx_config_name, fetch(:application)
-set :puma_workers, 2
+set :puma_workers, Figaro.env.puma_workers || '2'
+set :nginx_use_ssl, Figaro.env.nginx_use_ssl || 'false'
