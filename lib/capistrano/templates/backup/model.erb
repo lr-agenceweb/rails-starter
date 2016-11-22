@@ -11,7 +11,7 @@
 #
 app_config = YAML.load_file("<%= current_path %>/config/application.yml")
 
-LR_Backup.new(:<%= fetch(:backup_name) %>, "Site <%= fetch(:host_name) %>") do
+<%= fetch(:backup_parent_class) %>.new(:<%= fetch(:backup_name) %>, "Site <%= fetch(:host_name) %>") do
 
   ##
   # MySQL [Database]

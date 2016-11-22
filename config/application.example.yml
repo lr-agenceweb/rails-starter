@@ -145,6 +145,7 @@ exception_notification_slack_channel: '#exceptions'
 #
 # Backup gem
 # ============
+backup_parent_class: ~ # Parent class name
 production:
   dropbox: # Dropbox [Storage]
     api_key: ~

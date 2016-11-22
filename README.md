@@ -96,10 +96,11 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
 #### Rails
 
 * Color Routes: colored version of rake routes (run `rake color_routes`)
-* Dump SQL: make a quick save of your Database (run `rake db:backup`)
 
 
 #### Capistrano
+* **Nginx/Puma**  
+  * `cap <env> puma:nginx_config` : Upload puma vhost config file
 
 * **Uploads**  
   * `cap <env> upload:yml` : Upload yml configuration files such as application, database, secrets, ...
@@ -107,19 +108,12 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
   * `cap <env> upload:missing` : Upload default pictures when missing or unavailable paperclip model objects
   * `cap <env> upload:all` : Execute all previous commands in one task
 
-* **Database backup**  
-  * `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
+* **Database backup** (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)  
+  * `cap <env> backup:upload_config` : Upload backup parent config file
+  * `cap <env> backup:upload_model` : Upload model file corresponding to a database
 
 * **Logrotate**  
-  * `cap <env> logrotate:upload` : Upload logrotate config file to remote server
-
-* **Nginx**  
-  * `cap <env> nginx:upload:vhost` : Upload vhost config file to remote server (create file in conf.d)
-  * `cap <env> nginx:upload:vhost_ssl` : Same as above with SSL configuration for vhost (Let's Encrypt)
-  * `cap <env> nginx:vhost:symlink` : Symlink application path to /var/www
-  * `cap <env> nginx:vhost:disable` : Disable vhost (rename extension to .disabled)
-  * `cap <env> nginx:vhost:enable` : Enable vhost (rename extension to .conf)
-  * `cap <env> nginx:vhost:remove` : Remove uploaded vhost to conf.d folder
+  * `cap <env> logrotate:upload` : Upload logrotate config file
 
 * **Paperclip**  
   * `cap <env> paperclip:refresh:all` : Regenerate all Paperclip styles

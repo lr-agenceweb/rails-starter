@@ -44,7 +44,8 @@ set :keep_releases, 5
 
 # Backup database config files
 set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
-set :backup_name, fetch(:application_name)
+set :backup_name, fetch(:application)
+set :backup_parent_class, Figaro.env.backup_parent_class || 'ApplicationBackup'
 
 # Puma configuration
 set :nginx_config_name, fetch(:application)
