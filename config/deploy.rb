@@ -50,3 +50,4 @@ set :backup_name, fetch(:application_name)
 set :nginx_config_name, fetch(:application)
 set :puma_workers, Figaro.env.puma_workers || '2'
 set :nginx_use_ssl, Figaro.env.nginx_use_ssl || 'false'
+set :puma_use_actioncable, Figaro.env.puma_use_actioncable || 'false'
