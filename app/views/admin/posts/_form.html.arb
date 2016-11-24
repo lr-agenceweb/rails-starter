@@ -15,6 +15,8 @@ f.columns do
                 as: :select,
                 include_blank: false,
                 collection: BlogCategory.includes(:translations).all
+
+        f.li f.object.decorate.create_blog_category_link
       end
 
       render 'admin/publication_dates/form', f: f
