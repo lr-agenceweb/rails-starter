@@ -52,7 +52,7 @@ branches:
 
 addons:
   mariadb: '10.1'
-  postgresql: '9.5' # Rails 5 fix
+  postgresql: '9.4' # Rails 5 fix
   apt:
     sources:
       - travis-ci/sqlite3 # Rails 5 fix
