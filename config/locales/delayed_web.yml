@@ -4,8 +4,8 @@ fr:
     flashes:
       jobs:
         queued:
-          alert: Job ne peut pas être mis en file d'attente car il est déjà %{status}
-          notice: Job placé en file d'attente
+          alert: Cette tâche ne peut pas être mise en file d'attente car elle est déjà %{status}
+          notice: Tâche placée en file d'attente
         destroyed:
-          alert: Job ne peut pas être supprimé car il est déjà %{status}
-          notice: Job supprimé
+          alert: Cette tâche ne peut pas être supprimée car elle est déjà %{status}
+          notice: Tâche supprimée
