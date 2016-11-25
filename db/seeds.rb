@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# Includes
+include ActionView::Helpers::TagHelper
+include ActionView::Context
+
 # Variables
 @locales = I18n.available_locales
 @tmp_path = Rails.root.join('public', 'tmp')

@@ -45,13 +45,13 @@ ActiveAdmin.register_page 'Dashboard' do
           render 'posts', panel: panel, query: @posts
 
           # Pages
-          render 'pages', panel: panel, query: Page.includes(:background, menu: [:translations]) if current_user.super_administrator?
+          render 'pages', panel: panel, query: Page.includes(:background, :video_upload, menu: [:translations]) if current_user.super_administrator?
         end # column
 
         # Right
         column do |panel|
           # Comments
-          render 'comments', panel: panel, query: Comment.includes(:commentable).order(id: :desc).last(5) if OptionalModule.find_by(name: 'Comment').enabled?
+          render 'comments', panel: panel, query: Comment.includes(commentable: [:translations, :blog_category]).order(id: :desc).last(5) if OptionalModule.find_by(name: 'Comment').enabled?
 
           # Settings
           render 'settings', panel: panel, query: Setting.first
@@ -62,14 +62,8 @@ ActiveAdmin.register_page 'Dashboard' do
           render 'user', panel: panel, query: query
 
           # Mapbox
-          panel('Mapbox') { render 'elements/map' } if @show_map_contact
+          panel('Mapbox') { render 'elements/map' } if show_map_contact
         end
-      end # columns
-
-      columns do
-        column do |panel|
-          render 'optional_modules', panel: panel, query: OptionalModule.all
-        end # column
       end # columns
     end # if / else
   end # content

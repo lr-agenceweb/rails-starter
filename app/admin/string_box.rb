@@ -18,7 +18,6 @@ ActiveAdmin.register StringBox do
     column :description
     column :title
     column :content
-    column :optional_module if current_user.super_administrator?
 
     translation_status
     actions
@@ -31,7 +30,6 @@ ActiveAdmin.register StringBox do
         row :description
         row :title
         row :content
-        row :optional_module if current_user.super_administrator?
       end
     end
   end
@@ -39,30 +37,17 @@ ActiveAdmin.register StringBox do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
 
-    f.columns do
-      f.column do
-        f.inputs do
-          if f.object.new_record?
-            f.input :key
-          else
-            f.input :key, input_html: { disabled: :disabled }
+    if f.object.description?
+      f.columns do
+        f.column do
+          f.inputs t('activerecord.attributes.string_box.description') do
+            content_tag(:li) do
+              concat content_tag(:p, f.object.description)
+            end
           end
-
-          f.input :optional_module_id,
-                  as: :select,
-                  collection: OptionalModule.all.map { |m| [m.decorate.name, m.id] },
-                  include_blank: true
-        end
-      end
-    end if current_user.super_administrator?
-
-    f.columns do
-      f.column do
-        f.inputs t('activerecord.attributes.string_box.description') do
-          "<li><p>#{f.object.description}</p></li>".html_safe
-        end
-      end
-    end if f.object.description?
+        end # column
+      end # columns
+    end # if
 
     f.columns do
       f.column do
@@ -75,6 +60,25 @@ ActiveAdmin.register StringBox do
         end
       end
     end
+
+    if current_user.super_administrator?
+      f.columns do
+        f.column do
+          f.inputs do
+            if f.object.new_record?
+              f.input :key
+            else
+              f.input :key, input_html: { disabled: :disabled }
+            end
+
+            f.input :optional_module_id,
+                    as: :select,
+                    collection: OptionalModule.all.map { |m| [m.decorate.name, m.id] },
+                    include_blank: true
+          end
+        end # column
+      end # columns
+    end # if
 
     f.actions
   end

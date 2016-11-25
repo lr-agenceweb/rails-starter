@@ -5,7 +5,7 @@ require 'test_helper'
 # == MailingMessagesController Test
 #
 class MailingMessagesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
 
   setup :initialize_test
@@ -16,7 +16,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
   test 'should render preview in browser template' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        get :preview_in_browser, locale: locale.to_s, id: @mailing_message.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token
+        get :preview_in_browser, params: { locale: locale.to_s, id: @mailing_message.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token }
         assert_response :success
         assert_template :send_email, layout: 'mailing'
       end
@@ -30,7 +30,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview_in_browser, locale: locale.to_s, id: @mailing_message_two.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token
+          get :preview_in_browser, params: { locale: locale.to_s, id: @mailing_message_two.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token }
         end
       end
     end
@@ -40,7 +40,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview_in_browser, locale: locale.to_s, id: @mailing_message.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: ''
+          get :preview_in_browser, params: { locale: locale.to_s, id: @mailing_message.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: '' }
         end
       end
     end
@@ -50,7 +50,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview_in_browser, locale: locale.to_s, id: @mailing_message.id, token: '', mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token
+          get :preview_in_browser, params: { locale: locale.to_s, id: @mailing_message.id, token: '', mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token }
         end
       end
     end
@@ -60,7 +60,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview_in_browser, locale: locale.to_s, id: @mailing_message_two.id, token: @mailing_message_two.token, mailing_user_id: @mailing_user_two.id, mailing_user_token: @mailing_user_two.token
+          get :preview_in_browser, params: { locale: locale.to_s, id: @mailing_message_two.id, token: @mailing_message_two.token, mailing_user_id: @mailing_user_two.id, mailing_user_token: @mailing_user_two.token }
         end
       end
     end
@@ -70,7 +70,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview_in_browser, locale: locale.to_s, id: @mailing_message_three.id, token: @mailing_message_three.token, mailing_user_id: @mailing_user_two.id, mailing_user_token: @mailing_user_two.token
+          get :preview_in_browser, params: { locale: locale.to_s, id: @mailing_message_three.id, token: @mailing_message_three.token, mailing_user_id: @mailing_user_two.id, mailing_user_token: @mailing_user_two.token }
         end
       end
     end
@@ -117,7 +117,7 @@ class MailingMessagesControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview_in_browser, locale: locale.to_s, id: @mailing_message.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token
+          get :preview_in_browser, params: { locale: locale.to_s, id: @mailing_message.id, token: @mailing_message.token, mailing_user_id: @mailing_user.id, mailing_user_token: @mailing_user.token }
         end
       end
     end

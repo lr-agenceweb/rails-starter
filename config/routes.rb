@@ -1,11 +1,23 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  # Devise
   devise_config = ActiveAdmin::Devise.config
   devise_config[:controllers][:omniauth_callbacks] = 'users/omniauth_callbacks'
   devise_for :users, devise_config
 
+  # ActiveAdmin
   ActiveAdmin.routes(self)
 
+  # Delayed web
+  help = ApplicationController.helpers
+  authenticate :user, lambda { |user|
+    help.current_user_and_administrator?(user) &&
+      help.delayed_job_enabled?
+  } do
+    mount Delayed::Web::Engine, at: 'admin/jobs'
+  end
+
+  # Concerns
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
@@ -97,10 +109,10 @@ Rails.application.routes.draw do
     end
 
     # Errors
-    %w( 404 422 500 ).each do |code|
+    %w(404 422 500).each do |code|
       get "/#{code}", to: 'errors#show', code: code, as: "error_#{code}".to_sym
     end
-  end
+  end # localized
 
   # Robots and humans
   get 'robots.:format', to: 'robots#index'

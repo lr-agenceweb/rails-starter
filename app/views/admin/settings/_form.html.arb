@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 f.columns do
+
+  # Left column
   f.column do
     f.inputs t('formtastic.titles.setting_general_details') do
       f.columns do
@@ -36,6 +38,7 @@ f.columns do
     end
   end
 
+  # Right column
   f.column do
     f.inputs t('formtastic.titles.setting_user_details') do
       f.input :name
@@ -48,11 +51,7 @@ f.columns do
       f.input :show_file_upload
       f.input :answering_machine
     end
-  end
-end
 
-f.columns do
-  f.column do
     f.inputs t('formtastic.titles.setting_misc_details') do
       f.input :show_admin_bar
 
@@ -63,7 +62,7 @@ f.columns do
 
       f.input :date_format,
               as: :radio,
-              collection: Setting.date_format.options
+              collection: Setting.date_format_attributes_for_form
     end
   end
 end

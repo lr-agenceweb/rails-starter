@@ -5,10 +5,10 @@ article.post.search
 
       header.post__header
         h3.post__header__title
-          = link_to highlight(search.title, params[:term]), search.decorate.show_page_link, class: 'search__title__link'
+          = link_to highlight(search.title, params[:term]), resource_route_show(search.object), class: 'search__title__link'
 
       .post__body
         - text = excerpt(search.content, params[:term], radius: 100)
         - highlight = text.blank? ? search.content : highlight(text, params[:term])
 
-        = truncate_read_more(highlight, search.decorate.show_page_link)
+        = truncate_read_more(highlight, resource_route_show(search.object))

@@ -9,7 +9,7 @@ module Users
   # == OmniauthCallbacksController Test
   #
   class OmniauthCallbacksControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
@@ -113,21 +113,21 @@ module Users
     #
     test 'should not unlink omniauth if user is not same as current connected' do
       sign_in @administrator
-      delete :unlink, provider: 'facebook', id: @facebook_user.id
+      delete :unlink, params: { provider: 'facebook', id: @facebook_user.id }
       assert_equal I18n.t('omniauth.unlink.alert.wrong_identity'), flash[:alert]
       assert_redirected_to admin_user_path(@administrator)
     end
 
     test 'should not unlink omniauth if user is not omniauth user' do
       sign_in @administrator
-      delete :unlink, provider: 'facebook', id: @subscriber.id
+      delete :unlink, params: { provider: 'facebook', id: @subscriber.id }
       assert_equal I18n.t('omniauth.unlink.alert.wrong_identity'), flash[:alert]
       assert_redirected_to admin_user_path(@administrator)
     end
 
     test 'should unlink omniauth if all good' do
       sign_in @facebook_user
-      delete :unlink, provider: 'facebook', id: @facebook_user.id
+      delete :unlink, params: { provider: 'facebook', id: @facebook_user.id }
       assert_equal I18n.t('omniauth.unlink.alert.success', provider: 'Facebook'), flash[:notice]
       assert_redirected_to admin_user_path(@facebook_user)
     end
@@ -201,7 +201,7 @@ module Users
       @social_connect_module.update_attribute(:enabled, false)
       sign_in @facebook_user
       assert_raises(ActionController::RoutingError) do
-        delete :unlink, provider: 'facebook', id: @facebook_user.id
+        delete :unlink, params: { provider: 'facebook', id: @facebook_user.id }
       end
     end
 
@@ -209,14 +209,14 @@ module Users
       @social_connect_setting.update_attribute(:enabled, false)
       sign_in @facebook_user
       assert_raises(ActionController::RoutingError) do
-        delete :unlink, provider: 'facebook', id: @facebook_user.id
+        delete :unlink, params: { provider: 'facebook', id: @facebook_user.id }
       end
     end
 
     test 'should not unlink user if facebook provider is disabled' do
       @social_provider_facebook.update_attribute(:enabled, false)
       assert_raises(ActionController::RoutingError) do
-        delete :unlink, provider: 'facebook', id: @facebook_user.id
+        delete :unlink, params: { provider: 'facebook', id: @facebook_user.id }
       end
     end
 

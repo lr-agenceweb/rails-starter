@@ -2,12 +2,18 @@
 require 'test_helper'
 
 #
-# == NewsletterSetting test
-#
+# NewsletterSetting test
+# ========================
 class NewsletterSettingTest < ActiveSupport::TestCase
   #
-  # == Validation
+  # Shoulda
+  # =========
+  should have_many(:newsletter_user_roles)
+  should accept_nested_attributes_for(:newsletter_user_roles)
+
   #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     newsletter_setting = NewsletterSetting.new
     assert_not newsletter_setting.valid?

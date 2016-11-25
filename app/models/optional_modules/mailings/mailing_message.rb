@@ -1,22 +1,8 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: mailing_messages
-#
-#  id             :integer          not null, primary key
-#  title          :string(255)
-#  content        :text(65535)
-#  show_signature :boolean          default(TRUE)
-#  sent_at        :datetime
-#  token          :string(255)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#
-
 #
 # MailingMessage Model
-# ========================
+# ======================
 class MailingMessage < ApplicationRecord
   include Tokenable
   include Mailable
@@ -30,8 +16,10 @@ class MailingMessage < ApplicationRecord
   attr_accessor :should_redirect
 
   # Callbacks
-  before_save :redirect_to_form?, if: proc { |r| r.picture.try(:new_record?) || r.picture.try(:changed?) }
-  after_save :redirect_to_form?, if: proc { |r| r.picture.try(:destroyed?) }
+  before_save :redirect_to_form?,
+              if: proc { |r| r.picture.try(:new_record?) || r.picture.try(:changed?) }
+  after_save :redirect_to_form?,
+             if: proc { |r| r.picture.try(:destroyed?) }
 
   # Model relations
   has_many :mailing_users, through: :mailing_message_users
@@ -43,3 +31,15 @@ class MailingMessage < ApplicationRecord
     self.should_redirect = true
   end
 end
+
+# == Schema Information
+#
+# Table name: mailing_messages
+#
+#  id             :integer          not null, primary key
+#  show_signature :boolean          default(TRUE)
+#  sent_at        :datetime
+#  token          :string(255)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#

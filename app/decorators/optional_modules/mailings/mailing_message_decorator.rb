@@ -8,12 +8,12 @@ class MailingMessageDecorator < ApplicationDecorator
   delegate_all
 
   def preview
-    html = ''
+    html = []
     I18n.available_locales.each do |locale|
-      html += link_to I18n.t('mailing.preview', lang: I18n.t("active_admin.globalize.language.#{locale}")), send("preview_admin_mailing_message_#{locale}_path", model.id), target: :_blank
-      html += '<br/>'
+      html << link_to(I18n.t('mailing.preview', lang: I18n.t("active_admin.globalize.language.#{locale}")), send("preview_admin_mailing_message_#{locale}_path", model.id), target: :_blank)
+      html << tag(:br)
     end
-    raw html
+    safe_join [html]
   end
 
   def live_preview

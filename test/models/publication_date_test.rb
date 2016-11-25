@@ -2,14 +2,19 @@
 require 'test_helper'
 
 #
-# == PublicationDate Model test
-#
+# PublicationDate Model test
+# ============================
 class PublicationDateTest < ActiveSupport::TestCase
   setup :initialize_test
 
   #
-  # == Published later / Expired prematurely
+  # Shoulda
+  # =========
+  should belong_to(:publishable)
+
   #
+  # Published later / Expired prematurely
+  # =======================================
   test 'should reset published_at to null if boolean is not checked' do
     assert_equal '2028-03-11 09:00:00', @published_later.published_at.to_s(:db)
     @published_later.update_attribute(:published_later, false)

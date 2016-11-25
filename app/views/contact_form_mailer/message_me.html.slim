@@ -2,7 +2,7 @@ row
   columns
     .message
       p = I18n.t('newsletter.hello', subscriber: @setting.name)
-      p = @message.message
+      = simple_format @message.message
 
     p.sent-from
       == mail_to @message.email, @message.extract_name_from_email

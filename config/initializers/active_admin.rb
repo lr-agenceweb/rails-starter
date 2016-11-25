@@ -202,11 +202,21 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
-      menu.add id: 'site_configuration', label: I18n.t('admin_menu.config'), priority: 100
+      menu.add label: I18n.t('admin_menu.config'),
+               id: 'site_configuration',
+               priority: 100
+      menu.add label: I18n.t('admin_menu.jobs_web'),
+               id: 'jobs_web',
+               url: proc { delayed_web_path },
+               parent: 'site_configuration',
+               html_options: {
+                 target: :_blank
+               },
+               if: proc { delayed_job_enabled? }
     end
 
     admin.build_menu :utility_navigation do |menu|
-      menu.add label: proc { raw "#{retina_thumb_square(current_user)} <span>#{display_name(current_active_admin_user)} (#{I18n.t('role.' + current_active_admin_user.role_name)}) <br /> #{current_active_admin_user.decorate.connected_from} </span>" },
+      menu.add label: proc { current_active_admin_user.decorate.active_admin_header_user_profile },
                url: proc { url_for([:admin, current_active_admin_user]) },
                id: 'current_user'
 
@@ -270,5 +280,14 @@ module ActiveAdmin
         end
       end
     end
+  end
+end
+
+# FriendlyId Rails 5 fix
+ActiveAdmin::ResourceController.class_eval do
+  def find_resource
+    return scoped_collection.friendly.find(params[:id]) if resource_class.is_a?(FriendlyId)
+
+    scoped_collection.find(params[:id])
   end
 end

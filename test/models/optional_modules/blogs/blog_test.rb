@@ -2,16 +2,45 @@
 require 'test_helper'
 
 #
-# == Blog model test
-#
+# Blog Model test
+# =================
 class BlogTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
+  include Rails.application.routes.url_helpers
 
   setup :initialize_test
 
   #
-  # == Validation rules
+  # Shoulda
+  # =========
+  should have_one(:publication_date)
+  should have_one(:audio)
+  should have_one(:picture)
+  should have_many(:pictures)
+  should have_one(:video_upload)
+  should have_many(:video_uploads)
+  should have_one(:video_platform)
+  should have_many(:video_platforms)
+  should have_many(:comments)
+  should have_one(:referencement)
+  should belong_to(:blog_category)
+  should belong_to(:user)
+
+  should accept_nested_attributes_for(:publication_date)
+  should accept_nested_attributes_for(:picture)
+  should accept_nested_attributes_for(:pictures)
+  should accept_nested_attributes_for(:video_upload)
+  should accept_nested_attributes_for(:video_uploads)
+  should accept_nested_attributes_for(:video_platform)
+  should accept_nested_attributes_for(:video_platforms)
+  should accept_nested_attributes_for(:comments)
+  should accept_nested_attributes_for(:referencement)
+
+  should validate_presence_of(:blog_category)
+
   #
+  # Validation rules
+  # ==================
   test 'should not be valid if no category specified' do
     blog = Blog.new
     refute blog.valid?, 'should not be valid if all fields are blank'
@@ -139,6 +168,14 @@ class BlogTest < ActiveSupport::TestCase
   #
   # == Prev / Next
   #
+  test 'should return correct prev blog' do
+    assert_equal blog_category_blog_path(@blog.blog_category, @blog), @blog_third.prev_post
+  end
+
+  test 'should return correct next blog' do
+    assert_equal blog_category_blog_path(@blog_third.blog_category, @blog_third), @blog.next_post
+  end
+
   test 'should have a next record' do
     assert @blog.next?, 'should have a next record'
     assert @blog_third.next?, 'should have a next record'
@@ -233,7 +270,7 @@ class BlogTest < ActiveSupport::TestCase
     @blog_naked = blogs(:naked)
 
     @blog_category = blog_categories(:one)
-    @blog_category_2 = blog_categories(:two)
+    @blog_category_two = blog_categories(:two)
   end
 
   def reset_counter_cache
@@ -243,9 +280,9 @@ class BlogTest < ActiveSupport::TestCase
     end
 
     @blog_category.reload
-    @blog_category_2.reload
+    @blog_category_two.reload
     assert_equal 3, @blog_category.blogs.size
-    assert_equal 2, @blog_category_2.blogs.size
+    assert_equal 2, @blog_category_two.blogs.size
   end
 
   def set_blog_record

@@ -9,7 +9,7 @@ module Admin
   # == AdultSettingsController test
   #
   class AdultSettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
@@ -22,13 +22,13 @@ module Admin
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @adult_setting
+      get :edit, params: { id: @adult_setting }
       assert_response :success
     end
 
     # Valid params
     test 'should update adult_setting if logged in' do
-      patch :update, id: @adult_setting, adult_setting: {}
+      patch :update, params: { id: @adult_setting, adult_setting: {} }
       assert_redirected_to admin_adult_setting_path
     end
 
@@ -37,7 +37,7 @@ module Admin
     #
     test 'should not destroy adult_setting if logged in as subscriber' do
       assert_no_difference 'AdultSetting.count' do
-        delete :destroy, id: @adult_setting
+        delete :destroy, params: { id: @adult_setting }
       end
     end
 
@@ -45,12 +45,12 @@ module Admin
     # == Validation
     #
     test 'should not update if redirect_link is not a correct url' do
-      patch :update, id: @adult_setting, adult_setting: { redirect_link: 'fake' }
+      patch :update, params: { id: @adult_setting, adult_setting: { redirect_link: 'fake' } }
       assert_not assigns(:adult_setting).valid?
     end
 
     test 'should update if redirect_link is not present' do
-      patch :update, id: @adult_setting, adult_setting: { redirect_link: '' }
+      patch :update, params: { id: @adult_setting, adult_setting: { redirect_link: '' } }
       assert assigns(:adult_setting).valid?
     end
 

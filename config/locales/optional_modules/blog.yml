@@ -8,6 +8,9 @@ en:
     in_category: in %{category} category
     destroy:
       confirm: Are you sure you want to remove this article ?
+  blog_category:
+    missing: If your category doesn't appear in list, you can
+    add: add it
 
 # French
 fr:
@@ -19,3 +22,6 @@ fr:
     in_category: dans la catégorie %{category}
     destroy:
       confirm: Êtes-vous sûr de vouloir supprimer cet article ?
+  blog_category:
+    missing: Si votre catégorie n'apparait pas dans la liste, vous pouvez
+    add: l'ajouter

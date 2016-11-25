@@ -2,14 +2,29 @@
 require 'test_helper'
 
 #
-# == GuestBook model test
-#
+# GuestBook Model test
+# ======================
 class GuestBookTest < ActiveSupport::TestCase
   setup :initialize_test
 
   #
-  # == Validation
+  # Shoulda
+  # =========
+  should validate_presence_of(:email)
+  should validate_presence_of(:username)
+  should validate_presence_of(:content)
+  should validate_presence_of(:lang)
+  should validate_absence_of(:nickname)
+
+  should allow_value('lorem@ipsum.com').for(:email)
+  should_not allow_value('loremipsum.com').for(:email)
+
+  should validate_inclusion_of(:lang)
+    .in_array(I18n.available_locales.map(&:to_s))
+
   #
+  # Validation rules
+  # ==================
   test 'should be able to create if all good' do
     guest_book = GuestBook.new(content: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'fr')
     assert guest_book.valid?

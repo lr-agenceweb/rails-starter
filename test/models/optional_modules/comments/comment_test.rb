@@ -2,14 +2,32 @@
 require 'test_helper'
 
 #
-# == Comment test
-#
+# Comment Model test
+# ====================
 class CommentTest < ActiveSupport::TestCase
   setup :initialize_test
 
   #
-  # == Validation
+  # Shoulda
+  # =========
+  should belong_to(:commentable)
+  should belong_to(:user)
+
+  should_not validate_presence_of(:username)
+  should_not validate_presence_of(:email)
+  should validate_presence_of(:comment)
+  should validate_presence_of(:lang)
+  should validate_absence_of(:nickname)
+
+  should allow_value('lorem@ipsum.com').for(:email)
+  should_not allow_value('loremipsum.com').for(:email)
+
+  should validate_inclusion_of(:lang)
+    .in_array(I18n.available_locales.map(&:to_s))
+
   #
+  # Validation rules
+  # ==================
   test 'should be able to create if all good' do
     comment = Comment.new(comment: 'youpi', username: 'leila', email: 'leila@skywalker.sw', lang: 'fr')
     assert comment.valid?
@@ -53,8 +71,8 @@ class CommentTest < ActiveSupport::TestCase
   end
 
   #
-  # == Ancestry
-  #
+  # Ancestry
+  # ==========
   test 'should have correct child and parent for comment' do
     @comment_bob.update_attribute(:parent_id, @comment_anthony.id)
     assert_equal @comment_anthony.id, @comment_bob.parent_id

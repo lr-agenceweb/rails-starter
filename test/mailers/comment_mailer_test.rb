@@ -5,7 +5,7 @@ require 'test_helper'
 # == Comment Mailer test class
 #
 class CommentMailerTest < ActionMailer::TestCase
-  include ActionController::TemplateAssertions
+  include Rails::Controller::Testing::TemplateAssertions
 
   setup :initialize_test
 
@@ -20,7 +20,7 @@ class CommentMailerTest < ActionMailer::TestCase
     assert_equal [@setting.email], email.to
     assert_equal I18n.t('comment_mailer.comment_created.subject', site: @setting.title, locale: I18n.default_locale), email.subject
 
-    assert_template :comment_validated
+    assert_template :comment_created
     assert_template layout: 'mailers/default'
   end
 
@@ -60,6 +60,6 @@ class CommentMailerTest < ActionMailer::TestCase
   end
 
   def response
-    @response = ActionController::TestRequest.new(host: 'http://test.host')
+    @response = ActionController::TestRequest.create
   end
 end

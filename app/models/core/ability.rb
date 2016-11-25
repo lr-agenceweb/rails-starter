@@ -55,10 +55,10 @@ class Ability
     can [:update, :read], [Page], optional_module: nil
     can [:update, :read], [Menu], page: { optional_module_id: nil }
 
-    can [:read, :destroy, :update], User, role_name: %w( subscriber )
+    can [:read, :destroy, :update], User, role_name: %w(subscriber)
     cannot [:create, :unlink], User
-    cannot [:update, :destroy], User, role: { name: %w( administrator ) }
-    cannot :manage, User, role: { name: %w( super_administrator ) }
+    cannot [:update, :destroy], User, role: { name: %w(administrator) }
+    cannot :manage, User, role: { name: %w(super_administrator) }
     can :manage, User, id: @user.id
     can [:read, :update, :destroy], Picture
     cannot :manage, OptionalModule
@@ -158,7 +158,7 @@ class Ability
   #
   def comment_module
     if @comment_module.enabled?
-      can [:read, :destroy], Comment, user: { role_name: %w( administrator subscriber ) }
+      can [:read, :destroy], Comment, user: { role_name: %w(administrator subscriber) }
       can [:read, :destroy], Comment, user_id: nil
       cannot [:create, :update], Comment
       can :destroy, Comment if @user.super_administrator?
@@ -346,9 +346,9 @@ class Ability
   # == batch_actions
   #
   def super_admin_batch_actions
-    can [:toggle_active], User, role: { name: %w( administrator subscriber ) }
+    can [:toggle_active], User, role: { name: %w(administrator subscriber) }
     cannot [:toggle_active], User, id: @user.id
-    cannot [:toggle_active], User, role: { name: %w( super_administrator ) }
+    cannot [:toggle_active], User, role: { name: %w(super_administrator) }
   end
 
   def admin_batch_actions
@@ -356,7 +356,7 @@ class Ability
     can [:toggle_validated, :toggle_signalled], [Comment, GuestBook]
     can [:toggle_archive_customer], [MailingUser]
     can [:toggle_show_calendar], [Event]
-    can [:toggle_active], User, role: { name: %w( subscriber ) }
+    can [:toggle_active], User, role: { name: %w(subscriber) }
     cannot [:toggle_active], User, id: @user.id
     cannot [:toggle_enabled], OptionalModule
   end

@@ -6,16 +6,11 @@ row
     p = t('.message')
     p = t('.instruction')
 
-    p
-      <!--[if mso]>
-        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{unlock_url(@resource, unlock_token: (Devise::VERSION.start_with?('3.') ? @token :@resource.unlock_token))}" style="height:25px;v-text-anchor:middle;" arcsize="8%" stroke="f" fillcolor="#0c708d">
-          <w:anchorlock/>
-          <center>
-        <![endif]-->
-            <a href="#{unlock_url(@resource, unlock_token: (Devise::VERSION.start_with?('3.') ? @token :@resource.unlock_token))}" target="_blank" style="background-color:#0c708d;" class="btn-style increase-width weight-500">
-              = t('.action')
-            </a>
-        <!--[if mso]>
-          </center>
-        </v:roundrect>
-      <![endif]-->
+    p.text-center
+      br
+      = render 'mailers/button',
+          label: t('.action'),
+          link: "#{unlock_url(@resource, unlock_token: (Devise::VERSION.start_with?('3.') ? @token :@resource.unlock_token))}",
+          width: 150,
+          color: SharedColoredVariables::PRIMARY_COLOR,
+          klass: 'increase-width'

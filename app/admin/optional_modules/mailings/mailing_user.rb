@@ -17,7 +17,7 @@ ActiveAdmin.register MailingUser do
 
   batch_action :toggle_archive_customer, if: proc { can? :toggle_archive_customer, Home } do |ids|
     MailingUser.find(ids).each { |item| item.toggle! :archive }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do

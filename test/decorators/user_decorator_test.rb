@@ -2,18 +2,18 @@
 require 'test_helper'
 
 #
-# == UserDecorator test
-#
+# UserDecorator test
+# ====================
 class UserDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 
   setup :initialize_test
 
   #
-  # == Avatar
-  #
+  # Avatar
+  # ========
   test 'should return gravatar image if no avatar uploaded' do
-    user_decorated = UserDecorator.new(@administrator)
+    user_decorated = @administrator_decorated
     assert_equal gravatar_image_tag(@administrator.email, alt: @administrator.username, gravatar: { size: 64, secure: true }), user_decorated.image_avatar
   end
 
@@ -23,24 +23,32 @@ class UserDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Admin link
-  #
+  # Admin link
+  # ============
   test 'should return correct admin link' do
-    user_decorated = UserDecorator.new(@administrator)
+    user_decorated = @administrator_decorated
     assert_match '<a href="/admin/users/bob">Voir</a>', user_decorated.admin_link
   end
 
   test 'should return correct connected_from value' do
     expected = t('user.connected_from', from: 'site')
-    assert_equal expected, UserDecorator.new(@administrator).connected_from
+    assert_equal expected, @administrator_decorated.connected_from
 
     expected = t('user.connected_from', from: 'facebook')
     assert_equal expected, UserDecorator.new(@facebook_user).connected_from
   end
 
   #
-  # == Omniauth
+  # ActiveAdmin
+  # =============
+  test 'should return correct html for header user profile' do
+    expected = '<img alt="bob" src="https://secure.gravatar.com/avatar/124c4cfb97b3bd8b5678301071cc695f?default=mm&secure=true&size=64" width="64" height="64" /> <span>Bob (Administrateur)<br />Depuis site</span>'
+    assert_equal expected, @administrator_decorated.active_admin_header_user_profile
+  end
+
   #
+  # Omniauth
+  # ==========
   test 'should return correct link_to_facebook content if not yet linked' do
     user_decorated = UserDecorator.new(@subscriber)
     assert_equal "<a class=\"button omniauth facebook\" id=\"omniauth_facebook\" data-vex-title=\"#{I18n.t('omniauth.title', provider: 'Facebook')}\" data-vex-message=\"#{I18n.t('omniauth.link.message', provider: 'Facebook')}\" href=\"/admin/auth/facebook\"><i class=\"fa fa-facebook\"></i> Lier à mon compte Facebook</a>", user_decorated.link_to_facebook
@@ -52,15 +60,15 @@ class UserDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Status tag
-  #
+  # Status tag
+  # ============
   test 'should return correct status_tag for subscriber' do
     user_decorated = UserDecorator.new(@subscriber)
     assert_match '<span class="status_tag abonné green">Abonné</span>', user_decorated.status
   end
 
   test 'should return correct status_tag for administrator' do
-    user_decorated = UserDecorator.new(@administrator)
+    user_decorated = @administrator_decorated
     assert_match '<span class="status_tag administrateur red">Administrateur</span>', user_decorated.status
   end
 
@@ -76,5 +84,7 @@ class UserDecoratorTest < Draper::TestCase
     @administrator = users(:bob)
     @super_administrator = users(:anthony)
     @facebook_user = users(:rafa)
+
+    @administrator_decorated = UserDecorator.new(@administrator)
   end
 end

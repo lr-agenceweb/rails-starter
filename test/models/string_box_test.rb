@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 require 'test_helper'
 
+#
+# StringBox Model test
+# ======================
 class StringBoxTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  #
+  # Shoulda
+  # =========
+  should belong_to(:optional_module)
 end

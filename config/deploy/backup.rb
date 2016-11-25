@@ -13,7 +13,7 @@ set :host_name, -> { Figaro.env.application_host_backup }
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-server Figaro.env.capistrano_server_ip_backup, user: fetch(:deploy_user_backup).to_s, roles: %w( web app db )
+server Figaro.env.capistrano_server_ip_backup, user: fetch(:deploy_user_backup).to_s, roles: %w(web app db)
 
 # role-based syntax
 # ==================

@@ -2,10 +2,16 @@
 require 'test_helper'
 
 #
-# == Menu model test
-#
+# Menu Model test
+# =================
 class MenuTest < ActiveSupport::TestCase
   setup :initialize_test
+
+  #
+  # Shoulda
+  # =========
+  should have_one(:page)
+  should have_one(:optional_module)
 
   test 'should return only online menu elements' do
     menu_items = Menu.online

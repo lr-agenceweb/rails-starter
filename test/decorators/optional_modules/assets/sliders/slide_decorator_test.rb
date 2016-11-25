@@ -2,26 +2,26 @@
 require 'test_helper'
 
 #
-# == SlideDecorator test
-#
+# SlideDecorator test
+# =====================
 class SlideDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 
   setup :initialize_test
 
   #
-  # == Slide
-  #
+  # Slide
+  # =======
   test 'should return page title for slide image' do
     assert_equal 'Accueil', @slide_decorated.slider_page_name
   end
 
   test 'should return title for slide image' do
-    assert_equal 'Title for slide one', @slide_decorated.title
+    assert_equal 'Titre slide 1', @slide_decorated.title
   end
 
   test 'should return description for slide image' do
-    assert_equal 'Description for slide one', @slide_decorated.description_d
+    assert_equal 'Description slide 1', @slide_decorated.description_d
   end
 
   test 'should return correct value for caption?' do
@@ -30,8 +30,13 @@ class SlideDecoratorTest < Draper::TestCase
   end
 
   #
-  # == ActiveAdmin
-  #
+  # ActiveAdmin
+  # =============
+  test 'should return correct hint for paperclip' do
+    expected = "#{t('formtastic.hints.slide.size')}<br />#{retina_image_tag(@slide_decorated, :image, :small)}"
+    assert_equal expected, @slide_decorated.hint_for_paperclip
+  end
+
   test 'should return correct AA show page title' do
     assert_equal 'Slide liée au slider de la page Accueil', @slide_decorated.title_aa_show
   end

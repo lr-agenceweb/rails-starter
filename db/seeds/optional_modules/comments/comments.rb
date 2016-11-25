@@ -17,7 +17,7 @@ puts 'Creating Comments for Blog'
   c.toggle!(:validated)
 end
 
-10.times do |i|
+20.times do |i|
   comment = Comment.roots.validated.sample
   c = Comment.create!(
     username: nil,

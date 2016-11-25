@@ -1,24 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: pages
-#
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  color              :string(255)
-#  optional           :boolean          default(FALSE)
-#  optional_module_id :integer
-#  menu_id            :integer
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#
-# Indexes
-#
-#  index_pages_on_menu_id             (menu_id)
-#  index_pages_on_optional_module_id  (optional_module_id)
-#
-
 #
 # Page Model
 # ==============
@@ -61,7 +42,7 @@ class Page < ApplicationRecord
 
   # self.except_already_background
   # self.except_already_slider
-  %w( background slider ).each do |o_module|
+  %w(background slider).each do |o_module|
     define_singleton_method "except_already_#{o_module}" do |myself = nil|
       pages = []
       Page.includes(o_module.to_sym).with_allowed_module.each do |page|
@@ -71,3 +52,22 @@ class Page < ApplicationRecord
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: pages
+#
+#  id                 :integer          not null, primary key
+#  name               :string(255)
+#  color              :string(255)
+#  optional           :boolean          default(FALSE)
+#  optional_module_id :integer
+#  menu_id            :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_pages_on_menu_id             (menu_id)
+#  index_pages_on_optional_module_id  (optional_module_id)
+#

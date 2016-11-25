@@ -63,7 +63,7 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct author_with_avatar value' do
-    assert_equal "<div class=\"author-with-avatar\">#{retina_thumb_square(@post_decorated.user)} <br /> <a href=\"/admin/users/bob\">bob</a></div>", @post_decorated.author_with_avatar
+    assert_equal "<div>#{retina_thumb_square(@post_decorated.user)}<br /><a href=\"/admin/users/bob\">bob</a></div>", @post_decorated.author_with_avatar
   end
 
   #

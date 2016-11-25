@@ -12,31 +12,36 @@ body, .body
 .no-padding-top
   padding-top: 0 !important
 
-.weight-500
-  font-weight: 700
+strong
+  color: $steel
+  font-weight: 400
 
 table
   width: 100%
 
 // Mailer blocks button
 .btn-style
-  border-radius: 3px
   display: inline-block
-  font-family: 'Lato', 'Arial', sans-serif
-  font-size: 11px
-  line-height: 40px
+  width: 170px
   text-align: center
   text-decoration: none
-  width: 150px
+  border-radius: 3px
+  font-family: 'Lato', 'Arial', sans-serif
+  font-size: 11px
+  font-weight: 700
+  line-height: 40px
   -webkit-text-size-adjust: none
 
   &.inline-version
     width: 70px
-    line-height: 25px
     font-size: 10px
+    line-height: 25px
 
     &.increase-width
       width: 90px
+
+  &.extra-width
+    width: 240px
 
   &:link, &:visited, &:hover, &:active
     color: $white

@@ -19,7 +19,7 @@ ActiveAdmin.register GuestBook do
 
   batch_action :toggle_validated, if: proc { can? :toggle_validated, GuestBook } do |ids|
     GuestBook.find(ids).each { |item| item.toggle! :validated }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do

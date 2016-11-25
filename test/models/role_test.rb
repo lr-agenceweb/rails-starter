@@ -7,6 +7,11 @@ require 'test_helper'
 class RoleTest < ActiveSupport::TestCase
   setup :initialize_test
 
+  #
+  # Shoulda
+  # =========
+  should have_many(:users)
+
   test 'should return all roles list if SA' do
     roles = Role.allowed_roles_for_user_role(@super_administrator)
     assert_equal roles.count, 3

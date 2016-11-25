@@ -5,18 +5,31 @@ require 'test_helper'
 # == ContactForm model test
 #
 class ContactFormTest < ActiveSupport::TestCase
+  include ActionDispatch::TestProcess
+
   setup :initialize_test
+
+  # Constants
+  ERROR_SCOPE = ContactForm::I18N_SCOPE
+
+  #
+  # Shoulda
+  # =========
+  should validate_presence_of(:name)
+  should validate_presence_of(:email)
+  should validate_presence_of(:message)
+  should validate_absence_of(:nickname)
 
   test 'should responds to name, email, message, send_copy' do
     msg = ContactForm.new
-    [:name, :email, :message, :send_copy, :nickname].each do |attr|
+    [:name, :email, :message, :send_copy, :attachment, :nickname].each do |attr|
       assert msg.respond_to? attr
     end
   end
 
   #
-  # == Validations
-  #
+  # Validation rules
+  # ==================
   test 'should accept valid attributes' do
     valid_attrs = {
       name: 'maria',
@@ -68,50 +81,47 @@ class ContactFormTest < ActiveSupport::TestCase
   # == Attachment
   #
   test 'should not be valid if attachment type is not allowed' do
-    file = File.new('./test/fixtures/images/bart.png')
-    file.stubs(:size).returns(1.megabytes)
-    file.stubs(:content_type).returns('images/psd')
+    file = fixture_file_upload('images/bart.png', 'image/png')
+    file.stub(:content_type, 'images/psd') do
+      error_i18n_type = {
+        attachment: [I18n.t('type', scope: ERROR_SCOPE)]
+      }
 
-    error_i18n_type = {
-      attachment: [I18n.t('type', scope: @error_scope)]
-    }
-
-    attrs = {
-      name: 'maria',
-      email: 'maria@example.com',
-      message: 'Lorem ipsum dolor sit amet',
-      attachment: file,
-      nickname: ''
-    }
-    msg = ContactForm.new attrs
-    assert_not msg.valid?
-    assert_equal [:attachment], msg.errors.keys
-    assert_equal error_i18n_type, msg.errors.messages
+      attrs = {
+        name: 'maria',
+        email: 'maria@example.com',
+        message: 'Lorem ipsum dolor sit amet',
+        attachment: file,
+        nickname: ''
+      }
+      msg = ContactForm.new attrs
+      assert_not msg.valid?
+      assert_equal [:attachment], msg.errors.keys
+      assert_equal error_i18n_type, msg.errors.messages
+    end
   end
 
   test 'should not be valid if attachment size is too heavy' do
-    file = File.new('./test/fixtures/images/bart.png')
-    file.stubs(:size).returns(6.megabytes)
-    file.stubs(:content_type).returns('text/plain')
+    file = fixture_file_upload('images/bart.png', 'image/png')
+    file.stub(:size, (ContactForm::ATTACHMENT_MAX_SIZE + 1).megabytes) do
+      error_i18n_size = {
+        attachment: [I18n.t('size', size: ContactForm::ATTACHMENT_MAX_SIZE, scope: ERROR_SCOPE)]
+      }
 
-    error_i18n_size = {
-      attachment: [I18n.t('size', size: ContactForm::ATTACHMENT_MAX_SIZE, scope: @error_scope)]
-    }
-
-    attrs = {
-      name: 'maria',
-      email: 'maria@example.com',
-      message: 'Lorem ipsum dolor sit amet',
-      attachment: file,
-      nickname: ''
-    }
-    msg = ContactForm.new attrs
-    assert_not msg.valid?
-    assert_equal [:attachment], msg.errors.keys
-    assert_equal error_i18n_size, msg.errors.messages
+      attrs = {
+        name: 'maria',
+        email: 'maria@example.com',
+        message: 'Lorem ipsum dolor sit amet',
+        attachment: file,
+        nickname: ''
+      }
+      msg = ContactForm.new attrs
+      assert_not msg.valid?
+      assert_equal [:attachment], msg.errors.keys
+      assert_equal error_i18n_size, msg.errors.messages
+    end
   end
 
   def initialize_test
-    @error_scope = ContactForm::I18N_SCOPE
   end
 end

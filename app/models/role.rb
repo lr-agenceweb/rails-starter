@@ -1,23 +1,13 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: roles
-#
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 #
 # UserRole Model
-# ===================
+# ================
 class Role < ApplicationRecord
   # Model relations
   has_many :users
 
-  # Scope
+  # Scopes
   scope :except_super_adminstrator, -> { where.not(name: 'super_administrator') }
 
   def self.allowed_roles_for_user_role(user)
@@ -28,3 +18,13 @@ class Role < ApplicationRecord
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: roles
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#

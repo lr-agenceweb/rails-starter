@@ -9,6 +9,9 @@ set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 set :domain_name, -> { Figaro.env.application_domain_name_production }
 set :host_name, -> { Figaro.env.application_host_production }
 
+# Puma config
+set :nginx_server_name, fetch(:domain_name)
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
@@ -17,7 +20,10 @@ set :host_name, -> { Figaro.env.application_host_production }
 # server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-server Figaro.env.capistrano_server_ip, user: fetch(:deploy_user).to_s, roles: %w( web app db )
+server Figaro.env.capistrano_server_ip,
+       user: fetch(:deploy_user).to_s,
+       roles: %w(web app db),
+       ssh_options: { forward_agent: true }
 
 # role-based syntax
 # ==================

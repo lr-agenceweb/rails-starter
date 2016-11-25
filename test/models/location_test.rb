@@ -2,14 +2,25 @@
 require 'test_helper'
 
 #
-# == Location model test
-#
+# Location Model test
+# =====================
 class LocationTest < ActiveSupport::TestCase
   setup :initialize_test
 
   #
-  # == Validation rules
+  # Shoulda
+  # =========
+  should belong_to(:locationable)
+
+  should validate_presence_of(:address)
+  should validate_presence_of(:city)
+  should validate_presence_of(:postcode)
+
+  should validate_numericality_of(:postcode)
+
   #
+  # Validation rules
+  # ==================
   test 'should be valid if all good' do
     location = Location.new default_attrs
     assert location.valid?

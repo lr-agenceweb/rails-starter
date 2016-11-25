@@ -2,12 +2,18 @@
 require 'test_helper'
 
 #
-# == SocialConnectSetting test
-#
+# SocialConnectSetting test
+# ===========================
 class SocialConnectSettingTest < ActiveSupport::TestCase
   #
-  # == Validation
+  # Shoulda
+  # =========
+  should have_many(:social_providers)
+  should accept_nested_attributes_for(:social_providers)
+
   #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     social_setting = SocialConnectSetting.new
     assert_not social_setting.valid?

@@ -2,13 +2,16 @@
 require 'test_helper'
 
 #
-# == VideoUploadDecorator test
-#
+# VideoUploadDecorator test
+# ============================
 class VideoUploadDecoratorTest < Draper::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
 
+  #
+  # Microdatas
+  # ============
   test 'should get correct title for microdatas' do
     assert_equal 'Landscape.mp4', @video_upload_decorated.title_microdatas
     assert_equal 'Paysages de France', @video_upload_two_decorated.title_microdatas
@@ -19,10 +22,22 @@ class VideoUploadDecoratorTest < Draper::TestCase
     assert_equal '<p>Vidéo présentant les paysages de France</p>', @video_upload_two_decorated.description_microdatas
   end
 
-  test 'should get correct preview image tag' do
-    assert_equal '<img src="/system/test/video_uploads/980190962/preview-landscape.jpg" alt="Preview landscape" />', @video_upload_decorated.preview
+  #
+  # Preview
+  # =========
+  test 'should get loader picture if video_upload not processed' do
+    expected = '<img src="/images/loader-dark.gif" alt="Loader dark" />'
+    assert_equal expected, @video_upload_decorated.preview
   end
 
+  test 'should get correct preview for video_upload if processes' do
+    expected = "<img src=\"/system/test/video_uploads/#{@video_upload_two_decorated.id}/preview-landscape.jpg\" alt=\"Preview landscape\" />"
+    assert_equal expected, @video_upload_two_decorated.preview
+  end
+
+  #
+  # Page
+  # ======
   test 'should not be linked to a page' do
     assert_not @video_upload_decorated.page?
   end
@@ -32,15 +47,15 @@ class VideoUploadDecoratorTest < Draper::TestCase
   end
 
   #
-  # == File
-  #
+  # File
+  # ======
   test 'should return correct file name without extension' do
     assert_equal 'Landscape', @video_upload_decorated.file_name_without_extension
   end
 
   #
-  # == Status tag
-  #
+  # Status tag
+  # ============
   test 'should return correct value for subtitles?' do
     upload_subtitles
     assert @video_upload_decorated.send(:subtitles?), 'should have subtitles'

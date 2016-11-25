@@ -55,7 +55,7 @@ module Users
     end
 
     def connect_me_from_omniauth
-      @user = User.find_by_provider_and_uid(request.env['omniauth.auth'])
+      @user = User.get_by_provider_and_uid(request.env['omniauth.auth'])
       if @user.blank? || !@user.persisted?
         redirect_to new_user_session_path, alert: I18n.t('omniauth.login.not_exist', provider: @provider.capitalize)
       elsif !@user.account_active?

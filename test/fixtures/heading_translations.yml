@@ -1,0 +1,17 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  content: ''
+
+# Blog
+blog_fr:
+  <<: *DEFAULTS
+  heading_id: <%= ActiveRecord::FixtureSet.identify(:blog) %>
+  locale: fr
+  content: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+blog_en:
+  <<: *DEFAULTS
+  heading_id: <%= ActiveRecord::FixtureSet.identify(:blog) %>
+  locale: en
+  content: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

@@ -2,16 +2,32 @@
 require 'test_helper'
 
 #
-# == Picture model test
-#
+# Picture Model test
+# ====================
 class PictureTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
 
+  # Constants
+  SIZE_PLUS_1 = Picture::ATTACHMENT_MAX_SIZE + 1
+
   #
-  # == Picture attachment
+  # Shoulda
+  # =========
+  should belong_to(:attachable)
+
+  should have_attached_file(:image)
+  should_not validate_attachment_presence(:image)
+  should validate_attachment_content_type(:image)
+    .allowing(Picture::ATTACHMENT_TYPES)
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:image)
+    .less_than((SIZE_PLUS_1 - 1).megabytes)
+
   #
+  # Picture attachment
+  # ====================
   test 'should not upload image if mime type is not allowed' do
     [:original, :large, :medium, :small, :thumb].each do |size|
       assert_nil @picture.image.path(size)

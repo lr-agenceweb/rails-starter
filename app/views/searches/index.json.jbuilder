@@ -3,7 +3,7 @@
 json.array! @searches do |search|
   # Core
   json.title search.title
-  json.url search.decorate.show_page_link
+  json.url resource_route_show(search.object)
   json.page t("activerecord.models.#{search.object.class.name.underscore}.other")
 
   # Assets

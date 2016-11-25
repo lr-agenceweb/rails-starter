@@ -87,7 +87,7 @@ ActiveAdmin.register MailingMessage do
       make_mailing_message_with_i18n(@mailing_message, @mailing_users)
 
       flash[:notice] = I18n.t('mailing.notice_sending', count: @mailing_users.count)
-      redirect_to :back
+      redirect_back(fallback_location: admin_dashboard_path)
     end
 
     def preview

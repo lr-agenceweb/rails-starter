@@ -1,4 +1,7 @@
-= @greeting
+= t('comment.email.greeting', author: @comment.pseudo_registered_or_guest)
 = "\r\n==============================================\r\n\r\n"
 
-= strip_tags(@content)
+== strip_tags t('comment_mailer.comment_validated.content', date: @comment.created_at(:long), article: @commentable.title)
+
+= "\r\n\r\n==============================================\r\n\r\n"
+= @link

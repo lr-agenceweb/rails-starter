@@ -1,0 +1,30 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  content: ''
+
+# One
+one_fr:
+  <<: *DEFAULTS
+  newsletter_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: fr
+  title: Première newsletter
+  content: Ici le contenu de ma première newsletter
+
+one_en:
+  <<: *DEFAULTS
+  newsletter_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: en
+  title: First newsletter
+  content: Here content of the first newsletter
+
+# Not sent
+not_sent_fr:
+  <<: *DEFAULTS
+  newsletter_id: <%= ActiveRecord::FixtureSet.identify(:not_sent) %>
+  locale: fr
+
+not_sent_en:
+  <<: *DEFAULTS
+  newsletter_id: <%= ActiveRecord::FixtureSet.identify(:not_sent) %>
+  locale: en

@@ -10,14 +10,16 @@ puts 'Creating Users'
   password: 'password',
   password_confirmation: 'password',
   role_id: 1,
-  account_active: true
+  account_active: true,
+  avatar: set_avatar(slug: 'anthony')
 )
 @administrator = User.create!(
   username: 'bob',
   email: 'bob@example.com',
   password: 'password',
   password_confirmation: 'password',
-  role_id: 2
+  role_id: 2,
+  avatar: set_avatar(slug: 'bob')
 )
 User.create!(
   username: 'abonne',

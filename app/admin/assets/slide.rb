@@ -13,7 +13,7 @@ ActiveAdmin.register Slide do
 
   batch_action :toggle_online, if: proc { can? :toggle_online, Slide } do |ids|
     Slide.find(ids).each { |item| item.toggle! :online }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do
@@ -43,10 +43,9 @@ ActiveAdmin.register Slide do
     columns do
       column do
         f.inputs t('formtastic.titles.slide_picture') do
-          hint = "#{t('formtastic.hints.slide.size')} <br /><br /> #{retina_image_tag(f.object, :image, :small)}".html_safe
           f.input :image,
                   as: :file,
-                  hint: hint
+                  hint: f.object.decorate.hint_for_paperclip
 
           f.input :online
         end

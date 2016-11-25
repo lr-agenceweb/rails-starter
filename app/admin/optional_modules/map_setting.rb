@@ -19,7 +19,7 @@ ActiveAdmin.register MapSetting do
             attributes_table_for resource.decorate do
               bool_row :show_map
               row :marker_icon
-              row :marker_color_preview
+              row :marker_color_preview if resource.marker_color?
             end
           end
         end

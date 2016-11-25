@@ -9,7 +9,7 @@ module Admin
   # == PostCommentsController test
   #
   class PostCommentsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
@@ -28,18 +28,18 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @comment
+      get :show, params: { id: @comment }
       assert_response :success
     end
 
     test 'should not be able to show comments for other users' do
       sign_in @subscriber
-      get :show, id: @comment
+      get :show, params: { id: @comment }
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not be able to edit a comment' do
-      get :edit, id: @comment_administrator
+      get :edit, params: { id: @comment_administrator }
       assert_redirected_to admin_dashboard_path
     end
 
@@ -56,7 +56,7 @@ module Admin
     test 'should destroy own comment if super_administrator' do
       sign_in @super_administrator
       assert_difference ['Comment.count'], -1 do
-        delete :destroy, id: @comment
+        delete :destroy, params: { id: @comment }
       end
       assert_redirected_to admin_post_comments_path
     end
@@ -64,7 +64,7 @@ module Admin
     test 'should destroy administrator comment if super_administrator' do
       sign_in @super_administrator
       assert_difference ['Comment.count'], -1 do
-        delete :destroy, id: @comment_administrator
+        delete :destroy, params: { id: @comment_administrator }
       end
       assert_redirected_to admin_post_comments_path
     end
@@ -72,7 +72,7 @@ module Admin
     test 'should destroy subscriber comment if super_administrator' do
       sign_in @super_administrator
       assert_difference ['Comment.count'], -1 do
-        delete :destroy, id: @comment_subscriber
+        delete :destroy, params: { id: @comment_subscriber }
       end
       assert_redirected_to admin_post_comments_path
     end
@@ -80,21 +80,21 @@ module Admin
     # Administrator
     test 'should not be able to destroy SA comment if administrator' do
       assert_no_difference ['Comment.count'] do
-        delete :destroy, id: @comment
+        delete :destroy, params: { id: @comment }
       end
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should be able to destroy own comment if administrator' do
       assert_difference ['Comment.count'], -1 do
-        delete :destroy, id: @comment_administrator
+        delete :destroy, params: { id: @comment_administrator }
       end
       assert_redirected_to admin_post_comments_path
     end
 
     test 'should be able to destroy subscriber comment if administrator' do
       assert_difference ['Comment.count'], -1 do
-        delete :destroy, id: @comment_subscriber
+        delete :destroy, params: { id: @comment_subscriber }
       end
       assert_redirected_to admin_post_comments_path
     end
@@ -103,7 +103,7 @@ module Admin
     test 'should not be able to destroy super_administrator comment if subscriber' do
       sign_in @subscriber
       assert_no_difference ['Comment.count'] do
-        delete :destroy, id: @comment
+        delete :destroy, params: { id: @comment }
       end
       assert_redirected_to admin_dashboard_path
     end
@@ -111,7 +111,7 @@ module Admin
     test 'should not be able to destroy admin comment if subscriber' do
       sign_in @subscriber
       assert_no_difference ['Comment.count'] do
-        delete :destroy, id: @comment_administrator
+        delete :destroy, params: { id: @comment_administrator }
       end
       assert_redirected_to admin_dashboard_path
     end
@@ -119,7 +119,7 @@ module Admin
     test 'should destroy own comment if subscriber' do
       sign_in @subscriber
       assert_difference ['Comment.count'], -1 do
-        delete :destroy, id: @comment_subscriber
+        delete :destroy, params: { id: @comment_subscriber }
       end
       assert_redirected_to admin_post_comments_path
     end
@@ -128,32 +128,32 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_validated batch action' do
-      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@comment.id]
+      post :batch_action, params: { batch_action: 'toggle_validated', collection_selection: [@comment.id] }
       [@comment].each(&:reload)
       assert_not @comment.validated?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_validated batch action' do
-      post :batch_action, batch_action: 'toggle_validated', collection_selection: [@comment.id]
+      post :batch_action, params: { batch_action: 'toggle_validated', collection_selection: [@comment.id] }
       assert_redirected_to admin_comments_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
 
     test 'should return correct value for toggle_signalled batch action' do
-      post :batch_action, batch_action: 'toggle_signalled', collection_selection: [@comment.id]
+      post :batch_action, params: { batch_action: 'toggle_signalled', collection_selection: [@comment.id] }
       [@comment].each(&:reload)
       assert @comment.signalled?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_signalled batch action' do
-      post :batch_action, batch_action: 'toggle_signalled', collection_selection: [@comment.id]
+      post :batch_action, params: { batch_action: 'toggle_signalled', collection_selection: [@comment.id] }
       assert_redirected_to admin_comments_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
 
     test 'should destroy only allowed comments in batch actions' do
       assert_difference ['Comment.count'], -1 do
-        post :batch_action, batch_action: 'destroy', collection_selection: [@comment.id, @comment_subscriber.id]
+        post :batch_action, params: { batch_action: 'destroy', collection_selection: [@comment.id, @comment_subscriber.id] }
         assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
         assert_redirected_to admin_comments_path
       end
@@ -165,7 +165,7 @@ module Admin
     test 'should toggle validated value of comment' do
       @request.env['HTTP_REFERER'] = admin_comment_path(@comment)
       assert @comment.validated?
-      put :toggle_validated, id: @comment
+      put :toggle_validated, params: { id: @comment }
       assert_not assigns(:post_comment).validated?
       assert_redirected_to admin_comment_path(@comment)
     end
@@ -179,7 +179,7 @@ module Admin
       assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 1 do
-        post :batch_action, batch_action: 'toggle_validated', collection_selection: [@comment_not_validated.id, @comment_subscriber.id]
+        post :batch_action, params: { batch_action: 'toggle_validated', collection_selection: [@comment_not_validated.id, @comment_subscriber.id] }
         @comment_not_validated.reload
         @comment_subscriber.reload
         assert @comment_not_validated.validated?

@@ -1,3 +1,8 @@
+one:
+  marker_icon: park
+  marker_color: '#EE903E'
+  show_map: true
+
 # == Schema Information
 #
 # Table name: map_settings
@@ -9,8 +14,3 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
-
-one:
-  marker_icon: park
-  marker_color: '#EE903E'
-  show_map: true

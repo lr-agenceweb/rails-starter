@@ -1,32 +1,17 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: socials
-#
-#  id                :integer          not null, primary key
-#  title             :string(255)
-#  link              :string(255)
-#  kind              :string(255)
-#  enabled           :boolean          default(TRUE)
-#  font_ikon         :string(255)
-#  ikon_updated_at   :datetime
-#  ikon_file_size    :integer
-#  ikon_content_type :string(255)
-#  ikon_file_name    :string(255)
-#  retina_dimensions :text(65535)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#
-
 #
 # Social Model
-# ================
+# ==============
 class Social < ApplicationRecord
   include Assets::Attachable
 
+  # Constants
+  ATTACHMENT_MAX_SIZE = 2 # megabytes
+  ATTACHMENT_TYPES = %r{\Aimage\/.*\Z}
+
   def self.allowed_title_social_network
-    %w( Facebook Twitter Google+ Email )
+    %w(Facebook Twitter Google+ Email)
   end
 
   def self.allowed_kind_social_network
@@ -34,7 +19,7 @@ class Social < ApplicationRecord
   end
 
   def self.allowed_font_awesome_ikons
-    %w( facebook twitter google envelope )
+    %w(facebook twitter google envelope)
   end
 
   retina!
@@ -45,10 +30,10 @@ class Social < ApplicationRecord
                       small: '32x32>',
                       thumb: '16x16>'
                     }
-  validates_attachment_content_type :ikon, content_type: %r{\Aimage\/.*\Z}
 
   include Assets::DeletableAttachment
 
+  # Validation rules
   validates :title,
             presence: true,
             allow_blank: false,
@@ -67,7 +52,27 @@ class Social < ApplicationRecord
             allow_blank: true,
             inclusion: { in: allowed_font_awesome_ikons }
 
+  # Scopes
   scope :follow, -> { where(kind: 'follow') }
   scope :share, -> { where(kind: 'share') }
   scope :enabled, -> { where(enabled: true) }
 end
+
+# == Schema Information
+#
+# Table name: socials
+#
+#  id                :integer          not null, primary key
+#  title             :string(255)
+#  link              :string(255)
+#  kind              :string(255)
+#  enabled           :boolean          default(TRUE)
+#  ikon_updated_at   :datetime
+#  ikon_file_size    :integer
+#  ikon_content_type :string(255)
+#  ikon_file_name    :string(255)
+#  retina_dimensions :text(65535)
+#  font_ikon         :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#

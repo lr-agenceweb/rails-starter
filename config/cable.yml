@@ -1,0 +1,14 @@
+# Local
+local: &local
+  adapter: async
+
+# Remote
+remote: &remote
+  adapter: redis
+  url: redis://localhost:6379/1
+
+# Environments
+development: *local
+test: *local
+staging: *remote
+production: *remote

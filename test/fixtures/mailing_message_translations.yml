@@ -1,0 +1,49 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  content: ''
+
+# One
+one_fr:
+  <<: *DEFAULTS
+  mailing_message_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: fr
+  title: Mailing 1
+  content: Content Mailing 1
+
+one_en:
+  <<: *DEFAULTS
+  mailing_message_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  locale: en
+  title: Mailing 1
+  content: Content Mailing 1
+
+# Two
+two_fr:
+  <<: *DEFAULTS
+  mailing_message_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  locale: fr
+  title: Mailing 2
+  content: Content Mailing 2
+
+two_en:
+  <<: *DEFAULTS
+  mailing_message_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  locale: en
+  title: Mailing 2
+  content: Content Mailing 2
+
+# Three
+three_fr:
+  <<: *DEFAULTS
+  mailing_message_id: <%= ActiveRecord::FixtureSet.identify(:three) %>
+  locale: fr
+  title: Mailing 3
+  content: Content Mailing 3
+
+three_en:
+  <<: *DEFAULTS
+  mailing_message_id: <%= ActiveRecord::FixtureSet.identify(:three) %>
+  locale: en
+  title: Mailing 3
+  content: Content Mailing 3

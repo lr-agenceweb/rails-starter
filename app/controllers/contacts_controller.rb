@@ -8,6 +8,10 @@ class ContactsController < ApplicationController
 
   skip_before_action :allow_cors,
                      :set_menu_elements,
+                     :set_controller_name,
+                     :set_pages,
+                     :set_current_page,
+                     :set_legal_notices,
                      :set_adult_validation,
                      :set_background,
                      :set_newsletter_user,
@@ -15,7 +19,10 @@ class ContactsController < ApplicationController
                      :set_slider,
                      :set_social_network,
                      :set_froala_key,
-                     only: :mapbox_popup
+                     only: :mapbox_popup,
+
+                     # Rails 5 fix
+                     raise: false
 
   # GET /contact
   # GET /contact.json
@@ -47,7 +54,7 @@ class ContactsController < ApplicationController
       if @show_map_contact
         render layout: false
       else
-        render nothing: true
+        head :ok
       end
     else
       redirect_to contacts_path

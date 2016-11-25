@@ -5,6 +5,7 @@ fr:
       email_format: Veuillez renseigner un email valide ;)
       in_between: doit être entre %{min} et %{max}
       max_row: Vous ne pouvez pas créer plus de resource de ce type
+      taken: n'est pas disponible
 
     attributes:
       email:

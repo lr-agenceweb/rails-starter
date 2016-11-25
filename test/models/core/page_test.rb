@@ -2,12 +2,30 @@
 require 'test_helper'
 
 #
-# Page model test
+# Page Model test
 # ==================
 class PageTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
+
+  #
+  # Shoulda
+  # =========
+  should belong_to(:optional_module)
+  should belong_to(:menu)
+  should have_one(:slider)
+  should have_one(:heading)
+  should have_one(:referencement)
+  should have_one(:background)
+  should have_one(:video_upload)
+  should have_many(:video_uploads)
+
+  should accept_nested_attributes_for(:heading)
+  should accept_nested_attributes_for(:referencement)
+  should accept_nested_attributes_for(:background)
+  should accept_nested_attributes_for(:video_upload)
+  should accept_nested_attributes_for(:video_uploads)
 
   test 'should return title for page' do
     assert_equal 'Accueil', Page.title_by_page(@page_home.name)

@@ -20,11 +20,11 @@ class BackgroundDecoratorTest < Draper::TestCase
   # == ActiveAdmin
   #
   test 'should return correct AA show page title' do
-    assert_equal "Arrière-plan lié à la page \"Accueil\"", @background_decorated.title_aa_show
+    assert_equal 'Arrière-plan lié à la page "Accueil"', @background_decorated.title_aa_show
   end
 
   test 'should return correct AA edit page title' do
-    assert_equal "Modifier Arrière-plan page \"Accueil\"", @background_decorated.title_aa_edit
+    assert_equal 'Modifier Arrière-plan page "Accueil"', @background_decorated.title_aa_edit
   end
 
   private

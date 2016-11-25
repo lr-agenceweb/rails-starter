@@ -1,13 +1,83 @@
 # frozen_string_literal: true
 
+#
+# Setting Model
+# ===============
+class Setting < ApplicationRecord
+  include MaxRowable
+  include Assets::Settings::Paperclipable
+
+  # Callbacks
+  after_validation :clean_paperclip_errors
+
+  # Translations
+  translates :title, :subtitle, fallbacks_for_empty_translations: true
+  active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
+    validates :title, presence: true
+  end
+
+  # Enum
+  enum date_format: {
+    with_time: 0,
+    without_time: 1,
+    ago: 2
+  }
+
+  def self.per_page_values
+    [1, 2, 3, 5, 10, 15, 20, 0]
+  end
+
+  # Validation rules
+  validates :name,  presence: true
+  validates :email, presence: true, email_format: true
+
+  validates :per_page,
+            presence: true,
+            allow_blank: false,
+            inclusion: per_page_values
+
+  validates :date_format,
+            presence: true,
+            allow_blank: false,
+            inclusion: {
+              in: Setting.date_formats.keys
+            }
+
+  def self.date_format_attributes_for_form
+    date_formats.map do |date_format, _|
+      [I18n.t("enum.#{model_name.i18n_key}.date_formats.#{date_format}"), date_format]
+    end
+  end
+
+  def subtitle?
+    subtitle.present?
+  end
+
+  def phone?
+    phone.present?
+  end
+
+  def logo?
+    logo.exists?
+  end
+
+  def logo_footer?
+    logo_footer.exists?
+  end
+
+  private
+
+  def clean_paperclip_errors
+    errors.delete(:logo)
+  end
+end
+
 # == Schema Information
 #
 # Table name: settings
 #
 #  id                       :integer          not null, primary key
 #  name                     :string(255)
-#  title                    :string(255)
-#  subtitle                 :string(255)
 #  phone                    :string(255)
 #  phone_secondary          :string(255)
 #  email                    :string(255)
@@ -34,61 +104,3 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #
-
-#
-# Setting Model
-# =================
-class Setting < ApplicationRecord
-  extend Enumerize
-  include MaxRowable
-  include Assets::Settings::Paperclipable
-
-  # Callbacks
-  after_validation :clean_paperclip_errors
-
-  # Translations
-  translates :title, :subtitle, fallbacks_for_empty_translations: true
-  active_admin_translates :title, :subtitle, fallbacks_for_empty_translations: true do
-    validates :title, presence: true
-  end
-
-  # Enum
-  enumerize :date_format,
-            in: {
-              with_time: 0,
-              without_time: 1,
-              ago: 2
-            },
-            default: :with_time
-
-  def self.per_page_values
-    [1, 2, 3, 5, 10, 15, 20, 0]
-  end
-
-  # Validation rules
-  validates :name,  presence: true
-  validates :email, presence: true, email_format: true
-
-  validates :per_page,
-            presence: true,
-            allow_blank: false,
-            inclusion: per_page_values
-
-  validates :date_format,
-            presence: true,
-            allow_blank: false,
-            inclusion: date_format.values
-
-  def title_and_subtitle
-    return "#{title}, #{subtitle}" if subtitle?
-    title
-  end
-
-  def subtitle?
-    !subtitle.blank?
-  end
-
-  def clean_paperclip_errors
-    errors.delete(:logo)
-  end
-end

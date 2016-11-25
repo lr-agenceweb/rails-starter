@@ -5,7 +5,7 @@ require 'test_helper'
 # == UserHelper Test
 #
 class UserHelperTest < ActionView::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   test 'should return true if user is super_administrator' do
     @super_administrator = users(:anthony)

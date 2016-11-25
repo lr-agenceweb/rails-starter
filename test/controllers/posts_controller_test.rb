@@ -5,7 +5,7 @@ require 'test_helper'
 # == PostsController Test
 #
 class PostsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
 
   setup :initialize_test
@@ -15,14 +15,14 @@ class PostsControllerTest < ActionController::TestCase
   #
   test 'Global :: should get atom page' do
     @locales.each do |locale|
-      get :feed, format: :atom, locale: locale.to_s
+      get :feed, params: { format: :atom, locale: locale.to_s }
       assert_response :success
     end
   end
 
   test 'Global :: should use feed template' do
     @locales.each do |locale|
-      get :feed, format: :atom, locale: locale.to_s
+      get :feed, params: { format: :atom, locale: locale.to_s }
       assert_template :feed, layout: false
     end
   end
@@ -35,7 +35,7 @@ class PostsControllerTest < ActionController::TestCase
   test 'Global :: should redirect to correct atom version by locale' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :feed, format: :rss, locale: locale.to_s
+        get :feed, params: { format: :rss, locale: locale.to_s }
         assert_redirected_to action: :feed, format: :atom, locale: locale.to_s
       end
     end
@@ -46,14 +46,14 @@ class PostsControllerTest < ActionController::TestCase
   #
   test 'Blog :: should get atom page' do
     @locales.each do |locale|
-      get :blog, format: :atom, locale: locale.to_s
+      get :blog, params: { format: :atom, locale: locale.to_s }
       assert_response :success
     end
   end
 
   test 'Blog :: should use feed template' do
     @locales.each do |locale|
-      get :blog, format: :atom, locale: locale.to_s
+      get :blog, params: { format: :atom, locale: locale.to_s }
       assert_template :feed, layout: false
     end
   end
@@ -66,7 +66,7 @@ class PostsControllerTest < ActionController::TestCase
   test 'Blog :: should redirect to correct atom version by locale' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :blog, format: :rss, locale: locale.to_s
+        get :blog, params: { format: :rss, locale: locale.to_s }
         assert_redirected_to action: :blog, format: :atom, locale: locale.to_s
       end
     end
@@ -77,14 +77,14 @@ class PostsControllerTest < ActionController::TestCase
   #
   test 'Event :: should get atom page' do
     @locales.each do |locale|
-      get :event, format: :atom, locale: locale.to_s
+      get :event, params: { format: :atom, locale: locale.to_s }
       assert_response :success
     end
   end
 
   test 'Event :: should use feed template' do
     @locales.each do |locale|
-      get :event, format: :atom, locale: locale.to_s
+      get :event, params: { format: :atom, locale: locale.to_s }
       assert_template :feed, layout: false
     end
   end
@@ -97,7 +97,7 @@ class PostsControllerTest < ActionController::TestCase
   test 'Event :: should redirect to correct atom version by locale' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :event, format: :rss, locale: locale.to_s
+        get :event, params: { format: :rss, locale: locale.to_s }
         assert_redirected_to action: :event, format: :atom, locale: locale.to_s
       end
     end
@@ -144,7 +144,7 @@ class PostsControllerTest < ActionController::TestCase
     sign_in @administrator
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :feed, format: :atom, locale: locale.to_s
+        get :feed, params: { format: :atom, locale: locale.to_s }
         assert_redirected_to root_path(locale: locale.to_s)
       end
     end

@@ -72,35 +72,35 @@ class EventDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct value for current_event? with all_day?' do
-    local_time_1 = Time.zone.local(2016, 5, 23, 14, 0, 0)
-    local_time_2 = Time.zone.local(2016, 5, 20, 14, 0, 0)
-    local_time_3 = Time.zone.local(2016, 5, 26, 14, 0, 0)
-    Timecop.freeze(local_time_1) do
+    local_time_one = Time.zone.local(2016, 5, 23, 14, 0, 0)
+    local_time_two = Time.zone.local(2016, 5, 20, 14, 0, 0)
+    local_time_three = Time.zone.local(2016, 5, 26, 14, 0, 0)
+    Timecop.freeze(local_time_one) do
       assert @event_all_day_decorated.current_event?
     end
 
-    Timecop.freeze(local_time_2) do
+    Timecop.freeze(local_time_two) do
       assert_not @event_all_day_decorated.current_event?
     end
 
-    Timecop.freeze(local_time_3) do
+    Timecop.freeze(local_time_three) do
       assert_not @event_all_day_decorated.current_event?
     end
   end
 
   test 'should return correct value for current_event? with start_date and end_date event' do
-    local_time_1 = Time.zone.local(2015, 7, 25, 14, 0, 0)
-    local_time_2 = Time.zone.local(2015, 7, 18, 14, 0, 0)
-    local_time_3 = Time.zone.local(2015, 7, 30, 14, 0, 0)
-    Timecop.freeze(local_time_1) do
+    local_time_one = Time.zone.local(2015, 7, 25, 14, 0, 0)
+    local_time_two = Time.zone.local(2015, 7, 18, 14, 0, 0)
+    local_time_three = Time.zone.local(2015, 7, 30, 14, 0, 0)
+    Timecop.freeze(local_time_one) do
       assert @event_decorated.current_event?
     end
 
-    Timecop.freeze(local_time_2) do
+    Timecop.freeze(local_time_two) do
       assert_not @event_decorated.current_event?
     end
 
-    Timecop.freeze(local_time_3) do
+    Timecop.freeze(local_time_three) do
       assert_not @event_decorated.current_event?
     end
   end

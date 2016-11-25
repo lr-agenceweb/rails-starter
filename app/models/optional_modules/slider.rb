@@ -1,4 +1,37 @@
 # frozen_string_literal: true
+
+#
+# Slider Model
+# ==============
+class Slider < ApplicationRecord
+  include OptionalModules::Assets::Slideable
+
+  def self.allowed_animations
+    %w(crossfade slide dissolve)
+  end
+
+  # Alias
+  alias_attribute :looper, :loop
+
+  # Models associations
+  belongs_to :page
+
+  # Delegates
+  delegate :online, to: :slides, prefix: true, allow_nil: true
+  delegate :name, to: :page, prefix: true, allow_nil: true
+
+  # Scopes
+  scope :online, -> { where(online: true) }
+  scope :by_page, ->(page) { joins(:page).where('pages.name = ?', page) }
+
+  # Validation rules
+  validates :page, presence: true
+  validates :time_to_show, presence: true
+  validates :animate,
+            presence: true,
+            inclusion: { in: allowed_animations }
+end
+
 # == Schema Information
 #
 # Table name: sliders
@@ -20,37 +53,3 @@
 #
 #  index_sliders_on_page_id  (page_id)
 #
-
-#
-# Slider Model
-# ===============
-class Slider < ApplicationRecord
-  include OptionalModules::Assets::Slideable
-
-  def self.allowed_animations
-    %w( crossfade slide dissolve )
-  end
-
-  # Alias
-  alias_attribute :looper, :loop
-
-  # Models associations
-  belongs_to :page
-  has_many :slides, -> { order(:position) }, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :slides, reject_if: :all_blank, allow_destroy: true
-
-  # Delegates
-  delegate :online, to: :slides, prefix: true, allow_nil: true
-  delegate :name, to: :page, prefix: true, allow_nil: true
-
-  # Scopes
-  scope :online, -> { where(online: true) }
-  scope :by_page, -> (page) { joins(:page).where('pages.name = ?', page) }
-
-  # Validation rules
-  validates :time_to_show, presence: true
-  validates :page, presence: true
-  validates :animate,
-            presence: true,
-            inclusion: { in: allowed_animations }
-end

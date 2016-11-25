@@ -1,40 +1,25 @@
 row
   columns
+    p = t('comment.email.greeting', author: @setting.name)
 
-    br
-
-    p = "Bonjour #{@setting.name},"
-
-    p == @content
-
-    br
+    p == t('comment_mailer.comment_signalled.content', user: @comment.pseudo_registered_or_guest, article: @commentable.title, locale: I18n.default_locale)
 
     p.text-center
-      <!--[if mso]>
-        br
-        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{admin_post_comment_url(@comment)}" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="8%" stroke="f" fillcolor="#0c708d">
-          <w:anchorlock/>
-          <center>
-        <![endif]-->
-            = link_to I18n.t('comment_mailer.comment_signalled.link'), admin_post_comment_url(@comment), target: :_blank, style: 'background-color:#0c708d;', class: 'btn-style weight-500'
-        <!--[if mso]>
-          </center>
-        </v:roundrect>
-      <![endif]-->
-
-    p.text-center ou
+      br
+      / Backend signalled comment link
+      = render 'mailers/button',
+          label: t('comment_mailer.comment_signalled.link'),
+          link: admin_post_comment_url(@comment),
+          width: 150,
+          color: SharedColoredVariables::PRIMARY_COLOR,
+          klass: ''
 
     p.text-center
-      <!--[if mso]>
-        br
-        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{admin_post_comments_url(scope: 'signales')}" style="height:40px;v-text-anchor:middle;width:240px;" arcsize="8%" stroke="f" fillcolor="#ee732a">
-          <w:anchorlock/>
-          <center>
-        <![endif]-->
-            = link_to I18n.t('comment_mailer.comment_signalled.all'), admin_post_comments_url(scope: 'signales'), target: :_blank, style: 'background-color:#ee732a; width: 240px', class: 'btn-style weight-500'
-        <!--[if mso]>
-          </center>
-        </v:roundrect>
-      <![endif]-->
-
-    br
+      br
+      / Backend all signalled comments
+      = render 'mailers/button',
+          label: t('comment_mailer.comment_signalled.all'),
+          link: admin_post_comments_url(scope: 'signales'),
+          width: 240,
+          color: SharedColoredVariables::SECONDARY_COLOR,
+          klass: 'extra-width'

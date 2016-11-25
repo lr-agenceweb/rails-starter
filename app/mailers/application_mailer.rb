@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 #
-# == Application Mailer
-#
+# Application Mailer
+# ====================
 class ApplicationMailer < ActionMailer::Base
+  include SharedColoredVariables
   helper :html # HtmlHelper
 
   before_action :set_setting

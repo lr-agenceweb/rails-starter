@@ -1,12 +1,57 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  user: bob
+  allow_comments: true
+
+# Home posts
+home:
+  <<: *DEFAULTS
+  type: Home
+  online: true
+
+home_offline:
+  <<: *DEFAULTS
+  type: Home
+  online: false
+
+# About posts
+about:
+  <<: *DEFAULTS
+  type: About
+  online: true
+  user: anthony
+
+about_offline:
+  <<: *DEFAULTS
+  type: About
+  online: false
+
+# Legal notices posts
+legal_notice_super_admin:
+  <<: *DEFAULTS
+  type: LegalNotice
+  online: true
+  user: anthony
+
+legal_notice_admin:
+  <<: *DEFAULTS
+  type: LegalNotice
+  online: true
+
+# Connection posts
+connection:
+  <<: *DEFAULTS
+  type: Connection
+  online: true
+
 # == Schema Information
 #
 # Table name: posts
 #
 #  id              :integer          not null, primary key
 #  type            :string(255)
-#  title           :string(255)
 #  slug            :string(255)
-#  content         :text(65535)
 #  show_as_gallery :boolean          default(FALSE)
 #  allow_comments  :boolean          default(TRUE)
 #  online          :boolean          default(TRUE)
@@ -20,54 +65,3 @@
 #  index_posts_on_slug     (slug) UNIQUE
 #  index_posts_on_user_id  (user_id)
 #
-
-DEFAULTS: &DEFAULTS
-  created_at: <%= 1.weeks.ago.to_s(:db) %>
-  updated_at: <%= 1.weeks.ago.to_s(:db) %>
-  content: ''
-  user: bob
-  allow_comments: true
-
-# Home posts
-home:
-  <<: *DEFAULTS
-  type: Home
-  online: true
-
-home_offline:
-  <<: *DEFAULTS
-  type: Home
-  title: Home article !
-  online: false
-
-# About posts
-about:
-  <<: *DEFAULTS
-  type: About
-  online: true
-  user: anthony
-
-about_offline:
-  <<: *DEFAULTS
-  type: About
-  title: About article offline !
-  online: false
-
-# Legal notices posts
-legal_notice_super_admin:
-  <<: *DEFAULTS
-  type: LegalNotice
-  online: true
-  user: anthony
-
-legal_notice_admin:
-  <<: *DEFAULTS
-  type: LegalNotice
-  title: My Legal notices
-  online: true
-
-# Connection posts
-connection:
-  <<: *DEFAULTS
-  type: Connection
-  online: true

@@ -1,7 +1,8 @@
 #
-# == Application
-#
-application_name: ~ # Ex: my-application
+# Application
+# =============
+# Host and domain name
+application_name: ~ # ex: my-application
 application_host : 'http://localhost:3000'
 application_domain_name: 'localhost:3000'
 
@@ -14,17 +15,22 @@ application_domain_name_production: ~
 application_host_backup: ~
 application_domain_name_backup: ~
 
-
-#
-# == Keys
-#
+# Keys
 application_devise_secret_key: ~
 application_base_secret_key: ~
 
 
 #
-# == Database
+# Server [Puma]
+# ===============
+puma_workers: '2'
+puma_use_actioncable: 'false'
+nginx_use_ssl: 'false'
+
+
 #
+# Database
+# ==========
 db_host: ~
 staging:
   db_name: ~
@@ -37,8 +43,8 @@ production:
 
 
 #
-# == Omniauth
-#
+# Omniauth
+# ==========
 development:
   facebook_app_id: ~
   facebook_app_secret: ~
@@ -64,22 +70,22 @@ test:
 
 
 #
-# == Mapbox
-#
+# Mapbox
+# ========
 mapbox_username: ~
 mapbox_map_key: ~
 mapbox_access_token: ~
 
 
 #
-# == Google Map [Autocomplete address]
-#
+# Google Map [Autocomplete address]
+# ===================================
 gmaps_api_key: ~
 
 
 #
-# == Google and Bing
-#
+# Google and Bing
+# =================
 production:
   google_analytics_key: ~
   google_site_verification: ~
@@ -87,23 +93,14 @@ production:
 
 
 #
-# == Mail server
-#
-mailer_address: ~
-mailer_port: ~
-mailer_user_name: ~
-mailer_password: ~
-
-
-#
-# == Froala [ActiveAdmin wysiwyg editor]
-#
+# Froala [ActiveAdmin wysiwyg editor]
+# =====================================
 froala_key: ~
 
 
 #
-# == Capistrano [Deployer]
-#
+# Capistrano [Deployer]
+# =======================
 capistrano_repo_url: ~
 capistrano_deploy_user: ~
 capistrano_server_ip: ~
@@ -116,8 +113,8 @@ production:
 
 
 #
-# == Staging Authentication
-#
+# Staging Authentication
+# ========================
 staging:
   admin_username: ~
   admin_password: ~
@@ -126,28 +123,29 @@ staging:
 
 
 #
-# == VideoInfo
-#
+# VideoInfo
+# ===========
 youtube_api_key: ~
 vimeo_api_key: ~
 
 
 #
-# == Adult module
-#
+# Adult module
+# ==============
 adult_not_validated_popup_redirect_link: 'http://www.lr-agenceweb.fr'
 
 
 #
-# == ExceptionNotification [slack integration]
-#
+# ExceptionNotification [Slack integration]
+# ===========================================
 exception_notification_slack_webhook_url: ~
 exception_notification_slack_channel: '#exceptions'
 
 
 #
-# == Backup gem
-#
+# Backup gem
+# ============
+backup_parent_class: ~ # Parent class name
 production:
   dropbox: # Dropbox [Storage]
     api_key: ~

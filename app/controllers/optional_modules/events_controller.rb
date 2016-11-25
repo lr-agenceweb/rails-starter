@@ -44,7 +44,7 @@ class EventsController < ApplicationController
 
   def set_events
     @events = Event.includes_collection.with_conditions.online
-    per_p = @setting.per_page == 0 ? @events.count : @setting.per_page
+    per_p = @setting.per_page.zero? ? @events.count : @setting.per_page
     @events = EventDecorator.decorate_collection(@events.page(params[:page]).per(per_p))
 
     gon.push(

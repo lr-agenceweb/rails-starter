@@ -1,12 +1,37 @@
 # frozen_string_literal: true
 
+#
+# VideoSubtitle Model
+# =====================
+class VideoSubtitle < ApplicationRecord
+  include Assets::Attachable
+
+  # Constants
+  ATTACHMENT_MAX_SIZE = 3 # megabytes
+  ATTACHMENT_TYPES = [].freeze
+
+  # Model relations
+  belongs_to :subtitleable, polymorphic: true, touch: true
+
+  handle_attachment :subtitle_fr
+  handle_attachment :subtitle_en
+
+  do_not_validate_attachment_file_type :subtitle_fr
+  do_not_validate_attachment_file_type :subtitle_en
+
+  include Assets::DeletableAttachment
+
+  # Scopes
+  scope :online, -> { where(online: true) }
+end
+
 # == Schema Information
 #
 # Table name: video_subtitles
 #
 #  id                       :integer          not null, primary key
-#  subtitleable_id          :integer
 #  subtitleable_type        :string(255)
+#  subtitleable_id          :integer
 #  online                   :boolean          default(TRUE)
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -23,24 +48,3 @@
 #
 #  index_video_subtitles_on_subtitleable_type_and_subtitleable_id  (subtitleable_type,subtitleable_id)
 #
-
-#
-# VideoSubtitle Model
-# =======================
-class VideoSubtitle < ApplicationRecord
-  include Assets::Attachable
-
-  # Model relations
-  belongs_to :subtitleable, polymorphic: true, touch: true
-
-  handle_attachment :subtitle_fr
-  handle_attachment :subtitle_en
-
-  do_not_validate_attachment_file_type :subtitle_fr
-  do_not_validate_attachment_file_type :subtitle_en
-
-  include Assets::DeletableAttachment
-
-  # Scopes
-  scope :online, -> { where(online: true) }
-end

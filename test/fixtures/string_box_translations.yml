@@ -1,7 +1,10 @@
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  title: ~
+  content: ~
 
+# Error 404
 error_404_fr:
   <<: *DEFAULTS
   string_box_id: <%= ActiveRecord::FixtureSet.identify(:error_404) %>
@@ -16,6 +19,29 @@ error_404_en:
   title: Error 404
   content: <p>The page you want to access doesn't exist :(</p>
 
+# Error 422
+error_422_fr:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:error_422) %>
+  locale: fr
+
+error_422_en:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:error_422) %>
+  locale: en
+
+# Error 500
+error_500_fr:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:error_500) %>
+  locale: fr
+
+error_500_en:
+  <<: *DEFAULTS
+  string_box_id: <%= ActiveRecord::FixtureSet.identify(:error_500) %>
+  locale: en
+
+# Success Contact Form
 success_contact_form_fr:
   <<: *DEFAULTS
   string_box_id: <%= ActiveRecord::FixtureSet.identify(:success_contact_form) %>
@@ -30,6 +56,7 @@ success_contact_form_en:
   title: Message sent with success
   content: Your message has been properly sent. Thank you :)
 
+# Answering Machine
 answering_machine_fr:
   <<: *DEFAULTS
   string_box_id: <%= ActiveRecord::FixtureSet.identify(:answering_machine) %>

@@ -67,7 +67,7 @@ ActiveAdmin.register Newsletter do
       make_newsletter_with_i18n(@newsletter, @newsletter_users)
 
       flash[:notice] = "La newsletter est en train d'être envoyée à #{count} " + 'personne'.pluralize(count)
-      redirect_to :back
+      redirect_back(fallback_location: admin_dashboard_path)
     end
 
     def preview

@@ -9,7 +9,7 @@ module Admin
   # == MailingMessagesController test
   #
   class MailingMessagesControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
     include Rails.application.routes.url_helpers
 
     setup :initialize_test
@@ -23,23 +23,23 @@ module Admin
     end
 
     test 'should create mailing_message' do
-      post :create, mailing_message: {}
+      post :create, params: { mailing_message: {} }
       assert_redirected_to admin_mailing_message_path(assigns(:mailing_message))
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @mailing_message
+      get :edit, params: { id: @mailing_message }
       assert_response :success
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @mailing_message
+      get :show, params: { id: @mailing_message }
       assert_response :success
     end
 
     # Valid params
     test 'should update mailing_message if logged in' do
-      patch :update, id: @mailing_message, mailing_message: {}
+      patch :update, params: { id: @mailing_message, mailing_message: {} }
       assert_redirected_to admin_mailing_message_path(@mailing_message)
     end
 
@@ -48,19 +48,19 @@ module Admin
     #
     test 'should redirect to edit form after create with picture' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      post :create, mailing_message: { picture_attributes: { image: attachment } }
+      post :create, params: { mailing_message: { picture_attributes: { image: attachment } } }
       assert_redirected_to edit_admin_mailing_message_path(assigns(:mailing_message))
     end
 
     test 'should redirect to edit form after update existing picture' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @mailing_message, mailing_message: { picture_attributes: { image: attachment } }
+      patch :update, params: { id: @mailing_message, mailing_message: { picture_attributes: { image: attachment } } }
       assert_redirected_to edit_admin_mailing_message_path(assigns(:mailing_message))
     end
 
     test 'should redirect to edit form after update with picture' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @mailing_message_without_picture, mailing_message: { picture_attributes: { image: attachment } }
+      patch :update, params: { id: @mailing_message_without_picture, mailing_message: { picture_attributes: { image: attachment } } }
       assert_redirected_to edit_admin_mailing_message_path(assigns(:mailing_message))
     end
 
@@ -70,18 +70,18 @@ module Admin
     test 'should not destroy message if logged in as subscriber' do
       sign_in @subscriber
       assert_no_difference 'MailingMessage.count' do
-        delete :destroy, id: @mailing_message
+        delete :destroy, params: { id: @mailing_message }
       end
     end
 
     test 'should destroy mailing message if logged in as admin' do
       assert_difference ['MailingMessage.count', 'Picture.count'], -1 do
-        delete :destroy, id: @mailing_message
+        delete :destroy, params: { id: @mailing_message }
       end
     end
 
     test 'should redirect to mailing users path after destroy' do
-      delete :destroy, id: @mailing_message
+      delete :destroy, params: { id: @mailing_message }
       assert_redirected_to admin_mailing_messages_path
     end
 
@@ -92,7 +92,7 @@ module Admin
       }
       assert @mailing_message.picture.present?
       assert_difference ['Picture.count'], -1 do
-        patch :update, id: @mailing_message, mailing_message: { picture_attributes: picture_attrs }
+        patch :update, params: { id: @mailing_message, mailing_message: { picture_attributes: picture_attrs } }
         assert assigns(:mailing_message).valid?
         @mailing_message.reload
         assigns(:mailing_message).reload
@@ -121,7 +121,7 @@ module Admin
     test 'should render mailing message preview' do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview, locale: locale.to_s, id: @mailing_message.id
+          get :preview, params: { locale: locale.to_s, id: @mailing_message }
           assert_response :success
         end
       end
@@ -136,7 +136,7 @@ module Admin
       assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 3 do
-        get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token, option: 'checked'
+        get :send_mailing_message, params: { id: @mailing_message.id, token: @mailing_message.token, option: 'checked' }
         assert_redirected_to root_url
       end
     end
@@ -147,7 +147,7 @@ module Admin
       assert ActionMailer::Base.deliveries.empty?
 
       assert_enqueued_jobs 4 do
-        get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token, option: 'all'
+        get :send_mailing_message, params: { id: @mailing_message.id, token: @mailing_message.token, option: 'all' }
         assert_redirected_to root_url
       end
     end
@@ -156,7 +156,7 @@ module Admin
       clear_deliveries_and_queues
 
       assert_enqueued_jobs 0 do
-        get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token, option: ''
+        get :send_mailing_message, params: { id: @mailing_message.id, token: @mailing_message.token, option: '' }
         assert_redirected_to admin_dashboard_path
       end
     end
@@ -165,7 +165,7 @@ module Admin
       clear_deliveries_and_queues
 
       assert_enqueued_jobs 0 do
-        get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token
+        get :send_mailing_message, params: { id: @mailing_message.id, token: @mailing_message.token }
         assert_redirected_to admin_dashboard_path
       end
     end
@@ -174,7 +174,7 @@ module Admin
       clear_deliveries_and_queues
 
       assert_enqueued_jobs 0 do
-        get :send_mailing_message, id: @mailing_message.id, token: '', option: 'all'
+        get :send_mailing_message, params: { id: @mailing_message.id, token: '', option: 'all' }
         assert_redirected_to admin_dashboard_path
       end
     end
@@ -184,7 +184,7 @@ module Admin
 
       assert_enqueued_jobs 0 do
         assert_raises(ActionController::UrlGenerationError) do
-          get :send_mailing_message, id: @mailing_message.id, option: 'all'
+          get :send_mailing_message, params: { id: @mailing_message.id, option: 'all' }
         end
       end
     end
@@ -194,7 +194,7 @@ module Admin
       assert_no_enqueued_jobs
       assert ActionMailer::Base.deliveries.empty?
 
-      get :send_mailing_message, id: @mailing_message.id, token: @mailing_message.token, option: 'checked'
+      get :send_mailing_message, params: { id: @mailing_message.id, token: @mailing_message.token, option: 'checked' }
       assert_equal "Le mail est en train d'être envoyé à 3 personne(s)", flash[:notice]
     end
 
