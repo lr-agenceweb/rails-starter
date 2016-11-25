@@ -54,7 +54,6 @@ gem 'jbuilder', '~> 2.0'
 # Media upload
 # =====================
 gem 'paperclip', '~> 5.0'
-gem 'retina_rails', '~> 2.0.0'
 gem 'paperclip-av-transcoder'
 gem 'delayed_paperclip'
 
@@ -105,7 +104,9 @@ gem 'analytical'
 # Background Tasks
 # =====================
 gem 'daemons'
-gem 'delayed-web'
+gem 'delayed-web',
+    github: 'gemsfix/delayed-web',
+    branch: 'feature/i18n-views'
 gem 'delayed_job_active_record'
 gem 'whenever', require: false # Cron tasks
 
@@ -167,6 +168,9 @@ gem 'dalli'
 #
 # Own gems fixes (https://github.com/gemsfix)
 # ================
+gem 'retina_rails',
+    github: 'gemsfix/retina_rails',
+    branch: 'feature/rails5'
 gem 'vex_rails', github: 'anthony-robin/vex_rails'
 gem 'activeadmin-globalize', github: 'anthony-robin/activeadmin-globalize'
 gem 'outdatedbrowser_rails', github: 'anthony-robin/outdatedbrowser_rails'
