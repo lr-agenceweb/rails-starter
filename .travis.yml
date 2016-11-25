@@ -51,7 +51,13 @@ branches:
     - develop
 
 addons:
-  mariadb: 10.1
+  mariadb: '10.1'
+  postgresql: '9.4' # Rails 5 fix
+  sources:
+    - travis-ci/sqlite3 # Rails 5 fix
+  packages:
+    - sqlite3
+
   code_climate:
     repo_token:
       secure: aLmZcxs6oDsqFB8fdivlOsdyWAePxZkdj2vFrd4iS3GwaZz0S6NhJxQzHW+jWAz8L2EEGsFthSBeKzOYR8q/ja7SfowRQ0qLxXY7lVgV4Iv9Y3GiIBjff42e0dCRNeZIVkEBLouLL/GYUp7jdelxlzpibY2t+vt5QtycLiF9+Is=
