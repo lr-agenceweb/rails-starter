@@ -2,16 +2,16 @@
 require 'test_helper'
 
 #
-# == ApplicationDecorator test
-#
+# ApplicationDecorator test
+# ===========================
 class ApplicationDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 
   setup :initialize_test
 
   #
-  # == DateTime
-  #
+  # DateTime
+  # ==========
   test 'should return correct created_at format' do
     assert_equal '01 fév. 13h32', @blog_article_decorated.created_at
   end
@@ -37,15 +37,15 @@ class ApplicationDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Paginator
-  #
+  # Paginator
+  # ===========
   test 'should return correct decorator class' do
     assert_equal PaginatingDecorator, ApplicationDecorator.collection_decorator_class
   end
 
   #
-  # == Status tag
-  #
+  # Status tag
+  # ============
   test 'should return status_tag for french language' do
     assert_match '<span class="status_tag français blue">Français</span>', @newsletter_user_decorated.lang
   end

@@ -91,11 +91,11 @@ module Admin
     end
 
     test 'should not update setting without title' do
-      attrs = { translations_attributes: { '1': { title: nil } } }
+      attrs = { translations_attributes: { '1': { title: nil }, '0': { title: nil } } }
       patch :update, params: { id: @setting, setting: attrs }
 
       assert_not assigns(:setting).valid?
-      assert_equal [:'translations.title'], assigns(:setting).errors.keys
+      assert_equal [:'translations.locale', :'translations.title'], assigns(:setting).errors.keys
     end
 
     test 'should not update social param if module is disabled' do

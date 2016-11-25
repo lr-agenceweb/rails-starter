@@ -49,7 +49,7 @@ class ApplicationDecorator < Draper::Decorator
 
   #
   # Methods used in all decorators
-  # =================================
+  # ================================
   def self.collection_decorator_class
     PaginatingDecorator
   end
