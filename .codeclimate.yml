@@ -1,9 +1,62 @@
-languages:
-  Ruby: true
-  JavaScript: true
-  PHP: false
-  Python: false
+---
+engines:
+  # Assets
+  scss-lint:
+    enabled: true
+  csslint:
+    enabled: false
+  coffeelint:
+    enabled: false
+  eslint:
+    enabled: false
+
+  # Security
+  brakeman:
+    enabled: true
+  bundler-audit:
+    enabled: false
+
+  # Clean code
+  rubocop:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+
+  # Misc
+  fixme:
+    enabled: true
+    config:
+      strings:
+      - FIXME
+      - TODO
+      - CHANGED
+      - XXX
+      - IDEA
+      - HACK
+      - NOTE
+      - REVIEW
+      - UPGRADEME
+      - TESTME
+      - CLEANME
+
+ratings:
+  paths:
+  # - Gemfile.lock
+  - "**.erb"
+  - "**.rb"
+  - "**.slim"
+  - "**.css"
+  - "**.sass"
+  - "**.coffee"
+  - "**.js"
 
 exclude_paths:
-- "config/application.rb"
-- "lib/mailer_previews"
+- config/application.rb
+- lib/mailer_previews
+- test/
+- db/
+- vendor/
