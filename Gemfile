@@ -178,7 +178,7 @@ gem 'rails_autosize_jquery', github: 'lr-agenceweb/rails_autosize_jquery'
 
 group :development do
   gem 'spring'
-  gem 'listen', '~> 3.0.5'
+  gem 'listen'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   gem 'better_errors'
