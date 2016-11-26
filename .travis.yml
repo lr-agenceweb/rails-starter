@@ -24,11 +24,11 @@ before_script:
   - psql -c 'create database rails_starter_test' -U postgres
 
 script:
-  # - RAILS_ENV=test bundle exec rake --trace db:migrate
-  - RAILS_ENV=test bundle exec rake --trace db:schema:load
-  - RAILS_ENV=test bundle exec rake test
-  - RAILS_ENV=test bundle exec rake assets:precompile
-  - RAILS_ENV=test bundle exec rake db:seed
+  - RAILS_ENV=test bundle exec rails --trace db:migrate
+  # - RAILS_ENV=test bundle exec rails --trace db:schema:load
+  - RAILS_ENV=test bundle exec rails test
+  - RAILS_ENV=test bundle exec rails assets:precompile
+  - RAILS_ENV=test bundle exec rails db:seed
 
 after_success:
   - bundle exec codeclimate-test-reporter
@@ -41,10 +41,10 @@ after_failure:
   - "bundle exec rake --version"
 
 matrix:
-  allow_failures:
-    - env: DB=postgresql
-    - env: DB=sqlite
   fast_finish: true
+  # allow_failures:
+  #   - env: DB=postgresql
+  #   - env: DB=sqlite
 
 branches:
   only:

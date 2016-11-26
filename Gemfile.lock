@@ -409,9 +409,10 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    listen (3.0.8)
+    listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
     lograge (0.4.1)
       actionpack (>= 4, < 5.1)
       activesupport (>= 4, < 5.1)
@@ -509,7 +510,7 @@ GEM
       actionmailer (>= 3, < 6)
       premailer (~> 1.7, >= 1.7.9)
     public_suffix (2.0.4)
-    puma (3.6.0)
+    puma (3.6.2)
     rack (2.0.1)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
@@ -569,6 +570,7 @@ GEM
     ruby-ll (2.1.2)
       ansi
       ast
+    ruby_dep (1.5.0)
     ruby_engine (1.0.1)
     ruby_info (1.0.1)
     ruby_version (1.0.1)
@@ -750,7 +752,7 @@ DEPENDENCIES
   jquery-ui-rails
   js_cookie_rails
   kaminari (~> 0.17.0)
-  listen (~> 3.0.5)
+  listen
   lograge
   magnific-popup-rails (~> 1.1.0)
   mapbox-rails!

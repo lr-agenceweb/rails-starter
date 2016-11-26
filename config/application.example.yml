@@ -31,6 +31,7 @@ nginx_use_ssl: 'false'
 #
 # Database
 # ==========
+db_adapter: 'mysql2' # mysql2, postgresql or sqlite3
 db_host: ~
 staging:
   db_name: ~
