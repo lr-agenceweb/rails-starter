@@ -8,13 +8,13 @@ machine:
 
 database:
   override:
-    - bundle exec rails db:create
-    - bundle exec rails db:migrate
+    - cp config/database.travis.yml config/database.yml
+    - cp config/application.example.yml config/application.yml
 
 test:
   pre:
-    - cp config/database.travis.yml config/database.yml
-    - cp config/application.example.yml config/application.yml
+    - bundle exec rails db:create
+    - bundle exec rails db:migrate
   override:
     - bundle exec rails test
   post:
