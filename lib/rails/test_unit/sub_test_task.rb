@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
 # Rails 5 fix
-class Rails::SubTestTask < Rake::TestTask
+module Rails
+  class SubTestTask < Rake::TestTask
+  end
 end
