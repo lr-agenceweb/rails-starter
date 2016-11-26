@@ -41,10 +41,10 @@ after_failure:
   - "bundle exec rake --version"
 
 matrix:
-  allow_failures:
-    - env: DB=postgresql
-    - env: DB=sqlite
   fast_finish: true
+  # allow_failures:
+  #   - env: DB=postgresql
+  #   - env: DB=sqlite
 
 branches:
   only:
