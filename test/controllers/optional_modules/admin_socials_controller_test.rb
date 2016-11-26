@@ -10,7 +10,7 @@ module Admin
   # == SocialsController test
   #
   class SocialsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
     include Rails.application.routes.url_helpers
 
     setup :initialize_test
@@ -24,17 +24,17 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @social
+      get :show, params: { id: @social }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @social
+      get :edit, params: { id: @social }
       assert_response :success
     end
 
     test 'should update social if logged in' do
-      patch :update, id: @social, social: {}
+      patch :update, params: { id: @social, social: {} }
       assert_redirected_to admin_social_path(assigns(:social))
     end
 
@@ -43,7 +43,7 @@ module Admin
     #
     test 'should not destroy social' do
       assert_no_difference ['Social.count'] do
-        delete :destroy, id: @social
+        delete :destroy, params: { id: @social }
       end
       assert_redirected_to admin_dashboard_path
     end
@@ -52,13 +52,13 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_enabled batch action' do
-      post :batch_action, batch_action: 'toggle_enabled', collection_selection: [@social.id]
+      post :batch_action, params: { batch_action: 'toggle_enabled', collection_selection: [@social.id] }
       [@social].each(&:reload)
       assert_not @social.enabled?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_enabled batch action' do
-      post :batch_action, batch_action: 'toggle_enabled', collection_selection: [@social.id]
+      post :batch_action, params: { batch_action: 'toggle_enabled', collection_selection: [@social.id] }
       assert_redirected_to admin_socials_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
@@ -67,7 +67,7 @@ module Admin
     # == Validation rules
     #
     test 'should remove forbidden key from object if administrator' do
-      patch :update, id: @social, social: { title: 'Google+', kind: 'share' }
+      patch :update, params: { id: @social, social: { title: 'Google+', kind: 'share' } }
       assert_equal 'Facebook', assigns(:social).title
       assert_equal 'follow', assigns(:social).kind
       assert_equal I18n.t('social.follow'), assigns(:social).decorate.kind
@@ -76,7 +76,7 @@ module Admin
     test 'should not save if title is not allowed' do
       sign_in @super_administrator
       assert_no_difference ['Social.count'] do
-        post :create, social: { title: 'forbidden', kind: 'share' }
+        post :create, params: { social: { title: 'forbidden', kind: 'share' } }
       end
       assert_not assigns(:social).valid?
     end
@@ -84,7 +84,7 @@ module Admin
     test 'should not save if kind is not allowed' do
       sign_in @super_administrator
       assert_no_difference ['Social.count'] do
-        post :create, social: { title: 'Facebook', kind: 'forbidden' }
+        post :create, params: { social: { title: 'Facebook', kind: 'forbidden' } }
       end
       assert_not assigns(:social).valid?
     end
@@ -92,7 +92,7 @@ module Admin
     test 'should not save if link is not correct' do
       sign_in @super_administrator
       assert_no_difference ['Social.count'] do
-        post :create, social: { title: 'Facebook', kind: 'follow', link: 'http://forbidden' }
+        post :create, params: { social: { title: 'Facebook', kind: 'follow', link: 'http://forbidden' } }
       end
       assert_not assigns(:social).valid?
     end
@@ -100,20 +100,20 @@ module Admin
     test 'should not save if link is not present with follow kind' do
       sign_in @super_administrator
       assert_no_difference ['Social.count'] do
-        post :create, social: { title: 'Facebook', kind: 'follow' }
+        post :create, params: { social: { title: 'Facebook', kind: 'follow' } }
       end
       assert_not assigns(:social).valid?
     end
 
     test 'should not update if font awesome ikon is not allowed' do
       sign_in @administrator
-      patch :update, id: @social_facebook_share, social: { font_ikon: 'forbidden_value' }
+      patch :update, params: { id: @social_facebook_share, social: { font_ikon: 'forbidden_value' } }
       assert_not assigns(:social).valid?
     end
 
     test 'should update if font awesome ikon is allowed' do
       sign_in @administrator
-      patch :update, id: @social_facebook_share, social: { font_ikon: 'twitter' }
+      patch :update, params: { id: @social_facebook_share, social: { font_ikon: 'twitter' } }
       assert assigns(:social).valid?
     end
 

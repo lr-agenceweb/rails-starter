@@ -1,0 +1,25 @@
+row
+  columns
+    p = t('comment.email.greeting', author: @setting.name)
+    p == t('comment_mailer.comment_created.content', date: @comment.created_at(:long), article: @commentable.title)
+
+    p.text-center
+      br
+      - if @comment.validated?
+        / Frontend link
+        = render 'mailers/button',
+            label: "#{t('comment_mailer.comment_created.link_frontend')} #{t('mailing.click_here_link')}",
+            link: @link,
+            width: 170,
+            color: SharedColoredVariables::PRIMARY_COLOR,
+            klass: ''
+
+        br: br
+
+      / Admin link
+      = render 'mailers/button',
+          label: "#{t('comment_mailer.comment_created.link_backend')} #{t('mailing.click_here_link')}",
+          link: admin_post_comment_url(@comment),
+          width: 170,
+          color: SharedColoredVariables::SECONDARY_COLOR,
+          klass: ''

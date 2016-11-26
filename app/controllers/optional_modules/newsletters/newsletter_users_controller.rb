@@ -41,7 +41,7 @@ class NewsletterUsersController < ApplicationController
 
   def respond_action(format, template, status, type = 'success')
     flash[type] = I18n.t("newsletter.subscribe_#{type}")
-    format.html { redirect_to :back }
+    format.html { redirect_back(fallback_location: root_path) }
     format.js { render template, status: status }
   end
 

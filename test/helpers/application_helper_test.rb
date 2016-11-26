@@ -2,48 +2,33 @@
 require 'test_helper'
 
 #
-# == ApplicationHelper Test
-#
+# ApplicationHelper Test
+# ========================
 class ApplicationHelperTest < ActionView::TestCase
-  include Rails.application.routes.url_helpers
-
   setup :initialize_test
 
   #
-  # == Pages actions
-  #
-  test 'should return correct value for index_page?' do
-    params[:action] = 'index'
-    assert index_page?
-    params[:action] = 'new'
-    assert_not index_page?
+  # DelayedJob
+  # ============
+  test 'should return correct value for delayed_job_enabled?' do
+    assert delayed_job_enabled?
 
-    params[:controller] = 'blog_categories'
-    params[:action] = 'show'
-    assert index_page?
-  end
-
-  test 'should return correct value for show_page?' do
-    params[:action] = 'new'
-    assert_not show_page?
-    params[:action] = 'show'
-    assert show_page?
-
-    params[:controller] = 'blog_categories'
-    params[:action] = 'show'
-    assert_not show_page?
+    %w(Video Audio Comment Newsletter Mailing).each do |om|
+      optional_modules(:"#{om.underscore}").update_attribute(:enabled, false)
+    end
+    assert_not delayed_job_enabled?
   end
 
   #
-  # == DateTime
-  #
+  # DateTime
+  # ==========
   test 'should return current year' do
     assert_equal Time.zone.now.year, current_year
   end
 
   #
-  # == Maintenance
-  #
+  # Maintenance
+  # =============
   test 'should return true if maintenance is enabled' do
     @setting.update_attributes(maintenance: true)
     assert maintenance?(@request), 'should be in maintenance'
@@ -54,8 +39,8 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   #
-  # == Git
-  #
+  # Git
+  # =============
   test 'should return correct branch name by environment' do
     Rails.env = 'staging'
     assert_equal 'BranchName', branch_name

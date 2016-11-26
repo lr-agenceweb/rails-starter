@@ -1,51 +1,54 @@
 # frozen_string_literal: true
 require 'test_helper'
-require 'minitest/autorun'
 
 #
-# == SocialProvider test
-#
+# SocialProvider test
+# =====================
 class SocialProviderTest < ActiveSupport::TestCase
   setup :initialize_test
 
-  ENV['facebook_app_id'] = 'test'
-  ENV['facebook_app_secret'] = 'test'
+  #
+  # Shoulda
+  # =========
+  should belong_to(:social_connect_setting)
+  should validate_presence_of(:name)
+  should validate_uniqueness_of(:name)
 
   #
-  # == Validation
-  #
+  # Validation rules
+  # ==================
   test 'should save social provider if all good' do
     @facebook_provider.destroy
     social_provider = SocialProvider.new(name: 'facebook')
-    assert social_provider.valid?
+    assert social_provider.valid?, 'should be valid'
     assert_empty social_provider.errors.keys
   end
 
   test 'should not save social provider if env keys are not set' do
     skip 'Find a way to stub env variable'
-    ENV.stub(:[]).with(:facebook_app_id).returns(nil)
-    ENV.stub(:[]).with(:facebook_app_secret).returns(nil)
     @facebook_provider.destroy
-    social_provider = SocialProvider.new(name: 'facebook')
-    assert_not social_provider.valid?
-    assert_equal [:name], social_provider.errors.keys
+    ENV.stub(:facebook_app_id, nil) do
+      social_provider = SocialProvider.new(name: 'facebook')
+      assert_not social_provider.valid?, 'should not be valid'
+      assert_equal [:name], social_provider.errors.keys
+    end
   end
 
   test 'should not save social provider if not unique' do
     social_provider = SocialProvider.new(name: 'facebook')
-    assert_not social_provider.valid?
+    assert_not social_provider.valid?, 'should not be valid'
     assert_equal [:name], social_provider.errors.keys
   end
 
   test 'should not save social provider if not allowed' do
     social_provider = SocialProvider.new(name: 'Linkedin')
-    assert_not social_provider.valid?
+    assert_not social_provider.valid?, 'should not be valid'
     assert_equal [:name], social_provider.errors.keys
   end
 
   #
-  # == Methods
-  #
+  # Methods
+  # =========
   test 'should return correct social provider by name' do
     assert_equal @facebook_provider, SocialProvider.provider_by_name('facebook')
     assert_nil SocialProvider.provider_by_name('Linkedin')

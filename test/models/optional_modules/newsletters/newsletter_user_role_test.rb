@@ -2,9 +2,24 @@
 require 'test_helper'
 
 #
-# == NewsletterUserRole test
-#
+# NewsletterUserRole test
+# =========================
 class NewsletterUserRoleTest < ActiveSupport::TestCase
+  #
+  # Shoulda
+  # =========
+  should belong_to(:rollable)
+  should have_many(:newsletter_users)
+
+  # should validate_presence_of(:'translations.title')
+  should validate_presence_of(:kind)
+
+  should validate_inclusion_of(:kind)
+    .in_array(NewsletterUserRole.allowed_newsletter_user_roles)
+
+  #
+  # Validation rules
+  # ==================
   test 'should not save if all good' do
     nur = NewsletterUserRole.new(kind: 'tester')
     assert nur.valid?

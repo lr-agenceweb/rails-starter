@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+#
+# VideoSetting Model
+# ====================
+class VideoSetting < ApplicationRecord
+end
+
 # == Schema Information
 #
 # Table name: video_settings
@@ -12,9 +18,3 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
-
-#
-# == VideoSetting Model
-#
-class VideoSetting < ActiveRecord::Base
-end

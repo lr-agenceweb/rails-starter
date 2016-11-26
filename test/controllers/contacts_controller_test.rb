@@ -6,7 +6,7 @@ require 'test_helper'
 #
 class ContactsControllerTest < ActionController::TestCase
   include UserHelper
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
 
   setup :initialize_test
@@ -17,7 +17,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'index page should redirect to new page' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        get :index, locale: locale.to_s
+        get :index, params: { locale: locale.to_s }
         assert_redirected_to(action: :new)
       end
     end
@@ -26,7 +26,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'should get new page' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        get :new, locale: locale.to_s
+        get :new, params: { locale: locale.to_s }
         assert_response :success
       end
     end
@@ -35,7 +35,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'should use new template' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        get :new, locale: locale.to_s
+        get :new, params: { locale: locale.to_s }
         assert_template :new
       end
     end
@@ -52,7 +52,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'should send a contact message if all fields are valid' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        post :create, locale: locale.to_s, contact_form: { email: 'john@test.com', name: 'john', message: 'Thanks for this site', nickname: '' }
+        post :create, params: { locale: locale.to_s, contact_form: { email: 'john@test.com', name: 'john', message: 'Thanks for this site', nickname: '' } }
         assert assigns(:contact_form).valid?
         assert_redirected_to new_contact_path
       end
@@ -63,7 +63,7 @@ class ContactsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_difference 'ActionMailer::Base.deliveries.size', 1 do
-          post :create, locale: locale.to_s, contact_form: default_attrs
+          post :create, params: { locale: locale.to_s, contact_form: default_attrs }
         end
 
         assert_redirected_to new_contact_path
@@ -76,7 +76,7 @@ class ContactsControllerTest < ActionController::TestCase
       I18n.with_locale(locale.to_s) do
         ActionMailer::Base.deliveries.clear
         assert_difference 'ActionMailer::Base.deliveries.size', 2 do
-          post :create, locale: locale.to_s, contact_form: default_attrs('1')
+          post :create, params: { locale: locale.to_s, contact_form: default_attrs('1') }
         end
 
         assert_redirected_to new_contact_path
@@ -89,7 +89,7 @@ class ContactsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_difference 'ActionMailer::Base.deliveries.size', 2 do
-          post :create, locale: locale.to_s, contact_form: default_attrs
+          post :create, params: { locale: locale.to_s, contact_form: default_attrs }
         end
 
         ActionMailer::Base.deliveries.clear
@@ -100,7 +100,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'should not send a contact message if fields are empty' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        post :create, locale: locale.to_s, contact_form: default_attrs('', '', '', '')
+        post :create, params: { locale: locale.to_s, contact_form: default_attrs('', '', '', '') }
         assert_not assigns(:contact_form).valid?
         assert_template :new
       end
@@ -110,7 +110,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'should not send a contact message if email is not correct' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        post :create, locale: locale.to_s, contact_form: default_attrs('0', 'johnletesteur.com')
+        post :create, params: { locale: locale.to_s, contact_form: default_attrs('0', 'johnletesteur.com') }
         assert_not assigns(:contact_form).valid?
         assert_template :new
       end
@@ -122,7 +122,7 @@ class ContactsControllerTest < ActionController::TestCase
       I18n.with_locale(locale.to_s) do
         attrs = default_attrs
         attrs[:nickname] = 'I am a robot'
-        post :create, locale: locale.to_s, contact_form: attrs
+        post :create, params: { locale: locale.to_s, contact_form: attrs }
         assert_template :new
       end
     end
@@ -131,7 +131,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'should redirect to index if try to access map popup' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        get :mapbox_popup, locale: locale.to_s
+        get :mapbox_popup, params: { locale: locale.to_s }
         assert_redirected_to contacts_path
       end
     end
@@ -142,7 +142,7 @@ class ContactsControllerTest < ActionController::TestCase
       I18n.with_locale(locale.to_s) do
         attrs = default_attrs
         attrs[:nickname] = ''
-        post :create, locale: locale.to_s, contact_form: attrs
+        post :create, params: { locale: locale.to_s, contact_form: attrs }
         assert_equal @string_box_success.content, flash[:success]
       end
     end
@@ -154,7 +154,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'AJAX :: should redirect to new page' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :get, :index, format: :js, locale: locale.to_s
+        get :index, params: { format: :js, locale: locale.to_s }, xhr: true
         assert_redirected_to(action: :new)
       end
     end
@@ -163,7 +163,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'AJAX :: should get new page' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :get, :new, format: :js, locale: locale.to_s
+        get :new, params: { format: :js, locale: locale.to_s }, xhr: true
         assert_response :success
       end
     end
@@ -172,7 +172,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'AJAX :: should use new template' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :get, :new, format: :js, locale: locale.to_s
+        get :new, params: { format: :js, locale: locale.to_s }, xhr: true
         assert_template :new
       end
     end
@@ -183,7 +183,7 @@ class ContactsControllerTest < ActionController::TestCase
       I18n.with_locale(locale.to_s) do
         attrs = default_attrs
         attrs[:nickname] = ''
-        xhr :post, :create, format: :js, locale: locale.to_s, contact_form: attrs
+        post :create, params: { format: :js, locale: locale.to_s, contact_form: attrs }, xhr: true
         assert assigns(:contact_form).valid?
         assert_template :create
       end
@@ -193,7 +193,7 @@ class ContactsControllerTest < ActionController::TestCase
   test 'AJAX :: should not send a message if fields are empty' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :post, :create, format: :js, locale: locale.to_s, contact_form: default_attrs('', '', '', '')
+        post :create, params: { format: :js, locale: locale.to_s, contact_form: default_attrs('', '', '', '') }, xhr: true
         assert_not assigns(:contact_form).valid?
         assert_template :new
       end
@@ -205,7 +205,7 @@ class ContactsControllerTest < ActionController::TestCase
       I18n.with_locale(locale.to_s) do
         attrs = default_attrs
         attrs[:nickname] = 'I am a robot'
-        xhr :post, :create, format: :js, locale: locale.to_s, contact_form: attrs
+        post :create, params: { format: :js, locale: locale.to_s, contact_form: attrs }, xhr: true
         assert_template :new
       end
     end
@@ -215,7 +215,7 @@ class ContactsControllerTest < ActionController::TestCase
     @map_setting.update_attribute(:show_map, true)
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :get, :mapbox_popup, locale: locale.to_s
+        get :mapbox_popup, params: { locale: locale.to_s }, xhr: true
         assert_template :mapbox_popup
         assert_template layout: false
       end
@@ -226,7 +226,7 @@ class ContactsControllerTest < ActionController::TestCase
     @map_setting.location.destroy
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
-        xhr :get, :mapbox_popup, locale: locale.to_s
+        get :mapbox_popup, params: { locale: locale.to_s }, xhr: true
         assert_template nil
         assert_template layout: false
       end
@@ -238,7 +238,7 @@ class ContactsControllerTest < ActionController::TestCase
       I18n.with_locale(locale.to_s) do
         attrs = default_attrs
         attrs[:nickname] = ''
-        xhr :post, :create, locale: locale.to_s, contact_form: attrs
+        post :create, params: { locale: locale.to_s, contact_form: attrs }, xhr: true
         assert_equal @string_box_success.content, flash[:success]
       end
     end
@@ -254,7 +254,7 @@ class ContactsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
-          get :new, locale: locale.to_s
+          get :new, params: { locale: locale.to_s }
         end
       end
     end

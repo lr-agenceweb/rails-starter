@@ -18,7 +18,7 @@ ActiveAdmin.register VideoUpload do
 
   batch_action :toggle_online, if: proc { can? :toggle_online, VideoUpload } do |ids|
     VideoUpload.find(ids).each { |item| item.toggle! :online }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do
@@ -43,13 +43,15 @@ ActiveAdmin.register VideoUpload do
           end
         end
 
-        column do
-          attributes_table do
-            row :title
-            row :description_d
-          end
-        end unless resource.page?
-      end
+        unless resource.page?
+          column do
+            attributes_table do
+              row :title
+              row :description_d
+            end
+          end # column
+        end # unless
+      end # columns
     end
   end
 
@@ -66,10 +68,12 @@ ActiveAdmin.register VideoUpload do
         end
       end
 
-      column do
-        render 'admin/assets/video_uploads/subtitles', f: f
-      end unless f.object.decorate.page?
-    end
+      unless f.object.decorate.page?
+        column do
+          render 'admin/assets/video_uploads/subtitles', f: f
+        end # column
+      end # unless
+    end # columns
 
     unless f.object.decorate.page?
       f.inputs t('formtastic.titles.video_content_details') do

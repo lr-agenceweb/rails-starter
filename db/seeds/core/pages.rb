@@ -82,7 +82,7 @@ keywords_fr = [
   # Referencement
   set_referencement(page, 'Page')
 
-  if index == 0
+  if index.zero?
     vb_name = 'The-Fountain'
     path = download_and_unzip(vb_name)
 

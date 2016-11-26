@@ -1,4 +1,15 @@
 row
   columns
-    p = @greeting
-    p == @content
+    p = t('comment.email.greeting', author: @comment.pseudo_registered_or_guest)
+
+    p == t('comment_mailer.comment_validated.content', date: @comment.created_at(:long), article: @commentable.title)
+
+    p.text-center
+      br
+      / Frontend link
+      = render 'mailers/button',
+          label: t('comment_mailer.comment_validated.link_frontend'),
+          link: @link,
+          width: 170,
+          color: SharedColoredVariables::PRIMARY_COLOR,
+          klass: ''

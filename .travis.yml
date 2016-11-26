@@ -30,10 +30,8 @@ script:
   - RAILS_ENV=test bundle exec rake assets:precompile
   - RAILS_ENV=test bundle exec rake db:seed
 
-matrix:
-  allow_failures:
-    - env: DB=mariadb
-  fast_finish: true
+after_success:
+  - bundle exec codeclimate-test-reporter
 
 after_failure:
   - date
@@ -42,16 +40,24 @@ after_failure:
   - "echo $RAILS_ENV"
   - "bundle exec rake --version"
 
+matrix:
+  allow_failures:
+    - env: DB=postgresql
+    - env: DB=sqlite
+  fast_finish: true
+
 branches:
   only:
     - master
     - develop
 
 addons:
-  mariadb: 10.1
+  mariadb: '10.1'
+
   code_climate:
     repo_token:
       secure: aLmZcxs6oDsqFB8fdivlOsdyWAePxZkdj2vFrd4iS3GwaZz0S6NhJxQzHW+jWAz8L2EEGsFthSBeKzOYR8q/ja7SfowRQ0qLxXY7lVgV4Iv9Y3GiIBjff42e0dCRNeZIVkEBLouLL/GYUp7jdelxlzpibY2t+vt5QtycLiF9+Is=
+
 notifications:
   email: false
   slack:

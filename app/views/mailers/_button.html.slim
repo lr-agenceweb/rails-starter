@@ -1,0 +1,11 @@
+/ label, link, width, color, klass
+<!--[if mso]>
+  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{link}" style="height:40px;v-text-anchor:middle;width:#{width}px;" arcsize="8%" stroke="f" fillcolor="#{color}">
+    <w:anchorlock/>
+    <center>
+  <![endif]-->
+      = link_to label, link, target: :_blank, style: "background-color: #{color};", class: "btn-style #{klass}"
+  <!--[if mso]>
+    </center>
+  </v:roundrect>
+<![endif]-->

@@ -1,0 +1,11 @@
+# French
+fr:
+  delayed/web:
+    flashes:
+      jobs:
+        queued:
+          alert: Cette tâche ne peut pas être mise en file d'attente car elle est déjà %{status}
+          notice: Tâche placée en file d'attente
+        destroyed:
+          alert: Cette tâche ne peut pas être supprimée car elle est déjà %{status}
+          notice: Tâche supprimée

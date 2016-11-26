@@ -1,3 +1,12 @@
+super_administrator:
+  name: super_administrator
+
+administrator:
+  name: administrator
+
+subscriber:
+  name: subscriber
+
 # == Schema Information
 #
 # Table name: roles
@@ -7,12 +16,3 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-super_administrator:
-  name: super_administrator
-
-administrator:
-  name: administrator
-
-subscriber:
-  name: subscriber

@@ -3,7 +3,7 @@
 /
 div itemscope='' itemtype='http://schema.org/Event'
   meta itemprop='name' content="#{resource.title}"
-  meta itemprop='url mainEntityOfPage' content="#{resource.show_page_link(true)}"
+  meta itemprop='url mainEntityOfPage' content="#{resource_route_show(resource.object, true)}"
 
   - unless resource.start_date.nil?
     meta itemprop='startDate' content="#{resource.start_date.to_datetime}"

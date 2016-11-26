@@ -18,10 +18,10 @@ class MailingSettingDecorator < ApplicationDecorator
   end
 
   def signature_d
-    raw(model.signature)
+    safe_join [raw(model.signature)]
   end
 
   def unsubscribe_content
-    raw(model.unsubscribe_content)
+    safe_join [raw(model.unsubscribe_content)]
   end
 end

@@ -1,5 +1,21 @@
 # frozen_string_literal: true
 
+#
+# AdultSetting Model
+# ====================
+class AdultSetting < ApplicationRecord
+  include MaxRowable
+
+  # Translations
+  translates :title, :content, fallbacks_for_empty_translations: true
+  active_admin_translates :title, :content
+
+  # Validation rules
+  validates :redirect_link,
+            allow_blank: true,
+            url: true
+end
+
 # == Schema Information
 #
 # Table name: adult_settings
@@ -10,17 +26,3 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-
-#
-# == AdultSetting Model
-#
-class AdultSetting < ActiveRecord::Base
-  include MaxRowable
-
-  translates :title, :content, fallbacks_for_empty_translations: true
-  active_admin_translates :title, :content
-
-  validates :redirect_link,
-            allow_blank: true,
-            url: true
-end

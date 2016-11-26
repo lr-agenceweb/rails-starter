@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 #
-# == SlideDecorator
-#
+# SlideDecorator
+# ================
 class SlideDecorator < PictureDecorator
   include Draper::LazyHelpers
   delegate_all
 
   #
-  # == Slide
-  #
+  # Slide
+  # =======
   def description_d
-    raw(model.description) if description?
+    safe_join [raw(model.description)] if description?
   end
 
   def slider_page_name
@@ -23,8 +23,15 @@ class SlideDecorator < PictureDecorator
   end
 
   #
-  # == ActiveAdmin
-  #
+  # ActiveAdmin
+  # =============
+  def hint_for_paperclip
+    html = []
+    html << safe_join([raw(t('formtastic.hints.slide.size'))])
+    html << retina_image_tag(model, :image, :small)
+    safe_join [html], tag(:br)
+  end
+
   def title_aa_show
     "#{I18n.t('activerecord.models.slide.one')} liée au slider de la page #{slider_page_name}"
   end
@@ -34,6 +41,6 @@ class SlideDecorator < PictureDecorator
   end
 
   def caption?
-    slide.title? || slide.description?
+    title? || description?
   end
 end

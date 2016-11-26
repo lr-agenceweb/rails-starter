@@ -5,7 +5,7 @@ require 'test_helper'
 # == Newsletter Mailer test class
 #
 class NewsletterMailerTest < ActionMailer::TestCase
-  include ActionController::TemplateAssertions
+  include Rails::Controller::Testing::TemplateAssertions
 
   setup :initialize_test
 
@@ -60,6 +60,6 @@ class NewsletterMailerTest < ActionMailer::TestCase
   end
 
   def response
-    @response = ActionController::TestRequest.new(host: 'http://test.host')
+    @response = ActionController::TestRequest.create
   end
 end

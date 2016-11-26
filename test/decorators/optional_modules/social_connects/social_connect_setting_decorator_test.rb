@@ -18,30 +18,30 @@ class SocialConnectSettingDecoratorTest < Draper::TestCase
   # == Status tag
   #
   test 'should return correct status_tag for social_facebook if enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @social_connect_setting_decorated.social_facebook
+    assert_match '<span class="status_tag activé green">Activé</span>', @social_connect_setting_decorated.social_facebook
   end
 
   test 'should return correct status_tag for social_facebook if disabled' do
     @facebook_provider.update_attribute(:enabled, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @social_connect_setting_decorated.social_facebook
+    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @social_connect_setting_decorated.social_facebook
   end
 
   test 'should return correct status_tag for social_twitter if enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @social_connect_setting_decorated.social_twitter
+    assert_match '<span class="status_tag activé green">Activé</span>', @social_connect_setting_decorated.social_twitter
   end
 
   test 'should return correct status_tag for social_twitter if disabled' do
     @twitter_provider.update_attribute(:enabled, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @social_connect_setting_decorated.social_twitter
+    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @social_connect_setting_decorated.social_twitter
   end
 
   test 'should return correct status_tag for social_google if enabled' do
-    assert_match "<span class=\"status_tag activé green\">Activé</span>", @social_connect_setting_decorated.social_google
+    assert_match '<span class="status_tag activé green">Activé</span>', @social_connect_setting_decorated.social_google
   end
 
   test 'should return correct status_tag for social_google if disabled' do
     @google_provider.update_attribute(:enabled, false)
-    assert_match "<span class=\"status_tag désactivé red\">Désactivé</span>", @social_connect_setting_decorated.social_google
+    assert_match '<span class="status_tag désactivé red">Désactivé</span>', @social_connect_setting_decorated.social_google
   end
 
   private

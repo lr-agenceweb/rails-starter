@@ -1,15 +1,12 @@
+#= require cable
+
 #= require jquery
 #= require jquery_ujs
 #= require jquery-ui/autocomplete
 
-#= require plugins/foundation
-
 #= require globals/_functions
 #= require base/flash
 #= require base/button_states
-
-#= require turbolinks
-#= require plugins/nprogress
 
 #= require rails.validations
 #= require rails.validations.simple_form
@@ -19,15 +16,18 @@
 #= require i18n/translations
 #= require base/i18n_settings
 
-#= require plugins/masonry
-
+#= require plugins/foundation
+#= require plugins/turbolinks
 #= require plugins/newsletter_user_form
-
-#= require magnific-popup
-#= require modules/magnific_popup
-
-#= require vex.combined.min.js
+#= require plugins/masonry
+#= require plugins/magnific_popup
 #= require plugins/vex_config
+#= require plugins/mapbox
+#= require plugins/fullcalendar
+#= require plugins/fotorama
+#= require plugins/outdated_browser
+#= require plugins/emoticonize
+#= require plugins/mediaelement
 
 #= require js.cookie
 #= require plugins/cookie_ie
@@ -41,28 +41,10 @@
 #= require plugins/override_rails_confirm
 #= require classes/social_share_class
 
-#= require mapbox
-#= require plugins/mapbox
-
-#= require fotorama
-#= require plugins/fotorama
-
-#= require plugins/fullcalendar
-
 #= require modules/responsive_menu
+#= require modules/scroll_infinite
 #= require modules/autocomplete_search
 #= require modules/comment
-
-#= require outdatedbrowser/outdatedBrowser
-#= require outdated_browser
-
-#= require plugins/emoticonize
-
-#= require mediaelement_rails
-#= require mediaelement/mejs-feature-logo.min
-#= require plugins/mediaelement
-
-#= require modules/scroll_infinite
 
 #= require plugins/devkit
 #= require polyfills/object-fit-images.js

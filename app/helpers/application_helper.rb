@@ -1,39 +1,32 @@
 # frozen_string_literal: true
 
 #
-# == ApplicationHelper
-#
+# ApplicationHelper
+# ====================
 module ApplicationHelper
+  #
+  # DelayedJob
+  # ============
+  def delayed_job_enabled?
+    candidates = []
+    concerned = %w(Video Audio Comment Newsletter Mailing)
+
+    OptionalModule.find_each do |om|
+      candidates << om.enabled? if concerned.include?(om.name)
+    end
+    candidates.include?(true)
+  end
+
+  #
+  # DateTime
+  # ==========
   def current_year
     Time.zone.now.year
   end
 
-  def title_for_page(page, opts = {})
-    extra_title = defined?(opts[:extra]) ? opts[:extra] : ''
-    page_title = page.menu_title
-    page_title += " <span class='extra-title'>#{extra_title}</span>" unless extra_title.blank?
-    link = link_to raw(page_title), page.menu_link(page.name), class: 'page__header__title__link'
-    content_tag(:h2, link, class: 'page__header__title', id: page.name.downcase)
-  end
-
-  def background_from_color_picker(page)
-    "background-color: #{page.color}" unless page.nil? || page.color.blank?
-  end
-
   #
-  # == Pages actions
-  #
-  def index_page?
-    params[:action] == 'index' || (params[:controller] == 'blog_categories' && params[:action] == 'show')
-  end
-
-  def show_page?
-    params[:action] == 'show' && params[:controller] != 'blog_categories'
-  end
-
-  #
-  # == Site validation
-  #
+  # Site validation
+  # ==================
   def google_bing_site_verification
     "#{google_site_verification} #{bing_site_verification}"
   end
@@ -47,15 +40,15 @@ module ApplicationHelper
   end
 
   #
-  # == Maintenance
-  #
+  # Maintenance
+  # =============
   def maintenance?(req = request)
     @setting.maintenance? && (!req.path.include?('/admin') || !self.class.name.to_s.split('::').first == 'ActiveAdmin')
   end
 
   #
-  # == Git
-  #
+  # Git
+  # ============
   def branch_name
     Rails.env.staging? ? 'BranchName' : `git rev-parse --abbrev-ref HEAD`
   end

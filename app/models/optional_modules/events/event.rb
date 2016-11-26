@@ -1,32 +1,9 @@
 # frozen_string_literal: true
 
-# == Schema Information
 #
-# Table name: events
-#
-#  id              :integer          not null, primary key
-#  title           :string(255)
-#  slug            :string(255)
-#  content         :text(65535)
-#  all_day         :boolean          default(FALSE)
-#  start_date      :datetime
-#  end_date        :datetime
-#  show_as_gallery :boolean          default(FALSE)
-#  show_calendar   :boolean          default(FALSE)
-#  show_map        :boolean          default(FALSE)
-#  online          :boolean          default(TRUE)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#
-# Indexes
-#
-#  index_events_on_slug  (slug)
-#
-
-#
-# == Event model
-#
-class Event < ActiveRecord::Base
+# Event Model
+# =============
+class Event < ApplicationRecord
   include Core::Referenceable
   include Core::DateConstraintable
   include Core::FriendlyGlobalizeSluggable
@@ -39,10 +16,13 @@ class Event < ActiveRecord::Base
   include PrevNextable
   include Linkable
 
-  # Constantes
+  # Constants
   EVENT_START = 9 # 9:00
   EVENT_END = 18 # 18:00
   I18N_SCOPE = 'activerecord.errors.models.event.attributes'
+  CANDIDATE ||= :title
+  TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
+  friendlyze_me # in FriendlyGlobalizeSluggable concern
 
   # Callbacks
   before_validation :reset_end_date,
@@ -75,3 +55,24 @@ class Event < ActiveRecord::Base
     self.all_day = true
   end
 end
+
+# == Schema Information
+#
+# Table name: events
+#
+#  id              :integer          not null, primary key
+#  slug            :string(255)
+#  all_day         :boolean          default(FALSE)
+#  start_date      :datetime
+#  end_date        :datetime
+#  show_as_gallery :boolean          default(FALSE)
+#  show_calendar   :boolean          default(FALSE)
+#  show_map        :boolean          default(FALSE)
+#  online          :boolean          default(TRUE)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_events_on_slug  (slug)
+#

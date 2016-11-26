@@ -1,31 +1,9 @@
 # frozen_string_literal: true
 
-# == Schema Information
 #
-# Table name: blogs
-#
-#  id               :integer          not null, primary key
-#  title            :string(255)
-#  slug             :string(255)
-#  content          :text(65535)
-#  show_as_gallery  :boolean          default(FALSE)
-#  allow_comments   :boolean          default(TRUE)
-#  online           :boolean          default(TRUE)
-#  user_id          :integer
-#  blog_category_id :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#
-# Indexes
-#
-#  index_blogs_on_blog_category_id  (blog_category_id)
-#  index_blogs_on_user_id           (user_id)
-#
-
-#
-# == Blog Model
-#
-class Blog < ActiveRecord::Base
+# Blog Model
+# ============
+class Blog < ApplicationRecord
   include Scopable
   include PrevNextable
   include Publishable
@@ -40,10 +18,16 @@ class Blog < ActiveRecord::Base
   include OptionalModules::Commentable
   include OptionalModules::Searchable
 
-  # Callbacks
-  after_update :update_counter_cache, if: proc { online_changed? }
+  # Constants
+  CANDIDATE ||= :title
+  TRANSLATED_FIELDS ||= [:title, :slug, :content].freeze
+  friendlyze_me # in FriendlyGlobalizeSluggable concern
 
-  # Models relation
+  # Callbacks
+  after_update :update_counter_cache,
+               if: proc { online_changed? }
+
+  # Model relations
   belongs_to :blog_category, inverse_of: :blogs, counter_cache: true
 
   # Validation rules
@@ -51,7 +35,7 @@ class Blog < ActiveRecord::Base
 
   # Scopes
   scope :online, -> { where(online: true) }
-  scope :by_category, -> (category) { where(blog_category_id: category) }
+  scope :by_category, ->(category) { where(blog_category_id: category) }
 
   # Delegates
   delegate :name, to: :blog_category, prefix: true, allow_nil: true
@@ -65,3 +49,24 @@ class Blog < ActiveRecord::Base
     BlogCategory.decrement_counter(:blogs_count, blog_category.id) unless online?
   end
 end
+
+# == Schema Information
+#
+# Table name: blogs
+#
+#  id               :integer          not null, primary key
+#  slug             :string(255)
+#  show_as_gallery  :boolean          default(FALSE)
+#  allow_comments   :boolean          default(TRUE)
+#  online           :boolean          default(TRUE)
+#  user_id          :integer
+#  blog_category_id :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_blogs_on_blog_category_id  (blog_category_id)
+#  index_blogs_on_slug              (slug)
+#  index_blogs_on_user_id           (user_id)
+#

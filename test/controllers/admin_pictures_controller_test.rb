@@ -9,7 +9,7 @@ module Admin
   # == PicturesController test
   #
   class PicturesControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
@@ -22,23 +22,23 @@ module Admin
     end
 
     test 'should visit show page if logged in' do
-      get :show, id: @picture
+      get :show, params: { id: @picture }
       assert_response :success
     end
 
     test 'should show edit page if logged in' do
-      get :edit, id: @picture
+      get :edit, params: { id: @picture }
       assert_response :success
     end
 
     test 'should update category if logged in' do
-      patch :update, id: @picture, picture: {}
+      patch :update, params: { id: @picture, picture: {} }
       assert_redirected_to admin_picture_path(@picture)
     end
 
     test 'should destroy picture' do
       assert_difference 'Picture.count', -1 do
-        delete :destroy, id: @picture
+        delete :destroy, params: { id: @picture }
       end
       assert_redirected_to admin_pictures_path
     end
@@ -53,13 +53,13 @@ module Admin
     # == Batch actions
     #
     test 'should return correct value for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@picture.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@picture.id] }
       [@picture].each(&:reload)
       assert_not @picture.online?
     end
 
     test 'should redirect to back and have correct flash notice for toggle_online batch action' do
-      post :batch_action, batch_action: 'toggle_online', collection_selection: [@picture.id]
+      post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@picture.id] }
       assert_redirected_to admin_pictures_path
       assert_equal I18n.t('active_admin.batch_actions.flash'), flash[:notice]
     end
@@ -142,16 +142,16 @@ module Admin
     #
     test 'should update picture if new picture is sent' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @picture, picture: { image: attachment }
+      patch :update, params: { id: @picture, picture: { image: attachment } }
       picture = assigns(:picture)
       assert_equal picture.image_file_name, 'background-paris.jpg'
       assert_equal picture.image_content_type, 'image/jpeg'
-      delete :destroy, id: picture.id
+      delete :destroy, params: { id: picture.id }
     end
 
     test 'should destroy all attachments when destroying picture' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @picture, picture: { image: attachment }
+      patch :update, params: { id: @picture, picture: { image: attachment } }
 
       picture = assigns(:picture)
       existing_styles = []
@@ -161,7 +161,7 @@ module Admin
         existing_styles << f
       end
 
-      delete :destroy, id: picture.id
+      delete :destroy, params: { id: picture.id }
       existing_styles.each do |f|
         assert_not File.exist?(f), "File #{f} should not exist"
       end

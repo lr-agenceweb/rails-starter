@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 require 'test_helper'
 
+#
+# Heading Model test
+# ====================
 class HeadingTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  #
+  # Shoulda
+  # =========
+  should belong_to(:headingable)
 end

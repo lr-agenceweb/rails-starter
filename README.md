@@ -34,7 +34,7 @@
 <p align='center'>
   <img src="https://img.shields.io/badge/Rails%20starter-v0.0.4-blue.svg?style=flat-square" alt="Rails starter version" />
   <img src="https://img.shields.io/badge/Ruby-2.3.0-5aaed7.svg?style=flat-square" alt="Ruby version" />
-  <img src="https://img.shields.io/badge/Rails-4.2.7.1-5aaed7.svg?style=flat-square" alt="Rails version" />
+  <img src="https://img.shields.io/badge/Rails-5.0.0.1-5aaed7.svg?style=flat-square" alt="Rails version" />
 </p>
 
 - [Demo](#demo)
@@ -82,7 +82,7 @@ That's it !
 
  Technology                                                                        | Description
 ---------------------------------------------------------------------------------- | -----------
-![Server](https://img.shields.io/badge/Server-Unicorn-5aaed7.svg?style=flat-square)| This project use unicorn in local development. <br /> The server is launched using `foreman start`
+![Server](https://img.shields.io/badge/Server-Puma-5aaed7.svg?style=flat-square)| This project use puma in local development. <br /> The server is launched using `foreman start`
 ![SGBD](https://img.shields.io/badge/Database-MySQL%20%7C%20MariaDB-5aaed7.svg?style=flat-square) <br /> ![SGBD](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20SQLite-5aaed7.svg?style=flat-square) | It use `MySQL2` but you can choose to use `PostgreSQL`, `SQlite` or `MariaDB`. <br /> To create a dump of your database, run `rake db:backup`
 ![Template](https://img.shields.io/badge/Template-Slim-5aaed7.svg?style=flat-square) | It use [Slim](https://github.com/slim-template/slim-rails) template to write HTML views.
 ![Assets](https://img.shields.io/badge/Assets-Sass%20%7C%20Coffeescript-5aaed7.svg?style=flat-square) | Style is writting in `scss` and `sass` (using libsass) <br /> Scripts are created in `coffeescript`
@@ -96,10 +96,11 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
 #### Rails
 
 * Color Routes: colored version of rake routes (run `rake color_routes`)
-* Dump SQL: make a quick save of your Database (run `rake db:backup`)
 
 
 #### Capistrano
+* **Nginx/Puma**  
+  * `cap <env> puma:nginx_config` : Upload puma vhost config file
 
 * **Uploads**  
   * `cap <env> upload:yml` : Upload yml configuration files such as application, database, secrets, ...
@@ -107,19 +108,13 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
   * `cap <env> upload:missing` : Upload default pictures when missing or unavailable paperclip model objects
   * `cap <env> upload:all` : Execute all previous commands in one task
 
-* **Database backup**  
-  * `cap <env> backup:upload_config` : Upload backup config file to remote server (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)
+* **Database backup** (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)  
+  * `cap <env> backup:upload:config` : Upload backup parent config file
+  * `cap <env> backup:upload:model` : Upload model file corresponding to a database
+  * `cap <env> backup:upload:all` : Upload both config and model files
 
 * **Logrotate**  
-  * `cap <env> logrotate:upload` : Upload logrotate config file to remote server
-
-* **Nginx**  
-  * `cap <env> nginx:upload:vhost` : Upload vhost config file to remote server (create file in conf.d)
-  * `cap <env> nginx:upload:vhost_ssl` : Same as above with SSL configuration for vhost (Let's Encrypt)
-  * `cap <env> nginx:vhost:symlink` : Symlink application path to /var/www
-  * `cap <env> nginx:vhost:disable` : Disable vhost (rename extension to .disabled)
-  * `cap <env> nginx:vhost:enable` : Enable vhost (rename extension to .conf)
-  * `cap <env> nginx:vhost:remove` : Remove uploaded vhost to conf.d folder
+  * `cap <env> logrotate:upload` : Upload logrotate config file
 
 * **Paperclip**  
   * `cap <env> paperclip:refresh:all` : Regenerate all Paperclip styles

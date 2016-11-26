@@ -1,11 +1,18 @@
+subscriber:
+  kind: subscriber
+  rollable: one (NewsletterSetting)
+
+tester:
+  kind: tester
+  rollable: one (NewsletterSetting)
+
 # == Schema Information
 #
 # Table name: newsletter_user_roles
 #
 #  id            :integer          not null, primary key
-#  rollable_id   :integer
 #  rollable_type :string(255)
-#  title         :string(255)
+#  rollable_id   :integer
 #  kind          :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -14,13 +21,3 @@
 #
 #  index_newsletter_user_roles_on_rollable_type_and_rollable_id  (rollable_type,rollable_id)
 #
-
-subscriber:
-  title: abonné
-  kind: subscriber
-  rollable: one (NewsletterSetting)
-
-tester:
-  title: testeur
-  kind: tester
-  rollable: one (NewsletterSetting)

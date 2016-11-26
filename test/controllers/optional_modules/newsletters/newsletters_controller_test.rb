@@ -5,7 +5,7 @@ require 'test_helper'
 # == NewslettersController Test
 #
 class NewslettersControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
 
   setup :initialize_test
@@ -16,7 +16,7 @@ class NewslettersControllerTest < ActionController::TestCase
   test 'should render preview_in_browser template and newsletter layout' do
     locale = @newsletter_user.lang
     I18n.with_locale(locale) do
-      get :preview_in_browser, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+      get :preview_in_browser, params: { locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token }
       assert_response :success
       assert_template 'newsletter_mailer/send_newsletter', layout: 'newsletter'
     end
@@ -26,7 +26,7 @@ class NewslettersControllerTest < ActionController::TestCase
     locale = @newsletter_user.lang
     assert_raises(ActionController::RoutingError) do
       I18n.with_locale(locale) do
-        get :preview_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+        get :preview_in_browser, params: { locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token }
       end
     end
   end
@@ -35,7 +35,7 @@ class NewslettersControllerTest < ActionController::TestCase
     locale = @newsletter_user.lang
     assert_raises(ActionController::RoutingError) do
       I18n.with_locale(locale) do
-        get :preview_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
+        get :preview_in_browser, params: { locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token }
       end
     end
   end
@@ -46,7 +46,7 @@ class NewslettersControllerTest < ActionController::TestCase
   test 'should render welcome_user template and newsletter layout' do
     locale = @newsletter_user.lang
     I18n.with_locale(locale) do
-      get :welcome_user, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+      get :welcome_user, params: { locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token }
       assert_response :success
       assert_template 'newsletter_mailer/welcome_user', layout: 'newsletter'
     end
@@ -56,7 +56,7 @@ class NewslettersControllerTest < ActionController::TestCase
     locale = @newsletter_user.lang
     assert_raises(ActionController::RoutingError) do
       I18n.with_locale(locale) do
-        get :welcome_user, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
+        get :welcome_user, params: { locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token }
       end
     end
   end
@@ -108,7 +108,7 @@ class NewslettersControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :welcome_user, locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token
+          get :welcome_user, params: { locale: locale.to_s, id: @newsletter, newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token }
         end
       end
     end
@@ -116,7 +116,7 @@ class NewslettersControllerTest < ActionController::TestCase
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
-          get :preview_in_browser, locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token
+          get :preview_in_browser, params: { locale: locale.to_s, id: @newsletter_not_sent, newsletter_user_id: @newsletter_user.id, token: @newsletter_user_en.token }
         end
       end
     end

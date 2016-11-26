@@ -21,7 +21,7 @@ ActiveAdmin.register Page do
 
   batch_action :reset_cache, if: proc { can? :reset_cache, Page } do |ids|
     Page.find(ids).each(&:touch)
-    redirect_to :back, notice: t('active_admin.batch_actions.reset_cache')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.reset_cache'))
   end
 
   index do

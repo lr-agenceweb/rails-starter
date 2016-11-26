@@ -1,25 +1,14 @@
 # frozen_string_literal: true
-require 'codeclimate-test-reporter'
 require 'simplecov'
-require 'simplecov-json'
-
-# Start reporters
-CodeClimate::TestReporter.start
-
-SimpleCov.formatters = [
-  SimpleCov::Formatter::JSONFormatter,
-  SimpleCov::Formatter::HTMLFormatter,
-  CodeClimate::TestReporter::Formatter
-]
-SimpleCov.start 'rails' do
-  add_filter 'lib/mailer_previews'
-end
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'minitest/reporters'
-require 'mocha/mini_test'
+require 'minitest/mock'
+require 'paperclip/matchers'
+# To add Capybara feature tests add `gem ' minitest-rails-capybara'`
+# to the test group in the Gemfile and uncomment the following:
+# require 'minitest/rails/capybara'
 
 #
 # == ActiveSupport namespace
@@ -29,11 +18,10 @@ module ActiveSupport
   # == TestCase class
   #
   class TestCase
+    extend Paperclip::Shoulda::Matchers
     include ActiveJob::TestHelper
 
     ActiveRecord::Migration.check_pending!
-    Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
-    # Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
@@ -48,7 +36,7 @@ module ActiveSupport
       old_controller = @controller
       sign_in user
       @controller = Admin::OptionalModulesController.new
-      patch :update, id: optional_module, optional_module: { enabled: '0' }
+      patch :update, params: { id: optional_module, optional_module: { enabled: '0' } }
       assert_equal name, assigns(:optional_module).name
       assert_not assigns(:optional_module).enabled, 'Module should be disabled'
       assert_redirected_to admin_optional_module_path(assigns(:optional_module))
@@ -77,18 +65,18 @@ module ActiveSupport
       end
 
       unless check.key?(:no_show) && check[:no_show]
-        get :show, id: obj
+        get :show, params: { id: obj.id }
         assert_redirected_to url
       end
-      get :edit, id: obj
+      get :edit, params: { id: obj.id }
       assert_redirected_to url
-      post :create, "#{attributes.to_sym}": {}
+      post :create, params: { "#{attributes.to_sym}": {} }
       assert_redirected_to url
-      patch :update, id: obj, "#{attributes.to_sym}": {}
+      patch :update, params: { id: obj.id, "#{attributes.to_sym}": {} }
       assert_redirected_to url
 
       return if check.key?(:no_delete) && check[:no_delete]
-      delete :destroy, id: obj
+      delete :destroy, params: { id: obj.id }
       assert_redirected_to url
     end
 
@@ -101,9 +89,9 @@ module ActiveSupport
       @locales.each do |locale|
         I18n.with_locale(locale) do
           if id.nil?
-            get page, locale: locale.to_s
+            get page, params: { locale: locale.to_s }
           else
-            get page, id: id, locale: locale.to_s
+            get page, params: { id: id, locale: locale.to_s }
           end
           assert_maintenance
         end
@@ -115,9 +103,9 @@ module ActiveSupport
       @locales.each do |locale|
         I18n.with_locale(locale) do
           if id.nil?
-            get page, locale: locale.to_s
+            get page, params: { locale: locale.to_s }
           else
-            get page, id: id, locale: locale.to_s
+            get page, params: { id: id, locale: locale.to_s }
           end
           assert_response :success
           assert_template layout: :application
@@ -131,7 +119,7 @@ module ActiveSupport
       if id.nil?
         get page
       else
-        get page, id: id
+        get page, params: { id: id }
       end
       assert_response :success
     end
@@ -141,7 +129,7 @@ module ActiveSupport
       if id.nil?
         get page
       else
-        get page, id: id
+        get page, params: { id: id }
       end
     end
 
@@ -162,7 +150,10 @@ module ActiveSupport
 
     # Default record attrs
     def set_default_record_attrs
-      attrs = { translations_attributes: { '1': { title: 'foo', locale: 'fr' }, '0': { title: 'bar', locale: 'en' } } }
+      attrs = { translations_attributes: {
+        '1': { title: 'foo', locale: 'fr' },
+        '0': { title: 'bar', locale: 'en' }
+      } }
 
       if @controller.class.name == 'Admin::BlogsController'
         attrs[:publication_date_attributes] = default_publication_date

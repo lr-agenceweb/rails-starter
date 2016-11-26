@@ -2,11 +2,22 @@
 require 'test_helper'
 
 #
-# == MailingSettingTest Model
-#
+# MailingSetting Model test
+# ===========================
 class MailingSettingTest < ActiveSupport::TestCase
   setup :initialize_test
 
+  #
+  # Shoulda
+  # =========
+  should_not validate_presence_of(:email)
+  should_not validate_uniqueness_of(:email)
+  should allow_value('lorem@ipsum.com').for(:email)
+  should_not allow_value('loremipsum.com').for(:email)
+
+  #
+  # Validation rules
+  # ==================
   test 'should save mailing setting if email is nil' do
     @mailing_setting.destroy
     mailing_setting = MailingSetting.new

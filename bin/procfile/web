@@ -2,8 +2,8 @@
 if [[ "$RACK_ENV" == "development" ]]; then
   if [[ "$START_IP_LOCAL_NETWORK" == "true" ]]; then
     IP_ADDRESS=`ifconfig en0 | grep inet | grep -v inet6 | awk '{print $2}'`
-    bundle exec rails s -b $IP_ADDRESS
+    bundle exec rails s -b $IP_ADDRESS -p 3000
   else
-    bundle exec rails s
+    bundle exec rails s -p 3000
   fi
 fi

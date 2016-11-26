@@ -9,13 +9,13 @@ module Admin
   # == SettingsController test
   #
   class SettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
     #
-    # == Routing
-    #
+    # Routing
+    # =========
     test 'should redirect index to show if logged in' do
       get :index
       assert_response 301
@@ -23,17 +23,17 @@ module Admin
     end
 
     test 'should show show page if logged in' do
-      get :show, id: @setting
+      get :show, params: { id: @setting }
       assert_response :success
     end
 
     test 'should show edit page if logged in' do
-      get :edit, id: @setting
+      get :edit, params: { id: @setting }
       assert_response :success
     end
 
     test 'should update setting if logged in' do
-      patch :update, id: @setting, setting: {}
+      patch :update, params: { id: @setting, setting: {} }
       assert_redirected_to admin_setting_path(@setting)
     end
 
@@ -50,8 +50,8 @@ module Admin
     end
 
     #
-    # == Maintenance
-    #
+    # Maintenance
+    # ===============
     test 'should still access admin page if maintenance is true' do
       @setting.update_attribute(:maintenance, true)
       get :index
@@ -82,36 +82,40 @@ module Admin
     end
 
     #
-    # == Form validations
-    #
-    test 'should not update article without name' do
-      patch :update, id: @setting
-      assert_not @setting.update(name: nil)
+    # Form validations
+    # ===================
+    test 'should not update setting without name' do
+      patch :update, params: { id: @setting, setting: { name: nil } }
+      assert_not assigns(:setting).valid?
+      assert_equal [:name], assigns(:setting).errors.keys
     end
 
-    test 'should not update article without title' do
-      patch :update, id: @setting
-      assert_not @setting.update(title: nil)
+    test 'should not update setting without title' do
+      attrs = { translations_attributes: { '1': { title: nil }, '0': { title: nil } } }
+      patch :update, params: { id: @setting, setting: attrs }
+
+      assert_not assigns(:setting).valid?
+      assert_equal [:'translations.locale', :'translations.title'], assigns(:setting).errors.keys
     end
 
     test 'should not update social param if module is disabled' do
       disable_optional_module @super_administrator, @social_module, 'Social' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @setting, setting: { show_social: '1' }
+      patch :update, params: { id: @setting, setting: { show_social: '1' } }
       assert_not assigns(:setting).show_social?
     end
 
     test 'should not update breadcrumb param if module is disabled' do
       disable_optional_module @super_administrator, @breadcrumb_module, 'Breadcrumb' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @setting, setting: { show_breadcrumb: '1' }
+      patch :update, params: { id: @setting, setting: { show_breadcrumb: '1' } }
       assert_not assigns(:setting).show_breadcrumb?
     end
 
     test 'should not update qrcode param if module is disabled' do
       disable_optional_module @super_administrator, @qrcode_module, 'Qrcode' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @setting, setting: { show_qrcode: '1' }
+      patch :update, params: { id: @setting, setting: { show_qrcode: '1' } }
       assert_not assigns(:setting).show_qrcode?
     end
 
@@ -120,13 +124,13 @@ module Admin
       disable_optional_module @super_administrator, @audio_module, 'Audio' # in test_helper.rb
       disable_optional_module @super_administrator, @video_module, 'Video' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @setting, setting: { picture_in_picture: '0' }
+      patch :update, params: { id: @setting, setting: { picture_in_picture: '0' } }
       assert assigns(:setting).picture_in_picture?
     end
 
     #
-    # == Abilities
-    #
+    # Abilities
+    # ============
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
@@ -154,8 +158,8 @@ module Admin
     end
 
     #
-    # == Crud actions
-    #
+    # Crud actions
+    # ===============
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
       assert_crud_actions(@setting, new_user_session_path, model_name, no_delete: true)
@@ -170,6 +174,7 @@ module Admin
 
     def initialize_test
       @setting = settings(:one)
+
       @social_module = optional_modules(:social)
       @guest_book_module = optional_modules(:guest_book)
       @comment_module = optional_modules(:comment)

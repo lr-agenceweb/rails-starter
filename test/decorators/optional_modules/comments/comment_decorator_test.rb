@@ -49,7 +49,7 @@ class CommentDecoratorTest < Draper::TestCase
 
   test 'should return correct author with avatar' do
     comment_decorated = CommentDecorator.new(@comment_not_connected)
-    assert_equal '<div class="author-with-avatar"><img alt="luke" src="https://secure.gravatar.com/avatar/2e5c8c61be4beb99af2f3c5fbb77e988?default=mm&secure=true" width="80" height="80" /> <br /> Luke</div>', comment_decorated.author_with_avatar
+    assert_equal '<div><img alt="luke" src="https://secure.gravatar.com/avatar/2e5c8c61be4beb99af2f3c5fbb77e988?default=mm&secure=true" width="80" height="80" /><br />Luke</div>', comment_decorated.author_with_avatar
   end
 
   #
@@ -71,11 +71,11 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct commentable link for regular articles' do
-    assert_equal "<a target=\"_blank\" class=\"button\" href=\"/blogs/lorem/article-de-blog-avec-beaucoup-de-commentaires\">Article de blog avec beaucoup de commentaires <br /> (#{I18n.t('comment.admin.go_to_source')})</a>", @comment_decorated.link_source
+    assert_equal "<a target=\"_blank\" class=\"button\" href=\"/blogs/lorem/article-de-blog-avec-beaucoup-de-commentaires\">Article de blog avec beaucoup de commentaires<br />#{I18n.t('comment.admin.go_to_source')}</a>", @comment_decorated.link_source
   end
 
   test 'should return correct commentable link for blog articles' do
-    assert_equal "<a target=\"_blank\" class=\"button\" href=\"/blogs/foo/article-de-blog-en-ligne\">Article de blog en ligne <br /> (#{I18n.t('comment.admin.go_to_source')})</a>", @blog_comment_decorated.link_source
+    assert_equal "<a target=\"_blank\" class=\"button\" href=\"/blogs/foo/article-de-blog-en-ligne\">Article de blog en ligne<br />#{I18n.t('comment.admin.go_to_source')}</a>", @blog_comment_decorated.link_source
   end
 
   test 'should return correct commentable link and image' do
@@ -83,7 +83,7 @@ class CommentDecoratorTest < Draper::TestCase
 
     attachment = fixture_file_upload 'images/bart.png', 'image/png'
     Picture.create(attachable_id: @blog_comment.commentable_id, attachable_type: 'Blog', image: attachment)
-    assert_equal "<p><img width=\"125\" height=\"223\" src=\"#{@blog_comment.commentable.picture.image.url(:medium)}\" alt=\"Medium bart\" /> <br /> <a target=\"_blank\" class=\"button\" href=\"/blogs/foo/article-de-blog-en-ligne\">Article de blog en ligne <br /> (#{I18n.t('comment.admin.go_to_source')})</a></p>", @blog_comment_decorated.link_and_image_source
+    assert_equal "<img width=\"125\" height=\"223\" src=\"#{@blog_comment.commentable.picture.image.url(:medium)}\" alt=\"Medium bart\" /><a target=\"_blank\" class=\"button\" href=\"/blogs/foo/article-de-blog-en-ligne\">Article de blog en ligne<br />#{I18n.t('comment.admin.go_to_source')}</a>", @blog_comment_decorated.link_and_image_source
   end
 
   private

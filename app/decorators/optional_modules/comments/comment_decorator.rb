@@ -52,15 +52,18 @@ class CommentDecorator < ApplicationDecorator
   end
 
   def link_source
-    link_to "#{commentable_title} <br /> (#{t('comment.admin.go_to_source')})".html_safe, commentable_path, target: :_blank, class: 'button'
+    html = []
+    html << commentable_title
+    html << tag(:br)
+    html << safe_join([raw(t('comment.admin.go_to_source'))])
+    link_to safe_join([html]), commentable_path, target: :_blank, class: 'button'
   end
 
   def link_and_image_source
-    html = ''
-    html << h.content_tag(:p) do
-      "#{commentable.decorate.custom_cover} <br /> #{link_source}".html_safe
-    end
-    html.html_safe
+    html = []
+    html << commentable.decorate.custom_cover
+    html << link_source
+    safe_join [html]
   end
 
   def pseudo(name = nil)

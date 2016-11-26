@@ -23,7 +23,7 @@ ActiveAdmin.register Social do
 
   batch_action :toggle_enabled, if: proc { can? :toggle_enabled, Social } do |ids|
     Social.find(ids).each { |item| item.toggle! :enabled }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do

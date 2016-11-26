@@ -1,0 +1,26 @@
+row.collapse.blocks-container
+  / Left block
+  columns.block.block-left
+    callout
+      p
+        span.first-part Membre de la coopérative
+        span.last-part<
+          = render 'mailers/button',
+              label: 'Ouvre-Boites 44',
+              link: 'http://www.ouvre-boites44.coop',
+              width: 90,
+              color: SharedColoredVariables::PRIMARY_COLOR,
+              klass: 'inline-version increase-width'
+
+  / Right block
+  columns.block.block-right
+    callout
+      p
+        span.first-part En savoir plus sur notre agence
+        span.last-part<
+          = render 'mailers/button',
+              label: 'Visiter L&R',
+              link: 'http://www.lr-agenceweb.fr',
+              width: 80,
+              color: SharedColoredVariables::SECONDARY_COLOR,
+              klass: 'inline-version'

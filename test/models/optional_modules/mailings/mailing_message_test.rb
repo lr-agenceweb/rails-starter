@@ -2,29 +2,28 @@
 require 'test_helper'
 
 #
-# == MailingMessage Model
-#
+# MailingMessage Model test
+# ===========================
 class MailingMessageTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
   teardown :clear_pictures
 
-  test 'should be linked to correct emailing user(s)' do
-    assert_includes @mailing_message.mailing_users.map(&:fullname), @mailing_user.fullname
-    assert_not_includes @mailing_message.mailing_users.map(&:fullname), @mailing_user_two.fullname
-  end
+  #
+  # Shoulda
+  # =========
+  should have_one(:picture)
+  should have_many(:pictures)
+  should have_many(:mailing_users)
+  should have_many(:mailing_message_users)
 
-  test 'should not be linked anymore if message destroyed' do
-    assert_not @mailing_user_two.mailing_messages.empty?, 'user should be link to message'
-    @mailing_message_two.destroy
-    assert @mailing_message_two.destroyed?
-    assert @mailing_user_two.mailing_messages.empty?, 'user should not be link to message'
-  end
+  should accept_nested_attributes_for(:picture)
+  should accept_nested_attributes_for(:pictures)
 
   #
-  # == Should redirect
-  #
+  # Should redirect
+  # =================
   test 'should return correct value for redirect_to_form? if new record' do
     mailing_message = MailingMessage.new
     mailing_message.save!
@@ -49,8 +48,8 @@ class MailingMessageTest < ActiveSupport::TestCase
   end
 
   #
-  # == Picture
-  #
+  # Picture
+  # =========
   test 'should have one picture linked' do
     assert_equal 'merry-christmas.jpg', @mailing_message.picture.image_file_name
   end
@@ -126,6 +125,21 @@ class MailingMessageTest < ActiveSupport::TestCase
     existing_styles.each do |file|
       assert_not File.exist?(file), "#{file} should not exist anymore"
     end
+  end
+
+  #
+  # Misc
+  # ======
+  test 'should be linked to correct emailing user(s)' do
+    assert_includes @mailing_message.mailing_users.map(&:fullname), @mailing_user.fullname
+    assert_not_includes @mailing_message.mailing_users.map(&:fullname), @mailing_user_two.fullname
+  end
+
+  test 'should not be linked anymore if message destroyed' do
+    assert_not @mailing_user_two.mailing_messages.empty?, 'user should be link to message'
+    @mailing_message_two.destroy
+    assert @mailing_message_two.destroyed?
+    assert @mailing_user_two.mailing_messages.empty?, 'user should not be link to message'
   end
 
   private

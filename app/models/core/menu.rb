@@ -1,36 +1,26 @@
 # frozen_string_literal: true
 
-# == Schema Information
 #
-# Table name: menus
-#
-#  id             :integer          not null, primary key
-#  title          :string(255)
-#  online         :boolean          default(TRUE)
-#  show_in_header :boolean          default(TRUE)
-#  show_in_footer :boolean          default(FALSE)
-#  ancestry       :string(255)
-#  position       :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#
-
-#
-# == Menu Model
-#
-class Menu < ActiveRecord::Base
+# Menu Model
+# ============
+class Menu < ApplicationRecord
   include Positionable
 
+  # Translations
   translates :title, fallbacks_for_empty_translations: true
   active_admin_translates :title
 
   has_ancestry
+
+  # Model relations
   has_one :page, dependent: :nullify
   has_one :optional_module, through: :page
 
+  # Delegates
   delegate :name, to: :page, prefix: true, allow_nil: true
   delegate :optional, to: :page, prefix: true, allow_nil: true
 
+  # Scopes
   scope :only_parents, -> { where(ancestry: nil) }
   scope :with_page, -> { joins(:page).where.not('pages.menu_id': nil) }
   scope :visible_header, -> { where(show_in_header: true) }
@@ -58,3 +48,17 @@ class Menu < ActiveRecord::Base
     menu
   end
 end
+
+# == Schema Information
+#
+# Table name: menus
+#
+#  id             :integer          not null, primary key
+#  online         :boolean          default(TRUE)
+#  show_in_header :boolean          default(TRUE)
+#  show_in_footer :boolean          default(FALSE)
+#  ancestry       :string(255)
+#  position       :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#

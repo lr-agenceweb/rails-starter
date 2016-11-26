@@ -2,26 +2,16 @@
 require 'test_helper'
 
 #
-# == ApplicationDecorator test
-#
+# ApplicationDecorator test
+# ===========================
 class ApplicationDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 
   setup :initialize_test
 
   #
-  # == Dynamic menu link
-  #
-  test 'should return correct menu link for pages' do
-    assert_equal '/contact', @contact_decorated.menu_link('Contact')
-    assert_equal 'http://test.host/contact', @contact_decorated.menu_link('Contact', true)
-    assert_equal '/', @contact_decorated.menu_link('Home')
-    assert_equal 'http://test.host/', @contact_decorated.menu_link('Home', true)
-  end
-
-  #
-  # == DateTime
-  #
+  # DateTime
+  # ==========
   test 'should return correct created_at format' do
     assert_equal '01 fév. 13h32', @blog_article_decorated.created_at
   end
@@ -47,26 +37,15 @@ class ApplicationDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Prev / Next
-  #
-  test 'should return correct prev blog' do
-    assert_equal blog_category_blog_path(@blog_article.blog_category, @blog_article), @blog_article_2_decorated.prev_post
-  end
-
-  test 'should return correct next blog' do
-    assert_equal blog_category_blog_path(@blog_article_2.blog_category, @blog_article_2), @blog_article_decorated.next_post
-  end
-
-  #
-  # == Paginator
-  #
+  # Paginator
+  # ===========
   test 'should return correct decorator class' do
     assert_equal PaginatingDecorator, ApplicationDecorator.collection_decorator_class
   end
 
   #
-  # == Status tag
-  #
+  # Status tag
+  # ============
   test 'should return status_tag for french language' do
     assert_match '<span class="status_tag français blue">Français</span>', @newsletter_user_decorated.lang
   end
@@ -84,13 +63,11 @@ class ApplicationDecoratorTest < Draper::TestCase
     @comment = comments(:one)
     @blog_setting = blog_settings(:one)
     @blog_article = blogs(:blog_online)
-    @blog_article_2 = blogs(:blog_third)
     @newsletter_user = newsletter_users(:newsletter_user_fr)
 
     @comment_decorated = ApplicationDecorator.new(@comment)
     @blog_setting_decorated = ApplicationDecorator.new(@blog_setting)
     @blog_article_decorated = ApplicationDecorator.new(@blog_article)
-    @blog_article_2_decorated = ApplicationDecorator.new(@blog_article_2)
     @contact_decorated = ApplicationDecorator.new(@contact)
     @newsletter_user_decorated = ApplicationDecorator.new(@newsletter_user)
   end

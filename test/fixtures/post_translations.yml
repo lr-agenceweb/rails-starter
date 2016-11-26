@@ -9,16 +9,16 @@ home_fr:
   post_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
   locale: fr
   title: Article d'accueil
-  content: <p>Premier article d'accueil</p>
   slug: article-d-accueil
+  content: <p>Premier article d'accueil</p>
 
 home_en:
   <<: *DEFAULTS
   post_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
   locale: en
   title: Home article
-  content: <p>First home article</p>
   slug: home-article
+  content: <p>First home article</p>
 
 # About
 about_fr:

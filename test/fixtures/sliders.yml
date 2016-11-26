@@ -1,3 +1,24 @@
+DEFAULTS: &DEFAULTS
+  animate: crossfade
+  autoplay: true
+  time_to_show: 5000
+  hover_pause: true
+  loop: true
+  navigation: true
+  bullet: true
+  online: true
+  page: home
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+online:
+  <<: *DEFAULTS
+
+offline:
+  <<: *DEFAULTS
+  online: false
+  page: blog
+
 # == Schema Information
 #
 # Table name: sliders
@@ -19,24 +40,3 @@
 #
 #  index_sliders_on_page_id  (page_id)
 #
-
-DEFAULTS: &DEFAULTS
-  animate: crossfade
-  autoplay: true
-  time_to_show: 5000
-  hover_pause: true
-  loop: true
-  navigation: true
-  bullet: true
-  online: true
-  page: home
-  created_at: <%= 1.weeks.ago.to_s(:db) %>
-  updated_at: <%= 1.weeks.ago.to_s(:db) %>
-
-online:
-  <<: *DEFAULTS
-
-offline:
-  <<: *DEFAULTS
-  online: false
-  page: blog

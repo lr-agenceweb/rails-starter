@@ -1,8 +1,10 @@
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  title: ~
+  description: ~
 
-# Home
+# Home one
 home_fr:
   <<: *DEFAULTS
   picture_id: <%= ActiveRecord::FixtureSet.identify(:home) %>
@@ -17,16 +19,13 @@ home_en:
   title: Home article picture
   description: <p>Main home article image</p>
 
+# Home two
 home_two_fr:
   <<: *DEFAULTS
   picture_id: <%= ActiveRecord::FixtureSet.identify(:home_two) %>
   locale: fr
-  title: ~
-  description: ~
 
 home_two_en:
   <<: *DEFAULTS
   picture_id: <%= ActiveRecord::FixtureSet.identify(:home_two) %>
   locale: en
-  title: ~
-  description: ~

@@ -8,20 +8,24 @@ class LocationDecorator < ApplicationDecorator
   delegate_all
 
   def full_address(inline = true)
-    content_tag(:span) do
-      concat(raw(model.address + (inline ? ', ' : '<br />')).to_s) if address?
-      concat(model.postcode + ' - ') if postcode?
+    html = []
+    html << content_tag(:span) do
+      concat(safe_join([raw(model.address + (inline ? ', ' : '<br />')).to_s])) if address?
+      concat((model.postcode + ' - ')) if postcode?
       concat(model.city) if city?
     end
+    safe_join [html]
   end
 
   #
   # == Popup
   #
   def address_popup
-    h.content_tag(:div) do
-      concat(h.content_tag(:p, full_address))
+    html = []
+    html << content_tag(:div) do
+      concat content_tag(:p, full_address)
     end
+    safe_join [html]
   end
 
   #

@@ -1,0 +1,42 @@
+DEFAULTS: &DEFAULTS
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+  title: ~
+  description: ~
+
+# One
+slide_one_fr:
+  <<: *DEFAULTS
+  slide_id: <%= ActiveRecord::FixtureSet.identify(:slide_one) %>
+  locale: fr
+  title: Titre slide 1
+  description: Description slide 1
+
+slide_one_en:
+  <<: *DEFAULTS
+  slide_id: <%= ActiveRecord::FixtureSet.identify(:slide_one) %>
+  locale: en
+  title: Title for slide one
+  description: Description for slide one
+
+# Two
+slide_two_fr:
+  <<: *DEFAULTS
+  slide_id: <%= ActiveRecord::FixtureSet.identify(:slide_two) %>
+  locale: fr
+
+slide_two_en:
+  <<: *DEFAULTS
+  slide_id: <%= ActiveRecord::FixtureSet.identify(:slide_two) %>
+  locale: en
+
+# Three
+slide_three_fr:
+  <<: *DEFAULTS
+  slide_id: <%= ActiveRecord::FixtureSet.identify(:slide_three) %>
+  locale: fr
+
+slide_three_en:
+  <<: *DEFAULTS
+  slide_id: <%= ActiveRecord::FixtureSet.identify(:slide_three) %>
+  locale: en

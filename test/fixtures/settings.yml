@@ -1,11 +1,32 @@
+DEFAULTS: &DEFAULTS
+  name: Rails Starter
+  email: demo@rails-starter.com
+  phone: +33 (0)1 02 03 04 05
+  per_page: 3
+  show_social: false
+  show_qrcode: false
+  show_breadcrumb: false
+  show_file_upload: false
+  picture_in_picture: true
+  date_format: 0
+  maintenance: false
+  created_at: <%= 1.weeks.ago.to_s(:db) %>
+  updated_at: <%= 1.weeks.ago.to_s(:db) %>
+
+one:
+  id: 1
+  <<: *DEFAULTS
+
+two:
+  id: 2
+  <<: *DEFAULTS
+
 # == Schema Information
 #
 # Table name: settings
 #
 #  id                       :integer          not null, primary key
 #  name                     :string(255)
-#  title                    :string(255)
-#  subtitle                 :string(255)
 #  phone                    :string(255)
 #  phone_secondary          :string(255)
 #  email                    :string(255)
@@ -17,7 +38,7 @@
 #  show_file_upload         :boolean          default(FALSE)
 #  answering_machine        :boolean          default(FALSE)
 #  picture_in_picture       :boolean          default(TRUE)
-#  date_format              :integer          default(0)
+#  date_format              :integer
 #  maintenance              :boolean          default(FALSE)
 #  logo_updated_at          :datetime
 #  logo_file_size           :integer
@@ -32,27 +53,3 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #
-
-DEFAULTS: &DEFAULTS
-  name: Rails Starter
-  email: demo@rails-starter.com
-  phone: +33 (0)1 02 03 04 05
-  per_page: 3
-  show_social: false
-  show_qrcode: false
-  show_breadcrumb: false
-  show_file_upload: false
-  picture_in_picture: true
-  maintenance: false
-  created_at: <%= 1.weeks.ago.to_s(:db) %>
-  updated_at: <%= 1.weeks.ago.to_s(:db) %>
-
-one:
-  id: 1
-  <<: *DEFAULTS
-
-two:
-  id: 2
-  <<: *DEFAULTS
-  title: Rails Starter
-  subtitle: ''

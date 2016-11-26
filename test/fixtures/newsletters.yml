@@ -1,22 +1,16 @@
+one:
+  sent_at: 2016-02-08 12:16:05
+
+not_sent:
+  sent_at: ~
+
 # == Schema Information
 #
 # Table name: newsletters
 #
 #  id         :integer          not null, primary key
-#  title      :string(255)
 #  slug       :string(255)
-#  content    :text(65535)
 #  sent_at    :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-one:
-  title: Première newsletter
-  content: Ici le contenu de ma première newsletter
-  sent_at: 2016-02-08 12:16:05
-
-not_sent:
-  title: Première newsletter
-  content: Ici le contenu de ma première newsletter
-  sent_at: ~

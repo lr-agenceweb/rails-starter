@@ -307,6 +307,7 @@
     "font-emphasize-style",
     "font-smooth",
     "line-height",
+    "-webkit-text-size-adjust",
     "$import",
     "$variable",
     "$extend",

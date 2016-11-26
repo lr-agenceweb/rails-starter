@@ -1,3 +1,9 @@
+one:
+  prev_next: false
+  show_map: false
+  show_calendar: false
+  event_order: one
+
 # == Schema Information
 #
 # Table name: event_settings
@@ -14,9 +20,3 @@
 #
 #  index_event_settings_on_event_order_id  (event_order_id)
 #
-
-one:
-  prev_next: false
-  show_map: false
-  show_calendar: false
-  event_order: one

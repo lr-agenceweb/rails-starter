@@ -2,12 +2,18 @@
 require 'test_helper'
 
 #
-# == Connection model test
-#
+# Connection Model test
+# =======================
 class ConnectionTest < ActiveSupport::TestCase
   #
-  # == Validation rules
+  # Shoulda
+  # =========
+  should have_one(:link)
+  should accept_nested_attributes_for(:link)
+
   #
+  # Validation rules
+  # ==================
   test 'should not create connection if link is not correct' do
     attrs = { id: SecureRandom.random_number(1_000), link_attributes: { url: 'bad-link' } }
     connection = define_connection_record(attrs)

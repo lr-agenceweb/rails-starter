@@ -9,6 +9,31 @@ class SocialTest < ActiveSupport::TestCase
 
   setup :initialize_test
 
+  # Constants
+  SIZE_PLUS_1 = Social::ATTACHMENT_MAX_SIZE + 1
+
+  #
+  # Shoulda
+  # =========
+  should validate_presence_of(:title)
+  should_not validate_presence_of(:kind)
+  should_not validate_presence_of(:font_ikon)
+
+  should validate_inclusion_of(:title)
+    .in_array(Social.allowed_title_social_network)
+  should validate_inclusion_of(:kind)
+    .in_array(Social.allowed_kind_social_network.flatten(1))
+  should validate_inclusion_of(:font_ikon)
+    .in_array(Social.allowed_font_awesome_ikons)
+
+  should have_attached_file(:ikon)
+  should_not validate_attachment_presence(:ikon)
+  should validate_attachment_content_type(:ikon)
+    .allowing('image/jpg', 'image/png')
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:ikon)
+    .less_than((SIZE_PLUS_1 - 1).megabytes)
+
   test 'should count social network with share kind' do
     assert_equal 1, Social.share.count
   end

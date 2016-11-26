@@ -5,7 +5,7 @@ require 'test_helper'
 # == ConnectionsController Test
 #
 class ConnectionsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
 
   setup :initialize_test
@@ -16,7 +16,7 @@ class ConnectionsControllerTest < ActionController::TestCase
   test 'should get index' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :index, locale: locale.to_s
+        get :index, params: { locale: locale.to_s }
         assert_response :success
         assert_not_nil assigns(:connections)
       end
@@ -26,7 +26,7 @@ class ConnectionsControllerTest < ActionController::TestCase
   test 'should use index template' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
-        get :index, locale: locale.to_s
+        get :index, params: { locale: locale.to_s }
         assert_template :index
       end
     end
@@ -47,7 +47,7 @@ class ConnectionsControllerTest < ActionController::TestCase
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
         assert_raises(ActionController::RoutingError) do
-          get :index, locale: locale.to_s
+          get :index, params: { locale: locale.to_s }
         end
       end
     end

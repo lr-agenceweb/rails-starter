@@ -9,7 +9,7 @@ module Admin
   # == MailingSettingsController test
   #
   class MailingSettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
@@ -23,32 +23,32 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @mailing_setting
+      get :show, params: { id: @mailing_setting }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @mailing_setting
+      get :edit, params: { id: @mailing_setting }
       assert_response :success
     end
 
     test 'should update mailing_setting if logged in' do
-      patch :update, id: @mailing_setting, mailing_setting: {}
+      patch :update, params: { id: @mailing_setting, mailing_setting: {} }
       assert_redirected_to admin_mailing_setting_path(@mailing_setting)
     end
 
     test 'should save if email is blank' do
-      patch :update, id: @mailing_setting, mailing_setting: { email: '' }
+      patch :update, params: { id: @mailing_setting, mailing_setting: { email: '' } }
       assert assigns(:mailing_setting).valid?
     end
 
     test 'should not save if email is set but not correct' do
-      patch :update, id: @mailing_setting, mailing_setting: { email: 'mail' }
+      patch :update, params: { id: @mailing_setting, mailing_setting: { email: 'mail' } }
       assert_not assigns(:mailing_setting).valid?
     end
 
     test 'should save if email is correct' do
-      patch :update, id: @mailing_setting, mailing_setting: { email: 'mailing@test.com' }
+      patch :update, params: { id: @mailing_setting, mailing_setting: { email: 'mailing@test.com' } }
       assert assigns(:mailing_setting).valid?
     end
 
@@ -58,13 +58,13 @@ module Admin
     test 'should not destroy if logged in as subscriber' do
       sign_in @subscriber
       assert_no_difference 'MailingSetting.count' do
-        delete :destroy, id: @mailing_setting
+        delete :destroy, params: { id: @mailing_setting }
       end
     end
 
     test 'should not destroy if logged in as administrator' do
       assert_no_difference 'MailingSetting.count' do
-        delete :destroy, id: @mailing_setting
+        delete :destroy, params: { id: @mailing_setting }
       end
     end
 

@@ -2,10 +2,12 @@
 require 'test_helper'
 
 #
-# == MailingMessageUser Model
-#
+# MailingMessageUser Model test
+# ===============================
 class MailingMessageUserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  #
+  # Shoulda
+  # =========
+  should belong_to(:mailing_user)
+  should belong_to(:mailing_message)
 end

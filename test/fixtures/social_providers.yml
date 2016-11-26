@@ -1,3 +1,18 @@
+facebook:
+  name: facebook
+  enabled: true
+  social_connect_setting: one
+
+twitter:
+  name: twitter
+  enabled: true
+  social_connect_setting: one
+
+google:
+  name: google
+  enabled: true
+  social_connect_setting: one
+
 # == Schema Information
 #
 # Table name: social_providers
@@ -13,18 +28,3 @@
 #
 #  index_social_providers_on_social_connect_setting_id  (social_connect_setting_id)
 #
-
-facebook:
-  name: facebook
-  enabled: true
-  social_connect_setting: one
-
-twitter:
-  name: twitter
-  enabled: true
-  social_connect_setting: one
-
-google:
-  name: google
-  enabled: true
-  social_connect_setting: one

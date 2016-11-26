@@ -2,9 +2,20 @@
 require 'test_helper'
 
 #
-# == MapSetting model test
-#
+# MapSetting Model test
+# =======================
 class MapSettingTest < ActiveSupport::TestCase
+  #
+  # Shoulda
+  # =========
+  should have_one(:location)
+  should accept_nested_attributes_for(:location)
+
+  should_not validate_presence_of(:marker_icon)
+
+  should validate_inclusion_of(:marker_icon)
+    .in_array(MapSetting.allowed_markers)
+
   test 'should return list of allowed map markers' do
     allowed_map_markers = MapSetting.allowed_markers
     assert_includes allowed_map_markers, 'camera'
@@ -17,8 +28,8 @@ class MapSettingTest < ActiveSupport::TestCase
   end
 
   #
-  # == Validation
-  #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     map_setting = MapSetting.new
     assert_not map_setting.valid?

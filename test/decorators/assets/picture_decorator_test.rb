@@ -43,7 +43,8 @@ class PictureDecoratorTest < Draper::TestCase
   end
 
   test 'should return correct source picture title link html tags' do
-    assert_equal "<a href=\"/admin/homes/article-d-accueil\">Article d'accueil</a>", @picture_decorated.source_picture_title_link
+    expected = safe_join([raw('<a href="/admin/homes/article-d-accueil">Article d\'accueil</a>')])
+    assert_equal expected, @picture_decorated.source_picture_title_link
   end
 
   test 'should return correct source object for picture' do

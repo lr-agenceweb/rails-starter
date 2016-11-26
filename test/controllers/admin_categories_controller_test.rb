@@ -9,7 +9,7 @@ module Admin
   # == PagesController test
   #
   class PagesControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
     include ActionView::Helpers::AssetTagHelper
 
     setup :initialize_test
@@ -23,17 +23,17 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @page
+      get :show, params: { id: @page }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @page
+      get :edit, params: { id: @page }
       assert_response :success
     end
 
     test 'should update page if logged in' do
-      patch :update, id: @page, page: { menu_id: @page.menu_id }
+      patch :update, params: { id: @page, page: { menu_id: @page.menu_id } }
       assert_redirected_to admin_page_path(@page)
       assert flash[:notice].blank?
     end
@@ -42,7 +42,7 @@ module Admin
     # == Batch actions
     #
     test 'should redirect to back and have correct flash notice for reset_cache batch action' do
-      post :batch_action, batch_action: 'reset_cache', collection_selection: [@page.id]
+      post :batch_action, params: { batch_action: 'reset_cache', collection_selection: [@page.id] }
       assert_redirected_to admin_pages_path
       assert_equal I18n.t('active_admin.batch_actions.reset_cache'), flash[:notice]
     end
@@ -52,7 +52,7 @@ module Admin
     #
     test 'should return correct flash content after updating a video' do
       video = fixture_file_upload 'videos/test.mp4', 'video/mp4'
-      patch :update, id: @page, page: { video_upload_attributes: { video_file: video } }
+      patch :update, params: { id: @page, page: { video_upload_attributes: { video_file: video } } }
       assert assigns(:page).video_upload.video_file_processing?, 'should be processing video task'
       assert_equal [I18n.t('video_upload.flash.upload_in_progress')], flash[:notice]
     end
@@ -62,28 +62,28 @@ module Admin
     #
     test 'should not create page if administrator' do
       assert_no_difference ['Page.count'] do
-        post :create, page: {}
+        post :create, params: { page: {} }
       end
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not delete page if administrator' do
       assert_no_difference ['Page.count'] do
-        delete :destroy, id: @page
+        delete :destroy, params: { id: @page }
       end
       assert_not_nil @page.background
       assert_redirected_to admin_dashboard_path
     end
 
     test 'should not delete optional_modules params if administrator' do
-      patch :update, id: @page_search, page: { optional: false, optional_module_id: @page_blog.id }
+      patch :update, params: { id: @page_search, page: { optional: false, optional_module_id: @page_blog.id } }
       assert assigns(:page).optional
       assert_equal @page_search.id, assigns(:page).optional_module_id
     end
 
     test 'should not update optional_modules params if administrator' do
       sign_in @super_administrator
-      patch :update, id: @page_search, page: { optional: false, optional_module_id: @page_blog.id }
+      patch :update, params: { id: @page_search, page: { optional: false, optional_module_id: @page_blog.id } }
       assert_not assigns(:page).optional
       assert_equal @page_blog.id, assigns(:page).optional_module_id
     end
@@ -92,7 +92,7 @@ module Admin
     # == Menu
     #
     test 'should not update menu param if administrator' do
-      patch :update, id: @page, page: { menu_id: 8 }
+      patch :update, params: { id: @page, page: { menu_id: 8 } }
       assert_equal @page.menu_id, assigns(:page).menu_id
     end
 
@@ -115,7 +115,7 @@ module Admin
     test 'should destroy background linked to page if SA' do
       sign_in @super_administrator
       assert_difference ['Page.count', 'Background.count'], -1 do
-        delete :destroy, id: @page
+        delete :destroy, params: { id: @page }
       end
       assert_redirected_to admin_pages_path
     end
@@ -124,14 +124,14 @@ module Admin
       disable_optional_module @super_administrator, @background_module, 'Background' # in test_helper.rb
       sign_in @administrator
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
-      patch :update, id: @page, page: { background_attributes: { image: attachment } }
+      patch :update, params: { id: @page, page: { background_attributes: { image: attachment } } }
       assert_equal 'background-homepage.jpg', assigns(:page).background.image_file_name
     end
 
     test 'should not destroy background if module is disabled' do
       disable_optional_module @super_administrator, @background_module, 'Background' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @page, page: { background_attributes: { _destroy: true } }
+      patch :update, params: { id: @page, page: { background_attributes: { _destroy: true } } }
       assert_equal 'background-homepage.jpg', assigns(:page).background.image_file_name
     end
 
@@ -139,7 +139,7 @@ module Admin
     # == Color
     #
     test 'should update color' do
-      patch :update, id: @page, page: { color: '#F0F' }
+      patch :update, params: { id: @page, page: { color: '#F0F' } }
       assert_equal '#F0F', assigns(:page).color
     end
 
@@ -149,7 +149,7 @@ module Admin
     test 'should destroy slider' do
       sign_in @super_administrator
       assert_difference ['Slider.count'], -1 do
-        delete :destroy, id: @page
+        delete :destroy, params: { id: @page }
       end
       assert_redirected_to admin_pages_path
     end

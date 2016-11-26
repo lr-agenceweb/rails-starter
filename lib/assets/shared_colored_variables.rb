@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 #
-# == Shared Colored variables
-#
+# Shared Colored variables
+# ==========================
 module SharedColoredVariables
   PRIMARY_COLOR = '#0c708d'.freeze
   SECONDARY_COLOR = '#ee732a'.freeze

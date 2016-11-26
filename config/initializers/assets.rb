@@ -6,14 +6,17 @@
 Rails.application.config.assets.version = '1.1'
 
 # Activeadmin assets
-Rails.application.config.assets.precompile += %w( active_admin/active_admin_globalize.css )
-Rails.application.config.assets.precompile += %w( active_admin/active_admin_globalize.js )
+Rails.application.config.assets.precompile += %w(active_admin/active_admin_globalize.css)
+Rails.application.config.assets.precompile += %w(active_admin/active_admin_globalize.js)
 
 # Mapbox assets
-Rails.application.config.assets.precompile += %w( icons-*.png )
+Rails.application.config.assets.precompile += %w(icons-*.png)
 
 # Email / Newsletter / Maintenance assets
-Rails.application.config.assets.precompile += %w( email.css newsletter.css maintenance.css noscript.css )
+Rails.application.config.assets.precompile += %w(email.css newsletter.css maintenance.css noscript.css)
 
 # ActiveAdmin Addons (paperclip attachment)
-Rails.application.config.assets.precompile += %w( fileicons/*.png )
+Rails.application.config.assets.precompile += %w(fileicons/*.png)
+
+# DelayedJob (web interface)
+Rails.application.config.assets.precompile += %w(delayed/web/application.css)

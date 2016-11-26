@@ -1,44 +1,19 @@
 # frozen_string_literal: true
 
-# == Schema Information
 #
-# Table name: video_uploads
-#
-#  id                      :integer          not null, primary key
-#  videoable_id            :integer
-#  videoable_type          :string(255)
-#  online                  :boolean          default(TRUE)
-#  position                :integer
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  video_file_file_name    :string(255)
-#  video_file_content_type :string(255)
-#  video_file_file_size    :integer
-#  video_file_updated_at   :datetime
-#  video_file_processing   :boolean
-#  retina_dimensions       :text(65535)
-#  video_autoplay          :boolean          default(FALSE)
-#  video_loop              :boolean          default(FALSE)
-#  video_controls          :boolean          default(TRUE)
-#  video_mute              :boolean          default(FALSE)
-#
-# Indexes
-#
-#  index_video_uploads_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
-#
-
-#
-# == VideoUpload Model
-#
-class VideoUpload < ActiveRecord::Base
+# VideoUpload Model
+# ===================
+class VideoUpload < ApplicationRecord
   include Assets::Attachable
   include OptionalModules::Assets::FlashNotifiable
 
+  # Translations
   translates :title, :description, fallbacks_for_empty_translations: true
   active_admin_translates :title, :description
 
   # Constants
-  MAX_FILE_SIZE = 40 # megabytes
+  ATTACHMENT_MAX_SIZE = 40 # megabytes
+  ATTACHMENT_TYPES = %r{\Avideo\/.*\Z}
 
   # Model relations
   belongs_to :videoable, polymorphic: true, touch: true
@@ -76,8 +51,6 @@ class VideoUpload < ActiveRecord::Base
                     },
                     processors: [:transcoder]
 
-  validates_attachment_content_type :video_file, content_type: %r{\Avideo\/.*\Z}
-  validates_attachment_size :video_file, in: 0.megabytes..MAX_FILE_SIZE.megabytes
   process_in_background :video_file, processing_image_url: ActionController::Base.helpers.image_path('loader-dark.gif')
 
   # Delegates
@@ -87,3 +60,30 @@ class VideoUpload < ActiveRecord::Base
   scope :online, -> { where(online: true) }
   scope :not_processing, -> { where.not(video_file_processing: true) }
 end
+
+# == Schema Information
+#
+# Table name: video_uploads
+#
+#  id                      :integer          not null, primary key
+#  videoable_type          :string(255)
+#  videoable_id            :integer
+#  online                  :boolean          default(TRUE)
+#  video_autoplay          :boolean          default(FALSE)
+#  video_loop              :boolean          default(FALSE)
+#  video_controls          :boolean          default(TRUE)
+#  video_mute              :boolean          default(FALSE)
+#  position                :integer
+#  video_file_processing   :boolean          default(TRUE)
+#  retina_dimensions       :text(65535)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  video_file_file_name    :string(255)
+#  video_file_content_type :string(255)
+#  video_file_file_size    :integer
+#  video_file_updated_at   :datetime
+#
+# Indexes
+#
+#  index_video_uploads_on_videoable_type_and_videoable_id  (videoable_type,videoable_id)
+#

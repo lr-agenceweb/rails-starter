@@ -26,15 +26,17 @@ ActiveAdmin.register NewsletterSetting do
           end
         end
 
-        column do
-          panel I18n.t('newsletter.active_admin.welcome_panel_title') do
-            attributes_table_for resource.decorate do
-              row :title_subscriber
-              row :content_subscriber
+        if resource.send_welcome_email?
+          column do
+            panel I18n.t('newsletter.active_admin.welcome_panel_title') do
+              attributes_table_for resource.decorate do
+                row :title_subscriber
+                row :content_subscriber
+              end
             end
-          end
-        end if resource.send_welcome_email?
-      end
+          end # columns
+        end # if
+      end # columns
     end
   end
 

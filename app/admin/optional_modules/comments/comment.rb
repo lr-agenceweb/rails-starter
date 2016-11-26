@@ -35,7 +35,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
 
   member_action :toggle_validated, method: :put do
     resource.toggle! :validated
-    redirect_to :back, notice: t('active_admin.toggle_validated.flash', verb: resource.validated? ? 'validé' : 'invalidé')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.toggle_validated.flash', verb: resource.validated? ? 'validé' : 'invalidé'))
   end
 
   batch_action :toggle_validated,
@@ -45,14 +45,14 @@ ActiveAdmin.register Comment, as: 'PostComment' do
       item.toggle! :validated
       email_comment_validated(item) if item.validated?
     end
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   batch_action :toggle_signalled,
                priority: 2,
                if: proc { can? :toggle_signalled, Comment } do |ids|
     Comment.find(ids).each { |item| item.toggle! :signalled }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   # Override destroy batch_action
@@ -60,7 +60,7 @@ ActiveAdmin.register Comment, as: 'PostComment' do
                priority: 3,
                confirm: I18n.t('active_admin.destroy.confirm', object_kind: I18n.t('activerecord.models.comment.one')) do |ids|
     Comment.find(ids).each { |item| item.destroy if can? :destroy, item }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do

@@ -9,7 +9,7 @@ module Admin
   # == EventSettingsController test
   #
   class EventSettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
@@ -23,23 +23,23 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @event_settings
+      get :show, params: { id: @event_settings }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @event_settings
+      get :edit, params: { id: @event_settings }
       assert_response :success
     end
 
     test 'should update event_setting if logged in' do
-      patch :update, id: @event_settings, event_setting: {}
+      patch :update, params: { id: @event_settings, event_setting: {} }
       assert_redirected_to admin_event_setting_path(@event_settings)
     end
 
     test 'should not destroy background' do
       assert_no_difference 'EventSetting.count' do
-        delete :destroy, id: @event_settings
+        delete :destroy, params: { id: @event_settings }
       end
     end
 
@@ -64,14 +64,14 @@ module Admin
       sign_in @administrator
 
       assert_not @event_settings.show_map?
-      patch :update, id: @event_settings, event_setting: { show_map: true }
+      patch :update, params: { id: @event_settings, event_setting: { show_map: true } }
       assert assigns(:event_setting).valid?
       assert_not assigns(:event_setting).show_map?, 'map should not change of status'
     end
 
     test 'should update show_map setting if map module is enabled' do
       assert_not @event_settings.show_map?
-      patch :update, id: @event_settings, event_setting: { show_map: true }
+      patch :update, params: { id: @event_settings, event_setting: { show_map: true } }
       assert assigns(:event_setting).valid?
       assert assigns(:event_setting).show_map?, 'map should have changed of status'
     end
@@ -84,14 +84,14 @@ module Admin
       sign_in @administrator
 
       assert_not @event_settings.show_calendar?
-      patch :update, id: @event_settings, event_setting: { show_calendar: true }
+      patch :update, params: { id: @event_settings, event_setting: { show_calendar: true } }
       assert assigns(:event_setting).valid?
       assert_not assigns(:event_setting).show_calendar?, 'calendar should not change of status'
     end
 
     test 'should update show_calendar setting if calendar module is enabled' do
       assert_not @event_settings.show_calendar?
-      patch :update, id: @event_settings, event_setting: { show_calendar: true }
+      patch :update, params: { id: @event_settings, event_setting: { show_calendar: true } }
       assert assigns(:event_setting).valid?
       assert assigns(:event_setting).show_calendar?, 'calendar should have changed of status'
     end

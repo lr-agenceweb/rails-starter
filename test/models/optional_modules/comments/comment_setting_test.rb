@@ -2,12 +2,12 @@
 require 'test_helper'
 
 #
-# == CommentSetting model test
-#
+# CommentSetting Model test
+# ===========================
 class CommentSettingTest < ActiveSupport::TestCase
   #
-  # == Validation
-  #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     comment_setting = CommentSetting.new
     assert_not comment_setting.valid?

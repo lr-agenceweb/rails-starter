@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == ContactForm Model
-#
+# ContactForm Model
+# =======================
 class ContactForm
   include ActiveModel::Model
   include Mailable
@@ -10,7 +10,7 @@ class ContactForm
   attr_accessor :name, :email, :message, :send_copy, :attachment, :nickname
 
   I18N_SCOPE = 'activerecord.errors.models.contact_form.attributes.attachment'
-  ATTACHMENT_MAX_SIZE = 3
+  ATTACHMENT_MAX_SIZE = 3 # megabytes
   ATTACHMENT_TYPES = ['application/pdf', 'image/jpeg', 'image/png', 'text/plain'].freeze
 
   validates :name,

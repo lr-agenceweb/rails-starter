@@ -28,6 +28,9 @@ module Skippable
                        :admin_bar_enabled?,
                        :set_comments_count,
                        :set_guest_books_count,
-                       :set_module_settings
+                       :set_module_settings,
+
+                       # Rails 5 fix
+                       raise: false
   end
 end

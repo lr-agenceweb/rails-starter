@@ -30,7 +30,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     get user_session_path
     assert_equal 200, status
     @user = User.create(email: 'user@example.com', username: 'user', password: Devise::Encryptor.digest(User, 'password'), account_active: true)
-    post user_session_path, 'user[email]': @user.email, 'user[password]': @user.password
+    post user_session_path, params: { 'user[email]': @user.email, 'user[password]': @user.password }
     follow_redirect!
   end
 

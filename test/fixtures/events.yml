@@ -1,32 +1,6 @@
-# == Schema Information
-#
-# Table name: events
-#
-#  id              :integer          not null, primary key
-#  title           :string(255)
-#  slug            :string(255)
-#  content         :text(65535)
-#  all_day         :boolean          default(FALSE)
-#  start_date      :datetime
-#  end_date        :datetime
-#  show_as_gallery :boolean          default(FALSE)
-#  show_calendar   :boolean          default(FALSE)
-#  show_map        :boolean          default(FALSE)
-#  online          :boolean          default(TRUE)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#
-# Indexes
-#
-#  index_events_on_slug  (slug)
-#
-
 DEFAULTS: &DEFAULTS
   created_at: <%= 1.weeks.ago.to_s(:db) %>
   updated_at: <%= 1.weeks.ago.to_s(:db) %>
-  title: ~
-  slug: ~
-  content: ~
 
 event_online:
   <<: *DEFAULTS
@@ -72,3 +46,24 @@ all_day:
   start_date: '2016-05-23 00:00:00'
   all_day: true
   online: true
+
+# == Schema Information
+#
+# Table name: events
+#
+#  id              :integer          not null, primary key
+#  slug            :string(255)
+#  all_day         :boolean          default(FALSE)
+#  start_date      :datetime
+#  end_date        :datetime
+#  show_as_gallery :boolean          default(FALSE)
+#  show_calendar   :boolean          default(FALSE)
+#  show_map        :boolean          default(FALSE)
+#  online          :boolean          default(TRUE)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_events_on_slug  (slug)
+#

@@ -8,11 +8,12 @@ module Validatable
 
   included do
     include UserHelper
-    after_initialize :set_validated, if: proc { |o| o.new_record? }
+    after_initialize :set_validated, if: proc { |u| u.new_record? }
 
     def set_validated
       klass = "#{self.class}Setting".constantize
-      self.validated = (klass.first.try(:should_validate?) && !current_user_and_administrator?(User.try(:current_user))) ? false : true
+      self.validated = true
+      self.validated = false if klass.first.try(:should_validate?) && !current_user_and_administrator?(User.try(:current_user))
     end
   end
 end

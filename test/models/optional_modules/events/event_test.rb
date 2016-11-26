@@ -2,12 +2,35 @@
 require 'test_helper'
 
 #
-# == Event model test
-#
+# Event Model test
+# ==================
 class EventTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
+
+  #
+  # Shoulda
+  # =========
+  should have_one(:link)
+  should have_one(:location)
+  should have_one(:picture)
+  should have_many(:pictures)
+  should have_one(:video_upload)
+  should have_many(:video_uploads)
+  should have_one(:video_platform)
+  should have_many(:video_platforms)
+  should have_one(:referencement)
+
+  should accept_nested_attributes_for(:link)
+  should accept_nested_attributes_for(:location)
+  should accept_nested_attributes_for(:picture)
+  should accept_nested_attributes_for(:pictures)
+  should accept_nested_attributes_for(:video_upload)
+  should accept_nested_attributes_for(:video_uploads)
+  should accept_nested_attributes_for(:video_platform)
+  should accept_nested_attributes_for(:video_platforms)
+  should accept_nested_attributes_for(:referencement)
 
   #
   # Validation rules
@@ -100,18 +123,24 @@ class EventTest < ActiveSupport::TestCase
     }
     event = define_event_record(attrs)
     assert event.send(:date_constraints)
+    assert_empty event.errors.keys
     event.delete
   end
 
-  test 'should return false if dates are not corrects' do
+  test 'should return errors if dates are not corrects' do
+    scope = 'activerecord.errors.models.event.attributes'
     attrs = {
       id: SecureRandom.random_number(1_000),
       start_date: Time.zone.now + 1.day.to_i,
       end_date: Time.zone.now
     }
-    scope = 'activerecord.errors.models.event.attributes'
+    expected = {
+      start_date: [I18n.t('start_date', scope: scope)],
+      end_date: [I18n.t('end_date', scope: scope)]
+    }
+
     event = define_event_record(attrs)
-    assert_equal [I18n.t('end_date', scope: scope)], event.send(:date_constraints)
+    assert_equal expected, event.errors.messages
     event.delete
   end
 

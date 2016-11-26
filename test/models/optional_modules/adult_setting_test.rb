@@ -2,14 +2,19 @@
 require 'test_helper'
 
 #
-# == AdultSetting test
-#
+# AdultSetting test
+# ===================
 class AdultSettingTest < ActiveSupport::TestCase
   setup :initialize_test
 
   #
-  # == Validation
+  # Shoulda
+  # =========
+  should_not validate_presence_of(:redirect_link)
+
   #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     adult_setting = AdultSetting.new
     assert_not adult_setting.valid?

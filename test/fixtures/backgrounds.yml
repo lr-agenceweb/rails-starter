@@ -1,10 +1,20 @@
+home:
+  attachable: home (Page)
+  image_file_name: background-homepage.jpg
+
+blog:
+  attachable: blog (Page)
+
+contact:
+  attachable: contact (Page)
+
 # == Schema Information
 #
 # Table name: backgrounds
 #
 #  id                 :integer          not null, primary key
-#  attachable_id      :integer
 #  attachable_type    :string(255)
+#  attachable_id      :integer
 #  image_file_name    :string(255)
 #  image_content_type :string(255)
 #  image_file_size    :integer
@@ -17,13 +27,3 @@
 #
 #  index_backgrounds_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
 #
-
-home:
-  attachable: home (Page)
-  image_file_name: background-homepage.jpg
-
-blog:
-  attachable: blog (Page)
-
-contact:
-  attachable: contact (Page)

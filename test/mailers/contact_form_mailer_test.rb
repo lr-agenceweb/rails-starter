@@ -6,8 +6,8 @@ require 'test_helper'
 #
 class ContactFormMailerTest < ActionMailer::TestCase
   include HtmlHelper
-  include ActionController::TemplateAssertions
   include ActionDispatch::TestProcess
+  include Rails::Controller::Testing::TemplateAssertions
 
   setup :initialize_test
 
@@ -183,6 +183,6 @@ class ContactFormMailerTest < ActionMailer::TestCase
   end
 
   def response
-    @response = ActionController::TestRequest.new(host: 'http://test.host')
+    @response = ActionController::TestRequest.create
   end
 end

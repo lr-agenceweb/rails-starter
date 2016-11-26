@@ -9,7 +9,7 @@ module Admin
   # == SocialConnectSettingsController test
   #
   class SocialConnectSettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
@@ -23,13 +23,13 @@ module Admin
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @social_connect_setting
+      get :edit, params: { id: @social_connect_setting }
       assert_response :success
     end
 
     # Valid params
     test 'should update social_connect_setting if logged in' do
-      patch :update, id: @social_connect_setting, social_connect_setting: {}
+      patch :update, params: { id: @social_connect_setting, social_connect_setting: {} }
       assert assigns(:social_connect_setting).valid?
       assert_redirected_to admin_social_connect_setting_path
     end
@@ -39,7 +39,7 @@ module Admin
     #
     test 'should not destroy social_connect_setting if logged in as subscriber' do
       assert_no_difference 'SocialConnectSetting.count' do
-        delete :destroy, id: @social_connect_setting
+        delete :destroy, params: { id: @social_connect_setting }
       end
     end
 

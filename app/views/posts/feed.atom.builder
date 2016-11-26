@@ -13,7 +13,7 @@ atom_feed language: @language do |feed|
     url = item.decorate.show_post_link('url')
 
     feed.entry(item, url: url) do |entry|
-      entry.url item.decorate.show_page_link(true)
+      entry.url resource_route_show(item, true)
       entry.title item.title
       entry.content item.decorate.image_and_content, type: 'html'
       entry.updated(item.updated_at.strftime('%Y-%m-%dT%H:%M:%SZ'))

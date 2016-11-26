@@ -2,16 +2,57 @@
 require 'test_helper'
 
 #
-# == Setting model test
-#
+# Setting Model test
+# ====================
 class SettingTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
   setup :initialize_test
 
   #
-  # == Validation rules
+  # Shoulda
+  # =========
+  should validate_presence_of(:name)
+  should validate_presence_of(:email)
+  should validate_presence_of(:per_page)
+  should validate_presence_of(:date_format)
+
+  should allow_value('lorem@ipsum.com').for(:email)
+  should_not allow_value('loremipsum.com').for(:email)
+
+  should validate_inclusion_of(:per_page)
+    .in_array(Setting.per_page_values)
+  should define_enum_for(:date_format)
+    .with(Setting.date_formats.keys)
+
+  # Logo
+  should have_attached_file(:logo)
+  should_not validate_attachment_presence(:logo)
+  should validate_attachment_content_type(:logo)
+    .allowing('image/jpg', 'image/png')
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:logo)
+    .less_than(Setting::ATTACHMENT_MAX_SIZE.megabytes)
+
+  # Logo footer
+  should have_attached_file(:logo_footer)
+  should_not validate_attachment_presence(:logo_footer)
+  should validate_attachment_content_type(:logo_footer)
+    .allowing('image/jpg', 'image/png')
+    .rejecting('text/plain', 'text/xml')
+  should validate_attachment_size(:logo_footer)
+    .less_than(Setting::ATTACHMENT_MAX_SIZE.megabytes)
+
   #
+  # Columns
+  # =========
+  test 'should return true if subtitle not blank' do
+    assert @setting.send(:subtitle?)
+  end
+
+  #
+  # Validation rules
+  # ==================
   test 'should not create more than one setting' do
     @setting_without_subtitle.destroy
 
@@ -22,62 +63,63 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   test 'should not update if name is empty' do
-    @setting.update_attributes(name: '')
+    @setting.update_column(:name, '')
     assert_not @setting.valid?
     assert_equal [:name], @setting.errors.keys
   end
 
   test 'should not update if email is empty' do
-    @setting.update_attributes(email: '')
+    @setting.update_column(:email, '')
     assert_not @setting.valid?
     assert_equal [:email], @setting.errors.keys
   end
 
   test 'should not update if email is not valid' do
-    @setting.update_attributes(email: 'fakeemail')
+    @setting.update_column(:email, 'fakeemail')
     assert_not @setting.valid?
     assert_equal [:email], @setting.errors.keys
   end
 
+  # Date format
+  test 'should be valid if enum value is correct for date_format' do
+    @setting.update_column(:date_format, :ago)
+    assert @setting.valid?
+    assert @setting.errors.keys.empty?
+  end
+
   test 'should not be valid if enum value is not correct for date_format' do
-    @setting.update_attributes(date_format: :fake)
+    @setting.update_column(:date_format, 99)
     assert_not @setting.valid?
     assert_equal [:date_format], @setting.errors.keys
   end
 
-  # == Per page
+  test 'should return correct date_format enum translations for collection' do
+    expected = [['30/04/2016 15:32', 'with_time'], ['30/04/2016', 'without_time'], ['Il y a 10 minutes', 'ago']]
+    assert_equal expected, Setting.date_format_attributes_for_form
+  end
+
+  # Per page
   test 'should not update if per_page params is not alloweded' do
-    @setting.update_attributes(per_page: 31)
+    @setting.update_column(:per_page, 31)
     assert_not @setting.valid?, 'should not update if per_page param is not allowed'
     assert_equal [:per_page], @setting.errors.keys
   end
 
   test 'should not update if per_page params is empty' do
-    @setting.update_attributes(per_page: nil)
+    @setting.update_column(:per_page, nil)
     assert_not @setting.valid?, 'should not update if per_page params is empty'
     assert_equal [:per_page], @setting.errors.keys
   end
 
   test 'should update if per_page params is allowed' do
-    @setting.update_attributes(per_page: 5)
+    @setting.update_column(:per_page, 5)
     assert @setting.valid?, 'should update if per_page params is allowed'
     assert @setting.errors.keys.empty?
   end
 
   #
-  # == Methods
-  #
-  test 'should return title and subtitle if subtitle is not blank' do
-    assert_equal @setting.title_and_subtitle, 'Rails Starter, Démarre rapidement'
-  end
-
-  test 'should return only title if subtitle is blank' do
-    assert_equal @setting_without_subtitle.title_and_subtitle, 'Rails Starter'
-  end
-
-  #
-  # == Logo
-  #
+  # Logo
+  # ======
   test 'should not upload logo if mime type is not allowed' do
     [:original, :large, :medium, :small, :thumb].each do |size|
       assert_nil @setting.logo.path(size)
@@ -130,8 +172,8 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   #
-  # == Logo footer
-  #
+  # Logo footer
+  # =============
   test 'should not upload logo_footer if mime type is not allowed' do
     [:original, :large, :medium, :small, :thumb].each do |size|
       assert_nil @setting.logo_footer.path(size)

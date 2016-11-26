@@ -26,7 +26,7 @@ module OptionalModules
     end
 
     test 'should return correct value for set_organization' do
-      assert_equal "ORG:Rails Starter démarre rapidement\n", set_organization
+      assert_equal "ORG:Rails Starter, Démarre rapidement\n", set_organization
     end
 
     test 'should return correct value for set_email' do
@@ -55,7 +55,7 @@ module OptionalModules
       @setting = settings(:one)
       @map_setting = map_settings(:one)
 
-      @vcard_string = "BEGIN:VCARD\nVERSION:3.0\nN:Rails Starter\nFN:Rails Starter\nTEL;WORK:+33 (0)1 02 03 04 05\nADR;WORK:;;1 Main Street;Auckland;;06001;France\nORG:Rails Starter démarre rapidement\nEMAIL:demo@rails-starter.com\nURL:http://test.host/\nEND:VCARD"
+      @vcard_string = "BEGIN:VCARD\nVERSION:3.0\nN:Rails Starter\nFN:Rails Starter\nTEL;WORK:+33 (0)1 02 03 04 05\nADR;WORK:;;1 Main Street;Auckland;;06001;France\nORG:Rails Starter, Démarre rapidement\nEMAIL:demo@rails-starter.com\nURL:http://test.host/\nEND:VCARD"
     end
   end
 end

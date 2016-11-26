@@ -13,7 +13,7 @@ ActiveAdmin.register Audio do
 
   batch_action :toggle_online, if: proc { can? :toggle_online, Audio } do |ids|
     Audio.find(ids).each { |item| item.toggle! :online }
-    redirect_to :back, notice: t('active_admin.batch_actions.flash')
+    redirect_back(fallback_location: admin_dashboard_path, notice: t('active_admin.batch_actions.flash'))
   end
 
   index do
@@ -44,7 +44,7 @@ ActiveAdmin.register Audio do
         f.inputs t('formtastic.titles.audio_details') do
           f.input :audio,
                   as: :file,
-                  hint: raw(f.object.decorate.hint_for_file)
+                  hint: f.object.decorate.hint_for_paperclip
           f.input :audio_autoplay
           f.input :online
         end

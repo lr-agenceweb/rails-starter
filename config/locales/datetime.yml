@@ -7,6 +7,7 @@ en:
       with_time: '%d/%m/%Y %I.%m %p'
       without_time: '%d/%m/%Y'
       without_time_no_year: '%d/%m'
+      short: "%d %b %H:%M"
       long: '%B %d, %Y at %I.%m %p'
       ago: '%d/%m/%Y %I.%m %p'
     greeting:
@@ -24,6 +25,7 @@ fr:
       without_time: '%d/%m/%Y'
       without_time_no_year: '%d/%m'
       long: "%A %d %B %Y à %Hh%M"
+      short: "%d %b %Hh%M"
       ago: '%d/%m/%Y %H:%M'
     greeting:
       morning: Bonjour

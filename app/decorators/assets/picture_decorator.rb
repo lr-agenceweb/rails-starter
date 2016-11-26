@@ -7,14 +7,6 @@ class PictureDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
-  def title
-    raw(model.title) if title?
-  end
-
-  def description
-    raw(model.description) if description?
-  end
-
   def source_picture_title_link
     klass = source_picture.class.name.underscore.singularize.downcase
     link_to source_picture_title, send("admin_#{klass}_path", source_picture)
@@ -41,8 +33,8 @@ class PictureDecorator < ApplicationDecorator
   end
 
   def source_picture_title
-    return source_picture.menu_title if model.attachable_type == 'Page'
-    raw(source_picture.title)
+    html = model.attachable_type == 'Page' ? source_picture.menu_title : source_picture.title
+    safe_join [raw(html)]
   end
 
   def base_image(size)

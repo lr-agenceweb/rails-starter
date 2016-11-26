@@ -1,3 +1,4 @@
+#= require mapbox
 #= require classes/mapbox_class
 
 $(document).on 'ready page:load page:restore', ->

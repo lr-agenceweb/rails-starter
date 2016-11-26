@@ -9,7 +9,7 @@ module Admin
   # == BlogSettingsController test
   #
   class BlogSettingsControllerTest < ActionController::TestCase
-    include Devise::TestHelpers
+    include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
@@ -23,23 +23,23 @@ module Admin
     end
 
     test 'should get show page if logged in' do
-      get :show, id: @blog_settings
+      get :show, params: { id: @blog_settings }
       assert_response :success
     end
 
     test 'should get edit page if logged in' do
-      get :edit, id: @blog_settings
+      get :edit, params: { id: @blog_settings }
       assert_response :success
     end
 
     test 'should update blog_setting if logged in' do
-      patch :update, id: @blog_settings, blog_setting: {}
+      patch :update, params: { id: @blog_settings, blog_setting: {} }
       assert_redirected_to admin_blog_setting_path(@blog_settings)
     end
 
     test 'should not destroy blog_setting' do
       assert_no_difference 'BlogSetting.count' do
-        delete :destroy, id: @blog_settings
+        delete :destroy, params: { id: @blog_settings }
       end
     end
 
@@ -47,14 +47,14 @@ module Admin
     # == Allowed params
     #
     test 'should save show_last_comments params if module is enabled' do
-      patch :update, id: @blog_settings, blog_setting: { show_last_comments: true }
+      patch :update, params: { id: @blog_settings, blog_setting: { show_last_comments: true } }
       assert assigns(:blog_setting).show_last_comments?
     end
 
     test 'should not save show_last_comments params if module is disabled' do
       disable_optional_module @super_administrator, @comment_module, 'Comment' # in test_helper.rb
       sign_in @administrator
-      patch :update, id: @blog_settings, blog_setting: { show_last_comments: true }
+      patch :update, params: { id: @blog_settings, blog_setting: { show_last_comments: true } }
       assert_not assigns(:blog_setting).show_last_comments?
     end
 
