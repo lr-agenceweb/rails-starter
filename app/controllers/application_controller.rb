@@ -33,7 +33,6 @@ class ApplicationController < ActionController::Base
   include Security::NotificationSettings
 
   # Misc
-  before_action :set_host_name
   before_action :set_froala_key, if: :user_signed_in?
   before_action :set_legal_notices
 
@@ -59,10 +58,6 @@ class ApplicationController < ActionController::Base
 
   def set_legal_notices
     @page_legal_notice = @pages.find_by(name: 'LegalNotice')
-  end
-
-  def set_host_name
-    @hostname = request.host
   end
 
   def set_froala_key
