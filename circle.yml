@@ -4,13 +4,19 @@ machine:
   ruby:
     version: 2.3.0
 
+database:
+  override:
+    - RAILS_ENV=test bundle exec rails db:drop
+    - RAILS_ENV=test bundle exec rails db:create
+    - RAILS_ENV=test bundle exec rails db:migrate
+
 test:
   pre:
     - cp config/application.example.yml config/application.yml
   override:
-    - RAILS_ENV=test bundle exec rake test
+    - RAILS_ENV=test bundle exec rails test
   post:
-    - RAILS_ENV=test bundle exec rake db:seed
+    - RAILS_ENV=test bundle exec rails db:seed
 
 general:
   branches:
