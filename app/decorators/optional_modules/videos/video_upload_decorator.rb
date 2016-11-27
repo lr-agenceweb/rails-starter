@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == VideoUploadDecorator
-#
+# VideoUploadDecorator
+# ======================
 class VideoUploadDecorator < VideoDecorator
   include Draper::LazyHelpers
   delegate_all
@@ -24,24 +24,29 @@ class VideoUploadDecorator < VideoDecorator
   end
 
   #
-  # == File
-  #
+  # File
+  # ======
   def file_name_without_extension
     super 'video_file'
   end
 
   #
-  # == Status tag
-  #
+  # Status tag
+  # ============
   def subtitles
     bool = subtitles? ? true : false
     color = bool ? 'green' : 'red'
     status_tag_deco I18n.t("subtitles.#{bool}"), color
   end
 
-  private
-
-  def subtitles?
-    model.video_subtitle_online && (model.video_subtitle.subtitle_fr.exists? || model.video_subtitle.subtitle_en.exists?)
+  #
+  # ActiveAdmin
+  # =============
+  def hint_for_paperclip
+    html = []
+    html << t('formtastic.hints.video_upload.video_file')
+    html << safe_join([raw(t('video_upload.flash.upload_in_progress'))]) if !new_record? && video_file_processing?
+    html << retina_image_tag(model, :video_file, :preview) unless new_record?
+    safe_join [html], tag(:br)
   end
 end

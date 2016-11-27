@@ -1,8 +1,6 @@
 - f.inputs t('formtastic.titles.picture_details'), for: [:picture, f.object.picture || Picture.new] do |item|
-  - hint =  "#{t('formtastic.hints.image')} <br /> #{retina_image_tag(item.object, :image, :medium)}".html_safe
-
   - item.input :image,
                as: :file,
-               hint: hint
+               hint: item.object.decorate.hint_for_paperclip
   - item.input :online
   - item.input :_destroy, as: :boolean if item.object.self_image?

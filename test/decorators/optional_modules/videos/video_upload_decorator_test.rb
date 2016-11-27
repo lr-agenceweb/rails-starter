@@ -69,6 +69,16 @@ class VideoUploadDecoratorTest < Draper::TestCase
     assert_match '<span class="status_tag sous_titres_absents red">Sous Titres Absents</span>', @video_upload_two_decorated.subtitles
   end
 
+  #
+  # ActiveAdmin
+  # =============
+  test 'should return correct hint_for_paperclip' do
+    default_hint = I18n.t('formtastic.hints.video_upload.video_file')
+    assert_equal default_hint, VideoUpload.new.decorate.hint_for_paperclip
+
+    assert_equal "#{default_hint}<br />#{I18n.t('video_upload.flash.upload_in_progress')}<br /><img src=\"/images/loader-dark.gif\" alt=\"Loader dark\" />", @video_upload_decorated.hint_for_paperclip
+  end
+
   private
 
   def initialize_test
