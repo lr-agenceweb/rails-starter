@@ -107,6 +107,12 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
 
 
 * **Nginx/Puma**  
+  * `cap <env> nginx:start` : Start Nginx server
+  * `cap <env> nginx:stop` : Stop Nginx server
+  * `cap <env> nginx:restart` : Retart Nginx server
+  * `cap <env> nginx:reload` : Reload Nginx server
+  * `cap <env> nginx:status` : Get current Nginx status
+  * `cap <env> puma:config` : Upload puma config file
   * `cap <env> puma:nginx_config` : Upload puma vhost config file
 
 
