@@ -16,10 +16,10 @@ app_config = YAML.load_file("<%= current_path %>/config/application.yml")
   ##
   # MySQL [Database]
   #
-  database MySQL, app_config['db_name'].to_sym do |db|
-    db.name     = app_config['db_name'] + '_' + app_config['db_env']
-    db.username = app_config['db_username']
-    db.password = app_config['db_password']
+  database MySQL, app_config[ENV['RAILS_ENV']]['db_name'].to_sym do |db|
+    db.name     = app_config[ENV['RAILS_ENV']]['db_name']
+    db.username = app_config[ENV['RAILS_ENV]]['db_username']
+    db.password = app_config[ENV['RAILS_ENV]]['db_password']
     db.host     = app_config['db_host']
   end
 
