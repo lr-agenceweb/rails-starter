@@ -99,22 +99,26 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
 
 
 #### Capistrano
+* **Core**  
+  * `cap <env> core:upload:yml` : Upload yml configuration files such as application, database, secrets, sitemap, ...
+  * `cap <env> core:upload:dkim` : Upload DKIM private key
+  * `cap <env> core:upload:missing` : Upload default pictures when missing or unavailable paperclip model objects
+  * `cap <env> core:upload:all` : Execute all previous commands in one task
+
+
 * **Nginx/Puma**  
   * `cap <env> puma:nginx_config` : Upload puma vhost config file
 
-* **Uploads**  
-  * `cap <env> upload:yml` : Upload yml configuration files such as application, database, secrets, ...
-  * `cap <env> upload:dkim` : Upload DKIM private key
-  * `cap <env> upload:missing` : Upload default pictures when missing or unavailable paperclip model objects
-  * `cap <env> upload:all` : Execute all previous commands in one task
 
 * **Database backup** (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)  
   * `cap <env> backup:upload:config` : Upload backup parent config file
   * `cap <env> backup:upload:model` : Upload model file corresponding to a database
   * `cap <env> backup:upload:all` : Upload both config and model files
 
+
 * **Logrotate**  
   * `cap <env> logrotate:upload` : Upload logrotate config file
+
 
 * **Paperclip**  
   * `cap <env> paperclip:refresh:all` : Regenerate all Paperclip styles
