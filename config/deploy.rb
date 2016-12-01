@@ -42,13 +42,16 @@ set :default_env, rvm_bin_path: '~/.rvm/bin'
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
+# Bundle options
+set :bundle_jobs, Figaro.env.puma_workers || 2
+
 # Backup database config files
 set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
 set :backup_name, fetch(:application)
 set :backup_parent_class, Figaro.env.backup_parent_class || 'ApplicationBackup'
 
 # Puma configuration
-set :nginx_config_name, fetch(:application)
-set :puma_workers, Figaro.env.puma_workers || '2'
-set :nginx_use_ssl, Figaro.env.nginx_use_ssl || 'false'
-set :puma_use_actioncable, Figaro.env.puma_use_actioncable || 'false'
+set :nginx_config_name, "#{fetch(:application)}_#{fetch(:puma_env)}"
+set :puma_workers, fetch(:bundle_jobs)
+set :nginx_use_ssl, Figaro.env.nginx_use_ssl || false
+set :puma_use_actioncable, Figaro.env.puma_use_actioncable || false
