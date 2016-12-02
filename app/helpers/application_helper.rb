@@ -50,6 +50,14 @@ module ApplicationHelper
   # Git
   # ============
   def branch_name
-    Rails.env.staging? ? 'BranchName' : `git rev-parse --abbrev-ref HEAD`
+    Rails.env.staging? ? 'BranchName' : `git rev-parse --abbrev-ref HEAD`.gsub('feature/', '')
+  end
+
+  #
+  # Server
+  # ========
+  def server_name
+    server_software = controller.request.env['SERVER_SOFTWARE'].split(' ')
+    "#{server_software[0].capitalize} #{server_software[1]}"
   end
 end

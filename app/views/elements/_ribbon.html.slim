@@ -1,5 +1,8 @@
 #ribbon.hide-for-small-only
   .ribbon-container class="#{Rails.env}"
     span.env = Rails.env.capitalize
-    span.version == "Ruby: <strong>#{RUBY_VERSION}</strong>, Rails: <strong>#{Rails.version}</strong>"
-    span.branch == "Branch: <strong>#{branch_name}</strong>"
+    span.version
+      == "Rails: <strong>#{Rails.version}</strong>, Ruby: <strong>#{RUBY_VERSION}</strong>"
+
+    span.server
+      == "Server: <strong>#{server_name}</strong>, Branch: <strong>#{branch_name}</strong>"

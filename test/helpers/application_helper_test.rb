@@ -49,6 +49,14 @@ class ApplicationHelperTest < ActionView::TestCase
     Rails.env = 'test'
   end
 
+  #
+  # Server
+  # ========
+  test 'should return correct value for server name' do
+    controller.request.env['SERVER_SOFTWARE'] = 'Puma 3.6.2 Sleepy'
+    assert_equal 'Puma 3.6.2', server_name
+  end
+
   private
 
   def initialize_test
