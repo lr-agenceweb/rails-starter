@@ -36,8 +36,12 @@ Rails.application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { host: 'test.host' }
-  Rails.application.routes.default_url_options = { host: 'test.host' }
+  config.action_mailer.default_url_options = {
+    host: Figaro.env.application_domain_name
+  }
+  Rails.application.routes.default_url_options = {
+    host: Figaro.env.application_domain_name
+  }
 
   # Randomize the order test cases are executed.
   # :random / :parallel / :sorted / :alpha

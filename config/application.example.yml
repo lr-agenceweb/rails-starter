@@ -1,19 +1,25 @@
 #
 # Application
 # =============
-# Host and domain name
+# Name
 application_name: ~ # ex: my-application
-application_host : 'http://localhost:3000'
-application_domain_name: 'localhost:3000'
 
-application_host_staging: ~
-application_domain_name_staging: ~
-
-application_host_production: ~
-application_domain_name_production: ~
-
-application_host_backup: ~
-application_domain_name_backup: ~
+# URL
+development: &development_host
+  application_host : 'http://localhost:3000'
+  application_domain_name: 'localhost:3000'
+test: &test
+  application_host: ~
+  application_domain_name: ~
+staging: &staging
+  application_host: ~
+  application_domain_name: ~
+production: &production
+  application_host: ~
+  application_domain_name: ~
+backup: &backup
+  application_host: ~
+  application_domain_name: ~
 
 # Keys
 application_devise_secret_key: ~
@@ -24,8 +30,8 @@ application_base_secret_key: ~
 # Server [Puma]
 # ===============
 puma_workers: '2'
-puma_use_actioncable: 'false'
 nginx_use_ssl: 'false'
+puma_use_actioncable: 'false'
 
 
 #
@@ -36,15 +42,19 @@ db_host: ~
 db_username: ~
 db_password: ~
 
-development: &development
+development: &development_database
+  <<: *development_host
   db_name: ~
-test: &test
+test: &test_database
+  <<: *test_host
   db_name: ~
-staging: &staging
+staging: &staging_database
+  <<: *staging_host
   db_name: ~
   db_username: ~
   db_password: ~
-production: &production
+production: &production_database
+  <<: *production_host
   db_name: ~
   db_username: ~
   db_password: ~
@@ -53,28 +63,28 @@ production: &production
 #
 # Omniauth
 # ==========
-development:
-  <<: *development
+development: &development_omniauth
+  <<: *development_database
   facebook_app_id: ~
   facebook_app_secret: ~
   google_app_id: ~
   google_app_secret: ~
-test:
-  <<: *test
+test: &test_omniauth
+  <<: *test_database
   facebook_app_id: 'test'
   facebook_app_secret: 'test'
   google_app_id: 'test'
   google_app_secret: 'test'
   twitter_app_id: 'test'
   twitter_app_secret: 'test'
-staging:
-  <<: *staging
+staging: &staging_omniauth
+  <<: *staging_database
   facebook_app_id: ~
   facebook_app_secret: ~
   google_app_id: ~
   google_app_secret: ~
-production:
-  <<: *production
+production: &production_omniauth
+  <<: *production_database
   facebook_app_id: ~
   facebook_app_secret: ~
   google_app_id: ~
@@ -98,8 +108,8 @@ gmaps_api_key: ~
 #
 # Google and Bing
 # =================
-production:
-  <<: *production
+production: &production_seo
+  <<: *production_omniauth
   google_analytics_key: ~
   google_site_verification: ~
   bing_site_verification: ~
@@ -130,8 +140,8 @@ production:
 #
 # Staging Authentication
 # ========================
-staging:
-  <<: *staging
+staging: &staging_htpasswd
+  <<: *staging_omniauth
   admin_username: ~
   admin_password: ~
   guest_username: ~
@@ -162,8 +172,8 @@ exception_notification_slack_channel: '#exceptions'
 # Backup gem
 # ============
 backup_parent_class: ~ # Parent class name
-production:
-  <<: *production
+production: &production_backup
+  <<: *production_seo
   dropbox: # Dropbox [Storage]
     api_key: ~
     api_secret: ~

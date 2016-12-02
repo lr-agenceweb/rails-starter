@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: *.pdf
-Sitemap: <%= "#{@application_host}/sitemap.xml" %>
+Sitemap: <%= "#{Figaro.env.application_host}/sitemap.xml" %>

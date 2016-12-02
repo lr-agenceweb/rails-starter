@@ -5,16 +5,16 @@ require_relative './production'
 
 Rails.application.configure do
   # Controller
-  config.action_controller.asset_host = Figaro.env.application_host_staging
+  config.action_controller.asset_host = Figaro.env.application_host
 
   # Mailer
   config.action_mailer.default_url_options = {
-    host: Figaro.env.application_domain_name_staging
+    host: Figaro.env.application_domain_name
   }
-  config.action_mailer.asset_host = Figaro.env.application_host_staging
+  config.action_mailer.asset_host = Figaro.env.application_host
 
   # ActionCable (WebSockets)
-  config.action_cable.url = "ws://#{Figaro.env.application_domain_name_staging}/cable"
+  config.action_cable.url = "ws://#{Figaro.env.application_domain_name}/cable"
 
   # Restrict access to the staging environment
   config.middleware.insert_before(::Rack::Runtime, '::Rack::Auth::Basic', 'Staging environment') do |u, p|
@@ -25,5 +25,5 @@ end
 
 # Set host to links in staging environment
 Rails.application.routes.default_url_options = {
-  host: Figaro.env.application_host_staging
+  host: Figaro.env.application_host
 }
