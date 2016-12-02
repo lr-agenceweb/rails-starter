@@ -27,8 +27,8 @@ app_config = YAML.load_file("<%= current_path %>/config/application.yml")
   # Dropbox [Storage]
   #
   store_with Dropbox do |db|
-    db.api_key     = app_config['dropbox']['api_key']
-    db.api_secret  = app_config['dropbox']['api_secret']
+    db.api_key     = app_config[ENV['RAILS_ENV']]['dropbox']['api_key']
+    db.api_secret  = app_config[ENV['RAILS_ENV']]['dropbox']['api_secret']
     db.cache_path  = ".cache"
     db.access_type = :app_folder
     db.path        = '/'
@@ -44,8 +44,8 @@ app_config = YAML.load_file("<%= current_path %>/config/application.yml")
     slack.on_failure = true
 
     # The integration token
-    slack.webhook_url = app_config['slack']['webhook_url']
-    slack.channel     = app_config['slack']['channel']
+    slack.webhook_url = app_config[ENV['RAILS_ENV']]['slack']['webhook_url']
+    slack.channel     = app_config[ENV['RAILS_ENV']]['slack']['channel']
     slack.username    = app_config['slack']['username']
     slack.icon_emoji  = ':ghost:'
   end

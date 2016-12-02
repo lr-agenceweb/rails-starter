@@ -29,15 +29,22 @@ nginx_use_ssl: 'false'
 
 
 #
-# Database
-# ==========
+# Database connection
+# =====================
 db_adapter: 'mysql2' # mysql2, postgresql or sqlite3
 db_host: ~
-staging:
+db_username: ~
+db_password: ~
+
+development: &development
+  db_name: ~
+test: &test
+  db_name: ~
+staging: &staging
   db_name: ~
   db_username: ~
   db_password: ~
-production:
+production: &production
   db_name: ~
   db_username: ~
   db_password: ~
@@ -47,27 +54,31 @@ production:
 # Omniauth
 # ==========
 development:
-  facebook_app_id: ~
-  facebook_app_secret: ~
-  google_app_id: ~
-  google_app_secret: ~
-staging:
-  facebook_app_id: ~
-  facebook_app_secret: ~
-  google_app_id: ~
-  google_app_secret: ~
-production:
+  <<: *development
   facebook_app_id: ~
   facebook_app_secret: ~
   google_app_id: ~
   google_app_secret: ~
 test:
+  <<: *test
   facebook_app_id: 'test'
   facebook_app_secret: 'test'
   google_app_id: 'test'
   google_app_secret: 'test'
   twitter_app_id: 'test'
   twitter_app_secret: 'test'
+staging:
+  <<: *staging
+  facebook_app_id: ~
+  facebook_app_secret: ~
+  google_app_id: ~
+  google_app_secret: ~
+production:
+  <<: *production
+  facebook_app_id: ~
+  facebook_app_secret: ~
+  google_app_id: ~
+  google_app_secret: ~
 
 
 #
@@ -88,6 +99,7 @@ gmaps_api_key: ~
 # Google and Bing
 # =================
 production:
+  <<: *production
   google_analytics_key: ~
   google_site_verification: ~
   bing_site_verification: ~
@@ -108,8 +120,10 @@ capistrano_server_ip: ~
 capistrano_rvm_ruby_version: '2.3.0-preview1' # 2.2.2
 
 staging:
+  <<: *staging
   capistrano_deploy_to: ~
 production:
+  <<: *production
   capistrano_deploy_to: ~
 
 
@@ -117,6 +131,7 @@ production:
 # Staging Authentication
 # ========================
 staging:
+  <<: *staging
   admin_username: ~
   admin_password: ~
   guest_username: ~
@@ -148,6 +163,7 @@ exception_notification_slack_channel: '#exceptions'
 # ============
 backup_parent_class: ~ # Parent class name
 production:
+  <<: *production
   dropbox: # Dropbox [Storage]
     api_key: ~
     api_secret: ~
