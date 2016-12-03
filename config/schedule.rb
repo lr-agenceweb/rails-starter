@@ -12,7 +12,7 @@ end
 case @environment
 when 'production'
   every 1.day, at: '4:00 am' do
-    command "RAILS_ENV=#{@environment} backup perform -t #{app_config['application_name'].underscore}"
+    command "RAILS_ENV=#{@environment} backup perform -t #{app_config['application_name'].tr('-', '_')}"
   end
 end
 
