@@ -57,8 +57,10 @@ module ApplicationHelper
   # Server
   # ========
   def server_name
-    server_software = controller.request.env['SERVER_SOFTWARE'].split(' ')
-    "#{server_software[0].capitalize} #{server_software[1]}"
+    server_software = controller.request.env['SERVER_SOFTWARE']
+    return if server_software.nil?
+    ss = server_software.split(' ')
+    "#{ss[0].capitalize} #{ss[1]}"
   end
 
   #
