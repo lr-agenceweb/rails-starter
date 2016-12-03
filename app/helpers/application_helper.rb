@@ -60,4 +60,11 @@ module ApplicationHelper
     server_software = controller.request.env['SERVER_SOFTWARE'].split(' ')
     "#{server_software[0].capitalize} #{server_software[1]}"
   end
+
+  #
+  # DelayedJob
+  # ============
+  def delayed_job_running?
+    File.exist?(Rails.root.join('tmp', 'pids', 'delayed_job.pid'))
+  end
 end

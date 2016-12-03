@@ -57,6 +57,17 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal 'Puma 3.6.2', server_name
   end
 
+  #
+  # DelayedJob
+  # ============
+  test 'should return correct value for delayed_job_running?' do
+    if File.exist?(Rails.root.join('tmp', 'pids', 'delayed_job.pid'))
+      assert delayed_job_running?
+    else
+      assert_not delayed_job_running?
+    end
+  end
+
   private
 
   def initialize_test

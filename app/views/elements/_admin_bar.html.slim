@@ -4,10 +4,15 @@
       li
         - if @setting.maintenance?
           span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('maintenance.title')}"
-            = fa_icon 'exclamation-triangle 2x', class: 'warning'
+            = fa_icon 'circle 2x', class: 'warning'
         - else
           span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('no_maintenance.title')}"
-            = fa_icon 'check-circle-o 2x', class: 'success'
+            = fa_icon 'circle 2x', class: 'success'
+
+      li
+        span.has-tip data-tooltip='' aria-haspopup='true' title=I18n.t("delayed/web.pids.#{delayed_job_running? ? 'running' : 'not_running'}")
+          = fa_icon 'circle 2x', class: delayed_job_running? ? 'success' : 'alert'
+
       - if @guest_book_module.enabled? && @guest_book_setting_admin_bar.should_validate?
         li.divider
         li
