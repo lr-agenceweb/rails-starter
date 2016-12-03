@@ -56,19 +56,19 @@ Rails.application.configure do
   config.cache_store = :dalli_store, { namespace: "#{Figaro.env.application_name}_#{Rails.env}", compress: true }
 
   # ActionCable (WebSockets)
-  config.action_cable.url = "ws://#{Figaro.env.application_domain_name}/cable"
+  config.action_cable.url = "ws://#{Figaro.env.domain_name}/cable"
   config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = Figaro.env.application_host
+  config.action_controller.asset_host = Figaro.env.host_name
 
   #
   # Mail server [Postfix]
   # =======================
   config.action_mailer.default_url_options = {
-    host: Figaro.env.application_domain_name
+    host: Figaro.env.domain_name
   }
-  config.action_mailer.asset_host = Figaro.env.application_host
+  config.action_mailer.asset_host = Figaro.env.host_name
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
@@ -105,5 +105,5 @@ end
 
 # Set host to links in production environment
 Rails.application.routes.default_url_options = {
-  host: Figaro.env.application_host
+  host: Figaro.env.host_name
 }

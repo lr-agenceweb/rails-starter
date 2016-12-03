@@ -37,10 +37,10 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_url_options = {
-    host: Figaro.env.application_domain_name
+    host: Figaro.env.domain_name
   }
   Rails.application.routes.default_url_options = {
-    host: Figaro.env.application_domain_name
+    host: Figaro.env.domain_name
   }
 
   # Randomize the order test cases are executed.

@@ -239,7 +239,7 @@ Devise.setup do |config|
                   Figaro.env.facebook_app_secret,
                   scope: 'email',
                   info_fields: 'email, name',
-                  callback_url: "#{Figaro.env.application_host}/admin/auth/facebook/callback",
+                  callback_url: "#{Figaro.env.host_name}/admin/auth/facebook/callback",
                   image_size: :large
 
   config.omniauth :google_oauth2,

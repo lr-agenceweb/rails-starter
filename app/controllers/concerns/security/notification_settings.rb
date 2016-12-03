@@ -16,7 +16,7 @@ module Security
       def set_notification_settings
         request.env['exception_notifier.exception_data'] = {
           'Application name': Figaro.env.application_name,
-          'Site': Figaro.env.application_host
+          'Site': Figaro.env.host_name
         }
       end
     end

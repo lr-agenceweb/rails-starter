@@ -2,7 +2,7 @@
 SitemapGenerator::Interpreter.send :include, SitemapHelper
 
 # Configuration of sitemap
-SitemapGenerator::Sitemap.default_host = Figaro.env.application_host
+SitemapGenerator::Sitemap.default_host = Figaro.env.host_name
 SitemapGenerator::Sitemap.verbose = true
 SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.sitemaps_path = ''
