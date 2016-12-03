@@ -156,8 +156,13 @@ Name                | Description
 **Audio**           | Upload audio files and play them in an HTML5 player.
 
 
-### Screenshot
-![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
+### Screenshots
+
+#### Frontend
+![Frontend example](vendor/assets/images/readme/frontend.png)
+
+#### Backend
+![Activeadmin Dashboard example](vendor/assets/images/readme/backend.png)
 
 ### Thanks
 A big thanks to [Grafikart](http://grafikart.fr) for all his amazing tutorials !
