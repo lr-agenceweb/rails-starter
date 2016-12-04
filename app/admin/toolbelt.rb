@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-ActiveAdmin.register_page 'ToolBelt' do
+ActiveAdmin.register_page 'Toolbelt' do
   menu parent: I18n.t('admin_menu.config'),
        if: proc { current_user.super_administrator? }
 
@@ -56,6 +56,8 @@ ActiveAdmin.register_page 'ToolBelt' do
   # ============
   controller do
     before_action :redirect_to_dashboard,
-                  unless: proc { current_user.super_administrator? }
+                  unless: proc {
+                    current_user.super_administrator?
+                  }
   end
 end
