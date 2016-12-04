@@ -8,16 +8,16 @@ application_name: ~ # ex: my-application
 development: &development_host
   host_name : 'http://localhost:3000'
   domain_name: 'localhost:3000'
-test: &test
+test: &test_host
   host_name: ~
   domain_name: ~
-staging: &staging
+staging: &staging_host
   host_name: ~
   domain_name: ~
-production: &production
+production: &production_host
   host_name: ~
   domain_name: ~
-backup: &backup
+backup: &backup_host
   host_name: ~
   domain_name: ~
 
@@ -127,13 +127,13 @@ froala_key: ~
 capistrano_repo_url: ~
 capistrano_deploy_user: ~
 capistrano_server_ip: ~
-capistrano_rvm_ruby_version: '2.3.0-preview1' # 2.2.2
+capistrano_rvm_ruby_version: '2.3.3'
 
-staging:
-  <<: *staging
+staging: &staging_capistrano
+  <<: *staging_omniauth
   capistrano_deploy_to: ~
-production:
-  <<: *production
+production: &production_capistrano
+  <<: *production_seo
   capistrano_deploy_to: ~
 
 
@@ -173,7 +173,7 @@ exception_notification_slack_channel: '#exceptions'
 # ============
 backup_parent_class: ~ # Parent class name
 production: &production_backup
-  <<: *production_seo
+  <<: *production_capistrano
   dropbox: # Dropbox [Storage]
     api_key: ~
     api_secret: ~
