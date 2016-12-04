@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 ActiveAdmin.register_page 'ToolBelt' do
-  menu parent: I18n.t('admin_menu.config')
+  menu parent: I18n.t('admin_menu.config'),
+       if: proc { current_user.super_administrator? }
 
   content do
     columns do
@@ -49,4 +50,13 @@ ActiveAdmin.register_page 'ToolBelt' do
       end # column
     end # columns
   end # content
+
+  controller do
+    before_action :redirect_to_dashboard,
+                  unless: proc { current_user.super_administrator? }
+
+    def redirect_to_dashboard
+      redirect_to admin_dashboard_path, status: 301
+    end
+  end
 end
