@@ -6,19 +6,19 @@ ActiveAdmin.register_page 'ToolBelt' do
     columns do
       column do
         div class: 'panel' do
-          h3 'Caractéristiques de l\'application'
+          h3 t('toolbelt.application_settings_title')
           div class: 'panel_contents' do
             attributes_table_for false do
-              row 'Environment' do
+              row t('toolbelt.environment') do
                 Rails.env
               end
-              row 'Rails version' do
+              row t('toolbelt.rails_version') do
                 Rails.version
               end
-              row 'Ruby version' do
+              row t('toolbelt.ruby_version') do
                 RUBY_VERSION
               end
-              row 'ActiveAdmin version' do
+              row t('toolbelt.active_admin_version') do
                 ActiveAdmin::VERSION
               end
             end
@@ -28,16 +28,16 @@ ActiveAdmin.register_page 'ToolBelt' do
 
       column do
         div class: 'panel' do
-          h3 'Caractéristiques du serveur'
+          h3 t('toolbelt.server_settings_title')
           div class: 'panel_contents' do
             attributes_table_for false do
-              row 'Server name' do
+              row t('toolbelt.rails_server_name') do
                 server_name
               end
-              row 'Deployed branch' do
+              row t('toolbelt.deployed_branch') do
                 branch_name
               end
-              row 'DelayedJob' do
+              row t('toolbelt.delayed_job') do
                 delayed_job_running?
               end
             end

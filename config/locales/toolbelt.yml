@@ -1,0 +1,37 @@
+# French
+fr:
+  toolbelt:
+    # Application
+    environment: Environement
+    rails_version: Version de Rails
+    ruby_version: Version de Ruby
+    active_admin_version: Version de ActiveAdmin
+
+    # Server
+    os_name: Système d'exploitation
+    rails_server_name: Serveur Rails
+    deployed_branch: Branche déployée
+    delayed_job: DelayedJob activé ?
+
+    # Titles
+    application_settings_title: Caractéristiques de l'application
+    server_settings_title: Caractéristiques du serveur
+
+# English
+en:
+  toolbelt:
+    # Application
+    environment: Environment
+    rails_version: Rails version
+    ruby_version: Ruby version
+    active_admin_version: ActiveAdmin version
+
+    # Server
+    os_name: Operating system
+    rails_server_name: Rails server
+    deployed_branch: Deployed branch
+    delayed_job: DelayedJob running ?
+
+    # Titles
+    application_settings_title: Application characteristics
+    server_settings_title: Server characteristics
