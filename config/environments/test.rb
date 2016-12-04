@@ -39,9 +39,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {
     host: Figaro.env.domain_name
   }
-  Rails.application.routes.default_url_options = {
-    host: Figaro.env.domain_name
-  }
 
   # Randomize the order test cases are executed.
   # :random / :parallel / :sorted / :alpha
@@ -53,3 +50,8 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
+
+# Set host to links in test environment
+Rails.application.routes.default_url_options = {
+  host: Figaro.env.domain_name
+}
