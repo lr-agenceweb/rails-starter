@@ -32,7 +32,7 @@
 </p>
 
 <p align='center'>
-  <img src="https://img.shields.io/badge/Rails%20starter-v0.0.4-blue.svg?style=flat-square" alt="Rails starter version" />
+  <img src="https://img.shields.io/badge/Rails%20starter-v0.0.5-blue.svg?style=flat-square" alt="Rails starter version" />
   <img src="https://img.shields.io/badge/Ruby-2.3.3-5aaed7.svg?style=flat-square" alt="Ruby version" />
   <img src="https://img.shields.io/badge/Rails-5.0.0.1-5aaed7.svg?style=flat-square" alt="Rails version" />
 </p>
