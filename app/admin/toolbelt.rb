@@ -31,6 +31,9 @@ ActiveAdmin.register_page 'ToolBelt' do
           h3 t('toolbelt.server_settings_title')
           div class: 'panel_contents' do
             attributes_table_for false do
+              row t('toolbelt.os_name') do
+                `lsb_release -d`
+              end
               row t('toolbelt.rails_server_name') do
                 server_name
               end
