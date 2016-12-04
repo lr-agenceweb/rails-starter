@@ -17,6 +17,10 @@ module ApplicationHelper
     candidates.include?(true)
   end
 
+  def delayed_job_running?
+    File.exist?(Rails.root.join('tmp', 'pids', 'delayed_job.pid'))
+  end
+
   #
   # DateTime
   # ==========
@@ -61,12 +65,5 @@ module ApplicationHelper
     return if server_software.nil?
     ss = server_software.split(' ')
     "#{ss[0].capitalize} #{ss[1]}"
-  end
-
-  #
-  # DelayedJob
-  # ============
-  def delayed_job_running?
-    File.exist?(Rails.root.join('tmp', 'pids', 'delayed_job.pid'))
   end
 end

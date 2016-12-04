@@ -47,6 +47,9 @@
           - if delayed_job_enabled?
             li
               = link_to(fa_icon('briefcase', text: I18n.t('admin_menu.jobs_web')), delayed_web_path, class: 'dahsboard-link', target: :_blank, data: { no_turbolink: true })
+          - if current_user.super_administrator?
+            li
+              = link_to(fa_icon('wrench', text: I18n.t('admin_menu.toolbelt')), admin_toolbelt_path, class: 'dahsboard-link', data: { no_turbolink: true })
           li
             = link_to(fa_icon('unlock', text: I18n.t('admin_bar.go_to_admin')), admin_dashboard_path, class: 'dahsboard-link', data: { no_turbolink: true })
           li
