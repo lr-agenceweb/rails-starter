@@ -49,17 +49,16 @@ ActiveAdmin.register Setting do
   # == Controller
   #
   controller do
-    before_action :redirect_to_dashboard, unless: proc { current_user_and_administrator? }
-    before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? }
+    before_action :redirect_to_dashboard,
+                  unless: proc { current_user_and_administrator? }
+    before_action :redirect_to_show,
+                  only: [:index],
+                  if: proc { current_user_and_administrator? }
 
     private
 
     def redirect_to_show
       redirect_to admin_setting_path(Setting.first), status: 301
-    end
-
-    def redirect_to_dashboard
-      redirect_to admin_dashboard_path, status: 301
     end
   end
 end

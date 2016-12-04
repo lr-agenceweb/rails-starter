@@ -51,12 +51,11 @@ ActiveAdmin.register_page 'ToolBelt' do
     end # columns
   end # content
 
+  #
+  # Controller
+  # ============
   controller do
     before_action :redirect_to_dashboard,
                   unless: proc { current_user.super_administrator? }
-
-    def redirect_to_dashboard
-      redirect_to admin_dashboard_path, status: 301
-    end
   end
 end
