@@ -159,10 +159,10 @@ Name                | Description
 ### Screenshots
 
 #### Frontend
-![Frontend example](vendor/assets/images/readme/frontend.png)
+![Frontend example](vendor/assets/images/readme/frontend.jpg)
 
 #### Backend
-![Activeadmin Dashboard example](vendor/assets/images/readme/backend.png)
+![Activeadmin Dashboard example](vendor/assets/images/readme/backend.jpg)
 
 ### Thanks
 A big thanks to [Grafikart](http://grafikart.fr) for all his amazing tutorials !
