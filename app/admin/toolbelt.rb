@@ -41,7 +41,7 @@ ActiveAdmin.register_page 'ToolBelt' do
                 branch_name
               end
               row t('toolbelt.delayed_job') do
-                delayed_job_running?
+                status_tag delayed_job_running?
               end
             end
           end
