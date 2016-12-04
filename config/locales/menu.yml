@@ -29,7 +29,7 @@ fr:
     config: Site Configuration
     modules_config: Modules configuration
     jobs_web: Delayed Jobs
-
+    toolbelt: Informations sur le site
   menu:
     title_aa_show: "Élément de menu \"%{menu_item}\""
     no_children: Cet élément n'a pas de sous-menu
@@ -60,3 +60,4 @@ en:
   admin_menu:
     modules: Modules
     configuration: Configuration
+    toolbelt: Website informations

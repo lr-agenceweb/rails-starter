@@ -23,6 +23,13 @@ class VideoSubtitle < ApplicationRecord
 
   # Scopes
   scope :online, -> { where(online: true) }
+
+  # subtitle_fr? // subtitle_en?
+  I18n.available_locales.each do |locale|
+    define_method "subtitle_#{locale}?" do
+      send("subtitle_#{locale}").exists?
+    end
+  end
 end
 
 # == Schema Information

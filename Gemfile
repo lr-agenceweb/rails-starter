@@ -104,9 +104,7 @@ gem 'analytical'
 # Background Tasks
 # =====================
 gem 'daemons'
-gem 'delayed-web',
-    github: 'gemsfix/delayed-web',
-    branch: 'feature/i18n-views'
+gem 'delayed-web'
 gem 'delayed_job_active_record'
 gem 'whenever', require: false # Cron tasks
 

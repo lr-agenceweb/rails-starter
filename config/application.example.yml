@@ -1,19 +1,25 @@
 #
 # Application
 # =============
-# Host and domain name
+# Name
 application_name: ~ # ex: my-application
-application_host : 'http://localhost:3000'
-application_domain_name: 'localhost:3000'
 
-application_host_staging: ~
-application_domain_name_staging: ~
-
-application_host_production: ~
-application_domain_name_production: ~
-
-application_host_backup: ~
-application_domain_name_backup: ~
+# URL
+development: &development_host
+  host_name : 'http://localhost:3000'
+  domain_name: 'localhost:3000'
+test: &test_host
+  host_name: ~
+  domain_name: ~
+staging: &staging_host
+  host_name: ~
+  domain_name: ~
+production: &production_host
+  host_name: ~
+  domain_name: ~
+backup: &backup_host
+  host_name: ~
+  domain_name: ~
 
 # Keys
 application_devise_secret_key: ~
@@ -24,20 +30,31 @@ application_base_secret_key: ~
 # Server [Puma]
 # ===============
 puma_workers: '2'
-puma_use_actioncable: 'false'
 nginx_use_ssl: 'false'
+puma_use_actioncable: 'false'
 
 
 #
-# Database
-# ==========
+# Database connection
+# =====================
 db_adapter: 'mysql2' # mysql2, postgresql or sqlite3
 db_host: ~
-staging:
+db_username: ~
+db_password: ~
+
+development: &development_database
+  <<: *development_host
+  db_name: ~
+test: &test_database
+  <<: *test_host
+  db_name: ~
+staging: &staging_database
+  <<: *staging_host
   db_name: ~
   db_username: ~
   db_password: ~
-production:
+production: &production_database
+  <<: *production_host
   db_name: ~
   db_username: ~
   db_password: ~
@@ -46,28 +63,32 @@ production:
 #
 # Omniauth
 # ==========
-development:
+development: &development_omniauth
+  <<: *development_database
   facebook_app_id: ~
   facebook_app_secret: ~
   google_app_id: ~
   google_app_secret: ~
-staging:
-  facebook_app_id: ~
-  facebook_app_secret: ~
-  google_app_id: ~
-  google_app_secret: ~
-production:
-  facebook_app_id: ~
-  facebook_app_secret: ~
-  google_app_id: ~
-  google_app_secret: ~
-test:
+test: &test_omniauth
+  <<: *test_database
   facebook_app_id: 'test'
   facebook_app_secret: 'test'
   google_app_id: 'test'
   google_app_secret: 'test'
   twitter_app_id: 'test'
   twitter_app_secret: 'test'
+staging: &staging_omniauth
+  <<: *staging_database
+  facebook_app_id: ~
+  facebook_app_secret: ~
+  google_app_id: ~
+  google_app_secret: ~
+production: &production_omniauth
+  <<: *production_database
+  facebook_app_id: ~
+  facebook_app_secret: ~
+  google_app_id: ~
+  google_app_secret: ~
 
 
 #
@@ -87,7 +108,8 @@ gmaps_api_key: ~
 #
 # Google and Bing
 # =================
-production:
+production: &production_seo
+  <<: *production_omniauth
   google_analytics_key: ~
   google_site_verification: ~
   bing_site_verification: ~
@@ -105,18 +127,21 @@ froala_key: ~
 capistrano_repo_url: ~
 capistrano_deploy_user: ~
 capistrano_server_ip: ~
-capistrano_rvm_ruby_version: '2.3.0-preview1' # 2.2.2
+capistrano_rvm_ruby_version: '2.3.3'
 
-staging:
+staging: &staging_capistrano
+  <<: *staging_omniauth
   capistrano_deploy_to: ~
-production:
+production: &production_capistrano
+  <<: *production_seo
   capistrano_deploy_to: ~
 
 
 #
 # Staging Authentication
 # ========================
-staging:
+staging: &staging_htpasswd
+  <<: *staging_omniauth
   admin_username: ~
   admin_password: ~
   guest_username: ~
@@ -147,7 +172,8 @@ exception_notification_slack_channel: '#exceptions'
 # Backup gem
 # ============
 backup_parent_class: ~ # Parent class name
-production:
+production: &production_backup
+  <<: *production_capistrano
   dropbox: # Dropbox [Storage]
     api_key: ~
     api_secret: ~

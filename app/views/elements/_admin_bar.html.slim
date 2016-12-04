@@ -1,13 +1,18 @@
 #admin_bar.hide-for-small-only.clearfix
   .float-left
-    ul.menu.simple class="#{!Rails.env.production? ? 'ribbon-margin-left' : ''}"
+    ul.menu.simple.ribbon-margin-left
       li
         - if @setting.maintenance?
           span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('maintenance.title')}"
-            = fa_icon 'exclamation-triangle 2x', class: 'warning'
+            = fa_icon 'circle 2x', class: 'warning'
         - else
           span.has-tip data-tooltip='' aria-haspopup='true' title="#{I18n.t('no_maintenance.title')}"
-            = fa_icon 'check-circle-o 2x', class: 'success'
+            = fa_icon 'circle 2x', class: 'success'
+
+      li
+        span.has-tip data-tooltip='' aria-haspopup='true' title=I18n.t("delayed/web.pids.#{delayed_job_running? ? 'running' : 'not_running'}")
+          = fa_icon 'circle 2x', class: delayed_job_running? ? 'success' : 'alert'
+
       - if @guest_book_module.enabled? && @guest_book_setting_admin_bar.should_validate?
         li.divider
         li
@@ -42,6 +47,9 @@
           - if delayed_job_enabled?
             li
               = link_to(fa_icon('briefcase', text: I18n.t('admin_menu.jobs_web')), delayed_web_path, class: 'dahsboard-link', target: :_blank, data: { no_turbolink: true })
+          - if current_user.super_administrator?
+            li
+              = link_to(fa_icon('wrench', text: I18n.t('admin_menu.toolbelt')), admin_toolbelt_path, class: 'dahsboard-link', data: { no_turbolink: true })
           li
             = link_to(fa_icon('unlock', text: I18n.t('admin_bar.go_to_admin')), admin_dashboard_path, class: 'dahsboard-link', data: { no_turbolink: true })
           li

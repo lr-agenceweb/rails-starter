@@ -5,13 +5,13 @@
 
   - subtitle.input :subtitle_fr,
                    as: :file,
-                   hint: raw("#{t('formtastic.hints.video_subtitle.subtitle_fr')} <br /> #{subtitle.object.subtitle_fr_file_name + ' le ' if subtitle.object.subtitle_fr.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_fr.exists?}")
+                   hint: subtitle.object.decorate.hint_for_paperclip
   - subtitle.input :delete_subtitle_fr, as: :boolean if subtitle.object.subtitle_fr.exists?
 
   - if I18n.available_locales.include?(:en)
     - subtitle.input :subtitle_en,
                      as: :file,
-                     hint: raw("#{t('formtastic.hints.video_subtitle.subtitle_en')} <br /> #{subtitle.object.subtitle_en_file_name + ' le ' if subtitle.object.subtitle_en.exists?}  #{I18n.l(subtitle.object.created_at, format: :short) if subtitle.object.subtitle_en.exists?}")
+                     hint: subtitle.object.decorate.hint_for_paperclip(attribute: :subtitle_en)
     - subtitle.input :delete_subtitle_en, as: :boolean if subtitle.object.subtitle_en.exists?
 
   - subtitle.input :online

@@ -9,3 +9,6 @@ fr:
         destroyed:
           alert: Cette tâche ne peut pas être supprimée car elle est déjà %{status}
           notice: Tâche supprimée
+    pids:
+      running: Delayed job est démarré
+      not_running: Delayed job n'a pas été démarré

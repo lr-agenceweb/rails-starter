@@ -1,7 +1,7 @@
 - begin
   - video_info = VideoInfo.new(item.object.url) unless item.object.new_record?
   - item.input :url,
-  hint: raw("#{t('formtastic.hints.video_platform.url')} <br /><br /> #{image_tag video_info.thumbnail_medium if !video_info.nil? && video_info.available?}")
+               hint: item.object.decorate.hint_for_paperclip(video_info: video_info)
 - rescue
 
 - item.input :online

@@ -59,6 +59,11 @@ class VideoUpload < ApplicationRecord
   # Scopes
   scope :online, -> { where(online: true) }
   scope :not_processing, -> { where.not(video_file_processing: true) }
+
+  def subtitles?
+    video_subtitle_online &&
+      (video_subtitle.subtitle_fr? || video_subtitle.subtitle_en?)
+  end
 end
 
 # == Schema Information

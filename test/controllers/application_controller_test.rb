@@ -15,12 +15,6 @@ class ApplicationControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should return correct hostname' do
-    make_get_index(assertions) do
-      assert_equal 'test.host', assigns(:hostname)
-    end
-  end
-
   test 'should return correct language' do
     make_get_index(assertions) do
       assert_equal :fr, assigns(:language)

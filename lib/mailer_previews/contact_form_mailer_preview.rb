@@ -28,7 +28,7 @@ class ContactFormMailerPreview < ActionMailer::Preview
   private
 
   def default_attrs(name, email)
-    attrs = {
+    {
       name: name,
       email: email,
       message: 'Hi, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos minus atque accusantium quos perspiciatis dolor itaque dicta nulla architecto ut quaerat sequi nostrum, earum magni doloribus maxime tempore quam sapiente.'

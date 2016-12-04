@@ -2,30 +2,30 @@
 require 'test_helper'
 
 #
-# == PictureDecorator test
-#
+# PictureDecorator test
+# =======================
 class PictureDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 
   setup :initialize_test
 
   #
-  # == File
-  #
+  # File
+  # ======
   test 'should return correct file name without extension' do
     assert_equal 'My-picture', @picture_decorated.file_name_without_extension
   end
 
   #
-  # == Image
-  #
+  # Image
+  # =======
   test 'should return correct base image tag' do
     assert_equal "<img src=\"/system/test/pictures/#{@picture.id}/large-my-picture.jpg\" alt=\"Large my picture\" />", @picture_decorated.send(:base_image, :large)
   end
 
   #
-  # == Informations
-  #
+  # Informations
+  # ==============
   test 'should return correct title for picture if any' do
     assert_equal "Image article d'accueil", @picture_decorated.title
   end
@@ -53,6 +53,16 @@ class PictureDecoratorTest < Draper::TestCase
 
   test 'should return correct source picture title' do
     assert_equal 'Article d\'accueil', @picture_decorated.send(:source_picture_title)
+  end
+
+  #
+  # ActiveAdmin
+  # =============
+  test 'should return correct hint for paperclip file' do
+    default_hint = I18n.t('formtastic.hints.image')
+    assert_equal "#{default_hint}<br /><img src=\"/default/medium-missing.png\" alt=\"Medium missing\" />", Picture.new.decorate.hint_for_paperclip
+
+    assert_equal "#{default_hint}<br /><img src=\"/system/test/pictures/#{@picture_two_decorated.id}/medium-my-picture-2.jpg\" alt=\"Medium my picture 2\" />", @picture_two_decorated.hint_for_paperclip
   end
 
   private

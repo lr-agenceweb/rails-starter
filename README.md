@@ -33,7 +33,7 @@
 
 <p align='center'>
   <img src="https://img.shields.io/badge/Rails%20starter-v0.0.4-blue.svg?style=flat-square" alt="Rails starter version" />
-  <img src="https://img.shields.io/badge/Ruby-2.3.0-5aaed7.svg?style=flat-square" alt="Ruby version" />
+  <img src="https://img.shields.io/badge/Ruby-2.3.3-5aaed7.svg?style=flat-square" alt="Ruby version" />
   <img src="https://img.shields.io/badge/Rails-5.0.0.1-5aaed7.svg?style=flat-square" alt="Rails version" />
 </p>
 
@@ -99,22 +99,32 @@ Code structure | This project follow most of [Rubocop](https://github.com/bbatso
 
 
 #### Capistrano
+* **Core**  
+  * `cap <env> core:upload:yml` : Upload yml configuration files such as application, database, secrets, sitemap, ...
+  * `cap <env> core:upload:dkim` : Upload DKIM private key
+  * `cap <env> core:upload:missing` : Upload default pictures when missing or unavailable paperclip model objects
+  * `cap <env> core:upload:all` : Execute all previous commands in one task
+
+
 * **Nginx/Puma**  
+  * `cap <env> nginx:start` : Start Nginx server
+  * `cap <env> nginx:stop` : Stop Nginx server
+  * `cap <env> nginx:restart` : Retart Nginx server
+  * `cap <env> nginx:reload` : Reload Nginx server
+  * `cap <env> nginx:status` : Get current Nginx status
+  * `cap <env> puma:config` : Upload puma config file
   * `cap <env> puma:nginx_config` : Upload puma vhost config file
 
-* **Uploads**  
-  * `cap <env> upload:yml` : Upload yml configuration files such as application, database, secrets, ...
-  * `cap <env> upload:dkim` : Upload DKIM private key
-  * `cap <env> upload:missing` : Upload default pictures when missing or unavailable paperclip model objects
-  * `cap <env> upload:all` : Execute all previous commands in one task
 
 * **Database backup** (needs [Backup](http://backup.github.io/backup/v4/) gem to be installed)  
   * `cap <env> backup:upload:config` : Upload backup parent config file
   * `cap <env> backup:upload:model` : Upload model file corresponding to a database
   * `cap <env> backup:upload:all` : Upload both config and model files
 
+
 * **Logrotate**  
   * `cap <env> logrotate:upload` : Upload logrotate config file
+
 
 * **Paperclip**  
   * `cap <env> paperclip:refresh:all` : Regenerate all Paperclip styles
@@ -146,8 +156,13 @@ Name                | Description
 **Audio**           | Upload audio files and play them in an HTML5 player.
 
 
-### Screenshot
-![Activeadmin Dashboard example](vendor/assets/images/readme/dashboard_rails_starter.jpg)
+### Screenshots
+
+#### Frontend
+![Frontend example](vendor/assets/images/readme/frontend.jpg)
+
+#### Backend
+![Activeadmin Dashboard example](vendor/assets/images/readme/backend.jpg)
 
 ### Thanks
 A big thanks to [Grafikart](http://grafikart.fr) for all his amazing tutorials !

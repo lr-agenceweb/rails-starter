@@ -47,7 +47,7 @@ ActiveAdmin.register Picture do
         f.inputs t('formtastic.titles.picture_details') do
           f.input :image,
                   as: :file,
-                  hint: "#{t('formtastic.hints.image')} <br /><br />#{retina_image_tag(f.object, :image, :medium)}"
+                  hint: f.object.decorate.hint_for_paperclip
           f.input :online
         end
       end

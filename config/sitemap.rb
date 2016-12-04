@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 SitemapGenerator::Interpreter.send :include, SitemapHelper
 
-# Set the host name for URL creation
-renv = Rails.env.development? ? '' : "_#{Rails.env}"
-application_host = ENV["application_host#{renv}"]
-SitemapGenerator::Sitemap.default_host = application_host
+# Configuration of sitemap
+SitemapGenerator::Sitemap.default_host = Figaro.env.host_name
 SitemapGenerator::Sitemap.verbose = true
 SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.sitemaps_path = ''

@@ -25,10 +25,10 @@ class SlideDecorator < PictureDecorator
   #
   # ActiveAdmin
   # =============
-  def hint_for_paperclip
+  def hint_for_paperclip(size: :small)
     html = []
     html << safe_join([raw(t('formtastic.hints.slide.size'))])
-    html << retina_image_tag(model, :image, :small)
+    html << retina_image_tag(model, :image, size)
     safe_join [html], tag(:br)
   end
 

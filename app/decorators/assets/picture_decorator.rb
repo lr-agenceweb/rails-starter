@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == PictureDecorator
-#
+# PictureDecorator
+# ==================
 class PictureDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
@@ -17,17 +17,28 @@ class PictureDecorator < ApplicationDecorator
   end
 
   #
-  # == File
-  #
+  # File
+  # ======
   def file_name_without_extension
     super 'image'
+  end
+
+  #
+  # ActiveAdmin
+  # =============
+  def hint_for_paperclip(size: :medium)
+    html = []
+    html << t('formtastic.hints.image')
+    html << retina_image_tag(model, :image, size)
+
+    safe_join [html], tag(:br)
   end
 
   private
 
   #
-  # == Article where the Picture comes from
-  #
+  # Article where the Picture comes from
+  # ======================================
   def source_picture
     model.attachable
   end

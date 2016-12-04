@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 desc 'Pretty version on rails rake routes.'
 
 EMK = "\033[1;30m"
@@ -16,11 +17,11 @@ task color_routes: :environment do
   all_routes.select! { |route| ENV['CONTROLLER'].nil? || route.defaults[:controller].to_s == ENV['CONTROLLER'] }
 
   max_widths = {
-    names: (all_routes.map { |route| route.name.to_s.length }.max),
-    verbs: (6),
-    paths: (all_routes.map { |route| route.path.spec.to_s.length }.max),
-    controllers: (all_routes.map { |route| route.defaults[:controller].to_s.length }.max),
-    actions: (all_routes.map { |route| route.defaults[:action].to_s.length }.max)
+    names: all_routes.map { |route| route.name.to_s.length }.max,
+    verbs: 6,
+    paths: all_routes.map { |route| route.path.spec.to_s.length }.max,
+    controllers: all_routes.map { |route| route.defaults[:controller].to_s.length }.max,
+    actions: all_routes.map { |route| route.defaults[:action].to_s.length }.max
   }
 
   all_routes.group_by { |route| route.defaults[:controller] }.each_value do |group|

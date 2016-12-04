@@ -33,7 +33,6 @@ class ApplicationController < ActionController::Base
   include Security::NotificationSettings
 
   # Misc
-  before_action :set_host_name
   before_action :set_froala_key, if: :user_signed_in?
   before_action :set_legal_notices
 
@@ -61,10 +60,6 @@ class ApplicationController < ActionController::Base
     @page_legal_notice = @pages.find_by(name: 'LegalNotice')
   end
 
-  def set_host_name
-    @hostname = request.host
-  end
-
   def set_froala_key
     gon.push(froala_key: Figaro.env.froala_key)
   end
@@ -76,5 +71,9 @@ class ApplicationController < ActionController::Base
 
   def access_denied(exception)
     redirect_to admin_dashboard_path, alert: exception.message
+  end
+
+  def redirect_to_dashboard
+    redirect_to admin_dashboard_path, status: 301
   end
 end

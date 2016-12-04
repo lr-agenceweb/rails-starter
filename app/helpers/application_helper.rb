@@ -17,6 +17,10 @@ module ApplicationHelper
     candidates.include?(true)
   end
 
+  def delayed_job_running?
+    File.exist?(Rails.root.join('tmp', 'pids', 'delayed_job.pid'))
+  end
+
   #
   # DateTime
   # ==========
@@ -50,6 +54,16 @@ module ApplicationHelper
   # Git
   # ============
   def branch_name
-    Rails.env.staging? ? 'BranchName' : `git rev-parse --abbrev-ref HEAD`
+    Rails.env.staging? ? 'BranchName' : `git rev-parse --abbrev-ref HEAD`.gsub('feature/', '')
+  end
+
+  #
+  # Server
+  # ========
+  def server_name
+    server_software = controller.request.env['SERVER_SOFTWARE']
+    return if server_software.nil?
+    ss = server_software.split(' ')
+    "#{ss[0].capitalize} #{ss[1]}"
   end
 end

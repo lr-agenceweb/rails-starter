@@ -1,11 +1,9 @@
 .form-columns
   .form-left-column
     = item.inputs t('formtastic.titles.slide_picture') do
-      - hint = "#{t('formtastic.hints.slide.size')} <br /><br /> #{retina_image_tag(item.object, :image, :small)}".html_safe
       - item.input :image,
                    as: :file,
-                   hint: hint
-
+                   hint: item.object.decorate.hint_for_paperclip
       - item.input :online
 
       - if item.object.self_image?
