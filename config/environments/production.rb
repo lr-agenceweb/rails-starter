@@ -53,10 +53,14 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
-  config.cache_store = :dalli_store, { namespace: "#{Figaro.env.application_name}_#{Rails.env}", compress: true }
+  config.cache_store = :dalli_store, {
+    namespace: "#{Figaro.env.application_name}_#{Rails.env}",
+    compress: true
+  }
 
   # ActionCable (WebSockets)
-  config.action_cable.url = "ws://#{Figaro.env.domain_name}/cable"
+  ws_schema = Figaro.env.nginx_use_ssl.to_bool ? 'wss' : 'ws'
+  config.action_cable.url = "#{ws_schema}://#{Figaro.env.domain_name}/cable"
   config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
