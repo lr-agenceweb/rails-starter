@@ -59,7 +59,7 @@ Rails.application.configure do
   }
 
   # ActionCable (WebSockets)
-  ws_schema = Figaro.env.nginx_use_ssl.to_bool ? 'wss' : 'ws'
+  ws_schema = Figaro.env.nginx_use_ssl == 'true' ? 'wss' : 'ws'
   config.action_cable.url = "#{ws_schema}://#{Figaro.env.domain_name}/cable"
   config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
 
