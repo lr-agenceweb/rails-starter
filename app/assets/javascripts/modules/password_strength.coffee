@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'ready page:load page:restore', ->
   if show_password_strength()
     instructions = I18n.t('password.instructions', locale: 'fr')
     $('#user_password').parents('.input.password').prepend("<p id='password_instructions'>#{instructions}</p>")

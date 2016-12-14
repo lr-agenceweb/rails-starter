@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'ready page:load page:restore', ->
   #
   # Event
   # (hide end_date input if all_day is checked)

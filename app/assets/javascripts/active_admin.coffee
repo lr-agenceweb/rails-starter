@@ -4,6 +4,8 @@
 
 #= require jquery-ui
 
+#= require plugins/turbolinks
+
 #= require i18n
 #= require i18n/translations
 #= require base/i18n_settings
@@ -31,7 +33,7 @@
 #= require plugins/emoticonize
 #= require plugins/datetimepicker
 
-$ ->
+$(document).on 'ready page:load page:restore', ->
   emoticonize_me()
 
   if $('#newsletter_setting_send_welcome_email').length

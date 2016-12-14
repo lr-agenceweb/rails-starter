@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'ready page:load page:restore', ->
   if $('.available-locales, form.slider, form.newsletter_setting').length
     switch_locale($('.available-locales'))
     # slugify()
