@@ -19,7 +19,7 @@ module Mailingable
     private
 
     def set_mailing_message
-      @mailing_message = MailingMessage.find(params[:id])
+      @mailing_message = MailingMessage.includes(:picture, :translations).find(params[:id])
     rescue ActiveRecord::RecordNotFound
       raise ActionController::RoutingError, 'Not Found'
     end
