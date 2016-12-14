@@ -19,8 +19,8 @@ app_config = YAML.load_file("<%= current_path %>/config/application.yml")
   database MySQL, app_config[ENV['RAILS_ENV']]['db_name'].to_sym do |db|
     db.host     = app_config['db_host']
     db.name     = app_config[ENV['RAILS_ENV']]['db_name']
-    db.username = app_config[ENV['RAILS_ENV]]['db_username']
-    db.password = app_config[ENV['RAILS_ENV]]['db_password']
+    db.username = app_config[ENV['RAILS_ENV']]['db_username']
+    db.password = app_config[ENV['RAILS_ENV']]['db_password']
   end
 
   ##
@@ -44,9 +44,9 @@ app_config = YAML.load_file("<%= current_path %>/config/application.yml")
     slack.on_failure = true
 
     # The integration token
-    slack.webhook_url = app_config[ENV['RAILS_ENV']]['slack']['webhook_url']
     slack.channel     = app_config[ENV['RAILS_ENV']]['slack']['channel']
-    slack.username    = app_config['slack']['username']
+    slack.username    = app_config[ENV['RAILS_ENV']]['slack']['username']
+    slack.webhook_url = app_config[ENV['RAILS_ENV']]['slack']['webhook_url']
     slack.icon_emoji  = ':ghost:'
   end
 end
