@@ -6,6 +6,7 @@ fr:
     rails_version: Version de Rails
     ruby_version: Version de Ruby
     active_admin_version: Version de ActiveAdmin
+    sgbd: Système de Gestion de Base de Données
 
     # Server
     os_name: Système d'exploitation
@@ -25,6 +26,7 @@ en:
     rails_version: Rails version
     ruby_version: Ruby version
     active_admin_version: ActiveAdmin version
+    sgbd: SGBD
 
     # Server
     os_name: Operating system
