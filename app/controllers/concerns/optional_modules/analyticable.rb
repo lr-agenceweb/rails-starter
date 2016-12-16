@@ -11,8 +11,18 @@ module OptionalModules
     extend ActiveSupport::Concern
 
     included do
-      analytical modules: [:google], disable_if: proc { |controller| controller.analytical_modules? || !controller.cookie_cnil_check? }
+      analytical modules: [:google],
+                 disable_if: proc { |controller|
+                   !controller.should_track_user?
+                 }
+
+      def should_track_user?
+        !analytical_modules? && cookie_cnil_check?
+      end
+      helper_method :should_track_user?
     end
+
+    private
 
     def analytical_modules?
       @bool_value = !Rails.env.production? || Figaro.env.google_analytics_key.nil? || cookies[:cookie_cnil_cancel] == '1' || request.headers['HTTP_DNT'] == '1' || !@analytics_module.enabled?

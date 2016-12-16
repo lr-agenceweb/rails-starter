@@ -66,10 +66,6 @@ class ApplicationControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should not have cookie cnil checked' do
-    assert_not @controller.cookie_cnil_check?
-  end
-
   #
   # == Concern
   #
@@ -82,6 +78,24 @@ class ApplicationControllerTest < ActionController::TestCase
   #
   # == Analytical
   #
+  test 'should not have cookie cnil checked' do
+    assert_not @controller.send(:cookie_cnil_check?)
+  end
+
+  test 'should be true for should_track_user? if all good' do
+    good_analytical_conditions
+    @request.cookies['cookiebar_cnil'] = '1'
+    assert @controller.send(:should_track_user?), 'should_track_user? should return true'
+    reset_analytical_conditions
+  end
+
+  test 'should be false for should_track_user? if cookie cnil not check' do
+    good_analytical_conditions
+    @request.cookies['cookiebar_cnil'] = nil
+    assert_not @controller.send(:should_track_user?), 'should_track_user? should return false'
+    reset_analytical_conditions
+  end
+
   test 'should be true for analytical_modules? if all good' do
     good_analytical_conditions
     assert_not @controller.send(:analytical_modules?), 'analytical should not be disabled'

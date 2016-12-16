@@ -3,7 +3,7 @@ html lang="#{@language}" class='no-js'
 
   head
     meta charset='utf-8'
-    = raw analytical.head_prepend_javascript
+    = raw analytical.head_prepend_javascript if should_track_user?
     = display_meta_tags title: title, site: setting.title_and_subtitle, reverse: true
     == google_bing_site_verification
     meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'
@@ -23,10 +23,10 @@ html lang="#{@language}" class='no-js'
     link type='text/plain' rel='author' href='/humans.txt'
     = favicon_link_tag '/favicon.ico'
     = csrf_meta_tag
-    = raw analytical.head_append_javascript
+    = raw analytical.head_append_javascript if should_track_user?
 
   body style="#{background_from_color_picker(page)}" itemscope='' itemtype='http://schema.org/WebPage' class="#{current_page?(root_url) ? 'is-homepage' : ''}"
-    = raw analytical.body_prepend_javascript
+    = raw analytical.body_prepend_javascript if should_track_user?
     = include_gon
     = render 'outdatedbrowser/outdatedbrowser'
     = render 'elements/banner_maintenance' if maintenance?
@@ -44,6 +44,6 @@ html lang="#{@language}" class='no-js'
       .push
 
     = render 'elements/footer/footer', newsletter_user: @newsletter_user
-    = raw analytical.body_append_javascript
+    = raw analytical.body_append_javascript if should_track_user?
 
     / = render 'elements/devkit'
