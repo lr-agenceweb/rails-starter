@@ -12,19 +12,72 @@ end
   <%= server %><% end %>
 }
 <% if fetch(:nginx_use_ssl) %>
+# Redirect FROM http to https
 server {
   listen 80;
   listen [::]:80;
-  server_name <%= fetch(:nginx_server_name) %>;
+  server_name <%= fetch(:nginx_server_name).gsub('www.', '') %> <%= fetch(:nginx_server_name) %>;
 
   location ~ /\.well-known/acme-challenge {
     allow all;
   }
+  <% if fetch(:nginx_enforce_www) %>
+  rewrite ^(.*) https://www.$host$1 permanent; <% else %>
+  rewrite ^(.*) https://$host$1 permanent; <% end %>
+}
+<% else %>
+<% if fetch(:nginx_enforce_www) %>
+# Redirect FROM http non-www TO http www
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name <%= fetch(:nginx_server_name).gsub('www.', '') %>;
+  rewrite ^(.*) http://www.$host$1 permanent;
+} <% else %>
+# Redirect FROM http www TO http non-www
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name <%= fetch(:nginx_server_name) %>;
+  rewrite ^(.*) http://$host$1 permanent;
+} <% end # /nginx_enforce_www %>
+<% end # /nginx_use_ssl %>
+
+<% if fetch(:nginx_use_ssl) && fetch(:nginx_enforce_www) %>
+# Redirect FROM https non-www TO https www
+server {
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
+
+  server_name <%= fetch(:nginx_server_name).gsub('www.', '') %>;
+
+  # SSL
+  ssl on;
+  ssl_certificate /etc/letsencrypt/live/<%= fetch(:domain_name) %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= fetch(:domain_name) %>/privkey.pem;
+
+  rewrite ^(.*) https://www.$host$1 permanent;
+} <% end %>
+
+<% if fetch(:nginx_use_ssl) && !fetch(:nginx_enforce_www) %>
+# Redirect FROM https www TO https non-www
+server {
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
+
+  server_name <%= fetch(:nginx_server_name) %>;
+
+  # SSL
+  ssl on;
+  ssl_certificate /etc/letsencrypt/live/<%= fetch(:domain_name) %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= fetch(:domain_name) %>/privkey.pem;
 
   rewrite ^(.*) https://$host$1 permanent;
-}
-<% end %>
+} <% end %>
 
+# Full config
 server {
 <% if fetch(:nginx_use_ssl) %>
   listen 443 ssl http2;
@@ -59,7 +112,9 @@ server {
   error_page 500 502 504 /500.html;
   error_page 503 @503;
 
-  server_name <%= fetch(:nginx_server_name) %>;
+  <% if fetch(:nginx_enforce_www) %>
+  server_name <%= fetch(:nginx_server_name) %>; <% else %>
+  server_name <%= fetch(:nginx_server_name).gsub('www.', '') %>; <% end %>
   root <%= current_path %>/public;
   try_files $uri/index.html $uri @puma_<%= fetch(:nginx_config_name) %>;
 
