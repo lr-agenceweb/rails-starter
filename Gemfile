@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 #
 # Rails
 # =====================
-gem 'rails', '5.0.0.1'
+gem 'rails', '5.0.1'
 gem 'rails-observers', github: 'rails/rails-observers' # Rails 5 fix
 gem 'puma' # Server
 
