@@ -36,7 +36,7 @@ class User < ApplicationRecord
             if: proc { |u| u.new_record? || u.changed? }
 
   validates :email,
-            presence: { message: 'Ne doit pas être vide' },
+            presence: true,
             email_format: true,
             uniqueness: {
               case_sensitive: false,
