@@ -62,7 +62,11 @@ ActiveAdmin.register MailingMessage do
     include Mailingable
     include OptionalModules::NewsletterHelper
 
-    before_action :redirect_to_dashboard, only: [:send_mailing_message]
+    before_action :redirect_to_dashboard,
+                  only: [:send_mailing_message],
+                  if: proc {
+                    params[:option].blank? || @mailing_message.token != params[:token]
+                  }
 
     def scoped_collection
       super.includes :picture, :translations
@@ -111,10 +115,6 @@ ActiveAdmin.register MailingMessage do
       else
         redirect_to admin_mailing_message_path(resource.id)
       end
-    end
-
-    def redirect_to_dashboard
-      redirect_to admin_dashboard_path if params[:option].blank? || @mailing_message.token != params[:token]
     end
   end
 end
