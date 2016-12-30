@@ -1,3 +1,11 @@
+geocoder = undefined
+map = undefined
+marker = undefined
+
+# autocomplete_init
+$(document).on 'ready page:load page:restore', ->
+  autocomplete_init()
+
 # fill in the UI elements with new position data
 update_ui = (address, latLng) ->
   $('#gmaps-input-address').autocomplete 'close'
@@ -101,9 +109,3 @@ autocomplete_init = ->
     return
 
   return
-geocoder = undefined
-map = undefined
-marker = undefined
-# autocomplete_init
-$(document).ready ->
-  autocomplete_init()
