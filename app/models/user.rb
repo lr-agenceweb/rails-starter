@@ -20,20 +20,21 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # Model relations
   has_many :posts, dependent: :destroy
   has_many :blogs, dependent: :destroy
   belongs_to :role
   accepts_nested_attributes_for :role, reject_if: :all_blank
 
-  delegate :name, to: :role, prefix: true, allow_nil: true
-
+  # Validation rules
   validates :username,
             presence: true,
             uniqueness: {
               case_sensitive: false,
               scope: :provider
             },
-            if: proc { |u| u.new_record? || u.changed? }
+            format: { with: /\A[a-z0-9 _\-\.]*\z/i },
+            if: proc { |u| u.new_record? || u.username_changed? }
 
   validates :email,
             presence: true,
@@ -43,6 +44,10 @@ class User < ApplicationRecord
               scope: :provider
             }
 
+  # Delegates
+  delegate :name, to: :role, prefix: true, allow_nil: true
+
+  # Scopes
   scope :except_super_administrator, -> { where.not(role_id: 1) }
 
   # define has_role? methods
