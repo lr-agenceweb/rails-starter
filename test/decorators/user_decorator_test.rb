@@ -42,7 +42,7 @@ class UserDecoratorTest < Draper::TestCase
   # ActiveAdmin
   # =============
   test 'should return correct html for header user profile' do
-    expected = '<img alt="bob" src="https://secure.gravatar.com/avatar/124c4cfb97b3bd8b5678301071cc695f?default=mm&secure=true&size=64" width="64" height="64" /> <span>Bob (Administrateur)<br />Depuis site</span>'
+    expected = '<img alt="bob" src="https://secure.gravatar.com/avatar/124c4cfb97b3bd8b5678301071cc695f?default=mm&secure=true&size=64" width="64" height="64" /> <span>bob (Administrateur)<br />Depuis site</span>'
     assert_equal expected, @administrator_decorated.active_admin_header_user_profile
   end
 
