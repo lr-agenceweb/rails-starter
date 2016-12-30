@@ -76,4 +76,9 @@ class ApplicationController < ActionController::Base
   def redirect_to_dashboard
     redirect_to admin_dashboard_path, status: 301
   end
+
+  # Devise sign_out redirection
+  def after_sign_out_path_for(_resource)
+    new_user_session_path
+  end
 end
