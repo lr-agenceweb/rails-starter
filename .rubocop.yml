@@ -8,6 +8,8 @@ AllCops:
     - 'script/**/*'
     - 'node_modules/**/*'
 
+Bundler/OrderedGems:
+  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:

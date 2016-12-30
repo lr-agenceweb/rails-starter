@@ -7,8 +7,6 @@ require 'test_helper'
 class ContactFormTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
-  setup :initialize_test
-
   # Constants
   ERROR_SCOPE = ContactForm::I18N_SCOPE
 
@@ -120,8 +118,5 @@ class ContactFormTest < ActiveSupport::TestCase
       assert_equal [:attachment], msg.errors.keys
       assert_equal error_i18n_size, msg.errors.messages
     end
-  end
-
-  def initialize_test
   end
 end

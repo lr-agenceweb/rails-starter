@@ -5,8 +5,6 @@ require 'test_helper'
 # == Post model test
 #
 class PostTest < ActiveSupport::TestCase
-  setup :initialize_test
-
   test 'should have correct list of subclasses' do
     subclasses = Post.type
     %w(Home About Contact).each do |item|
@@ -24,9 +22,6 @@ class PostTest < ActiveSupport::TestCase
   end
 
   private
-
-  def initialize_test
-  end
 
   def expected_in_rss(expected, rss_items)
     expected.each do |item|
