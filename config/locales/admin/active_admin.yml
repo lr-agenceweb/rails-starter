@@ -39,7 +39,7 @@ fr:
       update_newsletter_setting: Modifier la configuration Newsletter
     devise:
       login:
-        title: Identifiant
+        key: Identifiant
         placeholder: Nom d'utilisateur ou Email
       sign_up:
         title: Inscription

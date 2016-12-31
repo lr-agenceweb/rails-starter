@@ -6,8 +6,9 @@
     f.inputs do
       resource.class.authentication_keys.each_with_index { |key, index|
         f.input key,
-                label: t('active_admin.devise.' + key.to_s + '.title'),
+                label: t('active_admin.devise.' + key.to_s + '.key'),
                 placeholder: t('active_admin.devise.' + key.to_s + '.placeholder'),
+                required: true,
                 input_html: { autofocus: index.zero? }
       }
       f.input :password,
