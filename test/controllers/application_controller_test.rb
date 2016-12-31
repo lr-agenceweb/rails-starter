@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == ApplicationController Test
-#
+# ApplicationController Test
+# ============================
 class ApplicationControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
@@ -38,8 +38,8 @@ class ApplicationControllerTest < ActionController::TestCase
   end
 
   #
-  # == AdminBarable
-  #
+  # AdminBarable
+  # ==============
   test 'should not have nil module settings content if logged in as administrator' do
     sign_in users(:bob)
     assert @setting.show_admin_bar?
@@ -67,8 +67,8 @@ class ApplicationControllerTest < ActionController::TestCase
   end
 
   #
-  # == Concern
-  #
+  # Concern
+  # =========
   test 'should not have newsletter_user with nil value' do
     make_get_index(assertions) do
       assert_not assigns(:newsletter_user).nil?
@@ -76,8 +76,8 @@ class ApplicationControllerTest < ActionController::TestCase
   end
 
   #
-  # == Analytical
-  #
+  # Analytical
+  # ============
   test 'should not have cookie cnil checked' do
     assert_not @controller.send(:cookie_cnil_check?)
   end
@@ -132,6 +132,26 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_not @analytics_module.enabled?
     assert @controller.send(:analytical_modules?), 'analytical should be disabled'
     reset_analytical_conditions
+  end
+
+  #
+  # ActiveAdmin
+  # =============
+  test 'should return correct boolean value for active_admin?' do
+    # Frontend
+    make_get_index(assertions) do
+      assert_not @controller.send(:active_admin?)
+    end
+
+    # Backend
+    old_controller = @controller
+    @controller = Admin::DashboardController.new
+    assert @controller.send(:active_admin?)
+    @controller = ActiveAdmin::Devise::SessionsController.new
+    assert @controller.send(:active_admin?)
+
+    # Revert to normal
+    @controller = old_controller
   end
 
   private

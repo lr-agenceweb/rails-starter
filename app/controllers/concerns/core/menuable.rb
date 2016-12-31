@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 #
-# == Core namespace
-#
+# Core namespace
+# ================
 module Core
   #
-  # == MenuableConcern
-  #
+  # Menuable module
+  # =================
   module Menuable
     extend ActiveSupport::Concern
 
@@ -14,7 +14,8 @@ module Core
       before_action :set_menu_elements,
                     :set_controller_name,
                     :set_pages,
-                    :set_current_page
+                    :set_current_page,
+                    unless: :active_admin?
       before_action :not_found,
                     unless: proc {
                       @page.nil? || @page.menu_online
