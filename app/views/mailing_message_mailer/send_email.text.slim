@@ -1,10 +1,11 @@
-= "Bonjour #{@mailing_user.email}"
-= "\r\n==============================================\r\n\r\n"
+= "Bonjour #{@mailing_user.email},"
+= "\r\n\r\n"
 = sanitize_string(@content)
 
-= "\r\n\r\n==============================================\r\n"
-| Voir la version en ligne :
+= "\r\n\r\n"
+= "# Voir la version en ligne :"
 =<> preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token)
-= "\r\n\r\n==============================================\r\n"
-| Si vous ne souhaitez plus recevoir d'emailing de la part de L&R Agence web, désabonnez-vous ici :
+
+= "\r\n"
+= "# Si vous ne souhaitez plus recevoir d'emailing de la part de L&R Agence web, désabonnez-vous ici :"
 =<> unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token)

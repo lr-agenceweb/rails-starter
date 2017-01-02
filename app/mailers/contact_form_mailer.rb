@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == ContactForm Mailer
-#
+# ContactForm Mailer
+# ====================
 class ContactFormMailer < ApplicationMailer
   layout 'mailers/default'
 

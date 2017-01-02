@@ -1,14 +1,11 @@
-= I18n.t('newsletter.hello', subscriber: @newsletter_user.name, locale: @newsletter_user.lang)
-= "\r\n==============================================\r\n\r\n"
-
+= I18n.t('newsletter.hello', subscriber: @newsletter_user.name, locale: @newsletter_user.lang) + ','
+= "\r\n\r\n"
 == strip_tags(@content)
-== "\r\n\==== #{@setting.name}"
 
-= "\r\n\r\n\r\n==============================================\r\n"
-= I18n.t('newsletter.footer_message', locale: @newsletter_user.lang)
-= ' - '
-= unsubscribe_url(@newsletter_user.id, @newsletter_user.token)
-= "\r\n===\r\n"
-= I18n.t('newsletter.see_in_browser', locale: @newsletter_user.lang)
-= ' - '
-= welcome_user_newsletters_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)
+== "\r\n\r\n"
+= '# ' + I18n.t('newsletter.footer_message', locale: @newsletter_user.lang) + ':'
+=< unsubscribe_url(@newsletter_user.id, @newsletter_user.token)
+
+= "\r\n"
+= '# ' + I18n.t('newsletter.see_in_browser', locale: @newsletter_user.lang) + ':'
+=< welcome_user_newsletters_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)

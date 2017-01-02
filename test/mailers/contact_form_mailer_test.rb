@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == ContactForm Mailer test class
-#
+# ContactFormMailer test
+# ========================
 class ContactFormMailerTest < ActionMailer::TestCase
   include HtmlHelper
   include ActionDispatch::TestProcess
@@ -12,8 +12,8 @@ class ContactFormMailerTest < ActionMailer::TestCase
   setup :initialize_test
 
   #
-  # == Send email
-  #
+  # Send email
+  # ============
   test 'should message me' do
     email = ContactFormMailer.message_me(@message).deliver_now
     refute ActionMailer::Base.deliveries.empty?
@@ -71,8 +71,8 @@ class ContactFormMailerTest < ActionMailer::TestCase
   end
 
   #
-  # == AnsweringMachine
-  #
+  # AnsweringMachine
+  # ==================
   test 'should send answering machine email to sender' do
     email = ContactFormMailer.answering_machine('karim@benzema.fr').deliver_now
 
@@ -92,7 +92,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
 
         assert_equal @answering_machine.title, email.subject
         content = sanitize_string(@answering_machine.content)
-        assert_match(/#{content}/, CGI.unescape_html(last_email.text_part.body.to_s))
+        assert_match(/#{content}/, last_email.text_part.body.to_s)
         assert_match(/#{content}/, sanitize_string(last_email.html_part.body.to_s))
 
         ActionMailer::Base.deliveries.clear
@@ -109,7 +109,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
 
         assert_equal I18n.t('contact_form_mailer.answering_machine.subject', site: @setting.title, locale: locale), email.subject
         content = sanitize_string(I18n.t('contact_form_mailer.answering_machine.content'))
-        assert_match(/#{content}/, CGI.unescape_html(last_email.text_part.body.to_s))
+        assert_match(/#{content}/, last_email.text_part.body.to_s)
         assert_match(/#{content}/, sanitize_string(last_email.html_part.body.to_s))
 
         ActionMailer::Base.deliveries.clear
@@ -138,7 +138,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
         last_email = ActionMailer::Base.deliveries.last
 
         content = sanitize_string(I18n.t('contact_form_mailer.answering_machine.content'))
-        assert_match(/#{content}/, CGI.unescape_html(last_email.text_part.body.to_s))
+        assert_match(/#{content}/, last_email.text_part.body.to_s)
         assert_match(/#{content}/, sanitize_string(last_email.html_part.body.to_s))
 
         ActionMailer::Base.deliveries.clear
@@ -177,7 +177,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
     @message = ContactForm.new(
       name: 'cristiano',
       email: 'cristiano@ronaldo.pt',
-      message: 'Hello from the internet'
+      message: read_fixture('message').join
     )
     @answering_machine = string_boxes(:answering_machine)
   end

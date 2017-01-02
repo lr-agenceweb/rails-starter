@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == MailingMessage Mailer
-#
+# MailingMessage Mailer
+# =======================
 class MailingMessageMailer < ApplicationMailer
   add_template_helper(HtmlHelper)
   layout 'mailers/mailing'
@@ -21,7 +21,7 @@ class MailingMessageMailer < ApplicationMailer
            to: @mailing_user.email,
            subject: default_i18n_subject(title: @mailing_message.title) do |format|
         format.html
-        format.text
+        format.text { render layout: 'mailers/default' }
       end
     end
   end

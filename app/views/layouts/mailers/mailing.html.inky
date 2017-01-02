@@ -12,11 +12,13 @@
         <td class="center" align="center" valign="top">
           <center>
 
+            <% unless @hide_preview_link %>
             <!-- Upper Header -->
             <container>
               <spacer size="20"></spacer>
               <%= raw(render 'mailing_message_mailer/upper_header') %>
             </container>
+            <% end %>
 
             <!-- Lower Header -->
             <container>

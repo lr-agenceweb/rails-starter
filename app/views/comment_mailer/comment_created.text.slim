@@ -1,7 +1,6 @@
-= t('comment.email.greeting', author: @setting.name)
-= "\r\n==============================================\r\n\r\n"
-
+= t('comment.email.greeting', author: @setting.name) + ','
+= "\r\n\r\n"
 == strip_tags t('comment_mailer.comment_created.content', date: @comment.created_at(:long), article: @commentable.title)
 
-= "\r\n\r\n==============================================\r\n\r\n"
-= admin_post_comment_url(@comment)
+= "\r\n\r\n"
+= "# #{admin_post_comment_url(@comment)}"

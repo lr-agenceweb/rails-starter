@@ -12,10 +12,12 @@
         <td class="center" align="center" valign="top">
           <center>
 
+            <% if @copy_to_sender %>
             <!-- Upper Header -->
             <container>
               <%= raw(render 'contact_form_mailer/upper_header') %>
             </container>
+            <% end %>
 
             <!-- Lower Header -->
             <container>

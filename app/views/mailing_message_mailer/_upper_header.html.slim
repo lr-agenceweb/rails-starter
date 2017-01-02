@@ -1,6 +1,4 @@
-- unless @hide_preview_link
-
-  row.upper-header
-    columns
-      p.preview-link
-        == I18n.t('mailing.preview_in_browser', link: link_to(I18n.t('mailing.click_here_link'), preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token), target: :blank))
+row.upper-header
+  columns
+    p.preview-link
+      == I18n.t('mailing.preview_in_browser', link: link_to(I18n.t('mailing.click_here_link'), preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token), target: :blank))

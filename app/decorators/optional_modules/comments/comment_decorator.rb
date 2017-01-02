@@ -1,18 +1,19 @@
 # frozen_string_literal: false
+
 #
-# == CommentDecorator
-#
+# CommentDecorator
+# ==================
 class CommentDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   include AssetsHelper
   delegate_all
 
   #
-  # == Extract pseudo and email from comment
-  #
+  # Extract pseudo and email from comment
+  # =======================================
   def pseudo_registered_or_guest
     name = model.try(:user_id).nil? ? model.username : model.user_username
-    name.capitalize
+    name
   end
 
   def email_registered_or_guest
@@ -20,8 +21,8 @@ class CommentDecorator < ApplicationDecorator
   end
 
   #
-  # == Avatar associated to comment
-  #
+  # Avatar associated to comment
+  # ==============================
   def avatar
     # Not connected
     if model.try(:user_id).nil?
@@ -38,15 +39,15 @@ class CommentDecorator < ApplicationDecorator
   end
 
   #
-  # == Content
-  #
+  # Content
+  # =========
   def preview_content
     truncate_html(model.content, length: 100, escape: true)
   end
 
   #
-  # == Commentable
-  #
+  # Commentable
+  # =============
   def commentable_path
     commentable.decorate.show_post_link
   end

@@ -5,8 +5,12 @@
 # ====================
 class ApplicationMailer < ActionMailer::Base
   include SharedColoredVariables
-  helper :html # HtmlHelper
 
+  # Helpers
+  helper :html # HtmlHelper
+  helper :application # ApplicationHelper
+
+  # Callbacks
   before_action :set_setting
   before_action :set_map_setting
   before_action :set_contact_settings

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == Newsletter Mailer
-#
+# Newsletter Mailer
+# ===================
 class NewsletterMailer < ApplicationMailer
   add_template_helper(HtmlHelper)
   layout 'mailers/newsletter'
@@ -43,7 +43,7 @@ class NewsletterMailer < ApplicationMailer
          to: @newsletter_user.email,
          subject: default_i18n_subject(title: title) do |format|
       format.html
-      format.text
+      format.text { render layout: 'mailers/default' }
     end
   end
 end
