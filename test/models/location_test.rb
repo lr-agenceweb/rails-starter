@@ -68,11 +68,34 @@ class LocationTest < ActiveSupport::TestCase
     assert_equal [I18n.t('postcode.not_a_number', scope: @scope)], location.errors.messages[:postcode]
   end
 
+  #
+  # Boolean
+  # =========
+  test 'should return true as boolean for latlon?' do
+    assert @location.latlon?
+  end
+
+  test 'should return true as boolean for city?' do
+    assert @location.city?
+  end
+
+  test 'should return true as boolean for postcode?' do
+    assert @location.city?
+  end
+
+  test 'should return false as boolean for latlon?' do
+    location = LocationDecorator.new(@location_three)
+    assert_not location.latlon?
+  end
+
   private
 
   def initialize_test
     @setting = settings(:one)
     @scope = 'activerecord.errors.models.location.attributes'
+
+    @location = locations(:one)
+    @location_three = locations(:three)
   end
 
   def default_attrs

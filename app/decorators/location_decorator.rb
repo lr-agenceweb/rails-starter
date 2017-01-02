@@ -27,19 +27,4 @@ class LocationDecorator < ApplicationDecorator
     end
     safe_join [html]
   end
-
-  #
-  # Boolean
-  # =========
-  def address?
-    !model.address.blank?
-  end
-
-  def postcode?
-    !model.postcode.blank?
-  end
-
-  def city?
-    !model.city.blank?
-  end
 end
