@@ -15,7 +15,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
   # Send email
   # ============
   test 'should message me' do
-    email = ContactFormMailer.message_me(@message).deliver_now
+    email = ContactFormMailer.to_admin(@message).deliver_now
     refute ActionMailer::Base.deliveries.empty?
     last_email = ActionMailer::Base.deliveries.last
 
@@ -24,22 +24,22 @@ class ContactFormMailerTest < ActionMailer::TestCase
     # ===================
     assert_equal ['cristiano@ronaldo.pt'], email.from
     assert_equal ['demo@rails-starter.com'], email.to
-    assert_equal I18n.t('contact_form_mailer.message_me.subject', site: @setting.title), email.subject
+    assert_equal I18n.t('contact_form_mailer.to_admin.subject', site: @setting.title), email.subject
     assert_match(/Hello from the internet/, last_email.text_part.body.to_s)
     assert_match(/Hello from the internet/, last_email.html_part.body.to_s)
 
     #
     # Template
     # ========
-    assert_template :message_me
+    assert_template :to_admin
     assert_template layout: 'mailers/default'
 
     ActionMailer::Base.deliveries.clear
   end
 
   test 'should send copy of email contact to sender' do
-    ContactFormMailer.message_me(@message).deliver_now
-    ContactFormMailer.send_copy(@message).deliver_now
+    ContactFormMailer.to_admin(@message).deliver_now
+    ContactFormMailer.copy(@message).deliver_now
     refute ActionMailer::Base.deliveries.empty?
     contact_email = ActionMailer::Base.deliveries.first
     cc_email = ActionMailer::Base.deliveries.last
@@ -50,21 +50,21 @@ class ContactFormMailerTest < ActionMailer::TestCase
     # Contact => Admin
     assert_equal 'cristiano@ronaldo.pt', contact_email.from[0]
     assert_equal 'demo@rails-starter.com', contact_email.to[0]
-    assert_equal I18n.t('contact_form_mailer.message_me.subject', site: @setting.title, locale: I18n.default_locale), contact_email.subject
+    assert_equal I18n.t('contact_form_mailer.to_admin.subject', site: @setting.title, locale: I18n.default_locale), contact_email.subject
     assert_match(/Hello from the internet/, contact_email.text_part.body.to_s)
     assert_match(/Hello from the internet/, contact_email.html_part.body.to_s)
 
     # Admin => Contact (Carbon Copy)
     assert_equal 'demo@rails-starter.com', cc_email.from[0]
     assert_equal 'cristiano@ronaldo.pt', cc_email.to[0]
-    assert_equal I18n.t('contact_form_mailer.send_copy.subject', site: @setting.title, locale: I18n.default_locale), cc_email.subject
+    assert_equal I18n.t('contact_form_mailer.copy.subject', site: @setting.title, locale: I18n.default_locale), cc_email.subject
     assert_match(/Hello from the internet/, cc_email.text_part.body.to_s)
     assert_match(/Hello from the internet/, cc_email.html_part.body.to_s)
 
     #
     # Template
     # ========
-    assert_template :message_me
+    assert_template :to_admin
     assert_template layout: 'mailers/default'
 
     ActionMailer::Base.deliveries.clear
@@ -153,7 +153,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
     @message.attachment = fixture_file_upload('/images/bart.png')
     assert_not @message.attachment.blank?
 
-    email = ContactFormMailer.message_me(@message).deliver_now
+    email = ContactFormMailer.to_admin(@message).deliver_now
     assert_equal 0, email.attachments.size
     assert email.attachments.blank?
   end
@@ -163,7 +163,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
     @message.attachment = fixture_file_upload('/images/bart.png')
     assert_not @message.attachment.blank?
 
-    email = ContactFormMailer.message_me(@message).deliver_now
+    email = ContactFormMailer.to_admin(@message).deliver_now
     assert_equal 1, email.attachments.size
     assert_equal 'bart.png', email.attachments[0].filename
   end

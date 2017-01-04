@@ -7,7 +7,7 @@ class ContactFormMailer < ApplicationMailer
   layout 'mailers/default'
 
   # Customer => Administrator
-  def message_me(message)
+  def to_admin(message)
     @message = message
 
     if message.attachment && @setting.show_file_upload?
@@ -19,7 +19,7 @@ class ContactFormMailer < ApplicationMailer
   end
 
   # Administrator => Customer
-  def send_copy(message)
+  def copy(message)
     @message = message
     @copy_to_sender = true
     mail_method(@from_admin, @message.email)
@@ -35,7 +35,7 @@ class ContactFormMailer < ApplicationMailer
 
   private
 
-  def mail_method(from, to, body = @message.message, template = :message_me, locale = I18n.default_locale)
+  def mail_method(from, to, body = @message.message, template = :to_admin, locale = I18n.default_locale)
     subject = @subject || default_i18n_subject(site: @setting.title, locale: locale)
 
     mail from: from,

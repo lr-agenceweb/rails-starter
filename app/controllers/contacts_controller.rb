@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == ContactsController
-#
+# ContactsController
+# ====================
 class ContactsController < ApplicationController
   include OptionalModules::QrcodeHelper
 
@@ -40,8 +40,8 @@ class ContactsController < ApplicationController
   def create
     @contact_form = ContactForm.new(contact_form_params)
     if @contact_form.valid?
-      ContactFormMailer.message_me(@contact_form).deliver_now
-      ContactFormMailer.send_copy(@contact_form).deliver_now if @contact_form.send_copy == '1'
+      ContactFormMailer.to_admin(@contact_form).deliver_now
+      ContactFormMailer.copy(@contact_form).deliver_now if @contact_form.send_copy == '1'
       ContactFormMailer.answering_machine(@contact_form.email, @locale).deliver_now if @setting.answering_machine?
       respond_action :create
     else

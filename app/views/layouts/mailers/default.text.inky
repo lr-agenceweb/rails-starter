@@ -1,5 +1,5 @@
 <% if @copy_to_sender %>
-<%= I18n.t('contact_form_mailer.send_copy.message_cc', name: @setting.name) %>
+<%= I18n.t('contact_form_mailer.copy.message_cc', name: @setting.name) %>
 -----------------------------------------------------------
 <% end %>
 

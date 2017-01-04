@@ -1,9 +1,9 @@
 # French
 fr:
   contact_form_mailer:
-    message_me:
+    to_admin:
       subject: "[%{site}] Message de contact"
-    send_copy:
+    copy:
       subject: "[%{site}] Copie de votre message de contact"
       message_cc: Voici une copie de l'email reçu par %{name}
     answering_machine:
@@ -44,9 +44,9 @@ fr:
 # English
 en:
   contact_form_mailer:
-    message_me:
+    to_admin:
       subject: "[%{site}] Contact form message"
-    send_copy:
+    copy:
       subject: "[%{site}] Copy of your contact message"
       message_cc: Here is a copy of the email received by %{name}
     answering_machine:
