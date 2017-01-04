@@ -30,11 +30,6 @@
               <%= yield %>
             </container>
 
-            <!-- Blocks -->
-            <container>
-              <%= raw(render 'mailers/blocks') %>
-            </container>
-
             <!-- Footer -->
             <container>
               <%= raw(render 'mailers/footer') %>
