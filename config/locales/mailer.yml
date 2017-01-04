@@ -2,63 +2,63 @@
 fr:
   contact_form_mailer:
     message_me:
-      subject: Message envoyé par le site %{site}
+      subject: "[%{site}] Message de contact"
     send_copy:
-      subject: Copie de votre message de contact envoyé à %{site}
+      subject: "[%{site}] Copie de votre message de contact"
       message_cc: Voici une copie de l'email reçu par %{name}
     answering_machine:
-      subject: Répondeur de contact automatique par le site %{site}
+      subject: "[%{site}] Répondeur de contact automatique"
       content: "<p> Le formulaire de contact a été configuré en mode \"répondeur automatique\". Cela signifie que l'admininstrateur n'est pas disponible pour vous répondre maintenant mais qu'il le fera dès son retour. <br /><br /> A bientôt </p>"
 
   newsletter_mailer:
     welcome_user:
-      subject: '%{title}'
+      subject: '[%{site}] %{title}'
     send_newsletter:
-      subject: '%{title}'
+      subject: '[%{site}] %{title}'
 
   comment_mailer:
     comment_created:
-      subject: Un commentaire vient d'être ajouté sur le site "%{site}"
+      subject: "[%{site}] Un commentaire vient d'être ajouté sur le site"
       content: Un commentaire vient d'être posté sur l'article "<strong>%{article}</strong>" le <strong>%{date}</strong>.
       link_frontend: Pour le visualiser
       link_backend: Pour le modérer
     comment_signalled:
-      subject: Un commentaire a été signalé sur le site %{site}
+      subject: "[%{site}] Un commentaire a été signalé sur le site"
       content: Un commentaire écrit par <strong>%{user}</strong> sur l'article "<strong>%{article}</strong>" a été signalé comme non approprié sur le site.
       link: Modérer le commentaire
       all: Voir tous les commentaires à modérer
     comment_validated:
-      subject: Votre commentaire posté sur le site "%{site}" a été validé par l'administrateur !
+      subject: "[%{site}] Votre commentaire a été validé par l'administrateur !"
       content: Le commentaire que vous avez posté le <strong>%{date}</strong> sur l'article "<strong>%{article}</strong>" a été validé par l'administrateur.
       link_frontend: Vous pouvez le visualiser ici
 
   mailing_message_mailer:
     send_email:
-      subject: '%{title}'
+      subject: '[%{site}] %{title}'
 
   active_user_mailer:
     send_email:
-      subject: Activation de votre compte sur le site %{site}
-      content: Votre compte a été validé par l'administrateur du site %{site}. Vous pouvez maintenant vous connecter avec vos identifiants définis lors de votre inscription
+      subject: "[%{site}] Activation de votre compte utilisateur sur le site"
+      content: Votre compte a été validé par l'administrateur du site %{site}. <br /><br /> Vous pouvez maintenant vous connecter avec vos identifiants définis lors de votre inscription.
 
 # English
 en:
   contact_form_mailer:
     message_me:
-      subject: Message sent by %{site} website
+      subject: "[%{site}] Contact form message"
     send_copy:
-      subject: Copy of your contact message sent to %{site} website
+      subject: "[%{site}] Copy of your contact message"
       message_cc: Here is a copy of the email received by %{name}
     answering_machine:
-      subject: Automatic answering machine by the %{site} site
+      subject: "[%{site}] Automatic answering machine"
       content: "<p> The contact form has been configured as \"automatic answering machine\" mode. This mean the administrator is not available for now and will answer when he will be back. <br /><br /> See you soon </p>"
 
   newsletter_mailer:
     welcome_user:
-      subject: '%{title}'
+      subject: '[%{site}] %{title}'
     send_newsletter:
-      subject: '%{title}'
+      subject: '[%{site}] %{title}'
 
   mailing_message_mailer:
     send_email:
-      subject: '%{title}'
+      subject: '[%{site}] %{title}'

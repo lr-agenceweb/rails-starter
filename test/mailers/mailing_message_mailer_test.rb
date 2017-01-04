@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == MailingMessage Mailer test class
-#
+# MailingMessageMailer test
+# ===========================
 class MailingMessageMailerTest < ActionMailer::TestCase
   include Rails::Controller::Testing::TemplateAssertions
 
@@ -23,7 +23,7 @@ class MailingMessageMailerTest < ActionMailer::TestCase
     refute ActionMailer::Base.deliveries.empty?
     assert_equal [@mailing_user.email], email.to
     assert_equal [@setting.email], email.from
-    assert_equal @mailing_message.title, email.subject
+    assert_equal "[#{@setting.title}] #{@mailing_message.title}", email.subject
   end
 
   test 'should send email with custom headers' do
@@ -37,7 +37,7 @@ class MailingMessageMailerTest < ActionMailer::TestCase
     refute ActionMailer::Base.deliveries.empty?
     assert_equal [@mailing_user.email], email.to
     assert_equal [@mailing_setting.email], email.from
-    assert_equal @mailing_message.title, email.subject
+    assert_equal "[#{@setting.title}] #{@mailing_message.title}", email.subject
   end
 
   private

@@ -1,3 +1,6 @@
 = "Bonjour #{@user.email},"
 = "\r\n\r\n"
-= @content
+= sanitize_string(@content)
+
+= "\r\n\r\n"
+= "# #{@setting.name}"

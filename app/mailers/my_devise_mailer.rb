@@ -33,7 +33,7 @@ class MyDeviseMailer < Devise::Mailer
   end
 
   def fix_headers(opts)
-    opts[:from] = @setting.email
-    opts[:reply_to] = @setting.email
+    opts[:from] = @from_admin
+    opts[:reply_to] = @from_admin
   end
 end

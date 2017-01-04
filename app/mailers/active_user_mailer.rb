@@ -10,7 +10,7 @@ class ActiveUserMailer < ApplicationMailer
     @user = user
     @content = I18n.t('active_user_mailer.send_email.content', site: @setting.title)
 
-    mail from: @setting.email,
+    mail from: @from_admin,
          to: @user.email,
          subject: default_i18n_subject(site: @setting.title) do |format|
       format.html

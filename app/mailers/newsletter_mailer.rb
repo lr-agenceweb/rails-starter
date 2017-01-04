@@ -39,9 +39,9 @@ class NewsletterMailer < ApplicationMailer
   end
 
   def process_email(title)
-    mail from: @setting.email,
+    mail from: @from_admin,
          to: @newsletter_user.email,
-         subject: default_i18n_subject(title: title) do |format|
+         subject: default_i18n_subject(site: @setting.title, title: title) do |format|
       format.html
       format.text { render layout: 'mailers/default' }
     end

@@ -22,14 +22,14 @@ class ContactFormMailer < ApplicationMailer
   def send_copy(message)
     @message = message
     @copy_to_sender = true
-    mail_method(@setting.email, @message.email)
+    mail_method(@from_admin, @message.email)
   end
 
   # Administrator => Customer
   def answering_machine(message_email, locale = I18n.default_locale)
     I18n.with_locale(locale) do
       sb_answering_machine
-      mail_method(@setting.email, message_email, @message, :answering_machine, locale)
+      mail_method(@from_admin, message_email, @message, :answering_machine, locale)
     end
   end
 
@@ -49,7 +49,7 @@ class ContactFormMailer < ApplicationMailer
 
   def sb_answering_machine
     sb = StringBox.includes(:translations).find_by(key: 'answering_machine')
-    @subject = sb.title.blank? ? nil : sb.title
+    @subject = sb.title unless sb.title.blank?
     @message = sb.content.blank? ? t('contact_form_mailer.answering_machine.content') : sb.content
   rescue
     @message = t('contact_form_mailer.answering_machine.content')

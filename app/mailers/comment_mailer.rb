@@ -48,7 +48,7 @@ class CommentMailer < ApplicationMailer
   end
 
   def admin_to_user
-    mail from: @setting.email,
+    mail from: @from_admin,
          to: @comment.email_registered_or_guest,
          subject: default_i18n_subject(site: @setting.title) do |format|
       format.html

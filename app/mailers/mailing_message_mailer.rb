@@ -19,7 +19,7 @@ class MailingMessageMailer < ApplicationMailer
 
       mail from: "#{@mailing_setting.name_status} <#{@mailing_setting.email_status}>",
            to: @mailing_user.email,
-           subject: default_i18n_subject(title: @mailing_message.title) do |format|
+           subject: default_i18n_subject(site: @setting.title, title: @mailing_message.title) do |format|
         format.html
         format.text { render layout: 'mailers/default' }
       end
