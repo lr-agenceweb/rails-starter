@@ -1,11 +1,12 @@
 row
   columns
-    - I18n.with_locale(@newsletter_user.lang) do
-      p = I18n.t('newsletter.hello', subscriber: @newsletter_user.extract_name_from_email)
+    .fr-view
+      - I18n.with_locale(@newsletter_user.lang) do
+        p = I18n.t('newsletter.hello', subscriber: @newsletter_user.extract_name_from_email)
 
-      == @newsletter.content
+        == @newsletter.content
 
-      br
+        br
 
-      p.sent-from
-        == h(@setting.name)
+        p.sent-from
+          == h(@setting.name)
