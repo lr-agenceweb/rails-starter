@@ -56,18 +56,15 @@ ActiveAdmin.register Newsletter do
     include Newsletterable
     include OptionalModules::NewsletterHelper
 
+    # Callbacks
+    before_action :set_newsletter_users,
+                  only: [:send_newsletter]
+
     def send_newsletter
-      if params[:option] == 'subscribers'
-        @newsletter.update_attributes(sent_at: Time.zone.now)
-        @newsletter_users = NewsletterUser.subscribers.find_each
-        count = @newsletter_users.count
-      elsif params[:option] == 'testers'
-        @newsletter_users = NewsletterUser.testers
-        count = @newsletter_users.count
-      end
+      count = @newsletter_users.count
 
       @newsletter_users.each do |newsletter_user|
-        NewsletterJob.set(wait: 3.seconds).perform_later(newsletter_user, newsletter)
+        NewsletterJob.set(wait: 3.seconds).perform_later(newsletter_user, @newsletter)
       end
 
       flash[:notice] = "La newsletter est en train d'être envoyée à #{count} " + 'personne'.pluralize(count)
@@ -80,6 +77,17 @@ ActiveAdmin.register Newsletter do
         @newsletter_user = NewsletterUser.find_by(lang: params[:locale])
 
         render 'newsletter_mailer/send_newsletter', layout: 'mailers/newsletter'
+      end
+    end
+
+    private
+
+    def set_newsletter_users
+      if params[:option] == 'subscribers'
+        @newsletter_users = NewsletterUser.subscribers.find_each
+        @newsletter.update_attributes(sent_at: Time.zone.now)
+      elsif params[:option] == 'testers'
+        @newsletter_users = NewsletterUser.testers
       end
     end
   end
