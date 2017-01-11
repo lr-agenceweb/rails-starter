@@ -62,11 +62,15 @@ ActiveAdmin.register MailingMessage do
     include Mailingable
     include OptionalModules::NewsletterHelper
 
+    # Callbacks
     before_action :redirect_to_dashboard,
                   only: [:send_mailing_message],
                   if: proc {
                     params[:option].blank? || @mailing_message.token != params[:token]
                   }
+
+    before_action :set_mailing_users,
+                  only: [:send_mailing_message]
 
     def scoped_collection
       super.includes :picture, :translations
@@ -85,10 +89,11 @@ ActiveAdmin.register MailingMessage do
     end
 
     def send_mailing_message
+      @mailing_users.each do |mailing_user|
+        MailingMessageJob.set(wait: 3.seconds).perform_later(mailing_user, @mailing_message, @mailing_setting)
+      end
+
       @mailing_message.update_attributes(sent_at: Time.zone.now)
-      @mailing_users = @mailing_message.mailing_users if params[:option] == 'checked'
-      @mailing_users = MailingUser.all if params[:option] == 'all'
-      make_mailing_message_with_i18n(@mailing_message, @mailing_users)
 
       flash[:notice] = I18n.t('mailing.notice_sending', count: @mailing_users.count)
       redirect_back(fallback_location: admin_dashboard_path)
@@ -102,18 +107,17 @@ ActiveAdmin.register MailingMessage do
 
     private
 
-    def make_mailing_message_with_i18n(message, mailing_users)
-      mailing_users.each do |user|
-        MailingMessageJob.set(wait: 3.seconds).perform_later(user, message, @mailing_setting)
-      end
-    end
-
     def make_redirect
       if resource.should_redirect == true
         redirect_to edit_admin_mailing_message_path(resource.id)
       else
         redirect_to admin_mailing_message_path(resource.id)
       end
+    end
+
+    def set_mailing_users
+      @mailing_users = @mailing_message.mailing_users if params[:option] == 'checked'
+      @mailing_users = MailingUser.all if params[:option] == 'all'
     end
   end
 end
