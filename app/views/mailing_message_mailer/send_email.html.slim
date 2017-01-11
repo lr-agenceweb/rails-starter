@@ -1,12 +1,13 @@
 row
   columns
-    p
-      = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
-    .fr-view
-      == @content
+    - I18n.with_locale(@mailing_user.lang) do
+      p
+        = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
+      .fr-view
+        == @mailing_message.content
 
-    - if @mailing_message.picture? && @mailing_message.picture_online
-      p = image_tag "#{Figaro.env.host_name}#{@mailing_message.picture.image.url(:medium)}", class: 'visual'
+      - if @mailing_message.picture? && @mailing_message.picture_online
+        p = image_tag "#{Figaro.env.host_name}#{@mailing_message.picture.image.url(:medium)}", class: 'visual'
 
-    - if @mailing_message.show_signature?
-      div.signature == @mailing_setting.signature
+      - if @mailing_message.show_signature?
+        div.signature == @mailing_setting.signature

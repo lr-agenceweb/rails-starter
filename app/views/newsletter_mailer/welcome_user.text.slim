@@ -1,11 +1,12 @@
-= I18n.t('newsletter.hello', subscriber: @newsletter_user.name, locale: @newsletter_user.lang) + ','
-= "\r\n\r\n"
-== strip_tags(@content)
+- I18n.with_locale(@newsletter_user.lang) do
+  = I18n.t('newsletter.hello', subscriber: @newsletter_user.extract_name_from_email)
+  = "\r\n\r\n"
+  == strip_tags(@newsletter.content)
 
-== "\r\n\r\n"
-= '# ' + I18n.t('newsletter.footer_message', locale: @newsletter_user.lang) + ':'
-=< unsubscribe_url(@newsletter_user.id, @newsletter_user.token)
+  == "\r\n\r\n"
+  = '# ' + I18n.t('newsletter.footer_message') + ':'
+  =< unsubscribe_url(@newsletter_user.id, @newsletter_user.token)
 
-= "\r\n"
-= '# ' + I18n.t('newsletter.see_in_browser', locale: @newsletter_user.lang) + ':'
-=< welcome_user_newsletters_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)
+  = "\r\n"
+  = '# ' + I18n.t('newsletter.see_in_browser') + ':'
+  =< welcome_user_newsletters_url(newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token)

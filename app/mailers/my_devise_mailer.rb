@@ -4,6 +4,7 @@
 # MyDevise Mailer
 # =================
 class MyDeviseMailer < Devise::Mailer
+  # Callbacks
   before_action :set_setting
 
   def password_change(record, opts = {})
@@ -15,16 +16,6 @@ class MyDeviseMailer < Devise::Mailer
     fix_headers(opts)
     super
   end
-
-  # def confirmation_instructions(record, token, opts = {})
-  #   fix_headers(opts)
-  #   super
-  # end
-  #
-  # def unlock_instructions(record, token, opts = {})
-  #   fix_headers(opts)
-  #   super
-  # end
 
   private
 

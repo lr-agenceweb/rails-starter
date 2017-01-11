@@ -47,11 +47,12 @@ ActiveAdmin.register Newsletter do
   end
 
   #
-  # == Controller
-  #
+  # Controller
+  # ============
   controller do
     include ActiveAdmin::ParamsHelper
     include Skippable
+    include ModuleSettingable
     include Newsletterable
     include OptionalModules::NewsletterHelper
 
@@ -64,7 +65,10 @@ ActiveAdmin.register Newsletter do
         @newsletter_users = NewsletterUser.testers
         count = @newsletter_users.count
       end
-      make_newsletter_with_i18n(@newsletter, @newsletter_users)
+
+      @newsletter_users.each do |newsletter_user|
+        NewsletterJob.set(wait: 3.seconds).perform_later(newsletter_user, newsletter)
+      end
 
       flash[:notice] = "La newsletter est en train d'être envoyée à #{count} " + 'personne'.pluralize(count)
       redirect_back(fallback_location: admin_dashboard_path)
@@ -73,24 +77,9 @@ ActiveAdmin.register Newsletter do
     def preview
       I18n.with_locale(params[:locale]) do
         @newsletter = Newsletter.find(params[:id])
-        @content = @newsletter.content
         @newsletter_user = NewsletterUser.find_by(lang: params[:locale])
 
         render 'newsletter_mailer/send_newsletter', layout: 'mailers/newsletter'
-      end
-    end
-
-    private
-
-    def make_newsletter_with_i18n(newsletter, newsletter_users)
-      I18n.available_locales.each do |locale|
-        I18n.with_locale(locale) do
-          newsletter_users.each do |user|
-            if user.lang == locale.to_s
-              NewsletterJob.set(wait: 3.seconds).perform_later(user, newsletter)
-            end
-          end
-        end
       end
     end
   end

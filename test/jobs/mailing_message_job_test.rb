@@ -12,8 +12,8 @@ class MailingMessageJobTest < ActiveJob::TestCase
 
     assert_enqueued_jobs 0
 
-    assert_enqueued_with(job: MailingMessageJob, args: [@mailing_user, @mailing_message], queue: 'default') do
-      MailingMessageJob.perform_later(@mailing_user, @mailing_message)
+    assert_enqueued_with(job: MailingMessageJob, args: [@mailing_user, @mailing_message, @mailing_setting], queue: 'default') do
+      MailingMessageJob.perform_later(@mailing_user, @mailing_message, @mailing_setting)
     end
 
     assert_enqueued_jobs 1
@@ -25,16 +25,16 @@ class MailingMessageJobTest < ActiveJob::TestCase
     assert_performed_jobs 0
 
     perform_enqueued_jobs do
-      assert_performed_with(job: MailingMessageJob, args: [@mailing_user, @mailing_message], queue: 'default') do
-        MailingMessageJob.perform_later(@mailing_user, @mailing_message)
+      assert_performed_with(job: MailingMessageJob, args: [@mailing_user, @mailing_message, @mailing_setting], queue: 'default') do
+        MailingMessageJob.perform_later(@mailing_user, @mailing_message, @mailing_setting)
       end
     end
 
     assert_performed_jobs 1
 
     perform_enqueued_jobs do
-      assert_performed_with(job: MailingMessageJob, args: [@mailing_user, @mailing_message], queue: 'default') do
-        MailingMessageJob.perform_later(@mailing_user, @mailing_message)
+      assert_performed_with(job: MailingMessageJob, args: [@mailing_user, @mailing_message, @mailing_setting], queue: 'default') do
+        MailingMessageJob.perform_later(@mailing_user, @mailing_message, @mailing_setting)
       end
     end
 
@@ -46,5 +46,6 @@ class MailingMessageJobTest < ActiveJob::TestCase
   def initialize_test
     @mailing_user = mailing_users(:one)
     @mailing_message = mailing_messages(:one)
+    @mailing_setting = mailing_settings(:one)
   end
 end

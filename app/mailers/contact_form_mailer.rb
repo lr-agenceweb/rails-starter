@@ -15,7 +15,7 @@ class ContactFormMailer < ApplicationMailer
       attachments[attachment_name] = message.attachment.read
     end
 
-    mail_method(@message.email, @setting.email)
+    mail_method(@message.email, @from_admin)
   end
 
   # Administrator => Customer

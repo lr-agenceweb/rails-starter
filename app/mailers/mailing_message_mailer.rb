@@ -4,25 +4,23 @@
 # MailingMessage Mailer
 # =======================
 class MailingMessageMailer < ApplicationMailer
-  add_template_helper(HtmlHelper)
   layout 'mailers/mailing'
 
+  # Callbacks
   before_action :set_variables
 
-  # Email MailingMessage
-  def send_email(mailing_user, mailing_message)
-    @mailing_user = mailing_user
-    I18n.with_locale(@mailing_user.lang) do
-      @mailing_setting = MailingSetting.first.decorate
-      @mailing_message = MailingMessage.find(mailing_message.id)
-      @content = @mailing_message.content
+  # Administrator => Customer
+  def send_email(opts)
+    extract_vars(opts)
+    subject = I18n.with_locale(@mailing_user.lang) do
+      default_i18n_subject(site: @setting.title, title: @mailing_message.title)
+    end
 
-      mail from: "#{@mailing_setting.name_status} <#{@mailing_setting.email_status}>",
-           to: @mailing_user.email,
-           subject: default_i18n_subject(site: @setting.title, title: @mailing_message.title) do |format|
-        format.html
-        format.text { render layout: 'mailers/default' }
-      end
+    mail from: optimize_from_header,
+         to: @mailing_user.email,
+         subject: subject do |format|
+      format.html
+      format.text { render layout: 'mailers/default' }
     end
   end
 
@@ -31,5 +29,15 @@ class MailingMessageMailer < ApplicationMailer
   def set_variables
     @show_in_email = true
     @hide_preview_link = false
+  end
+
+  def extract_vars(opts)
+    @mailing_user ||= opts[:mailing_user]
+    @mailing_message ||= opts[:mailing_message]
+    @mailing_setting ||= opts[:mailing_setting]
+  end
+
+  def optimize_from_header
+    "#{@mailing_setting.name_status} <#{@mailing_setting.email_status}>"
   end
 end

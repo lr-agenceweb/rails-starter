@@ -2,9 +2,9 @@
 require 'test_helper'
 
 #
-# == WelcomeWelcomeNewsletterJobTest
-#
-class WelcomeWelcomeNewsletterJobTest < ActiveJob::TestCase
+# WelcomeNewsletterJob Test
+# ===========================
+class WelcomeNewsletterJobTest < ActiveJob::TestCase
   setup :initialize_test
 
   test 'should enqueued job' do
@@ -12,8 +12,8 @@ class WelcomeWelcomeNewsletterJobTest < ActiveJob::TestCase
 
     assert_enqueued_jobs 0
 
-    assert_enqueued_with(job: WelcomeNewsletterJob, args: [@user], queue: 'default') do
-      WelcomeNewsletterJob.perform_later(@user)
+    assert_enqueued_with(job: WelcomeNewsletterJob, args: [@user, @newsletter_setting], queue: 'default') do
+      WelcomeNewsletterJob.perform_later(@user, @newsletter_setting)
     end
 
     assert_enqueued_jobs 1
@@ -25,16 +25,16 @@ class WelcomeWelcomeNewsletterJobTest < ActiveJob::TestCase
     assert_performed_jobs 0
 
     perform_enqueued_jobs do
-      assert_performed_with(job: WelcomeNewsletterJob, args: [@user], queue: 'default') do
-        WelcomeNewsletterJob.perform_later(@user)
+      assert_performed_with(job: WelcomeNewsletterJob, args: [@user, @newsletter_setting], queue: 'default') do
+        WelcomeNewsletterJob.perform_later(@user, @newsletter_setting)
       end
     end
 
     assert_performed_jobs 1
 
     perform_enqueued_jobs do
-      assert_performed_with(job: WelcomeNewsletterJob, args: [@user], queue: 'default') do
-        WelcomeNewsletterJob.perform_later(@user)
+      assert_performed_with(job: WelcomeNewsletterJob, args: [@user, @newsletter_setting], queue: 'default') do
+        WelcomeNewsletterJob.perform_later(@user, @newsletter_setting)
       end
     end
 
@@ -45,5 +45,6 @@ class WelcomeWelcomeNewsletterJobTest < ActiveJob::TestCase
 
   def initialize_test
     @user = newsletter_users(:newsletter_user_fr)
+    @newsletter_setting = newsletter_settings(:one)
   end
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == MailingSettingDecorator
-#
+# MailingSettingDecorator
+# =========================
 class MailingSettingDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all

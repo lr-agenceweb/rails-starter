@@ -4,31 +4,31 @@
 # Newsletter Mailer
 # ===================
 class NewsletterMailer < ApplicationMailer
-  add_template_helper(HtmlHelper)
   layout 'mailers/newsletter'
 
+  # Callbacks
   before_action :set_newsletter_settings
 
+  # Administrator => Customer
   # Email send after a user subscribed to the newsletter
-  def welcome_user(newsletter_user)
-    @newsletter_user = newsletter_user
-    @newsletter_user.name = @newsletter_user.extract_name_from_email
+  def welcome_user(opts)
+    extract_vars(opts)
+    @is_welcome_user = true
+
     I18n.with_locale(@newsletter_user.lang) do
-      wn = NewsletterSetting.first
-      @content = wn.content_subscriber
-      @is_welcome_user = true
-      process_email(wn.title_subscriber)
+      @newsletter = Newsletter.new(
+        title: @newsletter_setting.title_subscriber,
+        content: @newsletter_setting.content_subscriber
+      )
     end
+
+    process_email
   end
 
-  # Email Newsletter
-  def send_newsletter(newsletter_user, newsletter)
-    @newsletter_user = newsletter_user
-    I18n.with_locale(@newsletter_user.lang) do
-      @newsletter = Newsletter.find(newsletter.id)
-      @content = @newsletter.content
-      process_email(@newsletter.title)
-    end
+  # Administrator => Customer
+  def send_newsletter(opts)
+    extract_vars(opts)
+    process_email
   end
 
   private
@@ -38,10 +38,20 @@ class NewsletterMailer < ApplicationMailer
     @hide_preview_link = false
   end
 
-  def process_email(title)
+  def extract_vars(opts)
+    @newsletter ||= opts[:newsletter]
+    @newsletter_user ||= opts[:newsletter_user]
+    @newsletter_setting ||= opts[:newsletter_setting]
+  end
+
+  def process_email
+    subject = I18n.with_locale(@newsletter_user.lang) do
+      default_i18n_subject(site: @setting.title, title: @newsletter.title)
+    end
+
     mail from: @from_admin,
          to: @newsletter_user.email,
-         subject: default_i18n_subject(site: @setting.title, title: title) do |format|
+         subject: subject do |format|
       format.html
       format.text { render layout: 'mailers/default' }
     end

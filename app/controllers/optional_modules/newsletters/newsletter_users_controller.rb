@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
 #
-# == NewsletterUsersController
-#
+# NewsletterUsersController
+# ===========================
 class NewsletterUsersController < ApplicationController
   include ModuleSettingable
   include NewsletterUserable
 
-  after_action :send_welcome_newsletter, only: [:create], if: proc { @newsletter_setting.send_welcome_email? && @newsletter_user.persisted? }
+  # Callbacks
+  after_action :send_welcome_newsletter,
+               only: [:create],
+               if: proc {
+                 @newsletter_setting.send_welcome_email? && @newsletter_user.persisted?
+               }
 
   def create
     @newsletter_user = NewsletterUser.new(newsletter_user_params)
@@ -47,8 +52,6 @@ class NewsletterUsersController < ApplicationController
 
   # Sends email to user when subscription.
   def send_welcome_newsletter
-    I18n.with_locale(@newsletter_user.lang) do
-      WelcomeNewsletterJob.set(wait: 10.seconds).perform_later(@newsletter_user)
-    end
+    WelcomeNewsletterJob.set(wait: 10.seconds).perform_later(@newsletter_user, @newsletter_setting)
   end
 end

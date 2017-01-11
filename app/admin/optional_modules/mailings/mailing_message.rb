@@ -53,8 +53,8 @@ ActiveAdmin.register MailingMessage do
   end
 
   #
-  # == Controller
-  #
+  # Controller
+  # ============
   controller do
     include ActiveAdmin::ParamsHelper
     include Skippable
@@ -95,7 +95,6 @@ ActiveAdmin.register MailingMessage do
     end
 
     def preview
-      @content = @mailing_message.content
       @mailing_user = MailingUser.new(id: current_user.id, email: current_user.email, fullname: current_user.username.capitalize, token: Digest::MD5.hexdigest(current_user.email))
 
       render 'mailing_message_mailer/send_email', layout: 'mailers/mailing'
@@ -105,7 +104,7 @@ ActiveAdmin.register MailingMessage do
 
     def make_mailing_message_with_i18n(message, mailing_users)
       mailing_users.each do |user|
-        MailingMessageJob.set(wait: 3.seconds).perform_later(user, message)
+        MailingMessageJob.set(wait: 3.seconds).perform_later(user, message, @mailing_setting)
       end
     end
 

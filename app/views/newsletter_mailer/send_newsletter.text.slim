@@ -1,6 +1,7 @@
-= "Hi #{@newsletter_user.email},"
-= "\r\n\r\n"
-= sanitize_string(@newsletter.content)
+- I18n.with_locale(@newsletter_user.lang) do
+  = I18n.t('newsletter.hello', subscriber: @newsletter_user.extract_name_from_email)
+  = "\r\n\r\n"
+  = sanitize_string(@newsletter.content)
 
-= "\r\n\r\n"
-= "# Pour vous désinscrire: #{unsubscribe_url(@newsletter_user.id, @newsletter_user.token)}"
+  = "\r\n\r\n"
+  = "# Pour vous désinscrire: #{unsubscribe_url(@newsletter_user.id, @newsletter_user.token)}"
