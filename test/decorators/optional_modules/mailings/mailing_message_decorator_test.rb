@@ -3,14 +3,14 @@ require 'test_helper'
 
 #
 # MailingMessage Decorator test
-# ==============================
+# ===============================
 class MailingMessageDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 
   setup :initialize_test
 
   test 'should return correct code for preview method' do
-    expected = "<a target=\"_blank\" href=\"/admin/mailing_messages/#{@mailing_message_decorated.id}/preview\">Prévisualisation du mail à envoyer en Français</a><br /><a target=\"_blank\" href=\"/en/admin/mailing_messages/#{@mailing_message_decorated.id}/preview\">Prévisualisation du mail à envoyer en English</a><br />"
+    expected = "<a target=\"_blank\" href=\"/admin/mailing_messages/#{@mailing_message_decorated.id}/preview\">Français</a><br /><a target=\"_blank\" href=\"/en/admin/mailing_messages/#{@mailing_message_decorated.id}/preview\">English</a><br />"
     assert_equal expected, @mailing_message_decorated.preview
   end
 

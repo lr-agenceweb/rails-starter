@@ -1,16 +1,19 @@
 # frozen_string_literal: true
 
 #
-# == MailingMessageDecorator
-#
+# MailingMessageDecorator
+# =========================
 class MailingMessageDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
+  #
+  # Content
+  # =========
   def preview
     html = []
     I18n.available_locales.each do |locale|
-      html << link_to(I18n.t('mailing.preview', lang: I18n.t("active_admin.globalize.language.#{locale}")), send("preview_admin_mailing_message_#{locale}_path", model.id), target: :_blank)
+      html << link_to(t("active_admin.globalize.language.#{locale}"), send("preview_admin_mailing_message_#{locale}_path", model.id), target: :_blank)
       html << tag(:br)
     end
     safe_join [html]
@@ -28,6 +31,9 @@ class MailingMessageDecorator < ApplicationDecorator
     render '/admin/mailings/send', resource: model
   end
 
+  #
+  # Status tag
+  # ============
   def status
     color = model.already_sent? ? 'red' : 'green'
     status_tag_deco(I18n.t("sent.#{model.already_sent?}"), color)

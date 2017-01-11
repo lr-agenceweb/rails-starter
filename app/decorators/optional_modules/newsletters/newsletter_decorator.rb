@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
 #
-# == NewsletterDecorator
-#
+# NewsletterDecorator
+# =====================
 class NewsletterDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
   #
-  # == Content
-  #
-  def sent_at
-    model.sent_at_message
-  end
-
+  # Content
+  # =========
   def preview
     html = []
     I18n.available_locales.each do |locale|
@@ -27,6 +23,10 @@ class NewsletterDecorator < ApplicationDecorator
     render '/admin/newsletters/iframe_preview', resource: model
   end
 
+  def sent_at
+    model.sent_at_message
+  end
+
   def send_link
     render '/admin/newsletters/send', resource: model
   end
@@ -36,8 +36,8 @@ class NewsletterDecorator < ApplicationDecorator
   end
 
   #
-  # == Status tag
-  #
+  # Status tag
+  # ============
   def status
     color = model.already_sent? ? 'red' : 'green'
     status_tag_deco(I18n.t("sent.#{model.already_sent?}"), color)
