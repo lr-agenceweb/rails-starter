@@ -2,16 +2,16 @@
 require 'test_helper'
 
 #
-# == NewsletterDecorator test
-#
+# NewsletterDecorator test
+# ==========================
 class NewsletterDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 
   setup :initialize_test
 
   #
-  # == Content
-  #
+  # Content
+  # =========
   test 'should return correct title' do
     assert_equal 'Première newsletter', @newsletter_decorated.title
   end
@@ -37,8 +37,8 @@ class NewsletterDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Status tag
-  #
+  # Status tag
+  # ============
   test 'should return correct status_tag if already_sent' do
     assert_match '<span class="status_tag envoyé red">Envoyé</span>', @newsletter_decorated.status
   end
@@ -46,6 +46,11 @@ class NewsletterDecoratorTest < Draper::TestCase
   test 'should return correct status_tag if not already_sent' do
     @newsletter.update_attribute(:sent_at, nil)
     assert_match '<span class="status_tag pas_encore_envoyé green">Pas Encore Envoyé</span>', @newsletter_decorated.status
+  end
+
+  test 'should return correct resource name' do
+    assert_equal 'newsletter', @newsletter_decorated.send(:resource_name)
+    assert_equal 'newsletter', @newsletter_decorated.send(:resource_name, with_gsub: true)
   end
 
   private

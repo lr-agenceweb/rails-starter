@@ -23,7 +23,6 @@ ActiveAdmin.register Newsletter do
     column :sent_at
     column :send_link
 
-    translation_status
     actions
   end
 

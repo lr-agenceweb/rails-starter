@@ -25,6 +25,11 @@ class MailingMessageDecoratorTest < Draper::TestCase
     assert_match '<span class="status_tag envoyé red">Envoyé</span>', @mailing_message_decorated.status
   end
 
+  test 'should return correct resource name' do
+    assert_equal 'mailing_message', @mailing_message_decorated.send(:resource_name)
+    assert_equal 'mailing', @mailing_message_decorated.send(:resource_name, with_gsub: true)
+  end
+
   private
 
   def initialize_test
