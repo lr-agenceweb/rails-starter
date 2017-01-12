@@ -23,6 +23,7 @@ class MailingSettingDecorator < ApplicationDecorator
   end
 
   def unsubscribe_content
-    safe_join [raw(model.unsubscribe_content)]
+    s = model.unsubscribe_content.blank? ? t('newsletter.unsubscribe.success') : model.unsubscribe_content
+    safe_join [raw(s)]
   end
 end

@@ -3,7 +3,7 @@ require 'test_helper'
 
 #
 # NewsletterUsersController Test
-# =================================
+# ================================
 class NewsletterUsersControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
@@ -12,7 +12,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
   #
   # Subscribing
-  # ==============
+  # =============
   test 'should not create if email not properly formatted' do
     assert_no_difference ['NewsletterUser.count'] do
       post :create, params: { newsletter_user: { email: 'aaabbb.cc', lang: 'fr' } }
@@ -72,7 +72,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
   #
   # Flash
-  # ========
+  # =======
   # Create
   test 'should have correct flash if create' do
     post :create, params: { newsletter_user: { email: @email, lang: @lang } }
@@ -95,9 +95,16 @@ class NewsletterUsersControllerTest < ActionController::TestCase
   end
 
   # Delete
-  test 'should have correct flash if unsubscribe' do
+  test 'should have correct default flash if unsubscribe' do
     delete :unsubscribe, params: { locale: 'fr', newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token }
     assert_equal I18n.t('newsletter.unsubscribe.success'), flash[:success]
+  end
+
+  test 'should have correct personal flash if unsubscribe' do
+    @mailing_setting.attributes = { unsubscribe_content: 'contenu personnel', locale: :fr }
+    @mailing_setting.save
+    delete :unsubscribe, params: { locale: 'fr', newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token }
+    assert_equal 'contenu personnel', flash[:success]
   end
 
   test 'should have correct flash if unsubscribe fails' do
@@ -128,7 +135,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
   #
   # Ajax
-  # =======
+  # ======
   test 'AJAX :: should create' do
     post :create, params: { format: :js, newsletter_user: { email: @email, lang: @lang } }, xhr: true
     assert_response :success
@@ -166,7 +173,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
   #
   # Unsubscribing
-  # ================
+  # ===============
   test 'should get redirected to french home after unsubscribing' do
     delete :unsubscribe, params: { locale: 'fr', newsletter_user_id: @newsletter_user.id, token: @newsletter_user.token }
     assert_redirected_to root_path(locale: 'fr')
@@ -191,7 +198,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
   #
   # Mailer
-  # =========
+  # ========
   test 'should send an email when a subscribed' do
     clear_deliveries_and_queues
     assert_no_enqueued_jobs
@@ -257,7 +264,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
   #
   # Abilities
-  # ============
+  # ===========
   test 'should test abilities for subscriber' do
     sign_in @subscriber
     ability = Ability.new(@subscriber)
@@ -297,6 +304,7 @@ class NewsletterUsersControllerTest < ActionController::TestCase
 
     @newsletter_module = optional_modules(:newsletter)
     @newsletter_setting = newsletter_settings(:one)
+    @mailing_setting = mailing_settings(:one)
 
     @newsletter_user = newsletter_users(:newsletter_user_fr)
     @newsletter_user_en = newsletter_users(:newsletter_user_en)

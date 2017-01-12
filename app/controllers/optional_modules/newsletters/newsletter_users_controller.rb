@@ -30,7 +30,7 @@ class NewsletterUsersController < ApplicationController
     if @newsletter_user.token == params[:token]
       lang = @newsletter_user.lang
       @newsletter_user.destroy
-      flash[:success] = I18n.t('newsletter.unsubscribe.success')
+      flash[:success] = @mailing_setting.unsubscribe_content
     else
       flash[:error] = I18n.t('newsletter.unsubscribe.fail')
     end
