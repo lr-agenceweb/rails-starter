@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == MailingMessagesController Test
-#
+# MailingMessagesController Test
+# ================================
 class MailingMessagesControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
@@ -11,8 +11,8 @@ class MailingMessagesControllerTest < ActionController::TestCase
   setup :initialize_test
 
   #
-  # == Preview in browser
-  #
+  # Preview in browser
+  # ====================
   test 'should render preview in browser template' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -24,8 +24,8 @@ class MailingMessagesControllerTest < ActionController::TestCase
   end
 
   #
-  # == Request integrity
-  #
+  # Request integrity
+  # ===================
   test 'should render 404 if tries to access another mailing' do
     assert_raises(ActionController::RoutingError) do
       @locales.each do |locale|
@@ -77,8 +77,8 @@ class MailingMessagesControllerTest < ActionController::TestCase
   end
 
   #
-  # == Abilities
-  #
+  # Abilities
+  # ===========
   test 'should test abilities for subscriber' do
     sign_in @subscriber
     ability = Ability.new(@subscriber)
@@ -110,8 +110,8 @@ class MailingMessagesControllerTest < ActionController::TestCase
   end
 
   #
-  # == Module disabled
-  #
+  # Module disabled
+  # =================
   test 'should render 404 if module is disabled' do
     disable_optional_module @super_administrator, @mailing_module, 'Mailing' # in test_helper.rb
     assert_raises(ActionController::RoutingError) do
