@@ -2,5 +2,5 @@
   div itemprop='video' itemscope='' itemtype='http://schema.org/VideoObject'
     meta itemprop='name' content="#{video_upload.title_microdatas}"
     meta itemprop='description' content="#{video_upload.description_microdatas}"
-    meta itemprop='thumbnail thumbnailUrl' content="#{attachment_url(video_upload.video_file, :preview)}"
+    meta itemprop='thumbnail thumbnailUrl' content="#{asset_url(video_upload.video_file.url(:preview))}"
     meta itemprop='uploadDate' content="#{video_upload.created_at.to_datetime}"

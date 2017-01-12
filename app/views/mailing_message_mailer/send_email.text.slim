@@ -1,5 +1,5 @@
 - I18n.with_locale(@mailing_user.lang) do
-  = t('mailing.hello', user: @mailing_user.decorate.name_or_not)
+  = t('mailing.hello', user: @mailing_user.decorate.fullname)
   = "\r\n\r\n"
   = sanitize_string(@mailing_message.content)
 

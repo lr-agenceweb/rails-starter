@@ -7,6 +7,9 @@ class MailingUserDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
 
+  #
+  # Columns
+  # ==========
   def name
     html = []
     html << email
@@ -15,10 +18,9 @@ class MailingUserDecorator < ApplicationDecorator
     safe_join [html], ' '
   end
 
-  def name_or_not
-    model.fullname.blank? ? ',' : ' ' + model.fullname + ','
-  end
-
+  #
+  # Status tag
+  # ============
   def archive_status
     color = model.archive? ? 'blue' : 'warning'
     status_tag_deco I18n.t("archive.#{model.archive}"), color

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 #
-# == OptionalModules namespace
-#
+# OptionalModules namespace
+# ===========================
 module OptionalModules
   #
-  # == SocialHelper
-  #
+  # SocialHelper
+  # ==============
   module SocialHelper
     include Core::PageHelper
     include AssetsHelper
@@ -20,7 +20,7 @@ module OptionalModules
     #
     def seo_tag_index(page, background = nil)
       return false if page.nil?
-      img = background.nil? ? nil : attachment_url(background.image, :medium)
+      img = background.nil? ? nil : asset_url(background.image.url(:medium))
       title_seo = title_seo_structure(page.menu_title)
       set_meta_tags title: page.menu_title,
                     description: sanitize_and_truncate(page.referencement_description),
@@ -135,8 +135,8 @@ module OptionalModules
     #   - the image for a given object if any
     #
     def image_for_object(obj)
-      return attachment_url(obj.picture.image, :large) if defined?(obj.picture) && obj.picture?
-      return attachment_url(obj.first_pictures_image, :large) if defined?(obj.pictures) && obj.pictures?
+      return asset_url(obj.picture.image.url(:large)) if defined?(obj.picture) && obj.picture?
+      return asset_url(obj.first_pictures_image.url(:large)) if defined?(obj.pictures) && obj.pictures?
       nil
     end
 

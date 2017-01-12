@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == PostDecorator
-#
+# PostDecorator
+# ===============
 class PostDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   include AssetsHelper
@@ -12,8 +12,8 @@ class PostDecorator < ApplicationDecorator
   decorates_association :pictures
 
   #
-  # == Author and avatar linked to Post
-  #
+  # Author and avatar linked to Post
+  # ==================================
   def author
     model.user_username
   end
@@ -31,8 +31,8 @@ class PostDecorator < ApplicationDecorator
   end
 
   #
-  # == Picture
-  #
+  # Picture
+  # =========
   def image
     pictures? ? retina_image_tag(first_pictures, :image, :small) : t('post.no_cover')
   end
@@ -50,13 +50,13 @@ class PostDecorator < ApplicationDecorator
   # Method used to display content in RSS Feed
   def image_and_content
     html = content
-    html << image_tag(attachment_url(first_pictures.image, :medium)) if pictures?
+    html << image_tag(asset_url(first_pictures.image.url(:medium))) if pictures?
     html
   end
 
   #
   # Post
-  # =========
+  # ======
   def title_front_link
     link_to title, resource_route_show(model), target: :_blank
   end
@@ -67,29 +67,29 @@ class PostDecorator < ApplicationDecorator
   end
 
   #
-  # == Type of Post
-  #
+  # Type of Post
+  # ==============
   def type_title
     Page.title_by_page(type)
   end
 
   #
-  # == ActiveAdmin
-  #
+  # ActiveAdmin
+  # =============
   def title_aa_show
     I18n.t('post.title_aa_show', page: type_title, title: title)
   end
 
   #
-  # == Comments
-  #
+  # Comments
+  # ==========
   def comments_count
     comments.validated.count
   end
 
   #
-  # == PublicationDate (publishable polymorphic)
-  #
+  # PublicationDate (publishable polymorphic)
+  # ===========================================
   # TODO: Refactor duplicated code
   def publication
     html = []
@@ -108,8 +108,8 @@ class PostDecorator < ApplicationDecorator
   end
 
   #
-  # == Link (linkable polymorphic)
-  #
+  # Link (linkable polymorphic)
+  # =============================
   def link?
     model.link.try(:url).present?
   end
@@ -119,8 +119,8 @@ class PostDecorator < ApplicationDecorator
   end
 
   #
-  # == Post link (regular post or Blog)
-  #
+  # Post link (regular Post or Blog)
+  # ==================================
   def show_post_link(suffix = 'path')
     model.is_a?(Blog) ? send("blog_category_blog_#{suffix}", model.blog_category, model) : send("#{model.class.name.underscore}_#{suffix}", model)
   end

@@ -48,7 +48,7 @@ ActiveAdmin.register MailingMessage do
     end
   end
 
-  form do |f|
+  form html: { multipart: true } do |f|
     render 'admin/mailings/form', f: f
   end
 

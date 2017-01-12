@@ -17,15 +17,6 @@ class MailingUserDecoratorTest < Draper::TestCase
     assert_equal expected, @mailing_user_decorated.name
   end
 
-  test 'should return correct value for name_or_not method' do
-    assert_equal ' Lorie,', @mailing_user_decorated.name_or_not
-  end
-
-  test 'should return correct value for name_or_not method 2' do
-    @mailing_user.update_attribute(:fullname, '')
-    assert_equal ',', @mailing_user_decorated.name_or_not
-  end
-
   #
   # Status tag
   # ============
