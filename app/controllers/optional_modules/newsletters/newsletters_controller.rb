@@ -12,8 +12,9 @@ class NewslettersController < ApplicationController
   # Callbacks
   before_action :not_found,
                 unless: proc { @newsletter_module.enabled? }
-  before_action :set_variables,
+  before_action :set_vars,
                 only: [:preview_in_browser, :welcome_user]
+  before_action :set_newsletter_setting
 
   # Preview Welcome email in browser
   def welcome_user
@@ -39,8 +40,12 @@ class NewslettersController < ApplicationController
 
   private
 
-  def set_variables
+  def set_vars
     @hide_preview_link = true
+  end
+
+  def set_newsletter_setting
+    @mailing_setting = MailingSetting.first.decorate
   end
 
   def all_conditions_respected?

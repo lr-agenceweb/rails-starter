@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 #
-# == ContactForm Mailer preview
-# Preview all emails at http://localhost:3000/rails/mailers/contact_form_mailer
-#
+# ContactForm Mailer preview
+# http://localhost:3000/rails/mailers/contact_form_mailer
+# =============================
 class ContactFormMailerPreview < ActionMailer::Preview
   def to_admin_preview
     @message = ContactForm.new default_attrs('cristiano', 'cristiano@ronaldo.pt')

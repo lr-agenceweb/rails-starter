@@ -11,10 +11,11 @@ class ApplicationMailer < ActionMailer::Base
   helper :application # ApplicationHelper
 
   # Callbacks
-  before_action :set_setting
-  before_action :set_map_setting
-  before_action :set_contact_settings
-  before_action :set_formatted_from
+  before_action :set_setting,
+                :set_map_setting,
+                :set_mailing_setting,
+                :set_contact_setting,
+                :set_formatted_from
 
   private
 
@@ -26,7 +27,11 @@ class ApplicationMailer < ActionMailer::Base
     @map_setting = MapSetting.first.decorate
   end
 
-  def set_contact_settings
+  def set_mailing_setting
+    @mailing_setting = MailingSetting.first.decorate
+  end
+
+  def set_contact_setting
     @copy_to_sender = false
   end
 

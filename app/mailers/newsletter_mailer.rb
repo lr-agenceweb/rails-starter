@@ -7,7 +7,7 @@ class NewsletterMailer < ApplicationMailer
   layout 'mailers/newsletter'
 
   # Callbacks
-  before_action :set_newsletter_settings
+  before_action :set_vars
 
   # Administrator => Customer
   # Email send after a user subscribed to the newsletter
@@ -33,7 +33,7 @@ class NewsletterMailer < ApplicationMailer
 
   private
 
-  def set_newsletter_settings
+  def set_vars
     @is_welcome_user = false
     @hide_preview_link = false
   end

@@ -2,7 +2,7 @@
 
 #
 # Ability Class
-# =================
+# ===============
 class Ability
   include CanCan::Ability
   prepend Draper::CanCanCan
@@ -100,11 +100,12 @@ class Ability
 
   def optional_modules_check
     comment_frontend
-    newsletter_frontend
     mailing_frontend
-    guest_book_module
+    mailing_module
+    newsletter_frontend
     newsletter_module
     comment_module
+    guest_book_module
     blog_module
     slider_module
     event_module
@@ -113,15 +114,14 @@ class Ability
     background_module
     adult_module
     video_module
-    mailing_module
     social_connect_module
     audio_module
     rss_module
   end
 
   #
-  # == GuestBook
-  #
+  # GuestBook
+  # ===========
   def guest_book_module
     if @guest_book_module.enabled?
       can [:read, :destroy], GuestBook
@@ -134,14 +134,14 @@ class Ability
   end
 
   #
-  # == Newsletter
-  #
+  # Newsletter
+  # ============
   def newsletter_module
     if @newsletter_module.enabled?
       can [:crud, :send, :preview], Newsletter
       can :crud, NewsletterUser
-      can [:read, :update], NewsletterSetting
-      cannot [:create, :destroy], NewsletterSetting
+      can [:read, :update], [NewsletterSetting, MailingSetting]
+      cannot [:create, :destroy], [NewsletterSetting, MailingSetting]
     else
       cannot :manage, [Newsletter, NewsletterUser, NewsletterSetting]
     end
@@ -154,8 +154,30 @@ class Ability
   end
 
   #
-  # == Comment
+  # Mailing
+  # =========
+  def mailing_module
+    if @mailing_module.enabled?
+      can [:crud,
+           :send_mailing_message,
+           :preview], MailingMessage
+      can [:crud], MailingUser
+      can [:read, :update], [MailingSetting]
+      cannot [:create, :destroy], [MailingSetting]
+    else
+      cannot :manage, [MailingUser, MailingSetting, MailingMessage]
+    end
+  end
+
+  def mailing_frontend
+    return unless @mailing_module.enabled?
+    can :preview_in_browser, MailingMessage
+    can :unsubscribe, MailingUser
+  end
+
   #
+  # Comment
+  # =========
   def comment_module
     if @comment_module.enabled?
       can [:read, :destroy], Comment, user: { role_name: %w(administrator subscriber) }
@@ -182,8 +204,8 @@ class Ability
   end
 
   #
-  # == Slider
-  #
+  # Slider
+  # ========
   def slider_module
     if @slider_module.enabled?
       can :crud, [Slider, Slide]
@@ -194,8 +216,8 @@ class Ability
   end
 
   #
-  # == Blog / Event
-  #
+  # Blog / Event
+  # ==============
   [Blog, Event].each do |model_object|
     define_method "#{model_object.to_s.underscore}_module" do
       model_object_setting = "#{model_object}Setting".constantize
@@ -211,8 +233,8 @@ class Ability
   end
 
   #
-  # == Map
-  #
+  # Map
+  # =====
   def map_module
     if @map_module.enabled?
       can [:update, :read], MapSetting
@@ -224,8 +246,8 @@ class Ability
   end
 
   #
-  # == Social
-  #
+  # Social
+  # ========
   def social_module
     if @social_module.enabled?
       can [:update, :read], Social
@@ -236,8 +258,8 @@ class Ability
   end
 
   #
-  # == Background
-  #
+  # Background
+  # ============
   def background_module
     if @background_module.enabled?
       can :crud, Background
@@ -247,8 +269,8 @@ class Ability
   end
 
   #
-  # == Adult
-  #
+  # Adult
+  # =======
   def adult_module
     if @adult_module.enabled?
       can [:read, :update], AdultSetting
@@ -259,8 +281,8 @@ class Ability
   end
 
   #
-  # == Video
-  #
+  # Video
+  # =======
   def video_module
     @video_settings = VideoSetting.first
     if @video_module.enabled?
@@ -286,30 +308,8 @@ class Ability
   end
 
   #
-  # == Mailing
-  #
-  def mailing_module
-    if @mailing_module.enabled?
-      can [:crud,
-           :send_mailing_message,
-           :preview], MailingMessage
-      can [:crud], MailingUser
-      can [:read, :update], [MailingSetting]
-      cannot [:create, :destroy], [MailingSetting]
-    else
-      cannot :manage, [MailingUser, MailingSetting, MailingMessage]
-    end
-  end
-
-  def mailing_frontend
-    return unless @mailing_module.enabled?
-    can :preview_in_browser, MailingMessage
-    can :unsubscribe, MailingUser
-  end
-
-  #
-  # == SocialConnect
-  #
+  # SocialConnect
+  # ===============
   def social_connect_module
     if @social_connect_module.enabled?
       can [:read, :update], [SocialConnectSetting]
@@ -320,8 +320,8 @@ class Ability
   end
 
   #
-  # == Audio
-  #
+  # Audio
+  # =======
   def audio_module
     if @audio_module.enabled?
       can [:read, :update, :destroy], Audio
@@ -332,8 +332,8 @@ class Ability
   end
 
   #
-  # == RSS
-  #
+  # RSS
+  # =====
   def rss_module
     if @rss_module.enabled?
       can :feed, Post
@@ -343,8 +343,8 @@ class Ability
   end
 
   #
-  # == batch_actions
-  #
+  # batch_actions
+  # ===============
   def super_admin_batch_actions
     can [:toggle_active], User, role: { name: %w(administrator subscriber) }
     cannot [:toggle_active], User, id: @user.id

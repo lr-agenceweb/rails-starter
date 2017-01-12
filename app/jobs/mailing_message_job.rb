@@ -4,12 +4,11 @@
 # MailingMessage Job
 # ====================
 class MailingMessageJob < ApplicationJob
-  def perform(user, message, setting)
+  def perform(user, message)
     I18n.with_locale(user.lang) do
       opts = {
         mailing_user: user,
-        mailing_message: message,
-        mailing_setting: setting.decorate
+        mailing_message: message
       }
 
       MailingMessageMailer.send_email(opts).deliver_now

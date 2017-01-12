@@ -17,8 +17,9 @@ class MailingSettingDecorator < ApplicationDecorator
     Setting.first.email
   end
 
-  def signature_d
-    safe_join [raw(model.signature)]
+  def signature
+    s = model.signature.blank? ? name_status : model.signature
+    safe_join [raw(s)]
   end
 
   def unsubscribe_content

@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == MailingSettingDecorator test
-#
+# MailingSettingDecorator test
+# ==============================
 class MailingSettingDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 

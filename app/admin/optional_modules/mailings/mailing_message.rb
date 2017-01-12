@@ -90,7 +90,7 @@ ActiveAdmin.register MailingMessage do
 
     def send_mailing_message
       @mailing_users.each do |mailing_user|
-        MailingMessageJob.set(wait: 3.seconds).perform_later(mailing_user, @mailing_message, @mailing_setting)
+        MailingMessageJob.set(wait: 3.seconds).perform_later(mailing_user, @mailing_message)
       end
 
       @mailing_message.update_attributes(sent_at: Time.zone.now)

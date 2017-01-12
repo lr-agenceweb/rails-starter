@@ -20,7 +20,7 @@ ActiveAdmin.register MailingSetting do
           attributes_table do
             row :name_status
             row :email_status
-            row :signature_d
+            row :signature, class: 'fr-view'
             row :unsubscribe_title
             row :unsubscribe_content
           end
@@ -62,12 +62,25 @@ ActiveAdmin.register MailingSetting do
   end
 
   #
-  # == Controller
-  #
+  # Controller
+  # ============
   controller do
-    before_action :redirect_to_show, only: [:index], if: proc { current_user_and_administrator? && @mailing_module.enabled? }
+    before_action :set_newsletter_module
+    before_action :redirect_to_show,
+                  only: [:index],
+                  if: proc {
+                    current_user_and_administrator? && (@mailing_module.enabled? || @newsletter_module.enabled?)
+                  }
 
     private
+
+    def scoped_collection
+      super.includes(:translations)
+    end
+
+    def set_newsletter_module
+      @newsletter_module = OptionalModule.by_name('Newsletter')
+    end
 
     def redirect_to_show
       redirect_to admin_mailing_setting_path(MailingSetting.first), status: 301

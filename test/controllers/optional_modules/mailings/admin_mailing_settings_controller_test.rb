@@ -2,20 +2,20 @@
 require 'test_helper'
 
 #
-# == Admin namespace
-#
+# Admin namespace
+# =================
 module Admin
   #
-  # == MailingSettingsController test
-  #
+  # MailingSettingsController test
+  # ================================
   class MailingSettingsControllerTest < ActionController::TestCase
     include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
     #
-    # == Routes / Templates / Responses
-    #
+    # Routes / Templates / Responses
+    # ================================
     test 'should redirect index page to show if logged in' do
       get :index
       assert_response 301
@@ -53,8 +53,8 @@ module Admin
     end
 
     #
-    # == Destroy
-    #
+    # Destroy
+    # =========
     test 'should not destroy if logged in as subscriber' do
       sign_in @subscriber
       assert_no_difference 'MailingSetting.count' do
@@ -69,8 +69,8 @@ module Admin
     end
 
     #
-    # == Subscriber
-    #
+    # Subscriber
+    # ============
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
       assert_crud_actions(@mailing_setting, new_user_session_path, model_name, no_show: true)
@@ -82,8 +82,8 @@ module Admin
     end
 
     #
-    # == Maintenance
-    #
+    # Maintenance
+    # =============
     test 'should not render maintenance even if enabled and SA' do
       sign_in @super_administrator
       assert_no_maintenance_backend(:show, @mailing_setting.id)
@@ -107,8 +107,8 @@ module Admin
     end
 
     #
-    # == Abilities
-    #
+    # Abilities
+    # ===========
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
@@ -136,10 +136,11 @@ module Admin
     end
 
     #
-    # == Module disabled
-    #
-    test 'should not access page if mailing module is disabled' do
+    # Module disabled
+    # =================
+    test 'should not access page if mailing and newsletter modules are disabled' do
       disable_optional_module @super_administrator, @mailing_module, 'Mailing' # in test_helper.rb
+      disable_optional_module @super_administrator, @newsletter_module, 'Newsletter' # in test_helper.rb
       sign_in @super_administrator
       assert_crud_actions(@mailing_setting, admin_dashboard_path, model_name)
       sign_in @administrator
@@ -148,12 +149,20 @@ module Admin
       assert_crud_actions(@mailing_setting, admin_dashboard_path, model_name)
     end
 
+    test 'should access page if mailing module is enabled but not newsletter' do
+      disable_optional_module @super_administrator, @newsletter_module, 'Newsletter' # in test_helper.rb
+      sign_in @super_administrator
+      get :show, params: { id: @mailing_setting }
+      assert_response :success
+    end
+
     private
 
     def initialize_test
       @setting = settings(:one)
       @mailing_setting = mailing_settings(:one)
       @mailing_module = optional_modules(:mailing)
+      @newsletter_module = optional_modules(:newsletter)
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

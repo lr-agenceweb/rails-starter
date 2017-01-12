@@ -5,6 +5,7 @@
 # ====================
 class ContactsController < ApplicationController
   include OptionalModules::QrcodeHelper
+  include ModuleSettingable
 
   skip_before_action :allow_cors,
                      :set_menu_elements,

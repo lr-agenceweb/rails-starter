@@ -34,7 +34,6 @@ class MailingMessageMailer < ApplicationMailer
   def extract_vars(opts)
     @mailing_user ||= opts[:mailing_user]
     @mailing_message ||= opts[:mailing_message]
-    @mailing_setting ||= opts[:mailing_setting]
   end
 
   def optimize_from_header

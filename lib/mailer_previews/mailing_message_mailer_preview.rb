@@ -14,7 +14,6 @@ class MailingMessageMailerPreview < ActionMailer::Preview
       lang: 'fr'
     )
     @mailing_message = MailingMessage.first.decorate
-    @mailing_setting = MailingSetting.first.decorate
 
     MailingMessageMailer.send_email(opts)
   end
@@ -24,8 +23,7 @@ class MailingMessageMailerPreview < ActionMailer::Preview
   def opts
     {
       mailing_user: @mailing_user,
-      mailing_message: @mailing_message,
-      mailing_setting: @mailing_setting
+      mailing_message: @mailing_message
     }
   end
 end
