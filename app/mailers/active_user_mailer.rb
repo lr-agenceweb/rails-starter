@@ -8,7 +8,6 @@ class ActiveUserMailer < ApplicationMailer
 
   def send_email(user)
     @user = user
-    @content = I18n.t('active_user_mailer.send_email.content', site: @setting.title)
 
     mail from: @from_admin,
          to: @user.email,

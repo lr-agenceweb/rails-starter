@@ -14,7 +14,6 @@ class MailingMessagesController < ApplicationController
 
   def preview_in_browser
     raise ActionController::RoutingError, 'Not Found' unless all_conditions_respected?
-    @content = @mailing_message.content
     @hide_preview_link = true
 
     I18n.with_locale(params[:locale]) do

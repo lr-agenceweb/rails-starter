@@ -1,12 +1,13 @@
 - I18n.with_locale(@mailing_user.lang) do
-  = I18n.t('mailing.hello', user: @mailing_user.decorate.name_or_not)
+  = t('mailing.hello', user: @mailing_user.decorate.name_or_not)
   = "\r\n\r\n"
   = sanitize_string(@mailing_message.content)
 
   = "\r\n\r\n"
-  = "# Voir la version en ligne :"
-  =<> preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token)
+  == '# ' + t('mailing.preview_in_browser', link: preview_in_browser_mailing_message_url(@mailing_message.id, @mailing_message.token, @mailing_user.id, @mailing_user.token))
 
   = "\r\n"
-  = "# Si vous ne souhaitez plus recevoir d'emailing de la part de L&R Agence web, désabonnez-vous ici :"
-  =<> unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token)
+  == '# ' + t('mailing.footer_unsubscribe', owner: h(@setting.title), link: unsubscribe_mailing_user_url(@mailing_user.id, @mailing_user.token))
+
+  = "\r\n"
+  = '# ' + t('mailing.no_reply')

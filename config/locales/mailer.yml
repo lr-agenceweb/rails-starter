@@ -39,7 +39,7 @@ fr:
   active_user_mailer:
     send_email:
       subject: "[%{site}] Activation de votre compte utilisateur sur le site"
-      content: Votre compte a été validé par l'administrateur du site %{site}. <br /><br /> Vous pouvez maintenant vous connecter avec vos identifiants définis lors de votre inscription.
+      content: Votre compte a été validé par l'administrateur du site %{site}. <br /> Vous pouvez maintenant vous connecter avec vos identifiants définis lors de votre inscription.
 
 # English
 en:
