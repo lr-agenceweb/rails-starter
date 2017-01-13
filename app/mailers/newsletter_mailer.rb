@@ -35,7 +35,7 @@ class NewsletterMailer < ApplicationMailer
 
   def set_vars
     @is_welcome_user = false
-    @hide_preview_link = false
+    @show_preview_link = true
   end
 
   def extract_vars(opts)

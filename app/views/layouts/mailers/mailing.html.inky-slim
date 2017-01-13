@@ -11,7 +11,7 @@ html[xmlns='http://www.w3.org/1999/xhtml']
         td.center align="center" valign="top"
           center
 
-            - unless @hide_preview_link
+            - if @show_preview_link
               / Upper Header
               container
                 spacer size="20"

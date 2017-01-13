@@ -41,7 +41,7 @@ class NewslettersController < ApplicationController
   private
 
   def set_vars
-    @hide_preview_link = true
+    @show_preview_link = false
   end
 
   def set_newsletter_setting

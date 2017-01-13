@@ -17,7 +17,7 @@ class MailingMessagesController < ApplicationController
 
   def preview_in_browser
     I18n.with_locale(params[:locale]) do
-      @hide_preview_link = true
+      @show_preview_link = false
       render 'mailing_message_mailer/send_email'
     end
   end

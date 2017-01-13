@@ -28,7 +28,7 @@ class MailingMessageMailer < ApplicationMailer
 
   def set_variables
     @show_in_email = true
-    @hide_preview_link = false
+    @show_preview_link = true
   end
 
   def extract_vars(opts)
