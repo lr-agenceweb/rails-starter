@@ -15,7 +15,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
   # Send email
   # ============
   test 'should message me' do
-    email = ContactFormMailer.to_admin(@message).deliver_now
+    email = ContactFormMailer.to_admin(@message, I18n.default_locale).deliver_now
     refute ActionMailer::Base.deliveries.empty?
     last_email = ActionMailer::Base.deliveries.last
 
@@ -38,8 +38,8 @@ class ContactFormMailerTest < ActionMailer::TestCase
   end
 
   test 'should send copy of email contact to sender' do
-    ContactFormMailer.to_admin(@message).deliver_now
-    ContactFormMailer.copy(@message).deliver_now
+    ContactFormMailer.to_admin(@message, I18n.default_locale).deliver_now
+    ContactFormMailer.copy(@message, I18n.default_locale).deliver_now
     refute ActionMailer::Base.deliveries.empty?
     contact_email = ActionMailer::Base.deliveries.first
     cc_email = ActionMailer::Base.deliveries.last
@@ -74,7 +74,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
   # AnsweringMachine
   # ==================
   test 'should send answering machine email to sender' do
-    email = ContactFormMailer.answering_machine('karim@benzema.fr').deliver_now
+    email = ContactFormMailer.answering_machine('karim@benzema.fr', I18n.default_locale).deliver_now
 
     refute ActionMailer::Base.deliveries.empty?
     assert_equal ['demo@rails-starter.com'], email.from
@@ -153,7 +153,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
     @message.attachment = fixture_file_upload('/images/bart.png')
     assert_not @message.attachment.blank?
 
-    email = ContactFormMailer.to_admin(@message).deliver_now
+    email = ContactFormMailer.to_admin(@message, I18n.default_locale).deliver_now
     assert_equal 0, email.attachments.size
     assert email.attachments.blank?
   end
@@ -163,7 +163,7 @@ class ContactFormMailerTest < ActionMailer::TestCase
     @message.attachment = fixture_file_upload('/images/bart.png')
     assert_not @message.attachment.blank?
 
-    email = ContactFormMailer.to_admin(@message).deliver_now
+    email = ContactFormMailer.to_admin(@message, I18n.default_locale).deliver_now
     assert_equal 1, email.attachments.size
     assert_equal 'bart.png', email.attachments[0].filename
   end

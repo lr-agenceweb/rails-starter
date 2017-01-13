@@ -7,22 +7,16 @@
 class ContactFormMailerPreview < ActionMailer::Preview
   def to_admin_preview
     @message = ContactForm.new default_attrs('cristiano', 'cristiano@ronaldo.pt')
-
-    I18n.with_locale(:fr) do
-      ContactFormMailer.to_admin(@message)
-    end
+    ContactFormMailer.to_admin(@message, :fr)
   end
 
   def copy_preview
     @message = ContactForm.new default_attrs('Karim', 'karim@benzema.fr')
-
-    I18n.with_locale(:fr) do
-      ContactFormMailer.copy(@message)
-    end
+    ContactFormMailer.copy(@message, :fr)
   end
 
   def answering_machine_preview
-    ContactFormMailer.answering_machine('karim@benzema.fr', :fr)
+    ContactFormMailer.answering_machine('karim@benzema.fr', :en)
   end
 
   private

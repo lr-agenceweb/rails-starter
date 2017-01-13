@@ -81,8 +81,8 @@ class ContactsController < ApplicationController
   end
 
   def set_emails
-    ContactFormMailer.to_admin(@contact_form).deliver_now
-    ContactFormMailer.copy(@contact_form).deliver_now if @contact_form.send_copy == '1'
-    ContactFormMailer.answering_machine(@contact_form.email, @locale).deliver_now if @setting.answering_machine?
+    ContactFormMailer.to_admin(@contact_form, @language).deliver_now
+    ContactFormMailer.copy(@contact_form, @language).deliver_now if @contact_form.send_copy == '1'
+    ContactFormMailer.answering_machine(@contact_form.email, @language).deliver_now if @setting.answering_machine?
   end
 end
