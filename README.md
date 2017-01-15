@@ -45,7 +45,7 @@
   - [Rails](#rails)
   - [Capistrano](#capistrano)
 - [Modules](#modules)
-- [Screenshot](#screenshot)
+- [Screenshots](#screenshots)
 - [Thanks](#thanks)
 - [Contributing](#contributing)
 
