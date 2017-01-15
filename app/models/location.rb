@@ -15,6 +15,21 @@ class Location < ApplicationRecord
             presence: true,
             numericality: { only_integer: true }
 
+  #
+  # Boolean
+  # =========
+  def address?
+    !address.blank?
+  end
+
+  def postcode?
+    !postcode.blank?
+  end
+
+  def city?
+    !city.blank?
+  end
+
   def latlon?
     latitude.present? && longitude.present?
   end

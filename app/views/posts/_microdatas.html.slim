@@ -20,7 +20,7 @@ div itemscope='' itemtype="http://schema.org/#{defined?(kind) ? kind : 'Article'
 
     - if @setting.decorate.logo?
       div itemprop='logo' itemscope='' itemtype='http://schema.org/ImageObject'
-        meta itemprop='url' content="#{attachment_url(@setting.logo, :small)}"
+        meta itemprop='url' content="#{asset_url(@setting.logo.url(:small))}"
         meta itemprop='width' content="#{@setting.retina_dimensions[:logo][:small][:width]}"
         meta itemprop='height' content="#{@setting.retina_dimensions[:logo][:small][:width]}"
 

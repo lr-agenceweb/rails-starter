@@ -15,34 +15,42 @@ class User < ApplicationRecord
   # Helpers
   include AssetsHelper
 
+  # Accessors
+  attr_accessor :login
+
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # Model relations
   has_many :posts, dependent: :destroy
   has_many :blogs, dependent: :destroy
   belongs_to :role
   accepts_nested_attributes_for :role, reject_if: :all_blank
 
-  delegate :name, to: :role, prefix: true, allow_nil: true
-
+  # Validation rules
   validates :username,
             presence: true,
             uniqueness: {
               case_sensitive: false,
               scope: :provider
             },
-            if: proc { |u| u.new_record? || u.changed? }
+            format: { with: /\A[a-z0-9 _\-\.]*\z/i },
+            if: proc { |u| u.new_record? || u.username_changed? }
 
   validates :email,
-            presence: { message: 'Ne doit pas être vide' },
+            presence: true,
             email_format: true,
             uniqueness: {
               case_sensitive: false,
               scope: :provider
             }
 
+  # Delegates
+  delegate :name, to: :role, prefix: true, allow_nil: true
+
+  # Scopes
   scope :except_super_administrator, -> { where.not(role_id: 1) }
 
   # define has_role? methods
@@ -64,6 +72,19 @@ class User < ApplicationRecord
   def self.current_user=(user)
     Thread.current[:current_user] = user
   end
+
+  # Connect user by username or email
+  # rubocop:disable Rails/FindBy
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if (login = conditions.delete(:login))
+      where(conditions.to_hash).where('lower(username) = :value OR lower(email) = :value', value: login.downcase).first
+
+    else
+      where(conditions.to_hash).first
+    end
+  end
+  # rubocop:enable Rails/FindBy
 end
 
 # == Schema Information

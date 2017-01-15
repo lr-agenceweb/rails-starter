@@ -12,13 +12,11 @@ class SearchesController < ApplicationController
 
   # GET /rechercher
   # GET /rechercher.json
-  def index
-  end
+  def index; end
 
   # GET /rechercher/autocomplete
   # GET /rechercher/autocomplete.json
-  def autocomplete
-  end
+  def autocomplete; end
 
   private
 

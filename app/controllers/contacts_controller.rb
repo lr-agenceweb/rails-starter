@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 #
-# == ContactsController
-#
+# ContactsController
+# ====================
 class ContactsController < ApplicationController
   include OptionalModules::QrcodeHelper
+  include ModuleSettingable
 
   skip_before_action :allow_cors,
                      :set_menu_elements,
@@ -24,6 +25,10 @@ class ContactsController < ApplicationController
                      # Rails 5 fix
                      raise: false
 
+  after_action :set_emails,
+               only: [:create],
+               if: proc { @contact_form.valid? }
+
   # GET /contact
   # GET /contact.json
   def index
@@ -40,9 +45,6 @@ class ContactsController < ApplicationController
   def create
     @contact_form = ContactForm.new(contact_form_params)
     if @contact_form.valid?
-      ContactFormMailer.message_me(@contact_form).deliver_now
-      ContactFormMailer.send_copy(@contact_form).deliver_now if @contact_form.send_copy == '1'
-      ContactFormMailer.answering_machine(@contact_form.email, @locale).deliver_now if @setting.answering_machine?
       respond_action :create
     else
       render :new
@@ -76,5 +78,11 @@ class ContactsController < ApplicationController
       format.html { redirect_to new_contact_path, notice: @success_contact_form.content }
       format.js { render template }
     end
+  end
+
+  def set_emails
+    ContactFormMailer.to_admin(@contact_form, @language).deliver_now
+    ContactFormMailer.copy(@contact_form, @language).deliver_now if @contact_form.send_copy == '1'
+    ContactFormMailer.answering_machine(@contact_form.email, @language).deliver_now if @setting.answering_machine?
   end
 end

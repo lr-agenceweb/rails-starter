@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 #
-# == NewsletterUserable Concern
-#
+# NewsletterUserable Concern
+# ============================
 module NewsletterUserable
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_newsletter_user, only: [:unsubscribe, :preview_in_browser, :welcome_user]
+    # Callbacks
+    before_action :set_newsletter_user,
+                  only: [:unsubscribe, :preview_in_browser, :welcome_user]
   end
 
   def set_newsletter_user

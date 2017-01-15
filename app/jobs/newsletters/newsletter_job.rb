@@ -2,9 +2,16 @@
 
 #
 # Newsletter Job
-# ==================
+# =================
 class NewsletterJob < ApplicationJob
   def perform(user, newsletter)
-    NewsletterMailer.send_newsletter(user, newsletter).deliver_now
+    I18n.with_locale(user.lang) do
+      opts = {
+        newsletter_user: user,
+        newsletter: newsletter
+      }
+
+      NewsletterMailer.send_newsletter(opts).deliver_now
+    end
   end
 end

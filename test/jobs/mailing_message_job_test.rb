@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == MailingMessageJobTest
-#
+# MailingMessageJob test
+# ========================
 class MailingMessageJobTest < ActiveJob::TestCase
   setup :initialize_test
 

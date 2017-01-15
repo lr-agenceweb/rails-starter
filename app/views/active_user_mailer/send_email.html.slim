@@ -1,4 +1,10 @@
-.message
-  p = @content
+row
+  columns
+    .message
+      p = t('mailing.hello', user: @user.email)
 
-p.sent-from = @setting.name
+      == simple_format t('active_user_mailer.send_email.content', site: @setting.title)
+
+      br
+
+      p.sent-from = @setting.name

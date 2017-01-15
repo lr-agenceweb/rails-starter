@@ -22,6 +22,9 @@ ActiveAdmin.register_page 'Toolbelt' do
               row t('toolbelt.active_admin_version') do
                 ActiveAdmin::VERSION
               end
+              row t('toolbelt.sgbd') do
+                ActiveRecord::Base.connection_config[:adapter]
+              end
             end
           end
         end # panel

@@ -2,20 +2,20 @@
 require 'test_helper'
 
 #
-# == Admin namespace
-#
+# Admin namespace
+# =================
 module Admin
   #
-  # == PicturesController test
-  #
+  # PicturesController test
+  # =========================
   class PicturesControllerTest < ActionController::TestCase
     include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
     #
-    # == Routes / Templates / Responses
-    #
+    # Routes / Templates / Responses
+    # ================================
     test 'should show index page if logged in' do
       get :index
       assert_response :success
@@ -50,8 +50,8 @@ module Admin
     end
 
     #
-    # == Batch actions
-    #
+    # Batch actions
+    # ===============
     test 'should return correct value for toggle_online batch action' do
       post :batch_action, params: { batch_action: 'toggle_online', collection_selection: [@picture.id] }
       [@picture].each(&:reload)
@@ -65,8 +65,8 @@ module Admin
     end
 
     #
-    # == Crud actions
-    #
+    # Crud actions
+    # ==============
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
       assert_crud_actions(@picture, new_user_session_path, model_name)
@@ -78,8 +78,8 @@ module Admin
     end
 
     #
-    # == Maintenance
-    #
+    # Maintenance
+    # =============
     test 'should not render maintenance even if enabled and SA' do
       sign_in @super_administrator
       assert_no_maintenance_backend
@@ -103,8 +103,8 @@ module Admin
     end
 
     #
-    # == Abilities
-    #
+    # Abilities
+    # ===========
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
@@ -138,8 +138,8 @@ module Admin
     end
 
     #
-    # == Picture
-    #
+    # Picture
+    # =========
     test 'should update picture if new picture is sent' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
       patch :update, params: { id: @picture, picture: { image: attachment } }

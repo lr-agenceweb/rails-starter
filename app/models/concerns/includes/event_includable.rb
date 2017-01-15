@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 #
-# == Module Includes
-#
+# Module Includes
+# =================
 module Includes
   #
-  # == EventIncludable module
-  #
+  # EventIncludable module
+  # ========================
   module EventIncludable
     extend ActiveSupport::Concern
 

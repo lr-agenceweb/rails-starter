@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == ActiveUser Mailer test class
-#
+# ActiveUserMailer test
+# =======================
 class ActiveUserMailerTest < ActionMailer::TestCase
   include Rails::Controller::Testing::TemplateAssertions
 
@@ -12,7 +12,7 @@ class ActiveUserMailerTest < ActionMailer::TestCase
   test 'should use correct template and layout' do
     ActiveUserMailer.send_email(@user).deliver_now
     assert_template :send_email
-    assert_template layout: nil
+    assert_template layout: 'mailers/default'
   end
 
   test 'should send email' do

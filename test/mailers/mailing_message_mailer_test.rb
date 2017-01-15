@@ -2,15 +2,16 @@
 require 'test_helper'
 
 #
-# == MailingMessage Mailer test class
-#
+# MailingMessageMailer test
+# ===========================
 class MailingMessageMailerTest < ActionMailer::TestCase
   include Rails::Controller::Testing::TemplateAssertions
 
   setup :initialize_test
 
   test 'should use correct template and layout' do
-    MailingMessageMailer.send_email(@mailing_user, @mailing_message).deliver_now
+    opts = set_opts
+    MailingMessageMailer.send_email(opts).deliver_now
     assert_template :send_email
     assert_template layout: 'mailers/mailing'
   end
@@ -18,12 +19,13 @@ class MailingMessageMailerTest < ActionMailer::TestCase
   test 'should send email with default headers' do
     clear_deliveries_and_queues
 
-    email = MailingMessageMailer.send_email(@mailing_user, @mailing_message).deliver_now
+    opts = set_opts
+    email = MailingMessageMailer.send_email(opts).deliver_now
 
     refute ActionMailer::Base.deliveries.empty?
     assert_equal [@mailing_user.email], email.to
     assert_equal [@setting.email], email.from
-    assert_equal @mailing_message.title, email.subject
+    assert_equal "[#{@setting.title}] #{@mailing_message.title}", email.subject
   end
 
   test 'should send email with custom headers' do
@@ -32,12 +34,13 @@ class MailingMessageMailerTest < ActionMailer::TestCase
 
     clear_deliveries_and_queues
 
-    email = MailingMessageMailer.send_email(@mailing_user, @mailing_message).deliver_now
+    opts = set_opts
+    email = MailingMessageMailer.send_email(opts).deliver_now
 
     refute ActionMailer::Base.deliveries.empty?
     assert_equal [@mailing_user.email], email.to
     assert_equal [@mailing_setting.email], email.from
-    assert_equal @mailing_message.title, email.subject
+    assert_equal "[#{@setting.title}] #{@mailing_message.title}", email.subject
   end
 
   private
@@ -46,10 +49,18 @@ class MailingMessageMailerTest < ActionMailer::TestCase
     @setting = settings(:one)
     @mailing_user = mailing_users(:one)
     @mailing_message = mailing_messages(:one)
-    @mailing_setting = mailing_settings(:one)
+    @mailing_setting = mailing_settings(:one).decorate
   end
 
   def response
     @response = ActionController::TestRequest.create
+  end
+
+  def set_opts
+    {
+      mailing_user: @mailing_user,
+      mailing_message: @mailing_message,
+      mailing_setting: @mailing_setting
+    }
   end
 end

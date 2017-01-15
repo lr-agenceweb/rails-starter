@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == NewsletterUserDecorator
-#
+# NewsletterUserDecorator
+# =========================
 class NewsletterUserDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all

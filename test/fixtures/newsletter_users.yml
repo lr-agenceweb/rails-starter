@@ -18,7 +18,7 @@ newsletter_user_en:
 
 newsletter_user_test:
   <<: *DEFAULTS
-  email: 'foo@bar.com'
+  email: foo@bar.com
   lang: fr
   token: _JCD1DXUjs3i2jDUSrwlVA
   newsletter_user_role: tester

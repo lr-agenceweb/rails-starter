@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 #
-# == Newsletterable Concern
-#
+# Newsletterable Concern
+# ========================
 module Newsletterable
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_newsletter, only: [
-      :send_newsletter,
-      :preview_in_browser,
-      :welcome_user
-    ]
+    before_action :set_newsletter,
+                  only: [
+                    :send_newsletter,
+                    :preview_in_browser,
+                    :welcome_user
+                  ]
   end
 
   def set_newsletter

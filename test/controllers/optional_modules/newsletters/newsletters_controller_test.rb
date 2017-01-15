@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == NewslettersController Test
-#
+# NewslettersController Test
+# ============================
 class NewslettersControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
@@ -11,8 +11,8 @@ class NewslettersControllerTest < ActionController::TestCase
   setup :initialize_test
 
   #
-  # == See in browser [Newsletter]
-  #
+  # See in browser [Newsletter]
+  # =============================
   test 'should render preview_in_browser template and newsletter layout' do
     locale = @newsletter_user.lang
     I18n.with_locale(locale) do
@@ -41,8 +41,8 @@ class NewslettersControllerTest < ActionController::TestCase
   end
 
   #
-  # == See in browser [Welcome User message]
-  #
+  # See in browser [Welcome User message]
+  # =======================================
   test 'should render welcome_user template and newsletter layout' do
     locale = @newsletter_user.lang
     I18n.with_locale(locale) do
@@ -62,8 +62,8 @@ class NewslettersControllerTest < ActionController::TestCase
   end
 
   #
-  # == Abilities
-  #
+  # Abilities
+  # ===========
   test 'should test abilities for subscriber' do
     sign_in @subscriber
     ability = Ability.new(@subscriber)
@@ -101,8 +101,8 @@ class NewslettersControllerTest < ActionController::TestCase
   end
 
   #
-  # == Module disabled
-  #
+  # Module disabled
+  # =================
   test 'should render 404 if module is disabled' do
     disable_optional_module @super_administrator, @newsletter_module, 'Newsletter' # in test_helper.rb
     assert_raises(ActionController::RoutingError) do

@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'ready page:load page:restore', ->
   if $('#map_show_map').length
     $this = $('#map_show_map')
     # init = false

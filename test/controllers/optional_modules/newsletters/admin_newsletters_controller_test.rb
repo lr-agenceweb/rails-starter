@@ -2,20 +2,20 @@
 require 'test_helper'
 
 #
-# == Admin namespace
-#
+# Admin namespace
+# =================
 module Admin
   #
-  # == NewslettersController test
-  #
+  # NewslettersController test
+  # ============================
   class NewslettersControllerTest < ActionController::TestCase
     include Devise::Test::ControllerHelpers
 
     setup :initialize_test
 
     #
-    # == Routes / Templates / Responses
-    #
+    # Routes / Templates / Responses
+    # ================================
     test 'should get index page if logged in' do
       get :index
       assert_response :success
@@ -32,8 +32,8 @@ module Admin
     end
 
     #
-    # == Destroy
-    #
+    # Destroy
+    # =========
     test 'should not destroy newsletter if logged in as subscriber' do
       sign_in @subscriber
       assert_no_difference 'Newsletter.count' do
@@ -54,8 +54,8 @@ module Admin
     end
 
     #
-    # == Preview
-    #
+    # Preview
+    # =========
     test 'should render preview template and newsletter layout' do
       I18n.available_locales.each do |locale|
         I18n.with_locale(locale) do
@@ -67,8 +67,8 @@ module Admin
     end
 
     #
-    # == Mailer
-    #
+    # Mailer
+    # ========
     test 'should send email to subscribers' do
       clear_deliveries_and_queues
       assert_no_enqueued_jobs
@@ -96,8 +96,8 @@ module Admin
     end
 
     #
-    # == Maintenance
-    #
+    # Maintenance
+    # =============
     test 'should not render maintenance even if enabled and SA' do
       sign_in @super_administrator
       assert_no_maintenance_backend
@@ -121,8 +121,8 @@ module Admin
     end
 
     #
-    # == Abilities
-    #
+    # Abilities
+    # ===========
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
@@ -197,8 +197,8 @@ module Admin
     end
 
     #
-    # == Module disabled
-    #
+    # Module disabled
+    # =================
     test 'should not access page if newsletter module is disabled' do
       disable_optional_module @super_administrator, @newsletter_module, 'Newsletter' # in test_helper.rb
       sign_in @super_administrator
@@ -212,12 +212,12 @@ module Admin
     private
 
     def initialize_test
-      @request.env['HTTP_REFERER'] = admin_newsletters_path
       @setting = settings(:one)
       @newsletter = newsletters(:one)
       @newsletter_not_sent = newsletters(:not_sent)
       @newsletter_user = newsletter_users(:newsletter_user_fr)
       @newsletter_module = optional_modules(:newsletter)
+      @request.env['HTTP_REFERER'] = admin_newsletters_path
 
       @subscriber = users(:alice)
       @administrator = users(:bob)

@@ -1,9 +1,10 @@
+
 # frozen_string_literal: true
 require 'test_helper'
 
 #
-# == ContactsController Test
-#
+# ContactsController test
+# =========================
 class ContactsControllerTest < ActionController::TestCase
   include UserHelper
   include Devise::Test::ControllerHelpers
@@ -12,8 +13,8 @@ class ContactsControllerTest < ActionController::TestCase
   setup :initialize_test
 
   #
-  # == Routes / Templates / Responses
-  #
+  # Routes / Templates / Responses
+  # ================================
   test 'index page should redirect to new page' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -47,8 +48,8 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   #
-  # == Form
-  #
+  # Form
+  # ======
   test 'should send a contact message if all fields are valid' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -149,8 +150,8 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   #
-  # == Ajax
-  #
+  # Ajax
+  # ======
   test 'AJAX :: should redirect to new page' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -245,8 +246,8 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   #
-  # == Menu offline
-  #
+  # Menu offline
+  # ==============
   test 'should render 404 if menu item is offline' do
     @menu.update_attribute(:online, false)
     assert_not @menu.online, 'menu item should be offline'
@@ -261,8 +262,8 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   #
-  # == Abilities
-  #
+  # Abilities
+  # ===========
   test 'should test abilities for subscriber' do
     sign_in @subscriber
     ability = Ability.new(@subscriber)
@@ -282,8 +283,8 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   #
-  # == Maintenance
-  #
+  # Maintenance
+  # =============
   test 'should not render maintenance even if enabled and SA' do
     sign_in @super_administrator
     assert_no_maintenance_frontend(:new)

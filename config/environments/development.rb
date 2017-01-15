@@ -30,7 +30,9 @@ Rails.application.configure do
   end
 
   # Mailer (Maildev)
-  config.action_mailer.default_url_options = { host: Figaro.env.domain_name }
+  config.action_mailer.default_url_options = {
+    host: Figaro.env.domain_name
+  }
   config.action_controller.asset_host = Figaro.env.host_name
   config.action_mailer.asset_host = Figaro.env.host_name
   config.action_mailer.raise_delivery_errors = false

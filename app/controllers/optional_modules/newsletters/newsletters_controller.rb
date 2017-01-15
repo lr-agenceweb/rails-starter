@@ -1,27 +1,22 @@
 # frozen_string_literal: true
 
 #
-# == NewslettersController
-#
+# NewslettersController
+# =======================
 class NewslettersController < ApplicationController
   include NewsletterUserable
   include Newsletterable
 
-  before_action :not_found, unless: proc { @newsletter_module.enabled? }
-  before_action :set_variables, only: [:preview_in_browser, :welcome_user]
   layout 'mailers/newsletter'
 
-  # Preview Newsletter in browser
-  def preview_in_browser
-    raise ActionController::RoutingError, 'Not Found' if !all_conditions_respected? || !@newsletter.already_sent?
-    @content = @newsletter.content
+  # Callbacks
+  before_action :not_found,
+                unless: proc { @newsletter_module.enabled? }
+  before_action :set_vars,
+                only: [:preview_in_browser, :welcome_user]
+  before_action :set_newsletter_setting
 
-    I18n.with_locale(@newsletter_user.lang) do
-      render 'newsletter_mailer/send_newsletter'
-    end
-  end
-
-  # See welcome email in browser
+  # Preview Welcome email in browser
   def welcome_user
     raise ActionController::RoutingError, 'Not Found' unless all_conditions_respected?
     welcome_newsletter = NewsletterSetting.first
@@ -33,10 +28,24 @@ class NewslettersController < ApplicationController
     end
   end
 
+  # Preview Newsletter in browser
+  def preview_in_browser
+    raise ActionController::RoutingError, 'Not Found' if !all_conditions_respected? || !@newsletter.already_sent?
+    @content = @newsletter.content
+
+    I18n.with_locale(@newsletter_user.lang) do
+      render 'newsletter_mailer/send_newsletter'
+    end
+  end
+
   private
 
-  def set_variables
-    @hide_preview_link = true
+  def set_vars
+    @show_preview_link = false
+  end
+
+  def set_newsletter_setting
+    @mailing_setting = MailingSetting.first.decorate
   end
 
   def all_conditions_respected?

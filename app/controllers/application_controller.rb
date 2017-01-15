@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == ApplicationController
-#
+# ApplicationController
+# =======================
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include OptionalModules::SocialHelper
@@ -33,8 +33,8 @@ class ApplicationController < ActionController::Base
   include Security::NotificationSettings
 
   # Misc
-  before_action :set_froala_key, if: :user_signed_in?
-  before_action :set_legal_notices
+  before_action :set_froala_key, if: :active_admin?
+  before_action :set_legal_notices, unless: :active_admin?
 
   decorates_assigned :setting, :page, :menu
 
@@ -70,10 +70,25 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied(exception)
-    redirect_to admin_dashboard_path, alert: exception.message
+    redirect_to_dashboard(exception.message)
   end
 
-  def redirect_to_dashboard
-    redirect_to admin_dashboard_path, status: 301
+  def redirect_to_dashboard(message = nil)
+    if message.nil?
+      redirect_to admin_dashboard_path, status: 301
+    else
+      redirect_to admin_dashboard_path, status: 301, alert: message
+    end
+  end
+
+  # Devise sign_out redirection
+  def after_sign_out_path_for(_resource)
+    new_user_session_path
+  end
+
+  # Check if is in an ActiveAdmin namespace
+  def active_admin?
+    namespace = controller_path.split('/').first
+    %w(admin active_admin).include?(namespace)
   end
 end

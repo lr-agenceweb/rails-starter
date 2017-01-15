@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == MailingSettingDecorator test
-#
+# MailingSettingDecorator test
+# ==============================
 class MailingSettingDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 
@@ -27,9 +27,18 @@ class MailingSettingDecoratorTest < Draper::TestCase
     assert_equal 'demo@mailing.com', @mailing_setting_decorated.email_status
   end
 
+  test 'should return correct signature' do
+    assert_equal @setting.name, @mailing_setting_decorated.signature
+  end
+
+  test 'should return correct unsubscribe message' do
+    assert_equal I18n.t('newsletter.unsubscribe.success'), @mailing_setting_decorated.unsubscribe_content
+  end
+
   private
 
   def initialize_test
+    @setting = settings(:one)
     @mailing_setting = mailing_settings(:one)
     @mailing_setting_decorated = MailingSettingDecorator.new(@mailing_setting)
   end

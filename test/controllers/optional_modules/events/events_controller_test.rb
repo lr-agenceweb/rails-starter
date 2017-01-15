@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == EventsController Test
-#
+# EventsController Test
+# =======================
 class EventsControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
   include Rails.application.routes.url_helpers
@@ -11,8 +11,8 @@ class EventsControllerTest < ActionController::TestCase
   setup :initialize_test
 
   #
-  # == Routes / Templates / Responses
-  #
+  # Routes / Templates / Responses
+  # ================================
   test 'should get index' do
     @locales.each do |locale|
       I18n.with_locale(locale) do
@@ -59,8 +59,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   #
-  # == Object
-  #
+  # Object
+  # ========
   test 'should render 404 if event article is offline' do
     @locales.each do |locale|
       I18n.with_locale(locale.to_s) do
@@ -72,8 +72,23 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   #
-  # == Menu offline
+  # Picture
+  # =========
+  test 'should render show with success if article has picture' do
+    attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
+    @event.pictures.create(
+      image: attachment
+    )
+    @locales.each do |locale|
+      I18n.with_locale(locale) do
+        get :show, params: { locale: locale.to_s, id: @event }
+      end
+    end
+  end
+
   #
+  # Menu offline
+  # ==============
   test 'should render 404 if menu item is offline' do
     @menu.update_attribute(:online, false)
     assert_not @menu.online, 'menu item should be offline'
@@ -88,8 +103,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   #
-  # == Module disabled
-  #
+  # Module disabled
+  # =================
   test 'should render 404 if module is disabled' do
     disable_optional_module @super_administrator, @event_module, 'Event' # in test_helper.rb
     @locales.each do |locale|
@@ -125,8 +140,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   #
-  # == Maintenance
-  #
+  # Maintenance
+  # =============
   test 'should render maintenance if enabled and not connected' do
     assert_maintenance_frontend
   end

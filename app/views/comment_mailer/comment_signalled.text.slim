@@ -1,7 +1,7 @@
-= t('comment.email.greeting', author: @setting.name)
-= "\r\n==============================================\r\n\r\n"
+= t('comment.email.greeting', author: @setting.name) + ','
+= "\r\n\r\n"
 
 == strip_tags t('comment_mailer.comment_signalled.content', user: @comment.pseudo_registered_or_guest, article: @commentable.title, locale: I18n.default_locale)
 
-= "\r\n\r\n==============================================\r\n\r\n"
-= admin_post_comment_url(@comment)
+= "\r\n\r\n"
+= "# #{admin_post_comment_url(@comment)}"

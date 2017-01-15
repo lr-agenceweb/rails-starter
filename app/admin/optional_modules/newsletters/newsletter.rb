@@ -23,7 +23,6 @@ ActiveAdmin.register Newsletter do
     column :sent_at
     column :send_link
 
-    translation_status
     actions
   end
 
@@ -47,24 +46,25 @@ ActiveAdmin.register Newsletter do
   end
 
   #
-  # == Controller
-  #
+  # Controller
+  # ============
   controller do
     include ActiveAdmin::ParamsHelper
     include Skippable
+    include ModuleSettingable
     include Newsletterable
     include OptionalModules::NewsletterHelper
 
+    # Callbacks
+    before_action :set_newsletter_users,
+                  only: [:send_newsletter]
+
     def send_newsletter
-      if params[:option] == 'subscribers'
-        @newsletter.update_attributes(sent_at: Time.zone.now)
-        @newsletter_users = NewsletterUser.subscribers.find_each
-        count = @newsletter_users.count
-      elsif params[:option] == 'testers'
-        @newsletter_users = NewsletterUser.testers
-        count = @newsletter_users.count
+      count = @newsletter_users.count
+
+      @newsletter_users.each do |newsletter_user|
+        NewsletterJob.set(wait: 3.seconds).perform_later(newsletter_user, @newsletter)
       end
-      make_newsletter_with_i18n(@newsletter, @newsletter_users)
 
       flash[:notice] = "La newsletter est en train d'être envoyée à #{count} " + 'personne'.pluralize(count)
       redirect_back(fallback_location: admin_dashboard_path)
@@ -72,8 +72,7 @@ ActiveAdmin.register Newsletter do
 
     def preview
       I18n.with_locale(params[:locale]) do
-        @newsletter = Newsletter.find(params[:id])
-        @content = @newsletter.content
+        @newsletter = Newsletter.includes(:translations).find(params[:id])
         @newsletter_user = NewsletterUser.find_by(lang: params[:locale])
 
         render 'newsletter_mailer/send_newsletter', layout: 'mailers/newsletter'
@@ -82,15 +81,12 @@ ActiveAdmin.register Newsletter do
 
     private
 
-    def make_newsletter_with_i18n(newsletter, newsletter_users)
-      I18n.available_locales.each do |locale|
-        I18n.with_locale(locale) do
-          newsletter_users.each do |user|
-            if user.lang == locale.to_s
-              NewsletterJob.set(wait: 3.seconds).perform_later(user, newsletter)
-            end
-          end
-        end
+    def set_newsletter_users
+      if params[:option] == 'subscribers'
+        @newsletter_users = NewsletterUser.subscribers.find_each
+        @newsletter.update_attributes(sent_at: Time.zone.now)
+      elsif params[:option] == 'testers'
+        @newsletter_users = NewsletterUser.testers
       end
     end
   end

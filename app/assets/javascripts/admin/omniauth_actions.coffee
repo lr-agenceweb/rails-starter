@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'ready page:load page:restore', ->
   if ('.button.omniauth').length
     $('.button.omniauth').on 'click', (e) ->
       e.preventDefault()

@@ -2,5 +2,7 @@
   p.contact-informations__body
     span.contact-informations__phone = setting.phone
     span.contact-informations__email = setting.email
-    span.contact-informations__address
-      == map_setting.location.decorate.full_address(false)
+
+    - if map_setting.location?
+      span.contact-informations__address
+        == map_setting.location.decorate.full_address(inline: false)

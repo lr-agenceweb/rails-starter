@@ -3,14 +3,14 @@ require 'test_helper'
 
 #
 # MailingMessage Decorator test
-# ==============================
+# ===============================
 class MailingMessageDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
 
   setup :initialize_test
 
   test 'should return correct code for preview method' do
-    expected = "<a target=\"_blank\" href=\"/admin/mailing_messages/#{@mailing_message_decorated.id}/preview\">Prévisualisation du mail à envoyer en Français</a><br /><a target=\"_blank\" href=\"/en/admin/mailing_messages/#{@mailing_message_decorated.id}/preview\">Prévisualisation du mail à envoyer en English</a><br />"
+    expected = "<a target=\"_blank\" href=\"/admin/mailing_messages/#{@mailing_message_decorated.id}/preview\">Français</a><br /><a target=\"_blank\" href=\"/en/admin/mailing_messages/#{@mailing_message_decorated.id}/preview\">English</a><br />"
     assert_equal expected, @mailing_message_decorated.preview
   end
 
@@ -23,6 +23,11 @@ class MailingMessageDecoratorTest < Draper::TestCase
   # ============
   test 'should return correct status_tag for sent attribute' do
     assert_match '<span class="status_tag envoyé red">Envoyé</span>', @mailing_message_decorated.status
+  end
+
+  test 'should return correct resource name' do
+    assert_equal 'mailing_message', @mailing_message_decorated.send(:resource_name)
+    assert_equal 'mailing', @mailing_message_decorated.send(:resource_name, with_gsub: true)
   end
 
   private

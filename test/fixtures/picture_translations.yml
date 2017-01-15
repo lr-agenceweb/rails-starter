@@ -29,3 +29,14 @@ home_two_en:
   <<: *DEFAULTS
   picture_id: <%= ActiveRecord::FixtureSet.identify(:home_two) %>
   locale: en
+
+# Event online
+event_online_fr:
+  <<: *DEFAULTS
+  picture_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
+  locale: fr
+
+event_online_en:
+  <<: *DEFAULTS
+  picture_id: <%= ActiveRecord::FixtureSet.identify(:event_online) %>
+  locale: en

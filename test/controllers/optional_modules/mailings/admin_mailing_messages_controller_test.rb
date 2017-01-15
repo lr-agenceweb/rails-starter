@@ -2,12 +2,12 @@
 require 'test_helper'
 
 #
-# == Admin namespace
-#
+# Admin namespace
+# =================
 module Admin
   #
-  # == MailingMessagesController test
-  #
+  # MailingMessagesController test
+  # ================================
   class MailingMessagesControllerTest < ActionController::TestCase
     include Devise::Test::ControllerHelpers
     include Rails.application.routes.url_helpers
@@ -15,8 +15,8 @@ module Admin
     setup :initialize_test
 
     #
-    # == Routes / Templates / Responses
-    #
+    # Routes / Templates / Responses
+    # ================================
     test 'should get index page if logged in' do
       get :index
       assert_response :success
@@ -44,8 +44,8 @@ module Admin
     end
 
     #
-    # == Redirection after create or update
-    #
+    # Redirection after create or update
+    # ====================================
     test 'should redirect to edit form after create with picture' do
       attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
       post :create, params: { mailing_message: { picture_attributes: { image: attachment } } }
@@ -65,8 +65,8 @@ module Admin
     end
 
     #
-    # == Destroy
-    #
+    # Destroy
+    # =========
     test 'should not destroy message if logged in as subscriber' do
       sign_in @subscriber
       assert_no_difference 'MailingMessage.count' do
@@ -103,8 +103,8 @@ module Admin
     end
 
     #
-    # == Subscriber
-    #
+    # Subscriber
+    # ============
     test 'should redirect to users/sign_in if not logged in' do
       sign_out @administrator
       assert_crud_actions(@mailing_message, new_user_session_path, model_name, no_show: true)
@@ -116,8 +116,8 @@ module Admin
     end
 
     #
-    # == Preview
-    #
+    # Preview
+    # =========
     test 'should render mailing message preview' do
       @locales.each do |locale|
         I18n.with_locale(locale.to_s) do
@@ -128,8 +128,8 @@ module Admin
     end
 
     #
-    # == Mailer
-    #
+    # Mailer
+    # ========
     test 'should send email for checked users in MailingMessage' do
       clear_deliveries_and_queues
       assert_no_enqueued_jobs
@@ -199,8 +199,8 @@ module Admin
     end
 
     #
-    # == Maintenance
-    #
+    # Maintenance
+    # =============
     test 'should not render maintenance even if enabled and SA' do
       sign_in @super_administrator
       assert_no_maintenance_backend
@@ -224,8 +224,8 @@ module Admin
     end
 
     #
-    # == Abilities
-    #
+    # Abilities
+    # ===========
     test 'should test abilities for subscriber' do
       sign_in @subscriber
       ability = Ability.new(@subscriber)
@@ -286,8 +286,8 @@ module Admin
     end
 
     #
-    # == Module disabled
-    #
+    # Module disabled
+    # =================
     test 'should not access page if mailing module is disabled' do
       disable_optional_module @super_administrator, @mailing_module, 'Mailing' # in test_helper.rb
       sign_in @super_administrator

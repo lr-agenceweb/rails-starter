@@ -51,7 +51,8 @@ set :backup_name, fetch(:application)
 set :backup_parent_class, Figaro.env.backup_parent_class || 'ApplicationBackup'
 
 # Puma configuration
-set :nginx_config_name, "#{fetch(:application)}_#{fetch(:puma_env)}"
+set :nginx_config_name, "#{fetch(:application)}_#{fetch(:puma_env)}.vhost"
 set :puma_workers, fetch(:bundle_jobs)
 set :nginx_use_ssl, Figaro.env.nginx_use_ssl.to_bool || false
+set :nginx_enforce_www, Figaro.env.nginx_enforce_www.to_bool || false
 set :puma_use_actioncable, Figaro.env.puma_use_actioncable.to_bool || false

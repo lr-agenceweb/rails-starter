@@ -2,7 +2,7 @@
 
 #
 # ActiveUser Job
-# ===================
+# ================
 class ActiveUserJob < ApplicationJob
   def perform(user)
     ActiveUserMailer.send_email(user).deliver_now

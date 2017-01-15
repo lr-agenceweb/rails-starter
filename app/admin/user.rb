@@ -96,7 +96,10 @@ ActiveAdmin.register User do
                     as: :file,
                     hint: f.object.avatar.exists? ? retina_image_tag(f.object, :avatar, :small) : gravatar_image_tag(f.object.email, alt: f.object.username, gravatar: { secure: true })
 
-            f.input :delete_avatar if f.object.avatar?
+            if f.object.avatar?
+              f.input :delete_avatar,
+                      as: :boolean
+            end
           end
         end # column
       end # unless

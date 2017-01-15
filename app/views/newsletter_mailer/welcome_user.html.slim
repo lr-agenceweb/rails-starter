@@ -1,10 +1,1 @@
-row
-  columns
-    p = I18n.t('newsletter.hello', subscriber: @newsletter_user.name, locale: @newsletter_user.lang)
-
-    == @content
-
-    br
-
-    p.sent-from
-      == h(@setting.name)
+= render template: 'newsletter_mailer/send_newsletter'

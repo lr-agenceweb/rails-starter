@@ -1,5 +1,4 @@
-- if @copy_to_sender
-  callout.success
-    row.upper-header
-      columns
-        p = I18n.t('contact_form_mailer.send_copy.message_cc', name: @setting.name)
+callout.success
+  row.upper-header
+    columns
+      p = I18n.t('contact_form_mailer.copy.message_cc', name: @setting.name)

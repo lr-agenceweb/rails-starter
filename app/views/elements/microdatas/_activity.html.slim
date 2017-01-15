@@ -4,7 +4,7 @@
 div itemscope='' itemtype='http://schema.org/ProfessionalService'
   - if resource.logo?
     div itemprop='logo' itemscope='' itemtype='http://schema.org/ImageObject'
-      meta itemprop='url' content="#{attachment_url(resource.logo, :small)}"
+      meta itemprop='url' content="#{asset_url(resource.logo.url(:small))}"
       meta itemprop='width' content="#{resource.retina_dimensions[:logo][:small][:width]}"
       meta itemprop='height' content="#{resource.retina_dimensions[:logo][:small][:height]}"
 

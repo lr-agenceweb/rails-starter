@@ -1,0 +1,36 @@
+doctype strict
+html[xmlns='http://www.w3.org/1999/xhtml']
+  head
+    meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+    meta name="viewport" content="width=device-width"
+    = stylesheet_link_tag 'email'
+
+  body
+    table.body data-made-with-foundation=""
+      tr
+        td.center align="center" valign="top"
+          center
+
+            - if @show_preview_link
+              / Upper Header
+              container
+                spacer size="20"
+                = raw(render 'mailing_message_mailer/upper_header')
+
+            / Lower Header
+            container
+              = raw(render 'mailers/header')
+
+            / Content
+            container
+              spacer size="20"
+              = yield
+
+            / Footer
+            container
+              = raw(render 'mailers/footer')
+
+            / Lower Footer
+            container
+              spacer size="20"
+              = raw(render 'mailing_message_mailer/lower_footer')

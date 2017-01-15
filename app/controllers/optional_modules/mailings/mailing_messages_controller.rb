@@ -1,30 +1,30 @@
 # frozen_string_literal: true
 
 #
-# == MailingMessages Controller
-#
+# MailingMessages Controller
+# ============================
 class MailingMessagesController < ApplicationController
   include ModuleSettingable
   include Mailingable
 
   layout 'mailers/mailing'
 
+  # Callbacks
   before_action :not_found,
-                unless: proc { @mailing_module.enabled? }
+                unless: proc {
+                  @mailing_module.enabled? && allowed_to_preview?
+                }
 
   def preview_in_browser
-    raise ActionController::RoutingError, 'Not Found' unless all_conditions_respected?
-    @content = @mailing_message.content
-    @hide_preview_link = true
-
     I18n.with_locale(params[:locale]) do
+      @show_preview_link = false
       render 'mailing_message_mailer/send_email'
     end
   end
 
   private
 
-  def all_conditions_respected?
+  def allowed_to_preview?
     params[:mailing_user_token] &&
       params[:token] &&
       @mailing_user.token == params[:mailing_user_token] &&

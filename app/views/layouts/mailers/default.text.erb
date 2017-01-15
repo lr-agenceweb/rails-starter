@@ -1,0 +1,18 @@
+<% if @copy_to_sender %>
+<%= I18n.t('contact_form_mailer.copy.message_cc', name: @setting.name) %>
+-----------------------------------------------------------
+<% end %>
+
+===========================================================
+<%= @setting.decorate.title_and_subtitle %>
+===========================================================
+
+<%= yield %>
+
+===========================================================
+<%= '# ' + @setting.name %>
+<%= '# ' + @setting.phone %>
+<%= '# ' + root_url %>
+<%= '# ' + sanitize_string(@map_setting.location.decorate.full_address(inline: false)) if @map_setting.location? %>
+<%= '# ' + @setting.title %> - <%= current_year %>
+===========================================================

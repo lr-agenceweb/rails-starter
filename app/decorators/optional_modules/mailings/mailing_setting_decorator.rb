@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == MailingSettingDecorator
-#
+# MailingSettingDecorator
+# =========================
 class MailingSettingDecorator < ApplicationDecorator
   include Draper::LazyHelpers
   delegate_all
@@ -17,11 +17,13 @@ class MailingSettingDecorator < ApplicationDecorator
     Setting.first.email
   end
 
-  def signature_d
-    safe_join [raw(model.signature)]
+  def signature
+    s = model.signature.blank? ? name_status : model.signature
+    safe_join [raw(s)]
   end
 
   def unsubscribe_content
-    safe_join [raw(model.unsubscribe_content)]
+    s = model.unsubscribe_content.blank? ? t('newsletter.unsubscribe.success') : model.unsubscribe_content
+    safe_join [raw(s)]
   end
 end

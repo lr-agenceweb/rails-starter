@@ -1,7 +1,7 @@
 # French
 fr:
   newsletter:
-    hello: Bonjour %{subscriber}
+    hello: Bonjour %{subscriber},
     see_in_browser: Visualiser dans le navigateur
     header: S'abonner à la newsletter
     placeholder: Saisissez votre email
@@ -27,7 +27,7 @@ fr:
 # English
 en:
   newsletter:
-    hello: Hello %{subscriber}
+    hello: Hello %{subscriber},
     see_in_browser: See the newsletter in your browser
     header: Subscribe to the newsletter
     placeholder: Enter your email

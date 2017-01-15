@@ -5,8 +5,6 @@
 @import 'motion-ui/motion-ui';
 
 @include foundation-global-styles;
-
-// Grid
 // @include foundation-grid;
 @include foundation-flex-grid;
 @include foundation-flex-classes;
@@ -26,7 +24,7 @@
 @include foundation-drilldown-menu;
 @include foundation-dropdown;
 @include foundation-dropdown-menu;
-@include foundation-flex-video;
+@include foundation-responsive-embed;
 @include foundation-label;
 @include foundation-media-object;
 @include foundation-menu;

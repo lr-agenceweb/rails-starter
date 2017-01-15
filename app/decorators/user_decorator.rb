@@ -25,7 +25,7 @@ class UserDecorator < ApplicationDecorator
     html = []
     html << retina_thumb_square(model)
     html << content_tag(:span) do
-      concat model.username.capitalize
+      concat model.username
       concat " (#{I18n.t('role.' + model.role_name)})"
       concat tag(:br)
       concat connected_from

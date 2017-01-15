@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == PostDecorator test
-#
+# PostDecorator test
+# ====================
 class PostDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
   include ActionDispatch::TestProcess
@@ -12,7 +12,7 @@ class PostDecoratorTest < Draper::TestCase
 
   #
   # Post informations
-  #
+  # ===================
   test 'should return correct author for post' do
     assert_equal 'bob', @post_decorated.author
   end
@@ -39,8 +39,8 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Post link
-  #
+  # Post link
+  # ===========
   test 'should return correct show_post_link content' do
     expected = blog_category_blog_path(@blog.blog_category, @blog)
     assert_equal expected, @blog_decorated.show_post_link
@@ -56,8 +56,8 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   #
-  # == User
-  #
+  # User
+  # ======
   test 'should return correct author_avatar value' do
     assert_equal retina_thumb_square(@post_decorated.user), @post_decorated.author_avatar
   end
@@ -67,8 +67,8 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Picture
-  #
+  # Picture
+  # =========
   test 'should return correct content for image method' do
     attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
     @post_decorated.picture.update_attributes(image: attachment)
@@ -81,13 +81,13 @@ class PostDecoratorTest < Draper::TestCase
     attachment = fixture_file_upload 'images/background-paris.jpg', 'image/jpeg'
     @post_decorated.picture.update_attributes(image: attachment)
 
-    assert_equal "<p>Premier article d'accueil</p><img src=\"#{attachment_url(@post_decorated.picture.image, :medium)}\" alt=\"Medium background paris\" />", @post_decorated.image_and_content
+    assert_equal "<p>Premier article d'accueil</p><img src=\"#{asset_url(@post_decorated.picture.image.url(:medium))}\" alt=\"Medium background paris\" />", @post_decorated.image_and_content
     assert_equal 'Ruby', @about_decorated.image_and_content
   end
 
   #
-  # == Custom cover
-  #
+  # Custom cover
+  # ==============
   test 'should return picture cover if any' do
     @blog_decorated.pictures.each(&:destroy)
     @blog_decorated.video_upload.destroy
@@ -137,8 +137,8 @@ class PostDecoratorTest < Draper::TestCase
   end
 
   #
-  # == PublicationDate (publishable polymorphic)
-  #
+  # PublicationDate (publishable polymorphic)
+  # ===========================================
   test 'should return correct published_at content' do
     expected = '11/03/2028'
     assert_equal expected, @blog_decorated.published_at
@@ -167,7 +167,7 @@ class PostDecoratorTest < Draper::TestCase
 
   #
   # ActiveAdmin
-  #
+  # =============
   test 'should return correct AA show page title' do
     assert_equal 'Accueil: "Article d\'accueil"', @post_decorated.title_aa_show
   end

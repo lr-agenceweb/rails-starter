@@ -5,4 +5,7 @@
       == "Rails: <strong>#{Rails.version}</strong>, Ruby: <strong>#{RUBY_VERSION}</strong>"
 
     span.server
-      == "Server: <strong>#{server_name}</strong>, Branch: <strong>#{branch_name}</strong>"
+      == "Server: <strong>#{server_name}</strong>, Adapter: <strong>#{ActiveRecord::Base.connection_config[:adapter]}</strong>"
+
+    span.git
+      == "Branch: <strong>#{branch_name}</strong>, Release: <strong>#{`git tag | tail -n1`}</strong>"

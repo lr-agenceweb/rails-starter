@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'ready page:load page:restore', ->
   if $('fieldset#referencement').length
     $('fieldset#referencement textarea').each ->
       $textarea = $(this)

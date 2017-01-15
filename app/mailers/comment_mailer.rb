@@ -47,8 +47,9 @@ class CommentMailer < ApplicationMailer
     @link = @comment.commentable_type == 'Blog' ? blog_category_blog_url(@commentable.blog_category, @commentable, anchor: anchor) : polymorphic_url(@commentable, anchor: anchor)
   end
 
+  # Administrator => Customer
   def admin_to_user
-    mail from: @setting.email,
+    mail from: @from_admin,
          to: @comment.email_registered_or_guest,
          subject: default_i18n_subject(site: @setting.title) do |format|
       format.html
@@ -56,9 +57,10 @@ class CommentMailer < ApplicationMailer
     end
   end
 
+  # Customer => Administrator
   def user_to_admin(template)
-    mail from: @comment.decorate.email_registered_or_guest,
-         to: @setting.email,
+    mail from: @comment.email_registered_or_guest,
+         to: @from_admin,
          subject: default_i18n_subject(site: @setting.title) do |format|
       format.html { render template }
       format.text { render template }

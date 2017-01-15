@@ -2,8 +2,8 @@
 require 'test_helper'
 
 #
-# == CommentDecorator test
-#
+# CommentDecorator test
+# =======================
 class CommentDecoratorTest < Draper::TestCase
   include Draper::LazyHelpers
   include ActionDispatch::TestProcess
@@ -11,19 +11,19 @@ class CommentDecoratorTest < Draper::TestCase
   setup :initialize_test
 
   #
-  # == Pseudo and Email
-  #
+  # Pseudo and Email
+  # ==================
   test 'should return correct name if user is connected' do
-    assert_equal 'Anthony', @comment_decorated.pseudo_registered_or_guest
+    assert_equal 'anthony', @comment_decorated.pseudo_registered_or_guest
   end
 
   test 'should return correct name if user is not connected' do
     comment_decorated = CommentDecorator.new(@comment_not_connected)
-    assert_equal 'Luke', comment_decorated.pseudo_registered_or_guest
+    assert_equal 'luke', comment_decorated.pseudo_registered_or_guest
   end
 
   test 'should return correct html_tag for user' do
-    assert_equal '<strong class="comment__author__name">Anthony</strong>', @comment_decorated.pseudo
+    assert_equal '<strong class="comment__author__name">anthony</strong>', @comment_decorated.pseudo
   end
 
   test 'should return correct email if user is connected' do
@@ -36,8 +36,8 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Avatar
-  #
+  # Avatar
+  # =======
   test 'should return correct avatar for connected user' do
     assert_equal '<img alt="anthony" src="https://secure.gravatar.com/avatar/d7097d5b6b00db57b0bf772923729a7d?default=mm&secure=true" width="80" height="80" />', @comment_decorated.avatar
   end
@@ -49,12 +49,12 @@ class CommentDecoratorTest < Draper::TestCase
 
   test 'should return correct author with avatar' do
     comment_decorated = CommentDecorator.new(@comment_not_connected)
-    assert_equal '<div><img alt="luke" src="https://secure.gravatar.com/avatar/2e5c8c61be4beb99af2f3c5fbb77e988?default=mm&secure=true" width="80" height="80" /><br />Luke</div>', comment_decorated.author_with_avatar
+    assert_equal '<div><img alt="luke" src="https://secure.gravatar.com/avatar/2e5c8c61be4beb99af2f3c5fbb77e988?default=mm&secure=true" width="80" height="80" /><br />luke</div>', comment_decorated.author_with_avatar
   end
 
   #
-  # == Content
-  #
+  # Content
+  # =========
   test 'should return preview of comment' do
     assert_equal 'Mon commentaire de test', @comment_decorated.preview_content
 
@@ -63,8 +63,8 @@ class CommentDecoratorTest < Draper::TestCase
   end
 
   #
-  # == Commentable
-  #
+  # Commentable
+  # =============
   test 'should return correct commentable_path' do
     assert_equal '/blogs/lorem/article-de-blog-avec-beaucoup-de-commentaires', @comment_decorated.commentable_path
     assert_equal '/blogs/foo/article-de-blog-en-ligne', @blog_comment_decorated.commentable_path

@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 #
 # Rails
 # =====================
-gem 'rails', '5.0.0.1'
+gem 'rails', '5.0.1'
 gem 'rails-observers', github: 'rails/rails-observers' # Rails 5 fix
 gem 'puma' # Server
 
@@ -29,7 +29,7 @@ gem 'omniauth-google-oauth2', '~> 0.4.1'
 #
 # Administration
 # =====================
-gem 'activeadmin', '1.0.0.pre4'
+gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources' # Rails 5 fix
 
 gem 'activeadmin_addons'
@@ -119,18 +119,18 @@ gem 'nokogiri'
 #
 # Frontend libraries
 # ====================
+gem 'jquery-ui-rails'
 gem 'normalize-rails', github: 'markmcconachie/normalize-rails'
-gem 'foundation-rails', '~> 6.2.0'
+gem 'foundation-rails', '~> 6.3.0'
 gem 'fotoramajs' # Slider
 gem 'fullcalendar-rails' # Calendar
 gem 'momentjs-rails'
 gem 'wysiwyg-rails' # Froala editor
 gem 'mapbox-rails', github: 'aai/mapbox-rails'
-gem 'kaminari', '~> 0.17.0' # Pagination
+gem 'kaminari', '~> 1.0' # Pagination
 gem 'gretel' # Breadcrumb
 gem 'js_cookie_rails'
 gem 'autoprefixer-rails'
-gem 'jquery-ui-rails'
 gem 'nprogress-rails'
 gem 'font-awesome-rails'
 gem 'gon'

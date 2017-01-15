@@ -38,6 +38,9 @@ fr:
       new_slider: Créer Slider
       update_newsletter_setting: Modifier la configuration Newsletter
     devise:
+      login:
+        key: Identifiant
+        placeholder: Nom d'utilisateur ou Email
       sign_up:
         title: Inscription
         submit: S'inscrire

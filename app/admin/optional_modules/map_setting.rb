@@ -47,7 +47,7 @@ ActiveAdmin.register MapSetting do
 
     f.columns id: 'map-columns' do
       f.column do
-        f.inputs t('formtastic.titles.map_setting_details'), class: 'map-settings' do
+        f.inputs t('formtastic.titles.map_setting_details'), class: 'inputs map-settings' do
           f.input :show_map
 
           f.input :marker_icon,
@@ -80,6 +80,10 @@ ActiveAdmin.register MapSetting do
     before_action :redirect_to_show,
                   only: [:index],
                   if: proc { @map_module.enabled? && current_user_and_administrator? }
+
+    def scoped_collection
+      super.includes :location
+    end
 
     private
 

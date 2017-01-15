@@ -1,9 +1,8 @@
 #= require moment
 #= require moment/en-gb
-#= require temporary_workaround/fullcalendar.3.0.1.min
+#= require fullcalendar
 #= require fullcalendar/lang/fr
 
-# UPGRADEME: Use official Fullcalendar gem version when 3.0.1 will be released
 $(document).on 'ready page:load page:restore', ->
   if $('#calendar').length
     $('#calendar').fullCalendar

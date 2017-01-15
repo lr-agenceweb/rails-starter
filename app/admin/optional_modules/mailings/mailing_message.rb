@@ -48,13 +48,13 @@ ActiveAdmin.register MailingMessage do
     end
   end
 
-  form do |f|
+  form html: { multipart: true } do |f|
     render 'admin/mailings/form', f: f
   end
 
   #
-  # == Controller
-  #
+  # Controller
+  # ============
   controller do
     include ActiveAdmin::ParamsHelper
     include Skippable
@@ -62,7 +62,15 @@ ActiveAdmin.register MailingMessage do
     include Mailingable
     include OptionalModules::NewsletterHelper
 
-    before_action :redirect_to_dashboard, only: [:send_mailing_message]
+    # Callbacks
+    before_action :redirect_to_dashboard,
+                  only: [:send_mailing_message],
+                  if: proc {
+                    params[:option].blank? || @mailing_message.token != params[:token]
+                  }
+
+    before_action :set_mailing_users,
+                  only: [:send_mailing_message]
 
     def scoped_collection
       super.includes :picture, :translations
@@ -81,29 +89,23 @@ ActiveAdmin.register MailingMessage do
     end
 
     def send_mailing_message
+      @mailing_users.each do |mailing_user|
+        MailingMessageJob.set(wait: 3.seconds).perform_later(mailing_user, @mailing_message)
+      end
+
       @mailing_message.update_attributes(sent_at: Time.zone.now)
-      @mailing_users = @mailing_message.mailing_users if params[:option] == 'checked'
-      @mailing_users = MailingUser.all if params[:option] == 'all'
-      make_mailing_message_with_i18n(@mailing_message, @mailing_users)
 
       flash[:notice] = I18n.t('mailing.notice_sending', count: @mailing_users.count)
       redirect_back(fallback_location: admin_dashboard_path)
     end
 
     def preview
-      @content = @mailing_message.content
       @mailing_user = MailingUser.new(id: current_user.id, email: current_user.email, fullname: current_user.username.capitalize, token: Digest::MD5.hexdigest(current_user.email))
 
       render 'mailing_message_mailer/send_email', layout: 'mailers/mailing'
     end
 
     private
-
-    def make_mailing_message_with_i18n(message, mailing_users)
-      mailing_users.each do |user|
-        MailingMessageJob.set(wait: 3.seconds).perform_later(user, message)
-      end
-    end
 
     def make_redirect
       if resource.should_redirect == true
@@ -113,8 +115,9 @@ ActiveAdmin.register MailingMessage do
       end
     end
 
-    def redirect_to_dashboard
-      redirect_to admin_dashboard_path if params[:option].blank? || @mailing_message.token != params[:token]
+    def set_mailing_users
+      @mailing_users = @mailing_message.mailing_users if params[:option] == 'checked'
+      @mailing_users = MailingUser.all if params[:option] == 'all'
     end
   end
 end

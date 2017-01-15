@@ -1,14 +1,12 @@
 row.upper-footer
   columns
     p.small-text-center.text-left
-      span Ouvre-Boites 44
-      br
-      span 8 avenue des Thébaudières - 44800 St Herblain
+      span = @setting.name
+      - if @map_setting.location?
+        br: span = @map_setting.location.decorate.full_address
 
   columns
-    p.initials-container.small-text-center.text-right
-      span.initials>
-        span.letter-l L
-        span.letter-esperluette &amp;
-        span.letter-r R
-      span Agence web, conception de sites en ligne
+    p.small-text-center.text-right
+      span = link_to @setting.title, root_url
+      - if @setting.subtitle?
+        br: span = @setting.subtitle

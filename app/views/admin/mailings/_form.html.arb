@@ -10,7 +10,7 @@ f.columns do
       else
         f.input :mailing_users,
                 as: :check_boxes,
-                collection: MailingUser.all,
+                collection: MailingUserDecorator.decorate_collection(MailingUser.all),
                 label: false
       end
     end

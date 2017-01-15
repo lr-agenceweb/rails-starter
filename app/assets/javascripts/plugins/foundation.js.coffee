@@ -17,7 +17,7 @@
 #= require foundation.sticky.js
 #= require foundation.tabs.js
 #= require foundation.toggler.js
-#= require temporary_workaround/foundation.tooltip.js
+#= require foundation.tooltip.js
 #= require foundation.util.box.js
 #= require foundation.util.keyboard.js
 #= require foundation.util.mediaQuery.js
@@ -27,7 +27,6 @@
 #= require foundation.util.touch.js
 #= require foundation.util.triggers.js
 
-# UPGRADEME: Use official Tooltip version when 6.3 will be released
 $(document).on 'ready page:load page:restore', ->
   $(document).foundation()
 
