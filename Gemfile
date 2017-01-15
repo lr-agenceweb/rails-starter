@@ -127,7 +127,7 @@ gem 'fullcalendar-rails' # Calendar
 gem 'momentjs-rails'
 gem 'wysiwyg-rails' # Froala editor
 gem 'mapbox-rails', github: 'aai/mapbox-rails'
-gem 'kaminari', '~> 0.17.0' # Pagination
+gem 'kaminari', '~> 1.0' # Pagination
 gem 'gretel' # Breadcrumb
 gem 'js_cookie_rails'
 gem 'autoprefixer-rails'
