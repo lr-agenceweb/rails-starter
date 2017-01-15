@@ -8,11 +8,11 @@
   &__input
     width: $search_bar_width + $submit_width
 
-@media #{$small-only}
+@include breakpoint(small only)
   .search-form
     margin: 2.75rem auto 0 auto
 
-@media #{$medium-up}
+@include breakpoint(medium)
   .search-form
     float: right
     margin-right: 2rem

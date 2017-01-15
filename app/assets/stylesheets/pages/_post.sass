@@ -141,12 +141,12 @@
         width: 36px
         margin-bottom: 0
 
-@media #{$medium-up}
+@include breakpoint(medium)
   .post
     &__header, &__body, &__footer
       padding: 0 .9375rem
 
-@media #{$large-up}
+@include breakpoint(large)
   .post
     &__header
       &__timestamps, &__location, &__url

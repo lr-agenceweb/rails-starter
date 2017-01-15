@@ -11,6 +11,7 @@ module OptionalModules
     include Core::PageHelper
     include AssetsHelper
     include ERB::Util
+    include ActionView::Helpers::AssetUrlHelper
 
     # SEO Meta tags for index pages (include Facebook and Twitter)
     #

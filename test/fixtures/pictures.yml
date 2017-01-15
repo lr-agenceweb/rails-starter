@@ -2,21 +2,32 @@ DEFAULTS: &DEFAULTS
   online: true
 
 home:
+  <<: *DEFAULTS
   attachable: home (Post)
   image_file_name: my-picture.jpg
 
 home_two:
+  <<: *DEFAULTS
   attachable: home (Post)
   image_file_name: my-picture-2.jpg
 
 home_three:
+  <<: *DEFAULTS
   attachable: home (Post)
 
 blog_mc:
+  <<: *DEFAULTS
   attachable: many_comments (Blog)
   image_file_name: my-picture-3.jpg
 
+event_online:
+  <<: *DEFAULTS
+  attachable_id: 1
+  attachable_type: Event
+  image_file_name: my-event.jpg
+
 mailing_message:
+  <<: *DEFAULTS
   attachable: one (MailingMessage)
   image_file_name: merry-christmas.jpg
 

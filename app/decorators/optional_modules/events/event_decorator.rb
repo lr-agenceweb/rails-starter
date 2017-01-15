@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 #
-# == EventDecorator
-#
+# EventDecorator
+# ================
 class EventDecorator < PostDecorator
   include Draper::LazyHelpers
   include ActionView::Helpers::DateHelper
@@ -11,8 +11,8 @@ class EventDecorator < PostDecorator
   decorates_association :location
 
   #
-  # == Dates
-  #
+  # Dates
+  # =======
   def duration
     distance_of_time_in_words(model.end_date, model.start_date) if start_date? && end_date?
   end
@@ -37,22 +37,22 @@ class EventDecorator < PostDecorator
   end
 
   #
-  # == Calendar
-  #
+  # Calendar
+  # ==========
   def all_conditions_to_show_calendar?(calendar_module)
     model.show_calendar? && calendar_module.enabled? && start_date? && end_date?
   end
 
   #
-  # == Map
-  #
+  # Map
+  # =====
   def all_conditions_to_show_map?(map_module)
     map_module.enabled? && model.show_map? && model.location_latlon? && EventSetting.first.show_map?
   end
 
   #
-  # == Location
-  #
+  # Location
+  # ==========
   def full_address(inline: true)
     model.location.decorate.full_address(inline: inline) if location?
   end

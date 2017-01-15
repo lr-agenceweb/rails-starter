@@ -19,11 +19,11 @@
       margin: 0 0 0 7px
       font-size: .7rem
 
-@media #{$small-only}
+@include breakpoint(small only)
   .page-section
     padding: 1.5rem 0
 
-@media #{$medium-up}
+@include breakpoint(medium)
   .page-section
     .page__header
       &__title

@@ -30,7 +30,7 @@
       font-size: rem-calc(13)
 
 @if variable-exists(small-only)
-  @media #{$small-only}
+  @include breakpoint(small only)
     .logo
       margin: 0 auto
 

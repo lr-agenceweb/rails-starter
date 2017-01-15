@@ -121,7 +121,7 @@ gem 'nokogiri'
 # ====================
 gem 'jquery-ui-rails'
 gem 'normalize-rails', github: 'markmcconachie/normalize-rails'
-gem 'foundation-rails', '~> 6.2.0'
+gem 'foundation-rails', '~> 6.3.0'
 gem 'fotoramajs' # Slider
 gem 'fullcalendar-rails' # Calendar
 gem 'momentjs-rails'
